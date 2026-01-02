@@ -208,7 +208,13 @@
         "Opzioni",
     "scheduler_preset_action_program_say":
         "Parla",
-    "scheduler_preset_action_net_http_call":
+  "scheduler_preset_action_genie_command":
+        "Comando Genie",
+  "scheduler_preset_action_config_wish":
+        "Azione in linguaggio naturale",
+  "scheduler_preset_action_config_wish.placeholder":
+        "Prova: \"Imposta il riscaldamento a 22° e avvia lo scenario Alba\"",
+  "scheduler_preset_action_net_http_call":
         "Chiama un Servizio Web",
     "scheduler_preset_action_config_url":
         "Indirizzo (URL)",
@@ -582,12 +588,18 @@
         "IA Locale",
       "Description":
         "Esegui LLM all'avanguardia direttamente sul tuo server HomeGenie. Include un'API completa per controllare l'IA da altri programmi e script.",
-      "ConfigureOptions.MaxTokens":
-        "Token Massimi (lunghezza risposta)",
       "ConfigureOptions.ModelFile":
         "Modello",
+      "ConfigureOptions.ContextSize":
+        "Dimensione memoria AI (Context Window)",
+      "ConfigureOptions.MaxTokens":
+        "Token Massimi (lunghezza risposta)",
+      "ConfigureOptions.MaxTurns":
+        "Max turni cronologia chat (0 = nessun limite)",
       "ConfigureOptions.SystemInstructions":
-        "Istruzioni di Sistema"
+        "Istruzioni di Sistema",
+      "ConfigureOptions.SendContextData":
+        "Includi elenco dispositivi e sensori nelle richieste"
     },
 
     "575": {

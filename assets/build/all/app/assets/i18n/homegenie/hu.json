@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Hőmérséklet-érzékelő",
       "VirtualThermostat.HeatingSwitchModule": "Fűtéskapcsoló",
       "VirtualThermostat.CoolingSwitchModule": "Hűtőkapcsoló",
-      "ConfigureOptions.ThermostatsCount": "Termosztátok száma"
+      "ConfigureOptions.ThermostatsCount": "Termosztátok száma",
+      "ConfigureOptions.EnsureCommandDelivery": "Biztosítsa a parancsok folyamatos átvitelét (impulzus üzemmód)."
     },
     "81": {
       "Title": "Energiamonitor",
@@ -311,20 +312,26 @@
       "Title": "Gemini szándékkezelő",
       "Description": "Lehetővé teszi az intelligens rendszer természetes nyelvi vezérlését a Google Gemini mesterséges intelligenciájának használatával. A funkció aktiválásához adjon meg egy érvényes API-kulcsot. Kövesse a https://aistudio.google.com/app/apikey oldalon található utasításokat egy ingyenes API-kulcs megszerzéséhez.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API kulcs",
-      "ConfigureOptions.ModelId": "Modellazonosító"
+      "ConfigureOptions.ModelId": "Modellazonosító",
+      "ConfigureOptions.SystemInstructions": "Rendszerutasítások"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Személyes mesterséges intelligencia által vezérelt dzsinned widgetek létrehozásához. A Gemini által működtetett program segít HTML, CSS és JavaScript kódok írásában és hibakeresésében közvetlenül a HomeGenie szerkesztőben. A funkció aktiválásához adj meg egy érvényes API-kulcsot. Kövesd a https://aistudio.google.com/app/apikey oldalon található utasításokat egy ingyenes API-kulcs megszerzéséhez.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API kulcs",
-      "ConfigureOptions.ModelId": "Modellazonosító"
+      "ConfigureOptions.ModelId": "Modellazonosító",
+      "ConfigureOptions.SystemInstructions": "Rendszerutasítások"
     },
     "940": {
       "Title": "Helyi mesterséges intelligencia",
       "Description": "Futtasson korszerű LLM-eket közvetlenül a HomeGenie szerverén. Teljes API-t tartalmaz a mesterséges intelligencia más programokból és szkriptekből történő vezérléséhez.",
       "ConfigureOptions.MaxTokens": "Max. tokenek (válasz hossza)",
       "ConfigureOptions.ModelPath": "A helyi GGUF fájl elérési útja",
-      "ConfigureOptions.ModelFile": "Modell"
+      "ConfigureOptions.ModelFile": "Modell",
+      "ConfigureOptions.SystemInstructions": "Rendszerutasítások",
+      "ConfigureOptions.ContextSize": "AI memória mérete (környezeti ablak)",
+      "ConfigureOptions.MaxTurns": "Maximális csevegési előzmények száma (0 = nincs korlát)",
+      "ConfigureOptions.SendContextData": "Eszközlista és érzékelők szerepeltetése a lekérdezésekben"
     },
     "575": {
       "Title": "Letöltéskezelő",
@@ -362,5 +369,8 @@
       "Title": "Óránkénti energiafogyasztás",
       "Description": "Oszlopdiagram, amely a nap minden órájára (00:00-23:00) vonatkozó átlagos watt/óra fogyasztást mutatja. Az adatok a kiválasztott hétre összesítve jelennek meg, forrásuk az Energy Use Statistics API."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Dzsinn Parancsnokság",
+  "scheduler_preset_action_config_wish": "Természetes nyelvi cselekvés",
+  "scheduler_preset_action_config_wish.placeholder": "Próbáld ki ezt: „Állítsd a hőmérsékletet 22°C-ra, és indítsd el a Napfelkelte jelenetet”"
 }

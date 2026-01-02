@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "ತಾಪಮಾನ ಸಂವೇದಕ",
       "VirtualThermostat.HeatingSwitchModule": "ತಾಪನ ಸ್ವಿಚ್",
       "VirtualThermostat.CoolingSwitchModule": "ಕೂಲಿಂಗ್ ಸ್ವಿಚ್",
-      "ConfigureOptions.ThermostatsCount": "ಥರ್ಮೋಸ್ಟಾಟ್‌ಗಳ ಸಂಖ್ಯೆ"
+      "ConfigureOptions.ThermostatsCount": "ಥರ್ಮೋಸ್ಟಾಟ್‌ಗಳ ಸಂಖ್ಯೆ",
+      "ConfigureOptions.EnsureCommandDelivery": "ನಿರಂತರ ಪ್ರಸರಣದೊಂದಿಗೆ (ಪಲ್ಸ್-ಮೋಡ್) ಆಜ್ಞೆಯ ವಿತರಣೆಯನ್ನು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ."
     },
     "81": {
       "Title": "ಶಕ್ತಿ ಮಾನಿಟರ್",
@@ -311,20 +312,26 @@
       "Title": "ಜೆಮಿನಿ ಇಂಟೆಂಟ್ ಹ್ಯಾಂಡ್ಲರ್",
       "Description": "Google ನ ಜೆಮಿನಿ AI ಬಳಸಿಕೊಂಡು ನಿಮ್ಮ ಸ್ಮಾರ್ಟ್ ಸಿಸ್ಟಮ್‌ಗೆ ನೈಸರ್ಗಿಕ ಭಾಷಾ ನಿಯಂತ್ರಣವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುತ್ತದೆ. ಈ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು, ಮಾನ್ಯವಾದ API ಕೀಲಿಯನ್ನು ನಮೂದಿಸಿ. ಉಚಿತ API ಕೀಲಿಯನ್ನು ಪಡೆಯಲು https://aistudio.google.com/app/apikey ನಲ್ಲಿನ ಸೂಚನೆಗಳನ್ನು ಅನುಸರಿಸಿ.",
       "ConfigureOptions.ApiKey": "ಗೂಗಲ್ ಜೆಮಿನಿ AI API ಕೀ",
-      "ConfigureOptions.ModelId": "ಮಾದರಿ ಐಡಿ"
+      "ConfigureOptions.ModelId": "ಮಾದರಿ ಐಡಿ",
+      "ConfigureOptions.SystemInstructions": "ಸಿಸ್ಟಮ್ ಸೂಚನೆಗಳು"
     },
     "931": {
       "Title": "ಜೆಮಿನಿ ವಿಜೆಟ್ ಜಿನೀ",
       "Description": "ವಿಜೆಟ್ ರಚನೆಗಾಗಿ ನಿಮ್ಮ ವೈಯಕ್ತಿಕ AI ಜೀನಿ. ಜೆಮಿನಿಯಿಂದ ನಡೆಸಲ್ಪಡುವ ಇದು, ಹೋಮ್‌ಜೆನಿ ಸಂಪಾದಕದಲ್ಲಿಯೇ HTML, CSS ಮತ್ತು ಜಾವಾಸ್ಕ್ರಿಪ್ಟ್ ಕೋಡ್ ಅನ್ನು ಬರೆಯಲು ಮತ್ತು ಡೀಬಗ್ ಮಾಡಲು ನಿಮಗೆ ಸಹಾಯ ಮಾಡುತ್ತದೆ. ಈ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು, ಮಾನ್ಯವಾದ API ಕೀಲಿಯನ್ನು ನಮೂದಿಸಿ. ಉಚಿತ API ಕೀಲಿಯನ್ನು ಪಡೆಯಲು https://aistudio.google.com/app/apikey ನಲ್ಲಿನ ಸೂಚನೆಗಳನ್ನು ಅನುಸರಿಸಿ.",
       "ConfigureOptions.ApiKey": "ಗೂಗಲ್ ಜೆಮಿನಿ AI API ಕೀ",
-      "ConfigureOptions.ModelId": "ಮಾದರಿ ಐಡಿ"
+      "ConfigureOptions.ModelId": "ಮಾದರಿ ಐಡಿ",
+      "ConfigureOptions.SystemInstructions": "ಸಿಸ್ಟಮ್ ಸೂಚನೆಗಳು"
     },
     "940": {
       "Title": "ಸ್ಥಳೀಯ AI",
       "Description": "ನಿಮ್ಮ HomeGenie ಸರ್ವರ್‌ನಲ್ಲಿ ನೇರವಾಗಿ ಅತ್ಯಾಧುನಿಕ LLM ಗಳನ್ನು ರನ್ ಮಾಡಿ. ಇತರ ಪ್ರೋಗ್ರಾಂಗಳು ಮತ್ತು ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳಿಂದ AI ಅನ್ನು ನಿಯಂತ್ರಿಸಲು ಪೂರ್ಣ API ಅನ್ನು ಒಳಗೊಂಡಿದೆ.",
       "ConfigureOptions.MaxTokens": "ಗರಿಷ್ಠ ಟೋಕನ್‌ಗಳು (ಪ್ರತಿಕ್ರಿಯೆಯ ಉದ್ದ)",
       "ConfigureOptions.ModelPath": "ಸ್ಥಳೀಯ GGUF ಫೈಲ್‌ಗೆ ಮಾರ್ಗ",
-      "ConfigureOptions.ModelFile": "ಮಾದರಿ"
+      "ConfigureOptions.ModelFile": "ಮಾದರಿ",
+      "ConfigureOptions.SystemInstructions": "ಸಿಸ್ಟಮ್ ಸೂಚನೆಗಳು",
+      "ConfigureOptions.ContextSize": "AI ಮೆಮೊರಿ ಗಾತ್ರ (ಸಂದರ್ಭ ವಿಂಡೋ)",
+      "ConfigureOptions.MaxTurns": "ಗರಿಷ್ಠ ಚಾಟ್ ಇತಿಹಾಸ ತಿರುವುಗಳು (0 = ಮಿತಿಯಿಲ್ಲ)",
+      "ConfigureOptions.SendContextData": "ಪ್ರಶ್ನೆಗಳಲ್ಲಿ ಸಾಧನ ಪಟ್ಟಿ ಮತ್ತು ಸಂವೇದಕಗಳನ್ನು ಸೇರಿಸಿ"
     },
     "575": {
       "Title": "ಡೌನ್‌ಲೋಡ್ ಮ್ಯಾನೇಜರ್",
@@ -362,5 +369,8 @@
       "Title": "ಗಂಟೆಯ ವಿದ್ಯುತ್ ಬಳಕೆ",
       "Description": "ದಿನದ ಪ್ರತಿ ಗಂಟೆಗೆ (00ಗಂ-23ಗಂ) ಸರಾಸರಿ ವ್ಯಾಟ್‌ಗಳು/ಗಂಟೆ ಬಳಕೆಯನ್ನು ಪ್ರದರ್ಶಿಸುವ ಬಾರ್ ಚಾರ್ಟ್. ಆಯ್ದ ವಾರದಲ್ಲಿ ಡೇಟಾವನ್ನು ಒಟ್ಟುಗೂಡಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ಶಕ್ತಿ ಬಳಕೆಯ ಅಂಕಿಅಂಶಗಳ API ನಿಂದ ಪಡೆಯಲಾಗುತ್ತದೆ."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "ಜಿನೀ ಕಮಾಂಡ್",
+  "scheduler_preset_action_config_wish": "ನೈಸರ್ಗಿಕ ಭಾಷಾ ಕ್ರಿಯೆ",
+  "scheduler_preset_action_config_wish.placeholder": "ಪ್ರಯತ್ನಿಸಿ: \"ಶಾಖವನ್ನು 22° ಗೆ ಹೊಂದಿಸಿ ಮತ್ತು ಸೂರ್ಯೋದಯ ದೃಶ್ಯವನ್ನು ಪ್ರಾರಂಭಿಸಿ\""
 }

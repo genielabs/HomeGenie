@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Senzor temperature",
       "VirtualThermostat.HeatingSwitchModule": "Prekidač grijanja",
       "VirtualThermostat.CoolingSwitchModule": "Prekidač za hlađenje",
-      "ConfigureOptions.ThermostatsCount": "Broj termostata"
+      "ConfigureOptions.ThermostatsCount": "Broj termostata",
+      "ConfigureOptions.EnsureCommandDelivery": "Osigurajte isporuku naredbi kontinuiranim prijenosom (pulsni način rada)."
     },
     "81": {
       "Title": "Monitor energije",
@@ -311,20 +312,26 @@
       "Title": "Rukovatelj namjerama Geminija",
       "Description": "Omogućuje upravljanje prirodnim jezikom za vaš pametni sustav pomoću Googleovog Gemini AI-a. Da biste aktivirali ovu značajku, unesite važeći API ključ. Slijedite upute na https://aistudio.google.com/app/apikey kako biste dobili besplatni API ključ.",
       "ConfigureOptions.ApiKey": "Ključ Google Gemini AI API-ja",
-      "ConfigureOptions.ModelId": "ID modela"
+      "ConfigureOptions.ModelId": "ID modela",
+      "ConfigureOptions.SystemInstructions": "Sistemske upute"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Vaš osobni AI duh za izradu widgeta. Pokretan Geminijem, pomaže vam u pisanju i ispravljanju pogrešaka HTML, CSS i JavaScript koda izravno unutar HomeGenie editora. Da biste aktivirali ovu značajku, unesite važeći API ključ. Slijedite upute na https://aistudio.google.com/app/apikey kako biste dobili besplatni API ključ.",
       "ConfigureOptions.ApiKey": "Ključ Google Gemini AI API-ja",
-      "ConfigureOptions.ModelId": "ID modela"
+      "ConfigureOptions.ModelId": "ID modela",
+      "ConfigureOptions.SystemInstructions": "Sistemske upute"
     },
     "940": {
       "Title": "Lokalna umjetna inteligencija",
       "Description": "Pokrenite najsuvremenije LLM-ove izravno na svom HomeGenie poslužitelju. Uključuje potpuni API za upravljanje umjetnom inteligencijom iz drugih programa i skripti.",
       "ConfigureOptions.MaxTokens": "Maks. tokena (duljina odgovora)",
       "ConfigureOptions.ModelPath": "Put do lokalne GGUF datoteke",
-      "ConfigureOptions.ModelFile": "Model"
+      "ConfigureOptions.ModelFile": "Model",
+      "ConfigureOptions.SystemInstructions": "Sistemske upute",
+      "ConfigureOptions.ContextSize": "Veličina AI memorije (kontekstni prozor)",
+      "ConfigureOptions.MaxTurns": "Maksimalan broj okretaja u povijesti chata (0 = bez ograničenja)",
+      "ConfigureOptions.SendContextData": "U upite uključite popis uređaja i senzora"
     },
     "575": {
       "Title": "Upravitelj preuzimanja",
@@ -362,5 +369,8 @@
       "Title": "Potrošnja energije po satu",
       "Description": "Trakasti grafikon koji prikazuje prosječnu potrošnju u vatima/satu za svaki sat u danu (00h-23h). Podaci se agregiraju tijekom odabranog tjedna i dobivaju se iz API-ja za statistiku korištenja energije."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Naredba Genie",
+  "scheduler_preset_action_config_wish": "Radnja prirodnog jezika",
+  "scheduler_preset_action_config_wish.placeholder": "Pokušajte: \"Namjestite temperaturu na 22° i pokrenite scenu izlaska sunca\""
 }

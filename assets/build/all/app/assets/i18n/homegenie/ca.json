@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Sensor de temperatura",
       "VirtualThermostat.HeatingSwitchModule": "Interruptor de calefacció",
       "VirtualThermostat.CoolingSwitchModule": "Interruptor de refrigeració",
-      "ConfigureOptions.ThermostatsCount": "Nombre de termostats"
+      "ConfigureOptions.ThermostatsCount": "Nombre de termostats",
+      "ConfigureOptions.EnsureCommandDelivery": "Assegureu el lliurament d'ordres amb transmissió contínua (mode d'impulsos)."
     },
     "81": {
       "Title": "Monitor d'energia",
@@ -311,20 +312,26 @@
       "Title": "Gestor d'intencions de Bessons",
       "Description": "Activa el control del llenguatge natural per al teu sistema intel·ligent mitjançant la intel·ligència artificial Gemini de Google. Per activar aquesta funció, introdueix una clau API vàlida. Segueix les instruccions a https://aistudio.google.com/app/apikey per obtenir una clau API gratuïta.",
       "ConfigureOptions.ApiKey": "Clau de l'API d'IA de Google Gemini",
-      "ConfigureOptions.ModelId": "ID del model"
+      "ConfigureOptions.ModelId": "ID del model",
+      "ConfigureOptions.SystemInstructions": "Instruccions del sistema"
     },
     "931": {
       "Title": "Geni del widget de Bessons",
       "Description": "El vostre geni personal d'IA per a la creació de widgets. Amb la tecnologia de Gemini, us ajuda a escriure i depurar codi HTML, CSS i JavaScript directament dins de l'editor HomeGenie. Per activar aquesta funció, introduïu una clau API vàlida. Seguiu les instruccions a https://aistudio.google.com/app/apikey per obtenir una clau API gratuïta.",
       "ConfigureOptions.ApiKey": "Clau de l'API d'IA de Google Gemini",
-      "ConfigureOptions.ModelId": "ID del model"
+      "ConfigureOptions.ModelId": "ID del model",
+      "ConfigureOptions.SystemInstructions": "Instruccions del sistema"
     },
     "940": {
       "Title": "IA local",
       "Description": "Executeu LLM d'última generació directament al vostre servidor HomeGenie. Inclou una API completa per controlar la IA des d'altres programes i scripts.",
       "ConfigureOptions.MaxTokens": "Tokens màxims (longitud de la resposta)",
       "ConfigureOptions.ModelPath": "Camí al fitxer GGUF local",
-      "ConfigureOptions.ModelFile": "Model"
+      "ConfigureOptions.ModelFile": "Model",
+      "ConfigureOptions.SystemInstructions": "Instruccions del sistema",
+      "ConfigureOptions.ContextSize": "Mida de memòria IA (finestra contextual)",
+      "ConfigureOptions.MaxTurns": "Torns màxims a l'historial de xat (0 = sense límit)",
+      "ConfigureOptions.SendContextData": "Inclou la llista de dispositius i sensors a les consultes"
     },
     "575": {
       "Title": "Gestor de descàrregues",
@@ -362,5 +369,8 @@
       "Title": "Consum d'energia per hora",
       "Description": "Gràfic de barres que mostra el consum mitjà de watts/hora per a cada hora del dia (00h-23h). Les dades s'agreguen durant la setmana seleccionada i provenen de l'API d'estadístiques d'ús energètic."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Comandament Geni",
+  "scheduler_preset_action_config_wish": "Acció de llenguatge natural",
+  "scheduler_preset_action_config_wish.placeholder": "Prova: \"Posa la calefacció a 22° i comença l'escena de la sortida del sol\""
 }

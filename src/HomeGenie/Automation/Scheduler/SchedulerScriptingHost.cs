@@ -46,6 +46,7 @@ namespace HomeGenie.Automation.Scheduler
         private MqttClientHelper mqttClientHelper;
         private KnxClientHelper knxClientHelper;
         private SchedulerHelper schedulerHelper;
+        private ApiHelper apiHelper;
         private ProgramHelperBase programHelper;
         private readonly StoreHelper storeHelper;
         private Action<ModuleHelper, ModuleParameter> moduleUpdateHandler;
@@ -68,6 +69,7 @@ namespace HomeGenie.Automation.Scheduler
             mqttClientHelper = new MqttClientHelper();
             knxClientHelper = new KnxClientHelper();
             schedulerHelper = new SchedulerHelper(homegenie);
+            apiHelper = new ApiHelper(homegenie, 0);
             programHelper = new ProgramHelperBase(homegenie);
         }
 
@@ -114,6 +116,11 @@ namespace HomeGenie.Automation.Scheduler
         {
             moduleUpdateHandler = handler;
             return this;
+        }
+
+        public ApiHelper Api
+        {
+            get { return apiHelper; }
         }
 
         public ProgramHelperBase Program

@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Температур мэдрэгч",
       "VirtualThermostat.HeatingSwitchModule": "Халаалтын унтраалга",
       "VirtualThermostat.CoolingSwitchModule": "Хөргөх унтраалга",
-      "ConfigureOptions.ThermostatsCount": "Термостатын тоо"
+      "ConfigureOptions.ThermostatsCount": "Термостатын тоо",
+      "ConfigureOptions.EnsureCommandDelivery": "Тасралтгүй дамжуулалттай (импульсийн горим) командын гүйцэтгэлийг хангах."
     },
     "81": {
       "Title": "Эрчим хүчний хяналт",
@@ -311,20 +312,26 @@
       "Title": "Gemini зорилго зохицуулагч",
       "Description": "Google-ийн Gemini AI ашиглан таны ухаалаг системд байгалийн хэлний хяналтыг идэвхжүүлнэ. Энэ функцийг идэвхжүүлэхийн тулд хүчинтэй API түлхүүр оруулна уу. Үнэгүй API түлхүүр авахын тулд https://aistudio.google.com/app/apikey дээрх зааврыг дагана уу.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API түлхүүр",
-      "ConfigureOptions.ModelId": "Загварын ID"
+      "ConfigureOptions.ModelId": "Загварын ID",
+      "ConfigureOptions.SystemInstructions": "Системийн зааварчилгаа"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Виджет бүтээхэд зориулсан таны хувийн хиймэл оюун ухаан. Gemini-ээр дэмжигдсэн энэ нь танд HTML, CSS болон JavaScript кодыг HomeGenie засварлагч дотор шууд бичиж, дибаг хийхэд тусална. Энэ функцийг идэвхжүүлэхийн тулд хүчинтэй API түлхүүр оруулна уу. Үнэгүй API түлхүүр авахын тулд https://aistudio.google.com/app/apikey дээрх зааврыг дагана уу.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API түлхүүр",
-      "ConfigureOptions.ModelId": "Загварын ID"
+      "ConfigureOptions.ModelId": "Загварын ID",
+      "ConfigureOptions.SystemInstructions": "Системийн зааварчилгаа"
     },
     "940": {
       "Title": "Орон нутгийн хиймэл оюун ухаан",
       "Description": "Хамгийн сүүлийн үеийн LLM-үүдийг HomeGenie сервер дээрээ шууд ажиллуулна. Бусад програм болон скриптээс хиймэл оюун ухааныг удирдах бүрэн API-г багтаасан болно.",
       "ConfigureOptions.MaxTokens": "Хамгийн их Токен (хариу өгөх хугацаа)",
       "ConfigureOptions.ModelPath": "Орон нутгийн GGUF файлын зам",
-      "ConfigureOptions.ModelFile": "Загвар"
+      "ConfigureOptions.ModelFile": "Загвар",
+      "ConfigureOptions.SystemInstructions": "Системийн зааварчилгаа",
+      "ConfigureOptions.ContextSize": "Хиймэл оюун ухааны санах ойн хэмжээ (Контекст цонх)",
+      "ConfigureOptions.MaxTurns": "Чатын түүхийн дээд хязгаар (0 = хязгааргүй)",
+      "ConfigureOptions.SendContextData": "Асуулгад төхөөрөмжийн жагсаалт болон мэдрэгчийг оруулах"
     },
     "575": {
       "Title": "Татаж авах менежер",
@@ -362,5 +369,8 @@
       "Title": "Цагийн эрчим хүчний хэрэглээ",
       "Description": "Өдрийн цаг тутамд (00-23 цаг) Ватт/цаг зарцуулалтын дундаж хэмжээг харуулсан баганан график. Өгөгдлийг сонгосон долоо хоногийн турш нэгтгэж, Эрчим хүчний хэрэглээний статистикийн API-аас авсан болно."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Жин команд",
+  "scheduler_preset_action_config_wish": "Байгалийн хэлний үйлдэл",
+  "scheduler_preset_action_config_wish.placeholder": "Дараахыг туршаад үзээрэй: \"Дулааныг 22° болгож, нар мандах үзэгдлийг эхлүүлнэ үү\""
 }

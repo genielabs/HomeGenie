@@ -159,7 +159,7 @@ namespace HomeGenie.Automation.Engines
             "YamlDotNet.Serialization.NamingConventions"
         };
 
-        public static int ProgramCodeOffset => Includes.Count() + 11;
+        public static int ProgramCodeOffset => Includes.Count() + 12;
 
 #if NETCOREAPP
         public static EmitResult CompileScript(string scriptSetup, string scriptSource, string scriptContext, string outputDllFile)
@@ -167,9 +167,10 @@ namespace HomeGenie.Automation.Engines
         public static CompilerResults CompileScript(string scriptSetup, string scriptSource, string scriptContext, string outputDllFile)
 #endif
         {
-            var source = @"# pragma warning disable 0168 // variable declared but not used.
-# pragma warning disable 0219 // variable assigned but not used.
-# pragma warning disable 0414 // private field assigned but not used.
+            var source = @"#pragma warning disable 0168 // variable declared but not used.
+#pragma warning disable 0219 // variable assigned but not used.
+#pragma warning disable 0414 // private field assigned but not used.
+#pragma warning disable 0162 // Unreachable code detected
 
 {using}
 

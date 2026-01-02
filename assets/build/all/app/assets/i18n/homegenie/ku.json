@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Sensorê germahiyê",
       "VirtualThermostat.HeatingSwitchModule": "Guhestina germkirinê",
       "VirtualThermostat.CoolingSwitchModule": "Guhêrbarê sarkirinê",
-      "ConfigureOptions.ThermostatsCount": "Hejmara termostatan"
+      "ConfigureOptions.ThermostatsCount": "Hejmara termostatan",
+      "ConfigureOptions.EnsureCommandDelivery": "Radestkirina fermanan bi veguhestina berdewam (moda pulsê) misoger bike."
     },
     "81": {
       "Title": "Çavdêrê Enerjiyê",
@@ -311,20 +312,26 @@
       "Title": "Gerînendeyê Niyeta Gemini",
       "Description": "Bi karanîna Gemini AI ya Google-ê, kontrola zimanê xwezayî ji bo pergala we ya jîr çalak dike. Ji bo çalakkirina vê taybetmendiyê, mifteyek API-yê ya derbasdar binivîse. Ji bo bidestxistina mifteyek API-yê ya belaş, rêwerzên li https://aistudio.google.com/app/apikey bişopînin.",
       "ConfigureOptions.ApiKey": "Mifteya API ya Google Gemini AI",
-      "ConfigureOptions.ModelId": "Nasnameya Modelê"
+      "ConfigureOptions.ModelId": "Nasnameya Modelê",
+      "ConfigureOptions.SystemInstructions": "Rênimayên Sîstemê"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Cinîya AI ya we ya şexsî ji bo afirandina widgetan. Bi hêza Gemini, ew ji we re dibe alîkar ku hûn koda HTML, CSS, û JavaScript rasterast di nav edîtorê HomeGenie de binivîsin û xeletiyan çareser bikin. Ji bo çalakkirina vê taybetmendiyê, mifteyek API-ya derbasdar binivîsin. Ji bo ku mifteyek API-ya belaş bistînin, rêwerzên li https://aistudio.google.com/app/apikey bişopînin.",
       "ConfigureOptions.ApiKey": "Mifteya API ya Google Gemini AI",
-      "ConfigureOptions.ModelId": "Nasnameya Modelê"
+      "ConfigureOptions.ModelId": "Nasnameya Modelê",
+      "ConfigureOptions.SystemInstructions": "Rênimayên Sîstemê"
     },
     "940": {
       "Title": "AI-ya herêmî",
       "Description": "LLM-yên herî pêşketî rasterast li ser servera xwe ya HomeGenie bimeşînin. API-yek tevahî vedihewîne da ku AI-ê ji bername û skrîptên din kontrol bike.",
       "ConfigureOptions.MaxTokens": "Maksimum Token (dirêjahiya bersivê)",
       "ConfigureOptions.ModelPath": "Riya pelê GGUF ya herêmî",
-      "ConfigureOptions.ModelFile": "Cins"
+      "ConfigureOptions.ModelFile": "Cins",
+      "ConfigureOptions.SystemInstructions": "Rênimayên Sîstemê",
+      "ConfigureOptions.ContextSize": "Mezinahiya Bîra AI (Pencereya Kontekstê)",
+      "ConfigureOptions.MaxTurns": "Zêdetirîn dorên dîroka sohbetê (0 = bê sînor)",
+      "ConfigureOptions.SendContextData": "Lîsteya cîhaz û sensoran di nav lêpirsînan de bihewîne"
     },
     "575": {
       "Title": "Gerînendeyê Dakêşanê",
@@ -362,5 +369,8 @@
       "Title": "Xerckirina Enerjiyê ya Saetî",
       "Description": "Nexşeya barî ku xerckirina navînî ya Watt/Saet ji bo her saetek rojê (00h-23h) nîşan dide. Daneyên li ser hefteya bijartî têne berhev kirin û ji API-ya Statîstîkên Bikaranîna Enerjiyê têne wergirtin."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Fermandariya Genie",
+  "scheduler_preset_action_config_wish": "Çalakiya Zimanê Xwezayî",
+  "scheduler_preset_action_config_wish.placeholder": "Biceribîne: \"Germiyê deyne ser 22° û dîmena Hilatina Rojê bide destpêkirin\""
 }

@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "வெப்பநிலை சென்சார்",
       "VirtualThermostat.HeatingSwitchModule": "வெப்பமூட்டும் சுவிட்ச்",
       "VirtualThermostat.CoolingSwitchModule": "கூலிங் ஸ்விட்ச்",
-      "ConfigureOptions.ThermostatsCount": "தெர்மோஸ்டாட்களின் எண்ணிக்கை"
+      "ConfigureOptions.ThermostatsCount": "தெர்மோஸ்டாட்களின் எண்ணிக்கை",
+      "ConfigureOptions.EnsureCommandDelivery": "தொடர்ச்சியான பரிமாற்றத்துடன் (துடிப்பு-முறை) கட்டளை விநியோகத்தை உறுதி செய்யவும்."
     },
     "81": {
       "Title": "ஆற்றல் கண்காணிப்பு",
@@ -311,20 +312,26 @@
       "Title": "ஜெமினி இன்டென்ட் ஹேண்ட்லர்",
       "Description": "கூகிளின் ஜெமினி AI ஐப் பயன்படுத்தி உங்கள் ஸ்மார்ட் சிஸ்டத்திற்கு இயல்பான மொழி கட்டுப்பாட்டை இயக்குகிறது. இந்த அம்சத்தை செயல்படுத்த, செல்லுபடியாகும் API விசையை உள்ளிடவும். இலவச API விசையைப் பெற https://aistudio.google.com/app/apikey இல் உள்ள வழிமுறைகளைப் பின்பற்றவும்.",
       "ConfigureOptions.ApiKey": "கூகிள் ஜெமினி AI API விசை",
-      "ConfigureOptions.ModelId": "மாதிரி ஐடி"
+      "ConfigureOptions.ModelId": "மாதிரி ஐடி",
+      "ConfigureOptions.SystemInstructions": "கணினி வழிமுறைகள்"
     },
     "931": {
       "Title": "ஜெமினி விட்ஜெட் ஜீனி",
       "Description": "விட்ஜெட் உருவாக்கத்திற்கான உங்கள் தனிப்பட்ட AI ஜீனி. ஜெமினியால் இயக்கப்படும் இது, HomeGenie எடிட்டருக்குள் நேரடியாக HTML, CSS மற்றும் JavaScript குறியீட்டை எழுதவும் பிழைத்திருத்தவும் உதவுகிறது. இந்த அம்சத்தை செயல்படுத்த, செல்லுபடியாகும் API விசையை உள்ளிடவும். இலவச API விசையைப் பெற https://aistudio.google.com/app/apikey இல் உள்ள வழிமுறைகளைப் பின்பற்றவும்.",
       "ConfigureOptions.ApiKey": "கூகிள் ஜெமினி AI API விசை",
-      "ConfigureOptions.ModelId": "மாதிரி ஐடி"
+      "ConfigureOptions.ModelId": "மாதிரி ஐடி",
+      "ConfigureOptions.SystemInstructions": "கணினி வழிமுறைகள்"
     },
     "940": {
       "Title": "உள்ளூர் AI",
       "Description": "உங்கள் HomeGenie சர்வரில் நேரடியாக அதிநவீன LLMகளை இயக்கவும். பிற நிரல்கள் மற்றும் ஸ்கிரிப்ட்களிலிருந்து AI ஐக் கட்டுப்படுத்த முழு API ஐ உள்ளடக்கியது.",
       "ConfigureOptions.MaxTokens": "அதிகபட்ச டோக்கன்கள் (பதில் நீளம்)",
       "ConfigureOptions.ModelPath": "உள்ளூர் GGUF கோப்பிற்கான பாதை",
-      "ConfigureOptions.ModelFile": "மாதிரி"
+      "ConfigureOptions.ModelFile": "மாதிரி",
+      "ConfigureOptions.SystemInstructions": "கணினி வழிமுறைகள்",
+      "ConfigureOptions.ContextSize": "AI நினைவக அளவு (சூழல் சாளரம்)",
+      "ConfigureOptions.MaxTurns": "அதிகபட்ச அரட்டை வரலாறு திருப்பங்கள் (0 = வரம்பு இல்லை)",
+      "ConfigureOptions.SendContextData": "வினவல்களில் சாதனப் பட்டியல் மற்றும் சென்சார்களைச் சேர்க்கவும்"
     },
     "575": {
       "Title": "பதிவிறக்க மேலாளர்",
@@ -362,5 +369,8 @@
       "Title": "மணிநேர ஆற்றல் நுகர்வு",
       "Description": "நாளின் ஒவ்வொரு மணி நேரத்திற்கும் (00h-23h) சராசரி வாட்ஸ்/மணிநேர நுகர்வு காட்டும் பார் விளக்கப்படம். தேர்ந்தெடுக்கப்பட்ட வாரத்தில் தரவு ஒருங்கிணைக்கப்பட்டு, ஆற்றல் பயன்பாட்டு புள்ளிவிவர API இலிருந்து பெறப்படுகிறது."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "ஜெனி கட்டளை",
+  "scheduler_preset_action_config_wish": "இயற்கை மொழி செயல்",
+  "scheduler_preset_action_config_wish.placeholder": "\"வெப்பத்தை 22° ஆக அமைத்து சூரிய உதயக் காட்சியைத் தொடங்கு\" என்பதை முயற்சிக்கவும்."
 }

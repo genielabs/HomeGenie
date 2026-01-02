@@ -136,5 +136,19 @@
         "transform": "time:seconds"
       }
     }
+  },
+  {
+    "id": "genie_command",
+    "script": "const prompt = '$wish$';\n  $$.api.call('AI.IntentHandlers/Lailama/Prompt.Schedule/' + encodeURIComponent(prompt));\n",
+    "config": {
+      "wish": {
+        "type": "textarea",
+        "options": {
+          "maxLength": 1000,
+          "placeholder": "E.g.: Set the heat to 22° and start the Cinema scene."
+        },
+        "value": ""
+      }
+    }
   }
 ]

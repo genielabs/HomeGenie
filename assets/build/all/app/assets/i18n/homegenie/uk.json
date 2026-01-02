@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Датчик температури",
       "VirtualThermostat.HeatingSwitchModule": "Перемикач опалення",
       "VirtualThermostat.CoolingSwitchModule": "Перемикач охолодження",
-      "ConfigureOptions.ThermostatsCount": "Кількість термостатів"
+      "ConfigureOptions.ThermostatsCount": "Кількість термостатів",
+      "ConfigureOptions.EnsureCommandDelivery": "Забезпечити доставку команд безперервною передачею (імпульсний режим)."
     },
     "81": {
       "Title": "Енергетичний монітор",
@@ -311,20 +312,26 @@
       "Title": "Обробник намірів Gemini",
       "Description": "Дозволяє керувати вашою розумною системою природною мовою за допомогою штучного інтелекту Gemini від Google. Щоб активувати цю функцію, введіть дійсний ключ API. Дотримуйтесь інструкцій на сторінці https://aistudio.google.com/app/apikey, щоб отримати безкоштовний ключ API.",
       "ConfigureOptions.ApiKey": "Ключ API штучного інтелекту Google Gemini",
-      "ConfigureOptions.ModelId": "Ідентифікатор моделі"
+      "ConfigureOptions.ModelId": "Ідентифікатор моделі",
+      "ConfigureOptions.SystemInstructions": "Системні інструкції"
     },
     "931": {
       "Title": "Джеміні Віджет Джин",
       "Description": "Ваш особистий штучний інтелект-джин для створення віджетів. Працює на Gemini, допомагає вам писати та налагоджувати код HTML, CSS та JavaScript безпосередньо в редакторі HomeGenie. Щоб активувати цю функцію, введіть дійсний ключ API. Дотримуйтесь інструкцій на сторінці https://aistudio.google.com/app/apikey, щоб отримати безкоштовний ключ API.",
       "ConfigureOptions.ApiKey": "Ключ API штучного інтелекту Google Gemini",
-      "ConfigureOptions.ModelId": "Ідентифікатор моделі"
+      "ConfigureOptions.ModelId": "Ідентифікатор моделі",
+      "ConfigureOptions.SystemInstructions": "Системні інструкції"
     },
     "940": {
       "Title": "Локальний ШІ",
       "Description": "Запускайте найсучасніші LLM безпосередньо на вашому сервері HomeGenie. Включає повний API для керування ШІ з інших програм та скриптів.",
       "ConfigureOptions.MaxTokens": "Максимальна кількість токенів (довжина відповіді)",
       "ConfigureOptions.ModelPath": "Шлях до локального файлу GGUF",
-      "ConfigureOptions.ModelFile": "Модель"
+      "ConfigureOptions.ModelFile": "Модель",
+      "ConfigureOptions.SystemInstructions": "Системні інструкції",
+      "ConfigureOptions.ContextSize": "Розмір пам'яті ШІ (контекстне вікно)",
+      "ConfigureOptions.MaxTurns": "Максимальна кількість поворотів в історії чату (0 = без обмежень)",
+      "ConfigureOptions.SendContextData": "Включити список пристроїв та датчики в запити"
     },
     "575": {
       "Title": "Менеджер завантажень",
@@ -362,5 +369,8 @@
       "Title": "Споживання енергії за годину",
       "Description": "Гістограма, що відображає середнє споживання енергії у ватах/годину за кожну годину доби (з 00:00 до 23:00). Дані агрегуються за вибраний тиждень та отримані з API статистики використання енергії."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Команда Джина",
+  "scheduler_preset_action_config_wish": "Дія природної мови",
+  "scheduler_preset_action_config_wish.placeholder": "Спробуйте: «Встановіть температуру на 22° та запустіть сцену зі сходом сонця»."
 }

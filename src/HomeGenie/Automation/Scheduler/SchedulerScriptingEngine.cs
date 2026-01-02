@@ -45,6 +45,10 @@ namespace HomeGenie.Automation.Scheduler
           // ModulesManager
           modules: hg.modules,
           boundModules: hg.boundModules,
+          // ApiHelper
+          api: {
+            call: (apiCommand, data) => hg.api.call(apiCommand, data)
+          },
           // ProgramHelperBase
           program: hg.Program,
           // SettingsHelper

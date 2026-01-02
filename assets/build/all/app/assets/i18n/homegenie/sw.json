@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Sensor ya joto",
       "VirtualThermostat.HeatingSwitchModule": "Kubadilisha inapokanzwa",
       "VirtualThermostat.CoolingSwitchModule": "Swichi ya kupoeza",
-      "ConfigureOptions.ThermostatsCount": "Idadi ya thermostats"
+      "ConfigureOptions.ThermostatsCount": "Idadi ya thermostats",
+      "ConfigureOptions.EnsureCommandDelivery": "Hakikisha uwasilishaji wa amri kwa kutumia upitishaji unaoendelea (hali ya mapigo)."
     },
     "81": {
       "Title": "Ufuatiliaji wa Nishati",
@@ -311,20 +312,26 @@
       "Title": "Kidhibiti cha Nia ya Gemini",
       "Description": "Huwasha udhibiti wa lugha asilia kwa mfumo wako mahiri kwa kutumia Gemini AI ya Google. Ili kuwezesha kipengele hiki, weka ufunguo halali wa API. Fuata maagizo katika https://aistudio.google.com/app/apikey ili kupata ufunguo wa API bila malipo.",
       "ConfigureOptions.ApiKey": "Kitufe cha Google Gemini AI API",
-      "ConfigureOptions.ModelId": "Kitambulisho cha mfano"
+      "ConfigureOptions.ModelId": "Kitambulisho cha mfano",
+      "ConfigureOptions.SystemInstructions": "Maelekezo ya Mfumo"
     },
     "931": {
       "Title": "Gemini Widget Jini",
       "Description": "Jini wako wa kibinafsi wa AI kwa kuunda wijeti. Inaendeshwa na Gemini, hukusaidia kuandika na kurekebisha HTML, CSS, na msimbo wa JavaScript moja kwa moja ndani ya kihariri cha HomeGenie. Ili kuwezesha kipengele hiki, weka ufunguo halali wa API. Fuata maagizo katika https://aistudio.google.com/app/apikey ili kupata ufunguo wa API bila malipo.",
       "ConfigureOptions.ApiKey": "Kitufe cha Google Gemini AI API",
-      "ConfigureOptions.ModelId": "Kitambulisho cha mfano"
+      "ConfigureOptions.ModelId": "Kitambulisho cha mfano",
+      "ConfigureOptions.SystemInstructions": "Maelekezo ya Mfumo"
     },
     "940": {
       "Title": "AI ya Ndani",
       "Description": "Endesha LLM za kisasa moja kwa moja kwenye seva yako ya HomeGenie. Inajumuisha API kamili ya kudhibiti AI kutoka kwa programu na hati zingine.",
       "ConfigureOptions.MaxTokens": "Tokeni za Juu (urefu wa majibu)",
       "ConfigureOptions.ModelPath": "Njia ya faili ya GGUF ya ndani",
-      "ConfigureOptions.ModelFile": "Mfano"
+      "ConfigureOptions.ModelFile": "Mfano",
+      "ConfigureOptions.SystemInstructions": "Maelekezo ya Mfumo",
+      "ConfigureOptions.ContextSize": "Ukubwa wa Kumbukumbu ya AI (Dirisha la Muktadha)",
+      "ConfigureOptions.MaxTurns": "Zamu ya juu zaidi ya historia ya gumzo (0 = hakuna kikomo)",
+      "ConfigureOptions.SendContextData": "Jumuisha orodha ya vifaa na vitambuzi katika hoja"
     },
     "575": {
       "Title": "Kidhibiti cha Upakuaji",
@@ -362,5 +369,8 @@
       "Title": "Matumizi ya Nishati kwa Saa",
       "Description": "Chati ya miraba inayoonyesha wastani wa matumizi ya Wati/Saa kwa kila saa ya siku (00h-23h). Data hukusanywa kwa wiki iliyochaguliwa na kupatikana kutoka kwa API ya Takwimu za Matumizi ya Nishati."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Amri ya Jini",
+  "scheduler_preset_action_config_wish": "Kitendo cha Lugha Asilia",
+  "scheduler_preset_action_config_wish.placeholder": "Jaribu: \"Weka joto hadi 22° na uanze mandhari ya Jua\""
 }

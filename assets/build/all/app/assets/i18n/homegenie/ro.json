@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Senzor de temperatură",
       "VirtualThermostat.HeatingSwitchModule": "Comutator de încălzire",
       "VirtualThermostat.CoolingSwitchModule": "Comutator de răcire",
-      "ConfigureOptions.ThermostatsCount": "Numărul de termostate"
+      "ConfigureOptions.ThermostatsCount": "Numărul de termostate",
+      "ConfigureOptions.EnsureCommandDelivery": "Asigurați livrarea comenzilor cu transmisie continuă (mod impuls)."
     },
     "81": {
       "Title": "Monitor de energie",
@@ -311,20 +312,26 @@
       "Title": "Gemeni Intent Handler",
       "Description": "Activează controlul în limbaj natural pentru sistemul tău inteligent folosind inteligența artificială Gemini de la Google. Pentru a activa această funcție, introdu o cheie API validă. Urmează instrucțiunile de la https://aistudio.google.com/app/apikey pentru a obține o cheie API gratuită.",
       "ConfigureOptions.ApiKey": "Cheia API Google Gemini AI",
-      "ConfigureOptions.ModelId": "ID-ul modelului"
+      "ConfigureOptions.ModelId": "ID-ul modelului",
+      "ConfigureOptions.SystemInstructions": "Instrucțiuni de sistem"
     },
     "931": {
       "Title": "Gemeni Widget Genie",
       "Description": "Geniul tău personal cu inteligență artificială pentru crearea de widgeturi. Bazat pe Gemini, te ajută să scrii și să depanezi cod HTML, CSS și JavaScript direct în editorul HomeGenie. Pentru a activa această funcție, introdu o cheie API validă. Urmează instrucțiunile de la https://aistudio.google.com/app/apikey pentru a obține o cheie API gratuită.",
       "ConfigureOptions.ApiKey": "Cheia API Google Gemini AI",
-      "ConfigureOptions.ModelId": "ID-ul modelului"
+      "ConfigureOptions.ModelId": "ID-ul modelului",
+      "ConfigureOptions.SystemInstructions": "Instrucțiuni de sistem"
     },
     "940": {
       "Title": "IA locală",
       "Description": "Rulați LLM-uri de ultimă generație direct pe serverul dvs. HomeGenie. Include o API completă pentru a controla inteligența artificială din alte programe și scripturi.",
       "ConfigureOptions.MaxTokens": "Număr maxim de tokenuri (lungimea răspunsului)",
       "ConfigureOptions.ModelPath": "Calea către fișierul GGUF local",
-      "ConfigureOptions.ModelFile": "Model"
+      "ConfigureOptions.ModelFile": "Model",
+      "ConfigureOptions.SystemInstructions": "Instrucțiuni de sistem",
+      "ConfigureOptions.ContextSize": "Dimensiunea memoriei AI (fereastră contextuală)",
+      "ConfigureOptions.MaxTurns": "Număr maxim de ture în istoricul chatului (0 = fără limită)",
+      "ConfigureOptions.SendContextData": "Includeți lista de dispozitive și senzori în interogări"
     },
     "575": {
       "Title": "Manager de descărcări",
@@ -362,5 +369,8 @@
       "Title": "Consum orar de energie",
       "Description": "Diagramă cu bare care afișează consumul mediu de wați/oră pentru fiecare oră a zilei (00:00-23:00). Datele sunt agregate pe parcursul săptămânii selectate și provin din API-ul Energy Use Statistics."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Comandamentul Geniilor",
+  "scheduler_preset_action_config_wish": "Acțiune în limbaj natural",
+  "scheduler_preset_action_config_wish.placeholder": "Încearcă: „Setează temperatura la 22° și pornește scena Răsărit de soare”"
 }

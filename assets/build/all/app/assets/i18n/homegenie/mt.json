@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Sensur tat-temperatura",
       "VirtualThermostat.HeatingSwitchModule": "Swiċċ tat-tisħin",
       "VirtualThermostat.CoolingSwitchModule": "Swiċċ tat-tkessiħ",
-      "ConfigureOptions.ThermostatsCount": "Numru ta' termostati"
+      "ConfigureOptions.ThermostatsCount": "Numru ta' termostati",
+      "ConfigureOptions.EnsureCommandDelivery": "Aċċerta ruħek li l-kmand jingħata b'trażmissjoni kontinwa (modalità ta' impuls)."
     },
     "81": {
       "Title": "Monitor tal-Enerġija",
@@ -311,20 +312,26 @@
       "Title": "Immaniġġjar tal-Intenzjoni Gemini",
       "Description": "Jippermetti kontroll tal-lingwa naturali għas-sistema intelliġenti tiegħek bl-użu tal-Gemini AI ta' Google. Biex tattiva din il-karatteristika, daħħal ċavetta API valida. Segwi l-istruzzjonijiet fuq https://aistudio.google.com/app/apikey biex tikseb ċavetta API b'xejn.",
       "ConfigureOptions.ApiKey": "Ċavetta tal-API tal-AI tal-Google Gemini",
-      "ConfigureOptions.ModelId": "ID tal-Mudell"
+      "ConfigureOptions.ModelId": "ID tal-Mudell",
+      "ConfigureOptions.SystemInstructions": "Istruzzjonijiet tas-Sistema"
     },
     "931": {
       "Title": "Widget tal-Ġenju tal-Gemini",
       "Description": "Il-ġenju personali tal-AI tiegħek għall-ħolqien tal-widgets. Imħaddem minn Gemini, jgħinek tikteb u tiddibaggja kodiċi HTML, CSS, u JavaScript direttament fl-editur HomeGenie. Biex tattiva din il-karatteristika, daħħal ċavetta API valida. Segwi l-istruzzjonijiet fuq https://aistudio.google.com/app/apikey biex tikseb ċavetta API b'xejn.",
       "ConfigureOptions.ApiKey": "Ċavetta tal-API tal-AI tal-Google Gemini",
-      "ConfigureOptions.ModelId": "ID tal-Mudell"
+      "ConfigureOptions.ModelId": "ID tal-Mudell",
+      "ConfigureOptions.SystemInstructions": "Istruzzjonijiet tas-Sistema"
     },
     "940": {
       "Title": "AI Lokali",
       "Description": "Mexxi LLMs avvanzati direttament fuq is-server HomeGenie tiegħek. Jinkludi API sħiħa biex tikkontrolla l-AI minn programmi u skripts oħra.",
       "ConfigureOptions.MaxTokens": "Tokens Massimi (tul tar-rispons)",
       "ConfigureOptions.ModelPath": "Mogħdija għall-fajl GGUF lokali",
-      "ConfigureOptions.ModelFile": "Mudell"
+      "ConfigureOptions.ModelFile": "Mudell",
+      "ConfigureOptions.SystemInstructions": "Istruzzjonijiet tas-Sistema",
+      "ConfigureOptions.ContextSize": "Daqs tal-Memorja AI (Tieqa tal-Kuntest)",
+      "ConfigureOptions.MaxTurns": "Dawriet massimi fl-istorja taċ-chat (0 = bla limitu)",
+      "ConfigureOptions.SendContextData": "Inkludi lista ta' apparati u sensuri fil-mistoqsijiet"
     },
     "575": {
       "Title": "Maniġer tat-Tniżżil",
@@ -362,5 +369,8 @@
       "Title": "Konsum tal-Enerġija kull Siegħa",
       "Description": "Grafika bil-bars li turi l-konsum medju ta' Watts/Siegħa għal kull siegħa tal-ġurnata (00h-23h). Id-dejta hija aggregata matul il-ġimgħa magħżula u ġejja mill-API tal-Istatistika tal-Użu tal-Enerġija."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Kmand tal-Ġenji",
+  "scheduler_preset_action_config_wish": "Azzjoni tal-Lingwa Naturali",
+  "scheduler_preset_action_config_wish.placeholder": "Ipprova: \"Issettja s-sħana għal 22° u ibda x-xena tax-Xemx li Jbex\""
 }

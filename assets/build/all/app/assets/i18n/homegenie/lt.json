@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Temperatūros jutiklis",
       "VirtualThermostat.HeatingSwitchModule": "Šildymo jungiklis",
       "VirtualThermostat.CoolingSwitchModule": "Aušinimo jungiklis",
-      "ConfigureOptions.ThermostatsCount": "Termostatų skaičius"
+      "ConfigureOptions.ThermostatsCount": "Termostatų skaičius",
+      "ConfigureOptions.EnsureCommandDelivery": "Užtikrinti komandų perdavimą nepertraukiamu perdavimu (impulsiniu režimu)."
     },
     "81": {
       "Title": "Energijos monitorius",
@@ -311,20 +312,26 @@
       "Title": "Gemini ketinimų tvarkytojas",
       "Description": "Įgalina natūralios kalbos valdymą jūsų išmaniojoje sistemoje naudojant „Google Gemini“ dirbtinį intelektą. Norėdami suaktyvinti šią funkciją, įveskite galiojantį API raktą. Vadovaukitės instrukcijomis, pateiktomis adresu https://aistudio.google.com/app/apikey, kad gautumėte nemokamą API raktą.",
       "ConfigureOptions.ApiKey": "„Google Gemini“ dirbtinio intelekto API raktas",
-      "ConfigureOptions.ModelId": "Modelio ID"
+      "ConfigureOptions.ModelId": "Modelio ID",
+      "ConfigureOptions.SystemInstructions": "Sistemos instrukcijos"
     },
     "931": {
       "Title": "Dvynių valdiklio džinas",
       "Description": "Jūsų asmeninis dirbtinio intelekto džinas valdikliams kurti. Sukurtas „Gemini“ pagrindu, jis padeda rašyti ir derinti HTML, CSS ir „JavaScript“ kodus tiesiai „HomeGenie“ redaktoriuje. Norėdami suaktyvinti šią funkciją, įveskite galiojantį API raktą. Vadovaukitės instrukcijomis, pateiktomis adresu https://aistudio.google.com/app/apikey, kad gautumėte nemokamą API raktą.",
       "ConfigureOptions.ApiKey": "„Google Gemini“ dirbtinio intelekto API raktas",
-      "ConfigureOptions.ModelId": "Modelio ID"
+      "ConfigureOptions.ModelId": "Modelio ID",
+      "ConfigureOptions.SystemInstructions": "Sistemos instrukcijos"
     },
     "940": {
       "Title": "Vietinis dirbtinis intelektas",
       "Description": "Paleiskite pažangiausias LLM programas tiesiogiai savo „HomeGenie“ serveryje. Apima visą API sąsają, skirtą dirbtiniam intelektui valdyti iš kitų programų ir scenarijų.",
       "ConfigureOptions.MaxTokens": "Maksimalus žetonų skaičius (atsakymo ilgis)",
       "ConfigureOptions.ModelPath": "Kelias į vietinį GGUF failą",
-      "ConfigureOptions.ModelFile": "Modelis"
+      "ConfigureOptions.ModelFile": "Modelis",
+      "ConfigureOptions.SystemInstructions": "Sistemos instrukcijos",
+      "ConfigureOptions.ContextSize": "DI atminties dydis (kontekstinis langas)",
+      "ConfigureOptions.MaxTurns": "Maksimalus pokalbių istorijos ėjimų skaičius (0 = neribojamas)",
+      "ConfigureOptions.SendContextData": "Į užklausas įtraukite įrenginių sąrašą ir jutiklius"
     },
     "575": {
       "Title": "Atsisiuntimų tvarkyklė",
@@ -362,5 +369,8 @@
       "Title": "Valandinis energijos suvartojimas",
       "Description": "Juostinė diagrama, rodanti vidutinį energijos suvartojimą vatais per valandą kiekvieną paros valandą (00–23 val.). Duomenys apibendrinami per pasirinktą savaitę ir gaunami iš energijos naudojimo statistikos API."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Džinų komanda",
+  "scheduler_preset_action_config_wish": "Natūralios kalbos veiksmas",
+  "scheduler_preset_action_config_wish.placeholder": "Pabandykite: „Nustatykite 22° temperatūrą ir paleiskite saulėtekio sceną“."
 }

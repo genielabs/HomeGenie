@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Sensori i temperaturës",
       "VirtualThermostat.HeatingSwitchModule": "Ndërprerësi i ngrohjes",
       "VirtualThermostat.CoolingSwitchModule": "Ndërprerësi i ftohjes",
-      "ConfigureOptions.ThermostatsCount": "Numri i termostatëve"
+      "ConfigureOptions.ThermostatsCount": "Numri i termostatëve",
+      "ConfigureOptions.EnsureCommandDelivery": "Siguroni dhënien e komandës me transmetim të vazhdueshëm (modaliteti i pulsit)."
     },
     "81": {
       "Title": "Monitori i Energjisë",
@@ -311,20 +312,26 @@
       "Title": "Trajneri i Synimeve të Binjakëve",
       "Description": "Aktivizon kontrollin e gjuhës natyrore për sistemin tuaj inteligjent duke përdorur Gemini AI të Google. Për të aktivizuar këtë funksion, futni një çelës API të vlefshëm. Ndiqni udhëzimet në https://aistudio.google.com/app/apikey për të marrë një çelës API falas.",
       "ConfigureOptions.ApiKey": "Çelësi API i Google Gemini AI",
-      "ConfigureOptions.ModelId": "ID e modelit"
+      "ConfigureOptions.ModelId": "ID e modelit",
+      "ConfigureOptions.SystemInstructions": "Udhëzimet e Sistemit"
     },
     "931": {
       "Title": "Xhindi i Widget-it të Binjakëve",
       "Description": "Xhindi juaj personal i inteligjencës artificiale për krijimin e veglave. I mundësuar nga Gemini, ju ndihmon të shkruani dhe të debugoni kodin HTML, CSS dhe JavaScript direkt brenda redaktorit HomeGenie. Për të aktivizuar këtë funksion, futni një çelës API të vlefshëm. Ndiqni udhëzimet në https://aistudio.google.com/app/apikey për të marrë një çelës API falas.",
       "ConfigureOptions.ApiKey": "Çelësi API i Google Gemini AI",
-      "ConfigureOptions.ModelId": "ID e modelit"
+      "ConfigureOptions.ModelId": "ID e modelit",
+      "ConfigureOptions.SystemInstructions": "Udhëzimet e Sistemit"
     },
     "940": {
       "Title": "IA lokale",
       "Description": "Ekzekutoni LLM-të e teknologjisë së fundit direkt në serverin tuaj HomeGenie. Përfshin një API të plotë për të kontrolluar IA-në nga programe dhe skripte të tjera.",
       "ConfigureOptions.MaxTokens": "Maksimumi i Tokenëve (gjatësia e përgjigjes)",
       "ConfigureOptions.ModelPath": "Shtegu për në skedarin lokal GGUF",
-      "ConfigureOptions.ModelFile": "Model"
+      "ConfigureOptions.ModelFile": "Model",
+      "ConfigureOptions.SystemInstructions": "Udhëzimet e Sistemit",
+      "ConfigureOptions.ContextSize": "Madhësia e memories AI (Dritarja e kontekstit)",
+      "ConfigureOptions.MaxTurns": "Numri maksimal i kthesave në historikun e bisedave (0 = pa limit)",
+      "ConfigureOptions.SendContextData": "Përfshi listën e pajisjeve dhe sensorët në pyetje"
     },
     "575": {
       "Title": "Menaxheri i Shkarkimeve",
@@ -362,5 +369,8 @@
       "Title": "Konsumi i Energjisë në Ora",
       "Description": "Grafik me shtylla që shfaq konsumin mesatar të vatëve/orë për çdo orë të ditës (00:00-23:00). Të dhënat grumbullohen gjatë javës së zgjedhur dhe burojnë nga API-ja e Statistikave të Përdorimit të Energjisë."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Komanda e Xhindëve",
+  "scheduler_preset_action_config_wish": "Veprimi i Gjuhës Natyrore",
+  "scheduler_preset_action_config_wish.placeholder": "Provo: \"Vendos nxehtësinë në 22° dhe fillo skenën e Lindjes së Diellit\""
 }

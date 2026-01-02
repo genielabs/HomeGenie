@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Synhwyrydd tymheredd",
       "VirtualThermostat.HeatingSwitchModule": "Switsh gwresogi",
       "VirtualThermostat.CoolingSwitchModule": "Switsh oeri",
-      "ConfigureOptions.ThermostatsCount": "Nifer y thermostatau"
+      "ConfigureOptions.ThermostatsCount": "Nifer y thermostatau",
+      "ConfigureOptions.EnsureCommandDelivery": "Sicrhau bod gorchymyn yn cael ei drosglwyddo'n barhaus (modd pwls)."
     },
     "81": {
       "Title": "Monitor Ynni",
@@ -311,20 +312,26 @@
       "Title": "Triniwr Bwriad Gemini",
       "Description": "Yn galluogi rheolaeth iaith naturiol ar gyfer eich system glyfar gan ddefnyddio Gemini AI Google. I actifadu'r nodwedd hon, nodwch allwedd API ddilys. Dilynwch y cyfarwyddiadau yn https://aistudio.google.com/app/apikey i gael allwedd API am ddim.",
       "ConfigureOptions.ApiKey": "Allwedd API Google Gemini AI",
-      "ConfigureOptions.ModelId": "ID Model"
+      "ConfigureOptions.ModelId": "ID Model",
+      "ConfigureOptions.SystemInstructions": "Cyfarwyddiadau System"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Eich genie AI personol ar gyfer creu teclynnau. Wedi'i bweru gan Gemini, mae'n eich helpu i ysgrifennu a dadfygio cod HTML, CSS, a JavaScript yn uniongyrchol o fewn golygydd HomeGenie. I actifadu'r nodwedd hon, nodwch allwedd API ddilys. Dilynwch y cyfarwyddiadau yn https://aistudio.google.com/app/apikey i gael allwedd API am ddim.",
       "ConfigureOptions.ApiKey": "Allwedd API Google Gemini AI",
-      "ConfigureOptions.ModelId": "ID Model"
+      "ConfigureOptions.ModelId": "ID Model",
+      "ConfigureOptions.SystemInstructions": "Cyfarwyddiadau System"
     },
     "940": {
       "Title": "Deallusrwydd Artiffisial Lleol",
       "Description": "Rhedeg LLMs o'r radd flaenaf yn uniongyrchol ar eich gweinydd HomeGenie. Yn cynnwys API llawn i reoli'r AI o raglenni a sgriptiau eraill.",
       "ConfigureOptions.MaxTokens": "Uchafswm Tocynnau (hyd ymateb)",
       "ConfigureOptions.ModelPath": "Llwybr i'r ffeil GGUF leol",
-      "ConfigureOptions.ModelFile": "Model"
+      "ConfigureOptions.ModelFile": "Model",
+      "ConfigureOptions.SystemInstructions": "Cyfarwyddiadau System",
+      "ConfigureOptions.ContextSize": "Maint Cof AI (Ffenestr Cyd-destun)",
+      "ConfigureOptions.MaxTurns": "Uchafswm troeon hanes sgwrsio (0 = dim terfyn)",
+      "ConfigureOptions.SendContextData": "Cynnwys rhestr dyfeisiau a synwyryddion mewn ymholiadau"
     },
     "575": {
       "Title": "Rheolwr Lawrlwytho",
@@ -362,5 +369,8 @@
       "Title": "Defnydd Ynni Fesul Awr",
       "Description": "Siart bar yn dangos y defnydd Watiau/Awr cyfartalog ar gyfer pob awr o'r dydd (00h-23h). Mae data wedi'i agregu dros yr wythnos a ddewiswyd ac wedi'i ffynhonnellu o'r API Ystadegau Defnydd Ynni."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Gorchymyn Genie",
+  "scheduler_preset_action_config_wish": "Gweithred Iaith Naturiol",
+  "scheduler_preset_action_config_wish.placeholder": "Rhowch gynnig ar: \"Gosodwch y gwres i 22° a dechreuwch olygfa'r Haul\""
 }

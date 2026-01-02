@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Сенсори ҳарорат",
       "VirtualThermostat.HeatingSwitchModule": "Калиди гармидиҳӣ",
       "VirtualThermostat.CoolingSwitchModule": "Калиди хунуккунӣ",
-      "ConfigureOptions.ThermostatsCount": "Шумораи термостатҳо"
+      "ConfigureOptions.ThermostatsCount": "Шумораи термостатҳо",
+      "ConfigureOptions.EnsureCommandDelivery": "Иҷрои фармонро бо интиқоли пайваста (реҷаи импулсӣ) таъмин намоед."
     },
     "81": {
       "Title": "Мониторинги энергия",
@@ -311,20 +312,26 @@
       "Title": "Идоракунандаи нияти Gemini",
       "Description": "Бо истифода аз Gemini AI-и Google назорати забони табииро барои системаи интеллектуалии шумо имкон медиҳад. Барои фаъол кардани ин хусусият, калиди дурусти API-ро ворид кунед. Барои гирифтани калиди ройгони API дастурҳоро дар https://aistudio.google.com/app/apikey иҷро кунед.",
       "ConfigureOptions.ApiKey": "Калиди API Google Gemini AI",
-      "ConfigureOptions.ModelId": "Модели ID"
+      "ConfigureOptions.ModelId": "Модели ID",
+      "ConfigureOptions.SystemInstructions": "Дастурҳои система"
     },
     "931": {
       "Title": "Виҷети Gemini Genie",
       "Description": "Ҷинҳои шахсии AI барои эҷоди виджет. Аз ҷониби Gemini таҳия шудааст, он ба шумо кӯмак мекунад, ки коди HTML, CSS ва JavaScript-ро мустақиман дар дохили муҳаррири HomeGenie нависед ва ислоҳ кунед. Барои фаъол кардани ин хусусият, калиди дурусти API-ро ворид кунед. Барои гирифтани калиди ройгони API дастурҳоро дар https://aistudio.google.com/app/apikey иҷро кунед.",
       "ConfigureOptions.ApiKey": "Калиди API Google Gemini AI",
-      "ConfigureOptions.ModelId": "Модели ID"
+      "ConfigureOptions.ModelId": "Модели ID",
+      "ConfigureOptions.SystemInstructions": "Дастурҳои система"
     },
     "940": {
       "Title": "зеҳни сунъии маҳаллӣ",
       "Description": "LLM-ҳои муосирро мустақиман дар сервери HomeGenie-и худ иҷро кунед. API-и пурраро барои идоракунии зеҳни сунъӣ аз дигар барномаҳо ва скриптҳо дар бар мегирад.",
       "ConfigureOptions.MaxTokens": "Ҳадди аксар токенҳо (дарозии посух)",
       "ConfigureOptions.ModelPath": "Роҳ ба файли маҳаллии GGUF",
-      "ConfigureOptions.ModelFile": "Модел"
+      "ConfigureOptions.ModelFile": "Модел",
+      "ConfigureOptions.SystemInstructions": "Дастурҳои система",
+      "ConfigureOptions.ContextSize": "Андозаи хотираи зеҳни сунъӣ (Тирезаи контекстӣ)",
+      "ConfigureOptions.MaxTurns": "Ҳадди аксар гардиши таърихи чат (0 = бе маҳдудият)",
+      "ConfigureOptions.SendContextData": "Рӯйхати дастгоҳҳо ва сенсорҳоро дар дархостҳо дохил кунед"
     },
     "575": {
       "Title": "Менеҷери зеркашӣ",
@@ -362,5 +369,8 @@
       "Title": "Истеъмоли соатбайъи энергия",
       "Description": "Диаграммаи сутунӣ, ки истеъмоли миёнаи Ватт/соатро барои ҳар соати рӯз (00-23) нишон медиҳад. Маълумот дар тӯли ҳафтаи интихобшуда ҷамъоварӣ карда шуда, аз API-и омори истифодаи энергия гирифта шудааст."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Фармондеҳии Ҷин",
+  "scheduler_preset_action_config_wish": "Амали забони табиӣ",
+  "scheduler_preset_action_config_wish.placeholder": "Кӯшиш кунед: \"Ҳароратро ба 22° муқаррар кунед ва манзараи тулӯи офтобро оғоз кунед\""
 }

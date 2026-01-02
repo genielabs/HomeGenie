@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Sıcaklık sensörü",
       "VirtualThermostat.HeatingSwitchModule": "Isıtma anahtarı",
       "VirtualThermostat.CoolingSwitchModule": "Soğutma anahtarı",
-      "ConfigureOptions.ThermostatsCount": "Termostat sayısı"
+      "ConfigureOptions.ThermostatsCount": "Termostat sayısı",
+      "ConfigureOptions.EnsureCommandDelivery": "Komut iletiminin kesintisiz (darbe modu) olarak gerçekleştirilmesini sağlayın."
     },
     "81": {
       "Title": "Enerji Monitörü",
@@ -311,20 +312,26 @@
       "Title": "Gemini Niyet İşleyicisi",
       "Description": "Google'ın Gemini AI teknolojisini kullanarak akıllı sisteminiz için doğal dil kontrolünü etkinleştirir. Bu özelliği etkinleştirmek için geçerli bir API anahtarı girin. Ücretsiz bir API anahtarı almak için https://aistudio.google.com/app/apikey adresindeki talimatları izleyin.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API anahtarı",
-      "ConfigureOptions.ModelId": "Model Kimliği"
+      "ConfigureOptions.ModelId": "Model Kimliği",
+      "ConfigureOptions.SystemInstructions": "Sistem Talimatları"
     },
     "931": {
       "Title": "İkizler Widget Cin'i",
       "Description": "Widget oluşturmanız için kişisel yapay zeka cininiz. Gemini destekli bu özellik, HTML, CSS ve JavaScript kodlarını doğrudan HomeGenie düzenleyicisinde yazmanıza ve hata ayıklamanıza yardımcı olur. Bu özelliği etkinleştirmek için geçerli bir API anahtarı girin. Ücretsiz bir API anahtarı almak için https://aistudio.google.com/app/apikey adresindeki talimatları izleyin.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API anahtarı",
-      "ConfigureOptions.ModelId": "Model Kimliği"
+      "ConfigureOptions.ModelId": "Model Kimliği",
+      "ConfigureOptions.SystemInstructions": "Sistem Talimatları"
     },
     "940": {
       "Title": "Yerel Yapay Zeka",
       "Description": "En gelişmiş LLM'leri doğrudan HomeGenie sunucunuzda çalıştırın. Yapay zekayı diğer programlar ve komut dosyalarından kontrol etmek için eksiksiz bir API içerir.",
       "ConfigureOptions.MaxTokens": "Maksimum Token Sayısı (yanıt uzunluğu)",
       "ConfigureOptions.ModelPath": "Yerel GGUF dosyasına giden yol",
-      "ConfigureOptions.ModelFile": "Model"
+      "ConfigureOptions.ModelFile": "Model",
+      "ConfigureOptions.SystemInstructions": "Sistem Talimatları",
+      "ConfigureOptions.ContextSize": "Yapay Zeka Bellek Boyutu (Bağlam Penceresi)",
+      "ConfigureOptions.MaxTurns": "Maksimum sohbet geçmişi turu sayısı (0 = sınır yok)",
+      "ConfigureOptions.SendContextData": "Sorgulara cihaz listesini ve sensörleri dahil edin."
     },
     "575": {
       "Title": "İndirme Yöneticisi",
@@ -362,5 +369,8 @@
       "Title": "Saatlik Enerji Tüketimi",
       "Description": "Günün her saati için (00:00-23:00) ortalama Watt/Saat tüketimini gösteren çubuk grafik. Veriler seçilen hafta üzerinden toplanmış ve Enerji Kullanım İstatistikleri API'sinden alınmıştır."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Cin Komutu",
+  "scheduler_preset_action_config_wish": "Doğal Dil Eylemi",
+  "scheduler_preset_action_config_wish.placeholder": "Şunu deneyin: \"Isıyı 22 dereceye ayarlayın ve Gün Doğumu sahnesini başlatın\""
 }

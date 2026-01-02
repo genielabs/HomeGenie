@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "חיישן טמפרטורה",
       "VirtualThermostat.HeatingSwitchModule": "מתג חימום",
       "VirtualThermostat.CoolingSwitchModule": "מתג קירור",
-      "ConfigureOptions.ThermostatsCount": "מספר תרמוסטטים"
+      "ConfigureOptions.ThermostatsCount": "מספר תרמוסטטים",
+      "ConfigureOptions.EnsureCommandDelivery": "ודא מסירת פקודות באמצעות שידור רציף (מצב פולסים)."
     },
     "81": {
       "Title": "צג אנרגיה",
@@ -311,20 +312,26 @@
       "Title": "מטפל כוונות ג'מיני",
       "Description": "מאפשר שליטה בשפה טבעית עבור המערכת החכמה שלך באמצעות הבינה המלאכותית Gemini של גוגל. כדי להפעיל תכונה זו, הזן מפתח API תקף. פעל לפי ההוראות בכתובת https://aistudio.google.com/app/apikey כדי לקבל מפתח API בחינם.",
       "ConfigureOptions.ApiKey": "מפתח ה-API של גוגל ג'מיני לבינה מלאכותית",
-      "ConfigureOptions.ModelId": "מזהה דגם"
+      "ConfigureOptions.ModelId": "מזהה דגם",
+      "ConfigureOptions.SystemInstructions": "הוראות מערכת"
     },
     "931": {
       "Title": "ג'יני ווידג'ט של ג'מיני",
       "Description": "ג'יני הבינה המלאכותית האישי שלך ליצירת ווידג'טים. מופעל על ידי Gemini, הוא עוזר לך לכתוב ולפתור באגים בקוד HTML, CSS ו-JavaScript ישירות בתוך עורך HomeGenie. כדי להפעיל תכונה זו, הזן מפתח API תקף. פעל לפי ההוראות בכתובת https://aistudio.google.com/app/apikey כדי לקבל מפתח API בחינם.",
       "ConfigureOptions.ApiKey": "מפתח ה-API של גוגל ג'מיני לבינה מלאכותית",
-      "ConfigureOptions.ModelId": "מזהה דגם"
+      "ConfigureOptions.ModelId": "מזהה דגם",
+      "ConfigureOptions.SystemInstructions": "הוראות מערכת"
     },
     "940": {
       "Title": "בינה מלאכותית מקומית",
       "Description": "הפעלת מערכות LLM חדישות ישירות על שרת HomeGenie שלך. כוללת API מלא לשליטה בבינה המלאכותית מתוכנות וסקריפטים אחרים.",
       "ConfigureOptions.MaxTokens": "מקסימום אסימונים (אורך תגובה)",
       "ConfigureOptions.ModelPath": "נתיב לקובץ GGUF מקומי",
-      "ConfigureOptions.ModelFile": "דֶגֶם"
+      "ConfigureOptions.ModelFile": "דֶגֶם",
+      "ConfigureOptions.SystemInstructions": "הוראות מערכת",
+      "ConfigureOptions.ContextSize": "גודל זיכרון בינה מלאכותית (חלון הקשר)",
+      "ConfigureOptions.MaxTurns": "מקסימום סיבובי היסטוריית צ'אט (0 = ללא הגבלה)",
+      "ConfigureOptions.SendContextData": "כלול רשימת מכשירים וחיישנים בשאילתות"
     },
     "575": {
       "Title": "מנהל ההורדות",
@@ -362,5 +369,8 @@
       "Title": "צריכת אנרגיה שעתית",
       "Description": "תרשים עמודות המציג את צריכת הוואט/שעה הממוצעת עבור כל שעה ביום (00:00-23:00). הנתונים נאספים במהלך השבוע שנבחר ומקורם בממשק ה-API לסטטיסטיקות שימוש באנרגיה."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "פיקוד ג'יני",
+  "scheduler_preset_action_config_wish": "פעולת שפה טבעית",
+  "scheduler_preset_action_config_wish.placeholder": "נסה: \"הגדר את החום ל-22° והתחל את סצנת הזריחה\""
 }

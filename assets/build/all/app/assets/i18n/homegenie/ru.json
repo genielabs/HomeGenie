@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Датчик температуры",
       "VirtualThermostat.HeatingSwitchModule": "Переключатель отопления",
       "VirtualThermostat.CoolingSwitchModule": "Переключатель охлаждения",
-      "ConfigureOptions.ThermostatsCount": "Количество термостатов"
+      "ConfigureOptions.ThermostatsCount": "Количество термостатов",
+      "ConfigureOptions.EnsureCommandDelivery": "Обеспечьте доставку команд с помощью непрерывной передачи (импульсный режим)."
     },
     "81": {
       "Title": "Энергетический монитор",
@@ -311,20 +312,26 @@
       "Title": "Обработчик намерений Gemini",
       "Description": "Обеспечивает управление естественным языком для вашей интеллектуальной системы с помощью Gemini AI от Google. Чтобы активировать эту функцию, введите действительный ключ API. Следуйте инструкциям на странице https://aistudio.google.com/app/apikey, чтобы получить бесплатный ключ API.",
       "ConfigureOptions.ApiKey": "API-ключ Google Gemini AI",
-      "ConfigureOptions.ModelId": "Идентификатор модели"
+      "ConfigureOptions.ModelId": "Идентификатор модели",
+      "ConfigureOptions.SystemInstructions": "Системные инструкции"
     },
     "931": {
       "Title": "Виджет Gemini Genie",
       "Description": "Ваш персональный ИИ-джинн для создания виджетов. Работающий на базе Gemini, он помогает писать и отлаживать код HTML, CSS и JavaScript прямо в редакторе HomeGenie. Чтобы активировать эту функцию, введите действительный ключ API. Следуйте инструкциям на странице https://aistudio.google.com/app/apikey, чтобы получить бесплатный ключ API.",
       "ConfigureOptions.ApiKey": "API-ключ Google Gemini AI",
-      "ConfigureOptions.ModelId": "Идентификатор модели"
+      "ConfigureOptions.ModelId": "Идентификатор модели",
+      "ConfigureOptions.SystemInstructions": "Системные инструкции"
     },
     "940": {
       "Title": "Локальный ИИ",
       "Description": "Запускайте самые современные LLM-системы непосредственно на вашем сервере HomeGenie. Включает в себя полный API для управления ИИ из других программ и скриптов.",
       "ConfigureOptions.MaxTokens": "Максимальное количество токенов (длина ответа)",
       "ConfigureOptions.ModelPath": "Путь к локальному файлу GGUF",
-      "ConfigureOptions.ModelFile": "Модель"
+      "ConfigureOptions.ModelFile": "Модель",
+      "ConfigureOptions.SystemInstructions": "Системные инструкции",
+      "ConfigureOptions.ContextSize": "Размер памяти ИИ (контекстное окно)",
+      "ConfigureOptions.MaxTurns": "Максимальное количество оборотов в истории чата (0 = без ограничений)",
+      "ConfigureOptions.SendContextData": "Включайте список устройств и датчиков в запросы."
     },
     "575": {
       "Title": "Менеджер загрузок",
@@ -362,5 +369,8 @@
       "Title": "Почасовое потребление энергии",
       "Description": "Гистограмма, отображающая среднее потребление электроэнергии в ваттах в час за каждый час суток (с 00:00 до 23:00). Данные агрегированы за выбранную неделю и получены из API статистики энергопотребления."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Командование Джиннов",
+  "scheduler_preset_action_config_wish": "Действия на естественном языке",
+  "scheduler_preset_action_config_wish.placeholder": "Попробуйте: \"Установите температуру на 22° и запустите сцену \"Восход солнца\"\"."
 }

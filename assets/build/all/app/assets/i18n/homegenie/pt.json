@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Sensor de temperatura",
       "VirtualThermostat.HeatingSwitchModule": "Interruptor de aquecimento",
       "VirtualThermostat.CoolingSwitchModule": "Interruptor de resfriamento",
-      "ConfigureOptions.ThermostatsCount": "Número de termostatos"
+      "ConfigureOptions.ThermostatsCount": "Número de termostatos",
+      "ConfigureOptions.EnsureCommandDelivery": "Garantir a entrega de comandos com transmissão contínua (modo pulso)."
     },
     "81": {
       "Title": "Monitor de Energia",
@@ -311,20 +312,26 @@
       "Title": "Manipulador de Intenções de Gêmeos",
       "Description": "Habilita o controle de linguagem natural para seu sistema inteligente usando a IA Gemini do Google. Para ativar este recurso, insira uma chave de API válida. Siga as instruções em https://aistudio.google.com/app/apikey para obter uma chave de API gratuita.",
       "ConfigureOptions.ApiKey": "Chave de API do Google Gemini AI",
-      "ConfigureOptions.ModelId": "ID do modelo"
+      "ConfigureOptions.ModelId": "ID do modelo",
+      "ConfigureOptions.SystemInstructions": "Instruções do sistema"
     },
     "931": {
       "Title": "Gênio do widget Gemini",
       "Description": "Seu gênio da IA pessoal para criação de widgets. Desenvolvido pela Gemini, ele ajuda você a escrever e depurar códigos HTML, CSS e JavaScript diretamente no editor HomeGenie. Para ativar este recurso, insira uma chave de API válida. Siga as instruções em https://aistudio.google.com/app/apikey para obter uma chave de API gratuita.",
       "ConfigureOptions.ApiKey": "Chave de API do Google Gemini AI",
-      "ConfigureOptions.ModelId": "ID do modelo"
+      "ConfigureOptions.ModelId": "ID do modelo",
+      "ConfigureOptions.SystemInstructions": "Instruções do sistema"
     },
     "940": {
       "Title": "IA local",
       "Description": "Execute LLMs de última geração diretamente no seu servidor HomeGenie. Inclui uma API completa para controlar a IA a partir de outros programas e scripts.",
       "ConfigureOptions.MaxTokens": "Tokens máximos (comprimento da resposta)",
       "ConfigureOptions.ModelPath": "Caminho para o arquivo GGUF local",
-      "ConfigureOptions.ModelFile": "Modelo"
+      "ConfigureOptions.ModelFile": "Modelo",
+      "ConfigureOptions.SystemInstructions": "Instruções do sistema",
+      "ConfigureOptions.ContextSize": "Tamanho da memória da IA (janela de contexto)",
+      "ConfigureOptions.MaxTurns": "Número máximo de interações no histórico de bate-papo (0 = sem limite)",
+      "ConfigureOptions.SendContextData": "Incluir lista de dispositivos e sensores nas consultas"
     },
     "575": {
       "Title": "Gerenciador de downloads",
@@ -362,5 +369,8 @@
       "Title": "Consumo de energia por hora",
       "Description": "Gráfico de barras que exibe o consumo médio de Watts/Hora para cada hora do dia (00h-23h). Os dados são agregados ao longo da semana selecionada e provenientes da API de Estatísticas de Uso de Energia."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Comando do Gênio",
+  "scheduler_preset_action_config_wish": "Ação de linguagem natural",
+  "scheduler_preset_action_config_wish.placeholder": "Experimente: \"Ajuste a temperatura para 22° e inicie a cena Nascer do Sol\""
 }

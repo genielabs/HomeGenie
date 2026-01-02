@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Sensor temperaturae",
       "VirtualThermostat.HeatingSwitchModule": "Interruptor calefactionis",
       "VirtualThermostat.CoolingSwitchModule": "Interruptor refrigerationis",
-      "ConfigureOptions.ThermostatsCount": "Numerus thermostatorum"
+      "ConfigureOptions.ThermostatsCount": "Numerus thermostatorum",
+      "ConfigureOptions.EnsureCommandDelivery": "Traditionem mandati transmissione continua (modo impulsuum) cura."
     },
     "81": {
       "Title": "Monitor Energiae",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "Imperium linguae naturalis pro systemate tuo intelligenti per Gemini AI Google permittit. Ad hanc functionem activandam, clavem API validam inscribe. Instructiones apud https://aistudio.google.com/app/apikey sequere ut clavem API gratuitam accipias.",
       "ConfigureOptions.ApiKey": "Clavis API Google Gemini AI",
-      "ConfigureOptions.ModelId": "Identificatio exemplaris"
+      "ConfigureOptions.ModelId": "Identificatio exemplaris",
+      "ConfigureOptions.SystemInstructions": "Instructiones Systematis"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Genius tuus personalis intellegentiae artificialis ad creationem instrumentorum. A Gemini impulsus, te adiuvat ut codicem HTML, CSS, et JavaScript directe intra editorem HomeGenie scribere et corrigere possis. Ad hanc functionem activandam, clavem API validam inscribe. Instructiones apud https://aistudio.google.com/app/apikey sequere ut clavem API gratuitam accipias.",
       "ConfigureOptions.ApiKey": "Clavis API Google Gemini AI",
-      "ConfigureOptions.ModelId": "Identificatio exemplaris"
+      "ConfigureOptions.ModelId": "Identificatio exemplaris",
+      "ConfigureOptions.SystemInstructions": "Instructiones Systematis"
     },
     "940": {
       "Title": "Intellegentia Artificialis Localis",
       "Description": "Curre programmata LLM recentissima directe in servo tuo HomeGenie. API plenam includit ad intellegentiam artificialem ex aliis programmatibus et scriptis moderandam.",
       "ConfigureOptions.MaxTokens": "Tesserae Maximae (longitudo responsorum)",
       "ConfigureOptions.ModelPath": "Semita ad fasciculum GGUF localem",
-      "ConfigureOptions.ModelFile": "Modellum"
+      "ConfigureOptions.ModelFile": "Modellum",
+      "ConfigureOptions.SystemInstructions": "Instructiones Systematis",
+      "ConfigureOptions.ContextSize": "Magnitudo memoriae AI (Fenestra Contextualis)",
+      "ConfigureOptions.MaxTurns": "Maximae vices historiae colloquiorum (0 = nullus finis)",
+      "ConfigureOptions.SendContextData": "Indicem instrumentorum et sensorum in interrogationibus includere"
     },
     "575": {
       "Title": "Administrator Deductionum",
@@ -362,5 +369,8 @@
       "Title": "Consumptio Energiae Horaria",
       "Description": "Diagramma columnarium consumptionem mediam Watts/Horae pro qualibet hora diei (00:00-23:00) ostendens. Data per hebdomadam selectam aggregata sunt et ex API Statisticarum Usus Energiae derivantur."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Mandatum Genii",
+  "scheduler_preset_action_config_wish": "Actio Linguae Naturalis",
+  "scheduler_preset_action_config_wish.placeholder": "Conare: \"Calorem ad 22° pone et scaenam Solis Ortus incipe.\""
 }

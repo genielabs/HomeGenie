@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Температура сенсоры",
       "VirtualThermostat.HeatingSwitchModule": "Жылыту қосқышы",
       "VirtualThermostat.CoolingSwitchModule": "Салқындату қосқышы",
-      "ConfigureOptions.ThermostatsCount": "Термостаттардың саны"
+      "ConfigureOptions.ThermostatsCount": "Термостаттардың саны",
+      "ConfigureOptions.EnsureCommandDelivery": "Үздіксіз беріліспен (импульстік режимде) команданың жеткізілуін қамтамасыз етіңіз."
     },
     "81": {
       "Title": "Энергия мониторы",
@@ -311,20 +312,26 @@
       "Title": "Gemini ниет өңдеушісі",
       "Description": "Google Gemini AI көмегімен смарт жүйеңіз үшін табиғи тілді басқаруды қосады. Бұл мүмкіндікті белсендіру үшін жарамды API кілтін енгізіңіз. Тегін API кілтін алу үшін https://aistudio.google.com/app/apikey бетіндегі нұсқауларды орындаңыз.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API кілті",
-      "ConfigureOptions.ModelId": "Үлгі идентификаторы"
+      "ConfigureOptions.ModelId": "Үлгі идентификаторы",
+      "ConfigureOptions.SystemInstructions": "Жүйелік нұсқаулар"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Виджетті жасауға арналған жеке AI жыныңыз. Gemini арқылы жұмыс істейді, ол HTML, CSS және JavaScript кодын тікелей HomeGenie редакторында жазуға және жөндеуге көмектеседі. Бұл мүмкіндікті белсендіру үшін жарамды API кілтін енгізіңіз. Тегін API кілтін алу үшін https://aistudio.google.com/app/apikey бетіндегі нұсқауларды орындаңыз.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API кілті",
-      "ConfigureOptions.ModelId": "Үлгі идентификаторы"
+      "ConfigureOptions.ModelId": "Үлгі идентификаторы",
+      "ConfigureOptions.SystemInstructions": "Жүйелік нұсқаулар"
     },
     "940": {
       "Title": "Жергілікті жасанды интеллект",
       "Description": "HomeGenie серверіңізде тікелей заманауи LLM іске қосыңыз. Басқа бағдарламалар мен сценарийлерден жасанды интеллектті басқаруға арналған толық API қамтиды.",
       "ConfigureOptions.MaxTokens": "Максималды токендер (жауап ұзақтығы)",
       "ConfigureOptions.ModelPath": "Жергілікті GGUF файлына жол",
-      "ConfigureOptions.ModelFile": "Модель"
+      "ConfigureOptions.ModelFile": "Модель",
+      "ConfigureOptions.SystemInstructions": "Жүйелік нұсқаулар",
+      "ConfigureOptions.ContextSize": "Жасанды интеллект жадының өлшемі (контекстік терезе)",
+      "ConfigureOptions.MaxTurns": "Чат тарихының максималды айналымы (0 = шектеусіз)",
+      "ConfigureOptions.SendContextData": "Сұрауларға құрылғылар тізімін және сенсорларды қосыңыз"
     },
     "575": {
       "Title": "Жүктеу менеджері",
@@ -362,5 +369,8 @@
       "Title": "Сағаттық энергия тұтынуы",
       "Description": "Күннің әр сағаты (00-23 сағат) үшін орташа ватт/сағат тұтынуды көрсететін бағаналық диаграмма. Деректер таңдалған апта бойынша жинақталған және Энергияны пайдалану статистикасы API интерфейсінен алынған."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Жын командасы",
+  "scheduler_preset_action_config_wish": "Табиғи тіл әрекеті",
+  "scheduler_preset_action_config_wish.placeholder": "Мынаны қолданып көріңіз: \"Температураны 22°-қа қойып, күн шығу көрінісін бастаңыз\"."
 }

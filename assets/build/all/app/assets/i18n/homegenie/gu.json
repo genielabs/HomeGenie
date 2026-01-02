@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "તાપમાન સેન્સર",
       "VirtualThermostat.HeatingSwitchModule": "હીટિંગ સ્વીચ",
       "VirtualThermostat.CoolingSwitchModule": "કૂલિંગ સ્વીચ",
-      "ConfigureOptions.ThermostatsCount": "થર્મોસ્ટેટ્સની સંખ્યા"
+      "ConfigureOptions.ThermostatsCount": "થર્મોસ્ટેટ્સની સંખ્યા",
+      "ConfigureOptions.EnsureCommandDelivery": "સતત ટ્રાન્સમિશન (પલ્સ-મોડ) સાથે કમાન્ડ ડિલિવરી સુનિશ્ચિત કરો."
     },
     "81": {
       "Title": "એનર્જી મોનિટર",
@@ -311,20 +312,26 @@
       "Title": "જેમિની ઇન્ટેન્ટ હેન્ડલર",
       "Description": "Google ના Gemini AI નો ઉપયોગ કરીને તમારા સ્માર્ટ સિસ્ટમ માટે કુદરતી ભાષા નિયંત્રણ સક્ષમ કરે છે. આ સુવિધાને સક્રિય કરવા માટે, માન્ય API કી દાખલ કરો. મફત API કી મેળવવા માટે https://aistudio.google.com/app/apikey પરની સૂચનાઓનું પાલન કરો.",
       "ConfigureOptions.ApiKey": "ગૂગલ જેમિની એઆઈ એપીઆઈ કી",
-      "ConfigureOptions.ModelId": "મોડેલ ID"
+      "ConfigureOptions.ModelId": "મોડેલ ID",
+      "ConfigureOptions.SystemInstructions": "સિસ્ટમ સૂચનાઓ"
     },
     "931": {
       "Title": "જેમિની વિજેટ જીની",
       "Description": "વિજેટ બનાવવા માટે તમારી વ્યક્તિગત AI જીની. જેમિની દ્વારા સંચાલિત, તે તમને HomeGenie એડિટરમાં સીધા HTML, CSS અને JavaScript કોડ લખવા અને ડીબગ કરવામાં મદદ કરે છે. આ સુવિધાને સક્રિય કરવા માટે, માન્ય API કી દાખલ કરો. મફત API કી મેળવવા માટે https://aistudio.google.com/app/apikey પરની સૂચનાઓનું પાલન કરો.",
       "ConfigureOptions.ApiKey": "ગૂગલ જેમિની એઆઈ એપીઆઈ કી",
-      "ConfigureOptions.ModelId": "મોડેલ ID"
+      "ConfigureOptions.ModelId": "મોડેલ ID",
+      "ConfigureOptions.SystemInstructions": "સિસ્ટમ સૂચનાઓ"
     },
     "940": {
       "Title": "સ્થાનિક AI",
       "Description": "તમારા HomeGenie સર્વર પર સીધા જ અત્યાધુનિક LLM ચલાવો. અન્ય પ્રોગ્રામ્સ અને સ્ક્રિપ્ટ્સમાંથી AI ને નિયંત્રિત કરવા માટે સંપૂર્ણ API શામેલ છે.",
       "ConfigureOptions.MaxTokens": "મહત્તમ ટોકન્સ (પ્રતિભાવ લંબાઈ)",
       "ConfigureOptions.ModelPath": "સ્થાનિક GGUF ફાઇલનો માર્ગ",
-      "ConfigureOptions.ModelFile": "મોડેલ"
+      "ConfigureOptions.ModelFile": "મોડેલ",
+      "ConfigureOptions.SystemInstructions": "સિસ્ટમ સૂચનાઓ",
+      "ConfigureOptions.ContextSize": "AI મેમરી કદ (સંદર્ભ વિન્ડો)",
+      "ConfigureOptions.MaxTurns": "મહત્તમ ચેટ ઇતિહાસ વળાંક (0 = કોઈ મર્યાદા નહીં)",
+      "ConfigureOptions.SendContextData": "ક્વેરીઝમાં ડિવાઇસ સૂચિ અને સેન્સર શામેલ કરો"
     },
     "575": {
       "Title": "ડાઉનલોડ મેનેજર",
@@ -362,5 +369,8 @@
       "Title": "કલાકદીઠ ઊર્જા વપરાશ",
       "Description": "દિવસના દરેક કલાક (00 કલાકથી 23 કલાક) માટે સરેરાશ વોટ્સ/કલાક વપરાશ દર્શાવતો બાર ચાર્ટ. ડેટા પસંદ કરેલા અઠવાડિયા દરમિયાન એકત્રિત કરવામાં આવે છે અને ઊર્જા ઉપયોગ આંકડા API માંથી મેળવવામાં આવે છે."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "જીની કમાન્ડ",
+  "scheduler_preset_action_config_wish": "કુદરતી ભાષા ક્રિયા",
+  "scheduler_preset_action_config_wish.placeholder": "\"ગરમી 22° પર સેટ કરો અને સૂર્યોદયનો દ્રશ્ય શરૂ કરો\" આનો પ્રયાસ કરો."
 }

@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Temperatursensor",
       "VirtualThermostat.HeatingSwitchModule": "Varmeafbryder",
       "VirtualThermostat.CoolingSwitchModule": "Køleafbryder",
-      "ConfigureOptions.ThermostatsCount": "Antal termostater"
+      "ConfigureOptions.ThermostatsCount": "Antal termostater",
+      "ConfigureOptions.EnsureCommandDelivery": "Sørg for kommandolevering med kontinuerlig transmission (pulstilstand)."
     },
     "81": {
       "Title": "Energimåler",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "Aktiverer kontrol af naturligt sprog til dit smarte system ved hjælp af Googles Gemini AI. For at aktivere denne funktion skal du indtaste en gyldig API-nøgle. Følg instruktionerne på https://aistudio.google.com/app/apikey for at få en gratis API-nøgle.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-nøgle",
-      "ConfigureOptions.ModelId": "Model-ID"
+      "ConfigureOptions.ModelId": "Model-ID",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktioner"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Din personlige AI-ånd til oprettelse af widgets. Drevet af Gemini hjælper den dig med at skrive og fejlfinde HTML-, CSS- og JavaScript-kode direkte i HomeGenie-editoren. For at aktivere denne funktion skal du indtaste en gyldig API-nøgle. Følg instruktionerne på https://aistudio.google.com/app/apikey for at få en gratis API-nøgle.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-nøgle",
-      "ConfigureOptions.ModelId": "Model-ID"
+      "ConfigureOptions.ModelId": "Model-ID",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktioner"
     },
     "940": {
       "Title": "Lokal kunstig intelligens",
       "Description": "Kør avancerede LLM'er direkte på din HomeGenie-server. Inkluderer en komplet API til at styre AI'en fra andre programmer og scripts.",
       "ConfigureOptions.MaxTokens": "Maks. antal tokens (svarlængde)",
       "ConfigureOptions.ModelPath": "Sti til lokal GGUF-fil",
-      "ConfigureOptions.ModelFile": "Model"
+      "ConfigureOptions.ModelFile": "Model",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktioner",
+      "ConfigureOptions.ContextSize": "AI-hukommelsesstørrelse (kontekstvindue)",
+      "ConfigureOptions.MaxTurns": "Maks. antal omgange chathistorik (0 = ingen grænse)",
+      "ConfigureOptions.SendContextData": "Inkluder enhedsliste og sensorer i forespørgsler"
     },
     "575": {
       "Title": "Downloadhåndtering",
@@ -362,5 +369,8 @@
       "Title": "Timeforbrug af energi",
       "Description": "Søjlediagram, der viser det gennemsnitlige watt/time-forbrug for hver time på dagen (00:00-23:00). Dataene er aggregeret over den valgte uge og hentet fra Energy Use Statistics API'en."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Genie-kommando",
+  "scheduler_preset_action_config_wish": "Naturlig sproghandling",
+  "scheduler_preset_action_config_wish.placeholder": "Prøv: \"Indstil varmen til 22° og start solopgangsscenen\""
 }

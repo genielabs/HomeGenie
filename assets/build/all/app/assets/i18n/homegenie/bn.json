@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "তাপমাত্রা সেন্সর",
       "VirtualThermostat.HeatingSwitchModule": "হিটিং সুইচ",
       "VirtualThermostat.CoolingSwitchModule": "কুলিং সুইচ",
-      "ConfigureOptions.ThermostatsCount": "থার্মোস্ট্যাটের সংখ্যা"
+      "ConfigureOptions.ThermostatsCount": "থার্মোস্ট্যাটের সংখ্যা",
+      "ConfigureOptions.EnsureCommandDelivery": "অবিচ্ছিন্ন ট্রান্সমিশন (পালস-মোড) সহ কমান্ড ডেলিভারি নিশ্চিত করুন।"
     },
     "81": {
       "Title": "এনার্জি মনিটর",
@@ -311,20 +312,26 @@
       "Title": "জেমিনি ইন্টেন্ট হ্যান্ডলার",
       "Description": "গুগলের জেমিনি এআই ব্যবহার করে আপনার স্মার্ট সিস্টেমের জন্য প্রাকৃতিক ভাষা নিয়ন্ত্রণ সক্ষম করে। এই বৈশিষ্ট্যটি সক্রিয় করতে, একটি বৈধ API কী প্রবেশ করান। একটি বিনামূল্যে API কী পেতে https://aistudio.google.com/app/apikey-এ নির্দেশাবলী অনুসরণ করুন।",
       "ConfigureOptions.ApiKey": "গুগল জেমিনি এআই এপিআই কী",
-      "ConfigureOptions.ModelId": "মডেল আইডি"
+      "ConfigureOptions.ModelId": "মডেল আইডি",
+      "ConfigureOptions.SystemInstructions": "সিস্টেম নির্দেশাবলী"
     },
     "931": {
       "Title": "জেমিনি উইজেট জিনি",
       "Description": "উইজেট তৈরির জন্য আপনার ব্যক্তিগত এআই জিনি। জেমিনি দ্বারা পরিচালিত, এটি আপনাকে হোমজেনি এডিটরের মধ্যে সরাসরি HTML, CSS এবং জাভাস্ক্রিপ্ট কোড লিখতে এবং ডিবাগ করতে সাহায্য করে। এই বৈশিষ্ট্যটি সক্রিয় করতে, একটি বৈধ API কী প্রবেশ করান। একটি বিনামূল্যে API কী পেতে https://aistudio.google.com/app/apikey-এ নির্দেশাবলী অনুসরণ করুন।",
       "ConfigureOptions.ApiKey": "গুগল জেমিনি এআই এপিআই কী",
-      "ConfigureOptions.ModelId": "মডেল আইডি"
+      "ConfigureOptions.ModelId": "মডেল আইডি",
+      "ConfigureOptions.SystemInstructions": "সিস্টেম নির্দেশাবলী"
     },
     "940": {
       "Title": "স্থানীয় এআই",
       "Description": "আপনার HomeGenie সার্ভারে সরাসরি অত্যাধুনিক LLM চালান। অন্যান্য প্রোগ্রাম এবং স্ক্রিপ্ট থেকে AI নিয়ন্ত্রণ করার জন্য একটি সম্পূর্ণ API অন্তর্ভুক্ত।",
       "ConfigureOptions.MaxTokens": "সর্বোচ্চ টোকেন (প্রতিক্রিয়ার দৈর্ঘ্য)",
       "ConfigureOptions.ModelPath": "স্থানীয় GGUF ফাইলের পথ",
-      "ConfigureOptions.ModelFile": "মডেল"
+      "ConfigureOptions.ModelFile": "মডেল",
+      "ConfigureOptions.SystemInstructions": "সিস্টেম নির্দেশাবলী",
+      "ConfigureOptions.ContextSize": "এআই মেমোরি সাইজ (প্রসঙ্গ উইন্ডো)",
+      "ConfigureOptions.MaxTurns": "চ্যাটের ইতিহাসের সর্বোচ্চ পরিবর্তন (০ = সীমা নেই)",
+      "ConfigureOptions.SendContextData": "কোয়েরিতে ডিভাইসের তালিকা এবং সেন্সর অন্তর্ভুক্ত করুন"
     },
     "575": {
       "Title": "ডাউনলোড ম্যানেজার",
@@ -362,5 +369,8 @@
       "Title": "প্রতি ঘন্টায় শক্তি খরচ",
       "Description": "দিনের প্রতি ঘন্টায় (০০ঘন্টা-২৩ঘন্টা) গড় ওয়াট/ঘন্টা খরচ প্রদর্শনকারী বার চার্ট। নির্বাচিত সপ্তাহে ডেটা একত্রিত করা হয় এবং শক্তি ব্যবহারের পরিসংখ্যান API থেকে নেওয়া হয়।"
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "জিনি কমান্ড",
+  "scheduler_preset_action_config_wish": "প্রাকৃতিক ভাষা কর্ম",
+  "scheduler_preset_action_config_wish.placeholder": "চেষ্টা করুন: \"তাপ ২২° এ সেট করুন এবং সূর্যোদয়ের দৃশ্য শুরু করুন\""
 }

@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Temperatursensor",
       "VirtualThermostat.HeatingSwitchModule": "Heizungsschalter",
       "VirtualThermostat.CoolingSwitchModule": "Kühlschalter",
-      "ConfigureOptions.ThermostatsCount": "Anzahl der Thermostate"
+      "ConfigureOptions.ThermostatsCount": "Anzahl der Thermostate",
+      "ConfigureOptions.EnsureCommandDelivery": "Gewährleisten Sie die Befehlsübermittlung durch kontinuierliche Übertragung (Impulsmodus)."
     },
     "81": {
       "Title": "Energiemonitor",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "Ermöglicht die Steuerung Ihres Smart-Systems in natürlicher Sprache mithilfe der Gemini-KI von Google. Geben Sie zur Aktivierung einen gültigen API-Schlüssel ein. Folgen Sie den Anweisungen unter https://aistudio.google.com/app/apikey, um einen kostenlosen API-Schlüssel zu erhalten.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-Schlüssel",
-      "ConfigureOptions.ModelId": "Modell-ID"
+      "ConfigureOptions.ModelId": "Modell-ID",
+      "ConfigureOptions.SystemInstructions": "Systemanweisungen"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Ihr persönlicher KI-Genie zur Widget-Erstellung. Basierend auf Gemini hilft es Ihnen, HTML-, CSS- und JavaScript-Code direkt im HomeGenie-Editor zu schreiben und zu debuggen. Um diese Funktion zu aktivieren, geben Sie einen gültigen API-Schlüssel ein. Folgen Sie den Anweisungen unter https://aistudio.google.com/app/apikey, um einen kostenlosen API-Schlüssel zu erhalten.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-Schlüssel",
-      "ConfigureOptions.ModelId": "Modell-ID"
+      "ConfigureOptions.ModelId": "Modell-ID",
+      "ConfigureOptions.SystemInstructions": "Systemanweisungen"
     },
     "940": {
       "Title": "Lokale KI",
       "Description": "Führen Sie hochmoderne LLMs direkt auf Ihrem HomeGenie-Server aus. Beinhaltet eine vollständige API zur Steuerung der KI aus anderen Programmen und Skripten.",
       "ConfigureOptions.MaxTokens": "Maximale Anzahl an Tokens (Antwortlänge)",
       "ConfigureOptions.ModelPath": "Pfad zur lokalen GGUF-Datei",
-      "ConfigureOptions.ModelFile": "Modell"
+      "ConfigureOptions.ModelFile": "Modell",
+      "ConfigureOptions.SystemInstructions": "Systemanweisungen",
+      "ConfigureOptions.ContextSize": "KI-Speichergröße (Kontextfenster)",
+      "ConfigureOptions.MaxTurns": "Maximale Anzahl Chat-Verläufe (0 = keine Begrenzung)",
+      "ConfigureOptions.SendContextData": "Geräteliste und Sensoren in Abfragen einbeziehen"
     },
     "575": {
       "Title": "Download-Manager",
@@ -362,5 +369,8 @@
       "Title": "Stündlicher Energieverbrauch",
       "Description": "Das Balkendiagramm zeigt den durchschnittlichen Wattstundenverbrauch für jede Stunde des Tages (00:00–23:00 Uhr). Die Daten wurden über die ausgewählte Woche aggregiert und stammen von der Energy Use Statistics API."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Genie-Befehl",
+  "scheduler_preset_action_config_wish": "Aktionen in natürlicher Sprache",
+  "scheduler_preset_action_config_wish.placeholder": "Versuchen Sie Folgendes: „Stellen Sie die Heizung auf 22° ein und starten Sie die Sonnenaufgangsszene.“"
 }

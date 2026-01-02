@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "温度传感器",
       "VirtualThermostat.HeatingSwitchModule": "加热开关",
       "VirtualThermostat.CoolingSwitchModule": "冷却开关",
-      "ConfigureOptions.ThermostatsCount": "恒温器数量"
+      "ConfigureOptions.ThermostatsCount": "恒温器数量",
+      "ConfigureOptions.EnsureCommandDelivery": "确保通过连续传输（脉冲模式）传递命令。"
     },
     "81": {
       "Title": "能源监测器",
@@ -311,20 +312,26 @@
       "Title": "双子座意图处理程序",
       "Description": "使用 Google Gemini AI 为您的智能系统启用自然语言控制。要激活此功能，请输入有效的 API 密钥。请按照 https://aistudio.google.com/app/apikey 上的说明获取免费 API 密钥。",
       "ConfigureOptions.ApiKey": "Google Gemini AI API 密钥",
-      "ConfigureOptions.ModelId": "模型 ID"
+      "ConfigureOptions.ModelId": "模型 ID",
+      "ConfigureOptions.SystemInstructions": "系统说明"
     },
     "931": {
       "Title": "双子座小工具精灵",
       "Description": "您的专属 AI 小工具，助您轻松创建小工具。它由 Gemini 提供支持，可帮助您直接在 HomeGenie 编辑器中编写和调试 HTML、CSS 和 JavaScript 代码。要激活此功能，请输入有效的 API 密钥。请按照 https://aistudio.google.com/app/apikey 上的说明获取免费的 API 密钥。",
       "ConfigureOptions.ApiKey": "Google Gemini AI API 密钥",
-      "ConfigureOptions.ModelId": "模型 ID"
+      "ConfigureOptions.ModelId": "模型 ID",
+      "ConfigureOptions.SystemInstructions": "系统说明"
     },
     "940": {
       "Title": "本地人工智能",
       "Description": "直接在您的 HomeGenie 服务器上运行最先进的 LLM（逻辑逻辑模型）。包含完整的 API，可从其他程序和脚本控制 AI。",
       "ConfigureOptions.MaxTokens": "最大令牌数（响应长度）",
       "ConfigureOptions.ModelPath": "本地 GGUF 文件的路径",
-      "ConfigureOptions.ModelFile": "模型"
+      "ConfigureOptions.ModelFile": "模型",
+      "ConfigureOptions.SystemInstructions": "系统说明",
+      "ConfigureOptions.ContextSize": "AI 内存大小（上下文窗口）",
+      "ConfigureOptions.MaxTurns": "聊天记录最大轮数（0 = 无限制）",
+      "ConfigureOptions.SendContextData": "查询中包含设备列表和传感器信息"
     },
     "575": {
       "Title": "下载管理器",
@@ -362,5 +369,8 @@
       "Title": "每小时能源消耗量",
       "Description": "柱状图显示了一天中每个小时（00:00-23:00）的平均瓦时消耗量。数据汇总自所选一周，来源于能源使用统计 API。"
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "精灵指令",
+  "scheduler_preset_action_config_wish": "自然语言行动",
+  "scheduler_preset_action_config_wish.placeholder": "试试：“将温度设置为 22°，然后开始日出场景”"
 }

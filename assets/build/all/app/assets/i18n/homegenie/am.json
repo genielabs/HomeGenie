@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "የሙቀት ዳሳሽ",
       "VirtualThermostat.HeatingSwitchModule": "ማሞቂያ መቀየሪያ",
       "VirtualThermostat.CoolingSwitchModule": "የማቀዝቀዣ መቀየሪያ",
-      "ConfigureOptions.ThermostatsCount": "የሙቀት መቆጣጠሪያዎች ብዛት"
+      "ConfigureOptions.ThermostatsCount": "የሙቀት መቆጣጠሪያዎች ብዛት",
+      "ConfigureOptions.EnsureCommandDelivery": "የትእዛዝ አቅርቦትን በተከታታይ ስርጭት (የ pulse-mode) ያረጋግጡ።"
     },
     "81": {
       "Title": "የኢነርጂ መቆጣጠሪያ",
@@ -311,20 +312,26 @@
       "Title": "ጀሚኒ ሐሳብ ተቆጣጣሪ",
       "Description": "የGoogle Gemini AIን በመጠቀም ለእርስዎ ዘመናዊ ስርዓት የተፈጥሮ ቋንቋ ቁጥጥርን ያነቃል። ይህንን ባህሪ ለማግበር የሚሰራ የኤፒአይ ቁልፍ ያስገቡ። ነፃ የኤፒአይ ቁልፍ ለማግኘት https://aistudio.google.com/app/apikey ላይ ያሉትን መመሪያዎች ይከተሉ።",
       "ConfigureOptions.ApiKey": "Google Gemini AI API ቁልፍ",
-      "ConfigureOptions.ModelId": "የሞዴል መታወቂያ"
+      "ConfigureOptions.ModelId": "የሞዴል መታወቂያ",
+      "ConfigureOptions.SystemInstructions": "የስርዓት መመሪያዎች"
     },
     "931": {
       "Title": "የጌሚኒ መግብር ጂኒ",
       "Description": "የእርስዎ የግል AI ጂኒ ለመግብር ፈጠራ። በጌሚኒ የተጎለበተ፣ HTML፣ CSS እና JavaScript ኮድን በቀጥታ በHomeGenie አርታዒ ውስጥ እንዲጽፉ እና እንዲያርሙ ያግዝዎታል። ይህንን ባህሪ ለማግበር የሚሰራ የኤፒአይ ቁልፍ ያስገቡ። ነፃ የኤፒአይ ቁልፍ ለማግኘት https://aistudio.google.com/app/apikey ላይ ያሉትን መመሪያዎች ይከተሉ።",
       "ConfigureOptions.ApiKey": "Google Gemini AI API ቁልፍ",
-      "ConfigureOptions.ModelId": "የሞዴል መታወቂያ"
+      "ConfigureOptions.ModelId": "የሞዴል መታወቂያ",
+      "ConfigureOptions.SystemInstructions": "የስርዓት መመሪያዎች"
     },
     "940": {
       "Title": "አካባቢያዊ የአዕምሮ ህክምና ባለሙያ (AI)",
       "Description": "ዘመናዊ የሆኑ LLMዎችን በቀጥታ በHomeGenie አገልጋይዎ ላይ ያሂዱ። ከሌሎች ፕሮግራሞች እና ስክሪፕቶች AIን ለመቆጣጠር ሙሉ ኤፒአይ ያካትታል።",
       "ConfigureOptions.MaxTokens": "ከፍተኛ ቶከኖች (የምላሽ ርዝመት)",
       "ConfigureOptions.ModelPath": "ወደ አካባቢያዊ GGUF ፋይል የሚወስደው መንገድ",
-      "ConfigureOptions.ModelFile": "ሞዴል"
+      "ConfigureOptions.ModelFile": "ሞዴል",
+      "ConfigureOptions.SystemInstructions": "የስርዓት መመሪያዎች",
+      "ConfigureOptions.ContextSize": "የAI ማህደረ ትውስታ መጠን (የአውድ መስኮት)",
+      "ConfigureOptions.MaxTurns": "ከፍተኛው የውይይት ታሪክ መዞሪያዎች (0 = ምንም ገደብ የለም)",
+      "ConfigureOptions.SendContextData": "የመሣሪያ ዝርዝር እና ዳሳሾችን በጥያቄዎች ውስጥ ያካትቱ"
     },
     "575": {
       "Title": "የማውረጃ አስተዳዳሪ",
@@ -362,5 +369,8 @@
       "Title": "በሰዓት የኃይል ፍጆታ",
       "Description": "በቀን ውስጥ ለእያንዳንዱ ሰዓት (00h-23h) አማካይ የዋት/ሰዓት ፍጆታን የሚያሳይ የአሞሌ ገበታ። መረጃው በተመረጠው ሳምንት ውስጥ ተሰብስቦ ከኢነርጂ አጠቃቀም ስታቲስቲክስ ኤፒአይ የተገኘ ነው።"
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "የጂኒ ኮማንድ",
+  "scheduler_preset_action_config_wish": "የተፈጥሮ ቋንቋ ተግባር",
+  "scheduler_preset_action_config_wish.placeholder": "ይሞክሩ፦ \"ሙቀቱን ወደ 22° ያቀናብሩ እና የፀሐይ መውጣት ትዕይንትን ይጀምሩ\""
 }

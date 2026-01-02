@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "ឧបករណ៍ចាប់សញ្ញាសីតុណ្ហភាព",
       "VirtualThermostat.HeatingSwitchModule": "កុងតាក់កំដៅ",
       "VirtualThermostat.CoolingSwitchModule": "កុងតាក់ត្រជាក់",
-      "ConfigureOptions.ThermostatsCount": "ចំនួនឧបករណ៍កម្តៅ"
+      "ConfigureOptions.ThermostatsCount": "ចំនួនឧបករណ៍កម្តៅ",
+      "ConfigureOptions.EnsureCommandDelivery": "ធានាការបញ្ជូនពាក្យបញ្ជាជាមួយនឹងការបញ្ជូនបន្ត (របៀបជីពចរ)។"
     },
     "81": {
       "Title": "ម៉ូនីទ័រថាមពល",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "បើកការគ្រប់គ្រងភាសាធម្មជាតិសម្រាប់ប្រព័ន្ធឆ្លាតវៃរបស់អ្នកដោយប្រើ Gemini AI របស់ Google ។ ដើម្បីដំណើរការមុខងារនេះ សូមបញ្ចូលសោ API ត្រឹមត្រូវ។ អនុវត្តតាមការណែនាំនៅ https://aistudio.google.com/app/apikey ដើម្បីទទួលបានគន្លឹះ API ឥតគិតថ្លៃ។",
       "ConfigureOptions.ApiKey": "គន្លឹះ Google Gemini AI API",
-      "ConfigureOptions.ModelId": "លេខសម្គាល់ម៉ូដែល"
+      "ConfigureOptions.ModelId": "លេខសម្គាល់ម៉ូដែល",
+      "ConfigureOptions.SystemInstructions": "ការណែនាំអំពីប្រព័ន្ធ"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "ទេពកោសល្យ AI ផ្ទាល់ខ្លួនរបស់អ្នកសម្រាប់ការបង្កើតធាតុក្រាហ្វិក។ ដំណើរការដោយ Gemini វាជួយអ្នកក្នុងការសរសេរ និងបំបាត់កំហុសកូដ HTML, CSS និង JavaScript ដោយផ្ទាល់នៅក្នុងកម្មវិធីនិពន្ធ HomeGenie ។ ដើម្បីដំណើរការមុខងារនេះ សូមបញ្ចូលសោ API ត្រឹមត្រូវ។ អនុវត្តតាមការណែនាំនៅ https://aistudio.google.com/app/apikey ដើម្បីទទួលបានគន្លឹះ API ឥតគិតថ្លៃ។",
       "ConfigureOptions.ApiKey": "គន្លឹះ Google Gemini AI API",
-      "ConfigureOptions.ModelId": "លេខសម្គាល់ម៉ូដែល"
+      "ConfigureOptions.ModelId": "លេខសម្គាល់ម៉ូដែល",
+      "ConfigureOptions.SystemInstructions": "ការណែនាំអំពីប្រព័ន្ធ"
     },
     "940": {
       "Title": "បញ្ញាសិប្បនិម្មិតក្នុងស្រុក",
       "Description": "ដំណើរការ LLM ទំនើបៗដោយផ្ទាល់នៅលើម៉ាស៊ីនមេ HomeGenie របស់អ្នក។ រួមបញ្ចូល API ពេញលេញដើម្បីគ្រប់គ្រង AI ពីកម្មវិធី និងស្គ្រីបផ្សេងទៀត។",
       "ConfigureOptions.MaxTokens": "ថូខឹនអតិបរមា (ប្រវែងឆ្លើយតប)",
       "ConfigureOptions.ModelPath": "ផ្លូវទៅកាន់ឯកសារ GGUF មូលដ្ឋាន",
-      "ConfigureOptions.ModelFile": "ម៉ូដែល"
+      "ConfigureOptions.ModelFile": "ម៉ូដែល",
+      "ConfigureOptions.SystemInstructions": "ការណែនាំអំពីប្រព័ន្ធ",
+      "ConfigureOptions.ContextSize": "ទំហំអង្គចងចាំ AI (បង្អួចបរិបទ)",
+      "ConfigureOptions.MaxTurns": "ប្រវត្តិជជែកអតិបរមា (០ = គ្មានដែនកំណត់)",
+      "ConfigureOptions.SendContextData": "រួមបញ្ចូលបញ្ជីឧបករណ៍ និងឧបករណ៍ចាប់សញ្ញានៅក្នុងសំណួរ"
     },
     "575": {
       "Title": "កម្មវិធីគ្រប់គ្រងការទាញយក",
@@ -362,5 +369,8 @@
       "Title": "ការប្រើប្រាស់ថាមពលប្រចាំម៉ោង",
       "Description": "តារាងរបារដែលបង្ហាញពីការប្រើប្រាស់ថាមពលជាមធ្យមវ៉ាត់/ម៉ោងសម្រាប់រាល់ម៉ោងនៃថ្ងៃ (០០-២៣)។ ទិន្នន័យត្រូវបានប្រមូលផ្តុំក្នុងសប្តាហ៍ដែលបានជ្រើសរើស និងមានប្រភពមកពី Energy Use Statistics API។"
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "ពាក្យបញ្ជា Genie",
+  "scheduler_preset_action_config_wish": "សកម្មភាពភាសាធម្មជាតិ",
+  "scheduler_preset_action_config_wish.placeholder": "សាកល្បង៖ \"កំណត់កំដៅទៅ 22° ហើយចាប់ផ្តើមឈុតព្រះអាទិត្យរះ\""
 }

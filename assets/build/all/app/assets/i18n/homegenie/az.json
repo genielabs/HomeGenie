@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Temperatur sensoru",
       "VirtualThermostat.HeatingSwitchModule": "İstilik açarı",
       "VirtualThermostat.CoolingSwitchModule": "Soyutma açarı",
-      "ConfigureOptions.ThermostatsCount": "Termostatların sayı"
+      "ConfigureOptions.ThermostatsCount": "Termostatların sayı",
+      "ConfigureOptions.EnsureCommandDelivery": "Komandaların fasiləsiz ötürülmə (impuls rejimi) ilə çatdırılmasını təmin edin."
     },
     "81": {
       "Title": "Enerji monitoru",
@@ -311,20 +312,26 @@
       "Title": "Əkizlər Niyyət İşləyicisi",
       "Description": "Google-un Gemini AI-dan istifadə edərək ağıllı sisteminiz üçün təbii dil nəzarətini təmin edir. Bu funksiyanı aktivləşdirmək üçün etibarlı API açarı daxil edin. Pulsuz API açarı əldə etmək üçün https://aistudio.google.com/app/apikey ünvanındakı təlimatlara əməl edin.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API açarı",
-      "ConfigureOptions.ModelId": "Model ID"
+      "ConfigureOptions.ModelId": "Model ID",
+      "ConfigureOptions.SystemInstructions": "Sistem Təlimatları"
     },
     "931": {
       "Title": "Əkizlər Widget Cin",
       "Description": "Vidcet yaratmaq üçün şəxsi AI cininiz. Əkizlər tərəfindən dəstəklənir, o, HTML, CSS və JavaScript kodunu birbaşa HomeGenie redaktoru daxilində yazmağa və sazlamanıza kömək edir. Bu funksiyanı aktivləşdirmək üçün etibarlı API açarı daxil edin. Pulsuz API açarı əldə etmək üçün https://aistudio.google.com/app/apikey ünvanındakı təlimatlara əməl edin.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API açarı",
-      "ConfigureOptions.ModelId": "Model ID"
+      "ConfigureOptions.ModelId": "Model ID",
+      "ConfigureOptions.SystemInstructions": "Sistem Təlimatları"
     },
     "940": {
       "Title": "Yerli süni intellekt",
       "Description": "Ən müasir LLM-ləri birbaşa HomeGenie serverinizdə işlədin. Digər proqramlardan və skriptlərdən süni intellekt idarə etmək üçün tam API daxildir.",
       "ConfigureOptions.MaxTokens": "Maksimum Tokenlər (cavab uzunluğu)",
       "ConfigureOptions.ModelPath": "Yerli GGUF faylına yol",
-      "ConfigureOptions.ModelFile": "Model"
+      "ConfigureOptions.ModelFile": "Model",
+      "ConfigureOptions.SystemInstructions": "Sistem Təlimatları",
+      "ConfigureOptions.ContextSize": "Süni intellekt yaddaşının ölçüsü (Kontekst Pəncərəsi)",
+      "ConfigureOptions.MaxTurns": "Maksimum söhbət tarixçəsi dövrləri (0 = limit yoxdur)",
+      "ConfigureOptions.SendContextData": "Sorğulara cihaz siyahısını və sensorları daxil edin"
     },
     "575": {
       "Title": "Yükləmə Meneceri",
@@ -362,5 +369,8 @@
       "Title": "Saatlıq Enerji İstehlakı",
       "Description": "Günün hər saatı (00-23 saat) üçün orta Vatt/Saat istehlakını göstərən sütunlu diaqram. Məlumatlar seçilmiş həftə üzrə toplanır və Enerji İstifadəsi Statistikası API-sindən əldə edilir."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Cin Komandanlığı",
+  "scheduler_preset_action_config_wish": "Təbii Dil Fəaliyyəti",
+  "scheduler_preset_action_config_wish.placeholder": "Sınayın: \"İstiliyi 22°-yə qoyun və Günəşin doğuş səhnəsini başlayın\""
 }

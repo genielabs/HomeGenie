@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Temperatursensor",
       "VirtualThermostat.HeatingSwitchModule": "Varmebryter",
       "VirtualThermostat.CoolingSwitchModule": "Kjølebryter",
-      "ConfigureOptions.ThermostatsCount": "Antall termostater"
+      "ConfigureOptions.ThermostatsCount": "Antall termostater",
+      "ConfigureOptions.EnsureCommandDelivery": "Sørg for kontinuerlig kommandolevering (pulsmodus)."
     },
     "81": {
       "Title": "Energimonitor",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "Aktiverer naturlig språkkontroll for smartsystemet ditt ved hjelp av Googles Gemini AI. For å aktivere denne funksjonen, skriv inn en gyldig API-nøkkel. Følg instruksjonene på https://aistudio.google.com/app/apikey for å få en gratis API-nøkkel.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-nøkkel",
-      "ConfigureOptions.ModelId": "Modell-ID"
+      "ConfigureOptions.ModelId": "Modell-ID",
+      "ConfigureOptions.SystemInstructions": "Systeminstruksjoner"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Din personlige AI-ånd for widget-oppretting. Drevet av Gemini, hjelper den deg med å skrive og feilsøke HTML-, CSS- og JavaScript-kode direkte i HomeGenie-editoren. For å aktivere denne funksjonen, skriv inn en gyldig API-nøkkel. Følg instruksjonene på https://aistudio.google.com/app/apikey for å få en gratis API-nøkkel.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-nøkkel",
-      "ConfigureOptions.ModelId": "Modell-ID"
+      "ConfigureOptions.ModelId": "Modell-ID",
+      "ConfigureOptions.SystemInstructions": "Systeminstruksjoner"
     },
     "940": {
       "Title": "Lokal AI",
       "Description": "Kjør toppmoderne LLM-er direkte på HomeGenie-serveren din. Inkluderer et komplett API for å kontrollere AI-en fra andre programmer og skript.",
       "ConfigureOptions.MaxTokens": "Maks. antall tokener (svarlengde)",
       "ConfigureOptions.ModelPath": "Sti til lokal GGUF-fil",
-      "ConfigureOptions.ModelFile": "Modell"
+      "ConfigureOptions.ModelFile": "Modell",
+      "ConfigureOptions.SystemInstructions": "Systeminstruksjoner",
+      "ConfigureOptions.ContextSize": "AI-minnestørrelse (kontekstvindu)",
+      "ConfigureOptions.MaxTurns": "Maks antall omdreininger i chathistorikk (0 = ingen grense)",
+      "ConfigureOptions.SendContextData": "Inkluder enhetsliste og sensorer i spørringer"
     },
     "575": {
       "Title": "Nedlastingsbehandler",
@@ -362,5 +369,8 @@
       "Title": "Timebasert energiforbruk",
       "Description": "Stolpediagram som viser gjennomsnittlig watt/time-forbruk for hver time på dagen (00:00–23:00). Dataene er samlet inn for den valgte uken og hentet fra API-et for energibruksstatistikk."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Genie-kommandoen",
+  "scheduler_preset_action_config_wish": "Naturlig språkhandling",
+  "scheduler_preset_action_config_wish.placeholder": "Prøv: «Sett varmen til 22° og start soloppgangsscenen»"
 }

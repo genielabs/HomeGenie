@@ -956,22 +956,6 @@ The default user to connect to the bridge is "newdeveloper" and it should be alr
         <UpdateTime>2023-01-21T15:34:31.0977162Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>HomeGenie.SecurityArmed</Name>
-        <Value>Disarmed</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:10:38.3025913Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>HomeGenie.SecurityTriggered</Name>
-        <Value>0</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:10:38.3026775Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>Program.Status</Name>
         <Value>Running</Value>
         <Description />
@@ -980,28 +964,12 @@ The default user to connect to the bridge is "newdeveloper" and it should be alr
         <UpdateTime>2022-11-26T22:12:03.0238531Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
-        <Name>Status.Level</Name>
-        <Value>0</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2022-12-28T17:10:38.3162464Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
         <Value>90</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
         <UpdateTime>2024-12-04T17:32:48.6521019Z</UpdateTime>
-      </ModuleParameter>
-      <ModuleParameter>
-        <Name>Widget.DisplayModule</Name>
-        <Value>homegenie/generic/securitysystem</Value>
-        <Description />
-        <FieldType />
-        <ParentId>0</ParentId>
-        <UpdateTime>2014-04-11T19:26:31.638769Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />
@@ -1042,8 +1010,7 @@ The default user to connect to the bridge is "newdeveloper" and it should be alr
   </Module>
   <Module>
     <Name>Smart Thermostat</Name>
-    <Description>Use any temperature sensor and smart switch to implement thermostat functionality.
-</Description>
+    <Description>Use any temperature sensor and smart switch to implement thermostat functionality.</Description>
     <DeviceType>Program</DeviceType>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>78</Address>

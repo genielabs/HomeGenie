@@ -25,8 +25,14 @@ Api.Handle("System.Utility/ContextEngine", (args) =&gt; {
     var userModules = new List&lt;ModuleHelper&gt;();
     
     // Physical devices (Lights, Switches, Thermostats, etc.)
-    string allowedTypes = "Dimmer,Light,Color,Switch,Shutter,DoorLock,Thermostat";
+    string allowedTypes = "Dimmer,Light,Color,Switch,Shutter,DoorLock,Thermostat,Sensor";
     Modules.OfDeviceType(allowedTypes).Each((m) =&gt; {
+        var instance = m.Instance;
+        if (instance.DeviceType.ToString().ToLower() == "sensor" &amp;&amp; instance.Domain != "HomeAutomation.SecuritySystem")
+        {
+            // the only "Sensor" listed is Security Alarm System
+            return false;
+        }
         userModules.Add(m);
         return false; // Continue iteration
     });
@@ -34,9 +40,10 @@ Api.Handle("System.Utility/ContextEngine", (args) =&gt; {
     // Scenarios and Macros (Programs configured with the generic program widget)
     Modules.OfDeviceType("Program").WithParameter("Widget.DisplayModule").Each((m) =&gt; {
         // Filter out system loggers and ensure it's a user-facing program
+        var widget = m.Parameter("Widget.DisplayModule")?.Value;
         if (m.Instance.Address != "6" &amp;&amp; m.Instance.Address != "7"
             &amp;&amp; m.Instance.Address != "34" &amp;&amp; m.Instance.Address != "940"
-            &amp;&amp; !String.IsNullOrWhiteSpace(m.Parameter("Widget.DisplayModule").Value))
+            &amp;&amp; !String.IsNullOrWhiteSpace(widget))
         {
             userModules.Add(m);
         }
@@ -74,7 +81,7 @@ Api.Handle("System.Utility/ContextEngine", (args) =&gt; {
     var energy = Modules.InDomain("HomeAutomation.EnergyMonitor").WithAddress("1").Get();
     if (energy.Instance != null) statusSb.AppendLine("- " + PromptHelpers.GetEnergyStatus(energy));
 
-    var alarm = Modules.InDomain("HomeAutomation.HomeGenie.Automation").WithAddress("90").Get();
+    var alarm = Modules.InDomain("HomeAutomation.SecuritySystem").WithAddress("Main").Get();
     if (alarm.Instance != null) statusSb.AppendLine("- " + PromptHelpers.GetSecurityStatus(alarm));
 
     var thermo = Modules.InDomain("HomeAutomation.SmartThermostat").WithAddress("1").Get();
@@ -214,16 +221,16 @@ Program.GoBackground();
     }
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>context-engine</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>D49099C173C084DE1E8DF2C832E7298A</Checksum>
+      <Checksum>885D95F668C6D4D4AC75333A25B29871</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>578</Address>
@@ -1000,9 +1007,12 @@ Program.Setup(() =&gt; {
     // - Response length limit (Max Tokens)
     // - Model selection dropdown (populated from models.yaml)
     // - System Instructions (Markdown editor linked to system_prompt.txt)
-    .AddOption(OPTION_MAX_TOKENS, "1536", "Max Tokens (response length)", "slider:64:4096:32")
-    .AddOption(OPTION_MODEL_FILE, "", "Model", $"select:{ models }")
-    .AddOption(OPTION_SYSTEM_INSTRUCTIONS, "", "System Instructions", $"editor:file:{systemPromptFile}:markdown")
+    .AddOption(OPTION_MODEL_FILE, "", "1. Model", $"select:{ models }")
+    .AddOption(OPTION_CONTEXT_SIZE, "4096", "2. AI Memory size (Context Window)", "slider:512:8192:512")
+    .AddOption(OPTION_MAX_TOKENS, "1536", "3. Max Tokens (response length)", "slider:64:4096:32")
+    .AddOption(OPTION_MAX_TURNS, "10", "4. Max chat history turns (0 = no limit)", "slider:0:20:1")
+    .AddOption(OPTION_SYSTEM_INSTRUCTIONS, "", "5. System Instructions", $"editor:file:{systemPromptFile}:markdown")
+    .AddOption(OPTION_SEND_CONTEXT_DATA, "", "6. Include device list and sensors in queries", "checkbox")
     
     // Assign the custom UI widget for the chat interface
     .UseWidget("custom/examples/local-ai-chat")
@@ -1033,6 +1043,7 @@ Program.Run();
 // --- 1. CONFIGURATION AND STATE INITIALIZATION ---
 
 var reconfigureRequired = false;
+int maxMessages = (int)Program.Option(OPTION_MAX_TURNS).DecimalValue * 2;
 
 // Register event handler to trigger a restart if configuration options change.
 When.ModuleParameterChanged((module, parameter) =&gt; {
@@ -1194,9 +1205,10 @@ else
 
   // Load Inference Parameters
   LailamaInferenceParams.MaxTokens = (int)Program.Option(OPTION_MAX_TOKENS).DecimalValue;
+  uint contextSize = (uint)Program.Option(OPTION_CONTEXT_SIZE).DecimalValue;
   var parameters = new ModelParams(modelPath)
   {
-      ContextSize = PARAMS_CONTEXT_SIZE,
+      ContextSize = contextSize,
       GpuLayerCount = PARAMS_GPU_LAYER_SIZE
   };
 
@@ -1276,13 +1288,13 @@ else
     * @param synchronous Whether to wait for the full response before returning.
     * @return The full generated response (if synchronous), otherwise an empty string.
     */
-  var processInput = new Func&lt;string, bool, string&gt;((rawInput, synchronous) =&gt; {
+  var processInput = new Func&lt;string, bool, bool, bool, string&gt;((rawInput, synchronous, sendContextData, noHistory) =&gt; {
 
       if (generationCts != null) generationCts.Dispose();
       generationCts = new CancellationTokenSource();
 
       string fullInput = rawInput;
-      if (CONTEXT_SEND_SYSTEM_INFO)
+      if (sendContextData)
       {
         string systemInfo = (string)Api.Call("System.Utility/ContextEngine/Render", "%%SYSTEM_STATUS%%");
         fullInput = systemInfo + "\n\n" + rawInput;
@@ -1290,10 +1302,13 @@ else
 
 
       // 2. PERSIST USER MESSAGE: Save the CLEAN raw input to the service
-      Api.Call("System.Utility/ChatHistory/Add", new {
-          StoreId = storeId,
-          Message = ChatMessage.Create("user", rawInput)
-      });
+      if (!noHistory)
+      {
+        Api.Call("System.Utility/ChatHistory/Add", new {
+            StoreId = storeId,
+            Message = ChatMessage.Create("user", rawInput)
+        });
+      }
 
       // 3. TEMPLATING: Prepare input for the engine (but don't save this to history!)
       string templatedInput = BuildUserPrompt(templateType, fullInput);
@@ -1346,12 +1361,15 @@ else
               Parts = messageSegments.Select(s =&gt; new MessagePart { Text = s }).ToList()
           };
 
-          Api.Call("System.Utility/ChatHistory/Add", new {
-              StoreId = storeId,
-              Message = modelResponse
-          });
+          if (!noHistory)
+          {
+            Api.Call("System.Utility/ChatHistory/Add", new {
+                StoreId = storeId,
+                Message = modelResponse
+            });
+          }
 
-          if (CONTEXT_SEND_SYSTEM_INFO)
+          if (sendContextData)
           {
             // Replace content with the clean text (without systemInfo)
             var lastUserMsg = session.History.Messages.LastOrDefault(m =&gt; m.AuthorRole == AuthorRole.User);
@@ -1359,6 +1377,26 @@ else
             {
                 lastUserMsg.Content = rawInput; 
             }
+          }
+
+          // Check chat history (excluding the System Message at index 0)
+          // If history size exceeds the limit (System + max allowed messages), start pruning.
+          /*
+          while (maxMessages &gt; 0 &amp;&amp; session.History.Messages.Count &gt; maxMessages + 1)
+          {
+              // Remove the oldest message immediately following the System Message.
+              // Index 1 represents the earliest User or Assistant message in the conversation.
+              session.History.Messages.RemoveAt(1);
+          }
+          */
+          if (session.History.Messages.Count &gt; maxMessages)
+          {
+            session.LoadSession(resetState);
+            session.History.Messages.Clear();
+            //context.NativeHandle.MemoryClear(data: true);
+            systemPrompt = (string)Api.Call("System.Utility/ContextEngine/Render", promptText);
+            systemMessage = new ChatHistory.Message(AuthorRole.System, (string)systemPrompt);
+            session.History.Messages.Add(systemMessage);
           }
 
           return fullReply;
@@ -1382,11 +1420,21 @@ else
   Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userInput) =&gt; {
       // Direct intent submission (e.g. from external modules or scripts)
       string input = WebUtility.UrlDecode((string)userInput);
-      if (!String.IsNullOrEmpty(input))
+      if (!String.IsNullOrWhiteSpace(input))
       {
-          processInput(input, false);
+          bool sendContextData = (Program.Option(OPTION_SEND_CONTEXT_DATA).Value == "On");
+          processInput(input, false, sendContextData, false);
       }
       return new ResponseStatus(Status.Ok, "Processing: " + input);
+
+  }).Handle($"{API_URL}/{API_PROMPT_SCHEDULE}", (command) =&gt; {
+      // Direct intent submission (e.g. from external modules or scripts)
+      string input = WebUtility.UrlDecode((string)command);
+      if (!String.IsNullOrWhiteSpace(input))
+      {
+        return new ResponseStatus(Status.Ok, processInput(input, true, false, true));
+      }
+      return new ResponseStatus(Status.Error, "No input");
 
   }).Handle($"{API_URL}/{API_PROMPT_CANCEL}", (userCommand) =&gt; {
       // Abort current generation
@@ -1412,7 +1460,7 @@ else
         if (session.History.Messages.Count &gt; 0)
         {
             session.History.Messages.Clear();
-            context.NativeHandle.MemoryClear(data: true);
+            //context.NativeHandle.MemoryClear(data: true);
             systemPrompt = (string)Api.Call("System.Utility/ContextEngine/Render", promptText);
             systemMessage = new ChatHistory.Message(AuthorRole.System, (string)systemPrompt);
             session.History.Messages.Add(systemMessage);
@@ -1454,13 +1502,16 @@ while (Program.IsRunning)
 /* Internal API Routing */
 const string API_URL = "AI.IntentHandlers/Lailama";
 const string API_PROMPT_SUBMIT = "Prompt.Submit";
+const string API_PROMPT_SCHEDULE = "Prompt.Schedule";
 const string API_PROMPT_CANCEL = "Prompt.Cancel";
 const string API_HISTORY_GET = "History.Get";
 const string API_HISTORY_CLEAR = "History.Clear";
 
 /* Module Option Keys */
-const string OPTION_MODEL_PATH = "ModelPath";
+const string OPTION_SEND_CONTEXT_DATA = "SendContextData";
+const string OPTION_CONTEXT_SIZE = "ContextSize";
 const string OPTION_MAX_TOKENS = "MaxTokens";
+const string OPTION_MAX_TURNS = "MaxTurns";
 const string OPTION_MODEL_FILE = "ModelFile";
 const string OPTION_SYSTEM_INSTRUCTIONS = "SystemInstructions";
 
@@ -1476,9 +1527,7 @@ const string FIELD_DOWNLOAD_PROGRESS = "Status.Download.Progress";
 
 /* Resource Settings */
 const string CONFIG_FILE_NAME = "models.yaml";
-const int PARAMS_CONTEXT_SIZE = 4096;
 const int PARAMS_GPU_LAYER_SIZE = 0; // Set &gt; 0 to enable GPU offloading (VRAM)
-const bool CONTEXT_SEND_SYSTEM_INFO = false;
 
 // ===================================================================
 // DATA MODELS AND CONFIGURATION LOADING
@@ -1533,9 +1582,9 @@ InferenceParams LailamaInferenceParams = new InferenceParams
 {
     SamplingPipeline = new DefaultSamplingPipeline
     {
-        Temperature = 0.4f, // Lower temperature for more deterministic/factual responses
+        Temperature = 0.6f, // Lower temperature for more deterministic/factual responses
         TopP = 0.95f,
-        RepeatPenalty = 1.1f 
+        RepeatPenalty = 1.2f 
     },
     MaxTokens = 1024, 
     
@@ -1738,9 +1787,9 @@ public List&lt;string&gt; ExtractAndExecute(dynamic Api, string response)
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.0.4</Version>
+      <Version>1.0.5</Version>
       <Required>true</Required>
-      <Checksum>9098869A1A53D958C7CE9DC8DF2CBDF4</Checksum>
+      <Checksum>6CFA1884CADE324E8195C3AAF9DCC02F</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>

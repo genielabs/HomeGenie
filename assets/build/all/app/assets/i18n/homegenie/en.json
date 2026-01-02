@@ -208,6 +208,12 @@
         "Options",
     "scheduler_preset_action_program_say":
         "Say",
+    "scheduler_preset_action_genie_command":
+        "Genie Command",
+    "scheduler_preset_action_config_wish":
+        "Natural Language Action",
+    "scheduler_preset_action_config_wish.placeholder":
+        "Try: \"Set the heat to 22° and start the Sunrise scene\"",
     "scheduler_preset_action_net_http_call":
         "Call a Web Service",
     "scheduler_preset_action_config_url":
@@ -290,13 +296,13 @@
 
     "16": {
       "Title":
-      "Level Memory",
+        "Level Memory",
       "Description":
-      "Store and recall last dimmer level.",
+        "Store and recall last dimmer level.",
       "HomeGenie.LevelMemory":
-      "Recall last light level when switched on",
+        "Recall last light level when switched on",
       "HomeGenie.LevelMemory.SimulateOnly":
-      "Simulate only"
+        "Simulate only"
     },
 
     "26": {
@@ -314,17 +320,17 @@
 
     "34": {
       "Title":
-      "Weather Forecast",
+        "Weather Forecast",
       "Description":
-      "Weather and forecast information from Open Weather Map service.\nTo activate this widget enter a valid API key.\nFollow instructions at https://openweathermap.org/appid to get a free API key.",
+        "Weather and forecast information from Open Weather Map service.\nTo activate this widget enter a valid API key.\nFollow instructions at https://openweathermap.org/appid to get a free API key.",
       "ConfigureOptions.Location":
-      "City name",
+        "City name",
       "ConfigureOptions.Language":
-      "Language (eg. EN, IT, FR, DE, ...)",
+        "Language (eg. EN, IT, FR, DE, ...)",
       "ConfigureOptions.UpdateInterval":
-      "Update interval (minutes)",
+        "Update interval (minutes)",
       "ConfigureOptions.ApiKey":
-      "OpenWeatherMap API key (APPID)"
+        "OpenWeatherMap API key (APPID)"
     },
 
     "77": {
@@ -582,12 +588,18 @@
         "Local AI",
       "Description":
         "Run state-of-the-art LLMs directly on your HomeGenie server. Includes a full API to control the AI from other programs and scripts.",
-      "ConfigureOptions.MaxTokens":
-        "Max Tokens (response length)",
       "ConfigureOptions.ModelFile":
         "Model",
+      "ConfigureOptions.ContextSize":
+        "AI Memory size (Context Window)",
+      "ConfigureOptions.MaxTokens":
+        "Max Tokens (response length)",
+      "ConfigureOptions.MaxTurns":
+        "Max chat history turns (0 = no limit)",
       "ConfigureOptions.SystemInstructions":
-        "System Instructions"
+        "System Instructions",
+      "ConfigureOptions.SendContextData":
+        "Include device list and sensors in queries"
     },
 
     "575": {

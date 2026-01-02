@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Hitastigsskynjari",
       "VirtualThermostat.HeatingSwitchModule": "Hitunarrofi",
       "VirtualThermostat.CoolingSwitchModule": "Kælirofi",
-      "ConfigureOptions.ThermostatsCount": "Fjöldi hitastilla"
+      "ConfigureOptions.ThermostatsCount": "Fjöldi hitastilla",
+      "ConfigureOptions.EnsureCommandDelivery": "Tryggið afhendingu skipana með samfelldri sendingu (púlsstilling)."
     },
     "81": {
       "Title": "Orkumælir",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "Virkjar stjórn á náttúrulegu tungumáli fyrir snjallkerfið þitt með Gemini gervigreind Google. Til að virkja þennan eiginleika skaltu slá inn gilt API-lykil. Fylgdu leiðbeiningunum á https://aistudio.google.com/app/apikey til að fá ókeypis API-lykil.",
       "ConfigureOptions.ApiKey": "Lykill fyrir Google Gemini gervigreindarforritaskil",
-      "ConfigureOptions.ModelId": "Gerðarauðkenni"
+      "ConfigureOptions.ModelId": "Gerðarauðkenni",
+      "ConfigureOptions.SystemInstructions": "Leiðbeiningar um kerfið"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Þinn persónulegi gervigreindarandi fyrir gerð viðmóts. Knúið af Gemini, hjálpar það þér að skrifa og kemba HTML, CSS og JavaScript kóða beint í HomeGenie ritilnum. Til að virkja þennan eiginleika skaltu slá inn gilt API lykil. Fylgdu leiðbeiningunum á https://aistudio.google.com/app/apikey til að fá ókeypis API lykil.",
       "ConfigureOptions.ApiKey": "Lykill fyrir gervigreindarforritaskil Google Gemini",
-      "ConfigureOptions.ModelId": "Gerðarauðkenni"
+      "ConfigureOptions.ModelId": "Gerðarauðkenni",
+      "ConfigureOptions.SystemInstructions": "Leiðbeiningar um kerfið"
     },
     "940": {
       "Title": "Staðbundin gervigreind",
       "Description": "Keyrðu nýjustu LLM-kerfin beint á HomeGenie-þjóninum þínum. Inniheldur fullt forritaskil (API) til að stjórna gervigreindinni frá öðrum forritum og forskriftum.",
       "ConfigureOptions.MaxTokens": "Hámarksfjöldi tákna (svarlengd)",
       "ConfigureOptions.ModelPath": "Slóð að staðbundinni GGUF skrá",
-      "ConfigureOptions.ModelFile": "Fyrirmynd"
+      "ConfigureOptions.ModelFile": "Fyrirmynd",
+      "ConfigureOptions.SystemInstructions": "Leiðbeiningar um kerfið",
+      "ConfigureOptions.ContextSize": "Stærð gervigreindarminnis (samhengisgluggi)",
+      "ConfigureOptions.MaxTurns": "Hámarksfjöldi spjallferils (0 = engin takmörk)",
+      "ConfigureOptions.SendContextData": "Hafa lista yfir tæki og skynjara með í fyrirspurnum"
     },
     "575": {
       "Title": "Niðurhalsstjóri",
@@ -362,5 +369,8 @@
       "Title": "Orkunotkun á klukkustund",
       "Description": "Súlurit sem sýnir meðalnotkun í vöttum/klst. fyrir hverja klukkustund dagsins (kl. 00-23). Gögnum er safnað saman yfir valda viku og fengið úr orkunotkunartölfræðiforritaskilinu."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Skipun Genie",
+  "scheduler_preset_action_config_wish": "Náttúruleg tungumálaaðgerð",
+  "scheduler_preset_action_config_wish.placeholder": "Prófaðu: „Stilltu hitann á 22° og byrjaðu sólarupprásarsenuna“"
 }

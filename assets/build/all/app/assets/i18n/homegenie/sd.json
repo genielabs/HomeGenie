@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "گرمي پد سينسر",
       "VirtualThermostat.HeatingSwitchModule": "حرارتي سوئچ",
       "VirtualThermostat.CoolingSwitchModule": "کولنگ سوئچ",
-      "ConfigureOptions.ThermostatsCount": "ٿرموسٽيٽس جو تعداد"
+      "ConfigureOptions.ThermostatsCount": "ٿرموسٽيٽس جو تعداد",
+      "ConfigureOptions.EnsureCommandDelivery": "مسلسل ٽرانسميشن (پلس موڊ) سان ڪمانڊ پهچائڻ کي يقيني بڻايو."
     },
     "81": {
       "Title": "توانائي مانيٽر",
@@ -311,20 +312,26 @@
       "Title": "جيميني انٽينٽ هينڊلر",
       "Description": "گوگل جي جيميني اي آءِ استعمال ڪندي توهان جي سمارٽ سسٽم لاءِ قدرتي ٻولي ڪنٽرول کي فعال ڪري ٿو. هن خصوصيت کي چالو ڪرڻ لاءِ، هڪ صحيح API ڪي داخل ڪريو. مفت API ڪي حاصل ڪرڻ لاءِ https://aistudio.google.com/app/apikey تي ڏنل هدايتن تي عمل ڪريو.",
       "ConfigureOptions.ApiKey": "گوگل جيمنائي اي آءِ API ڪي",
-      "ConfigureOptions.ModelId": "ماڊل سڃاڻپ"
+      "ConfigureOptions.ModelId": "ماڊل سڃاڻپ",
+      "ConfigureOptions.SystemInstructions": "سسٽم جون هدايتون"
     },
     "931": {
       "Title": "جيمينائي ويجيٽ جيني",
       "Description": "ويجيٽ ٺاهڻ لاءِ توهان جو ذاتي AI جيني. جيميني پاران طاقتور، اهو توهان کي هوم جيني ايڊيٽر اندر سڌو سنئون HTML، CSS، ۽ جاوا اسڪرپٽ ڪوڊ لکڻ ۽ ڊيبگ ڪرڻ ۾ مدد ڪري ٿو. هن خصوصيت کي چالو ڪرڻ لاءِ، هڪ صحيح API ڪي داخل ڪريو. مفت API ڪي حاصل ڪرڻ لاءِ https://aistudio.google.com/app/apikey تي ڏنل هدايتن تي عمل ڪريو.",
       "ConfigureOptions.ApiKey": "گوگل جيمنائي اي آءِ API ڪي",
-      "ConfigureOptions.ModelId": "ماڊل سڃاڻپ"
+      "ConfigureOptions.ModelId": "ماڊل سڃاڻپ",
+      "ConfigureOptions.SystemInstructions": "سسٽم جون هدايتون"
     },
     "940": {
       "Title": "مقامي AI",
       "Description": "پنهنجي هوم جيني سرور تي سڌو سنئون جديد LLM هلايو. ٻين پروگرامن ۽ اسڪرپٽس مان AI کي ڪنٽرول ڪرڻ لاءِ هڪ مڪمل API شامل آهي.",
       "ConfigureOptions.MaxTokens": "وڌ ۾ وڌ ٽوڪن (جواب جي ڊيگهه)",
       "ConfigureOptions.ModelPath": "مقامي GGUF فائل جو رستو",
-      "ConfigureOptions.ModelFile": "ماڊل"
+      "ConfigureOptions.ModelFile": "ماڊل",
+      "ConfigureOptions.SystemInstructions": "سسٽم جون هدايتون",
+      "ConfigureOptions.ContextSize": "AI ميموري سائيز (Context Window)",
+      "ConfigureOptions.MaxTurns": "وڌ ۾ وڌ چيٽ جي تاريخ موڙ (0 = ڪابه حد ناهي)",
+      "ConfigureOptions.SendContextData": "سوالن ۾ ڊوائيس لسٽ ۽ سينسر شامل ڪريو"
     },
     "575": {
       "Title": "ڊائون لوڊ مئنيجر",
@@ -362,5 +369,8 @@
       "Title": "ڪلاڪ جي حساب سان توانائي جو استعمال",
       "Description": "بار چارٽ جيڪو ڏينهن جي هر ڪلاڪ (00 ڪلاڪ کان 23 ڪلاڪ) لاءِ سراسري واٽ/ڪلاڪ استعمال ڏيکاري ٿو. ڊيٽا چونڊيل هفتي دوران گڏ ڪئي وئي آهي ۽ توانائي جي استعمال جي شماريات API مان حاصل ڪئي وئي آهي."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "جيني ڪمانڊ",
+  "scheduler_preset_action_config_wish": "قدرتي ٻولي جو عمل",
+  "scheduler_preset_action_config_wish.placeholder": "ڪوشش ڪريو: \"گرمي کي 22° تي سيٽ ڪريو ۽ سج اڀرڻ جو منظر شروع ڪريو\""
 }

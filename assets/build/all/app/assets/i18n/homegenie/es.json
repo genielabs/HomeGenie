@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Sensor de temperatura",
       "VirtualThermostat.HeatingSwitchModule": "Interruptor de calefacción",
       "VirtualThermostat.CoolingSwitchModule": "Interruptor de enfriamiento",
-      "ConfigureOptions.ThermostatsCount": "Número de termostatos"
+      "ConfigureOptions.ThermostatsCount": "Número de termostatos",
+      "ConfigureOptions.EnsureCommandDelivery": "Garantizar la entrega de comandos con transmisión continua (modo pulso)."
     },
     "81": {
       "Title": "Monitor de energía",
@@ -311,20 +312,26 @@
       "Title": "Controlador de intenciones de Géminis",
       "Description": "Permite el control del lenguaje natural en tu sistema inteligente mediante la IA Gemini de Google. Para activar esta función, introduce una clave API válida. Sigue las instrucciones en https://aistudio.google.com/app/apikey para obtener una clave API gratuita.",
       "ConfigureOptions.ApiKey": "Clave API de Google Gemini AI",
-      "ConfigureOptions.ModelId": "Identificación del modelo"
+      "ConfigureOptions.ModelId": "Identificación del modelo",
+      "ConfigureOptions.SystemInstructions": "Instrucciones del sistema"
     },
     "931": {
       "Title": "Genio del widget Géminis",
       "Description": "Tu genio de IA personal para crear widgets. Desarrollado por Gemini, te ayuda a escribir y depurar código HTML, CSS y JavaScript directamente en el editor de HomeGenie. Para activar esta función, introduce una clave API válida. Sigue las instrucciones en https://aistudio.google.com/app/apikey para obtener una clave API gratuita.",
       "ConfigureOptions.ApiKey": "Clave API de Google Gemini AI",
-      "ConfigureOptions.ModelId": "Identificación del modelo"
+      "ConfigureOptions.ModelId": "Identificación del modelo",
+      "ConfigureOptions.SystemInstructions": "Instrucciones del sistema"
     },
     "940": {
       "Title": "IA local",
       "Description": "Ejecute LLM de última generación directamente en su servidor HomeGenie. Incluye una API completa para controlar la IA desde otros programas y scripts.",
       "ConfigureOptions.MaxTokens": "Máximo de tokens (longitud de respuesta)",
       "ConfigureOptions.ModelPath": "Ruta al archivo GGUF local",
-      "ConfigureOptions.ModelFile": "Modelo"
+      "ConfigureOptions.ModelFile": "Modelo",
+      "ConfigureOptions.SystemInstructions": "Instrucciones del sistema",
+      "ConfigureOptions.ContextSize": "Tamaño de la memoria de IA (ventana de contexto)",
+      "ConfigureOptions.MaxTurns": "Máximo de turnos en el historial de chat (0 = sin límite)",
+      "ConfigureOptions.SendContextData": "Incluir lista de dispositivos y sensores en las consultas"
     },
     "575": {
       "Title": "Administrador de descargas",
@@ -362,5 +369,8 @@
       "Title": "Consumo de energía por hora",
       "Description": "Gráfico de barras que muestra el consumo promedio de vatios/hora para cada hora del día (00:00-23:00). Los datos se agregan a lo largo de la semana seleccionada y provienen de la API de Estadísticas de Consumo de Energía."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Comando Genie",
+  "scheduler_preset_action_config_wish": "Acción del lenguaje natural",
+  "scheduler_preset_action_config_wish.placeholder": "Prueba: \"Pon la calefacción a 22° y empieza la escena del Amanecer\""
 }

@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "เซ็นเซอร์วัดอุณหภูมิ",
       "VirtualThermostat.HeatingSwitchModule": "สวิตช์ทำความร้อน",
       "VirtualThermostat.CoolingSwitchModule": "สวิตช์ระบายความร้อน",
-      "ConfigureOptions.ThermostatsCount": "จำนวนเทอร์โมสตัท"
+      "ConfigureOptions.ThermostatsCount": "จำนวนเทอร์โมสตัท",
+      "ConfigureOptions.EnsureCommandDelivery": "ตรวจสอบให้แน่ใจว่าการส่งคำสั่งเป็นไปอย่างต่อเนื่อง (โหมดพัลส์)"
     },
     "81": {
       "Title": "เครื่องตรวจสอบพลังงาน",
@@ -311,20 +312,26 @@
       "Title": "ตัวจัดการเจตนาของ Gemini",
       "Description": "เปิดใช้งานการควบคุมภาษาธรรมชาติสำหรับระบบอัจฉริยะของคุณโดยใช้ Gemini AI ของ Google หากต้องการเปิดใช้งานฟีเจอร์นี้ ให้ป้อนรหัส API ที่ถูกต้อง ทำตามคำแนะนำที่ https://aistudio.google.com/app/apikey เพื่อรับรหัส API ฟรี",
       "ConfigureOptions.ApiKey": "รหัส API ของ Google Gemini AI",
-      "ConfigureOptions.ModelId": "รหัสรุ่น"
+      "ConfigureOptions.ModelId": "รหัสรุ่น",
+      "ConfigureOptions.SystemInstructions": "คำแนะนำการใช้งานระบบ"
     },
     "931": {
       "Title": "เจมินี่ วิดเจ็ต จินนี่",
       "Description": "จินนี่ AI ส่วนตัวของคุณสำหรับการสร้างวิดเจ็ต ขับเคลื่อนโดย Gemini ช่วยให้คุณเขียนและแก้ไขโค้ด HTML, CSS และ JavaScript ได้โดยตรงภายในโปรแกรมแก้ไข HomeGenie หากต้องการเปิดใช้งานฟีเจอร์นี้ ให้ป้อนรหัส API ที่ถูกต้อง ทำตามคำแนะนำที่ https://aistudio.google.com/app/apikey เพื่อรับรหัส API ฟรี",
       "ConfigureOptions.ApiKey": "รหัส API ของ Google Gemini AI",
-      "ConfigureOptions.ModelId": "รหัสรุ่น"
+      "ConfigureOptions.ModelId": "รหัสรุ่น",
+      "ConfigureOptions.SystemInstructions": "คำแนะนำการใช้งานระบบ"
     },
     "940": {
       "Title": "AI ท้องถิ่น",
       "Description": "ใช้งานระบบ LLM ล้ำสมัยได้โดยตรงบนเซิร์ฟเวอร์ HomeGenie ของคุณ มาพร้อม API เต็มรูปแบบสำหรับควบคุม AI จากโปรแกรมและสคริปต์อื่นๆ",
       "ConfigureOptions.MaxTokens": "จำนวนโทเค็นสูงสุด (ความยาวของการตอบกลับ)",
       "ConfigureOptions.ModelPath": "เส้นทางไปยังไฟล์ GGUF ในเครื่อง",
-      "ConfigureOptions.ModelFile": "แบบอย่าง"
+      "ConfigureOptions.ModelFile": "แบบอย่าง",
+      "ConfigureOptions.SystemInstructions": "คำแนะนำการใช้งานระบบ",
+      "ConfigureOptions.ContextSize": "ขนาดหน่วยความจำ AI (หน้าต่างบริบท)",
+      "ConfigureOptions.MaxTurns": "จำนวนครั้งสูงสุดในการแสดงประวัติการแชท (0 = ไม่จำกัด)",
+      "ConfigureOptions.SendContextData": "รวมรายการอุปกรณ์และเซ็นเซอร์ไว้ในคำสั่งค้นหา"
     },
     "575": {
       "Title": "ตัวจัดการดาวน์โหลด",
@@ -362,5 +369,8 @@
       "Title": "การใช้พลังงานต่อชั่วโมง",
       "Description": "แผนภูมิแท่งแสดงค่าเฉลี่ยการใช้พลังงาน (วัตต์/ชั่วโมง) ในแต่ละชั่วโมงของวัน (00:00-23:00 น.) ข้อมูลถูกรวบรวมในช่วงสัปดาห์ที่เลือกและดึงมาจาก API สถิติการใช้พลังงาน"
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "คำสั่งจินนี่",
+  "scheduler_preset_action_config_wish": "การกระทำภาษาธรรมชาติ",
+  "scheduler_preset_action_config_wish.placeholder": "ลองทำตามนี้: \"ตั้งค่าความร้อนเป็น 22° แล้วเริ่มฉากพระอาทิตย์ขึ้น\""
 }

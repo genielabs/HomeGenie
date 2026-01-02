@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Snímač teploty",
       "VirtualThermostat.HeatingSwitchModule": "Spínač kúrenia",
       "VirtualThermostat.CoolingSwitchModule": "Spínač chladenia",
-      "ConfigureOptions.ThermostatsCount": "Počet termostatov"
+      "ConfigureOptions.ThermostatsCount": "Počet termostatov",
+      "ConfigureOptions.EnsureCommandDelivery": "Zabezpečte doručovanie príkazov s nepretržitým prenosom (pulzný režim)."
     },
     "81": {
       "Title": "Monitor energie",
@@ -311,20 +312,26 @@
       "Title": "Obsluha zámerov Gemini",
       "Description": "Umožňuje ovládanie prirodzeného jazyka pre váš inteligentný systém pomocou umelej inteligencie Gemini od spoločnosti Google. Ak chcete túto funkciu aktivovať, zadajte platný kľúč API. Postupujte podľa pokynov na stránke https://aistudio.google.com/app/apikey a získajte bezplatný kľúč API.",
       "ConfigureOptions.ApiKey": "Kľúč API pre umelú inteligenciu Google Gemini",
-      "ConfigureOptions.ModelId": "ID modelu"
+      "ConfigureOptions.ModelId": "ID modelu",
+      "ConfigureOptions.SystemInstructions": "Systémové pokyny"
     },
     "931": {
       "Title": "Džin z widgetu Gemini",
       "Description": "Váš osobný džin s umelou inteligenciou na tvorbu widgetov. Vďaka technológii Gemini vám pomôže písať a ladiť kód HTML, CSS a JavaScript priamo v editore HomeGenie. Ak chcete túto funkciu aktivovať, zadajte platný kľúč API. Postupujte podľa pokynov na stránke https://aistudio.google.com/app/apikey a získajte bezplatný kľúč API.",
       "ConfigureOptions.ApiKey": "Kľúč API pre umelú inteligenciu Google Gemini",
-      "ConfigureOptions.ModelId": "ID modelu"
+      "ConfigureOptions.ModelId": "ID modelu",
+      "ConfigureOptions.SystemInstructions": "Systémové pokyny"
     },
     "940": {
       "Title": "Lokálna umelá inteligencia",
       "Description": "Spúšťajte najmodernejšie LLM priamo na vašom serveri HomeGenie. Zahŕňa kompletné API na ovládanie AI z iných programov a skriptov.",
       "ConfigureOptions.MaxTokens": "Maximálny počet tokenov (dĺžka odpovede)",
       "ConfigureOptions.ModelPath": "Cesta k lokálnemu súboru GGUF",
-      "ConfigureOptions.ModelFile": "Model"
+      "ConfigureOptions.ModelFile": "Model",
+      "ConfigureOptions.SystemInstructions": "Systémové pokyny",
+      "ConfigureOptions.ContextSize": "Veľkosť pamäte AI (kontextové okno)",
+      "ConfigureOptions.MaxTurns": "Maximálny počet otočení v histórii chatu (0 = bez obmedzenia)",
+      "ConfigureOptions.SendContextData": "Zahrnúť zoznam zariadení a senzorov do dotazov"
     },
     "575": {
       "Title": "Správca sťahovania",
@@ -362,5 +369,8 @@
       "Title": "Hodinová spotreba energie",
       "Description": "Stĺpcový graf zobrazujúci priemernú spotrebu vo wattoch/hodinu za každú hodinu dňa (00:00 – 23:00). Údaje sú agregované za vybraný týždeň a pochádzajú z rozhrania Energy Use Statistics API."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Džinsky príkaz",
+  "scheduler_preset_action_config_wish": "Akcia v prirodzenom jazyku",
+  "scheduler_preset_action_config_wish.placeholder": "Skúste: „Nastavte teplotu na 22 °C a spustite scénu s východom slnka.“"
 }

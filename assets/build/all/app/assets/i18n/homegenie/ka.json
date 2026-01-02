@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "ტემპერატურის სენსორი",
       "VirtualThermostat.HeatingSwitchModule": "გათბობის ჩამრთველი",
       "VirtualThermostat.CoolingSwitchModule": "გაგრილების გადამრთველი",
-      "ConfigureOptions.ThermostatsCount": "თერმოსტატების რაოდენობა"
+      "ConfigureOptions.ThermostatsCount": "თერმოსტატების რაოდენობა",
+      "ConfigureOptions.EnsureCommandDelivery": "უზრუნველყავით ბრძანების მიწოდება უწყვეტი გადაცემით (პულსური რეჟიმი)."
     },
     "81": {
       "Title": "ენერგიის მონიტორი",
@@ -311,20 +312,26 @@
       "Title": "ტყუპების განზრახვის დამმუშავებელი",
       "Description": "Google-ის Gemini AI-ის გამოყენებით თქვენი ჭკვიანი სისტემისთვის ბუნებრივი ენის კონტროლს რთავს. ამ ფუნქციის გასააქტიურებლად, შეიყვანეთ მოქმედი API გასაღები. უფასო API გასაღების მისაღებად მიჰყევით ინსტრუქციებს https://aistudio.google.com/app/apikey-ზე.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API გასაღები",
-      "ConfigureOptions.ModelId": "მოდელის ID"
+      "ConfigureOptions.ModelId": "მოდელის ID",
+      "ConfigureOptions.SystemInstructions": "სისტემის ინსტრუქციები"
     },
     "931": {
       "Title": "ტყუპების ვიჯეტის ჯინი",
       "Description": "თქვენი პერსონალური ხელოვნური ინტელექტის ჯინი ვიჯეტების შესაქმნელად. Gemini-ს მხარდაჭერით, ის დაგეხმარებათ HTML, CSS და JavaScript კოდის დაწერასა და გამართვაში პირდაპირ HomeGenie რედაქტორში. ამ ფუნქციის გასააქტიურებლად, შეიყვანეთ მოქმედი API გასაღები. მიჰყევით ინსტრუქციებს https://aistudio.google.com/app/apikey-ზე უფასო API გასაღების მისაღებად.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API გასაღები",
-      "ConfigureOptions.ModelId": "მოდელის ID"
+      "ConfigureOptions.ModelId": "მოდელის ID",
+      "ConfigureOptions.SystemInstructions": "სისტემის ინსტრუქციები"
     },
     "940": {
       "Title": "ადგილობრივი ხელოვნური ინტელექტი",
       "Description": "გაუშვით უახლესი LLM-ები პირდაპირ თქვენს HomeGenie სერვერზე. მოიცავს სრულ API-ს სხვა პროგრამებიდან და სკრიპტებიდან ხელოვნური ინტელექტის სამართავად.",
       "ConfigureOptions.MaxTokens": "მაქსიმალური ჟეტონები (პასუხის სიგრძე)",
       "ConfigureOptions.ModelPath": "ლოკალური GGUF ფაილისკენ მიმავალი გზა",
-      "ConfigureOptions.ModelFile": "მოდელი"
+      "ConfigureOptions.ModelFile": "მოდელი",
+      "ConfigureOptions.SystemInstructions": "სისტემის ინსტრუქციები",
+      "ConfigureOptions.ContextSize": "ხელოვნური ინტელექტის მეხსიერების ზომა (კონტექსტური ფანჯარა)",
+      "ConfigureOptions.MaxTurns": "ჩატის ისტორიის მაქსიმალური ცვლები (0 = ლიმიტის გარეშე)",
+      "ConfigureOptions.SendContextData": "მოწყობილობების სიისა და სენსორების ჩართვა მოთხოვნებში"
     },
     "575": {
       "Title": "ჩამოტვირთვის მენეჯერი",
@@ -362,5 +369,8 @@
       "Title": "საათობრივი ენერგიის მოხმარება",
       "Description": "სვეტოვანი დიაგრამა, რომელიც აჩვენებს საშუალო ვატ/საათ მოხმარებას დღის ყოველი საათისთვის (00h-23h). მონაცემები გაერთიანებულია არჩეული კვირის განმავლობაში და მოპოვებულია ენერგიის გამოყენების სტატისტიკის API-დან."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "ჯინის სარდლობა",
+  "scheduler_preset_action_config_wish": "ბუნებრივი ენის მოქმედება",
+  "scheduler_preset_action_config_wish.placeholder": "სცადეთ: „დააყენეთ ტემპერატურა 22°-ზე და დაიწყეთ მზის ამოსვლის სცენა“"
 }

@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Sensọ iwọn otutu",
       "VirtualThermostat.HeatingSwitchModule": "Alapapo yipada",
       "VirtualThermostat.CoolingSwitchModule": "Itutu yipada",
-      "ConfigureOptions.ThermostatsCount": "Nọmba ti thermostats"
+      "ConfigureOptions.ThermostatsCount": "Nọmba ti thermostats",
+      "ConfigureOptions.EnsureCommandDelivery": "Rí i dájú pé a fi àṣẹ ránṣẹ́ pẹ̀lú ìfiranṣẹ́ tí ń bá a lọ ní gbogbo ìgbà (ipo-pulse)."
     },
     "81": {
       "Title": "Agbara Atẹle",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "Nṣiṣẹ iṣakoso ede adayeba fun eto ọlọgbọn rẹ nipa lilo Gemini AI Google. Lati mu ẹya ara ẹrọ yii ṣiṣẹ, tẹ bọtini API to wulo. Tẹle awọn ilana ni https://aistudio.google.com/app/apikey lati gba bọtini API ọfẹ kan.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API bọtini",
-      "ConfigureOptions.ModelId": "ID awoṣe"
+      "ConfigureOptions.ModelId": "ID awoṣe",
+      "ConfigureOptions.SystemInstructions": "Àwọn Ìtọ́ni Ètò"
     },
     "931": {
       "Title": "Gemini ailorukọ Ẹmi",
       "Description": "Ẹmi AI ti ara ẹni fun ẹda ẹrọ ailorukọ. Agbara nipasẹ Gemini, o ṣe iranlọwọ fun ọ lati kọ ati ṣatunṣe HTML, CSS, ati koodu JavaScript taara laarin olootu HomeGenie. Lati mu ẹya ara ẹrọ yii ṣiṣẹ, tẹ bọtini API to wulo. Tẹle awọn ilana ni https://aistudio.google.com/app/apikey lati gba bọtini API ọfẹ kan.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API bọtini",
-      "ConfigureOptions.ModelId": "ID awoṣe"
+      "ConfigureOptions.ModelId": "ID awoṣe",
+      "ConfigureOptions.SystemInstructions": "Àwọn Ìtọ́ni Ètò"
     },
     "940": {
       "Title": "AI agbegbe",
       "Description": "Ṣiṣẹ́ àwọn LLM tuntun taara lórí olupin HomeGenie rẹ. Ó ní API pípé láti ṣàkóso AI láti inú àwọn ètò àti àwọn ìwé àkọsílẹ̀ mìíràn.",
       "ConfigureOptions.MaxTokens": "Àwọn àmì tó pọ̀ jùlọ (gígùn ìdáhùn)",
       "ConfigureOptions.ModelPath": "Ona si faili GGUF agbegbe",
-      "ConfigureOptions.ModelFile": "Àwòṣe"
+      "ConfigureOptions.ModelFile": "Àwòṣe",
+      "ConfigureOptions.SystemInstructions": "Àwọn Ìtọ́ni Ètò",
+      "ConfigureOptions.ContextSize": "Ìwọ̀n ìrántí AI (Fèrèsé àyíká)",
+      "ConfigureOptions.MaxTurns": "Ìtàn ìfọ̀rọ̀wérọ̀ tó pọ̀ jùlọ (0 = kò sí ààlà)",
+      "ConfigureOptions.SendContextData": "Fi àkójọ ẹ̀rọ àti àwọn sensọ kún àwọn ìbéèrè"
     },
     "575": {
       "Title": "Olùṣàkóso Ìgbàsílẹ̀",
@@ -362,5 +369,8 @@
       "Title": "Lilo Agbara Wakati",
       "Description": "Àtẹ ìtẹ̀wé tí ó ń fi ìwọ̀n ìlò Watt/Wákàtí tí a lò fún gbogbo wákàtí ọjọ́ (00h-23h) hàn. A kó àwọn dátà jọ ní ọ̀sẹ̀ tí a yàn, a sì wá láti inú Agbára Lilo Àkójọpọ̀."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Àṣẹ Ẹ̀mí",
+  "scheduler_preset_action_config_wish": "Ìṣe Èdè Àdánidá",
+  "scheduler_preset_action_config_wish.placeholder": "Gbìyànjú: \"Ṣètò ooru sí 22° kí o sì bẹ̀rẹ̀ sí í rí ìrísí ìlà oòrùn\""
 }

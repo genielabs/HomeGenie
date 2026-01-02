@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "ਤਾਪਮਾਨ ਸੈਂਸਰ",
       "VirtualThermostat.HeatingSwitchModule": "ਹੀਟਿੰਗ ਸਵਿੱਚ",
       "VirtualThermostat.CoolingSwitchModule": "ਕੂਲਿੰਗ ਸਵਿੱਚ",
-      "ConfigureOptions.ThermostatsCount": "ਥਰਮੋਸਟੈਟਾਂ ਦੀ ਗਿਣਤੀ"
+      "ConfigureOptions.ThermostatsCount": "ਥਰਮੋਸਟੈਟਾਂ ਦੀ ਗਿਣਤੀ",
+      "ConfigureOptions.EnsureCommandDelivery": "ਨਿਰੰਤਰ ਟ੍ਰਾਂਸਮਿਸ਼ਨ (ਪਲਸ-ਮੋਡ) ਨਾਲ ਕਮਾਂਡ ਡਿਲੀਵਰੀ ਯਕੀਨੀ ਬਣਾਓ।"
     },
     "81": {
       "Title": "ਊਰਜਾ ਮਾਨੀਟਰ",
@@ -311,20 +312,26 @@
       "Title": "ਜੈਮਿਨੀ ਇੰਟੈਂਟ ਹੈਂਡਲਰ",
       "Description": "ਗੂਗਲ ਦੇ ਜੈਮਿਨੀ ਏਆਈ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਤੁਹਾਡੇ ਸਮਾਰਟ ਸਿਸਟਮ ਲਈ ਕੁਦਰਤੀ ਭਾਸ਼ਾ ਨਿਯੰਤਰਣ ਨੂੰ ਸਮਰੱਥ ਬਣਾਉਂਦਾ ਹੈ। ਇਸ ਵਿਸ਼ੇਸ਼ਤਾ ਨੂੰ ਕਿਰਿਆਸ਼ੀਲ ਕਰਨ ਲਈ, ਇੱਕ ਵੈਧ API ਕੁੰਜੀ ਦਰਜ ਕਰੋ। ਇੱਕ ਮੁਫਤ API ਕੁੰਜੀ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ https://aistudio.google.com/app/apikey 'ਤੇ ਨਿਰਦੇਸ਼ਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ।",
       "ConfigureOptions.ApiKey": "ਗੂਗਲ ਜੈਮਿਨੀ ਏਆਈ ਏਪੀਆਈ ਕੁੰਜੀ",
-      "ConfigureOptions.ModelId": "ਮਾਡਲ ਆਈਡੀ"
+      "ConfigureOptions.ModelId": "ਮਾਡਲ ਆਈਡੀ",
+      "ConfigureOptions.SystemInstructions": "ਸਿਸਟਮ ਨਿਰਦੇਸ਼"
     },
     "931": {
       "Title": "ਜੈਮਿਨੀ ਵਿਜੇਟ ਜਿਨੀ",
       "Description": "ਵਿਜੇਟ ਬਣਾਉਣ ਲਈ ਤੁਹਾਡਾ ਨਿੱਜੀ AI ਜੀਨੀ। Gemini ਦੁਆਰਾ ਸੰਚਾਲਿਤ, ਇਹ ਤੁਹਾਨੂੰ HomeGenie ਸੰਪਾਦਕ ਦੇ ਅੰਦਰ ਸਿੱਧੇ HTML, CSS, ਅਤੇ JavaScript ਕੋਡ ਲਿਖਣ ਅਤੇ ਡੀਬੱਗ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰਦਾ ਹੈ। ਇਸ ਵਿਸ਼ੇਸ਼ਤਾ ਨੂੰ ਕਿਰਿਆਸ਼ੀਲ ਕਰਨ ਲਈ, ਇੱਕ ਵੈਧ API ਕੁੰਜੀ ਦਰਜ ਕਰੋ। ਇੱਕ ਮੁਫ਼ਤ API ਕੁੰਜੀ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ https://aistudio.google.com/app/apikey 'ਤੇ ਨਿਰਦੇਸ਼ਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ।",
       "ConfigureOptions.ApiKey": "ਗੂਗਲ ਜੈਮਿਨੀ ਏਆਈ ਏਪੀਆਈ ਕੁੰਜੀ",
-      "ConfigureOptions.ModelId": "ਮਾਡਲ ਆਈਡੀ"
+      "ConfigureOptions.ModelId": "ਮਾਡਲ ਆਈਡੀ",
+      "ConfigureOptions.SystemInstructions": "ਸਿਸਟਮ ਨਿਰਦੇਸ਼"
     },
     "940": {
       "Title": "ਸਥਾਨਕ ਏ.ਆਈ.",
       "Description": "ਆਪਣੇ HomeGenie ਸਰਵਰ 'ਤੇ ਸਿੱਧੇ ਅਤਿ-ਆਧੁਨਿਕ LLM ਚਲਾਓ। ਹੋਰ ਪ੍ਰੋਗਰਾਮਾਂ ਅਤੇ ਸਕ੍ਰਿਪਟਾਂ ਤੋਂ AI ਨੂੰ ਕੰਟਰੋਲ ਕਰਨ ਲਈ ਇੱਕ ਪੂਰਾ API ਸ਼ਾਮਲ ਹੈ।",
       "ConfigureOptions.MaxTokens": "ਵੱਧ ਤੋਂ ਵੱਧ ਟੋਕਨ (ਜਵਾਬ ਦੀ ਲੰਬਾਈ)",
       "ConfigureOptions.ModelPath": "ਸਥਾਨਕ GGUF ਫਾਈਲ ਲਈ ਮਾਰਗ",
-      "ConfigureOptions.ModelFile": "ਮਾਡਲ"
+      "ConfigureOptions.ModelFile": "ਮਾਡਲ",
+      "ConfigureOptions.SystemInstructions": "ਸਿਸਟਮ ਨਿਰਦੇਸ਼",
+      "ConfigureOptions.ContextSize": "AI ਮੈਮੋਰੀ ਆਕਾਰ (ਸੰਦਰਭ ਵਿੰਡੋ)",
+      "ConfigureOptions.MaxTurns": "ਵੱਧ ਤੋਂ ਵੱਧ ਚੈਟ ਇਤਿਹਾਸ ਮੋੜ (0 = ਕੋਈ ਸੀਮਾ ਨਹੀਂ)",
+      "ConfigureOptions.SendContextData": "ਪੁੱਛਗਿੱਛਾਂ ਵਿੱਚ ਡਿਵਾਈਸ ਸੂਚੀ ਅਤੇ ਸੈਂਸਰ ਸ਼ਾਮਲ ਕਰੋ"
     },
     "575": {
       "Title": "ਡਾਊਨਲੋਡ ਮੈਨੇਜਰ",
@@ -362,5 +369,8 @@
       "Title": "ਘੰਟੇਵਾਰ ਊਰਜਾ ਦੀ ਖਪਤ",
       "Description": "ਦਿਨ ਦੇ ਹਰ ਘੰਟੇ (00h-23h) ਲਈ ਔਸਤ ਵਾਟਸ/ਘੰਟੇ ਦੀ ਖਪਤ ਨੂੰ ਦਰਸਾਉਂਦਾ ਬਾਰ ਚਾਰਟ। ਚੁਣੇ ਹੋਏ ਹਫ਼ਤੇ ਦੌਰਾਨ ਡੇਟਾ ਇਕੱਠਾ ਕੀਤਾ ਜਾਂਦਾ ਹੈ ਅਤੇ ਊਰਜਾ ਵਰਤੋਂ ਅੰਕੜੇ API ਤੋਂ ਪ੍ਰਾਪਤ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।"
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "ਜਿਨੀ ਕਮਾਂਡ",
+  "scheduler_preset_action_config_wish": "ਕੁਦਰਤੀ ਭਾਸ਼ਾ ਕਿਰਿਆ",
+  "scheduler_preset_action_config_wish.placeholder": "ਇਹ ਅਜ਼ਮਾਓ: \"ਗਰਮੀ ਨੂੰ 22° 'ਤੇ ਸੈੱਟ ਕਰੋ ਅਤੇ ਸੂਰਜ ਚੜ੍ਹਨ ਦਾ ਦ੍ਰਿਸ਼ ਸ਼ੁਰੂ ਕਰੋ\""
 }

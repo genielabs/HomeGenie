@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "အပူချိန်အာရုံခံကိရိယာ",
       "VirtualThermostat.HeatingSwitchModule": "အပူပေးခလုတ်",
       "VirtualThermostat.CoolingSwitchModule": "အအေးခံခလုတ်",
-      "ConfigureOptions.ThermostatsCount": "အပူချိန်ထိန်းကိရိယာ အရေအတွက်"
+      "ConfigureOptions.ThermostatsCount": "အပူချိန်ထိန်းကိရိယာ အရေအတွက်",
+      "ConfigureOptions.EnsureCommandDelivery": "စဉ်ဆက်မပြတ်ထုတ်လွှင့်မှု (pulse-mode) ဖြင့် အမိန့်ပေးပို့ဆောင်မှုကို သေချာစေပါ။"
     },
     "81": {
       "Title": "စွမ်းအင်စောင့်ကြည့်",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "Google ၏ Gemini AI ကို အသုံးပြု၍ သင်၏စမတ်စနစ်အတွက် သဘာဝဘာသာစကားထိန်းချုပ်မှုကို ဖွင့်ပါ။ ဤအင်္ဂါရပ်ကို အသက်သွင်းရန်အတွက် မှန်ကန်သော API သော့ကို ထည့်သွင်းပါ။ အခမဲ့ API သော့ကို ရယူရန် https://aistudio.google.com/app/apikey တွင် ညွှန်ကြားချက်များကို လိုက်နာပါ။",
       "ConfigureOptions.ApiKey": "Google Gemini AI API သော့",
-      "ConfigureOptions.ModelId": "မော်ဒယ် ID"
+      "ConfigureOptions.ModelId": "မော်ဒယ် ID",
+      "ConfigureOptions.SystemInstructions": "စနစ်ညွှန်ကြားချက်များ"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "ဝစ်ဂျက်ဖန်တီးမှုအတွက် သင်၏ကိုယ်ပိုင် AI ပါရမီရှင်။ Gemini မှ စွမ်းဆောင်ထားသောကြောင့် ၎င်းသည် သင့်အား HomeGenie တည်းဖြတ်မှုအတွင်း HTML၊ CSS နှင့် JavaScript ကုဒ်များကို တိုက်ရိုက်ရေးသားပြီး အမှားရှာရန် ကူညီပေးသည်။ ဤအင်္ဂါရပ်ကို အသက်သွင်းရန်အတွက် မှန်ကန်သော API သော့ကို ထည့်သွင်းပါ။ အခမဲ့ API သော့ကို ရယူရန် https://aistudio.google.com/app/apikey တွင် ညွှန်ကြားချက်များကို လိုက်နာပါ။",
       "ConfigureOptions.ApiKey": "Google Gemini AI API သော့",
-      "ConfigureOptions.ModelId": "မော်ဒယ် ID"
+      "ConfigureOptions.ModelId": "မော်ဒယ် ID",
+      "ConfigureOptions.SystemInstructions": "စနစ်ညွှန်ကြားချက်များ"
     },
     "940": {
       "Title": "ဒေသတွင်း AI",
       "Description": "သင့်ရဲ့ HomeGenie server မှာ နောက်ဆုံးပေါ် LLM တွေကို တိုက်ရိုက် run လိုက်ပါ။ တခြား program တွေနဲ့ script တွေကနေ AI ကို ထိန်းချုပ်ဖို့ full API ပါဝင်ပါတယ်။",
       "ConfigureOptions.MaxTokens": "အများဆုံး တိုကင်များ (တုံ့ပြန်မှုအရှည်)",
       "ConfigureOptions.ModelPath": "ဒေသဆိုင်ရာ GGUF ဖိုင်သို့ လမ်းကြောင်း",
-      "ConfigureOptions.ModelFile": "မော်ဒယ်"
+      "ConfigureOptions.ModelFile": "မော်ဒယ်",
+      "ConfigureOptions.SystemInstructions": "စနစ်ညွှန်ကြားချက်များ",
+      "ConfigureOptions.ContextSize": "AI မှတ်ဉာဏ်အရွယ်အစား (အခြေအနေဝင်းဒိုး)",
+      "ConfigureOptions.MaxTurns": "အများဆုံး ချတ်မှတ်တမ်းအရေအတွက် (၀ = ကန့်သတ်ချက်မရှိ)",
+      "ConfigureOptions.SendContextData": "မေးမြန်းချက်များတွင် စက်ပစ္စည်းစာရင်းနှင့် အာရုံခံကိရိယာများ ပါဝင်ပါ"
     },
     "575": {
       "Title": "ဒေါင်းလုဒ်မန်နေဂျာ",
@@ -362,5 +369,8 @@
       "Title": "တစ်နာရီလျှင် စွမ်းအင်သုံးစွဲမှု",
       "Description": "တစ်နေ့တာ၏ တစ်နာရီလျှင် (၀၀ နာရီမှ ၂၃ နာရီ) အတွက် ပျမ်းမျှ ဝပ်/နာရီ သုံးစွဲမှုကို ပြသထားသော ဘားဇယား။ ရွေးချယ်ထားသော ရက်သတ္တပတ်အတွင်း ဒေတာကို စုစည်းထားပြီး Energy Use Statistics API မှ ရယူထားသည်။"
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "ဂျီနီ အမိန့်ပေးချက်",
+  "scheduler_preset_action_config_wish": "သဘာဝဘာသာစကားလုပ်ဆောင်ချက်",
+  "scheduler_preset_action_config_wish.placeholder": "စမ်းကြည့်ပါ- \"အပူချိန်ကို ၂၂° ထားပြီး နေထွက်မြင်ကွင်းကို စတင်ပါ\""
 }

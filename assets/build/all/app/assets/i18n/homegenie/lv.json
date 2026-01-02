@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Temperatūras sensors",
       "VirtualThermostat.HeatingSwitchModule": "Apkures slēdzis",
       "VirtualThermostat.CoolingSwitchModule": "Dzesēšanas slēdzis",
-      "ConfigureOptions.ThermostatsCount": "Termostatu skaits"
+      "ConfigureOptions.ThermostatsCount": "Termostatu skaits",
+      "ConfigureOptions.EnsureCommandDelivery": "Nodrošināt komandu piegādi ar nepārtrauktu pārraidi (impulsa režīmā)."
     },
     "81": {
       "Title": "Enerģijas monitors",
@@ -311,20 +312,26 @@
       "Title": "Gemini nodomu apstrādātājs",
       "Description": "Iespējo dabiskās valodas vadību jūsu viedierīcē, izmantojot Google Gemini mākslīgo intelektu. Lai aktivizētu šo funkciju, ievadiet derīgu API atslēgu. Izpildiet norādījumus vietnē https://aistudio.google.com/app/apikey, lai iegūtu bezmaksas API atslēgu.",
       "ConfigureOptions.ApiKey": "Google Gemini mākslīgā intelekta API atslēga",
-      "ConfigureOptions.ModelId": "Modeļa ID"
+      "ConfigureOptions.ModelId": "Modeļa ID",
+      "ConfigureOptions.SystemInstructions": "Sistēmas instrukcijas"
     },
     "931": {
       "Title": "Dvīņu logrīka džins",
       "Description": "Jūsu personīgais mākslīgā intelekta džins logrīku izveidei. Darbojas ar Gemini, tas palīdz jums rakstīt un atkļūdot HTML, CSS un JavaScript kodu tieši HomeGenie redaktorā. Lai aktivizētu šo funkciju, ievadiet derīgu API atslēgu. Izpildiet norādījumus vietnē https://aistudio.google.com/app/apikey, lai iegūtu bezmaksas API atslēgu.",
       "ConfigureOptions.ApiKey": "Google Gemini mākslīgā intelekta API atslēga",
-      "ConfigureOptions.ModelId": "Modeļa ID"
+      "ConfigureOptions.ModelId": "Modeļa ID",
+      "ConfigureOptions.SystemInstructions": "Sistēmas instrukcijas"
     },
     "940": {
       "Title": "Vietējais mākslīgais intelekts",
       "Description": "Palaidiet jaunākās paaudzes LLM tieši savā HomeGenie serverī. Iekļauts pilns API, lai kontrolētu mākslīgo intelektu no citām programmām un skriptiem.",
       "ConfigureOptions.MaxTokens": "Maksimālais žetonu skaits (atbildes garums)",
       "ConfigureOptions.ModelPath": "Ceļš uz lokālo GGUF failu",
-      "ConfigureOptions.ModelFile": "Modelis"
+      "ConfigureOptions.ModelFile": "Modelis",
+      "ConfigureOptions.SystemInstructions": "Sistēmas instrukcijas",
+      "ConfigureOptions.ContextSize": "AI atmiņas lielums (konteksta logs)",
+      "ConfigureOptions.MaxTurns": "Maksimālais tērzēšanas vēstures gājienu skaits (0 = nav ierobežojuma)",
+      "ConfigureOptions.SendContextData": "Iekļaut ierīču sarakstu un sensorus vaicājumos"
     },
     "575": {
       "Title": "Lejupielāžu pārvaldnieks",
@@ -362,5 +369,8 @@
       "Title": "Stundas enerģijas patēriņš",
       "Description": "Stabiņu diagramma, kurā attēlots vidējais patēriņš vatos stundā katrai diennakts stundai (no 00:00 līdz 23:00). Dati tiek apkopoti atlasītajā nedēļā un iegūti no enerģijas patēriņa statistikas API."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Džinu pavēlniecība",
+  "scheduler_preset_action_config_wish": "Dabiskās valodas darbība",
+  "scheduler_preset_action_config_wish.placeholder": "Izmēģiniet: \"Iestatiet temperatūru uz 22° un sāciet saullēkta ainu\"."
 }

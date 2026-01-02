@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Temperatursensor",
       "VirtualThermostat.HeatingSwitchModule": "Heizungsschalter",
       "VirtualThermostat.CoolingSwitchModule": "Killschalter",
-      "ConfigureOptions.ThermostatsCount": "Zuel vun Thermostaten"
+      "ConfigureOptions.ThermostatsCount": "Zuel vun Thermostaten",
+      "ConfigureOptions.EnsureCommandDelivery": "Sécherstellen, datt d'Kommandoen duerch kontinuéierlech Iwwerdroung (Pulsmodus) geliwwert ginn."
     },
     "81": {
       "Title": "Energiemonitor",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "Erméiglecht d'Kontroll vun der natierlecher Sprooch fir Äert Smart-System mat der Gemini AI vu Google. Fir dës Funktioun z'aktivéieren, gitt e gültege API-Schlëssel an. Follegt den Instruktiounen op https://aistudio.google.com/app/apikey fir e gratis API-Schlëssel ze kréien.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API Schlëssel",
-      "ConfigureOptions.ModelId": "Modell-ID"
+      "ConfigureOptions.ModelId": "Modell-ID",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktiounen"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Äre perséinleche KI-Genie fir d'Erstelle vu Widgets. Ugedriwwe vu Gemini, hëlleft et Iech HTML-, CSS- a JavaScript-Code direkt am HomeGenie-Editor ze schreiwen an ze debuggen. Fir dës Funktioun z'aktivéieren, gitt e gültege API-Schlëssel an. Follegt den Instruktiounen op https://aistudio.google.com/app/apikey fir e gratis API-Schlëssel ze kréien.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API Schlëssel",
-      "ConfigureOptions.ModelId": "Modell-ID"
+      "ConfigureOptions.ModelId": "Modell-ID",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktiounen"
     },
     "940": {
       "Title": "Lokal KI",
       "Description": "Laf modern LLMs direkt op Ärem HomeGenie Server aus. Enthält eng komplett API fir d'KI vun anere Programmer a Skripter aus ze kontrolléieren.",
       "ConfigureOptions.MaxTokens": "Max Tokens (Äntwertlängt)",
       "ConfigureOptions.ModelPath": "Wee zur lokaler GGUF-Datei",
-      "ConfigureOptions.ModelFile": "Modell"
+      "ConfigureOptions.ModelFile": "Modell",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktiounen",
+      "ConfigureOptions.ContextSize": "Gréisst vun der KI-Speicher (Kontextfenster)",
+      "ConfigureOptions.MaxTurns": "Maximal Chat-Verlafzäiten (0 = keng Limit)",
+      "ConfigureOptions.SendContextData": "Lëscht vun den Apparater a Sensoren an Ufroen integréieren"
     },
     "575": {
       "Title": "Downloadmanager",
@@ -362,5 +369,8 @@
       "Title": "Stonnelaang Energieverbrauch",
       "Description": "Balkendiagramm, dat den duerchschnëttleche Watt/Stonn-Verbrauch fir all Stonn vum Dag (00:00-23:00 Auer) weist. D'Donnéeë ginn iwwer déi gewielte Woch zesummegefaasst a stamen aus der Energy Use Statistics API."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Genie Kommando",
+  "scheduler_preset_action_config_wish": "Aktioun vun der natierlecher Sprooch",
+  "scheduler_preset_action_config_wish.placeholder": "Probéier: \"Setzt d'Hëtzt op 22° a start d'Sonnenopgangsszene\""
 }

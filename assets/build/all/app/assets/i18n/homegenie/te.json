@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "ఉష్ణోగ్రత సెన్సార్",
       "VirtualThermostat.HeatingSwitchModule": "తాపన స్విచ్",
       "VirtualThermostat.CoolingSwitchModule": "కూలింగ్ స్విచ్",
-      "ConfigureOptions.ThermostatsCount": "థర్మోస్టాట్‌ల సంఖ్య"
+      "ConfigureOptions.ThermostatsCount": "థర్మోస్టాట్‌ల సంఖ్య",
+      "ConfigureOptions.EnsureCommandDelivery": "నిరంతర ప్రసారం (పల్స్-మోడ్) తో కమాండ్ డెలివరీ ఉండేలా చూసుకోండి."
     },
     "81": {
       "Title": "ఎనర్జీ మానిటర్",
@@ -311,20 +312,26 @@
       "Title": "జెమిని ఇంటెంట్ హ్యాండ్లర్",
       "Description": "Google యొక్క జెమిని AIని ఉపయోగించి మీ స్మార్ట్ సిస్టమ్ కోసం సహజ భాషా నియంత్రణను ప్రారంభిస్తుంది. ఈ ఫీచర్‌ని యాక్టివేట్ చేయడానికి, చెల్లుబాటు అయ్యే API కీని నమోదు చేయండి. ఉచిత API కీని పొందడానికి https://aistudio.google.com/app/apikeyలోని సూచనలను అనుసరించండి.",
       "ConfigureOptions.ApiKey": "గూగుల్ జెమిని AI API కీ",
-      "ConfigureOptions.ModelId": "మోడల్ ఐడి"
+      "ConfigureOptions.ModelId": "మోడల్ ఐడి",
+      "ConfigureOptions.SystemInstructions": "సిస్టమ్ సూచనలు"
     },
     "931": {
       "Title": "జెమిని విడ్జెట్ జెనీ",
       "Description": "విడ్జెట్ సృష్టి కోసం మీ వ్యక్తిగత AI జెనీ. జెమిని ద్వారా ఆధారితం, ఇది HomeGenie ఎడిటర్‌లోనే HTML, CSS మరియు JavaScript కోడ్‌లను వ్రాయడానికి మరియు డీబగ్ చేయడానికి మీకు సహాయపడుతుంది. ఈ ఫీచర్‌ను యాక్టివేట్ చేయడానికి, చెల్లుబాటు అయ్యే API కీని నమోదు చేయండి. ఉచిత API కీని పొందడానికి https://aistudio.google.com/app/apikeyలోని సూచనలను అనుసరించండి.",
       "ConfigureOptions.ApiKey": "గూగుల్ జెమిని AI API కీ",
-      "ConfigureOptions.ModelId": "మోడల్ ఐడి"
+      "ConfigureOptions.ModelId": "మోడల్ ఐడి",
+      "ConfigureOptions.SystemInstructions": "సిస్టమ్ సూచనలు"
     },
     "940": {
       "Title": "స్థానిక AI",
       "Description": "మీ HomeGenie సర్వర్‌లో నేరుగా అత్యాధునిక LLMలను అమలు చేయండి. ఇతర ప్రోగ్రామ్‌లు మరియు స్క్రిప్ట్‌ల నుండి AIని నియంత్రించడానికి పూర్తి APIని కలిగి ఉంటుంది.",
       "ConfigureOptions.MaxTokens": "గరిష్ట టోకెన్లు (ప్రతిస్పందన పొడవు)",
       "ConfigureOptions.ModelPath": "స్థానిక GGUF ఫైల్‌కు మార్గం",
-      "ConfigureOptions.ModelFile": "మోడల్"
+      "ConfigureOptions.ModelFile": "మోడల్",
+      "ConfigureOptions.SystemInstructions": "సిస్టమ్ సూచనలు",
+      "ConfigureOptions.ContextSize": "AI మెమరీ పరిమాణం (సందర్భ విండో)",
+      "ConfigureOptions.MaxTurns": "గరిష్ట చాట్ చరిత్ర మలుపులు (0 = పరిమితి లేదు)",
+      "ConfigureOptions.SendContextData": "ప్రశ్నలలో పరికర జాబితా మరియు సెన్సార్‌లను చేర్చండి"
     },
     "575": {
       "Title": "డౌన్‌లోడ్ మేనేజర్",
@@ -362,5 +369,8 @@
       "Title": "గంటకు విద్యుత్ వినియోగం",
       "Description": "రోజులోని ప్రతి గంటకు (00గం-23గం) సగటు వాట్స్/గంట వినియోగాన్ని ప్రదర్శించే బార్ చార్ట్. ఎంచుకున్న వారంలో డేటా సమగ్రపరచబడుతుంది మరియు శక్తి వినియోగ గణాంకాల API నుండి తీసుకోబడుతుంది."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "జెనీ కమాండ్",
+  "scheduler_preset_action_config_wish": "సహజ భాషా చర్య",
+  "scheduler_preset_action_config_wish.placeholder": "\"వేడిని 22°కి సెట్ చేసి సూర్యోదయ దృశ్యాన్ని ప్రారంభించండి\" అని ప్రయత్నించండి."
 }

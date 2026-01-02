@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Pūoko pāmahana",
       "VirtualThermostat.HeatingSwitchModule": "Whakawera whakawera",
       "VirtualThermostat.CoolingSwitchModule": "Whakawhiti whakamahana",
-      "ConfigureOptions.ThermostatsCount": "Te maha o nga whakamaarama"
+      "ConfigureOptions.ThermostatsCount": "Te maha o nga whakamaarama",
+      "ConfigureOptions.EnsureCommandDelivery": "Me whakarite kia tukuna tonutia ngā whakahau (aratau-pāhekoheko)."
     },
     "81": {
       "Title": "Aroturuki Pungao",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "Ka taea te whakahaere reo maori mo to punaha atamai ma te whakamahi i te Gemini AI a Google. Hei whakahohe i tenei ahuatanga, whakauruhia he matua API whaimana. A pee i nga tohutohu i https://aistudio.google.com/app/apikey ki te tiki i te taviri API kore utu.",
       "ConfigureOptions.ApiKey": "Google Gemini AI kī API",
-      "ConfigureOptions.ModelId": "Tauira ID"
+      "ConfigureOptions.ModelId": "Tauira ID",
+      "ConfigureOptions.SystemInstructions": "Ngā Tohutohu Pūnaha"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Ko to taangata AI mo te hanga widget. Na Gemini, ka awhina koe ki te tuhi me te patuiro i te HTML, CSS, me te waehere JavaScript ki roto tonu i te ētita HomeGenie. Hei whakahohe i tenei ahuatanga, whakauruhia he matua API whaimana. A pee i nga tohutohu i https://aistudio.google.com/app/apikey ki te tiki i te taviri API kore utu.",
       "ConfigureOptions.ApiKey": "Google Gemini AI kī API",
-      "ConfigureOptions.ModelId": "Tauira ID"
+      "ConfigureOptions.ModelId": "Tauira ID",
+      "ConfigureOptions.SystemInstructions": "Ngā Tohutohu Pūnaha"
     },
     "940": {
       "Title": "AI ā-Rohe",
       "Description": "Whakahaerehia ngā LLM hou rawa atu i runga i tō tūmau HomeGenie. Kei roto ko te API katoa hei whakahaere i te AI mai i ētahi atu papatono me ngā tuhinga.",
       "ConfigureOptions.MaxTokens": "Ngā Tohu Mōrahi (roa whakautu)",
       "ConfigureOptions.ModelPath": "Ara ki te kōnae GGUF paetata",
-      "ConfigureOptions.ModelFile": "Tauira"
+      "ConfigureOptions.ModelFile": "Tauira",
+      "ConfigureOptions.SystemInstructions": "Ngā Tohutohu Pūnaha",
+      "ConfigureOptions.ContextSize": "Rahi o te Mahara AI (Matapihi Horopaki)",
+      "ConfigureOptions.MaxTurns": "Te nui o ngā huringa hītori kōrerorero (0 = kāore he rohe)",
+      "ConfigureOptions.SendContextData": "Whakauruhia te rārangi taputapu me ngā pūoko ki ngā patai"
     },
     "575": {
       "Title": "Kaiwhakahaere Tikiake",
@@ -362,5 +369,8 @@
       "Title": "Te Whakamahinga Pūngao ia Hāora",
       "Description": "He tūtohi pae e whakaatu ana i te toharite o te whakamahinga o ngā Watts/Hāora mō ia hāora o te rā (00h-23h). Ka kohikohia ngā raraunga mō te wiki kua tīpakohia, ā, ka ahu mai i te Energy Use Statistics API."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Te Whakahau a te Ira Tangata",
+  "scheduler_preset_action_config_wish": "Mahi Reo Māori",
+  "scheduler_preset_action_config_wish.placeholder": "Whakamātauria: \"Whakatakotoria te wera ki te 22° ka tīmata te tirohanga o te Rāwhiti\""
 }

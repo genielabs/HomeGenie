@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "مستشعر درجة الحرارة",
       "VirtualThermostat.HeatingSwitchModule": "مفتاح التدفئة",
       "VirtualThermostat.CoolingSwitchModule": "مفتاح التبريد",
-      "ConfigureOptions.ThermostatsCount": "عدد منظمات الحرارة"
+      "ConfigureOptions.ThermostatsCount": "عدد منظمات الحرارة",
+      "ConfigureOptions.EnsureCommandDelivery": "ضمان إيصال الأوامر من خلال الإرسال المستمر (وضع النبض)."
     },
     "81": {
       "Title": "مراقب الطاقة",
@@ -311,20 +312,26 @@
       "Title": "معالج نوايا الجوزاء",
       "Description": "يُمكّنك هذا من التحكم باللغة الطبيعية في نظامك الذكي باستخدام تقنية الذكاء الاصطناعي Gemini من جوجل. لتفعيل هذه الميزة، أدخل مفتاح واجهة برمجة تطبيقات صالحًا. اتبع التعليمات على الرابط https://aistudio.google.com/app/apikey للحصول على مفتاح واجهة برمجة تطبيقات مجاني.",
       "ConfigureOptions.ApiKey": "مفتاح API لـ Google Gemini AI",
-      "ConfigureOptions.ModelId": "معرف النموذج"
+      "ConfigureOptions.ModelId": "معرف النموذج",
+      "ConfigureOptions.SystemInstructions": "تعليمات النظام"
     },
     "931": {
       "Title": "جني أداة الجوزاء",
       "Description": "أداة الذكاء الاصطناعي الخاصة بك لإنشاء الأدوات. تعمل هذه الأداة بواسطة Gemini، وتساعدك على كتابة وتصحيح أكواد HTML وCSS وJavaScript مباشرةً داخل محرر HomeGenie. لتفعيل هذه الميزة، أدخل مفتاح API صالحًا. اتبع التعليمات على الرابط https://aistudio.google.com/app/apikey للحصول على مفتاح API مجاني.",
       "ConfigureOptions.ApiKey": "مفتاح API لـ Google Gemini AI",
-      "ConfigureOptions.ModelId": "معرف النموذج"
+      "ConfigureOptions.ModelId": "معرف النموذج",
+      "ConfigureOptions.SystemInstructions": "تعليمات النظام"
     },
     "940": {
       "Title": "الذكاء الاصطناعي المحلي",
       "Description": "قم بتشغيل أحدث أنظمة التعلم الآلي للتعلم الآلي مباشرةً على خادم HomeGenie الخاص بك. يتضمن واجهة برمجة تطبيقات كاملة للتحكم في الذكاء الاصطناعي من برامج ونصوص برمجية أخرى.",
       "ConfigureOptions.MaxTokens": "الحد الأقصى للرموز (طول الاستجابة)",
       "ConfigureOptions.ModelPath": "المسار إلى ملف GGUF المحلي",
-      "ConfigureOptions.ModelFile": "نموذج"
+      "ConfigureOptions.ModelFile": "نموذج",
+      "ConfigureOptions.SystemInstructions": "تعليمات النظام",
+      "ConfigureOptions.ContextSize": "حجم ذاكرة الذكاء الاصطناعي (نافذة السياق)",
+      "ConfigureOptions.MaxTurns": "الحد الأقصى لعدد مرات تحويل سجل المحادثات (0 = لا يوجد حد)",
+      "ConfigureOptions.SendContextData": "قم بتضمين قائمة الأجهزة وأجهزة الاستشعار في الاستعلامات"
     },
     "575": {
       "Title": "مدير التنزيل",
@@ -362,5 +369,8 @@
       "Title": "استهلاك الطاقة بالساعة",
       "Description": "رسم بياني شريطي يعرض متوسط استهلاك الطاقة (بالواط/ساعة) لكل ساعة من ساعات اليوم (من الساعة 00:00 إلى الساعة 23:00). يتم تجميع البيانات على مدار الأسبوع المحدد، وهي مستقاة من واجهة برمجة تطبيقات إحصاءات استخدام الطاقة."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "أوامر الجني",
+  "scheduler_preset_action_config_wish": "لغة طبيعية",
+  "scheduler_preset_action_config_wish.placeholder": "جرب: \"اضبط درجة الحرارة على 22 درجة وابدأ مشهد شروق الشمس\""
 }

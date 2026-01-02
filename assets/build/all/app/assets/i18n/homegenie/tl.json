@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Sensor ng temperatura",
       "VirtualThermostat.HeatingSwitchModule": "Heating switch",
       "VirtualThermostat.CoolingSwitchModule": "Cooling switch",
-      "ConfigureOptions.ThermostatsCount": "Bilang ng mga thermostat"
+      "ConfigureOptions.ThermostatsCount": "Bilang ng mga thermostat",
+      "ConfigureOptions.EnsureCommandDelivery": "Tiyakin ang paghahatid ng utos na may tuloy-tuloy na transmisyon (pulse-mode)."
     },
     "81": {
       "Title": "Monitor ng Enerhiya",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "Pinapagana ang natural na kontrol sa wika para sa iyong matalinong system gamit ang Gemini AI ng Google. Para i-activate ang feature na ito, maglagay ng valid na API key. Sundin ang mga tagubilin sa https://aistudio.google.com/app/apikey para makakuha ng libreng API key.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API key",
-      "ConfigureOptions.ModelId": "Model ID"
+      "ConfigureOptions.ModelId": "Model ID",
+      "ConfigureOptions.SystemInstructions": "Mga Tagubilin sa Sistema"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Ang iyong personal na AI genie para sa paggawa ng widget. Pinapatakbo ng Gemini, tinutulungan ka nitong magsulat at mag-debug ng HTML, CSS, at JavaScript code nang direkta sa loob ng editor ng HomeGenie. Para i-activate ang feature na ito, maglagay ng valid na API key. Sundin ang mga tagubilin sa https://aistudio.google.com/app/apikey para makakuha ng libreng API key.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API key",
-      "ConfigureOptions.ModelId": "Model ID"
+      "ConfigureOptions.ModelId": "Model ID",
+      "ConfigureOptions.SystemInstructions": "Mga Tagubilin sa Sistema"
     },
     "940": {
       "Title": "Lokal na AI",
       "Description": "Magpatakbo ng mga makabagong LLM nang direkta sa iyong HomeGenie server. May kasamang kumpletong API para kontrolin ang AI mula sa iba pang mga programa at script.",
       "ConfigureOptions.MaxTokens": "Pinakamataas na Token (haba ng tugon)",
       "ConfigureOptions.ModelPath": "Path sa lokal na GGUF file",
-      "ConfigureOptions.ModelFile": "Modelo"
+      "ConfigureOptions.ModelFile": "Modelo",
+      "ConfigureOptions.SystemInstructions": "Mga Tagubilin sa Sistema",
+      "ConfigureOptions.ContextSize": "Laki ng Memorya ng AI (Context Window)",
+      "ConfigureOptions.MaxTurns": "Pinakamataas na bilang ng mga lumiliko sa kasaysayan ng chat (0 = walang limitasyon)",
+      "ConfigureOptions.SendContextData": "Isama ang listahan ng device at mga sensor sa mga query"
     },
     "575": {
       "Title": "Tagapamahala ng Pag-download",
@@ -362,5 +369,8 @@
       "Title": "Pagkonsumo ng Enerhiya kada Oras",
       "Description": "Bar chart na nagpapakita ng average na konsumo ng Watts/Oras para sa bawat oras ng araw (00h-23h). Ang datos ay pinagsama-sama sa napiling linggo at kinuha mula sa Energy Use Statistics API."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Utos ng Genie",
+  "scheduler_preset_action_config_wish": "Aksyon sa Likas na Wika",
+  "scheduler_preset_action_config_wish.placeholder": "Subukan: \"Itakda ang init sa 22° at simulan ang eksena ng Pagsikat ng Araw\""
 }

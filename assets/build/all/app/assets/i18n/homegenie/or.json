@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "ତାପମାତ୍ରା ସେନ୍ସର୍",
       "VirtualThermostat.HeatingSwitchModule": "ଗରମ ସ୍ୱିଚ୍",
       "VirtualThermostat.CoolingSwitchModule": "କୁଲିଂ ସ୍ୱିଚ୍",
-      "ConfigureOptions.ThermostatsCount": "ଥର୍ମୋଷ୍ଟାଟ୍ ସଂଖ୍ୟା"
+      "ConfigureOptions.ThermostatsCount": "ଥର୍ମୋଷ୍ଟାଟ୍ ସଂଖ୍ୟା",
+      "ConfigureOptions.EnsureCommandDelivery": "ନିରନ୍ତର ପ୍ରସାରଣ (ପଲ୍ସ-ମୋଡ୍) ସହିତ ନିର୍ଦ୍ଦେଶ ବିତରଣ ନିଶ୍ଚିତ କରନ୍ତୁ।"
     },
     "81": {
       "Title": "ଏନର୍ଜି ମନିଟର",
@@ -311,20 +312,26 @@
       "Title": "ଜେମିନି ଇଣ୍ଟେଣ୍ଟ ହ୍ୟାଣ୍ଡଲର୍",
       "Description": "Google ର Gemini AI ବ୍ୟବହାର କରି ଆପଣଙ୍କ ସ୍ମାର୍ଟ ସିଷ୍ଟମ ପାଇଁ ପ୍ରାକୃତିକ ଭାଷା ନିୟନ୍ତ୍ରଣ ସକ୍ଷମ କରେ। ଏହି ବୈଶିଷ୍ଟ୍ୟକୁ ସକ୍ରିୟ କରିବା ପାଇଁ, ଏକ ବୈଧ API କୀ ପ୍ରବେଶ କରନ୍ତୁ। ଏକ ମାଗଣା API କୀ ପାଇବା ପାଇଁ https://aistudio.google.com/app/apikey ରେ ଥିବା ନିର୍ଦ୍ଦେଶାବଳୀ ଅନୁସରଣ କରନ୍ତୁ।",
       "ConfigureOptions.ApiKey": "ଗୁଗୁଲ୍ ଜେମିନି ଏଆଇ ଏପିଆଇ କୀ",
-      "ConfigureOptions.ModelId": "ମଡେଲ୍ ଆଇଡି"
+      "ConfigureOptions.ModelId": "ମଡେଲ୍ ଆଇଡି",
+      "ConfigureOptions.SystemInstructions": "ସିଷ୍ଟମ୍ ନିର୍ଦ୍ଦେଶାବଳୀ"
     },
     "931": {
       "Title": "ଜେମିନି ୱିଜେଟ୍ ଜିନି",
       "Description": "ୱିଜେଟ୍ ସୃଷ୍ଟି ପାଇଁ ଆପଣଙ୍କର ବ୍ୟକ୍ତିଗତ AI ଜିନି। ଜେମିନି ଦ୍ୱାରା ପରିଚାଳିତ, ଏହା ଆପଣଙ୍କୁ HomeGenie ସମ୍ପାଦକ ମଧ୍ୟରେ ସିଧାସଳଖ HTML, CSS, ଏବଂ JavaScript କୋଡ୍ ଲେଖିବା ଏବଂ ଡିବଗ୍ କରିବାରେ ସାହାଯ୍ୟ କରେ। ଏହି ବୈଶିଷ୍ଟ୍ୟକୁ ସକ୍ରିୟ କରିବା ପାଇଁ, ଏକ ବୈଧ API କୀ ପ୍ରବେଶ କରନ୍ତୁ। ଏକ ମାଗଣା API କୀ ପାଇବା ପାଇଁ https://aistudio.google.com/app/apikey ରେ ଥିବା ନିର୍ଦ୍ଦେଶାବଳୀ ଅନୁସରଣ କରନ୍ତୁ।",
       "ConfigureOptions.ApiKey": "ଗୁଗୁଲ୍ ଜେମିନି ଏଆଇ ଏପିଆଇ କୀ",
-      "ConfigureOptions.ModelId": "ମଡେଲ୍ ଆଇଡି"
+      "ConfigureOptions.ModelId": "ମଡେଲ୍ ଆଇଡି",
+      "ConfigureOptions.SystemInstructions": "ସିଷ୍ଟମ୍ ନିର୍ଦ୍ଦେଶାବଳୀ"
     },
     "940": {
       "Title": "ସ୍ଥାନୀୟ AI",
       "Description": "ଆପଣଙ୍କର HomeGenie ସର୍ଭରରେ ସିଧାସଳଖ ଅତ୍ୟାଧୁନିକ LLM ଚଲାନ୍ତୁ। ଅନ୍ୟ ପ୍ରୋଗ୍ରାମ ଏବଂ ସ୍କ୍ରିପ୍ଟରୁ AI ନିୟନ୍ତ୍ରଣ କରିବା ପାଇଁ ଏକ ସମ୍ପୂର୍ଣ୍ଣ API ଅନ୍ତର୍ଭୁକ୍ତ।",
       "ConfigureOptions.MaxTokens": "ସର୍ବାଧିକ ଟୋକନ୍ (ପ୍ରତିକ୍ରିୟା ଲମ୍ବ)",
       "ConfigureOptions.ModelPath": "ସ୍ଥାନୀୟ GGUF ଫାଇଲକୁ ପଥ",
-      "ConfigureOptions.ModelFile": "ମଡେଲ"
+      "ConfigureOptions.ModelFile": "ମଡେଲ",
+      "ConfigureOptions.SystemInstructions": "ସିଷ୍ଟମ୍ ନିର୍ଦ୍ଦେଶାବଳୀ",
+      "ConfigureOptions.ContextSize": "AI ମେମୋରୀ ଆକାର (ସନ୍ଦର୍ଭ ୱିଣ୍ଡୋ)",
+      "ConfigureOptions.MaxTurns": "ସର୍ବାଧିକ ଚାଟ୍ ଇତିହାସ ପରିବର୍ତ୍ତନ (୦ = କୌଣସି ସୀମା ନାହିଁ)",
+      "ConfigureOptions.SendContextData": "କ୍ୱେରୀଗୁଡ଼ିକରେ ଡିଭାଇସ୍ ତାଲିକା ଏବଂ ସେନ୍ସରଗୁଡ଼ିକୁ ଅନ୍ତର୍ଭୁକ୍ତ କରନ୍ତୁ"
     },
     "575": {
       "Title": "ଡାଉନଲୋଡ୍ ପରିଚାଳକ",
@@ -362,5 +369,8 @@
       "Title": "ଘଣ୍ଟାପ୍ରତି ଶକ୍ତି ବ୍ୟବହାର",
       "Description": "ଦିନର ପ୍ରତ୍ୟେକ ଘଣ୍ଟା (୦୦ଘଣ୍ଟା-୨୩ଘଣ୍ଟା) ପାଇଁ ହାରାହାରି ୱାଟ୍/ଘଣ୍ଟା ବ୍ୟବହାର ପ୍ରଦର୍ଶନ କରୁଥିବା ବାର ଚାର୍ଟ। ଚୟନିତ ସପ୍ତାହରେ ତଥ୍ୟ ଏକତ୍ରିତ କରାଯାଏ ଏବଂ ଶକ୍ତି ବ୍ୟବହାର ପରିସଂଖ୍ୟାନ API ରୁ ଉତ୍ସ କରାଯାଏ।"
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "ଜେନି କମାଣ୍ଡ",
+  "scheduler_preset_action_config_wish": "ପ୍ରାକୃତିକ ଭାଷା କାର୍ଯ୍ୟ",
+  "scheduler_preset_action_config_wish.placeholder": "ଚେଷ୍ଟା କରନ୍ତୁ: \"ତାପକୁ 22° ରେ ସେଟ୍ କରନ୍ତୁ ଏବଂ ସୂର୍ଯ୍ୟୋଦୟ ଦୃଶ୍ୟ ଆରମ୍ଭ କରନ୍ତୁ\""
 }

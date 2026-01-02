@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Capteur tanperati",
       "VirtualThermostat.HeatingSwitchModule": "Chanjman chofaj",
       "VirtualThermostat.CoolingSwitchModule": "Chanjman refwadisman",
-      "ConfigureOptions.ThermostatsCount": "Kantite tèmosta"
+      "ConfigureOptions.ThermostatsCount": "Kantite tèmosta",
+      "ConfigureOptions.EnsureCommandDelivery": "Asire livrezon kòmandman an avèk transmisyon kontinyèl (mòd pulsasyon)."
     },
     "81": {
       "Title": "Monitè Enèji",
@@ -311,20 +312,26 @@
       "Title": "Jemini Intent Handler",
       "Description": "Pèmèt kontwòl lang natirèl pou sistèm entelijan ou a lè l sèvi avèk Gemini AI Google la. Pou aktive fonksyon sa a, antre yon kle API ki valab. Swiv enstriksyon yo nan https://aistudio.google.com/app/apikey pou jwenn yon kle API gratis.",
       "ConfigureOptions.ApiKey": "Kle API Google Gemini AI a",
-      "ConfigureOptions.ModelId": "ID Modèl"
+      "ConfigureOptions.ModelId": "ID Modèl",
+      "ConfigureOptions.SystemInstructions": "Enstriksyon Sistèm yo"
     },
     "931": {
       "Title": "Widjè Gemini Jeni",
       "Description": "Jeni entèlijans atifisyèl pèsonèl ou pou kreye widjèt. Avèk fonksyon Gemini, li ede w ekri epi debogaj kòd HTML, CSS, ak JavaScript dirèkteman nan editè HomeGenie a. Pou aktive fonksyon sa a, antre yon kle API ki valab. Swiv enstriksyon yo nan https://aistudio.google.com/app/apikey pou jwenn yon kle API gratis.",
       "ConfigureOptions.ApiKey": "Kle API Google Gemini AI a",
-      "ConfigureOptions.ModelId": "ID Modèl"
+      "ConfigureOptions.ModelId": "ID Modèl",
+      "ConfigureOptions.SystemInstructions": "Enstriksyon Sistèm yo"
     },
     "940": {
       "Title": "IA lokal",
       "Description": "Kouri LLM dènye kri yo dirèkteman sou sèvè HomeGenie ou a. Gen ladan yon API konplè pou kontwole IA a soti nan lòt pwogram ak script.",
       "ConfigureOptions.MaxTokens": "Maksimòm jeton (longè repons)",
       "ConfigureOptions.ModelPath": "Chemen pou dosye GGUF lokal la",
-      "ConfigureOptions.ModelFile": "Modèl"
+      "ConfigureOptions.ModelFile": "Modèl",
+      "ConfigureOptions.SystemInstructions": "Enstriksyon Sistèm yo",
+      "ConfigureOptions.ContextSize": "Gwosè memwa IA (Fenèt Kontèks)",
+      "ConfigureOptions.MaxTurns": "Maksimòm kantite vire nan istwa chat la (0 = pa gen limit)",
+      "ConfigureOptions.SendContextData": "Mete lis aparèy ak detèktè nan rechèch yo"
     },
     "575": {
       "Title": "Manadjè Telechajman",
@@ -362,5 +369,8 @@
       "Title": "Konsomasyon enèji chak èdtan",
       "Description": "Grafik ba ki montre konsomasyon mwayèn Watts/Èdtan pou chak èdtan nan jounen an (00h-23h). Done yo rasanble sou semèn ki chwazi a epi yo soti nan API Estatistik Itilizasyon Enèji a."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Kòmandman Jeni",
+  "scheduler_preset_action_config_wish": "Aksyon Lang Natirèl",
+  "scheduler_preset_action_config_wish.placeholder": "Eseye: \"Mete chalè a sou 22° epi kòmanse sèn Lever solèy la\""
 }

@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Sensor maripana",
       "VirtualThermostat.HeatingSwitchModule": "Fanafanana switch",
       "VirtualThermostat.CoolingSwitchModule": "Fanodinana mangatsiaka",
-      "ConfigureOptions.ThermostatsCount": "Isan'ny thermostats"
+      "ConfigureOptions.ThermostatsCount": "Isan'ny thermostats",
+      "ConfigureOptions.EnsureCommandDelivery": "Ataovy azo antoka fa mitohy ny fandefasana baiko (pulse-mode)."
     },
     "81": {
       "Title": "Energy Monitor",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "Mamela ny fifehezana ny fiteny voajanahary ho an'ny rafitra marani-tsainao mampiasa ny Gemini AI an'ny Google. Mba hampavitrika ity endri-javatra ity dia ampidiro fanalahidy API manan-kery. Araho ny toromarika ao amin'ny https://aistudio.google.com/app/apikey hahazoana fanalahidy API maimaim-poana.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API key",
-      "ConfigureOptions.ModelId": "ID modely"
+      "ConfigureOptions.ModelId": "ID modely",
+      "ConfigureOptions.SystemInstructions": "Torolàlana momba ny rafitra"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Ny genie AI anao manokana amin'ny famoronana widget. Powered by Gemini, manampy anao hanoratra sy debug HTML, CSS ary JavaScript mivantana ao anatin'ny tonian-dahatsoratra HomeGenie. Mba hampavitrika ity endri-javatra ity dia ampidiro fanalahidy API manan-kery. Araho ny toromarika ao amin'ny https://aistudio.google.com/app/apikey hahazoana fanalahidy API maimaim-poana.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API key",
-      "ConfigureOptions.ModelId": "ID modely"
+      "ConfigureOptions.ModelId": "ID modely",
+      "ConfigureOptions.SystemInstructions": "Torolàlana momba ny rafitra"
     },
     "940": {
       "Title": "AI eo an-toerana",
       "Description": "Ampandehano mivantana amin'ny mpizara HomeGenie anao ireo LLM maoderina. Ahitana API feno hifehezana ny AI avy amin'ny programa sy script hafa.",
       "ConfigureOptions.MaxTokens": "Tokens ambony indrindra (halavan'ny valiny)",
       "ConfigureOptions.ModelPath": "Lalana mankany amin'ny rakitra GGUF eo an-toerana",
-      "ConfigureOptions.ModelFile": "MODELY"
+      "ConfigureOptions.ModelFile": "MODELY",
+      "ConfigureOptions.SystemInstructions": "Torolàlana momba ny rafitra",
+      "ConfigureOptions.ContextSize": "Haben'ny Fahatsiarovana AI (Varavarankely Context)",
+      "ConfigureOptions.MaxTurns": "Fiovana farany ambony indrindra amin'ny tantaran'ny chat (0 = tsy misy fetra)",
+      "ConfigureOptions.SendContextData": "Ampidiro ao amin'ny fangatahana ny lisitry ny fitaovana sy ny sensor"
     },
     "575": {
       "Title": "Mpitantana ny fampidinana",
@@ -362,5 +369,8 @@
       "Title": "Fanjifana Angovo Isan'ora",
       "Description": "Tabilao bara mampiseho ny salan'isa fanjifana Watts/Ora isaky ny ora amin'ny andro (00h-23h). Angonina mandritra ny herinandro voafantina ny angona ary avy amin'ny Energy Use Statistics API."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Didin'ny Génie",
+  "scheduler_preset_action_config_wish": "Hetsika amin'ny fiteny voajanahary",
+  "scheduler_preset_action_config_wish.placeholder": "Andramo: \"Apetraho amin'ny 22° ny hafanana ary atombohy ny fiposahan'ny masoandro\""
 }

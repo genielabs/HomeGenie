@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Czujnik temperatury",
       "VirtualThermostat.HeatingSwitchModule": "Przełącznik ogrzewania",
       "VirtualThermostat.CoolingSwitchModule": "Przełącznik chłodzenia",
-      "ConfigureOptions.ThermostatsCount": "Liczba termostatów"
+      "ConfigureOptions.ThermostatsCount": "Liczba termostatów",
+      "ConfigureOptions.EnsureCommandDelivery": "Zapewnij dostarczanie poleceń za pomocą transmisji ciągłej (tryb impulsowy)."
     },
     "81": {
       "Title": "Monitor energii",
@@ -311,20 +312,26 @@
       "Title": "Obsługa intencji Gemini",
       "Description": "Umożliwia sterowanie systemem inteligentnym za pomocą języka naturalnego za pomocą Google Gemini AI. Aby aktywować tę funkcję, wprowadź prawidłowy klucz API. Postępuj zgodnie z instrukcjami na stronie https://aistudio.google.com/app/apikey, aby otrzymać bezpłatny klucz API.",
       "ConfigureOptions.ApiKey": "Klucz API Google Gemini AI",
-      "ConfigureOptions.ModelId": "Identyfikator modelu"
+      "ConfigureOptions.ModelId": "Identyfikator modelu",
+      "ConfigureOptions.SystemInstructions": "Instrukcje systemowe"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Twój osobisty dżin AI do tworzenia widżetów. Oparty na technologii Gemini, pomaga pisać i debugować kod HTML, CSS i JavaScript bezpośrednio w edytorze HomeGenie. Aby aktywować tę funkcję, wprowadź prawidłowy klucz API. Postępuj zgodnie z instrukcjami na stronie https://aistudio.google.com/app/apikey, aby otrzymać bezpłatny klucz API.",
       "ConfigureOptions.ApiKey": "Klucz API Google Gemini AI",
-      "ConfigureOptions.ModelId": "Identyfikator modelu"
+      "ConfigureOptions.ModelId": "Identyfikator modelu",
+      "ConfigureOptions.SystemInstructions": "Instrukcje systemowe"
     },
     "940": {
       "Title": "Lokalna sztuczna inteligencja",
       "Description": "Uruchamiaj najnowocześniejsze programy LLM bezpośrednio na serwerze HomeGenie. Zawiera pełne API do sterowania sztuczną inteligencją z poziomu innych programów i skryptów.",
       "ConfigureOptions.MaxTokens": "Maksymalna liczba tokenów (długość odpowiedzi)",
       "ConfigureOptions.ModelPath": "Ścieżka do lokalnego pliku GGUF",
-      "ConfigureOptions.ModelFile": "Model"
+      "ConfigureOptions.ModelFile": "Model",
+      "ConfigureOptions.SystemInstructions": "Instrukcje systemowe",
+      "ConfigureOptions.ContextSize": "Rozmiar pamięci AI (okno kontekstowe)",
+      "ConfigureOptions.MaxTurns": "Maksymalna liczba obrotów historii czatu (0 = brak limitu)",
+      "ConfigureOptions.SendContextData": "Uwzględnij listę urządzeń i czujników w zapytaniach"
     },
     "575": {
       "Title": "Menedżer pobierania",
@@ -362,5 +369,8 @@
       "Title": "Godzinowe zużycie energii",
       "Description": "Wykres słupkowy przedstawiający średnie zużycie energii w watach na godzinę dla każdej godziny dnia (00-23). Dane są agregowane dla wybranego tygodnia i pochodzą z interfejsu API statystyk zużycia energii."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Dowództwo Dżina",
+  "scheduler_preset_action_config_wish": "Akcja języka naturalnego",
+  "scheduler_preset_action_config_wish.placeholder": "Spróbuj: „Ustaw temperaturę na 22° i uruchom scenę Wschodu słońca”"
 }

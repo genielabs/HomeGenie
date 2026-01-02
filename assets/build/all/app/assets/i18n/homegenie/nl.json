@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Temperatuursensor",
       "VirtualThermostat.HeatingSwitchModule": "Verwarmingsschakelaar",
       "VirtualThermostat.CoolingSwitchModule": "Koelschakelaar",
-      "ConfigureOptions.ThermostatsCount": "Aantal thermostaten"
+      "ConfigureOptions.ThermostatsCount": "Aantal thermostaten",
+      "ConfigureOptions.EnsureCommandDelivery": "Zorg voor continue overdracht van de opdracht (pulsmodus)."
     },
     "81": {
       "Title": "Energiemonitor",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "Maakt natuurlijke taalbesturing voor uw slimme systeem mogelijk met behulp van Google's Gemini AI. Voer een geldige API-sleutel in om deze functie te activeren. Volg de instructies op https://aistudio.google.com/app/apikey om een gratis API-sleutel te ontvangen.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-sleutel",
-      "ConfigureOptions.ModelId": "Model-ID"
+      "ConfigureOptions.ModelId": "Model-ID",
+      "ConfigureOptions.SystemInstructions": "Systeeminstructies"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Jouw persoonlijke AI-genie voor het maken van widgets. Deze tool, aangestuurd door Gemini, helpt je bij het schrijven en debuggen van HTML-, CSS- en JavaScript-code rechtstreeks in de HomeGenie-editor. Voer een geldige API-sleutel in om deze functie te activeren. Volg de instructies op https://aistudio.google.com/app/apikey om een gratis API-sleutel te krijgen.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-sleutel",
-      "ConfigureOptions.ModelId": "Model-ID"
+      "ConfigureOptions.ModelId": "Model-ID",
+      "ConfigureOptions.SystemInstructions": "Systeeminstructies"
     },
     "940": {
       "Title": "Lokale AI",
       "Description": "Voer geavanceerde LLM's rechtstreeks uit op uw HomeGenie-server. Inclusief een volledige API om de AI vanuit andere programma's en scripts te besturen.",
       "ConfigureOptions.MaxTokens": "Max. tokens (antwoordlengte)",
       "ConfigureOptions.ModelPath": "Pad naar lokaal GGUF-bestand",
-      "ConfigureOptions.ModelFile": "Model"
+      "ConfigureOptions.ModelFile": "Model",
+      "ConfigureOptions.SystemInstructions": "Systeeminstructies",
+      "ConfigureOptions.ContextSize": "Grootte van het AI-geheugen (contextvenster)",
+      "ConfigureOptions.MaxTurns": "Max chatgeschiedenis draait (0 = geen limiet)",
+      "ConfigureOptions.SendContextData": "Voeg de apparatenlijst en sensoren toe aan de zoekopdrachten."
     },
     "575": {
       "Title": "Downloadmanager",
@@ -362,5 +369,8 @@
       "Title": "Uurlijks energieverbruik",
       "Description": "Staafdiagram met het gemiddelde wattuurverbruik voor elk uur van de dag (00:00-23:00). De gegevens zijn verzameld over de geselecteerde week en afkomstig van de Energy Use Statistics API."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Genie Command",
+  "scheduler_preset_action_config_wish": "Natuurlijke taalactie",
+  "scheduler_preset_action_config_wish.placeholder": "Probeer: \"Stel de temperatuur in op 22° en start de zonsopgangscène\""
 }

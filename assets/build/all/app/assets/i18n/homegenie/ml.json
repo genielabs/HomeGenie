@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "താപനില സെൻസർ",
       "VirtualThermostat.HeatingSwitchModule": "ചൂടാക്കൽ സ്വിച്ച്",
       "VirtualThermostat.CoolingSwitchModule": "കൂളിംഗ് സ്വിച്ച്",
-      "ConfigureOptions.ThermostatsCount": "തെർമോസ്റ്റാറ്റുകളുടെ എണ്ണം"
+      "ConfigureOptions.ThermostatsCount": "തെർമോസ്റ്റാറ്റുകളുടെ എണ്ണം",
+      "ConfigureOptions.EnsureCommandDelivery": "തുടർച്ചയായ ട്രാൻസ്മിഷൻ (പൾസ്-മോഡ്) ഉപയോഗിച്ച് കമാൻഡ് ഡെലിവറി ഉറപ്പാക്കുക."
     },
     "81": {
       "Title": "എനർജി മോണിറ്റർ",
@@ -311,20 +312,26 @@
       "Title": "ജെമിനി ഇന്റന്റ് ഹാൻഡ്‌ലർ",
       "Description": "ഗൂഗിളിന്റെ ജെമിനി AI ഉപയോഗിച്ച് നിങ്ങളുടെ സ്മാർട്ട് സിസ്റ്റത്തിനായി സ്വാഭാവിക ഭാഷാ നിയന്ത്രണം പ്രാപ്തമാക്കുന്നു. ഈ സവിശേഷത സജീവമാക്കുന്നതിന്, സാധുവായ ഒരു API കീ നൽകുക. സൗജന്യ API കീ ലഭിക്കുന്നതിന് https://aistudio.google.com/app/apikey എന്നതിലെ നിർദ്ദേശങ്ങൾ പാലിക്കുക.",
       "ConfigureOptions.ApiKey": "ഗൂഗിൾ ജെമിനി AI API കീ",
-      "ConfigureOptions.ModelId": "മോഡൽ ഐഡി"
+      "ConfigureOptions.ModelId": "മോഡൽ ഐഡി",
+      "ConfigureOptions.SystemInstructions": "സിസ്റ്റം നിർദ്ദേശങ്ങൾ"
     },
     "931": {
       "Title": "ജെമിനി വിഡ്ജറ്റ് ജെനി",
       "Description": "വിജറ്റ് സൃഷ്ടിക്കുന്നതിനുള്ള നിങ്ങളുടെ സ്വകാര്യ AI ജീനി. ജെമിനി നൽകുന്ന ഇത്, ഹോംജെനി എഡിറ്ററിൽ നേരിട്ട് HTML, CSS, JavaScript കോഡുകൾ എഴുതാനും ഡീബഗ് ചെയ്യാനും നിങ്ങളെ സഹായിക്കുന്നു. ഈ സവിശേഷത സജീവമാക്കുന്നതിന്, സാധുവായ ഒരു API കീ നൽകുക. സൗജന്യ API കീ ലഭിക്കുന്നതിന് https://aistudio.google.com/app/apikey എന്നതിലെ നിർദ്ദേശങ്ങൾ പാലിക്കുക.",
       "ConfigureOptions.ApiKey": "ഗൂഗിൾ ജെമിനി AI API കീ",
-      "ConfigureOptions.ModelId": "മോഡൽ ഐഡി"
+      "ConfigureOptions.ModelId": "മോഡൽ ഐഡി",
+      "ConfigureOptions.SystemInstructions": "സിസ്റ്റം നിർദ്ദേശങ്ങൾ"
     },
     "940": {
       "Title": "ലോക്കൽ AI",
       "Description": "നിങ്ങളുടെ HomeGenie സെർവറിൽ നേരിട്ട് അത്യാധുനിക LLM-കൾ പ്രവർത്തിപ്പിക്കുക. മറ്റ് പ്രോഗ്രാമുകളിൽ നിന്നും സ്ക്രിപ്റ്റുകളിൽ നിന്നും AI നിയന്ത്രിക്കുന്നതിന് ഒരു പൂർണ്ണ API ഉൾപ്പെടുന്നു.",
       "ConfigureOptions.MaxTokens": "പരമാവധി ടോക്കണുകൾ (പ്രതികരണ ദൈർഘ്യം)",
       "ConfigureOptions.ModelPath": "ലോക്കൽ GGUF ഫയലിലേക്കുള്ള പാത",
-      "ConfigureOptions.ModelFile": "മോഡൽ"
+      "ConfigureOptions.ModelFile": "മോഡൽ",
+      "ConfigureOptions.SystemInstructions": "സിസ്റ്റം നിർദ്ദേശങ്ങൾ",
+      "ConfigureOptions.ContextSize": "AI മെമ്മറി വലുപ്പം (സന്ദർഭ വിൻഡോ)",
+      "ConfigureOptions.MaxTurns": "പരമാവധി ചാറ്റ് ചരിത്ര ടേണുകൾ (0 = പരിധിയില്ല)",
+      "ConfigureOptions.SendContextData": "ചോദ്യങ്ങളിൽ ഉപകരണ ലിസ്റ്റും സെൻസറുകളും ഉൾപ്പെടുത്തുക"
     },
     "575": {
       "Title": "ഡൗൺലോഡ് മാനേജർ",
@@ -362,5 +369,8 @@
       "Title": "മണിക്കൂർ ഊർജ്ജ ഉപഭോഗം",
       "Description": "ദിവസത്തിലെ ഓരോ മണിക്കൂറിലും (00h-23h) ശരാശരി വാട്ട്സ്/മണിക്കൂർ ഉപഭോഗം പ്രദർശിപ്പിക്കുന്ന ബാർ ചാർട്ട്. തിരഞ്ഞെടുത്ത ആഴ്ചയിലെ ഡാറ്റ സമാഹരിച്ച് എനർജി യൂസ് സ്റ്റാറ്റിസ്റ്റിക്സ് API-യിൽ നിന്ന് എടുത്തതാണ്."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "ജെനി കമാൻഡ്",
+  "scheduler_preset_action_config_wish": "സ്വാഭാവിക ഭാഷാ പ്രവർത്തനം",
+  "scheduler_preset_action_config_wish.placeholder": "\"താപനില 22° ആക്കി സൂര്യോദയ രംഗം ആരംഭിക്കൂ\" എന്ന് ശ്രമിക്കുക."
 }

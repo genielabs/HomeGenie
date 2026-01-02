@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "firikwensin zafin jiki",
       "VirtualThermostat.HeatingSwitchModule": "Sauyawa mai zafi",
       "VirtualThermostat.CoolingSwitchModule": "Sauya sanyi",
-      "ConfigureOptions.ThermostatsCount": "Yawan thermostats"
+      "ConfigureOptions.ThermostatsCount": "Yawan thermostats",
+      "ConfigureOptions.EnsureCommandDelivery": "Tabbatar da isar da umarni tare da watsawa akai-akai (yanayin bugun jini)."
     },
     "81": {
       "Title": "Kula da Makamashi",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "Yana ba da damar sarrafa harshe na halitta don tsarin ku mai wayo ta amfani da Google's Gemini AI. Don kunna wannan fasalin, shigar da maɓallin API mai aiki. Bi umarnin a https://aistudio.google.com/app/apikey don samun maɓallin API kyauta.",
       "ConfigureOptions.ApiKey": "Google Gemini AI key",
-      "ConfigureOptions.ModelId": "Model ID"
+      "ConfigureOptions.ModelId": "Model ID",
+      "ConfigureOptions.SystemInstructions": "Umarnin Tsarin"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Genie AI na ku don ƙirƙirar widget din. Gemini yana ƙarfafa shi, yana taimaka muku rubutawa da gyara HTML, CSS, da lambar JavaScript kai tsaye a cikin editan HomeGenie. Don kunna wannan fasalin, shigar da maɓallin API mai aiki. Bi umarnin a https://aistudio.google.com/app/apikey don samun maɓallin API kyauta.",
       "ConfigureOptions.ApiKey": "Google Gemini AI key",
-      "ConfigureOptions.ModelId": "Model ID"
+      "ConfigureOptions.ModelId": "Model ID",
+      "ConfigureOptions.SystemInstructions": "Umarnin Tsarin"
     },
     "940": {
       "Title": "AI na gida",
       "Description": "Gudanar da LLMs na zamani kai tsaye akan sabar HomeGenie ɗinku. Ya haɗa da cikakken API don sarrafa AI daga wasu shirye-shirye da rubutun.",
       "ConfigureOptions.MaxTokens": "Max Tokens (tsawon amsawa)",
       "ConfigureOptions.ModelPath": "Hanya zuwa fayil na GGUF na gida",
-      "ConfigureOptions.ModelFile": "Samfuri"
+      "ConfigureOptions.ModelFile": "Samfuri",
+      "ConfigureOptions.SystemInstructions": "Umarnin Tsarin",
+      "ConfigureOptions.ContextSize": "Girman Ƙwaƙwalwar AI (Tagar Yanayi)",
+      "ConfigureOptions.MaxTurns": "Matsakaicin juyi na tarihin hira (0 = babu iyaka)",
+      "ConfigureOptions.SendContextData": "Haɗa jerin na'urori da na'urori masu auna sigina a cikin tambayoyi"
     },
     "575": {
       "Title": "Manajan Saukewa",
@@ -362,5 +369,8 @@
       "Title": "Amfani da Makamashi a Sa'a",
       "Description": "Taswirar sandar da ke nuna matsakaicin amfani da Watts/Hour na kowace awa ta yini (00h-23h). Ana tattara bayanai a cikin makon da aka zaɓa kuma an samo su daga API ɗin Kididdigar Amfani da Makamashi."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Kwamandan Genie",
+  "scheduler_preset_action_config_wish": "Ayyukan Harshe na Halitta",
+  "scheduler_preset_action_config_wish.placeholder": "Gwada: \"Saita zafin zuwa 22° kuma fara yanayin fitowar rana\""
 }

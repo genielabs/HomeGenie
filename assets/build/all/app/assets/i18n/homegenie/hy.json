@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Ջերմաստիճանի սենսոր",
       "VirtualThermostat.HeatingSwitchModule": "Ջեռուցման անջատիչ",
       "VirtualThermostat.CoolingSwitchModule": "Սառեցման անջատիչ",
-      "ConfigureOptions.ThermostatsCount": "Ջերմաստիճանների քանակը"
+      "ConfigureOptions.ThermostatsCount": "Ջերմաստիճանների քանակը",
+      "ConfigureOptions.EnsureCommandDelivery": "Ապահովեք հրամանի փոխանցումը անընդհատ փոխանցմամբ (իմպուլսային ռեժիմ):"
     },
     "81": {
       "Title": "Էներգիայի մոնիտոր",
@@ -311,20 +312,26 @@
       "Title": "Երկվորյակների մտադրությունների մշակիչ",
       "Description": "Հնարավորություն է տալիս բնական լեզվի կառավարման ձեր խելացի համակարգի համար՝ օգտագործելով Google-ի Gemini AI-ը: Այս գործառույթը ակտիվացնելու համար մուտքագրեք վավեր API բանալի: Հետևեք https://aistudio.google.com/app/apikey կայքում տրված հրահանգներին՝ անվճար API բանալի ստանալու համար:",
       "ConfigureOptions.ApiKey": "Google Gemini AI API բանալի",
-      "ConfigureOptions.ModelId": "Մոդելի ID"
+      "ConfigureOptions.ModelId": "Մոդելի ID",
+      "ConfigureOptions.SystemInstructions": "Համակարգի հրահանգներ"
     },
     "931": {
       "Title": "Երկվորյակների վիջեթ ջին",
       "Description": "Ձեր անձնական արհեստական բանականության ջինը վիջեթներ ստեղծելու համար: Gemini-ի հզորությամբ այն օգնում է ձեզ գրել և վրիպազերծել HTML, CSS և JavaScript կոդը անմիջապես HomeGenie խմբագրիչում: Այս գործառույթը ակտիվացնելու համար մուտքագրեք վավեր API բանալի: Հետևեք https://aistudio.google.com/app/apikey կայքում տեղադրված հրահանգներին՝ անվճար API բանալի ստանալու համար:",
       "ConfigureOptions.ApiKey": "Google Gemini AI API բանալի",
-      "ConfigureOptions.ModelId": "Մոդելի ID"
+      "ConfigureOptions.ModelId": "Մոդելի ID",
+      "ConfigureOptions.SystemInstructions": "Համակարգի հրահանգներ"
     },
     "940": {
       "Title": "Տեղական արհեստական բանականություն",
       "Description": "Գործարկեք ժամանակակից LLM ծրագրեր անմիջապես ձեր HomeGenie սերվերի վրա: Ներառում է լիարժեք API՝ այլ ծրագրերից և սկրիպտներից արհեստական բանականությունը կառավարելու համար:",
       "ConfigureOptions.MaxTokens": "Առավելագույն տոկեններ (պատասխանի երկարություն)",
       "ConfigureOptions.ModelPath": "Տեղական GGUF ֆայլի ուղին",
-      "ConfigureOptions.ModelFile": "Մոդել"
+      "ConfigureOptions.ModelFile": "Մոդել",
+      "ConfigureOptions.SystemInstructions": "Համակարգի հրահանգներ",
+      "ConfigureOptions.ContextSize": "Արհեստական բանականության հիշողության չափը (համատեքստային պատուհան)",
+      "ConfigureOptions.MaxTurns": "Զրույցի պատմության առավելագույն շրջադարձեր (0 = անսահմանափակ)",
+      "ConfigureOptions.SendContextData": "Հարցումներում ներառել սարքերի ցանկը և սենսորները"
     },
     "575": {
       "Title": "Ներբեռնումների կառավարիչ",
@@ -362,5 +369,8 @@
       "Title": "Ժամային էներգիայի սպառում",
       "Description": "Սյունակային դիագրամ, որը ցույց է տալիս օրվա յուրաքանչյուր ժամի (00ժ-23ժ) միջին վատտ/ժամ սպառումը: Տվյալները ամփոփվում են ընտրված շաբաթվա ընթացքում և վերցված են Էներգիայի օգտագործման վիճակագրության API-ից:"
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Ջինի հրամանատարություն",
+  "scheduler_preset_action_config_wish": "Բնական լեզվի գործողություն",
+  "scheduler_preset_action_config_wish.placeholder": "Փորձեք. «Ջերմությունը սահմանեք 22°-ի և սկսեք Արևածագի տեսարանը»"
 }

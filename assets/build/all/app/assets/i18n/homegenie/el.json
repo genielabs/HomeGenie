@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Αισθητήρας θερμοκρασίας",
       "VirtualThermostat.HeatingSwitchModule": "Διακόπτης θέρμανσης",
       "VirtualThermostat.CoolingSwitchModule": "Διακόπτης ψύξης",
-      "ConfigureOptions.ThermostatsCount": "Αριθμός θερμοστατών"
+      "ConfigureOptions.ThermostatsCount": "Αριθμός θερμοστατών",
+      "ConfigureOptions.EnsureCommandDelivery": "Διασφαλίστε την παράδοση εντολών με συνεχή μετάδοση (λειτουργία παλμών)."
     },
     "81": {
       "Title": "Παρακολούθηση Ενέργειας",
@@ -311,20 +312,26 @@
       "Title": "Χειριστής προθέσεων Gemini",
       "Description": "Επιτρέπει τον έλεγχο φυσικής γλώσσας για το έξυπνο σύστημά σας χρησιμοποιώντας το Gemini AI της Google. Για να ενεργοποιήσετε αυτήν τη λειτουργία, εισαγάγετε ένα έγκυρο κλειδί API. Ακολουθήστε τις οδηγίες στη διεύθυνση https://aistudio.google.com/app/apikey για να λάβετε ένα δωρεάν κλειδί API.",
       "ConfigureOptions.ApiKey": "Κλειδί API AI Google Gemini",
-      "ConfigureOptions.ModelId": "Αναγνωριστικό μοντέλου"
+      "ConfigureOptions.ModelId": "Αναγνωριστικό μοντέλου",
+      "ConfigureOptions.SystemInstructions": "Οδηγίες συστήματος"
     },
     "931": {
       "Title": "Τζίνι του Gemini Widget",
       "Description": "Το προσωπικό σας τζίνι τεχνητής νοημοσύνης για τη δημιουργία widget. Με την υποστήριξη του Gemini, σας βοηθά να γράφετε και να εντοπίζετε σφάλματα κώδικα HTML, CSS και JavaScript απευθείας μέσα στον επεξεργαστή HomeGenie. Για να ενεργοποιήσετε αυτήν τη λειτουργία, εισαγάγετε ένα έγκυρο κλειδί API. Ακολουθήστε τις οδηγίες στη διεύθυνση https://aistudio.google.com/app/apikey για να λάβετε ένα δωρεάν κλειδί API.",
       "ConfigureOptions.ApiKey": "Κλειδί API AI Google Gemini",
-      "ConfigureOptions.ModelId": "Αναγνωριστικό μοντέλου"
+      "ConfigureOptions.ModelId": "Αναγνωριστικό μοντέλου",
+      "ConfigureOptions.SystemInstructions": "Οδηγίες συστήματος"
     },
     "940": {
       "Title": "Τοπική Τεχνητή Νοημοσύνη",
       "Description": "Εκτελέστε υπερσύγχρονα LLM απευθείας στον διακομιστή HomeGenie. Περιλαμβάνει ένα πλήρες API για τον έλεγχο της τεχνητής νοημοσύνης από άλλα προγράμματα και σενάρια.",
       "ConfigureOptions.MaxTokens": "Μέγιστος αριθμός διακριτικών (μήκος απόκρισης)",
       "ConfigureOptions.ModelPath": "Διαδρομή προς το τοπικό αρχείο GGUF",
-      "ConfigureOptions.ModelFile": "Μοντέλο"
+      "ConfigureOptions.ModelFile": "Μοντέλο",
+      "ConfigureOptions.SystemInstructions": "Οδηγίες συστήματος",
+      "ConfigureOptions.ContextSize": "Μέγεθος μνήμης AI (Παράθυρο περιβάλλοντος)",
+      "ConfigureOptions.MaxTurns": "Μέγιστος αριθμός στροφών στο ιστορικό συνομιλίας (0 = χωρίς όριο)",
+      "ConfigureOptions.SendContextData": "Συμπερίληψη λίστας συσκευών και αισθητήρων στα ερωτήματα"
     },
     "575": {
       "Title": "Διαχείριση λήψεων",
@@ -362,5 +369,8 @@
       "Title": "Ωριαία Κατανάλωση Ενέργειας",
       "Description": "Ραβδόγραμμα που εμφανίζει τη μέση κατανάλωση Watt/ώρα για κάθε ώρα της ημέρας (00h-23h). Τα δεδομένα συγκεντρώνονται κατά την επιλεγμένη εβδομάδα και προέρχονται από το API Στατιστικών Χρήσης Ενέργειας."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Διοίκηση Τζίνι",
+  "scheduler_preset_action_config_wish": "Δράση Φυσικής Γλώσσας",
+  "scheduler_preset_action_config_wish.placeholder": "Δοκιμάστε: \"Ρυθμίστε τη θερμότητα στους 22° και ξεκινήστε τη σκηνή της ανατολής του ηλίου\""
 }

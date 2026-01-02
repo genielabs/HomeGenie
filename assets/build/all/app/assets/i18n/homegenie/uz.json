@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Harorat sensori",
       "VirtualThermostat.HeatingSwitchModule": "Isitish kaliti",
       "VirtualThermostat.CoolingSwitchModule": "Sovutish tugmasi",
-      "ConfigureOptions.ThermostatsCount": "Termostatlar soni"
+      "ConfigureOptions.ThermostatsCount": "Termostatlar soni",
+      "ConfigureOptions.EnsureCommandDelivery": "Buyruqlarning uzluksiz uzatilishini (impuls rejimida) ta'minlang."
     },
     "81": {
       "Title": "Energiya monitori",
@@ -311,20 +312,26 @@
       "Title": "Egizaklar niyatini ishlovchi",
       "Description": "Google Gemini AI yordamida aqlli tizimingiz uchun tabiiy tilni boshqarish imkonini beradi. Ushbu xususiyatni faollashtirish uchun yaroqli API kalitini kiriting. Bepul API kalitini olish uchun https://aistudio.google.com/app/apikey manzilidagi ko‘rsatmalarga amal qiling.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API kaliti",
-      "ConfigureOptions.ModelId": "Model ID"
+      "ConfigureOptions.ModelId": "Model ID",
+      "ConfigureOptions.SystemInstructions": "Tizim ko'rsatmalari"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Vidjet yaratish uchun shaxsiy AI jiningiz. Gemini tomonidan quvvatlanadi, u to'g'ridan-to'g'ri HomeGenie muharririda HTML, CSS va JavaScript kodlarini yozish va disk raskadrovka qilishga yordam beradi. Ushbu xususiyatni faollashtirish uchun yaroqli API kalitini kiriting. Bepul API kalitini olish uchun https://aistudio.google.com/app/apikey manzilidagi ko‘rsatmalarga amal qiling.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API kaliti",
-      "ConfigureOptions.ModelId": "Model ID"
+      "ConfigureOptions.ModelId": "Model ID",
+      "ConfigureOptions.SystemInstructions": "Tizim ko'rsatmalari"
     },
     "940": {
       "Title": "Mahalliy AI",
       "Description": "Eng zamonaviy LLMlarni to'g'ridan-to'g'ri HomeGenie serveringizda ishga tushiring. Boshqa dasturlar va skriptlardan sun'iy intellektni boshqarish uchun to'liq API ni o'z ichiga oladi.",
       "ConfigureOptions.MaxTokens": "Maksimal tokenlar (javob uzunligi)",
       "ConfigureOptions.ModelPath": "Mahalliy GGUF fayliga yo'l",
-      "ConfigureOptions.ModelFile": "Model"
+      "ConfigureOptions.ModelFile": "Model",
+      "ConfigureOptions.SystemInstructions": "Tizim ko'rsatmalari",
+      "ConfigureOptions.ContextSize": "AI xotira hajmi (Kontekst oynasi)",
+      "ConfigureOptions.MaxTurns": "Maksimal chat tarixi (0 = cheklov yo'q)",
+      "ConfigureOptions.SendContextData": "So'rovlarga qurilmalar ro'yxati va sensorlarni qo'shing"
     },
     "575": {
       "Title": "Yuklab olish menejeri",
@@ -362,5 +369,8 @@
       "Title": "Soatlik energiya sarfi",
       "Description": "Kunning har bir soati (00-23 soat) uchun o'rtacha vatt/soat iste'molini ko'rsatuvchi ustunli diagramma. Ma'lumotlar tanlangan hafta davomida to'planadi va Energiyadan foydalanish statistikasi API'sidan olinadi."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Jin qo'mondonligi",
+  "scheduler_preset_action_config_wish": "Tabiiy til harakati",
+  "scheduler_preset_action_config_wish.placeholder": "Sinab ko'ring: \"Haroratni 22° ga qo'ying va quyosh chiqishi sahnasini boshlang\"."
 }

@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Sensor suhu",
       "VirtualThermostat.HeatingSwitchModule": "Sakelar pemanas",
       "VirtualThermostat.CoolingSwitchModule": "Sakelar pendingin",
-      "ConfigureOptions.ThermostatsCount": "Jumlah termostat"
+      "ConfigureOptions.ThermostatsCount": "Jumlah termostat",
+      "ConfigureOptions.EnsureCommandDelivery": "Pastikan pengiriman perintah dengan transmisi berkelanjutan (mode pulsa)."
     },
     "81": {
       "Title": "Pemantau Energi",
@@ -311,20 +312,26 @@
       "Title": "Penangan Maksud Gemini",
       "Description": "Mengaktifkan kontrol bahasa alami untuk sistem pintar Anda menggunakan Gemini AI Google. Untuk mengaktifkan fitur ini, masukkan kunci API yang valid. Ikuti petunjuk di https://aistudio.google.com/app/apikey untuk mendapatkan kunci API gratis.",
       "ConfigureOptions.ApiKey": "Kunci API Google Gemini AI",
-      "ConfigureOptions.ModelId": "Identitas Model"
+      "ConfigureOptions.ModelId": "Identitas Model",
+      "ConfigureOptions.SystemInstructions": "Instruksi Sistem"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "AI Genie pribadi Anda untuk pembuatan widget. Didukung oleh Gemini, fitur ini membantu Anda menulis dan men-debug kode HTML, CSS, dan JavaScript langsung di dalam editor HomeGenie. Untuk mengaktifkan fitur ini, masukkan kunci API yang valid. Ikuti petunjuk di https://aistudio.google.com/app/apikey untuk mendapatkan kunci API gratis.",
       "ConfigureOptions.ApiKey": "Kunci API Google Gemini AI",
-      "ConfigureOptions.ModelId": "Identitas Model"
+      "ConfigureOptions.ModelId": "Identitas Model",
+      "ConfigureOptions.SystemInstructions": "Instruksi Sistem"
     },
     "940": {
       "Title": "AI Lokal",
       "Description": "Jalankan LLM (Learning Learning Model) canggih langsung di server HomeGenie Anda. Termasuk API lengkap untuk mengontrol AI dari program dan skrip lain.",
       "ConfigureOptions.MaxTokens": "Token Maksimum (panjang respons)",
       "ConfigureOptions.ModelPath": "Jalur ke file GGUF lokal",
-      "ConfigureOptions.ModelFile": "Model"
+      "ConfigureOptions.ModelFile": "Model",
+      "ConfigureOptions.SystemInstructions": "Instruksi Sistem",
+      "ConfigureOptions.ContextSize": "Ukuran Memori AI (Jendela Konteks)",
+      "ConfigureOptions.MaxTurns": "Jumlah putaran riwayat obrolan maksimum (0 = tanpa batas)",
+      "ConfigureOptions.SendContextData": "Sertakan daftar perangkat dan sensor dalam kueri."
     },
     "575": {
       "Title": "Pengelola Unduhan",
@@ -362,5 +369,8 @@
       "Title": "Konsumsi Energi Per Jam",
       "Description": "Grafik batang yang menampilkan konsumsi Watt/Jam rata-rata untuk setiap jam dalam sehari (00h-23h). Data dikumpulkan selama minggu yang dipilih dan bersumber dari API Statistik Penggunaan Energi."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Perintah Jin",
+  "scheduler_preset_action_config_wish": "Tindakan Bahasa Alami",
+  "scheduler_preset_action_config_wish.placeholder": "Coba: \"Atur suhu ke 22° dan mulai adegan Matahari Terbit\""
 }

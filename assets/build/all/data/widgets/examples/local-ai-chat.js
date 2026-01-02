@@ -281,7 +281,7 @@ class LocalAiChat extends ControllerInstance {
 
     this.isFirstToken = true;
 
-    this.control('Prompt.Submit', userInput);
+    this.intent('Prompt.Submit', userInput);
   }
 
   /**
@@ -399,7 +399,7 @@ class LocalAiChat extends ControllerInstance {
       if (intentHandlerApi) {
         this.apiCall(`${intentHandlerApi.value}/${cmd}/${data}`)
             .subscribe(res => {
-              console.log(res);
+              //console.log(res);
             });
       } else {
         bm.control(cmd, data);

@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Cảm biến nhiệt độ",
       "VirtualThermostat.HeatingSwitchModule": "Công tắc sưởi ấm",
       "VirtualThermostat.CoolingSwitchModule": "Công tắc làm mát",
-      "ConfigureOptions.ThermostatsCount": "Số lượng bộ điều nhiệt"
+      "ConfigureOptions.ThermostatsCount": "Số lượng bộ điều nhiệt",
+      "ConfigureOptions.EnsureCommandDelivery": "Đảm bảo việc truyền lệnh được thực hiện liên tục (chế độ xung)."
     },
     "81": {
       "Title": "Màn hình năng lượng",
@@ -311,20 +312,26 @@
       "Title": "Trình xử lý ý định Gemini",
       "Description": "Cho phép kiểm soát ngôn ngữ tự nhiên cho hệ thống thông minh của bạn bằng Gemini AI của Google. Để kích hoạt tính năng này, hãy nhập khóa API hợp lệ. Làm theo hướng dẫn tại https://aistudio.google.com/app/apikey để nhận khóa API miễn phí.",
       "ConfigureOptions.ApiKey": "Khóa API AI Gemini của Google",
-      "ConfigureOptions.ModelId": "Mã số mô hình"
+      "ConfigureOptions.ModelId": "Mã số mô hình",
+      "ConfigureOptions.SystemInstructions": "Hướng dẫn hệ thống"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Trí tuệ nhân tạo AI cá nhân của bạn để tạo widget. Được hỗ trợ bởi Gemini, nó giúp bạn viết và gỡ lỗi mã HTML, CSS và JavaScript trực tiếp trong trình soạn thảo HomeGenie. Để kích hoạt tính năng này, hãy nhập khóa API hợp lệ. Làm theo hướng dẫn tại https://aistudio.google.com/app/apikey để nhận khóa API miễn phí.",
       "ConfigureOptions.ApiKey": "Khóa API AI Gemini của Google",
-      "ConfigureOptions.ModelId": "Mã số mô hình"
+      "ConfigureOptions.ModelId": "Mã số mô hình",
+      "ConfigureOptions.SystemInstructions": "Hướng dẫn hệ thống"
     },
     "940": {
       "Title": "Trí tuệ nhân tạo địa phương",
       "Description": "Chạy các hệ thống quản lý ngôn ngữ tự động (LLM) tiên tiến trực tiếp trên máy chủ HomeGenie của bạn. Bao gồm API đầy đủ để điều khiển trí tuệ nhân tạo từ các chương trình và tập lệnh khác.",
       "ConfigureOptions.MaxTokens": "Số lượng token tối đa (độ dài phản hồi)",
       "ConfigureOptions.ModelPath": "Đường dẫn đến tệp GGUF cục bộ",
-      "ConfigureOptions.ModelFile": "Người mẫu"
+      "ConfigureOptions.ModelFile": "Người mẫu",
+      "ConfigureOptions.SystemInstructions": "Hướng dẫn hệ thống",
+      "ConfigureOptions.ContextSize": "Kích thước bộ nhớ AI (Cửa sổ ngữ cảnh)",
+      "ConfigureOptions.MaxTurns": "Số lượt hiển thị lịch sử trò chuyện tối đa (0 = không giới hạn)",
+      "ConfigureOptions.SendContextData": "Bao gồm danh sách thiết bị và cảm biến trong các truy vấn"
     },
     "575": {
       "Title": "Trình quản lý tải xuống",
@@ -362,5 +369,8 @@
       "Title": "Mức tiêu thụ năng lượng hàng giờ",
       "Description": "Biểu đồ cột hiển thị mức tiêu thụ điện năng trung bình (Watts/giờ) cho mỗi giờ trong ngày (00h-23h). Dữ liệu được tổng hợp trong tuần đã chọn và được lấy từ API Thống kê Sử dụng Năng lượng."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Lệnh Genie",
+  "scheduler_preset_action_config_wish": "Hành động ngôn ngữ tự nhiên",
+  "scheduler_preset_action_config_wish.placeholder": "Hãy thử: \"Đặt nhiệt độ ở mức 22° và bắt đầu cảnh bình minh\""
 }

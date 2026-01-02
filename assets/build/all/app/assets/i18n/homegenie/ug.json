@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "تېمپېراتۇرا سېنزورى",
       "VirtualThermostat.HeatingSwitchModule": "ئىسسىقلىق ئالماشتۇرۇش",
       "VirtualThermostat.CoolingSwitchModule": "سوۋۇتقۇچ",
-      "ConfigureOptions.ThermostatsCount": "تېرموستاتلارنىڭ سانى"
+      "ConfigureOptions.ThermostatsCount": "تېرموستاتلارنىڭ سانى",
+      "ConfigureOptions.EnsureCommandDelivery": "بۇيرۇقنىڭ ئۈزلۈكسىز يەتكۈزۈش (ئىمپۇلس ھالىتى) بىلەن يەتكۈزۈلۈشىگە كاپالەتلىك قىلىڭ."
     },
     "81": {
       "Title": "Energy Monitor",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "گۇگۇلنىڭ Gemini AI ئارقىلىق ئەقلىي ئىقتىدارلىق سىستېمىڭىزنىڭ تەبىئىي تىل كونترول قىلىشىنى قوزغىتىدۇ. بۇ ئىقتىدارنى قوزغىتىش ئۈچۈن ئىناۋەتلىك API كۇنۇپكىسىنى كىرگۈزۈڭ. ھەقسىز API ئاچقۇچىغا ئېرىشىش ئۈچۈن https://aistudio.google.com/app/apikey دىكى كۆرسەتمىلەرگە ئەگىشىڭ.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API ئاچقۇچى",
-      "ConfigureOptions.ModelId": "Model ID"
+      "ConfigureOptions.ModelId": "Model ID",
+      "ConfigureOptions.SystemInstructions": "سىستېما كۆرسەتمىلىرى"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "كىچىك قورال ياساش ئۈچۈن شەخسىي سۈنئىي ئەقىل گېنىڭىز. Gemini تەرىپىدىن ئىشلەنگەن ، ئۇ HomeGenie تەھرىرلىگۈچنىڭ ئىچىدە HTML ، CSS ۋە JavaScript كودىنى يېزىش ۋە يېشىشكە ياردەم بېرىدۇ. بۇ ئىقتىدارنى قوزغىتىش ئۈچۈن ئىناۋەتلىك API كۇنۇپكىسىنى كىرگۈزۈڭ. ھەقسىز API ئاچقۇچىغا ئېرىشىش ئۈچۈن https://aistudio.google.com/app/apikey دىكى كۆرسەتمىلەرگە ئەگىشىڭ.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API ئاچقۇچى",
-      "ConfigureOptions.ModelId": "Model ID"
+      "ConfigureOptions.ModelId": "Model ID",
+      "ConfigureOptions.SystemInstructions": "سىستېما كۆرسەتمىلىرى"
     },
     "940": {
       "Title": "يەرلىك سۈنئىي ئەقىل",
       "Description": "HomeGenie سېرۋېرىڭىزدا ئەڭ ئىلغار LLM لارنى بىۋاسىتە ئىجرا قىلىڭ. باشقا پروگراممىلار ۋە سىكرىپتلاردىن سۈنئىي ئەقىلنى كونترول قىلىش ئۈچۈن تولۇق API نى ئۆز ئىچىگە ئالىدۇ.",
       "ConfigureOptions.MaxTokens": "ئەڭ چوڭ توكېن (جاۋاب ئۇزۇنلۇقى)",
       "ConfigureOptions.ModelPath": "يەرلىك GGUF ھۆججىتىگە يول",
-      "ConfigureOptions.ModelFile": "مودېل"
+      "ConfigureOptions.ModelFile": "مودېل",
+      "ConfigureOptions.SystemInstructions": "سىستېما كۆرسەتمىلىرى",
+      "ConfigureOptions.ContextSize": "سۈنئىي ئەقىل ئىچكى ساقلىغۇچ چوڭلۇقى (كونتېكست كۆزنىكى)",
+      "ConfigureOptions.MaxTurns": "ئەڭ كۆپ پاراڭلىشىش تارىخى (0 = چەكلىمە يوق)",
+      "ConfigureOptions.SendContextData": "سوئاللارغا ئۈسكۈنە تىزىملىكى ۋە سېنزورلارنى قوشۇڭ"
     },
     "575": {
       "Title": "چۈشۈرۈش باشقۇرغۇچىسى",
@@ -362,5 +369,8 @@
       "Title": "سائەتلىك ئېنېرگىيە سەرپىياتى",
       "Description": "كۈننىڭ ھەر سائىتى (00-23) ئۈچۈن ئوتتۇرىچە ۋات/سائەت ئېنېرگىيە سەرپىياتىنى كۆرسىتىدىغان سىتول دىئاگراممىسى. سانلىق مەلۇماتلار تاللانغان ھەپتە بويىچە توپلانغان ۋە ئېنېرگىيە ئىشلىتىش ستاتىستىكا API دىن ئېلىنغان."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "جىن قوماندانلىقى",
+  "scheduler_preset_action_config_wish": "تەبىئىي تىل ھەرىكىتى",
+  "scheduler_preset_action_config_wish.placeholder": "سىناپ بېقىڭ: «تېمپېراتۇرىنى 22° غا تەڭشەپ، قۇياش چىقىش كۆرۈنۈشىنى باشلاڭ»."
 }

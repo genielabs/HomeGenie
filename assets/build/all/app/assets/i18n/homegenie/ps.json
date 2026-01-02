@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "د تودوخې سینسر",
       "VirtualThermostat.HeatingSwitchModule": "د تودوخې سویچ",
       "VirtualThermostat.CoolingSwitchModule": "د یخولو سویچ",
-      "ConfigureOptions.ThermostatsCount": "د ترموسټاټ شمېر"
+      "ConfigureOptions.ThermostatsCount": "د ترموسټاټ شمېر",
+      "ConfigureOptions.EnsureCommandDelivery": "د دوامداره لیږد (نبض حالت) سره د قوماندې رسولو ډاډ ترلاسه کړئ."
     },
     "81": {
       "Title": "د انرژۍ څارنه",
@@ -311,20 +312,26 @@
       "Title": "د جیمني ارادې سمبالونکی",
       "Description": "د ګوګل د جیمني AI په کارولو سره ستاسو د سمارټ سیسټم لپاره د طبیعي ژبې کنټرول فعالوي. د دې ځانګړتیا فعالولو لپاره، یو باوري API کیلي دننه کړئ. د وړیا API کیلي ترلاسه کولو لپاره په https://aistudio.google.com/app/apikey کې لارښوونې تعقیب کړئ.",
       "ConfigureOptions.ApiKey": "د ګوګل جیمني AI API کیلي",
-      "ConfigureOptions.ModelId": "د ماډل ID"
+      "ConfigureOptions.ModelId": "د ماډل ID",
+      "ConfigureOptions.SystemInstructions": "د سیسټم لارښوونې"
     },
     "931": {
       "Title": "د جیمني ویجیټ جینی",
       "Description": "ستاسو شخصي مصنوعي ذهانت جینی د ویجیټ جوړولو لپاره. د جیمیني لخوا پرمخ وړل کیږي، دا تاسو سره د هوم جینی ایډیټر کې مستقیم د HTML، CSS، او جاواسکریپټ کوډ لیکلو او ډیبګ کولو کې مرسته کوي. د دې ځانګړتیا فعالولو لپاره، یو باوري API کیلي دننه کړئ. د وړیا API کیلي ترلاسه کولو لپاره په https://aistudio.google.com/app/apikey کې لارښوونې تعقیب کړئ.",
       "ConfigureOptions.ApiKey": "د ګوګل جیمني AI API کیلي",
-      "ConfigureOptions.ModelId": "د ماډل ID"
+      "ConfigureOptions.ModelId": "د ماډل ID",
+      "ConfigureOptions.SystemInstructions": "د سیسټم لارښوونې"
     },
     "940": {
       "Title": "سیمه ییز AI",
       "Description": "په مستقیم ډول ستاسو په هوم جیني سرور کې عصري LLM چل کړئ. د نورو برنامو او سکریپټونو څخه د AI کنټرول لپاره بشپړ API پکې شامل دی.",
       "ConfigureOptions.MaxTokens": "اعظمي ټوکنونه (د ځواب اوږدوالی)",
       "ConfigureOptions.ModelPath": "د ځایي GGUF فایل ته لاره",
-      "ConfigureOptions.ModelFile": "ماډل"
+      "ConfigureOptions.ModelFile": "ماډل",
+      "ConfigureOptions.SystemInstructions": "د سیسټم لارښوونې",
+      "ConfigureOptions.ContextSize": "د AI حافظې اندازه (د شرایطو کړکۍ)",
+      "ConfigureOptions.MaxTurns": "د چیٹ تاریخ اعظمي بدلون (۰ = هیڅ حد نشته)",
+      "ConfigureOptions.SendContextData": "په پوښتنو کې د وسیلو لیست او سینسرونه شامل کړئ"
     },
     "575": {
       "Title": "د ډاونلوډ مدیر",
@@ -362,5 +369,8 @@
       "Title": "په ساعت کې د انرژۍ مصرف",
       "Description": "د بار چارټ چې د ورځې د هر ساعت (00 ساعته څخه تر 23 ساعتونو پورې) لپاره د اوسط واټ/ساعت مصرف ښیې. معلومات په ټاکل شوې اونۍ کې راټول شوي او د انرژۍ کارولو احصایې API څخه سرچینه اخیستل کیږي."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "د جینی قومانده",
+  "scheduler_preset_action_config_wish": "د طبیعي ژبې عمل",
+  "scheduler_preset_action_config_wish.placeholder": "هڅه وکړئ: \"تودوخه ۲۲ درجو ته تنظیم کړئ او د لمر ختو صحنه پیل کړئ\""
 }

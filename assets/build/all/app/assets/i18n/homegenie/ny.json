@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Sensa ya kutentha",
       "VirtualThermostat.HeatingSwitchModule": "Kusintha kwa kutentha",
       "VirtualThermostat.CoolingSwitchModule": "Kusintha kozizira",
-      "ConfigureOptions.ThermostatsCount": "Chiwerengero cha ma thermostats"
+      "ConfigureOptions.ThermostatsCount": "Chiwerengero cha ma thermostats",
+      "ConfigureOptions.EnsureCommandDelivery": "Onetsetsani kuti lamulo laperekedwa ndi kutumiza kosalekeza (pulse-mode)."
     },
     "81": {
       "Title": "Mphamvu Monitor",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "Imayatsa kuwongolera zilankhulo zachilengedwe pamakina anu anzeru pogwiritsa ntchito Google's Gemini AI. Kuti mutsegule izi, lowetsani kiyi yolondola ya API. Tsatirani malangizo pa https://aistudio.google.com/app/apikey kuti mupeze kiyi yaulere ya API.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API kiyi",
-      "ConfigureOptions.ModelId": "ID yachitsanzo"
+      "ConfigureOptions.ModelId": "ID yachitsanzo",
+      "ConfigureOptions.SystemInstructions": "Malangizo a Machitidwe"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "AI genie wanu wopanga widget. Mothandizidwa ndi Gemini, imakuthandizani kulemba ndikusintha HTML, CSS, ndi JavaScript code mwachindunji mkati mwa mkonzi wa HomeGenie. Kuti mutsegule izi, lowetsani kiyi yolondola ya API. Tsatirani malangizo pa https://aistudio.google.com/app/apikey kuti mupeze kiyi yaulere ya API.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API kiyi",
-      "ConfigureOptions.ModelId": "ID yachitsanzo"
+      "ConfigureOptions.ModelId": "ID yachitsanzo",
+      "ConfigureOptions.SystemInstructions": "Malangizo a Machitidwe"
     },
     "940": {
       "Title": "AI Yapafupi",
       "Description": "Yendetsani ma LLM apamwamba kwambiri mwachindunji pa seva yanu ya HomeGenie. Muli ndi API yonse yowongolera AI kuchokera ku mapulogalamu ena ndi zolemba.",
       "ConfigureOptions.MaxTokens": "Max Tokens (kutalika kwa yankho)",
       "ConfigureOptions.ModelPath": "Njira yopita ku fayilo ya GGUF yakomweko",
-      "ConfigureOptions.ModelFile": "Chitsanzo"
+      "ConfigureOptions.ModelFile": "Chitsanzo",
+      "ConfigureOptions.SystemInstructions": "Malangizo a Machitidwe",
+      "ConfigureOptions.ContextSize": "Kukula kwa Memory ya AI (Zenera la Nkhani)",
+      "ConfigureOptions.MaxTurns": "Kuchuluka kwa mbiri ya macheza (0 = palibe malire)",
+      "ConfigureOptions.SendContextData": "Phatikizani mndandanda wa zida ndi masensa mu mafunso"
     },
     "575": {
       "Title": "Woyang'anira Tsitsani",
@@ -362,5 +369,8 @@
       "Title": "Kugwiritsa Ntchito Mphamvu pa Ola Lililonse",
       "Description": "Tchati cha mipiringidzo chomwe chikuwonetsa kuchuluka kwa ma Watts/Ola omwe amagwiritsidwa ntchito pa ola lililonse la tsiku (00h-23h). Deta imasonkhanitsidwa pamodzi pa sabata yosankhidwa ndikupeza kuchokera ku Energy Use Statistics API."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Lamulo la Genie",
+  "scheduler_preset_action_config_wish": "Zochita za Chilankhulo Chachilengedwe",
+  "scheduler_preset_action_config_wish.placeholder": "Yesani: \"Ikani kutentha pa 22° ndipo yambani chiwonetsero cha Kutuluka kwa Dzuwa\""
 }

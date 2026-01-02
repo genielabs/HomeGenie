@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "سنسور دما",
       "VirtualThermostat.HeatingSwitchModule": "سوئیچ گرمایش",
       "VirtualThermostat.CoolingSwitchModule": "سوئیچ خنک کننده",
-      "ConfigureOptions.ThermostatsCount": "تعداد ترموستات‌ها"
+      "ConfigureOptions.ThermostatsCount": "تعداد ترموستات‌ها",
+      "ConfigureOptions.EnsureCommandDelivery": "با ارسال مداوم (حالت پالس) از دریافت فرمان اطمینان حاصل کنید."
     },
     "81": {
       "Title": "مانیتور انرژی",
@@ -311,20 +312,26 @@
       "Title": "هندلر اینتنت جمینی",
       "Description": "کنترل زبان طبیعی را برای سیستم هوشمند شما با استفاده از هوش مصنوعی Gemini گوگل فعال می‌کند. برای فعال کردن این ویژگی، یک کلید API معتبر وارد کنید. برای دریافت یک کلید API رایگان، دستورالعمل‌های موجود در https://aistudio.google.com/app/apikey را دنبال کنید.",
       "ConfigureOptions.ApiKey": "کلید API هوش مصنوعی گوگل جمینی",
-      "ConfigureOptions.ModelId": "شناسه مدل"
+      "ConfigureOptions.ModelId": "شناسه مدل",
+      "ConfigureOptions.SystemInstructions": "دستورالعمل‌های سیستم"
     },
     "931": {
       "Title": "ویجت جمینی جنی",
       "Description": "هوش مصنوعی شخصی شما برای ساخت ویجت. این ابزار که توسط Gemini پشتیبانی می‌شود، به شما کمک می‌کند تا کدهای HTML، CSS و جاوا اسکریپت را مستقیماً در ویرایشگر HomeGenie بنویسید و اشکال‌زدایی کنید. برای فعال کردن این ویژگی، یک کلید API معتبر وارد کنید. برای دریافت یک کلید API رایگان، دستورالعمل‌های https://aistudio.google.com/app/apikey را دنبال کنید.",
       "ConfigureOptions.ApiKey": "کلید API هوش مصنوعی گوگل جمینی",
-      "ConfigureOptions.ModelId": "شناسه مدل"
+      "ConfigureOptions.ModelId": "شناسه مدل",
+      "ConfigureOptions.SystemInstructions": "دستورالعمل‌های سیستم"
     },
     "940": {
       "Title": "هوش مصنوعی محلی",
       "Description": "LLM های پیشرفته را مستقیماً روی سرور HomeGenie خود اجرا کنید. شامل یک API کامل برای کنترل هوش مصنوعی از سایر برنامه‌ها و اسکریپت‌ها است.",
       "ConfigureOptions.MaxTokens": "حداکثر توکن (طول پاسخ)",
       "ConfigureOptions.ModelPath": "مسیر فایل محلی GGUF",
-      "ConfigureOptions.ModelFile": "مدل"
+      "ConfigureOptions.ModelFile": "مدل",
+      "ConfigureOptions.SystemInstructions": "دستورالعمل‌های سیستم",
+      "ConfigureOptions.ContextSize": "اندازه حافظه هوش مصنوعی (پنجره زمینه)",
+      "ConfigureOptions.MaxTurns": "حداکثر تعداد چرخش تاریخچه چت (0 = بدون محدودیت)",
+      "ConfigureOptions.SendContextData": "لیست دستگاه‌ها و حسگرها را در کوئری‌ها قرار دهید"
     },
     "575": {
       "Title": "مدیریت دانلود",
@@ -362,5 +369,8 @@
       "Title": "مصرف انرژی ساعتی",
       "Description": "نمودار میله‌ای که میانگین مصرف وات/ساعت را برای هر ساعت از روز (00h-23h) نشان می‌دهد. داده‌ها در طول هفته انتخاب شده جمع‌آوری شده و از API آمار مصرف انرژی گرفته شده‌اند."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "فرماندهی جنی",
+  "scheduler_preset_action_config_wish": "اقدام زبان طبیعی",
+  "scheduler_preset_action_config_wish.placeholder": "امتحان کنید: «گرما را روی ۲۲ درجه تنظیم کنید و صحنه طلوع آفتاب را شروع کنید»"
 }

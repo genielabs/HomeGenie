@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Temperatuuriandur",
       "VirtualThermostat.HeatingSwitchModule": "Küttelüliti",
       "VirtualThermostat.CoolingSwitchModule": "Jahutuslüliti",
-      "ConfigureOptions.ThermostatsCount": "Termostaatide arv"
+      "ConfigureOptions.ThermostatsCount": "Termostaatide arv",
+      "ConfigureOptions.EnsureCommandDelivery": "Tagada käskude edastamine pideva ülekandega (impulssrežiim)."
     },
     "81": {
       "Title": "Energiamonitor",
@@ -311,20 +312,26 @@
       "Title": "Gemini kavatsuste käitleja",
       "Description": "Võimaldab teie nutika süsteemi loomuliku keele juhtimist Google'i Gemini tehisintellekti abil. Selle funktsiooni aktiveerimiseks sisestage kehtiv API-võti. Tasuta API-võtme saamiseks järgige juhiseid aadressil https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini tehisintellekti API võti",
-      "ConfigureOptions.ModelId": "Mudeli ID"
+      "ConfigureOptions.ModelId": "Mudeli ID",
+      "ConfigureOptions.SystemInstructions": "Süsteemi juhised"
     },
     "931": {
       "Title": "Kaksikute vidina džinn",
       "Description": "Sinu isiklik tehisintellekti džinn vidinate loomiseks. Gemini toega seade aitab sul kirjutada ja siluda HTML-i, CSS-i ja JavaScripti koodi otse HomeGenie redaktoris. Selle funktsiooni aktiveerimiseks sisesta kehtiv API-võti. Tasuta API-võtme saamiseks järgi juhiseid aadressil https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini tehisintellekti API võti",
-      "ConfigureOptions.ModelId": "Mudeli ID"
+      "ConfigureOptions.ModelId": "Mudeli ID",
+      "ConfigureOptions.SystemInstructions": "Süsteemi juhised"
     },
     "940": {
       "Title": "Kohalik tehisintellekt",
       "Description": "Käivita tipptasemel õigusteaduse programme (LLM) otse oma HomeGenie serveris. Sisaldab täielikku API-t tehisintellekti juhtimiseks teistest programmidest ja skriptidest.",
       "ConfigureOptions.MaxTokens": "Maksimaalne tokenite arv (vastuse pikkus)",
       "ConfigureOptions.ModelPath": "Kohaliku GGUF-faili tee",
-      "ConfigureOptions.ModelFile": "Mudel"
+      "ConfigureOptions.ModelFile": "Mudel",
+      "ConfigureOptions.SystemInstructions": "Süsteemi juhised",
+      "ConfigureOptions.ContextSize": "AI mälumaht (kontekstiaken)",
+      "ConfigureOptions.MaxTurns": "Maksimaalne vestlusajaloo käikude arv (0 = piirangut pole)",
+      "ConfigureOptions.SendContextData": "Lisa päringutesse seadmete loend ja andurid"
     },
     "575": {
       "Title": "Allalaadimishaldur",
@@ -362,5 +369,8 @@
       "Title": "Tunnine energiatarve",
       "Description": "Tulpdiagramm, mis kuvab keskmist vattide/tunni tarbimist iga päeva tunni kohta (00–23). Andmed koondatakse valitud nädala kohta ja pärinevad energiakasutuse statistika API-st."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Džinni käsk",
+  "scheduler_preset_action_config_wish": "Loomuliku keele toiming",
+  "scheduler_preset_action_config_wish.placeholder": "Proovi: „Seadista temperatuur 22°C peale ja käivita päikesetõusu stseen”"
 }

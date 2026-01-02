@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "ເຊັນເຊີອຸນຫະພູມ",
       "VirtualThermostat.HeatingSwitchModule": "ສະຫຼັບຄວາມຮ້ອນ",
       "VirtualThermostat.CoolingSwitchModule": "ສະຫຼັບຄວາມເຢັນ",
-      "ConfigureOptions.ThermostatsCount": "ຈຳນວນເຄື່ອງຄວບຄຸມອຸນຫະພູມ"
+      "ConfigureOptions.ThermostatsCount": "ຈຳນວນເຄື່ອງຄວບຄຸມອຸນຫະພູມ",
+      "ConfigureOptions.EnsureCommandDelivery": "ຮັບປະກັນການສົ່ງຄຳສັ່ງດ້ວຍການສົ່ງຕໍ່ຢ່າງຕໍ່ເນື່ອງ (ໂໝດກຳມະຈອນ)."
     },
     "81": {
       "Title": "ຕິດຕາມກວດກາພະລັງງານ",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "ເປີດໃຊ້ການຄວບຄຸມພາສາທໍາມະຊາດສໍາລັບລະບົບອັດສະລິຍະຂອງທ່ານໂດຍໃຊ້ Gemini AI ຂອງ Google. ເພື່ອເປີດໃຊ້ຄຸນສົມບັດນີ້, ໃຫ້ໃສ່ລະຫັດ API ທີ່ຖືກຕ້ອງ. ປະຕິບັດຕາມຄໍາແນະນໍາຢູ່ https://aistudio.google.com/app/apikey ເພື່ອຮັບລະຫັດ API ຟຣີ.",
       "ConfigureOptions.ApiKey": "ກະແຈ Google Gemini AI API",
-      "ConfigureOptions.ModelId": "ID ຕົວແບບ"
+      "ConfigureOptions.ModelId": "ID ຕົວແບບ",
+      "ConfigureOptions.SystemInstructions": "ຄຳແນະນຳກ່ຽວກັບລະບົບ"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "genie AI ສ່ວນຕົວຂອງທ່ານສໍາລັບການສ້າງ widget. ຂັບເຄື່ອນໂດຍ Gemini, ມັນຊ່ວຍໃຫ້ທ່ານຂຽນແລະແກ້ໄຂລະຫັດ HTML, CSS, ແລະ JavaScript ໂດຍກົງພາຍໃນຕົວແກ້ໄຂ HomeGenie. ເພື່ອເປີດໃຊ້ຄຸນສົມບັດນີ້, ກະລຸນາໃສ່ລະຫັດ API ທີ່ຖືກຕ້ອງ. ປະຕິບັດຕາມຄໍາແນະນໍາຢູ່ https://aistudio.google.com/app/apikey ເພື່ອຮັບລະຫັດ API ຟຣີ.",
       "ConfigureOptions.ApiKey": "ກະແຈ Google Gemini AI API",
-      "ConfigureOptions.ModelId": "ID ຕົວແບບ"
+      "ConfigureOptions.ModelId": "ID ຕົວແບບ",
+      "ConfigureOptions.SystemInstructions": "ຄຳແນະນຳກ່ຽວກັບລະບົບ"
     },
     "940": {
       "Title": "AI ທ້ອງຖິ່ນ",
       "Description": "ໃຊ້ງານ LLM ທີ່ທັນສະໄໝໂດຍກົງໃນເຊີບເວີ HomeGenie ຂອງທ່ານ. ລວມມີ API ເຕັມຮູບແບບເພື່ອຄວບຄຸມ AI ຈາກໂປຣແກຣມ ແລະ ສະຄຣິບອື່ນໆ.",
       "ConfigureOptions.MaxTokens": "ໂທເຄັນສູງສຸດ (ຄວາມຍາວຕອບສະໜອງ)",
       "ConfigureOptions.ModelPath": "ເສັ້ນທາງໄປຫາໄຟລ໌ GGUF ທ້ອງຖິ່ນ",
-      "ConfigureOptions.ModelFile": "ຮຸ່ນ"
+      "ConfigureOptions.ModelFile": "ຮຸ່ນ",
+      "ConfigureOptions.SystemInstructions": "ຄຳແນະນຳກ່ຽວກັບລະບົບ",
+      "ConfigureOptions.ContextSize": "ຂະໜາດໜ່ວຍຄວາມຈຳ AI (ໜ້າຕ່າງສະພາບການ)",
+      "ConfigureOptions.MaxTurns": "ປະຫວັດການສົນທະນາສູງສຸດ (0 = ບໍ່ມີຂີດຈຳກັດ)",
+      "ConfigureOptions.SendContextData": "ລວມເອົາລາຍຊື່ອຸປະກອນ ແລະ ເຊັນເຊີໃນຄຳຖາມ"
     },
     "575": {
       "Title": "ຕົວຈັດການດາວໂຫຼດ",
@@ -362,5 +369,8 @@
       "Title": "ການໃຊ້ພະລັງງານຕໍ່ຊົ່ວໂມງ",
       "Description": "ຕາຕະລາງແຖບສະແດງການໃຊ້ພະລັງງານວັດ/ຊົ່ວໂມງສະເລ່ຍສຳລັບທຸກໆຊົ່ວໂມງຂອງມື້ (00h-23h). ຂໍ້ມູນຖືກລວບລວມໃນອາທິດທີ່ເລືອກ ແລະ ໄດ້ມາຈາກ API ສະຖິຕິການໃຊ້ພະລັງງານ."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "ຄຳສັ່ງຂອງ Genie",
+  "scheduler_preset_action_config_wish": "ການກະທຳທາງພາສາທຳມະຊາດ",
+  "scheduler_preset_action_config_wish.placeholder": "ລອງ: \"ຕັ້ງຄວາມຮ້ອນໄວ້ທີ່ 22° ແລະ ເລີ່ມຕົ້ນສາກຕາເວັນຂຶ້ນ\""
 }

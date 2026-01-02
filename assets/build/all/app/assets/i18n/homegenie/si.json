@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "උෂ්ණත්ව සංවේදකය",
       "VirtualThermostat.HeatingSwitchModule": "තාපන ස්විචය",
       "VirtualThermostat.CoolingSwitchModule": "සිසිලන ස්විචය",
-      "ConfigureOptions.ThermostatsCount": "උෂ්ණත්ව පාලක ගණන"
+      "ConfigureOptions.ThermostatsCount": "උෂ්ණත්ව පාලක ගණන",
+      "ConfigureOptions.EnsureCommandDelivery": "අඛණ්ඩ සම්ප්‍රේෂණය (ස්පන්දන මාදිලිය) සමඟ විධාන බෙදා හැරීම සහතික කරන්න."
     },
     "81": {
       "Title": "බලශක්ති මොනිටරය",
@@ -311,20 +312,26 @@
       "Title": "මිථුන අභිප්‍රායන් හසුරුවන්නා",
       "Description": "Google හි Gemini AI භාවිතයෙන් ඔබේ ස්මාර්ට් පද්ධතිය සඳහා ස්වභාවික භාෂා පාලනය සක්‍රීය කරයි. මෙම විශේෂාංගය සක්‍රිය කිරීමට, වලංගු API යතුරක් ඇතුළත් කරන්න. නොමිලේ API යතුරක් ලබා ගැනීමට https://aistudio.google.com/app/apikey හි උපදෙස් අනුගමනය කරන්න.",
       "ConfigureOptions.ApiKey": "ගූගල් මිථුන AI API යතුර",
-      "ConfigureOptions.ModelId": "මාදිලි හැඳුනුම්පත"
+      "ConfigureOptions.ModelId": "මාදිලි හැඳුනුම්පත",
+      "ConfigureOptions.SystemInstructions": "පද්ධති උපදෙස්"
     },
     "931": {
       "Title": "ජෙමිනි විජට් ජෙනී",
       "Description": "විජට් නිර්මාණය සඳහා ඔබේ පුද්ගලික AI ජෙනී. Gemini මගින් බල ගැන්වෙන එය, HomeGenie සංස්කාරකය තුළ කෙලින්ම HTML, CSS සහ JavaScript කේත ලිවීමට සහ නිදොස් කිරීමට ඔබට උපකාරී වේ. මෙම විශේෂාංගය සක්‍රිය කිරීමට, වලංගු API යතුරක් ඇතුළත් කරන්න. නොමිලේ API යතුරක් ලබා ගැනීමට https://aistudio.google.com/app/apikey හි උපදෙස් අනුගමනය කරන්න.",
       "ConfigureOptions.ApiKey": "ගූගල් මිථුන AI API යතුර",
-      "ConfigureOptions.ModelId": "මාදිලි හැඳුනුම්පත"
+      "ConfigureOptions.ModelId": "මාදිලි හැඳුනුම්පත",
+      "ConfigureOptions.SystemInstructions": "පද්ධති උපදෙස්"
     },
     "940": {
       "Title": "දේශීය AI",
       "Description": "ඔබගේ HomeGenie සේවාදායකයේ සෘජුවම අති නවීන LLM ධාවනය කරන්න. අනෙකුත් වැඩසටහන් සහ ස්ක්‍රිප්ට් වලින් AI පාලනය කිරීමට සම්පූර්ණ API එකක් ඇතුළත් වේ.",
       "ConfigureOptions.MaxTokens": "උපරිම ටෝකන (ප්‍රතිචාර දිග)",
       "ConfigureOptions.ModelPath": "දේශීය GGUF ගොනුවට මාර්ගය",
-      "ConfigureOptions.ModelFile": "ආකෘතිය"
+      "ConfigureOptions.ModelFile": "ආකෘතිය",
+      "ConfigureOptions.SystemInstructions": "පද්ධති උපදෙස්",
+      "ConfigureOptions.ContextSize": "AI මතක ප්‍රමාණය (සන්දර්භ කවුළුව)",
+      "ConfigureOptions.MaxTurns": "උපරිම කතාබස් ඉතිහාස හැරීම් (0 = සීමාවක් නැත)",
+      "ConfigureOptions.SendContextData": "විමසුම්වල උපාංග ලැයිස්තුව සහ සංවේදක ඇතුළත් කරන්න"
     },
     "575": {
       "Title": "බාගැනීම් කළමනාකරු",
@@ -362,5 +369,8 @@
       "Title": "පැයකට බලශක්ති පරිභෝජනය",
       "Description": "දවසේ සෑම පැයකටම (පැය 00-පැය 23) සාමාන්‍ය වොට්/පැය පරිභෝජනය පෙන්වන තීරු ප්‍රස්ථාරය. තෝරාගත් සතිය පුරා දත්ත එකතු කර බලශක්ති භාවිත සංඛ්‍යාලේඛන API වෙතින් ලබා ගනී."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "ජෙනී විධානය",
+  "scheduler_preset_action_config_wish": "ස්වභාවික භාෂා ක්‍රියාව",
+  "scheduler_preset_action_config_wish.placeholder": "උත්සාහ කරන්න: \"තාපය 22° ට සකසා හිරු උදාව දර්ශනය ආරම්භ කරන්න\""
 }

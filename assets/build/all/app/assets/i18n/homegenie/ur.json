@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "درجہ حرارت سینسر",
       "VirtualThermostat.HeatingSwitchModule": "حرارتی سوئچ",
       "VirtualThermostat.CoolingSwitchModule": "کولنگ سوئچ",
-      "ConfigureOptions.ThermostatsCount": "تھرموسٹیٹ کی تعداد"
+      "ConfigureOptions.ThermostatsCount": "تھرموسٹیٹ کی تعداد",
+      "ConfigureOptions.EnsureCommandDelivery": "مسلسل ٹرانسمیشن (پلس موڈ) کے ساتھ کمانڈ کی ترسیل کو یقینی بنائیں۔"
     },
     "81": {
       "Title": "انرجی مانیٹر",
@@ -311,20 +312,26 @@
       "Title": "جیمنی انٹینٹ ہینڈلر",
       "Description": "Google کے Gemini AI کا استعمال کرتے ہوئے آپ کے سمارٹ سسٹم کے لیے قدرتی زبان کے کنٹرول کو فعال کرتا ہے۔ اس خصوصیت کو چالو کرنے کے لیے، ایک درست API کلید درج کریں۔ مفت API کلید حاصل کرنے کے لیے https://aistudio.google.com/app/apikey پر دی گئی ہدایات پر عمل کریں۔",
       "ConfigureOptions.ApiKey": "Google Gemini AI API کلید",
-      "ConfigureOptions.ModelId": "ماڈل ID"
+      "ConfigureOptions.ModelId": "ماڈل ID",
+      "ConfigureOptions.SystemInstructions": "سسٹم کی ہدایات"
     },
     "931": {
       "Title": "جیمنی ویجیٹ جنی",
       "Description": "ویجیٹ تخلیق کے لیے آپ کا ذاتی AI جنن۔ Gemini کے ذریعے تقویت یافتہ، یہ آپ کو HTML، CSS، اور JavaScript کوڈ کو براہ راست HomeGenie ایڈیٹر میں لکھنے اور ڈیبگ کرنے میں مدد کرتا ہے۔ اس خصوصیت کو چالو کرنے کے لیے، ایک درست API کلید درج کریں۔ مفت API کلید حاصل کرنے کے لیے https://aistudio.google.com/app/apikey پر دی گئی ہدایات پر عمل کریں۔",
       "ConfigureOptions.ApiKey": "Google Gemini AI API کلید",
-      "ConfigureOptions.ModelId": "ماڈل ID"
+      "ConfigureOptions.ModelId": "ماڈل ID",
+      "ConfigureOptions.SystemInstructions": "سسٹم کی ہدایات"
     },
     "940": {
       "Title": "مقامی AI",
       "Description": "جدید ترین LLMs کو براہ راست اپنے HomeGenie سرور پر چلائیں۔ دوسرے پروگراموں اور اسکرپٹس سے AI کو کنٹرول کرنے کے لیے ایک مکمل API شامل ہے۔",
       "ConfigureOptions.MaxTokens": "زیادہ سے زیادہ ٹوکنز (جواب کی لمبائی)",
       "ConfigureOptions.ModelPath": "مقامی GGUF فائل کا راستہ",
-      "ConfigureOptions.ModelFile": "ماڈل"
+      "ConfigureOptions.ModelFile": "ماڈل",
+      "ConfigureOptions.SystemInstructions": "سسٹم کی ہدایات",
+      "ConfigureOptions.ContextSize": "AI میموری کا سائز (سیاق و سباق کی کھڑکی)",
+      "ConfigureOptions.MaxTurns": "زیادہ سے زیادہ چیٹ کی تاریخ بدل جاتی ہے (0 = کوئی حد نہیں)",
+      "ConfigureOptions.SendContextData": "سوالات میں ڈیوائس کی فہرست اور سینسرز شامل کریں۔"
     },
     "575": {
       "Title": "ڈاؤن لوڈ مینیجر",
@@ -362,5 +369,8 @@
       "Title": "فی گھنٹہ توانائی کی کھپت",
       "Description": "دن کے ہر گھنٹے (00h-23h) کے لیے اوسط واٹس/گھنٹہ کی کھپت کو ظاہر کرنے والا بار چارٹ۔ ڈیٹا کو منتخب ہفتہ میں جمع کیا جاتا ہے اور توانائی کے استعمال کے اعداد و شمار API سے حاصل کیا جاتا ہے۔"
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "جنی کمانڈ",
+  "scheduler_preset_action_config_wish": "قدرتی زبان کا عمل",
+  "scheduler_preset_action_config_wish.placeholder": "کوشش کریں: \"گرمی کو 22° پر سیٹ کریں اور طلوع آفتاب کا منظر شروع کریں\""
 }

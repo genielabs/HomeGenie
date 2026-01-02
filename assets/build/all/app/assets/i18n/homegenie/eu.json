@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Tenperatura sentsorea",
       "VirtualThermostat.HeatingSwitchModule": "Berogailu etengailua",
       "VirtualThermostat.CoolingSwitchModule": "Hozte-etengailua",
-      "ConfigureOptions.ThermostatsCount": "Termostato kopurua"
+      "ConfigureOptions.ThermostatsCount": "Termostato kopurua",
+      "ConfigureOptions.EnsureCommandDelivery": "Ziurtatu komandoen bidalketa transmisio jarraituarekin (pultsu moduan)."
     },
     "81": {
       "Title": "Energia Monitorea",
@@ -311,20 +312,26 @@
       "Title": "Gemini Asmoen Kudeatzailea",
       "Description": "Google-ren Gemini AI erabiliz zure sistema adimendunerako hizkuntza naturalaren kontrola gaitzen du. Funtzio hau aktibatzeko, sartu API gako baliodun bat. Jarraitu https://aistudio.google.com/app/apikey helbideko argibideei doako API gako bat lortzeko.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API gakoa",
-      "ConfigureOptions.ModelId": "Modeloaren IDa"
+      "ConfigureOptions.ModelId": "Modeloaren IDa",
+      "ConfigureOptions.SystemInstructions": "Sistemaren argibideak"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Widgetak sortzeko zure IA jenio pertsonala. Gemini-k bultzatuta, HTML, CSS eta JavaScript kodea idazten eta arazten laguntzen dizu zuzenean HomeGenie editorean. Funtzio hau aktibatzeko, sartu API gako baliodun bat. Jarraitu https://aistudio.google.com/app/apikey helbideko argibideei doako API gako bat lortzeko.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API gakoa",
-      "ConfigureOptions.ModelId": "Modeloaren IDa"
+      "ConfigureOptions.ModelId": "Modeloaren IDa",
+      "ConfigureOptions.SystemInstructions": "Sistemaren argibideak"
     },
     "940": {
       "Title": "Tokiko IA",
       "Description": "Exekutatu punta-puntako LLMak zuzenean zure HomeGenie zerbitzarian. API osoa barne hartzen du IA beste programa eta script batzuetatik kontrolatzeko.",
       "ConfigureOptions.MaxTokens": "Token maximoak (erantzunaren luzera)",
       "ConfigureOptions.ModelPath": "Tokiko GGUF fitxategirako bidea",
-      "ConfigureOptions.ModelFile": "Modeloa"
+      "ConfigureOptions.ModelFile": "Modeloa",
+      "ConfigureOptions.SystemInstructions": "Sistemaren argibideak",
+      "ConfigureOptions.ContextSize": "AI memoriaren tamaina (testuinguru leihoa)",
+      "ConfigureOptions.MaxTurns": "Txat-historiaren txanda maximoak (0 = mugarik gabe)",
+      "ConfigureOptions.SendContextData": "Sartu gailuen zerrenda eta sentsoreak kontsultetan"
     },
     "575": {
       "Title": "Deskarga kudeatzailea",
@@ -362,5 +369,8 @@
       "Title": "Orduko energia-kontsumoa",
       "Description": "Barra-diagrama, eguneko ordu bakoitzeko (00:00etatik 23:00etara) watt/orduko batez besteko kontsumoa erakusten duena. Datuak hautatutako astean zehar agregatzen dira eta Energia Erabileraren Estatistiken APItik datoz."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Genio Komandoa",
+  "scheduler_preset_action_config_wish": "Hizkuntza Naturalaren Ekintza",
+  "scheduler_preset_action_config_wish.placeholder": "Saiatu: \"Ezarri beroa 22°-tan eta hasi egunsentiaren eszena\""
 }

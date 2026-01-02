@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Penderia suhu",
       "VirtualThermostat.HeatingSwitchModule": "Suis pemanas",
       "VirtualThermostat.CoolingSwitchModule": "Suis penyejuk",
-      "ConfigureOptions.ThermostatsCount": "Bilangan termostat"
+      "ConfigureOptions.ThermostatsCount": "Bilangan termostat",
+      "ConfigureOptions.EnsureCommandDelivery": "Pastikan penghantaran arahan dengan penghantaran berterusan (mod denyut)."
     },
     "81": {
       "Title": "Pemantau Tenaga",
@@ -311,20 +312,26 @@
       "Title": "Pengendali Niat Gemini",
       "Description": "Mendayakan kawalan bahasa semula jadi untuk sistem pintar anda menggunakan Gemini AI Google. Untuk mengaktifkan ciri ini, masukkan kunci API yang sah. Ikut arahan di https://aistudio.google.com/app/apikey untuk mendapatkan kunci API percuma.",
       "ConfigureOptions.ApiKey": "Kunci API Google Gemini AI",
-      "ConfigureOptions.ModelId": "ID model"
+      "ConfigureOptions.ModelId": "ID model",
+      "ConfigureOptions.SystemInstructions": "Arahan Sistem"
     },
     "931": {
       "Title": "Gemini Widget Jin",
       "Description": "Jin AI peribadi anda untuk penciptaan widget. Dikuasakan oleh Gemini, ia membantu anda menulis dan menyahpepijat kod HTML, CSS dan JavaScript terus dalam editor HomeGenie. Untuk mengaktifkan ciri ini, masukkan kunci API yang sah. Ikut arahan di https://aistudio.google.com/app/apikey untuk mendapatkan kunci API percuma.",
       "ConfigureOptions.ApiKey": "Kunci API Google Gemini AI",
-      "ConfigureOptions.ModelId": "ID model"
+      "ConfigureOptions.ModelId": "ID model",
+      "ConfigureOptions.SystemInstructions": "Arahan Sistem"
     },
     "940": {
       "Title": "AI Tempatan",
       "Description": "Jalankan LLM canggih terus pada pelayan HomeGenie anda. Termasuk API penuh untuk mengawal AI daripada program dan skrip lain.",
       "ConfigureOptions.MaxTokens": "Token Maks (panjang respons)",
       "ConfigureOptions.ModelPath": "Laluan ke fail GGUF setempat",
-      "ConfigureOptions.ModelFile": "Model"
+      "ConfigureOptions.ModelFile": "Model",
+      "ConfigureOptions.SystemInstructions": "Arahan Sistem",
+      "ConfigureOptions.ContextSize": "Saiz Memori AI (Tetingkap Konteks)",
+      "ConfigureOptions.MaxTurns": "Pusingan sejarah sembang maksimum (0 = tiada had)",
+      "ConfigureOptions.SendContextData": "Sertakan senarai peranti dan sensor dalam pertanyaan"
     },
     "575": {
       "Title": "Pengurus Muat Turun",
@@ -362,5 +369,8 @@
       "Title": "Penggunaan Tenaga Setiap Jam",
       "Description": "Carta bar memaparkan purata penggunaan Watt/Jam untuk setiap jam dalam sehari (00h-23h). Data diagregatkan sepanjang minggu yang dipilih dan diperoleh daripada API Statistik Penggunaan Tenaga."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Perintah Jin",
+  "scheduler_preset_action_config_wish": "Tindakan Bahasa Semula Jadi",
+  "scheduler_preset_action_config_wish.placeholder": "Cuba: \"Tetapkan suhu kepada 22° dan mulakan pemandangan Matahari Terbit\""
 }

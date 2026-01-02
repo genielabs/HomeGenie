@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Ihe mmetụta okpomọkụ",
       "VirtualThermostat.HeatingSwitchModule": "Mgba ọkụ ọkụ",
       "VirtualThermostat.CoolingSwitchModule": "Mgbanwe jụrụ oyi",
-      "ConfigureOptions.ThermostatsCount": "Ọnụọgụ nke thermostats"
+      "ConfigureOptions.ThermostatsCount": "Ọnụọgụ nke thermostats",
+      "ConfigureOptions.EnsureCommandDelivery": "Hụ na nnyefe iwu na-aga n'ihu site na nnyefe na-aga n'ihu (ụdị pulse)."
     },
     "81": {
       "Title": "Nyochaa ike",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "Na-enyere njikwa asụsụ eke maka sistemụ smart gị site na iji Gemini AI nke Google. Iji mee ka njirimara a rụọ ọrụ, tinye igodo API dị irè. Soro ntuziaka a na https://aistudio.google.com/app/apikey iji nweta igodo API efu.",
       "ConfigureOptions.ApiKey": "Google Gemini AI igodo",
-      "ConfigureOptions.ModelId": "NJ nlereanya"
+      "ConfigureOptions.ModelId": "NJ nlereanya",
+      "ConfigureOptions.SystemInstructions": "Ntuziaka Sistemụ"
     },
     "931": {
       "Title": "Gemini wijetị Genie",
       "Description": "Genie AI nkeonwe gị maka imepụta wijetị. Gemini kwadoro ya, ọ na-enyere gị aka ide na ihichapụ HTML, CSS na koodu Javascript ozugbo n'ime onye nchịkọta akụkọ HomeGenie. Iji mee ka njirimara a rụọ ọrụ, tinye igodo API dị irè. Soro ntuziaka a na https://aistudio.google.com/app/apikey iji nweta igodo API efu.",
       "ConfigureOptions.ApiKey": "Google Gemini AI igodo",
-      "ConfigureOptions.ModelId": "NJ nlereanya"
+      "ConfigureOptions.ModelId": "NJ nlereanya",
+      "ConfigureOptions.SystemInstructions": "Ntuziaka Sistemụ"
     },
     "940": {
       "Title": "AI mpaghara",
       "Description": "Gbaa LLMs kachasị ọhụrụ ozugbo na sava HomeGenie gị. Gụnyere API zuru oke iji chịkwaa AI site na mmemme na edemede ndị ọzọ.",
       "ConfigureOptions.MaxTokens": "Max Tokens (ogologo nzaghachi)",
       "ConfigureOptions.ModelPath": "Ụzọ gaa faịlụ GGUF mpaghara",
-      "ConfigureOptions.ModelFile": "Ụdị nlereanya"
+      "ConfigureOptions.ModelFile": "Ụdị nlereanya",
+      "ConfigureOptions.SystemInstructions": "Ntuziaka Sistemụ",
+      "ConfigureOptions.ContextSize": "Nha ebe nchekwa AI (Window Gburugburu)",
+      "ConfigureOptions.MaxTurns": "Oge kachasị elu nke akụkọ nkata (0 = enweghị oke)",
+      "ConfigureOptions.SendContextData": "Tinye ndepụta ngwaọrụ na ihe mmetụta na ajụjụ"
     },
     "575": {
       "Title": "Onye njikwa nbudata",
@@ -362,5 +369,8 @@
       "Title": "Oriri Ike kwa elekere",
       "Description": "Chaatị mmanya na-egosi nkezi oriri Watts/Awa maka awa ọ bụla n'ụbọchị (00h-23h). A na-achịkọta data n'ime izu ahọpụtara ma nweta ya site na API Energy Use Statistics."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Iwu Genie",
+  "scheduler_preset_action_config_wish": "Omume Asụsụ Okike",
+  "scheduler_preset_action_config_wish.placeholder": "Nwaa: \"Tọọ okpomọkụ ahụ ruo 22° wee malite ihe nkiri Ịnyanwụ\""
 }

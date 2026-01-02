@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Braiteoir teochta",
       "VirtualThermostat.HeatingSwitchModule": "Lasc téimh",
       "VirtualThermostat.CoolingSwitchModule": "Lasc fuaraithe",
-      "ConfigureOptions.ThermostatsCount": "Líon na dteirmeastat"
+      "ConfigureOptions.ThermostatsCount": "Líon na dteirmeastat",
+      "ConfigureOptions.EnsureCommandDelivery": "Cinntigh go seachadtar orduithe le tarchur leanúnach (mód cuisle)."
     },
     "81": {
       "Title": "Monatóir Fuinnimh",
@@ -311,20 +312,26 @@
       "Title": "Láimhseálaí Intinne Gemini",
       "Description": "Cumasaíonn sé rialú teanga nádúrtha do do chóras cliste ag baint úsáide as Gemini AI Google. Chun an ghné seo a ghníomhachtú, cuir isteach eochair API bhailí. Lean na treoracha ag https://aistudio.google.com/app/apikey chun eochair API saor in aisce a fháil.",
       "ConfigureOptions.ApiKey": "Eochair API AI Google Gemini",
-      "ConfigureOptions.ModelId": "Aitheantas Múnla"
+      "ConfigureOptions.ModelId": "Aitheantas Múnla",
+      "ConfigureOptions.SystemInstructions": "Treoracha Córais"
     },
     "931": {
       "Title": "Géine Giuirléid Gemini",
       "Description": "Do ghiní pearsanta AI le haghaidh cruthú giuirléidí. Cumhachtaithe ag Gemini, cabhraíonn sé leat cód HTML, CSS, agus JavaScript a scríobh agus a dhífhabhtú go díreach laistigh d'eagarthóir HomeGenie. Chun an ghné seo a ghníomhachtú, cuir isteach eochair API bhailí. Lean na treoracha ag https://aistudio.google.com/app/apikey chun eochair API saor in aisce a fháil.",
       "ConfigureOptions.ApiKey": "Eochair API AI Google Gemini",
-      "ConfigureOptions.ModelId": "Aitheantas Múnla"
+      "ConfigureOptions.ModelId": "Aitheantas Múnla",
+      "ConfigureOptions.SystemInstructions": "Treoracha Córais"
     },
     "940": {
       "Title": "Intleacht Shaorga Áitiúil",
       "Description": "Rith LLManna den scoth go díreach ar do fhreastalaí HomeGenie. Áirítear API iomlán chun an AI a rialú ó chláir agus scripteanna eile.",
       "ConfigureOptions.MaxTokens": "Uasmhéid Comharthaí (fad freagartha)",
       "ConfigureOptions.ModelPath": "Cosán chuig an gcomhad GGUF áitiúil",
-      "ConfigureOptions.ModelFile": "Samhail"
+      "ConfigureOptions.ModelFile": "Samhail",
+      "ConfigureOptions.SystemInstructions": "Treoracha Córais",
+      "ConfigureOptions.ContextSize": "Méid Cuimhne AI (Fuinneog Chomhthéacs)",
+      "ConfigureOptions.MaxTurns": "Uasmhéid casadh staire comhrá (0 = gan teorainn)",
+      "ConfigureOptions.SendContextData": "Cuir liosta gléasanna agus braiteoirí san áireamh i gceisteanna"
     },
     "575": {
       "Title": "Bainisteoir Íoslódála",
@@ -362,5 +369,8 @@
       "Title": "Tomhaltas Fuinnimh in aghaidh na hUaire",
       "Description": "Cairt barra a thaispeánann an meántomhaltas Vata/Uair an chloig do gach uair an chloig den lá (00h-23h). Déantar na sonraí a chomhiomlánú thar an tseachtain roghnaithe agus foinsítear iad ó API Staitisticí Úsáide Fuinnimh."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Ordú Genie",
+  "scheduler_preset_action_config_wish": "Gníomh Teanga Nádúrtha",
+  "scheduler_preset_action_config_wish.placeholder": "Bain triail as: \"Socraigh an teas go 22° agus cuir tús leis an radharc Éirí Gréine\""
 }

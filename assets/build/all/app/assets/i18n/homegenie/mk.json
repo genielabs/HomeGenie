@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Сензор за температура",
       "VirtualThermostat.HeatingSwitchModule": "Прекинувач за греење",
       "VirtualThermostat.CoolingSwitchModule": "Прекинувач за ладење",
-      "ConfigureOptions.ThermostatsCount": "Број на термостати"
+      "ConfigureOptions.ThermostatsCount": "Број на термостати",
+      "ConfigureOptions.EnsureCommandDelivery": "Обезбедете испорака на команди со континуиран пренос (пулсен режим)."
     },
     "81": {
       "Title": "Монитор за енергија",
@@ -311,20 +312,26 @@
       "Title": "Ракувач на намери на Gemini",
       "Description": "Овозможува контрола на природниот јазик за вашиот паметен систем користејќи ја вештачката интелигенција Gemini на Google. За да ја активирате оваа функција, внесете важечки API клуч. Следете ги упатствата на https://aistudio.google.com/app/apikey за да добиете бесплатен API клуч.",
       "ConfigureOptions.ApiKey": "API клуч за Google Gemini AI",
-      "ConfigureOptions.ModelId": "ИД на модел"
+      "ConfigureOptions.ModelId": "ИД на модел",
+      "ConfigureOptions.SystemInstructions": "Системски инструкции"
     },
     "931": {
       "Title": "Виџет Џини на Близнаци",
       "Description": "Вашиот личен AI џин за креирање виџети. Овозможен од Gemini, ви помага да пишувате и дебагирате HTML, CSS и JavaScript код директно во уредникот HomeGenie. За да ја активирате оваа функција, внесете важечки API клуч. Следете ги упатствата на https://aistudio.google.com/app/apikey за да добиете бесплатен API клуч.",
       "ConfigureOptions.ApiKey": "API клуч за Google Gemini AI",
-      "ConfigureOptions.ModelId": "ИД на модел"
+      "ConfigureOptions.ModelId": "ИД на модел",
+      "ConfigureOptions.SystemInstructions": "Системски инструкции"
     },
     "940": {
       "Title": "Локална вештачка интелигенција",
       "Description": "Стартувајте најсовремени LLM директно на вашиот HomeGenie сервер. Вклучува целосен API за контрола на вештачката интелигенција од други програми и скрипти.",
       "ConfigureOptions.MaxTokens": "Максимален број на токени (должина на одговор)",
       "ConfigureOptions.ModelPath": "Патека до локалната GGUF-датотека",
-      "ConfigureOptions.ModelFile": "Модел"
+      "ConfigureOptions.ModelFile": "Модел",
+      "ConfigureOptions.SystemInstructions": "Системски инструкции",
+      "ConfigureOptions.ContextSize": "Големина на меморијата со вештачка интелигенција (контекстен прозорец)",
+      "ConfigureOptions.MaxTurns": "Максимален број на вртења во историјата на разговор (0 = без ограничување)",
+      "ConfigureOptions.SendContextData": "Вклучи список на уреди и сензори во барањата"
     },
     "575": {
       "Title": "Менаџер за преземања",
@@ -362,5 +369,8 @@
       "Title": "Часовна потрошувачка на енергија",
       "Description": "Столб-дијаграм што ја прикажува просечната потрошувачка на вати/час за секој час од денот (00:00-23:00). Податоците се агрегирани во текот на избраната недела и се добиени од API-то за статистика на потрошувачката на енергија."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Џини Команда",
+  "scheduler_preset_action_config_wish": "Акција за природен јазик",
+  "scheduler_preset_action_config_wish.placeholder": "Обидете се: „Поставете ја топлината на 22° и започнете ја сцената со изгрејсонце“"
 }

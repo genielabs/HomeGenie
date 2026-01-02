@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "温度センサー",
       "VirtualThermostat.HeatingSwitchModule": "暖房スイッチ",
       "VirtualThermostat.CoolingSwitchModule": "冷却スイッチ",
-      "ConfigureOptions.ThermostatsCount": "サーモスタットの数"
+      "ConfigureOptions.ThermostatsCount": "サーモスタットの数",
+      "ConfigureOptions.EnsureCommandDelivery": "連続送信（パルスモード）によるコマンド配信を保証します。"
     },
     "81": {
       "Title": "エネルギーモニター",
@@ -311,20 +312,26 @@
       "Title": "ジェミニ インテント ハンドラー",
       "Description": "Google Gemini AI を活用し、スマートシステムの自然言語制御を可能にします。この機能を有効にするには、有効な API キーを入力してください。無料の API キーを取得するには、https://aistudio.google.com/app/apikey の手順に従ってください。",
       "ConfigureOptions.ApiKey": "Google Gemini AI APIキー",
-      "ConfigureOptions.ModelId": "モデルID"
+      "ConfigureOptions.ModelId": "モデルID",
+      "ConfigureOptions.SystemInstructions": "システム手順"
     },
     "931": {
       "Title": "ジェミニウィジェットジーニー",
       "Description": "ウィジェット作成のためのパーソナルAIジーニー。Geminiを搭載し、HomeGenieエディタ内で直接HTML、CSS、JavaScriptコードを記述・デバッグできます。この機能を有効にするには、有効なAPIキーを入力してください。無料のAPIキーを取得するには、https://aistudio.google.com/app/apikey の手順に従ってください。",
       "ConfigureOptions.ApiKey": "Google Gemini AI APIキー",
-      "ConfigureOptions.ModelId": "モデルID"
+      "ConfigureOptions.ModelId": "モデルID",
+      "ConfigureOptions.SystemInstructions": "システム手順"
     },
     "940": {
       "Title": "ローカルAI",
       "Description": "HomeGenieサーバー上で最先端のLLMを直接実行できます。他のプログラムやスクリプトからAIを制御するための完全なAPIが含まれています。",
       "ConfigureOptions.MaxTokens": "最大トークン数（応答の長さ）",
       "ConfigureOptions.ModelPath": "ローカル GGUF ファイルへのパス",
-      "ConfigureOptions.ModelFile": "モデル"
+      "ConfigureOptions.ModelFile": "モデル",
+      "ConfigureOptions.SystemInstructions": "システム手順",
+      "ConfigureOptions.ContextSize": "AI メモリ サイズ (コンテキスト ウィンドウ)",
+      "ConfigureOptions.MaxTurns": "チャット履歴の最大回転数（0 = 制限なし）",
+      "ConfigureOptions.SendContextData": "クエリにデバイスリストとセンサーを含める"
     },
     "575": {
       "Title": "ダウンロードマネージャー",
@@ -362,5 +369,8 @@
       "Title": "1時間あたりのエネルギー消費量",
       "Description": "1日（00時～23時）の各時間における平均ワット/時間消費量を示す棒グラフ。データは選択した週のデータを集計したもので、エネルギー使用統計APIから取得されます。"
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "ジーニーコマンド",
+  "scheduler_preset_action_config_wish": "自然言語アクション",
+  "scheduler_preset_action_config_wish.placeholder": "試してみましょう: 「暖房を 22 度に設定して日の出シーンを開始してください」"
 }

@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Dareemaha heerkulka",
       "VirtualThermostat.HeatingSwitchModule": "Daar kuleyliyaha",
       "VirtualThermostat.CoolingSwitchModule": "qaboojinta beddelka",
-      "ConfigureOptions.ThermostatsCount": "Tirada heerkulbeegyada"
+      "ConfigureOptions.ThermostatsCount": "Tirada heerkulbeegyada",
+      "ConfigureOptions.EnsureCommandDelivery": "Hubi gaarsiinta amarka iyadoo la adeegsanayo gudbin joogto ah (qaab garaaca wadnaha)."
     },
     "81": {
       "Title": "Kormeerka Tamarta",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Handler",
       "Description": "Waxay u saamaxdaa xakamaynta luqadda dabiiciga ah ee nidaamkaaga caqliga leh iyadoo la adeegsanayo Google Gemini AI. Si aad u dhaqaajiso sifadan, geli furaha API sax ah. Raac tilmaamaha https://aistudio.google.com/app/apikey si aad u hesho furaha API bilaashka ah.",
       "ConfigureOptions.ApiKey": "Google Gemini AI furaha",
-      "ConfigureOptions.ModelId": "Aqoonsiga Model"
+      "ConfigureOptions.ModelId": "Aqoonsiga Model",
+      "ConfigureOptions.SystemInstructions": "Tilmaamaha Nidaamka"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Genie-gaaga gaarka ah ee AI ee abuuritaanka widget-kaaga. Waxaa ku shaqeeya Gemini, waxay kaa caawinaysaa inaad qorto oo aad ka saarto HTML, CSS, iyo JavaScript code si toos ah gudaha tifaftiraha HomeGenie. Si aad u dhaqaajiso sifadan, geli furaha API sax ah. Raac tilmaamaha https://aistudio.google.com/app/apikey si aad u hesho furaha API bilaashka ah.",
       "ConfigureOptions.ApiKey": "Google Gemini AI furaha",
-      "ConfigureOptions.ModelId": "Aqoonsiga Model"
+      "ConfigureOptions.ModelId": "Aqoonsiga Model",
+      "ConfigureOptions.SystemInstructions": "Tilmaamaha Nidaamka"
     },
     "940": {
       "Title": "AI-ga maxalliga ah",
       "Description": "Ku socodsii LLM-yada casriga ah si toos ah server-kaaga HomeGenie. Waxaa ku jira API buuxa si loo xakameeyo AI-ga barnaamijyada kale iyo qoraallada.",
       "ConfigureOptions.MaxTokens": "Calaamadaha ugu Sareeya (dhererka jawaabta)",
       "ConfigureOptions.ModelPath": "Jidka loo maro faylka GGUF deegaanka",
-      "ConfigureOptions.ModelFile": "Moodel"
+      "ConfigureOptions.ModelFile": "Moodel",
+      "ConfigureOptions.SystemInstructions": "Tilmaamaha Nidaamka",
+      "ConfigureOptions.ContextSize": "Cabbirka xusuusta AI (Daaqadda Macnaha)",
+      "ConfigureOptions.MaxTurns": "Taariikhda ugu badan ee sheekaysiga (0 = xad la'aan)",
+      "ConfigureOptions.SendContextData": "Ku dar liiska qalabka iyo dareemayaasha su'aalaha"
     },
     "575": {
       "Title": "Maareeyaha Soo dejinta",
@@ -362,5 +369,8 @@
       "Title": "Isticmaalka Tamarta Saacadlaha ah",
       "Description": "Shaxda baarka oo muujinaysa celceliska isticmaalka Watts/Saacadda saacad kasta oo maalinta ah (00h-23h). Xogta waxaa la isku soo ururiyay toddobaadka la doortay waxaana laga soo qaatay API-ga Tirakoobka Isticmaalka Tamarta."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Taliska Genie",
+  "scheduler_preset_action_config_wish": "Ficilka Luqadda Dabiiciga ah",
+  "scheduler_preset_action_config_wish.placeholder": "Isku day: \"Kuleylka dhig 22° oo bilow muuqaalka Qorrax-soo-baxa\""
 }

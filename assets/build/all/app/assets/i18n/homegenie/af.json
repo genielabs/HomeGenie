@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Temperatuursensor",
       "VirtualThermostat.HeatingSwitchModule": "Verhittingskakelaar",
       "VirtualThermostat.CoolingSwitchModule": "Verkoelingskakelaar",
-      "ConfigureOptions.ThermostatsCount": "Aantal termostate"
+      "ConfigureOptions.ThermostatsCount": "Aantal termostate",
+      "ConfigureOptions.EnsureCommandDelivery": "Verseker opdraglewering met deurlopende oordrag (pulsmodus)."
     },
     "81": {
       "Title": "Energiemonitor",
@@ -311,20 +312,26 @@
       "Title": "Gemini Intent Hanteerder",
       "Description": "Aktiveer natuurlike taalbeheer vir jou slimstelsel met behulp van Google se Gemini KI. Om hierdie kenmerk te aktiveer, voer 'n geldige API-sleutel in. Volg die instruksies by https://aistudio.google.com/app/apikey om 'n gratis API-sleutel te kry.",
       "ConfigureOptions.ApiKey": "Google Gemini KI API-sleutel",
-      "ConfigureOptions.ModelId": "Model-ID"
+      "ConfigureOptions.ModelId": "Model-ID",
+      "ConfigureOptions.SystemInstructions": "Stelselinstruksies"
     },
     "931": {
       "Title": "Tweeling-widget Genie",
       "Description": "Jou persoonlike KI-gees vir die skep van widgets. Aangedryf deur Gemini, help dit jou om HTML-, CSS- en JavaScript-kode direk binne die HomeGenie-redigeerder te skryf en te ontfout. Om hierdie funksie te aktiveer, voer 'n geldige API-sleutel in. Volg die instruksies by https://aistudio.google.com/app/apikey om 'n gratis API-sleutel te kry.",
       "ConfigureOptions.ApiKey": "Google Gemini KI API-sleutel",
-      "ConfigureOptions.ModelId": "Model-ID"
+      "ConfigureOptions.ModelId": "Model-ID",
+      "ConfigureOptions.SystemInstructions": "Stelselinstruksies"
     },
     "940": {
       "Title": "Plaaslike KI",
       "Description": "Laat die nuutste LLM's direk op jou HomeGenie-bediener loop. Sluit 'n volledige API in om die KI vanaf ander programme en skrifte te beheer.",
       "ConfigureOptions.MaxTokens": "Maksimum aantal tekens (responslengte)",
       "ConfigureOptions.ModelPath": "Pad na plaaslike GGUF-lêer",
-      "ConfigureOptions.ModelFile": "Model"
+      "ConfigureOptions.ModelFile": "Model",
+      "ConfigureOptions.SystemInstructions": "Stelselinstruksies",
+      "ConfigureOptions.ContextSize": "KI-geheuegrootte (konteksvenster)",
+      "ConfigureOptions.MaxTurns": "Maksimum kletsgeskiedenis-beurte (0 = geen limiet nie)",
+      "ConfigureOptions.SendContextData": "Sluit toestellys en sensors in navrae in"
     },
     "575": {
       "Title": "Aflaaibestuurder",
@@ -362,5 +369,8 @@
       "Title": "Uurlikse Energieverbruik",
       "Description": "Staafgrafiek wat die gemiddelde Watt/Uur-verbruik vir elke uur van die dag (00:00-23:00) vertoon. Data word oor die gekose week saamgevoeg en is verkry vanaf die Energieverbruikstatistieke-API."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Genie-opdrag",
+  "scheduler_preset_action_config_wish": "Natuurlike Taalaksie",
+  "scheduler_preset_action_config_wish.placeholder": "Probeer: \"Stel die hitte op 22° en begin die Sonsopkoms-toneel\""
 }

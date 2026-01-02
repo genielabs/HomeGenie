@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "溫度感測器",
       "VirtualThermostat.HeatingSwitchModule": "加熱開關",
       "VirtualThermostat.CoolingSwitchModule": "冷卻開關",
-      "ConfigureOptions.ThermostatsCount": "恆溫器數量"
+      "ConfigureOptions.ThermostatsCount": "恆溫器數量",
+      "ConfigureOptions.EnsureCommandDelivery": "確保透過連續傳輸（脈衝模式）傳遞命令。"
     },
     "81": {
       "Title": "能源監測器",
@@ -311,20 +312,26 @@
       "Title": "雙子座意圖處理程序",
       "Description": "使用 Google Gemini AI 為您的智慧型系統啟用自然語言控制。若要啟動此功能，請輸入有效的 API 金鑰。請依照 https://aistudio.google.com/app/apikey 上的說明取得免費 API 金鑰。",
       "ConfigureOptions.ApiKey": "Google Gemini AI API 金鑰",
-      "ConfigureOptions.ModelId": "模型 ID"
+      "ConfigureOptions.ModelId": "模型 ID",
+      "ConfigureOptions.SystemInstructions": "系統說明"
     },
     "931": {
       "Title": "雙子座小工具精靈",
       "Description": "您的專屬 AI 小工具，幫助您輕鬆建立小工具。它由 Gemini 提供支持，可幫助您直接在 HomeGenie 編輯器中編寫和調試 HTML、CSS 和 JavaScript 程式碼。若要啟動此功能，請輸入有效的 API 金鑰。請按照 https://aistudio.google.com/app/apikey 上的說明取得免費的 API 金鑰。",
       "ConfigureOptions.ApiKey": "Google Gemini AI API 金鑰",
-      "ConfigureOptions.ModelId": "模型 ID"
+      "ConfigureOptions.ModelId": "模型 ID",
+      "ConfigureOptions.SystemInstructions": "系統說明"
     },
     "940": {
       "Title": "本地人工智慧",
       "Description": "直接在您的 HomeGenie 伺服器上執行最先進的 LLM（邏輯邏輯模型）。包含完整的 API，可從其他程式和腳本控制 AI。",
       "ConfigureOptions.MaxTokens": "最大令牌數（響應長度）",
       "ConfigureOptions.ModelPath": "本地 GGUF 檔案的路徑",
-      "ConfigureOptions.ModelFile": "模型"
+      "ConfigureOptions.ModelFile": "模型",
+      "ConfigureOptions.SystemInstructions": "系統說明",
+      "ConfigureOptions.ContextSize": "AI 記憶體大小（上下文視窗）",
+      "ConfigureOptions.MaxTurns": "聊天記錄最大輪數（0 = 無限制）",
+      "ConfigureOptions.SendContextData": "查詢中包含設備列表和感測器信息"
     },
     "575": {
       "Title": "下載管理器",
@@ -362,5 +369,8 @@
       "Title": "每小時能源消耗量",
       "Description": "長條圖顯示了一天中每個小時（00:00-23:00）的平均瓦時消耗量。數據匯總自所選一周，來自能源使用統計 API。"
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "精靈指令",
+  "scheduler_preset_action_config_wish": "自然語言行動",
+  "scheduler_preset_action_config_wish.placeholder": "試試：“將溫度設定為 22°，然後開始日出場景”"
 }

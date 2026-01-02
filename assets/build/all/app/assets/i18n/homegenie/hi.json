@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "तापमान संवेदक",
       "VirtualThermostat.HeatingSwitchModule": "हीटिंग स्विच",
       "VirtualThermostat.CoolingSwitchModule": "शीतलन स्विच",
-      "ConfigureOptions.ThermostatsCount": "थर्मोस्टैट्स की संख्या"
+      "ConfigureOptions.ThermostatsCount": "थर्मोस्टैट्स की संख्या",
+      "ConfigureOptions.EnsureCommandDelivery": "निरंतर संचरण (पल्स-मोड) के माध्यम से कमांड की डिलीवरी सुनिश्चित करें।"
     },
     "81": {
       "Title": "ऊर्जा मॉनिटर",
@@ -311,20 +312,26 @@
       "Title": "जेमिनी इंटेंट हैंडलर",
       "Description": "Google के Gemini AI का उपयोग करके आपके स्मार्ट सिस्टम के लिए प्राकृतिक भाषा नियंत्रण सक्षम करता है। इस सुविधा को सक्रिय करने के लिए, एक मान्य API कुंजी दर्ज करें। निःशुल्क API कुंजी प्राप्त करने के लिए https://aistudio.google.com/app/apikey पर दिए गए निर्देशों का पालन करें।",
       "ConfigureOptions.ApiKey": "Google Gemini AI API कुंजी",
-      "ConfigureOptions.ModelId": "मॉडल आईडी"
+      "ConfigureOptions.ModelId": "मॉडल आईडी",
+      "ConfigureOptions.SystemInstructions": "सिस्टम निर्देश"
     },
     "931": {
       "Title": "जेमिनी विजेट जिन्न",
       "Description": "विजेट निर्माण के लिए आपका निजी AI जिन्न। जेमिनी द्वारा संचालित, यह आपको सीधे HomeGenie संपादक में HTML, CSS और JavaScript कोड लिखने और डीबग करने में मदद करता है। इस सुविधा को सक्रिय करने के लिए, एक मान्य API कुंजी दर्ज करें। मुफ़्त API कुंजी प्राप्त करने के लिए https://aistudio.google.com/app/apikey पर दिए गए निर्देशों का पालन करें।",
       "ConfigureOptions.ApiKey": "Google Gemini AI API कुंजी",
-      "ConfigureOptions.ModelId": "मॉडल आईडी"
+      "ConfigureOptions.ModelId": "मॉडल आईडी",
+      "ConfigureOptions.SystemInstructions": "सिस्टम निर्देश"
     },
     "940": {
       "Title": "स्थानीय एआई",
       "Description": "अपने HomeGenie सर्वर पर अत्याधुनिक LLM को सीधे चलाएं। इसमें अन्य प्रोग्राम और स्क्रिप्ट से AI को नियंत्रित करने के लिए एक पूर्ण API शामिल है।",
       "ConfigureOptions.MaxTokens": "अधिकतम टोकन (प्रतिक्रिया की लंबाई)",
       "ConfigureOptions.ModelPath": "स्थानीय GGUF फ़ाइल का पथ",
-      "ConfigureOptions.ModelFile": "नमूना"
+      "ConfigureOptions.ModelFile": "नमूना",
+      "ConfigureOptions.SystemInstructions": "सिस्टम निर्देश",
+      "ConfigureOptions.ContextSize": "एआई मेमोरी आकार (संदर्भ विंडो)",
+      "ConfigureOptions.MaxTurns": "चैट इतिहास की अधिकतम सीमा (0 = कोई सीमा नहीं)",
+      "ConfigureOptions.SendContextData": "क्वेरी में डिवाइस सूची और सेंसर शामिल करें"
     },
     "575": {
       "Title": "अधःभारण प्रबंधक",
@@ -362,5 +369,8 @@
       "Title": "प्रति घंटा ऊर्जा खपत",
       "Description": "यह बार चार्ट दिन के प्रत्येक घंटे (00h-23h) के लिए औसत वाट/घंटा खपत को दर्शाता है। डेटा चयनित सप्ताह के दौरान एकत्रित किया गया है और ऊर्जा उपयोग सांख्यिकी एपीआई से लिया गया है।"
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "जिनी कमांड",
+  "scheduler_preset_action_config_wish": "प्राकृतिक भाषा क्रिया",
+  "scheduler_preset_action_config_wish.placeholder": "यह आजमाएं: \"तापमान को 22° पर सेट करें और सूर्योदय का दृश्य शुरू करें\""
 }

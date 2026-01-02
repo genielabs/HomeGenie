@@ -1,5 +1,5 @@
 {
-  " ": "-------------------------------------------",
+  " ": "------------------------------------------",
   "welcome_to_homegenie": "Benvido/a a HomeGenie!",
   "welcome_subtitle": "A intelixencia de automatización programable",
   "not_configured_yet": "O sistema aínda non está configurado. Este asistente de configuración axudarache a poñer en marcha o sistema en poucos pasos.",
@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Sensor de temperatura",
       "VirtualThermostat.HeatingSwitchModule": "Interruptor de calefacción",
       "VirtualThermostat.CoolingSwitchModule": "Interruptor de refrixeración",
-      "ConfigureOptions.ThermostatsCount": "Número de termostatos"
+      "ConfigureOptions.ThermostatsCount": "Número de termostatos",
+      "ConfigureOptions.EnsureCommandDelivery": "Asegurar a entrega de comandos con transmisión continua (modo de pulsos)."
     },
     "81": {
       "Title": "Monitor de enerxía",
@@ -311,20 +312,26 @@
       "Title": "Xestor de intencións de Gemini",
       "Description": "Activa o control da linguaxe natural para o teu sistema intelixente mediante a IA Gemini de Google. Para activar esta función, introduce unha clave API válida. Segue as instrucións en https://aistudio.google.com/app/apikey para obter unha clave API gratuíta.",
       "ConfigureOptions.ApiKey": "Clave da API de IA de Google Gemini",
-      "ConfigureOptions.ModelId": "ID do modelo"
+      "ConfigureOptions.ModelId": "ID do modelo",
+      "ConfigureOptions.SystemInstructions": "Instrucións do sistema"
     },
     "931": {
       "Title": "Xenio do widget de Xemelgos",
       "Description": "O teu xenio persoal de IA para a creación de widgets. Con tecnoloxía Gemini, axúdache a escribir e depurar código HTML, CSS e JavaScript directamente dentro do editor HomeGenie. Para activar esta función, introduce unha clave API válida. Segue as instrucións en https://aistudio.google.com/app/apikey para obter unha clave API gratuíta.",
       "ConfigureOptions.ApiKey": "Clave da API de IA de Google Gemini",
-      "ConfigureOptions.ModelId": "ID do modelo"
+      "ConfigureOptions.ModelId": "ID do modelo",
+      "ConfigureOptions.SystemInstructions": "Instrucións do sistema"
     },
     "940": {
       "Title": "IA local",
       "Description": "Executa LLM de última xeración directamente no teu servidor HomeGenie. Inclúe unha API completa para controlar a IA desde outros programas e scripts.",
       "ConfigureOptions.MaxTokens": "Tokens máximos (lonxitude da resposta)",
       "ConfigureOptions.ModelPath": "Ruta ao ficheiro GGUF local",
-      "ConfigureOptions.ModelFile": "Modelo"
+      "ConfigureOptions.ModelFile": "Modelo",
+      "ConfigureOptions.SystemInstructions": "Instrucións do sistema",
+      "ConfigureOptions.ContextSize": "Tamaño da memoria da IA (xanela contextual)",
+      "ConfigureOptions.MaxTurns": "Máximo número de quendas no historial de chat (0 = sen límite)",
+      "ConfigureOptions.SendContextData": "Incluír a lista de dispositivos e sensores nas consultas"
     },
     "575": {
       "Title": "Xestor de descargas",
@@ -362,5 +369,8 @@
       "Title": "Consumo de enerxía por hora",
       "Description": "Gráfico de barras que mostra o consumo medio de vatios/hora para cada hora do día (00:00-23:00). Os datos agrúpanse durante a semana seleccionada e proceden da API de estatísticas de uso de enerxía."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Comando Xenio",
+  "scheduler_preset_action_config_wish": "Acción da linguaxe natural",
+  "scheduler_preset_action_config_wish.placeholder": "Proba: \"Poñe a calefacción a 22° e comeza a escena do amencer\""
 }

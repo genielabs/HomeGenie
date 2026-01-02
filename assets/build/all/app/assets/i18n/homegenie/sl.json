@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Temperaturni senzor",
       "VirtualThermostat.HeatingSwitchModule": "Stikalo za ogrevanje",
       "VirtualThermostat.CoolingSwitchModule": "Stikalo za hlajenje",
-      "ConfigureOptions.ThermostatsCount": "Število termostatov"
+      "ConfigureOptions.ThermostatsCount": "Število termostatov",
+      "ConfigureOptions.EnsureCommandDelivery": "Zagotovite dostavljanje ukazov z neprekinjenim prenosom (pulzni način)."
     },
     "81": {
       "Title": "Monitor energije",
@@ -311,20 +312,26 @@
       "Title": "Upravljavec namer Gemini",
       "Description": "Omogoča upravljanje naravnega jezika za vaš pametni sistem z uporabo Googlove umetne inteligence Gemini. Če želite aktivirati to funkcijo, vnesite veljaven ključ API. Sledite navodilom na https://aistudio.google.com/app/apikey, da dobite brezplačen ključ API.",
       "ConfigureOptions.ApiKey": "Ključ API-ja za umetno inteligenco Google Gemini",
-      "ConfigureOptions.ModelId": "ID modela"
+      "ConfigureOptions.ModelId": "ID modela",
+      "ConfigureOptions.SystemInstructions": "Sistemska navodila"
     },
     "931": {
       "Title": "Gemini Widget Genie",
       "Description": "Vaš osebni duh umetne inteligence za ustvarjanje gradnikov. Poganja ga Gemini in vam pomaga pisati ter odpravljati napake v kodi HTML, CSS in JavaScript neposredno v urejevalniku HomeGenie. Če želite aktivirati to funkcijo, vnesite veljaven ključ API. Sledite navodilom na https://aistudio.google.com/app/apikey, da dobite brezplačen ključ API.",
       "ConfigureOptions.ApiKey": "Ključ API-ja za umetno inteligenco Google Gemini",
-      "ConfigureOptions.ModelId": "ID modela"
+      "ConfigureOptions.ModelId": "ID modela",
+      "ConfigureOptions.SystemInstructions": "Sistemska navodila"
     },
     "940": {
       "Title": "Lokalna umetna inteligenca",
       "Description": "Zaženite najsodobnejše LLM-je neposredno na strežniku HomeGenie. Vključuje celoten API za upravljanje umetne inteligence iz drugih programov in skriptov.",
       "ConfigureOptions.MaxTokens": "Največ žetonov (dolžina odgovora)",
       "ConfigureOptions.ModelPath": "Pot do lokalne datoteke GGUF",
-      "ConfigureOptions.ModelFile": "Model"
+      "ConfigureOptions.ModelFile": "Model",
+      "ConfigureOptions.SystemInstructions": "Sistemska navodila",
+      "ConfigureOptions.ContextSize": "Velikost pomnilnika umetne inteligence (kontekstno okno)",
+      "ConfigureOptions.MaxTurns": "Največje število obratov v zgodovini klepeta (0 = brez omejitve)",
+      "ConfigureOptions.SendContextData": "V poizvedbe vključi seznam naprav in senzorjev"
     },
     "575": {
       "Title": "Upravitelj prenosov",
@@ -362,5 +369,8 @@
       "Title": "Urna poraba energije",
       "Description": "Stolpični grafikon, ki prikazuje povprečno porabo energije v vatih/uro za vsako uro dneva (00h–23h). Podatki so združeni za izbrani teden in izvirajo iz API-ja za statistiko porabe energije."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Ukaz Genie",
+  "scheduler_preset_action_config_wish": "Dejanje naravnega jezika",
+  "scheduler_preset_action_config_wish.placeholder": "Poskusite: \"Nastavite temperaturo na 22° in zaženite prizor sončnega vzhoda.\""
 }

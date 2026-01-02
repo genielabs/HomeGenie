@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "온도 센서",
       "VirtualThermostat.HeatingSwitchModule": "난방 스위치",
       "VirtualThermostat.CoolingSwitchModule": "냉각 스위치",
-      "ConfigureOptions.ThermostatsCount": "온도 조절기 수"
+      "ConfigureOptions.ThermostatsCount": "온도 조절기 수",
+      "ConfigureOptions.EnsureCommandDelivery": "연속 전송(펄스 모드)을 통해 명령 전달을 보장합니다."
     },
     "81": {
       "Title": "에너지 모니터",
@@ -311,20 +312,26 @@
       "Title": "제미니 인텐트 핸들러",
       "Description": "Google Gemini AI를 사용하여 스마트 시스템의 자연어 제어를 지원합니다. 이 기능을 활성화하려면 유효한 API 키를 입력하세요. https://aistudio.google.com/app/apikey의 안내에 따라 무료 API 키를 받으세요.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API 키",
-      "ConfigureOptions.ModelId": "모델 ID"
+      "ConfigureOptions.ModelId": "모델 ID",
+      "ConfigureOptions.SystemInstructions": "시스템 지침"
     },
     "931": {
       "Title": "제미니 위젯 지니",
       "Description": "위젯 제작을 위한 나만의 AI 지니. Gemini 기반이며, HomeGenie 편집기에서 HTML, CSS, JavaScript 코드를 직접 작성하고 디버깅할 수 있도록 도와줍니다. 이 기능을 활성화하려면 유효한 API 키를 입력하세요. https://aistudio.google.com/app/apikey의 안내에 따라 무료 API 키를 받으세요.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API 키",
-      "ConfigureOptions.ModelId": "모델 ID"
+      "ConfigureOptions.ModelId": "모델 ID",
+      "ConfigureOptions.SystemInstructions": "시스템 지침"
     },
     "940": {
       "Title": "로컬 AI",
       "Description": "최첨단 LLM(로컬 라이프사이클 관리)을 HomeGenie 서버에서 직접 실행하세요. 다른 프로그램 및 스크립트에서 AI를 제어할 수 있는 완벽한 API가 포함되어 있습니다.",
       "ConfigureOptions.MaxTokens": "최대 토큰 수(응답 길이)",
       "ConfigureOptions.ModelPath": "로컬 GGUF 파일 경로",
-      "ConfigureOptions.ModelFile": "모델"
+      "ConfigureOptions.ModelFile": "모델",
+      "ConfigureOptions.SystemInstructions": "시스템 지침",
+      "ConfigureOptions.ContextSize": "AI 메모리 크기(컨텍스트 윈도우)",
+      "ConfigureOptions.MaxTurns": "최대 채팅 기록 턴 수 (0 = 제한 없음)",
+      "ConfigureOptions.SendContextData": "쿼리에 장치 목록과 센서를 포함하세요."
     },
     "575": {
       "Title": "다운로드 관리자",
@@ -362,5 +369,8 @@
       "Title": "시간당 에너지 소비량",
       "Description": "하루 중 시간대별(00시~23시) 평균 와트시(W/H) 소비량을 보여주는 막대 그래프입니다. 데이터는 선택한 주간 동안 집계되었으며 에너지 사용 통계 API에서 가져왔습니다."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "지니 커맨드",
+  "scheduler_preset_action_config_wish": "자연어 동작",
+  "scheduler_preset_action_config_wish.placeholder": "\"온도를 22도로 설정하고 일출 장면을 시작해 보세요.\""
 }

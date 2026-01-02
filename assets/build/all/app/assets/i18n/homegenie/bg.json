@@ -181,7 +181,8 @@
       "VirtualThermostat.TemperatureModule": "Температурен сензор",
       "VirtualThermostat.HeatingSwitchModule": "Превключвател за отопление",
       "VirtualThermostat.CoolingSwitchModule": "Превключвател за охлаждане",
-      "ConfigureOptions.ThermostatsCount": "Брой термостати"
+      "ConfigureOptions.ThermostatsCount": "Брой термостати",
+      "ConfigureOptions.EnsureCommandDelivery": "Осигурете предаване на командите с непрекъснато предаване (импулсен режим)."
     },
     "81": {
       "Title": "Енергиен монитор",
@@ -311,20 +312,26 @@
       "Title": "Обработчик на намерения Gemini",
       "Description": "Активира контрол на естествения език за вашата интелигентна система, използвайки Gemini AI на Google. За да активирате тази функция, въведете валиден API ключ. Следвайте инструкциите на https://aistudio.google.com/app/apikey, за да получите безплатен API ключ.",
       "ConfigureOptions.ApiKey": "Ключ за Google Gemini AI API",
-      "ConfigureOptions.ModelId": "Идентификационен номер на модела"
+      "ConfigureOptions.ModelId": "Идентификационен номер на модела",
+      "ConfigureOptions.SystemInstructions": "Системни инструкции"
     },
     "931": {
       "Title": "Джемини Уиджет Джийн",
       "Description": "Вашият личен AI джин за създаване на джаджи. Задвижван от Gemini, той ви помага да пишете и отстранявате грешки в HTML, CSS и JavaScript код директно в редактора HomeGenie. За да активирате тази функция, въведете валиден API ключ. Следвайте инструкциите на https://aistudio.google.com/app/apikey, за да получите безплатен API ключ.",
       "ConfigureOptions.ApiKey": "Ключ за Google Gemini AI API",
-      "ConfigureOptions.ModelId": "Идентификационен номер на модела"
+      "ConfigureOptions.ModelId": "Идентификационен номер на модела",
+      "ConfigureOptions.SystemInstructions": "Системни инструкции"
     },
     "940": {
       "Title": "Локален изкуствен интелект",
       "Description": "Стартирайте най-съвременни LLM-и директно на вашия HomeGenie сървър. Включва пълен API за управление на AI от други програми и скриптове.",
       "ConfigureOptions.MaxTokens": "Максимален брой токени (дължина на отговора)",
       "ConfigureOptions.ModelPath": "Път до локалния GGUF файл",
-      "ConfigureOptions.ModelFile": "Модел"
+      "ConfigureOptions.ModelFile": "Модел",
+      "ConfigureOptions.SystemInstructions": "Системни инструкции",
+      "ConfigureOptions.ContextSize": "Размер на AI паметта (контекстен прозорец)",
+      "ConfigureOptions.MaxTurns": "Максимален брой ходове в историята на чата (0 = без ограничение)",
+      "ConfigureOptions.SendContextData": "Включване на списък с устройства и сензори в заявките"
     },
     "575": {
       "Title": "Мениджър на изтегляния",
@@ -362,5 +369,8 @@
       "Title": "Почасова консумация на енергия",
       "Description": "Стълбовидна диаграма, показваща средната консумация във ватове/час за всеки час от деня (00:00-23:00). Данните са обобщени за избраната седмица и са получени от API за статистика на потреблението на енергия."
     }
-  }
+  },
+  "scheduler_preset_action_genie_command": "Команда на Джин",
+  "scheduler_preset_action_config_wish": "Действие с естествен език",
+  "scheduler_preset_action_config_wish.placeholder": "Опитайте: „Настройте температурата на 22° и пуснете сцената с изгрева“"
 }
