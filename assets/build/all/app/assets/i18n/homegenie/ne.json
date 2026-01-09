@@ -325,13 +325,15 @@
     "940": {
       "Title": "स्थानीय एआई",
       "Description": "तपाईंको HomeGenie सर्भरमा सिधै अत्याधुनिक LLM हरू चलाउनुहोस्। अन्य कार्यक्रमहरू र स्क्रिप्टहरूबाट AI नियन्त्रण गर्न पूर्ण API समावेश गर्दछ।",
-      "ConfigureOptions.MaxTokens": "अधिकतम टोकनहरू (प्रतिक्रियाको लम्बाइ)",
+      "ConfigureOptions.MaxTokens": "प्रतिक्रिया लम्बाइ (अधिकतम टोकनहरू)",
       "ConfigureOptions.ModelPath": "स्थानीय GGUF फाइलको लागि मार्ग",
-      "ConfigureOptions.ModelFile": "मोडेल",
-      "ConfigureOptions.SystemInstructions": "प्रणाली निर्देशनहरू",
-      "ConfigureOptions.ContextSize": "एआई मेमोरी साइज (सन्दर्भ विन्डो)",
-      "ConfigureOptions.MaxTurns": "अधिकतम च्याट इतिहास घुम्ने समय (० = कुनै सीमा छैन)",
-      "ConfigureOptions.SendContextData": "क्वेरीहरूमा उपकरण सूची र सेन्सरहरू समावेश गर्नुहोस्"
+      "ConfigureOptions.ModelFile": "एआई मोडेल",
+      "ConfigureOptions.SystemInstructions": "प्रणाली प्रम्प्ट (निर्देशनहरू)",
+      "ConfigureOptions.ContextSize": "एआई मेमोरी क्षमता (सन्दर्भ विन्डो)",
+      "ConfigureOptions.MaxTurns": "च्याट मेमोरी (अधिकतम पालो) (० = कुनै सीमा छैन)",
+      "ConfigureOptions.SendContextData": "एआईसँग प्रणाली र मोड्युल सन्दर्भ साझा गर्नुहोस्",
+      "ConfigureOptions.ModelTemperature": "रचनात्मकता (सटीक = ०, रचनात्मक = २)",
+      "ConfigureOptions.ModelList": "एआई मोडेल सूची (YAML)"
     },
     "575": {
       "Title": "डाउनलोड प्रबन्धक",

@@ -468,5 +468,7 @@
   "api_calls": "API komutları",
   "show_code": "Kodu Göster",
   "copy_api_call": "API çağrı dizesini kopyala",
-  "copy_full_api_url": "API URL'sinin tamamını kopyala"
+  "copy_full_api_url": "API URL'sinin tamamını kopyala",
+  "details": "Detaylar",
+  "visual_program": "Görsel Program"
 }

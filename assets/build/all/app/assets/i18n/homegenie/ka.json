@@ -325,13 +325,15 @@
     "940": {
       "Title": "ადგილობრივი ხელოვნური ინტელექტი",
       "Description": "გაუშვით უახლესი LLM-ები პირდაპირ თქვენს HomeGenie სერვერზე. მოიცავს სრულ API-ს სხვა პროგრამებიდან და სკრიპტებიდან ხელოვნური ინტელექტის სამართავად.",
-      "ConfigureOptions.MaxTokens": "მაქსიმალური ჟეტონები (პასუხის სიგრძე)",
+      "ConfigureOptions.MaxTokens": "პასუხის სიგრძე (მაქსიმალური ჟეტონები)",
       "ConfigureOptions.ModelPath": "ლოკალური GGUF ფაილისკენ მიმავალი გზა",
-      "ConfigureOptions.ModelFile": "მოდელი",
-      "ConfigureOptions.SystemInstructions": "სისტემის ინსტრუქციები",
-      "ConfigureOptions.ContextSize": "ხელოვნური ინტელექტის მეხსიერების ზომა (კონტექსტური ფანჯარა)",
-      "ConfigureOptions.MaxTurns": "ჩატის ისტორიის მაქსიმალური ცვლები (0 = ლიმიტის გარეშე)",
-      "ConfigureOptions.SendContextData": "მოწყობილობების სიისა და სენსორების ჩართვა მოთხოვნებში"
+      "ConfigureOptions.ModelFile": "ხელოვნური ინტელექტის მოდელი",
+      "ConfigureOptions.SystemInstructions": "სისტემის მოთხოვნა (ინსტრუქციები)",
+      "ConfigureOptions.ContextSize": "ხელოვნური ინტელექტის მეხსიერების მოცულობა (კონტექსტური ფანჯარა)",
+      "ConfigureOptions.MaxTurns": "ჩატის მეხსიერება (მაქსიმალური ბრუნვები) (0 = ლიმიტის გარეშე)",
+      "ConfigureOptions.SendContextData": "სისტემისა და მოდულის კონტექსტის ხელოვნურ ინტელექტთან გაზიარება",
+      "ConfigureOptions.ModelTemperature": "კრეატიულობა (ზუსტი = 0, კრეატიულობა = 2)",
+      "ConfigureOptions.ModelList": "ხელოვნური ინტელექტის მოდელების სია (YAML)"
     },
     "575": {
       "Title": "ჩამოტვირთვის მენეჯერი",

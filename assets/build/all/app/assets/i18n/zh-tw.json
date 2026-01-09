@@ -468,5 +468,7 @@
   "api_calls": "API指令",
   "show_code": "顯示程式碼",
   "copy_api_call": "複製 API 呼叫字串",
-  "copy_full_api_url": "複製完整的 API URL"
+  "copy_full_api_url": "複製完整的 API URL",
+  "details": "細節",
+  "visual_program": "視覺程式"
 }

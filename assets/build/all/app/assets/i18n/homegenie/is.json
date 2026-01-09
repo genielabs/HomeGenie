@@ -325,13 +325,15 @@
     "940": {
       "Title": "Staðbundin gervigreind",
       "Description": "Keyrðu nýjustu LLM-kerfin beint á HomeGenie-þjóninum þínum. Inniheldur fullt forritaskil (API) til að stjórna gervigreindinni frá öðrum forritum og forskriftum.",
-      "ConfigureOptions.MaxTokens": "Hámarksfjöldi tákna (svarlengd)",
+      "ConfigureOptions.MaxTokens": "Svarlengd (hámarksfjöldi tákna)",
       "ConfigureOptions.ModelPath": "Slóð að staðbundinni GGUF skrá",
-      "ConfigureOptions.ModelFile": "Fyrirmynd",
-      "ConfigureOptions.SystemInstructions": "Leiðbeiningar um kerfið",
-      "ConfigureOptions.ContextSize": "Stærð gervigreindarminnis (samhengisgluggi)",
-      "ConfigureOptions.MaxTurns": "Hámarksfjöldi spjallferils (0 = engin takmörk)",
-      "ConfigureOptions.SendContextData": "Hafa lista yfir tæki og skynjara með í fyrirspurnum"
+      "ConfigureOptions.ModelFile": "Gervigreindarlíkan",
+      "ConfigureOptions.SystemInstructions": "Kerfisfyrirmæli (leiðbeiningar)",
+      "ConfigureOptions.ContextSize": "Minnigeta gervigreindar (samhengisgluggi)",
+      "ConfigureOptions.MaxTurns": "Spjallminni (hámarksfjöldi beygna) (0 = engin takmörk)",
+      "ConfigureOptions.SendContextData": "Deila kerfis- og einingasamhengi með gervigreindinni",
+      "ConfigureOptions.ModelTemperature": "Sköpunargáfa (Nákvæmni = 0, Skapandi = 2)",
+      "ConfigureOptions.ModelList": "Listi yfir gervigreindarlíkön (YAML)"
     },
     "575": {
       "Title": "Niðurhalsstjóri",

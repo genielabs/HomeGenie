@@ -325,13 +325,15 @@
     "940": {
       "Title": "Локальний ШІ",
       "Description": "Запускайте найсучасніші LLM безпосередньо на вашому сервері HomeGenie. Включає повний API для керування ШІ з інших програм та скриптів.",
-      "ConfigureOptions.MaxTokens": "Максимальна кількість токенів (довжина відповіді)",
+      "ConfigureOptions.MaxTokens": "Довжина відповіді (максимальна кількість токенів)",
       "ConfigureOptions.ModelPath": "Шлях до локального файлу GGUF",
-      "ConfigureOptions.ModelFile": "Модель",
-      "ConfigureOptions.SystemInstructions": "Системні інструкції",
-      "ConfigureOptions.ContextSize": "Розмір пам'яті ШІ (контекстне вікно)",
-      "ConfigureOptions.MaxTurns": "Максимальна кількість поворотів в історії чату (0 = без обмежень)",
-      "ConfigureOptions.SendContextData": "Включити список пристроїв та датчики в запити"
+      "ConfigureOptions.ModelFile": "Модель штучного інтелекту",
+      "ConfigureOptions.SystemInstructions": "Системний запит (інструкції)",
+      "ConfigureOptions.ContextSize": "Обсяг пам'яті штучного інтелекту (контекстне вікно)",
+      "ConfigureOptions.MaxTurns": "Пам'ять чату (максимум ходів) (0 = без обмежень)",
+      "ConfigureOptions.SendContextData": "Спільне використання контексту системи та модулів зі штучним інтелектом",
+      "ConfigureOptions.ModelTemperature": "Креативність (Точність = 0, Креативність = 2)",
+      "ConfigureOptions.ModelList": "Список моделей штучного інтелекту (YAML)"
     },
     "575": {
       "Title": "Менеджер завантажень",

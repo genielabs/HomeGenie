@@ -468,5 +468,7 @@
   "api_calls": "Orduithe API",
   "show_code": "Taispeáin an Cód",
   "copy_api_call": "Cóipeáil teaghrán glao API",
-  "copy_full_api_url": "Cóipeáil URL iomlán an API"
+  "copy_full_api_url": "Cóipeáil URL iomlán an API",
+  "details": "Sonraí",
+  "visual_program": "Clár Amhairc"
 }

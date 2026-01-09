@@ -325,13 +325,15 @@
     "940": {
       "Title": "مقامی AI",
       "Description": "جدید ترین LLMs کو براہ راست اپنے HomeGenie سرور پر چلائیں۔ دوسرے پروگراموں اور اسکرپٹس سے AI کو کنٹرول کرنے کے لیے ایک مکمل API شامل ہے۔",
-      "ConfigureOptions.MaxTokens": "زیادہ سے زیادہ ٹوکنز (جواب کی لمبائی)",
+      "ConfigureOptions.MaxTokens": "جواب کی لمبائی (زیادہ سے زیادہ ٹوکن)",
       "ConfigureOptions.ModelPath": "مقامی GGUF فائل کا راستہ",
-      "ConfigureOptions.ModelFile": "ماڈل",
-      "ConfigureOptions.SystemInstructions": "سسٹم کی ہدایات",
-      "ConfigureOptions.ContextSize": "AI میموری کا سائز (سیاق و سباق کی کھڑکی)",
-      "ConfigureOptions.MaxTurns": "زیادہ سے زیادہ چیٹ کی تاریخ بدل جاتی ہے (0 = کوئی حد نہیں)",
-      "ConfigureOptions.SendContextData": "سوالات میں ڈیوائس کی فہرست اور سینسرز شامل کریں۔"
+      "ConfigureOptions.ModelFile": "اے آئی ماڈل",
+      "ConfigureOptions.SystemInstructions": "سسٹم پرامپٹ (ہدایات)",
+      "ConfigureOptions.ContextSize": "AI میموری کی صلاحیت (سیاق و سباق کی کھڑکی)",
+      "ConfigureOptions.MaxTurns": "چیٹ میموری (زیادہ سے زیادہ موڑ) (0 = کوئی حد نہیں)",
+      "ConfigureOptions.SendContextData": "AI کے ساتھ سسٹم اور ماڈیول سیاق و سباق کا اشتراک کریں۔",
+      "ConfigureOptions.ModelTemperature": "تخلیقی صلاحیت (صحیح = 0، تخلیقی = 2)",
+      "ConfigureOptions.ModelList": "AI ماڈل لسٹ (YAML)"
     },
     "575": {
       "Title": "ڈاؤن لوڈ مینیجر",

@@ -468,5 +468,7 @@
   "api_calls": "د API امرونه",
   "show_code": "کوډ وښایاست",
   "copy_api_call": "د API کال سټرینګ کاپي کړئ",
-  "copy_full_api_url": "د بشپړ API URL کاپي کړئ"
+  "copy_full_api_url": "د بشپړ API URL کاپي کړئ",
+  "details": "جزیات",
+  "visual_program": "بصري پروګرام"
 }

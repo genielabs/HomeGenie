@@ -325,13 +325,15 @@
     "940": {
       "Title": "Lokalna umjetna inteligencija",
       "Description": "Pokrenite najsuvremenije LLM-ove izravno na svom HomeGenie poslužitelju. Uključuje potpuni API za upravljanje umjetnom inteligencijom iz drugih programa i skripti.",
-      "ConfigureOptions.MaxTokens": "Maks. tokena (duljina odgovora)",
+      "ConfigureOptions.MaxTokens": "Duljina odgovora (maks. tokena)",
       "ConfigureOptions.ModelPath": "Put do lokalne GGUF datoteke",
-      "ConfigureOptions.ModelFile": "Model",
-      "ConfigureOptions.SystemInstructions": "Sistemske upute",
-      "ConfigureOptions.ContextSize": "Veličina AI memorije (kontekstni prozor)",
-      "ConfigureOptions.MaxTurns": "Maksimalan broj okretaja u povijesti chata (0 = bez ograničenja)",
-      "ConfigureOptions.SendContextData": "U upite uključite popis uređaja i senzora"
+      "ConfigureOptions.ModelFile": "Model umjetne inteligencije",
+      "ConfigureOptions.SystemInstructions": "Sistemski upit (upute)",
+      "ConfigureOptions.ContextSize": "Kapacitet AI memorije (kontekstni prozor)",
+      "ConfigureOptions.MaxTurns": "Memorija chata (maksimalni broj okretaja) (0 = bez ograničenja)",
+      "ConfigureOptions.SendContextData": "Dijeli kontekst sustava i modula s umjetnom inteligencijom",
+      "ConfigureOptions.ModelTemperature": "Kreativnost (Preciznost = 0, Kreativnost = 2)",
+      "ConfigureOptions.ModelList": "Popis AI modela (YAML)"
     },
     "575": {
       "Title": "Upravitelj preuzimanja",

@@ -468,5 +468,7 @@
   "api_calls": "Arahan API",
   "show_code": "Tunjukkan Kod",
   "copy_api_call": "Salin rentetan panggilan API",
-  "copy_full_api_url": "Salin URL API penuh"
+  "copy_full_api_url": "Salin URL API penuh",
+  "details": "Butiran",
+  "visual_program": "Program Visual"
 }

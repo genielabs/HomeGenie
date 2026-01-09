@@ -325,13 +325,15 @@
     "940": {
       "Title": "IA lokal",
       "Description": "Kouri LLM dènye kri yo dirèkteman sou sèvè HomeGenie ou a. Gen ladan yon API konplè pou kontwole IA a soti nan lòt pwogram ak script.",
-      "ConfigureOptions.MaxTokens": "Maksimòm jeton (longè repons)",
+      "ConfigureOptions.MaxTokens": "Longè Repons (Jeton Maksimòm)",
       "ConfigureOptions.ModelPath": "Chemen pou dosye GGUF lokal la",
-      "ConfigureOptions.ModelFile": "Modèl",
-      "ConfigureOptions.SystemInstructions": "Enstriksyon Sistèm yo",
-      "ConfigureOptions.ContextSize": "Gwosè memwa IA (Fenèt Kontèks)",
-      "ConfigureOptions.MaxTurns": "Maksimòm kantite vire nan istwa chat la (0 = pa gen limit)",
-      "ConfigureOptions.SendContextData": "Mete lis aparèy ak detèktè nan rechèch yo"
+      "ConfigureOptions.ModelFile": "Modèl IA",
+      "ConfigureOptions.SystemInstructions": "Sistèm Enstriksyon (Enstriksyon)",
+      "ConfigureOptions.ContextSize": "Kapasite Memwa IA (Fenèt Kontèks)",
+      "ConfigureOptions.MaxTurns": "Memwa Chat (Tou Maksimòm) (0 = pa gen limit)",
+      "ConfigureOptions.SendContextData": "Pataje kontèks sistèm ak modil la avèk IA a",
+      "ConfigureOptions.ModelTemperature": "Kreyativite (Presi = 0, Kreyatif = 2)",
+      "ConfigureOptions.ModelList": "Lis Modèl IA (YAML)"
     },
     "575": {
       "Title": "Manadjè Telechajman",

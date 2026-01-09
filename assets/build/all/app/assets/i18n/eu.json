@@ -468,5 +468,7 @@
   "api_calls": "API komandoak",
   "show_code": "Erakutsi kodea",
   "copy_api_call": "Kopiatu API dei-katea",
-  "copy_full_api_url": "Kopiatu API URL osoa"
+  "copy_full_api_url": "Kopiatu API URL osoa",
+  "details": "Xehetasunak",
+  "visual_program": "Ikus-entzunezko Programa"
 }

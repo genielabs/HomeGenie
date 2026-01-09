@@ -325,13 +325,15 @@
     "940": {
       "Title": "IA local",
       "Description": "Execute LLMs de última geração diretamente no seu servidor HomeGenie. Inclui uma API completa para controlar a IA a partir de outros programas e scripts.",
-      "ConfigureOptions.MaxTokens": "Tokens máximos (comprimento da resposta)",
+      "ConfigureOptions.MaxTokens": "Comprimento da resposta (tokens máximos)",
       "ConfigureOptions.ModelPath": "Caminho para o arquivo GGUF local",
-      "ConfigureOptions.ModelFile": "Modelo",
-      "ConfigureOptions.SystemInstructions": "Instruções do sistema",
-      "ConfigureOptions.ContextSize": "Tamanho da memória da IA (janela de contexto)",
-      "ConfigureOptions.MaxTurns": "Número máximo de interações no histórico de bate-papo (0 = sem limite)",
-      "ConfigureOptions.SendContextData": "Incluir lista de dispositivos e sensores nas consultas"
+      "ConfigureOptions.ModelFile": "Modelo de IA",
+      "ConfigureOptions.SystemInstructions": "Mensagem do sistema (Instruções)",
+      "ConfigureOptions.ContextSize": "Capacidade de memória da IA (janela de contexto)",
+      "ConfigureOptions.MaxTurns": "Memória de bate-papo (Número máximo de turnos) (0 = sem limite)",
+      "ConfigureOptions.SendContextData": "Compartilhe o contexto do sistema e do módulo com a IA.",
+      "ConfigureOptions.ModelTemperature": "Criatividade (Precisão = 0, Criatividade = 2)",
+      "ConfigureOptions.ModelList": "Lista de modelos de IA (YAML)"
     },
     "575": {
       "Title": "Gerenciador de downloads",

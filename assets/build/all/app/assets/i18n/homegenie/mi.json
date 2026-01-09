@@ -325,13 +325,15 @@
     "940": {
       "Title": "AI ā-Rohe",
       "Description": "Whakahaerehia ngā LLM hou rawa atu i runga i tō tūmau HomeGenie. Kei roto ko te API katoa hei whakahaere i te AI mai i ētahi atu papatono me ngā tuhinga.",
-      "ConfigureOptions.MaxTokens": "Ngā Tohu Mōrahi (roa whakautu)",
+      "ConfigureOptions.MaxTokens": "Te Roa o te Urupare (Ngā Tohu Mōrahi)",
       "ConfigureOptions.ModelPath": "Ara ki te kōnae GGUF paetata",
-      "ConfigureOptions.ModelFile": "Tauira",
-      "ConfigureOptions.SystemInstructions": "Ngā Tohutohu Pūnaha",
-      "ConfigureOptions.ContextSize": "Rahi o te Mahara AI (Matapihi Horopaki)",
-      "ConfigureOptions.MaxTurns": "Te nui o ngā huringa hītori kōrerorero (0 = kāore he rohe)",
-      "ConfigureOptions.SendContextData": "Whakauruhia te rārangi taputapu me ngā pūoko ki ngā patai"
+      "ConfigureOptions.ModelFile": "Tauira AI",
+      "ConfigureOptions.SystemInstructions": "Tohutohu Pūnaha (Tohutohu)",
+      "ConfigureOptions.ContextSize": "Te Pūmanawa Mahara AI (Matapihi Horopaki)",
+      "ConfigureOptions.MaxTurns": "Mahara Kōrerorero (Tauira Mōrahi) (0 = kāore he rohe)",
+      "ConfigureOptions.SendContextData": "Tohaina te horopaki pūnaha me te kōwae ki te AI",
+      "ConfigureOptions.ModelTemperature": "Auahatanga (Tika = 0, Auahatanga = 2)",
+      "ConfigureOptions.ModelList": "Rārangi Tauira AI (YAML)"
     },
     "575": {
       "Title": "Kaiwhakahaere Tikiake",

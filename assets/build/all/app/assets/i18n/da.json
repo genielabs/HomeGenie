@@ -468,5 +468,7 @@
   "api_calls": "API-kommandoer",
   "show_code": "Vis kode",
   "copy_api_call": "Kopiér API-kaldsstreng",
-  "copy_full_api_url": "Kopiér den fulde API-URL"
+  "copy_full_api_url": "Kopiér den fulde API-URL",
+  "details": "Detaljer",
+  "visual_program": "Visuelt program"
 }

@@ -468,5 +468,7 @@
   "api_calls": "Amarrada API",
   "show_code": "Muuji Koodhka",
   "copy_api_call": "Nuqul ka samee xarigga wicitaanka API",
-  "copy_full_api_url": "Nuqul ka samee URL-ka API-ga oo buuxa"
+  "copy_full_api_url": "Nuqul ka samee URL-ka API-ga oo buuxa",
+  "details": "Faahfaahinta",
+  "visual_program": "Barnaamijka Muuqaalka"
 }

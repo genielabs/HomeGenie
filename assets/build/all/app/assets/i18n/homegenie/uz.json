@@ -325,13 +325,15 @@
     "940": {
       "Title": "Mahalliy AI",
       "Description": "Eng zamonaviy LLMlarni to'g'ridan-to'g'ri HomeGenie serveringizda ishga tushiring. Boshqa dasturlar va skriptlardan sun'iy intellektni boshqarish uchun to'liq API ni o'z ichiga oladi.",
-      "ConfigureOptions.MaxTokens": "Maksimal tokenlar (javob uzunligi)",
+      "ConfigureOptions.MaxTokens": "Javob uzunligi (Maksimal tokenlar)",
       "ConfigureOptions.ModelPath": "Mahalliy GGUF fayliga yo'l",
-      "ConfigureOptions.ModelFile": "Model",
-      "ConfigureOptions.SystemInstructions": "Tizim ko'rsatmalari",
-      "ConfigureOptions.ContextSize": "AI xotira hajmi (Kontekst oynasi)",
-      "ConfigureOptions.MaxTurns": "Maksimal chat tarixi (0 = cheklov yo'q)",
-      "ConfigureOptions.SendContextData": "So'rovlarga qurilmalar ro'yxati va sensorlarni qo'shing"
+      "ConfigureOptions.ModelFile": "Sun'iy intellekt modeli",
+      "ConfigureOptions.SystemInstructions": "Tizim so'rovi (ko'rsatmalar)",
+      "ConfigureOptions.ContextSize": "Sun'iy intellekt xotira hajmi (kontekst oynasi)",
+      "ConfigureOptions.MaxTurns": "Chat xotirasi (Maksimal aylanishlar) (0 = cheklov yo'q)",
+      "ConfigureOptions.SendContextData": "Tizim va modul kontekstini AI bilan baham ko'ring",
+      "ConfigureOptions.ModelTemperature": "Ijodkorlik (Aniq = 0, Ijodkor = 2)",
+      "ConfigureOptions.ModelList": "Sun'iy intellekt modellari ro'yxati (YAML)"
     },
     "575": {
       "Title": "Yuklab olish menejeri",

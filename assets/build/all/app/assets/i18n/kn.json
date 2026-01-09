@@ -468,5 +468,7 @@
   "api_calls": "API ಆಜ್ಞೆಗಳು",
   "show_code": "ಕೋಡ್ ತೋರಿಸಿ",
   "copy_api_call": "API ಕರೆ ಸ್ಟ್ರಿಂಗ್ ಅನ್ನು ನಕಲಿಸಿ",
-  "copy_full_api_url": "ಪೂರ್ಣ API URL ಅನ್ನು ನಕಲಿಸಿ"
+  "copy_full_api_url": "ಪೂರ್ಣ API URL ಅನ್ನು ನಕಲಿಸಿ",
+  "details": "ವಿವರಗಳು",
+  "visual_program": "ದೃಶ್ಯ ಕಾರ್ಯಕ್ರಮ"
 }

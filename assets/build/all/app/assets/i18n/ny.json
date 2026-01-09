@@ -468,5 +468,7 @@
   "api_calls": "Malamulo a API",
   "show_code": "Onetsani Khodi",
   "copy_api_call": "Koperani chingwe choyimbira cha API",
-  "copy_full_api_url": "Koperani API URL yonse"
+  "copy_full_api_url": "Koperani API URL yonse",
+  "details": "Tsatanetsatane",
+  "visual_program": "Pulogalamu Yowoneka"
 }

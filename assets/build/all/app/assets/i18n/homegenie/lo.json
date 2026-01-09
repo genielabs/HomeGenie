@@ -325,13 +325,15 @@
     "940": {
       "Title": "AI ທ້ອງຖິ່ນ",
       "Description": "ໃຊ້ງານ LLM ທີ່ທັນສະໄໝໂດຍກົງໃນເຊີບເວີ HomeGenie ຂອງທ່ານ. ລວມມີ API ເຕັມຮູບແບບເພື່ອຄວບຄຸມ AI ຈາກໂປຣແກຣມ ແລະ ສະຄຣິບອື່ນໆ.",
-      "ConfigureOptions.MaxTokens": "ໂທເຄັນສູງສຸດ (ຄວາມຍາວຕອບສະໜອງ)",
+      "ConfigureOptions.MaxTokens": "ຄວາມຍາວຕອບສະໜອງ (ໂທເຄັນສູງສຸດ)",
       "ConfigureOptions.ModelPath": "ເສັ້ນທາງໄປຫາໄຟລ໌ GGUF ທ້ອງຖິ່ນ",
-      "ConfigureOptions.ModelFile": "ຮຸ່ນ",
-      "ConfigureOptions.SystemInstructions": "ຄຳແນະນຳກ່ຽວກັບລະບົບ",
-      "ConfigureOptions.ContextSize": "ຂະໜາດໜ່ວຍຄວາມຈຳ AI (ໜ້າຕ່າງສະພາບການ)",
-      "ConfigureOptions.MaxTurns": "ປະຫວັດການສົນທະນາສູງສຸດ (0 = ບໍ່ມີຂີດຈຳກັດ)",
-      "ConfigureOptions.SendContextData": "ລວມເອົາລາຍຊື່ອຸປະກອນ ແລະ ເຊັນເຊີໃນຄຳຖາມ"
+      "ConfigureOptions.ModelFile": "ຮູບແບບ AI",
+      "ConfigureOptions.SystemInstructions": "ການແຈ້ງເຕືອນຂອງລະບົບ (ຄຳແນະນຳ)",
+      "ConfigureOptions.ContextSize": "ຄວາມຈຸໜ່ວຍຄວາມຈຳ AI (ໜ້າຕ່າງສະພາບການ)",
+      "ConfigureOptions.MaxTurns": "ໜ່ວຍຄວາມຈຳການສົນທະນາ (ຈຳນວນຄັ້ງສູງສຸດ) (0 = ບໍ່ມີຂີດຈຳກັດ)",
+      "ConfigureOptions.SendContextData": "ແບ່ງປັນລະບົບ ແລະ ບໍລິບົດໂມດູນກັບ AI",
+      "ConfigureOptions.ModelTemperature": "ຄວາມຄິດສ້າງສັນ (ແມ່ນຍຳ = 0, ຄວາມຄິດສ້າງສັນ = 2)",
+      "ConfigureOptions.ModelList": "ລາຍຊື່ຮູບແບບ AI (YAML)"
     },
     "575": {
       "Title": "ຕົວຈັດການດາວໂຫຼດ",

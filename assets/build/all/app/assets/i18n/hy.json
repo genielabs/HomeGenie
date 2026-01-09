@@ -468,5 +468,7 @@
   "api_calls": "API հրամաններ",
   "show_code": "Ցուցադրել կոդը",
   "copy_api_call": "Պատճենել API կանչի տողը",
-  "copy_full_api_url": "Պատճենել API-ի ամբողջական URL-ը"
+  "copy_full_api_url": "Պատճենել API-ի ամբողջական URL-ը",
+  "details": "Մանրամասներ",
+  "visual_program": "Տեսողական ծրագիր"
 }

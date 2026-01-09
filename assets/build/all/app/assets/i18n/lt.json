@@ -468,5 +468,7 @@
   "api_calls": "API komandos",
   "show_code": "Rodyti kodą",
   "copy_api_call": "Kopijuoti API iškvietimo eilutę",
-  "copy_full_api_url": "Kopijuoti visą API URL"
+  "copy_full_api_url": "Kopijuoti visą API URL",
+  "details": "Išsami informacija",
+  "visual_program": "Vizualinė programa"
 }

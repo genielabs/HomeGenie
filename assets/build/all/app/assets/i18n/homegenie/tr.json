@@ -325,13 +325,15 @@
     "940": {
       "Title": "Yerel Yapay Zeka",
       "Description": "En gelişmiş LLM'leri doğrudan HomeGenie sunucunuzda çalıştırın. Yapay zekayı diğer programlar ve komut dosyalarından kontrol etmek için eksiksiz bir API içerir.",
-      "ConfigureOptions.MaxTokens": "Maksimum Token Sayısı (yanıt uzunluğu)",
+      "ConfigureOptions.MaxTokens": "Yanıt Uzunluğu (Maksimum Token Sayısı)",
       "ConfigureOptions.ModelPath": "Yerel GGUF dosyasına giden yol",
-      "ConfigureOptions.ModelFile": "Model",
-      "ConfigureOptions.SystemInstructions": "Sistem Talimatları",
-      "ConfigureOptions.ContextSize": "Yapay Zeka Bellek Boyutu (Bağlam Penceresi)",
-      "ConfigureOptions.MaxTurns": "Maksimum sohbet geçmişi turu sayısı (0 = sınır yok)",
-      "ConfigureOptions.SendContextData": "Sorgulara cihaz listesini ve sensörleri dahil edin."
+      "ConfigureOptions.ModelFile": "Yapay Zeka Modeli",
+      "ConfigureOptions.SystemInstructions": "Sistem İstemi (Talimatlar)",
+      "ConfigureOptions.ContextSize": "Yapay Zeka Bellek Kapasitesi (Bağlam Penceresi)",
+      "ConfigureOptions.MaxTurns": "Sohbet Hafızası (Maksimum Tur Sayısı) (0 = sınır yok)",
+      "ConfigureOptions.SendContextData": "Sistem ve modül bağlamını yapay zeka ile paylaşın.",
+      "ConfigureOptions.ModelTemperature": "Yaratıcılık (Hassas = 0, Yaratıcı = 2)",
+      "ConfigureOptions.ModelList": "Yapay Zeka Model Listesi (YAML)"
     },
     "575": {
       "Title": "İndirme Yöneticisi",

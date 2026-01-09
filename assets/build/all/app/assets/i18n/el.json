@@ -468,5 +468,7 @@
   "api_calls": "Εντολές API",
   "show_code": "Εμφάνιση κωδικού",
   "copy_api_call": "Αντιγραφή συμβολοσειράς κλήσης API",
-  "copy_full_api_url": "Αντιγραφή πλήρους διεύθυνσης URL API"
+  "copy_full_api_url": "Αντιγραφή πλήρους διεύθυνσης URL API",
+  "details": "Καθέκαστα",
+  "visual_program": "Οπτικό Πρόγραμμα"
 }

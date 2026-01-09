@@ -325,13 +325,15 @@
     "940": {
       "Title": "AI Yapafupi",
       "Description": "Yendetsani ma LLM apamwamba kwambiri mwachindunji pa seva yanu ya HomeGenie. Muli ndi API yonse yowongolera AI kuchokera ku mapulogalamu ena ndi zolemba.",
-      "ConfigureOptions.MaxTokens": "Max Tokens (kutalika kwa yankho)",
+      "ConfigureOptions.MaxTokens": "Kutalika kwa Mayankho (Ma Tokeni Ochuluka)",
       "ConfigureOptions.ModelPath": "Njira yopita ku fayilo ya GGUF yakomweko",
-      "ConfigureOptions.ModelFile": "Chitsanzo",
-      "ConfigureOptions.SystemInstructions": "Malangizo a Machitidwe",
-      "ConfigureOptions.ContextSize": "Kukula kwa Memory ya AI (Zenera la Nkhani)",
-      "ConfigureOptions.MaxTurns": "Kuchuluka kwa mbiri ya macheza (0 = palibe malire)",
-      "ConfigureOptions.SendContextData": "Phatikizani mndandanda wa zida ndi masensa mu mafunso"
+      "ConfigureOptions.ModelFile": "Chitsanzo cha AI",
+      "ConfigureOptions.SystemInstructions": "Chidziwitso cha System (Malangizo)",
+      "ConfigureOptions.ContextSize": "Kutha Kukumbukira kwa AI (Zenera la Nkhani)",
+      "ConfigureOptions.MaxTurns": "Memory ya Macheza (Maulendo Aakulu) (0 = palibe malire)",
+      "ConfigureOptions.SendContextData": "Gawani dongosolo ndi gawo ndi AI",
+      "ConfigureOptions.ModelTemperature": "Luso (Lolondola = 0, Luso = 2)",
+      "ConfigureOptions.ModelList": "Mndandanda wa Zitsanzo za AI (YAML)"
     },
     "575": {
       "Title": "Woyang'anira Tsitsani",

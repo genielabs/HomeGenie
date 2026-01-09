@@ -7,9 +7,9 @@ Qwen3-4B-Instruct-2507-UD-Q5_K_XL.gguf:
   Url: https://huggingface.co/unsloth/Qwen3-4B-Instruct-2507-GGUF/resolve/main/Qwen3-4B-Instruct-2507-UD-Q5_K_XL.gguf?download=true
   Template: chatml
 
-Qwen3-8B-Q8_0.gguf:
-  Name: Qwen/Qwen3-8B-GGUF
-  Url: https://huggingface.co/Qwen/Qwen3-8B-GGUF/resolve/main/Qwen3-8B-Q8_0.gguf?download=true
+Qwen3-1.7B-Q8_0.gguf:
+  Name: Qwen/Qwen3-1.7B-GGUF
+  Url: https://huggingface.co/Qwen/Qwen3-1.7B-GGUF/resolve/main/Qwen3-1.7B-Q8_0.gguf?download=true
   Template: chatml
 
 Qwen3-4B-Q5_K_M.gguf:
@@ -17,29 +17,24 @@ Qwen3-4B-Q5_K_M.gguf:
   Url: https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/main/Qwen3-4B-Q5_K_M.gguf?download=true
   Template: chatml
 
-Qwen3-1.7B-Q8_0.gguf:
-  Name: Qwen/Qwen3-1.7B-GGUF
-  Url: https://huggingface.co/Qwen/Qwen3-1.7B-GGUF/resolve/main/Qwen3-1.7B-Q8_0.gguf?download=true
+Qwen3-8B-Q8_0.gguf:
+  Name: Qwen/Qwen3-8B-GGUF
+  Url: https://huggingface.co/Qwen/Qwen3-8B-GGUF/resolve/main/Qwen3-8B-Q8_0.gguf?download=true
+  Template: chatml
+
+Qwen3-4B-Thinking-2507-MiMo-V2-Flash-Distill.q5_k_m.gguf:
+  Name: Qwen3-4B-Thinking-2507-MiMo-V2-Flash-Distill-GGUF
+  Url: https://huggingface.co/TeichAI/Qwen3-4B-Thinking-2507-MiMo-V2-Flash-Distill-GGUF/resolve/main/Qwen3-4B-Thinking-2507-MiMo-V2-Flash-Distill.q5_k_m.gguf?download=true
+  Template: chatml
+
+Qwen2.5-7B-Instruct.Q5_K_M.gguf:
+  Name: MaziyarPanahi/Qwen2.5-7B-Instruct-GGUF
+  Url: https://huggingface.co/MaziyarPanahi/Qwen2.5-7B-Instruct-GGUF/resolve/main/Qwen2.5-7B-Instruct.Q5_K_M.gguf?download=true
   Template: chatml
 
 qwen2.5-coder-7b-instruct-q5_k_m.gguf:
   Name: Qwen/Qwen2.5-Coder-7B-Instruct-GGUF
   Url: https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct-GGUF/resolve/main/qwen2.5-coder-7b-instruct-q5_k_m.gguf?download=true
-  Template: chatml
-
-qwen2.5-1.5b-instruct-q8_0.gguf:
-  Name: Qwen/Qwen2.5-1.5B-Instruct-GGUF
-  Url: https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct-GGUF/resolve/main/qwen2.5-1.5b-instruct-q8_0.gguf?download=true
-  Template: chatml
-
-qwen2.5-3b-instruct-q5_k_m.gguf:
-  Name: Qwen/Qwen2.5-3B-Instruct-GGUF
-  Url: https://huggingface.co/Qwen/Qwen2.5-3B-Instruct-GGUF/resolve/main/qwen2.5-3b-instruct-q5_k_m.gguf?download=true
-  Template: chatml
-
-qwen2.5-1.5b-instruct-fp16.gguf:
-  Name: Qwen/Qwen2.5-1.5B-Instruct-GGUF (fp16)
-  Url: https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct-GGUF/resolve/main/qwen2.5-1.5b-instruct-fp16.gguf?download=true
   Template: chatml
 
 

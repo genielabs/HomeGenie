@@ -325,13 +325,15 @@
     "940": {
       "Title": "Lokálna umelá inteligencia",
       "Description": "Spúšťajte najmodernejšie LLM priamo na vašom serveri HomeGenie. Zahŕňa kompletné API na ovládanie AI z iných programov a skriptov.",
-      "ConfigureOptions.MaxTokens": "Maximálny počet tokenov (dĺžka odpovede)",
+      "ConfigureOptions.MaxTokens": "Dĺžka odpovede (maximálny počet tokenov)",
       "ConfigureOptions.ModelPath": "Cesta k lokálnemu súboru GGUF",
-      "ConfigureOptions.ModelFile": "Model",
-      "ConfigureOptions.SystemInstructions": "Systémové pokyny",
-      "ConfigureOptions.ContextSize": "Veľkosť pamäte AI (kontextové okno)",
-      "ConfigureOptions.MaxTurns": "Maximálny počet otočení v histórii chatu (0 = bez obmedzenia)",
-      "ConfigureOptions.SendContextData": "Zahrnúť zoznam zariadení a senzorov do dotazov"
+      "ConfigureOptions.ModelFile": "Model umelej inteligencie",
+      "ConfigureOptions.SystemInstructions": "Systémový výzva (pokyny)",
+      "ConfigureOptions.ContextSize": "Kapacita pamäte AI (kontextové okno)",
+      "ConfigureOptions.MaxTurns": "Pamäť chatu (maximálny počet ťahov) (0 = bez obmedzenia)",
+      "ConfigureOptions.SendContextData": "Zdieľajte kontext systému a modulov s umelou inteligenciou",
+      "ConfigureOptions.ModelTemperature": "Kreativita (Presnosť = 0, Kreatívnosť = 2)",
+      "ConfigureOptions.ModelList": "Zoznam modelov umelej inteligencie (YAML)"
     },
     "575": {
       "Title": "Správca sťahovania",
@@ -372,5 +374,5 @@
   },
   "scheduler_preset_action_genie_command": "Džinsky príkaz",
   "scheduler_preset_action_config_wish": "Akcia v prirodzenom jazyku",
-  "scheduler_preset_action_config_wish.placeholder": "Skúste: „Nastavte teplotu na 22 °C a spustite scénu s východom slnka.“"
+  "scheduler_preset_action_config_wish.placeholder": "Skúste: „Nastavte teplotu na 22 ° a spustite scénu s východom slnka.“"
 }

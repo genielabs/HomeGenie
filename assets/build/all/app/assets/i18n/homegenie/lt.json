@@ -325,13 +325,15 @@
     "940": {
       "Title": "Vietinis dirbtinis intelektas",
       "Description": "Paleiskite pažangiausias LLM programas tiesiogiai savo „HomeGenie“ serveryje. Apima visą API sąsają, skirtą dirbtiniam intelektui valdyti iš kitų programų ir scenarijų.",
-      "ConfigureOptions.MaxTokens": "Maksimalus žetonų skaičius (atsakymo ilgis)",
+      "ConfigureOptions.MaxTokens": "Atsakymo ilgis (maks. žetonų)",
       "ConfigureOptions.ModelPath": "Kelias į vietinį GGUF failą",
-      "ConfigureOptions.ModelFile": "Modelis",
-      "ConfigureOptions.SystemInstructions": "Sistemos instrukcijos",
-      "ConfigureOptions.ContextSize": "DI atminties dydis (kontekstinis langas)",
-      "ConfigureOptions.MaxTurns": "Maksimalus pokalbių istorijos ėjimų skaičius (0 = neribojamas)",
-      "ConfigureOptions.SendContextData": "Į užklausas įtraukite įrenginių sąrašą ir jutiklius"
+      "ConfigureOptions.ModelFile": "DI modelis",
+      "ConfigureOptions.SystemInstructions": "Sistemos raginimas (instrukcijos)",
+      "ConfigureOptions.ContextSize": "DI atminties talpa (kontekstinis langas)",
+      "ConfigureOptions.MaxTurns": "Pokalbių atmintis (maks. ėjimų skaičius) (0 = neribojama)",
+      "ConfigureOptions.SendContextData": "Bendrinkite sistemos ir modulio kontekstą su dirbtiniu intelektu",
+      "ConfigureOptions.ModelTemperature": "Kūrybiškumas (tikslus = 0, kūrybiškumas = 2)",
+      "ConfigureOptions.ModelList": "Dirbtinio intelekto modelių sąrašas (YAML)"
     },
     "575": {
       "Title": "Atsisiuntimų tvarkyklė",

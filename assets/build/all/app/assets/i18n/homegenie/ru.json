@@ -325,13 +325,15 @@
     "940": {
       "Title": "Локальный ИИ",
       "Description": "Запускайте самые современные LLM-системы непосредственно на вашем сервере HomeGenie. Включает в себя полный API для управления ИИ из других программ и скриптов.",
-      "ConfigureOptions.MaxTokens": "Максимальное количество токенов (длина ответа)",
+      "ConfigureOptions.MaxTokens": "Длина ответа (максимальное количество токенов)",
       "ConfigureOptions.ModelPath": "Путь к локальному файлу GGUF",
-      "ConfigureOptions.ModelFile": "Модель",
-      "ConfigureOptions.SystemInstructions": "Системные инструкции",
-      "ConfigureOptions.ContextSize": "Размер памяти ИИ (контекстное окно)",
-      "ConfigureOptions.MaxTurns": "Максимальное количество оборотов в истории чата (0 = без ограничений)",
-      "ConfigureOptions.SendContextData": "Включайте список устройств и датчиков в запросы."
+      "ConfigureOptions.ModelFile": "Модель ИИ",
+      "ConfigureOptions.SystemInstructions": "Системная подсказка (инструкции)",
+      "ConfigureOptions.ContextSize": "Объем памяти ИИ (контекстное окно)",
+      "ConfigureOptions.MaxTurns": "Память чата (максимальное количество ходов) (0 = без ограничений)",
+      "ConfigureOptions.SendContextData": "Передайте ИИ контекст системы и модулей.",
+      "ConfigureOptions.ModelTemperature": "Креативность (Точность = 0, Креативность = 2)",
+      "ConfigureOptions.ModelList": "Список моделей ИИ (YAML)"
     },
     "575": {
       "Title": "Менеджер загрузок",

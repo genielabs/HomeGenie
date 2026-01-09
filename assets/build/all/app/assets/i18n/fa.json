@@ -468,5 +468,7 @@
   "api_calls": "دستورات API",
   "show_code": "نمایش کد",
   "copy_api_call": "رشته فراخوانی API را کپی کنید",
-  "copy_full_api_url": "کپی کردن آدرس کامل API"
+  "copy_full_api_url": "کپی کردن آدرس کامل API",
+  "details": "جزئیات",
+  "visual_program": "برنامه بصری"
 }

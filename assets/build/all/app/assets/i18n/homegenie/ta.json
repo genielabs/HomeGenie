@@ -325,13 +325,15 @@
     "940": {
       "Title": "உள்ளூர் AI",
       "Description": "உங்கள் HomeGenie சர்வரில் நேரடியாக அதிநவீன LLMகளை இயக்கவும். பிற நிரல்கள் மற்றும் ஸ்கிரிப்ட்களிலிருந்து AI ஐக் கட்டுப்படுத்த முழு API ஐ உள்ளடக்கியது.",
-      "ConfigureOptions.MaxTokens": "அதிகபட்ச டோக்கன்கள் (பதில் நீளம்)",
+      "ConfigureOptions.MaxTokens": "மறுமொழி நீளம் (அதிகபட்ச டோக்கன்கள்)",
       "ConfigureOptions.ModelPath": "உள்ளூர் GGUF கோப்பிற்கான பாதை",
-      "ConfigureOptions.ModelFile": "மாதிரி",
-      "ConfigureOptions.SystemInstructions": "கணினி வழிமுறைகள்",
-      "ConfigureOptions.ContextSize": "AI நினைவக அளவு (சூழல் சாளரம்)",
-      "ConfigureOptions.MaxTurns": "அதிகபட்ச அரட்டை வரலாறு திருப்பங்கள் (0 = வரம்பு இல்லை)",
-      "ConfigureOptions.SendContextData": "வினவல்களில் சாதனப் பட்டியல் மற்றும் சென்சார்களைச் சேர்க்கவும்"
+      "ConfigureOptions.ModelFile": "AI மாதிரி",
+      "ConfigureOptions.SystemInstructions": "கணினி அறிவிப்பு (வழிமுறைகள்)",
+      "ConfigureOptions.ContextSize": "AI நினைவக திறன் (சூழல் சாளரம்)",
+      "ConfigureOptions.MaxTurns": "அரட்டை நினைவகம் (அதிகபட்ச திருப்பங்கள்) (0 = வரம்பு இல்லை)",
+      "ConfigureOptions.SendContextData": "AI உடன் அமைப்பு மற்றும் தொகுதி சூழலைப் பகிரவும்",
+      "ConfigureOptions.ModelTemperature": "படைப்பாற்றல் (துல்லியமானது = 0, படைப்பாற்றல் = 2)",
+      "ConfigureOptions.ModelList": "AI மாதிரி பட்டியல் (YAML)"
     },
     "575": {
       "Title": "பதிவிறக்க மேலாளர்",

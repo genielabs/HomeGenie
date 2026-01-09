@@ -325,13 +325,15 @@
     "940": {
       "Title": "בינה מלאכותית מקומית",
       "Description": "הפעלת מערכות LLM חדישות ישירות על שרת HomeGenie שלך. כוללת API מלא לשליטה בבינה המלאכותית מתוכנות וסקריפטים אחרים.",
-      "ConfigureOptions.MaxTokens": "מקסימום אסימונים (אורך תגובה)",
+      "ConfigureOptions.MaxTokens": "אורך תגובה (מקסימום אסימונים)",
       "ConfigureOptions.ModelPath": "נתיב לקובץ GGUF מקומי",
-      "ConfigureOptions.ModelFile": "דֶגֶם",
-      "ConfigureOptions.SystemInstructions": "הוראות מערכת",
-      "ConfigureOptions.ContextSize": "גודל זיכרון בינה מלאכותית (חלון הקשר)",
-      "ConfigureOptions.MaxTurns": "מקסימום סיבובי היסטוריית צ'אט (0 = ללא הגבלה)",
-      "ConfigureOptions.SendContextData": "כלול רשימת מכשירים וחיישנים בשאילתות"
+      "ConfigureOptions.ModelFile": "מודל בינה מלאכותית",
+      "ConfigureOptions.SystemInstructions": "הנחיית מערכת (הוראות)",
+      "ConfigureOptions.ContextSize": "קיבולת זיכרון של בינה מלאכותית (חלון הקשר)",
+      "ConfigureOptions.MaxTurns": "זיכרון צ'אט (מקסימום תורות) (0 = ללא הגבלה)",
+      "ConfigureOptions.SendContextData": "שתף את הקשר של המערכת והמודולים עם הבינה המלאכותית",
+      "ConfigureOptions.ModelTemperature": "יצירתיות (דיוק = 0, יצירתיות = 2)",
+      "ConfigureOptions.ModelList": "רשימת מודלים של בינה מלאכותית (YAML)"
     },
     "575": {
       "Title": "מנהל ההורדות",

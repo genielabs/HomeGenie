@@ -325,13 +325,15 @@
     "940": {
       "Title": "IA locală",
       "Description": "Rulați LLM-uri de ultimă generație direct pe serverul dvs. HomeGenie. Include o API completă pentru a controla inteligența artificială din alte programe și scripturi.",
-      "ConfigureOptions.MaxTokens": "Număr maxim de tokenuri (lungimea răspunsului)",
+      "ConfigureOptions.MaxTokens": "Lungimea răspunsului (număr maxim de jetoane)",
       "ConfigureOptions.ModelPath": "Calea către fișierul GGUF local",
-      "ConfigureOptions.ModelFile": "Model",
+      "ConfigureOptions.ModelFile": "Modelul AI",
       "ConfigureOptions.SystemInstructions": "Instrucțiuni de sistem",
-      "ConfigureOptions.ContextSize": "Dimensiunea memoriei AI (fereastră contextuală)",
-      "ConfigureOptions.MaxTurns": "Număr maxim de ture în istoricul chatului (0 = fără limită)",
-      "ConfigureOptions.SendContextData": "Includeți lista de dispozitive și senzori în interogări"
+      "ConfigureOptions.ContextSize": "Capacitatea memoriei AI (fereastră contextuală)",
+      "ConfigureOptions.MaxTurns": "Memorie Chat (Max. Runde) (0 = fără limită)",
+      "ConfigureOptions.SendContextData": "Partajați contextul sistemului și al modulelor cu inteligența artificială",
+      "ConfigureOptions.ModelTemperature": "Creativitate (Precis = 0, Creativ = 2)",
+      "ConfigureOptions.ModelList": "Listă de modele AI (YAML)"
     },
     "575": {
       "Title": "Manager de descărcări",

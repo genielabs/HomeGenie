@@ -325,13 +325,15 @@
     "940": {
       "Title": "Лакальны штучны інтэлект",
       "Description": "Запускайце найноўшыя LLM непасрэдна на вашым серверы HomeGenie. Уключае поўны API для кіравання штучным інтэлектам з іншых праграм і скрыптоў.",
-      "ConfigureOptions.MaxTokens": "Максімальная колькасць токенаў (даўжыня адказу)",
+      "ConfigureOptions.MaxTokens": "Даўжыня адказу (максімальная колькасць токенаў)",
       "ConfigureOptions.ModelPath": "Шлях да лакальнага файла GGUF",
-      "ConfigureOptions.ModelFile": "Мадэль",
-      "ConfigureOptions.SystemInstructions": "Сістэмныя інструкцыі",
-      "ConfigureOptions.ContextSize": "Памер памяці штучнага інтэлекту (кантэкстнае акно)",
-      "ConfigureOptions.MaxTurns": "Максімальная колькасць зваротаў у гісторыі чата (0 = без абмежаванняў)",
-      "ConfigureOptions.SendContextData": "Уключыць спіс прылад і датчыкі ў запыты"
+      "ConfigureOptions.ModelFile": "Мадэль штучнага інтэлекту",
+      "ConfigureOptions.SystemInstructions": "Сістэмны запыт (інструкцыі)",
+      "ConfigureOptions.ContextSize": "Ёмістасць памяці штучнага інтэлекту (кантэкстнае акно)",
+      "ConfigureOptions.MaxTurns": "Памяць чата (максімальная колькасць хадоў) (0 = без абмежаванняў)",
+      "ConfigureOptions.SendContextData": "Абагульвайце кантэкст сістэмы і модуля са штучным інтэлектам",
+      "ConfigureOptions.ModelTemperature": "Крэатыўнасць (Дакладнасць = 0, Крэатыўнасць = 2)",
+      "ConfigureOptions.ModelList": "Спіс мадэляў штучнага інтэлекту (YAML)"
     },
     "575": {
       "Title": "Менеджэр загрузак",

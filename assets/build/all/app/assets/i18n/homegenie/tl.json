@@ -325,13 +325,15 @@
     "940": {
       "Title": "Lokal na AI",
       "Description": "Magpatakbo ng mga makabagong LLM nang direkta sa iyong HomeGenie server. May kasamang kumpletong API para kontrolin ang AI mula sa iba pang mga programa at script.",
-      "ConfigureOptions.MaxTokens": "Pinakamataas na Token (haba ng tugon)",
+      "ConfigureOptions.MaxTokens": "Haba ng Tugon (Max Tokens)",
       "ConfigureOptions.ModelPath": "Path sa lokal na GGUF file",
-      "ConfigureOptions.ModelFile": "Modelo",
-      "ConfigureOptions.SystemInstructions": "Mga Tagubilin sa Sistema",
-      "ConfigureOptions.ContextSize": "Laki ng Memorya ng AI (Context Window)",
-      "ConfigureOptions.MaxTurns": "Pinakamataas na bilang ng mga lumiliko sa kasaysayan ng chat (0 = walang limitasyon)",
-      "ConfigureOptions.SendContextData": "Isama ang listahan ng device at mga sensor sa mga query"
+      "ConfigureOptions.ModelFile": "Modelo ng AI",
+      "ConfigureOptions.SystemInstructions": "Prompt ng Sistema (Mga Tagubilin)",
+      "ConfigureOptions.ContextSize": "Kapasidad ng Memorya ng AI (Context Window)",
+      "ConfigureOptions.MaxTurns": "Memorya ng Chat (Pinakamataas na Bilang ng Turns) (0 = walang limitasyon)",
+      "ConfigureOptions.SendContextData": "Ibahagi ang konteksto ng sistema at modyul sa AI",
+      "ConfigureOptions.ModelTemperature": "Pagkamalikhain (Tumpak = 0, Malikhain = 2)",
+      "ConfigureOptions.ModelList": "Listahan ng Modelo ng AI (YAML)"
     },
     "575": {
       "Title": "Tagapamahala ng Pag-download",

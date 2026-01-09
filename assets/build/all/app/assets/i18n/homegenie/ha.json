@@ -325,13 +325,15 @@
     "940": {
       "Title": "AI na gida",
       "Description": "Gudanar da LLMs na zamani kai tsaye akan sabar HomeGenie ɗinku. Ya haɗa da cikakken API don sarrafa AI daga wasu shirye-shirye da rubutun.",
-      "ConfigureOptions.MaxTokens": "Max Tokens (tsawon amsawa)",
+      "ConfigureOptions.MaxTokens": "Tsawon Amsa (Matsakaicin Alamomi)",
       "ConfigureOptions.ModelPath": "Hanya zuwa fayil na GGUF na gida",
-      "ConfigureOptions.ModelFile": "Samfuri",
-      "ConfigureOptions.SystemInstructions": "Umarnin Tsarin",
-      "ConfigureOptions.ContextSize": "Girman Ƙwaƙwalwar AI (Tagar Yanayi)",
-      "ConfigureOptions.MaxTurns": "Matsakaicin juyi na tarihin hira (0 = babu iyaka)",
-      "ConfigureOptions.SendContextData": "Haɗa jerin na'urori da na'urori masu auna sigina a cikin tambayoyi"
+      "ConfigureOptions.ModelFile": "Tsarin AI",
+      "ConfigureOptions.SystemInstructions": "Umarnin Tsarin (Umarni)",
+      "ConfigureOptions.ContextSize": "Ƙarfin Ƙwaƙwalwar AI (Tagar Yanayi)",
+      "ConfigureOptions.MaxTurns": "Ƙwaƙwalwar Hira (Matsakaicin Juyawa) (0 = babu iyaka)",
+      "ConfigureOptions.SendContextData": "Raba tsarin da yanayin module tare da AI",
+      "ConfigureOptions.ModelTemperature": "Ƙirƙira (Daidaitacce = 0, Ƙirƙira = 2)",
+      "ConfigureOptions.ModelList": "Jerin Samfurin AI (YAML)"
     },
     "575": {
       "Title": "Manajan Saukewa",

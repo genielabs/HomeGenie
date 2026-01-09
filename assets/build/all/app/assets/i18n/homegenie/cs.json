@@ -325,13 +325,15 @@
     "940": {
       "Title": "Lokální umělá inteligence",
       "Description": "Spouštějte nejmodernější LLM přímo na svém serveru HomeGenie. Zahrnuje kompletní API pro ovládání umělé inteligence z jiných programů a skriptů.",
-      "ConfigureOptions.MaxTokens": "Max. počet tokenů (délka odpovědi)",
+      "ConfigureOptions.MaxTokens": "Délka odpovědi (max. tokenů)",
       "ConfigureOptions.ModelPath": "Cesta k lokálnímu souboru GGUF",
-      "ConfigureOptions.ModelFile": "Model",
-      "ConfigureOptions.SystemInstructions": "Systémové instrukce",
-      "ConfigureOptions.ContextSize": "Velikost paměti AI (kontextové okno)",
-      "ConfigureOptions.MaxTurns": "Maximální počet tahů v historii chatu (0 = bez omezení)",
-      "ConfigureOptions.SendContextData": "Zahrnout do dotazů seznam zařízení a senzorů"
+      "ConfigureOptions.ModelFile": "Model umělé inteligence",
+      "ConfigureOptions.SystemInstructions": "Systémový výzva (pokyny)",
+      "ConfigureOptions.ContextSize": "Kapacita paměti AI (kontextové okno)",
+      "ConfigureOptions.MaxTurns": "Paměť chatu (maximální počet tahů) (0 = bez omezení)",
+      "ConfigureOptions.SendContextData": "Sdílení kontextu systému a modulů s umělou inteligencí",
+      "ConfigureOptions.ModelTemperature": "Kreativita (Přesnost = 0, Kreativita = 2)",
+      "ConfigureOptions.ModelList": "Seznam modelů umělé inteligence (YAML)"
     },
     "575": {
       "Title": "Správce stahování",

@@ -325,13 +325,15 @@
     "940": {
       "Title": "로컬 AI",
       "Description": "최첨단 LLM(로컬 라이프사이클 관리)을 HomeGenie 서버에서 직접 실행하세요. 다른 프로그램 및 스크립트에서 AI를 제어할 수 있는 완벽한 API가 포함되어 있습니다.",
-      "ConfigureOptions.MaxTokens": "최대 토큰 수(응답 길이)",
+      "ConfigureOptions.MaxTokens": "응답 길이(최대 토큰 수)",
       "ConfigureOptions.ModelPath": "로컬 GGUF 파일 경로",
-      "ConfigureOptions.ModelFile": "모델",
-      "ConfigureOptions.SystemInstructions": "시스템 지침",
-      "ConfigureOptions.ContextSize": "AI 메모리 크기(컨텍스트 윈도우)",
-      "ConfigureOptions.MaxTurns": "최대 채팅 기록 턴 수 (0 = 제한 없음)",
-      "ConfigureOptions.SendContextData": "쿼리에 장치 목록과 센서를 포함하세요."
+      "ConfigureOptions.ModelFile": "AI 모델",
+      "ConfigureOptions.SystemInstructions": "시스템 안내 메시지(지침)",
+      "ConfigureOptions.ContextSize": "AI 메모리 용량(컨텍스트 윈도우)",
+      "ConfigureOptions.MaxTurns": "채팅 메모리(최대 턴 수) (0 = 제한 없음)",
+      "ConfigureOptions.SendContextData": "시스템 및 모듈 컨텍스트를 AI와 공유합니다.",
+      "ConfigureOptions.ModelTemperature": "창의성 (정확도 = 0, 창의성 = 2)",
+      "ConfigureOptions.ModelList": "AI 모델 목록(YAML)"
     },
     "575": {
       "Title": "다운로드 관리자",

@@ -325,13 +325,15 @@
     "940": {
       "Title": "સ્થાનિક AI",
       "Description": "તમારા HomeGenie સર્વર પર સીધા જ અત્યાધુનિક LLM ચલાવો. અન્ય પ્રોગ્રામ્સ અને સ્ક્રિપ્ટ્સમાંથી AI ને નિયંત્રિત કરવા માટે સંપૂર્ણ API શામેલ છે.",
-      "ConfigureOptions.MaxTokens": "મહત્તમ ટોકન્સ (પ્રતિભાવ લંબાઈ)",
+      "ConfigureOptions.MaxTokens": "પ્રતિભાવ લંબાઈ (મહત્તમ ટોકન્સ)",
       "ConfigureOptions.ModelPath": "સ્થાનિક GGUF ફાઇલનો માર્ગ",
-      "ConfigureOptions.ModelFile": "મોડેલ",
-      "ConfigureOptions.SystemInstructions": "સિસ્ટમ સૂચનાઓ",
-      "ConfigureOptions.ContextSize": "AI મેમરી કદ (સંદર્ભ વિન્ડો)",
-      "ConfigureOptions.MaxTurns": "મહત્તમ ચેટ ઇતિહાસ વળાંક (0 = કોઈ મર્યાદા નહીં)",
-      "ConfigureOptions.SendContextData": "ક્વેરીઝમાં ડિવાઇસ સૂચિ અને સેન્સર શામેલ કરો"
+      "ConfigureOptions.ModelFile": "AI મોડેલ",
+      "ConfigureOptions.SystemInstructions": "સિસ્ટમ પ્રોમ્પ્ટ (સૂચનો)",
+      "ConfigureOptions.ContextSize": "AI મેમરી ક્ષમતા (સંદર્ભ વિન્ડો)",
+      "ConfigureOptions.MaxTurns": "ચેટ મેમરી (મહત્તમ ટર્ન) (0 = કોઈ મર્યાદા નહીં)",
+      "ConfigureOptions.SendContextData": "AI સાથે સિસ્ટમ અને મોડ્યુલ સંદર્ભ શેર કરો",
+      "ConfigureOptions.ModelTemperature": "સર્જનાત્મકતા (ચોક્કસ = 0, સર્જનાત્મક = 2)",
+      "ConfigureOptions.ModelList": "AI મોડેલ યાદી (YAML)"
     },
     "575": {
       "Title": "ડાઉનલોડ મેનેજર",

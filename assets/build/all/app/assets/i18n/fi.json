@@ -468,5 +468,7 @@
   "api_calls": "API-komennot",
   "show_code": "Näytä koodi",
   "copy_api_call": "Kopioi API-kutsumerkkijono",
-  "copy_full_api_url": "Kopioi koko API-URL-osoite"
+  "copy_full_api_url": "Kopioi koko API-URL-osoite",
+  "details": "Tiedot",
+  "visual_program": "Visuaalinen ohjelma"
 }

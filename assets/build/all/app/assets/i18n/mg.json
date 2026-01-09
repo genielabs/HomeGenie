@@ -468,5 +468,7 @@
   "api_calls": "baiko API",
   "show_code": "Asehoy ny kaody",
   "copy_api_call": "Adikao ny tady fiantsoana API",
-  "copy_full_api_url": "Adikao ny URL API feno"
+  "copy_full_api_url": "Adikao ny URL API feno",
+  "details": "tsipiriany",
+  "visual_program": "Fandaharan'asa hita maso"
 }

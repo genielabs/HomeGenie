@@ -325,13 +325,15 @@
     "940": {
       "Title": "ലോക്കൽ AI",
       "Description": "നിങ്ങളുടെ HomeGenie സെർവറിൽ നേരിട്ട് അത്യാധുനിക LLM-കൾ പ്രവർത്തിപ്പിക്കുക. മറ്റ് പ്രോഗ്രാമുകളിൽ നിന്നും സ്ക്രിപ്റ്റുകളിൽ നിന്നും AI നിയന്ത്രിക്കുന്നതിന് ഒരു പൂർണ്ണ API ഉൾപ്പെടുന്നു.",
-      "ConfigureOptions.MaxTokens": "പരമാവധി ടോക്കണുകൾ (പ്രതികരണ ദൈർഘ്യം)",
+      "ConfigureOptions.MaxTokens": "പ്രതികരണ ദൈർഘ്യം (പരമാവധി ടോക്കണുകൾ)",
       "ConfigureOptions.ModelPath": "ലോക്കൽ GGUF ഫയലിലേക്കുള്ള പാത",
-      "ConfigureOptions.ModelFile": "മോഡൽ",
-      "ConfigureOptions.SystemInstructions": "സിസ്റ്റം നിർദ്ദേശങ്ങൾ",
-      "ConfigureOptions.ContextSize": "AI മെമ്മറി വലുപ്പം (സന്ദർഭ വിൻഡോ)",
-      "ConfigureOptions.MaxTurns": "പരമാവധി ചാറ്റ് ചരിത്ര ടേണുകൾ (0 = പരിധിയില്ല)",
-      "ConfigureOptions.SendContextData": "ചോദ്യങ്ങളിൽ ഉപകരണ ലിസ്റ്റും സെൻസറുകളും ഉൾപ്പെടുത്തുക"
+      "ConfigureOptions.ModelFile": "AI മോഡൽ",
+      "ConfigureOptions.SystemInstructions": "സിസ്റ്റം പ്രോംപ്റ്റ് (നിർദ്ദേശങ്ങൾ)",
+      "ConfigureOptions.ContextSize": "AI മെമ്മറി ശേഷി (സന്ദർഭ വിൻഡോ)",
+      "ConfigureOptions.MaxTurns": "ചാറ്റ് മെമ്മറി (പരമാവധി തിരിവുകൾ) (0 = പരിധിയില്ല)",
+      "ConfigureOptions.SendContextData": "സിസ്റ്റവും മൊഡ്യൂൾ സന്ദർഭവും AI-യുമായി പങ്കിടുക",
+      "ConfigureOptions.ModelTemperature": "സർഗ്ഗാത്മകത (കൃത്യം = 0, സർഗ്ഗാത്മകത = 2)",
+      "ConfigureOptions.ModelList": "AI മോഡൽ ലിസ്റ്റ് (YAML)"
     },
     "575": {
       "Title": "ഡൗൺലോഡ് മാനേജർ",

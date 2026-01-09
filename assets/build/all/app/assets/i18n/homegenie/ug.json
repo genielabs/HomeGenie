@@ -325,13 +325,15 @@
     "940": {
       "Title": "يەرلىك سۈنئىي ئەقىل",
       "Description": "HomeGenie سېرۋېرىڭىزدا ئەڭ ئىلغار LLM لارنى بىۋاسىتە ئىجرا قىلىڭ. باشقا پروگراممىلار ۋە سىكرىپتلاردىن سۈنئىي ئەقىلنى كونترول قىلىش ئۈچۈن تولۇق API نى ئۆز ئىچىگە ئالىدۇ.",
-      "ConfigureOptions.MaxTokens": "ئەڭ چوڭ توكېن (جاۋاب ئۇزۇنلۇقى)",
+      "ConfigureOptions.MaxTokens": "جاۋاب ئۇزۇنلۇقى (ئەڭ يۇقىرى بەلگىلەر)",
       "ConfigureOptions.ModelPath": "يەرلىك GGUF ھۆججىتىگە يول",
-      "ConfigureOptions.ModelFile": "مودېل",
-      "ConfigureOptions.SystemInstructions": "سىستېما كۆرسەتمىلىرى",
-      "ConfigureOptions.ContextSize": "سۈنئىي ئەقىل ئىچكى ساقلىغۇچ چوڭلۇقى (كونتېكست كۆزنىكى)",
-      "ConfigureOptions.MaxTurns": "ئەڭ كۆپ پاراڭلىشىش تارىخى (0 = چەكلىمە يوق)",
-      "ConfigureOptions.SendContextData": "سوئاللارغا ئۈسكۈنە تىزىملىكى ۋە سېنزورلارنى قوشۇڭ"
+      "ConfigureOptions.ModelFile": "سۈنئىي ئەقىل مودېلى",
+      "ConfigureOptions.SystemInstructions": "سىستېما كۆرسەتمىسى (كۆرسەتمىلەر)",
+      "ConfigureOptions.ContextSize": "سۈنئىي ئەقىلنىڭ ئىچكى ساقلىغۇچ سىغىمى (كونتېكست كۆزنىكى)",
+      "ConfigureOptions.MaxTurns": "پاراڭلىشىش خاتىرىسى (ئەڭ كۆپ قېتىم ئايلىنىش) (0 = چەكلىمە يوق)",
+      "ConfigureOptions.SendContextData": "سىستېما ۋە مودۇل مەزمۇنىنى سۈنئىي ئەقىل بىلەن ئورتاقلىشىڭ",
+      "ConfigureOptions.ModelTemperature": "ئىجادچانلىق (ئېنىق = 0، ئىجادچان = 2)",
+      "ConfigureOptions.ModelList": "سۈنئىي ئەقىل مودېل تىزىملىكى (YAML)"
     },
     "575": {
       "Title": "چۈشۈرۈش باشقۇرغۇچىسى",

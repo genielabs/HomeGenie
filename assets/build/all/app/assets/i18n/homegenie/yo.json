@@ -325,13 +325,15 @@
     "940": {
       "Title": "AI agbegbe",
       "Description": "Ṣiṣẹ́ àwọn LLM tuntun taara lórí olupin HomeGenie rẹ. Ó ní API pípé láti ṣàkóso AI láti inú àwọn ètò àti àwọn ìwé àkọsílẹ̀ mìíràn.",
-      "ConfigureOptions.MaxTokens": "Àwọn àmì tó pọ̀ jùlọ (gígùn ìdáhùn)",
+      "ConfigureOptions.MaxTokens": "Gígùn Ìdáhùn (Àwọn àmì tó pọ̀ jùlọ)",
       "ConfigureOptions.ModelPath": "Ona si faili GGUF agbegbe",
-      "ConfigureOptions.ModelFile": "Àwòṣe",
-      "ConfigureOptions.SystemInstructions": "Àwọn Ìtọ́ni Ètò",
-      "ConfigureOptions.ContextSize": "Ìwọ̀n ìrántí AI (Fèrèsé àyíká)",
-      "ConfigureOptions.MaxTurns": "Ìtàn ìfọ̀rọ̀wérọ̀ tó pọ̀ jùlọ (0 = kò sí ààlà)",
-      "ConfigureOptions.SendContextData": "Fi àkójọ ẹ̀rọ àti àwọn sensọ kún àwọn ìbéèrè"
+      "ConfigureOptions.ModelFile": "Àwòṣe AI",
+      "ConfigureOptions.SystemInstructions": "Ìtọ́sọ́nà Ètò (Àwọn Ìtọ́sọ́nà)",
+      "ConfigureOptions.ContextSize": "Agbára Ìrántí AI (Fèrèsé Àyíká)",
+      "ConfigureOptions.MaxTurns": "Iranti Iwiregbe (Awọn iyipo to pọ julọ) (0 = ko si opin)",
+      "ConfigureOptions.SendContextData": "Pin eto ati ipo modulu pẹlu AI",
+      "ConfigureOptions.ModelTemperature": "Ìṣẹ̀dá (Percule = 0, Ìṣẹ̀dá = 2)",
+      "ConfigureOptions.ModelList": "Àkójọ Àwòṣe AI (YAML)"
     },
     "575": {
       "Title": "Olùṣàkóso Ìgbàsílẹ̀",

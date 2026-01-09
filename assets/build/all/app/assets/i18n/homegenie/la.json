@@ -325,13 +325,15 @@
     "940": {
       "Title": "Intellegentia Artificialis Localis",
       "Description": "Curre programmata LLM recentissima directe in servo tuo HomeGenie. API plenam includit ad intellegentiam artificialem ex aliis programmatibus et scriptis moderandam.",
-      "ConfigureOptions.MaxTokens": "Tesserae Maximae (longitudo responsorum)",
+      "ConfigureOptions.MaxTokens": "Longitudo Responsionis (Tesserae Maximae)",
       "ConfigureOptions.ModelPath": "Semita ad fasciculum GGUF localem",
-      "ConfigureOptions.ModelFile": "Modellum",
-      "ConfigureOptions.SystemInstructions": "Instructiones Systematis",
-      "ConfigureOptions.ContextSize": "Magnitudo memoriae AI (Fenestra Contextualis)",
-      "ConfigureOptions.MaxTurns": "Maximae vices historiae colloquiorum (0 = nullus finis)",
-      "ConfigureOptions.SendContextData": "Indicem instrumentorum et sensorum in interrogationibus includere"
+      "ConfigureOptions.ModelFile": "Modelus Intellegentiae Artificialis",
+      "ConfigureOptions.SystemInstructions": "Instructiones Systematis (Instructiones)",
+      "ConfigureOptions.ContextSize": "Capacitas Memoriae Intellegentiae Artificialis (Fenestra Contextualis)",
+      "ConfigureOptions.MaxTurns": "Memoria Colloquii (Maximi Vicis) (0 = nullus finis)",
+      "ConfigureOptions.SendContextData": "Contextum systematis et moduli cum IA communica.",
+      "ConfigureOptions.ModelTemperature": "Creativitas (Praecisa = 0, Creativa = 2)",
+      "ConfigureOptions.ModelList": "Index Modelorum Intellegentiae Artificialis (YAML)"
     },
     "575": {
       "Title": "Administrator Deductionum",

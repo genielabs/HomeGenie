@@ -325,13 +325,15 @@
     "940": {
       "Title": "Орон нутгийн хиймэл оюун ухаан",
       "Description": "Хамгийн сүүлийн үеийн LLM-үүдийг HomeGenie сервер дээрээ шууд ажиллуулна. Бусад програм болон скриптээс хиймэл оюун ухааныг удирдах бүрэн API-г багтаасан болно.",
-      "ConfigureOptions.MaxTokens": "Хамгийн их Токен (хариу өгөх хугацаа)",
+      "ConfigureOptions.MaxTokens": "Хариу өгөх урт (Хамгийн их токен)",
       "ConfigureOptions.ModelPath": "Орон нутгийн GGUF файлын зам",
-      "ConfigureOptions.ModelFile": "Загвар",
-      "ConfigureOptions.SystemInstructions": "Системийн зааварчилгаа",
-      "ConfigureOptions.ContextSize": "Хиймэл оюун ухааны санах ойн хэмжээ (Контекст цонх)",
-      "ConfigureOptions.MaxTurns": "Чатын түүхийн дээд хязгаар (0 = хязгааргүй)",
-      "ConfigureOptions.SendContextData": "Асуулгад төхөөрөмжийн жагсаалт болон мэдрэгчийг оруулах"
+      "ConfigureOptions.ModelFile": "Хиймэл оюун ухааны загвар",
+      "ConfigureOptions.SystemInstructions": "Системийн заавар (Зааварчилгаа)",
+      "ConfigureOptions.ContextSize": "Хиймэл оюун ухааны санах ойн багтаамж (Контекст цонх)",
+      "ConfigureOptions.MaxTurns": "Чатын санах ой (Хамгийн их эргэлт) (0 = хязгааргүй)",
+      "ConfigureOptions.SendContextData": "Систем болон модулийн агуулгыг хиймэл оюун ухаантай хуваалцах",
+      "ConfigureOptions.ModelTemperature": "Бүтээлч байдал (Нарийвчлал = 0, Бүтээлч байдал = 2)",
+      "ConfigureOptions.ModelList": "Хиймэл оюун ухааны загварын жагсаалт (YAML)"
     },
     "575": {
       "Title": "Татаж авах менежер",

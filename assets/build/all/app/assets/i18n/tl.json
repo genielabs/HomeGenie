@@ -468,5 +468,7 @@
   "api_calls": "Mga utos ng API",
   "show_code": "Ipakita ang Kodigo",
   "copy_api_call": "Kopyahin ang string ng tawag sa API",
-  "copy_full_api_url": "Kopyahin ang buong URL ng API"
+  "copy_full_api_url": "Kopyahin ang buong URL ng API",
+  "details": "Mga Detalye",
+  "visual_program": "Programang Biswal"
 }

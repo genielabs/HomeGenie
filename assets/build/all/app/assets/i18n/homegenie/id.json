@@ -325,13 +325,15 @@
     "940": {
       "Title": "AI Lokal",
       "Description": "Jalankan LLM (Learning Learning Model) canggih langsung di server HomeGenie Anda. Termasuk API lengkap untuk mengontrol AI dari program dan skrip lain.",
-      "ConfigureOptions.MaxTokens": "Token Maksimum (panjang respons)",
+      "ConfigureOptions.MaxTokens": "Panjang Respons (Token Maksimum)",
       "ConfigureOptions.ModelPath": "Jalur ke file GGUF lokal",
-      "ConfigureOptions.ModelFile": "Model",
-      "ConfigureOptions.SystemInstructions": "Instruksi Sistem",
-      "ConfigureOptions.ContextSize": "Ukuran Memori AI (Jendela Konteks)",
-      "ConfigureOptions.MaxTurns": "Jumlah putaran riwayat obrolan maksimum (0 = tanpa batas)",
-      "ConfigureOptions.SendContextData": "Sertakan daftar perangkat dan sensor dalam kueri."
+      "ConfigureOptions.ModelFile": "Model AI",
+      "ConfigureOptions.SystemInstructions": "Perintah Sistem (Instruksi)",
+      "ConfigureOptions.ContextSize": "Kapasitas Memori AI (Jendela Konteks)",
+      "ConfigureOptions.MaxTurns": "Memori Obrolan (Jumlah Giliran Maksimum) (0 = tanpa batas)",
+      "ConfigureOptions.SendContextData": "Bagikan konteks sistem dan modul dengan AI.",
+      "ConfigureOptions.ModelTemperature": "Kreativitas (Tepat = 0, Kreatif = 2)",
+      "ConfigureOptions.ModelList": "Daftar Model AI (YAML)"
     },
     "575": {
       "Title": "Pengelola Unduhan",

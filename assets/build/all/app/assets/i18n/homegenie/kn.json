@@ -325,13 +325,15 @@
     "940": {
       "Title": "ಸ್ಥಳೀಯ AI",
       "Description": "ನಿಮ್ಮ HomeGenie ಸರ್ವರ್‌ನಲ್ಲಿ ನೇರವಾಗಿ ಅತ್ಯಾಧುನಿಕ LLM ಗಳನ್ನು ರನ್ ಮಾಡಿ. ಇತರ ಪ್ರೋಗ್ರಾಂಗಳು ಮತ್ತು ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳಿಂದ AI ಅನ್ನು ನಿಯಂತ್ರಿಸಲು ಪೂರ್ಣ API ಅನ್ನು ಒಳಗೊಂಡಿದೆ.",
-      "ConfigureOptions.MaxTokens": "ಗರಿಷ್ಠ ಟೋಕನ್‌ಗಳು (ಪ್ರತಿಕ್ರಿಯೆಯ ಉದ್ದ)",
+      "ConfigureOptions.MaxTokens": "ಪ್ರತಿಕ್ರಿಯೆ ಉದ್ದ (ಗರಿಷ್ಠ ಟೋಕನ್‌ಗಳು)",
       "ConfigureOptions.ModelPath": "ಸ್ಥಳೀಯ GGUF ಫೈಲ್‌ಗೆ ಮಾರ್ಗ",
-      "ConfigureOptions.ModelFile": "ಮಾದರಿ",
-      "ConfigureOptions.SystemInstructions": "ಸಿಸ್ಟಮ್ ಸೂಚನೆಗಳು",
-      "ConfigureOptions.ContextSize": "AI ಮೆಮೊರಿ ಗಾತ್ರ (ಸಂದರ್ಭ ವಿಂಡೋ)",
-      "ConfigureOptions.MaxTurns": "ಗರಿಷ್ಠ ಚಾಟ್ ಇತಿಹಾಸ ತಿರುವುಗಳು (0 = ಮಿತಿಯಿಲ್ಲ)",
-      "ConfigureOptions.SendContextData": "ಪ್ರಶ್ನೆಗಳಲ್ಲಿ ಸಾಧನ ಪಟ್ಟಿ ಮತ್ತು ಸಂವೇದಕಗಳನ್ನು ಸೇರಿಸಿ"
+      "ConfigureOptions.ModelFile": "AI ಮಾದರಿ",
+      "ConfigureOptions.SystemInstructions": "ಸಿಸ್ಟಮ್ ಪ್ರಾಂಪ್ಟ್ (ಸೂಚನೆಗಳು)",
+      "ConfigureOptions.ContextSize": "AI ಮೆಮೊರಿ ಸಾಮರ್ಥ್ಯ (ಸಂದರ್ಭ ವಿಂಡೋ)",
+      "ConfigureOptions.MaxTurns": "ಚಾಟ್ ಮೆಮೊರಿ (ಗರಿಷ್ಠ ತಿರುವುಗಳು) (0 = ಮಿತಿಯಿಲ್ಲ)",
+      "ConfigureOptions.SendContextData": "AI ಜೊತೆಗೆ ಸಿಸ್ಟಮ್ ಮತ್ತು ಮಾಡ್ಯೂಲ್ ಸಂದರ್ಭವನ್ನು ಹಂಚಿಕೊಳ್ಳಿ",
+      "ConfigureOptions.ModelTemperature": "ಸೃಜನಶೀಲತೆ (ನಿಖರ = 0, ಸೃಜನಶೀಲ = 2)",
+      "ConfigureOptions.ModelList": "AI ಮಾದರಿ ಪಟ್ಟಿ (YAML)"
     },
     "575": {
       "Title": "ಡೌನ್‌ಲೋಡ್ ಮ್ಯಾನೇಜರ್",

@@ -468,5 +468,7 @@
   "api_calls": "API-kommandon",
   "show_code": "Visa kod",
   "copy_api_call": "Kopiera API-anropssträng",
-  "copy_full_api_url": "Kopiera fullständig API-URL"
+  "copy_full_api_url": "Kopiera fullständig API-URL",
+  "details": "Detaljer",
+  "visual_program": "Visuellt program"
 }

@@ -325,13 +325,15 @@
     "940": {
       "Title": "مقامي AI",
       "Description": "پنهنجي هوم جيني سرور تي سڌو سنئون جديد LLM هلايو. ٻين پروگرامن ۽ اسڪرپٽس مان AI کي ڪنٽرول ڪرڻ لاءِ هڪ مڪمل API شامل آهي.",
-      "ConfigureOptions.MaxTokens": "وڌ ۾ وڌ ٽوڪن (جواب جي ڊيگهه)",
+      "ConfigureOptions.MaxTokens": "جواب جي ڊيگهه (وڌ ۾ وڌ ٽوڪن)",
       "ConfigureOptions.ModelPath": "مقامي GGUF فائل جو رستو",
-      "ConfigureOptions.ModelFile": "ماڊل",
-      "ConfigureOptions.SystemInstructions": "سسٽم جون هدايتون",
-      "ConfigureOptions.ContextSize": "AI ميموري سائيز (Context Window)",
-      "ConfigureOptions.MaxTurns": "وڌ ۾ وڌ چيٽ جي تاريخ موڙ (0 = ڪابه حد ناهي)",
-      "ConfigureOptions.SendContextData": "سوالن ۾ ڊوائيس لسٽ ۽ سينسر شامل ڪريو"
+      "ConfigureOptions.ModelFile": "اي آءِ ماڊل",
+      "ConfigureOptions.SystemInstructions": "سسٽم پرامپٽ (هدايتون)",
+      "ConfigureOptions.ContextSize": "اي آءِ ميموري ڪيپيسٽي (ڪانٽيڪسٽ ونڊو)",
+      "ConfigureOptions.MaxTurns": "چيٽ ميموري (وڌ کان وڌ موڙ) (0 = ڪابه حد ناهي)",
+      "ConfigureOptions.SendContextData": "AI سان سسٽم ۽ ماڊيول جي حوالي سان حصيداري ڪريو.",
+      "ConfigureOptions.ModelTemperature": "تخليقيت (صحيح = 0، تخليقي = 2)",
+      "ConfigureOptions.ModelList": "اي آءِ ماڊل لسٽ (YAML)"
     },
     "575": {
       "Title": "ڊائون لوڊ مئنيجر",

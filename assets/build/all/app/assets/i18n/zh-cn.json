@@ -468,5 +468,7 @@
   "api_calls": "API命令",
   "show_code": "显示代码",
   "copy_api_call": "复制 API 调用字符串",
-  "copy_full_api_url": "复制完整的 API URL"
+  "copy_full_api_url": "复制完整的 API URL",
+  "details": "细节",
+  "visual_program": "视觉程序"
 }

@@ -325,13 +325,15 @@
     "940": {
       "Title": "Локален изкуствен интелект",
       "Description": "Стартирайте най-съвременни LLM-и директно на вашия HomeGenie сървър. Включва пълен API за управление на AI от други програми и скриптове.",
-      "ConfigureOptions.MaxTokens": "Максимален брой токени (дължина на отговора)",
+      "ConfigureOptions.MaxTokens": "Дължина на отговора (максимален брой маркери)",
       "ConfigureOptions.ModelPath": "Път до локалния GGUF файл",
-      "ConfigureOptions.ModelFile": "Модел",
-      "ConfigureOptions.SystemInstructions": "Системни инструкции",
-      "ConfigureOptions.ContextSize": "Размер на AI паметта (контекстен прозорец)",
-      "ConfigureOptions.MaxTurns": "Максимален брой ходове в историята на чата (0 = без ограничение)",
-      "ConfigureOptions.SendContextData": "Включване на списък с устройства и сензори в заявките"
+      "ConfigureOptions.ModelFile": "Модел на изкуствен интелект",
+      "ConfigureOptions.SystemInstructions": "Системен подкана (инструкции)",
+      "ConfigureOptions.ContextSize": "Капацитет на паметта на изкуствения интелект (контекстен прозорец)",
+      "ConfigureOptions.MaxTurns": "Памет за чат (максимален брой ходове) (0 = без ограничение)",
+      "ConfigureOptions.SendContextData": "Споделяне на системния и модулния контекст с изкуствения интелект",
+      "ConfigureOptions.ModelTemperature": "Креативност (Прецизност = 0, Креативност = 2)",
+      "ConfigureOptions.ModelList": "Списък с модели на изкуствен интелект (YAML)"
     },
     "575": {
       "Title": "Мениджър на изтегляния",

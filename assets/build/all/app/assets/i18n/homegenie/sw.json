@@ -325,13 +325,15 @@
     "940": {
       "Title": "AI ya Ndani",
       "Description": "Endesha LLM za kisasa moja kwa moja kwenye seva yako ya HomeGenie. Inajumuisha API kamili ya kudhibiti AI kutoka kwa programu na hati zingine.",
-      "ConfigureOptions.MaxTokens": "Tokeni za Juu (urefu wa majibu)",
+      "ConfigureOptions.MaxTokens": "Urefu wa Majibu (Tokeni za Juu)",
       "ConfigureOptions.ModelPath": "Njia ya faili ya GGUF ya ndani",
-      "ConfigureOptions.ModelFile": "Mfano",
-      "ConfigureOptions.SystemInstructions": "Maelekezo ya Mfumo",
-      "ConfigureOptions.ContextSize": "Ukubwa wa Kumbukumbu ya AI (Dirisha la Muktadha)",
-      "ConfigureOptions.MaxTurns": "Zamu ya juu zaidi ya historia ya gumzo (0 = hakuna kikomo)",
-      "ConfigureOptions.SendContextData": "Jumuisha orodha ya vifaa na vitambuzi katika hoja"
+      "ConfigureOptions.ModelFile": "Mfano wa AI",
+      "ConfigureOptions.SystemInstructions": "Kidokezo cha Mfumo (Maelekezo)",
+      "ConfigureOptions.ContextSize": "Uwezo wa Kumbukumbu ya AI (Dirisha la Muktadha)",
+      "ConfigureOptions.MaxTurns": "Kumbukumbu ya Gumzo (Zamu ya Juu) (0 = hakuna kikomo)",
+      "ConfigureOptions.SendContextData": "Shiriki muktadha wa mfumo na moduli na AI",
+      "ConfigureOptions.ModelTemperature": "Ubunifu (Sahihi = 0, Ubunifu = 2)",
+      "ConfigureOptions.ModelList": "Orodha ya Mifano ya AI (YAML)"
     },
     "575": {
       "Title": "Kidhibiti cha Upakuaji",

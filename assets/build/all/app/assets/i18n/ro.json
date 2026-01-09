@@ -468,5 +468,7 @@
   "api_calls": "Comenzi API",
   "show_code": "Afișați codul",
   "copy_api_call": "Copiați șirul de apel API",
-  "copy_full_api_url": "Copiați adresa URL API completă"
+  "copy_full_api_url": "Copiați adresa URL API completă",
+  "details": "Detalii",
+  "visual_program": "Program vizual"
 }

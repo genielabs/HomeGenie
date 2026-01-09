@@ -468,5 +468,7 @@
   "api_calls": "Команды API",
   "show_code": "Показать код",
   "copy_api_call": "Скопировать строку вызова API",
-  "copy_full_api_url": "Скопировать полный URL API"
+  "copy_full_api_url": "Скопировать полный URL API",
+  "details": "Подробности",
+  "visual_program": "Визуальная программа"
 }

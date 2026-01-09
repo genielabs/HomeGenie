@@ -468,5 +468,7 @@
   "api_calls": "API کمانڈز",
   "show_code": "کوڈ دکھائیں۔",
   "copy_api_call": "API کال سٹرنگ کاپی کریں۔",
-  "copy_full_api_url": "مکمل API URL کاپی کریں۔"
+  "copy_full_api_url": "مکمل API URL کاپی کریں۔",
+  "details": "تفصیلات",
+  "visual_program": "بصری پروگرام"
 }

@@ -325,13 +325,15 @@
     "940": {
       "Title": "AI eo an-toerana",
       "Description": "Ampandehano mivantana amin'ny mpizara HomeGenie anao ireo LLM maoderina. Ahitana API feno hifehezana ny AI avy amin'ny programa sy script hafa.",
-      "ConfigureOptions.MaxTokens": "Tokens ambony indrindra (halavan'ny valiny)",
+      "ConfigureOptions.MaxTokens": "Faharetan'ny valiny (Tokens ambony indrindra)",
       "ConfigureOptions.ModelPath": "Lalana mankany amin'ny rakitra GGUF eo an-toerana",
-      "ConfigureOptions.ModelFile": "MODELY",
-      "ConfigureOptions.SystemInstructions": "Torolàlana momba ny rafitra",
-      "ConfigureOptions.ContextSize": "Haben'ny Fahatsiarovana AI (Varavarankely Context)",
-      "ConfigureOptions.MaxTurns": "Fiovana farany ambony indrindra amin'ny tantaran'ny chat (0 = tsy misy fetra)",
-      "ConfigureOptions.SendContextData": "Ampidiro ao amin'ny fangatahana ny lisitry ny fitaovana sy ny sensor"
+      "ConfigureOptions.ModelFile": "Modely AI",
+      "ConfigureOptions.SystemInstructions": "Fampandrenesana momba ny rafitra (Toromarika)",
+      "ConfigureOptions.ContextSize": "Fahafahan'ny Fahatsiarovana AI (Varavarankely Context)",
+      "ConfigureOptions.MaxTurns": "Fahatsiarovana amin'ny Chat (Fihodinana ambony indrindra) (0 = tsy misy fetra)",
+      "ConfigureOptions.SendContextData": "Mizara ny tontolon'ny rafitra sy ny môdely amin'ny AI",
+      "ConfigureOptions.ModelTemperature": "Fahaiza-mamorona (Marina = 0, Fahaiza-mamorona = 2)",
+      "ConfigureOptions.ModelList": "Lisitry ny Modely AI (YAML)"
     },
     "575": {
       "Title": "Mpitantana ny fampidinana",

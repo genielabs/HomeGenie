@@ -325,13 +325,15 @@
     "940": {
       "Title": "Yerli süni intellekt",
       "Description": "Ən müasir LLM-ləri birbaşa HomeGenie serverinizdə işlədin. Digər proqramlardan və skriptlərdən süni intellekt idarə etmək üçün tam API daxildir.",
-      "ConfigureOptions.MaxTokens": "Maksimum Tokenlər (cavab uzunluğu)",
+      "ConfigureOptions.MaxTokens": "Cavab Müddəti (Maks Tokenlər)",
       "ConfigureOptions.ModelPath": "Yerli GGUF faylına yol",
-      "ConfigureOptions.ModelFile": "Model",
-      "ConfigureOptions.SystemInstructions": "Sistem Təlimatları",
-      "ConfigureOptions.ContextSize": "Süni intellekt yaddaşının ölçüsü (Kontekst Pəncərəsi)",
-      "ConfigureOptions.MaxTurns": "Maksimum söhbət tarixçəsi dövrləri (0 = limit yoxdur)",
-      "ConfigureOptions.SendContextData": "Sorğulara cihaz siyahısını və sensorları daxil edin"
+      "ConfigureOptions.ModelFile": "Süni intellekt modeli",
+      "ConfigureOptions.SystemInstructions": "Sistem Sorğusu (Təlimatlar)",
+      "ConfigureOptions.ContextSize": "Süni intellekt yaddaş tutumu (Kontekst pəncərəsi)",
+      "ConfigureOptions.MaxTurns": "Çat Yaddaşı (Maksimum Dönüşlər) (0 = limit yoxdur)",
+      "ConfigureOptions.SendContextData": "Sistem və modul kontekstini süni intellektlə paylaşın",
+      "ConfigureOptions.ModelTemperature": "Yaradıcılıq (Dəqiq = 0, Yaradıcı = 2)",
+      "ConfigureOptions.ModelList": "Süni intellekt Model Siyahısı (YAML)"
     },
     "575": {
       "Title": "Yükləmə Meneceri",

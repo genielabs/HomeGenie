@@ -325,13 +325,15 @@
     "940": {
       "Title": "स्थानिक एआय",
       "Description": "तुमच्या HomeGenie सर्व्हरवर थेट अत्याधुनिक LLM चालवा. इतर प्रोग्राम्स आणि स्क्रिप्ट्समधून AI नियंत्रित करण्यासाठी संपूर्ण API समाविष्ट आहे.",
-      "ConfigureOptions.MaxTokens": "कमाल टोकन (प्रतिसाद लांबी)",
+      "ConfigureOptions.MaxTokens": "प्रतिसाद लांबी (कमाल टोकन)",
       "ConfigureOptions.ModelPath": "स्थानिक GGUF फाइलचा मार्ग",
-      "ConfigureOptions.ModelFile": "मॉडेल",
-      "ConfigureOptions.SystemInstructions": "सिस्टम सूचना",
-      "ConfigureOptions.ContextSize": "एआय मेमरी आकार (संदर्भ विंडो)",
-      "ConfigureOptions.MaxTurns": "कमाल चॅट इतिहास वळणे (० = मर्यादा नाही)",
-      "ConfigureOptions.SendContextData": "क्वेरींमध्ये डिव्हाइस सूची आणि सेन्सर समाविष्ट करा"
+      "ConfigureOptions.ModelFile": "एआय मॉडेल",
+      "ConfigureOptions.SystemInstructions": "सिस्टम प्रॉम्प्ट (सूचना)",
+      "ConfigureOptions.ContextSize": "एआय मेमरी क्षमता (संदर्भ विंडो)",
+      "ConfigureOptions.MaxTurns": "चॅट मेमरी (कमाल वळणे) (० = मर्यादा नाही)",
+      "ConfigureOptions.SendContextData": "एआय सोबत सिस्टम आणि मॉड्यूल संदर्भ शेअर करा.",
+      "ConfigureOptions.ModelTemperature": "सर्जनशीलता (अचूक = ०, सर्जनशील = २)",
+      "ConfigureOptions.ModelList": "एआय मॉडेल लिस्ट (YAML)"
     },
     "575": {
       "Title": "डाउनलोड व्यवस्थापक",

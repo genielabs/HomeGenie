@@ -468,5 +468,7 @@
   "api_calls": "Komandat e API-t",
   "show_code": "Shfaq Kodin",
   "copy_api_call": "Kopjo vargun e thirrjes së API-t",
-  "copy_full_api_url": "Kopjo URL-në e plotë të API-t"
+  "copy_full_api_url": "Kopjo URL-në e plotë të API-t",
+  "details": "Detajet",
+  "visual_program": "Programi Vizual"
 }

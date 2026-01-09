@@ -325,13 +325,15 @@
     "940": {
       "Title": "ਸਥਾਨਕ ਏ.ਆਈ.",
       "Description": "ਆਪਣੇ HomeGenie ਸਰਵਰ 'ਤੇ ਸਿੱਧੇ ਅਤਿ-ਆਧੁਨਿਕ LLM ਚਲਾਓ। ਹੋਰ ਪ੍ਰੋਗਰਾਮਾਂ ਅਤੇ ਸਕ੍ਰਿਪਟਾਂ ਤੋਂ AI ਨੂੰ ਕੰਟਰੋਲ ਕਰਨ ਲਈ ਇੱਕ ਪੂਰਾ API ਸ਼ਾਮਲ ਹੈ।",
-      "ConfigureOptions.MaxTokens": "ਵੱਧ ਤੋਂ ਵੱਧ ਟੋਕਨ (ਜਵਾਬ ਦੀ ਲੰਬਾਈ)",
+      "ConfigureOptions.MaxTokens": "ਜਵਾਬ ਦੀ ਲੰਬਾਈ (ਵੱਧ ਤੋਂ ਵੱਧ ਟੋਕਨ)",
       "ConfigureOptions.ModelPath": "ਸਥਾਨਕ GGUF ਫਾਈਲ ਲਈ ਮਾਰਗ",
-      "ConfigureOptions.ModelFile": "ਮਾਡਲ",
-      "ConfigureOptions.SystemInstructions": "ਸਿਸਟਮ ਨਿਰਦੇਸ਼",
-      "ConfigureOptions.ContextSize": "AI ਮੈਮੋਰੀ ਆਕਾਰ (ਸੰਦਰਭ ਵਿੰਡੋ)",
-      "ConfigureOptions.MaxTurns": "ਵੱਧ ਤੋਂ ਵੱਧ ਚੈਟ ਇਤਿਹਾਸ ਮੋੜ (0 = ਕੋਈ ਸੀਮਾ ਨਹੀਂ)",
-      "ConfigureOptions.SendContextData": "ਪੁੱਛਗਿੱਛਾਂ ਵਿੱਚ ਡਿਵਾਈਸ ਸੂਚੀ ਅਤੇ ਸੈਂਸਰ ਸ਼ਾਮਲ ਕਰੋ"
+      "ConfigureOptions.ModelFile": "ਏਆਈ ਮਾਡਲ",
+      "ConfigureOptions.SystemInstructions": "ਸਿਸਟਮ ਪ੍ਰੋਂਪਟ (ਨਿਰਦੇਸ਼)",
+      "ConfigureOptions.ContextSize": "AI ਮੈਮੋਰੀ ਸਮਰੱਥਾ (ਸੰਦਰਭ ਵਿੰਡੋ)",
+      "ConfigureOptions.MaxTurns": "ਚੈਟ ਮੈਮੋਰੀ (ਵੱਧ ਤੋਂ ਵੱਧ ਵਾਰੀ) (0 = ਕੋਈ ਸੀਮਾ ਨਹੀਂ)",
+      "ConfigureOptions.SendContextData": "AI ਨਾਲ ਸਿਸਟਮ ਅਤੇ ਮੋਡੀਊਲ ਸੰਦਰਭ ਸਾਂਝਾ ਕਰੋ",
+      "ConfigureOptions.ModelTemperature": "ਰਚਨਾਤਮਕਤਾ (ਸਟੀਕ = 0, ਰਚਨਾਤਮਕ = 2)",
+      "ConfigureOptions.ModelList": "ਏਆਈ ਮਾਡਲ ਸੂਚੀ (YAML)"
     },
     "575": {
       "Title": "ਡਾਊਨਲੋਡ ਮੈਨੇਜਰ",

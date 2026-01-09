@@ -468,5 +468,7 @@
   "api_calls": "API কমান্ড",
   "show_code": "কোড দেখান",
   "copy_api_call": "API কল স্ট্রিং কপি করুন",
-  "copy_full_api_url": "সম্পূর্ণ API URL কপি করুন"
+  "copy_full_api_url": "সম্পূর্ণ API URL কপি করুন",
+  "details": "বিস্তারিত",
+  "visual_program": "ভিজ্যুয়াল প্রোগ্রাম"
 }

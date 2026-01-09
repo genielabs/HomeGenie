@@ -468,5 +468,7 @@
   "api_calls": "API əmrləri",
   "show_code": "Kodu göstər",
   "copy_api_call": "API çağırış sətrini kopyalayın",
-  "copy_full_api_url": "Tam API URL-ni kopyalayın"
+  "copy_full_api_url": "Tam API URL-ni kopyalayın",
+  "details": "Təfərrüatlar",
+  "visual_program": "Vizual Proqram"
 }

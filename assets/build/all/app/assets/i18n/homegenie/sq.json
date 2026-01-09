@@ -325,13 +325,15 @@
     "940": {
       "Title": "IA lokale",
       "Description": "Ekzekutoni LLM-të e teknologjisë së fundit direkt në serverin tuaj HomeGenie. Përfshin një API të plotë për të kontrolluar IA-në nga programe dhe skripte të tjera.",
-      "ConfigureOptions.MaxTokens": "Maksimumi i Tokenëve (gjatësia e përgjigjes)",
+      "ConfigureOptions.MaxTokens": "Gjatësia e Përgjigjes (Tokenët Maksimalë)",
       "ConfigureOptions.ModelPath": "Shtegu për në skedarin lokal GGUF",
-      "ConfigureOptions.ModelFile": "Model",
-      "ConfigureOptions.SystemInstructions": "Udhëzimet e Sistemit",
-      "ConfigureOptions.ContextSize": "Madhësia e memories AI (Dritarja e kontekstit)",
-      "ConfigureOptions.MaxTurns": "Numri maksimal i kthesave në historikun e bisedave (0 = pa limit)",
-      "ConfigureOptions.SendContextData": "Përfshi listën e pajisjeve dhe sensorët në pyetje"
+      "ConfigureOptions.ModelFile": "Modeli i IA-së",
+      "ConfigureOptions.SystemInstructions": "Udhëzimet e Sistemit (Udhëzime)",
+      "ConfigureOptions.ContextSize": "Kapaciteti i Memorjes së IA-së (Dritarja e Kontekstit)",
+      "ConfigureOptions.MaxTurns": "Kujtesa e bisedës (Rrotullime maksimale) (0 = pa limit)",
+      "ConfigureOptions.SendContextData": "Ndani kontekstin e sistemit dhe modulit me IA-në",
+      "ConfigureOptions.ModelTemperature": "Kreativiteti (I saktë = 0, Kreativiteti = 2)",
+      "ConfigureOptions.ModelList": "Lista e Modeleve të IA-së (YAML)"
     },
     "575": {
       "Title": "Menaxheri i Shkarkimeve",

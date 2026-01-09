@@ -325,13 +325,15 @@
     "940": {
       "Title": "Deallusrwydd Artiffisial Lleol",
       "Description": "Rhedeg LLMs o'r radd flaenaf yn uniongyrchol ar eich gweinydd HomeGenie. Yn cynnwys API llawn i reoli'r AI o raglenni a sgriptiau eraill.",
-      "ConfigureOptions.MaxTokens": "Uchafswm Tocynnau (hyd ymateb)",
+      "ConfigureOptions.MaxTokens": "Hyd yr Ymateb (Uchafswm Tocynnau)",
       "ConfigureOptions.ModelPath": "Llwybr i'r ffeil GGUF leol",
-      "ConfigureOptions.ModelFile": "Model",
-      "ConfigureOptions.SystemInstructions": "Cyfarwyddiadau System",
-      "ConfigureOptions.ContextSize": "Maint Cof AI (Ffenestr Cyd-destun)",
-      "ConfigureOptions.MaxTurns": "Uchafswm troeon hanes sgwrsio (0 = dim terfyn)",
-      "ConfigureOptions.SendContextData": "Cynnwys rhestr dyfeisiau a synwyryddion mewn ymholiadau"
+      "ConfigureOptions.ModelFile": "Model Deallusrwydd Artiffisial",
+      "ConfigureOptions.SystemInstructions": "Anogwr System (Cyfarwyddiadau)",
+      "ConfigureOptions.ContextSize": "Capasiti Cof AI (Ffenestr Cyd-destun)",
+      "ConfigureOptions.MaxTurns": "Cof Sgwrs (Uchafswm Troeon) (0 = dim terfyn)",
+      "ConfigureOptions.SendContextData": "Rhannu cyd-destun system a modiwl gyda'r AI",
+      "ConfigureOptions.ModelTemperature": "Creadigrwydd (Manwl gywir = 0, Creadigol = 2)",
+      "ConfigureOptions.ModelList": "Rhestr Modelau AI (YAML)"
     },
     "575": {
       "Title": "Rheolwr Lawrlwytho",

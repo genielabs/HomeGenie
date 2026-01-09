@@ -325,13 +325,15 @@
     "940": {
       "Title": "Trí tuệ nhân tạo địa phương",
       "Description": "Chạy các hệ thống quản lý ngôn ngữ tự động (LLM) tiên tiến trực tiếp trên máy chủ HomeGenie của bạn. Bao gồm API đầy đủ để điều khiển trí tuệ nhân tạo từ các chương trình và tập lệnh khác.",
-      "ConfigureOptions.MaxTokens": "Số lượng token tối đa (độ dài phản hồi)",
+      "ConfigureOptions.MaxTokens": "Độ dài phản hồi (Số từ tối đa)",
       "ConfigureOptions.ModelPath": "Đường dẫn đến tệp GGUF cục bộ",
-      "ConfigureOptions.ModelFile": "Người mẫu",
-      "ConfigureOptions.SystemInstructions": "Hướng dẫn hệ thống",
-      "ConfigureOptions.ContextSize": "Kích thước bộ nhớ AI (Cửa sổ ngữ cảnh)",
-      "ConfigureOptions.MaxTurns": "Số lượt hiển thị lịch sử trò chuyện tối đa (0 = không giới hạn)",
-      "ConfigureOptions.SendContextData": "Bao gồm danh sách thiết bị và cảm biến trong các truy vấn"
+      "ConfigureOptions.ModelFile": "Mô hình AI",
+      "ConfigureOptions.SystemInstructions": "Thông báo hệ thống (Hướng dẫn)",
+      "ConfigureOptions.ContextSize": "Dung lượng bộ nhớ AI (Cửa sổ ngữ cảnh)",
+      "ConfigureOptions.MaxTurns": "Bộ nhớ trò chuyện (Số lượt tối đa) (0 = không giới hạn)",
+      "ConfigureOptions.SendContextData": "Chia sẻ ngữ cảnh hệ thống và mô-đun với AI",
+      "ConfigureOptions.ModelTemperature": "Tính sáng tạo (Chính xác = 0, Sáng tạo = 2)",
+      "ConfigureOptions.ModelList": "Danh sách mô hình AI (YAML)"
     },
     "575": {
       "Title": "Trình quản lý tải xuống",

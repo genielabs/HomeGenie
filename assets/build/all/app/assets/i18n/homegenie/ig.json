@@ -325,13 +325,15 @@
     "940": {
       "Title": "AI mpaghara",
       "Description": "Gbaa LLMs kachasị ọhụrụ ozugbo na sava HomeGenie gị. Gụnyere API zuru oke iji chịkwaa AI site na mmemme na edemede ndị ọzọ.",
-      "ConfigureOptions.MaxTokens": "Max Tokens (ogologo nzaghachi)",
+      "ConfigureOptions.MaxTokens": "Ogologo Nzaghachi (Mmasị Kachasị)",
       "ConfigureOptions.ModelPath": "Ụzọ gaa faịlụ GGUF mpaghara",
-      "ConfigureOptions.ModelFile": "Ụdị nlereanya",
-      "ConfigureOptions.SystemInstructions": "Ntuziaka Sistemụ",
-      "ConfigureOptions.ContextSize": "Nha ebe nchekwa AI (Window Gburugburu)",
-      "ConfigureOptions.MaxTurns": "Oge kachasị elu nke akụkọ nkata (0 = enweghị oke)",
-      "ConfigureOptions.SendContextData": "Tinye ndepụta ngwaọrụ na ihe mmetụta na ajụjụ"
+      "ConfigureOptions.ModelFile": "Ụdị AI",
+      "ConfigureOptions.SystemInstructions": "Ntuziaka Sistemụ (Ntuziaka)",
+      "ConfigureOptions.ContextSize": "Ike Ebe Nchekwa AI (Oghere Gburugburu)",
+      "ConfigureOptions.MaxTurns": "Ebe Nchekwa Nkata (Ntụgharị Kachasị) (0 = enweghị oke)",
+      "ConfigureOptions.SendContextData": "Kekọrịta ọnọdụ sistemụ na modulu na AI",
+      "ConfigureOptions.ModelTemperature": "Ihe Okike (Kpọmkwem = 0, Ihe Okike = 2)",
+      "ConfigureOptions.ModelList": "Ndepụta ihe nlereanya AI (YAML)"
     },
     "575": {
       "Title": "Onye njikwa nbudata",
@@ -372,5 +374,5 @@
   },
   "scheduler_preset_action_genie_command": "Iwu Genie",
   "scheduler_preset_action_config_wish": "Omume Asụsụ Okike",
-  "scheduler_preset_action_config_wish.placeholder": "Nwaa: \"Tọọ okpomọkụ ahụ ruo 22° wee malite ihe nkiri Ịnyanwụ\""
+  "scheduler_preset_action_config_wish.placeholder": "Nwaa: \"Tọọ okpomọkụ ahụ ruo 22° wee malite ihe nkiri Ọwụwa Anyanwụ\""
 }

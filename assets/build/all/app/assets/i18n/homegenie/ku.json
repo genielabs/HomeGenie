@@ -325,13 +325,15 @@
     "940": {
       "Title": "AI-ya herêmî",
       "Description": "LLM-yên herî pêşketî rasterast li ser servera xwe ya HomeGenie bimeşînin. API-yek tevahî vedihewîne da ku AI-ê ji bername û skrîptên din kontrol bike.",
-      "ConfigureOptions.MaxTokens": "Maksimum Token (dirêjahiya bersivê)",
+      "ConfigureOptions.MaxTokens": "Dirêjahiya Bersivê (Tokenên Herî Zêde)",
       "ConfigureOptions.ModelPath": "Riya pelê GGUF ya herêmî",
-      "ConfigureOptions.ModelFile": "Cins",
-      "ConfigureOptions.SystemInstructions": "Rênimayên Sîstemê",
-      "ConfigureOptions.ContextSize": "Mezinahiya Bîra AI (Pencereya Kontekstê)",
-      "ConfigureOptions.MaxTurns": "Zêdetirîn dorên dîroka sohbetê (0 = bê sînor)",
-      "ConfigureOptions.SendContextData": "Lîsteya cîhaz û sensoran di nav lêpirsînan de bihewîne"
+      "ConfigureOptions.ModelFile": "Modela AI",
+      "ConfigureOptions.SystemInstructions": "Fermana Sîstemê (Talîmat)",
+      "ConfigureOptions.ContextSize": "Kapasîteya Bîra AI (Pencereya Kontekstê)",
+      "ConfigureOptions.MaxTurns": "Bîra Sohbetê (Zivirandinên Herî Zêde) (0 = bê sînor)",
+      "ConfigureOptions.SendContextData": "Çarçoveya sîstem û modulê bi AI re parve bike",
+      "ConfigureOptions.ModelTemperature": "Afirînerî (Rast = 0, Afirînerî = 2)",
+      "ConfigureOptions.ModelList": "Lîsteya Modelên AI (YAML)"
     },
     "575": {
       "Title": "Gerînendeyê Dakêşanê",

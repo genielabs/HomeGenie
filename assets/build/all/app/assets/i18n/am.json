@@ -468,5 +468,7 @@
   "api_calls": "የኤፒአይ ትዕዛዞች",
   "show_code": "ኮድ አሳይ",
   "copy_api_call": "የኤፒአይ ጥሪ ሕብረቁምፊን ይቅዱ",
-  "copy_full_api_url": "ሙሉውን የኤፒአይ ዩአርኤል ይቅዱ"
+  "copy_full_api_url": "ሙሉውን የኤፒአይ ዩአርኤል ይቅዱ",
+  "details": "ዝርዝሮች",
+  "visual_program": "የእይታ ፕሮግራም"
 }

@@ -468,5 +468,7 @@
   "api_calls": "API आदेशहरू",
   "show_code": "कोड देखाउनुहोस्",
   "copy_api_call": "API कल स्ट्रिङ प्रतिलिपि गर्नुहोस्",
-  "copy_full_api_url": "पूरा API URL प्रतिलिपि गर्नुहोस्"
+  "copy_full_api_url": "पूरा API URL प्रतिलिपि गर्नुहोस्",
+  "details": "विवरणहरू",
+  "visual_program": "दृश्य कार्यक्रम"
 }

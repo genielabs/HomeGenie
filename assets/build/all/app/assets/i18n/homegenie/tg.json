@@ -325,13 +325,15 @@
     "940": {
       "Title": "зеҳни сунъии маҳаллӣ",
       "Description": "LLM-ҳои муосирро мустақиман дар сервери HomeGenie-и худ иҷро кунед. API-и пурраро барои идоракунии зеҳни сунъӣ аз дигар барномаҳо ва скриптҳо дар бар мегирад.",
-      "ConfigureOptions.MaxTokens": "Ҳадди аксар токенҳо (дарозии посух)",
+      "ConfigureOptions.MaxTokens": "Давомнокии посух (ҳадди аксар токенҳо)",
       "ConfigureOptions.ModelPath": "Роҳ ба файли маҳаллии GGUF",
-      "ConfigureOptions.ModelFile": "Модел",
-      "ConfigureOptions.SystemInstructions": "Дастурҳои система",
-      "ConfigureOptions.ContextSize": "Андозаи хотираи зеҳни сунъӣ (Тирезаи контекстӣ)",
-      "ConfigureOptions.MaxTurns": "Ҳадди аксар гардиши таърихи чат (0 = бе маҳдудият)",
-      "ConfigureOptions.SendContextData": "Рӯйхати дастгоҳҳо ва сенсорҳоро дар дархостҳо дохил кунед"
+      "ConfigureOptions.ModelFile": "Модели зеҳни сунъӣ",
+      "ConfigureOptions.SystemInstructions": "Саволи система (Дастурҳо)",
+      "ConfigureOptions.ContextSize": "Иқтидори хотираи зеҳни сунъӣ (Тирезаи контекстӣ)",
+      "ConfigureOptions.MaxTurns": "Хотираи чат (ҳадди аксар гардишҳо) (0 = маҳдудият нест)",
+      "ConfigureOptions.SendContextData": "Мубодилаи контексти система ва модул бо зеҳни сунъӣ",
+      "ConfigureOptions.ModelTemperature": "Эҷодкорӣ (Дақиқ = 0, Эҷодкорӣ = 2)",
+      "ConfigureOptions.ModelList": "Рӯйхати моделҳои зеҳни сунъӣ (YAML)"
     },
     "575": {
       "Title": "Менеҷери зеркашӣ",

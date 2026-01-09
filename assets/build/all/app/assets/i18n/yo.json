@@ -468,5 +468,7 @@
   "api_calls": "Àwọn àṣẹ API",
   "show_code": "Fi Kóòdù Hàn",
   "copy_api_call": "Daakọ okun ipe API",
-  "copy_full_api_url": "Da gbogbo URL API kọ"
+  "copy_full_api_url": "Da gbogbo URL API kọ",
+  "details": "Àwọn àlàyé",
+  "visual_program": "Ètò Àwòrán"
 }

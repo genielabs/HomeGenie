@@ -325,13 +325,15 @@
     "940": {
       "Title": "هوش مصنوعی محلی",
       "Description": "LLM های پیشرفته را مستقیماً روی سرور HomeGenie خود اجرا کنید. شامل یک API کامل برای کنترل هوش مصنوعی از سایر برنامه‌ها و اسکریپت‌ها است.",
-      "ConfigureOptions.MaxTokens": "حداکثر توکن (طول پاسخ)",
+      "ConfigureOptions.MaxTokens": "طول پاسخ (حداکثر توکن)",
       "ConfigureOptions.ModelPath": "مسیر فایل محلی GGUF",
-      "ConfigureOptions.ModelFile": "مدل",
-      "ConfigureOptions.SystemInstructions": "دستورالعمل‌های سیستم",
-      "ConfigureOptions.ContextSize": "اندازه حافظه هوش مصنوعی (پنجره زمینه)",
-      "ConfigureOptions.MaxTurns": "حداکثر تعداد چرخش تاریخچه چت (0 = بدون محدودیت)",
-      "ConfigureOptions.SendContextData": "لیست دستگاه‌ها و حسگرها را در کوئری‌ها قرار دهید"
+      "ConfigureOptions.ModelFile": "مدل هوش مصنوعی",
+      "ConfigureOptions.SystemInstructions": "اعلان سیستم (دستورالعمل‌ها)",
+      "ConfigureOptions.ContextSize": "ظرفیت حافظه هوش مصنوعی (پنجره زمینه)",
+      "ConfigureOptions.MaxTurns": "حافظه چت (حداکثر چرخش) (0 = بدون محدودیت)",
+      "ConfigureOptions.SendContextData": "اشتراک‌گذاری محتوای سیستم و ماژول با هوش مصنوعی",
+      "ConfigureOptions.ModelTemperature": "خلاقیت (دقیق = ۰، خلاقانه = ۲)",
+      "ConfigureOptions.ModelList": "فهرست مدل‌های هوش مصنوعی (YAML)"
     },
     "575": {
       "Title": "مدیریت دانلود",

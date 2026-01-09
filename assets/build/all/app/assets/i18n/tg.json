@@ -468,5 +468,7 @@
   "api_calls": "Фармонҳои API",
   "show_code": "Рамзро нишон диҳед",
   "copy_api_call": "Нусхабардории сатри даъвати API",
-  "copy_full_api_url": "Нусхабардории URL-и пурраи API"
+  "copy_full_api_url": "Нусхабардории URL-и пурраи API",
+  "details": "Тафсилот",
+  "visual_program": "Барномаи визуалӣ"
 }

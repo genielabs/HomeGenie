@@ -325,13 +325,15 @@
     "940": {
       "Title": "ローカルAI",
       "Description": "HomeGenieサーバー上で最先端のLLMを直接実行できます。他のプログラムやスクリプトからAIを制御するための完全なAPIが含まれています。",
-      "ConfigureOptions.MaxTokens": "最大トークン数（応答の長さ）",
+      "ConfigureOptions.MaxTokens": "レスポンスの長さ（最大トークン数）",
       "ConfigureOptions.ModelPath": "ローカル GGUF ファイルへのパス",
-      "ConfigureOptions.ModelFile": "モデル",
-      "ConfigureOptions.SystemInstructions": "システム手順",
-      "ConfigureOptions.ContextSize": "AI メモリ サイズ (コンテキスト ウィンドウ)",
-      "ConfigureOptions.MaxTurns": "チャット履歴の最大回転数（0 = 制限なし）",
-      "ConfigureOptions.SendContextData": "クエリにデバイスリストとセンサーを含める"
+      "ConfigureOptions.ModelFile": "AIモデル",
+      "ConfigureOptions.SystemInstructions": "システムプロンプト（指示）",
+      "ConfigureOptions.ContextSize": "AIメモリ容量（コンテキストウィンドウ）",
+      "ConfigureOptions.MaxTurns": "チャットメモリ（最大ターン数）（0 = 制限なし）",
+      "ConfigureOptions.SendContextData": "システムとモジュールのコンテキストをAIと共有する",
+      "ConfigureOptions.ModelTemperature": "創造性（正確性 = 0、創造性 = 2）",
+      "ConfigureOptions.ModelList": "AI モデルリスト (YAML)"
     },
     "575": {
       "Title": "ダウンロードマネージャー",

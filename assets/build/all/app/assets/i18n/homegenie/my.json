@@ -325,13 +325,15 @@
     "940": {
       "Title": "ဒေသတွင်း AI",
       "Description": "သင့်ရဲ့ HomeGenie server မှာ နောက်ဆုံးပေါ် LLM တွေကို တိုက်ရိုက် run လိုက်ပါ။ တခြား program တွေနဲ့ script တွေကနေ AI ကို ထိန်းချုပ်ဖို့ full API ပါဝင်ပါတယ်။",
-      "ConfigureOptions.MaxTokens": "အများဆုံး တိုကင်များ (တုံ့ပြန်မှုအရှည်)",
+      "ConfigureOptions.MaxTokens": "တုံ့ပြန်မှုအရှည် (အများဆုံးတိုကင်များ)",
       "ConfigureOptions.ModelPath": "ဒေသဆိုင်ရာ GGUF ဖိုင်သို့ လမ်းကြောင်း",
-      "ConfigureOptions.ModelFile": "မော်ဒယ်",
-      "ConfigureOptions.SystemInstructions": "စနစ်ညွှန်ကြားချက်များ",
-      "ConfigureOptions.ContextSize": "AI မှတ်ဉာဏ်အရွယ်အစား (အခြေအနေဝင်းဒိုး)",
-      "ConfigureOptions.MaxTurns": "အများဆုံး ချတ်မှတ်တမ်းအရေအတွက် (၀ = ကန့်သတ်ချက်မရှိ)",
-      "ConfigureOptions.SendContextData": "မေးမြန်းချက်များတွင် စက်ပစ္စည်းစာရင်းနှင့် အာရုံခံကိရိယာများ ပါဝင်ပါ"
+      "ConfigureOptions.ModelFile": "AI မော်ဒယ်",
+      "ConfigureOptions.SystemInstructions": "စနစ်ညွှန်ကြားချက် (ညွှန်ကြားချက်များ)",
+      "ConfigureOptions.ContextSize": "AI မှတ်ဉာဏ်စွမ်းရည် (အခြေအနေဝင်းဒိုး)",
+      "ConfigureOptions.MaxTurns": "ချတ်မှတ်ဉာဏ် (အများဆုံးလှည့်ခွင့်) (၀ = ကန့်သတ်ချက်မရှိ)",
+      "ConfigureOptions.SendContextData": "စနစ်နှင့် မော်ဂျူးအခြေအနေများကို AI နှင့် မျှဝေပါ",
+      "ConfigureOptions.ModelTemperature": "တီထွင်ဖန်တီးနိုင်စွမ်း (တိကျမှု = ၀၊ တီထွင်ဖန်တီးနိုင်စွမ်း = ၂)",
+      "ConfigureOptions.ModelList": "AI မော်ဒယ်စာရင်း (YAML)"
     },
     "575": {
       "Title": "ဒေါင်းလုဒ်မန်နေဂျာ",

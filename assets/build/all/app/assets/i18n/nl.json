@@ -468,5 +468,7 @@
   "api_calls": "API-opdrachten",
   "show_code": "Toon code",
   "copy_api_call": "Kopieer de API-aanroepreeks",
-  "copy_full_api_url": "Kopieer de volledige API-URL"
+  "copy_full_api_url": "Kopieer de volledige API-URL",
+  "details": "Details",
+  "visual_program": "Visueel programma"
 }

@@ -468,5 +468,7 @@
   "api_calls": "API ბრძანებები",
   "show_code": "კოდის ჩვენება",
   "copy_api_call": "API-ის გამოძახების სტრიქონის კოპირება",
-  "copy_full_api_url": "სრული API URL-ის კოპირება"
+  "copy_full_api_url": "სრული API URL-ის კოპირება",
+  "details": "დეტალები",
+  "visual_program": "ვიზუალური პროგრამა"
 }

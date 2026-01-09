@@ -468,5 +468,7 @@
   "api_calls": "API-opdragte",
   "show_code": "Wys Kode",
   "copy_api_call": "Kopieer API-oproepstring",
-  "copy_full_api_url": "Kopieer volledige API-URL"
+  "copy_full_api_url": "Kopieer volledige API-URL",
+  "details": "Besonderhede",
+  "visual_program": "Visuele Program"
 }

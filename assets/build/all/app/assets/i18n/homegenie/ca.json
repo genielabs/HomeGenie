@@ -325,13 +325,15 @@
     "940": {
       "Title": "IA local",
       "Description": "Executeu LLM d'última generació directament al vostre servidor HomeGenie. Inclou una API completa per controlar la IA des d'altres programes i scripts.",
-      "ConfigureOptions.MaxTokens": "Tokens màxims (longitud de la resposta)",
+      "ConfigureOptions.MaxTokens": "Durada de la resposta (màxim de tokens)",
       "ConfigureOptions.ModelPath": "Camí al fitxer GGUF local",
-      "ConfigureOptions.ModelFile": "Model",
-      "ConfigureOptions.SystemInstructions": "Instruccions del sistema",
-      "ConfigureOptions.ContextSize": "Mida de memòria IA (finestra contextual)",
-      "ConfigureOptions.MaxTurns": "Torns màxims a l'historial de xat (0 = sense límit)",
-      "ConfigureOptions.SendContextData": "Inclou la llista de dispositius i sensors a les consultes"
+      "ConfigureOptions.ModelFile": "Model d'IA",
+      "ConfigureOptions.SystemInstructions": "Sol·licitud del sistema (instruccions)",
+      "ConfigureOptions.ContextSize": "Capacitat de memòria d'IA (finestra contextual)",
+      "ConfigureOptions.MaxTurns": "Memòria de xat (torns màxims) (0 = sense límit)",
+      "ConfigureOptions.SendContextData": "Comparteix el context del sistema i del mòdul amb la IA",
+      "ConfigureOptions.ModelTemperature": "Creativitat (Precisió = 0, Creativitat = 2)",
+      "ConfigureOptions.ModelList": "Llista de models d'IA (YAML)"
     },
     "575": {
       "Title": "Gestor de descàrregues",

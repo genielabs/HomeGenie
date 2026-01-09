@@ -325,13 +325,15 @@
     "940": {
       "Title": "AI ท้องถิ่น",
       "Description": "ใช้งานระบบ LLM ล้ำสมัยได้โดยตรงบนเซิร์ฟเวอร์ HomeGenie ของคุณ มาพร้อม API เต็มรูปแบบสำหรับควบคุม AI จากโปรแกรมและสคริปต์อื่นๆ",
-      "ConfigureOptions.MaxTokens": "จำนวนโทเค็นสูงสุด (ความยาวของการตอบกลับ)",
+      "ConfigureOptions.MaxTokens": "ความยาวการตอบกลับ (จำนวนโทเค็นสูงสุด)",
       "ConfigureOptions.ModelPath": "เส้นทางไปยังไฟล์ GGUF ในเครื่อง",
-      "ConfigureOptions.ModelFile": "แบบอย่าง",
-      "ConfigureOptions.SystemInstructions": "คำแนะนำการใช้งานระบบ",
-      "ConfigureOptions.ContextSize": "ขนาดหน่วยความจำ AI (หน้าต่างบริบท)",
-      "ConfigureOptions.MaxTurns": "จำนวนครั้งสูงสุดในการแสดงประวัติการแชท (0 = ไม่จำกัด)",
-      "ConfigureOptions.SendContextData": "รวมรายการอุปกรณ์และเซ็นเซอร์ไว้ในคำสั่งค้นหา"
+      "ConfigureOptions.ModelFile": "โมเดล AI",
+      "ConfigureOptions.SystemInstructions": "ข้อความแจ้งเตือนจากระบบ (คำแนะนำ)",
+      "ConfigureOptions.ContextSize": "ความจุหน่วยความจำ AI (หน้าต่างบริบท)",
+      "ConfigureOptions.MaxTurns": "หน่วยความจำแชท (จำนวนเทิร์นสูงสุด) (0 = ไม่จำกัด)",
+      "ConfigureOptions.SendContextData": "แบ่งปันบริบทของระบบและโมดูลกับ AI",
+      "ConfigureOptions.ModelTemperature": "ความคิดสร้างสรรค์ (ความแม่นยำ = 0, ความคิดสร้างสรรค์ = 2)",
+      "ConfigureOptions.ModelList": "รายการโมเดล AI (YAML)"
     },
     "575": {
       "Title": "ตัวจัดการดาวน์โหลด",

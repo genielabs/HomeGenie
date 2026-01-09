@@ -468,5 +468,7 @@
   "api_calls": "API கட்டளைகள்",
   "show_code": "குறியீட்டைக் காட்டு",
   "copy_api_call": "API அழைப்பு சரத்தை நகலெடு",
-  "copy_full_api_url": "முழு API URL ஐ நகலெடுக்கவும்"
+  "copy_full_api_url": "முழு API URL ஐ நகலெடுக்கவும்",
+  "details": "விவரங்கள்",
+  "visual_program": "காட்சி நிரல்"
 }

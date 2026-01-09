@@ -325,13 +325,15 @@
     "940": {
       "Title": "Tokiko IA",
       "Description": "Exekutatu punta-puntako LLMak zuzenean zure HomeGenie zerbitzarian. API osoa barne hartzen du IA beste programa eta script batzuetatik kontrolatzeko.",
-      "ConfigureOptions.MaxTokens": "Token maximoak (erantzunaren luzera)",
+      "ConfigureOptions.MaxTokens": "Erantzunaren luzera (gehienezko tokenak)",
       "ConfigureOptions.ModelPath": "Tokiko GGUF fitxategirako bidea",
-      "ConfigureOptions.ModelFile": "Modeloa",
-      "ConfigureOptions.SystemInstructions": "Sistemaren argibideak",
-      "ConfigureOptions.ContextSize": "AI memoriaren tamaina (testuinguru leihoa)",
-      "ConfigureOptions.MaxTurns": "Txat-historiaren txanda maximoak (0 = mugarik gabe)",
-      "ConfigureOptions.SendContextData": "Sartu gailuen zerrenda eta sentsoreak kontsultetan"
+      "ConfigureOptions.ModelFile": "IA eredua",
+      "ConfigureOptions.SystemInstructions": "Sistemaren gonbita (argibideak)",
+      "ConfigureOptions.ContextSize": "AI Memoriaren Edukiera (Testuinguru Leihoa)",
+      "ConfigureOptions.MaxTurns": "Txat Memoria (Gehienezko Txanda) (0 = mugarik gabe)",
+      "ConfigureOptions.SendContextData": "Partekatu sistemaren eta moduluen testuingurua IArekin",
+      "ConfigureOptions.ModelTemperature": "Sormena (Zehatza = 0, Sormena = 2)",
+      "ConfigureOptions.ModelList": "IA Modeloen Zerrenda (YAML)"
     },
     "575": {
       "Title": "Deskarga kudeatzailea",

@@ -325,13 +325,15 @@
     "940": {
       "Title": "本地人工智慧",
       "Description": "直接在您的 HomeGenie 伺服器上執行最先進的 LLM（邏輯邏輯模型）。包含完整的 API，可從其他程式和腳本控制 AI。",
-      "ConfigureOptions.MaxTokens": "最大令牌數（響應長度）",
+      "ConfigureOptions.MaxTokens": "響應長度（最大令牌數）",
       "ConfigureOptions.ModelPath": "本地 GGUF 檔案的路徑",
-      "ConfigureOptions.ModelFile": "模型",
-      "ConfigureOptions.SystemInstructions": "系統說明",
-      "ConfigureOptions.ContextSize": "AI 記憶體大小（上下文視窗）",
-      "ConfigureOptions.MaxTurns": "聊天記錄最大輪數（0 = 無限制）",
-      "ConfigureOptions.SendContextData": "查詢中包含設備列表和感測器信息"
+      "ConfigureOptions.ModelFile": "人工智慧模型",
+      "ConfigureOptions.SystemInstructions": "系統提示（說明）",
+      "ConfigureOptions.ContextSize": "AI記憶容量（上下文視窗）",
+      "ConfigureOptions.MaxTurns": "聊天記錄（最大回合數）（0 = 無限制）",
+      "ConfigureOptions.SendContextData": "與人工智慧共享系統和模組上下文",
+      "ConfigureOptions.ModelTemperature": "創造力（精確=0，創造性=2）",
+      "ConfigureOptions.ModelList": "AI模型列表（YAML）"
     },
     "575": {
       "Title": "下載管理器",

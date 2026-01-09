@@ -468,5 +468,7 @@
   "api_calls": "API skipanir",
   "show_code": "Sýna kóða",
   "copy_api_call": "Afrita API-kallstreng",
-  "copy_full_api_url": "Afrita alla vefslóð forritaskila"
+  "copy_full_api_url": "Afrita alla vefslóð forritaskila",
+  "details": "Nánari upplýsingar",
+  "visual_program": "Sjónrænt forrit"
 }

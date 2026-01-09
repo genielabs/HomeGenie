@@ -468,5 +468,7 @@
   "api_calls": "Umarnin API",
   "show_code": "Nuna Lamba",
   "copy_api_call": "Kwafi layin kiran API",
-  "copy_full_api_url": "Kwafi cikakken URL na API"
+  "copy_full_api_url": "Kwafi cikakken URL na API",
+  "details": "Cikakkun bayanai",
+  "visual_program": "Shirin Kayayyaki"
 }

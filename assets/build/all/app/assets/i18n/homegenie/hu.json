@@ -325,13 +325,15 @@
     "940": {
       "Title": "Helyi mesterséges intelligencia",
       "Description": "Futtasson korszerű LLM-eket közvetlenül a HomeGenie szerverén. Teljes API-t tartalmaz a mesterséges intelligencia más programokból és szkriptekből történő vezérléséhez.",
-      "ConfigureOptions.MaxTokens": "Max. tokenek (válasz hossza)",
+      "ConfigureOptions.MaxTokens": "Válasz hossza (maximális tokenek)",
       "ConfigureOptions.ModelPath": "A helyi GGUF fájl elérési útja",
-      "ConfigureOptions.ModelFile": "Modell",
-      "ConfigureOptions.SystemInstructions": "Rendszerutasítások",
-      "ConfigureOptions.ContextSize": "AI memória mérete (környezeti ablak)",
-      "ConfigureOptions.MaxTurns": "Maximális csevegési előzmények száma (0 = nincs korlát)",
-      "ConfigureOptions.SendContextData": "Eszközlista és érzékelők szerepeltetése a lekérdezésekben"
+      "ConfigureOptions.ModelFile": "MI-modell",
+      "ConfigureOptions.SystemInstructions": "Rendszerparancs (utasítások)",
+      "ConfigureOptions.ContextSize": "AI memóriakapacitás (környezeti ablak)",
+      "ConfigureOptions.MaxTurns": "Csevegés memória (maximális körök) (0 = nincs korlát)",
+      "ConfigureOptions.SendContextData": "Rendszer- és modulkontextus megosztása a mesterséges intelligenciával",
+      "ConfigureOptions.ModelTemperature": "Kreativitás (Pontos = 0, Kreatív = 2)",
+      "ConfigureOptions.ModelList": "AI modelllista (YAML)"
     },
     "575": {
       "Title": "Letöltéskezelő",
@@ -372,5 +374,5 @@
   },
   "scheduler_preset_action_genie_command": "Dzsinn Parancsnokság",
   "scheduler_preset_action_config_wish": "Természetes nyelvi cselekvés",
-  "scheduler_preset_action_config_wish.placeholder": "Próbáld ki ezt: „Állítsd a hőmérsékletet 22°C-ra, és indítsd el a Napfelkelte jelenetet”"
+  "scheduler_preset_action_config_wish.placeholder": "Próbáld ki: „Állítsd a hőmérsékletet 22°C-ra, és indítsd el a Napfelkelte jelenetet”"
 }

@@ -325,13 +325,15 @@
     "940": {
       "Title": "Kohalik tehisintellekt",
       "Description": "Käivita tipptasemel õigusteaduse programme (LLM) otse oma HomeGenie serveris. Sisaldab täielikku API-t tehisintellekti juhtimiseks teistest programmidest ja skriptidest.",
-      "ConfigureOptions.MaxTokens": "Maksimaalne tokenite arv (vastuse pikkus)",
+      "ConfigureOptions.MaxTokens": "Vastuse pikkus (maksimaalne tokenite arv)",
       "ConfigureOptions.ModelPath": "Kohaliku GGUF-faili tee",
-      "ConfigureOptions.ModelFile": "Mudel",
-      "ConfigureOptions.SystemInstructions": "Süsteemi juhised",
+      "ConfigureOptions.ModelFile": "Tehisintellekti mudel",
+      "ConfigureOptions.SystemInstructions": "Süsteemi viip (juhised)",
       "ConfigureOptions.ContextSize": "AI mälumaht (kontekstiaken)",
-      "ConfigureOptions.MaxTurns": "Maksimaalne vestlusajaloo käikude arv (0 = piirangut pole)",
-      "ConfigureOptions.SendContextData": "Lisa päringutesse seadmete loend ja andurid"
+      "ConfigureOptions.MaxTurns": "Vestlusmälu (maksimaalne käikude arv) (0 = piirangut pole)",
+      "ConfigureOptions.SendContextData": "Jaga süsteemi ja mooduli konteksti tehisintellektiga",
+      "ConfigureOptions.ModelTemperature": "Loovus (täpne = 0, loominguline = 2)",
+      "ConfigureOptions.ModelList": "Tehisintellekti mudelite loend (YAML)"
     },
     "575": {
       "Title": "Allalaadimishaldur",

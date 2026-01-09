@@ -468,5 +468,7 @@
   "api_calls": "API-parancsok",
   "show_code": "Kód megjelenítése",
   "copy_api_call": "API-hívási karakterlánc másolása",
-  "copy_full_api_url": "Teljes API URL másolása"
+  "copy_full_api_url": "Teljes API URL másolása",
+  "details": "Részletek",
+  "visual_program": "Vizuális program"
 }

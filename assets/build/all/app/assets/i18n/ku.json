@@ -468,5 +468,7 @@
   "api_calls": "Fermanên API-ê",
   "show_code": "Kodê nîşan bide",
   "copy_api_call": "Zincîra banga API-yê kopî bike",
-  "copy_full_api_url": "URL-ya API-ya tevahî kopî bike"
+  "copy_full_api_url": "URL-ya API-ya tevahî kopî bike",
+  "details": "Hûrgulî",
+  "visual_program": "Bernameya Dîtbarî"
 }

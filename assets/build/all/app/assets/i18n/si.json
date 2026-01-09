@@ -468,5 +468,7 @@
   "api_calls": "API විධාන",
   "show_code": "කේතය පෙන්වන්න",
   "copy_api_call": "API ඇමතුම් අනුලකුණු වැල පිටපත් කරන්න",
-  "copy_full_api_url": "සම්පූර්ණ API URL එක පිටපත් කරන්න"
+  "copy_full_api_url": "සම්පූර්ණ API URL එක පිටපත් කරන්න",
+  "details": "විස්තර",
+  "visual_program": "දෘශ්‍ය වැඩසටහන"
 }

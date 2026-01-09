@@ -859,7 +859,7 @@ var historyDataFile = Path.Combine(Data.GetFolder(), $"{SECURITY_SYSTEM_ADDRESS}
 // Tell HomeGenie to include this data file in system backups
 Data.AddToSystemBackup(historyDataFile);
 // Load saved history
-var history = GetLast48HoursEvents(historyDataFile);
+var history = GetAllEvents(historyDataFile);
 var historyLimit = 24 * 7; // hours (one week)
 var AddHistoryEvent = new Action&lt;Module, ModuleParameter&gt;((mod, p)=&gt;{
   var evt = new MigEvent();
@@ -1102,6 +1102,11 @@ public async Task&lt;List&lt;MigEvent&gt;&gt; LoadEventsAsync(string filePath)
     return events;
 }
 
+public List&lt;MigEvent&gt; GetAllEvents(string dataFilePath)
+{
+    return LoadEventsAsync(dataFilePath).GetAwaiter().GetResult();
+}
+
 public List&lt;MigEvent&gt; GetLast48HoursEvents(string dataFilePath)
 {
     var allHistory = LoadEventsAsync(dataFilePath).GetAwaiter().GetResult();
@@ -1119,9 +1124,9 @@ public List&lt;MigEvent&gt; GetLast48HoursEvents(string dataFilePath)
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.2</PackageVersion>
       <Id>security-alarm-system</Id>
-      <Version>1.0.4</Version>
+      <Version>1.0.5</Version>
       <Required>true</Required>
-      <Checksum>CAF1EFBEB7E783F4E39B8649872771C5</Checksum>
+      <Checksum>A98DE2DFA612AB4E540466D20FD922D1</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>90</Address>

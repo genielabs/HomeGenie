@@ -325,13 +325,15 @@
     "940": {
       "Title": "AI-ga maxalliga ah",
       "Description": "Ku socodsii LLM-yada casriga ah si toos ah server-kaaga HomeGenie. Waxaa ku jira API buuxa si loo xakameeyo AI-ga barnaamijyada kale iyo qoraallada.",
-      "ConfigureOptions.MaxTokens": "Calaamadaha ugu Sareeya (dhererka jawaabta)",
+      "ConfigureOptions.MaxTokens": "Dhererka Jawaabta (Calaamadaha ugu Badan)",
       "ConfigureOptions.ModelPath": "Jidka loo maro faylka GGUF deegaanka",
-      "ConfigureOptions.ModelFile": "Moodel",
-      "ConfigureOptions.SystemInstructions": "Tilmaamaha Nidaamka",
-      "ConfigureOptions.ContextSize": "Cabbirka xusuusta AI (Daaqadda Macnaha)",
-      "ConfigureOptions.MaxTurns": "Taariikhda ugu badan ee sheekaysiga (0 = xad la'aan)",
-      "ConfigureOptions.SendContextData": "Ku dar liiska qalabka iyo dareemayaasha su'aalaha"
+      "ConfigureOptions.ModelFile": "Qaabka AI",
+      "ConfigureOptions.SystemInstructions": "Tilmaamaha Nidaamka (Tilmaamaha)",
+      "ConfigureOptions.ContextSize": "Awoodda Xusuusta AI (Daaqadda Macnaha)",
+      "ConfigureOptions.MaxTurns": "Xusuusta Sheekaysiga (Tirada ugu badan) (0 = xad la'aan)",
+      "ConfigureOptions.SendContextData": "La wadaag macnaha guud ee nidaamka iyo moduleka AI",
+      "ConfigureOptions.ModelTemperature": "Hal-abuur (Sax ah = 0, Hal-abuur = 2)",
+      "ConfigureOptions.ModelList": "Liiska Moodeelka AI (YAML)"
     },
     "575": {
       "Title": "Maareeyaha Soo dejinta",

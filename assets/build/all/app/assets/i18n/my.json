@@ -468,5 +468,7 @@
   "api_calls": "API အမိန့်များ",
   "show_code": "ကုဒ်ပြပါ",
   "copy_api_call": "API ခေါ်ဆိုမှု စာကြောင်းကို ကူးယူပါ",
-  "copy_full_api_url": "API URL အပြည့်အစုံကို ကူးယူပါ"
+  "copy_full_api_url": "API URL အပြည့်အစုံကို ကူးယူပါ",
+  "details": "အသေးစိတ်အချက်အလက်များ",
+  "visual_program": "ရုပ်မြင်သံကြား ပရိုဂရမ်"
 }

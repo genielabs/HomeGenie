@@ -589,17 +589,21 @@
       "Description":
         "Run state-of-the-art LLMs directly on your HomeGenie server. Includes a full API to control the AI from other programs and scripts.",
       "ConfigureOptions.ModelFile":
-        "Model",
-      "ConfigureOptions.ContextSize":
-        "AI Memory size (Context Window)",
-      "ConfigureOptions.MaxTokens":
-        "Max Tokens (response length)",
-      "ConfigureOptions.MaxTurns":
-        "Max chat history turns (0 = no limit)",
-      "ConfigureOptions.SystemInstructions":
-        "System Instructions",
+        "AI Model",
       "ConfigureOptions.SendContextData":
-        "Include device list and sensors in queries"
+        "Share system and module context with the AI",
+      "ConfigureOptions.ModelTemperature":
+        "Creativity (Precise = 0, Creative = 2)",
+      "ConfigureOptions.ContextSize":
+        "AI Memory Capacity (Context Window)",
+      "ConfigureOptions.MaxTokens":
+        "Response Length (Max Tokens)",
+      "ConfigureOptions.MaxTurns":
+        "Chat Memory (Max Turns) (0 = no limit)",
+      "ConfigureOptions.SystemInstructions":
+        "System Prompt (Instructions)",
+      "ConfigureOptions.ModelList":
+        "AI Model List (YAML)"
     },
 
     "575": {

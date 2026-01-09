@@ -325,13 +325,15 @@
     "940": {
       "Title": "Жергілікті жасанды интеллект",
       "Description": "HomeGenie серверіңізде тікелей заманауи LLM іске қосыңыз. Басқа бағдарламалар мен сценарийлерден жасанды интеллектті басқаруға арналған толық API қамтиды.",
-      "ConfigureOptions.MaxTokens": "Максималды токендер (жауап ұзақтығы)",
+      "ConfigureOptions.MaxTokens": "Жауап ұзындығы (максималды токендер)",
       "ConfigureOptions.ModelPath": "Жергілікті GGUF файлына жол",
-      "ConfigureOptions.ModelFile": "Модель",
-      "ConfigureOptions.SystemInstructions": "Жүйелік нұсқаулар",
-      "ConfigureOptions.ContextSize": "Жасанды интеллект жадының өлшемі (контекстік терезе)",
-      "ConfigureOptions.MaxTurns": "Чат тарихының максималды айналымы (0 = шектеусіз)",
-      "ConfigureOptions.SendContextData": "Сұрауларға құрылғылар тізімін және сенсорларды қосыңыз"
+      "ConfigureOptions.ModelFile": "Жасанды интеллект моделі",
+      "ConfigureOptions.SystemInstructions": "Жүйелік нұсқаулық (нұсқаулар)",
+      "ConfigureOptions.ContextSize": "Жасанды интеллект жады сыйымдылығы (контексттік терезе)",
+      "ConfigureOptions.MaxTurns": "Чат жады (максималды айналым) (0 = шектеусіз)",
+      "ConfigureOptions.SendContextData": "Жүйе мен модуль контекстін жасанды интеллектпен бөлісіңіз",
+      "ConfigureOptions.ModelTemperature": "Шығармашылық (Дәлдік = 0, Шығармашылық = 2)",
+      "ConfigureOptions.ModelList": "Жасанды интеллект үлгілерінің тізімі (YAML)"
     },
     "575": {
       "Title": "Жүктеу менеджері",

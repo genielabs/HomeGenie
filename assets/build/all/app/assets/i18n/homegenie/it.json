@@ -589,17 +589,21 @@
       "Description":
         "Esegui LLM all'avanguardia direttamente sul tuo server HomeGenie. Include un'API completa per controllare l'IA da altri programmi e script.",
       "ConfigureOptions.ModelFile":
-        "Modello",
-      "ConfigureOptions.ContextSize":
-        "Dimensione memoria AI (Context Window)",
-      "ConfigureOptions.MaxTokens":
-        "Token Massimi (lunghezza risposta)",
-      "ConfigureOptions.MaxTurns":
-        "Max turni cronologia chat (0 = nessun limite)",
-      "ConfigureOptions.SystemInstructions":
-        "Istruzioni di Sistema",
+        "Modello IA",
       "ConfigureOptions.SendContextData":
-        "Includi elenco dispositivi e sensori nelle richieste"
+        "Condividi il contesto del sistema e dei moduli con l'IA",
+      "ConfigureOptions.ModelTemperature":
+        "Creatività (Preciso = 0, Creativo = 2)",
+      "ConfigureOptions.ContextSize":
+        "Capacità memoria IA (Context Window)",
+      "ConfigureOptions.MaxTokens":
+        "Lunghezza risposta (Max Token)",
+      "ConfigureOptions.MaxTurns":
+        "Memoria conversazione (Max turni) (0 = nessun limite)",
+      "ConfigureOptions.SystemInstructions":
+        "System Prompt (Istruzioni)",
+      "ConfigureOptions.ModelList":
+        "Elenco modelli IA (YAML)"
     },
 
     "575": {

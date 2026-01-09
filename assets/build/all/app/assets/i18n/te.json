@@ -468,5 +468,7 @@
   "api_calls": "API ఆదేశాలు",
   "show_code": "కోడ్ చూపించు",
   "copy_api_call": "API కాల్ స్ట్రింగ్‌ను కాపీ చేయండి",
-  "copy_full_api_url": "పూర్తి API URLను కాపీ చేయి"
+  "copy_full_api_url": "పూర్తి API URLను కాపీ చేయి",
+  "details": "వివరాలు",
+  "visual_program": "దృశ్య కార్యక్రమం"
 }

@@ -468,5 +468,7 @@
   "api_calls": "Mandata API",
   "show_code": "Codicem Monstra",
   "copy_api_call": "Exscribe seriem vocationis API",
-  "copy_full_api_url": "URL API plenam exscribere"
+  "copy_full_api_url": "URL API plenam exscribere",
+  "details": "Detalia",
+  "visual_program": "Programma Visuale"
 }

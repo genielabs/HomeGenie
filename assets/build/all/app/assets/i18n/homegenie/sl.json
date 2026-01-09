@@ -325,13 +325,15 @@
     "940": {
       "Title": "Lokalna umetna inteligenca",
       "Description": "Zaženite najsodobnejše LLM-je neposredno na strežniku HomeGenie. Vključuje celoten API za upravljanje umetne inteligence iz drugih programov in skriptov.",
-      "ConfigureOptions.MaxTokens": "Največ žetonov (dolžina odgovora)",
+      "ConfigureOptions.MaxTokens": "Dolžina odgovora (največ žetonov)",
       "ConfigureOptions.ModelPath": "Pot do lokalne datoteke GGUF",
-      "ConfigureOptions.ModelFile": "Model",
-      "ConfigureOptions.SystemInstructions": "Sistemska navodila",
-      "ConfigureOptions.ContextSize": "Velikost pomnilnika umetne inteligence (kontekstno okno)",
-      "ConfigureOptions.MaxTurns": "Največje število obratov v zgodovini klepeta (0 = brez omejitve)",
-      "ConfigureOptions.SendContextData": "V poizvedbe vključi seznam naprav in senzorjev"
+      "ConfigureOptions.ModelFile": "Model umetne inteligence",
+      "ConfigureOptions.SystemInstructions": "Sistemski poziv (navodila)",
+      "ConfigureOptions.ContextSize": "Zmogljivost pomnilnika umetne inteligence (kontekstno okno)",
+      "ConfigureOptions.MaxTurns": "Pomnilnik klepeta (največje število obratov) (0 = brez omejitve)",
+      "ConfigureOptions.SendContextData": "Deli kontekst sistema in modulov z umetno inteligenco",
+      "ConfigureOptions.ModelTemperature": "Ustvarjalnost (Natančnost = 0, Ustvarjalnost = 2)",
+      "ConfigureOptions.ModelList": "Seznam modelov umetne inteligence (YAML)"
     },
     "575": {
       "Title": "Upravitelj prenosov",

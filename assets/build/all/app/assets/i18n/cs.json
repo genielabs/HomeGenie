@@ -468,5 +468,7 @@
   "api_calls": "Příkazy API",
   "show_code": "Zobrazit kód",
   "copy_api_call": "Kopírovat řetězec volání API",
-  "copy_full_api_url": "Kopírovat celou URL adresu API"
+  "copy_full_api_url": "Kopírovat celou URL adresu API",
+  "details": "Podrobnosti",
+  "visual_program": "Vizuální program"
 }

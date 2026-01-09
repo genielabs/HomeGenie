@@ -325,13 +325,15 @@
     "940": {
       "Title": "දේශීය AI",
       "Description": "ඔබගේ HomeGenie සේවාදායකයේ සෘජුවම අති නවීන LLM ධාවනය කරන්න. අනෙකුත් වැඩසටහන් සහ ස්ක්‍රිප්ට් වලින් AI පාලනය කිරීමට සම්පූර්ණ API එකක් ඇතුළත් වේ.",
-      "ConfigureOptions.MaxTokens": "උපරිම ටෝකන (ප්‍රතිචාර දිග)",
+      "ConfigureOptions.MaxTokens": "ප්‍රතිචාර දිග (උපරිම ටෝකන)",
       "ConfigureOptions.ModelPath": "දේශීය GGUF ගොනුවට මාර්ගය",
-      "ConfigureOptions.ModelFile": "ආකෘතිය",
-      "ConfigureOptions.SystemInstructions": "පද්ධති උපදෙස්",
-      "ConfigureOptions.ContextSize": "AI මතක ප්‍රමාණය (සන්දර්භ කවුළුව)",
-      "ConfigureOptions.MaxTurns": "උපරිම කතාබස් ඉතිහාස හැරීම් (0 = සීමාවක් නැත)",
-      "ConfigureOptions.SendContextData": "විමසුම්වල උපාංග ලැයිස්තුව සහ සංවේදක ඇතුළත් කරන්න"
+      "ConfigureOptions.ModelFile": "AI ආකෘතිය",
+      "ConfigureOptions.SystemInstructions": "පද්ධති විමසුම (උපදෙස්)",
+      "ConfigureOptions.ContextSize": "AI මතක ධාරිතාව (සන්දර්භ කවුළුව)",
+      "ConfigureOptions.MaxTurns": "කතාබස් මතකය (උපරිම හැරීම්) (0 = සීමාවක් නැත)",
+      "ConfigureOptions.SendContextData": "AI සමඟ පද්ධතිය සහ මොඩියුල සන්දර්භය බෙදා ගන්න",
+      "ConfigureOptions.ModelTemperature": "නිර්මාණශීලිත්වය (නිරවද්‍ය = 0, නිර්මාණශීලී = 2)",
+      "ConfigureOptions.ModelList": "AI ආකෘති ලැයිස්තුව (YAML)"
     },
     "575": {
       "Title": "බාගැනීම් කළමනාකරු",

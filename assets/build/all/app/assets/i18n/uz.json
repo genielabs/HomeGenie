@@ -468,5 +468,7 @@
   "api_calls": "API buyruqlari",
   "show_code": "Kodni ko'rsatish",
   "copy_api_call": "API chaqiruv satrini nusxalash",
-  "copy_full_api_url": "To'liq API URL manzilini nusxalash"
+  "copy_full_api_url": "To'liq API URL manzilini nusxalash",
+  "details": "Tafsilotlar",
+  "visual_program": "Vizual dastur"
 }

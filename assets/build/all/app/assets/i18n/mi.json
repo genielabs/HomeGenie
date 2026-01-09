@@ -468,5 +468,7 @@
   "api_calls": "Ngā whakahau API",
   "show_code": "Whakaaturia te Waehere",
   "copy_api_call": "Tāruatia te aho karanga API",
-  "copy_full_api_url": "Tāruatia te URL API katoa"
+  "copy_full_api_url": "Tāruatia te URL API katoa",
+  "details": "Ngā Taipitopito",
+  "visual_program": "Papatono Ataata"
 }

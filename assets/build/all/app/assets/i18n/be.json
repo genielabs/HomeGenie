@@ -468,5 +468,7 @@
   "api_calls": "Каманды API",
   "show_code": "Паказаць код",
   "copy_api_call": "Скапіяваць радок выкліку API",
-  "copy_full_api_url": "Скапіяваць поўны URL-адрас API"
+  "copy_full_api_url": "Скапіяваць поўны URL-адрас API",
+  "details": "Падрабязнасці",
+  "visual_program": "Візуальная праграма"
 }

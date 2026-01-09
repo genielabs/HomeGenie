@@ -325,13 +325,15 @@
     "940": {
       "Title": "Τοπική Τεχνητή Νοημοσύνη",
       "Description": "Εκτελέστε υπερσύγχρονα LLM απευθείας στον διακομιστή HomeGenie. Περιλαμβάνει ένα πλήρες API για τον έλεγχο της τεχνητής νοημοσύνης από άλλα προγράμματα και σενάρια.",
-      "ConfigureOptions.MaxTokens": "Μέγιστος αριθμός διακριτικών (μήκος απόκρισης)",
+      "ConfigureOptions.MaxTokens": "Μήκος απόκρισης (Μέγιστος αριθμός διακριτικών)",
       "ConfigureOptions.ModelPath": "Διαδρομή προς το τοπικό αρχείο GGUF",
-      "ConfigureOptions.ModelFile": "Μοντέλο",
-      "ConfigureOptions.SystemInstructions": "Οδηγίες συστήματος",
-      "ConfigureOptions.ContextSize": "Μέγεθος μνήμης AI (Παράθυρο περιβάλλοντος)",
-      "ConfigureOptions.MaxTurns": "Μέγιστος αριθμός στροφών στο ιστορικό συνομιλίας (0 = χωρίς όριο)",
-      "ConfigureOptions.SendContextData": "Συμπερίληψη λίστας συσκευών και αισθητήρων στα ερωτήματα"
+      "ConfigureOptions.ModelFile": "Μοντέλο Τεχνητής Νοημοσύνης",
+      "ConfigureOptions.SystemInstructions": "Οδηγίες συστήματος (Ενημερώσεις)",
+      "ConfigureOptions.ContextSize": "Χωρητικότητα μνήμης AI (Παράθυρο περιβάλλοντος)",
+      "ConfigureOptions.MaxTurns": "Μνήμη Συνομιλίας (Μέγιστος Αριθμός Γύρων) (0 = χωρίς όριο)",
+      "ConfigureOptions.SendContextData": "Κοινή χρήση του περιβάλλοντος συστήματος και ενότητας με την Τεχνητή Νοημοσύνη",
+      "ConfigureOptions.ModelTemperature": "Δημιουργικότητα (Ακριβής = 0, Δημιουργικότητα = 2)",
+      "ConfigureOptions.ModelList": "Λίστα μοντέλων τεχνητής νοημοσύνης (YAML)"
     },
     "575": {
       "Title": "Διαχείριση λήψεων",

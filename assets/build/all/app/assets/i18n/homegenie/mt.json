@@ -325,13 +325,15 @@
     "940": {
       "Title": "AI Lokali",
       "Description": "Mexxi LLMs avvanzati direttament fuq is-server HomeGenie tiegħek. Jinkludi API sħiħa biex tikkontrolla l-AI minn programmi u skripts oħra.",
-      "ConfigureOptions.MaxTokens": "Tokens Massimi (tul tar-rispons)",
+      "ConfigureOptions.MaxTokens": "Tul tar-Rispons (Tokens Massimi)",
       "ConfigureOptions.ModelPath": "Mogħdija għall-fajl GGUF lokali",
-      "ConfigureOptions.ModelFile": "Mudell",
-      "ConfigureOptions.SystemInstructions": "Istruzzjonijiet tas-Sistema",
-      "ConfigureOptions.ContextSize": "Daqs tal-Memorja AI (Tieqa tal-Kuntest)",
-      "ConfigureOptions.MaxTurns": "Dawriet massimi fl-istorja taċ-chat (0 = bla limitu)",
-      "ConfigureOptions.SendContextData": "Inkludi lista ta' apparati u sensuri fil-mistoqsijiet"
+      "ConfigureOptions.ModelFile": "Mudell tal-AI",
+      "ConfigureOptions.SystemInstructions": "Prompt tas-Sistema (Istruzzjonijiet)",
+      "ConfigureOptions.ContextSize": "Kapaċità tal-Memorja tal-AI (Tieqa tal-Kuntest)",
+      "ConfigureOptions.MaxTurns": "Memorja taċ-Chat (Dawriet Massimi) (0 = bla limitu)",
+      "ConfigureOptions.SendContextData": "Aqsam il-kuntest tas-sistema u tal-modulu mal-AI",
+      "ConfigureOptions.ModelTemperature": "Kreattività (Preċiża = 0, Kreattiva = 2)",
+      "ConfigureOptions.ModelList": "Lista ta' Mudelli tal-AI (YAML)"
     },
     "575": {
       "Title": "Maniġer tat-Tniżżil",

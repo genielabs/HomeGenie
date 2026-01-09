@@ -468,5 +468,7 @@
   "api_calls": "API-käsud",
   "show_code": "Näita koodi",
   "copy_api_call": "Kopeeri API kutse string",
-  "copy_full_api_url": "Kopeeri täielik API URL"
+  "copy_full_api_url": "Kopeeri täielik API URL",
+  "details": "Detailid",
+  "visual_program": "Visuaalne programm"
 }

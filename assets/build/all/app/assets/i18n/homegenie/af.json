@@ -325,13 +325,15 @@
     "940": {
       "Title": "Plaaslike KI",
       "Description": "Laat die nuutste LLM's direk op jou HomeGenie-bediener loop. Sluit 'n volledige API in om die KI vanaf ander programme en skrifte te beheer.",
-      "ConfigureOptions.MaxTokens": "Maksimum aantal tekens (responslengte)",
+      "ConfigureOptions.MaxTokens": "Reaksielengte (Maksimum Tokens)",
       "ConfigureOptions.ModelPath": "Pad na plaaslike GGUF-lêer",
-      "ConfigureOptions.ModelFile": "Model",
-      "ConfigureOptions.SystemInstructions": "Stelselinstruksies",
-      "ConfigureOptions.ContextSize": "KI-geheuegrootte (konteksvenster)",
-      "ConfigureOptions.MaxTurns": "Maksimum kletsgeskiedenis-beurte (0 = geen limiet nie)",
-      "ConfigureOptions.SendContextData": "Sluit toestellys en sensors in navrae in"
+      "ConfigureOptions.ModelFile": "KI-model",
+      "ConfigureOptions.SystemInstructions": "Stelselprompt (instruksies)",
+      "ConfigureOptions.ContextSize": "KI-geheuekapasiteit (konteksvenster)",
+      "ConfigureOptions.MaxTurns": "Kletsgeheue (Maksimum beurte) (0 = geen limiet)",
+      "ConfigureOptions.SendContextData": "Deel stelsel- en modulekonteks met die KI",
+      "ConfigureOptions.ModelTemperature": "Kreatiwiteit (Presies = 0, Kreatief = 2)",
+      "ConfigureOptions.ModelList": "KI-modellys (YAML)"
     },
     "575": {
       "Title": "Aflaaibestuurder",

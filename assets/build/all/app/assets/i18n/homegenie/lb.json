@@ -325,13 +325,15 @@
     "940": {
       "Title": "Lokal KI",
       "Description": "Laf modern LLMs direkt op Ärem HomeGenie Server aus. Enthält eng komplett API fir d'KI vun anere Programmer a Skripter aus ze kontrolléieren.",
-      "ConfigureOptions.MaxTokens": "Max Tokens (Äntwertlängt)",
+      "ConfigureOptions.MaxTokens": "Äntwertlängt (maximal Tokens)",
       "ConfigureOptions.ModelPath": "Wee zur lokaler GGUF-Datei",
-      "ConfigureOptions.ModelFile": "Modell",
-      "ConfigureOptions.SystemInstructions": "Systeminstruktiounen",
-      "ConfigureOptions.ContextSize": "Gréisst vun der KI-Speicher (Kontextfenster)",
-      "ConfigureOptions.MaxTurns": "Maximal Chat-Verlafzäiten (0 = keng Limit)",
-      "ConfigureOptions.SendContextData": "Lëscht vun den Apparater a Sensoren an Ufroen integréieren"
+      "ConfigureOptions.ModelFile": "KI-Modell",
+      "ConfigureOptions.SystemInstructions": "Systemprompt (Instruktiounen)",
+      "ConfigureOptions.ContextSize": "KI-Speicherkapazitéit (Kontextfenster)",
+      "ConfigureOptions.MaxTurns": "Chat-Speicher (Max. Touren) (0 = keng Limit)",
+      "ConfigureOptions.SendContextData": "Deelt de System- a Modulkontext mat der KI",
+      "ConfigureOptions.ModelTemperature": "Kreativitéit (Präzis = 0, Kreativ = 2)",
+      "ConfigureOptions.ModelList": "KI-Modelllëscht (YAML)"
     },
     "575": {
       "Title": "Downloadmanager",

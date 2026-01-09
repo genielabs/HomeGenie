@@ -325,13 +325,15 @@
     "940": {
       "Title": "ସ୍ଥାନୀୟ AI",
       "Description": "ଆପଣଙ୍କର HomeGenie ସର୍ଭରରେ ସିଧାସଳଖ ଅତ୍ୟାଧୁନିକ LLM ଚଲାନ୍ତୁ। ଅନ୍ୟ ପ୍ରୋଗ୍ରାମ ଏବଂ ସ୍କ୍ରିପ୍ଟରୁ AI ନିୟନ୍ତ୍ରଣ କରିବା ପାଇଁ ଏକ ସମ୍ପୂର୍ଣ୍ଣ API ଅନ୍ତର୍ଭୁକ୍ତ।",
-      "ConfigureOptions.MaxTokens": "ସର୍ବାଧିକ ଟୋକନ୍ (ପ୍ରତିକ୍ରିୟା ଲମ୍ବ)",
+      "ConfigureOptions.MaxTokens": "ପ୍ରତିକ୍ରିୟା ଦୈର୍ଘ୍ୟ (ସର୍ବାଧିକ ଟୋକନ୍)",
       "ConfigureOptions.ModelPath": "ସ୍ଥାନୀୟ GGUF ଫାଇଲକୁ ପଥ",
-      "ConfigureOptions.ModelFile": "ମଡେଲ",
-      "ConfigureOptions.SystemInstructions": "ସିଷ୍ଟମ୍ ନିର୍ଦ୍ଦେଶାବଳୀ",
-      "ConfigureOptions.ContextSize": "AI ମେମୋରୀ ଆକାର (ସନ୍ଦର୍ଭ ୱିଣ୍ଡୋ)",
-      "ConfigureOptions.MaxTurns": "ସର୍ବାଧିକ ଚାଟ୍ ଇତିହାସ ପରିବର୍ତ୍ତନ (୦ = କୌଣସି ସୀମା ନାହିଁ)",
-      "ConfigureOptions.SendContextData": "କ୍ୱେରୀଗୁଡ଼ିକରେ ଡିଭାଇସ୍ ତାଲିକା ଏବଂ ସେନ୍ସରଗୁଡ଼ିକୁ ଅନ୍ତର୍ଭୁକ୍ତ କରନ୍ତୁ"
+      "ConfigureOptions.ModelFile": "ଏଆଇ ମଡେଲ୍",
+      "ConfigureOptions.SystemInstructions": "ସିଷ୍ଟମ୍ ପ୍ରମ୍ପ୍ଟ (ନିର୍ଦ୍ଦେଶାବଳୀ)",
+      "ConfigureOptions.ContextSize": "AI ମେମୋରୀ କ୍ଷମତା (ସନ୍ଦର୍ଭ ୱିଣ୍ଡୋ)",
+      "ConfigureOptions.MaxTurns": "ଚାଟ୍ ମେମୋରୀ (ସର୍ବାଧିକ ପାଳି) (୦ = କୌଣସି ସୀମା ନାହିଁ)",
+      "ConfigureOptions.SendContextData": "AI ସହିତ ସିଷ୍ଟମ୍ ଏବଂ ମଡ୍ୟୁଲ୍ ପ୍ରସଙ୍ଗ ସେୟାର କରନ୍ତୁ",
+      "ConfigureOptions.ModelTemperature": "ସୃଜନଶୀଳତା (ସଠିକ = 0, ସୃଜନଶୀଳ = 2)",
+      "ConfigureOptions.ModelList": "AI ମଡେଲ୍ ତାଲିକା (YAML)"
     },
     "575": {
       "Title": "ଡାଉନଲୋଡ୍ ପରିଚାଳକ",

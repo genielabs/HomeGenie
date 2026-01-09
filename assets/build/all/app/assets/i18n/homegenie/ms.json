@@ -325,13 +325,15 @@
     "940": {
       "Title": "AI Tempatan",
       "Description": "Jalankan LLM canggih terus pada pelayan HomeGenie anda. Termasuk API penuh untuk mengawal AI daripada program dan skrip lain.",
-      "ConfigureOptions.MaxTokens": "Token Maks (panjang respons)",
+      "ConfigureOptions.MaxTokens": "Panjang Respons (Token Maks)",
       "ConfigureOptions.ModelPath": "Laluan ke fail GGUF setempat",
-      "ConfigureOptions.ModelFile": "Model",
-      "ConfigureOptions.SystemInstructions": "Arahan Sistem",
-      "ConfigureOptions.ContextSize": "Saiz Memori AI (Tetingkap Konteks)",
-      "ConfigureOptions.MaxTurns": "Pusingan sejarah sembang maksimum (0 = tiada had)",
-      "ConfigureOptions.SendContextData": "Sertakan senarai peranti dan sensor dalam pertanyaan"
+      "ConfigureOptions.ModelFile": "Model AI",
+      "ConfigureOptions.SystemInstructions": "Gesaan Sistem (Arahan)",
+      "ConfigureOptions.ContextSize": "Kapasiti Memori AI (Tetingkap Konteks)",
+      "ConfigureOptions.MaxTurns": "Memori Sembang (Pusingan Maksimum) (0 = tiada had)",
+      "ConfigureOptions.SendContextData": "Kongsi konteks sistem dan modul dengan AI",
+      "ConfigureOptions.ModelTemperature": "Kreativiti (Tepat = 0, Kreatif = 2)",
+      "ConfigureOptions.ModelList": "Senarai Model AI (YAML)"
     },
     "575": {
       "Title": "Pengurus Muat Turun",

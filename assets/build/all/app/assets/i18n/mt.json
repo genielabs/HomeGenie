@@ -468,5 +468,7 @@
   "api_calls": "Kmandi tal-API",
   "show_code": "Uri l-Kodiċi",
   "copy_api_call": "Ikkopja s-sekwenza tas-sejħa tal-API",
-  "copy_full_api_url": "Ikkopja l-URL sħiħ tal-API"
+  "copy_full_api_url": "Ikkopja l-URL sħiħ tal-API",
+  "details": "Dettalji",
+  "visual_program": "Programm Viżwali"
 }

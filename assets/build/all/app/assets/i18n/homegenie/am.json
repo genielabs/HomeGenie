@@ -325,13 +325,15 @@
     "940": {
       "Title": "አካባቢያዊ የአዕምሮ ህክምና ባለሙያ (AI)",
       "Description": "ዘመናዊ የሆኑ LLMዎችን በቀጥታ በHomeGenie አገልጋይዎ ላይ ያሂዱ። ከሌሎች ፕሮግራሞች እና ስክሪፕቶች AIን ለመቆጣጠር ሙሉ ኤፒአይ ያካትታል።",
-      "ConfigureOptions.MaxTokens": "ከፍተኛ ቶከኖች (የምላሽ ርዝመት)",
+      "ConfigureOptions.MaxTokens": "የምላሽ ርዝመት (ከፍተኛ ማስመሰያዎች)",
       "ConfigureOptions.ModelPath": "ወደ አካባቢያዊ GGUF ፋይል የሚወስደው መንገድ",
-      "ConfigureOptions.ModelFile": "ሞዴል",
-      "ConfigureOptions.SystemInstructions": "የስርዓት መመሪያዎች",
-      "ConfigureOptions.ContextSize": "የAI ማህደረ ትውስታ መጠን (የአውድ መስኮት)",
-      "ConfigureOptions.MaxTurns": "ከፍተኛው የውይይት ታሪክ መዞሪያዎች (0 = ምንም ገደብ የለም)",
-      "ConfigureOptions.SendContextData": "የመሣሪያ ዝርዝር እና ዳሳሾችን በጥያቄዎች ውስጥ ያካትቱ"
+      "ConfigureOptions.ModelFile": "የኤአይ ሞዴል",
+      "ConfigureOptions.SystemInstructions": "የስርዓት ጥያቄ (መመሪያዎች)",
+      "ConfigureOptions.ContextSize": "የAI ማህደረ ትውስታ አቅም (የአውድ መስኮት)",
+      "ConfigureOptions.MaxTurns": "የውይይት ማህደረ ትውስታ (ከፍተኛ ማዞሪያዎች) (0 = ምንም ገደብ የለም)",
+      "ConfigureOptions.SendContextData": "የስርዓት እና የሞዱል አውድ ከ AI ጋር ያጋሩ",
+      "ConfigureOptions.ModelTemperature": "ፈጠራ (ትክክለኛ = 0፣ ፈጠራ = 2)",
+      "ConfigureOptions.ModelList": "የAI ሞዴል ዝርዝር (YAML)"
     },
     "575": {
       "Title": "የማውረጃ አስተዳዳሪ",

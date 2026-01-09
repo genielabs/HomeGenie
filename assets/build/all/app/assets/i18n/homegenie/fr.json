@@ -325,13 +325,15 @@
     "940": {
       "Title": "IA locale",
       "Description": "Exécutez des modèles linguistiques de pointe directement sur votre serveur HomeGenie. Inclut une API complète pour contrôler l'IA depuis d'autres programmes et scripts.",
-      "ConfigureOptions.MaxTokens": "Nombre maximal de jetons (longueur de la réponse)",
+      "ConfigureOptions.MaxTokens": "Longueur de la réponse (nombre maximal de jetons)",
       "ConfigureOptions.ModelPath": "Chemin vers le fichier GGUF local",
-      "ConfigureOptions.ModelFile": "Modèle",
-      "ConfigureOptions.SystemInstructions": "Instructions système",
-      "ConfigureOptions.ContextSize": "Taille de la mémoire IA (fenêtre de contexte)",
-      "ConfigureOptions.MaxTurns": "Nombre maximal de tours dans l'historique des conversations (0 = aucune limite)",
-      "ConfigureOptions.SendContextData": "Inclure la liste des appareils et des capteurs dans les requêtes"
+      "ConfigureOptions.ModelFile": "Modèle d'IA",
+      "ConfigureOptions.SystemInstructions": "Invite système (Instructions)",
+      "ConfigureOptions.ContextSize": "Capacité de mémoire de l'IA (fenêtre contextuelle)",
+      "ConfigureOptions.MaxTurns": "Mémoire de chat (Nombre maximal de tours) (0 = aucune limite)",
+      "ConfigureOptions.SendContextData": "Partager le contexte du système et des modules avec l'IA",
+      "ConfigureOptions.ModelTemperature": "Créativité (Précis = 0, Créatif = 2)",
+      "ConfigureOptions.ModelList": "Liste des modèles d'IA (YAML)"
     },
     "575": {
       "Title": "Gestionnaire de téléchargement",

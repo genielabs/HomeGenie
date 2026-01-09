@@ -325,13 +325,15 @@
     "940": {
       "Title": "Տեղական արհեստական բանականություն",
       "Description": "Գործարկեք ժամանակակից LLM ծրագրեր անմիջապես ձեր HomeGenie սերվերի վրա: Ներառում է լիարժեք API՝ այլ ծրագրերից և սկրիպտներից արհեստական բանականությունը կառավարելու համար:",
-      "ConfigureOptions.MaxTokens": "Առավելագույն տոկեններ (պատասխանի երկարություն)",
+      "ConfigureOptions.MaxTokens": "Պատասխանի երկարությունը (առավելագույն տոկեններ)",
       "ConfigureOptions.ModelPath": "Տեղական GGUF ֆայլի ուղին",
-      "ConfigureOptions.ModelFile": "Մոդել",
-      "ConfigureOptions.SystemInstructions": "Համակարգի հրահանգներ",
-      "ConfigureOptions.ContextSize": "Արհեստական բանականության հիշողության չափը (համատեքստային պատուհան)",
-      "ConfigureOptions.MaxTurns": "Զրույցի պատմության առավելագույն շրջադարձեր (0 = անսահմանափակ)",
-      "ConfigureOptions.SendContextData": "Հարցումներում ներառել սարքերի ցանկը և սենսորները"
+      "ConfigureOptions.ModelFile": "Արհեստական բանականության մոդել",
+      "ConfigureOptions.SystemInstructions": "Համակարգի հուշում (հրահանգներ)",
+      "ConfigureOptions.ContextSize": "Արհեստական բանականության հիշողության տարողունակություն (համատեքստային պատուհան)",
+      "ConfigureOptions.MaxTurns": "Զրույցի հիշողություն (առավելագույն պտույտներ) (0 = անսահմանափակ)",
+      "ConfigureOptions.SendContextData": "Կիսվեք համակարգի և մոդուլի համատեքստով արհեստական բանականության հետ",
+      "ConfigureOptions.ModelTemperature": "Ստեղծագործականություն (Ճշգրիտ = 0, Ստեղծագործական = 2)",
+      "ConfigureOptions.ModelList": "Արհեստական բանականության մոդելների ցանկ (YAML)"
     },
     "575": {
       "Title": "Ներբեռնումների կառավարիչ",

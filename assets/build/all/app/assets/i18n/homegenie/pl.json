@@ -325,13 +325,15 @@
     "940": {
       "Title": "Lokalna sztuczna inteligencja",
       "Description": "Uruchamiaj najnowocześniejsze programy LLM bezpośrednio na serwerze HomeGenie. Zawiera pełne API do sterowania sztuczną inteligencją z poziomu innych programów i skryptów.",
-      "ConfigureOptions.MaxTokens": "Maksymalna liczba tokenów (długość odpowiedzi)",
+      "ConfigureOptions.MaxTokens": "Długość odpowiedzi (maksymalna liczba tokenów)",
       "ConfigureOptions.ModelPath": "Ścieżka do lokalnego pliku GGUF",
-      "ConfigureOptions.ModelFile": "Model",
-      "ConfigureOptions.SystemInstructions": "Instrukcje systemowe",
-      "ConfigureOptions.ContextSize": "Rozmiar pamięci AI (okno kontekstowe)",
-      "ConfigureOptions.MaxTurns": "Maksymalna liczba obrotów historii czatu (0 = brak limitu)",
-      "ConfigureOptions.SendContextData": "Uwzględnij listę urządzeń i czujników w zapytaniach"
+      "ConfigureOptions.ModelFile": "Model AI",
+      "ConfigureOptions.SystemInstructions": "Monit systemowy (instrukcje)",
+      "ConfigureOptions.ContextSize": "Pojemność pamięci AI (okno kontekstowe)",
+      "ConfigureOptions.MaxTurns": "Pamięć czatu (maksymalna liczba obrotów) (0 = brak limitu)",
+      "ConfigureOptions.SendContextData": "Udostępniaj kontekst systemu i modułu sztucznej inteligencji",
+      "ConfigureOptions.ModelTemperature": "Kreatywność (Dokładna = 0, Kreatywna = 2)",
+      "ConfigureOptions.ModelList": "Lista modeli AI (YAML)"
     },
     "575": {
       "Title": "Menedżer pobierania",

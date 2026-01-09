@@ -325,13 +325,15 @@
     "940": {
       "Title": "స్థానిక AI",
       "Description": "మీ HomeGenie సర్వర్‌లో నేరుగా అత్యాధునిక LLMలను అమలు చేయండి. ఇతర ప్రోగ్రామ్‌లు మరియు స్క్రిప్ట్‌ల నుండి AIని నియంత్రించడానికి పూర్తి APIని కలిగి ఉంటుంది.",
-      "ConfigureOptions.MaxTokens": "గరిష్ట టోకెన్లు (ప్రతిస్పందన పొడవు)",
+      "ConfigureOptions.MaxTokens": "ప్రతిస్పందన పొడవు (గరిష్ట టోకెన్‌లు)",
       "ConfigureOptions.ModelPath": "స్థానిక GGUF ఫైల్‌కు మార్గం",
-      "ConfigureOptions.ModelFile": "మోడల్",
-      "ConfigureOptions.SystemInstructions": "సిస్టమ్ సూచనలు",
-      "ConfigureOptions.ContextSize": "AI మెమరీ పరిమాణం (సందర్భ విండో)",
-      "ConfigureOptions.MaxTurns": "గరిష్ట చాట్ చరిత్ర మలుపులు (0 = పరిమితి లేదు)",
-      "ConfigureOptions.SendContextData": "ప్రశ్నలలో పరికర జాబితా మరియు సెన్సార్‌లను చేర్చండి"
+      "ConfigureOptions.ModelFile": "AI మోడల్",
+      "ConfigureOptions.SystemInstructions": "సిస్టమ్ ప్రాంప్ట్ (సూచనలు)",
+      "ConfigureOptions.ContextSize": "AI మెమరీ సామర్థ్యం (సందర్భ విండో)",
+      "ConfigureOptions.MaxTurns": "చాట్ మెమరీ (గరిష్ట మలుపులు) (0 = పరిమితి లేదు)",
+      "ConfigureOptions.SendContextData": "సిస్టమ్ మరియు మాడ్యూల్ సందర్భాన్ని AIతో పంచుకోండి",
+      "ConfigureOptions.ModelTemperature": "సృజనాత్మకత (ఖచ్చితత్వం = 0, సృజనాత్మకత = 2)",
+      "ConfigureOptions.ModelList": "AI మోడల్ జాబితా (YAML)"
     },
     "575": {
       "Title": "డౌన్‌లోడ్ మేనేజర్",

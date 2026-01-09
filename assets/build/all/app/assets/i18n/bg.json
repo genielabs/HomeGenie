@@ -468,5 +468,7 @@
   "api_calls": "API команди",
   "show_code": "Покажи код",
   "copy_api_call": "Копиране на низ за извикване на API",
-  "copy_full_api_url": "Копиране на пълния URL адрес на API"
+  "copy_full_api_url": "Копиране на пълния URL адрес на API",
+  "details": "Детайли",
+  "visual_program": "Визуална програма"
 }

@@ -386,6 +386,23 @@ declare class ControllerInstance extends ContextController {
    * @returns The subscription object for unsubscribing.
    */
   subscribe(field: ModuleField, callback: (f: ModuleField) => void): any;
+  /**
+   * Executes an API request to a HomeGenie service or program from the widget.
+   * @param methodEndPoint The API endpoint path including the method (e.g., 'domain/address/method').
+   * @param payload The data to send with the request (e.g., a natural language string or a JSON object).
+   * @returns An observable Subject that emits the ApiResponse.
+   */
+  apiCall(methodEndPoint: String, payload: any): any;
+  /**
+   * Programmatically opens the widget's configuration and settings user interface.
+   */
+  showSettings(): void;
+  /**
+   * Retrieves the localized string for a specific key from the project's translation files.
+   * @param key The translation key defined in the i18n assets.
+   * @returns An observable Subject that emits the localized value.
+   */
+  translate(key: String): any;
 }
 
 /**

@@ -325,13 +325,15 @@
     "940": {
       "Title": "स्थानीय एआई",
       "Description": "अपने HomeGenie सर्वर पर अत्याधुनिक LLM को सीधे चलाएं। इसमें अन्य प्रोग्राम और स्क्रिप्ट से AI को नियंत्रित करने के लिए एक पूर्ण API शामिल है।",
-      "ConfigureOptions.MaxTokens": "अधिकतम टोकन (प्रतिक्रिया की लंबाई)",
+      "ConfigureOptions.MaxTokens": "प्रतिक्रिया की लंबाई (अधिकतम टोकन)",
       "ConfigureOptions.ModelPath": "स्थानीय GGUF फ़ाइल का पथ",
-      "ConfigureOptions.ModelFile": "नमूना",
-      "ConfigureOptions.SystemInstructions": "सिस्टम निर्देश",
-      "ConfigureOptions.ContextSize": "एआई मेमोरी आकार (संदर्भ विंडो)",
-      "ConfigureOptions.MaxTurns": "चैट इतिहास की अधिकतम सीमा (0 = कोई सीमा नहीं)",
-      "ConfigureOptions.SendContextData": "क्वेरी में डिवाइस सूची और सेंसर शामिल करें"
+      "ConfigureOptions.ModelFile": "एआई मॉडल",
+      "ConfigureOptions.SystemInstructions": "सिस्टम प्रॉम्प्ट (निर्देश)",
+      "ConfigureOptions.ContextSize": "एआई मेमोरी क्षमता (संदर्भ विंडो)",
+      "ConfigureOptions.MaxTurns": "चैट मेमोरी (अधिकतम बारी) (0 = कोई सीमा नहीं)",
+      "ConfigureOptions.SendContextData": "एआई के साथ सिस्टम और मॉड्यूल संदर्भ साझा करें",
+      "ConfigureOptions.ModelTemperature": "रचनात्मकता (सटीक = 0, रचनात्मक = 2)",
+      "ConfigureOptions.ModelList": "एआई मॉडल सूची (YAML)"
     },
     "575": {
       "Title": "अधःभारण प्रबंधक",

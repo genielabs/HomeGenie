@@ -468,5 +468,7 @@
   "api_calls": "API കമാൻഡുകൾ",
   "show_code": "കോഡ് കാണിക്കുക",
   "copy_api_call": "API കോൾ സ്ട്രിംഗ് പകർത്തുക",
-  "copy_full_api_url": "പൂർണ്ണ API URL പകർത്തുക"
+  "copy_full_api_url": "പൂർണ്ണ API URL പകർത്തുക",
+  "details": "വിശദാംശങ്ങൾ",
+  "visual_program": "വിഷ്വൽ പ്രോഗ്രാം"
 }

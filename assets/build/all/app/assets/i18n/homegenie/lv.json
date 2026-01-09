@@ -325,13 +325,15 @@
     "940": {
       "Title": "Vietējais mākslīgais intelekts",
       "Description": "Palaidiet jaunākās paaudzes LLM tieši savā HomeGenie serverī. Iekļauts pilns API, lai kontrolētu mākslīgo intelektu no citām programmām un skriptiem.",
-      "ConfigureOptions.MaxTokens": "Maksimālais žetonu skaits (atbildes garums)",
+      "ConfigureOptions.MaxTokens": "Atbildes garums (maksimālais žetonu skaits)",
       "ConfigureOptions.ModelPath": "Ceļš uz lokālo GGUF failu",
-      "ConfigureOptions.ModelFile": "Modelis",
-      "ConfigureOptions.SystemInstructions": "Sistēmas instrukcijas",
-      "ConfigureOptions.ContextSize": "AI atmiņas lielums (konteksta logs)",
-      "ConfigureOptions.MaxTurns": "Maksimālais tērzēšanas vēstures gājienu skaits (0 = nav ierobežojuma)",
-      "ConfigureOptions.SendContextData": "Iekļaut ierīču sarakstu un sensorus vaicājumos"
+      "ConfigureOptions.ModelFile": "Mākslīgā intelekta modelis",
+      "ConfigureOptions.SystemInstructions": "Sistēmas uzvedne (instrukcijas)",
+      "ConfigureOptions.ContextSize": "AI atmiņas ietilpība (konteksta logs)",
+      "ConfigureOptions.MaxTurns": "Tērzēšanas atmiņa (maksimālais gājienu skaits) (0 = bez ierobežojuma)",
+      "ConfigureOptions.SendContextData": "Kopīgot sistēmas un moduļu kontekstu ar mākslīgo intelektu",
+      "ConfigureOptions.ModelTemperature": "Radošums (precīzs = 0, radošs = 2)",
+      "ConfigureOptions.ModelList": "Mākslīgā intelekta modeļu saraksts (YAML)"
     },
     "575": {
       "Title": "Lejupielāžu pārvaldnieks",

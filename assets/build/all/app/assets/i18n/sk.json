@@ -468,5 +468,7 @@
   "api_calls": "Príkazy API",
   "show_code": "Zobraziť kód",
   "copy_api_call": "Kopírovať reťazec volania API",
-  "copy_full_api_url": "Kopírovať celú URL adresu API"
+  "copy_full_api_url": "Kopírovať celú URL adresu API",
+  "details": "Detaily",
+  "visual_program": "Vizuálny program"
 }

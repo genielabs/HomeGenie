@@ -325,13 +325,15 @@
     "940": {
       "Title": "Lokal AI",
       "Description": "Kör toppmoderna LLM:er direkt på din HomeGenie-server. Inkluderar ett komplett API för att styra AI:n från andra program och skript.",
-      "ConfigureOptions.MaxTokens": "Max antal tokens (svarslängd)",
+      "ConfigureOptions.MaxTokens": "Svarslängd (max antal tokens)",
       "ConfigureOptions.ModelPath": "Sökväg till lokal GGUF-fil",
-      "ConfigureOptions.ModelFile": "Modell",
-      "ConfigureOptions.SystemInstructions": "Systeminstruktioner",
-      "ConfigureOptions.ContextSize": "AI-minnesstorlek (kontextfönster)",
-      "ConfigureOptions.MaxTurns": "Max antal omgångar chatthistorik (0 = ingen gräns)",
-      "ConfigureOptions.SendContextData": "Inkludera enhetslista och sensorer i frågor"
+      "ConfigureOptions.ModelFile": "AI-modell",
+      "ConfigureOptions.SystemInstructions": "Systemprompt (instruktioner)",
+      "ConfigureOptions.ContextSize": "AI-minneskapacitet (kontextfönster)",
+      "ConfigureOptions.MaxTurns": "Chattminne (max antal turer) (0 = ingen gräns)",
+      "ConfigureOptions.SendContextData": "Dela system- och modulkontext med AI:n",
+      "ConfigureOptions.ModelTemperature": "Kreativitet (Exakt = 0, Kreativitet = 2)",
+      "ConfigureOptions.ModelList": "AI-modelllista (YAML)"
     },
     "575": {
       "Title": "Nedladdningshanteraren",

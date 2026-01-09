@@ -468,5 +468,7 @@
   "api_calls": "API командууд",
   "show_code": "Кодыг харуулах",
   "copy_api_call": "API дуудлагын мөрийг хуулах",
-  "copy_full_api_url": "Бүрэн API URL-г хуулах"
+  "copy_full_api_url": "Бүрэн API URL-г хуулах",
+  "details": "Дэлгэрэнгүй мэдээлэл",
+  "visual_program": "Визуал хөтөлбөр"
 }

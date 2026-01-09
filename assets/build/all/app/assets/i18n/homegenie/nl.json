@@ -325,13 +325,15 @@
     "940": {
       "Title": "Lokale AI",
       "Description": "Voer geavanceerde LLM's rechtstreeks uit op uw HomeGenie-server. Inclusief een volledige API om de AI vanuit andere programma's en scripts te besturen.",
-      "ConfigureOptions.MaxTokens": "Max. tokens (antwoordlengte)",
+      "ConfigureOptions.MaxTokens": "Reactielengte (maximaal aantal tokens)",
       "ConfigureOptions.ModelPath": "Pad naar lokaal GGUF-bestand",
-      "ConfigureOptions.ModelFile": "Model",
-      "ConfigureOptions.SystemInstructions": "Systeeminstructies",
-      "ConfigureOptions.ContextSize": "Grootte van het AI-geheugen (contextvenster)",
-      "ConfigureOptions.MaxTurns": "Max chatgeschiedenis draait (0 = geen limiet)",
-      "ConfigureOptions.SendContextData": "Voeg de apparatenlijst en sensoren toe aan de zoekopdrachten."
+      "ConfigureOptions.ModelFile": "AI-model",
+      "ConfigureOptions.SystemInstructions": "Systeemprompt (Instructies)",
+      "ConfigureOptions.ContextSize": "AI-geheugencapaciteit (contextvenster)",
+      "ConfigureOptions.MaxTurns": "Chatgeheugen (Maximale beurten) (0 = geen limiet)",
+      "ConfigureOptions.SendContextData": "Deel de systeem- en modulecontext met de AI.",
+      "ConfigureOptions.ModelTemperature": "Creativiteit (Nauwkeurig = 0, Creatief = 2)",
+      "ConfigureOptions.ModelList": "Lijst met AI-modellen (YAML)"
     },
     "575": {
       "Title": "Downloadmanager",

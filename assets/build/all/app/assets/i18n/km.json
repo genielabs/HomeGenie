@@ -468,5 +468,7 @@
   "api_calls": "ពាក្យបញ្ជា API",
   "show_code": "បង្ហាញលេខកូដ",
   "copy_api_call": "ចម្លងខ្សែអក្សរហៅ API",
-  "copy_full_api_url": "ចម្លង URL API ពេញលេញ"
+  "copy_full_api_url": "ចម្លង URL API ពេញលេញ",
+  "details": "ព័ត៌មានលម្អិត",
+  "visual_program": "កម្មវិធី​ដែល​មើល​ឃើញ"
 }

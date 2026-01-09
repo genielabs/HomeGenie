@@ -325,13 +325,15 @@
     "940": {
       "Title": "Lokal kunstig intelligens",
       "Description": "Kør avancerede LLM'er direkte på din HomeGenie-server. Inkluderer en komplet API til at styre AI'en fra andre programmer og scripts.",
-      "ConfigureOptions.MaxTokens": "Maks. antal tokens (svarlængde)",
+      "ConfigureOptions.MaxTokens": "Svarlængde (maks. antal tokens)",
       "ConfigureOptions.ModelPath": "Sti til lokal GGUF-fil",
-      "ConfigureOptions.ModelFile": "Model",
-      "ConfigureOptions.SystemInstructions": "Systeminstruktioner",
-      "ConfigureOptions.ContextSize": "AI-hukommelsesstørrelse (kontekstvindue)",
-      "ConfigureOptions.MaxTurns": "Maks. antal omgange chathistorik (0 = ingen grænse)",
-      "ConfigureOptions.SendContextData": "Inkluder enhedsliste og sensorer i forespørgsler"
+      "ConfigureOptions.ModelFile": "AI-model",
+      "ConfigureOptions.SystemInstructions": "Systemprompt (instruktioner)",
+      "ConfigureOptions.ContextSize": "AI-hukommelseskapacitet (kontekstvindue)",
+      "ConfigureOptions.MaxTurns": "Chathukommelse (maks. antal ture) (0 = ingen grænse)",
+      "ConfigureOptions.SendContextData": "Del system- og modulkontekst med AI'en",
+      "ConfigureOptions.ModelTemperature": "Kreativitet (Præcis = 0, Kreativ = 2)",
+      "ConfigureOptions.ModelList": "Liste over AI-modeller (YAML)"
     },
     "575": {
       "Title": "Downloadhåndtering",

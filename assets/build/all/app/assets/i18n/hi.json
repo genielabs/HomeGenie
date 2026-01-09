@@ -468,5 +468,7 @@
   "api_calls": "एपीआई कमांड",
   "show_code": "कोड दिखाएँ",
   "copy_api_call": "API कॉल स्ट्रिंग कॉपी करें",
-  "copy_full_api_url": "पूरा एपीआई यूआरएल कॉपी करें"
+  "copy_full_api_url": "पूरा एपीआई यूआरएल कॉपी करें",
+  "details": "विवरण",
+  "visual_program": "दृश्य कार्यक्रम"
 }

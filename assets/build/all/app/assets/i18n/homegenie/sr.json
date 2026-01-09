@@ -325,13 +325,15 @@
     "940": {
       "Title": "Локална вештачка интелигенција",
       "Description": "Покрећите најсавременије LLM-ове директно на вашем HomeGenie серверу. Укључује комплетан API за контролу вештачке интелигенције из других програма и скрипти.",
-      "ConfigureOptions.MaxTokens": "Максималан број токена (дужина одговора)",
+      "ConfigureOptions.MaxTokens": "Дужина одговора (максималан број токена)",
       "ConfigureOptions.ModelPath": "Путања до локалне GGUF датотеке",
-      "ConfigureOptions.ModelFile": "Модел",
-      "ConfigureOptions.SystemInstructions": "Системска упутства",
-      "ConfigureOptions.ContextSize": "Величина вештачке интелигенције (контекстни прозор)",
-      "ConfigureOptions.MaxTurns": "Максималан број окрета у историји ћаскања (0 = без ограничења)",
-      "ConfigureOptions.SendContextData": "Укључи листу уређаја и сензоре у упите"
+      "ConfigureOptions.ModelFile": "Модел вештачке интелигенције",
+      "ConfigureOptions.SystemInstructions": "Системски упит (упутства)",
+      "ConfigureOptions.ContextSize": "Капацитет меморије вештачке интелигенције (контекстни прозор)",
+      "ConfigureOptions.MaxTurns": "Меморија ћаскања (максимални број потеза) (0 = без ограничења)",
+      "ConfigureOptions.SendContextData": "Делите контекст система и модула са вештачком интелигенцијом",
+      "ConfigureOptions.ModelTemperature": "Креативност (Прецизност = 0, Креативност = 2)",
+      "ConfigureOptions.ModelList": "Листа модела вештачке интелигенције (YAML)"
     },
     "575": {
       "Title": "Менаџер преузимања",

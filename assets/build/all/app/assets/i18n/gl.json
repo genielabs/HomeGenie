@@ -468,5 +468,7 @@
   "api_calls": "Comandos da API",
   "show_code": "Mostrar código",
   "copy_api_call": "Copiar a cadea de chamada da API",
-  "copy_full_api_url": "Copiar o URL completo da API"
+  "copy_full_api_url": "Copiar o URL completo da API",
+  "details": "Detalles",
+  "visual_program": "Programa visual"
 }

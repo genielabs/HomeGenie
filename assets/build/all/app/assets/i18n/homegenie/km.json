@@ -325,13 +325,15 @@
     "940": {
       "Title": "បញ្ញាសិប្បនិម្មិតក្នុងស្រុក",
       "Description": "ដំណើរការ LLM ទំនើបៗដោយផ្ទាល់នៅលើម៉ាស៊ីនមេ HomeGenie របស់អ្នក។ រួមបញ្ចូល API ពេញលេញដើម្បីគ្រប់គ្រង AI ពីកម្មវិធី និងស្គ្រីបផ្សេងទៀត។",
-      "ConfigureOptions.MaxTokens": "ថូខឹនអតិបរមា (ប្រវែងឆ្លើយតប)",
+      "ConfigureOptions.MaxTokens": "ប្រវែងឆ្លើយតប (ថូខឹនអតិបរមា)",
       "ConfigureOptions.ModelPath": "ផ្លូវទៅកាន់ឯកសារ GGUF មូលដ្ឋាន",
-      "ConfigureOptions.ModelFile": "ម៉ូដែល",
-      "ConfigureOptions.SystemInstructions": "ការណែនាំអំពីប្រព័ន្ធ",
-      "ConfigureOptions.ContextSize": "ទំហំអង្គចងចាំ AI (បង្អួចបរិបទ)",
-      "ConfigureOptions.MaxTurns": "ប្រវត្តិជជែកអតិបរមា (០ = គ្មានដែនកំណត់)",
-      "ConfigureOptions.SendContextData": "រួមបញ្ចូលបញ្ជីឧបករណ៍ និងឧបករណ៍ចាប់សញ្ញានៅក្នុងសំណួរ"
+      "ConfigureOptions.ModelFile": "ម៉ូដែល AI",
+      "ConfigureOptions.SystemInstructions": "ការណែនាំអំពីប្រព័ន្ធ (ការណែនាំ)",
+      "ConfigureOptions.ContextSize": "សមត្ថភាពអង្គចងចាំ AI (បង្អួចបរិបទ)",
+      "ConfigureOptions.MaxTurns": "អង្គចងចាំជជែក (ចំនួនវេនអតិបរមា) (០ = គ្មានដែនកំណត់)",
+      "ConfigureOptions.SendContextData": "ចែករំលែកបរិបទប្រព័ន្ធ និងម៉ូឌុលជាមួយ AI",
+      "ConfigureOptions.ModelTemperature": "ភាពច្នៃប្រឌិត (ច្បាស់លាស់ = ០, ភាពច្នៃប្រឌិត = ២)",
+      "ConfigureOptions.ModelList": "បញ្ជីគំរូ AI (YAML)"
     },
     "575": {
       "Title": "កម្មវិធីគ្រប់គ្រងការទាញយក",
@@ -372,5 +374,5 @@
   },
   "scheduler_preset_action_genie_command": "ពាក្យបញ្ជា Genie",
   "scheduler_preset_action_config_wish": "សកម្មភាពភាសាធម្មជាតិ",
-  "scheduler_preset_action_config_wish.placeholder": "សាកល្បង៖ \"កំណត់កំដៅទៅ 22° ហើយចាប់ផ្តើមឈុតព្រះអាទិត្យរះ\""
+  "scheduler_preset_action_config_wish.placeholder": "សាកល្បង៖ \"កំណត់កំដៅទៅ 22° ហើយចាប់ផ្តើមឈុតឆាកព្រះអាទិត្យរះ\""
 }

@@ -468,5 +468,7 @@
   "api_calls": "ຄຳສັ່ງ API",
   "show_code": "ສະແດງລະຫັດ",
   "copy_api_call": "ສຳເນົາສະຕຣິງການເອີ້ນໃຊ້ API",
-  "copy_full_api_url": "ສຳເນົາ URL API ເຕັມ"
+  "copy_full_api_url": "ສຳເນົາ URL API ເຕັມ",
+  "details": "ລາຍລະອຽດ",
+  "visual_program": "ໂປຣແກຣມສະແດງພາບ"
 }

@@ -468,5 +468,7 @@
   "api_calls": "API komandas",
   "show_code": "Rādīt kodu",
   "copy_api_call": "Kopēt API izsaukuma virkni",
-  "copy_full_api_url": "Kopēt pilnu API URL"
+  "copy_full_api_url": "Kopēt pilnu API URL",
+  "details": "Sīkāka informācija",
+  "visual_program": "Vizuālā programma"
 }

@@ -325,13 +325,15 @@
     "940": {
       "Title": "الذكاء الاصطناعي المحلي",
       "Description": "قم بتشغيل أحدث أنظمة التعلم الآلي للتعلم الآلي مباشرةً على خادم HomeGenie الخاص بك. يتضمن واجهة برمجة تطبيقات كاملة للتحكم في الذكاء الاصطناعي من برامج ونصوص برمجية أخرى.",
-      "ConfigureOptions.MaxTokens": "الحد الأقصى للرموز (طول الاستجابة)",
+      "ConfigureOptions.MaxTokens": "طول الاستجابة (الحد الأقصى للرموز)",
       "ConfigureOptions.ModelPath": "المسار إلى ملف GGUF المحلي",
-      "ConfigureOptions.ModelFile": "نموذج",
-      "ConfigureOptions.SystemInstructions": "تعليمات النظام",
-      "ConfigureOptions.ContextSize": "حجم ذاكرة الذكاء الاصطناعي (نافذة السياق)",
-      "ConfigureOptions.MaxTurns": "الحد الأقصى لعدد مرات تحويل سجل المحادثات (0 = لا يوجد حد)",
-      "ConfigureOptions.SendContextData": "قم بتضمين قائمة الأجهزة وأجهزة الاستشعار في الاستعلامات"
+      "ConfigureOptions.ModelFile": "نموذج الذكاء الاصطناعي",
+      "ConfigureOptions.SystemInstructions": "موجه النظام (التعليمات)",
+      "ConfigureOptions.ContextSize": "سعة ذاكرة الذكاء الاصطناعي (نافذة السياق)",
+      "ConfigureOptions.MaxTurns": "ذاكرة الدردشة (الحد الأقصى للأدوار) (0 = بلا حدود)",
+      "ConfigureOptions.SendContextData": "مشاركة سياق النظام والوحدة مع الذكاء الاصطناعي",
+      "ConfigureOptions.ModelTemperature": "الإبداع (الدقة = 0، الإبداع = 2)",
+      "ConfigureOptions.ModelList": "قائمة نماذج الذكاء الاصطناعي (YAML)"
     },
     "575": {
       "Title": "مدير التنزيل",

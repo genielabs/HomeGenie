@@ -325,13 +325,15 @@
     "940": {
       "Title": "Жергиликтүү жасалма интеллект",
       "Description": "HomeGenie сервериңизде түздөн-түз заманбап LLM'дерди иштетиңиз. Башка программалардан жана скрипттерден жасалма интеллектти башкаруу үчүн толук API камтылган.",
-      "ConfigureOptions.MaxTokens": "Максималдуу Токендер (жооп узактыгы)",
+      "ConfigureOptions.MaxTokens": "Жооптун узактыгы (максималдуу токендер)",
       "ConfigureOptions.ModelPath": "Жергиликтүү GGUF файлына жол",
-      "ConfigureOptions.ModelFile": "Модель",
-      "ConfigureOptions.SystemInstructions": "Системалык көрсөтмөлөр",
-      "ConfigureOptions.ContextSize": "Жасалма интеллект эс тутумунун көлөмү (контексттик терезе)",
-      "ConfigureOptions.MaxTurns": "Чат тарыхынын максималдуу көрсөткүчү (0 = чектөө жок)",
-      "ConfigureOptions.SendContextData": "Суроолорго түзмөктөрдүн тизмесин жана сенсорлорду кошуу"
+      "ConfigureOptions.ModelFile": "Жасалма интеллект модели",
+      "ConfigureOptions.SystemInstructions": "Системалык көрсөтмө (нускамалар)",
+      "ConfigureOptions.ContextSize": "Жасалма интеллекттин эс тутумунун сыйымдуулугу (контексттик терезе)",
+      "ConfigureOptions.MaxTurns": "Чат эс тутуму (максималдуу бурулуш) (0 = чектөө жок)",
+      "ConfigureOptions.SendContextData": "Системанын жана модулдун контекстин AI менен бөлүшүңүз",
+      "ConfigureOptions.ModelTemperature": "Чыгармачылык (Тактык = 0, Чыгармачылык = 2)",
+      "ConfigureOptions.ModelList": "Жасалма интеллект моделдеринин тизмеси (YAML)"
     },
     "575": {
       "Title": "Жүктөп алуу менеджери",

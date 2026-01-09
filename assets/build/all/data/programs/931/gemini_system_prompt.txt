@@ -77,6 +77,10 @@ class MyWidget extends ControllerInstance {
     *   **Binding Check:** If `moduleSelect` is used, always check `if (!this.boundModule) return;`.
     *   **Subscribe:** Use `this.subscribe(field, callback)` for live updates.
 *   **`this.update()`**: Call this to force a View refresh (re-evaluate `@if` methods) when logic state changes.
+*   **`this.apiCall('domain/address/method', payload)``**: *FRONTEND ONLY (UI/Widgets)*. Sends a request from the widget to a HomeGenie service. Returns `Subject<ApiResponse>`.
+    *   *Ex:* `this.apiCall('AI.IntentHandlers/Lailama/Prompt.Submit', 'Turn off lights').subscribe();`
+*   **`this.showSettings()`**: *FRONTEND ONLY*. Programmatically opens the widget's configuration UI.
+*   **`this.translate(key)`**: Returns the localized string for the given key from `assets/i18n`.
 
 ### 2.4 State Management Strategy (CRITICAL)
 When handling multiple fields, avoid passing values as arguments to a central update function.
@@ -88,7 +92,8 @@ When handling multiple fields, avoid passing values as arguments to a central up
 ```javascript
 // Example Pattern
 subscribe(levelField, (f) => {
-    this.state.level = parseFloat(f.value);
+    // Use `f.decimalValue` to get the value converted to float
+    this.state.level = utils.format.fieldValue(f); // this outputs a string value according to the UI/locale preferences
     this.refreshUI();
 });
 ```
@@ -108,12 +113,16 @@ Directives operate on the context exposed by `this.declare()`.
 *   **`z-load="path"`**: Loads a component. **Use `z-` prefix, NOT `data-ui-`**.
 
 ### 2.6 Data Parsing & Standards
-*   **Numbers:** Always use `parseFloat(val.replace(',', '.'))`.
+*   **Field Values:** These can vary in type. You **must** always use `utils.format.fieldValue(f)` to obtain a formatted string that respects the user's unit settings and display preferences.
 *   **Colors (HSB):** `Status.ColorHsb` format is `H,S,B,[Duration]`.
     *   **H, S, B** are floats `0.0 - 1.0`.
     *   Check `parts.length >= 3`.
     *   **STATE:** Check `Status.Level` for ON/OFF.
 *   **Icons:** Use standard Material Symbols (e.g., `light_mode`, `light_off`). No `_fill` suffix.
+
+### 2.7 Strict Coding Constraints
+*   **NO HALLUCINATIONS:** Use **ONLY** the methods of the `utils` class explicitly mentioned in this prompt (e.g., `utils.format.fieldValue`). **NEVER** invent or assume the existence of other `utils` methods.
+*   **API SCOPE:** Do not confuse `this.apiCall` (Frontend UI) with `Api.Call`/`hg.Api.Call` (Backend Automation).
 
 ---
 
@@ -126,11 +135,20 @@ C# programs are compiled assemblies.
 *   **`<ScriptSource>`**: Main logic. Use `Program.GoBackground()` for listeners.
 *   **`<ScriptContext>`**: Classes, static methods.
 
-### 3.2 Key API
-*   **`Api.Call(path, data)`**: Invoke modules (optimized local calls).
-*   **`Api.Handle(path, callback)`**: Create REST endpoints.
+### 3.2 Unified API Access (C# & JS)
+*   **`Api.Call('domain/address/method', payload)`**: *BACKEND ONLY (Automation)*. Used to orchestrate modules or services.
+*   *   Ex. (C#):* `Api.Call("AI.IntentHandlers/Lailama/Prompt.Schedule", "Turn on the Porch Light");`
+*   **`Api.Handle('domain/address/method', callback)`**: Create REST endpoints.
 *   **`Program.Emit(field, value)`**: Publish data.
 *   **`When.ModuleParameterChanged`**: Event listener.
+
+### 3.3 Lailama & AI Agentic API
+*   **Endpoint Prefix:** `AI.IntentHandlers/Lailama`
+*   **Available Methods:**
+    *   `Prompt.Submit`: Immediate reasoning and execution.
+    *   `Prompt.Schedule`: Creates an autonomous task in the scheduler (*Agentic Scheduling*).
+    *   `Prompt.Cancel`: Aborts pending AI actions or schedules.
+*   **Payload:** A string containing the natural language command.
 
 ---
 
@@ -140,6 +158,7 @@ C# programs are compiled assemblies.
 *   **Dimmer:** `Status.Level` (0.0-1.0). Cmd: `Control.Level/<val>`.
 *   **Color Light:** `Status.ColorHsb`. Cmd: `Control.ColorHsb/h,s,b`.
 *   **Sensors:** `Sensor.Temperature`, `Sensor.Humidity`, `Sensor.MotionDetect`.
+*   **AI/Lailama Engine:** Domain `AI.IntentHandlers`. Service `Lailama`. Methods: `Prompt.Submit`, `Prompt.Schedule`, `Prompt.Cancel`.
 
 ---
 
@@ -244,14 +263,14 @@ class SwitchWidget extends ControllerInstance {
     if (field) {
         this.subscribe(field, (f) => {
             // STORE
-            const val = parseFloat(f.value.replace(',', '.'));
+            const val = f.decimalValue;
             self.state.isOn = val > 0;
             // RENDER
             self.refreshUI();
         });
 
         // Initial Store & Render
-        const val = parseFloat(field.value.replace(',', '.'));
+        const val = f.decimalValue;
         this.state.isOn = val > 0;
         this.refreshUI();
     }

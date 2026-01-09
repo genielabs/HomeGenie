@@ -325,13 +325,15 @@
     "940": {
       "Title": "Paikallinen tekoäly",
       "Description": "Suorita huippuluokan LLM-ohjelmia suoraan HomeGenie-palvelimellasi. Sisältää täyden API:n tekoälyn ohjaamiseen muista ohjelmista ja skripteistä.",
-      "ConfigureOptions.MaxTokens": "Max Tokens (vastauksen pituus)",
+      "ConfigureOptions.MaxTokens": "Vastauksen pituus (maksimimäärä tokeneita)",
       "ConfigureOptions.ModelPath": "Polku paikalliseen GGUF-tiedostoon",
-      "ConfigureOptions.ModelFile": "Malli",
-      "ConfigureOptions.SystemInstructions": "Järjestelmäohjeet",
-      "ConfigureOptions.ContextSize": "Tekoälyn muistin koko (konteksti-ikkuna)",
-      "ConfigureOptions.MaxTurns": "Keskusteluhistorian vuorojen enimmäismäärä (0 = ei rajoitusta)",
-      "ConfigureOptions.SendContextData": "Sisällytä laiteluettelo ja anturit kyselyihin"
+      "ConfigureOptions.ModelFile": "Tekoälymalli",
+      "ConfigureOptions.SystemInstructions": "Järjestelmäkehote (ohjeet)",
+      "ConfigureOptions.ContextSize": "Tekoälyn muistikapasiteetti (konteksti-ikkuna)",
+      "ConfigureOptions.MaxTurns": "Keskustelumuisti (vuorojen enimmäismäärä) (0 = ei rajoitusta)",
+      "ConfigureOptions.SendContextData": "Jaa järjestelmän ja moduulin konteksti tekoälyn kanssa",
+      "ConfigureOptions.ModelTemperature": "Luovuus (Tarkka = 0, Luova = 2)",
+      "ConfigureOptions.ModelList": "Tekoälymalliluettelo (YAML)"
     },
     "575": {
       "Title": "Latausten hallinta",

@@ -468,5 +468,7 @@
   "api_calls": "APIコマンド",
   "show_code": "コードを表示",
   "copy_api_call": "API呼び出し文字列をコピー",
-  "copy_full_api_url": "完全なAPI URLをコピー"
+  "copy_full_api_url": "完全なAPI URLをコピー",
+  "details": "詳細",
+  "visual_program": "ビジュアルプログラム"
 }

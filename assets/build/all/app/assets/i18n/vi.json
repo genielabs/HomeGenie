@@ -468,5 +468,7 @@
   "api_calls": "Lệnh API",
   "show_code": "Hiển thị mã",
   "copy_api_call": "Sao chép chuỗi lệnh gọi API",
-  "copy_full_api_url": "Sao chép URL API đầy đủ"
+  "copy_full_api_url": "Sao chép URL API đầy đủ",
+  "details": "Chi tiết",
+  "visual_program": "Chương trình trực quan"
 }

@@ -325,13 +325,15 @@
     "940": {
       "Title": "স্থানীয় এআই",
       "Description": "আপনার HomeGenie সার্ভারে সরাসরি অত্যাধুনিক LLM চালান। অন্যান্য প্রোগ্রাম এবং স্ক্রিপ্ট থেকে AI নিয়ন্ত্রণ করার জন্য একটি সম্পূর্ণ API অন্তর্ভুক্ত।",
-      "ConfigureOptions.MaxTokens": "সর্বোচ্চ টোকেন (প্রতিক্রিয়ার দৈর্ঘ্য)",
+      "ConfigureOptions.MaxTokens": "প্রতিক্রিয়ার দৈর্ঘ্য (সর্বোচ্চ টোকেন)",
       "ConfigureOptions.ModelPath": "স্থানীয় GGUF ফাইলের পথ",
-      "ConfigureOptions.ModelFile": "মডেল",
-      "ConfigureOptions.SystemInstructions": "সিস্টেম নির্দেশাবলী",
-      "ConfigureOptions.ContextSize": "এআই মেমোরি সাইজ (প্রসঙ্গ উইন্ডো)",
-      "ConfigureOptions.MaxTurns": "চ্যাটের ইতিহাসের সর্বোচ্চ পরিবর্তন (০ = সীমা নেই)",
-      "ConfigureOptions.SendContextData": "কোয়েরিতে ডিভাইসের তালিকা এবং সেন্সর অন্তর্ভুক্ত করুন"
+      "ConfigureOptions.ModelFile": "এআই মডেল",
+      "ConfigureOptions.SystemInstructions": "সিস্টেম প্রম্পট (নির্দেশনা)",
+      "ConfigureOptions.ContextSize": "এআই মেমোরি ক্যাপাসিটি (প্রসঙ্গ উইন্ডো)",
+      "ConfigureOptions.MaxTurns": "চ্যাট মেমোরি (সর্বোচ্চ টার্ন) (০ = সীমা নেই)",
+      "ConfigureOptions.SendContextData": "AI এর সাথে সিস্টেম এবং মডিউলের প্রসঙ্গ ভাগ করুন",
+      "ConfigureOptions.ModelTemperature": "সৃজনশীলতা (সুনির্দিষ্ট = 0, সৃজনশীল = 2)",
+      "ConfigureOptions.ModelList": "এআই মডেল তালিকা (YAML)"
     },
     "575": {
       "Title": "ডাউনলোড ম্যানেজার",

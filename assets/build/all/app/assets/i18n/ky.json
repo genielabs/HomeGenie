@@ -468,5 +468,7 @@
   "api_calls": "API буйруктары",
   "show_code": "Кодду көрсөтүү",
   "copy_api_call": "API чакыруу сабын көчүрүү",
-  "copy_full_api_url": "Толук API URL'ин көчүрүү"
+  "copy_full_api_url": "Толук API URL'ин көчүрүү",
+  "details": "Чоо-жайы",
+  "visual_program": "Визуалдык программа"
 }

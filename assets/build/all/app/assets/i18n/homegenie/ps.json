@@ -325,13 +325,15 @@
     "940": {
       "Title": "سیمه ییز AI",
       "Description": "په مستقیم ډول ستاسو په هوم جیني سرور کې عصري LLM چل کړئ. د نورو برنامو او سکریپټونو څخه د AI کنټرول لپاره بشپړ API پکې شامل دی.",
-      "ConfigureOptions.MaxTokens": "اعظمي ټوکنونه (د ځواب اوږدوالی)",
+      "ConfigureOptions.MaxTokens": "د غبرګون اوږدوالی (زیاته ټوکنونه)",
       "ConfigureOptions.ModelPath": "د ځایي GGUF فایل ته لاره",
-      "ConfigureOptions.ModelFile": "ماډل",
-      "ConfigureOptions.SystemInstructions": "د سیسټم لارښوونې",
-      "ConfigureOptions.ContextSize": "د AI حافظې اندازه (د شرایطو کړکۍ)",
-      "ConfigureOptions.MaxTurns": "د چیٹ تاریخ اعظمي بدلون (۰ = هیڅ حد نشته)",
-      "ConfigureOptions.SendContextData": "په پوښتنو کې د وسیلو لیست او سینسرونه شامل کړئ"
+      "ConfigureOptions.ModelFile": "د مصنوعي ذهانت ماډل",
+      "ConfigureOptions.SystemInstructions": "د سیسټم پرامپټ (لارښوونې)",
+      "ConfigureOptions.ContextSize": "د AI حافظې ظرفیت (د شرایطو کړکۍ)",
+      "ConfigureOptions.MaxTurns": "د چیٹ حافظه (زیاته ګرځېدنه) (۰ = هیڅ حد نشته)",
+      "ConfigureOptions.SendContextData": "د AI سره د سیسټم او ماډل شرایط شریک کړئ",
+      "ConfigureOptions.ModelTemperature": "تخلیقیت (دقیق = 0، تخلیقیت = 2)",
+      "ConfigureOptions.ModelList": "د مصنوعي ذهانت ماډل لیست (YAML)"
     },
     "575": {
       "Title": "د ډاونلوډ مدیر",
