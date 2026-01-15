@@ -7,6 +7,9 @@
  *   like display properties if needed.
  * - Use CSS variables (e.g., var(--text-color)) to support HomeGenie themes.
  */
+@import 'assets/styles/widget-ui.css';
+@import 'assets/styles/flex-layout-attribute.min.css';
+
 :host {
     /* ':host' is the root of your widget's Shadow DOM. */
     /* By default, it's often best to leave it empty and style inner elements instead. */

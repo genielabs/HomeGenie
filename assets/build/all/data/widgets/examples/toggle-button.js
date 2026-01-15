@@ -33,7 +33,7 @@ class ToggleButton extends ControllerInstance {
         return +statusLevel?.value;
       }
     });
-//zuix.componentize(this.view());
+
   }
 
 }

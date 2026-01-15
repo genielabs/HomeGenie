@@ -2,36 +2,36 @@ wallpapers:
 
   - background:
       file: 01.jpg
-      title: Blue Dunes
+      title: Blue
       copyright:
     card:
-      color: "#050052"
-      opacity: 80
-      blur: 50
+      color: "#000a4d"
+      opacity: 70
+      blur: 60
 
   - background:
       file: 02.jpg
-      title: White Squares
-      copyright: ...
+      title: Multicolor
+      copyright: Gemini AI - Nano Banana
     card:
-      color: "#290c00"
-      opacity: 65
+      color: "#2b2b2b"
+      opacity: 70
       blur: 50
 
   - background:
       file: 03.jpg
-      title: Color Shapes
-      copyright: ...
+      title: Green
+      copyright: Gemini AI - Nano Banana
     card:
-      color: "#750046"
-      opacity: 50
+      color: "#001f01"
+      opacity: 60
       blur: 35
 
   - background:
       file: 04.jpg
-      title: Red Shades
-      copyright: ...
+      title: Multicolor
+      copyright: Gemini AI - Nano Banana
     card:
-      color: "#0b0042"
-      opacity: 80
-      blur: 50
+      color: "#000000"
+      opacity: 20
+      blur: 60

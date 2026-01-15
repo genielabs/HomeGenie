@@ -124,7 +124,7 @@ public static class HistoryStore
     }
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -467,7 +467,7 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     return data;
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -514,7 +514,7 @@ Api.Handle("System.Utility/DownloadManager", (args) =&gt; {
     }
     catch (Exception ex)
     {
-        data = request.Data.ToString();
+        data = request.Data?.ToString();
     }
 
     object responseData = null;
@@ -528,11 +528,12 @@ Api.Handle("System.Utility/DownloadManager", (args) =&gt; {
             case "Enqueue":
                 // Validate inputs and add a new download to the queue
                 if (data == null) throw new ArgumentException("Enqueue command requires a data payload (Url and Path).");
+                if (data.Name == null) throw new ArgumentException("Missing 'Name' parameter in Enqueue request.");
                 if (data.Url == null) throw new ArgumentException("Missing 'Url' parameter in Enqueue request.");
                 if (data.Path == null) throw new ArgumentException("Missing 'Path' parameter in Enqueue request.");
 
                 string url = data.Url.ToString();
-                string destinationFolder = data.Path.ToString();
+                string destinationFolder = Path.Combine(data.Path.ToString(), Path.GetDirectoryName(data.Name.ToString()));
 
                 if (string.IsNullOrWhiteSpace(url)) throw new ArgumentException("Url cannot be empty.");
                 if (string.IsNullOrWhiteSpace(destinationFolder)) throw new ArgumentException("Folder cannot be empty.");
@@ -1119,9 +1120,9 @@ public class DownloadManager : IDisposable
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>download-manager</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>43F5B501DC7F608D5D0EC644F1ABB330</Checksum>
+      <Checksum>7B4D4B9DFF27ADE38B697F7C5DA1852A</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>575</Address>
@@ -1483,7 +1484,7 @@ string GetDbName()
     return $"energy_use_{DateTime.Now.Year}.db";
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -1813,7 +1814,7 @@ Program.GoBackground();
         return Encoding.UTF8.GetString(fileBytes);
     }
 }</ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>

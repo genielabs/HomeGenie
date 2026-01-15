@@ -58,7 +58,8 @@ Api.Handle("System.Utility/ContextEngine", (args) =&gt; {
     // Live states (ON/OFF) are NOT included here to keep the list stable.
     var devicesSb = new StringBuilder();
     foreach (var m in controlModules) {
-        var type = m.Instance.DeviceType.ToString();
+        var module = m.Instance;
+        var type = module.DeviceType.ToString();
         // exception
         if (type == "Program" &amp;&amp; m.Parameter("Widget.DisplayModule").Value != "homegenie/generic/program")
         {
@@ -68,7 +69,20 @@ Api.Handle("System.Utility/ContextEngine", (args) =&gt; {
                 type = type.Substring(type.LastIndexOf("/") + 1);
             }
         }
-        devicesSb.AppendLine($"- {m.Instance.Name} | {type} | {m.Instance.Domain}/{m.Instance.Address}");
+
+        var moduleGroups = Modules.Groups
+            .Where(g =&gt; Modules.InGroup(g).SelectedModules.Any(mod =&gt;
+                mod.Domain == module.Domain &amp;&amp;
+                mod.Address == module.Address))
+            .ToList();
+
+        var groups = string.Join(", ", moduleGroups);
+        if (string.IsNullOrEmpty(groups))
+        {
+            groups = "(unassigned)";
+        }
+
+        devicesSb.AppendLine($"- {module.Name} | {type} | {module.Domain}/{module.Address} | " + groups);
     }
 
     // --- 3. GENERATE SYSTEM STATUS REPORT (Live Context) ---
@@ -240,16 +254,16 @@ Program.GoBackground();
     }
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>context-engine</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>E17F9B113DC78D1ED2D90ACB06EB8A03</Checksum>
+      <Checksum>A80B8EA809823681A6104092B48F5E74</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>578</Address>
@@ -270,9 +284,10 @@ var systemPromptFile = Path.Combine(Data.GetFolder(), "gemini_system_prompt.txt"
 Program.Implements(
     "@AI:IntentHandler",
     API_URL
-).AddOption("ApiKey", "?", "Google Gemini AI API key", "text")
- .AddOption("ModelId", DEFAULT_MODEL_ID, "Model ID", "text")
- .AddOption("SystemInstructions", "", "System Instructions", $"editor:file:{systemPromptFile}:markdown")
+).AddOption(OPTION_API_KEY, "", "1. Google Gemini AI API key", "text")
+ .AddOption(OPTION_MODEL_ID, DEFAULT_MODEL_ID, "2. Model ID", "text")
+ .AddOption(OPTION_SEND_CONTEXT_DATA, "", "3. Share system and module context with the AI", "checkbox")
+ .AddOption(OPTION_SYSTEM_INSTRUCTIONS, "", "4. System Instructions", $"editor:file:{systemPromptFile}:markdown")
  .Run();
 </ScriptSetup>
     <ScriptSource>// 1. Validate configuration
@@ -323,8 +338,13 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
     var promptText = "";
     try { promptText = File.ReadAllText(systemPromptFile); } catch (Exception e) { /* Handle error */ }
 
-    var systemPrompt = (string)Api.Call("System.Utility/ContextEngine/Render", promptText);
+    bool sendContextData = (Program.Option(OPTION_SEND_CONTEXT_DATA).Value == "On");
+    if (sendContextData)
+    {
+        promptText = promptText.Replace("\n%%AVAILABLE_DEVICES%%", "%%AVAILABLE_DEVICES%%\n\n%%SYSTEM_STATUS%%");
+    }
 
+    var systemPrompt = (string)Api.Call("System.Utility/ContextEngine/Render", promptText);
     var payload = new
     {
         contents = payloadContents,
@@ -447,6 +467,11 @@ const string API_PROMPT_SUBMIT = "Prompt.Submit";
 const string API_HISTORY_GET = "History.Get";
 const string API_HISTORY_CLEAR = "History.Clear";
 
+const string OPTION_API_KEY = "ApiKey";
+const string OPTION_MODEL_ID = "ModelId";
+const string OPTION_SEND_CONTEXT_DATA = "SendContextData";
+const string OPTION_SYSTEM_INSTRUCTIONS = "SystemInstructions";
+
 const string DEFAULT_MODEL_ID = "gemini-2.5-flash-lite";
 
 
@@ -473,9 +498,9 @@ public class ChatMessage {
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-intent-handler</Id>
-      <Version>1.0.8</Version>
+      <Version>1.0.9</Version>
       <Required>true</Required>
-      <Checksum>3406A441886ABB6861B701B0948AF9A2</Checksum>
+      <Checksum>D8E669282E99D31DD79F848407F73813</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>930</Address>
@@ -1028,7 +1053,7 @@ Program.Setup(() =&gt; {
     // - Model selection dropdown (populated from models.yaml)
     // - System Instructions (Markdown editor linked to system_prompt.txt)
     .AddOption(OPTION_MODEL_FILE, "", "0. AI Model", $"select:{ models }")
-    .AddOption(OPTION_SEND_CONTEXT_DATA, "", "1. Share system and module context with the AI", "checkbox")
+    .AddOption(OPTION_SEND_CONTEXT_DATA, "On", "1. Share system and module context with the AI", "checkbox")
     .AddOption(OPTION_MODEL_TEMPERATURE, "0.4", "2. Creativity (0.0 = Precise, 2.0 = Creative)", "slider:0.0:2.0:0.05")
     .AddOption(OPTION_CONTEXT_SIZE, "2048", "3. AI Memory Capacity (Context Window)", "slider:1024:32678:1024")
     .AddOption(OPTION_MAX_TOKENS, "1536", "4. Response Length (Max Tokens)", "slider:64:4096:32")
@@ -1184,6 +1209,14 @@ if (!File.Exists(localModelFile)) {
           .Emit(FIELD_DOWNLOAD_ID, String.IsNullOrEmpty(selectedModel) ? "Pending" : "")
           .Emit(FIELD_DOWNLOAD_TASK, localModelFile)
           .Emit(FIELD_DOWNLOAD_PROGRESS, "0");
+          if (modelsList.ContainsKey(selectedModel))
+          {
+            Program.Emit(FIELD_DOWNLOAD_REPOSITORY, modelsList[selectedModel].Repository);
+          }
+          else
+          {
+            Program.Emit(FIELD_DOWNLOAD_REPOSITORY, "");
+          }
       }
     }
 
@@ -1577,6 +1610,7 @@ const string FIELD_STATUS_ERROR = "Status.Error";
 const string FIELD_DOWNLOAD = "Status.Download";
 const string FIELD_DOWNLOAD_ID = "Status.Download.Id";
 const string FIELD_DOWNLOAD_TASK = "Status.Download.Task";
+const string FIELD_DOWNLOAD_REPOSITORY = "Status.Download.Repository";
 const string FIELD_DOWNLOAD_ERROR = "Status.Download.Error";
 const string FIELD_DOWNLOAD_PROGRESS = "Status.Download.Progress";
 
@@ -1591,6 +1625,7 @@ const int PARAMS_GPU_LAYER_SIZE = 0; // Set &gt; 0 to enable GPU offloading (VRA
 public class ModelInfo {
   public string Url = "";
   public string Name = "";
+  public string Repository = "";
   public string Description = "";
   public string Size = "";
   public string Template = "";
@@ -1901,9 +1936,9 @@ public ModelParams GetOptimizedParams(string modelPath)
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.0.6</Version>
+      <Version>1.0.7</Version>
       <Required>true</Required>
-      <Checksum>CC289EB90AA8A11D441784590EE77140</Checksum>
+      <Checksum>760011D8A5D7345B090BDDCC47A290DA</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>

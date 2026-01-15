@@ -597,7 +597,7 @@
       "ConfigureOptions.ContextSize":
         "Capacità memoria IA (Context Window)",
       "ConfigureOptions.MaxTokens":
-        "Lunghezza risposta (Max Token)",
+        "Lunghezza risposta (Max token)",
       "ConfigureOptions.MaxTurns":
         "Memoria conversazione (Max turni) (0 = nessun limite)",
       "ConfigureOptions.SystemInstructions":

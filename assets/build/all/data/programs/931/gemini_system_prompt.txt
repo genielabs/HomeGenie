@@ -32,14 +32,15 @@ Widgets are Single Page Applications (SPA) running in Shadow DOM. They consist o
 ### 2.1 Critical Rules (VIOLATION = BROKEN WIDGET)
 1.  **OFFLINE FIRST:** Do NOT use external CDNs (e.g., Google Fonts `<link>`).
 2.  **ELEMENT ACCESS & STYLING:**
-    *   **Access:** Use `this.field('my_el')` (Returns ZxQuery Object).
+    *   **Access:** Use `this.field('my_el')` for elements declared with the `#` directive attribute. Use `this.view().find('valid_query_selector')` to get elements within the view.  (Both returns ZxQuery Object).
     *   **Style:** Use `.css({ 'color': 'red' })`. **NEVER** use `.style` directly on `this.field()`.
-    *   **Raw DOM:** Use `this.field('my_el').get()` if you absolutely need the HTMLElement.
+    *   **Raw DOM:** Use `this.field('my_el').get()` and ``this.view().find('query_selector').get()` if you absolutely need the HTMLElement.
+    *   **IMPORTANT:** Inside the controller `this` is the `ControllerInstance`, `this.$` is the view (ZxQuery). Inside any elemnt of the View (HTML), `this` is the HTMLElement, `$this` is the ZxQuery-wrapped `this`, `context` is the ComponentContext with `context.model()` and other instance members.
 3.  **HTML IDS (Binding):**
     *   Use **snake_case** (e.g., `#my_value`).
     *   **NEVER use CamelCase** (e.g., `#myValue` is INVALID).
-4.  **NO ANGULAR SYNTAX:**
-    *   **Events:** Use `event`, `this`, or `$this`. **NEVER use `$event`**.
+4.  **IMPORTANT:**
+    *   **Events:** **NEVER use `$event`** (there's no such thing in zuix.js), Instead use `event`, `this`, or `$this`.
     *   **Interpolation:** Never use `{{ variable }}`.
     *   **Logic:** `@if` does **NOT** toggle visibility automatically. It creates a logic branch.
 5.  **UI SAFE ZONE:** The host overlays a settings button in the **Top-Right corner (48x48px)**.
@@ -79,7 +80,7 @@ class MyWidget extends ControllerInstance {
 *   **`this.update()`**: Call this to force a View refresh (re-evaluate `@if` methods) when logic state changes.
 *   **`this.apiCall('domain/address/method', payload)``**: *FRONTEND ONLY (UI/Widgets)*. Sends a request from the widget to a HomeGenie service. Returns `Subject<ApiResponse>`.
     *   *Ex:* `this.apiCall('AI.IntentHandlers/Lailama/Prompt.Submit', 'Turn off lights').subscribe();`
-*   **`this.showSettings()`**: *FRONTEND ONLY*. Programmatically opens the widget's configuration UI.
+*   **`this.showSettings()`**: *FRONTEND ONLY*. Programmatically opens the module settings (Features implemented by Automation Programs).
 *   **`this.translate(key)`**: Returns the localized string for the given key from `assets/i18n`.
 
 ### 2.4 State Management Strategy (CRITICAL)
@@ -104,11 +105,11 @@ Directives operate on the context exposed by `this.declare()`.
 *   **`@hide-if="methodName()"`**: **PREFERRED for VISIBILITY.** Hides element if true.
 *   **`@if="methodName()"`**: Evaluates logic. **MANDATORY:** Must be paired with `@then` or `@else`. It does **NOT** hide elements by itself.
 *   **`@then="..."` / `@else="..."`**: Executed based on `@if`.
-    *   Inside strings, `$this` is the element wrapper (ZxQuery object).
+    *   Inside strings, `$this` is the element wrapper (ZxQuery object), while `$` is the component view (ZxQuery object).
     *   *Ex:* `@then="$this.addClass('active')"`
 *   **`@active`**: **FLAG ONLY**. Keeps directives alive when off-screen.
 *   **`@set="js_expression"`**: Direct DOM execution.
-    *   *Ex:* `<div @set="this.style.width = width_percent + '%'"></div>`
+    *   *Ex:* `<div @set="this.style.width = width_percent + '%'"></div>` or ``<div @set="$this.css({width: width_percent + '%'})"></div>`
 *   **`@translate="key"`**: Replaces content with translation from `assets/i18n`.
 *   **`z-load="path"`**: Loads a component. **Use `z-` prefix, NOT `data-ui-`**.
 
@@ -118,10 +119,11 @@ Directives operate on the context exposed by `this.declare()`.
     *   **H, S, B** are floats `0.0 - 1.0`.
     *   Check `parts.length >= 3`.
     *   **STATE:** Check `Status.Level` for ON/OFF.
-*   **Icons:** Use standard Material Symbols (e.g., `light_mode`, `light_off`). No `_fill` suffix.
+*   **Icons:** Use standard *Google's Material Symbols & Icons* (e.g., `lightbulb`, `light_off` (not 'lightbulb_off'), `power`, `power_off`). No `_fill` suffix.
 
 ### 2.7 Strict Coding Constraints
 *   **NO HALLUCINATIONS:** Use **ONLY** the methods of the `utils` class explicitly mentioned in this prompt (e.g., `utils.format.fieldValue`). **NEVER** invent or assume the existence of other `utils` methods.
+    * Use `$this.value()` not `$this.val()`
 *   **API SCOPE:** Do not confuse `this.apiCall` (Frontend UI) with `Api.Call`/`hg.Api.Call` (Backend Automation).
 
 ---
@@ -155,7 +157,7 @@ C# programs are compiled assemblies.
 # SECTION 4: DATA MODELS & STANDARD FIELDS
 
 *   **Switch/Relay:** `Status.Level` (0=Off, 1=On). Cmd: `Control.On/Off`.
-*   **Dimmer:** `Status.Level` (0.0-1.0). Cmd: `Control.Level/<val>`.
+*   **Dimmer:** `Status.Level` (0.0-1.0). Cmd: `Control.Level/<value>` (0-100).
 *   **Color Light:** `Status.ColorHsb`. Cmd: `Control.ColorHsb/h,s,b`.
 *   **Sensors:** `Sensor.Temperature`, `Sensor.Humidity`, `Sensor.MotionDetect`.
 *   **AI/Lailama Engine:** Domain `AI.IntentHandlers`. Service `Lailama`. Methods: `Prompt.Submit`, `Prompt.Schedule`, `Prompt.Cancel`.
@@ -186,6 +188,7 @@ C# programs are compiled assemblies.
 "Here is a production-grade widget. It uses correct styling, safe zone handling, and architecture."
 
 ```html
+<!-- USE Flex Layout Attribute (`layout`) -->
 <div class="container" layout="column top-stretch">
     <!-- HEADER: Contains Name & Status. Applies Safe Zone Padding -->
     <div class="header" layout="row center-justify">
@@ -205,9 +208,6 @@ C# programs are compiled assemblies.
                 toggle_off
             </span>
         </button>
-
-        <!-- Example: Hide this text if ON using @hide-if -->
-        <div @hide-if="isOn()" class="hint">Tap to turn on</div>
     </div>
 </div>
 ```
@@ -216,7 +216,7 @@ C# programs are compiled assemblies.
 @import 'assets/styles/widget-ui.css';
 @import 'assets/styles/flex-layout-attribute.min.css';
 
-:host { font-family: sans-serif; display: block; }
+:host { font-family: sans-serif; display: block; height: 100%; }
 
 .container { padding: 12px; height: 100%; box-sizing: border-box; }
 
@@ -224,6 +224,7 @@ C# programs are compiled assemblies.
     /* SAFE ZONE: Only the header needs to dodge the top-right button */
     padding-right: 48px;
     margin-bottom: 8px;
+    color: var(--text-color);
 }
 
 .status { font-size: 0.9em; color: var(--secondary-text-color); }
@@ -233,7 +234,8 @@ C# programs are compiled assemblies.
 button { background: none; border: none; cursor: pointer; }
 .icon { font-size: 64px; color: var(--disabled-color); transition: color 0.3s; }
 .active-state { color: var(--accent-color); }
-.hint { font-size: 0.8em; color: var(--warn-color); margin-top: 8px; }
+.hint { font-size: 0.8em; color: var(--primary-color); margin-top: 8px; }
+.error { font-size: 0.8em; color: var(--warn-color); margin-top: 8px; }
 ```
 
 ```javascript
@@ -270,7 +272,7 @@ class SwitchWidget extends ControllerInstance {
         });
 
         // Initial Store & Render
-        const val = f.decimalValue;
+        const val = field.decimalValue;
         this.state.isOn = val > 0;
         this.refreshUI();
     }
@@ -289,5 +291,42 @@ class SwitchWidget extends ControllerInstance {
       this.boundModule.control(cmd);
     }
   }
+}
+```
+
+Only for your reference, the following are some of the styles declared in the `assets/styles/widget-ui.css` file:
+
+```
+.color-accent {
+  color: var(--accent-color) !important;
+}
+.color-primary {
+  color: var(--primary-color) !important;
+}
+.color-warn {
+  color: var(--warn-color) !important;
+}
+.color-secondary-text {
+  color: var(--secondary-text-color);
+}
+
+.widget-small {
+  width: 289.5px;
+  height: 148px;
+  margin: 10px;
+}
+.widget-medium {
+  width: 289.5px;
+  height: 296px;
+  margin: 10px;
+}
+.widget-big {
+  width: 460px;
+  height: 296px;
+  margin: 10px;
+}
+
+.hidden {
+  display: none;
 }
 ```
