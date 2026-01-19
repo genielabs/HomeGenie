@@ -516,5 +516,19 @@
   "Utilities": "Kommunal xizmatlar",
   "Scenes": "Sahnalar",
   "Virtual Modules": "Virtual modullar",
-  "Simulate": "Simulyatsiya qilish"
+  "Simulate": "Simulyatsiya qilish",
+  "day_of_year": "Yil kuni",
+  "year": "Yil",
+  "Daily Energy Summary": "Kundalik energiya haqida qisqacha ma'lumot",
+  "Data Monitor": "Ma'lumotlar monitori",
+  "Hourly Energy Consumption": "Soatlik energiya sarfi",
+  "Pie Chart Stats example": "Pirog diagrammasi demosi",
+  "Weekly Energy Consumption": "Haftalik energiya sarfi",
+  "Window Shutters": "Deraza panjurlari",
+  "Window Shutter 1": "Deraza pardasi 1",
+  "Window Shutter 2": "Deraza pardasi 2",
+  "Living Room": "Mehmonxona",
+  "Mood Light": "Kayfiyat yorug'ligi",
+  "Dashboard": "Boshqaruv paneli",
+  "watch_movies_dlna": "Filmlaringiz va seriallaringizni tomosha qiling (UPnP/DLNA)"
 }

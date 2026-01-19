@@ -516,5 +516,19 @@
   "Utilities": "Uslužnost",
   "Scenes": "Scene",
   "Virtual Modules": "Virtualni moduli",
-  "Simulate": "Simuliraj"
+  "Simulate": "Simuliraj",
+  "day_of_year": "Dan u godini",
+  "year": "Godina",
+  "Daily Energy Summary": "Dnevni sažetak energije",
+  "Data Monitor": "Monitor podataka",
+  "Hourly Energy Consumption": "Potrošnja energije po satu",
+  "Pie Chart Stats example": "Demo tortnog grafikona",
+  "Weekly Energy Consumption": "Sedmična potrošnja energije",
+  "Window Shutters": "Roletne",
+  "Window Shutter 1": "Roletna 1",
+  "Window Shutter 2": "Roletna 2",
+  "Living Room": "Dnevna soba",
+  "Mood Light": "Svjetlo za raspoloženje",
+  "Dashboard": "Kontrolna ploča",
+  "watch_movies_dlna": "Gledajte svoje filmove i serije (UPnP/DLNA)"
 }

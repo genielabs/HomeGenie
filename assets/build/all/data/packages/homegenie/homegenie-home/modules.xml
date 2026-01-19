@@ -90,6 +90,14 @@ The default user to connect to the bridge is "newdeveloper" and it should be alr
         <UpdateTime>2022-12-28T17:10:38.5461615Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
+        <Name>Widget.Statistics.DailyReport</Name>
+        <Value>On</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.5461615Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
         <Name>EventsLogger.EnableLogging</Name>
         <Value>On</Value>
         <Description>Enable events logging</Description>
@@ -259,7 +267,7 @@ The default user to connect to the bridge is "newdeveloper" and it should be alr
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
-        <Value>0</Value>
+        <Value>0.35</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
@@ -330,6 +338,14 @@ The default user to connect to the bridge is "newdeveloper" and it should be alr
         <FieldType />
         <ParentId>0</ParentId>
         <UpdateTime>2022-12-28T17:10:38.5724423Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.Statistics.DailyReport</Name>
+        <Value>On</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.5461615Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EventsLogger.EnableLogging</Name>
@@ -501,7 +517,7 @@ The default user to connect to the bridge is "newdeveloper" and it should be alr
       </ModuleParameter>
       <ModuleParameter>
         <Name>Status.Level</Name>
-        <Value>0</Value>
+        <Value>0.65</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
@@ -572,6 +588,14 @@ The default user to connect to the bridge is "newdeveloper" and it should be alr
         <FieldType />
         <ParentId>0</ParentId>
         <UpdateTime>2022-12-28T17:10:38.5993135Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.Statistics.DailyReport</Name>
+        <Value>On</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.5461615Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>EventsLogger.EnableLogging</Name>
@@ -801,12 +825,28 @@ The default user to connect to the bridge is "newdeveloper" and it should be alr
     <Stores />
   </Module>
   <Module>
-    <Name>Light 4</Name>
+    <Name>Mood Light</Name>
     <Description />
     <DeviceType>Color</DeviceType>
     <Domain>HomeAutomation.PhilipsHue</Domain>
     <Address>4</Address>
     <Properties>
+      <ModuleParameter>
+        <Name>Status.ColorHsb</Name>
+        <Value>0.2880952380952381,0.7,0.4</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.6006132Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.Level</Name>
+        <Value>0</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2024-12-04T17:04:29.6344792Z</UpdateTime>
+      </ModuleParameter>
       <ModuleParameter>
         <Name>HomeGenie.LevelMemory</Name>
         <Value />
@@ -817,11 +857,35 @@ The default user to connect to the bridge is "newdeveloper" and it should be alr
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>
-        <Value />
+        <Value>On</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2014-07-25T22:13:05.336917Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.6002141Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Simulator.Meter.Watts</Name>
+        <Value>On</Value>
+        <Description>Watts meter</Description>
+        <FieldType>checkbox</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.6003098Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Simulator.Meter.Watts.Max</Name>
+        <Value>62</Value>
+        <Description>Watts meter max power</Description>
+        <FieldType>slider:1:2500:1:10</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.6004069Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Simulator.Sensor.DataFrequency</Name>
+        <Value>1</Value>
+        <Description>Simulator emit frequency</Description>
+        <FieldType>slider:0.5:60:0.5:30</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.6005097Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -850,6 +914,22 @@ The default user to connect to the bridge is "newdeveloper" and it should be alr
     <Address>5</Address>
     <Properties>
       <ModuleParameter>
+        <Name>Status.ColorHsb</Name>
+        <Value>0.2880952380952381,0.7,0.4</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.6006132Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.Level</Name>
+        <Value>0</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2024-12-04T17:04:29.6344792Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
         <Name>HomeGenie.LevelMemory</Name>
         <Value />
         <Description />
@@ -859,11 +939,35 @@ The default user to connect to the bridge is "newdeveloper" and it should be alr
       </ModuleParameter>
       <ModuleParameter>
         <Name>Scenarios.SunriseColors</Name>
-        <Value />
+        <Value>On</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>
-        <UpdateTime>2014-07-25T22:13:19.754382Z</UpdateTime>
+        <UpdateTime>2022-12-28T17:10:38.6002141Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Simulator.Meter.Watts</Name>
+        <Value>On</Value>
+        <Description>Watts meter</Description>
+        <FieldType>checkbox</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.6003098Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Simulator.Meter.Watts.Max</Name>
+        <Value>62</Value>
+        <Description>Watts meter max power</Description>
+        <FieldType>slider:1:2500:1:10</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.6004069Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Simulator.Sensor.DataFrequency</Name>
+        <Value>1</Value>
+        <Description>Simulator emit frequency</Description>
+        <FieldType>slider:0.5:60:0.5:30</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.6005097Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
         <Name>VirtualModule.ParentId</Name>
@@ -1202,6 +1306,106 @@ The default user to connect to the bridge is "newdeveloper" and it should be alr
         <FieldType />
         <ParentId>0</ParentId>
         <UpdateTime>2022-11-26T17:29:35.7545495Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+  <Module>
+    <Name>Window Shutter 1</Name>
+    <Description />
+    <DeviceType>Shutter</DeviceType>
+    <Domain>HomeAutomation.Demo</Domain>
+    <Address>4</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>EventsLogger.EnableLogging</Name>
+        <Value>On</Value>
+        <Description>Enable events logging</Description>
+        <FieldType>checkbox</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.5462571Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.Battery</Name>
+        <Value>98</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2026-01-18T22:18:36.4174277Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.Level</Name>
+        <Value>0.5</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2026-01-18T22:18:36.4174809Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>400</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2026-01-18T22:18:36.4142648Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2026-01-18T21:03:40.0889976Z</UpdateTime>
+      </ModuleParameter>
+    </Properties>
+    <Stores />
+  </Module>
+  <Module>
+    <Name>Window Shutter 2</Name>
+    <Description />
+    <DeviceType>Shutter</DeviceType>
+    <Domain>HomeAutomation.Demo</Domain>
+    <Address>5</Address>
+    <Properties>
+      <ModuleParameter>
+        <Name>EventsLogger.EnableLogging</Name>
+        <Value>On</Value>
+        <Description>Enable events logging</Description>
+        <FieldType>checkbox</FieldType>
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.5462571Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.Battery</Name>
+        <Value>95</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2026-01-18T22:18:36.4175345Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Status.Level</Name>
+        <Value>0.75</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2026-01-18T22:18:36.4175875Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>VirtualModule.ParentId</Name>
+        <Value>400</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2026-01-18T22:18:36.4142667Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>Widget.DisplayModule</Name>
+        <Value />
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2026-01-18T21:03:40.0910925Z</UpdateTime>
       </ModuleParameter>
     </Properties>
     <Stores />

@@ -313,7 +313,8 @@
       "Description": "Umožňuje ovládání přirozeného jazyka pro váš chytrý systém pomocí umělé inteligence Gemini od Googlu. Chcete-li tuto funkci aktivovat, zadejte platný klíč API. Postupujte podle pokynů na adrese https://aistudio.google.com/app/apikey a získejte bezplatný klíč API.",
       "ConfigureOptions.ApiKey": "Klíč Google Gemini API pro umělou inteligenci",
       "ConfigureOptions.ModelId": "ID modelu",
-      "ConfigureOptions.SystemInstructions": "Systémové instrukce"
+      "ConfigureOptions.SystemInstructions": "Systémové instrukce",
+      "ConfigureOptions.SendContextData": "Sdílení kontextu systému a modulů s umělou inteligencí"
     },
     "931": {
       "Title": "Džin z widgetu Gemini",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Statistiky spotřeby energie",
-      "Description": "Neustále monitoruje, agreguje a zaznamenává data o spotřebě energie (W/h) v pravidelných intervalech. Implementuje plnohodnotné API pro procházení a dotazování historických datových sad."
+      "Description": "Neustále monitoruje, agreguje a zaznamenává data o spotřebě energie (Wh) v pravidelných intervalech. Implementuje plnohodnotné API pro procházení a dotazování historických datových sad."
     },
     "572": {
       "Title": "Příklad statistik koláčového grafu",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Hodinová spotřeba energie",
       "Description": "Sloupcový graf zobrazující průměrnou spotřebu ve wattech/hodinu pro každou hodinu dne (00:00–23:00). Data jsou agregována za vybraný týden a pocházejí z rozhraní Energy Use Statistics API."
+    },
+    "579": {
+      "Title": "Denní shrnutí energie",
+      "Description": "Denní spotřeba energie (Wh) podle zařízení.",
+      "Widget.Statistics.DailyReport": "Zahrnout do denní zprávy o Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Džinův příkaz",

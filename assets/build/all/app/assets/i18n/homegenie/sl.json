@@ -313,7 +313,8 @@
       "Description": "Omogoča upravljanje naravnega jezika za vaš pametni sistem z uporabo Googlove umetne inteligence Gemini. Če želite aktivirati to funkcijo, vnesite veljaven ključ API. Sledite navodilom na https://aistudio.google.com/app/apikey, da dobite brezplačen ključ API.",
       "ConfigureOptions.ApiKey": "Ključ API-ja za umetno inteligenco Google Gemini",
       "ConfigureOptions.ModelId": "ID modela",
-      "ConfigureOptions.SystemInstructions": "Sistemska navodila"
+      "ConfigureOptions.SystemInstructions": "Sistemska navodila",
+      "ConfigureOptions.SendContextData": "Deli kontekst sistema in modulov z umetno inteligenco"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Statistika porabe energije",
-      "Description": "Neprekinjeno spremlja, združuje in beleži podatke o porabi energije (W/h) v rednih intervalih. Implementira celoten API za brskanje in poizvedovanje po zgodovinskih naborih podatkov."
+      "Description": "Neprekinjeno spremlja, združuje in beleži podatke o porabi energije (Wh) v rednih intervalih. Implementira celoten API za brskanje in poizvedovanje po zgodovinskih naborih podatkov."
     },
     "572": {
       "Title": "Primer statistike tortnega grafikona",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Urna poraba energije",
       "Description": "Stolpični grafikon, ki prikazuje povprečno porabo energije v vatih/uro za vsako uro dneva (00h–23h). Podatki so združeni za izbrani teden in izvirajo iz API-ja za statistiko porabe energije."
+    },
+    "579": {
+      "Title": "Dnevni povzetek energije",
+      "Description": "Dnevna poraba energije (Wh) po napravi.",
+      "Widget.Statistics.DailyReport": "Vključi v dnevno poročilo o Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Ukaz Genie",

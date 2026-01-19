@@ -313,7 +313,8 @@
       "Description": "Habilita o controle de linguagem natural para seu sistema inteligente usando a IA Gemini do Google. Para ativar este recurso, insira uma chave de API válida. Siga as instruções em https://aistudio.google.com/app/apikey para obter uma chave de API gratuita.",
       "ConfigureOptions.ApiKey": "Chave de API do Google Gemini AI",
       "ConfigureOptions.ModelId": "ID do modelo",
-      "ConfigureOptions.SystemInstructions": "Instruções do sistema"
+      "ConfigureOptions.SystemInstructions": "Instruções do sistema",
+      "ConfigureOptions.SendContextData": "Compartilhe o contexto do sistema e do módulo com a IA."
     },
     "931": {
       "Title": "Gênio do widget Gemini",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Estatísticas de uso de energia",
-      "Description": "Monitora, agrega e registra continuamente dados de consumo de energia (W/h) em intervalos regulares. Implementa uma API completa para navegar e consultar conjuntos de dados históricos."
+      "Description": "Monitora, agrega e registra continuamente dados de consumo de energia (Wh) em intervalos regulares. Implementa uma API completa para navegar e consultar conjuntos de dados históricos."
     },
     "572": {
       "Title": "Exemplo de gráfico de pizza para estatísticas",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Consumo de energia por hora",
       "Description": "Gráfico de barras que exibe o consumo médio de Watts/Hora para cada hora do dia (00h-23h). Os dados são agregados ao longo da semana selecionada e provenientes da API de Estatísticas de Uso de Energia."
+    },
+    "579": {
+      "Title": "Resumo diário de energia",
+      "Description": "Consumo diário de energia (Wh) por dispositivo.",
+      "Widget.Statistics.DailyReport": "Incluir no relatório diário Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Comando do Gênio",

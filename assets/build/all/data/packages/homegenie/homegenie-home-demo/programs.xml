@@ -177,7 +177,7 @@ while (Program.IsRunning) {
 }
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -478,28 +478,26 @@ const domain = "HomeAutomation.Demo";
 const type = {
   Sensor: "Sensor",
   DoorWindow: "DoorWindow",
-  Switch: "Switch"
+  Switch: "Switch",
+  Shutter: "Shutter"
 };
 
 // Add a temperature and luminance sensor
 hg.program
-  .addModule(domain, "1", type.Sensor)
-  .addFeature(domain, type.Sensor, "Sensor.Temperature", "Temperature value", "slider:-50:100:0.5")
-  .addFeature(domain, type.Sensor, "Sensor.Humidity", "Humidity value", "slider:10:100:5")
-  .addFeature(domain, type.Sensor, "Sensor.Luminance", "Luminance value", "slider:0:1000:1")
-  .addFeature(domain, type.Sensor, "Sensor.MotionDetect", "Motion detection status", "slider:0:1:1")
-  .addFeature(domain, type.Sensor, "Status.Battery", "Battery level", "slider:0:100:1");
+  .addModule(domain, "1", type.Sensor);
 
 // Add a doorwindow sensor
 hg.program
-  .addModule(domain, "2", type.DoorWindow)
-  .addFeature(domain, type.DoorWindow, "Sensor.DoorWindow", "Door/Window sensor status (open/closed)", "slider:0:1:1")
-  .addFeature(domain, type.DoorWindow, "Status.Battery", "Battery level", "slider:0:100:1");
+  .addModule(domain, "2", type.DoorWindow);
 
 // Add an on/off switch
 hg.program
-  .addModule(domain, "3", type.Switch)
-  .addFeature(domain, type.Switch, "Status.Level", "Switch status (on/off)", "slider:0:1:1");
+  .addModule(domain, "3", type.Switch);
+
+// Add two shutters
+hg.program
+  .addModule(domain, "4", type.Shutter)
+  .addModule(domain, "5", type.Shutter);
 
 hg.program.run();
 </ScriptSetup>
@@ -541,18 +539,24 @@ hg.api.handle(domain, function(apiCall) {
   let response = "ERROR";
   // get the module addressed by the API call
   const mod = demoModules.withAddress(ac.address).get();
-  if (mod.isOfDeviceType("Switch")) {
+  if (mod.Instance.Domain === domain) {
     switch (ac.command) {
       case 'Control.On':
-        mod.emit("Status.Level", "1");
+      case 'Control.Open':
+        mod.emit("Status.Level", 1);
         response = "OK";
         break;
       case 'Control.Off':
-        mod.emit("Status.Level", "0");
+      case 'Control.Close':
+        mod.emit("Status.Level", 0);
         response = "OK";
         break;
       case 'Control.Toggle':
-        mod.emit("Status.Level", mod.level != 0 ? "0" : "1");
+        mod.emit("Status.Level", mod.level != 0 ? 0 : 1);
+        response = "OK";
+        break;
+      case 'Control.Level':
+        mod.emit("Status.Level", ac.getOption(0)/100);
         response = "OK";
         break;
     }
@@ -583,15 +587,15 @@ function initialize() {
   }
   const temperature = multiSensor.parameter("Sensor.Temperature");
   if (temperature.value == "") {
-    temperature.value = "25.5";
+    temperature.value = 25.5;
   }
   const luminance = multiSensor.parameter("Sensor.Luminance");
   if (luminance.value == "") {
-    luminance.value = "273";
+    luminance.value = 273;
   }
   const motionDetect = multiSensor.parameter("Sensor.MotionDetect");
   if (motionDetect.value == "") {
-    motionDetect.value = "0";
+    motionDetect.value = 0;
   }
   // Door Window
   const doorWindow = demoModules.withAddress("2").get();
@@ -600,7 +604,7 @@ function initialize() {
   }
   const sensorDoorWindow = doorWindow.parameter("Sensor.DoorWindow");
   if (sensorDoorWindow.value == "") {
-    sensorDoorWindow.value = "1";
+    sensorDoorWindow.value = 1;
   }
   // Boiler Switch
   const boilerSwitch = demoModules.withAddress("3").get();
@@ -609,77 +613,54 @@ function initialize() {
   }
   const statusLevel = boilerSwitch.parameter("Status.Level");
   if (statusLevel.value == "") {
-    statusLevel.value = "0";
+    statusLevel.value = 0;
   }
-}</ScriptSource>
+  // Window Shutter 1
+  const shutter1 = demoModules.withAddress("4").get();
+  if (shutter1.instance.name == "") {
+    shutter1.instance.name = "Window Shutter 1";
+  }
+  const statusLevelShutter1 = shutter1.parameter("Status.Level");
+  if (statusLevelShutter1.value == "") {
+    statusLevelShutter1.value = 0; // 0 = Closed, 100 = Open
+  }
+  const batteryShutter1 = shutter1.parameter("Status.Battery");
+  if (batteryShutter1.value == "") {
+    batteryShutter1.value = 95;
+  }
+  // Window Shutter 2
+  const shutter2 = demoModules.withAddress("5").get();
+  if (shutter2.instance.name == "") {
+    shutter2.instance.name = "Window Shutter 2";
+  }
+  const statusLevelShutter2 = shutter2.parameter("Status.Level");
+  if (statusLevelShutter2.value == "") {
+    statusLevelShutter2.value = 0.5;
+  }
+  const batteryShutter2 = shutter2.parameter("Status.Battery");
+  if (batteryShutter2.value == "") {
+    batteryShutter2.value = 42;
+  }
+}
+</ScriptSource>
     <ScriptContext />
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home-demo</PackageId>
       <PackageVersion>1.0.0</PackageVersion>
       <Id>virtual-modules-demo</Id>
-      <Version>1.0.3</Version>
+      <Version>1.0.4</Version>
       <Required>true</Required>
-      <Checksum>2D1C3778E19B06B28E02CA7A39AE65F2</Checksum>
+      <Checksum>12C70AEC45DBF8C1FDFA8F1FE7B73575</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>400</Address>
     <Name>Virtual Modules Demo</Name>
     <Description>Manually set values of the virtual device.</Description>
     <Group>Demo</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>slider:-50:100:0.5</FieldType>
-        <ForDomains>HomeAutomation.Demo</ForDomains>
-        <ForTypes>Sensor</ForTypes>
-        <Property>Sensor.Temperature</Property>
-        <Description>Temperature value</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>slider:10:100:5</FieldType>
-        <ForDomains>HomeAutomation.Demo</ForDomains>
-        <ForTypes>Sensor</ForTypes>
-        <Property>Sensor.Humidity</Property>
-        <Description>Humidity value</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>slider:0:1000:1</FieldType>
-        <ForDomains>HomeAutomation.Demo</ForDomains>
-        <ForTypes>Sensor</ForTypes>
-        <Property>Sensor.Luminance</Property>
-        <Description>Luminance value</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>slider:0:1:1</FieldType>
-        <ForDomains>HomeAutomation.Demo</ForDomains>
-        <ForTypes>Sensor</ForTypes>
-        <Property>Sensor.MotionDetect</Property>
-        <Description>Motion detection status</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>slider:0:100:1</FieldType>
-        <ForDomains>HomeAutomation.Demo</ForDomains>
-        <ForTypes>DoorWindow</ForTypes>
-        <Property>Status.Battery</Property>
-        <Description>Battery level</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>slider:0:1:1</FieldType>
-        <ForDomains>HomeAutomation.Demo</ForDomains>
-        <ForTypes>DoorWindow</ForTypes>
-        <Property>Sensor.DoorWindow</Property>
-        <Description>Door/Window sensor status (open/closed)</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>slider:0:1:1</FieldType>
-        <ForDomains>HomeAutomation.Demo</ForDomains>
-        <ForTypes>Switch</ForTypes>
-        <Property>Status.Level</Property>
-        <Description>Switch status (on/off)</Description>
-      </ProgramFeature>
-    </Features>
+    <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>false</Cloneable>
     <Type>Javascript</Type>

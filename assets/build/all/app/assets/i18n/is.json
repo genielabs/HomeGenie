@@ -516,5 +516,19 @@
   "Utilities": "Gagnsemi",
   "Scenes": "Senur",
   "Virtual Modules": "Sýndareiningar",
-  "Simulate": "Herma eftir"
+  "Simulate": "Herma eftir",
+  "day_of_year": "Dagur ársins",
+  "year": "Ár",
+  "Daily Energy Summary": "Daglegt orkuyfirlit",
+  "Data Monitor": "Gagnaeftirlit",
+  "Hourly Energy Consumption": "Orkunotkun á klukkustund",
+  "Pie Chart Stats example": "Sýnishorn af skífuriti",
+  "Weekly Energy Consumption": "Vikuleg orkunotkun",
+  "Window Shutters": "Gluggalokur",
+  "Window Shutter 1": "Gluggaloki 1",
+  "Window Shutter 2": "Gluggaloki 2",
+  "Living Room": "Stofa",
+  "Mood Light": "Stemningsljós",
+  "Dashboard": "Mælaborð",
+  "watch_movies_dlna": "Horfðu á kvikmyndir og þætti (UPnP/DLNA)"
 }

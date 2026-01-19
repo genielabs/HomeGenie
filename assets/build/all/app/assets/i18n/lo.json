@@ -516,5 +516,19 @@
   "Utilities": "ສາທາລະນູປະໂພກ",
   "Scenes": "ສາກຕ່າງໆ",
   "Virtual Modules": "ໂມດູນສະເໝືອນ",
-  "Simulate": "ຈຳລອງ"
+  "Simulate": "ຈຳລອງ",
+  "day_of_year": "ມື້ຂອງປີ",
+  "year": "ປີ",
+  "Daily Energy Summary": "ສະຫຼຸບພະລັງງານປະຈຳວັນ",
+  "Data Monitor": "ຕົວຕິດຕາມຂໍ້ມູນ",
+  "Hourly Energy Consumption": "ການໃຊ້ພະລັງງານຕໍ່ຊົ່ວໂມງ",
+  "Pie Chart Stats example": "ສາທິດຕາຕະລາງວົງມົນ",
+  "Weekly Energy Consumption": "ການໃຊ້ພະລັງງານປະຈຳອາທິດ",
+  "Window Shutters": "ມ່ານປ່ອງຢ້ຽມ",
+  "Window Shutter 1": "ປະຕູປ່ອງຢ້ຽມ 1",
+  "Window Shutter 2": "ປະຕູປ່ອງຢ້ຽມ 2",
+  "Living Room": "ຫ້ອງຮັບແຂກ",
+  "Mood Light": "ອາລົມສົດໃສ",
+  "Dashboard": "ແຜງຄວບຄຸມ",
+  "watch_movies_dlna": "ເບິ່ງຮູບເງົາ ແລະ ຊີຣີຂອງທ່ານ (UPnP/DLNA)"
 }

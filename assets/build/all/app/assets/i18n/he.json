@@ -516,5 +516,19 @@
   "Utilities": "תוֹעֶלֶת",
   "Scenes": "סצנות",
   "Virtual Modules": "מודולים וירטואליים",
-  "Simulate": "לְחַקוֹת"
+  "Simulate": "לְחַקוֹת",
+  "day_of_year": "יום בשנה",
+  "year": "שָׁנָה",
+  "Daily Energy Summary": "סיכום אנרגיה יומי",
+  "Data Monitor": "ניטור נתונים",
+  "Hourly Energy Consumption": "צריכת אנרגיה שעתית",
+  "Pie Chart Stats example": "הדגמת תרשים עוגה",
+  "Weekly Energy Consumption": "צריכת אנרגיה שבועית",
+  "Window Shutters": "תריסי חלונות",
+  "Window Shutter 1": "תריס חלון 1",
+  "Window Shutter 2": "תריס חלון 2",
+  "Living Room": "סָלוֹן",
+  "Mood Light": "אור מצב רוח",
+  "Dashboard": "לוּחַ מַחווָנִים",
+  "watch_movies_dlna": "צפה בסרטים ובסדרות שלך (UPnP/DLNA)"
 }

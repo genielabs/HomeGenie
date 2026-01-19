@@ -313,7 +313,8 @@
       "Description": "Aktiverar naturlig språkkontroll för ditt smarta system med Googles Gemini AI. För att aktivera den här funktionen, ange en giltig API-nyckel. Följ instruktionerna på https://aistudio.google.com/app/apikey för att få en gratis API-nyckel.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-nyckel",
       "ConfigureOptions.ModelId": "Modell-ID",
-      "ConfigureOptions.SystemInstructions": "Systeminstruktioner"
+      "ConfigureOptions.SystemInstructions": "Systeminstruktioner",
+      "ConfigureOptions.SendContextData": "Dela system- och modulkontext med AI:n"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Statistik över energianvändning",
-      "Description": "Övervakar, aggregerar och loggar kontinuerligt energiförbrukningsdata (W/h) med jämna mellanrum. Implementerar ett komplett API för att bläddra bland och fråga efter historiska datamängder."
+      "Description": "Övervakar, aggregerar och loggar kontinuerligt energiförbrukningsdata (Wh) med jämna mellanrum. Implementerar ett komplett API för att bläddra bland och fråga efter historiska datamängder."
     },
     "572": {
       "Title": "Exempel på statistik för cirkeldiagram",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Timförbrukning av energi",
       "Description": "Stapeldiagram som visar den genomsnittliga watt/timme-förbrukningen för varje timme på dagen (00:00–23:00). Data aggregeras under den valda veckan och hämtas från API:et för energianvändningsstatistik."
+    },
+    "579": {
+      "Title": "Daglig energiöversikt",
+      "Description": "Daglig energiförbrukning (Wh) per enhet.",
+      "Widget.Statistics.DailyReport": "Inkludera i den dagliga Wh-rapporten"
     }
   },
   "scheduler_preset_action_genie_command": "Genie-kommandot",

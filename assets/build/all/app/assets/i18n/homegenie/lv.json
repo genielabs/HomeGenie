@@ -313,7 +313,8 @@
       "Description": "Iespējo dabiskās valodas vadību jūsu viedierīcē, izmantojot Google Gemini mākslīgo intelektu. Lai aktivizētu šo funkciju, ievadiet derīgu API atslēgu. Izpildiet norādījumus vietnē https://aistudio.google.com/app/apikey, lai iegūtu bezmaksas API atslēgu.",
       "ConfigureOptions.ApiKey": "Google Gemini mākslīgā intelekta API atslēga",
       "ConfigureOptions.ModelId": "Modeļa ID",
-      "ConfigureOptions.SystemInstructions": "Sistēmas instrukcijas"
+      "ConfigureOptions.SystemInstructions": "Sistēmas instrukcijas",
+      "ConfigureOptions.SendContextData": "Kopīgot sistēmas un moduļu kontekstu ar mākslīgo intelektu"
     },
     "931": {
       "Title": "Dvīņu logrīka džins",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Enerģijas patēriņa statistika",
-      "Description": "Nepārtraukti uzrauga, apkopo un regulāri reģistrē enerģijas patēriņa datus (W/h). Ievieš pilnu API vēsturisko datu kopu pārlūkošanai un vaicāšanai."
+      "Description": "Nepārtraukti uzrauga, apkopo un regulāri reģistrē enerģijas patēriņa datus (Wh). Ievieš pilnu API vēsturisko datu kopu pārlūkošanai un vaicāšanai."
     },
     "572": {
       "Title": "Sektoru diagrammas statistikas piemērs",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Stundas enerģijas patēriņš",
       "Description": "Stabiņu diagramma, kurā attēlots vidējais patēriņš vatos stundā katrai diennakts stundai (no 00:00 līdz 23:00). Dati tiek apkopoti atlasītajā nedēļā un iegūti no enerģijas patēriņa statistikas API."
+    },
+    "579": {
+      "Title": "Dienas enerģijas kopsavilkums",
+      "Description": "Dienas enerģijas patēriņš (Wh) pa ierīcēm.",
+      "Widget.Statistics.DailyReport": "Iekļaut ikdienas Wh pārskatā"
     }
   },
   "scheduler_preset_action_genie_command": "Džinu pavēlniecība",

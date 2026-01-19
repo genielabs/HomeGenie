@@ -516,5 +516,19 @@
   "Utilities": "جدوى",
   "Scenes": "مشاهد",
   "Virtual Modules": "الوحدات الافتراضية",
-  "Simulate": "محاكاة"
+  "Simulate": "محاكاة",
+  "day_of_year": "يوم من أيام السنة",
+  "year": "سنة",
+  "Daily Energy Summary": "ملخص الطاقة اليومي",
+  "Data Monitor": "مراقب البيانات",
+  "Hourly Energy Consumption": "استهلاك الطاقة بالساعة",
+  "Pie Chart Stats example": "عرض توضيحي للرسم البياني الدائري",
+  "Weekly Energy Consumption": "الاستهلاك الأسبوعي للطاقة",
+  "Window Shutters": "مصاريع النوافذ",
+  "Window Shutter 1": "مصراع النافذة 1",
+  "Window Shutter 2": "مصراع النافذة 2",
+  "Living Room": "غرفة الجلوس",
+  "Mood Light": "ضوء مزاجي",
+  "Dashboard": "لوحة التحكم",
+  "watch_movies_dlna": "شاهد أفلامك ومسلسلاتك (UPnP/DLNA)"
 }

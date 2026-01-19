@@ -23,15 +23,15 @@ wallpapers:
       title: Green
       copyright: Gemini AI - Nano Banana
     card:
-      color: "#001f01"
-      opacity: 60
-      blur: 35
+      color: "#00a80b"
+      opacity: 15
+      blur: 60
 
   - background:
       file: 04.jpg
       title: Multicolor
       copyright: Gemini AI - Nano Banana
     card:
-      color: "#000000"
-      opacity: 20
+      color: "#71fedb"
+      opacity: 10
       blur: 60

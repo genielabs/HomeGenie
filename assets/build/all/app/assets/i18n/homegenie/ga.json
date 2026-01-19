@@ -313,7 +313,8 @@
       "Description": "Cumasaíonn sé rialú teanga nádúrtha do do chóras cliste ag baint úsáide as Gemini AI Google. Chun an ghné seo a ghníomhachtú, cuir isteach eochair API bhailí. Lean na treoracha ag https://aistudio.google.com/app/apikey chun eochair API saor in aisce a fháil.",
       "ConfigureOptions.ApiKey": "Eochair API AI Google Gemini",
       "ConfigureOptions.ModelId": "Aitheantas Múnla",
-      "ConfigureOptions.SystemInstructions": "Treoracha Córais"
+      "ConfigureOptions.SystemInstructions": "Treoracha Córais",
+      "ConfigureOptions.SendContextData": "Comhroinn comhthéacs an chórais agus an mhodúil leis an AI"
     },
     "931": {
       "Title": "Géine Giuirléid Gemini",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Staitisticí Úsáide Fuinnimh",
-      "Description": "Déanann monatóireacht, comhiomlánú agus logáil leanúnach ar shonraí tomhaltais fuinnimh (W/u) ag eatraimh rialta. Cuireann sé API iomlán i bhfeidhm chun tacair sonraí stairiúla a bhrabhsáil agus a fhiosrú."
+      "Description": "Déanann monatóireacht, comhiomlánú agus logáil leanúnach ar shonraí tomhaltais fuinnimh (Wh) ag eatraimh rialta. Cuireann sé API iomlán i bhfeidhm chun tacair sonraí stairiúla a bhrabhsáil agus a fhiosrú."
     },
     "572": {
       "Title": "Sampla de Staitisticí Cairte Pie",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Tomhaltas Fuinnimh in aghaidh na hUaire",
       "Description": "Cairt barra a thaispeánann an meántomhaltas Vata/Uair an chloig do gach uair an chloig den lá (00h-23h). Déantar na sonraí a chomhiomlánú thar an tseachtain roghnaithe agus foinsítear iad ó API Staitisticí Úsáide Fuinnimh."
+    },
+    "579": {
+      "Title": "Achoimre Laethúil ar Fhuinneamh",
+      "Description": "Tomhaltas fuinnimh laethúil (Wh) de réir gléis.",
+      "Widget.Statistics.DailyReport": "Cuir san áireamh sa tuarascáil Laethúil Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Ordú Genie",

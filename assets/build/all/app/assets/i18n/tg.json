@@ -516,5 +516,19 @@
   "Utilities": "Утилит",
   "Scenes": "Саҳнаҳо",
   "Virtual Modules": "Модулҳои виртуалӣ",
-  "Simulate": "Симулятсия кунед"
+  "Simulate": "Симулятсия кунед",
+  "day_of_year": "Рӯзи сол",
+  "year": "Сол",
+  "Daily Energy Summary": "Хулосаи энергияи ҳаррӯза",
+  "Data Monitor": "Мониторинги маълумот",
+  "Hourly Energy Consumption": "Истифодаи соатбайъи энергия",
+  "Pie Chart Stats example": "Намоиши диаграммаи доираӣ",
+  "Weekly Energy Consumption": "Истифодаи ҳарҳафтаинаи энергия",
+  "Window Shutters": "Пардаҳои тиреза",
+  "Window Shutter 1": "Пардаи тиреза 1",
+  "Window Shutter 2": "Пардаи тиреза 2",
+  "Living Room": "Меҳмонхона",
+  "Mood Light": "Нури кайфият",
+  "Dashboard": "панели идоракунӣ",
+  "watch_movies_dlna": "Филмҳо ва сериалҳои худро тамошо кунед (UPnP/DLNA)"
 }

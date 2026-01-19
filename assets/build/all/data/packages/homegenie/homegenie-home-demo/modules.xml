@@ -288,6 +288,14 @@
         <UpdateTime>2022-12-28T17:34:14.8602032Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
+        <Name>Widget.Statistics.DailyReport</Name>
+        <Value>On</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.5461615Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
         <Name>EventsLogger.EnableLogging</Name>
         <Value>On</Value>
         <Description>Enable events logging</Description>

@@ -516,5 +516,19 @@
   "Utilities": "Хэрэглээний хэрэгсэл",
   "Scenes": "Үзэгдлүүд",
   "Virtual Modules": "Виртуал модулиуд",
-  "Simulate": "Симуляци хийх"
+  "Simulate": "Симуляци хийх",
+  "day_of_year": "Жилийн өдөр",
+  "year": "Жил",
+  "Daily Energy Summary": "Өдөр тутмын эрчим хүчний хураангуй",
+  "Data Monitor": "Өгөгдлийн хяналт",
+  "Hourly Energy Consumption": "Цагийн эрчим хүчний хэрэглээ",
+  "Pie Chart Stats example": "Дугуй диаграмын демо",
+  "Weekly Energy Consumption": "Долоо хоногийн эрчим хүчний хэрэглээ",
+  "Window Shutters": "Цонхны хаалт",
+  "Window Shutter 1": "Цонхны хаалт 1",
+  "Window Shutter 2": "Цонхны хаалт 2",
+  "Living Room": "Зочны өрөө",
+  "Mood Light": "Сэтгэл санааны гэрэл",
+  "Dashboard": "Хяналтын самбар",
+  "watch_movies_dlna": "Кино болон цувралаа үзээрэй (UPnP/DLNA)"
 }

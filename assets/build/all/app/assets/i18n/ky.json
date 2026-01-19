@@ -516,5 +516,19 @@
   "Utilities": "Коммуналдык кызматтар",
   "Scenes": "Көрүнүштөр",
   "Virtual Modules": "Виртуалдык модулдар",
-  "Simulate": "Симуляциялоо"
+  "Simulate": "Симуляциялоо",
+  "day_of_year": "Жылдын күнү",
+  "year": "Жыл",
+  "Daily Energy Summary": "Күнүмдүк энергиянын кыскача баяндамасы",
+  "Data Monitor": "Маалыматтарды көзөмөлдөөчү",
+  "Hourly Energy Consumption": "Сааттык энергияны колдонуу",
+  "Pie Chart Stats example": "Дөңгөлөк диаграммасынын демо версиясы",
+  "Weekly Energy Consumption": "Апталык энергияны колдонуу",
+  "Window Shutters": "Терезе жапкычтары",
+  "Window Shutter 1": "Терезе жапкыч 1",
+  "Window Shutter 2": "Терезе жапкыч 2",
+  "Living Room": "Конок бөлмө",
+  "Mood Light": "Маанай жарык",
+  "Dashboard": "Башкаруу панели",
+  "watch_movies_dlna": "Тасмаларды жана сериалдарды көрүңүз (UPnP/DLNA)"
 }

@@ -313,7 +313,8 @@
       "Description": "Virkjar stjórn á náttúrulegu tungumáli fyrir snjallkerfið þitt með Gemini gervigreind Google. Til að virkja þennan eiginleika skaltu slá inn gilt API-lykil. Fylgdu leiðbeiningunum á https://aistudio.google.com/app/apikey til að fá ókeypis API-lykil.",
       "ConfigureOptions.ApiKey": "Lykill fyrir Google Gemini gervigreindarforritaskil",
       "ConfigureOptions.ModelId": "Gerðarauðkenni",
-      "ConfigureOptions.SystemInstructions": "Leiðbeiningar um kerfið"
+      "ConfigureOptions.SystemInstructions": "Leiðbeiningar um kerfið",
+      "ConfigureOptions.SendContextData": "Deila kerfis- og einingasamhengi með gervigreindinni"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Tölfræði um orkunotkun",
-      "Description": "Fylgist stöðugt með, safnar saman og skráir orkunotkunargögn (W/klst.) með reglulegu millibili. Innleiðir fullt forritaskil (API) til að skoða og leita í söguleg gagnasöfn."
+      "Description": "Fylgist stöðugt með, safnar saman og skráir orkunotkunargögn (Wh) með reglulegu millibili. Innleiðir fullt forritaskil (API) til að skoða og leita í söguleg gagnasöfn."
     },
     "572": {
       "Title": "Dæmi um tölfræði um skífurit",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Orkunotkun á klukkustund",
       "Description": "Súlurit sem sýnir meðalnotkun í vöttum/klst. fyrir hverja klukkustund dagsins (kl. 00-23). Gögnum er safnað saman yfir valda viku og fengið úr orkunotkunartölfræðiforritaskilinu."
+    },
+    "579": {
+      "Title": "Daglegt orkuyfirlit",
+      "Description": "Dagleg orkunotkun (Wh) eftir tæki.",
+      "Widget.Statistics.DailyReport": "Hafa með í daglegri Wh skýrslu"
     }
   },
   "scheduler_preset_action_genie_command": "Skipun Genie",

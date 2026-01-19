@@ -313,7 +313,8 @@
       "Description": "Ka taea te whakahaere reo maori mo to punaha atamai ma te whakamahi i te Gemini AI a Google. Hei whakahohe i tenei ahuatanga, whakauruhia he matua API whaimana. A pee i nga tohutohu i https://aistudio.google.com/app/apikey ki te tiki i te taviri API kore utu.",
       "ConfigureOptions.ApiKey": "Google Gemini AI kī API",
       "ConfigureOptions.ModelId": "Tauira ID",
-      "ConfigureOptions.SystemInstructions": "Ngā Tohutohu Pūnaha"
+      "ConfigureOptions.SystemInstructions": "Ngā Tohutohu Pūnaha",
+      "ConfigureOptions.SendContextData": "Tohaina te horopaki pūnaha me te kōwae ki te AI"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Ngā Tatauranga Whakamahinga Pūngao",
-      "Description": "Ka aroturuki tonu, ka kohikohi, ka tuhi hoki i ngā raraunga whakapaunga pūngao (W/h) i ngā wā auau. Ka whakatinana i tētahi API katoa mō te tirotiro me te uiui i ngā huinga raraunga tawhito."
+      "Description": "Ka aroturuki tonu, ka kohikohi, ka tuhi hoki i ngā raraunga whakapaunga pūngao (Wh) i ngā wā auau. Ka whakatinana i tētahi API katoa mō te tirotiro me te uiui i ngā huinga raraunga tawhito."
     },
     "572": {
       "Title": "Tauira Tatauranga Tūtohi Porowhita",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Te Whakamahinga Pūngao ia Hāora",
       "Description": "He tūtohi pae e whakaatu ana i te toharite o te whakamahinga o ngā Watts/Hāora mō ia hāora o te rā (00h-23h). Ka kohikohia ngā raraunga mō te wiki kua tīpakohia, ā, ka ahu mai i te Energy Use Statistics API."
+    },
+    "579": {
+      "Title": "Whakarāpopototanga Pūngao o ia Rā",
+      "Description": "Te whakapaunga pūngao o ia rā (Wh) mā te taputapu.",
+      "Widget.Statistics.DailyReport": "Whakaurua ki te pūrongo Wh o ia rā"
     }
   },
   "scheduler_preset_action_genie_command": "Te Whakahau a te Ira Tangata",

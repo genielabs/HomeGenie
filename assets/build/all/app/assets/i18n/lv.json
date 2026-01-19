@@ -516,5 +516,19 @@
   "Utilities": "Lietderība",
   "Scenes": "Ainas",
   "Virtual Modules": "Virtuālie moduļi",
-  "Simulate": "Simulēt"
+  "Simulate": "Simulēt",
+  "day_of_year": "Gada diena",
+  "year": "Gads",
+  "Daily Energy Summary": "Dienas enerģijas kopsavilkums",
+  "Data Monitor": "Datu monitors",
+  "Hourly Energy Consumption": "Enerģijas patēriņš stundā",
+  "Pie Chart Stats example": "Sektoru diagrammas demonstrācija",
+  "Weekly Energy Consumption": "Nedēļas enerģijas patēriņš",
+  "Window Shutters": "Logu slēģi",
+  "Window Shutter 1": "Logu slēģi 1",
+  "Window Shutter 2": "Logu slēģi 2",
+  "Living Room": "Dzīvojamā istaba",
+  "Mood Light": "Noskaņas gaisma",
+  "Dashboard": "Informācijas panelis",
+  "watch_movies_dlna": "Skatieties filmas un seriālus (UPnP/DLNA)"
 }

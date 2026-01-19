@@ -516,5 +516,19 @@
   "Utilities": "یوټیلیټي",
   "Scenes": "صحنې",
   "Virtual Modules": "مجازی ماډلونه",
-  "Simulate": "سمولیټ"
+  "Simulate": "سمولیټ",
+  "day_of_year": "د کال ورځ",
+  "year": "کال",
+  "Daily Energy Summary": "د ورځني انرژۍ لنډیز",
+  "Data Monitor": "د معلوماتو څارنه",
+  "Hourly Energy Consumption": "په ساعت کې د انرژۍ کارول",
+  "Pie Chart Stats example": "د پای چارټ ډیمو",
+  "Weekly Energy Consumption": "د انرژۍ اونيزه کارول",
+  "Window Shutters": "د کړکۍ بندونه",
+  "Window Shutter 1": "د کړکۍ شټر ۱",
+  "Window Shutter 2": "د کړکۍ شټر ۲",
+  "Living Room": "د اوسیدو خونه",
+  "Mood Light": "د مزاج رڼا",
+  "Dashboard": "ډشبورډ",
+  "watch_movies_dlna": "خپل فلمونه او لړۍ وګورئ (UPnP/DLNA)"
 }

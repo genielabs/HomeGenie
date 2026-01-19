@@ -313,7 +313,8 @@
       "Description": "Google-ren Gemini AI erabiliz zure sistema adimendunerako hizkuntza naturalaren kontrola gaitzen du. Funtzio hau aktibatzeko, sartu API gako baliodun bat. Jarraitu https://aistudio.google.com/app/apikey helbideko argibideei doako API gako bat lortzeko.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API gakoa",
       "ConfigureOptions.ModelId": "Modeloaren IDa",
-      "ConfigureOptions.SystemInstructions": "Sistemaren argibideak"
+      "ConfigureOptions.SystemInstructions": "Sistemaren argibideak",
+      "ConfigureOptions.SendContextData": "Partekatu sistemaren eta moduluen testuingurua IArekin"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Energia Erabileraren Estatistikak",
-      "Description": "Energia-kontsumoaren datuak (W/h) etengabe kontrolatzen, biltzen eta erregistratzen ditu aldizka. API oso bat ezartzen du datu-multzo historikoak arakatzeko eta kontsultatzeko."
+      "Description": "Energia-kontsumoaren datuak (Wh) etengabe kontrolatzen, biltzen eta erregistratzen ditu aldizka. API oso bat ezartzen du datu-multzo historikoak arakatzeko eta kontsultatzeko."
     },
     "572": {
       "Title": "Diagrama zirkularren estatistiken adibidea",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Orduko energia-kontsumoa",
       "Description": "Barra-diagrama, eguneko ordu bakoitzeko (00:00etatik 23:00etara) watt/orduko batez besteko kontsumoa erakusten duena. Datuak hautatutako astean zehar agregatzen dira eta Energia Erabileraren Estatistiken APItik datoz."
+    },
+    "579": {
+      "Title": "Eguneko Energia Laburpena",
+      "Description": "Gailuaren eguneroko energia-kontsumoa (Wh).",
+      "Widget.Statistics.DailyReport": "Sartu Eguneroko Wh txostenean"
     }
   },
   "scheduler_preset_action_genie_command": "Genio Komandoa",

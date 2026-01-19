@@ -313,7 +313,8 @@
       "Description": "Pinapagana ang natural na kontrol sa wika para sa iyong matalinong system gamit ang Gemini AI ng Google. Para i-activate ang feature na ito, maglagay ng valid na API key. Sundin ang mga tagubilin sa https://aistudio.google.com/app/apikey para makakuha ng libreng API key.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API key",
       "ConfigureOptions.ModelId": "Model ID",
-      "ConfigureOptions.SystemInstructions": "Mga Tagubilin sa Sistema"
+      "ConfigureOptions.SystemInstructions": "Mga Tagubilin sa Sistema",
+      "ConfigureOptions.SendContextData": "Ibahagi ang konteksto ng sistema at modyul sa AI"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Mga Istatistika ng Paggamit ng Enerhiya",
-      "Description": "Patuloy na sinusubaybayan, pinagsasama-sama, at tinatala ang datos ng pagkonsumo ng enerhiya (W/h) sa mga regular na pagitan. Nagpapatupad ng isang kumpletong API para sa pag-browse at pag-query sa mga makasaysayang dataset."
+      "Description": "Patuloy na sinusubaybayan, pinagsasama-sama, at tinatala ang datos ng pagkonsumo ng enerhiya (Wh) sa mga regular na pagitan. Nagpapatupad ng isang kumpletong API para sa pag-browse at pag-query sa mga makasaysayang dataset."
     },
     "572": {
       "Title": "Halimbawa ng mga Istatistika ng Pie Chart",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Pagkonsumo ng Enerhiya kada Oras",
       "Description": "Bar chart na nagpapakita ng average na konsumo ng Watts/Oras para sa bawat oras ng araw (00h-23h). Ang datos ay pinagsama-sama sa napiling linggo at kinuha mula sa Energy Use Statistics API."
+    },
+    "579": {
+      "Title": "Buod ng Pang-araw-araw na Enerhiya",
+      "Description": "Pang-araw-araw na pagkonsumo ng enerhiya (Wh) ayon sa aparato.",
+      "Widget.Statistics.DailyReport": "Isama sa ulat ng Daily Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Utos ng Genie",

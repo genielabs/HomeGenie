@@ -313,7 +313,8 @@
       "Description": "Waxay u saamaxdaa xakamaynta luqadda dabiiciga ah ee nidaamkaaga caqliga leh iyadoo la adeegsanayo Google Gemini AI. Si aad u dhaqaajiso sifadan, geli furaha API sax ah. Raac tilmaamaha https://aistudio.google.com/app/apikey si aad u hesho furaha API bilaashka ah.",
       "ConfigureOptions.ApiKey": "Google Gemini AI furaha",
       "ConfigureOptions.ModelId": "Aqoonsiga Model",
-      "ConfigureOptions.SystemInstructions": "Tilmaamaha Nidaamka"
+      "ConfigureOptions.SystemInstructions": "Tilmaamaha Nidaamka",
+      "ConfigureOptions.SendContextData": "La wadaag macnaha guud ee nidaamka iyo moduleka AI"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Tirakoobka Isticmaalka Tamarta",
-      "Description": "Si joogto ah ayuu ula socdaa, isu geeyaa, una diiwaangeliyaa xogta isticmaalka tamarta (W/h) wakhtiyo joogto ah. Wuxuu hirgeliyaa API buuxa oo loogu talagalay daalacashada iyo weydiinta xogta taariikhiga ah."
+      "Description": "Si joogto ah ayuu ula socdaa, isu geeyaa, una diiwaangeliyaa xogta isticmaalka tamarta (Wh) wakhtiyo joogto ah. Wuxuu hirgeliyaa API buuxa oo loogu talagalay daalacashada iyo weydiinta xogta taariikhiga ah."
     },
     "572": {
       "Title": "Tusaalaha Tirakoobka Shaxda Pie",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Isticmaalka Tamarta Saacadlaha ah",
       "Description": "Shaxda baarka oo muujinaysa celceliska isticmaalka Watts/Saacadda saacad kasta oo maalinta ah (00h-23h). Xogta waxaa la isku soo ururiyay toddobaadka la doortay waxaana laga soo qaatay API-ga Tirakoobka Isticmaalka Tamarta."
+    },
+    "579": {
+      "Title": "Soo Koobidda Tamarta Maalinlaha ah",
+      "Description": "Isticmaalka tamarta maalinlaha ah (Wh) iyadoo loo eegayo qalabka.",
+      "Widget.Statistics.DailyReport": "Ku dar warbixinta Daily Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Taliska Genie",

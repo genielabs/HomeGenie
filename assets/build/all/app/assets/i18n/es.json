@@ -516,5 +516,19 @@
   "Utilities": "Utilidad",
   "Scenes": "Escenas",
   "Virtual Modules": "Módulos virtuales",
-  "Simulate": "Simular"
+  "Simulate": "Simular",
+  "day_of_year": "Día del año",
+  "year": "Año",
+  "Daily Energy Summary": "Resumen diario de energía",
+  "Data Monitor": "Monitor de datos",
+  "Hourly Energy Consumption": "Consumo de energía por hora",
+  "Pie Chart Stats example": "Demostración de gráfico circular",
+  "Weekly Energy Consumption": "Consumo semanal de energía",
+  "Window Shutters": "Contraventanas",
+  "Window Shutter 1": "Contraventana 1",
+  "Window Shutter 2": "Contraventana 2",
+  "Living Room": "Sala de estar",
+  "Mood Light": "Luz de ambiente",
+  "Dashboard": "Panel",
+  "watch_movies_dlna": "Mira tus películas y series (UPnP/DLNA)"
 }

@@ -313,7 +313,8 @@
       "Description": "Bi karanîna Gemini AI ya Google-ê, kontrola zimanê xwezayî ji bo pergala we ya jîr çalak dike. Ji bo çalakkirina vê taybetmendiyê, mifteyek API-yê ya derbasdar binivîse. Ji bo bidestxistina mifteyek API-yê ya belaş, rêwerzên li https://aistudio.google.com/app/apikey bişopînin.",
       "ConfigureOptions.ApiKey": "Mifteya API ya Google Gemini AI",
       "ConfigureOptions.ModelId": "Nasnameya Modelê",
-      "ConfigureOptions.SystemInstructions": "Rênimayên Sîstemê"
+      "ConfigureOptions.SystemInstructions": "Rênimayên Sîstemê",
+      "ConfigureOptions.SendContextData": "Çarçoveya sîstem û modulê bi AI re parve bike"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Statîstîkên Bikaranîna Enerjiyê",
-      "Description": "Daneyên xerckirina enerjiyê (W/h) bi berdewamî di navberên birêkûpêk de dişopîne, kom dike û tomar dike. API-yek tevahî ji bo gerandin û lêpirsîna setên daneyên dîrokî bicîh tîne."
+      "Description": "Daneyên xerckirina enerjiyê (Wh) bi berdewamî di navberên birêkûpêk de dişopîne, kom dike û tomar dike. API-yek tevahî ji bo gerandin û lêpirsîna setên daneyên dîrokî bicîh tîne."
     },
     "572": {
       "Title": "Nimûneya Statîstîkên Nexşeya Pî",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Xerckirina Enerjiyê ya Saetî",
       "Description": "Nexşeya barî ku xerckirina navînî ya Watt/Saet ji bo her saetek rojê (00h-23h) nîşan dide. Daneyên li ser hefteya bijartî têne berhev kirin û ji API-ya Statîstîkên Bikaranîna Enerjiyê têne wergirtin."
+    },
+    "579": {
+      "Title": "Kurteya Enerjiya Rojane",
+      "Description": "Xerckirina enerjiya rojane (Wh) ji hêla cîhazê ve.",
+      "Widget.Statistics.DailyReport": "Di rapora rojane ya Wh de bihewîne"
     }
   },
   "scheduler_preset_action_genie_command": "Fermandariya Genie",

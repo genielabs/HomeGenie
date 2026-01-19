@@ -313,7 +313,8 @@
       "Description": "Ermöglicht die Steuerung Ihres Smart-Systems in natürlicher Sprache mithilfe der Gemini-KI von Google. Geben Sie zur Aktivierung einen gültigen API-Schlüssel ein. Folgen Sie den Anweisungen unter https://aistudio.google.com/app/apikey, um einen kostenlosen API-Schlüssel zu erhalten.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-Schlüssel",
       "ConfigureOptions.ModelId": "Modell-ID",
-      "ConfigureOptions.SystemInstructions": "Systemanweisungen"
+      "ConfigureOptions.SystemInstructions": "Systemanweisungen",
+      "ConfigureOptions.SendContextData": "System- und Modulkontext mit der KI teilen"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Energieverbrauchsstatistik",
-      "Description": "Überwacht, aggregiert und protokolliert kontinuierlich und in regelmäßigen Abständen Daten zum Energieverbrauch (Wh). Implementiert eine vollständige API zum Durchsuchen und Abfragen historischer Datensätze."
+      "Description": "Erfasst, aggregiert und protokolliert kontinuierlich und in regelmäßigen Abständen Daten zum Energieverbrauch (Wh). Implementiert eine vollständige API zum Durchsuchen und Abfragen historischer Datensätze."
     },
     "572": {
       "Title": "Beispiel für Statistiken in einem Kreisdiagramm",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Stündlicher Energieverbrauch",
       "Description": "Das Balkendiagramm zeigt den durchschnittlichen Wattstundenverbrauch für jede Stunde des Tages (00:00–23:00 Uhr). Die Daten wurden über die ausgewählte Woche aggregiert und stammen von der Energy Use Statistics API."
+    },
+    "579": {
+      "Title": "Tägliche Energieübersicht",
+      "Description": "Täglicher Energieverbrauch (Wh) pro Gerät.",
+      "Widget.Statistics.DailyReport": "In den täglichen Wh-Bericht aufnehmen"
     }
   },
   "scheduler_preset_action_genie_command": "Genie-Befehl",

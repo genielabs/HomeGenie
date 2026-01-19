@@ -313,7 +313,8 @@
       "Description": "Activează controlul în limbaj natural pentru sistemul tău inteligent folosind inteligența artificială Gemini de la Google. Pentru a activa această funcție, introdu o cheie API validă. Urmează instrucțiunile de la https://aistudio.google.com/app/apikey pentru a obține o cheie API gratuită.",
       "ConfigureOptions.ApiKey": "Cheia API Google Gemini AI",
       "ConfigureOptions.ModelId": "ID-ul modelului",
-      "ConfigureOptions.SystemInstructions": "Instrucțiuni de sistem"
+      "ConfigureOptions.SystemInstructions": "Instrucțiuni de sistem",
+      "ConfigureOptions.SendContextData": "Partajați contextul sistemului și al modulelor cu inteligența artificială"
     },
     "931": {
       "Title": "Gemeni Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Statistici privind consumul de energie",
-      "Description": "Monitorizează, agregă și înregistrează continuu datele privind consumul de energie (W/h) la intervale regulate. Implementează o API completă pentru răsfoirea și interogarea seturilor de date istorice."
+      "Description": "Monitorizează, agregă și înregistrează continuu datele privind consumul de energie (Wh) la intervale regulate. Implementează o API completă pentru răsfoirea și interogarea seturilor de date istorice."
     },
     "572": {
       "Title": "Exemplu de statistici pentru diagrame circulare",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Consum orar de energie",
       "Description": "Diagramă cu bare care afișează consumul mediu de wați/oră pentru fiecare oră a zilei (00:00-23:00). Datele sunt agregate pe parcursul săptămânii selectate și provin din API-ul Energy Use Statistics."
+    },
+    "579": {
+      "Title": "Rezumatul zilnic al energiei",
+      "Description": "Consumul zilnic de energie (Wh) în funcție de dispozitiv.",
+      "Widget.Statistics.DailyReport": "Includeți în raportul Daily Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Comandamentul Geniilor",

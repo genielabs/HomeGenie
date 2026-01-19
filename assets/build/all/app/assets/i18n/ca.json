@@ -516,5 +516,19 @@
   "Utilities": "Utilitat",
   "Scenes": "Escenes",
   "Virtual Modules": "Mòduls virtuals",
-  "Simulate": "Simular"
+  "Simulate": "Simular",
+  "day_of_year": "Dia de l'any",
+  "year": "Any",
+  "Daily Energy Summary": "Resum d'energia diària",
+  "Data Monitor": "Monitor de dades",
+  "Hourly Energy Consumption": "Ús d'energia per hora",
+  "Pie Chart Stats example": "Demostració del gràfic circular",
+  "Weekly Energy Consumption": "Ús d'energia setmanal",
+  "Window Shutters": "Persianes de finestres",
+  "Window Shutter 1": "Persiana de finestra 1",
+  "Window Shutter 2": "Persiana 2",
+  "Living Room": "Sala d'estar",
+  "Mood Light": "Llum d'ambient",
+  "Dashboard": "Tauler de control",
+  "watch_movies_dlna": "Mira les teves pel·lícules i sèries (UPnP/DLNA)"
 }

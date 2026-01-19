@@ -313,7 +313,8 @@
       "Description": "Mamela ny fifehezana ny fiteny voajanahary ho an'ny rafitra marani-tsainao mampiasa ny Gemini AI an'ny Google. Mba hampavitrika ity endri-javatra ity dia ampidiro fanalahidy API manan-kery. Araho ny toromarika ao amin'ny https://aistudio.google.com/app/apikey hahazoana fanalahidy API maimaim-poana.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API key",
       "ConfigureOptions.ModelId": "ID modely",
-      "ConfigureOptions.SystemInstructions": "Torolàlana momba ny rafitra"
+      "ConfigureOptions.SystemInstructions": "Torolàlana momba ny rafitra",
+      "ConfigureOptions.SendContextData": "Mizara ny tontolon'ny rafitra sy ny môdely amin'ny AI"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Statistika momba ny fampiasana angovo",
-      "Description": "Manara-maso, manangona ary mirakitra tsy tapaka ny angon-drakitra momba ny fandaniana angovo (W/h) amin'ny elanelam-potoana tsy tapaka. Mampihatra API feno ho an'ny fijerena sy ny fikarohana angon-drakitra ara-tantara."
+      "Description": "Manara-maso, manangona ary mirakitra tsy tapaka ny angon-drakitra momba ny fanjifana angovo (Wh) amin'ny elanelam-potoana tsy tapaka. Mampihatra API feno ho an'ny fijerena sy ny fikarohana angon-drakitra ara-tantara."
     },
     "572": {
       "Title": "Ohatra amin'ny statistika amin'ny tabilao boribory",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Fanjifana Angovo Isan'ora",
       "Description": "Tabilao bara mampiseho ny salan'isa fanjifana Watts/Ora isaky ny ora amin'ny andro (00h-23h). Angonina mandritra ny herinandro voafantina ny angona ary avy amin'ny Energy Use Statistics API."
+    },
+    "579": {
+      "Title": "Famintinana ny Angovo Isan'andro",
+      "Description": "Fanjifana angovo isan'andro (Wh) araka ny fitaovana.",
+      "Widget.Statistics.DailyReport": "Ampidiro ao amin'ny tatitra Daily Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Didin'ny Génie",

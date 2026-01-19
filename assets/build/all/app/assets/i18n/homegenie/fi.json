@@ -313,7 +313,8 @@
       "Description": "Mahdollistaa luonnollisen kielen hallinnan älyjärjestelmässäsi Googlen Gemini-tekoälyn avulla. Aktivoi tämä ominaisuus antamalla kelvollinen API-avain. Saat ilmaisen API-avaimen noudattamalla ohjeita osoitteessa https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI -API-avain",
       "ConfigureOptions.ModelId": "Mallitunnus",
-      "ConfigureOptions.SystemInstructions": "Järjestelmäohjeet"
+      "ConfigureOptions.SystemInstructions": "Järjestelmäohjeet",
+      "ConfigureOptions.SendContextData": "Jaa järjestelmän ja moduulin konteksti tekoälyn kanssa"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Energiankulutustilastot",
-      "Description": "Valvoo, kokoaa ja kirjaa energiankulutustietoja (W/h) jatkuvasti säännöllisin väliajoin. Toteuttaa täyden API:n historiallisten datajoukkojen selaamiseen ja kyselyyn."
+      "Description": "Valvoo, kokoaa ja kirjaa energiankulutustietoja (Wh) jatkuvasti säännöllisin väliajoin. Toteuttaa täyden API:n historiallisten datajoukkojen selaamiseen ja kyselyihin."
     },
     "572": {
       "Title": "Esimerkki ympyrädiagrammista",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Tuntikohtainen energiankulutus",
       "Description": "Pylväsdiagrammi, joka näyttää keskimääräisen wattituntikulutuksen jokaiselle päivän tunnille (00–23). Tiedot on koottu valitulta viikolta ja ne ovat peräisin Energy Use Statistics API:sta."
+    },
+    "579": {
+      "Title": "Päivittäinen energiayhteenveto",
+      "Description": "Päivittäinen energiankulutus (Wh) laitteelta.",
+      "Widget.Statistics.DailyReport": "Sisällytä päivittäiseen valkoisten ..."
     }
   },
   "scheduler_preset_action_genie_command": "Genie-komento",

@@ -313,7 +313,8 @@
       "Description": "Yana ba da damar sarrafa harshe na halitta don tsarin ku mai wayo ta amfani da Google's Gemini AI. Don kunna wannan fasalin, shigar da maɓallin API mai aiki. Bi umarnin a https://aistudio.google.com/app/apikey don samun maɓallin API kyauta.",
       "ConfigureOptions.ApiKey": "Google Gemini AI key",
       "ConfigureOptions.ModelId": "Model ID",
-      "ConfigureOptions.SystemInstructions": "Umarnin Tsarin"
+      "ConfigureOptions.SystemInstructions": "Umarnin Tsarin",
+      "ConfigureOptions.SendContextData": "Raba tsarin da yanayin module tare da AI"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Kididdigar Amfani da Makamashi",
-      "Description": "Yana ci gaba da sa ido, tattarawa, da kuma yin rikodin bayanan amfani da makamashi (W/h) a lokaci-lokaci. Yana aiwatar da cikakken API don bincika bayanai na tarihi da kuma bincika su."
+      "Description": "Yana ci gaba da sa ido, tattarawa, da kuma yin rikodin bayanan amfani da makamashi (Wh) a lokaci-lokaci. Yana aiwatar da cikakken API don bincika bayanai na tarihi da kuma bincika su."
     },
     "572": {
       "Title": "Misalin Taswirar Keke",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Amfani da Makamashi a Sa'a",
       "Description": "Taswirar sandar da ke nuna matsakaicin amfani da Watts/Hour na kowace awa ta yini (00h-23h). Ana tattara bayanai a cikin makon da aka zaɓa kuma an samo su daga API ɗin Kididdigar Amfani da Makamashi."
+    },
+    "579": {
+      "Title": "Takaitaccen Bayani game da Makamashi na Yau da Kullum",
+      "Description": "Amfani da makamashi na yau da kullun (Wh) ta hanyar na'ura.",
+      "Widget.Statistics.DailyReport": "A saka a cikin rahoton Daily Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Kwamandan Genie",

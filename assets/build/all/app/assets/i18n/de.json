@@ -516,5 +516,19 @@
   "Utilities": "Dienstprogramm",
   "Scenes": "Szenen",
   "Virtual Modules": "Virtuelle Module",
-  "Simulate": "Simulieren"
+  "Simulate": "Simulieren",
+  "day_of_year": "Tag des Jahres",
+  "year": "Jahr",
+  "Daily Energy Summary": "Tägliche Energieübersicht",
+  "Data Monitor": "Datenmonitor",
+  "Hourly Energy Consumption": "Stündlicher Energieverbrauch",
+  "Pie Chart Stats example": "Tortendiagramm-Demo",
+  "Weekly Energy Consumption": "Wöchentlicher Energieverbrauch",
+  "Window Shutters": "Fensterläden",
+  "Window Shutter 1": "Fensterladen 1",
+  "Window Shutter 2": "Fensterladen 2",
+  "Living Room": "Wohnzimmer",
+  "Mood Light": "Stimmungslicht",
+  "Dashboard": "Armaturenbrett",
+  "watch_movies_dlna": "Filme und Serien ansehen (UPnP/DLNA)"
 }

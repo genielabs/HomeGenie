@@ -516,5 +516,19 @@
   "Utilities": "യൂട്ടിലിറ്റി",
   "Scenes": "രംഗങ്ങൾ",
   "Virtual Modules": "വെർച്വൽ മൊഡ്യൂളുകൾ",
-  "Simulate": "സിമുലേറ്റ് ചെയ്യുക"
+  "Simulate": "സിമുലേറ്റ് ചെയ്യുക",
+  "day_of_year": "വർഷത്തിലെ ദിവസം",
+  "year": "വർഷം",
+  "Daily Energy Summary": "ദൈനംദിന ഊർജ്ജ സംഗ്രഹം",
+  "Data Monitor": "ഡാറ്റ മോണിറ്റർ",
+  "Hourly Energy Consumption": "മണിക്കൂർ തോറുമുള്ള ഊർജ്ജ ഉപയോഗം",
+  "Pie Chart Stats example": "പൈ ചാർട്ട് ഡെമോ",
+  "Weekly Energy Consumption": "പ്രതിവാര ഊർജ്ജ ഉപയോഗം",
+  "Window Shutters": "ജനൽ ഷട്ടറുകൾ",
+  "Window Shutter 1": "വിൻഡോ ഷട്ടർ 1",
+  "Window Shutter 2": "വിൻഡോ ഷട്ടർ 2",
+  "Living Room": "ലിവിംഗ് റൂം",
+  "Mood Light": "മൂഡ് ലൈറ്റ്",
+  "Dashboard": "ഡാഷ്‌ബോർഡ്",
+  "watch_movies_dlna": "നിങ്ങളുടെ സിനിമകളും പരമ്പരകളും കാണുക (UPnP/DLNA)"
 }

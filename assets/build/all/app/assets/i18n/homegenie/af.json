@@ -313,7 +313,8 @@
       "Description": "Aktiveer natuurlike taalbeheer vir jou slimstelsel met behulp van Google se Gemini KI. Om hierdie kenmerk te aktiveer, voer 'n geldige API-sleutel in. Volg die instruksies by https://aistudio.google.com/app/apikey om 'n gratis API-sleutel te kry.",
       "ConfigureOptions.ApiKey": "Google Gemini KI API-sleutel",
       "ConfigureOptions.ModelId": "Model-ID",
-      "ConfigureOptions.SystemInstructions": "Stelselinstruksies"
+      "ConfigureOptions.SystemInstructions": "Stelselinstruksies",
+      "ConfigureOptions.SendContextData": "Deel stelsel- en modulekonteks met die KI"
     },
     "931": {
       "Title": "Tweeling-widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Energieverbruikstatistieke",
-      "Description": "Monitor, versamel en teken energieverbruiksdata (W/h) voortdurend met gereelde tussenposes aan. Implementeer 'n volledige API vir die blaai en navraag van historiese datastelle."
+      "Description": "Monitor, versamel en teken energieverbruiksdata (Wh) voortdurend met gereelde tussenposes aan. Implementeer 'n volledige API vir die blaai en navraag van historiese datastelle."
     },
     "572": {
       "Title": "Voorbeeld van 'n sirkelgrafiekstatistiek",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Uurlikse Energieverbruik",
       "Description": "Staafgrafiek wat die gemiddelde Watt/Uur-verbruik vir elke uur van die dag (00:00-23:00) vertoon. Data word oor die gekose week saamgevoeg en is verkry vanaf die Energieverbruikstatistieke-API."
+    },
+    "579": {
+      "Title": "Daaglikse Energie Opsomming",
+      "Description": "Daaglikse energieverbruik (Wh) per toestel.",
+      "Widget.Statistics.DailyReport": "Sluit in Daaglikse Wh-verslag in"
     }
   },
   "scheduler_preset_action_genie_command": "Genie-opdrag",

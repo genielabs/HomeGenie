@@ -516,5 +516,19 @@
   "Utilities": "Ọrụ",
   "Scenes": "Ihe nkiri",
   "Virtual Modules": "Modulu mebere emebere",
-  "Simulate": "Mee ka ọ dị ka ihe nlereanya"
+  "Simulate": "Mee ka ọ dị ka ihe nlereanya",
+  "day_of_year": "Ụbọchị nke Afọ",
+  "year": "Afọ",
+  "Daily Energy Summary": "Nchịkọta Ike Kwa Ụbọchị",
+  "Data Monitor": "Nyocha Data",
+  "Hourly Energy Consumption": "Ojiji Ike kwa Awa",
+  "Pie Chart Stats example": "Ngosipụta Chaatị achịcha",
+  "Weekly Energy Consumption": "Ojiji Ike Kwa Izu",
+  "Window Shutters": "Mkpuchi windo",
+  "Window Shutter 1": "Mkpuchi windo 1",
+  "Window Shutter 2": "Mkpuchi windo nke abụọ",
+  "Living Room": "Ime ụlọ ezumike",
+  "Mood Light": "Ìhè Ọnọdụ",
+  "Dashboard": "Dashboard",
+  "watch_movies_dlna": "Lelee ihe nkiri na usoro gị (UPnP/DLNA)"
 }

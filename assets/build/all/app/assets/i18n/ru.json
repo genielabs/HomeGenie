@@ -516,5 +516,19 @@
   "Utilities": "Полезные функции",
   "Scenes": "Сцены",
   "Virtual Modules": "Виртуальные модули",
-  "Simulate": "Имитировать"
+  "Simulate": "Имитировать",
+  "day_of_year": "День года",
+  "year": "Год",
+  "Daily Energy Summary": "Сводка по суточному потреблению энергии",
+  "Data Monitor": "Монитор данных",
+  "Hourly Energy Consumption": "Почасовое потребление энергии",
+  "Pie Chart Stats example": "Демонстрация круговой диаграммы",
+  "Weekly Energy Consumption": "Еженедельное потребление энергии",
+  "Window Shutters": "Ставни на окна",
+  "Window Shutter 1": "Ставни окна 1",
+  "Window Shutter 2": "Ставни окна 2",
+  "Living Room": "Гостиная",
+  "Mood Light": "Настроение освещения",
+  "Dashboard": "Панель управления",
+  "watch_movies_dlna": "Смотрите фильмы и сериалы (UPnP/DLNA)"
 }

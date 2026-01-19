@@ -516,5 +516,19 @@
   "Utilities": "公用事业",
   "Scenes": "场景",
   "Virtual Modules": "虚拟模块",
-  "Simulate": "模拟"
+  "Simulate": "模拟",
+  "day_of_year": "一年中的某一天",
+  "year": "年",
+  "Daily Energy Summary": "每日能量概要",
+  "Data Monitor": "数据监控器",
+  "Hourly Energy Consumption": "每小时能源消耗量",
+  "Pie Chart Stats example": "饼图演示",
+  "Weekly Energy Consumption": "每周能源消耗",
+  "Window Shutters": "百叶窗",
+  "Window Shutter 1": "百叶窗 1",
+  "Window Shutter 2": "百叶窗 2",
+  "Living Room": "客厅",
+  "Mood Light": "情绪灯",
+  "Dashboard": "仪表板",
+  "watch_movies_dlna": "观看电影和剧集（UPnP/DLNA）"
 }

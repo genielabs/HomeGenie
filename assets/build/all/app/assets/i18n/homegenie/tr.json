@@ -313,7 +313,8 @@
       "Description": "Google'ın Gemini AI teknolojisini kullanarak akıllı sisteminiz için doğal dil kontrolünü etkinleştirir. Bu özelliği etkinleştirmek için geçerli bir API anahtarı girin. Ücretsiz bir API anahtarı almak için https://aistudio.google.com/app/apikey adresindeki talimatları izleyin.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API anahtarı",
       "ConfigureOptions.ModelId": "Model Kimliği",
-      "ConfigureOptions.SystemInstructions": "Sistem Talimatları"
+      "ConfigureOptions.SystemInstructions": "Sistem Talimatları",
+      "ConfigureOptions.SendContextData": "Sistem ve modül bağlamını yapay zeka ile paylaşın."
     },
     "931": {
       "Title": "İkizler Widget Cin'i",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Enerji Kullanım İstatistikleri",
-      "Description": "Enerji tüketim verilerini (W/sa) düzenli aralıklarla sürekli olarak izler, toplar ve kaydeder. Geçmiş veri kümelerine göz atmak ve sorgulamak için eksiksiz bir API sunar."
+      "Description": "Enerji tüketim verilerini (Wh) düzenli aralıklarla sürekli olarak izler, toplar ve kaydeder. Geçmiş veri kümelerine göz atmak ve sorgulamak için eksiksiz bir API uygular."
     },
     "572": {
       "Title": "Pasta Grafiği İstatistik Örneği",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Saatlik Enerji Tüketimi",
       "Description": "Günün her saati için (00:00-23:00) ortalama Watt/Saat tüketimini gösteren çubuk grafik. Veriler seçilen hafta üzerinden toplanmış ve Enerji Kullanım İstatistikleri API'sinden alınmıştır."
+    },
+    "579": {
+      "Title": "Günlük Enerji Özeti",
+      "Description": "Cihaz başına günlük enerji tüketimi (Wh).",
+      "Widget.Statistics.DailyReport": "Günlük Wh raporuna dahil edin"
     }
   },
   "scheduler_preset_action_genie_command": "Cin Komutu",

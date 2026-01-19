@@ -516,5 +516,19 @@
   "Utilities": "Itilite",
   "Scenes": "Sèn yo",
   "Virtual Modules": "Modil Vityèl",
-  "Simulate": "Simile"
+  "Simulate": "Simile",
+  "day_of_year": "Jou nan Ane a",
+  "year": "Ane",
+  "Daily Energy Summary": "Rezime Enèji Chak Jou",
+  "Data Monitor": "Monitè Done",
+  "Hourly Energy Consumption": "Itilizasyon Enèji Chak Èdtan",
+  "Pie Chart Stats example": "Demo graf sikilè",
+  "Weekly Energy Consumption": "Itilizasyon Enèji chak semèn",
+  "Window Shutters": "Vole fenèt yo",
+  "Window Shutter 1": "Volet Fenèt 1",
+  "Window Shutter 2": "Volet Fenèt 2",
+  "Living Room": "Salon",
+  "Mood Light": "Limyè atitid",
+  "Dashboard": "Tablodbò",
+  "watch_movies_dlna": "Gade fim ak seri ou yo (UPnP/DLNA)"
 }

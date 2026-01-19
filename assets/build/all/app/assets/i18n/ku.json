@@ -516,5 +516,19 @@
   "Utilities": "Amûr",
   "Scenes": "Dîmen",
   "Virtual Modules": "Modulên Virtual",
-  "Simulate": "Simulasyon bike"
+  "Simulate": "Simulasyon bike",
+  "day_of_year": "Roja Salê",
+  "year": "Sal",
+  "Daily Energy Summary": "Kurteya Enerjiya Rojane",
+  "Data Monitor": "Çavdêrê Daneyan",
+  "Hourly Energy Consumption": "Bikaranîna Enerjiyê ya Saetî",
+  "Pie Chart Stats example": "Demoya Nexşeya Pîvî",
+  "Weekly Energy Consumption": "Bikaranîna Enerjiyê ya Heftane",
+  "Window Shutters": "Perdeyên Paceyan",
+  "Window Shutter 1": "Perdeya Pencereyê 1",
+  "Window Shutter 2": "Perdeya Paceyê 2",
+  "Living Room": "Odeya binerdê",
+  "Mood Light": "Ronahiya Mîzahê",
+  "Dashboard": "Panela kontrolê",
+  "watch_movies_dlna": "Fîlm û rêzefîlmên xwe temaşe bikin (UPnP/DLNA)"
 }

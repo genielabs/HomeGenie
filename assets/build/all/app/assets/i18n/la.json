@@ -516,5 +516,19 @@
   "Utilities": "Utilitas",
   "Scenes": "Scaenae",
   "Virtual Modules": "Moduli Virtuales",
-  "Simulate": "Simula"
+  "Simulate": "Simula",
+  "day_of_year": "Dies Anni",
+  "year": "Annus",
+  "Daily Energy Summary": "Summarium Energiae Diariae",
+  "Data Monitor": "Monitor Datorum",
+  "Hourly Energy Consumption": "Usus Energiae Horarius",
+  "Pie Chart Stats example": "Demonstratio Diagrammatis Circularis",
+  "Weekly Energy Consumption": "Usus Energiae Hebdomadalis",
+  "Window Shutters": "Fenestrae Obturamenta",
+  "Window Shutter 1": "Fenestra Obturaculum 1",
+  "Window Shutter 2": "Fenestrae Obturaculum II",
+  "Living Room": "Conclave",
+  "Mood Light": "Lux Animi",
+  "Dashboard": "Tabula instrumentorum",
+  "watch_movies_dlna": "Pelliculas et Series Tuas Specta (UPnP/DLNA)"
 }

@@ -516,5 +516,19 @@
   "Utilities": "Nytte",
   "Scenes": "Scener",
   "Virtual Modules": "Virtuelle moduler",
-  "Simulate": "Simuler"
+  "Simulate": "Simuler",
+  "day_of_year": "Årets dag",
+  "year": "År",
+  "Daily Energy Summary": "Daglig energisammendrag",
+  "Data Monitor": "Datamonitor",
+  "Hourly Energy Consumption": "Timebasert energiforbruk",
+  "Pie Chart Stats example": "Demo av kakediagram",
+  "Weekly Energy Consumption": "Ukentlig energiforbruk",
+  "Window Shutters": "Vindusskodder",
+  "Window Shutter 1": "Vindusskodde 1",
+  "Window Shutter 2": "Vindusskodde 2",
+  "Living Room": "Stue",
+  "Mood Light": "Stemningslys",
+  "Dashboard": "Dashbord",
+  "watch_movies_dlna": "Se filmer og serier (UPnP/DLNA)"
 }

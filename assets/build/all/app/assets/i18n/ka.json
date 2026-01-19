@@ -516,5 +516,19 @@
   "Utilities": "კომუნალური მომსახურება",
   "Scenes": "სცენები",
   "Virtual Modules": "ვირტუალური მოდულები",
-  "Simulate": "სიმულაცია"
+  "Simulate": "სიმულაცია",
+  "day_of_year": "წლის დღე",
+  "year": "წელი",
+  "Daily Energy Summary": "ყოველდღიური ენერგიის შეჯამება",
+  "Data Monitor": "მონაცემთა მონიტორი",
+  "Hourly Energy Consumption": "საათობრივი ენერგიის მოხმარება",
+  "Pie Chart Stats example": "წრიული დიაგრამის დემო ვერსია",
+  "Weekly Energy Consumption": "ყოველკვირეული ენერგიის მოხმარება",
+  "Window Shutters": "ფანჯრის ჟალუზები",
+  "Window Shutter 1": "ფანჯრის ჟალუზი 1",
+  "Window Shutter 2": "ფანჯრის ჟალუზი 2",
+  "Living Room": "მისაღები ოთახი",
+  "Mood Light": "განწყობის განათება",
+  "Dashboard": "საინფორმაციო დაფა",
+  "watch_movies_dlna": "უყურეთ თქვენს ფილმებსა და სერიალებს (UPnP/DLNA)"
 }

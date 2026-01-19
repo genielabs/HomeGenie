@@ -313,7 +313,8 @@
       "Description": "Erméiglecht d'Kontroll vun der natierlecher Sprooch fir Äert Smart-System mat der Gemini AI vu Google. Fir dës Funktioun z'aktivéieren, gitt e gültege API-Schlëssel an. Follegt den Instruktiounen op https://aistudio.google.com/app/apikey fir e gratis API-Schlëssel ze kréien.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API Schlëssel",
       "ConfigureOptions.ModelId": "Modell-ID",
-      "ConfigureOptions.SystemInstructions": "Systeminstruktiounen"
+      "ConfigureOptions.SystemInstructions": "Systeminstruktiounen",
+      "ConfigureOptions.SendContextData": "Deelt de System- a Modulkontext mat der KI"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Energieverbrauchsstatistik",
-      "Description": "Iwwerwaacht, sammelt a protokolléiert Energieverbrauchsdaten (W/h) kontinuéierlech a reegelméissegen Intervaller. Implementéiert eng komplett API fir d'Duerchsichen an d'Ofrue vun historeschen Datensätz."
+      "Description": "Iwwerwaacht, sammelt a protokolléiert Energieverbrauchsdaten (Wh) kontinuéierlech a reegelméissegen Intervaller. Implementéiert eng komplett API fir d'Duerchsichen an d'Ofrue vun historeschen Datensätz."
     },
     "572": {
       "Title": "Beispill fir Statistike vun engem Kuchdiagramm",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Stonnelaang Energieverbrauch",
       "Description": "Balkendiagramm, dat den duerchschnëttleche Watt/Stonn-Verbrauch fir all Stonn vum Dag (00:00-23:00 Auer) weist. D'Donnéeë ginn iwwer déi gewielte Woch zesummegefaasst a stamen aus der Energy Use Statistics API."
+    },
+    "579": {
+      "Title": "Deeglech Energiezesummefassung",
+      "Description": "Deegleche Energieverbrauch (Wh) pro Apparat.",
+      "Widget.Statistics.DailyReport": "An deegleche Wh-Rapport integréieren"
     }
   },
   "scheduler_preset_action_genie_command": "Genie Kommando",

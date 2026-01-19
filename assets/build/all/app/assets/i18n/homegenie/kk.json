@@ -313,7 +313,8 @@
       "Description": "Google Gemini AI көмегімен смарт жүйеңіз үшін табиғи тілді басқаруды қосады. Бұл мүмкіндікті белсендіру үшін жарамды API кілтін енгізіңіз. Тегін API кілтін алу үшін https://aistudio.google.com/app/apikey бетіндегі нұсқауларды орындаңыз.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API кілті",
       "ConfigureOptions.ModelId": "Үлгі идентификаторы",
-      "ConfigureOptions.SystemInstructions": "Жүйелік нұсқаулар"
+      "ConfigureOptions.SystemInstructions": "Жүйелік нұсқаулар",
+      "ConfigureOptions.SendContextData": "Жүйе мен модуль контекстін жасанды интеллектпен бөлісіңіз"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Сағаттық энергия тұтынуы",
       "Description": "Күннің әр сағаты (00-23 сағат) үшін орташа ватт/сағат тұтынуды көрсететін бағаналық диаграмма. Деректер таңдалған апта бойынша жинақталған және Энергияны пайдалану статистикасы API интерфейсінен алынған."
+    },
+    "579": {
+      "Title": "Күнделікті энергия қоры",
+      "Description": "Құрылғы бойынша тәуліктік энергия тұтыну (Вт/сағ).",
+      "Widget.Statistics.DailyReport": "Күнделікті Wh есебіне қосу"
     }
   },
   "scheduler_preset_action_genie_command": "Жын командасы",
