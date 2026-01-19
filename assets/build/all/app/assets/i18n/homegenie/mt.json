@@ -313,7 +313,8 @@
       "Description": "Jippermetti kontroll tal-lingwa naturali għas-sistema intelliġenti tiegħek bl-użu tal-Gemini AI ta' Google. Biex tattiva din il-karatteristika, daħħal ċavetta API valida. Segwi l-istruzzjonijiet fuq https://aistudio.google.com/app/apikey biex tikseb ċavetta API b'xejn.",
       "ConfigureOptions.ApiKey": "Ċavetta tal-API tal-AI tal-Google Gemini",
       "ConfigureOptions.ModelId": "ID tal-Mudell",
-      "ConfigureOptions.SystemInstructions": "Istruzzjonijiet tas-Sistema"
+      "ConfigureOptions.SystemInstructions": "Istruzzjonijiet tas-Sistema",
+      "ConfigureOptions.SendContextData": "Aqsam il-kuntest tas-sistema u tal-modulu mal-AI"
     },
     "931": {
       "Title": "Widget tal-Ġenju tal-Gemini",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Statistika dwar l-Użu tal-Enerġija",
-      "Description": "Jimmonitorja, jiġbor flimkien, u jirreġistra kontinwament id-dejta tal-konsum tal-enerġija (W/h) f'intervalli regolari. Jimplimenta API sħiħa għall-browsing u l-interrogazzjoni ta' settijiet ta' dejta storiċi."
+      "Description": "Jimmonitorja, jiġbor flimkien, u jirreġistra kontinwament id-dejta tal-konsum tal-enerġija (Wh) f'intervalli regolari. Jimplimenta API sħiħa għall-browsing u l-interrogazzjoni ta' settijiet ta' dejta storiċi."
     },
     "572": {
       "Title": "Eżempju ta' Statistika ta' Pie Chart",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Konsum tal-Enerġija kull Siegħa",
       "Description": "Grafika bil-bars li turi l-konsum medju ta' Watts/Siegħa għal kull siegħa tal-ġurnata (00h-23h). Id-dejta hija aggregata matul il-ġimgħa magħżula u ġejja mill-API tal-Istatistika tal-Użu tal-Enerġija."
+    },
+    "579": {
+      "Title": "Sommarju tal-Enerġija ta' Kuljum",
+      "Description": "Konsum ta' enerġija kuljum (Wh) skont l-apparat.",
+      "Widget.Statistics.DailyReport": "Inkludi fir-rapport ta' Daily Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Kmand tal-Ġenji",

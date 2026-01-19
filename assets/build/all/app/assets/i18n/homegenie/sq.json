@@ -313,7 +313,8 @@
       "Description": "Aktivizon kontrollin e gjuhës natyrore për sistemin tuaj inteligjent duke përdorur Gemini AI të Google. Për të aktivizuar këtë funksion, futni një çelës API të vlefshëm. Ndiqni udhëzimet në https://aistudio.google.com/app/apikey për të marrë një çelës API falas.",
       "ConfigureOptions.ApiKey": "Çelësi API i Google Gemini AI",
       "ConfigureOptions.ModelId": "ID e modelit",
-      "ConfigureOptions.SystemInstructions": "Udhëzimet e Sistemit"
+      "ConfigureOptions.SystemInstructions": "Udhëzimet e Sistemit",
+      "ConfigureOptions.SendContextData": "Ndani kontekstin e sistemit dhe modulit me IA-në"
     },
     "931": {
       "Title": "Xhindi i Widget-it të Binjakëve",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Statistikat e Përdorimit të Energjisë",
-      "Description": "Monitoron, grumbullon dhe regjistron vazhdimisht të dhënat e konsumit të energjisë (W/h) në intervale të rregullta. Zbaton një API të plotë për shfletimin dhe kërkimin e të dhënave historike."
+      "Description": "Monitoron, grumbullon dhe regjistron vazhdimisht të dhënat e konsumit të energjisë (Wh) në intervale të rregullta. Zbaton një API të plotë për shfletimin dhe kërkimin e të dhënave historike."
     },
     "572": {
       "Title": "Shembull i Statistikave të Grafikut Rrethor",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Konsumi i Energjisë në Ora",
       "Description": "Grafik me shtylla që shfaq konsumin mesatar të vatëve/orë për çdo orë të ditës (00:00-23:00). Të dhënat grumbullohen gjatë javës së zgjedhur dhe burojnë nga API-ja e Statistikave të Përdorimit të Energjisë."
+    },
+    "579": {
+      "Title": "Përmbledhja e Energjisë Ditore",
+      "Description": "Konsumi ditor i energjisë (Wh) nga pajisja.",
+      "Widget.Statistics.DailyReport": "Përfshi në raportin ditor të Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Komanda e Xhindëve",

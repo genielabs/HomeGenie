@@ -313,7 +313,8 @@
       "Description": "Na-enyere njikwa asụsụ eke maka sistemụ smart gị site na iji Gemini AI nke Google. Iji mee ka njirimara a rụọ ọrụ, tinye igodo API dị irè. Soro ntuziaka a na https://aistudio.google.com/app/apikey iji nweta igodo API efu.",
       "ConfigureOptions.ApiKey": "Google Gemini AI igodo",
       "ConfigureOptions.ModelId": "NJ nlereanya",
-      "ConfigureOptions.SystemInstructions": "Ntuziaka Sistemụ"
+      "ConfigureOptions.SystemInstructions": "Ntuziaka Sistemụ",
+      "ConfigureOptions.SendContextData": "Kekọrịta ọnọdụ sistemụ na modulu na AI"
     },
     "931": {
       "Title": "Gemini wijetị Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Ọnụọgụgụ Ojiji Ike",
-      "Description": "Na-enyocha, na-achịkọta, ma na-edekọ data oriri ike (W/h) mgbe niile. Na-etinye API zuru oke maka ịchọgharị na ịjụ ajụjụ gbasara data akụkọ ihe mere eme."
+      "Description": "Na-enyocha, na-achịkọta, ma na-edekọ data oriri ike (Wh) mgbe niile. Na-etinye API zuru oke maka ịchọgharị na ịjụ ajụjụ gbasara data akụkọ ihe mere eme."
     },
     "572": {
       "Title": "Ihe atụ nke stats chaatị achịcha",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Oriri Ike kwa elekere",
       "Description": "Chaatị mmanya na-egosi nkezi oriri Watts/Awa maka awa ọ bụla n'ụbọchị (00h-23h). A na-achịkọta data n'ime izu ahọpụtara ma nweta ya site na API Energy Use Statistics."
+    },
+    "579": {
+      "Title": "Nchịkọta Ike Kwa Ụbọchị",
+      "Description": "Oriri ike kwa ụbọchị (Wh) site na ngwaọrụ.",
+      "Widget.Statistics.DailyReport": "Tinye na akụkọ Daily Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Iwu Genie",

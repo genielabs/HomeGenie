@@ -313,7 +313,8 @@
       "Description": "Imperium linguae naturalis pro systemate tuo intelligenti per Gemini AI Google permittit. Ad hanc functionem activandam, clavem API validam inscribe. Instructiones apud https://aistudio.google.com/app/apikey sequere ut clavem API gratuitam accipias.",
       "ConfigureOptions.ApiKey": "Clavis API Google Gemini AI",
       "ConfigureOptions.ModelId": "Identificatio exemplaris",
-      "ConfigureOptions.SystemInstructions": "Instructiones Systematis"
+      "ConfigureOptions.SystemInstructions": "Instructiones Systematis",
+      "ConfigureOptions.SendContextData": "Contextum systematis et moduli cum intellegentia artificiali communica."
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Statisticae Usus Energiae",
-      "Description": "Consumptionem energiae (W/h) continenter monitorat, aggregat, et anotat intervallis regularibus. API plenam ad perscrutandas et interrogandas collectiones datorum historicorum implementat."
+      "Description": "Consumptionis energiae (Wh) notitias regularibus intervallis continenter observat, aggregat, et in memoriam revocat. API plenam ad historicas collectiones perscrutandas et interrogandas instituit."
     },
     "572": {
       "Title": "Exemplum Statisticarum Diagrammatis Circularis",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Consumptio Energiae Horaria",
       "Description": "Diagramma columnarium consumptionem mediam Watts/Horae pro qualibet hora diei (00:00-23:00) ostendens. Data per hebdomadam selectam aggregata sunt et ex API Statisticarum Usus Energiae derivantur."
+    },
+    "579": {
+      "Title": "Summarium Energiae Diariae",
+      "Description": "Consumptio energiae quotidiana (Wh) per instrumentum.",
+      "Widget.Statistics.DailyReport": "Includi in relatione \"Cotidianum Wh\""
     }
   },
   "scheduler_preset_action_genie_command": "Mandatum Genii",

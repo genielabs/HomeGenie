@@ -313,7 +313,8 @@
       "Description": "የGoogle Gemini AIን በመጠቀም ለእርስዎ ዘመናዊ ስርዓት የተፈጥሮ ቋንቋ ቁጥጥርን ያነቃል። ይህንን ባህሪ ለማግበር የሚሰራ የኤፒአይ ቁልፍ ያስገቡ። ነፃ የኤፒአይ ቁልፍ ለማግኘት https://aistudio.google.com/app/apikey ላይ ያሉትን መመሪያዎች ይከተሉ።",
       "ConfigureOptions.ApiKey": "Google Gemini AI API ቁልፍ",
       "ConfigureOptions.ModelId": "የሞዴል መታወቂያ",
-      "ConfigureOptions.SystemInstructions": "የስርዓት መመሪያዎች"
+      "ConfigureOptions.SystemInstructions": "የስርዓት መመሪያዎች",
+      "ConfigureOptions.SendContextData": "የስርዓት እና የሞዱል አውድ ከ AI ጋር ያጋሩ"
     },
     "931": {
       "Title": "የጌሚኒ መግብር ጂኒ",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "የኃይል አጠቃቀም ስታቲስቲክስ",
-      "Description": "የኃይል ፍጆታ ውሂብን (W/h) በተከታታይ በየጊዜው ይከታተላል፣ ያዋህዳል እና ይመዘግባል። ታሪካዊ የውሂብ ስብስቦችን ለማሰስ እና ለመጠየቅ ሙሉ ኤፒአይ ይተገብራል።"
+      "Description": "የኃይል ፍጆታ ውሂብን (Wh) በየጊዜው በተከታታይ ይከታተላል፣ ያዋህዳል እና ይመዘግባል። ታሪካዊ የውሂብ ስብስቦችን ለማሰስ እና ለመጠየቅ ሙሉ ኤፒአይ ይተገብራል።"
     },
     "572": {
       "Title": "የፓይ ገበታ ስታቲስቲክስ ምሳሌ",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "በሰዓት የኃይል ፍጆታ",
       "Description": "በቀን ውስጥ ለእያንዳንዱ ሰዓት (00h-23h) አማካይ የዋት/ሰዓት ፍጆታን የሚያሳይ የአሞሌ ገበታ። መረጃው በተመረጠው ሳምንት ውስጥ ተሰብስቦ ከኢነርጂ አጠቃቀም ስታቲስቲክስ ኤፒአይ የተገኘ ነው።"
+    },
+    "579": {
+      "Title": "ዕለታዊ የኃይል ማጠቃለያ",
+      "Description": "ዕለታዊ የኃይል ፍጆታ (Wh) በመሳሪያ።",
+      "Widget.Statistics.DailyReport": "በዕለታዊ የWH ሪፖርት ውስጥ ያካትቱ"
     }
   },
   "scheduler_preset_action_genie_command": "የጂኒ ኮማንድ",

@@ -313,7 +313,8 @@
       "Description": "Lehetővé teszi az intelligens rendszer természetes nyelvi vezérlését a Google Gemini mesterséges intelligenciájának használatával. A funkció aktiválásához adjon meg egy érvényes API-kulcsot. Kövesse a https://aistudio.google.com/app/apikey oldalon található utasításokat egy ingyenes API-kulcs megszerzéséhez.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API kulcs",
       "ConfigureOptions.ModelId": "Modellazonosító",
-      "ConfigureOptions.SystemInstructions": "Rendszerutasítások"
+      "ConfigureOptions.SystemInstructions": "Rendszerutasítások",
+      "ConfigureOptions.SendContextData": "Rendszer- és modulkontextus megosztása a mesterséges intelligenciával"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Energiafelhasználási statisztikák",
-      "Description": "Folyamatosan figyeli, összesíti és naplózza az energiafogyasztási adatokat (W/h) rendszeres időközönként. Teljes API-t valósít meg a korábbi adatkészletek böngészéséhez és lekérdezéséhez."
+      "Description": "Folyamatosan figyeli, összesíti és naplózza az energiafogyasztási adatokat (Wh) rendszeres időközönként. Teljes API-t valósít meg a korábbi adatkészletek böngészéséhez és lekérdezéséhez."
     },
     "572": {
       "Title": "Kördiagram statisztikák példája",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Óránkénti energiafogyasztás",
       "Description": "Oszlopdiagram, amely a nap minden órájára (00:00-23:00) vonatkozó átlagos watt/óra fogyasztást mutatja. Az adatok a kiválasztott hétre összesítve jelennek meg, forrásuk az Energy Use Statistics API."
+    },
+    "579": {
+      "Title": "Napi energiaösszefoglaló",
+      "Description": "Napi energiafogyasztás (Wh) eszközönként.",
+      "Widget.Statistics.DailyReport": "Tartalmazza a napi fehérhónap-jelentésben"
     }
   },
   "scheduler_preset_action_genie_command": "Dzsinn Parancsnokság",

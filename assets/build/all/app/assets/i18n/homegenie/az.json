@@ -313,7 +313,8 @@
       "Description": "Google-un Gemini AI-dan istifadə edərək ağıllı sisteminiz üçün təbii dil nəzarətini təmin edir. Bu funksiyanı aktivləşdirmək üçün etibarlı API açarı daxil edin. Pulsuz API açarı əldə etmək üçün https://aistudio.google.com/app/apikey ünvanındakı təlimatlara əməl edin.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API açarı",
       "ConfigureOptions.ModelId": "Model ID",
-      "ConfigureOptions.SystemInstructions": "Sistem Təlimatları"
+      "ConfigureOptions.SystemInstructions": "Sistem Təlimatları",
+      "ConfigureOptions.SendContextData": "Sistem və modul kontekstini süni intellektlə paylaşın"
     },
     "931": {
       "Title": "Əkizlər Widget Cin",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Enerji İstifadəsi Statistikası",
-      "Description": "Enerji istehlakı məlumatlarını (Vt/saat) müntəzəm olaraq izləyir, aqreqasiya edir və qeyd edir. Tarixi məlumat dəstlərinə baxmaq və sorğu göndərmək üçün tam API tətbiq edir."
+      "Description": "Enerji istehlakı məlumatlarını (Wh) müntəzəm olaraq izləyir, aqreqasiya edir və qeyd edir. Tarixi məlumat dəstlərinə baxmaq və sorğu göndərmək üçün tam API tətbiq edir."
     },
     "572": {
       "Title": "Dairəvi Diaqram Statistikası nümunəsi",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Saatlıq Enerji İstehlakı",
       "Description": "Günün hər saatı (00-23 saat) üçün orta Vatt/Saat istehlakını göstərən sütunlu diaqram. Məlumatlar seçilmiş həftə üzrə toplanır və Enerji İstifadəsi Statistikası API-sindən əldə edilir."
+    },
+    "579": {
+      "Title": "Gündəlik Enerji Xülasəsi",
+      "Description": "Cihaz tərəfindən gündəlik enerji istehlakı (Wh).",
+      "Widget.Statistics.DailyReport": "Gündəlik Wh hesabatına daxil edin"
     }
   },
   "scheduler_preset_action_genie_command": "Cin Komandanlığı",

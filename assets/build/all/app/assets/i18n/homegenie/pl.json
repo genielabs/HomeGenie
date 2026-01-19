@@ -313,7 +313,8 @@
       "Description": "Umożliwia sterowanie systemem inteligentnym za pomocą języka naturalnego za pomocą Google Gemini AI. Aby aktywować tę funkcję, wprowadź prawidłowy klucz API. Postępuj zgodnie z instrukcjami na stronie https://aistudio.google.com/app/apikey, aby otrzymać bezpłatny klucz API.",
       "ConfigureOptions.ApiKey": "Klucz API Google Gemini AI",
       "ConfigureOptions.ModelId": "Identyfikator modelu",
-      "ConfigureOptions.SystemInstructions": "Instrukcje systemowe"
+      "ConfigureOptions.SystemInstructions": "Instrukcje systemowe",
+      "ConfigureOptions.SendContextData": "Udostępniaj kontekst systemu i modułu sztucznej inteligencji"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Statystyki zużycia energii",
-      "Description": "Ciągłe monitorowanie, agregowanie i rejestrowanie danych dotyczących zużycia energii (W/h) w regularnych odstępach czasu. Implementacja pełnego API do przeglądania i wykonywania zapytań w historycznych zestawach danych."
+      "Description": "Ciągłe monitorowanie, agregowanie i rejestrowanie danych dotyczących zużycia energii (Wh) w regularnych odstępach czasu. Implementacja pełnego interfejsu API do przeglądania i wyszukiwania historycznych zestawów danych."
     },
     "572": {
       "Title": "Przykład statystyk wykresu kołowego",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Godzinowe zużycie energii",
       "Description": "Wykres słupkowy przedstawiający średnie zużycie energii w watach na godzinę dla każdej godziny dnia (00-23). Dane są agregowane dla wybranego tygodnia i pochodzą z interfejsu API statystyk zużycia energii."
+    },
+    "579": {
+      "Title": "Podsumowanie dziennej energii",
+      "Description": "Dzienne zużycie energii (Wh) przez urządzenie.",
+      "Widget.Statistics.DailyReport": "Uwzględnij w raporcie Daily Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Dowództwo Dżina",

@@ -313,7 +313,8 @@
       "Description": "Huwasha udhibiti wa lugha asilia kwa mfumo wako mahiri kwa kutumia Gemini AI ya Google. Ili kuwezesha kipengele hiki, weka ufunguo halali wa API. Fuata maagizo katika https://aistudio.google.com/app/apikey ili kupata ufunguo wa API bila malipo.",
       "ConfigureOptions.ApiKey": "Kitufe cha Google Gemini AI API",
       "ConfigureOptions.ModelId": "Kitambulisho cha mfano",
-      "ConfigureOptions.SystemInstructions": "Maelekezo ya Mfumo"
+      "ConfigureOptions.SystemInstructions": "Maelekezo ya Mfumo",
+      "ConfigureOptions.SendContextData": "Shiriki muktadha wa mfumo na moduli na AI"
     },
     "931": {
       "Title": "Gemini Widget Jini",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Takwimu za Matumizi ya Nishati",
-      "Description": "Hufuatilia, hukusanya, na kurekodi data ya matumizi ya nishati (W/h) kila mara kwa vipindi vya kawaida. Hutekeleza API kamili ya kuvinjari na kuuliza seti za data za kihistoria."
+      "Description": "Hufuatilia, hukusanya, na kurekodi data ya matumizi ya nishati (Wh) kila mara kwa vipindi vya kawaida. Hutekeleza API kamili ya kuvinjari na kuuliza seti za data za kihistoria."
     },
     "572": {
       "Title": "Mfano wa Takwimu za Chati ya Pai",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Matumizi ya Nishati kwa Saa",
       "Description": "Chati ya miraba inayoonyesha wastani wa matumizi ya Wati/Saa kwa kila saa ya siku (00h-23h). Data hukusanywa kwa wiki iliyochaguliwa na kupatikana kutoka kwa API ya Takwimu za Matumizi ya Nishati."
+    },
+    "579": {
+      "Title": "Muhtasari wa Nishati ya Kila Siku",
+      "Description": "Matumizi ya nishati ya kila siku (Wh) kwa kifaa.",
+      "Widget.Statistics.DailyReport": "Jumuisha katika ripoti ya Daily Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Amri ya Jini",

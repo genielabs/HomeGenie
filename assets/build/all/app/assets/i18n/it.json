@@ -418,6 +418,8 @@
   "size": "Dimensione",
   "Status.ColorHsb": "Colore (HSV)",
   "week_of_year": "Settimana dell'anno",
+  "day_of_year": "Giorno dell'anno",
+  "year": "Anno",
   "new_value": "Nuovo valore",
   "events_logger_database": "Database del Logger Eventi",
   "volatile_statistics_cache": "Cache Statistiche Volatile",
@@ -515,5 +517,17 @@
   "Scenarios": "Scenari",
   "Security": "Sicurezza",
   "Utilities": "Utilità",
-  "Weather and Environment": "Meteo e Ambiente"
+  "Weather and Environment": "Meteo & Ambiente",
+  "Daily Energy Summary": "Riepilogo Energia Quotidiano",
+  "Data Monitor": "Monitor Dati",
+  "Hourly Energy Consumption": "Consumo Energetico Orario",
+  "Pie Chart Stats example": "Demo Grafico a Torta",
+  "Weekly Energy Consumption": "Consumo Energetico Settimanale",
+  "Window Shutters": "Tapparelle",
+  "Window Shutter 1": "Tapparella 1",
+  "Window Shutter 2": "Tapparella 2",
+  "Living Room": "Soggiorno",
+  "Mood Light": "Luce Atmosfera",
+  "Dashboard": "Dashboard",
+  "watch_movies_dlna": "Guarda i tuoi Film e Serie TV (UPnP/DLNA)"
 }

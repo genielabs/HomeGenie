@@ -516,5 +516,19 @@
   "Utilities": "Ratonga",
   "Scenes": "Ngā Wāhanga",
   "Virtual Modules": "Ngā Kōwae Mariko",
-  "Simulate": "Whakatauira"
+  "Simulate": "Whakatauira",
+  "day_of_year": "Te Rā o te Tau",
+  "year": "Tau",
+  "Daily Energy Summary": "Whakarāpopototanga Pūngao o ia Rā",
+  "Data Monitor": "Aroturuki Raraunga",
+  "Hourly Energy Consumption": "Te Whakamahinga Pūngao ia Hāora",
+  "Pie Chart Stats example": "Whakaaturanga Tūtohi Porowhita",
+  "Weekly Energy Consumption": "Te Whakamahinga Pūngao ia Wiki",
+  "Window Shutters": "Ngā Ārai Matapihi",
+  "Window Shutter 1": "Ārai Matapihi 1",
+  "Window Shutter 2": "Ārai Matapihi 2",
+  "Living Room": "Rūma Noho",
+  "Mood Light": "Mārama Wairua",
+  "Dashboard": "Papatohu",
+  "watch_movies_dlna": "Mātakihia ō Kiriata me ō Raupapa (UPnP/DLNA)"
 }

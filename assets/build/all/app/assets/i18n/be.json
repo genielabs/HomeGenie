@@ -516,5 +516,19 @@
   "Utilities": "Утыліта",
   "Scenes": "Сцэны",
   "Virtual Modules": "Віртуальныя модулі",
-  "Simulate": "Мадэляваць"
+  "Simulate": "Мадэляваць",
+  "day_of_year": "Дзень года",
+  "year": "Год",
+  "Daily Energy Summary": "Штодзённы агляд энергіі",
+  "Data Monitor": "Манітор дадзеных",
+  "Hourly Energy Consumption": "Пагадзіннае спажыванне энергіі",
+  "Pie Chart Stats example": "Дэманстрацыя кругавой дыяграмы",
+  "Weekly Energy Consumption": "Штотыднёвае спажыванне энергіі",
+  "Window Shutters": "Аканіцы",
+  "Window Shutter 1": "Аканіца 1",
+  "Window Shutter 2": "Аканіца 2",
+  "Living Room": "Гасцёўня",
+  "Mood Light": "Святло настрою",
+  "Dashboard": "Панэль кіравання",
+  "watch_movies_dlna": "Глядзіце свае фільмы і серыялы (UPnP/DLNA)"
 }

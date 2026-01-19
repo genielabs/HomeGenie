@@ -313,7 +313,8 @@
       "Description": "Activa el control del llenguatge natural per al teu sistema intel·ligent mitjançant la intel·ligència artificial Gemini de Google. Per activar aquesta funció, introdueix una clau API vàlida. Segueix les instruccions a https://aistudio.google.com/app/apikey per obtenir una clau API gratuïta.",
       "ConfigureOptions.ApiKey": "Clau de l'API d'IA de Google Gemini",
       "ConfigureOptions.ModelId": "ID del model",
-      "ConfigureOptions.SystemInstructions": "Instruccions del sistema"
+      "ConfigureOptions.SystemInstructions": "Instruccions del sistema",
+      "ConfigureOptions.SendContextData": "Comparteix el context del sistema i del mòdul amb la IA"
     },
     "931": {
       "Title": "Geni del widget de Bessons",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Estadístiques de consum d'energia",
-      "Description": "Supervisa, agrega i registra contínuament les dades de consum d'energia (W/h) a intervals regulars. Implementa una API completa per navegar i consultar conjunts de dades històriques."
+      "Description": "Supervisa, agrega i registra contínuament les dades de consum d'energia (Wh) a intervals regulars. Implementa una API completa per navegar i consultar conjunts de dades històriques."
     },
     "572": {
       "Title": "Exemple d'estadístiques de gràfic circular",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Consum d'energia per hora",
       "Description": "Gràfic de barres que mostra el consum mitjà de watts/hora per a cada hora del dia (00h-23h). Les dades s'agreguen durant la setmana seleccionada i provenen de l'API d'estadístiques d'ús energètic."
+    },
+    "579": {
+      "Title": "Resum d'energia diària",
+      "Description": "Consum d'energia diari (Wh) per dispositiu.",
+      "Widget.Statistics.DailyReport": "Inclou a l'informe Daily Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Comandament Geni",

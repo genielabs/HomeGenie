@@ -516,5 +516,19 @@
   "Utilities": "Cyfleustodau",
   "Scenes": "Golygfeydd",
   "Virtual Modules": "Modiwlau Rhithwir",
-  "Simulate": "Efelychu"
+  "Simulate": "Efelychu",
+  "day_of_year": "Diwrnod y Flwyddyn",
+  "year": "Blwyddyn",
+  "Daily Energy Summary": "Crynodeb Ynni Dyddiol",
+  "Data Monitor": "Monitro Data",
+  "Hourly Energy Consumption": "Defnydd Ynni Fesul Awr",
+  "Pie Chart Stats example": "Demo Siart Cylch",
+  "Weekly Energy Consumption": "Defnydd Ynni Wythnosol",
+  "Window Shutters": "Caeadau Ffenestri",
+  "Window Shutter 1": "Caead Ffenestr 1",
+  "Window Shutter 2": "Caead Ffenestr 2",
+  "Living Room": "Ystafell Fyw",
+  "Mood Light": "Golau Hwyliau",
+  "Dashboard": "Dangosfwrdd",
+  "watch_movies_dlna": "Gwyliwch eich Ffilmiau a'ch Cyfresi (UPnP/DLNA)"
 }

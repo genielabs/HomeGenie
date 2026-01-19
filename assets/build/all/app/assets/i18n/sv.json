@@ -516,5 +516,19 @@
   "Utilities": "Nytta",
   "Scenes": "Scener",
   "Virtual Modules": "Virtuella moduler",
-  "Simulate": "Simulera"
+  "Simulate": "Simulera",
+  "day_of_year": "Årets dag",
+  "year": "År",
+  "Daily Energy Summary": "Daglig energiöversikt",
+  "Data Monitor": "Dataövervakare",
+  "Hourly Energy Consumption": "Timanvändning av energi",
+  "Pie Chart Stats example": "Demo av cirkeldiagram",
+  "Weekly Energy Consumption": "Veckovis energianvändning",
+  "Window Shutters": "Fönsterluckor",
+  "Window Shutter 1": "Fönsterlucka 1",
+  "Window Shutter 2": "Fönsterlucka 2",
+  "Living Room": "Vardagsrum",
+  "Mood Light": "Stämningsljus",
+  "Dashboard": "Instrumentpanel",
+  "watch_movies_dlna": "Titta på dina filmer och serier (UPnP/DLNA)"
 }

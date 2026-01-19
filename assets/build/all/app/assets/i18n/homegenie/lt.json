@@ -313,7 +313,8 @@
       "Description": "Įgalina natūralios kalbos valdymą jūsų išmaniojoje sistemoje naudojant „Google Gemini“ dirbtinį intelektą. Norėdami suaktyvinti šią funkciją, įveskite galiojantį API raktą. Vadovaukitės instrukcijomis, pateiktomis adresu https://aistudio.google.com/app/apikey, kad gautumėte nemokamą API raktą.",
       "ConfigureOptions.ApiKey": "„Google Gemini“ dirbtinio intelekto API raktas",
       "ConfigureOptions.ModelId": "Modelio ID",
-      "ConfigureOptions.SystemInstructions": "Sistemos instrukcijos"
+      "ConfigureOptions.SystemInstructions": "Sistemos instrukcijos",
+      "ConfigureOptions.SendContextData": "Bendrinkite sistemos ir modulio kontekstą su dirbtiniu intelektu"
     },
     "931": {
       "Title": "Dvynių valdiklio džinas",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Energijos naudojimo statistika",
-      "Description": "Nuolat stebi, kaupia ir reguliariai registruoja energijos suvartojimo duomenis (W/h). Įdiegia visavertę API sąsają, skirtą naršyti ir ieškoti istorinių duomenų rinkinių."
+      "Description": "Nuolat stebi, kaupia ir reguliariai registruoja energijos suvartojimo duomenis (Wh). Įdiegia visavertę API sąsają, skirtą naršyti ir ieškoti istorinių duomenų rinkinių."
     },
     "572": {
       "Title": "Skritulinės diagramos statistikos pavyzdys",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Valandinis energijos suvartojimas",
       "Description": "Juostinė diagrama, rodanti vidutinį energijos suvartojimą vatais per valandą kiekvieną paros valandą (00–23 val.). Duomenys apibendrinami per pasirinktą savaitę ir gaunami iš energijos naudojimo statistikos API."
+    },
+    "579": {
+      "Title": "Dienos energijos santrauka",
+      "Description": "Įrenginio dienos energijos suvartojimas (Wh).",
+      "Widget.Statistics.DailyReport": "Įtraukti į dienos Wh ataskaitą"
     }
   },
   "scheduler_preset_action_genie_command": "Džinų komanda",

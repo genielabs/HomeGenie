@@ -313,7 +313,8 @@
       "Description": "Pèmèt kontwòl lang natirèl pou sistèm entelijan ou a lè l sèvi avèk Gemini AI Google la. Pou aktive fonksyon sa a, antre yon kle API ki valab. Swiv enstriksyon yo nan https://aistudio.google.com/app/apikey pou jwenn yon kle API gratis.",
       "ConfigureOptions.ApiKey": "Kle API Google Gemini AI a",
       "ConfigureOptions.ModelId": "ID Modèl",
-      "ConfigureOptions.SystemInstructions": "Enstriksyon Sistèm yo"
+      "ConfigureOptions.SystemInstructions": "Enstriksyon Sistèm yo",
+      "ConfigureOptions.SendContextData": "Pataje kontèks sistèm ak modil la avèk IA a"
     },
     "931": {
       "Title": "Widjè Gemini Jeni",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Estatistik sou Itilizasyon Enèji",
-      "Description": "Kontinyèlman kontwole, rasanble, epi anrejistre done konsomasyon enèji (W/h) nan entèval regilye. Aplike yon API konplè pou browse ak rechèche ansanm done istorik yo."
+      "Description": "Kontinyèlman kontwole, rasanble, epi anrejistre done konsomasyon enèji (Wh) nan entèval regilye. Aplike yon API konplè pou browse ak rechèche ansanm done istorik yo."
     },
     "572": {
       "Title": "Egzanp Estatistik sou yon graf sikilè",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Konsomasyon enèji chak èdtan",
       "Description": "Grafik ba ki montre konsomasyon mwayèn Watts/Èdtan pou chak èdtan nan jounen an (00h-23h). Done yo rasanble sou semèn ki chwazi a epi yo soti nan API Estatistik Itilizasyon Enèji a."
+    },
+    "579": {
+      "Title": "Rezime Enèji Chak Jou",
+      "Description": "Konsomasyon enèji chak jou (Wh) pa aparèy.",
+      "Widget.Statistics.DailyReport": "Mete nan rapò chak jou Wh la"
     }
   },
   "scheduler_preset_action_genie_command": "Kòmandman Jeni",

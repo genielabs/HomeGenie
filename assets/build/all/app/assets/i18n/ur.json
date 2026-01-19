@@ -516,5 +516,19 @@
   "Utilities": "افادیت",
   "Scenes": "مناظر",
   "Virtual Modules": "ورچوئل ماڈیولز",
-  "Simulate": "نقل کرنا"
+  "Simulate": "نقل کرنا",
+  "day_of_year": "سال کا دن",
+  "year": "سال",
+  "Daily Energy Summary": "روزانہ توانائی کا خلاصہ",
+  "Data Monitor": "ڈیٹا مانیٹر",
+  "Hourly Energy Consumption": "فی گھنٹہ توانائی کا استعمال",
+  "Pie Chart Stats example": "پائی چارٹ ڈیمو",
+  "Weekly Energy Consumption": "ہفتہ وار توانائی کا استعمال",
+  "Window Shutters": "کھڑکیوں کے شٹر",
+  "Window Shutter 1": "ونڈو شٹر 1",
+  "Window Shutter 2": "ونڈو شٹر 2",
+  "Living Room": "لونگ روم",
+  "Mood Light": "موڈ لائٹ",
+  "Dashboard": "ڈیش بورڈ",
+  "watch_movies_dlna": "اپنی فلمیں اور سیریز دیکھیں (UPnP/DLNA)"
 }

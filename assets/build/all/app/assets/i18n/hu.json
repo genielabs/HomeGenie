@@ -516,5 +516,19 @@
   "Utilities": "Hasznosság",
   "Scenes": "Jelenetek",
   "Virtual Modules": "Virtuális modulok",
-  "Simulate": "Szimuláció"
+  "Simulate": "Szimuláció",
+  "day_of_year": "Az év napja",
+  "year": "Év",
+  "Daily Energy Summary": "Napi energiaösszefoglaló",
+  "Data Monitor": "Adatfigyelő",
+  "Hourly Energy Consumption": "Óránkénti energiafelhasználás",
+  "Pie Chart Stats example": "Kördiagram demó",
+  "Weekly Energy Consumption": "Heti energiafelhasználás",
+  "Window Shutters": "Redőnyök",
+  "Window Shutter 1": "Ablakredőny 1",
+  "Window Shutter 2": "Ablakredőny 2",
+  "Living Room": "Nappali",
+  "Mood Light": "Hangulatfény",
+  "Dashboard": "Műszerfal",
+  "watch_movies_dlna": "Nézd meg filmjeidet és sorozataidat (UPnP/DLNA)"
 }

@@ -516,5 +516,19 @@
   "Utilities": "公用事業",
   "Scenes": "場景",
   "Virtual Modules": "虛擬模組",
-  "Simulate": "模擬"
+  "Simulate": "模擬",
+  "day_of_year": "一年中的某一天",
+  "year": "年",
+  "Daily Energy Summary": "每日能量概要",
+  "Data Monitor": "數據監控器",
+  "Hourly Energy Consumption": "每小時能源消耗量",
+  "Pie Chart Stats example": "圓餅圖示範",
+  "Weekly Energy Consumption": "每週能源消耗",
+  "Window Shutters": "百葉窗",
+  "Window Shutter 1": "百葉窗 1",
+  "Window Shutter 2": "百葉窗 2",
+  "Living Room": "客廳",
+  "Mood Light": "情緒燈",
+  "Dashboard": "儀表板",
+  "watch_movies_dlna": "觀看電影和劇集（UPnP/DLNA）"
 }

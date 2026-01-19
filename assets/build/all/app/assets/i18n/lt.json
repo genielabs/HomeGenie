@@ -516,5 +516,19 @@
   "Utilities": "Naudingumas",
   "Scenes": "Scenos",
   "Virtual Modules": "Virtualūs moduliai",
-  "Simulate": "Simuliuoti"
+  "Simulate": "Simuliuoti",
+  "day_of_year": "Metų diena",
+  "year": "Metai",
+  "Daily Energy Summary": "Dienos energijos santrauka",
+  "Data Monitor": "Duomenų monitorius",
+  "Hourly Energy Consumption": "Valandinis energijos suvartojimas",
+  "Pie Chart Stats example": "Skritulinės diagramos demonstracija",
+  "Weekly Energy Consumption": "Savaitinis energijos suvartojimas",
+  "Window Shutters": "Langinės",
+  "Window Shutter 1": "Langų užsklanda 1",
+  "Window Shutter 2": "Langų užsklanda 2",
+  "Living Room": "Svetainė",
+  "Mood Light": "Nuotaikos šviesa",
+  "Dashboard": "Prietaisų skydelis",
+  "watch_movies_dlna": "Žiūrėkite filmus ir serialus (UPnP/DLNA)"
 }

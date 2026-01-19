@@ -516,5 +516,19 @@
   "Utilities": "အသုံးအဆောင်",
   "Scenes": "မြင်ကွင်းများ",
   "Virtual Modules": "Virtual Modules များ",
-  "Simulate": "တုပပါ"
+  "Simulate": "တုပပါ",
+  "day_of_year": "နှစ်၏ရက်",
+  "year": "နှစ်",
+  "Daily Energy Summary": "နေ့စဉ်စွမ်းအင်အကျဉ်းချုပ်",
+  "Data Monitor": "ဒေတာ စောင့်ကြည့်ရေး",
+  "Hourly Energy Consumption": "တစ်နာရီလျှင် စွမ်းအင်အသုံးပြုမှု",
+  "Pie Chart Stats example": "စက်ဝိုင်းဇယား သရုပ်ပြ",
+  "Weekly Energy Consumption": "အပတ်စဉ် စွမ်းအင်အသုံးပြုမှု",
+  "Window Shutters": "ပြတင်းပေါက် ရှပ်တာများ",
+  "Window Shutter 1": "ပြတင်းပေါက်ရှပ်တာ ၁",
+  "Window Shutter 2": "ပြတင်းပေါက်ရှပ်တာ ၂",
+  "Living Room": "ဧည့်ခန်း",
+  "Mood Light": "စိတ်ခံစားချက် ပေါ့ပါးခြင်း",
+  "Dashboard": "ဒက်ရှ်ဘုတ်",
+  "watch_movies_dlna": "သင့်ရုပ်ရှင်များနှင့် စီးရီးများကို ကြည့်ရှုပါ (UPnP/DLNA)"
 }

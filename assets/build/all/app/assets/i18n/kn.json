@@ -516,5 +516,19 @@
   "Utilities": "ಉಪಯುಕ್ತತೆ",
   "Scenes": "ದೃಶ್ಯಗಳು",
   "Virtual Modules": "ವರ್ಚುವಲ್ ಮಾಡ್ಯೂಲ್‌ಗಳು",
-  "Simulate": "ಅನುಕರಿಸಿ"
+  "Simulate": "ಅನುಕರಿಸಿ",
+  "day_of_year": "ವರ್ಷದ ದಿನ",
+  "year": "ವರ್ಷ",
+  "Daily Energy Summary": "ದೈನಂದಿನ ಶಕ್ತಿಯ ಸಾರಾಂಶ",
+  "Data Monitor": "ಡೇಟಾ ಮಾನಿಟರ್",
+  "Hourly Energy Consumption": "ಗಂಟೆಯ ವಿದ್ಯುತ್ ಬಳಕೆ",
+  "Pie Chart Stats example": "ಪೈ ಚಾರ್ಟ್ ಡೆಮೊ",
+  "Weekly Energy Consumption": "ಸಾಪ್ತಾಹಿಕ ಇಂಧನ ಬಳಕೆ",
+  "Window Shutters": "ಕಿಟಕಿ ಶಟರ್‌ಗಳು",
+  "Window Shutter 1": "ಕಿಟಕಿ ಶಟರ್ 1",
+  "Window Shutter 2": "ಕಿಟಕಿ ಶಟರ್ 2",
+  "Living Room": "ಲಿವಿಂಗ್ ರೂಮ್",
+  "Mood Light": "ಮೂಡ್ ಲೈಟ್",
+  "Dashboard": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+  "watch_movies_dlna": "ನಿಮ್ಮ ಚಲನಚಿತ್ರಗಳು ಮತ್ತು ಸರಣಿಗಳನ್ನು ವೀಕ್ಷಿಸಿ (UPnP/DLNA)"
 }

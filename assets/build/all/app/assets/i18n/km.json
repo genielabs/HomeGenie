@@ -516,5 +516,19 @@
   "Utilities": "សេវាប្រើប្រាស់",
   "Scenes": "ឈុតឆាក",
   "Virtual Modules": "ម៉ូឌុលនិម្មិត",
-  "Simulate": "ក្លែងធ្វើ"
+  "Simulate": "ក្លែងធ្វើ",
+  "day_of_year": "ថ្ងៃនៃឆ្នាំ",
+  "year": "ឆ្នាំ",
+  "Daily Energy Summary": "សេចក្តីសង្ខេបថាមពលប្រចាំថ្ងៃ",
+  "Data Monitor": "ម៉ូនីទ័រទិន្នន័យ",
+  "Hourly Energy Consumption": "ការប្រើប្រាស់ថាមពលប្រចាំម៉ោង",
+  "Pie Chart Stats example": "ការបង្ហាញតារាងចំណិត",
+  "Weekly Energy Consumption": "ការប្រើប្រាស់ថាមពលប្រចាំសប្តាហ៍",
+  "Window Shutters": "ទ្វារបិទបើកបង្អួច",
+  "Window Shutter 1": "ទ្វារបិទបើកបង្អួច ១",
+  "Window Shutter 2": "ទ្វារបិទបើកបង្អួច 2",
+  "Living Room": "បន្ទប់ទទួលភ្ញៀវ",
+  "Mood Light": "ពន្លឺអារម្មណ៍",
+  "Dashboard": "ផ្ទាំងគ្រប់គ្រង",
+  "watch_movies_dlna": "មើលភាពយន្ត និងស៊េរីរបស់អ្នក (UPnP/DLNA)"
 }

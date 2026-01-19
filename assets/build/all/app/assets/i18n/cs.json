@@ -516,5 +516,19 @@
   "Utilities": "Užitková hodnota",
   "Scenes": "Scény",
   "Virtual Modules": "Virtuální moduly",
-  "Simulate": "Simulovat"
+  "Simulate": "Simulovat",
+  "day_of_year": "Den v roce",
+  "year": "Rok",
+  "Daily Energy Summary": "Denní shrnutí energie",
+  "Data Monitor": "Monitorování dat",
+  "Hourly Energy Consumption": "Hodinová spotřeba energie",
+  "Pie Chart Stats example": "Ukázka koláčového grafu",
+  "Weekly Energy Consumption": "Týdenní spotřeba energie",
+  "Window Shutters": "Okenice",
+  "Window Shutter 1": "Okenice 1",
+  "Window Shutter 2": "Okenice 2",
+  "Living Room": "Obývací pokoj",
+  "Mood Light": "Světlo nálady",
+  "Dashboard": "Dashboard",
+  "watch_movies_dlna": "Sledujte své filmy a seriály (UPnP/DLNA)"
 }

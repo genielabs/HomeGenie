@@ -516,5 +516,19 @@
   "Utilities": "Комунални услуги",
   "Scenes": "Сцени",
   "Virtual Modules": "Виртуелни модули",
-  "Simulate": "Симулирај"
+  "Simulate": "Симулирај",
+  "day_of_year": "Ден од годината",
+  "year": "Година",
+  "Daily Energy Summary": "Дневен преглед на енергија",
+  "Data Monitor": "Монитор на податоци",
+  "Hourly Energy Consumption": "Часовна потрошувачка на енергија",
+  "Pie Chart Stats example": "Демо на кружен дијаграм",
+  "Weekly Energy Consumption": "Неделна потрошувачка на енергија",
+  "Window Shutters": "Капаци за прозорци",
+  "Window Shutter 1": "Ролетна за прозорци 1",
+  "Window Shutter 2": "Ролетна за прозорци 2",
+  "Living Room": "Дневна соба",
+  "Mood Light": "Светло за расположение",
+  "Dashboard": "Контролна табла",
+  "watch_movies_dlna": "Гледајте ги вашите филмови и серии (UPnP/DLNA)"
 }

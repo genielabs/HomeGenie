@@ -313,7 +313,8 @@
       "Description": "Mengaktifkan kontrol bahasa alami untuk sistem pintar Anda menggunakan Gemini AI Google. Untuk mengaktifkan fitur ini, masukkan kunci API yang valid. Ikuti petunjuk di https://aistudio.google.com/app/apikey untuk mendapatkan kunci API gratis.",
       "ConfigureOptions.ApiKey": "Kunci API Google Gemini AI",
       "ConfigureOptions.ModelId": "Identitas Model",
-      "ConfigureOptions.SystemInstructions": "Instruksi Sistem"
+      "ConfigureOptions.SystemInstructions": "Instruksi Sistem",
+      "ConfigureOptions.SendContextData": "Bagikan konteks sistem dan modul dengan AI."
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Statistik Penggunaan Energi",
-      "Description": "Memantau, mengumpulkan, dan mencatat data konsumsi energi (W/jam) secara terus menerus pada interval reguler. Mengimplementasikan API lengkap untuk menelusuri dan menanyakan kumpulan data historis."
+      "Description": "Memantau, mengumpulkan, dan mencatat data konsumsi energi (Wh) secara terus menerus pada interval reguler. Mengimplementasikan API lengkap untuk menelusuri dan menanyakan kumpulan data historis."
     },
     "572": {
       "Title": "Contoh Statistik Diagram Lingkaran",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Konsumsi Energi Per Jam",
       "Description": "Grafik batang yang menampilkan konsumsi Watt/Jam rata-rata untuk setiap jam dalam sehari (00h-23h). Data dikumpulkan selama minggu yang dipilih dan bersumber dari API Statistik Penggunaan Energi."
+    },
+    "579": {
+      "Title": "Ringkasan Energi Harian",
+      "Description": "Konsumsi energi harian (Wh) per perangkat.",
+      "Widget.Statistics.DailyReport": "Sertakan dalam laporan Harian Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Perintah Jin",

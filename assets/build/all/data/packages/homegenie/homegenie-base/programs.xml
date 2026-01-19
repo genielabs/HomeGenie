@@ -220,6 +220,385 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
+    <ScriptSetup>// This method is used to register this program as a Chart provider
+Program.Setup(() =&gt; {
+  Program.Implements(
+    "@Statistics:Provider",
+    ApiUrl,
+     // the following param's value can be:
+     // --&gt; "select_module", "select_property" or "select_none"
+    new {
+        mode = "select_none",
+        legend = true,
+        icon = "bar_chart"
+    }
+  ).AddFeature("", "Light,Dimmer,Color,Switch,Sensor : /^Meter.Watts$/", WidgetStatisticsReport, "Include in Daily Wh report", "checkbox");
+});
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>var reportModules = Modules.WithFeature(WidgetStatisticsReport);
+
+// Helper lambda to resolve the YAML file path.
+// Logic:
+// 1. If 'year' and 'day' are provided, construct that specific path.
+// 2. If they are missing, scan the directory to find the absolute latest data.
+var GetYamlDataPath = (string year = null, string day = null) =&gt; {
+    // We pass 'year' to GetDataFilesInfo so it calculates the correct 'Last' day for that specific year
+    // instead of the last day of the latest year.
+    var dataFilesInfo = GetDataFilesInfo(Data.GetFolder(), YamlFileSuffix, year);
+    
+    var y = !string.IsNullOrWhiteSpace(year) ? year : dataFilesInfo.Archive.Current;
+    var d = !string.IsNullOrWhiteSpace(day) ? day : dataFilesInfo.Current;
+    
+    return Path.Combine(Data.GetFolder(), y, $"{y}_{d}{YamlFileSuffix}");
+};
+
+// -----------------------------------------------------------------------------
+// API Handler: Widget Configuration
+// Returns chart settings (Title, Type, Options) for a SPECIFIC date.
+// -----------------------------------------------------------------------------
+Api.Handle(ApiUrl, (args) =&gt; {
+    var request = Api.Parse(args);
+    
+    // Parse arguments. Option(0) = Year, Command = Day.
+    string reqYear = request.GetOption(0)?.Trim();
+    string reqDay = request.Command?.Trim();
+
+    // Load the configuration for the requested date. 
+    // If args are null, GetYamlDataPath resolves to the latest file.
+    var config = LoadConfig(GetYamlDataPath(reqYear, reqDay));
+    
+    var timeLabels = GetTimeLabels();
+    var workersConfig = new List&lt;object&gt;();
+
+    // Map datasets to worker configurations if valid data exists
+    if (config.Datasets != null) 
+    {
+        for (int i = 0; i &lt; config.Datasets.Count; i++)
+        {
+            var ds = config.Datasets[i];
+
+            // Build dynamic options object (camelCase for JS)
+            dynamic options = new ExpandoObject();
+            options.type = ds.Type;
+            
+            // Only map properties that are explicitly set in the YAML
+            if (ds.BackgroundColor != null) options.backgroundColor = ds.BackgroundColor;
+            if (ds.BorderColor != null) options.borderColor = ds.BorderColor;
+            if (ds.BorderWidth != null) options.borderWidth = ds.BorderWidth;
+            if (ds.Fill != null) options.fill = ds.Fill;
+            if (ds.Tension != null) options.tension = ds.Tension;
+
+            workersConfig.Add(new {
+                title = ds.Label,
+                queryOptions = new {
+                    datasetIndex = i 
+                },
+                chartOptions = options
+            });
+        }
+    }
+
+    return new {
+        dataApi = DataApiUrl,
+        title = config.Title,
+        scale = config.Scale, 
+        labels = timeLabels,
+        options = config.Options,
+        refreshMs = config.RefreshMs,
+        datasetConfigs = workersConfig,
+        browsing = true
+    };
+});
+
+// -----------------------------------------------------------------------------
+// API Handler: Data Retrieval
+// Returns raw numeric data or browsing metadata.
+// -----------------------------------------------------------------------------
+Api.Handle(DataApiUrl, (args) =&gt; {
+    var request = Api.Parse(args);
+    var year = request.GetOption(0)?.Trim();
+
+    // Mode 1: Return Navigation Metadata (List of years/days)
+    if (request.Command == "BrowsingRange")
+    {
+        return GetDataFilesInfo(Data.GetFolder(), YamlFileSuffix, year);
+    }
+
+    // Mode 2: Return Specific Dataset Values
+    if (!String.IsNullOrEmpty(request.Command)) 
+    {
+        // Resolve path: Command is the Day. Option 0 is the Year.
+        string path = GetYamlDataPath(year, request.Command.Trim());
+        var config = LoadConfig(path);
+        
+        // Determine dataset index. 
+        // If year is present, index is Option 1. If year is missing, index might be Option 0.
+        int datasetIndex = 0;
+        string indexOpt = !string.IsNullOrEmpty(year) ? request.GetOption(1) : request.GetOption(0);
+        
+        if (!string.IsNullOrEmpty(indexOpt))
+        {
+            int.TryParse(indexOpt, out datasetIndex);
+        }
+
+        if (config != null &amp;&amp; config.Datasets != null &amp;&amp; datasetIndex &gt;= 0 &amp;&amp; datasetIndex &lt; config.Datasets.Count)
+        {
+            return config.Datasets[datasetIndex].Data; 
+        }
+    }
+
+    return new List&lt;double&gt;();
+});
+
+
+// Main execution loop: Aggregates hourly data and saves to daily YAML files.
+while (Program.IsRunning)
+{
+    // 1. Determine the file path for TODAY
+    var now = DateTime.Now;
+    var year = now.Year.ToString();
+    var day = now.DayOfYear.ToString("000"); // Zero-padding recommended for sorting (e.g., 015)
+    
+    // Structure: /DataFolder/YYYY/YYYY_DDD_daily_stats.yaml
+    var folderPath = Path.Combine(Data.GetFolder(), year);
+    var filePath = Path.Combine(folderPath, $"{year}_{day}{YamlFileSuffix}");
+
+    // Ensure the year directory exists
+    if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
+
+    // 2. Load existing data (or create empty config if it's a new day)
+    var config = LoadConfig(filePath);
+    
+    // Initialize datasets list if new file
+    if (config.Datasets == null) config.Datasets = new List&lt;YamlDataset&gt;();
+
+    // 3. Iterate over enabled modules
+    bool dataChanged = false;
+
+    reportModules.Each(m =&gt; {
+        var moduleId = $"{m.Instance.Domain}:{m.Instance.Address}";
+        // Read the rolling hourly average value calculated by the MonitorWatts program
+        var wattsHour = m.Parameter("Meter.Watts.Hour").DecimalValue;
+
+        // Find corresponding dataset
+        var dataset = config.Datasets.FirstOrDefault(d =&gt; d.Label == moduleId);
+
+        // Create new dataset if module is encountered for the first time
+        if (dataset == null)
+        {
+            dataset = new YamlDataset 
+            { 
+                Type = "bar", // Default chart type
+                Label = moduleId,
+                Data = new double[24].ToList() // Initialize 24 hours with 0
+            };
+            config.Datasets.Add(dataset);
+        }
+
+        // Ensure array has 24 elements (safety for corrupted/legacy files)
+        while (dataset.Data.Count &lt; 24) dataset.Data.Add(0);
+
+        // 4. Write value to the current hour slot
+        // Round to 2 decimals for clean output
+        dataset.Data[now.Hour] = Math.Round(wattsHour, 2);
+        
+        dataChanged = true;
+        return false; // Continue iteration
+    });
+
+    // 5. Save to disk if data changed
+    if (dataChanged)
+    {
+        SaveConfig(filePath, config);
+    }
+
+    // Wait 1 minute before next update cycle
+    Pause(60); 
+}</ScriptSource>
+    <ScriptContext>const string YamlFileSuffix = "_daily_stats.yaml";
+const string ApiUrl = "Statistics.Providers/DailyEnergyReport";
+const string DataApiUrl = "DataProcessing.Statistics/DailyEnergyReport";
+const string WidgetStatisticsReport = "Widget.Statistics.DailyReport";
+
+public class YamlDataset
+{
+    public string Type { get; set; }
+    public string Label { get; set; }
+    public List&lt;double&gt; Data { get; set; }
+    public string BackgroundColor { get; set; }
+    public string BorderColor { get; set; }
+    public int? BorderWidth { get; set; }
+    public bool? Fill { get; set; }
+    public double? Tension { get; set; }
+}
+
+public class YamlConfig
+{
+    public string Title { get; set; }
+    public string Scale { get; set; }
+    public int RefreshMs { get; set; }
+    public object Options { get; set; }
+    public List&lt;YamlDataset&gt; Datasets { get; set; }
+}
+
+/// &lt;summary&gt;
+/// Deserializes a YAML file. Returns an empty config on failure.
+/// &lt;/summary&gt;
+YamlConfig LoadConfig(string yamlFilePath)
+{
+    try
+    {
+        if (System.IO.File.Exists(yamlFilePath))
+        {
+            var yaml = System.IO.File.ReadAllText(yamlFilePath);
+            var deserializer = new YamlDotNet.Serialization.DeserializerBuilder()
+                .WithNamingConvention(YamlDotNet.Serialization.NamingConventions.CamelCaseNamingConvention.Instance)
+                .IgnoreUnmatchedProperties()
+                .Build();
+            return deserializer.Deserialize&lt;YamlConfig&gt;(yaml);
+        }
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e.Message);
+    }
+    return new YamlConfig { Datasets = new List&lt;YamlDataset&gt;() };
+}
+
+/// &lt;summary&gt;
+/// Generates a list of hourly time labels (e.g., "00h", "01h", ..., "23h") for the chart X-axis.
+/// &lt;/summary&gt;
+List&lt;string&gt; GetTimeLabels()
+{
+    var labels = new List&lt;string&gt;();
+    var start = DateTime.Today;
+    for (int i = 0; i &lt; 24; i++) 
+    {
+        labels.Add(start.AddHours(i).ToString("HH") + 'h');
+    }
+    return labels;
+}
+
+/// &lt;summary&gt;
+/// Scans folders to determine available years and days.
+/// Returns metadata used by the frontend for navigation controls.
+/// &lt;/summary&gt;
+dynamic GetDataFilesInfo(string rootPath, string suffix, string inputYear = "")
+{
+    // 1. Get all year folders
+    var yearFolders = Directory.GetDirectories(rootPath)
+                           .Select(path =&gt; new DirectoryInfo(path).Name) // Safer than Path.GetFileName for dirs
+                           .OrderBy(y =&gt; y)
+                           .ToList();
+
+    // 2. Determine target year
+    string currentYear = DateTime.Now.Year.ToString();
+
+    if (!string.IsNullOrEmpty(inputYear) &amp;&amp; yearFolders.Contains(inputYear))
+    {
+        currentYear = inputYear;
+    }
+    else if (yearFolders.Any())
+    {
+        currentYear = yearFolders.Last();
+    }
+
+    // 3. Scan days within the selected year
+    var daysList = new List&lt;string&gt;();
+    string selectedYearPath = Path.Combine(rootPath, currentYear);
+
+    if (Directory.Exists(selectedYearPath))
+    {
+        string searchPattern = $"{currentYear}_*{suffix}";
+        
+        foreach (string filePath in Directory.EnumerateFiles(selectedYearPath, searchPattern))
+        {
+            string fileName = Path.GetFileName(filePath);
+            
+            // Extract "Day" part from "Year_Day_Suffix"
+            int prefixLength = currentYear.Length + 1; 
+            int variablePartLength = fileName.Length - prefixLength - suffix.Length;
+
+            if (variablePartLength &gt; 0)
+            {
+                string dayString = fileName.Substring(prefixLength, variablePartLength);
+                daysList.Add(dayString);
+            }
+        }
+    }
+
+    daysList.Sort(); 
+
+    string currentDay = daysList.LastOrDefault() ?? "";
+    string lastAvailableDay = daysList.LastOrDefault() ?? "";
+
+    return new {
+        Label = "day_of_year",
+        Items = daysList.ToArray(),
+        Current = currentDay,
+        Last = lastAvailableDay,
+
+        Archive = new {
+            Label = "year",
+            Items = yearFolders.ToArray(),
+            Current = currentYear
+        }
+    };
+}
+
+/// &lt;summary&gt;
+/// Serializes the configuration object to YAML format and writes it to the specified file path.
+/// Null values are omitted to keep the output clean.
+/// &lt;/summary&gt;
+void SaveConfig(string filePath, YamlConfig config)
+{
+    try 
+    {
+        var serializer = new YamlDotNet.Serialization.SerializerBuilder()
+            .WithNamingConvention(YamlDotNet.Serialization.NamingConventions.CamelCaseNamingConvention.Instance)
+            .ConfigureDefaultValuesHandling(YamlDotNet.Serialization.DefaultValuesHandling.OmitNull) 
+            .Build();
+
+        var yaml = serializer.Serialize(config);
+        File.WriteAllText(filePath, yaml);
+    }
+    catch (Exception ex)
+    {
+        //Console.WriteLine("Error: " + ex.Message);
+    }
+}</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.4</PackageVersion>
+      <Id>daily-energy-report</Id>
+      <Version>1.0.0</Version>
+      <Required>false</Required>
+      <Checksum>527F88D4CC12BA352EE2E60B85D7E8D6</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>579</Address>
+    <Name>Daily Energy Summary</Name>
+    <Description>Daily energy consumption (Wh) by device.</Description>
+    <Group>Data Processing</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Dimmer,Color,Switch,Sensor : /^Meter.Watts$/</ForTypes>
+        <Property>Widget.Statistics.DailyReport</Property>
+        <Description>Include in Daily Wh report</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
     <ScriptSetup>Program.Implements("@Statistics:Provider", ApiUrl, new {
     icon = "legend_toggle"
 }).Run();
@@ -1491,14 +1870,14 @@ string GetDbName()
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>energy-use-statistics</Id>
-      <Version>1.0.8</Version>
+      <Version>1.0.9</Version>
       <Required>false</Required>
       <Checksum>A57965D0B4E782C5ED2B01C6230982B7</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>571</Address>
     <Name>Energy Use Statistics</Name>
-    <Description>Continuously monitors, aggregates, and logs energy consumption data (W/h) at regular intervals. Implements a full API for browsing and querying historical datasets.</Description>
+    <Description>Continuously monitors, aggregates, and logs energy consumption data (Wh) at regular intervals. Implements a full API for browsing and querying historical datasets.</Description>
     <Group>Data Processing</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
@@ -2390,6 +2769,7 @@ Program.Run();
     .Emit("Conditions.IconType", data.weather_icon)
     .Emit("Conditions.Status", data.weather_status) // eg. cloudy, sunny, etc..
     .Emit("Conditions.LastUpdated", data.update_dt)
+    .Emit("Conditions.Timestamp", data.timestamp)
     // Add values to standard Sensor.* parameters
     .Emit("Sensor.Temperature", data.temperature)
     .Emit("Sensor.Temperature.Unit", "Celsius")
@@ -2407,9 +2787,10 @@ Program.Run();
 Action&lt;int,dynamic&gt; UpdateForecastParameters = (day, data) =&gt; {
   Program
     .Emit("Conditions.Forecast." + day + ".Description", data.weather_description)
-    .Emit("Conditions.Forecast." + day + ".Year", data.dt.Year.ToString("YYYY"))
+    .Emit("Conditions.Forecast." + day + ".Year", data.dt.ToString("yyyy"))
     .Emit("Conditions.Forecast." + day + ".Month", data.dt.ToString("MMM"))
     .Emit("Conditions.Forecast." + day + ".Day", data.dt.ToString("dd"))
+    .Emit("Conditions.Forecast." + day + ".Timestamp", data.timestamp)
     .Emit("Conditions.Forecast." + day + ".Weekday", data.dt.ToString("dddd"))
     .Emit("Conditions.Forecast." + day + ".IconType", data.weather_icon)
     .Emit("Conditions.Forecast." + day + ".Temperature", data.temperature)
@@ -2480,7 +2861,8 @@ Func&lt;string,string&gt; GetWeatherIcon = (type) =&gt; {
 };
 Func&lt;dynamic, dynamic&gt; CollectWeatherData = (weatherData) =&gt; {
   dynamic data = new ExpandoObject();
-  data.dt = Utility.JavaTimeStampToDateTime(1000D*(int)weatherData.dt);
+  data.timestamp = 1000D*(int)weatherData.dt;
+  data.dt = Utility.JavaTimeStampToDateTime(data.timestamp);
   data.update_dt = data.dt.ToLongDateString() + " " + TimeZoneInfo.ConvertTime(data.dt, TimeZoneInfo.Local).ToLongTimeString();
   data.temperature = weatherData.main.temp.ToString();
   data.temperature_min = weatherData.main.temp_min.ToString();
@@ -2600,9 +2982,9 @@ while (Program.IsRunning)
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>openweathermap</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>C84E2793CF3B0CA530B08855628D8786</Checksum>
+      <Checksum>44F31757B7D56F8ABBA651989A14CFFB</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>34</Address>

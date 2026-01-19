@@ -516,5 +516,19 @@
   "Utilities": "Apuohjelma",
   "Scenes": "Kohtaukset",
   "Virtual Modules": "Virtuaalimoduulit",
-  "Simulate": "Simuloida"
+  "Simulate": "Simuloida",
+  "day_of_year": "Vuoden päivä",
+  "year": "Vuosi",
+  "Daily Energy Summary": "Päivittäinen energiayhteenveto",
+  "Data Monitor": "Datamonitori",
+  "Hourly Energy Consumption": "Tuntikohtainen energiankulutus",
+  "Pie Chart Stats example": "Ympyräkaavion esittely",
+  "Weekly Energy Consumption": "Viikoittainen energiankulutus",
+  "Window Shutters": "Ikkunanluukut",
+  "Window Shutter 1": "Ikkunan suljin 1",
+  "Window Shutter 2": "Ikkunan suljin 2",
+  "Living Room": "Olohuone",
+  "Mood Light": "Tunnelmavalo",
+  "Dashboard": "Kojelauta",
+  "watch_movies_dlna": "Katso elokuvia ja sarjoja (UPnP/DLNA)"
 }

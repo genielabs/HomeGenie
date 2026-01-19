@@ -516,5 +516,19 @@
   "Utilities": "උපයෝගීතාව",
   "Scenes": "දර්ශන",
   "Virtual Modules": "අතථ්‍ය මොඩියුල",
-  "Simulate": "අනුකරණය කරන්න"
+  "Simulate": "අනුකරණය කරන්න",
+  "day_of_year": "අවුරුද්දේ දිනය",
+  "year": "වර්ෂය",
+  "Daily Energy Summary": "දෛනික බලශක්ති සාරාංශය",
+  "Data Monitor": "දත්ත නිරීක්ෂකය",
+  "Hourly Energy Consumption": "පැයකට වරක් බලශක්ති භාවිතය",
+  "Pie Chart Stats example": "පයි ප්‍රස්ථාර නිරූපණය",
+  "Weekly Energy Consumption": "සතිපතා බලශක්ති භාවිතය",
+  "Window Shutters": "ජනෙල් ෂටර්",
+  "Window Shutter 1": "ජනෙල් ෂටරය 1",
+  "Window Shutter 2": "ජනෙල් ෂටරය 2",
+  "Living Room": "විසිත්ත කාමරය",
+  "Mood Light": "මූඩ් ලයිට්",
+  "Dashboard": "උපකරණ පුවරුව",
+  "watch_movies_dlna": "ඔබේ චිත්‍රපට සහ මාලාවන් නරඹන්න (UPnP/DLNA)"
 }

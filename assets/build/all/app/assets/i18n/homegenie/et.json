@@ -313,7 +313,8 @@
       "Description": "Võimaldab teie nutika süsteemi loomuliku keele juhtimist Google'i Gemini tehisintellekti abil. Selle funktsiooni aktiveerimiseks sisestage kehtiv API-võti. Tasuta API-võtme saamiseks järgige juhiseid aadressil https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini tehisintellekti API võti",
       "ConfigureOptions.ModelId": "Mudeli ID",
-      "ConfigureOptions.SystemInstructions": "Süsteemi juhised"
+      "ConfigureOptions.SystemInstructions": "Süsteemi juhised",
+      "ConfigureOptions.SendContextData": "Jaga süsteemi ja mooduli konteksti tehisintellektiga"
     },
     "931": {
       "Title": "Kaksikute vidina džinn",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Energiatarbimise statistika",
-      "Description": "Jälgib, koondab ja logib pidevalt energiatarbimise andmeid (W/h) regulaarsete intervallidega. Rakendab täielikku API-t ajalooliste andmekogumite sirvimiseks ja päringute tegemiseks."
+      "Description": "Jälgib, koondab ja logib pidevalt energiatarbimise andmeid (Wh) regulaarsete intervallidega. Rakendab täielikku API-t ajalooliste andmekogumite sirvimiseks ja päringute tegemiseks."
     },
     "572": {
       "Title": "Sektordiagrammi statistika näide",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Tunnine energiatarve",
       "Description": "Tulpdiagramm, mis kuvab keskmist vattide/tunni tarbimist iga päeva tunni kohta (00–23). Andmed koondatakse valitud nädala kohta ja pärinevad energiakasutuse statistika API-st."
+    },
+    "579": {
+      "Title": "Päevane energiakokkuvõte",
+      "Description": "Seadme päevane energiatarve (Wh).",
+      "Widget.Statistics.DailyReport": "Lisa igapäevasesse valgete ..."
     }
   },
   "scheduler_preset_action_genie_command": "Džinni käsk",

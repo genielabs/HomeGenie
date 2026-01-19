@@ -313,7 +313,8 @@
       "Description": "Cho phép kiểm soát ngôn ngữ tự nhiên cho hệ thống thông minh của bạn bằng Gemini AI của Google. Để kích hoạt tính năng này, hãy nhập khóa API hợp lệ. Làm theo hướng dẫn tại https://aistudio.google.com/app/apikey để nhận khóa API miễn phí.",
       "ConfigureOptions.ApiKey": "Khóa API AI Gemini của Google",
       "ConfigureOptions.ModelId": "Mã số mô hình",
-      "ConfigureOptions.SystemInstructions": "Hướng dẫn hệ thống"
+      "ConfigureOptions.SystemInstructions": "Hướng dẫn hệ thống",
+      "ConfigureOptions.SendContextData": "Chia sẻ ngữ cảnh hệ thống và mô-đun với AI"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Thống kê sử dụng năng lượng",
-      "Description": "Liên tục giám sát, tổng hợp và ghi lại dữ liệu tiêu thụ năng lượng (W/h) theo định kỳ. Triển khai API đầy đủ để duyệt và truy vấn các tập dữ liệu lịch sử."
+      "Description": "Liên tục giám sát, tổng hợp và ghi lại dữ liệu tiêu thụ năng lượng (Wh) theo định kỳ. Cung cấp API đầy đủ để duyệt và truy vấn các tập dữ liệu lịch sử."
     },
     "572": {
       "Title": "Ví dụ về biểu đồ hình tròn thống kê",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Mức tiêu thụ năng lượng hàng giờ",
       "Description": "Biểu đồ cột hiển thị mức tiêu thụ điện năng trung bình (Watts/giờ) cho mỗi giờ trong ngày (00h-23h). Dữ liệu được tổng hợp trong tuần đã chọn và được lấy từ API Thống kê Sử dụng Năng lượng."
+    },
+    "579": {
+      "Title": "Tóm tắt năng lượng hàng ngày",
+      "Description": "Mức tiêu thụ năng lượng hàng ngày (Wh) của từng thiết bị.",
+      "Widget.Statistics.DailyReport": "Bao gồm trong báo cáo Daily Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Lệnh Genie",

@@ -313,7 +313,8 @@
       "Description": "Activez le contrôle en langage naturel pour votre système intelligent grâce à l'IA Gemini de Google. Pour activer cette fonctionnalité, saisissez une clé API valide. Suivez les instructions sur https://aistudio.google.com/app/apikey pour obtenir une clé API gratuite.",
       "ConfigureOptions.ApiKey": "Clé API Google Gemini AI",
       "ConfigureOptions.ModelId": "ID du modèle",
-      "ConfigureOptions.SystemInstructions": "Instructions système"
+      "ConfigureOptions.SystemInstructions": "Instructions système",
+      "ConfigureOptions.SendContextData": "Partager le contexte du système et des modules avec l'IA"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Statistiques sur la consommation d'énergie",
-      "Description": "Ce système surveille, agrège et enregistre en continu les données de consommation énergétique (W/h) à intervalles réguliers. Il met en œuvre une API complète permettant de consulter et d'interroger les données historiques."
+      "Description": "Ce système surveille, agrège et enregistre en continu les données de consommation énergétique (Wh) à intervalles réguliers. Il met en œuvre une API complète permettant de consulter et d'interroger les données historiques."
     },
     "572": {
       "Title": "Exemple de statistiques sur un graphique circulaire",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Consommation d'énergie horaire",
       "Description": "Graphique à barres affichant la consommation moyenne en watts par heure pour chaque heure de la journée (00h-23h). Les données sont agrégées sur la semaine sélectionnée et proviennent de l'API des statistiques de consommation d'énergie."
+    },
+    "579": {
+      "Title": "Résumé énergétique quotidien",
+      "Description": "Consommation énergétique quotidienne (Wh) par appareil.",
+      "Widget.Statistics.DailyReport": "Inclure dans le rapport quotidien Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Commande du génie",

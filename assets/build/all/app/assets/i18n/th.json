@@ -516,5 +516,19 @@
   "Utilities": "คุณประโยชน์",
   "Scenes": "ฉากต่างๆ",
   "Virtual Modules": "โมดูลเสมือน",
-  "Simulate": "จำลอง"
+  "Simulate": "จำลอง",
+  "day_of_year": "วันแห่งปี",
+  "year": "ปี",
+  "Daily Energy Summary": "สรุปพลังงานรายวัน",
+  "Data Monitor": "เครื่องตรวจสอบข้อมูล",
+  "Hourly Energy Consumption": "การใช้พลังงานรายชั่วโมง",
+  "Pie Chart Stats example": "การสาธิตแผนภูมิวงกลม",
+  "Weekly Energy Consumption": "ปริมาณการใช้พลังงานรายสัปดาห์",
+  "Window Shutters": "บานเกล็ดหน้าต่าง",
+  "Window Shutter 1": "บานหน้าต่าง 1",
+  "Window Shutter 2": "บานหน้าต่าง 2",
+  "Living Room": "ห้องนั่งเล่น",
+  "Mood Light": "ไฟสร้างบรรยากาศ",
+  "Dashboard": "แดชบอร์ด",
+  "watch_movies_dlna": "รับชมภาพยนตร์และซีรีส์ของคุณ (UPnP/DLNA)"
 }

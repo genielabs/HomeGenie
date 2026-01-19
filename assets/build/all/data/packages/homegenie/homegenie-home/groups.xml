@@ -18,7 +18,7 @@
     </Modules>
   </Group>
   <Group>
-    <Name>Color Lights</Name>
+    <Name>Living Room</Name>
     <Modules>
       <ModuleReference>
         <Address>1</Address>
@@ -29,16 +29,20 @@
         <Domain>HomeAutomation.PhilipsHue</Domain>
       </ModuleReference>
       <ModuleReference>
-        <Address>3</Address>
-        <Domain>HomeAutomation.PhilipsHue</Domain>
-      </ModuleReference>
-      <ModuleReference>
         <Address>4</Address>
         <Domain>HomeAutomation.PhilipsHue</Domain>
       </ModuleReference>
       <ModuleReference>
+        <Address>Window Shutters</Address>
+        <Domain>HomeGenie.UI.Separator</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>4</Address>
+        <Domain>HomeAutomation.Demo</Domain>
+      </ModuleReference>
+      <ModuleReference>
         <Address>5</Address>
-        <Domain>HomeAutomation.PhilipsHue</Domain>
+        <Domain>HomeAutomation.Demo</Domain>
       </ModuleReference>
       <ModuleReference>
         <Address>Scenes</Address>

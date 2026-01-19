@@ -566,6 +566,8 @@
         "Google Gemini AI API key",
       "ConfigureOptions.ModelId":
         "Model ID",
+      "ConfigureOptions.SendContextData":
+        "Share system and module context with the AI",
       "ConfigureOptions.SystemInstructions":
         "System Instructions"
     },
@@ -640,7 +642,7 @@
       "Title":
         "Energy Use Statistics",
       "Description":
-        "Continuously monitors, aggregates, and logs energy consumption data (W/h) at regular intervals. Implements a full API for browsing and querying historical datasets."
+        "Continuously monitors, aggregates, and logs energy consumption data (Wh) at regular intervals. Implements a full API for browsing and querying historical datasets."
     },
     "572": {
       "Title":
@@ -659,6 +661,14 @@
         "Hourly Energy Consumption",
       "Description":
         "Bar chart displaying the average Watts/Hour consumption for every hour of the day (00h-23h). Data is aggregated over the selected week and sourced from the Energy Use Statistics API."
+    },
+    "579": {
+      "Title":
+        "Daily Energy Summary",
+      "Description":
+        "Daily energy consumption (Wh) by device.",
+      "Widget.Statistics.DailyReport":
+        "Include in Daily Wh report"
     }
   }
 }

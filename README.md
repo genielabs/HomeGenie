@@ -3,7 +3,7 @@
 </p>
 <h1 align="center">HomeGenie</h1>
 <p align="center">
-  <strong>The Programmable Automation Intelligence</strong>
+  <strong>The Programmable Intelligence, with 100% Local Agentic AI.</strong>
   <br />
   <a href="https://homegenie.it"><strong>www.homegenie.it</strong></a>
 </p>
@@ -11,26 +11,30 @@
 <p align="center">
   <a href="https://github.com/genielabs/HomeGenie/actions/workflows/msbuild.yml"><img src="https://github.com/genielabs/HomeGenie/actions/workflows/msbuild.yml/badge.svg" alt="Build Status"></a>
   <a href="https://github.com/genielabs/HomeGenie/releases/latest"><img src="https://img.shields.io/github/v/release/genielabs/HomeGenie" alt="Latest Release"></a>
-  <a href="https://github.com/genielabs/HomeGenie/blob/master/LICENSE"><img src="https://img.shields.io/github/license/genielabs/HomeGenie.svg" alt="License"></a>
+  <a href="https://img.shields.io/github/license/genielabs/HomeGenie.svg?label=License&color=blue" alt="License"></a> <!-- AGPLv3 License Badge -->
 </p>
 
 
-HomeGenie is a versatile, open-source home automation platform written in .NET. Designed for tinkerers, developers, and DIY enthusiasts, it provides a powerful, server-centric solution that runs on a wide range of hardware, from a Raspberry Pi to a dedicated home server.
+HomeGenie is a **versatile, open-source platform for programmable intelligence**, written in .NET. Designed for tinkerers, developers, and DIY enthusiasts, it provides a powerful, server-centric solution that runs on a wide range of hardware, from a Raspberry Pi to a dedicated home server.
 
-With its robust scripting engine and extensive hardware support, HomeGenie offers the freedom to create complex automation scenarios and integrate a vast array of devices, all while ensuring your data and logic remain securely within your own network.
+With its robust **Local-First, Agentic AI capabilities** and extensive hardware support, HomeGenie offers the freedom to create complex automation scenarios and integrate a vast array of devices, all while ensuring your data and logic remain securely within your own network.
 
-![HomeGenie Dashboard](https://genielabs.github.io/HomeGenie/images/homegenie_dashboard_02.jpg)
+![HomeGenie Dashboard](https://genielabs.github.io/HomeGenie/images/2.0/homegenie_2_dashboard_01.png) <!-- MANTIENI QUESTO COME BASE PER IL NUOVO -->
 
 ## ✨ Key Features
 
--   **Wide Protocol Support:** Integrated drivers for X10, Z-Wave, ZigBee, GPIO, SPI, I2C, and more.
--   **100% Offline & Private:** Works completely offline without relying on any external cloud service. Your data, your rules, your home.
--   **Powerful Scripting Engine:** Automate anything with a fluent API programmable in **C#**, **JavaScript**, and **Python**.
--   **Advanced Scheduler:** Supports extended cron expressions with variables, conditions, and logical operators for time-based automations.
--   **Customizable Dashboard & Widgets:** A modern, responsive UI with a powerful built-in editor to create and customize your own widgets using HTML, JavaScript, and CSS.
--   **Visual Programming:** Create complex scenarios in an intuitive way with the Visual Programming workspace—no coding skills required.
--   **Voice Control:** Integrated support for voice and text-message-based commands.
--   **Extensible:** Features groups, configuration backup, a package repository, and much more.
+- **100% Local Agentic AI:** Run state-of-the-art LLMs directly on your HomeGenie server for autonomous reasoning, context awareness, and natural language control. Your data stays private, your intelligence stays local.
+- **AI Vision Suite:** Full integration of YOLO (Object Detection, Instance Segmentation, Pose Estimation) directly on server, ESP32-CAM modules, and generic IP cameras.
+- **Universal API & Programmability:** Automate anything with a fluent API programmable in **C#**, **JavaScript**, and **Python**. Create custom programs and widgets with full developer tools.
+- **Advanced Scheduler with Genie Commands:** Supports extended cron expressions, variables, conditions, and AI-driven natural language tasks for flexible automations.
+- **Customizable Dashboard & Widgets:** A modern, responsive UI with a powerful built-in editor to create and customize your own widgets using HTML, JavaScript, and CSS.
+- **Multi-protocol Support:** Integrated drivers for X10, Z-Wave, ZigBee, GPIO, SPI, I2C, IR/RF, and more.
+- **Smart Display & FPV Car Integration:** Transform ESP32 hardware into interactive smart displays or AI-powered FPV robotic platforms.
+- **Visual Programming:** Create complex scenarios intuitively with the Visual Program editor—no coding skills required.
+- **Voice Control & i18n:** Integrated support for voice commands and a fully localized UI across over 90 languages.
+- **Extensible:** Features groups, configuration backup, a package repository, and much more.
+
+[Full Features and Image Gallery](./docs/images/2.0/README.md) <!-- LINK ALLA TUA GALLERIA AGGIORNATA -->
 
 ##  Documentation
 

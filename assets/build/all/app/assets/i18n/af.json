@@ -516,5 +516,19 @@
   "Utilities": "Nutsdienste",
   "Scenes": "Tonele",
   "Virtual Modules": "Virtuele modules",
-  "Simulate": "Simuleer"
+  "Simulate": "Simuleer",
+  "day_of_year": "Dag van die Jaar",
+  "year": "Jaar",
+  "Daily Energy Summary": "Daaglikse Energie Opsomming",
+  "Data Monitor": "Datamonitor",
+  "Hourly Energy Consumption": "Uurlikse Energieverbruik",
+  "Pie Chart Stats example": "Sirkeldiagram-demonstrasie",
+  "Weekly Energy Consumption": "Weeklikse Energieverbruik",
+  "Window Shutters": "Vensterluike",
+  "Window Shutter 1": "Vensterluik 1",
+  "Window Shutter 2": "Vensterluik 2",
+  "Living Room": "Sitkamer",
+  "Mood Light": "Stemmingslig",
+  "Dashboard": "Dashboard",
+  "watch_movies_dlna": "Kyk na jou flieks en reekse (UPnP/DLNA)"
 }

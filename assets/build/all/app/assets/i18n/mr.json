@@ -516,5 +516,19 @@
   "Utilities": "उपयुक्तता",
   "Scenes": "दृश्ये",
   "Virtual Modules": "व्हर्च्युअल मॉड्यूल्स",
-  "Simulate": "अनुकरण करा"
+  "Simulate": "अनुकरण करा",
+  "day_of_year": "वर्षाचा दिवस",
+  "year": "वर्ष",
+  "Daily Energy Summary": "दैनिक ऊर्जेचा सारांश",
+  "Data Monitor": "डेटा मॉनिटर",
+  "Hourly Energy Consumption": "तासाला ऊर्जेचा वापर",
+  "Pie Chart Stats example": "पाय चार्ट डेमो",
+  "Weekly Energy Consumption": "आठवड्याचा ऊर्जेचा वापर",
+  "Window Shutters": "खिडक्यांचे शटर",
+  "Window Shutter 1": "विंडो शटर १",
+  "Window Shutter 2": "विंडो शटर २",
+  "Living Room": "बैठकीची खोली",
+  "Mood Light": "मूड लाइट",
+  "Dashboard": "डॅशबोर्ड",
+  "watch_movies_dlna": "तुमचे चित्रपट आणि मालिका पहा (UPnP/DLNA)"
 }

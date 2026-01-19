@@ -313,7 +313,8 @@
       "Description": "Mendayakan kawalan bahasa semula jadi untuk sistem pintar anda menggunakan Gemini AI Google. Untuk mengaktifkan ciri ini, masukkan kunci API yang sah. Ikut arahan di https://aistudio.google.com/app/apikey untuk mendapatkan kunci API percuma.",
       "ConfigureOptions.ApiKey": "Kunci API Google Gemini AI",
       "ConfigureOptions.ModelId": "ID model",
-      "ConfigureOptions.SystemInstructions": "Arahan Sistem"
+      "ConfigureOptions.SystemInstructions": "Arahan Sistem",
+      "ConfigureOptions.SendContextData": "Kongsi konteks sistem dan modul dengan AI"
     },
     "931": {
       "Title": "Gemini Widget Jin",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Statistik Penggunaan Tenaga",
-      "Description": "Memantau, mengagregat dan merekodkan data penggunaan tenaga (W/j) secara berterusan pada selang masa yang tetap. Melaksanakan API penuh untuk menyemak imbas dan membuat pertanyaan tentang set data sejarah."
+      "Description": "Memantau, mengagregat dan merekodkan data penggunaan tenaga (Wh) secara berterusan pada selang masa yang tetap. Melaksanakan API penuh untuk menyemak imbas dan membuat pertanyaan tentang set data sejarah."
     },
     "572": {
       "Title": "Contoh Statistik Carta Pai",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Penggunaan Tenaga Setiap Jam",
       "Description": "Carta bar memaparkan purata penggunaan Watt/Jam untuk setiap jam dalam sehari (00h-23h). Data diagregatkan sepanjang minggu yang dipilih dan diperoleh daripada API Statistik Penggunaan Tenaga."
+    },
+    "579": {
+      "Title": "Ringkasan Tenaga Harian",
+      "Description": "Penggunaan tenaga harian (Wh) mengikut peranti.",
+      "Widget.Statistics.DailyReport": "Sertakan dalam laporan Daily Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Perintah Jin",

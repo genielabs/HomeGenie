@@ -313,7 +313,8 @@
       "Description": "Nṣiṣẹ iṣakoso ede adayeba fun eto ọlọgbọn rẹ nipa lilo Gemini AI Google. Lati mu ẹya ara ẹrọ yii ṣiṣẹ, tẹ bọtini API to wulo. Tẹle awọn ilana ni https://aistudio.google.com/app/apikey lati gba bọtini API ọfẹ kan.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API bọtini",
       "ConfigureOptions.ModelId": "ID awoṣe",
-      "ConfigureOptions.SystemInstructions": "Àwọn Ìtọ́ni Ètò"
+      "ConfigureOptions.SystemInstructions": "Àwọn Ìtọ́ni Ètò",
+      "ConfigureOptions.SendContextData": "Pin eto ati ipo modulu pẹlu AI"
     },
     "931": {
       "Title": "Gemini ailorukọ Ẹmi",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Àwọn Àlàyé Nípa Lilo Agbára",
-      "Description": "Ó ń ṣe àkíyèsí, kó jọ, àti ṣàkọsílẹ̀ ìlò agbára (W/h) ní àwọn àkókò déédéé. Ó ń lo API pípé fún wíwá kiri àti ṣíṣe ìbéèrè lórí àwọn ìwádìí ìtàn."
+      "Description": "Ó ń ṣe àkíyèsí, kó jọ, àti ṣàkọsílẹ̀ ìlò agbára (Wh) ní àwọn àkókò déédéé. Ó ń lo API pípé fún wíwá kiri àti ṣíṣe ìbéèrè lórí àwọn ìwádìí ìtàn."
     },
     "572": {
       "Title": "Àpẹẹrẹ Àtẹ Àtẹ",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Lilo Agbara Wakati",
       "Description": "Àtẹ ìtẹ̀wé tí ó ń fi ìwọ̀n ìlò Watt/Wákàtí tí a lò fún gbogbo wákàtí ọjọ́ (00h-23h) hàn. A kó àwọn dátà jọ ní ọ̀sẹ̀ tí a yàn, a sì wá láti inú Agbára Lilo Àkójọpọ̀."
+    },
+    "579": {
+      "Title": "Àkópọ̀ Agbára Ojoojúmọ́",
+      "Description": "Lilo agbara ojoojumọ (Wh) nipasẹ ẹrọ.",
+      "Widget.Statistics.DailyReport": "Fi kún ìròyìn Daily Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Àṣẹ Ẹ̀mí",

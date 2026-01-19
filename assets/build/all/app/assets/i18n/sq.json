@@ -516,5 +516,19 @@
   "Utilities": "Shërbime",
   "Scenes": "Skena",
   "Virtual Modules": "Modulet Virtuale",
-  "Simulate": "Simulo"
+  "Simulate": "Simulo",
+  "day_of_year": "Dita e Vitit",
+  "year": "Viti",
+  "Daily Energy Summary": "Përmbledhja e Energjisë Ditore",
+  "Data Monitor": "Monitori i të Dhënave",
+  "Hourly Energy Consumption": "Përdorimi i Energjisë në Ora",
+  "Pie Chart Stats example": "Demo e Grafikut Rrethor",
+  "Weekly Energy Consumption": "Përdorimi javor i energjisë",
+  "Window Shutters": "Grila dritaresh",
+  "Window Shutter 1": "Qepena Dritare 1",
+  "Window Shutter 2": "Qepena Dritare 2",
+  "Living Room": "Dhoma e ndenjes",
+  "Mood Light": "Drita e humorit",
+  "Dashboard": "Paneli i kontrollit",
+  "watch_movies_dlna": "Shikoni Filmat dhe Serialet tuaja (UPnP/DLNA)"
 }

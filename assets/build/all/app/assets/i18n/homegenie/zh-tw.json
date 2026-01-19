@@ -313,7 +313,8 @@
       "Description": "使用 Google Gemini AI 為您的智慧型系統啟用自然語言控制。若要啟動此功能，請輸入有效的 API 金鑰。請依照 https://aistudio.google.com/app/apikey 上的說明取得免費 API 金鑰。",
       "ConfigureOptions.ApiKey": "Google Gemini AI API 金鑰",
       "ConfigureOptions.ModelId": "模型 ID",
-      "ConfigureOptions.SystemInstructions": "系統說明"
+      "ConfigureOptions.SystemInstructions": "系統說明",
+      "ConfigureOptions.SendContextData": "與人工智慧共享系統和模組上下文"
     },
     "931": {
       "Title": "雙子座小工具精靈",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "每小時能源消耗量",
       "Description": "長條圖顯示了一天中每個小時（00:00-23:00）的平均瓦時消耗量。數據匯總自所選一周，來自能源使用統計 API。"
+    },
+    "579": {
+      "Title": "每日能量概要",
+      "Description": "各設備每日能耗（瓦時）。",
+      "Widget.Statistics.DailyReport": "納入每日WH報告"
     }
   },
   "scheduler_preset_action_genie_command": "精靈指令",

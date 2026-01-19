@@ -516,5 +516,19 @@
   "Utilities": "Forbrugsvarer",
   "Scenes": "Scener",
   "Virtual Modules": "Virtuelle moduler",
-  "Simulate": "Simuler"
+  "Simulate": "Simuler",
+  "day_of_year": "Årets dag",
+  "year": "År",
+  "Daily Energy Summary": "Daglig energioversigt",
+  "Data Monitor": "Dataovervågning",
+  "Hourly Energy Consumption": "Timeforbrug af energi",
+  "Pie Chart Stats example": "Demo af cirkeldiagram",
+  "Weekly Energy Consumption": "Ugentlig energiforbrug",
+  "Window Shutters": "Vinduesskodder",
+  "Window Shutter 1": "Vinduesskodde 1",
+  "Window Shutter 2": "Vinduesskodde 2",
+  "Living Room": "Stue",
+  "Mood Light": "Stemningslys",
+  "Dashboard": "Dashboard",
+  "watch_movies_dlna": "Se dine film og serier (UPnP/DLNA)"
 }

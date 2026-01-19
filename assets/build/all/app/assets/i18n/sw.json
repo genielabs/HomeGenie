@@ -516,5 +516,19 @@
   "Utilities": "Huduma",
   "Scenes": "Mandhari",
   "Virtual Modules": "Moduli Pepe",
-  "Simulate": "Iga"
+  "Simulate": "Iga",
+  "day_of_year": "Siku ya Mwaka",
+  "year": "Mwaka",
+  "Daily Energy Summary": "Muhtasari wa Nishati ya Kila Siku",
+  "Data Monitor": "Kifuatiliaji cha Data",
+  "Hourly Energy Consumption": "Matumizi ya Nishati kwa Saa",
+  "Pie Chart Stats example": "Onyesho la Chati ya Pai",
+  "Weekly Energy Consumption": "Matumizi ya Nishati ya Kila Wiki",
+  "Window Shutters": "Vifunga vya Dirisha",
+  "Window Shutter 1": "Kifunga cha Dirisha 1",
+  "Window Shutter 2": "Kifunga cha Dirisha 2",
+  "Living Room": "Sebule",
+  "Mood Light": "Mwangaza wa Hali",
+  "Dashboard": "Dashibodi",
+  "watch_movies_dlna": "Tazama Filamu na Mifululizo Yako (UPnP/DLNA)"
 }

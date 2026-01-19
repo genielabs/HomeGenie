@@ -313,7 +313,8 @@
       "Description": "Imayatsa kuwongolera zilankhulo zachilengedwe pamakina anu anzeru pogwiritsa ntchito Google's Gemini AI. Kuti mutsegule izi, lowetsani kiyi yolondola ya API. Tsatirani malangizo pa https://aistudio.google.com/app/apikey kuti mupeze kiyi yaulere ya API.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API kiyi",
       "ConfigureOptions.ModelId": "ID yachitsanzo",
-      "ConfigureOptions.SystemInstructions": "Malangizo a Machitidwe"
+      "ConfigureOptions.SystemInstructions": "Malangizo a Machitidwe",
+      "ConfigureOptions.SendContextData": "Gawani dongosolo ndi gawo ndi AI"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Ziwerengero Zogwiritsira Ntchito Mphamvu",
-      "Description": "Imayang'anira, kusonkhanitsa, ndi kulemba deta yogwiritsira ntchito mphamvu (W/h) nthawi zonse. Imagwiritsa ntchito API yonse yofufuzira ndi kufufuza ma data akale."
+      "Description": "Imayang'anira, kusonkhanitsa, ndi kulemba deta yogwiritsira ntchito mphamvu (Wh) nthawi zonse. Imagwiritsa ntchito API yonse yofufuzira ndi kufufuza ma data akale."
     },
     "572": {
       "Title": "Chitsanzo cha ziwerengero za tchati cha pie",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Kugwiritsa Ntchito Mphamvu pa Ola Lililonse",
       "Description": "Tchati cha mipiringidzo chomwe chikuwonetsa kuchuluka kwa ma Watts/Ola omwe amagwiritsidwa ntchito pa ola lililonse la tsiku (00h-23h). Deta imasonkhanitsidwa pamodzi pa sabata yosankhidwa ndikupeza kuchokera ku Energy Use Statistics API."
+    },
+    "579": {
+      "Title": "Chidule cha Mphamvu za Tsiku ndi Tsiku",
+      "Description": "Kugwiritsa ntchito mphamvu tsiku ndi tsiku (Wh) pogwiritsa ntchito chipangizo.",
+      "Widget.Statistics.DailyReport": "Phatikizani mu lipoti la Daily Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Lamulo la Genie",

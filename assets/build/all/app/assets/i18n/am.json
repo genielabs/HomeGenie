@@ -516,5 +516,19 @@
   "Utilities": "መገልገያ",
   "Scenes": "ትዕይንቶች",
   "Virtual Modules": "ምናባዊ ሞጁሎች",
-  "Simulate": "አስመስል"
+  "Simulate": "አስመስል",
+  "day_of_year": "የዓመቱ ቀን",
+  "year": "አመት",
+  "Daily Energy Summary": "ዕለታዊ የኃይል ማጠቃለያ",
+  "Data Monitor": "የውሂብ ክትትል",
+  "Hourly Energy Consumption": "በሰዓት የሚፈጀው የኃይል አጠቃቀም",
+  "Pie Chart Stats example": "የአምባሻ ገበታ ማሳያ",
+  "Weekly Energy Consumption": "ሳምንታዊ የኃይል አጠቃቀም",
+  "Window Shutters": "የመስኮት መዝጊያዎች",
+  "Window Shutter 1": "የመስኮት መዝጊያ 1",
+  "Window Shutter 2": "የመስኮት መዝጊያ 2",
+  "Living Room": "ሳሎን",
+  "Mood Light": "የስሜት ብርሃን",
+  "Dashboard": "ዳሽቦርድ",
+  "watch_movies_dlna": "ፊልሞችዎን እና ተከታታይ ፊልሞችዎን (UPnP/DLNA) ይመልከቱ"
 }

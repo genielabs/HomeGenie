@@ -566,6 +566,8 @@
         "Chiave API Google Gemini AI",
       "ConfigureOptions.ModelId":
         "ID Modello",
+      "ConfigureOptions.SendContextData":
+        "Condividi il contesto del sistema e dei moduli con l'IA",
       "ConfigureOptions.SystemInstructions":
         "Istruzioni di Sistema"
     },
@@ -640,7 +642,7 @@
       "Title":
         "Statistiche Consumo Energetico",
       "Description":
-        "Monitora, aggrega e registra continuamente i dati di consumo energetico (W/h) a intervalli regolari. Implementa un'API completa per la consultazione e l'interrogazione dei set di dati storici."
+        "Monitora, aggrega e registra continuamente i dati di consumo energetico (Wh) a intervalli regolari. Implementa un'API completa per la consultazione e l'interrogazione dei set di dati storici."
     },
     "572": {
       "Title":
@@ -659,6 +661,14 @@
         "Consumo Energetico Orario",
       "Description":
         "Grafico a barre che visualizza il consumo medio in Watt/ora per ogni ora del giorno (00h-23h). I dati sono aggregati sulla base della settimana selezionata e provengono dalle API del servizio 'Statistiche Consumo Energetico'."
+    },
+    "579": {
+      "Title":
+        "Riepilogo Energia Quotidiano",
+      "Description":
+        "Consumo energetico giornaliero (Wh) per dispositivo.",
+      "Widget.Statistics.DailyReport":
+        "Includi nel report giornaliero Wh"
     }
   }
 }

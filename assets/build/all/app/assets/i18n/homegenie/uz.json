@@ -313,7 +313,8 @@
       "Description": "Google Gemini AI yordamida aqlli tizimingiz uchun tabiiy tilni boshqarish imkonini beradi. Ushbu xususiyatni faollashtirish uchun yaroqli API kalitini kiriting. Bepul API kalitini olish uchun https://aistudio.google.com/app/apikey manzilidagi ko‘rsatmalarga amal qiling.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API kaliti",
       "ConfigureOptions.ModelId": "Model ID",
-      "ConfigureOptions.SystemInstructions": "Tizim ko'rsatmalari"
+      "ConfigureOptions.SystemInstructions": "Tizim ko'rsatmalari",
+      "ConfigureOptions.SendContextData": "Tizim va modul kontekstini AI bilan baham ko'ring"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Soatlik energiya sarfi",
       "Description": "Kunning har bir soati (00-23 soat) uchun o'rtacha vatt/soat iste'molini ko'rsatuvchi ustunli diagramma. Ma'lumotlar tanlangan hafta davomida to'planadi va Energiyadan foydalanish statistikasi API'sidan olinadi."
+    },
+    "579": {
+      "Title": "Kundalik energiya haqida qisqacha ma'lumot",
+      "Description": "Qurilma bo'yicha kunlik energiya sarfi (Vt/soat).",
+      "Widget.Statistics.DailyReport": "Kundalik Wh hisobotiga qo'shing"
     }
   },
   "scheduler_preset_action_genie_command": "Jin qo'mondonligi",

@@ -516,5 +516,19 @@
   "Utilities": "Utility",
   "Scenes": "Mga Eksena",
   "Virtual Modules": "Mga Virtual na Module",
-  "Simulate": "Gayahin"
+  "Simulate": "Gayahin",
+  "day_of_year": "Araw ng Taon",
+  "year": "Taon",
+  "Daily Energy Summary": "Buod ng Pang-araw-araw na Enerhiya",
+  "Data Monitor": "Monitor ng Datos",
+  "Hourly Energy Consumption": "Paggamit ng Enerhiya kada Oras",
+  "Pie Chart Stats example": "Demo ng Tsart ng Pie",
+  "Weekly Energy Consumption": "Lingguhang Paggamit ng Enerhiya",
+  "Window Shutters": "Mga Shutter ng Bintana",
+  "Window Shutter 1": "Panangga sa Bintana 1",
+  "Window Shutter 2": "Panangga sa Bintana 2",
+  "Living Room": "Sala",
+  "Mood Light": "Ilaw ng Mood",
+  "Dashboard": "Dashboard",
+  "watch_movies_dlna": "Panoorin ang iyong mga Pelikula at Serye (UPnP/DLNA)"
 }

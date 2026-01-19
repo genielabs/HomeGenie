@@ -516,5 +516,19 @@
   "Utilities": "Utility",
   "Scenes": "Stseenid",
   "Virtual Modules": "Virtuaalsed moodulid",
-  "Simulate": "Simuleeri"
+  "Simulate": "Simuleeri",
+  "day_of_year": "Aastapäev",
+  "year": "Aasta",
+  "Daily Energy Summary": "Päevane energiakokkuvõte",
+  "Data Monitor": "Andmemonitor",
+  "Hourly Energy Consumption": "Tunnine energiakasutus",
+  "Pie Chart Stats example": "Sektordiagrammi demo",
+  "Weekly Energy Consumption": "Nädala energiatarbimine",
+  "Window Shutters": "Aknaluugid",
+  "Window Shutter 1": "Aknaluugi 1",
+  "Window Shutter 2": "Aknaluugi 2",
+  "Living Room": "Elutuba",
+  "Mood Light": "Meeleoluvalgus",
+  "Dashboard": "Armatuurlaud",
+  "watch_movies_dlna": "Vaadake oma filme ja sarju (UPnP/DLNA)"
 }

@@ -516,5 +516,19 @@
   "Utilities": "Կոմունալ ծառայություններ",
   "Scenes": "Տեսարաններ",
   "Virtual Modules": "Վիրտուալ մոդուլներ",
-  "Simulate": "Սիմուլյացիա"
+  "Simulate": "Սիմուլյացիա",
+  "day_of_year": "Տարվա օրը",
+  "year": "Տարի",
+  "Daily Energy Summary": "Օրական էներգիայի ամփոփում",
+  "Data Monitor": "Տվյալների մոնիտոր",
+  "Hourly Energy Consumption": "Ժամային էներգիայի օգտագործում",
+  "Pie Chart Stats example": "Շրջանաձև դիագրամի ցուցադրություն",
+  "Weekly Energy Consumption": "Շաբաթական էներգիայի օգտագործում",
+  "Window Shutters": "Պատուհանների փեղկեր",
+  "Window Shutter 1": "Պատուհանի փեղկ 1",
+  "Window Shutter 2": "Պատուհանի փեղկ 2",
+  "Living Room": "Հյուրասենյակ",
+  "Mood Light": "Տրամադրության լույս",
+  "Dashboard": "Կառավարման վահանակ",
+  "watch_movies_dlna": "Դիտեք ձեր ֆիլմերն ու սերիալները (UPnP/DLNA)"
 }

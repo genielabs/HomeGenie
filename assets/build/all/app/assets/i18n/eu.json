@@ -516,5 +516,19 @@
   "Utilities": "Erabilgarritasuna",
   "Scenes": "Eszenak",
   "Virtual Modules": "Modulu Birtualak",
-  "Simulate": "Simulatu"
+  "Simulate": "Simulatu",
+  "day_of_year": "Urteko eguna",
+  "year": "Urtea",
+  "Daily Energy Summary": "Eguneko Energia Laburpena",
+  "Data Monitor": "Datuen monitore",
+  "Hourly Energy Consumption": "Orduko energia-kontsumoa",
+  "Pie Chart Stats example": "Diagrama zirkularra demoa",
+  "Weekly Energy Consumption": "Asteko energia-kontsumoa",
+  "Window Shutters": "Leiho-pertsianak",
+  "Window Shutter 1": "Leihoko pertsiana 1",
+  "Window Shutter 2": "Leihoko pertsiana 2",
+  "Living Room": "Egongela",
+  "Mood Light": "Giro-argia",
+  "Dashboard": "Aginte-panela",
+  "watch_movies_dlna": "Ikusi zure filmak eta telesailak (UPnP/DLNA)"
 }

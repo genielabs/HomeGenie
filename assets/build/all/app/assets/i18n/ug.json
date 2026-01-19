@@ -516,5 +516,19 @@
   "Utilities": "پايدىلىنىش",
   "Scenes": "كۆرۈنۈشلەر",
   "Virtual Modules": "ۋىرتۇئال مودۇللار",
-  "Simulate": "سىمۇلياتسىيە قىلىش"
+  "Simulate": "سىمۇلياتسىيە قىلىش",
+  "day_of_year": "يىل كۈنى",
+  "year": "يىل",
+  "Daily Energy Summary": "كۈندىلىك ئېنېرگىيە خۇلاسىسى",
+  "Data Monitor": "سانلىق مەلۇمات كۆزىتىش سىستېمىسى",
+  "Hourly Energy Consumption": "سائەتلىك ئېنېرگىيە ئىشلىتىش",
+  "Pie Chart Stats example": "تور شەكىللىك دىئاگرامما كۆرسىتىشى",
+  "Weekly Energy Consumption": "ھەپتىلىك ئېنېرگىيە ئىشلىتىش",
+  "Window Shutters": "دېرىزە پەردىلىرى",
+  "Window Shutter 1": "دېرىزە پەردىسى 1",
+  "Window Shutter 2": "دېرىزە پەردىسى 2",
+  "Living Room": "مېھمانخانا",
+  "Mood Light": "كەيپىيات نۇرى",
+  "Dashboard": "باشقۇرۇش تاختىسى",
+  "watch_movies_dlna": "كىنو ۋە تېلېۋىزىيە تىياتىرلىرىڭىزنى كۆرۈڭ (UPnP/DLNA)"
 }

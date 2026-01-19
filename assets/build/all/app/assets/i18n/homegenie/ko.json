@@ -313,7 +313,8 @@
       "Description": "Google Gemini AI를 사용하여 스마트 시스템의 자연어 제어를 지원합니다. 이 기능을 활성화하려면 유효한 API 키를 입력하세요. https://aistudio.google.com/app/apikey의 안내에 따라 무료 API 키를 받으세요.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API 키",
       "ConfigureOptions.ModelId": "모델 ID",
-      "ConfigureOptions.SystemInstructions": "시스템 지침"
+      "ConfigureOptions.SystemInstructions": "시스템 지침",
+      "ConfigureOptions.SendContextData": "시스템 및 모듈 컨텍스트를 AI와 공유합니다."
     },
     "931": {
       "Title": "제미니 위젯 지니",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "에너지 사용 통계",
-      "Description": "에너지 소비량 데이터(W/h)를 지속적으로 모니터링, 집계 및 기록합니다. 과거 데이터 세트를 탐색하고 조회할 수 있는 완벽한 API를 제공합니다."
+      "Description": "정기적으로 에너지 소비량 데이터(Wh)를 지속적으로 모니터링, 집계 및 기록합니다. 과거 데이터 세트를 탐색하고 조회할 수 있는 완벽한 API를 제공합니다."
     },
     "572": {
       "Title": "원형 차트 통계 예시",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "시간당 에너지 소비량",
       "Description": "하루 중 시간대별(00시~23시) 평균 와트시(W/H) 소비량을 보여주는 막대 그래프입니다. 데이터는 선택한 주간 동안 집계되었으며 에너지 사용 통계 API에서 가져왔습니다."
+    },
+    "579": {
+      "Title": "일일 에너지 요약",
+      "Description": "기기별 일일 에너지 소비량(Wh).",
+      "Widget.Statistics.DailyReport": "일일 Wh 보고서에 포함"
     }
   },
   "scheduler_preset_action_genie_command": "지니 커맨드",

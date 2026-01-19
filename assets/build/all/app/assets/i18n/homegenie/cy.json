@@ -313,7 +313,8 @@
       "Description": "Yn galluogi rheolaeth iaith naturiol ar gyfer eich system glyfar gan ddefnyddio Gemini AI Google. I actifadu'r nodwedd hon, nodwch allwedd API ddilys. Dilynwch y cyfarwyddiadau yn https://aistudio.google.com/app/apikey i gael allwedd API am ddim.",
       "ConfigureOptions.ApiKey": "Allwedd API Google Gemini AI",
       "ConfigureOptions.ModelId": "ID Model",
-      "ConfigureOptions.SystemInstructions": "Cyfarwyddiadau System"
+      "ConfigureOptions.SystemInstructions": "Cyfarwyddiadau System",
+      "ConfigureOptions.SendContextData": "Rhannu cyd-destun system a modiwl gyda'r AI"
     },
     "931": {
       "Title": "Gemini Widget Genie",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "Ystadegau Defnydd Ynni",
-      "Description": "Yn monitro, crynhoi a chofnodi data defnydd ynni (W/awr) yn barhaus ar adegau rheolaidd. Yn gweithredu API llawn ar gyfer pori ac ymholi setiau data hanesyddol."
+      "Description": "Yn monitro, crynhoi a chofnodi data defnydd ynni (Wh) yn barhaus ar adegau rheolaidd. Yn gweithredu API llawn ar gyfer pori ac ymholi setiau data hanesyddol."
     },
     "572": {
       "Title": "Enghraifft o Ystadegau Siart Cylch",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "Defnydd Ynni Fesul Awr",
       "Description": "Siart bar yn dangos y defnydd Watiau/Awr cyfartalog ar gyfer pob awr o'r dydd (00h-23h). Mae data wedi'i agregu dros yr wythnos a ddewiswyd ac wedi'i ffynhonnellu o'r API Ystadegau Defnydd Ynni."
+    },
+    "579": {
+      "Title": "Crynodeb Ynni Dyddiol",
+      "Description": "Defnydd ynni dyddiol (Wh) yn ôl dyfais.",
+      "Widget.Statistics.DailyReport": "Cynnwys yn yr adroddiad Dyddiol Wh"
     }
   },
   "scheduler_preset_action_genie_command": "Gorchymyn Genie",

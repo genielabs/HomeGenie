@@ -252,4 +252,44 @@ if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
       </ModuleReference>
     </BoundModules>
   </SchedulerItem>
+  <SchedulerItem>
+    <Name>WindowShutters.Auto</Name>
+    <CronExpression>(@SolarTimes.Sunrise - 60 &gt; @SolarTimes.Sunset + 180)
+ %
+(@Holidays.Summer : @Holidays.Winter)</CronExpression>
+    <Description>Automates window shutters. They operate daily from 1 hour before sunrise until 3 hours after sunset, but only during Summer or Winter holidays.</Description>
+    <Data>{"itemType":3,"time":[],"occur_min_type":1,"occur_min_step":30,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":12,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":1,"occur_month_sel":[],"action":{"type":"template","template":{"forEach":{"enabled":false,"commands":[]},"forStart":{"enabled":true,"commands":[{"id":"command_set_level","config":{"level":0.8},"useEventValue":false}]},"forEnd":{"enabled":true,"commands":[{"id":"command_set_level","config":{"level":0.05},"useEventValue":false}]}}},"from":"2026-01-18","to":"2026-01-18"}</Data>
+    <IsEnabled>true</IsEnabled>
+    <Script>// auto-generated code from template
+if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
+  // this is start of a time slot
+
+  $$.boundModules.level = 0.8;
+
+} else if ($$.onPrevious() &amp;&amp; !$$.onNext()) {
+  // this is end of a time slot
+
+  $$.boundModules.level = 0.05;
+
+} else {
+  // this is for any other single occurrence
+  // and every minute within a time slot
+
+  //{each}//
+}
+</Script>
+    <BoundDevices>
+      <string>Shutter</string>
+    </BoundDevices>
+    <BoundModules>
+      <ModuleReference>
+        <Address>4</Address>
+        <Domain>HomeAutomation.Demo</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>5</Address>
+        <Domain>HomeAutomation.Demo</Domain>
+      </ModuleReference>
+    </BoundModules>
+  </SchedulerItem>
 </ArrayOfSchedulerItem>

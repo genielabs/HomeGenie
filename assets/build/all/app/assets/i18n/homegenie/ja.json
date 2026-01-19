@@ -313,7 +313,8 @@
       "Description": "Google Gemini AI を活用し、スマートシステムの自然言語制御を可能にします。この機能を有効にするには、有効な API キーを入力してください。無料の API キーを取得するには、https://aistudio.google.com/app/apikey の手順に従ってください。",
       "ConfigureOptions.ApiKey": "Google Gemini AI APIキー",
       "ConfigureOptions.ModelId": "モデルID",
-      "ConfigureOptions.SystemInstructions": "システム手順"
+      "ConfigureOptions.SystemInstructions": "システム手順",
+      "ConfigureOptions.SendContextData": "システムとモジュールのコンテキストをAIと共有する"
     },
     "931": {
       "Title": "ジェミニウィジェットジーニー",
@@ -357,7 +358,7 @@
     },
     "571": {
       "Title": "エネルギー使用統計",
-      "Description": "エネルギー消費データ（W/h）を定期的に継続的に監視、集計、記録します。履歴データセットの閲覧とクエリのための完全なAPIを実装しています。"
+      "Description": "エネルギー消費量データ（Wh）を定期的に継続的に監視、集計、記録します。履歴データセットの閲覧とクエリのための完全なAPIを実装しています。"
     },
     "572": {
       "Title": "円グラフの統計例",
@@ -370,6 +371,11 @@
     "574": {
       "Title": "1時間あたりのエネルギー消費量",
       "Description": "1日（00時～23時）の各時間における平均ワット/時間消費量を示す棒グラフ。データは選択した週のデータを集計したもので、エネルギー使用統計APIから取得されます。"
+    },
+    "579": {
+      "Title": "毎日のエネルギーサマリー",
+      "Description": "デバイス別の1日あたりのエネルギー消費量（Wh）。",
+      "Widget.Statistics.DailyReport": "日次Whレポートに含める"
     }
   },
   "scheduler_preset_action_genie_command": "ジーニーコマンド",
