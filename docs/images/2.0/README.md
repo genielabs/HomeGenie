@@ -1,4 +1,4 @@
-[← Back to Main README](../../README.md)
+[← Back to Main README](../../../README.md)
 
 # HomeGenie 2.0
 
@@ -43,4 +43,4 @@ navigation, visualize trends through interactive charts, and apply advanced data
 to understand your environment better. From temperature to luminance, gain deep insights into your system's performance
 and behavior.
 
-[← Back to Main README](../../README.md)
+[← Back to Main README](../../../README.md)

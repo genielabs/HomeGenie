@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/genielabs/HomeGenie/actions/workflows/msbuild.yml"><img src="https://github.com/genielabs/HomeGenie/actions/workflows/msbuild.yml/badge.svg" alt="Build Status"></a>
   <a href="https://github.com/genielabs/HomeGenie/releases/latest"><img src="https://img.shields.io/github/v/release/genielabs/HomeGenie" alt="Latest Release"></a>
-  <a href="https://img.shields.io/github/license/genielabs/HomeGenie.svg?label=License&color=blue" alt="License"></a> <!-- AGPLv3 License Badge -->
+  <a href="https://github.com/genielabs/HomeGenie/blob/master/LICENSE"><img src="https://img.shields.io/github/license/genielabs/HomeGenie.svg" alt="License"></a>
 </p>
 
 
@@ -19,7 +19,7 @@ HomeGenie is a **versatile, open-source platform for programmable intelligence**
 
 With its robust **Local-First, Agentic AI capabilities** and extensive hardware support, HomeGenie offers the freedom to create complex automation scenarios and integrate a vast array of devices, all while ensuring your data and logic remain securely within your own network.
 
-![HomeGenie Dashboard](https://genielabs.github.io/HomeGenie/images/2.0/homegenie_2_dashboard_01.png) <!-- MANTIENI QUESTO COME BASE PER IL NUOVO -->
+![HomeGenie Dashboard](https://genielabs.github.io/HomeGenie/images/2.0/homegenie_2_dashboard_01.png)
 
 ## ✨ Key Features
 
@@ -34,7 +34,7 @@ With its robust **Local-First, Agentic AI capabilities** and extensive hardware 
 - **Voice Control & i18n:** Integrated support for voice commands and a fully localized UI across over 90 languages.
 - **Extensible:** Features groups, configuration backup, a package repository, and much more.
 
-[Full Features and Image Gallery](./docs/images/2.0/README.md) <!-- LINK ALLA TUA GALLERIA AGGIORNATA -->
+[Full Features and Image Gallery](./docs/images/2.0/README.md)
 
 ##  Documentation
 
