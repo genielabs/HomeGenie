@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1769123533396,
+  "timestamp": 1769853311342,
   "index": "/app/index.html",
   "assetGroups": [
     {
@@ -15,7 +15,7 @@
         "/app/613.16b9c52c0ae74833.js",
         "/app/859.0f150be9c99a6b5a.js",
         "/app/index.html",
-        "/app/main.665114430c7860cf.js",
+        "/app/main.94ef877f3993bbb0.js",
         "/app/manifest.webmanifest",
         "/app/polyfills.a360d6e45b80c065.js",
         "/app/runtime.b92e2ca178ebbf4a.js",
@@ -2409,7 +2409,7 @@
     "/app/assets/scss/prism.scss": "f1f64f4a26b715edbd65391def53322611df75cf",
     "/app/assets/styles/flex-layout-attribute.min.css": "646ac47e6d0254310c838cb301315cfdf3822907",
     "/app/assets/styles/highlight.js/vs2015.css": "fc8e8571ee0e49b7fc2c994696126daea49d19bd",
-    "/app/assets/styles/widget-ui.css": "ff1bca4dd50811a48fc81fac6d0f7b32372d8cf7",
+    "/app/assets/styles/widget-ui.css": "02ecf3dd2db1f2602493858e1ab3f838573c8e44",
     "/app/assets/widgets/analog-clock/clock.png": "c72933161456f8bb6762bb9dd65cac926b862471",
     "/app/assets/widgets/compat/images/camera.png": "cd50117058efec6e13dd4601045243d64be67259",
     "/app/assets/widgets/compat/images/dimmer_off.png": "7b8bf07fa8a75af62b9584a49b039850597d1ccd",
@@ -2534,8 +2534,8 @@
     "/app/assets/widgets/weather/images_alt/weather.svg": "c719c09048977fd40688272316b35ddf1bdf89e8",
     "/app/assets/workers/typings-worker.js": "8df10d867c12d36cdebfb7e16caacd0020db301f",
     "/app/codicon.adf6e8098001c1bd.ttf": "8204a1cdfd45b283b1d09df9c9ccf176c9efdb2d",
-    "/app/index.html": "300475f1febe22ffc704fa054433bab6ef433934",
-    "/app/main.665114430c7860cf.js": "48bb80cc9e3c97edc383b836a22ce9677b8156ee",
+    "/app/index.html": "0dc8cd4ace8fe7fe38270d65f35e91cbe17e06a3",
+    "/app/main.94ef877f3993bbb0.js": "1316ab8b92f2819b17293a0a252595a5405f4a2d",
     "/app/manifest.webmanifest": "519d8ee6b3b82c1add66c43f8ca2cf632326f342",
     "/app/material-symbols-outlined.04b52b454f3bc5eb.woff2": "c98322df19b0d30fa1e9fbe8723f9592d86f367d",
     "/app/material-symbols-rounded.eabca9e86b77ef91.woff2": "572cf3956b7b3ba46650c504f5d9a941ff77f377",

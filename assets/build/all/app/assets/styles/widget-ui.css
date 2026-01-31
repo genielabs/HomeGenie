@@ -60,3 +60,146 @@ span.material-symbols {
 .hidden {
   display: none;
 }
+
+
+
+
+/* Form elements */
+
+input[type=range] {
+  accent-color: var(--accent-color);
+  -webkit-appearance: none; /* Chrome/Safari */
+  background: transparent;
+  cursor: pointer;
+  height: 24px;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  border: 1px solid var(--card-color);
+  background: var(--secondary-text-color);
+  border-radius: 4px;
+}
+/* Firefox */
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 4px;
+  opacity: 0.5;
+  border: 1px solid var(--card-color);
+  background: var(--accent-color);
+  border-radius: 4px;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  cursor: grab;
+  margin-top: -6px;
+}
+
+
+
+
+
+button {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 500;
+  stroke: var(--accent-color);
+  border: solid 1px rgba(127, 127, 127, 0.35);
+  background-color: rgba(127, 127, 127, 0.05);
+  color: var(--text-color);
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  transition: background-color 0.3s;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+button:hover {
+  border: solid 1px rgba(127, 127, 127, 0.5);
+  background-color: rgba(127, 127, 127, 0.15);
+}
+button:active {
+  background-color: rgba(127, 127, 127, 0.35);
+}
+
+button:disabled span {
+  opacity: 0.5;
+  display: none;
+}
+
+button:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
+}
+
+
+
+
+
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+
+  width: 13px;
+  height: 12px;
+  border: 2px solid var(--secondary-text-color);
+  border-radius: 2px;
+  background-color: transparent;
+  cursor: pointer;
+
+  display: grid;
+  place-content: center;
+  margin: 0; margin-left: 4px;
+  transition: all 0.2s ease-in-out;
+}
+input[type="checkbox"]::before {
+  content: "";
+
+  border-right: 1.75px solid var(--card-color);
+  border-bottom: 1.75px solid var(--card-color);
+
+  background-color: transparent;
+
+  transform: rotate(45deg) scale(1);
+
+  margin-top: -2px;
+
+  width: 0;
+  height: 0;
+
+  transition: 0.2s transform cubic-bezier(.4,0,.2,1);
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--accent-color);
+  border-color: transparent;
+}
+
+input[type="checkbox"]:checked::before {
+  transition: width 0.1s ease-out, height 0.1s ease-out 0.1s;
+  width: 3px;
+  height: 9px;
+}
+
+input[type="checkbox"]:hover {
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05);
+}
+
+input[type="checkbox"]:checked:hover {
+  box-shadow: 0 0 0 4px rgba(25, 118, 210, 0.1);
+}
+
+input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
