@@ -6,7 +6,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set env
         run: |
           echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
@@ -17,13 +17,13 @@ jobs:
         run: git log -1 --no-merges --pretty=%B > release_message.txt
 
       - name: Setup dotnet
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 9.x
+          dotnet-version: 10.x
 
       - name: Build release
         run: |
-          dotnet test ./src/HomeGenie.Tests/HomeGenie.Tests.csproj --framework net9.0
+          dotnet test ./src/HomeGenie.Tests/HomeGenie.Tests.csproj --framework net10.0 -m:1
           cat ./src/HomeGenie/release_info.xml
           ./assets/deploy/linux/build-all.sh
 
@@ -35,9 +35,7 @@ jobs:
       - name: Build debian package and docs
         run: |
           sudo apt-get install doxygen
-          ./assets/deploy/linux/builddeb.sh
           cd ./assets/deploy/linux && sh doxygen.sh
-          mv Output/* ../../../src/HomeGenie/bin/Release/artifacts/
           mv Doxy/homegenie_api.tgz ../../../src/HomeGenie/bin/Release/artifacts/
 
       - name: Release
@@ -50,8 +48,6 @@ jobs:
             ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_osx-x64.zip
             ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_linux-x64.zip
             ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_win-x64.zip
-            ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_net472.zip
-            ./src/HomeGenie/bin/Release/artifacts/homegenie_${{ env.VERSION_NUMBER }}_net472.deb
             ./src/HomeGenie/bin/Release/artifacts/homegenie_api.tgz
           body_path: release_message.txt
           generate_release_notes: true
