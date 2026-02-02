@@ -1,6 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="HomeGenie net472" type="DotNetFolderPublish" factoryName="Publish to folder">
-    <riderPublish configuration="Release" platform="Any CPU" runtime="Portable" target_folder="$PROJECT_DIR$/src/HomeGenie/bin/Release/net472" target_framework="net472" uuid_high="-2262129388064389205" uuid_low="-5369674084793783443" />
-    <method v="2" />
-  </configuration>
-</component>
