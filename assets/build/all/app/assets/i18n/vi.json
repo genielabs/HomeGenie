@@ -530,5 +530,11 @@
   "Living Room": "Phòng khách",
   "Mood Light": "Đèn tạo không khí",
   "Dashboard": "Bảng điều khiển",
-  "watch_movies_dlna": "Xem phim và phim truyền hình (UPnP/DLNA)"
+  "watch_movies_dlna": "Xem phim và phim truyền hình (UPnP/DLNA)",
+  "director_name": "Đạo diễn phim",
+  "original_title": "Tựa đề gốc",
+  "original_language": "Ngôn ngữ gốc",
+  "origin_country": "Quốc gia xuất xứ",
+  "production_companies": "Công ty sản xuất",
+  "movie_cast": "Diễn viên"
 }

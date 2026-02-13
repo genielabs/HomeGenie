@@ -530,5 +530,11 @@
   "Living Room": "اتاق نشیمن",
   "Mood Light": "نور خلق و خو",
   "Dashboard": "داشبورد",
-  "watch_movies_dlna": "فیلم‌ها و سریال‌های خود را تماشا کنید (UPnP/DLNA)"
+  "watch_movies_dlna": "فیلم‌ها و سریال‌های خود را تماشا کنید (UPnP/DLNA)",
+  "director_name": "کارگردان فیلم",
+  "original_title": "عنوان اصلی",
+  "original_language": "زبان اصلی",
+  "origin_country": "کشور مبدا",
+  "production_companies": "شرکت تولیدی",
+  "movie_cast": "بازیگران"
 }

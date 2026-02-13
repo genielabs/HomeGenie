@@ -530,5 +530,11 @@
   "Living Room": "Svetainė",
   "Mood Light": "Nuotaikos šviesa",
   "Dashboard": "Prietaisų skydelis",
-  "watch_movies_dlna": "Žiūrėkite filmus ir serialus (UPnP/DLNA)"
+  "watch_movies_dlna": "Žiūrėkite filmus ir serialus (UPnP/DLNA)",
+  "director_name": "Kino režisierius",
+  "original_title": "Originalus pavadinimas",
+  "original_language": "Originalo kalba",
+  "origin_country": "Kilmės šalis",
+  "production_companies": "Gamybos įmonė",
+  "movie_cast": "Aktoriai"
 }

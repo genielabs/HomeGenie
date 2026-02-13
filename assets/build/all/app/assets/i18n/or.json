@@ -530,5 +530,11 @@
   "Living Room": "ବୈଠକଖାନା",
   "Mood Light": "ହାଲୁକା ମୁଡ୍",
   "Dashboard": "ଡ୍ୟାସବୋର୍ଡ",
-  "watch_movies_dlna": "ଆପଣଙ୍କର ସିନେମା ଏବଂ ସିରିଜ୍ (UPnP/DLNA) ଦେଖନ୍ତୁ"
+  "watch_movies_dlna": "ଆପଣଙ୍କର ସିନେମା ଏବଂ ସିରିଜ୍ (UPnP/DLNA) ଦେଖନ୍ତୁ",
+  "director_name": "ଚଳଚ୍ଚିତ୍ର ନିର୍ଦ୍ଦେଶକ",
+  "original_title": "ମୂଳ ଟାଇଟଲ୍",
+  "original_language": "ମୂଳ ଭାଷା",
+  "origin_country": "ଉତ୍ପତ୍ତି ଦେଶ",
+  "production_companies": "ପ୍ରଡକ୍ସନ୍ କମ୍ପାନୀ",
+  "movie_cast": "ଅଭିନେତା"
 }

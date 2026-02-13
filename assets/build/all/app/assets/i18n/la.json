@@ -530,5 +530,11 @@
   "Living Room": "Conclave",
   "Mood Light": "Lux Animi",
   "Dashboard": "Tabula instrumentorum",
-  "watch_movies_dlna": "Pelliculas et Series Tuas Specta (UPnP/DLNA)"
+  "watch_movies_dlna": "Pelliculas et Series Tuas Specta (UPnP/DLNA)",
+  "director_name": "Director pellicularum",
+  "original_title": "Titulus Originalis",
+  "original_language": "Lingua Originalis",
+  "origin_country": "Patria Originis",
+  "production_companies": "Societas Productionis",
+  "movie_cast": "Actores"
 }

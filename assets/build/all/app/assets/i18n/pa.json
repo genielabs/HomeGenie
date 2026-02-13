@@ -530,5 +530,11 @@
   "Living Room": "ਰਿਹਣ ਵਾਲਾ ਕਮਰਾ",
   "Mood Light": "ਹਲਕਾ ਮੂਡ",
   "Dashboard": "ਡੈਸ਼ਬੋਰਡ",
-  "watch_movies_dlna": "ਆਪਣੀਆਂ ਫ਼ਿਲਮਾਂ ਅਤੇ ਸੀਰੀਜ਼ (UPnP/DLNA) ਦੇਖੋ"
+  "watch_movies_dlna": "ਆਪਣੀਆਂ ਫ਼ਿਲਮਾਂ ਅਤੇ ਸੀਰੀਜ਼ (UPnP/DLNA) ਦੇਖੋ",
+  "director_name": "ਫ਼ਿਲਮ ਨਿਰਦੇਸ਼ਕ",
+  "original_title": "ਮੂਲ ਸਿਰਲੇਖ",
+  "original_language": "ਮੂਲ ਭਾਸ਼ਾ",
+  "origin_country": "ਉਦਗਮ ਦੇਸ਼",
+  "production_companies": "ਉਤਪਾਦਨ ਕੰਪਨੀ",
+  "movie_cast": "ਅਦਾਕਾਰ"
 }

@@ -530,5 +530,11 @@
   "Living Room": "बैठक कक्ष",
   "Mood Light": "मूड लाइट",
   "Dashboard": "डैशबोर्ड",
-  "watch_movies_dlna": "अपनी फ़िल्में और सीरीज़ देखें (UPnP/DLNA)"
+  "watch_movies_dlna": "अपनी फ़िल्में और सीरीज़ देखें (UPnP/DLNA)",
+  "director_name": "फ़िल्म निर्देशक",
+  "original_title": "मूल शीर्षक",
+  "original_language": "मूल भाषा",
+  "origin_country": "उद्गम देश",
+  "production_companies": "उत्पादन कंपनी",
+  "movie_cast": "अभिनेताओं"
 }

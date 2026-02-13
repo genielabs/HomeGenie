@@ -530,5 +530,11 @@
   "Living Room": "Woonkamer",
   "Mood Light": "Sfeerverlichting",
   "Dashboard": "Dashboard",
-  "watch_movies_dlna": "Bekijk je films en series (UPnP/DLNA)"
+  "watch_movies_dlna": "Bekijk je films en series (UPnP/DLNA)",
+  "director_name": "Filmregisseur",
+  "original_title": "Originele titel",
+  "original_language": "Oorspronkelijke taal",
+  "origin_country": "Land van herkomst",
+  "production_companies": "Productiebedrijf",
+  "movie_cast": "Acteurs"
 }

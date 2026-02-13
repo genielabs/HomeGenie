@@ -530,5 +530,11 @@
   "Living Room": "رهائشي ڪمرو",
   "Mood Light": "موڊ لائيٽ",
   "Dashboard": "ڊيش بورڊ",
-  "watch_movies_dlna": "پنهنجون فلمون ۽ سيريز ڏسو (UPnP/DLNA)"
+  "watch_movies_dlna": "پنهنجون فلمون ۽ سيريز ڏسو (UPnP/DLNA)",
+  "director_name": "فلم ڊائريڪٽر",
+  "original_title": "اصل عنوان",
+  "original_language": "اصلي ٻولي",
+  "origin_country": "اصلي ملڪ",
+  "production_companies": "پيداوار ڪمپني",
+  "movie_cast": "اداڪار"
 }

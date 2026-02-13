@@ -530,5 +530,11 @@
   "Living Room": "வாழ்க்கை அறை",
   "Mood Light": "மனநிலை ஒளி",
   "Dashboard": "டாஷ்போர்டு",
-  "watch_movies_dlna": "உங்கள் திரைப்படங்கள் & தொடர்களைப் பாருங்கள் (UPnP/DLNA)"
+  "watch_movies_dlna": "உங்கள் திரைப்படங்கள் & தொடர்களைப் பாருங்கள் (UPnP/DLNA)",
+  "director_name": "திரைப்பட இயக்குனர்",
+  "original_title": "அசல் தலைப்பு",
+  "original_language": "மூல மொழி",
+  "origin_country": "பிறந்த நாடு",
+  "production_companies": "தயாரிப்பு நிறுவனம்",
+  "movie_cast": "நடிகர்கள்"
 }

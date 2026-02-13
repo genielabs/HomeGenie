@@ -530,5 +530,11 @@
   "Living Room": "客廳",
   "Mood Light": "情緒燈",
   "Dashboard": "儀表板",
-  "watch_movies_dlna": "觀看電影和劇集（UPnP/DLNA）"
+  "watch_movies_dlna": "觀看電影和劇集（UPnP/DLNA）",
+  "director_name": "電影導演",
+  "original_title": "原標題",
+  "original_language": "原文",
+  "origin_country": "原產地",
+  "production_companies": "生產公司",
+  "movie_cast": "演員"
 }

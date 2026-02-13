@@ -530,5 +530,11 @@
   "Living Room": "Ystafell Fyw",
   "Mood Light": "Golau Hwyliau",
   "Dashboard": "Dangosfwrdd",
-  "watch_movies_dlna": "Gwyliwch eich Ffilmiau a'ch Cyfresi (UPnP/DLNA)"
+  "watch_movies_dlna": "Gwyliwch eich Ffilmiau a'ch Cyfresi (UPnP/DLNA)",
+  "director_name": "Cyfarwyddwr Ffilm",
+  "original_title": "Teitl Gwreiddiol",
+  "original_language": "Iaith Wreiddiol",
+  "origin_country": "Gwlad Tarddiad",
+  "production_companies": "Cwmni Cynhyrchu",
+  "movie_cast": "Actorion"
 }

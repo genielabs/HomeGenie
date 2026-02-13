@@ -530,5 +530,11 @@
   "Living Room": "Wohnzimmer",
   "Mood Light": "Stimmungslicht",
   "Dashboard": "Armaturenbrett",
-  "watch_movies_dlna": "Filme und Serien ansehen (UPnP/DLNA)"
+  "watch_movies_dlna": "Filme und Serien ansehen (UPnP/DLNA)",
+  "director_name": "Filmregisseur",
+  "original_title": "Originaltitel",
+  "original_language": "Originalsprache",
+  "origin_country": "Ursprungsland",
+  "production_companies": "Produktionsfirma",
+  "movie_cast": "Schauspieler"
 }

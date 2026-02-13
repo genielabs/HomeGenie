@@ -530,5 +530,11 @@
   "Living Room": "Ruang tamu",
   "Mood Light": "Cahaya Suasana",
   "Dashboard": "Dasbor",
-  "watch_movies_dlna": "Tonton Film & Serial Anda (UPnP/DLNA)"
+  "watch_movies_dlna": "Tonton Film & Serial Anda (UPnP/DLNA)",
+  "director_name": "Sutradara",
+  "original_title": "Judul Asli",
+  "original_language": "Bahasa Asli",
+  "origin_country": "Negara Asal",
+  "production_companies": "Perusahaan Produksi",
+  "movie_cast": "Aktor"
 }

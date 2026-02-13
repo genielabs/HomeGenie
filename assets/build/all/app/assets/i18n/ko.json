@@ -530,5 +530,11 @@
   "Living Room": "거실",
   "Mood Light": "무드 조명",
   "Dashboard": "계기반",
-  "watch_movies_dlna": "영화와 시리즈를 감상하세요 (UPnP/DLNA 지원)"
+  "watch_movies_dlna": "영화와 시리즈를 감상하세요 (UPnP/DLNA 지원)",
+  "director_name": "영화 감독",
+  "original_title": "원제목",
+  "original_language": "원어",
+  "origin_country": "원산지",
+  "production_companies": "제작사",
+  "movie_cast": "배우들"
 }

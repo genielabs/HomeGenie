@@ -530,5 +530,11 @@
   "Living Room": "Καθιστικό",
   "Mood Light": "Φως διάθεσης",
   "Dashboard": "Ταμπλό",
-  "watch_movies_dlna": "Παρακολουθήστε τις ταινίες και τις σειρές σας (UPnP/DLNA)"
+  "watch_movies_dlna": "Παρακολουθήστε τις ταινίες και τις σειρές σας (UPnP/DLNA)",
+  "director_name": "Σκηνοθέτης",
+  "original_title": "Πρωτότυπος τίτλος",
+  "original_language": "Πρωτότυπη γλώσσα",
+  "origin_country": "Χώρα Προέλευσης",
+  "production_companies": "Εταιρεία Παραγωγής",
+  "movie_cast": "Ηθοποιοί"
 }

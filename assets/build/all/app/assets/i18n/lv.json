@@ -530,5 +530,11 @@
   "Living Room": "Dzīvojamā istaba",
   "Mood Light": "Noskaņas gaisma",
   "Dashboard": "Informācijas panelis",
-  "watch_movies_dlna": "Skatieties filmas un seriālus (UPnP/DLNA)"
+  "watch_movies_dlna": "Skatieties filmas un seriālus (UPnP/DLNA)",
+  "director_name": "Kinorežisors",
+  "original_title": "Oriģinālais nosaukums",
+  "original_language": "Oriģinālvaloda",
+  "origin_country": "Izcelsmes valsts",
+  "production_companies": "Ražošanas uzņēmums",
+  "movie_cast": "Aktieri"
 }

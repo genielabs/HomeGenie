@@ -530,5 +530,11 @@
   "Living Room": "લિવિંગ રૂમ",
   "Mood Light": "મૂડ લાઇટ",
   "Dashboard": "ડેશબોર્ડ",
-  "watch_movies_dlna": "તમારી મૂવીઝ અને સિરીઝ (UPnP/DLNA) જુઓ"
+  "watch_movies_dlna": "તમારી મૂવીઝ અને સિરીઝ (UPnP/DLNA) જુઓ",
+  "director_name": "ફિલ્મ દિગ્દર્શક",
+  "original_title": "મૂળ શીર્ષક",
+  "original_language": "મૂળ ભાષા",
+  "origin_country": "મૂળ દેશ",
+  "production_companies": "ઉત્પાદન કંપની",
+  "movie_cast": "અભિનેતાઓ"
 }

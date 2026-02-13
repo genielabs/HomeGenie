@@ -530,5 +530,11 @@
   "Living Room": "د اوسیدو خونه",
   "Mood Light": "د مزاج رڼا",
   "Dashboard": "ډشبورډ",
-  "watch_movies_dlna": "خپل فلمونه او لړۍ وګورئ (UPnP/DLNA)"
+  "watch_movies_dlna": "خپل فلمونه او لړۍ وګورئ (UPnP/DLNA)",
+  "director_name": "د فلم ډایرکټر",
+  "original_title": "اصلي سرلیک",
+  "original_language": "اصلي ژبه",
+  "origin_country": "د اصلي هیواد",
+  "production_companies": "د تولید شرکت",
+  "movie_cast": "لوبغاړي"
 }

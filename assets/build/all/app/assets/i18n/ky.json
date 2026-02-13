@@ -530,5 +530,11 @@
   "Living Room": "Конок бөлмө",
   "Mood Light": "Маанай жарык",
   "Dashboard": "Башкаруу панели",
-  "watch_movies_dlna": "Тасмаларды жана сериалдарды көрүңүз (UPnP/DLNA)"
+  "watch_movies_dlna": "Тасмаларды жана сериалдарды көрүңүз (UPnP/DLNA)",
+  "director_name": "Кинорежиссер",
+  "original_title": "Түпнуска аталышы",
+  "original_language": "Түпнуска тил",
+  "origin_country": "Келип чыккан өлкөсү",
+  "production_companies": "Өндүрүш компаниясы",
+  "movie_cast": "Актерлор"
 }

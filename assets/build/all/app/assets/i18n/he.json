@@ -530,5 +530,11 @@
   "Living Room": "סָלוֹן",
   "Mood Light": "אור מצב רוח",
   "Dashboard": "לוּחַ מַחווָנִים",
-  "watch_movies_dlna": "צפה בסרטים ובסדרות שלך (UPnP/DLNA)"
+  "watch_movies_dlna": "צפה בסרטים ובסדרות שלך (UPnP/DLNA)",
+  "director_name": "במאי קולנוע",
+  "original_title": "כותרת מקורית",
+  "original_language": "שפה מקורית",
+  "origin_country": "ארץ מוצא",
+  "production_companies": "חברת הפקה",
+  "movie_cast": "שחקנים"
 }

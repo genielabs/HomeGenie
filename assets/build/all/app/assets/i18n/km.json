@@ -530,5 +530,11 @@
   "Living Room": "បន្ទប់ទទួលភ្ញៀវ",
   "Mood Light": "ពន្លឺអារម្មណ៍",
   "Dashboard": "ផ្ទាំងគ្រប់គ្រង",
-  "watch_movies_dlna": "មើលភាពយន្ត និងស៊េរីរបស់អ្នក (UPnP/DLNA)"
+  "watch_movies_dlna": "មើលភាពយន្ត និងស៊េរីរបស់អ្នក (UPnP/DLNA)",
+  "director_name": "អ្នកដឹកនាំរឿង",
+  "original_title": "ចំណងជើងដើម",
+  "original_language": "ភាសាដើម",
+  "origin_country": "ប្រទេសដើម",
+  "production_companies": "ក្រុមហ៊ុនផលិត",
+  "movie_cast": "តារាសម្តែង"
 }

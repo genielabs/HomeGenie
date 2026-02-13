@@ -530,5 +530,11 @@
   "Living Room": "Nappali",
   "Mood Light": "Hangulatfény",
   "Dashboard": "Műszerfal",
-  "watch_movies_dlna": "Nézd meg filmjeidet és sorozataidat (UPnP/DLNA)"
+  "watch_movies_dlna": "Nézd meg filmjeidet és sorozataidat (UPnP/DLNA)",
+  "director_name": "Filmrendező",
+  "original_title": "Eredeti cím",
+  "original_language": "Eredeti nyelv",
+  "origin_country": "Származási ország",
+  "production_companies": "Produkciós cég",
+  "movie_cast": "Színészek"
 }

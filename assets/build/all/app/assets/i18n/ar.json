@@ -530,5 +530,11 @@
   "Living Room": "غرفة الجلوس",
   "Mood Light": "ضوء مزاجي",
   "Dashboard": "لوحة التحكم",
-  "watch_movies_dlna": "شاهد أفلامك ومسلسلاتك (UPnP/DLNA)"
+  "watch_movies_dlna": "شاهد أفلامك ومسلسلاتك (UPnP/DLNA)",
+  "director_name": "مخرج أفلام",
+  "original_title": "العنوان الأصلي",
+  "original_language": "اللغة الأصلية",
+  "origin_country": "بلد المنشأ",
+  "production_companies": "شركة إنتاج",
+  "movie_cast": "ممثلون"
 }

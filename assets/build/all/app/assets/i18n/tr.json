@@ -530,5 +530,11 @@
   "Living Room": "Oturma odası",
   "Mood Light": "Ortam Işığı",
   "Dashboard": "Kontrol Paneli",
-  "watch_movies_dlna": "Filmlerinizi ve dizilerinizi izleyin (UPnP/DLNA)"
+  "watch_movies_dlna": "Filmlerinizi ve dizilerinizi izleyin (UPnP/DLNA)",
+  "director_name": "Film Yönetmeni",
+  "original_title": "Orijinal Başlık",
+  "original_language": "Orijinal Dil",
+  "origin_country": "Menşei ülke",
+  "production_companies": "Prodüksiyon Şirketi",
+  "movie_cast": "Aktörler"
 }

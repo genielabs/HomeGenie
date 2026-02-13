@@ -530,5 +530,11 @@
   "Living Room": "ဧည့်ခန်း",
   "Mood Light": "စိတ်ခံစားချက် ပေါ့ပါးခြင်း",
   "Dashboard": "ဒက်ရှ်ဘုတ်",
-  "watch_movies_dlna": "သင့်ရုပ်ရှင်များနှင့် စီးရီးများကို ကြည့်ရှုပါ (UPnP/DLNA)"
+  "watch_movies_dlna": "သင့်ရုပ်ရှင်များနှင့် စီးရီးများကို ကြည့်ရှုပါ (UPnP/DLNA)",
+  "director_name": "ရုပ်ရှင်ဒါရိုက်တာ",
+  "original_title": "မူရင်းခေါင်းစဉ်",
+  "original_language": "မူရင်းဘာသာစကား",
+  "origin_country": "မူရင်းထုတ်လုပ်သည့်နိုင်ငံ",
+  "production_companies": "ထုတ်လုပ်ရေးကုမ္ပဏီ",
+  "movie_cast": "သရုပ်ဆောင်များ"
 }

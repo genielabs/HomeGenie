@@ -530,5 +530,11 @@
   "Living Room": "Дневна соба",
   "Mood Light": "Светло за расположение",
   "Dashboard": "Контролна табла",
-  "watch_movies_dlna": "Гледајте ги вашите филмови и серии (UPnP/DLNA)"
+  "watch_movies_dlna": "Гледајте ги вашите филмови и серии (UPnP/DLNA)",
+  "director_name": "Филмски режисер",
+  "original_title": "Оригинален наслов",
+  "original_language": "Оригинален јазик",
+  "origin_country": "Земја на потекло",
+  "production_companies": "Продуцентска компанија",
+  "movie_cast": "Актери"
 }

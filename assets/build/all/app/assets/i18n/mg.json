@@ -530,5 +530,11 @@
   "Living Room": "Efitra fandraisam-bahiny",
   "Mood Light": "Hazavana ara-pihetseham-po",
   "Dashboard": "anaty fiara",
-  "watch_movies_dlna": "Jereo ny Sarimihetsika & Andian-tantara (UPnP/DLNA)"
+  "watch_movies_dlna": "Jereo ny Sarimihetsika & Andian-tantara (UPnP/DLNA)",
+  "director_name": "Talen'ny Sarimihetsika",
+  "original_title": "Lohateny tany am-boalohany",
+  "original_language": "Fiteny tany am-boalohany",
+  "origin_country": "Firenena nihaviana",
+  "production_companies": "Orinasa mpamokatra",
+  "movie_cast": "mpilalao"
 }

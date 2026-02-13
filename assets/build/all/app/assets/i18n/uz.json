@@ -530,5 +530,11 @@
   "Living Room": "Mehmonxona",
   "Mood Light": "Kayfiyat yorug'ligi",
   "Dashboard": "Boshqaruv paneli",
-  "watch_movies_dlna": "Filmlaringiz va seriallaringizni tomosha qiling (UPnP/DLNA)"
+  "watch_movies_dlna": "Filmlaringiz va seriallaringizni tomosha qiling (UPnP/DLNA)",
+  "director_name": "Kinorejissor",
+  "original_title": "Asl sarlavha",
+  "original_language": "Asl til",
+  "origin_country": "Ishlab chiqaruvchi mamlakat; ta'minotchi mamlakat",
+  "production_companies": "Ishlab chiqarish kompaniyasi",
+  "movie_cast": "Aktyorlar"
 }

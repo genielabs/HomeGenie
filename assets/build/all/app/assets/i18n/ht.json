@@ -530,5 +530,11 @@
   "Living Room": "Salon",
   "Mood Light": "Limyè atitid",
   "Dashboard": "Tablodbò",
-  "watch_movies_dlna": "Gade fim ak seri ou yo (UPnP/DLNA)"
+  "watch_movies_dlna": "Gade fim ak seri ou yo (UPnP/DLNA)",
+  "director_name": "Direktè fim",
+  "original_title": "Tit orijinal la",
+  "original_language": "Lang orijinal la",
+  "origin_country": "Peyi orijin",
+  "production_companies": "Konpayi Pwodiksyon",
+  "movie_cast": "Aktè yo"
 }

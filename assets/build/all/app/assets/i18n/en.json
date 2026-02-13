@@ -529,5 +529,11 @@
   "Living Room": "Living Room",
   "Mood Light": "Mood Light",
   "Dashboard": "Dashboard",
-  "watch_movies_dlna": "Watch your Movies & Series (UPnP/DLNA)"
+  "watch_movies_dlna": "Watch your Movies & Series (UPnP/DLNA)",
+  "director_name": "Film Director",
+  "original_title": "Original Title",
+  "original_language": "Original Language",
+  "origin_country": "Country of Origin",
+  "production_companies": "Production Company",
+  "movie_cast": "Actors"
 }

@@ -530,5 +530,11 @@
   "Living Room": "Rūma Noho",
   "Mood Light": "Mārama Wairua",
   "Dashboard": "Papatohu",
-  "watch_movies_dlna": "Mātakihia ō Kiriata me ō Raupapa (UPnP/DLNA)"
+  "watch_movies_dlna": "Mātakihia ō Kiriata me ō Raupapa (UPnP/DLNA)",
+  "director_name": "Kaiwhakahaere Kiriata",
+  "original_title": "Taitara Taketake",
+  "original_language": "Reo Taketake",
+  "origin_country": "Whenua Taketake",
+  "production_companies": "Kamupene Whakaputa",
+  "movie_cast": "Ngā Kaiwhakaari"
 }

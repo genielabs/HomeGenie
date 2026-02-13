@@ -530,5 +530,11 @@
   "Living Room": "Sufragerie",
   "Mood Light": "Lumină de dispoziție",
   "Dashboard": "Bord",
-  "watch_movies_dlna": "Urmărește-ți filmele și serialele (UPnP/DLNA)"
+  "watch_movies_dlna": "Urmărește-ți filmele și serialele (UPnP/DLNA)",
+  "director_name": "Regizor de film",
+  "original_title": "Titlu original",
+  "original_language": "Limba originală",
+  "origin_country": "Țara de origine",
+  "production_companies": "Companie de producție",
+  "movie_cast": "Actori"
 }

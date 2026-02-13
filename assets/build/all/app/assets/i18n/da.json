@@ -530,5 +530,11 @@
   "Living Room": "Stue",
   "Mood Light": "Stemningslys",
   "Dashboard": "Dashboard",
-  "watch_movies_dlna": "Se dine film og serier (UPnP/DLNA)"
+  "watch_movies_dlna": "Se dine film og serier (UPnP/DLNA)",
+  "director_name": "Filminstruktør",
+  "original_title": "Original titel",
+  "original_language": "Originalsprog",
+  "origin_country": "Oprindelsesland",
+  "production_companies": "Produktionsselskab",
+  "movie_cast": "Skuespillere"
 }
