@@ -530,5 +530,11 @@
   "Living Room": "Меҳмонхона",
   "Mood Light": "Нури кайфият",
   "Dashboard": "панели идоракунӣ",
-  "watch_movies_dlna": "Филмҳо ва сериалҳои худро тамошо кунед (UPnP/DLNA)"
+  "watch_movies_dlna": "Филмҳо ва сериалҳои худро тамошо кунед (UPnP/DLNA)",
+  "director_name": "Коргардони филм",
+  "original_title": "Унвони аслӣ",
+  "original_language": "Забони аслӣ",
+  "origin_country": "Кишвари аслӣ",
+  "production_companies": "Ширкати истеҳсолӣ",
+  "movie_cast": "Ҳунармандон"
 }

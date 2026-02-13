@@ -530,5 +530,11 @@
   "Living Room": "Vardagsrum",
   "Mood Light": "Stämningsljus",
   "Dashboard": "Instrumentpanel",
-  "watch_movies_dlna": "Titta på dina filmer och serier (UPnP/DLNA)"
+  "watch_movies_dlna": "Titta på dina filmer och serier (UPnP/DLNA)",
+  "director_name": "Filmregissör",
+  "original_title": "Originaltitel",
+  "original_language": "Originalspråk",
+  "origin_country": "Ursprungsland",
+  "production_companies": "Produktionsbolag",
+  "movie_cast": "Skådespelare"
 }

@@ -530,5 +530,11 @@
   "Living Room": "Yara nla ibugbe",
   "Mood Light": "Ìmọ́lẹ̀ Ìmọ́lẹ̀",
   "Dashboard": "Dásíbọ́ọ̀dù",
-  "watch_movies_dlna": "Wo àwọn fíìmù àti eré rẹ (UPnP/DLNA)"
+  "watch_movies_dlna": "Wo àwọn fíìmù àti eré rẹ (UPnP/DLNA)",
+  "director_name": "Olùdarí Fíìmù",
+  "original_title": "Àkọlé Àtilẹ̀wá",
+  "original_language": "Èdè Àtilẹ̀bá",
+  "origin_country": "Ilu isenbale",
+  "production_companies": "Ilé-iṣẹ́ Ìṣẹ̀dá",
+  "movie_cast": "Àwọn òṣèré"
 }

@@ -530,5 +530,11 @@
   "Living Room": "Ruang Tamu",
   "Mood Light": "Cahaya Suasana",
   "Dashboard": "Papan Pemuka",
-  "watch_movies_dlna": "Tonton Filem & Siri anda (UPnP/DLNA)"
+  "watch_movies_dlna": "Tonton Filem & Siri anda (UPnP/DLNA)",
+  "director_name": "Pengarah Filem",
+  "original_title": "Tajuk Asal",
+  "original_language": "Bahasa Asal",
+  "origin_country": "Negara Asal",
+  "production_companies": "Syarikat Pengeluaran",
+  "movie_cast": "Pelakon"
 }

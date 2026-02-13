@@ -530,5 +530,11 @@
   "Living Room": "Dnevni boravak",
   "Mood Light": "Svjetlo raspoloženja",
   "Dashboard": "Nadzorna ploča",
-  "watch_movies_dlna": "Gledajte svoje filmove i serije (UPnP/DLNA)"
+  "watch_movies_dlna": "Gledajte svoje filmove i serije (UPnP/DLNA)",
+  "director_name": "Filmski redatelj",
+  "original_title": "Izvorni naslov",
+  "original_language": "Izvorni jezik",
+  "origin_country": "Zemlja podrijetla",
+  "production_companies": "Produkcijska kuća",
+  "movie_cast": "Glumci"
 }

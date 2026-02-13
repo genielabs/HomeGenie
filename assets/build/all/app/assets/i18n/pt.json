@@ -530,5 +530,11 @@
   "Living Room": "Sala de estar",
   "Mood Light": "Luz ambiente",
   "Dashboard": "Painel",
-  "watch_movies_dlna": "Assista a seus filmes e séries (UPnP/DLNA)"
+  "watch_movies_dlna": "Assista a seus filmes e séries (UPnP/DLNA)",
+  "director_name": "Diretor de Cinema",
+  "original_title": "Título original",
+  "original_language": "Língua original",
+  "origin_country": "País de origem",
+  "production_companies": "Empresa de Produção",
+  "movie_cast": "Atores"
 }

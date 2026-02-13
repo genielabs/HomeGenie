@@ -530,5 +530,11 @@
   "Living Room": "Qolka Fadhiga",
   "Mood Light": "Iftiinka Niyadda",
   "Dashboard": "Dashboard-ka",
-  "watch_movies_dlna": "Daawo Filimadaada iyo Taxanahaaga (UPnP/DLNA)"
+  "watch_movies_dlna": "Daawo Filimadaada iyo Taxanahaaga (UPnP/DLNA)",
+  "director_name": "Agaasimaha Filimada",
+  "original_title": "Cinwaankii Asalka ahaa",
+  "original_language": "Luqadda Asalka ah",
+  "origin_country": "Dalka Asalka ah",
+  "production_companies": "Shirkadda Wax Soo Saarka",
+  "movie_cast": "Jilayaasha"
 }

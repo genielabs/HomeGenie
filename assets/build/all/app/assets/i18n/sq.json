@@ -530,5 +530,11 @@
   "Living Room": "Dhoma e ndenjes",
   "Mood Light": "Drita e humorit",
   "Dashboard": "Paneli i kontrollit",
-  "watch_movies_dlna": "Shikoni Filmat dhe Serialet tuaja (UPnP/DLNA)"
+  "watch_movies_dlna": "Shikoni Filmat dhe Serialet tuaja (UPnP/DLNA)",
+  "director_name": "Regjisor Filmi",
+  "original_title": "Titulli origjinal",
+  "original_language": "Gjuha origjinale",
+  "origin_country": "Vendi i origjinës",
+  "production_companies": "Kompania e Prodhimit",
+  "movie_cast": "Aktorët"
 }

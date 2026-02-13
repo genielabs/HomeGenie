@@ -530,5 +530,11 @@
   "Living Room": "ലിവിംഗ് റൂം",
   "Mood Light": "മൂഡ് ലൈറ്റ്",
   "Dashboard": "ഡാഷ്‌ബോർഡ്",
-  "watch_movies_dlna": "നിങ്ങളുടെ സിനിമകളും പരമ്പരകളും കാണുക (UPnP/DLNA)"
+  "watch_movies_dlna": "നിങ്ങളുടെ സിനിമകളും പരമ്പരകളും കാണുക (UPnP/DLNA)",
+  "director_name": "ചലച്ചിത്ര സംവിധായകൻ",
+  "original_title": "യഥാർത്ഥ പേര്",
+  "original_language": "യഥാർത്ഥ ഭാഷ",
+  "origin_country": "മാതൃരാജ്യം",
+  "production_companies": "നിർമ്മാണ കമ്പനി",
+  "movie_cast": "അഭിനേതാക്കൾ"
 }

@@ -530,5 +530,11 @@
   "Living Room": "ሳሎን",
   "Mood Light": "የስሜት ብርሃን",
   "Dashboard": "ዳሽቦርድ",
-  "watch_movies_dlna": "ፊልሞችዎን እና ተከታታይ ፊልሞችዎን (UPnP/DLNA) ይመልከቱ"
+  "watch_movies_dlna": "ፊልሞችዎን እና ተከታታይ ፊልሞችዎን (UPnP/DLNA) ይመልከቱ",
+  "director_name": "የፊልም ዳይሬክተር",
+  "original_title": "የመጀመሪያው ርዕስ",
+  "original_language": "የመጀመሪያው ቋንቋ",
+  "origin_country": "የትውልድ አገር",
+  "production_companies": "የምርት ኩባንያ",
+  "movie_cast": "ተዋናዮች"
 }

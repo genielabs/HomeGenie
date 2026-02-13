@@ -530,5 +530,11 @@
   "Living Room": "Odeya binerdê",
   "Mood Light": "Ronahiya Mîzahê",
   "Dashboard": "Panela kontrolê",
-  "watch_movies_dlna": "Fîlm û rêzefîlmên xwe temaşe bikin (UPnP/DLNA)"
+  "watch_movies_dlna": "Fîlm û rêzefîlmên xwe temaşe bikin (UPnP/DLNA)",
+  "director_name": "Derhênerê Fîlm",
+  "original_title": "Sernavê Orjînal",
+  "original_language": "Zimanê Resen",
+  "origin_country": "Welatê Jêderkê",
+  "production_companies": "Kompaniya Hilberînê",
+  "movie_cast": "Aktor"
 }

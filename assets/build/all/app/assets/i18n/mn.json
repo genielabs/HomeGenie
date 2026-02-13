@@ -530,5 +530,11 @@
   "Living Room": "Зочны өрөө",
   "Mood Light": "Сэтгэл санааны гэрэл",
   "Dashboard": "Хяналтын самбар",
-  "watch_movies_dlna": "Кино болон цувралаа үзээрэй (UPnP/DLNA)"
+  "watch_movies_dlna": "Кино болон цувралаа үзээрэй (UPnP/DLNA)",
+  "director_name": "Кино найруулагч",
+  "original_title": "Анхны гарчиг",
+  "original_language": "Эх хэл",
+  "origin_country": "Гарал үүслийн улс",
+  "production_companies": "Үйлдвэрлэлийн компани",
+  "movie_cast": "Жүжигчид"
 }

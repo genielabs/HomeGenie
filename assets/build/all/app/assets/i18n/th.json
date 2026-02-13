@@ -530,5 +530,11 @@
   "Living Room": "ห้องนั่งเล่น",
   "Mood Light": "ไฟสร้างบรรยากาศ",
   "Dashboard": "แดชบอร์ด",
-  "watch_movies_dlna": "รับชมภาพยนตร์และซีรีส์ของคุณ (UPnP/DLNA)"
+  "watch_movies_dlna": "รับชมภาพยนตร์และซีรีส์ของคุณ (UPnP/DLNA)",
+  "director_name": "ผู้กำกับภาพยนตร์",
+  "original_title": "ชื่อเรื่องเดิม",
+  "original_language": "ภาษาต้นฉบับ",
+  "origin_country": "ประเทศต้นกำเนิด",
+  "production_companies": "บริษัทผู้ผลิต",
+  "movie_cast": "นักแสดง"
 }

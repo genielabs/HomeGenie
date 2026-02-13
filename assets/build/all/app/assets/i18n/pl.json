@@ -530,5 +530,11 @@
   "Living Room": "Salon",
   "Mood Light": "Światło nastrojowe",
   "Dashboard": "Panel",
-  "watch_movies_dlna": "Oglądaj filmy i seriale (UPnP/DLNA)"
+  "watch_movies_dlna": "Oglądaj filmy i seriale (UPnP/DLNA)",
+  "director_name": "Reżyser filmowy",
+  "original_title": "Oryginalny tytuł",
+  "original_language": "Język oryginalny",
+  "origin_country": "Kraj pochodzenia",
+  "production_companies": "Firma produkcyjna",
+  "movie_cast": "Aktorzy"
 }

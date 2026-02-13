@@ -530,5 +530,11 @@
   "Living Room": "Ime ụlọ ezumike",
   "Mood Light": "Ìhè Ọnọdụ",
   "Dashboard": "Dashboard",
-  "watch_movies_dlna": "Lelee ihe nkiri na usoro gị (UPnP/DLNA)"
+  "watch_movies_dlna": "Lelee ihe nkiri na usoro gị (UPnP/DLNA)",
+  "director_name": "Onye Nduzi Ihe Nkiri",
+  "original_title": "Aha Mbụ",
+  "original_language": "Asụsụ Mbụ",
+  "origin_country": "Mba onye si",
+  "production_companies": "Ụlọ Ọrụ Mmepụta",
+  "movie_cast": "Ndị na-eme ihe nkiri"
 }

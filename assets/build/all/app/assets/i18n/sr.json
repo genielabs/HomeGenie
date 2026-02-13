@@ -530,5 +530,11 @@
   "Living Room": "Дневна соба",
   "Mood Light": "Расположење светлости",
   "Dashboard": "Контролна табла",
-  "watch_movies_dlna": "Гледајте своје филмове и серије (UPnP/DLNA)"
+  "watch_movies_dlna": "Гледајте своје филмове и серије (UPnP/DLNA)",
+  "director_name": "Филмски редитељ",
+  "original_title": "Оригинални наслов",
+  "original_language": "Оригинални језик",
+  "origin_country": "Земља порекла",
+  "production_companies": "Продуцентска кућа",
+  "movie_cast": "Глумци"
 }

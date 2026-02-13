@@ -530,5 +530,11 @@
   "Living Room": "Seomra Maireachtála",
   "Mood Light": "Solas Giúmar",
   "Dashboard": "Painéal Rialaithe",
-  "watch_movies_dlna": "Féach ar do Scannáin & Sraitheanna (UPnP/DLNA)"
+  "watch_movies_dlna": "Féach ar do Scannáin & Sraitheanna (UPnP/DLNA)",
+  "director_name": "Stiúrthóir Scannán",
+  "original_title": "Teideal Bunaidh",
+  "original_language": "Teanga Bhunaidh",
+  "origin_country": "Tír Bhunaidh",
+  "production_companies": "Comhlacht Léiriúcháin",
+  "movie_cast": "Aisteoirí"
 }

@@ -530,5 +530,11 @@
   "Living Room": "Kamra tal-Ħajja",
   "Mood Light": "Dawl tal-Burdata",
   "Dashboard": "Dashboard",
-  "watch_movies_dlna": "Ara l-Films u s-Serje tiegħek (UPnP/DLNA)"
+  "watch_movies_dlna": "Ara l-Films u s-Serje tiegħek (UPnP/DLNA)",
+  "director_name": "Direttur tal-Films",
+  "original_title": "Titlu Oriġinali",
+  "original_language": "Lingwa Oriġinali",
+  "origin_country": "Pajjiż tal-Oriġini",
+  "production_companies": "Kumpanija tal-Produzzjoni",
+  "movie_cast": "Atturi"
 }

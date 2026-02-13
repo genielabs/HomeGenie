@@ -530,5 +530,11 @@
   "Living Room": "客厅",
   "Mood Light": "情绪灯",
   "Dashboard": "仪表板",
-  "watch_movies_dlna": "观看电影和剧集（UPnP/DLNA）"
+  "watch_movies_dlna": "观看电影和剧集（UPnP/DLNA）",
+  "director_name": "电影导演",
+  "original_title": "原标题",
+  "original_language": "原文",
+  "origin_country": "原产地",
+  "production_companies": "生产公司",
+  "movie_cast": "演员"
 }

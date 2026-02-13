@@ -529,5 +529,11 @@
   "Living Room": "Soggiorno",
   "Mood Light": "Luce Atmosfera",
   "Dashboard": "Dashboard",
-  "watch_movies_dlna": "Guarda i tuoi Film e Serie TV (UPnP/DLNA)"
+  "watch_movies_dlna": "Guarda i tuoi Film e Serie TV (UPnP/DLNA)",
+  "director_name": "Regista",
+  "original_title": "Titolo originale",
+  "original_language": "Lingua originale",
+  "origin_country": "Paese di origine",
+  "production_companies": "Casa di produzione",
+  "movie_cast": "Attori"
 }

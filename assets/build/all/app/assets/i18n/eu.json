@@ -530,5 +530,11 @@
   "Living Room": "Egongela",
   "Mood Light": "Giro-argia",
   "Dashboard": "Aginte-panela",
-  "watch_movies_dlna": "Ikusi zure filmak eta telesailak (UPnP/DLNA)"
+  "watch_movies_dlna": "Ikusi zure filmak eta telesailak (UPnP/DLNA)",
+  "director_name": "Zinema zuzendaria",
+  "original_title": "Jatorrizko izenburua",
+  "original_language": "Jatorrizko hizkuntza",
+  "origin_country": "Jatorrizko herrialdea",
+  "production_companies": "Ekoizpen-enpresa",
+  "movie_cast": "Aktoreak"
 }

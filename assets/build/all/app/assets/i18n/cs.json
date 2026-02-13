@@ -530,5 +530,11 @@
   "Living Room": "Obývací pokoj",
   "Mood Light": "Světlo nálady",
   "Dashboard": "Dashboard",
-  "watch_movies_dlna": "Sledujte své filmy a seriály (UPnP/DLNA)"
+  "watch_movies_dlna": "Sledujte své filmy a seriály (UPnP/DLNA)",
+  "director_name": "Filmový režisér",
+  "original_title": "Původní název",
+  "original_language": "Původní jazyk",
+  "origin_country": "Země původu",
+  "production_companies": "Produkční společnost",
+  "movie_cast": "Herci"
 }

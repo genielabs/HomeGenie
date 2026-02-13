@@ -530,5 +530,11 @@
   "Living Room": "مېھمانخانا",
   "Mood Light": "كەيپىيات نۇرى",
   "Dashboard": "باشقۇرۇش تاختىسى",
-  "watch_movies_dlna": "كىنو ۋە تېلېۋىزىيە تىياتىرلىرىڭىزنى كۆرۈڭ (UPnP/DLNA)"
+  "watch_movies_dlna": "كىنو ۋە تېلېۋىزىيە تىياتىرلىرىڭىزنى كۆرۈڭ (UPnP/DLNA)",
+  "director_name": "كىنو رېژىسسورى",
+  "original_title": "ئەسلى ماۋزۇ",
+  "original_language": "ئەسلى تىل",
+  "origin_country": "كېلىپ چىققان دۆلىتى",
+  "production_companies": "ئىشلەپچىقىرىش شىركىتى",
+  "movie_cast": "ئارتىسلار"
 }

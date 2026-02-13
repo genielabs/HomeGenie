@@ -530,5 +530,11 @@
   "Living Room": "Stofa",
   "Mood Light": "Stemningsljós",
   "Dashboard": "Mælaborð",
-  "watch_movies_dlna": "Horfðu á kvikmyndir og þætti (UPnP/DLNA)"
+  "watch_movies_dlna": "Horfðu á kvikmyndir og þætti (UPnP/DLNA)",
+  "director_name": "Kvikmyndaleikstjóri",
+  "original_title": "Upprunalegur titill",
+  "original_language": "Upprunalegt tungumál",
+  "origin_country": "Upprunaland",
+  "production_companies": "Framleiðslufyrirtæki",
+  "movie_cast": "Leikarar"
 }

@@ -530,5 +530,11 @@
   "Living Room": "లివింగ్ రూమ్",
   "Mood Light": "మూడ్ లైట్",
   "Dashboard": "డాష్‌బోర్డ్",
-  "watch_movies_dlna": "మీ సినిమాలు & సిరీస్‌లను చూడండి (UPnP/DLNA)"
+  "watch_movies_dlna": "మీ సినిమాలు & సిరీస్‌లను చూడండి (UPnP/DLNA)",
+  "director_name": "సినిమా దర్శకుడు",
+  "original_title": "అసలు శీర్షిక",
+  "original_language": "అసలు భాష",
+  "origin_country": "మూల దేశం",
+  "production_companies": "నిర్మాణ సంస్థ",
+  "movie_cast": "నటులు"
 }

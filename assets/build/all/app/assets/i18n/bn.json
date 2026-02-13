@@ -530,5 +530,11 @@
   "Living Room": "বসার ঘর",
   "Mood Light": "মেজাজ হালকা",
   "Dashboard": "ড্যাশবোর্ড",
-  "watch_movies_dlna": "আপনার সিনেমা এবং সিরিজ দেখুন (UPnP/DLNA)"
+  "watch_movies_dlna": "আপনার সিনেমা এবং সিরিজ দেখুন (UPnP/DLNA)",
+  "director_name": "চলচ্চিত্র পরিচালক",
+  "original_title": "মূল শিরোনাম",
+  "original_language": "মূল ভাষা",
+  "origin_country": "উৎপত্তি দেশ",
+  "production_companies": "উৎপাদন সংস্থা",
+  "movie_cast": "অভিনেতা"
 }

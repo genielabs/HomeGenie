@@ -530,5 +530,11 @@
   "Living Room": "Sala d'estar",
   "Mood Light": "Llum d'ambient",
   "Dashboard": "Tauler de control",
-  "watch_movies_dlna": "Mira les teves pel·lícules i sèries (UPnP/DLNA)"
+  "watch_movies_dlna": "Mira les teves pel·lícules i sèries (UPnP/DLNA)",
+  "director_name": "Director de cinema",
+  "original_title": "Títol original",
+  "original_language": "Idioma original",
+  "origin_country": "País d'origen",
+  "production_companies": "productora",
+  "movie_cast": "Actors"
 }

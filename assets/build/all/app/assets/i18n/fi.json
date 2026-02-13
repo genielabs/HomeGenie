@@ -530,5 +530,11 @@
   "Living Room": "Olohuone",
   "Mood Light": "Tunnelmavalo",
   "Dashboard": "Kojelauta",
-  "watch_movies_dlna": "Katso elokuvia ja sarjoja (UPnP/DLNA)"
+  "watch_movies_dlna": "Katso elokuvia ja sarjoja (UPnP/DLNA)",
+  "director_name": "Elokuvaohjaaja",
+  "original_title": "Alkuperäinen nimi",
+  "original_language": "Alkuperäinen kieli",
+  "origin_country": "Alkuperämaa",
+  "production_companies": "Tuotantoyhtiö",
+  "movie_cast": "Näyttelijät"
 }

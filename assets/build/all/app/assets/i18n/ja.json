@@ -530,5 +530,11 @@
   "Living Room": "リビングルーム",
   "Mood Light": "ムードライト",
   "Dashboard": "ダッシュボード",
-  "watch_movies_dlna": "映画やシリーズを視聴する（UPnP/DLNA）"
+  "watch_movies_dlna": "映画やシリーズを視聴する（UPnP/DLNA）",
+  "director_name": "映画監督",
+  "original_title": "原題",
+  "original_language": "原文",
+  "origin_country": "原産国",
+  "production_companies": "制作会社",
+  "movie_cast": "俳優"
 }

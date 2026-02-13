@@ -530,5 +530,11 @@
   "Living Room": "Sitkamer",
   "Mood Light": "Stemmingslig",
   "Dashboard": "Dashboard",
-  "watch_movies_dlna": "Kyk na jou flieks en reekse (UPnP/DLNA)"
+  "watch_movies_dlna": "Kyk na jou flieks en reekse (UPnP/DLNA)",
+  "director_name": "Rolprentregisseur",
+  "original_title": "Oorspronklike Titel",
+  "original_language": "Oorspronklike taal",
+  "origin_country": "Land van oorsprong",
+  "production_companies": "Produksiemaatskappy",
+  "movie_cast": "Akteurs"
 }

@@ -530,5 +530,11 @@
   "Living Room": "Qonaq otağı",
   "Mood Light": "Əhval-ruhiyyə işığı",
   "Dashboard": "İdarəetmə paneli",
-  "watch_movies_dlna": "Filmlərinizə və seriallarınıza baxın (UPnP/DLNA)"
+  "watch_movies_dlna": "Filmlərinizə və seriallarınıza baxın (UPnP/DLNA)",
+  "director_name": "Kinorejissor",
+  "original_title": "Orijinal Başlıq",
+  "original_language": "Orijinal Dil",
+  "origin_country": "Mənşə ölkəsi",
+  "production_companies": "İstehsal Şirkəti",
+  "movie_cast": "Aktyorlar"
 }

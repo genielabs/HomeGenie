@@ -530,5 +530,11 @@
   "Living Room": "විසිත්ත කාමරය",
   "Mood Light": "මූඩ් ලයිට්",
   "Dashboard": "උපකරණ පුවරුව",
-  "watch_movies_dlna": "ඔබේ චිත්‍රපට සහ මාලාවන් නරඹන්න (UPnP/DLNA)"
+  "watch_movies_dlna": "ඔබේ චිත්‍රපට සහ මාලාවන් නරඹන්න (UPnP/DLNA)",
+  "director_name": "චිත්‍රපට අධ්‍යක්ෂක",
+  "original_title": "මුල් මාතෘකාව",
+  "original_language": "මුල් භාෂාව",
+  "origin_country": "මුල් රට",
+  "production_companies": "නිෂ්පාදන සමාගම",
+  "movie_cast": "නළුවන්"
 }

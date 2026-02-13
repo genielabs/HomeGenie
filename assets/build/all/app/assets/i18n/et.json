@@ -530,5 +530,11 @@
   "Living Room": "Elutuba",
   "Mood Light": "Meeleoluvalgus",
   "Dashboard": "Armatuurlaud",
-  "watch_movies_dlna": "Vaadake oma filme ja sarju (UPnP/DLNA)"
+  "watch_movies_dlna": "Vaadake oma filme ja sarju (UPnP/DLNA)",
+  "director_name": "Filmirežissöör",
+  "original_title": "Algne pealkiri",
+  "original_language": "Algkeel",
+  "origin_country": "Päritoluriik",
+  "production_companies": "Produktsioonifirma",
+  "movie_cast": "Näitlejad"
 }

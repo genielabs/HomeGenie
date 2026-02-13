@@ -530,5 +530,11 @@
   "Living Room": "Dnevna soba",
   "Mood Light": "Luč razpoloženja",
   "Dashboard": "Nadzorna plošča",
-  "watch_movies_dlna": "Oglejte si svoje filme in serije (UPnP/DLNA)"
+  "watch_movies_dlna": "Oglejte si svoje filme in serije (UPnP/DLNA)",
+  "director_name": "Filmski režiser",
+  "original_title": "Izvirni naslov",
+  "original_language": "Izvirni jezik",
+  "origin_country": "Država izvora",
+  "production_companies": "Produkcijska hiša",
+  "movie_cast": "Igralci"
 }

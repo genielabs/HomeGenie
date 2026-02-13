@@ -530,5 +530,11 @@
   "Living Room": "Wunnzëmmer",
   "Mood Light": "Stëmmungsliicht",
   "Dashboard": "Dashboard",
-  "watch_movies_dlna": "Kuckt Är Filmer & Serien (UPnP/DLNA)"
+  "watch_movies_dlna": "Kuckt Är Filmer & Serien (UPnP/DLNA)",
+  "director_name": "Filmregisseur",
+  "original_title": "Originaltitel",
+  "original_language": "Originalsprooch",
+  "origin_country": "Hierkonftsland",
+  "production_companies": "Produktiounsfirma",
+  "movie_cast": "Schauspiller"
 }

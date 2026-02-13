@@ -530,5 +530,11 @@
   "Living Room": "ຫ້ອງຮັບແຂກ",
   "Mood Light": "ອາລົມສົດໃສ",
   "Dashboard": "ແຜງຄວບຄຸມ",
-  "watch_movies_dlna": "ເບິ່ງຮູບເງົາ ແລະ ຊີຣີຂອງທ່ານ (UPnP/DLNA)"
+  "watch_movies_dlna": "ເບິ່ງຮູບເງົາ ແລະ ຊີຣີຂອງທ່ານ (UPnP/DLNA)",
+  "director_name": "ຜູ້ກຳກັບຮູບເງົາ",
+  "original_title": "ຫົວຂໍ້ຕົ້ນສະບັບ",
+  "original_language": "ພາສາຕົ້ນສະບັບ",
+  "origin_country": "ປະເທດຕົ້ນກຳເນີດ",
+  "production_companies": "ບໍລິສັດຜະລິດ",
+  "movie_cast": "ນັກສະແດງ"
 }

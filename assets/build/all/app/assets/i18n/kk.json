@@ -530,5 +530,11 @@
   "Living Room": "Тұрғын бөлме",
   "Mood Light": "Көңіл-күй жарығы",
   "Dashboard": "Басқару тақтасы",
-  "watch_movies_dlna": "Фильмдер мен сериалдарды көріңіз (UPnP/DLNA)"
+  "watch_movies_dlna": "Фильмдер мен сериалдарды көріңіз (UPnP/DLNA)",
+  "director_name": "Кинорежиссер",
+  "original_title": "Түпнұсқа атауы",
+  "original_language": "Түпнұсқа тіл",
+  "origin_country": "Шыққан елі",
+  "production_companies": "Өндіріс компаниясы",
+  "movie_cast": "Актерлер"
 }

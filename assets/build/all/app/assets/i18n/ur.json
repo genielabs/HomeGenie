@@ -530,5 +530,11 @@
   "Living Room": "لونگ روم",
   "Mood Light": "موڈ لائٹ",
   "Dashboard": "ڈیش بورڈ",
-  "watch_movies_dlna": "اپنی فلمیں اور سیریز دیکھیں (UPnP/DLNA)"
+  "watch_movies_dlna": "اپنی فلمیں اور سیریز دیکھیں (UPnP/DLNA)",
+  "director_name": "فلم ڈائریکٹر",
+  "original_title": "اصل عنوان",
+  "original_language": "اصل زبان",
+  "origin_country": "اصل ملک",
+  "production_companies": "پروڈکشن کمپنی",
+  "movie_cast": "اداکاروں"
 }

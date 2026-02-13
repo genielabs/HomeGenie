@@ -530,5 +530,11 @@
   "Living Room": "Sebule",
   "Mood Light": "Mwangaza wa Hali",
   "Dashboard": "Dashibodi",
-  "watch_movies_dlna": "Tazama Filamu na Mifululizo Yako (UPnP/DLNA)"
+  "watch_movies_dlna": "Tazama Filamu na Mifululizo Yako (UPnP/DLNA)",
+  "director_name": "Mkurugenzi wa Filamu",
+  "original_title": "Kichwa Halisi",
+  "original_language": "Lugha Asili",
+  "origin_country": "Nchi ya Asili",
+  "production_companies": "Kampuni ya Uzalishaji",
+  "movie_cast": "Waigizaji"
 }

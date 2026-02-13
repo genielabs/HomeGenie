@@ -530,5 +530,11 @@
   "Living Room": "Гасцёўня",
   "Mood Light": "Святло настрою",
   "Dashboard": "Панэль кіравання",
-  "watch_movies_dlna": "Глядзіце свае фільмы і серыялы (UPnP/DLNA)"
+  "watch_movies_dlna": "Глядзіце свае фільмы і серыялы (UPnP/DLNA)",
+  "director_name": "Кінарэжысёр",
+  "original_title": "Арыгінальная назва",
+  "original_language": "Арыгінальная мова",
+  "origin_country": "Краіна паходжання",
+  "production_companies": "Прадзюсарская кампанія",
+  "movie_cast": "Акцёры"
 }

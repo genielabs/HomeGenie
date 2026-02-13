@@ -530,5 +530,11 @@
   "Living Room": "Հյուրասենյակ",
   "Mood Light": "Տրամադրության լույս",
   "Dashboard": "Կառավարման վահանակ",
-  "watch_movies_dlna": "Դիտեք ձեր ֆիլմերն ու սերիալները (UPnP/DLNA)"
+  "watch_movies_dlna": "Դիտեք ձեր ֆիլմերն ու սերիալները (UPnP/DLNA)",
+  "director_name": "կինոռեժիսոր",
+  "original_title": "Բնօրինակ վերնագիր",
+  "original_language": "Բնօրինակ լեզու",
+  "origin_country": "Ծագման երկիր",
+  "production_companies": "Արտադրական ընկերություն",
+  "movie_cast": "Դերասաններ"
 }

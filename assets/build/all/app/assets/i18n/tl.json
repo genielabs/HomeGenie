@@ -530,5 +530,11 @@
   "Living Room": "Sala",
   "Mood Light": "Ilaw ng Mood",
   "Dashboard": "Dashboard",
-  "watch_movies_dlna": "Panoorin ang iyong mga Pelikula at Serye (UPnP/DLNA)"
+  "watch_movies_dlna": "Panoorin ang iyong mga Pelikula at Serye (UPnP/DLNA)",
+  "director_name": "Direktor ng Pelikula",
+  "original_title": "Orihinal na Pamagat",
+  "original_language": "Orihinal na Wika",
+  "origin_country": "Bansang Pinagmulan",
+  "production_companies": "Kompanya ng Produksyon",
+  "movie_cast": "Mga aktor"
 }
