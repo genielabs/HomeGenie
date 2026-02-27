@@ -294,19 +294,22 @@
       "Description": "Откриване на обекти с помощта на предварително обучен YOLO модел.",
       "ML.ObjectDetection": "Активиране на откриване на обекти",
       "ML.ObjectDetection.TriggerDetect": "Списък с неща, разделени със запетаи (на английски), които ще задействат алармата. (напр.: котка, куче, човек, раница, куфар)",
-      "ConfigureOptions.Yolo.ModelPath": "Път към файла на модела YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Път към файла на модела YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Максимален брой заявки в секунда (RPS)"
     },
     "911": {
       "Title": "Оценка на позата",
       "Description": "Откриване на ключови точки чрез оценка на позата, използвайки персонализирани ONNX модели или предварително обучения модел YOLO по подразбиране (специфичен за човешката поза).",
       "ML.PoseEstimation": "Активиране на оценката на позата",
-      "ConfigureOptions.Yolo.ModelPath": "Път към файла на модела YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Път към файла на модела YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Максимален брой заявки в секунда (RPS)"
     },
     "912": {
       "Title": "Сегментиране на инстанции",
       "Description": "Откриване на обекти и техните очертания с помощта на предварително обучен YOLO модел.",
       "ML.InstanceSegmentation": "Активиране на сегментирането на екземпляри",
-      "ConfigureOptions.Yolo.ModelPath": "Път към файла на модела YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Път към файла на модела YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Максимален брой заявки в секунда (RPS)"
     },
     "930": {
       "Title": "Обработчик на намерения Gemini",
@@ -376,9 +379,30 @@
       "Title": "Дневен енергиен обзор",
       "Description": "Дневна консумация на енергия (Wh) по устройство.",
       "Widget.Statistics.DailyReport": "Включване в дневния отчет за Wh"
+    },
+    "200": {
+      "Title": "Видео вход",
+      "Description": "Заснема аудио и видео потоци за наблюдение на живо, обработка в реално време и непрекъснат запис.",
+      "VideoInput.Disable": "Деактивиране на този вход",
+      "VideoInput.SourceURL": "URL адрес на източника на видеото",
+      "VideoInput.ImageFeed": "URL адресът е единичен файл с изображение, който се актуализира на живо.",
+      "VideoInput.Username": "Потребителско име (по избор)",
+      "VideoInput.Password": "Парола (по избор)",
+      "Widget.Config.fps": "Максимален брой кадри в секунда",
+      "VideoOutput.Width": "Ширина на изходния поток.",
+      "VideoOutput.SnapshotQuality": "Качество на изображението на живо."
+    },
+    "250": {
+      "Title": "Видеорекордер",
+      "Description": "Записва аудио и видео потоци от всеки входен източник. Записите могат да бъдат непрекъснати, планирани или задействани от алармени събития.",
+      "NVR.EnableRecording": "Активиране на видеозапис",
+      "NVR.RecordOnAlarm": "Запис при аларма",
+      "NVR.ContinuousRecording": "Непрекъснат запис."
     }
   },
   "scheduler_preset_action_genie_command": "Команда на Джин",
   "scheduler_preset_action_config_wish": "Действие с естествен език",
-  "scheduler_preset_action_config_wish.placeholder": "Опитайте: „Настройте температурата на 22° и пуснете сцената с изгрева“"
+  "scheduler_preset_action_config_wish.placeholder": "Опитайте: „Настройте температурата на 22° и пуснете сцената с изгрева“",
+  "scheduler_preset_action_command_video_record_start": "Започнете запис на видео",
+  "scheduler_preset_action_command_video_record_stop": "Спиране на записа на видео"
 }

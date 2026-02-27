@@ -536,5 +536,15 @@
   "original_language": "ମୂଳ ଭାଷା",
   "origin_country": "ଉତ୍ପତ୍ତି ଦେଶ",
   "production_companies": "ପ୍ରଡକ୍ସନ୍ କମ୍ପାନୀ",
-  "movie_cast": "ଅଭିନେତା"
+  "movie_cast": "ଅଭିନେତା",
+  "live": "ଲାଇଭ୍",
+  "recordings": "ରେକର୍ଡିଂଗୁଡ଼ିକ",
+  "no_recordings": "କୌଣସି ରେକର୍ଡିଂ ନାହିଁ।",
+  "live_feed": "ଲାଇଭ୍ ଫିଡ୍",
+  "fullscreen_exit": "ପୂର୍ଣ୍ଣସ୍କ୍ରିନ୍‍ରୁ ବାହାରିଯାଆନ୍ତୁ",
+  "play_media": "ମିଡିଆ ଚଲାନ୍ତୁ",
+  "start_recording": "ରେକର୍ଡିଂ ଆରମ୍ଭ କରନ୍ତୁ",
+  "stop_recording": "ରେକର୍ଡିଂ ବନ୍ଦ କରନ୍ତୁ",
+  "toggle_smart_recording": "ଆଲାର୍ମରେ ସ୍ୱତଃ ରେକର୍ଡ କରନ୍ତୁ",
+  "search_metadata": "ମେଟାଡାଟା ସନ୍ଧାନ କରନ୍ତୁ"
 }

@@ -1,0 +1,3 @@
+{
+  "ffmpeg_required": "Mô-đun `{{module_name}}` yêu cầu **FFmpeg** để hoạt động. Vui lòng cài đặt nó từ trang web chính thức: - [https://ffmpeg.org](https://ffmpeg.org) Nếu bạn không cần tính năng này, bạn có thể tắt mô-đun này trong phần **Chương trình tự động hóa** hoặc bằng cách nhấp vào nút bên dưới."
+}

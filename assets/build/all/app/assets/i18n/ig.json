@@ -536,5 +536,15 @@
   "original_language": "Asụsụ Mbụ",
   "origin_country": "Mba onye si",
   "production_companies": "Ụlọ Ọrụ Mmepụta",
-  "movie_cast": "Ndị na-eme ihe nkiri"
+  "movie_cast": "Ndị na-eme ihe nkiri",
+  "live": "Ndụ",
+  "recordings": "Ndekọ",
+  "no_recordings": "Enweghị ndekọ ọ bụla.",
+  "live_feed": "Nri Dị Ndụ",
+  "fullscreen_exit": "Pụọ na ihuenyo zuru oke",
+  "play_media": "Kpọọ Mgbasa Ozi",
+  "start_recording": "Malite ndekọ",
+  "stop_recording": "Kwụsị Ndekọ",
+  "toggle_smart_recording": "Ndekọ akpaghị aka na mkpu",
+  "search_metadata": "Chọọ Metadata"
 }

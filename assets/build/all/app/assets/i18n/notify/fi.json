@@ -1,0 +1,3 @@
+{
+  "ffmpeg_required": "`{{module_name}}`-moduuli vaatii toimiakseen **FFmpeg**-ohjelman. Asenna se viralliselta verkkosivustolta: - [https://ffmpeg.org](https://ffmpeg.org) Jos et tarvitse tätä ominaisuutta, voit poistaa moduulin käytöstä **Automaatio-ohjelmat**-osiossa tai napsauttamalla alla olevaa painiketta."
+}

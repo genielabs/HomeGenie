@@ -536,5 +536,15 @@
   "original_language": "ភាសាដើម",
   "origin_country": "ប្រទេសដើម",
   "production_companies": "ក្រុមហ៊ុនផលិត",
-  "movie_cast": "តារាសម្តែង"
+  "movie_cast": "តារាសម្តែង",
+  "live": "ផ្សាយផ្ទាល់",
+  "recordings": "ការថតសំឡេង",
+  "no_recordings": "គ្មានការថតទេ។",
+  "live_feed": "ការផ្សាយផ្ទាល់",
+  "fullscreen_exit": "ចេញពីអេក្រង់ពេញ",
+  "play_media": "ចាក់មេឌៀ",
+  "start_recording": "ចាប់ផ្តើមថត",
+  "stop_recording": "ឈប់ថត",
+  "toggle_smart_recording": "ថតដោយស្វ័យប្រវត្តិនៅពេលមានសំឡេងរោទិ៍",
+  "search_metadata": "ស្វែងរកទិន្នន័យមេតា"
 }

@@ -536,5 +536,15 @@
   "original_language": "ئەسلى تىل",
   "origin_country": "كېلىپ چىققان دۆلىتى",
   "production_companies": "ئىشلەپچىقىرىش شىركىتى",
-  "movie_cast": "ئارتىسلار"
+  "movie_cast": "ئارتىسلار",
+  "live": "جانلىق",
+  "recordings": "خاتىرىلەر",
+  "no_recordings": "خاتىرىلەش يوق.",
+  "live_feed": "نەق مەيدان ئۇچۇر",
+  "fullscreen_exit": "تولۇق ئېكراندىن چىقىش",
+  "play_media": "مېدىيانى ئويناش",
+  "start_recording": "خاتىرىلەشنى باشلاڭ",
+  "stop_recording": "خاتىرىلەشنى توختىتىش",
+  "toggle_smart_recording": "سىگنالدا ئاپتوماتىك خاتىرىلەش",
+  "search_metadata": "مېتا سانلىق مەلۇماتلىرىنى ئىزدەش"
 }

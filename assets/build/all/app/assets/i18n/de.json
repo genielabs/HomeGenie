@@ -536,5 +536,15 @@
   "original_language": "Originalsprache",
   "origin_country": "Ursprungsland",
   "production_companies": "Produktionsfirma",
-  "movie_cast": "Schauspieler"
+  "movie_cast": "Schauspieler",
+  "live": "Live",
+  "recordings": "Aufnahmen",
+  "no_recordings": "Keine Aufnahmen.",
+  "live_feed": "Live-Feed",
+  "fullscreen_exit": "Vollbildmodus beenden",
+  "play_media": "Medien abspielen",
+  "start_recording": "Aufnahme starten",
+  "stop_recording": "Aufnahme stoppen",
+  "toggle_smart_recording": "Automatische Aufnahme bei Alarm",
+  "search_metadata": "Suchmetadaten"
 }

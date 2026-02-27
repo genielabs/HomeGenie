@@ -294,19 +294,22 @@
       "Description": "Phát hiện đối tượng bằng mô hình YOLO đã được đào tạo trước.",
       "ML.ObjectDetection": "Cho phép phát hiện đối tượng",
       "ML.ObjectDetection.TriggerDetect": "Danh sách các thứ được phân tách bằng dấu phẩy (bằng tiếng Anh) có thể kích hoạt báo động. (ví dụ: mèo, chó, người, ba lô, vali)",
-      "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Số lượng yêu cầu tối đa mỗi giây (RPS)"
     },
     "911": {
       "Title": "Ước tính tư thế",
       "Description": "Phát hiện điểm chính thông qua ước tính tư thế, sử dụng mô hình ONNX tùy chỉnh hoặc mô hình YOLO được đào tạo trước mặc định (dành riêng cho tư thế của con người).",
       "ML.PoseEstimation": "Cho phép ước tính tư thế",
-      "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Số lượng yêu cầu tối đa mỗi giây (RPS)"
     },
     "912": {
       "Title": "Phân đoạn phiên bản",
       "Description": "Phát hiện các vật thể và đường viền của chúng bằng mô hình YOLO đã được đào tạo trước.",
       "ML.InstanceSegmentation": "Cho phép phân đoạn phiên bản",
-      "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Đường dẫn của tệp mô hình YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Số lượng yêu cầu tối đa mỗi giây (RPS)"
     },
     "930": {
       "Title": "Trình xử lý ý định Gemini",
@@ -376,9 +379,30 @@
       "Title": "Tóm tắt năng lượng hàng ngày",
       "Description": "Mức tiêu thụ năng lượng hàng ngày (Wh) của từng thiết bị.",
       "Widget.Statistics.DailyReport": "Bao gồm trong báo cáo Daily Wh"
+    },
+    "200": {
+      "Title": "Đầu vào video",
+      "Description": "Thu nhận luồng âm thanh và video để giám sát trực tiếp, xử lý thời gian thực và ghi hình liên tục.",
+      "VideoInput.Disable": "Vô hiệu hóa đầu vào này",
+      "VideoInput.SourceURL": "URL nguồn video",
+      "VideoInput.ImageFeed": "URL là một tệp hình ảnh duy nhất được cập nhật trực tiếp.",
+      "VideoInput.Username": "Tên người dùng (tùy chọn)",
+      "VideoInput.Password": "Mật khẩu (tùy chọn)",
+      "Widget.Config.fps": "Số khung hình tối đa mỗi giây",
+      "VideoOutput.Width": "Độ rộng luồng đầu ra.",
+      "VideoOutput.SnapshotQuality": "Chất lượng hình ảnh trực tiếp."
+    },
+    "250": {
+      "Title": "Máy quay video",
+      "Description": "Ghi lại luồng âm thanh và video từ bất kỳ nguồn đầu vào nào. Quá trình ghi có thể diễn ra liên tục, theo lịch trình hoặc được kích hoạt bởi các sự kiện báo động.",
+      "NVR.EnableRecording": "Bật chế độ quay video",
+      "NVR.RecordOnAlarm": "Ghi âm khi có báo động",
+      "NVR.ContinuousRecording": "Ghi hình liên tục."
     }
   },
   "scheduler_preset_action_genie_command": "Lệnh Genie",
   "scheduler_preset_action_config_wish": "Hành động ngôn ngữ tự nhiên",
-  "scheduler_preset_action_config_wish.placeholder": "Hãy thử: \"Đặt nhiệt độ ở mức 22° và bắt đầu cảnh bình minh\""
+  "scheduler_preset_action_config_wish.placeholder": "Hãy thử: \"Đặt nhiệt độ ở mức 22° và bắt đầu cảnh bình minh\"",
+  "scheduler_preset_action_command_video_record_start": "Bắt đầu quay video",
+  "scheduler_preset_action_command_video_record_stop": "Dừng quay video"
 }

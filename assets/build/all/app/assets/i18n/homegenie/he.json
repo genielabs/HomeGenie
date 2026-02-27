@@ -294,19 +294,22 @@
       "Description": "זיהוי עצמים באמצעות מודל YOLO שאומן מראש.",
       "ML.ObjectDetection": "הפעלת זיהוי אובייקטים",
       "ML.ObjectDetection.TriggerDetect": "רשימה מופרדת בפסיקים של דברים (באנגלית) שיפעילו את האזעקה. (לדוגמה: חתול, כלב, אדם, תרמיל, מזוודה)",
-      "ConfigureOptions.Yolo.ModelPath": "נתיב קובץ המודל YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "נתיב קובץ המודל YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "מספר מקסימלי של בקשות לשנייה (RPS)"
     },
     "911": {
       "Title": "הערכת תנוחה",
       "Description": "זיהוי נקודות מפתח באמצעות הערכת תנוחה, באמצעות מודלים של ONNX מותאמים אישית או מודל YOLO שאומן מראש כברירת מחדל (ספציפי לתנוחה אנושית).",
       "ML.PoseEstimation": "הפעלת הערכת תנוחה",
-      "ConfigureOptions.Yolo.ModelPath": "נתיב קובץ המודל YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "נתיב קובץ המודל YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "מספר מקסימלי של בקשות לשנייה (RPS)"
     },
     "912": {
       "Title": "פילוח מופעים",
       "Description": "זיהוי עצמים וקווי המתאר שלהם באמצעות מודל YOLO שאומן מראש.",
       "ML.InstanceSegmentation": "הפעל פילוח מופעים",
-      "ConfigureOptions.Yolo.ModelPath": "נתיב קובץ המודל YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "נתיב קובץ המודל YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "מספר מקסימלי של בקשות לשנייה (RPS)"
     },
     "930": {
       "Title": "מטפל כוונות ג'מיני",
@@ -376,9 +379,30 @@
       "Title": "סיכום אנרגיה יומי",
       "Description": "צריכת אנרגיה יומית (Wh) לפי מכשיר.",
       "Widget.Statistics.DailyReport": "כלול בדוח Wh יומי"
+    },
+    "200": {
+      "Title": "קלט וידאו",
+      "Description": "לוכד זרמי אודיו ווידאו לניטור חי, עיבוד בזמן אמת והקלטה רציפה.",
+      "VideoInput.Disable": "השבת קלט זה",
+      "VideoInput.SourceURL": "כתובת אתר של מקור הסרטון",
+      "VideoInput.ImageFeed": "כתובת URL היא קובץ תמונה יחיד המתעדכן בזמן אמת.",
+      "VideoInput.Username": "שם משתמש (אופציונלי)",
+      "VideoInput.Password": "סיסמה (אופציונלי)",
+      "Widget.Config.fps": "מקסימום פריימים לשנייה",
+      "VideoOutput.Width": "רוחב זרם הפלט.",
+      "VideoOutput.SnapshotQuality": "איכות תמונה חיה."
+    },
+    "250": {
+      "Title": "רַשָׁם וִידֵיאוֹ",
+      "Description": "מקליט זרמי אודיו ווידאו מכל מקור קלט. הקלטות יכולות להיות רציפות, מתוזמנות או מופעלות על ידי אירועי אזעקה.",
+      "NVR.EnableRecording": "הפעל הקלטת וידאו",
+      "NVR.RecordOnAlarm": "הקלטה בעת אזעקה",
+      "NVR.ContinuousRecording": "הקלטה רציפה."
     }
   },
   "scheduler_preset_action_genie_command": "פיקוד ג'יני",
   "scheduler_preset_action_config_wish": "פעולת שפה טבעית",
-  "scheduler_preset_action_config_wish.placeholder": "נסה: \"הגדר את החום ל-22° והתחל את סצנת הזריחה\""
+  "scheduler_preset_action_config_wish.placeholder": "נסה: \"הגדר את החום ל-22° והתחל את סצנת הזריחה\"",
+  "scheduler_preset_action_command_video_record_start": "התחל להקליט וידאו",
+  "scheduler_preset_action_command_video_record_stop": "הפסקת הקלטת וידאו"
 }

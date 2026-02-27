@@ -294,19 +294,22 @@
       "Description": "Erkennen Sie Objekte mithilfe eines vortrainierten YOLO-Modells.",
       "ML.ObjectDetection": "Objekterkennung aktivieren",
       "ML.ObjectDetection.TriggerDetect": "Durch Kommas getrennte Liste von Dingen (auf Englisch), die den Alarm auslösen. (zB: Katze, Hund, Person, Rucksack, Koffer)",
-      "ConfigureOptions.Yolo.ModelPath": "Pfad der YOLO-Modelldatei (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pfad der YOLO-Modelldatei (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maximale Anfragen pro Sekunde (RPS)"
     },
     "911": {
       "Title": "Posenschätzung",
       "Description": "Schlüsselpunkterkennung durch Posenschätzung unter Verwendung benutzerdefinierter ONNX-Modelle oder des standardmäßig vortrainierten YOLO-Modells (spezifisch für die menschliche Pose).",
       "ML.PoseEstimation": "Aktivieren der Posenschätzung",
-      "ConfigureOptions.Yolo.ModelPath": "Pfad der YOLO-Modelldatei (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pfad der YOLO-Modelldatei (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maximale Anfragen pro Sekunde (RPS)"
     },
     "912": {
       "Title": "Instanzsegmentierung",
       "Description": "Erkennen Sie Objekte und ihre Umrisse mithilfe eines vortrainierten YOLO-Modells.",
       "ML.InstanceSegmentation": "Aktivieren der Instanzsegmentierung",
-      "ConfigureOptions.Yolo.ModelPath": "Pfad der YOLO-Modelldatei (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pfad der YOLO-Modelldatei (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maximale Anfragen pro Sekunde (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Tägliche Energieübersicht",
       "Description": "Täglicher Energieverbrauch (Wh) pro Gerät.",
       "Widget.Statistics.DailyReport": "In den täglichen Wh-Bericht aufnehmen"
+    },
+    "200": {
+      "Title": "Videoeingang",
+      "Description": "Erfasst Audio- und Videostreams für Live-Monitoring, Echtzeitverarbeitung und kontinuierliche Aufzeichnung.",
+      "VideoInput.Disable": "Diese Eingabe deaktivieren",
+      "VideoInput.SourceURL": "Videoquellen-URL",
+      "VideoInput.ImageFeed": "Die URL ist eine live aktualisierte Einzelbilddatei.",
+      "VideoInput.Username": "Benutzername (optional)",
+      "VideoInput.Password": "Passwort (optional)",
+      "Widget.Config.fps": "Maximale Bilder pro Sekunde",
+      "VideoOutput.Width": "Ausgabestreambreite.",
+      "VideoOutput.SnapshotQuality": "Live-Bildqualität."
+    },
+    "250": {
+      "Title": "Videorecorder",
+      "Description": "Zeichnet Audio- und Videostreams von beliebigen Eingangsquellen auf. Aufnahmen können kontinuierlich, zeitgesteuert oder durch Alarmereignisse ausgelöst werden.",
+      "NVR.EnableRecording": "Videoaufzeichnung aktivieren",
+      "NVR.RecordOnAlarm": "Aufnahme bei Alarm",
+      "NVR.ContinuousRecording": "Kontinuierliche Aufzeichnung."
     }
   },
   "scheduler_preset_action_genie_command": "Genie-Befehl",
   "scheduler_preset_action_config_wish": "Aktionen in natürlicher Sprache",
-  "scheduler_preset_action_config_wish.placeholder": "Versuchen Sie Folgendes: „Stellen Sie die Heizung auf 22° ein und starten Sie die Sonnenaufgangsszene.“"
+  "scheduler_preset_action_config_wish.placeholder": "Versuchen Sie Folgendes: „Stellen Sie die Heizung auf 22° ein und starten Sie die Sonnenaufgangsszene.“",
+  "scheduler_preset_action_command_video_record_start": "Videoaufnahme starten",
+  "scheduler_preset_action_command_video_record_stop": "Videoaufnahme stoppen"
 }

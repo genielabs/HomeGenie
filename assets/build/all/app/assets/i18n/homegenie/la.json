@@ -294,19 +294,22 @@
       "Description": "Obiecta detege utens modelo YOLO prae-exercitato.",
       "ML.ObjectDetection": "Detectionem rerum permitte",
       "ML.ObjectDetection.TriggerDetect": "Index rerum (Anglice) quae alarmum excitabunt, commatibus separatarum (exempli gratia: felis, canis, homo, saccus dorsualis, valis)",
-      "ConfigureOptions.Yolo.ModelPath": "Semita fasciculi exemplaris YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Semita fasciculi exemplaris YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maximae Petitiones Per Secundum (RPS)"
     },
     "911": {
       "Title": "Aestimatio Positionis",
       "Description": "Detectio punctorum clavium per aestimationem positionis, utens exemplaribus ONNX propriis vel exemplari YOLO prae-exercitato implicito (positioni humanae specifico).",
       "ML.PoseEstimation": "Aestimationem positionis activare",
-      "ConfigureOptions.Yolo.ModelPath": "Semita fasciculi exemplaris YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Semita fasciculi exemplaris YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maximae Petitiones Per Secundum (RPS)"
     },
     "912": {
       "Title": "Segmentatio Instantiarum",
       "Description": "Obiecta earumque lineamenta detege utens modelo YOLO prae-exercitato.",
       "ML.InstanceSegmentation": "Segmentationem instantiarum permitte",
-      "ConfigureOptions.Yolo.ModelPath": "Semita fasciculi exemplaris YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Semita fasciculi exemplaris YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maximae Petitiones Per Secundum (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Summarium Energiae Diariae",
       "Description": "Consumptio energiae quotidiana (Wh) per instrumentum.",
       "Widget.Statistics.DailyReport": "Includi in relatione \"Cotidianum Wh\""
+    },
+    "200": {
+      "Title": "Ingressus Video",
+      "Description": "Fluxus audio et video capit ad monitorationem in tempore reali, processum in tempore reali, et inscriptionem continuam.",
+      "VideoInput.Disable": "Hoc inputum inactivare",
+      "VideoInput.SourceURL": "URL fontis pelliculae",
+      "VideoInput.ImageFeed": "URL est fasciculus imaginis singularis, quae tempore renovatur.",
+      "VideoInput.Username": "Nomen usoris (facultativum)",
+      "VideoInput.Password": "Tessera (facultativa)",
+      "Widget.Config.fps": "Imaginum maximarum per secundum",
+      "VideoOutput.Width": "Latitudo fluminis egressus.",
+      "VideoOutput.SnapshotQuality": "Qualitas imaginis vivae."
+    },
+    "250": {
+      "Title": "Videographus",
+      "Description": "Fluxus audio et imaginum ex quavis fonte ingressus registrat. Registrationes continuae, programmatae, vel ab eventibus alarmis excitatae esse possunt.",
+      "NVR.EnableRecording": "Activatio Registrationis Video",
+      "NVR.RecordOnAlarm": "Recordatio in Alarma",
+      "NVR.ContinuousRecording": "Continua Registratio."
     }
   },
   "scheduler_preset_action_genie_command": "Mandatum Genii",
   "scheduler_preset_action_config_wish": "Actio Linguae Naturalis",
-  "scheduler_preset_action_config_wish.placeholder": "Conare: \"Calorem ad 22° pone et scaenam Solis Ortus incipe.\""
+  "scheduler_preset_action_config_wish.placeholder": "Conare: \"Calorem ad 22° pone et scaenam Solis Ortus incipe.\"",
+  "scheduler_preset_action_command_video_record_start": "Incipe Video Recordare",
+  "scheduler_preset_action_command_video_record_stop": "Desine Video Recordare"
 }

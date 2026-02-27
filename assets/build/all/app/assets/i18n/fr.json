@@ -536,5 +536,15 @@
   "original_language": "Langue originale",
   "origin_country": "Pays d'origine",
   "production_companies": "Société de production",
-  "movie_cast": "Acteurs"
+  "movie_cast": "Acteurs",
+  "live": "En direct",
+  "recordings": "Enregistrements",
+  "no_recordings": "Aucun enregistrement.",
+  "live_feed": "Flux en direct",
+  "fullscreen_exit": "Quitter le mode plein écran",
+  "play_media": "Play Media",
+  "start_recording": "Démarrer l'enregistrement",
+  "stop_recording": "Arrêter l'enregistrement",
+  "toggle_smart_recording": "Enregistrement automatique sur alarme",
+  "search_metadata": "Métadonnées de recherche"
 }

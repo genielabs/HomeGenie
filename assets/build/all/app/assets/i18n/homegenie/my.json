@@ -294,19 +294,22 @@
       "Description": "ကြိုတင်လေ့ကျင့်ထားသော YOLO မော်ဒယ်ကို အသုံးပြု၍ အရာဝတ္ထုများကို ရှာဖွေပါ။",
       "ML.ObjectDetection": "အရာဝတ္ထုများကို သိရှိခြင်းအား ဖွင့်ပါ။",
       "ML.ObjectDetection.TriggerDetect": "နှိုးစက်ကို အစပျိုးပေးမည့် ကော်မာ-ခြားထားသော အရာများစာရင်း (အင်္ဂလိပ်လို)။ (ဥပမာ- ကြောင်၊ ခွေး၊ လူ၊ ကျောပိုးအိတ်၊ ခရီးဆောင်အိတ်)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO မော်ဒယ်ဖိုင်၏ လမ်းကြောင်း (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO မော်ဒယ်ဖိုင်၏ လမ်းကြောင်း (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "တစ်စက္ကန့်လျှင် အများဆုံး တောင်းဆိုမှု (RPS)"
     },
     "911": {
       "Title": "Pose ခန့်မှန်းချက်",
       "Description": "စိတ်ကြိုက် ONNX မော်ဒယ်များ သို့မဟုတ် မူရင်းကြိုတင်လေ့ကျင့်ထားသည့် YOLO မော်ဒယ် (လူ့ပုံသဏ္ဍာန် သီးသန့်) ကို အသုံးပြု၍ pose ခန့်မှန်းချက်မှတစ်ဆင့် သော့ချက်ထောက်လှမ်းခြင်း။",
       "ML.PoseEstimation": "pose ခန့်မှန်းချက်ကို ဖွင့်ပါ။",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO မော်ဒယ်ဖိုင်၏ လမ်းကြောင်း (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO မော်ဒယ်ဖိုင်၏ လမ်းကြောင်း (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "တစ်စက္ကန့်လျှင် အများဆုံး တောင်းဆိုမှု (RPS)"
     },
     "912": {
       "Title": "Instance Segmentation",
       "Description": "ကြိုတင်လေ့ကျင့်ထားသော YOLO မော်ဒယ်ကို အသုံးပြု၍ အရာဝတ္ထုများနှင့် ၎င်းတို့၏ ကောက်ကြောင်းများကို ရှာဖွေပါ။",
       "ML.InstanceSegmentation": "ဥပမာ အပိုင်းခွဲခြင်းကို ဖွင့်ပါ။",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO မော်ဒယ်ဖိုင်၏ လမ်းကြောင်း (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO မော်ဒယ်ဖိုင်၏ လမ်းကြောင်း (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "တစ်စက္ကန့်လျှင် အများဆုံး တောင်းဆိုမှု (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "နေ့စဉ်စွမ်းအင်အကျဉ်းချုပ်",
       "Description": "စက်ပစ္စည်းအလိုက် နေ့စဉ်စွမ်းအင်သုံးစွဲမှု (Wh)။",
       "Widget.Statistics.DailyReport": "နေ့စဉ် Wh အစီရင်ခံစာတွင် ထည့်သွင်းပါ"
+    },
+    "200": {
+      "Title": "ဗီဒီယိုထည့်သွင်းမှု",
+      "Description": "တိုက်ရိုက်စောင့်ကြည့်ခြင်း၊ အချိန်နှင့်တပြေးညီ လုပ်ဆောင်ခြင်းနှင့် စဉ်ဆက်မပြတ် မှတ်တမ်းတင်ခြင်းအတွက် အသံနှင့် ဗီဒီယို စီးကြောင်းကို ဖမ်းယူသည်။",
+      "VideoInput.Disable": "ဤထည့်သွင်းမှုကို ပိတ်ပါ",
+      "VideoInput.SourceURL": "ဗီဒီယိုရင်းမြစ် URL",
+      "VideoInput.ImageFeed": "URL သည် တိုက်ရိုက် အပ်ဒိတ်လုပ်ထားသော တစ်ခုတည်းသော ရုပ်ပုံဖိုင်တစ်ခုဖြစ်သည်။",
+      "VideoInput.Username": "အသုံးပြုသူအမည် (ရွေးချယ်နိုင်သည်)",
+      "VideoInput.Password": "စကားဝှက် (ရွေးချယ်နိုင်သည်)",
+      "Widget.Config.fps": "တစ်စက္ကန့်လျှင် အများဆုံး ဖရိမ်များ",
+      "VideoOutput.Width": "အထွက်စီးကြောင်း အကျယ်။",
+      "VideoOutput.SnapshotQuality": "တိုက်ရိုက်ပုံရိပ်အရည်အသွေး။"
+    },
+    "250": {
+      "Title": "ဗီဒီယို မှတ်တမ်းတင်စက်",
+      "Description": "မည်သည့် input source မှမဆို အသံနှင့် ဗီဒီယို stream များကို မှတ်တမ်းတင်သည်။ မှတ်တမ်းတင်မှုများကို စဉ်ဆက်မပြတ်၊ အချိန်ဇယားဆွဲ သို့မဟုတ် အချက်ပေးသံများကြောင့် နှိုးစက်မြည်နိုင်သည်။",
+      "NVR.EnableRecording": "ဗီဒီယိုရိုက်ကူးခြင်းကို ဖွင့်ပါ",
+      "NVR.RecordOnAlarm": "နှိုးစက်ဖြင့် မှတ်တမ်းတင်ခြင်း",
+      "NVR.ContinuousRecording": "စဉ်ဆက်မပြတ် မှတ်တမ်းတင်ခြင်း။"
     }
   },
   "scheduler_preset_action_genie_command": "ဂျီနီ အမိန့်ပေးချက်",
   "scheduler_preset_action_config_wish": "သဘာဝဘာသာစကားလုပ်ဆောင်ချက်",
-  "scheduler_preset_action_config_wish.placeholder": "စမ်းကြည့်ပါ- \"အပူချိန်ကို ၂၂° ထားပြီး နေထွက်မြင်ကွင်းကို စတင်ပါ\""
+  "scheduler_preset_action_config_wish.placeholder": "စမ်းကြည့်ပါ- \"အပူချိန်ကို ၂၂° ထားပြီး နေထွက်မြင်ကွင်းကို စတင်ပါ\"",
+  "scheduler_preset_action_command_video_record_start": "ဗီဒီယိုရိုက်ကူးခြင်း စတင်ပါ",
+  "scheduler_preset_action_command_video_record_stop": "ဗီဒီယိုရိုက်ကူးခြင်းကို ရပ်ပါ"
 }

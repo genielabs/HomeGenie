@@ -536,5 +536,15 @@
   "original_language": "Ngôn ngữ gốc",
   "origin_country": "Quốc gia xuất xứ",
   "production_companies": "Công ty sản xuất",
-  "movie_cast": "Diễn viên"
+  "movie_cast": "Diễn viên",
+  "live": "Sống",
+  "recordings": "Bản ghi âm",
+  "no_recordings": "Không có bản ghi âm nào.",
+  "live_feed": "Phát sóng trực tiếp",
+  "fullscreen_exit": "Thoát chế độ toàn màn hình",
+  "play_media": "Phát đa phương tiện",
+  "start_recording": "Bắt đầu ghi âm",
+  "stop_recording": "Dừng ghi âm",
+  "toggle_smart_recording": "Tự động ghi âm khi có báo động",
+  "search_metadata": "Siêu dữ liệu tìm kiếm"
 }

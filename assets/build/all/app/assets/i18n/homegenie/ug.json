@@ -294,19 +294,22 @@
       "Description": "ئالدىن تەربىيەلەنگەن YOLO مودېلى ئارقىلىق جىسىملارنى ئېنىقلاڭ.",
       "ML.ObjectDetection": "جىسىملارنى بايقاشنى قوزغىتىڭ",
       "ML.ObjectDetection.TriggerDetect": "پەش ئارقىلىق ئايرىلغان ئىشلار (ئىنگلىزچە) ئاگاھلاندۇرۇش سىگنالىنى قوزغايدۇ. (مەسىلەن: مۈشۈك ، ئىت ، ئادەم ، سومكا ، چامادان)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO مودېل ھۆججىتىنىڭ يولى (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO مودېل ھۆججىتىنىڭ يولى (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "سېكۇنتىغا ئەڭ كۆپ تەلەپ (RPS)"
     },
     "911": {
       "Title": "Pose Estimation",
       "Description": "تۇراقلىق مۆلچەر ئارقىلىق كۇنۇپكا تاختىسىنى بايقاش ، ئىختىيارى ONNX مودېلى ياكى سۈكۈتتىكى ئالدىن تەربىيەلەنگەن YOLO مودېلى (ئىنسانلارنىڭ تۇرقىغا خاس).",
       "ML.PoseEstimation": "تۇراقلىق مۆلچەرنى قوزغىتىڭ",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO مودېل ھۆججىتىنىڭ يولى (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO مودېل ھۆججىتىنىڭ يولى (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "سېكۇنتىغا ئەڭ كۆپ تەلەپ (RPS)"
     },
     "912": {
       "Title": "Instance Segmentation",
       "Description": "ئالدىن تەربىيەلەنگەن YOLO مودېلى ئارقىلىق جىسىم ۋە ئۇلارنىڭ تىزىمىنى ئېنىقلاڭ.",
       "ML.InstanceSegmentation": "ئۈلگە بۆلەكنى قوزغىتىڭ",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO مودېل ھۆججىتىنىڭ يولى (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO مودېل ھۆججىتىنىڭ يولى (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "سېكۇنتىغا ئەڭ كۆپ تەلەپ (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "كۈندىلىك ئېنېرگىيە خۇلاسىسى",
       "Description": "ئۈسكۈنىلەرنىڭ كۈندىلىك ئېنېرگىيە سەرپىياتى (Wh).",
       "Widget.Statistics.DailyReport": "كۈندىلىك Wh دوكلاتىغا قوشۇڭ"
+    },
+    "200": {
+      "Title": "ۋىدېئو كىرگۈزۈش",
+      "Description": "نەق مەيدان كۆزىتىش، ھەقىقىي ۋاقىتلىق بىر تەرەپ قىلىش ۋە ئۈزلۈكسىز خاتىرىلەش ئۈچۈن ئاۋاز ۋە سىن ئېقىمىنى تۇتىدۇ.",
+      "VideoInput.Disable": "بۇ كىرگۈزۈشنى چەكلەش",
+      "VideoInput.SourceURL": "ۋىدېئو مەنبەسىنىڭ URL ئادرېسى",
+      "VideoInput.ImageFeed": "URL بولسا يېڭىلىنىدىغان يەككە رەسىم ھۆججىتى.",
+      "VideoInput.Username": "ئىشلەتكۈچى ئىسمى (خالىغانچە)",
+      "VideoInput.Password": "پارول (تاللاشچان)",
+      "Widget.Config.fps": "سېكۇنتىغا ئەڭ كۆپ كادىر",
+      "VideoOutput.Width": "چىقىرىش ئېقىمىنىڭ كەڭلىكى.",
+      "VideoOutput.SnapshotQuality": "جانلىق رەسىم سۈپىتى."
+    },
+    "250": {
+      "Title": "ۋىدېئو خاتىرىلىگۈچ",
+      "Description": "ھەر قانداق كىرگۈزۈش مەنبەسىدىن ئاۋاز ۋە سىن ئېقىمىنى خاتىرىلەيدۇ. خاتىرىلەشلەر ئۈزلۈكسىز، پىلانلىق ياكى سىگنال ۋەقەلىرى تەرىپىدىن قوزغىتىلىشى مۇمكىن.",
+      "NVR.EnableRecording": "ۋىدېئو خاتىرىلەشنى قوزغىتىش",
+      "NVR.RecordOnAlarm": "سىگنالدا خاتىرىلەش",
+      "NVR.ContinuousRecording": "ئۈزلۈكسىز خاتىرىلەش."
     }
   },
   "scheduler_preset_action_genie_command": "جىن قوماندانلىقى",
   "scheduler_preset_action_config_wish": "تەبىئىي تىل ھەرىكىتى",
-  "scheduler_preset_action_config_wish.placeholder": "سىناپ بېقىڭ: «تېمپېراتۇرىنى 22° غا تەڭشەپ، قۇياش چىقىش كۆرۈنۈشىنى باشلاڭ»."
+  "scheduler_preset_action_config_wish.placeholder": "سىناپ بېقىڭ: «تېمپېراتۇرىنى 22° غا تەڭشەپ، قۇياش چىقىش كۆرۈنۈشىنى باشلاڭ».",
+  "scheduler_preset_action_command_video_record_start": "ۋىدېئو خاتىرىلەشنى باشلاڭ",
+  "scheduler_preset_action_command_video_record_stop": "ۋىدېئو خاتىرىلەشنى توختىتىش"
 }

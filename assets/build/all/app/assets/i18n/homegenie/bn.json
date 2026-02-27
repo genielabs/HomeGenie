@@ -294,19 +294,22 @@
       "Description": "একটি পূর্ব-প্রশিক্ষিত YOLO মডেল ব্যবহার করে বস্তু সনাক্ত করুন।",
       "ML.ObjectDetection": "বস্তু সনাক্তকরণ সক্ষম করুন",
       "ML.ObjectDetection.TriggerDetect": "কমা দ্বারা পৃথক করা জিনিসপত্রের তালিকা (ইংরেজিতে) যা অ্যালার্ম ট্রিগার করবে। (যেমন: বিড়াল, কুকুর, ব্যক্তি, ব্যাকপ্যাক, স্যুটকেস)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO মডেল ফাইলের পথ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO মডেল ফাইলের পথ (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "প্রতি সেকেন্ডে সর্বোচ্চ অনুরোধ (RPS)"
     },
     "911": {
       "Title": "ভঙ্গি অনুমান",
       "Description": "কাস্টম ONNX মডেল অথবা ডিফল্ট প্রাক-প্রশিক্ষিত YOLO মডেল (মানব ভঙ্গি-নির্দিষ্ট) ব্যবহার করে ভঙ্গি অনুমানের মাধ্যমে কীপয়েন্ট সনাক্তকরণ।",
       "ML.PoseEstimation": "ভঙ্গি অনুমান সক্ষম করুন",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO মডেল ফাইলের পথ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO মডেল ফাইলের পথ (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "প্রতি সেকেন্ডে সর্বোচ্চ অনুরোধ (RPS)"
     },
     "912": {
       "Title": "ইনস্ট্যান্স সেগমেন্টেশন",
       "Description": "একটি পূর্ব-প্রশিক্ষিত YOLO মডেল ব্যবহার করে বস্তু এবং তাদের রূপরেখা সনাক্ত করুন।",
       "ML.InstanceSegmentation": "ইনস্ট্যান্স সেগমেন্টেশন সক্ষম করুন",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO মডেল ফাইলের পথ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO মডেল ফাইলের পথ (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "প্রতি সেকেন্ডে সর্বোচ্চ অনুরোধ (RPS)"
     },
     "930": {
       "Title": "জেমিনি ইন্টেন্ট হ্যান্ডলার",
@@ -376,9 +379,30 @@
       "Title": "দৈনিক শক্তির সারাংশ",
       "Description": "ডিভাইস অনুসারে দৈনিক শক্তি খরচ (Wh)।",
       "Widget.Statistics.DailyReport": "দৈনিক Wh রিপোর্টে অন্তর্ভুক্ত করুন"
+    },
+    "200": {
+      "Title": "ভিডিও ইনপুট",
+      "Description": "লাইভ মনিটরিং, রিয়েল-টাইম প্রসেসিং এবং ক্রমাগত রেকর্ডিংয়ের জন্য অডিও এবং ভিডিও স্ট্রিম ক্যাপচার করে।",
+      "VideoInput.Disable": "এই ইনপুটটি অক্ষম করুন",
+      "VideoInput.SourceURL": "ভিডিও সোর্স URL",
+      "VideoInput.ImageFeed": "URL হল একটি লাইভ-আপডেট করা একক চিত্র ফাইল।",
+      "VideoInput.Username": "ব্যবহারকারীর নাম (ঐচ্ছিক)",
+      "VideoInput.Password": "পাসওয়ার্ড (ঐচ্ছিক)",
+      "Widget.Config.fps": "প্রতি সেকেন্ডে সর্বোচ্চ ফ্রেম",
+      "VideoOutput.Width": "আউটপুট স্ট্রিম প্রস্থ।",
+      "VideoOutput.SnapshotQuality": "লাইভ ছবির মান।"
+    },
+    "250": {
+      "Title": "ভিডিও রেকর্ডার",
+      "Description": "যেকোনো ইনপুট উৎস থেকে অডিও এবং ভিডিও স্ট্রিম রেকর্ড করে। রেকর্ডিংগুলি ক্রমাগত, নির্ধারিত, অথবা অ্যালার্ম ইভেন্ট দ্বারা ট্রিগার করা যেতে পারে।",
+      "NVR.EnableRecording": "ভিডিও রেকর্ডিং সক্ষম করুন",
+      "NVR.RecordOnAlarm": "অ্যালার্মে রেকর্ড করুন",
+      "NVR.ContinuousRecording": "ক্রমাগত রেকর্ডিং।"
     }
   },
   "scheduler_preset_action_genie_command": "জিনি কমান্ড",
   "scheduler_preset_action_config_wish": "প্রাকৃতিক ভাষা কর্ম",
-  "scheduler_preset_action_config_wish.placeholder": "চেষ্টা করুন: \"তাপ ২২° এ সেট করুন এবং সূর্যোদয়ের দৃশ্য শুরু করুন\""
+  "scheduler_preset_action_config_wish.placeholder": "চেষ্টা করুন: \"তাপ ২২° এ সেট করুন এবং সূর্যোদয়ের দৃশ্য শুরু করুন\"",
+  "scheduler_preset_action_command_video_record_start": "ভিডিও রেকর্ডিং শুরু করুন",
+  "scheduler_preset_action_command_video_record_stop": "ভিডিও রেকর্ডিং বন্ধ করুন"
 }

@@ -1,0 +1,3 @@
+{
+  "ffmpeg_required": "`{{module_name}}` moduluak funtzionatzeko **FFmpeg** behar du. Mesedez, instalatu webgune ofizialetik: - [https://ffmpeg.org](https://ffmpeg.org) Ezaugarri hau behar ez baduzu, modulua desgaitu dezakezu **Automatizazio Programak** atalean, edo beheko botoian klik eginez."
+}

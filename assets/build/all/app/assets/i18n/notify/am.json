@@ -1,0 +1,3 @@
+{
+  "ffmpeg_required": "የ`{{module_name}}` ሞጁል እንዲሰራ **FFmpeg** ይፈልጋል። እባክዎን ከኦፊሴላዊው ድህረ ገጽ ይጫኑት፦ - [https://ffmpeg.org](https://ffmpeg.org) ይህ ባህሪ የማይፈልጉ ከሆነ፣ ይህንን ሞጁል በ **Automation Programs** ክፍል ውስጥ ወይም ከታች ያለውን አዝራር ጠቅ በማድረግ ማሰናከል ይችላሉ።"
+}

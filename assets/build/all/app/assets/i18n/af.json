@@ -536,5 +536,15 @@
   "original_language": "Oorspronklike taal",
   "origin_country": "Land van oorsprong",
   "production_companies": "Produksiemaatskappy",
-  "movie_cast": "Akteurs"
+  "movie_cast": "Akteurs",
+  "live": "Lewendig",
+  "recordings": "Opnames",
+  "no_recordings": "Geen opnames nie.",
+  "live_feed": "Regstreekse stroom",
+  "fullscreen_exit": "Verlaat Volskerm",
+  "play_media": "Speel media",
+  "start_recording": "Begin Opname",
+  "stop_recording": "Stop opname",
+  "toggle_smart_recording": "Outomatiese opname by alarm",
+  "search_metadata": "Soek Metadata"
 }

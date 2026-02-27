@@ -294,19 +294,22 @@
       "Description": "Bespeur voorwerpe met behulp van 'n voorafopgeleide YOLO-model.",
       "ML.ObjectDetection": "Aktiveer voorwerpopsporing",
       "ML.ObjectDetection.TriggerDetect": "Komma-geskeide lys van dinge (in Engels) wat die alarm sal aktiveer. (bv.: kat, hond, persoon, rugsak, tas)",
-      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO-modellêer (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO-modellêer (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimum Versoeke Per Sekonde (RPS)"
     },
     "911": {
       "Title": "Pose-skatting",
       "Description": "Sleutelpuntopsporing via poseberaming, met behulp van persoonlike ONNX-modelle of die standaard voorafopgeleide YOLO-model (menslike pose-spesifiek).",
       "ML.PoseEstimation": "Aktiveer pose-skatting",
-      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO-modellêer (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO-modellêer (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimum Versoeke Per Sekonde (RPS)"
     },
     "912": {
       "Title": "Instansiesegmentering",
       "Description": "Bespeur voorwerpe en hul buitelyne met behulp van 'n vooraf opgeleide YOLO-model.",
       "ML.InstanceSegmentation": "Aktiveer instansiesegmentering",
-      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO-modellêer (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO-modellêer (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimum Versoeke Per Sekonde (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Hanteerder",
@@ -376,9 +379,30 @@
       "Title": "Daaglikse Energie Opsomming",
       "Description": "Daaglikse energieverbruik (Wh) per toestel.",
       "Widget.Statistics.DailyReport": "Sluit in Daaglikse Wh-verslag in"
+    },
+    "200": {
+      "Title": "Video-invoer",
+      "Description": "Vang oudio- en videostrome vas vir regstreekse monitering, intydse verwerking en deurlopende opname.",
+      "VideoInput.Disable": "Deaktiveer hierdie invoer",
+      "VideoInput.SourceURL": "Videobron-URL",
+      "VideoInput.ImageFeed": "URL is 'n enkele beeldlêer wat regstreeks opgedateer word.",
+      "VideoInput.Username": "Gebruikersnaam (opsioneel)",
+      "VideoInput.Password": "Wagwoord (opsioneel)",
+      "Widget.Config.fps": "Maksimum rame per sekonde",
+      "VideoOutput.Width": "Uitsetstroomwydte.",
+      "VideoOutput.SnapshotQuality": "Lewendige beeldkwaliteit."
+    },
+    "250": {
+      "Title": "Video-opnemer",
+      "Description": "Neem oudio- en videostrome op vanaf enige invoerbron. Opnames kan deurlopend, geskeduleer of deur alarmgebeurtenisse geaktiveer word.",
+      "NVR.EnableRecording": "Aktiveer video-opname",
+      "NVR.RecordOnAlarm": "Opneem by alarm",
+      "NVR.ContinuousRecording": "Deurlopende opname."
     }
   },
   "scheduler_preset_action_genie_command": "Genie-opdrag",
   "scheduler_preset_action_config_wish": "Natuurlike Taalaksie",
-  "scheduler_preset_action_config_wish.placeholder": "Probeer: \"Stel die hitte op 22° en begin die Sonsopkoms-toneel\""
+  "scheduler_preset_action_config_wish.placeholder": "Probeer: \"Stel die hitte op 22° en begin die Sonsopkoms-toneel\"",
+  "scheduler_preset_action_command_video_record_start": "Begin video-opname",
+  "scheduler_preset_action_command_video_record_stop": "Stop die opname van video"
 }

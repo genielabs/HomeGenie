@@ -1,0 +1,3 @@
+{
+  "ffmpeg_required": "De module `{{module_name}}` vereist **FFmpeg** om te functioneren. Installeer deze via de officiële website: [https://ffmpeg.org](https://ffmpeg.org). Als u deze functie niet nodig hebt, kunt u deze module uitschakelen in het gedeelte **Automatiseringsprogramma's** of door op de onderstaande knop te klikken."
+}

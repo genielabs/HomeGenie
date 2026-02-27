@@ -536,5 +536,15 @@
   "original_language": "اصلي ژبه",
   "origin_country": "د اصلي هیواد",
   "production_companies": "د تولید شرکت",
-  "movie_cast": "لوبغاړي"
+  "movie_cast": "لوبغاړي",
+  "live": "ژوندی",
+  "recordings": "ثبتونه",
+  "no_recordings": "هیڅ ریکارډ نشته.",
+  "live_feed": "ژوندۍ خپرونه",
+  "fullscreen_exit": "له بشپړ سکرین څخه ووځئ",
+  "play_media": "میډیا پلی کړئ",
+  "start_recording": "ثبت پیل کړئ",
+  "stop_recording": "ثبت کول بند کړئ",
+  "toggle_smart_recording": "په الارم کې اتومات ثبت کول",
+  "search_metadata": "میټاډاټا ولټوئ"
 }

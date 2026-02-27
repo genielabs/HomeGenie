@@ -77,6 +77,14 @@
     }
   },
   {
+    "id": "command_video_record_start",
+    "script": "$$.boundModules.each((m) => {\n    m.emit('NVR.ContinuousRecording', 'On');\n    return false;\n  });\n"
+  },
+  {
+    "id": "command_video_record_stop",
+    "script": "$$.boundModules.each((m) => {\n    m.emit('NVR.ContinuousRecording', '');\n    return false;\n  });\n"
+  },
+  {
     "id": "program_run",
     "script": "$$.program.run('$program$', '$options$');\n",
     "config": {

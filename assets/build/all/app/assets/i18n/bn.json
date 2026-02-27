@@ -536,5 +536,15 @@
   "original_language": "মূল ভাষা",
   "origin_country": "উৎপত্তি দেশ",
   "production_companies": "উৎপাদন সংস্থা",
-  "movie_cast": "অভিনেতা"
+  "movie_cast": "অভিনেতা",
+  "live": "লাইভ",
+  "recordings": "রেকর্ডিং",
+  "no_recordings": "কোন রেকর্ডিং নেই।",
+  "live_feed": "লাইভ ফিড",
+  "fullscreen_exit": "পূর্ণস্ক্রিন থেকে প্রস্থান করুন",
+  "play_media": "মিডিয়া চালান",
+  "start_recording": "রেকর্ডিং শুরু করুন",
+  "stop_recording": "রেকর্ডিং বন্ধ করুন",
+  "toggle_smart_recording": "অ্যালার্মে অটো-রেকর্ড করুন",
+  "search_metadata": "মেটাডেটা অনুসন্ধান করুন"
 }

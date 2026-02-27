@@ -294,19 +294,22 @@
       "Description": "Chọpụta ihe n'iji ụdị YOLO a zụrụ azụ.",
       "ML.ObjectDetection": "Kwado nchọpụta ihe",
       "ML.ObjectDetection.TriggerDetect": "Ndepụta ihe ndị kewapụrụ rịkọm (na Bekee) ga-akpalite mkpu. (dịka ọmụmaatụ: pusi, nkịta, mmadụ, akpa azụ, akpa)",
-      "ConfigureOptions.Yolo.ModelPath": "Ụzọ nke faịlụ ụdị YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ụzọ nke faịlụ ụdị YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Arịrịọ Kachasị Kwa Sekọnd (RPS)"
     },
     "911": {
       "Title": "Ntụle ọnọdụ",
       "Description": "Nchọpụta isi ihe site na nleba anya pose, na-eji ụdị ONNX omenala ma ọ bụ ụdị YOLO a zụrụ nke ọma (kpọmkwem pose mmadụ).",
       "ML.PoseEstimation": "Kwado ntule ọnọdụ",
-      "ConfigureOptions.Yolo.ModelPath": "Ụzọ nke faịlụ ụdị YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ụzọ nke faịlụ ụdị YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Arịrịọ Kachasị Kwa Sekọnd (RPS)"
     },
     "912": {
       "Title": "Nkeji ihe atụ",
       "Description": "Chọpụta ihe na ndepụta ha site n'iji ụdị YOLO a zụrụ azụ.",
       "ML.InstanceSegmentation": "Kwado nkebi ihe atụ",
-      "ConfigureOptions.Yolo.ModelPath": "Ụzọ nke faịlụ ụdị YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ụzọ nke faịlụ ụdị YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Arịrịọ Kachasị Kwa Sekọnd (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Nchịkọta Ike Kwa Ụbọchị",
       "Description": "Oriri ike kwa ụbọchị (Wh) site na ngwaọrụ.",
       "Widget.Statistics.DailyReport": "Tinye na akụkọ Daily Wh"
+    },
+    "200": {
+      "Title": "Ntinye vidiyo",
+      "Description": "Na-ejide ọdịyo na vidiyo maka nlekota anya, nhazi oge, na ndekọ na-aga n'ihu.",
+      "VideoInput.Disable": "Gbanyụọ ntinye a",
+      "VideoInput.SourceURL": "URL isi iyi vidiyo",
+      "VideoInput.ImageFeed": "URL bụ faịlụ onyonyo nke a na-emelite ozugbo.",
+      "VideoInput.Username": "Aha njirimara (nhọrọ)",
+      "VideoInput.Password": "Paswọọdụ (nhọrọ)",
+      "Widget.Config.fps": "Oke okpokolo agba kachasị kwa sekọnd",
+      "VideoOutput.Width": "Obosara iyi mmepụta.",
+      "VideoOutput.SnapshotQuality": "Ogo onyonyo dị ndụ."
+    },
+    "250": {
+      "Title": "Ihe ndekọ vidiyo",
+      "Description": "Na-edekọ ọdịyo na vidiyo site na isi mmalite ntinye ọ bụla. Ndekọ nwere ike ịdị na-aga n'ihu, na-ahazi oge, ma ọ bụ na-akpali site na ihe omume mkpu.",
+      "NVR.EnableRecording": "Mee ka ndekọ vidiyo rụọ ọrụ",
+      "NVR.RecordOnAlarm": "Dekọọ na Mkpu",
+      "NVR.ContinuousRecording": "Ndekọ Na-aga n'ihu."
     }
   },
   "scheduler_preset_action_genie_command": "Iwu Genie",
   "scheduler_preset_action_config_wish": "Omume Asụsụ Okike",
-  "scheduler_preset_action_config_wish.placeholder": "Nwaa: \"Tọọ okpomọkụ ahụ ruo 22° wee malite ihe nkiri Ọwụwa Anyanwụ\""
+  "scheduler_preset_action_config_wish.placeholder": "Nwaa: \"Tọọ okpomọkụ ahụ ruo 22° wee malite ihe nkiri Ọwụwa Anyanwụ\"",
+  "scheduler_preset_action_command_video_record_start": "Malite ịdekọ vidiyo",
+  "scheduler_preset_action_command_video_record_stop": "Kwụsị Ịdekọ Vidiyo"
 }

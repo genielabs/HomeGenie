@@ -294,19 +294,22 @@
       "Description": "Zbuloni objektet duke përdorur një model YOLO të para-trajnuar.",
       "ML.ObjectDetection": "Aktivizo zbulimin e objekteve",
       "ML.ObjectDetection.TriggerDetect": "Listë e ndarë me presje e gjërave (në anglisht) që do të aktivizojnë alarmin. (p.sh.: mace, qen, person, çantë shpine, valixhe)",
-      "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Kërkesat Maksimale për Sekondë (RPS)"
     },
     "911": {
       "Title": "Vlerësimi i Pozës",
       "Description": "Zbulimi i pikave kyçe nëpërmjet vlerësimit të pozës, duke përdorur modele ONNX të personalizuara ose modelin YOLO të paracaktuar të trajnuar paraprakisht (specifik për pozën njerëzore).",
       "ML.PoseEstimation": "Aktivizo vlerësimin e pozës",
-      "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Kërkesat Maksimale për Sekondë (RPS)"
     },
     "912": {
       "Title": "Segmentimi i Instancës",
       "Description": "Zbuloni objektet dhe skicat e tyre duke përdorur një model YOLO të para-trajnuar.",
       "ML.InstanceSegmentation": "Aktivizo segmentimin e instancës",
-      "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Shtegu i skedarit të modelit YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Kërkesat Maksimale për Sekondë (RPS)"
     },
     "930": {
       "Title": "Trajneri i Synimeve të Binjakëve",
@@ -376,9 +379,30 @@
       "Title": "Përmbledhja e Energjisë Ditore",
       "Description": "Konsumi ditor i energjisë (Wh) nga pajisja.",
       "Widget.Statistics.DailyReport": "Përfshi në raportin ditor të Wh"
+    },
+    "200": {
+      "Title": "Hyrja e videos",
+      "Description": "Kap transmetimet audio dhe video për monitorim të drejtpërdrejtë, përpunim në kohë reale dhe regjistrim të vazhdueshëm.",
+      "VideoInput.Disable": "Çaktivizo këtë hyrje",
+      "VideoInput.SourceURL": "URL-ja e burimit të videos",
+      "VideoInput.ImageFeed": "URL është një skedar imazhi i vetëm i përditësuar drejtpërdrejt.",
+      "VideoInput.Username": "Emri i përdoruesit (opsional)",
+      "VideoInput.Password": "Fjalëkalimi (opsional)",
+      "Widget.Config.fps": "Kuadro maksimale për sekondë",
+      "VideoOutput.Width": "Gjerësia e rrjedhës së daljes.",
+      "VideoOutput.SnapshotQuality": "Cilësia e imazhit të drejtpërdrejtë."
+    },
+    "250": {
+      "Title": "Regjistrues videoje",
+      "Description": "Regjistron transmetime audio dhe video nga çdo burim hyrjeje. Regjistrimet mund të jenë të vazhdueshme, të planifikuara ose të aktivizuara nga ngjarje alarmi.",
+      "NVR.EnableRecording": "Aktivizo regjistrimin e videos",
+      "NVR.RecordOnAlarm": "Regjistro në alarm",
+      "NVR.ContinuousRecording": "Regjistrim i vazhdueshëm."
     }
   },
   "scheduler_preset_action_genie_command": "Komanda e Xhindëve",
   "scheduler_preset_action_config_wish": "Veprimi i Gjuhës Natyrore",
-  "scheduler_preset_action_config_wish.placeholder": "Provo: \"Vendos nxehtësinë në 22° dhe fillo skenën e Lindjes së Diellit\""
+  "scheduler_preset_action_config_wish.placeholder": "Provo: \"Vendos nxehtësinë në 22° dhe fillo skenën e Lindjes së Diellit\"",
+  "scheduler_preset_action_command_video_record_start": "Filloni regjistrimin e videos",
+  "scheduler_preset_action_command_video_record_stop": "Ndalo regjistrimin e videos"
 }

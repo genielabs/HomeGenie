@@ -536,5 +536,15 @@
   "original_language": "Alkuperäinen kieli",
   "origin_country": "Alkuperämaa",
   "production_companies": "Tuotantoyhtiö",
-  "movie_cast": "Näyttelijät"
+  "movie_cast": "Näyttelijät",
+  "live": "Elää",
+  "recordings": "Äänitteet",
+  "no_recordings": "Ei tallenteita.",
+  "live_feed": "Live-syöte",
+  "fullscreen_exit": "Poistu koko näytön tilasta",
+  "play_media": "Toista mediaa",
+  "start_recording": "Aloita tallennus",
+  "stop_recording": "Lopeta tallennus",
+  "toggle_smart_recording": "Automaattinen tallennus hälytyksestä",
+  "search_metadata": "Haku metatiedot"
 }

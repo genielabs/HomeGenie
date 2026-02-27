@@ -294,19 +294,22 @@
       "Description": "Rapua nga taonga ma te whakamahi i te tauira YOLO kua whakangungua.",
       "ML.ObjectDetection": "Whakahohehia te kitenga ahanoa",
       "ML.ObjectDetection.TriggerDetect": "Ko te rarangi whakawehenga piko o nga mea (i te reo Ingarihi) ka puta te whakaoho. (hei tauira: ngeru, kuri, tangata, peketua, pekepeke)",
-      "ConfigureOptions.Yolo.ModelPath": "Ara o te kōnae tauira YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ara o te kōnae tauira YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Tono Mōrahi mō ia Hekona (RPS)"
     },
     "911": {
       "Title": "Whakatau Whakatau",
       "Description": "Te kimi tohu matua ma te whakatau tata, ma te whakamahi i nga tauira ONNX ritenga, i te tauira YOLO kua whakangungua-mua ranei (whakaahua-tangata).",
       "ML.PoseEstimation": "Whakahohehia te whakatau tata",
-      "ConfigureOptions.Yolo.ModelPath": "Ara o te kōnae tauira YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ara o te kōnae tauira YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Tono Mōrahi mō ia Hekona (RPS)"
     },
     "912": {
       "Title": "Tauira Wehewehenga",
       "Description": "Rapua he ahanoa me o raatau whakahuahua ma te whakamahi i te tauira YOLO kua oti te whakangungu.",
       "ML.InstanceSegmentation": "Whakahohehia te wehenga tauira",
-      "ConfigureOptions.Yolo.ModelPath": "Ara o te kōnae tauira YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ara o te kōnae tauira YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Tono Mōrahi mō ia Hekona (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Whakarāpopototanga Pūngao o ia Rā",
       "Description": "Te whakapaunga pūngao o ia rā (Wh) mā te taputapu.",
       "Widget.Statistics.DailyReport": "Whakaurua ki te pūrongo Wh o ia rā"
+    },
+    "200": {
+      "Title": "Tāuru Ataata",
+      "Description": "Hopu ana i ngā awa oro me ngā ataata mō te aroturukitanga ora, te tukatuka wā-tūturu, me te tuhi tonu.",
+      "VideoInput.Disable": "Monokia tēnei tāuru",
+      "VideoInput.SourceURL": "URL pūtake ataata",
+      "VideoInput.ImageFeed": "He kōnae whakaahua kotahi kua whakahoutia ora te URL.",
+      "VideoInput.Username": "Ingoa Kaiwhakamahi (whiringa)",
+      "VideoInput.Password": "Kupuhipa (whiringa kore)",
+      "Widget.Config.fps": "Ngā anga mōrahi ia hekona",
+      "VideoOutput.Width": "Whānui o te awa putanga.",
+      "VideoOutput.SnapshotQuality": "Te kounga o te ahua ora."
+    },
+    "250": {
+      "Title": "Hopu Ataata",
+      "Description": "Ka hopu i ngā rerenga oro me ngā ataata mai i tētahi pūtake tāuru. Ka taea te hopu tonu, te whakarite, te whakaoho rānei e ngā kaupapa whakaoho.",
+      "NVR.EnableRecording": "Whakahohehia te Hopu Ataata",
+      "NVR.RecordOnAlarm": "Tuhia i te Whakaoho",
+      "NVR.ContinuousRecording": "Te Tuhi Tonu."
     }
   },
   "scheduler_preset_action_genie_command": "Te Whakahau a te Ira Tangata",
   "scheduler_preset_action_config_wish": "Mahi Reo Māori",
-  "scheduler_preset_action_config_wish.placeholder": "Whakamātauria: \"Whakatakotoria te wera ki te 22° ka tīmata te tirohanga o te Rāwhiti\""
+  "scheduler_preset_action_config_wish.placeholder": "Whakamātauria: \"Whakatakotoria te wera ki te 22° ka tīmata te tirohanga o te Rāwhiti\"",
+  "scheduler_preset_action_command_video_record_start": "Tīmata te Tuhi Ataata",
+  "scheduler_preset_action_command_video_record_stop": "Kati te Tuhi Ataata"
 }

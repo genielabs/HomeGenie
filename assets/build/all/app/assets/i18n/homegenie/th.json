@@ -294,19 +294,22 @@
       "Description": "ตรวจจับวัตถุโดยใช้โมเดล YOLO ที่ได้รับการฝึกอบรมล่วงหน้า",
       "ML.ObjectDetection": "เปิดใช้งานการตรวจจับวัตถุ",
       "ML.ObjectDetection.TriggerDetect": "รายการสิ่งของที่คั่นด้วยจุลภาค (เป็นภาษาอังกฤษ) ที่จะทำให้เกิดสัญญาณเตือน (เช่น แมว สุนัข คน กระเป๋าเป้ กระเป๋าเดินทาง)",
-      "ConfigureOptions.Yolo.ModelPath": "เส้นทางของไฟล์โมเดล YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "เส้นทางของไฟล์โมเดล YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "จำนวนคำขอสูงสุดต่อวินาที (RPS)"
     },
     "911": {
       "Title": "การประมาณท่าทาง",
       "Description": "การตรวจจับจุดสำคัญผ่านการประมาณท่าทาง โดยใช้โมเดล ONNX ที่กำหนดเองหรือโมเดล YOLO ที่ได้รับการฝึกอบรมไว้ล่วงหน้าตามค่าเริ่มต้น (เฉพาะท่าทางของมนุษย์)",
       "ML.PoseEstimation": "เปิดใช้งานการประมาณท่าทาง",
-      "ConfigureOptions.Yolo.ModelPath": "เส้นทางของไฟล์โมเดล YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "เส้นทางของไฟล์โมเดล YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "จำนวนคำขอสูงสุดต่อวินาที (RPS)"
     },
     "912": {
       "Title": "การแบ่งส่วนอินสแตนซ์",
       "Description": "ตรวจจับวัตถุและโครงร่างโดยใช้โมเดล YOLO ที่ได้รับการฝึกอบรมล่วงหน้า",
       "ML.InstanceSegmentation": "เปิดใช้งานการแบ่งส่วนอินสแตนซ์",
-      "ConfigureOptions.Yolo.ModelPath": "เส้นทางของไฟล์โมเดล YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "เส้นทางของไฟล์โมเดล YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "จำนวนคำขอสูงสุดต่อวินาที (RPS)"
     },
     "930": {
       "Title": "ตัวจัดการเจตนาของ Gemini",
@@ -376,9 +379,30 @@
       "Title": "สรุปพลังงานรายวัน",
       "Description": "ปริมาณการใช้พลังงานต่อวัน (Wh) ต่ออุปกรณ์",
       "Widget.Statistics.DailyReport": "รวมไว้ในรายงาน Wh รายวัน"
+    },
+    "200": {
+      "Title": "อินพุตวิดีโอ",
+      "Description": "บันทึกเสียงและวิดีโอเพื่อการตรวจสอบแบบเรียลไทม์ การประมวลผลแบบเรียลไทม์ และการบันทึกอย่างต่อเนื่อง",
+      "VideoInput.Disable": "ปิดใช้งานช่องป้อนข้อมูลนี้",
+      "VideoInput.SourceURL": "URL แหล่งที่มาของวิดีโอ",
+      "VideoInput.ImageFeed": "URL นี้เป็นไฟล์รูปภาพเดียวที่อัปเดตแบบเรียลไทม์",
+      "VideoInput.Username": "ชื่อผู้ใช้ (ไม่บังคับ)",
+      "VideoInput.Password": "รหัสผ่าน (ไม่บังคับ)",
+      "Widget.Config.fps": "เฟรมต่อวินาทีสูงสุด",
+      "VideoOutput.Width": "ความกว้างของสตรีมเอาต์พุต",
+      "VideoOutput.SnapshotQuality": "คุณภาพของภาพแบบเรียลไทม์"
+    },
+    "250": {
+      "Title": "เครื่องบันทึกวิดีโอ",
+      "Description": "บันทึกสตรีมเสียงและวิดีโอจากแหล่งอินพุตใดก็ได้ การบันทึกสามารถเป็นแบบต่อเนื่อง ตั้งเวลา หรือเริ่มบันทึกเมื่อเกิดเหตุการณ์แจ้งเตือน",
+      "NVR.EnableRecording": "เปิดใช้งานการบันทึกวิดีโอ",
+      "NVR.RecordOnAlarm": "บันทึกเมื่อมีสัญญาณเตือน",
+      "NVR.ContinuousRecording": "การบันทึกอย่างต่อเนื่อง"
     }
   },
   "scheduler_preset_action_genie_command": "คำสั่งจินนี่",
   "scheduler_preset_action_config_wish": "การกระทำภาษาธรรมชาติ",
-  "scheduler_preset_action_config_wish.placeholder": "ลองทำตามนี้: \"ตั้งค่าความร้อนเป็น 22° แล้วเริ่มฉากพระอาทิตย์ขึ้น\""
+  "scheduler_preset_action_config_wish.placeholder": "ลองทำตามนี้: \"ตั้งค่าความร้อนเป็น 22° แล้วเริ่มฉากพระอาทิตย์ขึ้น\"",
+  "scheduler_preset_action_command_video_record_start": "เริ่มบันทึกวิดีโอ",
+  "scheduler_preset_action_command_video_record_stop": "หยุดบันทึกวิดีโอ"
 }

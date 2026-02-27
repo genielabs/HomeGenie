@@ -536,5 +536,15 @@
   "original_language": "Algkeel",
   "origin_country": "Päritoluriik",
   "production_companies": "Produktsioonifirma",
-  "movie_cast": "Näitlejad"
+  "movie_cast": "Näitlejad",
+  "live": "Otseülekanne",
+  "recordings": "Salvestused",
+  "no_recordings": "Salvestisi pole.",
+  "live_feed": "Otseülekanne",
+  "fullscreen_exit": "Välju täisekraanirežiimist",
+  "play_media": "Esita meediat",
+  "start_recording": "Alusta salvestamist",
+  "stop_recording": "Peata salvestamine",
+  "toggle_smart_recording": "Automaatne salvestamine alarmi korral",
+  "search_metadata": "Otsi metaandmeid"
 }

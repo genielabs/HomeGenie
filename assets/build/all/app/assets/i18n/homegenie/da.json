@@ -294,19 +294,22 @@
       "Description": "Detekter objekter ved hjælp af en forudtrænet YOLO-model.",
       "ML.ObjectDetection": "Aktivér objektdetektion",
       "ML.ObjectDetection.TriggerDetect": "Kommasepareret liste over ting (på engelsk), der vil udløse alarmen. (f.eks.: kat, hund, person, rygsæk, kuffert)",
-      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO-modelfil (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO-modelfil (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maks. antal anmodninger pr. sekund (RPS)"
     },
     "911": {
       "Title": "Posevurdering",
       "Description": "Nøglepunktsdetektion via posestimering ved hjælp af brugerdefinerede ONNX-modeller eller den standardforudtrænede YOLO-model (specifik for menneskeposer).",
       "ML.PoseEstimation": "Aktivér poseestimering",
-      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO-modelfil (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO-modelfil (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maks. antal anmodninger pr. sekund (RPS)"
     },
     "912": {
       "Title": "Instanssegmentering",
       "Description": "Registrer objekter og deres omrids ved hjælp af en forudtrænet YOLO-model.",
       "ML.InstanceSegmentation": "Aktivér instanssegmentering",
-      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO-modelfil (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO-modelfil (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maks. antal anmodninger pr. sekund (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Daglig energioversigt",
       "Description": "Dagligt energiforbrug (Wh) pr. enhed.",
       "Widget.Statistics.DailyReport": "Inkluder i den daglige Wh-rapport"
+    },
+    "200": {
+      "Title": "Videoindgang",
+      "Description": "Optager lyd- og videostreams til liveovervågning, realtidsbehandling og kontinuerlig optagelse.",
+      "VideoInput.Disable": "Deaktiver dette input",
+      "VideoInput.SourceURL": "URL-adresse for videokilde",
+      "VideoInput.ImageFeed": "URL er en liveopdateret enkeltbilledfil.",
+      "VideoInput.Username": "Brugernavn (valgfrit)",
+      "VideoInput.Password": "Adgangskode (valgfrit)",
+      "Widget.Config.fps": "Maks. billeder pr. sekund",
+      "VideoOutput.Width": "Udgangsstrømbredde.",
+      "VideoOutput.SnapshotQuality": "Live-billedkvalitet."
+    },
+    "250": {
+      "Title": "Videooptager",
+      "Description": "Optager lyd- og videostreams fra enhver inputkilde. Optagelser kan være kontinuerlige, planlagte eller udløses af alarmhændelser.",
+      "NVR.EnableRecording": "Aktivér videooptagelse",
+      "NVR.RecordOnAlarm": "Optag ved alarm",
+      "NVR.ContinuousRecording": "Kontinuerlig optagelse."
     }
   },
   "scheduler_preset_action_genie_command": "Genie-kommando",
   "scheduler_preset_action_config_wish": "Naturlig sproghandling",
-  "scheduler_preset_action_config_wish.placeholder": "Prøv: \"Indstil varmen til 22° og start solopgangsscenen\""
+  "scheduler_preset_action_config_wish.placeholder": "Prøv: \"Indstil varmen til 22° og start solopgangsscenen\"",
+  "scheduler_preset_action_command_video_record_start": "Start optagelse af video",
+  "scheduler_preset_action_command_video_record_stop": "Stop optagelse af video"
 }

@@ -294,19 +294,22 @@
       "Description": "Soo ogow walxaha addoo isticmaalaya qaabka YOLO horay loo tababaray.",
       "ML.ObjectDetection": "Daar ogaanshaha walxaha",
       "ML.ObjectDetection.TriggerDetect": "Liiska walxaha kala-saaran (Ingiriisi) ee kicin doona qaylo-dhaanta. (tusaale: bisad, eey, qof, shandad dhabarka, shandad)",
-      "ConfigureOptions.Yolo.ModelPath": "Waddada faylka qaabka YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Waddada faylka qaabka YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Codsiyada ugu badan ee ilbiriqsi kasta (RPS)"
     },
     "911": {
       "Title": "Qiyaasta booska",
       "Description": "Ogaanshaha dhibicda furaha iyada oo la adeegsanayo qiimaynta gogoldhigga, iyadoo la adeegsanayo moodooyinka ONNX ee caadiga ah ama nooca YOLO ee horay loo tababaray ee caadiga ahaa",
       "ML.PoseEstimation": "Daree qiyaasta gogoldhigga",
-      "ConfigureOptions.Yolo.ModelPath": "Waddada faylka qaabka YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Waddada faylka qaabka YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Codsiyada ugu badan ee ilbiriqsi kasta (RPS)"
     },
     "912": {
       "Title": "Qaybta Tusaalaha",
       "Description": "Soo ogow walxaha iyo dulmarkooda adiga oo isticmaalaya qaabka YOLO horay loo tababaray.",
       "ML.InstanceSegmentation": "Daar kala qaybinta tusaale",
-      "ConfigureOptions.Yolo.ModelPath": "Waddada faylka qaabka YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Waddada faylka qaabka YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Codsiyada ugu badan ee ilbiriqsi kasta (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Soo Koobidda Tamarta Maalinlaha ah",
       "Description": "Isticmaalka tamarta maalinlaha ah (Wh) iyadoo loo eegayo qalabka.",
       "Widget.Statistics.DailyReport": "Ku dar warbixinta Daily Wh"
+    },
+    "200": {
+      "Title": "Gelinta Fiidiyowga",
+      "Description": "Waxay qabataa durdurrada maqalka iyo muuqaalka si loola socdo tooska ah, loo habeeyo waqtiga dhabta ah, iyo duubista joogtada ah.",
+      "VideoInput.Disable": "Dami gelintan",
+      "VideoInput.SourceURL": "URL-ka isha fiidiyowga",
+      "VideoInput.ImageFeed": "URL waa fayl sawir oo keliya oo si toos ah loo cusbooneysiiyay.",
+      "VideoInput.Username": "Magaca isticmaalaha (ikhtiyaar)",
+      "VideoInput.Password": "Furaha sirta ah (ikhtiyaar)",
+      "Widget.Config.fps": "Fiilooyinka ugu badan ilbiriqsi kasta",
+      "VideoOutput.Width": "Ballaca qulqulka soo baxaya.",
+      "VideoOutput.SnapshotQuality": "Tayada sawirka tooska ah."
+    },
+    "250": {
+      "Title": "Duubista Fiidiyowga",
+      "Description": "Waxay duubtaa qulqulka maqalka iyo muuqaalka ee laga helo ilo kasta oo wax lagu soo geliyo. Duubista waxay noqon kartaa mid joogto ah, jadwalaysan, ama ay kicin karto dhacdooyinka digniinta.",
+      "NVR.EnableRecording": "Daar duubista fiidiyowga",
+      "NVR.RecordOnAlarm": "Ku duub Digniinta",
+      "NVR.ContinuousRecording": "Duubista Joogtada ah."
     }
   },
   "scheduler_preset_action_genie_command": "Taliska Genie",
   "scheduler_preset_action_config_wish": "Ficilka Luqadda Dabiiciga ah",
-  "scheduler_preset_action_config_wish.placeholder": "Isku day: \"Kuleylka dhig 22° oo bilow muuqaalka Qorrax-soo-baxa\""
+  "scheduler_preset_action_config_wish.placeholder": "Isku day: \"Kuleylka dhig 22° oo bilow muuqaalka Qorrax-soo-baxa\"",
+  "scheduler_preset_action_command_video_record_start": "Bilow Duubista Fiidiyowga",
+  "scheduler_preset_action_command_video_record_stop": "Jooji Duubista Fiidiyowga"
 }

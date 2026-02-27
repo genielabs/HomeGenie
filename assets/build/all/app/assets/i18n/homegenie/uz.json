@@ -294,19 +294,22 @@
       "Description": "Oldindan o'rgatilgan YOLO modeli yordamida ob'ektlarni aniqlang.",
       "ML.ObjectDetection": "Ob'ektlarni aniqlashni yoqish",
       "ML.ObjectDetection.TriggerDetect": "Signalni ishga tushiradigan narsalarning vergul bilan ajratilgan ro'yxati (ingliz tilida). (masalan: mushuk, it, odam, ryukzak, chamadon)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO model faylining yoʻli (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO model faylining yoʻli (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Sekundiga maksimal so'rovlar (RPS)"
     },
     "911": {
       "Title": "Pozni baholash",
       "Description": "Maxsus ONNX modellari yoki oldindan o‘rgatilgan standart YOLO modeli (odamga xos poza) yordamida pozani baholash orqali asosiy nuqtani aniqlash.",
       "ML.PoseEstimation": "Pozni baholashni yoqish",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO model faylining yoʻli (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO model faylining yoʻli (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Sekundiga maksimal so'rovlar (RPS)"
     },
     "912": {
       "Title": "Namuna segmentatsiyasi",
       "Description": "Oldindan oʻrgatilgan YOLO modeli yordamida obʼyektlar va ularning konturlarini aniqlang.",
       "ML.InstanceSegmentation": "Misol segmentatsiyasini yoqing",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO model faylining yoʻli (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO model faylining yoʻli (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Sekundiga maksimal so'rovlar (RPS)"
     },
     "930": {
       "Title": "Egizaklar niyatini ishlovchi",
@@ -376,9 +379,30 @@
       "Title": "Kundalik energiya haqida qisqacha ma'lumot",
       "Description": "Qurilma bo'yicha kunlik energiya sarfi (Vt/soat).",
       "Widget.Statistics.DailyReport": "Kundalik Wh hisobotiga qo'shing"
+    },
+    "200": {
+      "Title": "Video kiritish",
+      "Description": "Jonli monitoring, real vaqt rejimida qayta ishlash va uzluksiz yozib olish uchun audio va video oqimlarni yozib oladi.",
+      "VideoInput.Disable": "Bu kiritish usulini o'chirib qo'ying",
+      "VideoInput.SourceURL": "Video manbasi URL manzili",
+      "VideoInput.ImageFeed": "URL - bu jonli ravishda yangilanadigan bitta rasm fayli.",
+      "VideoInput.Username": "Foydalanuvchi nomi (ixtiyoriy)",
+      "VideoInput.Password": "Parol (ixtiyoriy)",
+      "Widget.Config.fps": "Sekundiga maksimal kadrlar",
+      "VideoOutput.Width": "Chiqish oqimining kengligi.",
+      "VideoOutput.SnapshotQuality": "Jonli tasvir sifati."
+    },
+    "250": {
+      "Title": "Videomagnitofon",
+      "Description": "Istalgan kirish manbasidan audio va video oqimlarni yozib oladi. Yozib olishlar uzluksiz, rejalashtirilgan yoki signal hodisalari tomonidan ishga tushirilishi mumkin.",
+      "NVR.EnableRecording": "Video yozib olishni yoqish",
+      "NVR.RecordOnAlarm": "Yozib olish signali",
+      "NVR.ContinuousRecording": "Uzluksiz yozib olish."
     }
   },
   "scheduler_preset_action_genie_command": "Jin qo'mondonligi",
   "scheduler_preset_action_config_wish": "Tabiiy til harakati",
-  "scheduler_preset_action_config_wish.placeholder": "Sinab ko'ring: \"Haroratni 22° ga qo'ying va quyosh chiqishi sahnasini boshlang\"."
+  "scheduler_preset_action_config_wish.placeholder": "Sinab ko'ring: \"Haroratni 22° ga qo'ying va quyosh chiqishi sahnasini boshlang\".",
+  "scheduler_preset_action_command_video_record_start": "Videoni yozib olishni boshlang",
+  "scheduler_preset_action_command_video_record_stop": "Video yozib olishni to'xtatish"
 }

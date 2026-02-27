@@ -221,13 +221,20 @@ namespace HomeGenie.Automation.Scripting
             }
             catch (Exception ex)
             {
-                HomeGenieService.LogError(
-                    Instance.Domain,
-                    Instance.Address,
-                    ex.Message,
-                    "Exception.StackTrace",
-                    ex.StackTrace
-                );
+                try
+                {
+                    HomeGenieService.LogError(
+                        Instance.Domain,
+                        Instance.Address,
+                        ex.Message,
+                        "Exception.StackTrace",
+                        ex.StackTrace
+                    );
+                }
+                catch
+                {
+                    /* ignored */
+                }
             }
             return this;
         }

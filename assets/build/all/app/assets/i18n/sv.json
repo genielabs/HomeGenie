@@ -536,5 +536,15 @@
   "original_language": "Originalspråk",
   "origin_country": "Ursprungsland",
   "production_companies": "Produktionsbolag",
-  "movie_cast": "Skådespelare"
+  "movie_cast": "Skådespelare",
+  "live": "Bo",
+  "recordings": "Inspelningar",
+  "no_recordings": "Inga inspelningar.",
+  "live_feed": "Live-flöde",
+  "fullscreen_exit": "Avsluta helskärm",
+  "play_media": "Spela upp media",
+  "start_recording": "Starta inspelning",
+  "stop_recording": "Stoppa inspelningen",
+  "toggle_smart_recording": "Automatisk inspelning vid larm",
+  "search_metadata": "Sökmetadata"
 }

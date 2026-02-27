@@ -294,19 +294,22 @@
       "Description": "Aptikti objektus naudojant iš anksto apmokytą YOLO modelį.",
       "ML.ObjectDetection": "Įgalinti objektų aptikimą",
       "ML.ObjectDetection.TriggerDetect": "Kableliais atskirtas sąrašas dalykų (anglų kalba), kurie suaktyvins žadintuvą. (pvz.: katė, šuo, žmogus, kuprinė, lagaminas)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO modelio failo (.onnx) kelias"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO modelio failo (.onnx) kelias",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimalus užklausų skaičius per sekundę (RPS)"
     },
     "911": {
       "Title": "Pozos įvertinimas",
       "Description": "Pagrindinių taškų aptikimas naudojant pozos įvertinimą, pasirinktinius ONNX modelius arba numatytąjį iš anksto apmokytą YOLO modelį (specifinį žmogaus pozai).",
       "ML.PoseEstimation": "Įgalinti pozos įvertinimą",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO modelio failo (.onnx) kelias"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO modelio failo (.onnx) kelias",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimalus užklausų skaičius per sekundę (RPS)"
     },
     "912": {
       "Title": "Egzempliorių segmentavimas",
       "Description": "Aptikti objektus ir jų kontūrus naudojant iš anksto apmokytą YOLO modelį.",
       "ML.InstanceSegmentation": "Įgalinti egzempliorių segmentavimą",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO modelio failo (.onnx) kelias"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO modelio failo (.onnx) kelias",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimalus užklausų skaičius per sekundę (RPS)"
     },
     "930": {
       "Title": "Gemini ketinimų tvarkytojas",
@@ -376,9 +379,30 @@
       "Title": "Dienos energijos santrauka",
       "Description": "Įrenginio dienos energijos suvartojimas (Wh).",
       "Widget.Statistics.DailyReport": "Įtraukti į dienos Wh ataskaitą"
+    },
+    "200": {
+      "Title": "Vaizdo įvestis",
+      "Description": "Įrašo garso ir vaizdo srautus tiesioginiam stebėjimui, apdorojimui realiuoju laiku ir nepertraukiamam įrašymui.",
+      "VideoInput.Disable": "Išjungti šią įvestį",
+      "VideoInput.SourceURL": "Vaizdo įrašo šaltinio URL",
+      "VideoInput.ImageFeed": "URL yra tiesiogiai atnaujinamas vieno vaizdo failas.",
+      "VideoInput.Username": "Vartotojo vardas (neprivaloma)",
+      "VideoInput.Password": "Slaptažodis (nebūtina)",
+      "Widget.Config.fps": "Maks. kadrų per sekundę",
+      "VideoOutput.Width": "Išvesties srauto plotis.",
+      "VideoOutput.SnapshotQuality": "Tiesioginio vaizdo kokybė."
+    },
+    "250": {
+      "Title": "Vaizdo įrašymo įrenginys",
+      "Description": "Įrašo garso ir vaizdo srautus iš bet kurio įvesties šaltinio. Įrašymas gali būti nepertraukiamas, suplanuotas arba suaktyvintas pavojaus signalo įvykių.",
+      "NVR.EnableRecording": "Įjungti vaizdo įrašymą",
+      "NVR.RecordOnAlarm": "Įrašyti įjungus žadintuvą",
+      "NVR.ContinuousRecording": "Nuolatinis įrašymas."
     }
   },
   "scheduler_preset_action_genie_command": "Džinų komanda",
   "scheduler_preset_action_config_wish": "Natūralios kalbos veiksmas",
-  "scheduler_preset_action_config_wish.placeholder": "Pabandykite: „Nustatykite 22° temperatūrą ir paleiskite saulėtekio sceną“."
+  "scheduler_preset_action_config_wish.placeholder": "Pabandykite: „Nustatykite 22° temperatūrą ir paleiskite saulėtekio sceną“.",
+  "scheduler_preset_action_command_video_record_start": "Pradėti vaizdo įrašymą",
+  "scheduler_preset_action_command_video_record_stop": "Sustabdyti vaizdo įrašymą"
 }

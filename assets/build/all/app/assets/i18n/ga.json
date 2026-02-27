@@ -536,5 +536,15 @@
   "original_language": "Teanga Bhunaidh",
   "origin_country": "Tír Bhunaidh",
   "production_companies": "Comhlacht Léiriúcháin",
-  "movie_cast": "Aisteoirí"
+  "movie_cast": "Aisteoirí",
+  "live": "Beo",
+  "recordings": "Taifeadtaí",
+  "no_recordings": "Gan aon taifeadtaí.",
+  "live_feed": "Fotha Beo",
+  "fullscreen_exit": "Scoir Lánscáileáin",
+  "play_media": "Seinn Meáin",
+  "start_recording": "Tosaigh ag Taifeadadh",
+  "stop_recording": "Stop a Thaifeadadh",
+  "toggle_smart_recording": "Taifeadadh uathoibríoch ar Aláram",
+  "search_metadata": "Cuardaigh Meiteashonraí"
 }

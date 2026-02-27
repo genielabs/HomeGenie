@@ -536,5 +536,15 @@
   "original_language": "Originalsprog",
   "origin_country": "Oprindelsesland",
   "production_companies": "Produktionsselskab",
-  "movie_cast": "Skuespillere"
+  "movie_cast": "Skuespillere",
+  "live": "Levende",
+  "recordings": "Optagelser",
+  "no_recordings": "Ingen optagelser.",
+  "live_feed": "Live-feed",
+  "fullscreen_exit": "Afslut fuldskærm",
+  "play_media": "Afspil medier",
+  "start_recording": "Start optagelse",
+  "stop_recording": "Stop optagelse",
+  "toggle_smart_recording": "Automatisk optagelse ved alarm",
+  "search_metadata": "Søg i metadata"
 }

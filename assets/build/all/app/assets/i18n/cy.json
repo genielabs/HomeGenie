@@ -536,5 +536,15 @@
   "original_language": "Iaith Wreiddiol",
   "origin_country": "Gwlad Tarddiad",
   "production_companies": "Cwmni Cynhyrchu",
-  "movie_cast": "Actorion"
+  "movie_cast": "Actorion",
+  "live": "Byw",
+  "recordings": "Recordiadau",
+  "no_recordings": "Dim recordiadau.",
+  "live_feed": "Ffrwd Fyw",
+  "fullscreen_exit": "Allanfa Sgrin Llawn",
+  "play_media": "Chwarae Cyfryngau",
+  "start_recording": "Dechrau Recordio",
+  "stop_recording": "Stopio Recordio",
+  "toggle_smart_recording": "Recordio'n awtomatig ar Larwm",
+  "search_metadata": "Chwilio Metadata"
 }

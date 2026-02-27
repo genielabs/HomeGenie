@@ -536,5 +536,15 @@
   "original_language": "મૂળ ભાષા",
   "origin_country": "મૂળ દેશ",
   "production_companies": "ઉત્પાદન કંપની",
-  "movie_cast": "અભિનેતાઓ"
+  "movie_cast": "અભિનેતાઓ",
+  "live": "જીવંત",
+  "recordings": "રેકોર્ડિંગ્સ",
+  "no_recordings": "કોઈ રેકોર્ડિંગ નથી.",
+  "live_feed": "લાઇવ ફીડ",
+  "fullscreen_exit": "પૂર્ણસ્ક્રીનમાંથી બહાર નીકળો",
+  "play_media": "મીડિયા ચલાવો",
+  "start_recording": "રેકોર્ડિંગ શરૂ કરો",
+  "stop_recording": "રેકોર્ડિંગ બંધ કરો",
+  "toggle_smart_recording": "એલાર્મ પર ઓટો-રેકોર્ડ",
+  "search_metadata": "મેટાડેટા શોધો"
 }

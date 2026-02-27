@@ -536,5 +536,15 @@
   "original_language": "Èdè Àtilẹ̀bá",
   "origin_country": "Ilu isenbale",
   "production_companies": "Ilé-iṣẹ́ Ìṣẹ̀dá",
-  "movie_cast": "Àwọn òṣèré"
+  "movie_cast": "Àwọn òṣèré",
+  "live": "Lóògbé",
+  "recordings": "Àwọn ìgbàsílẹ̀",
+  "no_recordings": "Ko si awọn igbasilẹ.",
+  "live_feed": "Ìjáde Láyé",
+  "fullscreen_exit": "Jade ni Iboju Kikun",
+  "play_media": "Mu Media ṣiṣẹ",
+  "start_recording": "Bẹ̀rẹ̀ Ṣíṣísílẹ̀",
+  "stop_recording": "Dá gbígbàsílẹ̀ dúró",
+  "toggle_smart_recording": "Igbasilẹ laifọwọyi lori Itaniji",
+  "search_metadata": "Ṣe àwárí Metadata"
 }

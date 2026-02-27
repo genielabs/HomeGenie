@@ -1,0 +1,3 @@
+{
+  "ffmpeg_required": "Ang modyul na `{{module_name}}` ay nangangailangan ng **FFmpeg** upang gumana. Paki-install ito mula sa opisyal na website: - [https://ffmpeg.org](https://ffmpeg.org) Kung hindi mo kailangan ang feature na ito, maaari mong i-disable ang modyul na ito sa seksyong **Mga Programa ng Automation**, o sa pamamagitan ng pag-click sa button sa ibaba."
+}

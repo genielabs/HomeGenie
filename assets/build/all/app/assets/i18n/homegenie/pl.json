@@ -294,19 +294,22 @@
       "Description": "Wykrywanie obiektów przy użyciu wstępnie wytrenowanego modelu YOLO.",
       "ML.ObjectDetection": "Włącz wykrywanie obiektów",
       "ML.ObjectDetection.TriggerDetect": "Lista rzeczy (w języku angielskim), rozdzielonych przecinkami, które mogą wywołać alarm. (np.: kot, pies, osoba, plecak, walizka)",
-      "ConfigureOptions.Yolo.ModelPath": "Ścieżka do pliku modelu YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ścieżka do pliku modelu YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksymalna liczba żądań na sekundę (RPS)"
     },
     "911": {
       "Title": "Oszacowanie pozy",
       "Description": "Wykrywanie punktów kluczowych poprzez szacowanie pozycji przy użyciu niestandardowych modeli ONNX lub domyślnego, wstępnie wytrenowanego modelu YOLO (zależnego od pozycji człowieka).",
       "ML.PoseEstimation": "Włącz szacowanie pozycji",
-      "ConfigureOptions.Yolo.ModelPath": "Ścieżka do pliku modelu YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ścieżka do pliku modelu YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksymalna liczba żądań na sekundę (RPS)"
     },
     "912": {
       "Title": "Segmentacja instancji",
       "Description": "Wykrywaj obiekty i ich kontury przy użyciu wstępnie wytrenowanego modelu YOLO.",
       "ML.InstanceSegmentation": "Włącz segmentację instancji",
-      "ConfigureOptions.Yolo.ModelPath": "Ścieżka do pliku modelu YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ścieżka do pliku modelu YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksymalna liczba żądań na sekundę (RPS)"
     },
     "930": {
       "Title": "Obsługa intencji Gemini",
@@ -376,9 +379,30 @@
       "Title": "Podsumowanie dziennej energii",
       "Description": "Dzienne zużycie energii (Wh) przez urządzenie.",
       "Widget.Statistics.DailyReport": "Uwzględnij w raporcie Daily Wh"
+    },
+    "200": {
+      "Title": "Wejście wideo",
+      "Description": "Nagrywa strumienie audio i wideo w celu monitorowania na żywo, przetwarzania w czasie rzeczywistym i ciągłego nagrywania.",
+      "VideoInput.Disable": "Wyłącz to wejście",
+      "VideoInput.SourceURL": "Adres URL źródła wideo",
+      "VideoInput.ImageFeed": "Adres URL to pojedynczy plik obrazu aktualizowany na bieżąco.",
+      "VideoInput.Username": "Nazwa użytkownika (opcjonalnie)",
+      "VideoInput.Password": "Hasło (opcjonalnie)",
+      "Widget.Config.fps": "Maksymalna liczba klatek na sekundę",
+      "VideoOutput.Width": "Szerokość strumienia wyjściowego.",
+      "VideoOutput.SnapshotQuality": "Jakość obrazu na żywo."
+    },
+    "250": {
+      "Title": "Magnetowid",
+      "Description": "Nagrywa strumienie audio i wideo z dowolnego źródła. Nagrania mogą być ciągłe, zaplanowane lub uruchamiane przez zdarzenia alarmowe.",
+      "NVR.EnableRecording": "Włącz nagrywanie wideo",
+      "NVR.RecordOnAlarm": "Nagrywanie w przypadku alarmu",
+      "NVR.ContinuousRecording": "Nagrywanie ciągłe."
     }
   },
   "scheduler_preset_action_genie_command": "Dowództwo Dżina",
   "scheduler_preset_action_config_wish": "Akcja języka naturalnego",
-  "scheduler_preset_action_config_wish.placeholder": "Spróbuj: „Ustaw temperaturę na 22° i uruchom scenę Wschodu słońca”"
+  "scheduler_preset_action_config_wish.placeholder": "Spróbuj: „Ustaw temperaturę na 22° i uruchom scenę Wschodu słońca”",
+  "scheduler_preset_action_command_video_record_start": "Rozpocznij nagrywanie wideo",
+  "scheduler_preset_action_command_video_record_stop": "Zatrzymaj nagrywanie wideo"
 }

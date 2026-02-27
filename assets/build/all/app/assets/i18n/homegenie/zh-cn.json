@@ -294,19 +294,22 @@
       "Description": "使用预先训练的 YOLO 模型检测物体。",
       "ML.ObjectDetection": "启用物体检测",
       "ML.ObjectDetection.TriggerDetect": "以逗号分隔的将触发警报的事物列表（英文）。（例如：猫、狗、人、背包、手提箱）",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO模型文件（.onnx）路径"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO模型文件（.onnx）路径",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "每秒最大请求数 (RPS)"
     },
     "911": {
       "Title": "姿势估计",
       "Description": "通过姿势估计进行关键点检测，使用自定义 ONNX 模型或默认预训练的 YOLO 模型（针对人体姿势）。",
       "ML.PoseEstimation": "启用姿势估计",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO模型文件（.onnx）路径"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO模型文件（.onnx）路径",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "每秒最大请求数 (RPS)"
     },
     "912": {
       "Title": "实例分割",
       "Description": "使用预先训练的 YOLO 模型检测物体及其轮廓。",
       "ML.InstanceSegmentation": "启用实例分割",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO模型文件（.onnx）路径"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO模型文件（.onnx）路径",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "每秒最大请求数 (RPS)"
     },
     "930": {
       "Title": "双子座意图处理程序",
@@ -376,9 +379,30 @@
       "Title": "每日能量概要",
       "Description": "各设备每日能耗（瓦时）。",
       "Widget.Statistics.DailyReport": "纳入每日WH报告"
+    },
+    "200": {
+      "Title": "视频输入",
+      "Description": "捕获音频和视频流，用于实时监控、实时处理和连续录制。",
+      "VideoInput.Disable": "禁用此输入",
+      "VideoInput.SourceURL": "视频源网址",
+      "VideoInput.ImageFeed": "URL 是一个实时更新的单个图像文件。",
+      "VideoInput.Username": "用户名（可选）",
+      "VideoInput.Password": "密码（可选）",
+      "Widget.Config.fps": "每秒最大帧数",
+      "VideoOutput.Width": "输出流宽度。",
+      "VideoOutput.SnapshotQuality": "实时图像质量。"
+    },
+    "250": {
+      "Title": "录像机",
+      "Description": "可录制来自任何输入源的音频和视频流。录制可以是连续的、定时的，也可以由警报事件触发。",
+      "NVR.EnableRecording": "启用视频录制",
+      "NVR.RecordOnAlarm": "报警录音",
+      "NVR.ContinuousRecording": "连续录制。"
     }
   },
   "scheduler_preset_action_genie_command": "精灵指令",
   "scheduler_preset_action_config_wish": "自然语言行动",
-  "scheduler_preset_action_config_wish.placeholder": "试试：“将温度设置为 22°，然后开始日出场景”"
+  "scheduler_preset_action_config_wish.placeholder": "试试：“将温度设置为 22°，然后开始日出场景”",
+  "scheduler_preset_action_command_video_record_start": "开始录制视频",
+  "scheduler_preset_action_command_video_record_stop": "停止录制视频"
 }

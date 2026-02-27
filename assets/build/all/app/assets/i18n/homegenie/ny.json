@@ -294,19 +294,22 @@
       "Description": "Dziwani zinthu pogwiritsa ntchito mtundu wa YOLO wophunzitsidwa kale.",
       "ML.ObjectDetection": "Yambitsani kuzindikira zinthu",
       "ML.ObjectDetection.TriggerDetect": "Mndandanda wazinthu zosiyanitsidwa ndi koma (mu Chingerezi) zomwe zingayambitse alamu. (monga: mphaka, galu, munthu, chikwama, sutikesi)",
-      "ConfigureOptions.Yolo.ModelPath": "Njira ya fayilo yachitsanzo ya YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Njira ya fayilo yachitsanzo ya YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Zopempha Zapamwamba Pa Sekondi (RPS)"
     },
     "911": {
       "Title": "Pose Kuyerekeza",
       "Description": "Kuzindikira mfundo zazikuluzikulu pogwiritsa ntchito kuyerekezera kwazithunzi, pogwiritsa ntchito mitundu ya ONNX yokhazikika kapena mtundu wa YOLO wophunzitsidwa kale (mawonekedwe amunthu).",
       "ML.PoseEstimation": "Yambitsani kuyerekeza kwazithunzi",
-      "ConfigureOptions.Yolo.ModelPath": "Njira ya fayilo yachitsanzo ya YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Njira ya fayilo yachitsanzo ya YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Zopempha Zapamwamba Pa Sekondi (RPS)"
     },
     "912": {
       "Title": "Gawo lachitsanzo",
       "Description": "Dziwani zinthu ndi ma autilaini awo pogwiritsa ntchito chitsanzo cha YOLO chophunzitsidwa kale.",
       "ML.InstanceSegmentation": "Yambitsani magawo achitsanzo",
-      "ConfigureOptions.Yolo.ModelPath": "Njira ya fayilo yachitsanzo ya YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Njira ya fayilo yachitsanzo ya YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Zopempha Zapamwamba Pa Sekondi (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Chidule cha Mphamvu za Tsiku ndi Tsiku",
       "Description": "Kugwiritsa ntchito mphamvu tsiku ndi tsiku (Wh) pogwiritsa ntchito chipangizo.",
       "Widget.Statistics.DailyReport": "Phatikizani mu lipoti la Daily Wh"
+    },
+    "200": {
+      "Title": "Kanema Wolowera",
+      "Description": "Imajambula makanema ndi mawu kuti aziwunika pompopompo, azikonza nthawi yeniyeni, komanso azijambulira mosalekeza.",
+      "VideoInput.Disable": "Letsani izi",
+      "VideoInput.SourceURL": "Ulalo wa gwero la kanema",
+      "VideoInput.ImageFeed": "URL ndi fayilo ya chithunzi chimodzi chomwe chimasinthidwa pompopompo.",
+      "VideoInput.Username": "Dzina lolowera (ngati mukufuna)",
+      "VideoInput.Password": "Mawu achinsinsi (ngati mukufuna)",
+      "Widget.Config.fps": "Mafelemu ambiri pa sekondi iliyonse",
+      "VideoOutput.Width": "Kuchuluka kwa mtsinje wotuluka.",
+      "VideoOutput.SnapshotQuality": "Ubwino wa chithunzi chamoyo."
+    },
+    "250": {
+      "Title": "Chojambulira Makanema",
+      "Description": "Kujambula mawu ndi makanema kuchokera ku gwero lililonse lolowera. Kujambula kumatha kukhala kosalekeza, kokonzedwa, kapena kuyambitsidwa ndi zochitika za alamu.",
+      "NVR.EnableRecording": "Yambitsani Kujambula Kanema",
+      "NVR.RecordOnAlarm": "Lembani pa Alamu",
+      "NVR.ContinuousRecording": "Kujambula Kosalekeza."
     }
   },
   "scheduler_preset_action_genie_command": "Lamulo la Genie",
   "scheduler_preset_action_config_wish": "Zochita za Chilankhulo Chachilengedwe",
-  "scheduler_preset_action_config_wish.placeholder": "Yesani: \"Ikani kutentha pa 22° ndipo yambani chiwonetsero cha Kutuluka kwa Dzuwa\""
+  "scheduler_preset_action_config_wish.placeholder": "Yesani: \"Ikani kutentha pa 22° ndipo yambani chiwonetsero cha Kutuluka kwa Dzuwa\"",
+  "scheduler_preset_action_command_video_record_start": "Yambani Kujambula Kanema",
+  "scheduler_preset_action_command_video_record_stop": "Siyani Kujambula Kanema"
 }

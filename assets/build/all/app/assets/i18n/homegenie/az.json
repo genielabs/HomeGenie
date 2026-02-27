@@ -294,19 +294,22 @@
       "Description": "Əvvəlcədən öyrədilmiş YOLO modelindən istifadə edərək obyektləri aşkar edin.",
       "ML.ObjectDetection": "Obyektlərin aşkarlanmasını aktivləşdirin",
       "ML.ObjectDetection.TriggerDetect": "Siqnalı işə salacaq şeylərin vergüllə ayrılmış siyahısı (ingilis dilində). (məsələn: pişik, it, adam, kürək çantası, çamadan)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO model faylının yolu (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO model faylının yolu (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Saniyədə Maksimum Sorğular (RPS)"
     },
     "911": {
       "Title": "Poza qiymətləndirməsi",
       "Description": "Xüsusi ONNX modelləri və ya defolt əvvəlcədən öyrədilmiş YOLO modelindən (insan pozasına xas) istifadə edərək poza qiymətləndirilməsi vasitəsilə əsas nöqtənin aşkarlanması.",
       "ML.PoseEstimation": "Poza qiymətləndirməsini aktivləşdirin",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO model faylının yolu (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO model faylının yolu (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Saniyədə Maksimum Sorğular (RPS)"
     },
     "912": {
       "Title": "Nümunə Seqmentasiyası",
       "Description": "Əvvəlcədən öyrədilmiş YOLO modelindən istifadə edərək obyektləri və onların konturlarını aşkar edin.",
       "ML.InstanceSegmentation": "Nümunə seqmentasiyasını aktivləşdirin",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO model faylının yolu (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO model faylının yolu (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Saniyədə Maksimum Sorğular (RPS)"
     },
     "930": {
       "Title": "Əkizlər Niyyət İşləyicisi",
@@ -376,9 +379,30 @@
       "Title": "Gündəlik Enerji Xülasəsi",
       "Description": "Cihaz tərəfindən gündəlik enerji istehlakı (Wh).",
       "Widget.Statistics.DailyReport": "Gündəlik Wh hesabatına daxil edin"
+    },
+    "200": {
+      "Title": "Video Girişi",
+      "Description": "Canlı monitorinq, real vaxt rejimində emal və davamlı qeyd üçün audio və video axınlarını çəkir.",
+      "VideoInput.Disable": "Bu girişi deaktiv edin",
+      "VideoInput.SourceURL": "Video mənbəyi URL-i",
+      "VideoInput.ImageFeed": "URL canlı olaraq yenilənən tək şəkil faylıdır.",
+      "VideoInput.Username": "İstifadəçi adı (isteğe bağlı)",
+      "VideoInput.Password": "Şifrə (isteğe bağlı)",
+      "Widget.Config.fps": "Saniyədə maksimum kadr",
+      "VideoOutput.Width": "Çıxış axınının eni.",
+      "VideoOutput.SnapshotQuality": "Canlı görüntü keyfiyyəti."
+    },
+    "250": {
+      "Title": "Video Qeydiyyatçı",
+      "Description": "İstənilən giriş mənbəyindən audio və video axınlarını qeyd edir. Qeydlər davamlı, planlaşdırılmış və ya həyəcan hadisələri ilə tetiklenebilir.",
+      "NVR.EnableRecording": "Video Yazını Aktivləşdirin",
+      "NVR.RecordOnAlarm": "Siqnalizasiyada Qeyd",
+      "NVR.ContinuousRecording": "Davamlı Qeyd."
     }
   },
   "scheduler_preset_action_genie_command": "Cin Komandanlığı",
   "scheduler_preset_action_config_wish": "Təbii Dil Fəaliyyəti",
-  "scheduler_preset_action_config_wish.placeholder": "Sınayın: \"İstiliyi 22°-yə qoyun və Günəşin doğuş səhnəsini başlayın\""
+  "scheduler_preset_action_config_wish.placeholder": "Sınayın: \"İstiliyi 22°-yə qoyun və Günəşin doğuş səhnəsini başlayın\"",
+  "scheduler_preset_action_command_video_record_start": "Video Yazmağa Başlayın",
+  "scheduler_preset_action_command_video_record_stop": "Video Yazını Dayandırın"
 }

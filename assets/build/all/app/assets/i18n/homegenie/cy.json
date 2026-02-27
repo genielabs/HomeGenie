@@ -294,19 +294,22 @@
       "Description": "Canfod gwrthrychau gan ddefnyddio model YOLO sydd wedi'i hyfforddi ymlaen llaw.",
       "ML.ObjectDetection": "Galluogi canfod gwrthrychau",
       "ML.ObjectDetection.TriggerDetect": "Rhestr o bethau (yn Saesneg) a fydd yn sbarduno'r larwm, wedi'u gwahanu gan goma. (e.e.: cath, ci, person, sach gefn, cês dillad)",
-      "ConfigureOptions.Yolo.ModelPath": "Llwybr ffeil model YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Llwybr ffeil model YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Uchafswm Ceisiadau Fesul Eiliad (RPS)"
     },
     "911": {
       "Title": "Amcangyfrif Ystum",
       "Description": "Canfod pwyntiau allweddol trwy amcangyfrif ystum, gan ddefnyddio modelau ONNX personol neu'r model YOLO wedi'i hyfforddi ymlaen llaw rhagosodedig (penodol i ystum dynol).",
       "ML.PoseEstimation": "Galluogi amcangyfrif ystum",
-      "ConfigureOptions.Yolo.ModelPath": "Llwybr ffeil model YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Llwybr ffeil model YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Uchafswm Ceisiadau Fesul Eiliad (RPS)"
     },
     "912": {
       "Title": "Segmentu Enghraifft",
       "Description": "Canfod gwrthrychau a'u hamlinelliadau gan ddefnyddio model YOLO sydd wedi'i hyfforddi ymlaen llaw.",
       "ML.InstanceSegmentation": "Galluogi segmentu enghreifftiau",
-      "ConfigureOptions.Yolo.ModelPath": "Llwybr ffeil model YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Llwybr ffeil model YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Uchafswm Ceisiadau Fesul Eiliad (RPS)"
     },
     "930": {
       "Title": "Triniwr Bwriad Gemini",
@@ -376,9 +379,30 @@
       "Title": "Crynodeb Ynni Dyddiol",
       "Description": "Defnydd ynni dyddiol (Wh) yn ôl dyfais.",
       "Widget.Statistics.DailyReport": "Cynnwys yn yr adroddiad Dyddiol Wh"
+    },
+    "200": {
+      "Title": "Mewnbwn Fideo",
+      "Description": "Yn cipio ffrydiau sain a fideo ar gyfer monitro byw, prosesu amser real, a recordio parhaus.",
+      "VideoInput.Disable": "Analluogi'r mewnbwn hwn",
+      "VideoInput.SourceURL": "URL ffynhonnell fideo",
+      "VideoInput.ImageFeed": "Ffeil delwedd sengl sy'n cael ei diweddaru'n fyw yw URL.",
+      "VideoInput.Username": "Enw defnyddiwr (dewisol)",
+      "VideoInput.Password": "Cyfrinair (dewisol)",
+      "Widget.Config.fps": "Uchafswm fframiau yr eiliad",
+      "VideoOutput.Width": "Lled nant allbwn.",
+      "VideoOutput.SnapshotQuality": "Ansawdd delwedd fyw."
+    },
+    "250": {
+      "Title": "Recordydd Fideo",
+      "Description": "Yn recordio ffrydiau sain a fideo o unrhyw ffynhonnell fewnbwn. Gall recordiadau fod yn barhaus, wedi'u hamserlennu, neu wedi'u sbarduno gan ddigwyddiadau larwm.",
+      "NVR.EnableRecording": "Galluogi Recordio Fideo",
+      "NVR.RecordOnAlarm": "Recordio Ar Larwm",
+      "NVR.ContinuousRecording": "Recordio Parhaus."
     }
   },
   "scheduler_preset_action_genie_command": "Gorchymyn Genie",
   "scheduler_preset_action_config_wish": "Gweithred Iaith Naturiol",
-  "scheduler_preset_action_config_wish.placeholder": "Rhowch gynnig ar: \"Gosodwch y gwres i 22° a dechreuwch olygfa'r Haul\""
+  "scheduler_preset_action_config_wish.placeholder": "Rhowch gynnig ar: \"Gosodwch y gwres i 22° a dechreuwch olygfa'r Haul\"",
+  "scheduler_preset_action_command_video_record_start": "Dechrau Recordio Fideo",
+  "scheduler_preset_action_command_video_record_stop": "Stopio Recordio Fideo"
 }

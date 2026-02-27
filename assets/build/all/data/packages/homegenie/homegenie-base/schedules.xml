@@ -11,4 +11,85 @@
     <BoundDevices />
     <BoundModules />
   </SchedulerItem>
+  <SchedulerItem>
+    <Name>Video.Maintenance.Quota</Name>
+    <CronExpression>(* * * * *) ; [ (0 1 * * *) ]</CronExpression>
+    <Description>Daily storage optimization and quota enforcement at 01:00 AM</Description>
+    <Data>{"itemType":1,"time":[{"start":"01:00","end":"01:00"}],"occur_min_type":1,"occur_min_step":30,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":12,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":1,"occur_month_sel":[],"action":{"type":"script","template":{"forEach":{"enabled":false},"forStart":{"enabled":false},"forEnd":{"enabled":false}}},"from":"2026-02-26","to":"2026-02-26"}</Data>
+    <IsEnabled>true</IsEnabled>
+    <Script>$$.api.call('HomeAutomation.HomeGenie/NVR/Recordings.Check/6');
+</Script>
+    <BoundDevices />
+    <BoundModules />
+  </SchedulerItem>
+  <SchedulerItem>
+    <Name>Video.Recording.Nightly</Name>
+    <CronExpression>(* * * * *) ; [ ((0 0 * * *) &gt; (0 7 * * *)) : ((0 20 * * *) &gt; (59 23 * * *)) ]</CronExpression>
+    <Description>Nightly schedule active between 20:00 and 07:00</Description>
+    <Data>{"itemType":1,"time":[{"start":"00:00","end":"07:00"},{"start":"20:00","end":"23:59"}],"occur_min_type":1,"occur_min_step":30,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":12,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":1,"occur_month_sel":[],"action":{"type":"template","template":{"forEach":{"enabled":false},"forStart":{"enabled":true,"commands":[{"id":"command_video_record_start","config":{},"useEventValue":false}]},"forEnd":{"enabled":true,"commands":[{"id":"command_video_record_stop","config":{},"useEventValue":false}]}}},"from":"2026-02-26","to":"2026-02-26"}</Data>
+    <IsEnabled>true</IsEnabled>
+    <Script>// auto-generated code from template
+      if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
+      // this is start of a time slot
+
+      $$.boundModules.each((m) =&gt; {
+      m.emit('NVR.ContinuousRecording', 'On');
+      return false;
+      });
+
+      } else if ($$.onPrevious() &amp;&amp; !$$.onNext()) {
+      // this is end of a time slot
+
+      $$.boundModules.each((m) =&gt; {
+      m.emit('NVR.ContinuousRecording', '');
+      return false;
+      });
+
+      } else {
+      // this is for any other single occurrence
+      // and every minute within a time slot
+
+      //{each}//
+      }
+    </Script>
+    <BoundDevices>
+      <string>VideoInput</string>
+    </BoundDevices>
+    <BoundModules />
+  </SchedulerItem>
+  <SchedulerItem>
+    <Name>Video.Recording.Nightly</Name>
+    <CronExpression>(* * * * *) ; [ ((0 0 * * *) &gt; (0 7 * * *)) : ((0 20 * * *) &gt; (59 23 * * *)) ]</CronExpression>
+    <Description>Nightly schedule active between 20:00 and 07:00</Description>
+    <Data>{"itemType":1,"time":[{"start":"00:00","end":"07:00"},{"start":"20:00","end":"23:59"}],"occur_min_type":1,"occur_min_step":30,"occur_min_sel":[],"occur_hour_type":1,"occur_hour_step":12,"occur_hour_sel":[],"occur_dayom_type":1,"occur_dayom_sel":[],"occur_dayow_sel":[],"occur_month_type":1,"occur_month_sel":[],"action":{"type":"template","template":{"forEach":{"enabled":false},"forStart":{"enabled":true,"commands":[{"id":"command_video_record_start","config":{},"useEventValue":false}]},"forEnd":{"enabled":true,"commands":[{"id":"command_video_record_stop","config":{},"useEventValue":false}]}}},"from":"2026-02-26","to":"2026-02-26"}</Data>
+    <IsEnabled>true</IsEnabled>
+    <Script>// auto-generated code from template
+if (!$$.onPrevious() &amp;&amp; $$.onNext()) {
+  // this is start of a time slot
+
+  $$.boundModules.each((m) =&gt; {
+    m.emit('NVR.ContinuousRecording', 'On');
+    return false;
+  });
+
+} else if ($$.onPrevious() &amp;&amp; !$$.onNext()) {
+  // this is end of a time slot
+
+  $$.boundModules.each((m) =&gt; {
+    m.emit('NVR.ContinuousRecording', '');
+    return false;
+  });
+
+} else {
+  // this is for any other single occurrence
+  // and every minute within a time slot
+
+  //{each}//
+}
+</Script>
+    <BoundDevices>
+      <string>VideoInput</string>
+    </BoundDevices>
+    <BoundModules />
+  </SchedulerItem>
 </ArrayOfSchedulerItem>

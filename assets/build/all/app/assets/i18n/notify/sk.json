@@ -1,0 +1,3 @@
+{
+  "ffmpeg_required": "Modul `{{module_name}}` vyžaduje na fungovanie **FFmpeg**. Nainštalujte si ho z oficiálnej webovej stránky: - [https://ffmpeg.org](https://ffmpeg.org) Ak túto funkciu nepotrebujete, môžete tento modul vypnúť v sekcii **Automatizačné programy** alebo kliknutím na tlačidlo nižšie."
+}

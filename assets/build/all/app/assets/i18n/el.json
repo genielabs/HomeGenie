@@ -536,5 +536,15 @@
   "original_language": "Πρωτότυπη γλώσσα",
   "origin_country": "Χώρα Προέλευσης",
   "production_companies": "Εταιρεία Παραγωγής",
-  "movie_cast": "Ηθοποιοί"
+  "movie_cast": "Ηθοποιοί",
+  "live": "Ζω",
+  "recordings": "Ηχογραφήσεις",
+  "no_recordings": "Δεν υπάρχουν ηχογραφήσεις.",
+  "live_feed": "Ζωντανή ροή",
+  "fullscreen_exit": "Έξοδος από την πλήρη οθόνη",
+  "play_media": "Αναπαραγωγή πολυμέσων",
+  "start_recording": "Έναρξη εγγραφής",
+  "stop_recording": "Διακοπή εγγραφής",
+  "toggle_smart_recording": "Αυτόματη εγγραφή σε συναγερμό",
+  "search_metadata": "Αναζήτηση μεταδεδομένων"
 }

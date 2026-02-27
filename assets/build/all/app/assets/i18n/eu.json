@@ -536,5 +536,15 @@
   "original_language": "Jatorrizko hizkuntza",
   "origin_country": "Jatorrizko herrialdea",
   "production_companies": "Ekoizpen-enpresa",
-  "movie_cast": "Aktoreak"
+  "movie_cast": "Aktoreak",
+  "live": "Zuzenean",
+  "recordings": "Grabaketak",
+  "no_recordings": "Grabaziorik ez.",
+  "live_feed": "Zuzeneko jarioa",
+  "fullscreen_exit": "Irten pantaila osoko modutik",
+  "play_media": "Erreproduzitu multimedia",
+  "start_recording": "Hasi grabaketa",
+  "stop_recording": "Gelditu grabaketa",
+  "toggle_smart_recording": "Alarma automatikoki grabatu",
+  "search_metadata": "Bilaketa-metadatuak"
 }

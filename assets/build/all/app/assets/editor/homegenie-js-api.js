@@ -10,6 +10,10 @@ class SchedulerApi {
    */
   get modules(): ModulesManager;
   /**
+   * API Helper class. Provides methods for handling and invoking HomeGenie's web service API calls.
+   */
+  api: ApiHelper;
+  /**
    * Program Helper. Provides methods related to the current program or script execution context.
    */
   program: ProgramHelper;
@@ -77,6 +81,19 @@ class SchedulerApi {
   onUpdate(handler: (module: ModuleHelper, parameter: ModuleParameter) => any);
 }
 
+/**
+ * @description API Helper class. Provides methods for handling and invoking HomeGenie's web service API calls.
+ *              Class instance accessor: `hg.api`.
+ */
+class ApiHelper {
+  /**
+   * Invokes an API command and gets the result.
+   * @param apiCommand Any MIG/APP API command without the `/api/` prefix (e.g., "HomeAutomation.X10/A5/Control.Level/50").
+   * @param data Optional data object to pass with the command.
+   * @returns The API command response object.
+   */
+  call(apiCommand: string, data?: any): any;
+}
 
 /**
  * @description Program Helper class. Provides methods related to the current program or script execution context,

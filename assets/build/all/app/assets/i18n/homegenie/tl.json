@@ -294,19 +294,22 @@
       "Description": "Mag-detect ng mga bagay gamit ang isang pre-trained na modelo ng YOLO.",
       "ML.ObjectDetection": "Paganahin ang pagtuklas ng mga bagay",
       "ML.ObjectDetection.TriggerDetect": "Listahan ng mga bagay na pinaghihiwalay ng kuwit (sa English) na magti-trigger ng alarma. (hal: pusa, aso, tao, backpack, maleta)",
-      "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO model file (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO model file (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Pinakamataas na Kahilingan Bawat Segundo (RPS)"
     },
     "911": {
       "Title": "Pagtataya ng pose",
       "Description": "Keypoint detection sa pamamagitan ng pagtatantya ng pose, gamit ang mga custom na modelo ng ONNX o ang default na pre-trained na modelo ng YOLO (human pose-specific).",
       "ML.PoseEstimation": "Paganahin ang pagtatantya ng pose",
-      "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO model file (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO model file (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Pinakamataas na Kahilingan Bawat Segundo (RPS)"
     },
     "912": {
       "Title": "Pag-segment ng Instance",
       "Description": "I-detect ang mga bagay at ang kanilang mga balangkas gamit ang isang pre-trained na modelo ng YOLO.",
       "ML.InstanceSegmentation": "I-enable ang pagse-segment ng instance",
-      "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO model file (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Path ng YOLO model file (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Pinakamataas na Kahilingan Bawat Segundo (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Buod ng Pang-araw-araw na Enerhiya",
       "Description": "Pang-araw-araw na pagkonsumo ng enerhiya (Wh) ayon sa aparato.",
       "Widget.Statistics.DailyReport": "Isama sa ulat ng Daily Wh"
+    },
+    "200": {
+      "Title": "Pagpasok ng Bidyo",
+      "Description": "Kumukuha ng mga audio at video stream para sa live na pagsubaybay, real-time na pagproseso, at patuloy na pagre-record.",
+      "VideoInput.Disable": "Huwag paganahin ang input na ito",
+      "VideoInput.SourceURL": "URL ng pinagmulan ng video",
+      "VideoInput.ImageFeed": "Ang URL ay isang live-updated na iisang image file.",
+      "VideoInput.Username": "Pangalan ng Gumagamit (opsyonal)",
+      "VideoInput.Password": "Password (opsyonal)",
+      "Widget.Config.fps": "Pinakamataas na mga frame kada segundo",
+      "VideoOutput.Width": "Lapad ng daloy ng output.",
+      "VideoOutput.SnapshotQuality": "Kalidad ng live na imahe."
+    },
+    "250": {
+      "Title": "Video Recorder",
+      "Description": "Nagre-record ng mga audio at video stream mula sa anumang input source. Ang mga recording ay maaaring tuloy-tuloy, naka-iskedyul, o na-trigger ng mga alarm event.",
+      "NVR.EnableRecording": "Paganahin ang Pagre-record ng Video",
+      "NVR.RecordOnAlarm": "Mag-record sa Alarma",
+      "NVR.ContinuousRecording": "Patuloy na Pagtatala."
     }
   },
   "scheduler_preset_action_genie_command": "Utos ng Genie",
   "scheduler_preset_action_config_wish": "Aksyon sa Likas na Wika",
-  "scheduler_preset_action_config_wish.placeholder": "Subukan: \"Itakda ang init sa 22° at simulan ang eksena ng Pagsikat ng Araw\""
+  "scheduler_preset_action_config_wish.placeholder": "Subukan: \"Itakda ang init sa 22° at simulan ang eksena ng Pagsikat ng Araw\"",
+  "scheduler_preset_action_command_video_record_start": "Simulan ang Pag-record ng Video",
+  "scheduler_preset_action_command_video_record_stop": "Itigil ang Pagre-record ng Video"
 }

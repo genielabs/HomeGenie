@@ -536,5 +536,15 @@
   "original_language": "യഥാർത്ഥ ഭാഷ",
   "origin_country": "മാതൃരാജ്യം",
   "production_companies": "നിർമ്മാണ കമ്പനി",
-  "movie_cast": "അഭിനേതാക്കൾ"
+  "movie_cast": "അഭിനേതാക്കൾ",
+  "live": "തത്സമയം",
+  "recordings": "റെക്കോർഡിംഗുകൾ",
+  "no_recordings": "റെക്കോർഡിംഗുകളൊന്നുമില്ല.",
+  "live_feed": "ലൈവ് ഫീഡ്",
+  "fullscreen_exit": "പൂർണ്ണസ്‌ക്രീനിൽ നിന്ന് പുറത്തുകടക്കുക",
+  "play_media": "മീഡിയ പ്ലേ ചെയ്യുക",
+  "start_recording": "റെക്കോർഡിംഗ് ആരംഭിക്കുക",
+  "stop_recording": "റെക്കോർഡിംഗ് നിർത്തുക",
+  "toggle_smart_recording": "അലാറത്തിൽ യാന്ത്രികമായി റെക്കോർഡ് ചെയ്യുക",
+  "search_metadata": "മെറ്റാഡാറ്റ തിരയുക"
 }

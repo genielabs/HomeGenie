@@ -536,5 +536,15 @@
   "original_language": "ორიგინალი ენა",
   "origin_country": "წარმოშობის ქვეყანა",
   "production_companies": "საპროდიუსერო კომპანია",
-  "movie_cast": "მსახიობები"
+  "movie_cast": "მსახიობები",
+  "live": "პირდაპირი ეთერი",
+  "recordings": "ჩანაწერები",
+  "no_recordings": "ჩანაწერები არ არის.",
+  "live_feed": "პირდაპირი ეთერი",
+  "fullscreen_exit": "სრული ეკრანიდან გასვლა",
+  "play_media": "მედიის დაკვრა",
+  "start_recording": "ჩაწერის დაწყება",
+  "stop_recording": "ჩაწერის შეჩერება",
+  "toggle_smart_recording": "ავტომატური ჩაწერა სიგნალიზაციაზე",
+  "search_metadata": "მეტამონაცემების ძიება"
 }

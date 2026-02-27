@@ -536,5 +536,15 @@
   "original_language": "Originalsprooch",
   "origin_country": "Hierkonftsland",
   "production_companies": "Produktiounsfirma",
-  "movie_cast": "Schauspiller"
+  "movie_cast": "Schauspiller",
+  "live": "Liewen",
+  "recordings": "Opnamen",
+  "no_recordings": "Keng Opnamen.",
+  "live_feed": "Live-Feed",
+  "fullscreen_exit": "Vollbildmodus verloossen",
+  "play_media": "Medien ofspillen",
+  "start_recording": "Opnam ufänken",
+  "stop_recording": "Opnam stoppen",
+  "toggle_smart_recording": "Automatesch Opnam bei Alarm",
+  "search_metadata": "Metadaten duerchsichen"
 }

@@ -536,5 +536,15 @@
   "original_language": "Арыгінальная мова",
   "origin_country": "Краіна паходжання",
   "production_companies": "Прадзюсарская кампанія",
-  "movie_cast": "Акцёры"
+  "movie_cast": "Акцёры",
+  "live": "Жывы эфір",
+  "recordings": "Запісы",
+  "no_recordings": "Няма запісаў.",
+  "live_feed": "Жывая стужка",
+  "fullscreen_exit": "Выйсці з поўнаэкраннага рэжыму",
+  "play_media": "Прайграць медыя",
+  "start_recording": "Пачаць запіс",
+  "stop_recording": "Спыніць запіс",
+  "toggle_smart_recording": "Аўтаматычны запіс па трывозе",
+  "search_metadata": "Пошук метададзеных"
 }

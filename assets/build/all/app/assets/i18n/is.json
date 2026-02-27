@@ -536,5 +536,15 @@
   "original_language": "Upprunalegt tungumál",
   "origin_country": "Upprunaland",
   "production_companies": "Framleiðslufyrirtæki",
-  "movie_cast": "Leikarar"
+  "movie_cast": "Leikarar",
+  "live": "Lifandi",
+  "recordings": "Upptökur",
+  "no_recordings": "Engar upptökur.",
+  "live_feed": "Bein útsending",
+  "fullscreen_exit": "Hætta í fullri skjástærð",
+  "play_media": "Spila margmiðlunarefni",
+  "start_recording": "Hefja upptöku",
+  "stop_recording": "Hætta upptöku",
+  "toggle_smart_recording": "Sjálfvirk upptaka við viðvörun",
+  "search_metadata": "Leita í lýsigögnum"
 }

@@ -294,19 +294,22 @@
       "Description": "አስቀድሞ የሰለጠነ YOLO ሞዴል በመጠቀም ነገሮችን ያግኙ።",
       "ML.ObjectDetection": "የነገሮችን መለየት አንቃ",
       "ML.ObjectDetection.TriggerDetect": "ማንቂያውን የሚያነቃቁ በነጠላ ሰረዝ የተለዩ የነገሮች ዝርዝር (በእንግሊዘኛ)። (ለምሳሌ፡ ድመት፣ ውሻ፣ ሰው፣ ቦርሳ፣ ሻንጣ)",
-      "ConfigureOptions.Yolo.ModelPath": "የYOLO ሞዴል ፋይል መንገድ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "የYOLO ሞዴል ፋይል መንገድ (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "በሰከንድ የሚፈቀደው ከፍተኛ የጥያቄ መጠን (RPS)"
     },
     "911": {
       "Title": "Pose ግምት",
       "Description": "ብጁ ONNX ሞዴሎችን ወይም ነባሪው ቀድሞ የሰለጠነ YOLO ሞዴል (የሰው አቀማመጥ-ተኮር) በመጠቀም የቁልፍ ነጥብ ማወቂያ በፖዝ ግምት።",
       "ML.PoseEstimation": "የአቀማመጥ ግምትን አንቃ",
-      "ConfigureOptions.Yolo.ModelPath": "የYOLO ሞዴል ፋይል መንገድ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "የYOLO ሞዴል ፋይል መንገድ (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "በሰከንድ የሚፈቀደው ከፍተኛ የጥያቄ መጠን (RPS)"
     },
     "912": {
       "Title": "የአብነት ክፍፍል",
       "Description": "አስቀድሞ የሰለጠነ YOLO ሞዴል በመጠቀም ነገሮችን እና ገለጻዎቻቸውን ያግኙ።",
       "ML.InstanceSegmentation": "የአብነት ክፍፍልን አንቃ",
-      "ConfigureOptions.Yolo.ModelPath": "የYOLO ሞዴል ፋይል መንገድ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "የYOLO ሞዴል ፋይል መንገድ (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "በሰከንድ የሚፈቀደው ከፍተኛ የጥያቄ መጠን (RPS)"
     },
     "930": {
       "Title": "ጀሚኒ ሐሳብ ተቆጣጣሪ",
@@ -376,9 +379,30 @@
       "Title": "ዕለታዊ የኃይል ማጠቃለያ",
       "Description": "ዕለታዊ የኃይል ፍጆታ (Wh) በመሳሪያ።",
       "Widget.Statistics.DailyReport": "በዕለታዊ የWH ሪፖርት ውስጥ ያካትቱ"
+    },
+    "200": {
+      "Title": "የቪዲዮ ግቤት",
+      "Description": "ለቀጥታ ክትትል፣ ለእውነተኛ ጊዜ ሂደት እና ለቀጣይ ቀረጻ የድምጽ እና የቪዲዮ ዥረቶችን ይቀርጻል።",
+      "VideoInput.Disable": "ይህንን ግቤት ያሰናክሉ",
+      "VideoInput.SourceURL": "የቪዲዮ ምንጭ ዩአርኤል",
+      "VideoInput.ImageFeed": "URL በቀጥታ የሚዘመን ነጠላ ምስል ፋይል ነው።",
+      "VideoInput.Username": "የተጠቃሚ ስም (አማራጭ)",
+      "VideoInput.Password": "የይለፍ ቃል (አማራጭ)",
+      "Widget.Config.fps": "በሰከንድ ከፍተኛ ክፈፎች",
+      "VideoOutput.Width": "የውጤት ዥረት ስፋት።",
+      "VideoOutput.SnapshotQuality": "የቀጥታ ምስል ጥራት።"
+    },
+    "250": {
+      "Title": "የቪዲዮ መቅጃ",
+      "Description": "ከማንኛውም የግቤት ምንጭ የድምጽ እና የቪዲዮ ዥረቶችን ይቀርፃል። ቀረጻዎች ቀጣይነት ያለው፣ የጊዜ ሰሌዳ የተያዘላቸው ወይም በማንቂያ ክስተቶች የሚቀሰቀሱ ሊሆኑ ይችላሉ።",
+      "NVR.EnableRecording": "የቪዲዮ ቀረጻን ያንቁ",
+      "NVR.RecordOnAlarm": "ማንቂያ ላይ ቅዳ",
+      "NVR.ContinuousRecording": "ቀጣይነት ያለው ቀረጻ።"
     }
   },
   "scheduler_preset_action_genie_command": "የጂኒ ኮማንድ",
   "scheduler_preset_action_config_wish": "የተፈጥሮ ቋንቋ ተግባር",
-  "scheduler_preset_action_config_wish.placeholder": "ይሞክሩ፦ \"ሙቀቱን ወደ 22° ያቀናብሩ እና የፀሐይ መውጣት ትዕይንትን ይጀምሩ\""
+  "scheduler_preset_action_config_wish.placeholder": "ይሞክሩ፦ \"ሙቀቱን ወደ 22° ያቀናብሩ እና የፀሐይ መውጣት ትዕይንትን ይጀምሩ\"",
+  "scheduler_preset_action_command_video_record_start": "ቪዲዮ መቅዳት ይጀምሩ",
+  "scheduler_preset_action_command_video_record_stop": "ቪዲዮ መቅዳት አቁም"
 }

@@ -536,5 +536,15 @@
   "original_language": "Түпнұсқа тіл",
   "origin_country": "Шыққан елі",
   "production_companies": "Өндіріс компаниясы",
-  "movie_cast": "Актерлер"
+  "movie_cast": "Актерлер",
+  "live": "Тікелей эфир",
+  "recordings": "Жазбалар",
+  "no_recordings": "Жазбалар жоқ.",
+  "live_feed": "Тікелей эфир",
+  "fullscreen_exit": "Толық экран режимінен шығу",
+  "play_media": "Медианы ойнату",
+  "start_recording": "Жазуды бастау",
+  "stop_recording": "Жазуды тоқтату",
+  "toggle_smart_recording": "Дабылда автоматты түрде жазу",
+  "search_metadata": "Метадеректерді іздеу"
 }

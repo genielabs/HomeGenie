@@ -536,5 +536,15 @@
   "original_language": "Lugha Asili",
   "origin_country": "Nchi ya Asili",
   "production_companies": "Kampuni ya Uzalishaji",
-  "movie_cast": "Waigizaji"
+  "movie_cast": "Waigizaji",
+  "live": "Moja kwa Moja",
+  "recordings": "Rekodi",
+  "no_recordings": "Hakuna rekodi.",
+  "live_feed": "Mlisho wa Moja kwa Moja",
+  "fullscreen_exit": "Toka kwenye Skrini Nzima",
+  "play_media": "Cheza Vyombo vya Habari",
+  "start_recording": "Anza Kurekodi",
+  "stop_recording": "Acha Kurekodi",
+  "toggle_smart_recording": "Rekodi kiotomatiki kwenye Kengele",
+  "search_metadata": "Tafuta Metadata"
 }

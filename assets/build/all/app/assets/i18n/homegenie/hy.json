@@ -294,19 +294,22 @@
       "Description": "Հայտնաբերել առարկաներ՝ օգտագործելով նախապես պատրաստված YOLO մոդելը։",
       "ML.ObjectDetection": "Միացնել օբյեկտների հայտնաբերումը",
       "ML.ObjectDetection.TriggerDetect": "Ստորակետերով բաժանված իրերի ցանկ (անգլերենով), որոնք կակտիվացնեն ահազանգը (օրինակ՝ կատու, շուն, մարդ, մեջքի պայուսակ, ճամպրուկ)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO մոդելի ֆայլի ուղին (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO մոդելի ֆայլի ուղին (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Առավելագույն հարցումներ վայրկյանում (RPS)"
     },
     "911": {
       "Title": "Դիրքի գնահատում",
       "Description": "Հիմնական կետերի հայտնաբերում դիրքի գնահատման միջոցով՝ օգտագործելով ONNX-ի հատուկ մոդելներ կամ նախապես պատրաստված YOLO մոդելը (մարդկային դիրքին հատուկ):",
       "ML.PoseEstimation": "Միացնել դիրքի գնահատումը",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO մոդելի ֆայլի ուղին (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO մոդելի ֆայլի ուղին (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Առավելագույն հարցումներ վայրկյանում (RPS)"
     },
     "912": {
       "Title": "Օրինակի սեգմենտացիա",
       "Description": "Հայտնաբերեք առարկաները և դրանց ուրվագծերը՝ օգտագործելով նախապես պատրաստված YOLO մոդելը։",
       "ML.InstanceSegmentation": "Միացնել օրինակի սեգմենտացիան",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO մոդելի ֆայլի ուղին (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO մոդելի ֆայլի ուղին (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Առավելագույն հարցումներ վայրկյանում (RPS)"
     },
     "930": {
       "Title": "Երկվորյակների մտադրությունների մշակիչ",
@@ -376,9 +379,30 @@
       "Title": "Օրական էներգիայի ամփոփում",
       "Description": "Սարքի օրական էներգիայի սպառումը (Վտժ):",
       "Widget.Statistics.DailyReport": "Ներառել օրական Wh հաշվետվության մեջ"
+    },
+    "200": {
+      "Title": "Տեսանյութի մուտք",
+      "Description": "Ձայնագրում է աուդիո և վիդեո հոսքեր՝ ուղիղ մոնիթորինգի, իրական ժամանակում մշակման և շարունակական ձայնագրման համար։",
+      "VideoInput.Disable": "Անջատել այս մուտքագրումը",
+      "VideoInput.SourceURL": "Տեսանյութի աղբյուրի URL-ը",
+      "VideoInput.ImageFeed": "URL-ը թարմացվող մեկ պատկերի ֆայլ է։",
+      "VideoInput.Username": "Օգտատիրոջ անուն (ըստ ցանկության)",
+      "VideoInput.Password": "Գաղտնաբառ (ըստ ցանկության)",
+      "Widget.Config.fps": "Առավելագույն կադրեր վայրկյանում",
+      "VideoOutput.Width": "Ելքային հոսքի լայնությունը։",
+      "VideoOutput.SnapshotQuality": "Կենդանի պատկերի որակը։"
+    },
+    "250": {
+      "Title": "Տեսաձայնագրիչ",
+      "Description": "Ձայնագրում է աուդիո և վիդեո հոսքեր ցանկացած մուտքային աղբյուրից: Ձայնագրությունները կարող են լինել շարունակական, պլանավորված կամ ակտիվացված տագնապի իրադարձություններով:",
+      "NVR.EnableRecording": "Միացնել տեսագրությունը",
+      "NVR.RecordOnAlarm": "Ձայնագրել զարթուցիչի վրա",
+      "NVR.ContinuousRecording": "Շարունակական ձայնագրություն։"
     }
   },
   "scheduler_preset_action_genie_command": "Ջինի հրամանատարություն",
   "scheduler_preset_action_config_wish": "Բնական լեզվի գործողություն",
-  "scheduler_preset_action_config_wish.placeholder": "Փորձեք. «Ջերմությունը սահմանեք 22°-ի և սկսեք Արևածագի տեսարանը»"
+  "scheduler_preset_action_config_wish.placeholder": "Փորձեք. «Ջերմությունը սահմանեք 22°-ի և սկսեք Արևածագի տեսարանը»",
+  "scheduler_preset_action_command_video_record_start": "Սկսել տեսանյութի ձայնագրումը",
+  "scheduler_preset_action_command_video_record_stop": "Դադարեցնել տեսանյութի ձայնագրությունը"
 }

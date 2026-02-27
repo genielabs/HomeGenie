@@ -536,5 +536,15 @@
   "original_language": "मूल भाषा",
   "origin_country": "उत्पत्तिको देश",
   "production_companies": "उत्पादन कम्पनी",
-  "movie_cast": "अभिनेताहरू"
+  "movie_cast": "अभिनेताहरू",
+  "live": "लाइभ",
+  "recordings": "रेकर्डिङहरू",
+  "no_recordings": "कुनै रेकर्डिङ छैन।",
+  "live_feed": "लाइभ फिड",
+  "fullscreen_exit": "पूर्णस्क्रिनबाट बाहिर निस्कनुहोस्",
+  "play_media": "मिडिया प्ले गर्नुहोस्",
+  "start_recording": "रेकर्डिङ सुरु गर्नुहोस्",
+  "stop_recording": "रेकर्डिङ रोक्नुहोस्",
+  "toggle_smart_recording": "अलार्ममा स्वतः रेकर्ड गर्नुहोस्",
+  "search_metadata": "मेटाडेटा खोज्नुहोस्"
 }

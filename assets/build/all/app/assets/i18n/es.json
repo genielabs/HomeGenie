@@ -536,5 +536,15 @@
   "original_language": "Idioma original",
   "origin_country": "País natal",
   "production_companies": "Compañía productora",
-  "movie_cast": "Actores"
+  "movie_cast": "Actores",
+  "live": "Vivir",
+  "recordings": "Grabaciones",
+  "no_recordings": "No hay grabaciones.",
+  "live_feed": "Transmisión en vivo",
+  "fullscreen_exit": "Salir de pantalla completa",
+  "play_media": "Reproducir medios",
+  "start_recording": "Iniciar grabación",
+  "stop_recording": "Detener la grabación",
+  "toggle_smart_recording": "Grabación automática en caso de alarma",
+  "search_metadata": "Metadatos de búsqueda"
 }

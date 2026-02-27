@@ -294,19 +294,22 @@
       "Description": "Бо истифода аз модели қаблан омӯзонидашудаи YOLO объектҳоро ошкор кунед.",
       "ML.ObjectDetection": "Муайян кардани объектҳоро фаъол созед",
       "ML.ObjectDetection.TriggerDetect": "Рӯйхати чизҳое, ки бо вергул ҷудо карда шудаанд (ба забони англисӣ), ки ҳушдорро ба вуҷуд меоранд. (масалан: гурба, саг, шахс, борхалта, ҷомадон)",
-      "ConfigureOptions.Yolo.ModelPath": "Роҳи файли модели YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Роҳи файли модели YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Ҳадди аксар дархостҳо дар як сония (RPS)"
     },
     "911": {
       "Title": "Баҳодиҳии поза",
       "Description": "Муайян кардани нуқтаи калидӣ тавассути баҳодиҳии поза бо истифода аз моделҳои фармоишии ONNX ё модели пешфарз YOLO (позиси хоси инсон).",
       "ML.PoseEstimation": "Баҳодиҳии позаро фаъол созед",
-      "ConfigureOptions.Yolo.ModelPath": "Роҳи файли модели YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Роҳи файли модели YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Ҳадди аксар дархостҳо дар як сония (RPS)"
     },
     "912": {
       "Title": "Сегментатсияи мисол",
       "Description": "Бо истифода аз модели қаблан омӯзонидашудаи YOLO объектҳо ва контурҳои онҳоро муайян кунед.",
       "ML.InstanceSegmentation": "Сегментизатсияи мисолҳоро фаъол созед",
-      "ConfigureOptions.Yolo.ModelPath": "Роҳи файли модели YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Роҳи файли модели YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Ҳадди аксар дархостҳо дар як сония (RPS)"
     },
     "930": {
       "Title": "Идоракунандаи нияти Gemini",
@@ -376,9 +379,30 @@
       "Title": "Хулосаи энергияи ҳаррӯза",
       "Description": "Истеъмоли ҳаррӯзаи энергия (Вт/соат) аз ҷониби дастгоҳ.",
       "Widget.Statistics.DailyReport": "Дар гузориши ҳаррӯзаи Wh дохил кунед"
+    },
+    "200": {
+      "Title": "Вуруди видео",
+      "Description": "Ҷараёнҳои аудио ва видеоиро барои мониторинги мустақим, коркарди вақти воқеӣ ва сабти пайваста сабт мекунад.",
+      "VideoInput.Disable": "Ин вурудро ғайрифаъол кунед",
+      "VideoInput.SourceURL": "URL-и манбаи видео",
+      "VideoInput.ImageFeed": "URL як файли ягонаи тасвирӣ аст, ки мустақиман навсозӣ мешавад.",
+      "VideoInput.Username": "Номи корбар (ихтиёрӣ)",
+      "VideoInput.Password": "Рамз (ихтиёрӣ)",
+      "Widget.Config.fps": "Ҳадди аксар кадрҳо дар як сония",
+      "VideoOutput.Width": "Паҳнои ҷараёни баромад.",
+      "VideoOutput.SnapshotQuality": "Сифати тасвири зинда."
+    },
+    "250": {
+      "Title": "Сабткунандаи видео",
+      "Description": "Ҷараёнҳои аудио ва видеоро аз ҳама гуна манбаи вуруд сабт мекунад. Сабтҳо метавонанд пайваста, ба нақша гирифташуда ё аз ҷониби ҳодисаҳои ҳушдор фаъол карда шаванд.",
+      "NVR.EnableRecording": "Сабти видеоро фаъол созед",
+      "NVR.RecordOnAlarm": "Сабт дар ҳолати ҳушдор",
+      "NVR.ContinuousRecording": "Сабти пайваста."
     }
   },
   "scheduler_preset_action_genie_command": "Фармондеҳии Ҷин",
   "scheduler_preset_action_config_wish": "Амали забони табиӣ",
-  "scheduler_preset_action_config_wish.placeholder": "Кӯшиш кунед: \"Ҳароратро ба 22° муқаррар кунед ва манзараи тулӯи офтобро оғоз кунед\""
+  "scheduler_preset_action_config_wish.placeholder": "Кӯшиш кунед: \"Ҳароратро ба 22° муқаррар кунед ва манзараи тулӯи офтобро оғоз кунед\"",
+  "scheduler_preset_action_command_video_record_start": "Сабти видеоро оғоз кунед",
+  "scheduler_preset_action_command_video_record_stop": "Сабти видеоро қатъ кунед"
 }

@@ -1,0 +1,3 @@
+{
+  "ffmpeg_required": "Modul `{{module_name}}` zahtijeva **FFmpeg** za funkcioniranje. Molimo vas da ga instalirate sa službene web stranice: - [https://ffmpeg.org](https://ffmpeg.org) Ako vam ova funkcija nije potrebna, možete onemogućiti ovaj modul u odjeljku **Automatizacijski programi** ili klikom na dugme ispod."
+}

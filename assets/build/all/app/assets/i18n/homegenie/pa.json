@@ -294,19 +294,22 @@
       "Description": "ਪਹਿਲਾਂ ਤੋਂ ਸਿਖਲਾਈ ਪ੍ਰਾਪਤ YOLO ਮਾਡਲ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਵਸਤੂਆਂ ਦਾ ਪਤਾ ਲਗਾਓ।",
       "ML.ObjectDetection": "ਵਸਤੂਆਂ ਦੀ ਖੋਜ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ",
       "ML.ObjectDetection.TriggerDetect": "ਕਾਮੇ ਨਾਲ ਵੱਖ ਕੀਤੀਆਂ ਚੀਜ਼ਾਂ ਦੀ ਸੂਚੀ (ਅੰਗਰੇਜ਼ੀ ਵਿੱਚ) ਜੋ ਅਲਾਰਮ ਨੂੰ ਚਾਲੂ ਕਰਨਗੀਆਂ। (ਜਿਵੇਂ: ਬਿੱਲੀ, ਕੁੱਤਾ, ਵਿਅਕਤੀ, ਬੈਕਪੈਕ, ਸੂਟਕੇਸ)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO ਮਾਡਲ ਫਾਈਲ (.onnx) ਦਾ ਮਾਰਗ"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO ਮਾਡਲ ਫਾਈਲ (.onnx) ਦਾ ਮਾਰਗ",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "ਪ੍ਰਤੀ ਸਕਿੰਟ ਵੱਧ ਤੋਂ ਵੱਧ ਬੇਨਤੀਆਂ (RPS)"
     },
     "911": {
       "Title": "ਪੋਜ਼ ਅਨੁਮਾਨ",
       "Description": "ਕਸਟਮ ONNX ਮਾਡਲਾਂ ਜਾਂ ਡਿਫਾਲਟ ਪਹਿਲਾਂ ਤੋਂ ਸਿਖਲਾਈ ਪ੍ਰਾਪਤ YOLO ਮਾਡਲ (ਮਨੁੱਖੀ ਪੋਜ਼-ਵਿਸ਼ੇਸ਼) ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋਏ, ਪੋਜ਼ ਅਨੁਮਾਨ ਦੁਆਰਾ ਕੀਪੁਆਇੰਟ ਖੋਜ।",
       "ML.PoseEstimation": "ਪੋਜ਼ ਅੰਦਾਜ਼ਾ ਚਾਲੂ ਕਰੋ",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO ਮਾਡਲ ਫਾਈਲ (.onnx) ਦਾ ਮਾਰਗ"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO ਮਾਡਲ ਫਾਈਲ (.onnx) ਦਾ ਮਾਰਗ",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "ਪ੍ਰਤੀ ਸਕਿੰਟ ਵੱਧ ਤੋਂ ਵੱਧ ਬੇਨਤੀਆਂ (RPS)"
     },
     "912": {
       "Title": "ਇੰਸਟੈਂਸ ਸੈਗਮੈਂਟੇਸ਼ਨ",
       "Description": "ਪਹਿਲਾਂ ਤੋਂ ਸਿਖਲਾਈ ਪ੍ਰਾਪਤ YOLO ਮਾਡਲ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਵਸਤੂਆਂ ਅਤੇ ਉਨ੍ਹਾਂ ਦੀ ਰੂਪ-ਰੇਖਾ ਦਾ ਪਤਾ ਲਗਾਓ।",
       "ML.InstanceSegmentation": "ਉਦਾਹਰਨ ਸੈਗਮੈਂਟੇਸ਼ਨ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO ਮਾਡਲ ਫਾਈਲ (.onnx) ਦਾ ਮਾਰਗ"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO ਮਾਡਲ ਫਾਈਲ (.onnx) ਦਾ ਮਾਰਗ",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "ਪ੍ਰਤੀ ਸਕਿੰਟ ਵੱਧ ਤੋਂ ਵੱਧ ਬੇਨਤੀਆਂ (RPS)"
     },
     "930": {
       "Title": "ਜੈਮਿਨੀ ਇੰਟੈਂਟ ਹੈਂਡਲਰ",
@@ -376,9 +379,30 @@
       "Title": "ਰੋਜ਼ਾਨਾ ਊਰਜਾ ਸੰਖੇਪ",
       "Description": "ਡਿਵਾਈਸ ਦੁਆਰਾ ਰੋਜ਼ਾਨਾ ਊਰਜਾ ਖਪਤ (Wh)।",
       "Widget.Statistics.DailyReport": "ਰੋਜ਼ਾਨਾ Wh ਰਿਪੋਰਟ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ"
+    },
+    "200": {
+      "Title": "ਵੀਡੀਓ ਇਨਪੁੱਟ",
+      "Description": "ਲਾਈਵ ਨਿਗਰਾਨੀ, ਰੀਅਲ-ਟਾਈਮ ਪ੍ਰੋਸੈਸਿੰਗ, ਅਤੇ ਨਿਰੰਤਰ ਰਿਕਾਰਡਿੰਗ ਲਈ ਆਡੀਓ ਅਤੇ ਵੀਡੀਓ ਸਟ੍ਰੀਮਾਂ ਨੂੰ ਕੈਪਚਰ ਕਰਦਾ ਹੈ।",
+      "VideoInput.Disable": "ਇਸ ਇਨਪੁੱਟ ਨੂੰ ਬੰਦ ਕਰੋ",
+      "VideoInput.SourceURL": "ਵੀਡੀਓ ਸਰੋਤ URL",
+      "VideoInput.ImageFeed": "URL ਇੱਕ ਲਾਈਵ-ਅੱਪਡੇਟ ਕੀਤੀ ਸਿੰਗਲ ਇਮੇਜ ਫਾਈਲ ਹੈ।",
+      "VideoInput.Username": "ਯੂਜ਼ਰਨੇਮ (ਵਿਕਲਪਿਕ)",
+      "VideoInput.Password": "ਪਾਸਵਰਡ (ਵਿਕਲਪਿਕ)",
+      "Widget.Config.fps": "ਵੱਧ ਤੋਂ ਵੱਧ ਫਰੇਮ ਪ੍ਰਤੀ ਸਕਿੰਟ",
+      "VideoOutput.Width": "ਆਉਟਪੁੱਟ ਸਟ੍ਰੀਮ ਚੌੜਾਈ।",
+      "VideoOutput.SnapshotQuality": "ਲਾਈਵ ਚਿੱਤਰ ਗੁਣਵੱਤਾ।"
+    },
+    "250": {
+      "Title": "ਵੀਡੀਓ ਰਿਕਾਰਡਰ",
+      "Description": "ਕਿਸੇ ਵੀ ਇਨਪੁੱਟ ਸਰੋਤ ਤੋਂ ਆਡੀਓ ਅਤੇ ਵੀਡੀਓ ਸਟ੍ਰੀਮਾਂ ਨੂੰ ਰਿਕਾਰਡ ਕਰਦਾ ਹੈ। ਰਿਕਾਰਡਿੰਗਾਂ ਨਿਰੰਤਰ, ਤਹਿ ਕੀਤੀਆਂ ਜਾ ਸਕਦੀਆਂ ਹਨ, ਜਾਂ ਅਲਾਰਮ ਘਟਨਾਵਾਂ ਦੁਆਰਾ ਸ਼ੁਰੂ ਕੀਤੀਆਂ ਜਾ ਸਕਦੀਆਂ ਹਨ।",
+      "NVR.EnableRecording": "ਵੀਡੀਓ ਰਿਕਾਰਡਿੰਗ ਚਾਲੂ ਕਰੋ",
+      "NVR.RecordOnAlarm": "ਅਲਾਰਮ 'ਤੇ ਰਿਕਾਰਡ ਕਰੋ",
+      "NVR.ContinuousRecording": "ਨਿਰੰਤਰ ਰਿਕਾਰਡਿੰਗ।"
     }
   },
   "scheduler_preset_action_genie_command": "ਜਿਨੀ ਕਮਾਂਡ",
   "scheduler_preset_action_config_wish": "ਕੁਦਰਤੀ ਭਾਸ਼ਾ ਕਿਰਿਆ",
-  "scheduler_preset_action_config_wish.placeholder": "ਇਹ ਅਜ਼ਮਾਓ: \"ਗਰਮੀ ਨੂੰ 22° 'ਤੇ ਸੈੱਟ ਕਰੋ ਅਤੇ ਸੂਰਜ ਚੜ੍ਹਨ ਦਾ ਦ੍ਰਿਸ਼ ਸ਼ੁਰੂ ਕਰੋ\""
+  "scheduler_preset_action_config_wish.placeholder": "ਇਹ ਅਜ਼ਮਾਓ: \"ਗਰਮੀ ਨੂੰ 22° 'ਤੇ ਸੈੱਟ ਕਰੋ ਅਤੇ ਸੂਰਜ ਚੜ੍ਹਨ ਦਾ ਦ੍ਰਿਸ਼ ਸ਼ੁਰੂ ਕਰੋ\"",
+  "scheduler_preset_action_command_video_record_start": "ਵੀਡੀਓ ਰਿਕਾਰਡ ਕਰਨਾ ਸ਼ੁਰੂ ਕਰੋ",
+  "scheduler_preset_action_command_video_record_stop": "ਵੀਡੀਓ ਰਿਕਾਰਡ ਕਰਨਾ ਬੰਦ ਕਰੋ"
 }

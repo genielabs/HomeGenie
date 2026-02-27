@@ -536,5 +536,15 @@
   "original_language": "मूल भाषा",
   "origin_country": "उद्गम देश",
   "production_companies": "उत्पादन कंपनी",
-  "movie_cast": "अभिनेताओं"
+  "movie_cast": "अभिनेताओं",
+  "live": "रहना",
+  "recordings": "रिकॉर्डिंग",
+  "no_recordings": "कोई रिकॉर्डिंग नहीं।",
+  "live_feed": "लाइव फ़ीड",
+  "fullscreen_exit": "फ़ुलस्क्रीन से बाहर निकलें",
+  "play_media": "प्ले मीडिया",
+  "start_recording": "रिकॉर्डिंग शुरू करें",
+  "stop_recording": "रिकॉर्डिंग बंद करें",
+  "toggle_smart_recording": "अलार्म बजने पर ऑटो-रिकॉर्डिंग",
+  "search_metadata": "खोज मेटाडेटा"
 }

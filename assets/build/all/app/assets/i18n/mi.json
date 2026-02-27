@@ -536,5 +536,15 @@
   "original_language": "Reo Taketake",
   "origin_country": "Whenua Taketake",
   "production_companies": "Kamupene Whakaputa",
-  "movie_cast": "Ngā Kaiwhakaari"
+  "movie_cast": "Ngā Kaiwhakaari",
+  "live": "Ora",
+  "recordings": "Ngā rekoata",
+  "no_recordings": "Kāore he rekoata.",
+  "live_feed": "Whāngai Ora",
+  "fullscreen_exit": "Puta atu i te Mata Katoa",
+  "play_media": "Tākarohia ngā Pāpāho",
+  "start_recording": "Tīmata te Hopu",
+  "stop_recording": "Kati te Tuhi",
+  "toggle_smart_recording": "Tuhi-aunoa i te Whakaoho",
+  "search_metadata": "Rapu Raraunga Whānui"
 }

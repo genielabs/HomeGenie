@@ -770,7 +770,7 @@ namespace HomeGenie.Service.Handlers
                                             var mp = module.Properties[idx];
                                             if (Utility.MatchValues(forProperties, mp.Name))
                                             {
-                                                matchProperty = (compareProperties != null) ? mp.Value.Equals(compareProperties) : true;
+                                                matchProperty = (compareProperties == null) || Utility.MatchValues(compareProperties, mp.Value);
                                                 break;
                                             }
                                         }

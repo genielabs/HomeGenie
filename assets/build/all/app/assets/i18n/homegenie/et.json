@@ -294,19 +294,22 @@
       "Description": "Objektide tuvastamine eelnevalt treenitud YOLO mudeli abil.",
       "ML.ObjectDetection": "Objektide tuvastamise lubamine",
       "ML.ObjectDetection.TriggerDetect": "Komadega eraldatud nimekiri asjadest (inglise keeles), mis käivitavad alarmi. (nt: kass, koer, inimene, seljakott, kohver)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO mudelifaili (.onnx) tee"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO mudelifaili (.onnx) tee",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimaalne päringute arv sekundis (RPS)"
     },
     "911": {
       "Title": "Poosi hindamine",
       "Description": "Võtmepunktide tuvastamine poosi hindamise abil, kasutades kohandatud ONNX-mudeleid või vaikimisi eelnevalt treenitud YOLO mudelit (inimese poosispetsiifiline).",
       "ML.PoseEstimation": "Luba poosi hindamine",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO mudelifaili (.onnx) tee"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO mudelifaili (.onnx) tee",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimaalne päringute arv sekundis (RPS)"
     },
     "912": {
       "Title": "Instantsi segmenteerimine",
       "Description": "Tuvastage objekte ja nende kontuure eelnevalt treenitud YOLO mudeli abil.",
       "ML.InstanceSegmentation": "Luba eksemplaride segmenteerimine",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO mudelifaili (.onnx) tee"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO mudelifaili (.onnx) tee",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimaalne päringute arv sekundis (RPS)"
     },
     "930": {
       "Title": "Gemini kavatsuste käitleja",
@@ -376,9 +379,30 @@
       "Title": "Päevane energiakokkuvõte",
       "Description": "Seadme päevane energiatarve (Wh).",
       "Widget.Statistics.DailyReport": "Lisa igapäevasesse valgete ..."
+    },
+    "200": {
+      "Title": "Video sisend",
+      "Description": "Salvestab heli- ja videovooge otsejälgimiseks, reaalajas töötlemiseks ja pidevaks salvestamiseks.",
+      "VideoInput.Disable": "Keela see sisend",
+      "VideoInput.SourceURL": "Video allika URL",
+      "VideoInput.ImageFeed": "URL on reaalajas uuendatav üksikpildifail.",
+      "VideoInput.Username": "Kasutajanimi (valikuline)",
+      "VideoInput.Password": "Parool (valikuline)",
+      "Widget.Config.fps": "Maksimaalne kaadrite arv sekundis",
+      "VideoOutput.Width": "Väljundvoo laius.",
+      "VideoOutput.SnapshotQuality": "Reaalajas pildikvaliteet."
+    },
+    "250": {
+      "Title": "Videosalvesti",
+      "Description": "Salvestab heli- ja videovooge mis tahes sisendallikast. Salvestused võivad olla pidevad, ajastatud või käivituda häiresündmuste poolt.",
+      "NVR.EnableRecording": "Luba video salvestamine",
+      "NVR.RecordOnAlarm": "Salvesta äratuse ajal",
+      "NVR.ContinuousRecording": "Pidev salvestamine."
     }
   },
   "scheduler_preset_action_genie_command": "Džinni käsk",
   "scheduler_preset_action_config_wish": "Loomuliku keele toiming",
-  "scheduler_preset_action_config_wish.placeholder": "Proovi: „Seadista temperatuur 22°C peale ja käivita päikesetõusu stseen”"
+  "scheduler_preset_action_config_wish.placeholder": "Proovi: „Seadista temperatuur 22°C peale ja käivita päikesetõusu stseen”",
+  "scheduler_preset_action_command_video_record_start": "Alusta video salvestamist",
+  "scheduler_preset_action_command_video_record_stop": "Peata video salvestamine"
 }

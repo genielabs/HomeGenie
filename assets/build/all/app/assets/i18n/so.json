@@ -536,5 +536,15 @@
   "original_language": "Luqadda Asalka ah",
   "origin_country": "Dalka Asalka ah",
   "production_companies": "Shirkadda Wax Soo Saarka",
-  "movie_cast": "Jilayaasha"
+  "movie_cast": "Jilayaasha",
+  "live": "Toos ah",
+  "recordings": "Duubista",
+  "no_recordings": "Ma jiraan wax duubitaan ah.",
+  "live_feed": "Quudinta Tooska ah",
+  "fullscreen_exit": "Ka bax Shaashada Buuxda",
+  "play_media": "Daawashada Warbaahinta",
+  "start_recording": "Bilow duubista",
+  "stop_recording": "Jooji Duubista",
+  "toggle_smart_recording": "Diiwaanka otomaatiga ah ee Alarm-ka",
+  "search_metadata": "Raadinta Xogta-xogta"
 }

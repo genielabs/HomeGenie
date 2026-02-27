@@ -294,19 +294,22 @@
       "Description": "Objeten mat engem virtrainéierte YOLO-Modell erkennen.",
       "ML.ObjectDetection": "Objetdetektioun aktivéieren",
       "ML.ObjectDetection.TriggerDetect": "Komma-getrennt Lëscht vun de Saachen (op Englesch), déi den Alarm ausléisen. (z.B.: Kaz, Hond, Persoun, Rucksak, Koffer)",
-      "ConfigureOptions.Yolo.ModelPath": "Pfad vun der YOLO Modelldatei (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pfad vun der YOLO Modelldatei (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maximal Ufroen pro Sekonn (RPS)"
     },
     "911": {
       "Title": "Pose Schätzung",
       "Description": "Schlësselpunktdetektioun iwwer Pose-Schätzung, mat Hëllef vu personaliséierte ONNX-Modeller oder dem Standard-virtrainéierte YOLO-Modell (mënschlech Pose-spezifesch).",
       "ML.PoseEstimation": "Pose-Schätzung aktivéieren",
-      "ConfigureOptions.Yolo.ModelPath": "Pfad vun der YOLO Modelldatei (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pfad vun der YOLO Modelldatei (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maximal Ufroen pro Sekonn (RPS)"
     },
     "912": {
       "Title": "Instanzsegmentéierung",
       "Description": "Objeten an hir Konturen mat engem virtrainéierte YOLO-Modell erkennen.",
       "ML.InstanceSegmentation": "Instanzsegmentéierung aktivéieren",
-      "ConfigureOptions.Yolo.ModelPath": "Pfad vun der YOLO Modelldatei (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pfad vun der YOLO Modelldatei (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maximal Ufroen pro Sekonn (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Deeglech Energiezesummefassung",
       "Description": "Deegleche Energieverbrauch (Wh) pro Apparat.",
       "Widget.Statistics.DailyReport": "An deegleche Wh-Rapport integréieren"
+    },
+    "200": {
+      "Title": "Video-Input",
+      "Description": "Erfaasst Audio- a Videostreame fir Live-Iwwerwaachung, Echtzäitveraarbechtung a kontinuéierlech Opnam.",
+      "VideoInput.Disable": "Dësen Input deaktivéieren",
+      "VideoInput.SourceURL": "URL vun der Videoquell",
+      "VideoInput.ImageFeed": "Eng URL ass eng live-aktualiséiert eenzeg Bilddatei.",
+      "VideoInput.Username": "Benotzernumm (optional)",
+      "VideoInput.Password": "Passwuert (optional)",
+      "Widget.Config.fps": "Maximal Biller pro Sekonn",
+      "VideoOutput.Width": "Breet vum Ausgangsstroum.",
+      "VideoOutput.SnapshotQuality": "Live-Bildqualitéit."
+    },
+    "250": {
+      "Title": "Videorecorder",
+      "Description": "Nimmt Audio- a Videostreams vun all Inputquell op. D'Opname kënne kontinuéierlech, geplangt oder duerch Alarmereignisser ausgeléist ginn.",
+      "NVR.EnableRecording": "Videoopnam aktivéieren",
+      "NVR.RecordOnAlarm": "Opnam beim Alarm",
+      "NVR.ContinuousRecording": "Kontinuéierlech Opnam."
     }
   },
   "scheduler_preset_action_genie_command": "Genie Kommando",
   "scheduler_preset_action_config_wish": "Aktioun vun der natierlecher Sprooch",
-  "scheduler_preset_action_config_wish.placeholder": "Probéier: \"Setzt d'Hëtzt op 22° a start d'Sonnenopgangsszene\""
+  "scheduler_preset_action_config_wish.placeholder": "Probéier: \"Setzt d'Hëtzt op 22° a start d'Sonnenopgangsszene\"",
+  "scheduler_preset_action_command_video_record_start": "Video ophuelen ufänken",
+  "scheduler_preset_action_command_video_record_stop": "Video-Opnam stoppen"
 }

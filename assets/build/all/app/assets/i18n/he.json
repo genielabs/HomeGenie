@@ -536,5 +536,15 @@
   "original_language": "שפה מקורית",
   "origin_country": "ארץ מוצא",
   "production_companies": "חברת הפקה",
-  "movie_cast": "שחקנים"
+  "movie_cast": "שחקנים",
+  "live": "לִחיוֹת",
+  "recordings": "הקלטות",
+  "no_recordings": "אין הקלטות.",
+  "live_feed": "שידור חי",
+  "fullscreen_exit": "יציאה ממסך מלא",
+  "play_media": "הפעל מדיה",
+  "start_recording": "התחל הקלטה",
+  "stop_recording": "הפסקת ההקלטה",
+  "toggle_smart_recording": "הקלטה אוטומטית בעת אזעקה",
+  "search_metadata": "חיפוש מטא-נתונים"
 }

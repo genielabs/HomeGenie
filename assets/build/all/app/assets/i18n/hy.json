@@ -536,5 +536,15 @@
   "original_language": "Բնօրինակ լեզու",
   "origin_country": "Ծագման երկիր",
   "production_companies": "Արտադրական ընկերություն",
-  "movie_cast": "Դերասաններ"
+  "movie_cast": "Դերասաններ",
+  "live": "Ուղիղ",
+  "recordings": "Ձայնագրություններ",
+  "no_recordings": "Ձայնագրություններ չկան։",
+  "live_feed": "Ուղիղ հեռարձակում",
+  "fullscreen_exit": "Ելք լիաէկրան ռեժիմից",
+  "play_media": "Նվագարկել մեդիա",
+  "start_recording": "Սկսել ձայնագրությունը",
+  "stop_recording": "Դադարեցնել ձայնագրությունը",
+  "toggle_smart_recording": "Ավտոմատ ձայնագրում զարթուցիչի վրա",
+  "search_metadata": "Որոնել մետատվյալներ"
 }

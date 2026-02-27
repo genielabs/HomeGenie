@@ -294,19 +294,22 @@
       "Description": "ಪೂರ್ವ ತರಬೇತಿ ಪಡೆದ YOLO ಮಾದರಿಯನ್ನು ಬಳಸಿಕೊಂಡು ವಸ್ತುಗಳನ್ನು ಪತ್ತೆ ಮಾಡಿ.",
       "ML.ObjectDetection": "ವಸ್ತುಗಳ ಪತ್ತೆಹಚ್ಚುವಿಕೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
       "ML.ObjectDetection.TriggerDetect": "ಅಲಾರಾಂ ಅನ್ನು ಪ್ರಚೋದಿಸುವ ವಸ್ತುಗಳ ಅಲ್ಪವಿರಾಮದಿಂದ ಬೇರ್ಪಡಿಸಲಾದ ಪಟ್ಟಿ (ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿ). (ಉದಾ: ಬೆಕ್ಕು, ನಾಯಿ, ವ್ಯಕ್ತಿ, ಬೆನ್ನುಹೊರೆ, ಸೂಟ್‌ಕೇಸ್)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO ಮಾದರಿ ಫೈಲ್‌ನ ಮಾರ್ಗ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO ಮಾದರಿ ಫೈಲ್‌ನ ಮಾರ್ಗ (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "ಪ್ರತಿ ಸೆಕೆಂಡಿಗೆ ಗರಿಷ್ಠ ವಿನಂತಿಗಳು (RPS)"
     },
     "911": {
       "Title": "ಭಂಗಿ ಅಂದಾಜು",
       "Description": "ಕಸ್ಟಮ್ ONNX ಮಾದರಿಗಳು ಅಥವಾ ಡೀಫಾಲ್ಟ್ ಪೂರ್ವ-ತರಬೇತಿ ಪಡೆದ YOLO ಮಾದರಿ (ಮಾನವ ಭಂಗಿ-ನಿರ್ದಿಷ್ಟ) ಬಳಸಿಕೊಂಡು ಭಂಗಿ ಅಂದಾಜಿನ ಮೂಲಕ ಕೀಪಾಯಿಂಟ್ ಪತ್ತೆ.",
       "ML.PoseEstimation": "ಭಂಗಿ ಅಂದಾಜನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO ಮಾದರಿ ಫೈಲ್‌ನ ಮಾರ್ಗ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO ಮಾದರಿ ಫೈಲ್‌ನ ಮಾರ್ಗ (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "ಪ್ರತಿ ಸೆಕೆಂಡಿಗೆ ಗರಿಷ್ಠ ವಿನಂತಿಗಳು (RPS)"
     },
     "912": {
       "Title": "ನಿದರ್ಶನ ವಿಭಜನೆ",
       "Description": "ಪೂರ್ವ ತರಬೇತಿ ಪಡೆದ YOLO ಮಾದರಿಯನ್ನು ಬಳಸಿಕೊಂಡು ವಸ್ತುಗಳು ಮತ್ತು ಅವುಗಳ ಬಾಹ್ಯರೇಖೆಗಳನ್ನು ಪತ್ತೆ ಮಾಡಿ.",
       "ML.InstanceSegmentation": "ನಿದರ್ಶನ ವಿಭಜನೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO ಮಾದರಿ ಫೈಲ್‌ನ ಮಾರ್ಗ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO ಮಾದರಿ ಫೈಲ್‌ನ ಮಾರ್ಗ (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "ಪ್ರತಿ ಸೆಕೆಂಡಿಗೆ ಗರಿಷ್ಠ ವಿನಂತಿಗಳು (RPS)"
     },
     "930": {
       "Title": "ಜೆಮಿನಿ ಇಂಟೆಂಟ್ ಹ್ಯಾಂಡ್ಲರ್",
@@ -376,9 +379,30 @@
       "Title": "ದೈನಂದಿನ ಶಕ್ತಿಯ ಸಾರಾಂಶ",
       "Description": "ಸಾಧನದ ಪ್ರಕಾರ ದೈನಂದಿನ ವಿದ್ಯುತ್ ಬಳಕೆ (Wh).",
       "Widget.Statistics.DailyReport": "ದೈನಂದಿನ Wh ವರದಿಯಲ್ಲಿ ಸೇರಿಸಿ"
+    },
+    "200": {
+      "Title": "ವೀಡಿಯೊ ಇನ್‌ಪುಟ್",
+      "Description": "ಲೈವ್ ಮಾನಿಟರಿಂಗ್, ನೈಜ-ಸಮಯದ ಪ್ರಕ್ರಿಯೆ ಮತ್ತು ನಿರಂತರ ರೆಕಾರ್ಡಿಂಗ್‌ಗಾಗಿ ಆಡಿಯೋ ಮತ್ತು ವಿಡಿಯೋ ಸ್ಟ್ರೀಮ್‌ಗಳನ್ನು ಸೆರೆಹಿಡಿಯುತ್ತದೆ.",
+      "VideoInput.Disable": "ಈ ಇನ್‌ಪುಟ್ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
+      "VideoInput.SourceURL": "ವೀಡಿಯೊ ಮೂಲ URL",
+      "VideoInput.ImageFeed": "URL ಒಂದು ಲೈವ್-ಅಪ್‌ಡೇಟ್ ಮಾಡಲಾದ ಏಕ ಇಮೇಜ್ ಫೈಲ್ ಆಗಿದೆ.",
+      "VideoInput.Username": "ಬಳಕೆದಾರಹೆಸರು (ಐಚ್ಛಿಕ)",
+      "VideoInput.Password": "ಪಾಸ್‌ವರ್ಡ್ (ಐಚ್ಛಿಕ)",
+      "Widget.Config.fps": "ಪ್ರತಿ ಸೆಕೆಂಡಿಗೆ ಗರಿಷ್ಠ ಫ್ರೇಮ್‌ಗಳು",
+      "VideoOutput.Width": "ಔಟ್ಪುಟ್ ಸ್ಟ್ರೀಮ್ ಅಗಲ.",
+      "VideoOutput.SnapshotQuality": "ಲೈವ್ ಚಿತ್ರದ ಗುಣಮಟ್ಟ."
+    },
+    "250": {
+      "Title": "ವೀಡಿಯೊ ರೆಕಾರ್ಡರ್",
+      "Description": "ಯಾವುದೇ ಇನ್‌ಪುಟ್ ಮೂಲದಿಂದ ಆಡಿಯೋ ಮತ್ತು ವಿಡಿಯೋ ಸ್ಟ್ರೀಮ್‌ಗಳನ್ನು ರೆಕಾರ್ಡ್ ಮಾಡುತ್ತದೆ. ರೆಕಾರ್ಡಿಂಗ್‌ಗಳು ನಿರಂತರವಾಗಿರಬಹುದು, ನಿಗದಿಪಡಿಸಬಹುದು ಅಥವಾ ಎಚ್ಚರಿಕೆಯ ಘಟನೆಗಳಿಂದ ಪ್ರಚೋದಿಸಬಹುದು.",
+      "NVR.EnableRecording": "ವೀಡಿಯೊ ರೆಕಾರ್ಡಿಂಗ್ ಸಕ್ರಿಯಗೊಳಿಸಿ",
+      "NVR.RecordOnAlarm": "ಅಲಾರಾಂನಲ್ಲಿ ರೆಕಾರ್ಡ್ ಮಾಡಿ",
+      "NVR.ContinuousRecording": "ನಿರಂತರ ರೆಕಾರ್ಡಿಂಗ್."
     }
   },
   "scheduler_preset_action_genie_command": "ಜಿನೀ ಕಮಾಂಡ್",
   "scheduler_preset_action_config_wish": "ನೈಸರ್ಗಿಕ ಭಾಷಾ ಕ್ರಿಯೆ",
-  "scheduler_preset_action_config_wish.placeholder": "ಪ್ರಯತ್ನಿಸಿ: \"ಶಾಖವನ್ನು 22° ಗೆ ಹೊಂದಿಸಿ ಮತ್ತು ಸೂರ್ಯೋದಯ ದೃಶ್ಯವನ್ನು ಪ್ರಾರಂಭಿಸಿ\""
+  "scheduler_preset_action_config_wish.placeholder": "ಪ್ರಯತ್ನಿಸಿ: \"ಶಾಖವನ್ನು 22° ಗೆ ಹೊಂದಿಸಿ ಮತ್ತು ಸೂರ್ಯೋದಯ ದೃಶ್ಯವನ್ನು ಪ್ರಾರಂಭಿಸಿ\"",
+  "scheduler_preset_action_command_video_record_start": "ವೀಡಿಯೊ ರೆಕಾರ್ಡಿಂಗ್ ಪ್ರಾರಂಭಿಸಿ",
+  "scheduler_preset_action_command_video_record_stop": "ವೀಡಿಯೊ ರೆಕಾರ್ಡಿಂಗ್ ನಿಲ್ಲಿಸಿ"
 }

@@ -294,19 +294,22 @@
       "Description": "Önceden eğitilmiş bir YOLO modeli kullanarak nesneleri tespit edin.",
       "ML.ObjectDetection": "Nesne algılamayı etkinleştir",
       "ML.ObjectDetection.TriggerDetect": "Alarmı tetikleyecek şeylerin (İngilizce) virgülle ayrılmış listesi. (örneğin: kedi, köpek, kişi, sırt çantası, bavul)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO model dosyasının (.onnx) yolu"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO model dosyasının (.onnx) yolu",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Saniye Başına Maksimum İstek Sayısı (RPS)"
     },
     "911": {
       "Title": "Poz Tahmini",
       "Description": "Özel ONNX modelleri veya varsayılan önceden eğitilmiş YOLO modeli (insan duruşuna özgü) kullanılarak poz tahmini yoluyla anahtar nokta tespiti.",
       "ML.PoseEstimation": "Poz tahminini etkinleştir",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO model dosyasının (.onnx) yolu"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO model dosyasının (.onnx) yolu",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Saniye Başına Maksimum İstek Sayısı (RPS)"
     },
     "912": {
       "Title": "Örnek Segmentasyonu",
       "Description": "Önceden eğitilmiş bir YOLO modeli kullanarak nesneleri ve onların ana hatlarını tespit edin.",
       "ML.InstanceSegmentation": "Örnek segmentasyonunu etkinleştir",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO model dosyasının (.onnx) yolu"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO model dosyasının (.onnx) yolu",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Saniye Başına Maksimum İstek Sayısı (RPS)"
     },
     "930": {
       "Title": "Gemini Niyet İşleyicisi",
@@ -376,9 +379,30 @@
       "Title": "Günlük Enerji Özeti",
       "Description": "Cihaz başına günlük enerji tüketimi (Wh).",
       "Widget.Statistics.DailyReport": "Günlük Wh raporuna dahil edin"
+    },
+    "200": {
+      "Title": "Video Girişi",
+      "Description": "Canlı izleme, gerçek zamanlı işleme ve sürekli kayıt için ses ve video akışlarını yakalar.",
+      "VideoInput.Disable": "Bu girişi devre dışı bırak",
+      "VideoInput.SourceURL": "Video kaynağı URL'si",
+      "VideoInput.ImageFeed": "URL, canlı olarak güncellenen tek bir resim dosyasıdır.",
+      "VideoInput.Username": "Kullanıcı adı (isteğe bağlı)",
+      "VideoInput.Password": "Şifre (isteğe bağlı)",
+      "Widget.Config.fps": "Saniyedeki maksimum kare sayısı",
+      "VideoOutput.Width": "Çıkış akışı genişliği.",
+      "VideoOutput.SnapshotQuality": "Canlı görüntü kalitesi."
+    },
+    "250": {
+      "Title": "Video Kaydedici",
+      "Description": "Herhangi bir giriş kaynağından gelen ses ve video akışlarını kaydeder. Kayıtlar sürekli, planlı veya alarm olaylarıyla tetiklenebilir.",
+      "NVR.EnableRecording": "Video kaydını etkinleştirin",
+      "NVR.RecordOnAlarm": "Alarmı Kaydet",
+      "NVR.ContinuousRecording": "Sürekli Kayıt."
     }
   },
   "scheduler_preset_action_genie_command": "Cin Komutu",
   "scheduler_preset_action_config_wish": "Doğal Dil Eylemi",
-  "scheduler_preset_action_config_wish.placeholder": "Şunu deneyin: \"Isıyı 22 dereceye ayarlayın ve Gün Doğumu sahnesini başlatın\""
+  "scheduler_preset_action_config_wish.placeholder": "Şunu deneyin: \"Isıyı 22 dereceye ayarlayın ve Gün Doğumu sahnesini başlatın\"",
+  "scheduler_preset_action_command_video_record_start": "Video Kaydını Başlat",
+  "scheduler_preset_action_command_video_record_stop": "Video kaydını durdur"
 }

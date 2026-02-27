@@ -294,19 +294,22 @@
       "Description": "Bi karanîna modelek YOLO-a pêş-perwerdekirî tiştan tespît bikin.",
       "ML.ObjectDetection": "Tesbîtkirina tiştan çalak bike",
       "ML.ObjectDetection.TriggerDetect": "Lîsteya tiştên ku bi vertîkalê ji hev veqetandî ne (bi Îngilîzî) ku dê alarmê bidin destpêkirin. (mînak: pisîk, kûçik, mirov, çenteya piştê, çente)",
-      "ConfigureOptions.Yolo.ModelPath": "Riya pelê modela YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Riya pelê modela YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Daxwazên Herî Zêde Di Çirkeyekê de (RPS)"
     },
     "911": {
       "Title": "Texmîna Pozê",
       "Description": "Tesbîtkirina xala sereke bi rêya texmîna pozê, bi karanîna modelên ONNX-ê yên xwerû an modela YOLO-a pêş-perwerdekirî ya xwerû (taybetî bi poza mirovan).",
       "ML.PoseEstimation": "Texmînkirina pozê çalak bike",
-      "ConfigureOptions.Yolo.ModelPath": "Riya pelê modela YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Riya pelê modela YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Daxwazên Herî Zêde Di Çirkeyekê de (RPS)"
     },
     "912": {
       "Title": "Dabeşkirina Nimûneyê",
       "Description": "Bi karanîna modelek YOLO-a pêş-perwerdekirî tişt û xêzên wan tespît bikin.",
       "ML.InstanceSegmentation": "Dabeşkirina nimûneyê çalak bike",
-      "ConfigureOptions.Yolo.ModelPath": "Riya pelê modela YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Riya pelê modela YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Daxwazên Herî Zêde Di Çirkeyekê de (RPS)"
     },
     "930": {
       "Title": "Gerînendeyê Niyeta Gemini",
@@ -376,9 +379,30 @@
       "Title": "Kurteya Enerjiya Rojane",
       "Description": "Xerckirina enerjiya rojane (Wh) ji hêla cîhazê ve.",
       "Widget.Statistics.DailyReport": "Di rapora rojane ya Wh de bihewîne"
+    },
+    "200": {
+      "Title": "Têketina Vîdyoyê",
+      "Description": "Ji bo çavdêriya zindî, hilberandina demrast, û tomarkirina berdewam herikîna deng û vîdyoyê tomar dike.",
+      "VideoInput.Disable": "Vê têketinê neçalak bike",
+      "VideoInput.SourceURL": "URL-ya çavkaniya vîdyoyê",
+      "VideoInput.ImageFeed": "URL pelê wêneyekî yekane ye ku bi awayekî zindî tê nûvekirin.",
+      "VideoInput.Username": "Navê bikarhêner (vebijarkî)",
+      "VideoInput.Password": "Şîfre (vebijarkî)",
+      "Widget.Config.fps": "Herî zêde çarçove di saniyeyê de",
+      "VideoOutput.Width": "Firehiya herika derketinê.",
+      "VideoOutput.SnapshotQuality": "Qalîteya wêneya zindî."
+    },
+    "250": {
+      "Title": "Tomarkera Vîdyoyê",
+      "Description": "Herikînên deng û vîdyoyê ji her çavkaniyek têketinê tomar dike. Tomarkirin dikarin berdewam, bernamekirî, an jî ji hêla bûyerên alarmê ve werin çalak kirin.",
+      "NVR.EnableRecording": "Tomarkirina Vîdyoyê Çalak Bike",
+      "NVR.RecordOnAlarm": "Tomarkirina li ser alarmê",
+      "NVR.ContinuousRecording": "Tomarkirina Berdewam."
     }
   },
   "scheduler_preset_action_genie_command": "Fermandariya Genie",
   "scheduler_preset_action_config_wish": "Çalakiya Zimanê Xwezayî",
-  "scheduler_preset_action_config_wish.placeholder": "Biceribîne: \"Germiyê deyne ser 22° û dîmena Hilatina Rojê bide destpêkirin\""
+  "scheduler_preset_action_config_wish.placeholder": "Biceribîne: \"Germiyê deyne ser 22° û dîmena Hilatina Rojê bide destpêkirin\"",
+  "scheduler_preset_action_command_video_record_start": "Dest bi Tomarkirina Vîdyoyê Bike",
+  "scheduler_preset_action_command_video_record_stop": "Tomarkirina Vîdyoyê Rawestîne"
 }

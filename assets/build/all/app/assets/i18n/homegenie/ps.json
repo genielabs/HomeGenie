@@ -294,19 +294,22 @@
       "Description": "د مخکې له مخکې روزل شوي YOLO ماډل په کارولو سره شیان کشف کړئ.",
       "ML.ObjectDetection": "د شیانو کشف فعال کړئ",
       "ML.ObjectDetection.TriggerDetect": "د کوما سره جلا شوي د شیانو لیست (په انګلیسي کې) چې الارم به پیل کړي. (د مثال په توګه: پیشو، سپی، سړی، بیک پیک، سوټ کیس)",
-      "ConfigureOptions.Yolo.ModelPath": "د YOLO ماډل فایل لاره (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "د YOLO ماډل فایل لاره (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "په ثانیه کې اعظمي غوښتنې (RPS)"
     },
     "911": {
       "Title": "د پوز اټکل",
       "Description": "د پوز اټکل له لارې د کلیدي نقطو کشف، د دودیز ONNX ماډلونو یا د ډیفالټ دمخه روزل شوي YOLO ماډل (د انسان پوز پورې اړوند) په کارولو سره.",
       "ML.PoseEstimation": "د پوز اټکل فعال کړئ",
-      "ConfigureOptions.Yolo.ModelPath": "د YOLO ماډل فایل لاره (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "د YOLO ماډل فایل لاره (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "په ثانیه کې اعظمي غوښتنې (RPS)"
     },
     "912": {
       "Title": "د مثال قطع کول",
       "Description": "د مخکې له مخکې روزل شوي YOLO ماډل په کارولو سره شیان او د هغوی بڼې کشف کړئ.",
       "ML.InstanceSegmentation": "د مثال قطع کول فعال کړئ",
-      "ConfigureOptions.Yolo.ModelPath": "د YOLO ماډل فایل لاره (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "د YOLO ماډل فایل لاره (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "په ثانیه کې اعظمي غوښتنې (RPS)"
     },
     "930": {
       "Title": "د جیمني ارادې سمبالونکی",
@@ -376,9 +379,30 @@
       "Title": "د ورځني انرژۍ لنډیز",
       "Description": "د وسیلې له مخې د ورځني انرژۍ مصرف (Wh).",
       "Widget.Statistics.DailyReport": "په ورځني Wh راپور کې شامل کړئ"
+    },
+    "200": {
+      "Title": "د ویډیو ان پټ",
+      "Description": "د ژوندۍ څارنې، ریښتیني وخت پروسس کولو، او دوامداره ثبتولو لپاره آډیو او ویډیو جریانونه نیسي.",
+      "VideoInput.Disable": "دا ان پټ غیر فعال کړئ",
+      "VideoInput.SourceURL": "د ویډیو سرچینې URL",
+      "VideoInput.ImageFeed": "URL یو ژوندی تازه شوی واحد انځور فایل دی.",
+      "VideoInput.Username": "کارن نوم (اختیاري)",
+      "VideoInput.Password": "پټنوم (اختیاري)",
+      "Widget.Config.fps": "په ثانیه کې اعظمي چوکاټونه",
+      "VideoOutput.Width": "د وتلو جریان پلنوالی.",
+      "VideoOutput.SnapshotQuality": "د ژوندۍ انځور کیفیت."
+    },
+    "250": {
+      "Title": "د ویډیو ریکارډر",
+      "Description": "د هرې ان پټ سرچینې څخه آډیو او ویډیو جریانونه ثبتوي. ثبتونه دوامداره، مهالویش شوي، یا د الارم پیښو لخوا رامینځته کیدی شي.",
+      "NVR.EnableRecording": "د ویډیو ثبت کول فعال کړئ",
+      "NVR.RecordOnAlarm": "په الارم کې ثبت کول",
+      "NVR.ContinuousRecording": "دوامداره ثبت کول."
     }
   },
   "scheduler_preset_action_genie_command": "د جینی قومانده",
   "scheduler_preset_action_config_wish": "د طبیعي ژبې عمل",
-  "scheduler_preset_action_config_wish.placeholder": "هڅه وکړئ: \"تودوخه ۲۲ درجو ته تنظیم کړئ او د لمر ختو صحنه پیل کړئ\""
+  "scheduler_preset_action_config_wish.placeholder": "هڅه وکړئ: \"تودوخه ۲۲ درجو ته تنظیم کړئ او د لمر ختو صحنه پیل کړئ\"",
+  "scheduler_preset_action_command_video_record_start": "د ویډیو ثبتول پیل کړئ",
+  "scheduler_preset_action_command_video_record_stop": "د ویډیو ثبتول بند کړئ"
 }
