@@ -536,5 +536,15 @@
   "original_language": "Asl til",
   "origin_country": "Ishlab chiqaruvchi mamlakat; ta'minotchi mamlakat",
   "production_companies": "Ishlab chiqarish kompaniyasi",
-  "movie_cast": "Aktyorlar"
+  "movie_cast": "Aktyorlar",
+  "live": "Jonli",
+  "recordings": "Yozuvlar",
+  "no_recordings": "Hech qanday yozuv yo'q.",
+  "live_feed": "Jonli efir",
+  "fullscreen_exit": "To'liq ekran rejimidan chiqish",
+  "play_media": "Media ijro etish",
+  "start_recording": "Yozib olishni boshlash",
+  "stop_recording": "Yozib olishni to'xtatish",
+  "toggle_smart_recording": "Signalda avtomatik yozib olish",
+  "search_metadata": "Metadatalarni qidirish"
 }

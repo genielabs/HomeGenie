@@ -11,7 +11,7 @@ string dataFolder = Data.GetFolder();
 
 Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
     var request = Api.Parse(args);
-    
+
     dynamic data = (request.Data is string) ? JObject.Parse((string)request.Data) : JObject.FromObject(request.Data);
 
     string storeId = data?.StoreId?.ToString() ?? "default";
@@ -71,9 +71,9 @@ public class ChatMessage
 
     public static ChatMessage Create(string role, string text)
     {
-        return new ChatMessage { 
-            Role = role, 
-            Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = text } } 
+        return new ChatMessage {
+            Role = role,
+            Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = text } }
         };
     }
 }
@@ -129,11 +129,11 @@ public static class HistoryStore
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.4</PackageVersion>
+      <PackageVersion>1.0.5</PackageVersion>
       <Id>chat-history-service</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
-      <Checksum>3257E9D93488EB5073035391A0AFD9F1</Checksum>
+      <Checksum>F9D8FF9BC10DC6A37F321E56444BAA64</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>577</Address>
@@ -202,7 +202,7 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.4</PackageVersion>
+      <PackageVersion>1.0.5</PackageVersion>
       <Id>client-configs</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -246,10 +246,10 @@ var GetYamlDataPath = (string year = null, string day = null) =&gt; {
     // We pass 'year' to GetDataFilesInfo so it calculates the correct 'Last' day for that specific year
     // instead of the last day of the latest year.
     var dataFilesInfo = GetDataFilesInfo(Data.GetFolder(), YamlFileSuffix, year);
-    
+
     var y = !string.IsNullOrWhiteSpace(year) ? year : dataFilesInfo.Archive.Current;
     var d = !string.IsNullOrWhiteSpace(day) ? day : dataFilesInfo.Current;
-    
+
     return Path.Combine(Data.GetFolder(), y, $"{y}_{d}{YamlFileSuffix}");
 };
 
@@ -259,20 +259,20 @@ var GetYamlDataPath = (string year = null, string day = null) =&gt; {
 // -----------------------------------------------------------------------------
 Api.Handle(ApiUrl, (args) =&gt; {
     var request = Api.Parse(args);
-    
+
     // Parse arguments. Option(0) = Year, Command = Day.
     string reqYear = request.GetOption(0)?.Trim();
     string reqDay = request.Command?.Trim();
 
-    // Load the configuration for the requested date. 
+    // Load the configuration for the requested date.
     // If args are null, GetYamlDataPath resolves to the latest file.
     var config = LoadConfig(GetYamlDataPath(reqYear, reqDay));
-    
+
     var timeLabels = GetTimeLabels();
     var workersConfig = new List&lt;object&gt;();
 
     // Map datasets to worker configurations if valid data exists
-    if (config.Datasets != null) 
+    if (config.Datasets != null)
     {
         for (int i = 0; i &lt; config.Datasets.Count; i++)
         {
@@ -281,7 +281,7 @@ Api.Handle(ApiUrl, (args) =&gt; {
             // Build dynamic options object (camelCase for JS)
             dynamic options = new ExpandoObject();
             options.type = ds.Type;
-            
+
             // Only map properties that are explicitly set in the YAML
             if (ds.BackgroundColor != null) options.backgroundColor = ds.BackgroundColor;
             if (ds.BorderColor != null) options.borderColor = ds.BorderColor;
@@ -292,7 +292,7 @@ Api.Handle(ApiUrl, (args) =&gt; {
             workersConfig.Add(new {
                 title = ds.Label,
                 queryOptions = new {
-                    datasetIndex = i 
+                    datasetIndex = i
                 },
                 chartOptions = options
             });
@@ -302,7 +302,7 @@ Api.Handle(ApiUrl, (args) =&gt; {
     return new {
         dataApi = DataApiUrl,
         title = config.Title,
-        scale = config.Scale, 
+        scale = config.Scale,
         labels = timeLabels,
         options = config.Options,
         refreshMs = config.RefreshMs,
@@ -326,17 +326,17 @@ Api.Handle(DataApiUrl, (args) =&gt; {
     }
 
     // Mode 2: Return Specific Dataset Values
-    if (!String.IsNullOrEmpty(request.Command)) 
+    if (!String.IsNullOrEmpty(request.Command))
     {
         // Resolve path: Command is the Day. Option 0 is the Year.
         string path = GetYamlDataPath(year, request.Command.Trim());
         var config = LoadConfig(path);
-        
-        // Determine dataset index. 
+
+        // Determine dataset index.
         // If year is present, index is Option 1. If year is missing, index might be Option 0.
         int datasetIndex = 0;
         string indexOpt = !string.IsNullOrEmpty(year) ? request.GetOption(1) : request.GetOption(0);
-        
+
         if (!string.IsNullOrEmpty(indexOpt))
         {
             int.TryParse(indexOpt, out datasetIndex);
@@ -344,7 +344,7 @@ Api.Handle(DataApiUrl, (args) =&gt; {
 
         if (config != null &amp;&amp; config.Datasets != null &amp;&amp; datasetIndex &gt;= 0 &amp;&amp; datasetIndex &lt; config.Datasets.Count)
         {
-            return config.Datasets[datasetIndex].Data; 
+            return config.Datasets[datasetIndex].Data;
         }
     }
 
@@ -359,7 +359,7 @@ while (Program.IsRunning)
     var now = DateTime.Now;
     var year = now.Year.ToString();
     var day = now.DayOfYear.ToString("000"); // Zero-padding recommended for sorting (e.g., 015)
-    
+
     // Structure: /DataFolder/YYYY/YYYY_DDD_daily_stats.yaml
     var folderPath = Path.Combine(Data.GetFolder(), year);
     var filePath = Path.Combine(folderPath, $"{year}_{day}{YamlFileSuffix}");
@@ -369,7 +369,7 @@ while (Program.IsRunning)
 
     // 2. Load existing data (or create empty config if it's a new day)
     var config = LoadConfig(filePath);
-    
+
     // Initialize datasets list if new file
     if (config.Datasets == null) config.Datasets = new List&lt;YamlDataset&gt;();
 
@@ -387,8 +387,8 @@ while (Program.IsRunning)
         // Create new dataset if module is encountered for the first time
         if (dataset == null)
         {
-            dataset = new YamlDataset 
-            { 
+            dataset = new YamlDataset
+            {
                 Type = "bar", // Default chart type
                 Label = moduleId,
                 Data = new double[24].ToList() // Initialize 24 hours with 0
@@ -402,7 +402,7 @@ while (Program.IsRunning)
         // 4. Write value to the current hour slot
         // Round to 2 decimals for clean output
         dataset.Data[now.Hour] = Math.Round(wattsHour, 2);
-        
+
         dataChanged = true;
         return false; // Continue iteration
     });
@@ -414,7 +414,7 @@ while (Program.IsRunning)
     }
 
     // Wait 1 minute before next update cycle
-    Pause(60); 
+    Pause(60);
 }</ScriptSource>
     <ScriptContext>const string YamlFileSuffix = "_daily_stats.yaml";
 const string ApiUrl = "Statistics.Providers/DailyEnergyReport";
@@ -473,7 +473,7 @@ List&lt;string&gt; GetTimeLabels()
 {
     var labels = new List&lt;string&gt;();
     var start = DateTime.Today;
-    for (int i = 0; i &lt; 24; i++) 
+    for (int i = 0; i &lt; 24; i++)
     {
         labels.Add(start.AddHours(i).ToString("HH") + 'h');
     }
@@ -511,13 +511,13 @@ dynamic GetDataFilesInfo(string rootPath, string suffix, string inputYear = "")
     if (Directory.Exists(selectedYearPath))
     {
         string searchPattern = $"{currentYear}_*{suffix}";
-        
+
         foreach (string filePath in Directory.EnumerateFiles(selectedYearPath, searchPattern))
         {
             string fileName = Path.GetFileName(filePath);
-            
+
             // Extract "Day" part from "Year_Day_Suffix"
-            int prefixLength = currentYear.Length + 1; 
+            int prefixLength = currentYear.Length + 1;
             int variablePartLength = fileName.Length - prefixLength - suffix.Length;
 
             if (variablePartLength &gt; 0)
@@ -528,7 +528,7 @@ dynamic GetDataFilesInfo(string rootPath, string suffix, string inputYear = "")
         }
     }
 
-    daysList.Sort(); 
+    daysList.Sort();
 
     string currentDay = daysList.LastOrDefault() ?? "";
     string lastAvailableDay = daysList.LastOrDefault() ?? "";
@@ -553,11 +553,11 @@ dynamic GetDataFilesInfo(string rootPath, string suffix, string inputYear = "")
 /// &lt;/summary&gt;
 void SaveConfig(string filePath, YamlConfig config)
 {
-    try 
+    try
     {
         var serializer = new YamlDotNet.Serialization.SerializerBuilder()
             .WithNamingConvention(YamlDotNet.Serialization.NamingConventions.CamelCaseNamingConvention.Instance)
-            .ConfigureDefaultValuesHandling(YamlDotNet.Serialization.DefaultValuesHandling.OmitNull) 
+            .ConfigureDefaultValuesHandling(YamlDotNet.Serialization.DefaultValuesHandling.OmitNull)
             .Build();
 
         var yaml = serializer.Serialize(config);
@@ -568,16 +568,16 @@ void SaveConfig(string filePath, YamlConfig config)
         //Console.WriteLine("Error: " + ex.Message);
     }
 }</ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.4</PackageVersion>
+      <PackageVersion>1.0.5</PackageVersion>
       <Id>daily-energy-report</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
-      <Checksum>527F88D4CC12BA352EE2E60B85D7E8D6</Checksum>
+      <Checksum>C26D27C2F9B6748BF9AAA2C2DCE300EB</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>579</Address>
@@ -851,7 +851,7 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.4</PackageVersion>
+      <PackageVersion>1.0.5</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -1497,7 +1497,7 @@ public class DownloadManager : IDisposable
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.4</PackageVersion>
+      <PackageVersion>1.0.5</PackageVersion>
       <Id>download-manager</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1540,7 +1540,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.4</PackageVersion>
+      <PackageVersion>1.0.5</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1868,7 +1868,7 @@ string GetDbName()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.4</PackageVersion>
+      <PackageVersion>1.0.5</PackageVersion>
       <Id>energy-use-statistics</Id>
       <Version>1.0.9</Version>
       <Required>false</Required>
@@ -2043,7 +2043,7 @@ void InsertData(LiteDatabase db, LoggerEvent data) {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.4</PackageVersion>
+      <PackageVersion>1.0.5</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -2198,7 +2198,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.4</PackageVersion>
+      <PackageVersion>1.0.5</PackageVersion>
       <Id>file-manager</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2259,7 +2259,7 @@ public string[] GetHourLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.4</PackageVersion>
+      <PackageVersion>1.0.5</PackageVersion>
       <Id>hourly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -2721,7 +2721,7 @@ class MqttCommand: MigInterfaceCommand {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.4</PackageVersion>
+      <PackageVersion>1.0.5</PackageVersion>
       <Id>mqtt-network</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
@@ -2980,7 +2980,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.4</PackageVersion>
+      <PackageVersion>1.0.5</PackageVersion>
       <Id>openweathermap</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -3072,7 +3072,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.4</PackageVersion>
+      <PackageVersion>1.0.5</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -3164,7 +3164,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.4</PackageVersion>
+      <PackageVersion>1.0.5</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -3236,7 +3236,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.4</PackageVersion>
+      <PackageVersion>1.0.5</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -3252,6 +3252,1948 @@ while (Program.IsRunning)
     <Cloneable>false</Cloneable>
     <Type>csharp</Type>
     <IsEnabled>false</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>const string widget = "homegenie/generic/videoinput";
+const string filter = "VideoInput,Sensor:Widget.DisplayModule=" + widget;
+
+// FFMpeg Installation Check
+if (!FfmpegHelper.IsAvailable())
+{
+  Program.Notify(
+      $"The `{Program.Module.Name}` module requires **FFmpeg** to function.\n\n" +
+      $"Please install it from the official website:\n\n" +
+      $"- [https://ffmpeg.org](https://ffmpeg.org)\n\n" +
+      $"If you do not need this feature, you can disable this module\n\n" +
+      $"in the **Automation Programs** section or by clicking the button below" +
+      $"[program_disable,translate=NOTIFY.ffmpeg_required]"
+  );
+  Pause(10);
+  return false;
+}
+
+Program.Setup(() =&gt; {
+  Program
+    .AddModules(MediaVideoDomain, 1, VideoModulesCount, "VideoInput", widget)
+    .AddFeature(MediaVideoDomain, filter, VideoInputDisable, "0. Disable this input", "checkbox")
+    .AddFeature(MediaVideoDomain, filter, VideoInputSourceUrl, "1. Video Source URL", "text")
+    .AddFeature(MediaVideoDomain, filter, VideoInputImageFeed, "2. URL is a live-updated single image file", "checkbox")
+    .AddFeature(MediaVideoDomain, filter, VideoInputUsername, "3. Username (optional)", "text")
+    .AddFeature(MediaVideoDomain, filter, VideoInputPassword, "4. Password (optional)", "password")
+    .AddFeature(MediaVideoDomain, filter, WidgetConfigFps, "5. Max frames per second", "slider:1:30:1:5")
+    .AddFeature(MediaVideoDomain, filter, VideoOutputWidth, "6. Output stream width", "slider:160:3840:160:640")
+    .AddFeature(MediaVideoDomain, filter, SnapshotQuality, "7. Live image quality", "slider:1:31:1:5");
+});
+
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>// --- GLOBAL STATE ---
+// Caches active FFmpeg streamers and last known frames per camera module
+var frameCache = new Dictionary&lt;string, VideoInputCacheEntry&gt;();
+object dictionaryLock = new object();
+string baseOutputPath = Path.Combine(Data.GetFolder(), "..", "..", "media", "live");
+
+// Set default feature values
+Modules.InDomain(MediaVideoDomain).Each((m) =&gt; {
+    if (!m.HasFeature(VideoOutputWidth))
+    {
+        m.SetParameter(VideoOutputWidth, "640");
+    }
+    if (!m.HasFeature(SnapshotQuality))
+    {
+        m.SetParameter(SnapshotQuality, "5");
+    }
+    if (!m.HasFeature(WidgetConfigFps))
+    {
+        m.SetParameter(WidgetConfigFps, "5");
+    }
+    if (!m.HasParameter("NVR.Status.Recording"))
+    {
+        m.SetParameter("NVR.Status.Recording", "0");
+    }
+    return false;
+});
+
+// Thread-safe retrieval or creation of a camera's cache entry
+var GetVideoInputCacheEntry = new Func&lt;string, VideoInputCacheEntry&gt;((videoFolder) =&gt; {
+    VideoInputCacheEntry cacheEntry = null;
+    lock (dictionaryLock)
+    {
+        if (!frameCache.TryGetValue(videoFolder, out cacheEntry))
+        {
+            cacheEntry = new VideoInputCacheEntry();
+            frameCache[videoFolder] = cacheEntry;
+        }
+    }
+    return cacheEntry;
+});
+
+// Main configurator: reads module params and applies them to the FFmpeg streamer
+var checkStreamer = (string videoFolder, ModuleHelper module) =&gt; {
+
+    // 1. Read configurations
+    bool inputDisabled = module.Parameter(VideoInputDisable).Value == "On";
+    string feedUrl = module.Parameter(VideoInputSourceUrl).Value;
+    string user = module.Parameter(VideoInputUsername).Value;
+    string pass = module.Parameter(VideoInputPassword).Value;
+    double fpsVal = module.Parameter(WidgetConfigFps).DecimalValue;
+    if (fpsVal &lt;= 0.1) fpsVal = 1;
+
+    // Determine if FFmpeg should Pull from URL or wait for Pushed frames from C#
+    string ffmpegMode = (module.Parameter(VideoInputImageFeed).Value == "On") ? InputModePush : InputModePull;
+    var inputMode = (ffmpegMode == InputModePush) ? FfmpegInputMode.Push : FfmpegInputMode.Pull;
+
+    // 2. Output params setup (HLS Live stream &amp; UI Snapshot)
+    bool hlsEnabled = true;
+    bool snapshotEnabled = true;
+    string hlsOutputPath = Path.Combine(baseOutputPath, videoFolder);
+    string snapshotOutputPath = Path.Combine(baseOutputPath, videoFolder, "image.jpg");
+
+    if (!Directory.Exists(hlsOutputPath))
+    {
+        Directory.CreateDirectory(hlsOutputPath);
+    }
+
+    VideoInputCacheEntry cacheEntry = GetVideoInputCacheEntry(videoFolder);
+
+    // 3. Apply config and start/stop streamer
+    if (!inputDisabled &amp;&amp; (hlsEnabled || snapshotEnabled))
+    {
+        if (cacheEntry.Streamer == null) cacheEntry.Streamer = new FfmpegStreamer(Net);
+
+        int hlsTime = 3; int hlsListSize = 4;
+        int outputWidth = (int)module.Parameter(VideoOutputWidth).DecimalValue;
+        int snapshotQuality = (int)module.Parameter(SnapshotQuality).DecimalValue;
+
+        // Configure() handles restarting FFmpeg internally ONLY if params actually changed
+        cacheEntry.Streamer.Configure(
+            inputMode, feedUrl, user, pass, (int)fpsVal, outputWidth,
+            hlsEnabled, hlsOutputPath, hlsTime, hlsListSize,
+            snapshotEnabled, snapshotOutputPath, snapshotQuality
+        );
+
+        if (!cacheEntry.Streamer.IsRunning)
+        {
+            cacheEntry.Streamer.Start();
+
+            // Publish HLS stream details for NVR/Recorder modules
+            string playlistPath = Path.Combine(hlsOutputPath, "playlist.m3u8");
+            int preBufferDuration = hlsTime * hlsListSize;
+
+            if (playlistPath != module.Parameter("NVR.StreamPath").Value)
+            {
+                module.Emit("NVR.StreamPath", playlistPath);
+                module.Emit("NVR.StreamBuffer", preBufferDuration);
+            }
+        }
+    }
+    else
+    {
+        if (cacheEntry.Streamer != null) cacheEntry.Streamer.Stop();
+    }
+};
+
+// --- EVENT LISTENERS ---
+
+// Listen for errors reported by the NVR recorder (e.g., live stream died). Force a check/restart.
+When.ModuleParameterChanged((module, parameter) =&gt; {
+    if (module.Instance.Domain == MediaVideoDomain &amp;&amp; parameter.Is("NVR.Status.Error") &amp;&amp; parameter.Value == "encoder_not_ready")
+    {
+        string videoFolder = Path.Combine(module.Instance.Domain.Replace(":", "@"), module.Instance.Address);
+        checkStreamer(videoFolder, module);
+        module.Emit("NVR.Status.Error", ""); // reset state
+    }
+    return true;
+});
+
+
+// --- REST API INTERFACE ---
+
+// Handle all UI/Frontend requests in "Media.Video" domain
+Api.Handle($"{MediaVideoDomain}/", ( args ) =&gt; {
+  var request = Api.Parse(args);
+  object responseData = new ResponseStatus(Status.Error, "An error occurred processing this request.");
+
+  try
+  {
+    string videoFolder = Path.Combine(request.Domain.Replace(":", "@"), request.Address);
+    string command = request.Command;
+
+    VideoInputCacheEntry cacheEntry = GetVideoInputCacheEntry(videoFolder);
+
+    var inputModules = Modules.InDomain(MediaVideoDomain);
+    var module = inputModules.WithAddress(request.Address).Get();
+    if (module == null) return responseData;
+
+    // Ensure streamer is running before fulfilling the request
+    checkStreamer(videoFolder, module);
+
+    switch(command)
+    {
+      case "Camera.GetPicture":
+        bool inputDisabled = module.Parameter(VideoInputDisable).Value == "On";
+        if (inputDisabled) return null;
+        bool snapshotEnabled = true;
+        string snapshotOutputPath = Path.Combine(baseOutputPath, videoFolder, "image.jpg");
+
+        if (snapshotEnabled &amp;&amp; !string.IsNullOrEmpty(snapshotOutputPath))
+        {
+            responseData = null; // Clear default error response
+            try
+            {
+                if (File.Exists(snapshotOutputPath))
+                {
+                    DateTime lastWriteTime = File.GetLastWriteTimeUtc(snapshotOutputPath);
+                    TimeSpan fileAge = DateTime.UtcNow - lastWriteTime;
+
+                    if (fileAge.TotalSeconds &gt; 5 &amp;&amp; !cacheEntry.Streamer.IsRunning)
+                    {
+                        // Snapshot is stale AND FFmpeg is dead. Delete stale file and attempt restart.
+                        try { File.Delete(snapshotOutputPath); } catch (IOException) { /* ignored */ }
+                        cacheEntry.Streamer.Start();
+                    }
+                    else
+                    {
+                        // File is fresh, OR FFmpeg is running but delayed (e.g., waiting for keyframe).
+                        byte[] fileBytes = File.ReadAllBytes(snapshotOutputPath);
+                        cacheEntry.HttpImageData = fileBytes;
+                        responseData = fileBytes;
+                    }
+                }
+            }
+            catch (IOException)
+            {
+                // ignored
+            }
+
+            if (responseData == null &amp;&amp; cacheEntry.HttpImageData != null)
+            {
+                // fallback to last good frame
+                responseData = cacheEntry.HttpImageData;
+            }
+        }
+        else
+        {
+            // Fallback logic
+            if (cacheEntry.HttpImageData != null) responseData = cacheEntry.HttpImageData;
+        }
+        break;
+    }
+  }
+  catch (Exception e)
+  {
+    Program.Notify("Video Input ERROR!", e.Message);
+  }
+  return responseData;
+});
+
+When.ProgramStopping(() =&gt;
+{
+    foreach(var entry in frameCache.Values)
+    {
+        if (entry.Streamer != null) entry.Streamer.Stop();
+    }
+    frameCache.Clear();
+    return true;
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptContext>#using System.Diagnostics
+
+const int VideoModulesCount = 5;
+const string MediaVideoDomain = "Media.Video";
+const string VideoInputDisable = "VideoInput.Disable";
+const string VideoInputSourceUrl = "VideoInput.SourceURL";
+const string VideoInputImageFeed = "VideoInput.ImageFeed";
+const string VideoInputUsername = "VideoInput.Username";
+const string VideoInputPassword = "VideoInput.Password";
+const string VideoOutputWidth = "VideoOutput.Width";
+const string SnapshotQuality = "VideoOutput.SnapshotQuality";
+const string WidgetConfigFps = "Widget.Config.fps";
+
+const string InputModePush = "Push";
+const string InputModePull = "Pull";
+
+public class VideoInputCacheEntry
+{
+    public byte[] HttpImageData { get; set; }
+    public DateTime LastHttpFetch { get; set; }
+
+    public object HttpSyncRoot { get; set; } = new object();
+    public bool IsInitializing { get; set; } = true;
+
+    public FfmpegStreamer Streamer { get; set; }
+}
+
+public enum FfmpegInputMode
+{
+    Pull, // FFmpeg connects to a URL
+    Push  // C# pushes frames into FFmpeg
+}
+
+public class FfmpegStreamer
+{
+    private Process _process;
+    private FfmpegInputMode _mode;
+
+    // Configuration properties
+    private string _url, _user, _pass;
+    private int _fps, _width;
+    private int _hlsTime, _hlsListSize;
+    private int _snapshotQuality;
+    private bool _enableHls, _enableSnapshot;
+    private string _hlsOutputPath, _snapshotOutputPath;
+
+    private CancellationTokenSource _cts;
+    private byte[] _lastFrame;
+    private readonly object _frameLock = new object();
+
+    public bool IsRunning { get; private set; } = false;
+    private NetHelper netHelper;
+
+    // Event to notify parent if the process dies unexpectedly
+    public event EventHandler ProcessExited;
+
+    public FfmpegStreamer(NetHelper net)
+    {
+        netHelper = net;
+    }
+
+    public void Configure(FfmpegInputMode mode, string url, string user, string pass, int fps, int width,
+                          bool enableHls, string hlsOutputPath, int hlsTime, int hlsListSize,
+                          bool enableSnapshot, string snapshotOutputPath, int snapshotQuality)
+    {
+        // Restart ffmpeg if configuration changed
+        if (mode != _mode || url != _url || fps != _fps || width != _width
+            || enableHls != _enableHls || hlsOutputPath != _hlsOutputPath
+            || hlsTime != _hlsTime || hlsListSize != _hlsListSize
+            || enableSnapshot != _enableSnapshot || snapshotOutputPath != _snapshotOutputPath
+            || snapshotQuality != _snapshotQuality)
+        {
+            Stop();
+
+            _mode = mode; _url = url; _user = user; _pass = pass; _fps = fps; _width = width;
+            _enableHls = enableHls; _hlsOutputPath = hlsOutputPath;
+            _hlsTime = hlsTime;
+            _hlsListSize = hlsListSize;
+            _enableSnapshot = enableSnapshot; _snapshotOutputPath = snapshotOutputPath;
+            _snapshotQuality = snapshotQuality;
+        }
+    }
+
+    public void Start()
+    {
+        if (IsRunning) return;
+
+        if (_mode == FfmpegInputMode.Pull &amp;&amp; string.IsNullOrEmpty(_url)) return;
+        if (!_enableHls &amp;&amp; !_enableSnapshot) return;
+
+        IsRunning = true;
+        _cts = new CancellationTokenSource();
+
+        var argsBuilder = new StringBuilder();
+
+        // CORREZIONE: Mettiamo -y (overwrite) QUI, così vale per TUTTI i modi (Push e Pull).
+        // Essenziale ora che non cancelliamo più la cartella intera.
+        argsBuilder.Append("-y ");
+
+        // --- INPUT CONFIGURATION ---
+        if (_mode == FfmpegInputMode.Push)
+        {
+            // Push mode: FFmpeg expects a JPEG image stream from Standard Input
+            argsBuilder.Append($"-framerate {_fps} -f image2pipe -vcodec mjpeg -i - ");
+        }
+        else // Pull mode
+        {
+            string inputUrl = _url;
+            bool isNetworkStream = inputUrl.Contains("://");
+            bool isRtsp = inputUrl.StartsWith("rtsp", StringComparison.OrdinalIgnoreCase);
+
+            // Infinite loop for local files to prevent "10-second loop" issue
+            if (!isNetworkStream)
+            {
+                argsBuilder.Append("-stream_loop -1 ");
+            }
+
+            if (isNetworkStream)
+            {
+                if (isRtsp)
+                    argsBuilder.Append("-rtsp_transport tcp -st_timeout 5000000 ");
+                else
+                    argsBuilder.Append("-reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 5 ");
+            }
+            else
+            {
+                // -re reads the input at native framerate
+                argsBuilder.Append("-re ");
+            }
+
+            argsBuilder.Append($"-i \"{inputUrl}\" ");
+        }
+
+        // --- OUTPUT CONFIGURATION ---
+        PrepareOutputDirectories();
+
+        argsBuilder.Append("-loglevel error ");
+
+        if (_enableHls)
+        {
+            string hlsFilters = $"fps={_fps}";
+            if (_width &gt; 0) hlsFilters += $",scale={_width}:-2";
+
+            string playlistPath = Path.Combine(_hlsOutputPath, "playlist.m3u8");
+
+            int gop = _fps * 2;
+
+            argsBuilder.Append($"-map 0:v -map 0:a? -vf \"{hlsFilters}\" -c:v libx264 -preset ultrafast -tune zerolatency -crf 28 -pix_fmt yuv420p -g {gop} -sc_threshold 0 -c:a aac -b:a 128k ");
+            argsBuilder.Append($"-f fifo -fifo_format hls -drop_pkts_on_overflow 1 -attempt_recovery 1 -recover_any_error 1 ");
+            argsBuilder.Append($"-format_opts \"hls_time={_hlsTime}:hls_list_size={_hlsListSize}:hls_flags=delete_segments\" \"{playlistPath}\" ");
+        }
+
+        if (_enableSnapshot)
+        {
+            string snapshotFilters = $"fps={(_fps &lt; 30 ? _fps : 30)}";
+            if (_width &gt; 0) snapshotFilters += $",scale={_width}:-2";
+
+            argsBuilder.Append($"-vf \"{snapshotFilters}\" -fps_mode cfr -f image2 -update 1 -atomic_writing 1 -q:v {_snapshotQuality} \"{_snapshotOutputPath}\"");
+        }
+
+        try
+        {
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = "ffmpeg",
+                Arguments = argsBuilder.ToString(),
+                RedirectStandardInput = (_mode == FfmpegInputMode.Push),
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            _process = new Process { StartInfo = startInfo };
+
+            _process.ErrorDataReceived += (s, e) =&gt; {
+                if (!string.IsNullOrWhiteSpace(e.Data))
+                {
+                    Console.WriteLine($"FFMPEG ERR [{_url}]: {e.Data}");
+                }
+            };
+
+            _process.Start();
+            _process.BeginErrorReadLine();
+
+            Task.Run(() =&gt; MonitorProcessAsync(_cts.Token));
+
+            if (_mode == FfmpegInputMode.Push)
+            {
+                Task.Run(() =&gt; FetchLoopAsync(_cts.Token));
+                Task.Run(() =&gt; FeedLoopAsync(_cts.Token));
+            }
+        }
+        catch (Exception ex)
+        {
+            IsRunning = false;
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// Monitors the FFmpeg process to detect unexpected exits.
+    /// &lt;/summary&gt;
+    private async Task MonitorProcessAsync(CancellationToken ct)
+    {
+        try
+        {
+            while (!ct.IsCancellationRequested &amp;&amp; _process != null)
+            {
+                if (_process.HasExited)
+                {
+                    IsRunning = false;
+                    ProcessExited?.Invoke(this, EventArgs.Empty);
+                    break;
+                }
+                await Task.Delay(1000, ct);
+            }
+        }
+        catch {}
+    }
+
+    private async Task FetchLoopAsync(CancellationToken ct)
+    {
+        int intervalMs = (int)Math.Ceiling(1000.0 / _fps);
+
+        while (!ct.IsCancellationRequested &amp;&amp; _process != null &amp;&amp; !_process.HasExited)
+        {
+            if (string.IsNullOrWhiteSpace(_url))
+            {
+                await Task.Delay(1000, ct);
+                continue;
+            }
+
+            var watch = Stopwatch.StartNew();
+            try
+            {
+                // Async download
+                byte[] newBytes = await Task.Run(() =&gt;
+                    netHelper.WebService(_url).WithCredentials(_user, _pass).GetBytes(), ct);
+
+                if (newBytes != null &amp;&amp; newBytes.Length &gt; 0)
+                {
+                    lock (_frameLock)
+                    {
+                        _lastFrame = newBytes;
+                    }
+                }
+            }
+            catch
+            {
+                // Log fetch error
+            }
+
+            watch.Stop();
+
+            // Calculate delay to maintain download refresh rate
+            int delay = intervalMs - (int)watch.ElapsedMilliseconds;
+            if (delay &gt; 0)
+                await Task.Delay(delay, ct);
+        }
+    }
+
+    private async Task FeedLoopAsync(CancellationToken ct)
+    {
+        int intervalMs = (int)Math.Ceiling(1000.0 / _fps);
+
+        while (!ct.IsCancellationRequested &amp;&amp; _process != null &amp;&amp; !_process.HasExited)
+        {
+            var watch = Stopwatch.StartNew();
+
+            byte[] frameToSend = null;
+            lock (_frameLock)
+            {
+                frameToSend = _lastFrame;
+            }
+
+            if (frameToSend != null)
+            {
+                try
+                {
+                    // Write to FFmpeg pipe
+                    await _process.StandardInput.BaseStream.WriteAsync(frameToSend, 0, frameToSend.Length, ct);
+                    await _process.StandardInput.BaseStream.FlushAsync(ct);
+                }
+                catch
+                {
+                    // If pipe is broken, stop
+                    break;
+                }
+            }
+
+            watch.Stop();
+
+            // Precise timing for constant feed
+            int delay = intervalMs - (int)watch.ElapsedMilliseconds;
+            if (delay &gt; 0)
+                await Task.Delay(delay, ct);
+            else
+                await Task.Yield(); // Force thread yield if lagging
+        }
+    }
+
+    public void Stop()
+    {
+        IsRunning = false; // Flag immediately
+        _cts?.Cancel();
+
+        try
+        {
+            if (_process != null &amp;&amp; !_process.HasExited)
+            {
+                // Give it a chance to close gracefully (important for mp4 atom writing)
+                if (_mode == FfmpegInputMode.Push) _process.StandardInput.Close();
+
+                if (!_process.WaitForExit(500))
+                    _process.Kill();
+            }
+        } catch {}
+
+        _process = null;
+        _cts = null;
+    }
+
+    private void PrepareOutputDirectories()
+    {
+        // Safe creation
+        if (!string.IsNullOrEmpty(_hlsOutputPath)) Directory.CreateDirectory(_hlsOutputPath);
+        if (!string.IsNullOrEmpty(_snapshotOutputPath)) Directory.CreateDirectory(Path.GetDirectoryName(_snapshotOutputPath));
+
+        // Cleanup: Remove old files only, DO NOT delete the directory itself to avoid 404 errors on the client side
+        try
+        {
+            if (Directory.Exists(_hlsOutputPath))
+            {
+                foreach (var file in Directory.GetFiles(_hlsOutputPath, "*.m3u8")) File.Delete(file);
+                foreach (var file in Directory.GetFiles(_hlsOutputPath, "*.ts")) File.Delete(file);
+            }
+        }
+        catch {}
+    }
+}
+
+public static class FfmpegHelper
+{
+    private static bool? _isAvailable = null;
+
+    public static bool IsAvailable()
+    {
+        if (_isAvailable.HasValue) return _isAvailable.Value;
+
+        try
+        {
+            var p = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "ffmpeg",
+                    Arguments = "-version",
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                }
+            };
+
+            p.Start();
+            p.WaitForExit(2000);
+
+            _isAvailable = (p.ExitCode == 0);
+        }
+        catch (Exception)
+        {
+            _isAvailable = false;
+        }
+
+        return _isAvailable.Value;
+    }
+}
+</ScriptContext>
+    <ScriptErrors />
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.5</PackageVersion>
+      <Id>video-input</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>647609ECAAA8C3B2E44C1E4E90C7EAE6</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>200</Address>
+    <Name>Video Input</Name>
+    <Description>Captures audio and video streams for live monitoring, real-time processing, and continuous recording.</Description>
+    <Group>Devices and Things</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>Media.Video</ForDomains>
+        <ForTypes>VideoInput,Sensor:Widget.DisplayModule=homegenie/generic/videoinput</ForTypes>
+        <Property>VideoInput.Disable</Property>
+        <Description>0. Disable this input</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>Media.Video</ForDomains>
+        <ForTypes>VideoInput,Sensor:Widget.DisplayModule=homegenie/generic/videoinput</ForTypes>
+        <Property>VideoInput.SourceURL</Property>
+        <Description>1. Video Source URL</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains>Media.Video</ForDomains>
+        <ForTypes>VideoInput,Sensor:Widget.DisplayModule=homegenie/generic/videoinput</ForTypes>
+        <Property>VideoInput.ImageFeed</Property>
+        <Description>2. URL is a live-updated single image file</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>text</FieldType>
+        <ForDomains>Media.Video</ForDomains>
+        <ForTypes>VideoInput,Sensor:Widget.DisplayModule=homegenie/generic/videoinput</ForTypes>
+        <Property>VideoInput.Username</Property>
+        <Description>3. Username (optional)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>password</FieldType>
+        <ForDomains>Media.Video</ForDomains>
+        <ForTypes>VideoInput,Sensor:Widget.DisplayModule=homegenie/generic/videoinput</ForTypes>
+        <Property>VideoInput.Password</Property>
+        <Description>4. Password (optional)</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:1:30:1:5</FieldType>
+        <ForDomains>Media.Video</ForDomains>
+        <ForTypes>VideoInput,Sensor:Widget.DisplayModule=homegenie/generic/videoinput</ForTypes>
+        <Property>Widget.Config.fps</Property>
+        <Description>5. Max frames per second</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:160:3840:160:640</FieldType>
+        <ForDomains>Media.Video</ForDomains>
+        <ForTypes>VideoInput,Sensor:Widget.DisplayModule=homegenie/generic/videoinput</ForTypes>
+        <Property>VideoOutput.Width</Property>
+        <Description>6. Output stream width</Description>
+      </ProgramFeature>
+      <ProgramFeature>
+        <FieldType>slider:1:31:1:5</FieldType>
+        <ForDomains>Media.Video</ForDomains>
+        <ForTypes>VideoInput,Sensor:Widget.DisplayModule=homegenie/generic/videoinput</ForTypes>
+        <Property>VideoOutput.SnapshotQuality</Property>
+        <Description>7. Live image quality</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.Setup(() =&gt; {
+
+  Program
+    .AddFeature(
+      "",
+      VideoInputType,
+      RecordOnAlarm,
+      "Record On Alarm",
+      "checkbox"
+    );
+
+});
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>// Dictionary to track active workers using Module Address as Key
+var activeWorkers = new Dictionary&lt;string, CameraWorker&gt;();
+
+// Define the dynamic collection ONCE outside the loop
+var videoModules = Modules.OfDeviceType(VideoInputType);
+
+// Ensure cleanup on stop/update
+When.ProgramStopping(() =&gt; {
+    Program.Notify("NVR System", "Stopping all recorders...");
+    // Stop all running workers safely
+    // We convert values to a list to avoid modification errors during enumeration
+    var workerList = new List&lt;CameraWorker&gt;(activeWorkers.Values);
+    foreach (var w in workerList)
+    {
+        w.Stop();
+    }
+    activeWorkers.Clear();
+    return true;
+});
+
+
+Api.Handle("HomeAutomation.HomeGenie/NVR/Recordings.Start", (args) =&gt; {
+    var request = Api.Parse(args);
+    var cameraModule = Modules
+        .InDomain(WebUtility.UrlDecode(request.Domain))
+        .WithAddress(WebUtility.UrlDecode(request.Address))
+        .Get();
+    if (cameraModule.Exists)
+    {
+        cameraModule.Emit(ContinuousRecording, "On");
+        return new ResponseStatus(Status.Ok);
+    }
+    return null;
+});
+
+Api.Handle("HomeAutomation.HomeGenie/NVR/Recordings.Stop", (args) =&gt; {
+    var request = Api.Parse(args);
+    var cameraModule = Modules
+        .InDomain(WebUtility.UrlDecode(request.Domain))
+        .WithAddress(WebUtility.UrlDecode(request.Address))
+        .Get();
+    if (cameraModule.Exists)
+    {
+        cameraModule.Emit(ContinuousRecording, "");
+        return new ResponseStatus(Status.Ok);
+    }
+    return null;
+});
+
+Api.Handle("HomeAutomation.HomeGenie/NVR/Recordings.Check", (args) =&gt; {
+    if (!Int32.TryParse(args?.ToString(), out int daysToDelete))
+    {
+        daysToDelete = 7;
+    }
+    var deletedFolders = new List&lt;string&gt;();
+    videoModules.Each((module) =&gt; {
+        var mr = new ModuleReference(){ Domain = module.Instance.Domain, Address = module.Instance.Address };
+        string folder = NvrHelper.GetSafeModulePath(Data.GetFolder(RecordingsFolder), mr);
+        deletedFolders.AddRange(NvrHelper.DeleteOldDirectories(folder, daysToDelete));
+        return false; // Continue iteration
+    });
+    return deletedFolders;
+});
+
+Api.Handle("HomeAutomation.HomeGenie/NVR/Recordings.List", (args) =&gt; {
+    var request = Api.Parse(args);
+    var cameraModule = Modules
+        .InDomain(WebUtility.UrlDecode(request.Domain))
+        .WithAddress(WebUtility.UrlDecode(request.Address))
+        .Get();
+    if (cameraModule.Exists)
+    {
+        return NvrHelper.GetRecordings(Data.GetFolder(RecordingsFolder), cameraModule, request.Command);
+    }
+    return null;
+});
+
+
+Api.Handle("HomeAutomation.HomeGenie/NVR/Recordings.Days", (args) =&gt; {
+    var request = Api.Parse(args);
+    var cameraModule = Modules
+        .InDomain(WebUtility.UrlDecode(request.Domain))
+        .WithAddress(WebUtility.UrlDecode(request.Address))
+        .Get();
+    if (cameraModule.Exists)
+    {
+        return NvrHelper.GetRecordingFolders(Data.GetFolder(RecordingsFolder), cameraModule);
+    }
+    return null;
+});
+
+
+Api.Handle("HomeAutomation.HomeGenie/NVR/Recordings.Thumbnail", (args) =&gt; {
+    var request = Api.Parse(args);
+
+    var cameraModule = Modules
+        .InDomain(WebUtility.UrlDecode(request.Domain))
+        .WithAddress(WebUtility.UrlDecode(request.Address))
+        .Get();
+
+    if (cameraModule.Exists)
+    {
+        try
+        {
+            // Command contains the date (e.g. "20260215")
+            string dateFolder = request.Command;
+
+            // GetOption(0) contains the time of the folder (e.g. "103336")
+            string timeFolder = request.GetOption(0);
+
+            // GetOption(1) contains the offset in seconds (e.g. "15" or "10.5")
+            string offsetStr = request.GetOption(1);
+            // Basic parameter validation
+            if (!string.IsNullOrEmpty(dateFolder) &amp;&amp;
+                !string.IsNullOrEmpty(timeFolder) &amp;&amp;
+                !string.IsNullOrEmpty(offsetStr))
+            {
+                double offset = 0;
+                // Safe parsing of doubles (Culture invariant for semicolon handling)
+                double.TryParse(offsetStr, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out offset);
+
+                // Thumbnail URL Generation
+                return ThumbnailHelper.GetThumbnailWithCache(Data.GetFolder(RecordingsFolder), cameraModule, dateFolder, timeFolder, offset);
+            }
+        }
+        catch (Exception ex)
+        {
+            return new { Error = ex.Message };
+        }
+    }
+
+    return request; // empy object {}
+});
+
+
+// Main loop to monitor configuration changes
+while (Program.IsRunning)
+{
+    try
+    {
+        // List to keep track of modules that SHOULD be running in this iteration
+        var validAddresses = new List&lt;string&gt;();
+
+        // 1. ITERATE DYNAMIC COLLECTION &amp; START NEW WORKERS
+        videoModules.Each((module) =&gt; {
+            string cameraId = module.Instance.Domain + ":" + module.Instance.Address;
+            validAddresses.Add(cameraId);
+
+            // If we don't have a worker for this address yet, create and start it
+            if (!activeWorkers.ContainsKey(cameraId))
+            {
+                try
+                {
+                    //Program.Notify("NVR System", "Starting new worker for: " + cameraId);
+                    var worker = new CameraWorker(Data.GetFolder(RecordingsFolder), Modules, module.Instance.Domain, module.Instance.Address);
+                    worker.Start();
+                    activeWorkers.Add(cameraId, worker);
+                }
+                catch (Exception ex)
+                {
+                    Program.Notify("NVR Error", "Failed to start " + cameraId + ": " + ex.Message);
+                }
+            }
+            return false; // Continue iteration
+        });
+
+        // 2. STOP OBSOLETE WORKERS
+        var workersToRemove = new List&lt;string&gt;();
+
+        foreach (var kvp in activeWorkers)
+        {
+            string workerAddr = kvp.Key;
+
+            // If the active worker is NOT in the list we just built, it means the feature was disabled
+            if (!validAddresses.Contains(workerAddr))
+            {
+                //Program.Notify("NVR System", "Feature disabled. Stopping worker: " + workerAddr);
+                kvp.Value.Stop();
+                workersToRemove.Add(workerAddr);
+            }
+        }
+
+        // 3. CLEANUP DICTIONARY
+        foreach (var addr in workersToRemove)
+        {
+            activeWorkers.Remove(addr);
+        }
+    }
+    catch (Exception ex)
+    {
+        Program.Notify("NVR Loop Error", ex.Message);
+    }
+
+    // Check for configuration changes every 5 seconds.
+    Pause(5);
+}</ScriptSource>
+    <ScriptContext>#using System.Diagnostics
+
+const string RecordOnAlarm = "NVR.RecordOnAlarm";
+const string ContinuousRecording = "NVR.ContinuousRecording";
+
+const string VideoInputType = "VideoInput,Sensor:Widget.DisplayModule=homegenie/generic/videoinput";
+
+static string RecordingsFolder = Path.Combine("..", "media", "nvr");
+
+/// &lt;summary&gt;
+/// Worker class responsible for capturing video streams or frames from a specific camera module.
+/// It handles recording lifecycles, hourly file rotation, watchdog monitoring, and frame pacing.
+/// &lt;/summary&gt;
+public class CameraWorker
+{
+    // --- Constants for Parameter Names ---
+    private const string ParamStreamPath = "NVR.StreamPath";
+    private const string ParamStreamBuffer = "NVR.StreamBuffer";
+    private const string ParamFps = "Widget.Config.fps";
+    private const string ParamRecordOnAlarm = "NVR.RecordOnAlarm";     // Assumed name based on context
+    private const string ParamContinuous = "NVR.ContinuousRecording";  // Assumed name based on context
+    private const string ParamStatusError = "NVR.Status.Error";
+    private const string ParamStatusRecording = "NVR.Status.Recording";
+    private const string CmdGetPicture = "Camera.GetPicture";
+
+    // --- Core Dependencies ---
+    private readonly ModulesManager _modules;
+    private readonly ModuleReference _moduleRef = new ModuleReference();
+    private readonly FFmpegRecorder _recorder;
+    private Thread _workerThread;
+
+    // --- State Flags ---
+    private volatile bool _shouldStop = false;
+
+    // --- Configurations ---
+    private readonly double _defaultFps = 15.0;
+    private string _baseOutputFolder;
+
+    /// &lt;summary&gt;
+    /// Initializes a new instance of the camera worker.
+    /// &lt;/summary&gt;
+    /// &lt;param name="outputFolder"&gt;The root directory for NVR recordings.&lt;/param&gt;
+    /// &lt;param name="modules"&gt;The global modules manager.&lt;/param&gt;
+    /// &lt;param name="moduleDomain"&gt;The domain of the camera module.&lt;/param&gt;
+    /// &lt;param name="moduleAddress"&gt;The address of the camera module.&lt;/param&gt;
+    public CameraWorker(string outputFolder, ModulesManager modules, string moduleDomain, string moduleAddress)
+    {
+        _modules = modules;
+        _moduleRef.Domain = moduleDomain;
+        _moduleRef.Address = moduleAddress;
+
+        _recorder = new FFmpegRecorder();
+
+        // Resolve the specific output path for this camera
+        _baseOutputFolder = NvrHelper.GetSafeModulePath(outputFolder, _moduleRef);
+    }
+
+    /// &lt;summary&gt;
+    /// Starts the capture loop in a background thread.
+    /// &lt;/summary&gt;
+    public void Start()
+    {
+        if (_workerThread != null &amp;&amp; _workerThread.IsAlive) return;
+
+        _shouldStop = false;
+        _workerThread = new Thread(CaptureLoop)
+        {
+            IsBackground = true,
+            Name = $"Worker[{_moduleRef.Domain}:{_moduleRef.Address}]"
+        };
+        _workerThread.Start();
+    }
+
+    /// &lt;summary&gt;
+    /// Stops the capture loop and finalizes the recording.
+    /// &lt;/summary&gt;
+    public void Stop()
+    {
+        _shouldStop = true;
+        if (_workerThread != null &amp;&amp; _workerThread.IsAlive)
+        {
+            // Wait gracefully, then force if necessary
+            if (!_workerThread.Join(2000))
+                _workerThread.Interrupt();
+        }
+        _recorder.Stop(0);
+    }
+
+    /// &lt;summary&gt;
+    /// Main loop handling the logic for fetching frames, monitoring state, and managing FFmpeg.
+    /// &lt;/summary&gt;
+    private void CaptureLoop()
+    {
+        // Use TickCount64 to track frame pacing and avoid drift over time
+        long nextFrameTick = Environment.TickCount64;
+
+        DateTime lastRestartHour = DateTime.MinValue;
+        DateTime lastRecordingPing = DateTime.MinValue;
+        DateTime lastErrorTs = DateTime.MinValue;
+
+        bool isFrameByFrameMode = false;
+        byte[] lastValidFrame = null;
+
+        while (!_shouldStop)
+        {
+            try
+            {
+                // Always refresh the module reference to handle external restarts/updates of the Video Input program
+                var module = _modules
+                    .InDomain(_moduleRef.Domain)
+                    .WithAddress(_moduleRef.Address)
+                    .Get();
+
+                if (module == null)
+                {
+                    Thread.Sleep(1000);
+                    continue;
+                }
+
+                // --- 1. Read Parameters ---
+                var localStreamPath = module.Parameter(ParamStreamPath);
+                var preBufferSeconds = module.Parameter(ParamStreamBuffer);
+
+                double fps = module.Parameter(ParamFps).DecimalValue;
+                if (fps &lt;= 0) fps = _defaultFps;
+
+                // If no stream path is provided, we fall back to frame-by-frame (GetPicture) mode
+                isFrameByFrameMode = string.IsNullOrWhiteSpace(localStreamPath.Value);
+
+                var recordOnAlarmParam = module.Parameter(ParamRecordOnAlarm);
+                var continuousRecordingParam = module.Parameter(ParamContinuous);
+
+                // --- 2. Frame Pacing (FPS Control) ---
+                long nowTick = Environment.TickCount64;
+                int waitMs = (int)(nextFrameTick - nowTick);
+
+                // Minimum sleep to prevent CPU spinning, even if we are behind schedule
+                if (waitMs &lt; 5) waitMs = 5;
+                Thread.Sleep(waitMs);
+
+                int frameIntervalMs = (int)((1.0 / fps) * 1000);
+                nextFrameTick += frameIntervalMs;
+
+                // Drift Correction: If we are lagging significantly (&gt; 2 seconds),
+                // reset the timer to current time to avoid a burst of catch-up frames.
+                if (nowTick &gt; nextFrameTick + 2000)
+                {
+                    nextFrameTick = nowTick + frameIntervalMs;
+                }
+
+                // --- 3. Trigger Logic ---
+                bool recordOnAlarm = (recordOnAlarmParam.Value == "On");
+                bool continuousRecording = (continuousRecordingParam.Value == "On");
+
+                bool isTriggered = continuousRecording || (recordOnAlarm &amp;&amp; IsAlarmed(module));
+                DateTime now = DateTime.Now;
+
+                // --- 4. Watchdog / Error Reporting ---
+                // If we should be recording but the recorder isn't active, report an error periodically.
+                if (isTriggered &amp;&amp; !_recorder.IsRecording &amp;&amp; ((now - lastErrorTs).TotalSeconds &gt; 15))
+                {
+                    lastErrorTs = now;
+                    module.Emit(ParamStatusError, "encoder_not_ready");
+                }
+
+                // --- Start/Stop &amp; Hourly Logic ---
+
+                // Determine mode early (needed for both Start logic and Frame pushing later)
+                bool canUseCopyMode = !string.IsNullOrWhiteSpace(localStreamPath.Value);
+
+                // 1. Start/Stop Logic
+                // We handle this FIRST to ensure we restart immediately after an hourly cut
+                if (isTriggered &amp;&amp; !_recorder.IsRecording &amp;&amp; (now - lastRestartHour).TotalSeconds &gt; 10)
+                {
+                    lastRestartHour = now; // Mark session start (resets the debounce timer)
+                    lastErrorTs = now;
+
+                    if (canUseCopyMode)
+                    {
+                        // Mode A: Stream Copy
+                        _recorder.Start(_baseOutputFolder, fps, localStreamPath.Value, preBufferSeconds.DecimalValue);
+                    }
+                    else
+                    {
+                        // Mode B: Frame-by-Frame
+                        _recorder.Start(_baseOutputFolder, fps);
+                    }
+                }
+                else if (!isTriggered &amp;&amp; _recorder.IsRecording)
+                {
+                    // Stop if trigger ceased
+                    _recorder.Stop((int)(preBufferSeconds.DecimalValue * 1000));
+                    module.Emit(ParamStatusRecording, "0");
+                    lastErrorTs = now;
+                }
+
+                // 2. Hourly Recording Segmentation
+                // Check if we need to rotate the file.
+                // We do NOT update 'lastRestartHour' here to allow the 'Start Logic' above
+                // to trigger immediately in the next loop iteration.
+                if ((now.Minute == 0 &amp;&amp; now.Second &lt; 5 &amp;&amp; now.Hour != lastRestartHour.Hour) || _shouldStop)
+                {
+                    if (_recorder.IsRecording)
+                    {
+                        // Stop current segment, keeping the pre-buffer
+                        _recorder.Stop((int)(preBufferSeconds.DecimalValue * 1000));
+                        module.Emit(ParamStatusRecording, "0");
+                    }
+
+                    if (_shouldStop) break;
+                }
+
+                // Update UI status
+                if (isTriggered &amp;&amp; _recorder.IsRecording &amp;&amp; module.Parameter(ParamStatusRecording).Value == "0")
+                {
+                    module.Emit(ParamStatusRecording, "1");
+                }
+
+                // --- 7. Frame Processing (Frame-by-Frame Mode) ---
+                if (_recorder.IsRecording &amp;&amp; !canUseCopyMode)
+                {
+                    byte[] currentFrame = (byte[])module.Command(CmdGetPicture).GetValue();
+
+                    if (currentFrame != null &amp;&amp; currentFrame.Length &gt; 0)
+                    {
+                        lastValidFrame = currentFrame;
+                        _recorder.PushFrame(lastValidFrame);
+                    }
+                    else if (lastValidFrame != null)
+                    {
+                        // Fallback: If fetch fails, duplicate the last valid frame to maintain video continuity (prevent black frames)
+                        _recorder.PushFrame(lastValidFrame);
+                    }
+
+                    if ((now - lastRecordingPing).TotalSeconds &gt; 10)
+                    {
+                        lastRecordingPing = now;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // In case of transient errors, try to keep the recording alive by pushing the last known frame
+                if (_recorder.IsRecording &amp;&amp; isFrameByFrameMode &amp;&amp; lastValidFrame != null)
+                {
+                    _recorder.PushFrame(lastValidFrame);
+                }
+                // Short pause to prevent tight error loops
+                Thread.Sleep(500);
+            }
+        }
+
+        // Cleanup on exit
+        _recorder.Stop(0);
+
+        var m = _modules
+                .InDomain(_moduleRef.Domain)
+                .WithAddress(_moduleRef.Address)
+                .Get();
+        m?.Emit(ParamStatusRecording, "0");
+    }
+
+    /// &lt;summary&gt;
+    /// Checks if the motion or object sensors are currently active or within the buffer window.
+    /// &lt;/summary&gt;
+    private bool IsAlarmed(ModuleHelper module)
+    {
+        double preBufferSeconds = module.Parameter(ParamStreamBuffer).DecimalValue;
+
+        // Keep recording for 'buffer' seconds + 2 extra seconds after the event ends
+        double timeThreshold = preBufferSeconds + 2;
+
+        var motionSensor = module.Parameter("Sensor.MotionDetect");
+        var objectSensor = module.Parameter("Sensor.ObjectDetect");
+
+        // Check if value &gt; 0 and if the last update was recent enough (IdleTime)
+        bool isMotionActive = (motionSensor.DecimalValue &gt; 0) &amp;&amp; (motionSensor.IdleTime &lt;= timeThreshold);
+        bool isObjectActive = (objectSensor.DecimalValue &gt; 0) &amp;&amp; (objectSensor.IdleTime &lt;= timeThreshold);
+
+        return isMotionActive || isObjectActive;
+    }
+}
+
+public class FFmpegRecorder
+{
+    private Process _ffmpegProcess;
+    private Stream _ffmpegInputStream;
+    private bool _isRecording = false;
+
+    private string _ffmpegErrorLog = "";
+
+    private int _segmentDuration = 25; // Segments of 25 seconds
+    private int _playlistSize = 0;     // Keep 360 segments = 3600 seconds = 1 hour
+                                       // NOTE: Setting to 0 would keep ALL segments until stream ends.
+                                       //       360 is for "up to one hour" for the playlist duration.
+    private double _preBufferSeconds = 0;
+    private string _videoCodec = "libx264";
+
+    private string _currentRecordingSessionFolder = "";
+    private string _currentOutputMp4File = "";
+
+    public bool IsRecording
+    {
+        get { return _isRecording &amp;&amp; _ffmpegProcess != null &amp;&amp; !_ffmpegProcess.HasExited; }
+    }
+
+    /// &lt;summary&gt;
+    /// Starts the FFmpeg recording process, creating a timestamped subfolder for each session.
+    /// &lt;/summary&gt;
+    /// &lt;param name="outputBaseFolder"&gt;Base folder for all recordings (e.g., "html/cam_rec/CameraSensor")&lt;/param&gt;
+    /// &lt;param name="fps"&gt;Expected frame rate from the main loop&lt;/param&gt;
+    public void Start(string outputBaseFolder, double fps, string livePlaylistPath = null, double preBufferSeconds = 0)
+    {
+        if (IsRecording) return;
+
+        if (Directory.Exists(_currentRecordingSessionFolder))
+        {
+            // delete directory if empty (failed previous session)
+            if (Directory.GetFiles(_currentRecordingSessionFolder).Length == 0
+                &amp;&amp; Directory.GetDirectories(_currentRecordingSessionFolder).Length == 0)
+            {
+                Directory.Delete(_currentRecordingSessionFolder);
+            }
+        }
+
+        _currentRecordingSessionFolder = Path.Combine(outputBaseFolder, DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("HHmmss"));
+        _preBufferSeconds = preBufferSeconds;
+        _currentOutputMp4File = "";
+
+        if (!Directory.Exists(_currentRecordingSessionFolder))
+        {
+            Directory.CreateDirectory(_currentRecordingSessionFolder);
+        }
+
+        string playlistPath = Path.Combine(_currentRecordingSessionFolder, "playlist.m3u8");
+        string args = "";
+
+        if (livePlaylistPath != null)
+        {
+            // TODO: include input/source name in filename
+            string outputFilePath = _currentOutputMp4File = Path.Combine(
+                _currentRecordingSessionFolder,
+                "rec_" + DateTime.Now.ToString("yyyyMMdd")
+                    + "_" + DateTime.Now.ToString("HHmmss")
+                    + "_" + preBufferSeconds + ".mp4"
+            );
+            args = $"-y " +
+                $"-live_start_index 0 " +
+                $"-i \"{livePlaylistPath}\" " +
+//                $"-map 0:v:0 -map 0:a:0 " +
+                $"-c:v copy -c:a copy -f hls -hls_time 10 -hls_list_size 0 -hls_segment_type mpegts -hls_flags independent_segments " +
+                $"\"{playlistPath}\" " +
+                $"-f mp4 -movflags +faststart \"{outputFilePath}\"";
+        }
+        else
+        {
+            int gop = (int)Math.Round(fps * _segmentDuration);
+            args = $"-y -f image2pipe -vcodec mjpeg -r {fps} -i - " +
+                $"-c:v {_videoCodec} -an -r {fps} -preset ultrafast -crf 23 -pix_fmt yuv420p -g {gop} " +
+                $"-f hls -hls_time {_segmentDuration} -hls_list_size {_playlistSize} " +
+                $"\"{playlistPath}\"";
+        }
+
+        ProcessStartInfo psi = new ProcessStartInfo
+        {
+            FileName = "ffmpeg",
+            Arguments = args,
+            RedirectStandardInput = true,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+            CreateNoWindow = true
+        };
+
+        try
+        {
+            _ffmpegProcess = new Process();
+            _ffmpegProcess.StartInfo = psi;
+
+            // Register event handlers for output/error
+            _ffmpegProcess.OutputDataReceived += (sender, e) =&gt; { if (e.Data != null) _ffmpegErrorLog += e.Data + Environment.NewLine; };
+            _ffmpegProcess.ErrorDataReceived += (sender, e) =&gt; { if (e.Data != null) _ffmpegErrorLog += "ERROR: " + e.Data + Environment.NewLine; };
+
+            _ffmpegProcess.Start();
+            _ffmpegProcess.BeginOutputReadLine(); // Start reading async
+            _ffmpegProcess.BeginErrorReadLine();  // Start reading async
+
+            _ffmpegInputStream = _ffmpegProcess.StandardInput.BaseStream;
+            _isRecording = true;
+        }
+        catch (Exception ex)
+        {
+            _isRecording = false;
+            // Now you can log the FFmpeg output/error log if it fails to start
+            //Program.Notify("FFmpeg Startup Error", "Check FFmpeg command/path. FFmpeg Log:\n" + _ffmpegErrorLog + "\nException: " + ex.Message);
+            throw;
+        }
+    }
+
+    // Method to retrieve the log:
+    public string GetFFmpegLog()
+    {
+        return _ffmpegErrorLog;
+    }
+
+    /// &lt;summary&gt;
+    /// Pushes a single image frame (JPEG byte array) to the FFmpeg pipe.
+    /// &lt;/summary&gt;
+    public void PushFrame(byte[] imageBytes)
+    {
+        if (!IsRecording) return;
+        try
+        {
+            _ffmpegInputStream.Write(imageBytes, 0, imageBytes.Length);
+            _ffmpegInputStream.Flush();
+        }
+        catch (Exception)
+        {
+            Stop(0);
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// Stops the recording process and terminates FFmpeg.
+    /// &lt;/summary&gt;
+    public void Stop(int delay)
+    {
+        if (!_isRecording) return;
+        try
+        {
+            var ouputFile = _currentOutputMp4File;
+            var process = _ffmpegProcess;
+            Task.Run(() =&gt; {
+                Thread.Sleep(delay);
+                if (process != null &amp;&amp; !process.HasExited)
+                {
+                    // Send the character 'q' to FFmpeg's Standard Input
+                    if (process.StartInfo.RedirectStandardInput)
+                    {
+                        try
+                        {
+                            StreamWriter writer = process.StandardInput;
+                            writer.WriteLine("q");
+                            writer.Close();
+                        }
+                        catch { /* Ignored */ }
+                    }
+                    process.WaitForExit(10000);
+
+                    // last resort
+                    if (!process.HasExited)
+                    {
+                        process.Kill();
+                    }
+
+                    process.Dispose();
+
+                    // remove live playlist.*
+                    var dir = new DirectoryInfo(Path.Combine(Path.GetDirectoryName(ouputFile)));
+                    foreach (var file in dir.EnumerateFiles("playlist*")) {
+                        file.Delete();
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(ouputFile))
+                    {
+                        MediaInfoService.GetMediaInfo(ouputFile);
+                    }
+                }
+            });
+        }
+        catch (Exception)
+        {
+            // Ignored
+        }
+        finally
+        {
+            _ffmpegProcess = null;
+            _ffmpegInputStream = null;
+            _isRecording = false;
+            _currentRecordingSessionFolder = "";
+            _currentOutputMp4File = "";
+        }
+    }
+}
+
+public class NvrHelper
+{
+    public class RecordingSession
+    {
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public TimeSpan Duration { get { return EndTime - StartTime; } }
+        public string PlaylistPath { get; set; }
+        public string FolderName { get; set; }
+        public long SizeBytes { get; set; }
+        public string MediaSummary { get; set; }
+    }
+
+    public class RecordingFolder
+    {
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public int TotalTime { get; set; }
+        public long TotalSize { get; set; }
+        public int SessionCount { get; set; }
+        public string FolderName { get; set; }
+    }
+
+    public static string GetSafeModulePath(string outputFolder, ModuleReference mr)
+    {
+        string safeDomain = System.Text.RegularExpressions.Regex.Replace(mr.Domain.Replace(":", "@"), "[^a-zA-Z0-9_+\\-().@]", "");
+        string safeName = System.Text.RegularExpressions.Regex.Replace(mr.Address, "[^a-zA-Z0-9_+\\-().@]", "");
+        return Path.Combine(outputFolder, safeDomain, safeName);
+    }
+
+    public static List&lt;RecordingSession&gt; GetRecordings(string nvrBasePath, ModuleHelper videoModule, string dateFilter = null)
+    {
+        var mr = new ModuleReference(){ Domain = videoModule.Instance.Domain, Address = videoModule.Instance.Address };
+        var sessions = new List&lt;RecordingSession&gt;();
+        string camPath = GetSafeModulePath(nvrBasePath, mr);
+        if (!Directory.Exists(camPath)) return sessions;
+
+        var dayDirs = Directory.GetDirectories(camPath);
+
+        foreach (var dayDir in dayDirs)
+        {
+            string dayName = new DirectoryInfo(dayDir).Name;
+            if (!string.IsNullOrEmpty(dateFilter) &amp;&amp; dayName != dateFilter) continue;
+
+            if (!DateTime.TryParseExact(dayName, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateBase))
+                continue;
+
+            var timeDirs = Directory.GetDirectories(dayDir);
+
+            foreach (var timeDir in timeDirs)
+            {
+                string timeName = new DirectoryInfo(timeDir).Name;
+
+                if (!DateTime.TryParseExact(timeName, "HHmmss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime sessionBaseTime))
+                    continue;
+
+                DateTime baseStart = dateBase.Date + sessionBaseTime.TimeOfDay;
+                baseStart = DateTime.SpecifyKind(baseStart, DateTimeKind.Local);
+
+                string playlistPath = Path.Combine(timeDir, "playlist.m3u8");
+                var mp4Files = Directory.GetFiles(timeDir, "rec_*.mp4");
+
+                bool playlistExists = File.Exists(playlistPath);
+                bool mp4Exists = mp4Files.Length &gt; 0;
+                bool usePlaylist = false;
+
+                // --- SMART LOGIC: Live vs Archive ---
+                if (playlistExists)
+                {
+                    DateTime lastWrite = File.GetLastWriteTime(playlistPath);
+                    double minutesSinceLastUpdate = (DateTime.Now - lastWrite).TotalMinutes;
+
+                    // If the playlist was updated recently (e.g., &lt; 2 mins ago),
+                    // we assume the recording is ACTIVE (Live). We MUST use the playlist.
+                    if (minutesSinceLastUpdate &lt; 2.0)
+                    {
+                        usePlaylist = true;
+                    }
+                    // If the playlist is old (stale) AND we have an MP4,
+                    // it means the recording crashed or finished without cleanup.
+                    // We discard the playlist and use the MP4.
+                    else if (mp4Exists)
+                    {
+                        try
+                        {
+                            File.Delete(playlistPath);
+                            var tsFiles = Directory.GetFiles(timeDir, "*.ts");
+                            foreach (var ts in tsFiles) File.Delete(ts);
+                        }
+                        catch { /* Ignore locks */ }
+
+                        usePlaylist = false;
+                    }
+                    else
+                    {
+                        // Playlist is old but NO MP4 exists?
+                        // We have no choice but to try using the playlist (HLS-only recording).
+                        usePlaylist = true;
+                    }
+                }
+
+                if (usePlaylist)
+                {
+                    double totalDurationSeconds = GetDurationFromPlaylist(playlistPath);
+                    DateTime fullEnd = baseStart.AddSeconds(totalDurationSeconds);
+
+                    sessions.Add(new RecordingSession
+                    {
+                        StartTime = baseStart.ToUniversalTime(),
+                        EndTime = fullEnd.ToUniversalTime(),
+                        PlaylistPath = playlistPath,
+                        FolderName = $"{dayName}/{timeName}"
+                    });
+                }
+                else if (mp4Exists)
+                {
+                    foreach (var mp4Path in mp4Files)
+                    {
+                        // Logic to extract PreBuffer info from filename: rec_YYYYMMDD_HHMMSS_PREBUFFER.mp4
+                        string fileName = Path.GetFileNameWithoutExtension(mp4Path);
+                        string[] parts = fileName.Split('_');
+
+                        int preBuffer = 0;
+                        if (parts.Length &gt;= 4)
+                        {
+                            int.TryParse(parts[3], out preBuffer);
+                        }
+
+                        // Subtract PreBuffer to find the actual event start
+                        DateTime adjustedStart = baseStart.AddSeconds(-preBuffer);
+
+                        var mediaInfo = MediaInfoService.GetMediaInfo(mp4Path);
+                        double duration = mediaInfo.TotalDuration;
+                        DateTime adjustedEnd = adjustedStart.AddSeconds(duration);
+
+                        // Safety check for metadata inconsistencies
+                        if (adjustedEnd &lt; adjustedStart) adjustedEnd = adjustedStart.AddSeconds(preBuffer + 5);
+
+                        // --- Media Info for UI ---
+                        long sizeBytes = 0;
+                        long.TryParse(mediaInfo.format?.size, out sizeBytes);
+
+                        string mediaSummary = "N/A";
+                        var videoStream = mediaInfo.VideoStream;
+                        var audioStream = mediaInfo.AudioStream;
+
+                        if (videoStream != null)
+                        {
+                            string fps = "";
+                            if (!string.IsNullOrEmpty(videoStream.avg_frame_rate))
+                            {
+                                var fpsParts = videoStream.avg_frame_rate.Split('/');
+                                if (fpsParts.Length == 2 &amp;&amp; double.TryParse(fpsParts[0], out double num) &amp;&amp; double.TryParse(fpsParts[1], out double den) &amp;&amp; den != 0)
+                                {
+                                    fps = $" • {Math.Round(num / den)} fps";
+                                }
+                            }
+
+                            string audioCodec = audioStream != null &amp;&amp; !string.IsNullOrEmpty(audioStream.codec_name)
+                                ? $"/{audioStream.codec_name}"
+                                : "";
+
+                            mediaSummary = $"{mediaInfo.VideoRes}{fps} • {videoStream.codec_name}{audioCodec}";
+                        }
+
+                        sessions.Add(new RecordingSession
+                        {
+                            StartTime = adjustedStart.ToUniversalTime(),
+                            EndTime = adjustedEnd.ToUniversalTime(),
+                            PlaylistPath = mp4Path,
+                            FolderName = $"{dayName}/{timeName}",
+                            SizeBytes = sizeBytes,
+                            MediaSummary = mediaSummary
+                        });
+                    }
+                }
+            }
+        }
+
+        return sessions.OrderBy(s =&gt; s.StartTime).ToList();
+    }
+
+    public static List&lt;RecordingFolder&gt; GetRecordingFolders(string nvrBasePath, ModuleHelper videoModule)
+    {
+        var mr = new ModuleReference(){ Domain = videoModule.Instance.Domain, Address = videoModule.Instance.Address };
+        var folders = new List&lt;RecordingFolder&gt;();
+        string camPath = GetSafeModulePath(nvrBasePath, mr);
+        if (!Directory.Exists(camPath)) return folders;
+
+        var dayDirs = Directory.GetDirectories(camPath);
+
+        foreach (var dayDir in dayDirs)
+        {
+            string dayName = new DirectoryInfo(dayDir).Name;
+            if (!DateTime.TryParseExact(dayName, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateBase))
+                continue;
+
+            int sessionCount = 0;
+            long totalSize = 0;
+            double totalDurationSeconds = 0;
+            DateTime? minStartTime = null;
+            DateTime? maxEndTime = null;
+
+            var timeDirs = Directory.GetDirectories(dayDir);
+            foreach (var timeDir in timeDirs)
+            {
+                string timeName = new DirectoryInfo(timeDir).Name;
+                if (!DateTime.TryParseExact(timeName, "HHmmss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime sessionBaseTime))
+                    continue;
+
+                DateTime baseStart = dateBase.Date + sessionBaseTime.TimeOfDay;
+                baseStart = DateTime.SpecifyKind(baseStart, DateTimeKind.Local);
+
+                bool sessionFound = false;
+                DateTime sessionStart = baseStart;
+                DateTime sessionEnd = baseStart;
+                double sessionDuration = 0;
+
+                string playlistPath = Path.Combine(timeDir, "playlist.m3u8");
+                var mp4Files = Directory.GetFiles(timeDir, "rec_*.mp4");
+
+                bool playlistExists = File.Exists(playlistPath);
+                bool mp4Exists = mp4Files.Length &gt; 0;
+                bool usePlaylist = false;
+
+                // --- DUPLICATED SMART LOGIC (Kept consistent with GetRecordings) ---
+                if (playlistExists)
+                {
+                    DateTime lastWrite = File.GetLastWriteTime(playlistPath);
+                    if ((DateTime.Now - lastWrite).TotalMinutes &lt; 2.0)
+                    {
+                        usePlaylist = true; // Active recording
+                    }
+                    else if (!mp4Exists)
+                    {
+                        usePlaylist = true; // No MP4 available
+                    }
+                    // Else: Stale playlist + MP4 exists -&gt; Fallthrough to MP4 logic
+                }
+
+                if (usePlaylist)
+                {
+                    sessionDuration = GetDurationFromPlaylist(playlistPath);
+                    sessionEnd = baseStart.AddSeconds(sessionDuration);
+                    sessionFound = true;
+                }
+                else if (mp4Exists)
+                {
+                    string mp4Path = mp4Files[0];
+                    string[] parts = Path.GetFileNameWithoutExtension(mp4Path).Split('_');
+                    int preBuffer = 0;
+                    if (parts.Length &gt;= 4) int.TryParse(parts[3], out preBuffer);
+
+                    sessionStart = baseStart.AddSeconds(-preBuffer);
+
+                    var mediaInfo = MediaInfoService.GetMediaInfo(mp4Path);
+                    sessionEnd = sessionStart.AddSeconds(mediaInfo.TotalDuration);
+
+                    if (sessionEnd &lt; sessionStart) sessionEnd = sessionStart.AddSeconds(preBuffer + 5);
+
+                    sessionDuration = (sessionEnd - sessionStart).TotalSeconds;
+                    sessionFound = true;
+                }
+
+                if (sessionFound)
+                {
+                    sessionCount++;
+                    totalDurationSeconds += sessionDuration;
+                    totalSize += new DirectoryInfo(timeDir).EnumerateFiles("*", SearchOption.AllDirectories).Sum(fi =&gt; fi.Length);
+
+                    if (minStartTime == null || sessionStart &lt; minStartTime) minStartTime = sessionStart;
+                    if (maxEndTime == null || sessionEnd &gt; maxEndTime) maxEndTime = sessionEnd;
+                }
+            }
+
+            if (sessionCount &gt; 0 &amp;&amp; minStartTime.HasValue &amp;&amp; maxEndTime.HasValue)
+            {
+                folders.Add(new RecordingFolder
+                {
+                    FolderName = dayName,
+                    SessionCount = sessionCount,
+                    StartTime = minStartTime.Value.ToUniversalTime(),
+                    EndTime = maxEndTime.Value.ToUniversalTime(),
+                    TotalTime = (int)Math.Round(totalDurationSeconds),
+                    TotalSize = totalSize
+                });
+            }
+        }
+
+        return folders.OrderBy(f =&gt; f.FolderName).ToList();
+    }
+
+    private static double GetDurationFromPlaylist(string playlistPath)
+    {
+        double totalDurationSeconds = 0;
+        try
+        {
+            string[] lines = File.ReadAllLines(playlistPath);
+            foreach (string line in lines)
+            {
+                if (line.StartsWith("#EXTINF:"))
+                {
+                    int colonIndex = 8;
+                    int commaIndex = line.IndexOf(',');
+                    if (commaIndex &gt; colonIndex)
+                    {
+                        string durationStr = line.Substring(colonIndex, commaIndex - colonIndex);
+                        if (double.TryParse(durationStr, NumberStyles.Any, CultureInfo.InvariantCulture, out double segmentDuration))
+                        {
+                            totalDurationSeconds += segmentDuration;
+                        }
+                    }
+                }
+            }
+        }
+        catch { return 0; }
+        return totalDurationSeconds;
+    }
+
+    public static List&lt;string&gt; DeleteOldDirectories(string baseFolder, int daysToDeleteOlderThan)
+    {
+        var deletedFolders = new List&lt;string&gt;();
+        if (!Directory.Exists(baseFolder))
+        {
+            return deletedFolders;
+        }
+        try
+        {
+            var directories = Directory.GetDirectories(baseFolder)
+                                      .Select(dir =&gt; new DirectoryInfo(dir))
+                                      .Where(dirInfo =&gt; dirInfo.Exists);
+            DateTime cutoffDate = DateTime.Now.AddDays(-daysToDeleteOlderThan);
+            var oldDirectories = directories.Where(dirInfo =&gt; dirInfo.CreationTimeUtc &lt; cutoffDate || dirInfo.LastWriteTimeUtc &lt; cutoffDate);
+            foreach (var dirToDelete in oldDirectories)
+            {
+                try
+                {
+                    Directory.Delete(dirToDelete.FullName, true);
+                    deletedFolders.Add(dirToDelete.FullName);
+                }
+                catch (Exception e)
+                {
+                    /* ignored */
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            /* ignored */
+        }
+        return deletedFolders;
+    }
+}
+
+public static class MediaInfoService
+{
+    public static MediaMetadata GetMediaInfo(string videoPath)
+    {
+        string cachePath = videoPath + ".info";
+        FileInfo videoFileInfo = new FileInfo(videoPath);
+        FileInfo cacheFileInfo = new FileInfo(cachePath);
+
+        if (File.Exists(cachePath) &amp;&amp; cacheFileInfo.LastWriteTimeUtc &gt;= videoFileInfo.LastWriteTimeUtc)
+        {
+            try {
+                string jsonCache = File.ReadAllText(cachePath);
+                return JsonSerializer.Deserialize&lt;MediaMetadata&gt;(jsonCache);
+            } catch { /* Corrupted cache, proceed with ffprobe */ }
+        }
+
+        string jsonOutput = RunFFprobe(videoPath);
+
+        var options = new JsonSerializerOptions { WriteIndented = true };
+        File.WriteAllText(cachePath, jsonOutput);
+
+        return JsonSerializer.Deserialize&lt;MediaMetadata&gt;(jsonOutput);
+    }
+
+    private static string RunFFprobe(string filePath)
+    {
+        var psi = new ProcessStartInfo
+        {
+            FileName = "ffprobe",
+            Arguments = $"-v quiet -print_format json -show_format -show_streams \"{filePath}\"",
+            RedirectStandardOutput = true,
+            UseShellExecute = false,
+            CreateNoWindow = true
+        };
+
+        using (var process = Process.Start(psi))
+        {
+            string output = process.StandardOutput.ReadToEnd();
+            process.WaitForExit();
+            return output;
+        }
+    }
+}
+public class MediaMetadata
+{
+    public List&lt;StreamInfo&gt; streams { get; set; }
+    public FormatInfo format { get; set; }
+
+    // Helpers
+    public double TotalDuration =&gt; double.Parse(format?.duration ?? "0", System.Globalization.CultureInfo.InvariantCulture);
+    public StreamInfo VideoStream =&gt; streams?.FirstOrDefault(s =&gt; s.codec_type == "video");
+    public StreamInfo AudioStream =&gt; streams?.FirstOrDefault(s =&gt; s.codec_type == "audio");
+    public string VideoRes =&gt; VideoStream != null ? $"{VideoStream.width}x{VideoStream.height}" : "N/A";
+}
+
+public class StreamInfo
+{
+    public string codec_name { get; set; }
+    public string codec_type { get; set; }
+    public string profile { get; set; }
+    public int width { get; set; }
+    public int height { get; set; }
+    public string avg_frame_rate { get; set; }
+    public string duration { get; set; }
+    public Dictionary&lt;string, string&gt; tags { get; set; }
+}
+
+public class FormatInfo
+{
+    public string format_long_name { get; set; }
+    public string duration { get; set; }
+    public string size { get; set; }
+    public string bit_rate { get; set; }
+    public Dictionary&lt;string, string&gt; tags { get; set; }
+}
+
+public class ThumbnailHelper
+{
+    private static string _cacheFolder = "";
+
+    private static string GetCacheFilePath(ModuleHelper module, string dateFolder, string timeFolder, double offset)
+    {
+        string rawId = $"{module.Instance.Domain}_{module.Instance.Address}_{dateFolder}_{timeFolder}_{offset}";
+        string safeId = System.Text.RegularExpressions.Regex.Replace(rawId, "[^a-zA-Z0-9_]", "") + ".jpg";
+        return Path.Combine(_cacheFolder, safeId);
+    }
+
+    // Returns the URL, using the cache
+    public static byte[] GetThumbnailWithCache(string nvrBaseFolder, ModuleHelper module, string dateFolder, string timeFolder, double offset)
+    {
+        if (_cacheFolder == "")
+        {
+            _cacheFolder = Path.Combine(nvrBaseFolder, "cache");
+        }
+        string cacheFilePath = GetCacheFilePath(module, dateFolder, timeFolder, offset);
+        if (!File.Exists(cacheFilePath))
+        {
+            byte[] thumbData = GenerateThumbnailBytes(nvrBaseFolder, module, dateFolder, timeFolder, offset);
+            if (thumbData != null)
+            {
+                if (!Directory.Exists(_cacheFolder)) Directory.CreateDirectory(_cacheFolder);
+                File.WriteAllBytes(cacheFilePath, thumbData);
+            }
+            return thumbData;
+        }
+        return File.ReadAllBytes(cacheFilePath);
+    }
+
+    // Returns the bytes, generating the file temporarily and then deleting it
+    public static byte[] GetThumbnailBytes(string nvrBaseFolder, ModuleHelper module, string dateFolder, string timeFolder, double offset)
+    {
+        byte[] thumbData = GenerateThumbnailBytes(nvrBaseFolder, module, dateFolder, timeFolder, offset);
+        return thumbData;
+    }
+
+    public static byte[] GenerateThumbnailBytes(string nvrBaseFolder, ModuleHelper videoModule, string dateFolder, string timeFolder, double offset)
+    {
+        var mr = new ModuleReference(){ Domain = videoModule.Instance.Domain, Address = videoModule.Instance.Address };
+        string camPath = NvrHelper.GetSafeModulePath(nvrBaseFolder, mr);
+        string timeDir = Path.Combine(camPath, dateFolder, timeFolder);
+        string inputFilePath = Path.Combine(timeDir, "playlist.m3u8");
+        // HLS Playlist
+        if (!File.Exists(inputFilePath))
+        {
+            // MP4 File
+            var mp4Files = Directory.GetFiles(timeDir, "rec_*.mp4");
+            if (mp4Files.Length &gt; 0)
+            {
+                inputFilePath = mp4Files[0];
+            }
+        }
+
+        if (!File.Exists(inputFilePath)) return null;
+
+        string args = $"-ss {offset} -i \"{inputFilePath}\" -frames:v 1 -q:v 5 -f image2pipe -vcodec mjpeg -";
+
+        var psi = new ProcessStartInfo
+        {
+            FileName = "ffmpeg",
+            Arguments = args,
+            RedirectStandardOutput = true,
+            UseShellExecute = false,
+            CreateNoWindow = true
+        };
+
+        try
+        {
+            using (var p = Process.Start(psi))
+            {
+                using (var ms = new MemoryStream())
+                {
+                    p.StandardOutput.BaseStream.CopyTo(ms);
+                    return ms.ToArray();
+                }
+            }
+        }
+        catch { return null; }
+    }
+}
+</ScriptContext>
+    <ScriptErrors />
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.5</PackageVersion>
+      <Id>video-recorder</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>23F8E51526FE777858AF5B8081A4D5B7</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>250</Address>
+    <Name>Video Recorder</Name>
+    <Description>Records audio and video streams from any input source. Recordings can be continuous, scheduled, or triggered by alarm events.</Description>
+    <Group>Utilities</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>VideoInput,Sensor:Widget.DisplayModule=homegenie/generic/videoinput</ForTypes>
+        <Property>NVR.RecordOnAlarm</Property>
+        <Description>Record On Alarm</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program.Implements(
@@ -3309,7 +5251,7 @@ public string[] GetDayLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.4</PackageVersion>
+      <PackageVersion>1.0.5</PackageVersion>
       <Id>weekly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>

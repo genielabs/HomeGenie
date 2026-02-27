@@ -294,19 +294,22 @@
       "Description": "Выяўленне аб'ектаў з дапамогай папярэдне навучанай мадэлі YOLO.",
       "ML.ObjectDetection": "Уключыць выяўленне аб'ектаў",
       "ML.ObjectDetection.TriggerDetect": "Спіс рэчаў (па-ангельску), якія выклічуць сігналізацыю, падзелены коскамі (напрыклад: кот, сабака, чалавек, заплечнік, валіза)",
-      "ConfigureOptions.Yolo.ModelPath": "Шлях да файла мадэлі YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Шлях да файла мадэлі YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Максімальная колькасць запытаў у секунду (RPS)"
     },
     "911": {
       "Title": "Ацэнка позы",
       "Description": "Выяўленне ключавых кропак з дапамогай ацэнкі позы, з выкарыстаннем карыстальніцкіх мадэляў ONNX або папярэдне навучанай мадэлі YOLO па змаўчанні (спецыфічнай для позы чалавека).",
       "ML.PoseEstimation": "Уключыць ацэнку позы",
-      "ConfigureOptions.Yolo.ModelPath": "Шлях да файла мадэлі YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Шлях да файла мадэлі YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Максімальная колькасць запытаў у секунду (RPS)"
     },
     "912": {
       "Title": "Сегментацыя экзэмпляраў",
       "Description": "Выяўляйце аб'екты і іх контуры з дапамогай папярэдне навучанай мадэлі YOLO.",
       "ML.InstanceSegmentation": "Уключыць сегментацыю экзэмпляраў",
-      "ConfigureOptions.Yolo.ModelPath": "Шлях да файла мадэлі YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Шлях да файла мадэлі YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Максімальная колькасць запытаў у секунду (RPS)"
     },
     "930": {
       "Title": "Апрацоўшчык намераў Gemini",
@@ -376,9 +379,30 @@
       "Title": "Штодзённы агляд энергіі",
       "Description": "Штодзённае спажыванне энергіі (Вт·г) прыладай.",
       "Widget.Statistics.DailyReport": "Уключыць у штодзённую справаздачу аб Wh"
+    },
+    "200": {
+      "Title": "Відэаўваход",
+      "Description": "Захоплівае аўдыё- і відэаструмені для маніторынгу ў рэжыме рэальнага часу, апрацоўкі ў рэжыме рэальнага часу і бесперапыннага запісу.",
+      "VideoInput.Disable": "Адключыць гэты ўвод",
+      "VideoInput.SourceURL": "URL-адрас крыніцы відэа",
+      "VideoInput.ImageFeed": "URL-адрас — гэта адзін файл выявы, які абнаўляецца ў рэжыме рэальнага часу.",
+      "VideoInput.Username": "Імя карыстальніка (неабавязкова)",
+      "VideoInput.Password": "Пароль (неабавязкова)",
+      "Widget.Config.fps": "Максімальная колькасць кадраў у секунду",
+      "VideoOutput.Width": "Шырыня выходнага патоку.",
+      "VideoOutput.SnapshotQuality": "Якасць жывой выявы."
+    },
+    "250": {
+      "Title": "Відэарэгістратар",
+      "Description": "Запісвае аўдыё- і відэаструмені з любой крыніцы ўваходнага сігналу. Запісы могуць быць бесперапыннымі, запланаванымі або запускацца падзей трывогі.",
+      "NVR.EnableRecording": "Уключыць відэазапіс",
+      "NVR.RecordOnAlarm": "Запіс па трывозе",
+      "NVR.ContinuousRecording": "Бесперапынны запіс."
     }
   },
   "scheduler_preset_action_genie_command": "Каманда джына",
   "scheduler_preset_action_config_wish": "Дзеянне з натуральнай мовай",
-  "scheduler_preset_action_config_wish.placeholder": "Паспрабуйце: «Усталюйце тэмпературу на 22° і ўключыце сцэну ўзыходу сонца»."
+  "scheduler_preset_action_config_wish.placeholder": "Паспрабуйце: «Усталюйце тэмпературу на 22° і ўключыце сцэну ўзыходу сонца».",
+  "scheduler_preset_action_command_video_record_start": "Пачаць запіс відэа",
+  "scheduler_preset_action_command_video_record_stop": "Спыніць запіс відэа"
 }

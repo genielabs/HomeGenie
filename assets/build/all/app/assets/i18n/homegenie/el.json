@@ -294,19 +294,22 @@
       "Description": "Εντοπίστε αντικείμενα χρησιμοποιώντας ένα προ-εκπαιδευμένο μοντέλο YOLO.",
       "ML.ObjectDetection": "Ενεργοποίηση ανίχνευσης αντικειμένων",
       "ML.ObjectDetection.TriggerDetect": "Λίστα αντικειμένων (στα Αγγλικά) διαχωρισμένων με κόμματα που θα ενεργοποιήσουν τον συναγερμό. (π.χ. γάτα, σκύλος, άτομο, σακίδιο πλάτης, βαλίτσα)",
-      "ConfigureOptions.Yolo.ModelPath": "Διαδρομή του αρχείου μοντέλου YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Διαδρομή του αρχείου μοντέλου YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Μέγιστος αριθμός αιτημάτων ανά δευτερόλεπτο (RPS)"
     },
     "911": {
       "Title": "Εκτίμηση Στάσης",
       "Description": "Ανίχνευση βασικών σημείων μέσω εκτίμησης στάσης, χρησιμοποιώντας προσαρμοσμένα μοντέλα ONNX ή το προεπιλεγμένο προ-εκπαιδευμένο μοντέλο YOLO (ειδικό για ανθρώπινη στάση).",
       "ML.PoseEstimation": "Ενεργοποίηση εκτίμησης πόζας",
-      "ConfigureOptions.Yolo.ModelPath": "Διαδρομή του αρχείου μοντέλου YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Διαδρομή του αρχείου μοντέλου YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Μέγιστος αριθμός αιτημάτων ανά δευτερόλεπτο (RPS)"
     },
     "912": {
       "Title": "Τμηματοποίηση Παρουσίας",
       "Description": "Εντοπίστε αντικείμενα και τα περιγράμματά τους χρησιμοποιώντας ένα προ-εκπαιδευμένο μοντέλο YOLO.",
       "ML.InstanceSegmentation": "Ενεργοποίηση τμηματοποίησης παρουσίας",
-      "ConfigureOptions.Yolo.ModelPath": "Διαδρομή του αρχείου μοντέλου YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Διαδρομή του αρχείου μοντέλου YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Μέγιστος αριθμός αιτημάτων ανά δευτερόλεπτο (RPS)"
     },
     "930": {
       "Title": "Χειριστής προθέσεων Gemini",
@@ -376,9 +379,30 @@
       "Title": "Ημερήσια Σύνοψη Ενέργειας",
       "Description": "Ημερήσια κατανάλωση ενέργειας (Wh) ανά συσκευή.",
       "Widget.Statistics.DailyReport": "Συμπερίληψη στην ημερήσια αναφορά Wh"
+    },
+    "200": {
+      "Title": "Είσοδος βίντεο",
+      "Description": "Καταγράφει ροές ήχου και βίντεο για ζωντανή παρακολούθηση, επεξεργασία σε πραγματικό χρόνο και συνεχή εγγραφή.",
+      "VideoInput.Disable": "Απενεργοποίηση αυτής της εισόδου",
+      "VideoInput.SourceURL": "URL πηγής βίντεο",
+      "VideoInput.ImageFeed": "Το URL είναι ένα αρχείο μεμονωμένης εικόνας που ενημερώνεται ζωντανά.",
+      "VideoInput.Username": "Όνομα χρήστη (προαιρετικό)",
+      "VideoInput.Password": "Κωδικός πρόσβασης (προαιρετικό)",
+      "Widget.Config.fps": "Μέγιστο καρέ ανά δευτερόλεπτο",
+      "VideoOutput.Width": "Πλάτος ροής εξόδου.",
+      "VideoOutput.SnapshotQuality": "Ποιότητα ζωντανής εικόνας."
+    },
+    "250": {
+      "Title": "Εγγραφή βίντεο",
+      "Description": "Εγγράφει ροές ήχου και βίντεο από οποιαδήποτε πηγή εισόδου. Οι εγγραφές μπορούν να είναι συνεχείς, προγραμματισμένες ή να ενεργοποιούνται από συμβάντα συναγερμού.",
+      "NVR.EnableRecording": "Ενεργοποίηση εγγραφής βίντεο",
+      "NVR.RecordOnAlarm": "Εγγραφή σε συναγερμό",
+      "NVR.ContinuousRecording": "Συνεχής καταγραφή."
     }
   },
   "scheduler_preset_action_genie_command": "Διοίκηση Τζίνι",
   "scheduler_preset_action_config_wish": "Δράση Φυσικής Γλώσσας",
-  "scheduler_preset_action_config_wish.placeholder": "Δοκιμάστε: \"Ρυθμίστε τη θερμότητα στους 22° και ξεκινήστε τη σκηνή της ανατολής του ηλίου\""
+  "scheduler_preset_action_config_wish.placeholder": "Δοκιμάστε: \"Ρυθμίστε τη θερμότητα στους 22° και ξεκινήστε τη σκηνή της ανατολής του ηλίου\"",
+  "scheduler_preset_action_command_video_record_start": "Έναρξη εγγραφής βίντεο",
+  "scheduler_preset_action_command_video_record_stop": "Διακοπή εγγραφής βίντεο"
 }

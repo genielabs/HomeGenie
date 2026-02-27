@@ -1,0 +1,3 @@
+{
+  "ffmpeg_required": "Moodul `{{module_name}}` vajab toimimiseks **FFmpeg**-i. Palun installige see ametlikult veebisaidilt: - [https://ffmpeg.org](https://ffmpeg.org) Kui te seda funktsiooni ei vaja, saate selle mooduli keelata jaotises **Automatiseerimisprogrammid** või klõpsates alloleval nupul."
+}

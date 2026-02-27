@@ -67,6 +67,8 @@ namespace HomeGenie.Automation.Engines
             "System.Device.I2c",
             "Iot.Device",
             "Iot.Device.Common",
+            "System.Text.Json",
+            "JsonSerializer = System.Text.Json.JsonSerializer",
 #endif
 #if NET8_0_OR_GREATER
             // yolo
@@ -270,6 +272,7 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Threading.Thread.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Collections.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Text.RegularExpressions.dll")),
+                    MetadataReference.CreateFromFile(typeof(System.Text.Json.JsonSerializer).Assembly.Location),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.Primitives.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.NameResolution.dll")),
@@ -279,6 +282,8 @@ namespace HomeGenie.Automation.Scripting
                     // Other
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Collections.Concurrent.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.ComponentModel.Primitives.dll")),
+                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Diagnostics.Process.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Memory.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.Http.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.ObjectModel.dll")),

@@ -294,19 +294,22 @@
       "Description": "Detekciju objekata vrši pomoću prethodno obučenog YOLO modela.",
       "ML.ObjectDetection": "Omogući detekciju objekata",
       "ML.ObjectDetection.TriggerDetect": "Zarezom odvojena lista stvari (na engleskom) koje će aktivirati alarm. (npr.: mačka, pas, osoba, ruksak, kofer)",
-      "ConfigureOptions.Yolo.ModelPath": "Putanja do datoteke modela YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Putanja do datoteke modela YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimalan broj zahtjeva u sekundi (RPS)"
     },
     "911": {
       "Title": "Procjena poze",
       "Description": "Detekcija ključnih tačaka putem procjene poze, korištenjem prilagođenih ONNX modela ili zadanog prethodno obučenog YOLO modela (specifičnog za ljudsku pozu).",
       "ML.PoseEstimation": "Omogući procjenu poze",
-      "ConfigureOptions.Yolo.ModelPath": "Putanja do datoteke modela YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Putanja do datoteke modela YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimalan broj zahtjeva u sekundi (RPS)"
     },
     "912": {
       "Title": "Segmentacija instanci",
       "Description": "Detektuj objekte i njihove obrise koristeći prethodno obučeni YOLO model.",
       "ML.InstanceSegmentation": "Omogući segmentaciju instanci",
-      "ConfigureOptions.Yolo.ModelPath": "Putanja do YOLO datoteke modela (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Putanja do YOLO datoteke modela (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimalan broj zahtjeva u sekundi (RPS)"
     },
     "930": {
       "Title": "Rukovatelj namjerama Gemini",
@@ -376,9 +379,30 @@
       "Title": "Dnevni sažetak energije",
       "Description": "Dnevna potrošnja energije (Wh) po uređaju.",
       "Widget.Statistics.DailyReport": "Uključi u dnevni izvještaj o Wh"
+    },
+    "200": {
+      "Title": "Video ulaz",
+      "Description": "Snima audio i video streamove za praćenje uživo, obradu u stvarnom vremenu i kontinuirano snimanje.",
+      "VideoInput.Disable": "Onemogući ovaj unos",
+      "VideoInput.SourceURL": "URL izvora videa",
+      "VideoInput.ImageFeed": "URL je datoteka jedne slike koja se ažurira uživo.",
+      "VideoInput.Username": "Korisničko ime (opciono)",
+      "VideoInput.Password": "Lozinka (opciono)",
+      "Widget.Config.fps": "Maksimalan broj kadrova u sekundi",
+      "VideoOutput.Width": "Širina izlaznog toka.",
+      "VideoOutput.SnapshotQuality": "Kvalitet slike uživo."
+    },
+    "250": {
+      "Title": "Video rekorder",
+      "Description": "Snima audio i video streamove iz bilo kojeg ulaznog izvora. Snimci mogu biti kontinuirani, zakazani ili pokrenuti alarmnim događajima.",
+      "NVR.EnableRecording": "Omogući snimanje videa",
+      "NVR.RecordOnAlarm": "Snimanje pri alarmu",
+      "NVR.ContinuousRecording": "Neprekidno snimanje."
     }
   },
   "scheduler_preset_action_genie_command": "Džinova komanda",
   "scheduler_preset_action_config_wish": "Radnja prirodnog jezika",
-  "scheduler_preset_action_config_wish.placeholder": "Pokušajte: \"Podesite temperaturu na 22° i pokrenite scenu izlaska sunca\""
+  "scheduler_preset_action_config_wish.placeholder": "Pokušajte: \"Podesite temperaturu na 22° i pokrenite scenu izlaska sunca\"",
+  "scheduler_preset_action_command_video_record_start": "Započni snimanje videa",
+  "scheduler_preset_action_command_video_record_stop": "Zaustavi snimanje videa"
 }

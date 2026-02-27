@@ -294,19 +294,22 @@
       "Description": "Mitadiava zavatra mampiasa maodely YOLO efa voaofana mialoha.",
       "ML.ObjectDetection": "Alefaso ny fitadiavana zavatra",
       "ML.ObjectDetection.TriggerDetect": "Lisitry ny zavatra misaraka amin'ny faingo (amin'ny teny anglisy) izay hiteraka fanairana. (oh: saka, alika, olona, kitapo, valizy)",
-      "ConfigureOptions.Yolo.ModelPath": "Lalana misy rakitra modely YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Lalana misy rakitra modely YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Fangatahana ambony indrindra isan-tsegondra (RPS)"
     },
     "911": {
       "Title": "Tombana Pose",
       "Description": "Famantarana ny hevi-dehibe amin'ny alalan'ny tombantombana pose, mampiasa maodely ONNX mahazatra na modely YOLO efa voaofana mialoha (manokana ny maha-olona).",
       "ML.PoseEstimation": "Alefaso ny tombana pose",
-      "ConfigureOptions.Yolo.ModelPath": "Làlan'ny rakitra modely YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Làlan'ny rakitra modely YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Fangatahana ambony indrindra isan-tsegondra (RPS)"
     },
     "912": {
       "Title": "Segmentation ohatra",
       "Description": "Tadiavo ny zavatra sy ny sariny amin'ny fampiasana modely YOLO efa voaofana mialoha.",
       "ML.InstanceSegmentation": "Alefaso ny fizarana ohatra",
-      "ConfigureOptions.Yolo.ModelPath": "Làlan'ny rakitra modely YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Làlan'ny rakitra modely YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Fangatahana ambony indrindra isan-tsegondra (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Famintinana ny Angovo Isan'andro",
       "Description": "Fanjifana angovo isan'andro (Wh) araka ny fitaovana.",
       "Widget.Statistics.DailyReport": "Ampidiro ao amin'ny tatitra Daily Wh"
+    },
+    "200": {
+      "Title": "Fidirana horonan-tsary",
+      "Description": "Maka feo sy horonan-tsary mivantana ho an'ny fanaraha-maso mivantana, fanodinana amin'ny fotoana tena izy, ary fandraketana mitohy.",
+      "VideoInput.Disable": "Atsaharo ity fidirana ity",
+      "VideoInput.SourceURL": "URL loharanon'ny lahatsary",
+      "VideoInput.ImageFeed": "Rakitra sary tokana havaozina mivantana ny URL.",
+      "VideoInput.Username": "Anaran'ny mpampiasa (tsy voatery)",
+      "VideoInput.Password": "Tenimiafina (tsy voatery)",
+      "Widget.Config.fps": "Frames isan-tsegondra ambony indrindra",
+      "VideoOutput.Width": "Sakany fivoahan'ny renirano.",
+      "VideoOutput.SnapshotQuality": "Kalitao sary mivantana."
+    },
+    "250": {
+      "Title": "Fandraisam-peo",
+      "Description": "Mirakitra feo sy horonan-tsary avy amin'ny loharano fidirana rehetra. Mety ho mitohy, voalahatra, na vokatry ny hetsika fanairana ny fandraketana.",
+      "NVR.EnableRecording": "Alefaso ny fandraketana horonan-tsary",
+      "NVR.RecordOnAlarm": "Raketo an-tsoratra rehefa misy fanairana",
+      "NVR.ContinuousRecording": "Fandraketana mitohy."
     }
   },
   "scheduler_preset_action_genie_command": "Didin'ny Génie",
   "scheduler_preset_action_config_wish": "Hetsika amin'ny fiteny voajanahary",
-  "scheduler_preset_action_config_wish.placeholder": "Andramo: \"Apetraho amin'ny 22° ny hafanana ary atombohy ny fiposahan'ny masoandro\""
+  "scheduler_preset_action_config_wish.placeholder": "Andramo: \"Apetraho amin'ny 22° ny hafanana ary atombohy ny fiposahan'ny masoandro\"",
+  "scheduler_preset_action_command_video_record_start": "Atombohy ny fandraketana horonan-tsary",
+  "scheduler_preset_action_command_video_record_stop": "Atsaharo ny fandraketana horonan-tsary"
 }

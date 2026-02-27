@@ -536,5 +536,15 @@
   "original_language": "የመጀመሪያው ቋንቋ",
   "origin_country": "የትውልድ አገር",
   "production_companies": "የምርት ኩባንያ",
-  "movie_cast": "ተዋናዮች"
+  "movie_cast": "ተዋናዮች",
+  "live": "በቀጥታ ስርጭት",
+  "recordings": "ቅጂዎች",
+  "no_recordings": "ምንም ቅጂዎች የሉም።",
+  "live_feed": "የቀጥታ ምግብ",
+  "fullscreen_exit": "ከሙሉ ማያ ገጽ ይውጡ",
+  "play_media": "ሚዲያ አጫውት",
+  "start_recording": "መቅዳት ይጀምሩ",
+  "stop_recording": "መቅዳት አቁም",
+  "toggle_smart_recording": "በማንቂያ ላይ በራስ-ሰር መቅዳት",
+  "search_metadata": "ሜታዳታ ፈልግ"
 }

@@ -224,6 +224,10 @@
         "Seconds",
     "scheduler_preset_action_config_message":
         "Message",
+    "scheduler_preset_action_command_video_record_start":
+        "Start Recording Video",
+    "scheduler_preset_action_command_video_record_stop":
+        "Stop Recording Video",
 " ":"---------------- PROGRAM EDITOR -----------------",
   "save_and_build":
     "Save and build",
@@ -532,7 +536,9 @@
       "ML.ObjectDetection.TriggerDetect":
         "Comma-separated list of things (in English) that will trigger the alarm. (e.g.: cat, dog, person, backpack, suitcase)",
       "ConfigureOptions.Yolo.ModelPath":
-        "Path of YOLO model file (.onnx)"
+        "Path of YOLO model file (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond":
+        "Max Requests Per Second (RPS)"
     },
 
     "911": {
@@ -543,7 +549,9 @@
       "ML.PoseEstimation":
         "Enable pose estimation",
       "ConfigureOptions.Yolo.ModelPath":
-        "Path of YOLO model file (.onnx)"
+        "Path of YOLO model file (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond":
+        "Max Requests Per Second (RPS)"
     },
 
     "912": {
@@ -554,7 +562,9 @@
       "ML.InstanceSegmentation":
         "Enable instance segmentation",
       "ConfigureOptions.Yolo.ModelPath":
-        "Path of YOLO model file (.onnx)"
+        "Path of YOLO model file (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond":
+        "Max Requests Per Second (RPS)"
     },
 
     "930": {
@@ -669,6 +679,44 @@
         "Daily energy consumption (Wh) by device.",
       "Widget.Statistics.DailyReport":
         "Include in Daily Wh report"
+    },
+
+    "200": {
+      "Title":
+          "Video Input",
+      "Description":
+          "Captures audio and video streams for live monitoring, real-time processing, and continuous recording.",
+      "VideoInput.Disable":
+          "Disable this input",
+      "VideoInput.SourceURL":
+          "Video source URL",
+      "VideoInput.ImageFeed":
+          "URL is a live-updated single image file.",
+      "VideoInput.Username":
+          "Username (optional)",
+      "VideoInput.Password":
+          "Password (optional)",
+     "Widget.Config.fps":
+          "Max frames per second",
+      "VideoOutput.Width":
+          "Output stream width.",
+      "VideoOutput.SnapshotQuality":
+          "Live image quality."
+    },
+
+    "250":
+    {
+      "Title":
+          "Video Recorder",
+      "Description":
+          "Records audio and video streams from any input source. Recordings can be continuous, scheduled, or triggered by alarm events.",
+      "NVR.EnableRecording":
+          "Enable Video Recording",
+      "NVR.RecordOnAlarm":
+          "Record On Alarm",
+      "NVR.ContinuousRecording":
+          "Continuous Recording."
     }
+
   }
 }

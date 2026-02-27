@@ -294,19 +294,22 @@
       "Description": "Ṣawari awọn nkan nipa lilo awoṣe YOLO ti a ti kọ tẹlẹ.",
       "ML.ObjectDetection": "Mu wiwa nkan ṣiṣẹ",
       "ML.ObjectDetection.TriggerDetect": "Akojọ awọn ohun ti o ya sọtọ (ni ede Gẹẹsi) ti yoo fa itaniji naa. (fun apẹẹrẹ: ologbo, aja, eniyan, apoeyin, apoti)",
-      "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Àwọn ìbéèrè tó pọ̀ jùlọ fún ìṣẹ́jú-àáyá kan (RPS)"
     },
     "911": {
       "Title": "Iṣiro iduro",
       "Description": "Wiwa bọtini bọtini nipasẹ iṣiro iduro, lilo awọn awoṣe ONNX aṣa tabi aiyipada awoṣe YOLO ti a ti kọkọ tẹlẹ (pato-pato eniyan).",
       "ML.PoseEstimation": "Mu iṣiro iduro ṣiṣẹ",
-      "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Àwọn ìbéèrè tó pọ̀ jùlọ fún ìṣẹ́jú-àáyá kan (RPS)"
     },
     "912": {
       "Title": "Apakan apẹẹrẹ",
       "Description": "Ṣewadii awọn nkan ati awọn ilana wọn nipa lilo awoṣe YOLO ti a ti kọ tẹlẹ.",
       "ML.InstanceSegmentation": "Mu ipin apẹẹrẹ ṣiṣẹ",
-      "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ọna ti faili awoṣe YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Àwọn ìbéèrè tó pọ̀ jùlọ fún ìṣẹ́jú-àáyá kan (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Àkópọ̀ Agbára Ojoojúmọ́",
       "Description": "Lilo agbara ojoojumọ (Wh) nipasẹ ẹrọ.",
       "Widget.Statistics.DailyReport": "Fi kún ìròyìn Daily Wh"
+    },
+    "200": {
+      "Title": "Ìtẹ̀wọlé Fídíò",
+      "Description": "Ó máa ń ya àwọn ìṣàn ohùn àti fídíò fún àbójútó láyìíká, ṣíṣe àgbékalẹ̀ ní àkókò gidi, àti gbígbàsílẹ̀ nígbà gbogbo.",
+      "VideoInput.Disable": "Má ṣe ìtẹ̀síwájú yìí mọ́",
+      "VideoInput.SourceURL": "URL orísun fídíò",
+      "VideoInput.ImageFeed": "URL jẹ́ fáìlì àwòrán kan ṣoṣo tí a ń ṣe àtúnṣe lójúkan.",
+      "VideoInput.Username": "Orúkọ orúkọ (àṣàyàn)",
+      "VideoInput.Password": "Ọ̀rọ̀ìpamọ́ (àṣàyàn)",
+      "Widget.Config.fps": "Àwọn férémù tó pọ̀ jùlọ fún ìṣẹ́jú-àáyá kan",
+      "VideoOutput.Width": "Ìbú ìṣàn àgbéjáde.",
+      "VideoOutput.SnapshotQuality": "Dídára àwòrán láàyè."
+    },
+    "250": {
+      "Title": "Agbohunsilẹ Fidio",
+      "Description": "Ó máa ń gba ohùn àti fídíò sílẹ̀ láti orísun ìtẹ̀wọlé èyíkéyìí. Àwọn ìgbàsílẹ̀ lè máa lọ déédéé, wọ́n lè ṣètò, tàbí kí wọ́n máa wáyé nípasẹ̀ àwọn ìṣẹ̀lẹ̀ ìkìlọ̀.",
+      "NVR.EnableRecording": "Mu Gbigbasilẹ Fidio ṣiṣẹ",
+      "NVR.RecordOnAlarm": "Gba silẹ lori Itaniji",
+      "NVR.ContinuousRecording": "Gbigbasilẹ ti nlọ lọwọ."
     }
   },
   "scheduler_preset_action_genie_command": "Àṣẹ Ẹ̀mí",
   "scheduler_preset_action_config_wish": "Ìṣe Èdè Àdánidá",
-  "scheduler_preset_action_config_wish.placeholder": "Gbìyànjú: \"Ṣètò ooru sí 22° kí o sì bẹ̀rẹ̀ sí í rí ìrísí ìlà oòrùn\""
+  "scheduler_preset_action_config_wish.placeholder": "Gbìyànjú: \"Ṣètò ooru sí 22° kí o sì bẹ̀rẹ̀ sí í rí ìrísí ìlà oòrùn\"",
+  "scheduler_preset_action_command_video_record_start": "Bẹ̀rẹ̀ sí Gbígbà Fídíò sílẹ̀",
+  "scheduler_preset_action_command_video_record_stop": "Dáwọ́ Gbígbàsílẹ̀ Fídíò dúró"
 }

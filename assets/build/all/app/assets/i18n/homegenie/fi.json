@@ -294,19 +294,22 @@
       "Description": "Tunnista esineitä käyttämällä esikoulutettua YOLO-mallia.",
       "ML.ObjectDetection": "Ota käyttöön objektien tunnistus",
       "ML.ObjectDetection.TriggerDetect": "Pilkuilla erotettu luettelo asioista (englanniksi), jotka laukaisevat hälytyksen. (esim. kissa, koira, henkilö, reppu, matkalaukku)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO-mallitiedoston polku (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO-mallitiedoston polku (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Pyyntöjen enimmäismäärä sekunnissa (RPS)"
     },
     "911": {
       "Title": "Asennon arviointi",
       "Description": "Avainpisteiden tunnistus asennon arvioinnin avulla, käyttämällä mukautettuja ONNX-malleja tai oletusarvoista esikoulutettua YOLO-mallia (ihmisen asentokohtainen).",
       "ML.PoseEstimation": "Ota asennon arviointi käyttöön",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO-mallitiedoston polku (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO-mallitiedoston polku (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Pyyntöjen enimmäismäärä sekunnissa (RPS)"
     },
     "912": {
       "Title": "Instanssien segmentointi",
       "Description": "Tunnista esineitä ja niiden ääriviivoja käyttämällä esikoulutettua YOLO-mallia.",
       "ML.InstanceSegmentation": "Ota käyttöön instanssien segmentointi",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO-mallitiedoston polku (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO-mallitiedoston polku (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Pyyntöjen enimmäismäärä sekunnissa (RPS)"
     },
     "930": {
       "Title": "Gemini-aikeiden käsittelijä",
@@ -376,9 +379,30 @@
       "Title": "Päivittäinen energiayhteenveto",
       "Description": "Päivittäinen energiankulutus (Wh) laitteelta.",
       "Widget.Statistics.DailyReport": "Sisällytä päivittäiseen valkoisten ..."
+    },
+    "200": {
+      "Title": "Videotulo",
+      "Description": "Tallentaa ääni- ja videovirtoja reaaliaikaista seurantaa, reaaliaikaista käsittelyä ja jatkuvaa tallennusta varten.",
+      "VideoInput.Disable": "Poista tämä syöte käytöstä",
+      "VideoInput.SourceURL": "Videon lähteen URL-osoite",
+      "VideoInput.ImageFeed": "URL-osoite on reaaliaikaisesti päivittyvä yksittäinen kuvatiedosto.",
+      "VideoInput.Username": "Käyttäjätunnus (valinnainen)",
+      "VideoInput.Password": "Salasana (valinnainen)",
+      "Widget.Config.fps": "Enimmäiskehyksiä sekunnissa",
+      "VideoOutput.Width": "Lähtövirran leveys.",
+      "VideoOutput.SnapshotQuality": "Reaaliaikaisen kuvan laatu."
+    },
+    "250": {
+      "Title": "Videonauhuri",
+      "Description": "Tallentaa ääni- ja videostreameja mistä tahansa tulolähteestä. Tallenteet voivat olla jatkuvia, ajoitettuja tai hälytystapahtumien laukaisemia.",
+      "NVR.EnableRecording": "Ota videotallennus käyttöön",
+      "NVR.RecordOnAlarm": "Tallenna hälytyksestä",
+      "NVR.ContinuousRecording": "Jatkuva tallennus."
     }
   },
   "scheduler_preset_action_genie_command": "Genie-komento",
   "scheduler_preset_action_config_wish": "Luonnollisen kielen toiminta",
-  "scheduler_preset_action_config_wish.placeholder": "Kokeile: \"Aseta lämpötila 22°C:een ja käynnistä auringonnousukohtaus\""
+  "scheduler_preset_action_config_wish.placeholder": "Kokeile: \"Aseta lämpötila 22°C:een ja käynnistä auringonnousukohtaus\"",
+  "scheduler_preset_action_command_video_record_start": "Aloita videon tallennus",
+  "scheduler_preset_action_command_video_record_stop": "Lopeta videon tallennus"
 }

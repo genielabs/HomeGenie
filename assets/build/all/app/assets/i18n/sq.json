@@ -536,5 +536,15 @@
   "original_language": "Gjuha origjinale",
   "origin_country": "Vendi i origjinës",
   "production_companies": "Kompania e Prodhimit",
-  "movie_cast": "Aktorët"
+  "movie_cast": "Aktorët",
+  "live": "Drejtpërdrejt",
+  "recordings": "Regjistrime",
+  "no_recordings": "Asnjë regjistrim.",
+  "live_feed": "Transmetim i drejtpërdrejtë",
+  "fullscreen_exit": "Dil nga Ekrani i plotë",
+  "play_media": "Luaj Median",
+  "start_recording": "Fillo regjistrimin",
+  "stop_recording": "Ndalo regjistrimin",
+  "toggle_smart_recording": "Regjistrim automatik në alarm",
+  "search_metadata": "Kërko metadata"
 }

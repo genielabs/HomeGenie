@@ -294,19 +294,22 @@
       "Description": "Objektumok észlelése egy előre betanított YOLO modell segítségével.",
       "ML.ObjectDetection": "Objektumészlelés engedélyezése",
       "ML.ObjectDetection.TriggerDetect": "Vesszővel elválasztott lista (angol nyelven), amely kiváltja a riasztást. (pl.: macska, kutya, személy, hátizsák, bőrönd)",
-      "ConfigureOptions.Yolo.ModelPath": "A YOLO modellfájl (.onnx) elérési útja"
+      "ConfigureOptions.Yolo.ModelPath": "A YOLO modellfájl (.onnx) elérési útja",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Másodpercenkénti maximális kérésszám (RPS)"
     },
     "911": {
       "Title": "Pózbecslés",
       "Description": "Kulcspont-észlelés pózbecsléssel, egyéni ONNX modellek vagy az alapértelmezett előre betanított YOLO modell (emberi póz-specifikus) használatával.",
       "ML.PoseEstimation": "Pózbecslés engedélyezése",
-      "ConfigureOptions.Yolo.ModelPath": "A YOLO modellfájl (.onnx) elérési útja"
+      "ConfigureOptions.Yolo.ModelPath": "A YOLO modellfájl (.onnx) elérési útja",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Másodpercenkénti maximális kérésszám (RPS)"
     },
     "912": {
       "Title": "Példány szegmentálás",
       "Description": "Objektumok és körvonalaik észlelése egy előre betanított YOLO modell segítségével.",
       "ML.InstanceSegmentation": "Példányszegmentálás engedélyezése",
-      "ConfigureOptions.Yolo.ModelPath": "A YOLO modellfájl (.onnx) elérési útja"
+      "ConfigureOptions.Yolo.ModelPath": "A YOLO modellfájl (.onnx) elérési útja",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Másodpercenkénti maximális kérésszám (RPS)"
     },
     "930": {
       "Title": "Gemini szándékkezelő",
@@ -376,9 +379,30 @@
       "Title": "Napi energiaösszefoglaló",
       "Description": "Napi energiafogyasztás (Wh) eszközönként.",
       "Widget.Statistics.DailyReport": "Tartalmazza a napi fehérhónap-jelentésben"
+    },
+    "200": {
+      "Title": "Videobemenet",
+      "Description": "Hang- és videofolyamokat rögzít élő monitorozáshoz, valós idejű feldolgozáshoz és folyamatos felvételhez.",
+      "VideoInput.Disable": "Tiltsa le ezt a bevitelt",
+      "VideoInput.SourceURL": "Videó forrás URL-címe",
+      "VideoInput.ImageFeed": "Az URL egy élőben frissített, egyetlen képfájl.",
+      "VideoInput.Username": "Felhasználónév (opcionális)",
+      "VideoInput.Password": "Jelszó (opcionális)",
+      "Widget.Config.fps": "Max. képkocka/másodperc",
+      "VideoOutput.Width": "Kimeneti adatfolyam szélessége.",
+      "VideoOutput.SnapshotQuality": "Élőképminőség."
+    },
+    "250": {
+      "Title": "Videomagnó",
+      "Description": "Hang- és videofelvételeket rögzít bármilyen bemeneti forrásból. A felvételek lehetnek folyamatosak, ütemezettek vagy riasztási események által kiváltottak.",
+      "NVR.EnableRecording": "Videofelvétel engedélyezése",
+      "NVR.RecordOnAlarm": "Felvétel riasztáskor",
+      "NVR.ContinuousRecording": "Folyamatos felvétel."
     }
   },
   "scheduler_preset_action_genie_command": "Dzsinn Parancsnokság",
   "scheduler_preset_action_config_wish": "Természetes nyelvi cselekvés",
-  "scheduler_preset_action_config_wish.placeholder": "Próbáld ki: „Állítsd a hőmérsékletet 22°C-ra, és indítsd el a Napfelkelte jelenetet”"
+  "scheduler_preset_action_config_wish.placeholder": "Próbáld ki: „Állítsd a hőmérsékletet 22°C-ra, és indítsd el a Napfelkelte jelenetet”",
+  "scheduler_preset_action_command_video_record_start": "Videófelvétel indítása",
+  "scheduler_preset_action_command_video_record_stop": "Videófelvétel leállítása"
 }

@@ -536,5 +536,15 @@
   "original_language": "Bahasa Asli",
   "origin_country": "Negara Asal",
   "production_companies": "Perusahaan Produksi",
-  "movie_cast": "Aktor"
+  "movie_cast": "Aktor",
+  "live": "Hidup",
+  "recordings": "Rekaman",
+  "no_recordings": "Tidak ada rekaman.",
+  "live_feed": "Siaran Langsung",
+  "fullscreen_exit": "Keluar dari Layar Penuh",
+  "play_media": "Putar Media",
+  "start_recording": "Mulai Merekam",
+  "stop_recording": "Hentikan Perekaman",
+  "toggle_smart_recording": "Rekam otomatis saat alarm berbunyi",
+  "search_metadata": "Metadata Pencarian"
 }

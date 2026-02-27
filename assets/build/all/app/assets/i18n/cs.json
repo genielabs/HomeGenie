@@ -536,5 +536,15 @@
   "original_language": "Původní jazyk",
   "origin_country": "Země původu",
   "production_companies": "Produkční společnost",
-  "movie_cast": "Herci"
+  "movie_cast": "Herci",
+  "live": "Žít",
+  "recordings": "Nahrávky",
+  "no_recordings": "Žádné nahrávky.",
+  "live_feed": "Živý přenos",
+  "fullscreen_exit": "Ukončit režim celé obrazovky",
+  "play_media": "Přehrát média",
+  "start_recording": "Spustit nahrávání",
+  "stop_recording": "Zastavit nahrávání",
+  "toggle_smart_recording": "Automatické nahrávání při alarmu",
+  "search_metadata": "Vyhledávání metadat"
 }

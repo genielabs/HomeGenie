@@ -265,7 +265,8 @@ namespace HomeGenie.Automation.Scripting
         /// </example>
         public ModuleHelper Get()
         {
-            return new ModuleHelper(homegenie, SelectedModules.Count > 0 ? SelectedModules.First() : null);
+            var currentSelection = SelectedModules;
+            return new ModuleHelper(homegenie, currentSelection.FirstOrDefault());
         }
 
         public ModuleHelper FromInstance(Module module)

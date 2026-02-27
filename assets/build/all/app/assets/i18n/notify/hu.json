@@ -1,0 +1,3 @@
+{
+  "ffmpeg_required": "A `{{module_name}}` modul működéséhez **FFmpeg** szükséges. Kérjük, telepítse a hivatalos weboldalról: - [https://ffmpeg.org](https://ffmpeg.org) Ha nincs szüksége erre a funkcióra, letilthatja a modult az **Automatizálási programok** részben, vagy az alábbi gombra kattintva."
+}

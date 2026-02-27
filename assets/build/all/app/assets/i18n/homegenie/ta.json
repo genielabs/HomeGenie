@@ -294,19 +294,22 @@
       "Description": "முன் பயிற்சி பெற்ற YOLO மாதிரியைப் பயன்படுத்தி பொருட்களைக் கண்டறியவும்.",
       "ML.ObjectDetection": "பொருட்களைக் கண்டறிதலை இயக்கு",
       "ML.ObjectDetection.TriggerDetect": "அலாரத்தைத் தூண்டும் விஷயங்களின் காற்புள்ளியால் பிரிக்கப்பட்ட பட்டியல் (ஆங்கிலத்தில்). (எ.கா: பூனை, நாய், நபர், முதுகுப்பை, சூட்கேஸ்)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO மாதிரி கோப்பின் பாதை (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO மாதிரி கோப்பின் பாதை (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "வினாடிக்கு அதிகபட்ச கோரிக்கைகள் (RPS)"
     },
     "911": {
       "Title": "போஸ் மதிப்பீடு",
       "Description": "தனிப்பயன் ONNX மாதிரிகள் அல்லது இயல்புநிலை முன் பயிற்சி பெற்ற YOLO மாதிரி (மனித போஸ்-குறிப்பிட்டது) பயன்படுத்தி, போஸ் மதிப்பீடு மூலம் முக்கிய புள்ளி கண்டறிதல்.",
       "ML.PoseEstimation": "போஸ் மதிப்பீட்டை இயக்கு",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO மாதிரி கோப்பின் பாதை (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO மாதிரி கோப்பின் பாதை (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "வினாடிக்கு அதிகபட்ச கோரிக்கைகள் (RPS)"
     },
     "912": {
       "Title": "நிகழ்வுப் பிரிவு",
       "Description": "முன் பயிற்சி பெற்ற YOLO மாதிரியைப் பயன்படுத்தி பொருட்களையும் அவற்றின் வெளிப்புறங்களையும் கண்டறியவும்.",
       "ML.InstanceSegmentation": "நிகழ்வுப் பிரிவை இயக்கு",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO மாதிரி கோப்பின் பாதை (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO மாதிரி கோப்பின் பாதை (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "வினாடிக்கு அதிகபட்ச கோரிக்கைகள் (RPS)"
     },
     "930": {
       "Title": "ஜெமினி இன்டென்ட் ஹேண்ட்லர்",
@@ -376,9 +379,30 @@
       "Title": "தினசரி ஆற்றல் சுருக்கம்",
       "Description": "சாதனத்தின் தினசரி ஆற்றல் நுகர்வு (Wh).",
       "Widget.Statistics.DailyReport": "தினசரி Wh அறிக்கையில் சேர்க்கவும்"
+    },
+    "200": {
+      "Title": "வீடியோ உள்ளீடு",
+      "Description": "நேரடி கண்காணிப்பு, நிகழ்நேர செயலாக்கம் மற்றும் தொடர்ச்சியான பதிவுக்காக ஆடியோ மற்றும் வீடியோ ஸ்ட்ரீம்களைப் பிடிக்கிறது.",
+      "VideoInput.Disable": "இந்த உள்ளீட்டை முடக்கு",
+      "VideoInput.SourceURL": "வீடியோ மூல URL",
+      "VideoInput.ImageFeed": "URL என்பது நேரடியாகப் புதுப்பிக்கப்பட்ட ஒற்றைப் படக் கோப்பாகும்.",
+      "VideoInput.Username": "பயனர்பெயர் (விரும்பினால்)",
+      "VideoInput.Password": "கடவுச்சொல் (விரும்பினால்)",
+      "Widget.Config.fps": "வினாடிக்கு அதிகபட்ச பிரேம்கள்",
+      "VideoOutput.Width": "வெளியீட்டு ஓட்ட அகலம்.",
+      "VideoOutput.SnapshotQuality": "நேரடி பட தரம்."
+    },
+    "250": {
+      "Title": "வீடியோ ரெக்கார்டர்",
+      "Description": "எந்த உள்ளீட்டு மூலத்திலிருந்தும் ஆடியோ மற்றும் வீடியோ ஸ்ட்ரீம்களைப் பதிவு செய்கிறது. பதிவுகள் தொடர்ச்சியாகவோ, திட்டமிடப்பட்டதாகவோ அல்லது எச்சரிக்கை நிகழ்வுகளால் தூண்டப்பட்டதாகவோ இருக்கலாம்.",
+      "NVR.EnableRecording": "வீடியோ பதிவை இயக்கு",
+      "NVR.RecordOnAlarm": "அலாரத்தில் பதிவு செய்",
+      "NVR.ContinuousRecording": "தொடர்ச்சியான பதிவு."
     }
   },
   "scheduler_preset_action_genie_command": "ஜெனி கட்டளை",
   "scheduler_preset_action_config_wish": "இயற்கை மொழி செயல்",
-  "scheduler_preset_action_config_wish.placeholder": "\"வெப்பத்தை 22° ஆக அமைத்து சூரிய உதயக் காட்சியைத் தொடங்கு\" என்பதை முயற்சிக்கவும்."
+  "scheduler_preset_action_config_wish.placeholder": "\"வெப்பத்தை 22° ஆக அமைத்து சூரிய உதயக் காட்சியைத் தொடங்கு\" என்பதை முயற்சிக்கவும்.",
+  "scheduler_preset_action_command_video_record_start": "வீடியோவைப் பதிவுசெய்யத் தொடங்கு",
+  "scheduler_preset_action_command_video_record_stop": "வீடியோ பதிவு செய்வதை நிறுத்து"
 }

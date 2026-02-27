@@ -398,7 +398,7 @@ namespace HomeGenie.Service
             if (valueList.Trim().StartsWith("/"))
             {
                 valueList = Regex.Replace(valueList, "^\\/+|\\/+$", "");
-                Match m = Regex.Match(matchValue, valueList);
+                var m = Regex.Match(matchValue, valueList);
                 return m.Success;
             }
 

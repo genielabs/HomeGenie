@@ -536,5 +536,15 @@
   "original_language": "Limba originală",
   "origin_country": "Țara de origine",
   "production_companies": "Companie de producție",
-  "movie_cast": "Actori"
+  "movie_cast": "Actori",
+  "live": "Trăi",
+  "recordings": "Înregistrări",
+  "no_recordings": "Nicio înregistrare.",
+  "live_feed": "Flux live",
+  "fullscreen_exit": "Ieșire din ecran complet",
+  "play_media": "Redare conținut media",
+  "start_recording": "Începeți înregistrarea",
+  "stop_recording": "Opriți înregistrarea",
+  "toggle_smart_recording": "Înregistrare automată la alarmă",
+  "search_metadata": "Metadate de căutare"
 }

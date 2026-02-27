@@ -536,5 +536,15 @@
   "original_language": "ಮೂಲ ಭಾಷೆ",
   "origin_country": "ಮೂಲದ ದೇಶ",
   "production_companies": "ನಿರ್ಮಾಣ ಕಂಪನಿ",
-  "movie_cast": "ನಟರು"
+  "movie_cast": "ನಟರು",
+  "live": "ಲೈವ್",
+  "recordings": "ರೆಕಾರ್ಡಿಂಗ್‌ಗಳು",
+  "no_recordings": "ಯಾವುದೇ ರೆಕಾರ್ಡಿಂಗ್‌ಗಳಿಲ್ಲ.",
+  "live_feed": "ಲೈವ್ ಫೀಡ್",
+  "fullscreen_exit": "ಪೂರ್ಣಪರದೆಯಿಂದ ನಿರ್ಗಮಿಸಿ",
+  "play_media": "ಮಾಧ್ಯಮವನ್ನು ಪ್ಲೇ ಮಾಡಿ",
+  "start_recording": "ರೆಕಾರ್ಡಿಂಗ್ ಪ್ರಾರಂಭಿಸಿ",
+  "stop_recording": "ರೆಕಾರ್ಡಿಂಗ್ ನಿಲ್ಲಿಸಿ",
+  "toggle_smart_recording": "ಅಲಾರಾಂನಲ್ಲಿ ಸ್ವಯಂ-ರೆಕಾರ್ಡ್ ಮಾಡಿ",
+  "search_metadata": "ಮೆಟಾಡೇಟಾ ಹುಡುಕಿ"
 }

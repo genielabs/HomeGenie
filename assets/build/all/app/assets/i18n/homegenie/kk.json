@@ -294,19 +294,22 @@
       "Description": "Алдын ала дайындалған YOLO үлгісін пайдаланып нысандарды анықтаңыз.",
       "ML.ObjectDetection": "Нысандарды анықтауды қосыңыз",
       "ML.ObjectDetection.TriggerDetect": "Дабылды қосатын заттардың үтірмен бөлінген тізімі (ағылшын тілінде). (мысалы: мысық, ит, адам, рюкзак, чемодан)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO үлгі файлының жолы (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO үлгі файлының жолы (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Секундына ең көп сұраныстар (RPS)"
     },
     "911": {
       "Title": "Позаны бағалау",
       "Description": "Пайдаланушы ONNX үлгілерін немесе әдепкі алдын ала дайындалған YOLO үлгісін (адам позасына тән) пайдалана отырып, позаны бағалау арқылы негізгі нүктені анықтау.",
       "ML.PoseEstimation": "Позаны бағалауды қосыңыз",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO үлгі файлының жолы (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO үлгі файлының жолы (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Секундына ең көп сұраныстар (RPS)"
     },
     "912": {
       "Title": "Дана сегментациясы",
       "Description": "Алдын ала дайындалған YOLO үлгісін пайдаланып нысандарды және олардың контурларын анықтаңыз.",
       "ML.InstanceSegmentation": "Дана сегментациясын қосыңыз",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO үлгі файлының жолы (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO үлгі файлының жолы (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Секундына ең көп сұраныстар (RPS)"
     },
     "930": {
       "Title": "Gemini ниет өңдеушісі",
@@ -376,9 +379,30 @@
       "Title": "Күнделікті энергия қоры",
       "Description": "Құрылғы бойынша тәуліктік энергия тұтыну (Вт/сағ).",
       "Widget.Statistics.DailyReport": "Күнделікті Wh есебіне қосу"
+    },
+    "200": {
+      "Title": "Бейне кірісі",
+      "Description": "Тікелей бақылау, нақты уақыт режимінде өңдеу және үздіксіз жазу үшін аудио және бейне ағындарын түсіреді.",
+      "VideoInput.Disable": "Бұл енгізуді өшіру",
+      "VideoInput.SourceURL": "Бейне көзінің URL мекенжайы",
+      "VideoInput.ImageFeed": "URL мекенжайы - тікелей жаңартылатын жалғыз кескін файлы.",
+      "VideoInput.Username": "Пайдаланушы аты (міндетті емес)",
+      "VideoInput.Password": "Құпия сөз (міндетті емес)",
+      "Widget.Config.fps": "Секундына ең көп кадрлар",
+      "VideoOutput.Width": "Шығыс ағынының ені.",
+      "VideoOutput.SnapshotQuality": "Тікелей эфирдегі кескін сапасы."
+    },
+    "250": {
+      "Title": "Бейнежазба құрылғысы",
+      "Description": "Кез келген кіріс көзінен аудио және бейне ағындарын жазады. Жазбалар үздіксіз, жоспарланған немесе дабыл оқиғалары арқылы іске қосылуы мүмкін.",
+      "NVR.EnableRecording": "Бейнежазбаны қосу",
+      "NVR.RecordOnAlarm": "Дабыл жазуы",
+      "NVR.ContinuousRecording": "Үздіксіз жазу."
     }
   },
   "scheduler_preset_action_genie_command": "Жын командасы",
   "scheduler_preset_action_config_wish": "Табиғи тіл әрекеті",
-  "scheduler_preset_action_config_wish.placeholder": "Мынаны қолданып көріңіз: \"Температураны 22°-қа қойып, күн шығу көрінісін бастаңыз\"."
+  "scheduler_preset_action_config_wish.placeholder": "Мынаны қолданып көріңіз: \"Температураны 22°-қа қойып, күн шығу көрінісін бастаңыз\".",
+  "scheduler_preset_action_command_video_record_start": "Бейне жазуды бастау",
+  "scheduler_preset_action_command_video_record_stop": "Бейне жазуды тоқтату"
 }

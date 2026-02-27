@@ -294,19 +294,22 @@
       "Description": "ముందుగా శిక్షణ పొందిన YOLO మోడల్‌ని ఉపయోగించి వస్తువులను గుర్తించండి.",
       "ML.ObjectDetection": "వస్తువుల గుర్తింపును ప్రారంభించండి",
       "ML.ObjectDetection.TriggerDetect": "అలారం మోగించే వస్తువుల జాబితా (ఇంగ్లీషులో) కామాతో వేరు చేయబడింది. (ఉదా: పిల్లి, కుక్క, వ్యక్తి, బ్యాక్‌ప్యాక్, సూట్‌కేస్)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO మోడల్ ఫైల్ (.onnx) యొక్క మార్గం"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO మోడల్ ఫైల్ (.onnx) యొక్క మార్గం",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "సెకనుకు గరిష్ట అభ్యర్థనలు (RPS)"
     },
     "911": {
       "Title": "భంగిమ అంచనా",
       "Description": "కస్టమ్ ONNX మోడల్స్ లేదా డిఫాల్ట్ ప్రీ-ట్రైన్డ్ YOLO మోడల్ (మానవ భంగిమ-నిర్దిష్ట) ఉపయోగించి భంగిమ అంచనా ద్వారా కీపాయింట్ గుర్తింపు.",
       "ML.PoseEstimation": "భంగిమ అంచనాను ప్రారంభించండి",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO మోడల్ ఫైల్ (.onnx) యొక్క మార్గం"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO మోడల్ ఫైల్ (.onnx) యొక్క మార్గం",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "సెకనుకు గరిష్ట అభ్యర్థనలు (RPS)"
     },
     "912": {
       "Title": "ఇన్‌స్టన్స్ సెగ్మెంటేషన్",
       "Description": "ముందుగా శిక్షణ పొందిన YOLO మోడల్‌ని ఉపయోగించి వస్తువులు మరియు వాటి రూపురేఖలను గుర్తించండి.",
       "ML.InstanceSegmentation": "ఉదాహరణ విభజనను ప్రారంభించండి",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO మోడల్ ఫైల్ (.onnx) యొక్క మార్గం"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO మోడల్ ఫైల్ (.onnx) యొక్క మార్గం",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "సెకనుకు గరిష్ట అభ్యర్థనలు (RPS)"
     },
     "930": {
       "Title": "జెమిని ఇంటెంట్ హ్యాండ్లర్",
@@ -376,9 +379,30 @@
       "Title": "రోజువారీ శక్తి సారాంశం",
       "Description": "పరికరం ద్వారా రోజువారీ శక్తి వినియోగం (Wh).",
       "Widget.Statistics.DailyReport": "డైలీ Wh రిపోర్ట్‌లో చేర్చండి"
+    },
+    "200": {
+      "Title": "వీడియో ఇన్‌పుట్",
+      "Description": "ప్రత్యక్ష పర్యవేక్షణ, రియల్-టైమ్ ప్రాసెసింగ్ మరియు నిరంతర రికార్డింగ్ కోసం ఆడియో మరియు వీడియో స్ట్రీమ్‌లను సంగ్రహిస్తుంది.",
+      "VideoInput.Disable": "ఈ ఇన్‌పుట్‌ను నిలిపివేయండి",
+      "VideoInput.SourceURL": "వీడియో సోర్స్ URL",
+      "VideoInput.ImageFeed": "URL అనేది ప్రత్యక్షంగా నవీకరించబడిన సింగిల్ ఇమేజ్ ఫైల్.",
+      "VideoInput.Username": "యూజర్ పేరు (ఐచ్ఛికం)",
+      "VideoInput.Password": "పాస్‌వర్డ్ (ఐచ్ఛికం)",
+      "Widget.Config.fps": "సెకనుకు గరిష్ట ఫ్రేమ్‌లు",
+      "VideoOutput.Width": "అవుట్‌పుట్ స్ట్రీమ్ వెడల్పు.",
+      "VideoOutput.SnapshotQuality": "ప్రత్యక్ష చిత్ర నాణ్యత."
+    },
+    "250": {
+      "Title": "వీడియో రికార్డర్",
+      "Description": "ఏదైనా ఇన్‌పుట్ మూలం నుండి ఆడియో మరియు వీడియో స్ట్రీమ్‌లను రికార్డ్ చేస్తుంది. రికార్డింగ్‌లు నిరంతరంగా, షెడ్యూల్ చేయబడి లేదా అలారం ఈవెంట్‌ల ద్వారా ట్రిగ్గర్ చేయబడతాయి.",
+      "NVR.EnableRecording": "వీడియో రికార్డింగ్‌ను ప్రారంభించండి",
+      "NVR.RecordOnAlarm": "అలారంలో రికార్డ్ చేయి",
+      "NVR.ContinuousRecording": "నిరంతర రికార్డింగ్."
     }
   },
   "scheduler_preset_action_genie_command": "జెనీ కమాండ్",
   "scheduler_preset_action_config_wish": "సహజ భాషా చర్య",
-  "scheduler_preset_action_config_wish.placeholder": "\"వేడిని 22°కి సెట్ చేసి సూర్యోదయ దృశ్యాన్ని ప్రారంభించండి\" అని ప్రయత్నించండి."
+  "scheduler_preset_action_config_wish.placeholder": "\"వేడిని 22°కి సెట్ చేసి సూర్యోదయ దృశ్యాన్ని ప్రారంభించండి\" అని ప్రయత్నించండి.",
+  "scheduler_preset_action_command_video_record_start": "వీడియో రికార్డింగ్ ప్రారంభించండి",
+  "scheduler_preset_action_command_video_record_stop": "వీడియో రికార్డింగ్ ఆపివేయి"
 }

@@ -294,19 +294,22 @@
       "Description": "ກວດຫາວັດຖຸໂດຍໃຊ້ຕົວແບບ YOLO ທີ່ໄດ້ຮັບການຝຶກອົບຮົມກ່ອນ.",
       "ML.ObjectDetection": "ເປີດໃຊ້ການກວດຫາວັດຖຸ",
       "ML.ObjectDetection.TriggerDetect": "ລາຍຊື່ສິ່ງຕ່າງໆທີ່ຂັ້ນດ້ວຍເຄື່ອງໝາຍຈຸດ (ໃນພາສາອັງກິດ) ທີ່ຈະກະຕຸ້ນເຕືອນ. (ເຊັ່ນ: cat, dog, person, backpack, suitcase)",
-      "ConfigureOptions.Yolo.ModelPath": "ເສັ້ນທາງຂອງໄຟລ໌ຕົວແບບ YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "ເສັ້ນທາງຂອງໄຟລ໌ຕົວແບບ YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "ຄຳຮ້ອງຂໍສູງສຸດຕໍ່ວິນາທີ (RPS)"
     },
     "911": {
       "Title": "Pose ຄາດຄະເນ",
       "Description": "ການກວດຫາຈຸດສຳຄັນຜ່ານການຄາດຄະເນການຕັ້ງຕົວແບບ, ໂດຍໃຊ້ໂມເດວ ONNX ແບບກຳນົດເອງ ຫຼືຮູບແບບ YOLO ທີ່ໄດ້ຝຶກອົບຮົມໄວ້ກ່ອນເລີ່ມຕົ້ນ (ສະເພາະຕົວແບບຂອງມະນຸດ).",
       "ML.PoseEstimation": "ເປີດ​ໃຊ້​ງານ​ການ​ຄາດ​ຄະ​ເນ​",
-      "ConfigureOptions.Yolo.ModelPath": "ເສັ້ນທາງຂອງໄຟລ໌ຕົວແບບ YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "ເສັ້ນທາງຂອງໄຟລ໌ຕົວແບບ YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "ຄຳຮ້ອງຂໍສູງສຸດຕໍ່ວິນາທີ (RPS)"
     },
     "912": {
       "Title": "ການແບ່ງສ່ວນຕົວຢ່າງ",
       "Description": "ກວດຫາວັດຖຸ ແລະໂຄງຮ່າງຂອງພວກມັນໂດຍໃຊ້ຕົວແບບ YOLO ທີ່ໄດ້ຮັບການຝຶກອົບຮົມກ່ອນ.",
       "ML.InstanceSegmentation": "ເປີດໃຊ້ການແບ່ງສ່ວນຕົວຢ່າງ",
-      "ConfigureOptions.Yolo.ModelPath": "ເສັ້ນທາງຂອງໄຟລ໌ຕົວແບບ YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "ເສັ້ນທາງຂອງໄຟລ໌ຕົວແບບ YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "ຄຳຮ້ອງຂໍສູງສຸດຕໍ່ວິນາທີ (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "ສະຫຼຸບພະລັງງານປະຈຳວັນ",
       "Description": "ການໃຊ້ພະລັງງານປະຈຳວັນ (Wh) ຕໍ່ອຸປະກອນ.",
       "Widget.Statistics.DailyReport": "ລວມເຂົ້າໃນລາຍງານ Wh ປະຈຳວັນ"
+    },
+    "200": {
+      "Title": "ການປ້ອນຂໍ້ມູນວິດີໂອ",
+      "Description": "ບັນທຶກສຽງ ແລະ ວິດີໂອສຳລັບການຕິດຕາມກວດກາສົດ, ການປະມວນຜົນແບບເວລາຈິງ ແລະ ການບັນທຶກສຽງຢ່າງຕໍ່ເນື່ອງ.",
+      "VideoInput.Disable": "ປິດການປ້ອນຂໍ້ມູນນີ້",
+      "VideoInput.SourceURL": "URL ແຫຼ່ງທີ່ມາຂອງວິດີໂອ",
+      "VideoInput.ImageFeed": "URL ແມ່ນໄຟລ໌ຮູບພາບດຽວທີ່ອັບເດດສົດ.",
+      "VideoInput.Username": "ຊື່ຜູ້ໃຊ້ (ບໍ່ຈຳເປັນ)",
+      "VideoInput.Password": "ລະຫັດຜ່ານ (ບໍ່ຈຳເປັນ)",
+      "Widget.Config.fps": "ເຟຣມສູງສຸດຕໍ່ວິນາທີ",
+      "VideoOutput.Width": "ຄວາມກວ້າງຂອງກະແສຜົນຜະລິດ.",
+      "VideoOutput.SnapshotQuality": "ຄຸນນະພາບຮູບພາບສົດ."
+    },
+    "250": {
+      "Title": "ເຄື່ອງບັນທຶກວິດີໂອ",
+      "Description": "ບັນທຶກສຽງ ແລະ ວິດີໂອຈາກແຫຼ່ງປ້ອນຂໍ້ມູນໃດກໍໄດ້. ການບັນທຶກສາມາດເປັນແບບຕໍ່ເນື່ອງ, ກຳນົດເວລາໄວ້, ຫຼື ຖືກກະຕຸ້ນໂດຍເຫດການເຕືອນໄພ.",
+      "NVR.EnableRecording": "ເປີດໃຊ້ການບັນທຶກວິດີໂອ",
+      "NVR.RecordOnAlarm": "ບັນທຶກໃນເວລາປຸກ",
+      "NVR.ContinuousRecording": "ການບັນທຶກຢ່າງຕໍ່ເນື່ອງ."
     }
   },
   "scheduler_preset_action_genie_command": "ຄຳສັ່ງຂອງ Genie",
   "scheduler_preset_action_config_wish": "ການກະທຳທາງພາສາທຳມະຊາດ",
-  "scheduler_preset_action_config_wish.placeholder": "ລອງ: \"ຕັ້ງຄວາມຮ້ອນໄວ້ທີ່ 22° ແລະ ເລີ່ມຕົ້ນສາກຕາເວັນຂຶ້ນ\""
+  "scheduler_preset_action_config_wish.placeholder": "ລອງ: \"ຕັ້ງຄວາມຮ້ອນໄວ້ທີ່ 22° ແລະ ເລີ່ມຕົ້ນສາກຕາເວັນຂຶ້ນ\"",
+  "scheduler_preset_action_command_video_record_start": "ເລີ່ມການບັນທຶກວິດີໂອ",
+  "scheduler_preset_action_command_video_record_stop": "ຢຸດການບັນທຶກວິດີໂອ"
 }

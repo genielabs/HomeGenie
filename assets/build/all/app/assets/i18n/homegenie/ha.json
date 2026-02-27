@@ -294,19 +294,22 @@
       "Description": "Gano abubuwa ta amfani da ƙirar YOLO da aka riga aka horar.",
       "ML.ObjectDetection": "Kunna gano abubuwa",
       "ML.ObjectDetection.TriggerDetect": "Jerin abubuwan da aka raba waƙafi (a cikin Ingilishi) waɗanda zasu kunna ƙararrawa. (misali: cat, kare, mutum, jakar baya, akwati)",
-      "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Matsakaicin Buƙatu a Kowace Daƙiƙa (RPS)"
     },
     "911": {
       "Title": "Ƙimar Matsayi",
       "Description": "Gano maɓalli ta hanyar ƙididdige matsayi, ta amfani da samfuran ONNX na al'ada ko ƙirar YOLO da aka riga aka horar da ita (takamaiman matsayi na ɗan adam).",
       "ML.PoseEstimation": "Kunna kimar matsayi",
-      "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Matsakaicin Buƙatu a Kowace Daƙiƙa (RPS)"
     },
     "912": {
       "Title": "Rarraba Misali",
       "Description": "Gano abubuwa da fassarorinsu ta amfani da ƙirar YOLO da aka riga aka horar.",
       "ML.InstanceSegmentation": "Kunna sashin misali",
-      "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Hanyar fayil ɗin samfurin YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Matsakaicin Buƙatu a Kowace Daƙiƙa (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Takaitaccen Bayani game da Makamashi na Yau da Kullum",
       "Description": "Amfani da makamashi na yau da kullun (Wh) ta hanyar na'ura.",
       "Widget.Statistics.DailyReport": "A saka a cikin rahoton Daily Wh"
+    },
+    "200": {
+      "Title": "Shigar da Bidiyo",
+      "Description": "Yana ɗaukar kwararar sauti da bidiyo don sa ido kai tsaye, sarrafa lokaci-lokaci, da kuma yin rikodi akai-akai.",
+      "VideoInput.Disable": "Kashe wannan shigarwar",
+      "VideoInput.SourceURL": "Adireshin URL na tushen bidiyo",
+      "VideoInput.ImageFeed": "URL fayil ne mai hoto ɗaya da aka sabunta kai tsaye.",
+      "VideoInput.Username": "Sunan mai amfani (zaɓi ne)",
+      "VideoInput.Password": "Kalmar sirri (zaɓi ne)",
+      "Widget.Config.fps": "Matsakaicin firam a daƙiƙa",
+      "VideoOutput.Width": "Faɗin kwararar fitarwa.",
+      "VideoOutput.SnapshotQuality": "Ingancin hoto kai tsaye."
+    },
+    "250": {
+      "Title": "Mai Rikodin Bidiyo",
+      "Description": "Yana rikodin kwararar sauti da bidiyo daga kowace hanyar shigarwa. Ana iya yin rikodin akai-akai, a tsara jadawalin, ko kuma a haifar da shi ta hanyar abubuwan da suka faru na faɗakarwa.",
+      "NVR.EnableRecording": "Kunna Rikodin Bidiyo",
+      "NVR.RecordOnAlarm": "Yi rikodi akan Ƙararrawa",
+      "NVR.ContinuousRecording": "Rikodi Mai Ci Gaba."
     }
   },
   "scheduler_preset_action_genie_command": "Kwamandan Genie",
   "scheduler_preset_action_config_wish": "Ayyukan Harshe na Halitta",
-  "scheduler_preset_action_config_wish.placeholder": "Gwada: \"Saita zafin zuwa 22° kuma fara yanayin fitowar rana\""
+  "scheduler_preset_action_config_wish.placeholder": "Gwada: \"Saita zafin zuwa 22° kuma fara yanayin fitowar rana\"",
+  "scheduler_preset_action_command_video_record_start": "Fara Rikodin Bidiyo",
+  "scheduler_preset_action_command_video_record_stop": "Dakatar da Rikodin Bidiyo"
 }

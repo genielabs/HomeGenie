@@ -294,19 +294,22 @@
       "Description": "Detekujte objekty pomocou vopred natrénovaného modelu YOLO.",
       "ML.ObjectDetection": "Povoliť detekciu objektov",
       "ML.ObjectDetection.TriggerDetect": "Zoznam vecí oddelených čiarkami (v angličtine), ktoré spustia alarm. (napr.: mačka, pes, osoba, batoh, kufor)",
-      "ConfigureOptions.Yolo.ModelPath": "Cesta k súboru modelu YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Cesta k súboru modelu YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maximálny počet požiadaviek za sekundu (RPS)"
     },
     "911": {
       "Title": "Odhad pózy",
       "Description": "Detekcia kľúčových bodov prostredníctvom odhadu polohy, s použitím vlastných modelov ONNX alebo prednastaveného predtrénovaného modelu YOLO (špecifického pre ľudskú polohu).",
       "ML.PoseEstimation": "Povoliť odhad pózy",
-      "ConfigureOptions.Yolo.ModelPath": "Cesta k súboru modelu YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Cesta k súboru modelu YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maximálny počet požiadaviek za sekundu (RPS)"
     },
     "912": {
       "Title": "Segmentácia inštancií",
       "Description": "Detekujte objekty a ich obrysy pomocou vopred natrénovaného modelu YOLO.",
       "ML.InstanceSegmentation": "Povoliť segmentáciu inštancií",
-      "ConfigureOptions.Yolo.ModelPath": "Cesta k súboru modelu YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Cesta k súboru modelu YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maximálny počet požiadaviek za sekundu (RPS)"
     },
     "930": {
       "Title": "Obsluha zámerov Gemini",
@@ -376,9 +379,30 @@
       "Title": "Denný energetický súhrn",
       "Description": "Denná spotreba energie (Wh) podľa zariadenia.",
       "Widget.Statistics.DailyReport": "Zahrnúť do dennej správy o Wh"
+    },
+    "200": {
+      "Title": "Video vstup",
+      "Description": "Zachytáva zvukové a obrazové streamy pre živé monitorovanie, spracovanie v reálnom čase a nepretržité nahrávanie.",
+      "VideoInput.Disable": "Zakázať tento vstup",
+      "VideoInput.SourceURL": "URL zdroja videa",
+      "VideoInput.ImageFeed": "URL je súbor s jedným obrázkom, ktorý sa aktualizuje v reálnom čase.",
+      "VideoInput.Username": "Používateľské meno (voliteľné)",
+      "VideoInput.Password": "Heslo (voliteľné)",
+      "Widget.Config.fps": "Maximálny počet snímok za sekundu",
+      "VideoOutput.Width": "Šírka výstupného prúdu.",
+      "VideoOutput.SnapshotQuality": "Kvalita živého obrazu."
+    },
+    "250": {
+      "Title": "Videorekordér",
+      "Description": "Nahráva zvukové a obrazové streamy z akéhokoľvek vstupného zdroja. Nahrávky môžu byť nepretržité, plánované alebo spúšťané alarmovými udalosťami.",
+      "NVR.EnableRecording": "Povoliť nahrávanie videa",
+      "NVR.RecordOnAlarm": "Nahrávanie pri alarme",
+      "NVR.ContinuousRecording": "Nepretržité nahrávanie."
     }
   },
   "scheduler_preset_action_genie_command": "Džinsky príkaz",
   "scheduler_preset_action_config_wish": "Akcia v prirodzenom jazyku",
-  "scheduler_preset_action_config_wish.placeholder": "Skúste: „Nastavte teplotu na 22 ° a spustite scénu s východom slnka.“"
+  "scheduler_preset_action_config_wish.placeholder": "Skúste: „Nastavte teplotu na 22 ° a spustite scénu s východom slnka.“",
+  "scheduler_preset_action_command_video_record_start": "Spustiť nahrávanie videa",
+  "scheduler_preset_action_command_video_record_stop": "Zastaviť nahrávanie videa"
 }

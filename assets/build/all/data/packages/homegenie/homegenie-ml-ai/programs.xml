@@ -7,7 +7,7 @@
 // CONTEXT ENGINE - SYSTEM UTILITY
 // ===================================================================
 // This service generates dynamic prompts for LLM handlers.
-// It populates templates with the list of controllable devices and 
+// It populates templates with the list of controllable devices and
 // current system status (Weather, Energy, Security, and live states).
 // ===================================================================
 
@@ -24,7 +24,7 @@ Api.Handle("System.Utility/ContextEngine", (args) =&gt; {
     // We create a unified list of ModuleHelpers that the user is allowed to control.
     var controlModules = new List&lt;ModuleHelper&gt;();
     var sensorModules = new List&lt;ModuleHelper&gt;();
-    
+
     // Physical devices (Lights, Switches, Thermostats, etc.)
     string allowedTypes = "Dimmer,Light,Color,Switch,Shutter,DoorLock,Thermostat,Sensor,DoorWindow";
     Modules.OfDeviceType(allowedTypes).Each((m) =&gt; {
@@ -88,10 +88,10 @@ Api.Handle("System.Utility/ContextEngine", (args) =&gt; {
     // --- 3. GENERATE SYSTEM STATUS REPORT (Live Context) ---
     // This section provides the AI with real-time situational awareness.
     var statusSb = new StringBuilder();
-    
+
     // A. Core System Reports (Weather, Energy, Alarm, Master Thermostat)
     statusSb.AppendLine("## SYSTEM REPORT");
-    
+
     var weather = Modules.InDomain("HomeAutomation.HomeGenie.Automation").WithAddress("34").Get();
     if (weather.Instance != null) statusSb.AppendLine("- " + PromptHelpers.GetWeatherStatus(weather));
 
@@ -148,10 +148,10 @@ Program.GoBackground();
     {
         var condition = m.Parameter("Conditions.Status").Value;
         if (string.IsNullOrWhiteSpace(condition)) condition = m.Parameter("Conditions.Description").Value;
-        
+
         var temp = Fmt(m.Parameter("Sensor.Temperature").DecimalValue, "°C");
         var wind = Fmt(m.Parameter("Sensor.Wind.Speed").DecimalValue, " Kph");
-        
+
         return $"Weather: {(string.IsNullOrEmpty(condition) ? "Unknown" : condition)} | Exterior Temp: {temp} | Wind: {wind}";
     }
 
@@ -162,10 +162,10 @@ Program.GoBackground();
     {
         var load = Fmt(m.Parameter("EnergyMonitor.WattLoad").DecimalValue, "W");
         var todayKwh = (m.Parameter("EnergyMonitor.WattCounter.Today").DecimalValue / 1000.0).ToString("F2", CultureInfo.InvariantCulture) + " kWh";
-        
+
         var lights = m.Parameter("EnergyMonitor.OperatingLights").Value;
         var appliances = m.Parameter("EnergyMonitor.OperatingSwitches").Value;
-        
+
         return $"Energy: Load {load} | Today's Usage: {todayKwh} (Active -&gt; Lights: {lights}, Appliances: {appliances})";
     }
 
@@ -176,7 +176,7 @@ Program.GoBackground();
     {
         var state = m.Parameter("HomeGenie.SecurityArmed").Value;
         var triggered = m.Parameter("HomeGenie.SecurityTriggered").DecimalValue &gt; 0 ? " !!ALARM TRIGGERED!!" : "";
-        
+
         return $"Security: System is {state}{triggered}";
     }
 
@@ -189,7 +189,7 @@ Program.GoBackground();
         var target = Fmt(m.Parameter("Thermostat.SetPoint.Heating").DecimalValue, "°C");
         var state = m.Parameter("Thermostat.OperatingState").Value;
         var mode = m.Parameter("Thermostat.Mode").Value;
-        
+
         return $"Thermostat: Ambient {ambient} | Target {target} (Mode: {mode}, State: {state})";
     }
 
@@ -212,41 +212,41 @@ Program.GoBackground();
         }
 
         // 2. SENSORS (Environmental parameters)
-        if (m.HasParameter("Sensor.Temperature")) 
+        if (m.HasParameter("Sensor.Temperature"))
             statusParts.Add("Temp: " + Fmt(m.Parameter("Sensor.Temperature").DecimalValue, "°C"));
-        
-        if (m.HasParameter("Sensor.Humidity")) 
+
+        if (m.HasParameter("Sensor.Humidity"))
             statusParts.Add("Hum: " + Fmt(m.Parameter("Sensor.Humidity").DecimalValue, "%"));
-        
-        if (m.HasParameter("Sensor.Luminance")) 
+
+        if (m.HasParameter("Sensor.Luminance"))
             statusParts.Add("Luminance: " + m.Parameter("Sensor.Luminance").Value + " lux");
-        
-        if (m.HasParameter("Sensor.Motion")) 
+
+        if (m.HasParameter("Sensor.Motion"))
             statusParts.Add("Motion: " + (m.Parameter("Sensor.Motion").DecimalValue &gt; 0 ? "Detected" : "None"));
 
-        if (m.HasParameter("Meter.Watts")) 
+        if (m.HasParameter("Meter.Watts"))
             statusParts.Add("Watts: " + Fmt(m.Parameter("Meter.Watts").DecimalValue, "W"));
 
-        if (m.HasParameter("Meter.Watts.Hour")) 
+        if (m.HasParameter("Meter.Watts.Hour"))
             statusParts.Add("Watthour: " + Fmt(m.Parameter("Meter.Watts.Hour").DecimalValue, "W/h"));
 
-        if (m.HasParameter("Sensor.DoorWindow")) 
+        if (m.HasParameter("Sensor.DoorWindow"))
             statusParts.Add("Door/Window: " + (m.Parameter("Sensor.DoorWindow").DecimalValue &gt; 0 ? "Open" : "Closed"));
 
         // 3. ACTUATORS (Lights, Switches, Dimmer, Shutters)
         // Reports live state (ON/OFF/%) for the system status update
-        if (m.HasParameter("Status.Level")) 
+        if (m.HasParameter("Status.Level"))
         {
             var level = m.Parameter("Status.Level").DecimalValue;
             string state = (level &gt; 0) ? "ON" : "OFF";
-            
+
             // Append percentage for dimmers or color lights
             if (level &gt; 0 &amp;&amp; level &lt;= 1) state = "ON"; // Standard binary
             else if (level &gt; 1) state += $" ({level}%)";
-            
+
             statusParts.Add("State: " + state);
         }
-        
+
         // Final fallback to ensure the AI knows the device is reachable
         if (statusParts.Count == 0) statusParts.Add("Status: Online");
 
@@ -263,7 +263,7 @@ Program.GoBackground();
       <Id>context-engine</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>A80B8EA809823681A6104092B48F5E74</Checksum>
+      <Checksum>0E7FEC9D423A27CE2D47D79047C5CB1A</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>578</Address>
@@ -319,7 +319,7 @@ string allowedTypes = "Dimmer,Light,Color,Switch,Shutter,DoorLock,Thermostat";
 // ===================================================================
 // API HANDLER: Submit a new intent (user command)
 // ===================================================================
-Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt; 
+Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
 {
     // Get the current history from the centralized service
     var storeId = Program.Module.Address;
@@ -438,7 +438,7 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
 // ===================================================================
 // API HANDLER: Get the current chat history
 // ===================================================================
-Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt; 
+Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt;
 {
     return Api.Call("System.Utility/ChatHistory/Get", new { StoreId = Program.Module.Address });
 });
@@ -446,7 +446,7 @@ Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt;
 // ===================================================================
 // API HANDLER: Clear the chat history
 // ===================================================================
-Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (p) =&gt; 
+Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (p) =&gt;
 {
     var storeId = Program.Module.Address;
     Program.Log.Info($"Clearing history for module {storeId}...");
@@ -500,7 +500,7 @@ public class ChatMessage {
       <Id>gemini-intent-handler</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
-      <Checksum>D8E669282E99D31DD79F848407F73813</Checksum>
+      <Checksum>A5FF200261E243A1CFAD464578344DD9</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>930</Address>
@@ -560,7 +560,7 @@ string storeId = Program.Module.Address;
 // ===================================================================
 // API HANDLER: Process a new user message
 // ===================================================================
-Api.Handle($"{API_URL}/{API_PROCESS}", (userCommand) =&gt; 
+Api.Handle($"{API_URL}/{API_PROCESS}", (userCommand) =&gt;
 {
 
     // 2. Fetch the current history from the centralized System Service
@@ -584,7 +584,7 @@ Api.Handle($"{API_URL}/{API_PROCESS}", (userCommand) =&gt;
 
     // 6. Build the API Request Payload (History + New Message)
     payloadContents.Add(userMessage);
-    
+
     var payload = new
     {
         contents = payloadContents,
@@ -597,7 +597,7 @@ Api.Handle($"{API_URL}/{API_PROCESS}", (userCommand) =&gt;
         // 7. Send the request to Gemini API
         string payloadJson = JsonConvert.SerializeObject(payload);
         string geminiRequestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
-        
+
         var data = Net
             .WebService(geminiRequestUrl)
             .WithTimeout(120)
@@ -635,7 +635,7 @@ Api.Handle($"{API_URL}/{API_PROCESS}", (userCommand) =&gt;
 // ===================================================================
 // API HANDLER: Get the current chat history
 // ===================================================================
-Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt; 
+Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt;
 {
     return Api.Call("System.Utility/ChatHistory/Get", new { StoreId = Program.Module.Address });
 });
@@ -643,7 +643,7 @@ Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt;
 // ===================================================================
 // API HANDLER: Clear the chat history
 // ===================================================================
-Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (p) =&gt; 
+Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (p) =&gt;
 {
     var storeId = Program.Module.Address;
     Program.Log.Info($"Clearing history for module {storeId}...");
@@ -688,7 +688,7 @@ public class ChatMessage {
       <Id>gemini-widget-genie</Id>
       <Version>1.0.6</Version>
       <Required>true</Required>
-      <Checksum>99A57BC98F48FBAC9A8058FA33F36637</Checksum>
+      <Checksum>3F9DBFDC62D1F2946F131F1BD7EB23C2</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>931</Address>
@@ -719,14 +719,25 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
     "text"
   ).AddOption(
     "Yolo.ModelPath",
-    Data.GetFolder() + "/yolo11n-seg.onnx",
-    "Path of YOLO model file (.onnx)",
+    Data.GetFolder() + "/yolo26n-seg.onnx",
+    "1. Path of YOLO model file (.onnx)",
     "text"
+  ).AddOption(
+    YoloRequestsPerSecond,
+    "5",
+    "2. Max Requests Per Second (RPS)",
+    "slider:1:30:1"
   );
 
 Program.Run();
 </ScriptSetup>
     <ScriptSource>var inputModules = Modules.WithFeature(InstanceSegmentation);
+var requestsPerSecond = Program.Option(YoloRequestsPerSecond);
+
+// Show toggle icon for this algorithm in the NVR / Video widget
+Program
+    .Emit("NVR.Vision.Algorithm", InstanceSegmentation)     // feature to toggle "On" in order to enable this algo
+    .Emit("NVR.Vision.Algorithm.Icon", "pattern");          // material symbol icon for the toggle button
 
 // Restart program if configuration has been changed to apply new settings.
 When.ModuleParameterChanged( (module, property) =&gt; {
@@ -763,6 +774,11 @@ try
             continue;
         }
         inputModules.Command("Camera.GetPicture").Submit((m, data) =&gt; {
+            if (data == null || ((byte[])data).Length == 0)
+            {
+                // I/O errors might occasionally occur and can be ignored
+                return;
+            }
             try
             {
                 var result = detectPredictor.Segment((byte[])data);
@@ -793,14 +809,14 @@ try
                         }
                         if (filtered.Count &gt; 0)
                         {
-                            if (module.Parameter(ObjectDetect).DecimalValue != filtered.Count) 
+                            if (module.Parameter(ObjectDetect).DecimalValue != filtered.Count)
                             {
                                 module.Emit(ObjectDetect, filtered.Count);
                             }
                             else
                             {
                                 // update value and timestamp only, do not emit event
-                                module.Parameter(ObjectDetect).SetData(filtered.Count);   
+                                module.Parameter(ObjectDetect).SetData(filtered.Count);
                             }
                             foreach (var r in filtered)
                             {
@@ -811,7 +827,7 @@ try
                                 module.Emit(ObjectDetectSubject, r);
                             }
                         }
-                        else if (module.Parameter(ObjectDetect).DecimalValue != 0 &amp;&amp; module.Parameter(ObjectDetect).IdleTime &gt; 5) 
+                        else if (module.Parameter(ObjectDetect).DecimalValue != 0 &amp;&amp; module.Parameter(ObjectDetect).IdleTime &gt; 5)
                         {
                             module.Emit(ObjectDetect, 0);
                         }
@@ -839,13 +855,24 @@ try
             catch (Exception e)
             {
                 errorOccurred = true;
-                Console.WriteLine(e.Message);
+                //Console.WriteLine(e.Message);
             }
         });
         if (errorOccurred)
         {
             errorOccurred = false;
-            Pause(5);
+            Pause(3);
+        }
+        else
+        {
+            if (requestsPerSecond.DecimalValue &gt; 0)
+            {
+                Pause(1D / requestsPerSecond.DecimalValue);
+            }
+            else
+            {
+                Pause(0.2); // default is 5 RPS max
+            }
         }
     }
 }
@@ -861,7 +888,8 @@ catch (Exception e)
 const string
 OptionButtons = "[program_configure,program_disable]",
 YoloModelPath = "Yolo.ModelPath",
-ForCameraInputType = "Sensor:Widget.DisplayModule=homegenie/generic/camerainput",
+YoloRequestsPerSecond = "Yolo.RequestsPerSecond",
+ForCameraInputType = "VideoInput,Sensor:Widget.DisplayModule=/homegenie/generic/(videoinput|camerainput)/",
 InstanceSegmentation = "ML.InstanceSegmentation",
 InstanceSegmentationTrigger = $"{InstanceSegmentation}.TriggerDetect",
 ObjectDetect = "Sensor.ObjectDetect",
@@ -983,9 +1011,9 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>instance-segmentation</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>C249CD2182AD04DD7226B7713540740C</Checksum>
+      <Checksum>AD92A3DD40DDDFBFE4A69385C64AF26A</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>912</Address>
@@ -997,14 +1025,14 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
         <ForDomains />
-        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
+        <ForTypes>VideoInput,Sensor:Widget.DisplayModule=/homegenie/generic/(videoinput|camerainput)/</ForTypes>
         <Property>ML.InstanceSegmentation</Property>
         <Description>Enable instance segmentation</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>text</FieldType>
         <ForDomains />
-        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
+        <ForTypes>VideoInput,Sensor:Widget.DisplayModule=/homegenie/generic/(videoinput|camerainput)/</ForTypes>
         <Property>ML.InstanceSegmentation.TriggerDetect</Property>
         <Description>Comma-separated list of things (in English) that will trigger the alarm. (e.g.: cat, dog, person, backpack, suitcase)</Description>
       </ProgramFeature>
@@ -1018,7 +1046,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <ScriptSetup>// ===================================================================
 // SETUP BLOCK - PROGRAM INITIALIZATION
 // ===================================================================
-// This block is executed once when the program is enabled. 
+// This block is executed once when the program is enabled.
 // It is responsible for:
 // 1. Loading the available models for the UI selection.
 // 2. Registering the program as a system-wide AI Intent Handler.
@@ -1040,14 +1068,14 @@ var modelsFile = Path.Combine(Data.GetFolder(), CONFIG_FILE_NAME);
 // --- 2. PROGRAM SETUP DELEGATE ---
 
 Program.Setup(() =&gt; {
-  
+
   Program
     // Implement the AI Intent Handler interface to allow system integration
     .Implements(
       "@AI:IntentHandler",
       API_URL
     )
-    
+
     // UI Options Definition:
     // - Response length limit (Max Tokens)
     // - Model selection dropdown (populated from models.yaml)
@@ -1055,12 +1083,12 @@ Program.Setup(() =&gt; {
     .AddOption(OPTION_MODEL_FILE, "", "0. AI Model", $"select:{ models }")
     .AddOption(OPTION_SEND_CONTEXT_DATA, "On", "1. Share system and module context with the AI", "checkbox")
     .AddOption(OPTION_MODEL_TEMPERATURE, "0.4", "2. Creativity (0.0 = Precise, 2.0 = Creative)", "slider:0.0:2.0:0.05")
-    .AddOption(OPTION_CONTEXT_SIZE, "2048", "3. AI Memory Capacity (Context Window)", "slider:1024:32678:1024")
+    .AddOption(OPTION_CONTEXT_SIZE, "2048", "3. AI Memory Capacity (Context Window)", "slider:1024:32768:1024")
     .AddOption(OPTION_MAX_TOKENS, "1536", "4. Response Length (Max Tokens)", "slider:64:4096:32")
     .AddOption(OPTION_MAX_TURNS, "10", "5. Chat Memory (Max Turns) (0 = no limit)", "slider:0:20:1")
     .AddOption(OPTION_SYSTEM_INSTRUCTIONS, "", "6. System Prompt (Instructions)", $"editor:file:{systemPromptFile}:markdown")
     .AddOption(OPTION_MODEL_LIST, "", "7. AI Model List", $"editor:file:{modelsFile}:yaml")
-    
+
     // Assign the custom UI widget for the chat interface
     .UseWidget("custom/examples/local-ai-chat")
     .Emit("@AI:IntentHandler", API_URL); // notify widgets
@@ -1078,7 +1106,7 @@ Program.Run();
 // ===================================================================
 // This block manages the integration of a Local Language Model (GGUF)
 // for home automation control within HomeGenie.
-// 
+//
 // Main Responsibilities:
 // 1. Model download management via System DownloadManager.
 // 2. LLamaSharp engine initialization (VRAM/RAM management).
@@ -1170,7 +1198,7 @@ Api.Handle($"{Program.Module.Domain}/{Program.Module.Address}/DownloadStart", (p
 
 // --- 2.1 INFERENCE POST-PROCESSING HELPER METHOD (shared for using by other programs)
 Api.Handle($"{Program.Module.Domain}/{Program.Module.Address}/Extract", (modelResponse) =&gt; {
-    // Post-Process AI reply and execute local commands 
+    // Post-Process AI reply and execute local commands
     var request = Api.Parse(modelResponse);
     var response = WebUtility.UrlDecode(request.OriginalRequest);
     return ExtractAndExecute(Api, response);
@@ -1184,7 +1212,7 @@ if (!File.Exists(localModelFile)) {
   while (!File.Exists(localModelFile))
   {
     dynamic response = Api.Call("System.Utility/DownloadManager/GetStatus", localModelFile);
-    dynamic fileStatus = JsonConvert.DeserializeObject&lt;dynamic&gt;(response);  
+    dynamic fileStatus = JsonConvert.DeserializeObject&lt;dynamic&gt;(response);
 
     if ((bool)fileStatus?.Success)
     {
@@ -1198,8 +1226,8 @@ if (!File.Exists(localModelFile)) {
           .Emit(FIELD_DOWNLOAD_TASK, task.DestinationFilePath.ToString())
           .Emit(FIELD_DOWNLOAD_ERROR, task.ErrorMessage.ToString())
           .Emit(FIELD_DOWNLOAD_PROGRESS, task.ProgressPercentage.ToString("F2", CultureInfo.InvariantCulture));
-        
-        if (task.ProgressPercentage &gt;= 100) break; 
+
+        if (task.ProgressPercentage &gt;= 100) break;
       }
       else if (Program.Parameter(FIELD_DOWNLOAD_TASK)?.Value != localModelFile)
       {
@@ -1225,7 +1253,7 @@ if (!File.Exists(localModelFile)) {
   }
 
   Program
-    .Emit(FIELD_STATUS_ERROR, "") 
+    .Emit(FIELD_STATUS_ERROR, "")
     .Emit(FIELD_DOWNLOAD, "Complete")
     .Emit(FIELD_DOWNLOAD_PROGRESS, "100");
 
@@ -1281,7 +1309,7 @@ if (String.IsNullOrEmpty(modelPath))
 {
   Program.Notify($"LLM model path not configured.[program_configure]").Emit(FIELD_STATUS_ERROR, "LLM model path not configured.");
 }
-else if (!File.Exists(modelPath)) 
+else if (!File.Exists(modelPath))
 {
   Program.Notify($"File not found: {modelPath}.[program_configure]").Emit(FIELD_STATUS_ERROR, $"File not found: {modelPath}");
 }
@@ -1336,8 +1364,8 @@ else
                 chatHistory.Messages.Add(new ChatHistory.Message(role, combinedText));
             }
         }
-    } catch (Exception ex) { 
-        Program.Log.Error("Sync error: " + ex.Message); 
+    } catch (Exception ex) {
+        Program.Log.Error("Sync error: " + ex.Message);
     }
 
 
@@ -1367,7 +1395,7 @@ else
     /**
       * Processes the user input, handles LLM inference, manages the token stream,
       * and synchronizes with the centralized Chat History Service.
-      * 
+      *
       * @param rawInput The clean text entered by the user.
       * @param synchronous Whether to wait for the full response before returning.
       * @return The full generated response (if synchronous), otherwise an empty string.
@@ -1400,8 +1428,8 @@ else
         var process = new Func&lt;bool, string&gt;((sync) =&gt; {
             // Send the templated input to the engine
             var sessionChat = session.ChatAsync(
-                new ChatHistory.Message(AuthorRole.User, templatedInput), 
-                LailamaInferenceParams, 
+                new ChatHistory.Message(AuthorRole.User, templatedInput),
+                LailamaInferenceParams,
                 cancellationToken: generationCts.Token
             );
 
@@ -1427,10 +1455,10 @@ else
 
                 if (!isPotentialDanger || streamBuffer.Length &gt; 25) {
                     Program.Emit(FIELD_TOKENS_STREAM, streamBuffer);
-                    streamBuffer = ""; 
+                    streamBuffer = "";
                 }
             }).GetAwaiter().GetResult();
-            
+
             if (!string.IsNullOrEmpty(streamBuffer)) {
                 foreach (var tag in technicalTags) streamBuffer = streamBuffer.Replace(tag, "");
                 if (!string.IsNullOrWhiteSpace(streamBuffer)) Program.Emit(FIELD_TOKENS_STREAM, streamBuffer);
@@ -1459,7 +1487,7 @@ else
               var lastUserMsg = session.History.Messages.LastOrDefault(m =&gt; m.AuthorRole == AuthorRole.User);
               if (lastUserMsg != null)
               {
-                  lastUserMsg.Content = rawInput; 
+                  lastUserMsg.Content = rawInput;
               }
             }
 
@@ -1529,7 +1557,7 @@ else
         return new ResponseStatus(Status.Ok);
 
     }).Handle($"{API_URL}/{API_HISTORY_GET}", (userCommand) =&gt; {
-  
+
       return Api.Call("System.Utility/ChatHistory/Get", new {
           StoreId = Program.Module.Address
       });
@@ -1538,7 +1566,7 @@ else
 
       var storeId = Program.Module.Address;
       Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId });
-      if (session != null &amp;&amp; resetState != null) 
+      if (session != null &amp;&amp; resetState != null)
       {
           session.LoadSession(resetState);
           if (session.History.Messages.Count &gt; 0)
@@ -1674,10 +1702,10 @@ InferenceParams LailamaInferenceParams = new InferenceParams
     {
         Temperature = 0.4f, // Lower temperature for more deterministic/factual responses
         TopP = 0.95f,
-        RepeatPenalty = 1.2f 
+        RepeatPenalty = 1.2f
     },
-    MaxTokens = 1024, 
-    
+    MaxTokens = 1024,
+
     // ANTI-PROMPTS (Stop Sequences)
     // This list prevents the model from "hallucinating" both sides of the conversation
     // or continuing indefinitely after providing the answer.
@@ -1706,10 +1734,10 @@ InferenceParams LailamaInferenceParams = new InferenceParams
 
         // --- GROUP 3: TEXTUAL FALLBACKS ---
         // Prevents the model from writing plain-text labels like "Assistant:" or "User:".
-        "Assistant:",   
-        "\nAssistant:", 
-        "Response:",    
-        "\nResponse:",  
+        "Assistant:",
+        "\nAssistant:",
+        "Response:",
+        "\nResponse:",
         "### Assistant",
         "### Response",
         "\nUser:",
@@ -1736,7 +1764,7 @@ string GetSystemPrompt(string templateType, string prompt) {
   switch (templateType) {
     case "llama3":
       return $"&lt;|begin_of_text|&gt;&lt;|start_header_id|&gt;system&lt;|end_header_id|&gt;\n\n{prompt}\n&lt;|eot_id|&gt;";
-    
+
     case "phi3":
       return $"{prompt}\n\n";
 
@@ -1752,7 +1780,7 @@ string GetSystemPrompt(string templateType, string prompt) {
 
     case "chatml":
     default:
-      return $"&lt;|im_start|&gt;system\n{prompt}\n&lt;|im_end|&gt;\n"; 
+      return $"&lt;|im_start|&gt;system\n{prompt}\n&lt;|im_end|&gt;\n";
   }
 }
 
@@ -1763,7 +1791,7 @@ string BuildUserPrompt(string templateType, string userInput) {
   switch (templateType) {
     case "llama3":
       return $"&lt;|start_header_id|&gt;user&lt;|end_header_id|&gt;\n\n{userInput}&lt;|eot_id|&gt;&lt;|start_header_id|&gt;assistant&lt;|end_header_id|&gt;\n\n";
-    
+
     case "phi3":
       return $"&lt;|user|&gt;\n{userInput}&lt;|end|&gt;\n&lt;|assistant|&gt;\n";
 
@@ -1775,13 +1803,13 @@ string BuildUserPrompt(string templateType, string userInput) {
 
     case "gemma":
       return "&lt;start_of_turn&gt;user\n" + userInput + "&lt;end_of_turn&gt;\n&lt;start_of_turn&gt;model\n";
-    
+
     case "deepseek":
       return $"User:{userInput}\n\nAssistant: ";
 
     case "chatml":
     default:
-      return $"&lt;|im_start|&gt;user\n{userInput}&lt;|im_end|&gt;\n&lt;|im_start|&gt;assistant\n"; 
+      return $"&lt;|im_start|&gt;user\n{userInput}&lt;|im_end|&gt;\n&lt;|im_start|&gt;assistant\n";
   }
 }
 
@@ -1811,7 +1839,7 @@ public class CodeBlockExtractor
 {
     // Regex che cattura l'intero blocco comprese le etichette di apertura e chiusura
     private const string ApiCallPattern = @"(```api-call[\s\S]*?```)";
-    
+
     /**
      * Extracts interleaved text and API blocks.
      * API segments are returned exactly as: ```api-call\n...\n```
@@ -1827,7 +1855,7 @@ public class CodeBlockExtractor
         foreach (var part in parts)
         {
             if (string.IsNullOrEmpty(part)) continue;
-            
+
             // Aggiungiamo il segmento alla lista (sia esso testo o blocco api-call)
             result.Add(part.Trim());
         }
@@ -1841,7 +1869,7 @@ public class CodeBlockExtractor
  */
 public List&lt;string&gt; ExtractAndExecute(dynamic Api, string response)
 {
-    var segments = CodeBlockExtractor.ExtractInterleaved(response);   
+    var segments = CodeBlockExtractor.ExtractInterleaved(response);
     foreach (var segment in segments)
     {
         if (segment.StartsWith("```api-call"))
@@ -1851,8 +1879,8 @@ public List&lt;string&gt; ExtractAndExecute(dynamic Api, string response)
                 .Replace("```", "")
                 .Trim();
 
-            var commands = commandsRaw.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);            
-            foreach(var cmd in commands) 
+            var commands = commandsRaw.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach(var cmd in commands)
             {
                 string cleanCmd = cmd.Trim();
                 if (!string.IsNullOrEmpty(cleanCmd))
@@ -1910,13 +1938,13 @@ public ModelParams GetOptimizedParams(string modelPath)
     else if (totalRamGB &lt;= 16)
     {
         // STANDARD PROFILE (The most common configuration)
-        p.ContextSize = 16384; 
+        p.ContextSize = 16384;
         p.TypeK = GGMLType.GGML_TYPE_Q4_0;
         p.TypeV = GGMLType.GGML_TYPE_Q4_0;
         p.BatchSize = 512;
         p.UBatchSize = 512;
     }
-    else 
+    else
     {
         // HIGH PERFORMANCE PROFILE (32GB RAM or more)
         p.ContextSize = 32768; // Can be safely increased to 65536 if needed
@@ -1929,16 +1957,16 @@ public ModelParams GetOptimizedParams(string modelPath)
     return p;
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.0.7</Version>
+      <Version>1.0.8</Version>
       <Required>true</Required>
-      <Checksum>760011D8A5D7345B090BDDCC47A290DA</Checksum>
+      <Checksum>72D704836A3B445B5F72BC38EFE7BDEE</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>
@@ -1967,14 +1995,26 @@ public ModelParams GetOptimizedParams(string modelPath)
     "text"
   ).AddOption(
     YoloModelPath,
-    Data.GetFolder() + "/yolo11n.onnx",
-    "Path of YOLO model file (.onnx)",
+    Data.GetFolder() + "/yolo26n.onnx",
+    "1. Path of YOLO model file (.onnx)",
     "text"
+  ).AddOption(
+    YoloRequestsPerSecond,
+    "5",
+    "2. Max Requests Per Second (RPS)",
+    "slider:1:30:1"
   );
 
 Program.Run();
 </ScriptSetup>
     <ScriptSource>var inputModules = Modules.WithFeature( ObjectDetection );
+var requestsPerSecond = Program.Option(YoloRequestsPerSecond);
+
+// Show toggle icon for this algorithm in the NVR / Video widget
+Program
+    .Emit("NVR.Vision.Algorithm", ObjectDetection)            // feature to toggle "On" in order to enable this algo
+    .Emit("NVR.Vision.Algorithm.Icon", "detection_and_zone"); // material symbol icon for the toggle button
+
 // Restart program if configuration has been changed to apply new settings.
 When.ModuleParameterChanged( (module, property) =&gt; {
     if (module.Instance == Program.Module &amp;&amp; property.Name.StartsWith("ConfigureOptions."))
@@ -2010,6 +2050,11 @@ try
             continue;
         }
         inputModules.Command("Camera.GetPicture").Submit((m, data) =&gt; {
+            if (data == null || ((byte[])data).Length == 0)
+            {
+                // I/O errors might occasionally occur and can be ignored
+                return;
+            }
             try
             {
                 var result = detectPredictor.Detect((byte[])data, new YoloConfiguration { Confidence = 0.35f });
@@ -2040,14 +2085,14 @@ try
                         }
                         if (filtered.Count &gt; 0)
                         {
-                            if (module.Parameter(ObjectDetect).DecimalValue != filtered.Count) 
+                            if (module.Parameter(ObjectDetect).DecimalValue != filtered.Count)
                             {
                                 module.Emit(ObjectDetect, filtered.Count);
                             }
                             else
                             {
                                 // update value and timestamp only, do not emit event
-                                module.Parameter(ObjectDetect).SetData(filtered.Count);   
+                                module.Parameter(ObjectDetect).SetData(filtered.Count);
                             }
                             foreach (var r in filtered)
                             {
@@ -2055,7 +2100,7 @@ try
                             }
                             jsonResults = JsonConvert.SerializeObject(filtered);
                         }
-                        else if (module.Parameter(ObjectDetect).DecimalValue != 0 &amp;&amp; module.Parameter(ObjectDetect).IdleTime &gt; 5) 
+                        else if (module.Parameter(ObjectDetect).DecimalValue != 0 &amp;&amp; module.Parameter(ObjectDetect).IdleTime &gt; 5)
                         {
                             module.Emit(ObjectDetect, 0);
                         }
@@ -2075,13 +2120,21 @@ try
             catch (Exception e)
             {
                 errorOccurred = true;
-                Console.WriteLine(e.Message);
+                //Console.WriteLine(e.Message);
+            }
+            if (errorOccurred)
+            {
+                errorOccurred = false;
+                Pause(3);
             }
         });
-        if (errorOccurred)
+        if (requestsPerSecond.DecimalValue &gt; 0)
         {
-            errorOccurred = false;
-            Pause(5);
+            Pause(1D / requestsPerSecond.DecimalValue);
+        }
+        else
+        {
+            Pause(0.2); // default is 5 RPS max
         }
     }
 }
@@ -2095,7 +2148,8 @@ catch (Exception e)
     <ScriptContext>const string
 OptionButtons = "[program_configure,program_disable]",
 YoloModelPath = "Yolo.ModelPath",
-ForCameraInputType = "Sensor:Widget.DisplayModule=homegenie/generic/camerainput",
+YoloRequestsPerSecond = "Yolo.RequestsPerSecond",
+ForCameraInputType = "VideoInput,Sensor:Widget.DisplayModule=/homegenie/generic/(videoinput|camerainput)/",
 ObjectDetection = "ML.ObjectDetection",
 ObjectDetectionTrigger = $"{ObjectDetection}.TriggerDetect",
 ObjectDetect = "Sensor.ObjectDetect",
@@ -2109,9 +2163,9 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>object-detection</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>3D2F4F592448A4868B9A61FB4B111C5B</Checksum>
+      <Checksum>9BBE2416C9A0E9AC60ADCEF095CA1C86</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>910</Address>
@@ -2123,14 +2177,14 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
         <ForDomains />
-        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
+        <ForTypes>VideoInput,Sensor:Widget.DisplayModule=/homegenie/generic/(videoinput|camerainput)/</ForTypes>
         <Property>ML.ObjectDetection</Property>
         <Description>Enable objects detection</Description>
       </ProgramFeature>
       <ProgramFeature>
         <FieldType>text</FieldType>
         <ForDomains />
-        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
+        <ForTypes>VideoInput,Sensor:Widget.DisplayModule=/homegenie/generic/(videoinput|camerainput)/</ForTypes>
         <Property>ML.ObjectDetection.TriggerDetect</Property>
         <Description>Comma-separated list of things (in English) that will trigger the alarm. (e.g.: cat, dog, person, backpack, suitcase)</Description>
       </ProgramFeature>
@@ -2150,14 +2204,25 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     "checkbox"
   ).AddOption(
     "Yolo.ModelPath",
-    Data.GetFolder() + "/yolo11n-pose.onnx",
-    "Path of YOLO model file (.onnx)",
+    Data.GetFolder() + "/yolo26n-pose.onnx",
+    "1. Path of YOLO model file (.onnx)",
     "text"
+  ).AddOption(
+    YoloRequestsPerSecond,
+    "5",
+    "2. Max Requests Per Second (RPS)",
+    "slider:1:30:1"
   );
 
 Program.Run();
 </ScriptSetup>
     <ScriptSource>var inputModules = Modules.WithFeature(PoseDetection);
+var requestsPerSecond = Program.Option(YoloRequestsPerSecond);
+
+// Show toggle icon for this algorithm in the NVR / Video widget
+Program
+    .Emit("NVR.Vision.Algorithm", PoseDetection)     // feature to toggle "On" in order to enable this algo
+    .Emit("NVR.Vision.Algorithm.Icon", "sports_gymnastics");          // material symbol icon for the toggle button
 
 // Restart program if configuration has been changed to apply new settings.
 When.ModuleParameterChanged( (module, property) =&gt; {
@@ -2194,6 +2259,11 @@ try
             continue;
         }
         inputModules.Command("Camera.GetPicture").Submit((m, data) =&gt; {
+            if (data == null || ((byte[])data).Length == 0)
+            {
+                // I/O errors might occasionally occur and can be ignored
+                return;
+            }
             try
             {
                 var module = Modules.InDomain(m.Domain).WithAddress(m.Address).Get();
@@ -2206,22 +2276,22 @@ try
                     // Emit json data for the video player (overlay data)
                     module.Emit(VideoPlayerWidgetOverlayPose, jsonResults);
 
-                    if (module.Parameter(ObjectDetect).DecimalValue != result.Count) 
+                    if (module.Parameter(ObjectDetect).DecimalValue != result.Count)
                     {
                         module.Emit(ObjectDetect, result.Count);
                     }
                     else
                     {
                         // update value and timestamp only, do not emit event
-                        module.Parameter(ObjectDetect).SetData(result.Count);   
+                        module.Parameter(ObjectDetect).SetData(result.Count);
                     }
 
-                    foreach (var r in result)
-                    {
-                        module.Emit(ObjectDetectSubject, r);
-                    }
+                    //foreach (var r in result)
+                    //{
+                    //    module.Emit(ObjectDetectSubject, r);
+                    //}
                 }
-                else if (module.Parameter(ObjectDetect).DecimalValue != 0 &amp;&amp; module.Parameter(ObjectDetect).IdleTime &gt; 5) 
+                else if (module.Parameter(ObjectDetect).DecimalValue != 0 &amp;&amp; module.Parameter(ObjectDetect).IdleTime &gt; 5)
                 {
                     module.Emit(ObjectDetect, 0);
                 }
@@ -2229,13 +2299,24 @@ try
             catch (Exception e)
             {
                 errorOccurred = true;
-                Console.WriteLine(e.Message);
+                Program.Notify(e.Message);
             }
         });
         if (errorOccurred)
         {
             errorOccurred = false;
-            Pause(5);
+            Pause(3);
+        }
+        else
+        {
+            if (requestsPerSecond.DecimalValue &gt; 0)
+            {
+                Pause(1D / requestsPerSecond.DecimalValue);
+            }
+            else
+            {
+                Pause(0.2); // default is 5 RPS max
+            }
         }
     }
 }
@@ -2249,7 +2330,8 @@ catch (Exception e)
     <ScriptContext>const string
 OptionButtons = "[program_configure,program_disable]",
 YoloModelPath = "Yolo.ModelPath",
-ForCameraInputType = "Sensor:Widget.DisplayModule=homegenie/generic/camerainput",
+YoloRequestsPerSecond = "Yolo.RequestsPerSecond",
+ForCameraInputType = "VideoInput,Sensor:Widget.DisplayModule=/homegenie/generic/(videoinput|camerainput)/",
 PoseDetection = "ML.PoseEstimation",
 ObjectDetect = "Sensor.ObjectDetect",
 ObjectDetectSubject = "Sensor.ObjectDetect.Subject",
@@ -2262,9 +2344,9 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>pose-estimation</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>D8CA796A879E90B543897366A4702CBF</Checksum>
+      <Checksum>B6C921277F8E9E598F3050ED3D92A7AA</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>911</Address>
@@ -2275,7 +2357,7 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
       <ProgramFeature>
         <FieldType>checkbox</FieldType>
         <ForDomains />
-        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
+        <ForTypes>VideoInput,Sensor:Widget.DisplayModule=/homegenie/generic/(videoinput|camerainput)/</ForTypes>
         <Property>ML.PoseEstimation</Property>
         <Description>Enable pose tracking</Description>
       </ProgramFeature>

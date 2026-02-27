@@ -536,5 +536,15 @@
   "original_language": "Harshen Asali",
   "origin_country": "Ƙasar Asali",
   "production_companies": "Kamfanin Samarwa",
-  "movie_cast": "'Yan wasan kwaikwayo"
+  "movie_cast": "'Yan wasan kwaikwayo",
+  "live": "Kai tsaye",
+  "recordings": "Rikodi",
+  "no_recordings": "Babu rikodin.",
+  "live_feed": "Ciyarwar Kai Tsaye",
+  "fullscreen_exit": "Fita Cikakkiyar Allo",
+  "play_media": "Kunna Kafafen Yaɗa Labarai",
+  "start_recording": "Fara Rikodi",
+  "stop_recording": "Dakatar da Rikodi",
+  "toggle_smart_recording": "Rikodi ta atomatik akan Ƙararrawa",
+  "search_metadata": "Binciken Bayanan Bayanai"
 }

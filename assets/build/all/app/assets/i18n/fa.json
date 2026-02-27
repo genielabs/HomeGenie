@@ -536,5 +536,15 @@
   "original_language": "زبان اصلی",
   "origin_country": "کشور مبدا",
   "production_companies": "شرکت تولیدی",
-  "movie_cast": "بازیگران"
+  "movie_cast": "بازیگران",
+  "live": "زنده",
+  "recordings": "ضبط‌ها",
+  "no_recordings": "هیچ ضبطی وجود ندارد.",
+  "live_feed": "پخش زنده",
+  "fullscreen_exit": "خروج از حالت تمام صفحه",
+  "play_media": "پخش رسانه",
+  "start_recording": "شروع ضبط",
+  "stop_recording": "ضبط را متوقف کنید",
+  "toggle_smart_recording": "ضبط خودکار در حالت آلارم",
+  "search_metadata": "جستجوی فراداده"
 }

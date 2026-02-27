@@ -536,5 +536,15 @@
   "original_language": "Оригинален јазик",
   "origin_country": "Земја на потекло",
   "production_companies": "Продуцентска компанија",
-  "movie_cast": "Актери"
+  "movie_cast": "Актери",
+  "live": "Во живо",
+  "recordings": "Снимки",
+  "no_recordings": "Нема записи.",
+  "live_feed": "Пренос во живо",
+  "fullscreen_exit": "Излез од цел екран",
+  "play_media": "Пушти медиуми",
+  "start_recording": "Започни со снимање",
+  "stop_recording": "Престани со снимање",
+  "toggle_smart_recording": "Автоматско снимање при аларм",
+  "search_metadata": "Пребарување метаподатоци"
 }

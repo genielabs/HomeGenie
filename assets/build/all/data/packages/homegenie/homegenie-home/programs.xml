@@ -141,7 +141,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>philips-hue-bridge</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -368,7 +368,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>energy-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -436,7 +436,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>energy-saving-mode</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -469,125 +469,6 @@ Program.GoBackground();
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-    <ScriptSetup>const string domain = "Media.IpCamera";
-const string widget = "homegenie/generic/camerainput";
-const string filter = "Sensor:Widget.DisplayModule=" + widget;
-Program.Setup(() =&gt; {
-  Program
-    .AddModules(domain, 1, GENERIC_IP_CAMERA_COUNT, "Sensor", widget)
-    .AddFeature(domain, filter, "IpCamera.ImageURL", "Camera image API URL (see your camera docs)", "text")
-    .AddFeature(domain, filter, "Widget.Config.fps", "Max frames per second", "slider:1:20:1:5")
-    .AddFeature(domain, filter, "IpCamera.Username", "Username (optional)", "text")
-    .AddFeature(domain, filter, "IpCamera.Password", "Password (optional)", "password")
-    .AddFeature(domain, filter, "Widget.Config.size", "Widget size", "select:small=small,medium=medium,large=big,auto=auto");
-});
-Program.Run();
-</ScriptSetup>
-    <ScriptSource>var cameraModules = Modules.InDomain("Media.IpCamera");
-
-// - http://&lt;hg_address&gt;/api/Media.IpCamera/&lt;camera_address&gt;/...
-Api.Handle("Media.IpCamera/", ( args ) =&gt; {
-  var request = Api.Parse(args);
-  //string domain = reqs[0];
-  object data = "{ 'ResponseValue' : 'ERROR' }";
-  try
-  {
-    string cameraaddress = request.Address;
-    string command = request.Command;
-
-    var module = cameraModules.WithAddress(cameraaddress).Get();
-    //
-    switch(command)
-    {
-      // eg. http://&lt;hg_address&gt;/api/Media.IpCamera/&lt;camera_address&gt;/Camera.GetPicture
-      case "Camera.GetPicture":
-        string cameraUrl = module.Parameter("IpCamera.ImageURL").Value;
-        if (!String.IsNullOrEmpty(cameraUrl))
-        {
-          data = Net
-            .WebService(module.Parameter("IpCamera.ImageURL").Value)
-            .WithCredentials(module.Parameter("IpCamera.Username").Value, module.Parameter("IpCamera.Password").Value)
-            .GetBytes();
-        }
-        break;
-      case "Camera.MotionDetected":
-        data = "{ 'ResponseValue' : 'OK' }";
-        // blink Sensor.MotionDetect parameter
-        module.Emit("Sensor.MotionDetect", "1", "Generic IP Camera");
-        Pause(1);
-        module.Emit("Sensor.MotionDetect", "0", "Generic IP Camera");
-        break;
-    }
-  } catch (Exception e) { 
-
-    Program.Notify("IpCamera ERROR!", e.Message);
-
-  }
-  return data;
-});
-
-Program.GoBackground();
-</ScriptSource>
-    <ScriptContext>const int GENERIC_IP_CAMERA_COUNT = 5;</ScriptContext>
-    <ScriptErrors />
-    <Data />
-    <PackageInfo>
-      <Repository>homegenie</Repository>
-      <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
-      <Id>generic-ip-camera</Id>
-      <Version>1.0.4</Version>
-      <Required>false</Required>
-      <Checksum>286EF97F9732C74F0123487F373E5477</Checksum>
-    </PackageInfo>
-    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
-    <Address>88</Address>
-    <Name>Generic IP Camera</Name>
-    <Description>Generic IP camera module.</Description>
-    <Group>Devices and Things</Group>
-    <Features>
-      <ProgramFeature>
-        <FieldType>text</FieldType>
-        <ForDomains>Media.IpCamera</ForDomains>
-        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
-        <Property>IpCamera.ImageURL</Property>
-        <Description>Camera image API URL (see your camera docs)</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>slider:1:20:1:5</FieldType>
-        <ForDomains>Media.IpCamera</ForDomains>
-        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
-        <Property>Widget.Config.fps</Property>
-        <Description>Max frames per second</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>text</FieldType>
-        <ForDomains>Media.IpCamera</ForDomains>
-        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
-        <Property>IpCamera.Username</Property>
-        <Description>Username (optional)</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>password</FieldType>
-        <ForDomains>Media.IpCamera</ForDomains>
-        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
-        <Property>IpCamera.Password</Property>
-        <Description>Password (optional)</Description>
-      </ProgramFeature>
-      <ProgramFeature>
-        <FieldType>select:small=small,medium=medium,large=big,auto=auto</FieldType>
-        <ForDomains>Media.IpCamera</ForDomains>
-        <ForTypes>Sensor:Widget.DisplayModule=homegenie/generic/camerainput</ForTypes>
-        <Property>Widget.Config.size</Property>
-        <Description>Widget size</Description>
-      </ProgramFeature>
-    </Features>
-    <AutoRestartEnabled>false</AutoRestartEnabled>
-    <Cloneable>false</Cloneable>
-    <Type>CSharp</Type>
-    <IsEnabled>true</IsEnabled>
-  </ProgramBlock>
-  <ProgramBlock>
     <ScriptSetup>Program.Setup(()=&gt;{
   Program.UseWidget("homegenie/generic/program");
 });
@@ -605,7 +486,7 @@ Modules
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>group-lights-off</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -638,7 +519,7 @@ Modules
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>group-lights-on</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -793,7 +674,7 @@ const string ADDRESS_PROPERTY = "KNX.Address";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>knx-client</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>
@@ -1117,12 +998,12 @@ public List&lt;MigEvent&gt; GetLast48HoursEvents(string dataFilePath)
     return recentEvents;
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>security-alarm-system</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -1262,7 +1143,7 @@ const string SMART_DEVICE_LAST_EVENT = "HomeGenie.SmartLights.LastEvent";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>smart-device</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1547,7 +1428,7 @@ const string OPTION_ENSURE_COMMAND_DELIVERY = "EnsureCommandDelivery";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>smart-thermostat</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -1622,7 +1503,7 @@ Pause(10);</ScriptSource>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>sunrise-colors-scenario</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>
@@ -1784,7 +1665,7 @@ const string WEMO_DOMAIN = "HomeAutomation.WeMo";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.2</PackageVersion>
+      <PackageVersion>1.0.3</PackageVersion>
       <Id>wemo</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>

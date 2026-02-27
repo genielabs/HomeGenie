@@ -536,5 +536,15 @@
   "original_language": "Izvorni jezik",
   "origin_country": "Zemlja podrijetla",
   "production_companies": "Produkcijska kuća",
-  "movie_cast": "Glumci"
+  "movie_cast": "Glumci",
+  "live": "Živjeti",
+  "recordings": "Snimke",
+  "no_recordings": "Nema snimaka.",
+  "live_feed": "Prijenos uživo",
+  "fullscreen_exit": "Izlaz iz cijelog zaslona",
+  "play_media": "Reproduciraj medije",
+  "start_recording": "Započni snimanje",
+  "stop_recording": "Zaustavi snimanje",
+  "toggle_smart_recording": "Automatsko snimanje pri alarmu",
+  "search_metadata": "Pretraživanje metapodataka"
 }

@@ -536,5 +536,15 @@
   "original_language": "Chilankhulo Choyambirira",
   "origin_country": "Dziko lakochokera",
   "production_companies": "Kampani Yopanga",
-  "movie_cast": "Ochita sewero"
+  "movie_cast": "Ochita sewero",
+  "live": "Zamoyo",
+  "recordings": "Zojambulajambula",
+  "no_recordings": "Palibe zojambulira.",
+  "live_feed": "Chakudya Chamoyo",
+  "fullscreen_exit": "Tulukani pa Fullscreen",
+  "play_media": "Sewerani Zosangalatsa",
+  "start_recording": "Yambani Kujambula",
+  "stop_recording": "Siyani Kujambula",
+  "toggle_smart_recording": "Lembani zokha pa Alamu",
+  "search_metadata": "Sakani Metadata"
 }

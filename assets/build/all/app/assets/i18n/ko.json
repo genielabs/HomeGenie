@@ -536,5 +536,15 @@
   "original_language": "원어",
   "origin_country": "원산지",
   "production_companies": "제작사",
-  "movie_cast": "배우들"
+  "movie_cast": "배우들",
+  "live": "살다",
+  "recordings": "녹음",
+  "no_recordings": "녹음된 내용이 없습니다.",
+  "live_feed": "라이브 피드",
+  "fullscreen_exit": "전체 화면 종료",
+  "play_media": "플레이 미디어",
+  "start_recording": "녹화 시작",
+  "stop_recording": "녹화 중지",
+  "toggle_smart_recording": "알람 발생 시 자동 녹화",
+  "search_metadata": "검색 메타데이터"
 }

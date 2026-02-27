@@ -536,5 +536,15 @@
   "original_language": "Izvirni jezik",
   "origin_country": "Država izvora",
   "production_companies": "Produkcijska hiša",
-  "movie_cast": "Igralci"
+  "movie_cast": "Igralci",
+  "live": "V živo",
+  "recordings": "Posnetki",
+  "no_recordings": "Brez posnetkov.",
+  "live_feed": "V živo",
+  "fullscreen_exit": "Izhod iz celozaslonskega načina",
+  "play_media": "Predvajaj medije",
+  "start_recording": "Začni snemanje",
+  "stop_recording": "Ustavi snemanje",
+  "toggle_smart_recording": "Samodejno snemanje ob alarmu",
+  "search_metadata": "Iskanje metapodatkov"
 }

@@ -536,5 +536,15 @@
   "original_language": "原文",
   "origin_country": "原産国",
   "production_companies": "制作会社",
-  "movie_cast": "俳優"
+  "movie_cast": "俳優",
+  "live": "ライブ",
+  "recordings": "録音",
+  "no_recordings": "録音はありません。",
+  "live_feed": "ライブフィード",
+  "fullscreen_exit": "全画面表示を終了",
+  "play_media": "メディアを再生",
+  "start_recording": "録画を開始",
+  "stop_recording": "録画を停止",
+  "toggle_smart_recording": "アラームで自動録画",
+  "search_metadata": "検索メタデータ"
 }

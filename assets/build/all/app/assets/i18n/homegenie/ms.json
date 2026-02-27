@@ -294,19 +294,22 @@
       "Description": "Kesan objek menggunakan model YOLO yang telah terlatih.",
       "ML.ObjectDetection": "Dayakan pengesanan objek",
       "ML.ObjectDetection.TriggerDetect": "Senarai perkara yang dipisahkan koma (dalam bahasa Inggeris) yang akan mencetuskan penggera. (cth: kucing, anjing, orang, beg galas, beg pakaian)",
-      "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Permintaan Maks Sesaat (RPS)"
     },
     "911": {
       "Title": "Anggaran Pose",
       "Description": "Pengesanan titik kunci melalui anggaran pose, menggunakan model ONNX tersuai atau model YOLO pra-latihan lalai (khusus pose manusia).",
       "ML.PoseEstimation": "Dayakan anggaran pose",
-      "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Permintaan Maks Sesaat (RPS)"
     },
     "912": {
       "Title": "Pembahagian Instance",
       "Description": "Kesan objek dan garis besarnya menggunakan model YOLO yang telah terlatih.",
       "ML.InstanceSegmentation": "Dayakan pembahagian contoh",
-      "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Laluan fail model YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Permintaan Maks Sesaat (RPS)"
     },
     "930": {
       "Title": "Pengendali Niat Gemini",
@@ -376,9 +379,30 @@
       "Title": "Ringkasan Tenaga Harian",
       "Description": "Penggunaan tenaga harian (Wh) mengikut peranti.",
       "Widget.Statistics.DailyReport": "Sertakan dalam laporan Daily Wh"
+    },
+    "200": {
+      "Title": "Input Video",
+      "Description": "Menangkap strim audio dan video untuk pemantauan langsung, pemprosesan masa nyata dan rakaman berterusan.",
+      "VideoInput.Disable": "Lumpuhkan input ini",
+      "VideoInput.SourceURL": "URL sumber video",
+      "VideoInput.ImageFeed": "URL ialah fail imej tunggal yang dikemas kini secara langsung.",
+      "VideoInput.Username": "Nama pengguna (pilihan)",
+      "VideoInput.Password": "Kata Laluan (pilihan)",
+      "Widget.Config.fps": "Bingkai maksimum sesaat",
+      "VideoOutput.Width": "Lebar aliran output.",
+      "VideoOutput.SnapshotQuality": "Kualiti imej langsung."
+    },
+    "250": {
+      "Title": "Perakam Video",
+      "Description": "Merakam strim audio dan video daripada sebarang sumber input. Rakaman boleh berterusan, dijadualkan atau dicetuskan oleh peristiwa penggera.",
+      "NVR.EnableRecording": "Dayakan Rakaman Video",
+      "NVR.RecordOnAlarm": "Rakam Semasa Penggera",
+      "NVR.ContinuousRecording": "Rakaman Berterusan."
     }
   },
   "scheduler_preset_action_genie_command": "Perintah Jin",
   "scheduler_preset_action_config_wish": "Tindakan Bahasa Semula Jadi",
-  "scheduler_preset_action_config_wish.placeholder": "Cuba: \"Tetapkan suhu kepada 22° dan mulakan pemandangan Matahari Terbit\""
+  "scheduler_preset_action_config_wish.placeholder": "Cuba: \"Tetapkan suhu kepada 22° dan mulakan pemandangan Matahari Terbit\"",
+  "scheduler_preset_action_command_video_record_start": "Mula Merakam Video",
+  "scheduler_preset_action_command_video_record_stop": "Hentikan Rakaman Video"
 }

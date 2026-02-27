@@ -294,19 +294,22 @@
       "Description": "Алдын ала даярдалган YOLO моделин колдонуп объекттерди аныктоо.",
       "ML.ObjectDetection": "Объекттерди аныктоону иштетүү",
       "ML.ObjectDetection.TriggerDetect": "Ойготкучту иштете турган нерселердин үтүр менен бөлүнгөн тизмеси (англис тилинде). (мис.: мышык, ит, адам, рюкзак, чемодан)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO үлгү файлынын жолу (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO үлгү файлынын жолу (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Секундасына максималдуу суроо-талаптар (RPS)"
     },
     "911": {
       "Title": "Позаны баалоо",
       "Description": "Ыңгайлаштырылган ONNX моделдерин же демейки алдын ала даярдалган YOLO моделин (адамдын позасына тиешелүү) колдонуу менен позаны баалоо аркылуу негизги чекитти аныктоо.",
       "ML.PoseEstimation": "Позаны баалоону иштетүү",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO үлгү файлынын жолу (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO үлгү файлынын жолу (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Секундасына максималдуу суроо-талаптар (RPS)"
     },
     "912": {
       "Title": "Instance Segmentation",
       "Description": "Алдын ала даярдалган YOLO моделин колдонуу менен объекттерди жана алардын контурларын табыңыз.",
       "ML.InstanceSegmentation": "Мисал сегментациясын иштетүү",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO үлгү файлынын жолу (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO үлгү файлынын жолу (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Секундасына максималдуу суроо-талаптар (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Күнүмдүк энергиянын кыскача баяндамасы",
       "Description": "Түзмөк боюнча күнүмдүк энергия сарптоо (Вт/саат).",
       "Widget.Statistics.DailyReport": "Күнүмдүк Wh отчетуна кошуу"
+    },
+    "200": {
+      "Title": "Видео киргизүү",
+      "Description": "Түз эфирде мониторинг жүргүзүү, реалдуу убакыт режиминде иштетүү жана үзгүлтүксүз жаздыруу үчүн аудио жана видео агымдарды тартат.",
+      "VideoInput.Disable": "Бул киргизүүнү өчүрүү",
+      "VideoInput.SourceURL": "Видео булагынын URL дареги",
+      "VideoInput.ImageFeed": "URL дареги – бул түз жаңыртылып турган жалгыз сүрөт файлы.",
+      "VideoInput.Username": "Колдонуучу аты (милдеттүү эмес)",
+      "VideoInput.Password": "Сырсөз (милдеттүү эмес)",
+      "Widget.Config.fps": "Секундасына максималдуу кадрлар",
+      "VideoOutput.Width": "Чыгаруу агымынын туурасы.",
+      "VideoOutput.SnapshotQuality": "Түз эфирдеги сүрөттүн сапаты."
+    },
+    "250": {
+      "Title": "Видео жазгыч",
+      "Description": "Каалаган киргизүү булагынан аудио жана видео агымдарын жаздырат. Жаздыруулар үзгүлтүксүз, пландаштырылган же ойготкуч окуяларынан улам ишке кириши мүмкүн.",
+      "NVR.EnableRecording": "Видео жаздырууну иштетүү",
+      "NVR.RecordOnAlarm": "Ойготкучту жаздыруу",
+      "NVR.ContinuousRecording": "Үзгүлтүксүз жаздыруу."
     }
   },
   "scheduler_preset_action_genie_command": "Жиндер командасы",
   "scheduler_preset_action_config_wish": "Табигый тил аракети",
-  "scheduler_preset_action_config_wish.placeholder": "Төмөнкүлөрдү колдонуп көрүңүз: \"Жылуулукту 22° кылып, күн чыгышын баштаңыз\""
+  "scheduler_preset_action_config_wish.placeholder": "Төмөнкүлөрдү колдонуп көрүңүз: \"Жылуулукту 22° кылып, күн чыгышын баштаңыз\"",
+  "scheduler_preset_action_command_video_record_start": "Видео жаздырууну баштоо",
+  "scheduler_preset_action_command_video_record_stop": "Видео жаздырууну токтотуу"
 }

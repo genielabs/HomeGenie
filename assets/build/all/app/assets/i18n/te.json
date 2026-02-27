@@ -536,5 +536,15 @@
   "original_language": "అసలు భాష",
   "origin_country": "మూల దేశం",
   "production_companies": "నిర్మాణ సంస్థ",
-  "movie_cast": "నటులు"
+  "movie_cast": "నటులు",
+  "live": "ప్రత్యక్ష ప్రసారం",
+  "recordings": "రికార్డింగ్‌లు",
+  "no_recordings": "రికార్డింగ్‌లు లేవు.",
+  "live_feed": "లైవ్ ఫీడ్",
+  "fullscreen_exit": "పూర్తి స్క్రీన్ నుండి నిష్క్రమించు",
+  "play_media": "మీడియాను ప్లే చేయండి",
+  "start_recording": "రికార్డింగ్ ప్రారంభించండి",
+  "stop_recording": "రికార్డింగ్ ఆపివేయి",
+  "toggle_smart_recording": "అలారంపై ఆటో-రికార్డ్",
+  "search_metadata": "మెటాడేటాను శోధించు"
 }

@@ -294,19 +294,22 @@
       "Description": "ଏକ ପୂର୍ବ-ପ୍ରଶିକ୍ଷିତ YOLO ମଡେଲ ବ୍ୟବହାର କରି ବସ୍ତୁଗୁଡ଼ିକୁ ଚିହ୍ନଟ କରନ୍ତୁ।",
       "ML.ObjectDetection": "ବସ୍ତୁ ଚିହ୍ନଟ ସକ୍ଷମ କରନ୍ତୁ",
       "ML.ObjectDetection.TriggerDetect": "ଆଲାର୍ମ ଟ୍ରିଗର କରୁଥିବା ଜିନିଷଗୁଡ଼ିକର କମା-ବିଚ୍ଛେଦିତ ତାଲିକା (ଇଂରାଜୀରେ)। (ଯଥା: ବିଲେଇ, କୁକୁର, ବ୍ୟକ୍ତି, ବ୍ୟାକପ୍ୟାକ୍, ସୁଟକେସ୍)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO ମଡେଲ ଫାଇଲର ପଥ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO ମଡେଲ ଫାଇଲର ପଥ (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "ପ୍ରତି ସେକେଣ୍ଡରେ ସର୍ବାଧିକ ଅନୁରୋଧ (RPS)"
     },
     "911": {
       "Title": "ପୋଜ୍ ଆକଳନ",
       "Description": "କଷ୍ଟମ୍ ONNX ମଡେଲ୍ କିମ୍ବା ଡିଫଲ୍ଟ ପୂର୍ବ-ପ୍ରଶିକ୍ଷିତ YOLO ମଡେଲ୍ (ମାନବ ପୋଜ୍-ନିର୍ଦ୍ଦିଷ୍ଟ) ବ୍ୟବହାର କରି ପୋଜ୍ ଆକଳନ ମାଧ୍ୟମରେ କୀପଏଣ୍ଟ ଚିହ୍ନଟ।",
       "ML.PoseEstimation": "ପୋଜ୍ ଆକଳନକୁ ସକ୍ଷମ କରନ୍ତୁ",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO ମଡେଲ ଫାଇଲର ପଥ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO ମଡେଲ ଫାଇଲର ପଥ (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "ପ୍ରତି ସେକେଣ୍ଡରେ ସର୍ବାଧିକ ଅନୁରୋଧ (RPS)"
     },
     "912": {
       "Title": "ଇନଷ୍ଟାନ୍ସ ବିଭାଜନ",
       "Description": "ଏକ ପୂର୍ବ-ପ୍ରଶିକ୍ଷିତ YOLO ମଡେଲ ବ୍ୟବହାର କରି ବସ୍ତୁ ଏବଂ ସେମାନଙ୍କର ରୂପରେଖା ଚିହ୍ନଟ କରନ୍ତୁ।",
       "ML.InstanceSegmentation": "ଇନଷ୍ଟାନ୍ସ ସେଗମେଣ୍ଟେସନ୍ ସକ୍ଷମ କରନ୍ତୁ",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO ମଡେଲ ଫାଇଲର ପଥ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO ମଡେଲ ଫାଇଲର ପଥ (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "ପ୍ରତି ସେକେଣ୍ଡରେ ସର୍ବାଧିକ ଅନୁରୋଧ (RPS)"
     },
     "930": {
       "Title": "ଜେମିନି ଇଣ୍ଟେଣ୍ଟ ହ୍ୟାଣ୍ଡଲର୍",
@@ -376,9 +379,30 @@
       "Title": "ଦୈନିକ ଶକ୍ତି ସାରାଂଶ",
       "Description": "ଡିଭାଇସ୍ ଦ୍ୱାରା ଦୈନିକ ଶକ୍ତି ବ୍ୟବହାର (Wh)।",
       "Widget.Statistics.DailyReport": "ଦୈନିକ Wh ରିପୋର୍ଟରେ ଅନ୍ତର୍ଭୁକ୍ତ କରନ୍ତୁ"
+    },
+    "200": {
+      "Title": "ଭିଡିଓ ଇନପୁଟ୍",
+      "Description": "ଲାଇଭ୍ ମନିଟରିଂ, ରିଅଲ୍-ଟାଇମ୍ ପ୍ରକ୍ରିୟାକରଣ ଏବଂ ନିରନ୍ତର ରେକର୍ଡିଂ ପାଇଁ ଅଡିଓ ଏବଂ ଭିଡିଓ ଷ୍ଟ୍ରିମ୍ କ୍ୟାପଚର କରେ।",
+      "VideoInput.Disable": "ଏହି ଇନପୁଟ୍‌କୁ ଅକ୍ଷମ କରନ୍ତୁ",
+      "VideoInput.SourceURL": "ଭିଡିଓ ସୋର୍ସ URL",
+      "VideoInput.ImageFeed": "URL ହେଉଛି ଏକ ଲାଇଭ୍-ଅପ୍ଡେଟ୍ ହୋଇଥିବା ସିଙ୍ଗଲ୍ ଇମେଜ୍ ଫାଇଲ୍।",
+      "VideoInput.Username": "ଉପଯୋଗକର୍ତ୍ତା ନାମ (ଇଚ୍ଛାଧୀନ)",
+      "VideoInput.Password": "ପାସୱାର୍ଡ (ବୈକଳ୍ପିକ)",
+      "Widget.Config.fps": "ପ୍ରତି ସେକେଣ୍ଡରେ ସର୍ବାଧିକ ଫ୍ରେମ୍",
+      "VideoOutput.Width": "ଆଉଟପୁଟ୍ ଷ୍ଟ୍ରିମ୍ ଓସାର।",
+      "VideoOutput.SnapshotQuality": "ଲାଇଭ୍ ପ୍ରତିଛବି ଗୁଣବତ୍ତା।"
+    },
+    "250": {
+      "Title": "ଭିଡିଓ ରେକର୍ଡର୍",
+      "Description": "ଯେକୌଣସି ଇନପୁଟ୍ ଉତ୍ସରୁ ଅଡିଓ ଏବଂ ଭିଡିଓ ଷ୍ଟ୍ରିମ୍ ରେକର୍ଡ କରେ। ରେକର୍ଡିଂଗୁଡ଼ିକ ନିରନ୍ତର, ନିର୍ଦ୍ଧାରିତ କିମ୍ବା ଆଲାର୍ମ ଇଭେଣ୍ଟ ଦ୍ୱାରା ଟ୍ରିଗର ହୋଇପାରେ।",
+      "NVR.EnableRecording": "ଭିଡିଓ ରେକର୍ଡିଂ ସକ୍ଷମ କରନ୍ତୁ",
+      "NVR.RecordOnAlarm": "ଆଲାର୍ମରେ ରେକର୍ଡ କରନ୍ତୁ",
+      "NVR.ContinuousRecording": "ନିରନ୍ତର ରେକର୍ଡିଂ।"
     }
   },
   "scheduler_preset_action_genie_command": "ଜେନି କମାଣ୍ଡ",
   "scheduler_preset_action_config_wish": "ପ୍ରାକୃତିକ ଭାଷା କାର୍ଯ୍ୟ",
-  "scheduler_preset_action_config_wish.placeholder": "ଚେଷ୍ଟା କରନ୍ତୁ: \"ତାପକୁ 22° ରେ ସେଟ୍ କରନ୍ତୁ ଏବଂ ସୂର୍ଯ୍ୟୋଦୟ ଦୃଶ୍ୟ ଆରମ୍ଭ କରନ୍ତୁ\""
+  "scheduler_preset_action_config_wish.placeholder": "ଚେଷ୍ଟା କରନ୍ତୁ: \"ତାପକୁ 22° ରେ ସେଟ୍ କରନ୍ତୁ ଏବଂ ସୂର୍ଯ୍ୟୋଦୟ ଦୃଶ୍ୟ ଆରମ୍ଭ କରନ୍ତୁ\"",
+  "scheduler_preset_action_command_video_record_start": "ଭିଡିଓ ରେକର୍ଡିଂ ଆରମ୍ଭ କରନ୍ତୁ",
+  "scheduler_preset_action_command_video_record_stop": "ଭିଡିଓ ରେକର୍ଡିଂ ବନ୍ଦ କରନ୍ତୁ"
 }

@@ -536,5 +536,15 @@
   "original_language": "Түпнуска тил",
   "origin_country": "Келип чыккан өлкөсү",
   "production_companies": "Өндүрүш компаниясы",
-  "movie_cast": "Актерлор"
+  "movie_cast": "Актерлор",
+  "live": "Түз эфирде",
+  "recordings": "Жаздыруулар",
+  "no_recordings": "Эч кандай жаздыруу жок.",
+  "live_feed": "Түз эфир",
+  "fullscreen_exit": "Толук экран режиминен чыгуу",
+  "play_media": "Медианы ойнотуу",
+  "start_recording": "Жаздырууну баштоо",
+  "stop_recording": "Жаздырууну токтотуу",
+  "toggle_smart_recording": "Сигнализацияда автоматтык түрдө жаздыруу",
+  "search_metadata": "Метадайындарды издөө"
 }

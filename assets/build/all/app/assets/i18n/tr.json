@@ -536,5 +536,15 @@
   "original_language": "Orijinal Dil",
   "origin_country": "Menşei ülke",
   "production_companies": "Prodüksiyon Şirketi",
-  "movie_cast": "Aktörler"
+  "movie_cast": "Aktörler",
+  "live": "Canlı",
+  "recordings": "Kayıtlar",
+  "no_recordings": "Kayıt yok.",
+  "live_feed": "Canlı Yayın",
+  "fullscreen_exit": "Tam ekrandan çık",
+  "play_media": "Medya Oynat",
+  "start_recording": "Kaydı Başlat",
+  "stop_recording": "Kaydı Durdur",
+  "toggle_smart_recording": "Alarmda otomatik kayıt",
+  "search_metadata": "Arama Meta Verileri"
 }

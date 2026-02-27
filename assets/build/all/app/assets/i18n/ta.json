@@ -536,5 +536,15 @@
   "original_language": "மூல மொழி",
   "origin_country": "பிறந்த நாடு",
   "production_companies": "தயாரிப்பு நிறுவனம்",
-  "movie_cast": "நடிகர்கள்"
+  "movie_cast": "நடிகர்கள்",
+  "live": "நேரடி",
+  "recordings": "பதிவுகள்",
+  "no_recordings": "பதிவுகள் இல்லை.",
+  "live_feed": "நேரடி ஊட்டம்",
+  "fullscreen_exit": "முழுத்திரையிலிருந்து வெளியேறு",
+  "play_media": "மீடியாவை இயக்கு",
+  "start_recording": "பதிவு செய்யத் தொடங்கு",
+  "stop_recording": "பதிவு செய்வதை நிறுத்து",
+  "toggle_smart_recording": "அலாரத்தில் தானியங்கி பதிவு",
+  "search_metadata": "மெட்டாடேட்டாவைத் தேடு"
 }

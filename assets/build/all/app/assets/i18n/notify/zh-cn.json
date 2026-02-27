@@ -1,0 +1,3 @@
+{
+  "ffmpeg_required": "`{{module_name}}` 模块需要 **FFmpeg** 才能运行。请从官方网站 [https://ffmpeg.org](https://ffmpeg.org) 安装。如果您不需要此功能，可以在“自动化程序”部分禁用此模块，或点击下方按钮。"
+}

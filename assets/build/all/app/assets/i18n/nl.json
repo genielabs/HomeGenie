@@ -536,5 +536,15 @@
   "original_language": "Oorspronkelijke taal",
   "origin_country": "Land van herkomst",
   "production_companies": "Productiebedrijf",
-  "movie_cast": "Acteurs"
+  "movie_cast": "Acteurs",
+  "live": "Live",
+  "recordings": "Opnames",
+  "no_recordings": "Geen opnames.",
+  "live_feed": "Live feed",
+  "fullscreen_exit": "Verlaat de volledige schermmodus",
+  "play_media": "Play Media",
+  "start_recording": "Start opnemen",
+  "stop_recording": "Stop met opnemen",
+  "toggle_smart_recording": "Automatische opname bij alarm",
+  "search_metadata": "Zoekmetadata"
 }

@@ -294,19 +294,22 @@
       "Description": "事前トレーニング済みの YOLO モデルを使用してオブジェクトを検出します。",
       "ML.ObjectDetection": "オブジェクト検出を有効にする",
       "ML.ObjectDetection.TriggerDetect": "アラームをトリガーする項目（英語）のコンマ区切りリスト。（例：猫、犬、人、バックパック、スーツケース）",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO モデルファイル (.onnx) のパス"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO モデルファイル (.onnx) のパス",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "1秒あたりの最大リクエスト数（RPS）"
     },
     "911": {
       "Title": "姿勢推定",
       "Description": "カスタム ONNX モデルまたはデフォルトの事前トレーニング済み YOLO モデル (人間のポーズに固有) を使用したポーズ推定によるキーポイント検出。",
       "ML.PoseEstimation": "姿勢推定を有効にする",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO モデルファイル (.onnx) のパス"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO モデルファイル (.onnx) のパス",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "1秒あたりの最大リクエスト数（RPS）"
     },
     "912": {
       "Title": "インスタンスセグメンテーション",
       "Description": "事前トレーニング済みの YOLO モデルを使用して、オブジェクトとその輪郭を検出します。",
       "ML.InstanceSegmentation": "インスタンスセグメンテーションを有効にする",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO モデルファイル (.onnx) のパス"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO モデルファイル (.onnx) のパス",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "1秒あたりの最大リクエスト数（RPS）"
     },
     "930": {
       "Title": "ジェミニ インテント ハンドラー",
@@ -376,9 +379,30 @@
       "Title": "毎日のエネルギーサマリー",
       "Description": "デバイス別の1日あたりのエネルギー消費量（Wh）。",
       "Widget.Statistics.DailyReport": "日次Whレポートに含める"
+    },
+    "200": {
+      "Title": "ビデオ入力",
+      "Description": "ライブ監視、リアルタイム処理、継続的な録画のためにオーディオおよびビデオ ストリームをキャプチャします。",
+      "VideoInput.Disable": "この入力を無効にする",
+      "VideoInput.SourceURL": "ビデオソースURL",
+      "VideoInput.ImageFeed": "URL はライブ更新される単一の画像ファイルです。",
+      "VideoInput.Username": "ユーザー名（オプション）",
+      "VideoInput.Password": "パスワード（オプション）",
+      "Widget.Config.fps": "1秒あたりの最大フレーム数",
+      "VideoOutput.Width": "出力ストリームの幅。",
+      "VideoOutput.SnapshotQuality": "ライブ画像の品質。"
+    },
+    "250": {
+      "Title": "ビデオレコーダー",
+      "Description": "あらゆる入力ソースからのオーディオおよびビデオストリームを録画します。録画は連続、スケジュール、またはアラームイベントによるトリガーが可能です。",
+      "NVR.EnableRecording": "ビデオ録画を有効にする",
+      "NVR.RecordOnAlarm": "アラーム時に録画",
+      "NVR.ContinuousRecording": "連続録画。"
     }
   },
   "scheduler_preset_action_genie_command": "ジーニーコマンド",
   "scheduler_preset_action_config_wish": "自然言語アクション",
-  "scheduler_preset_action_config_wish.placeholder": "試してみましょう: 「暖房を 22 度に設定して日の出シーンを開始してください」"
+  "scheduler_preset_action_config_wish.placeholder": "試してみましょう: 「暖房を 22 度に設定して日の出シーンを開始してください」",
+  "scheduler_preset_action_command_video_record_start": "ビデオ録画を開始",
+  "scheduler_preset_action_command_video_record_stop": "ビデオ録画を停止"
 }

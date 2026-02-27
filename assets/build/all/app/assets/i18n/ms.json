@@ -536,5 +536,15 @@
   "original_language": "Bahasa Asal",
   "origin_country": "Negara Asal",
   "production_companies": "Syarikat Pengeluaran",
-  "movie_cast": "Pelakon"
+  "movie_cast": "Pelakon",
+  "live": "Langsung",
+  "recordings": "Rakaman",
+  "no_recordings": "Tiada rakaman.",
+  "live_feed": "Suapan Langsung",
+  "fullscreen_exit": "Keluar dari Skrin Penuh",
+  "play_media": "Main Media",
+  "start_recording": "Mulakan Rakaman",
+  "stop_recording": "Hentikan Rakaman",
+  "toggle_smart_recording": "Rakam automatik pada Penggera",
+  "search_metadata": "Carian Metadata"
 }

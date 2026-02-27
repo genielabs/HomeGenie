@@ -536,5 +536,15 @@
   "original_language": "اصل زبان",
   "origin_country": "اصل ملک",
   "production_companies": "پروڈکشن کمپنی",
-  "movie_cast": "اداکاروں"
+  "movie_cast": "اداکاروں",
+  "live": "جیو",
+  "recordings": "ریکارڈنگز",
+  "no_recordings": "کوئی ریکارڈنگ نہیں۔",
+  "live_feed": "لائیو فیڈ",
+  "fullscreen_exit": "پوری اسکرین سے باہر نکلیں۔",
+  "play_media": "میڈیا چلائیں۔",
+  "start_recording": "ریکارڈنگ شروع کریں۔",
+  "stop_recording": "ریکارڈنگ بند کرو",
+  "toggle_smart_recording": "الارم پر آٹو ریکارڈ",
+  "search_metadata": "میٹا ڈیٹا تلاش کریں۔"
 }

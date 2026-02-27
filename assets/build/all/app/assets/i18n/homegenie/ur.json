@@ -294,19 +294,22 @@
       "Description": "پہلے سے تربیت یافتہ YOLO ماڈل کا استعمال کرتے ہوئے اشیاء کا پتہ لگائیں۔",
       "ML.ObjectDetection": "اشیاء کا پتہ لگانے کو فعال کریں۔",
       "ML.ObjectDetection.TriggerDetect": "کوما سے الگ کردہ چیزوں کی فہرست (انگریزی میں) جو الارم کو متحرک کرے گی۔ (مثال کے طور پر: بلی، کتا، شخص، بیگ، سوٹ کیس)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO ماڈل فائل کا راستہ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO ماڈل فائل کا راستہ (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "فی سیکنڈ زیادہ سے زیادہ درخواستیں (RPS)"
     },
     "911": {
       "Title": "پوز کا تخمینہ",
       "Description": "اپنی مرضی کے مطابق ONNX ماڈلز یا پہلے سے تربیت یافتہ YOLO ماڈل (انسانی پوز کے لیے مخصوص) کا استعمال کرتے ہوئے پوز تخمینہ کے ذریعے کلیدی پوائنٹ کا پتہ لگانا۔",
       "ML.PoseEstimation": "پوز کا تخمینہ فعال کریں۔",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO ماڈل فائل کا راستہ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO ماڈل فائل کا راستہ (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "فی سیکنڈ زیادہ سے زیادہ درخواستیں (RPS)"
     },
     "912": {
       "Title": "مثال سیگمنٹیشن",
       "Description": "پہلے سے تربیت یافتہ YOLO ماڈل کا استعمال کرتے ہوئے اشیاء اور ان کے خاکوں کا پتہ لگائیں۔",
       "ML.InstanceSegmentation": "مثال کی تقسیم کو فعال کریں۔",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO ماڈل فائل کا راستہ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO ماڈل فائل کا راستہ (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "فی سیکنڈ زیادہ سے زیادہ درخواستیں (RPS)"
     },
     "930": {
       "Title": "جیمنی انٹینٹ ہینڈلر",
@@ -376,9 +379,30 @@
       "Title": "روزانہ توانائی کا خلاصہ",
       "Description": "ڈیوائس کے ذریعہ روزانہ توانائی کی کھپت (Wh)۔",
       "Widget.Statistics.DailyReport": "روزانہ Wh رپورٹ میں شامل کریں۔"
+    },
+    "200": {
+      "Title": "ویڈیو ان پٹ",
+      "Description": "لائیو مانیٹرنگ، ریئل ٹائم پروسیسنگ، اور مسلسل ریکارڈنگ کے لیے آڈیو اور ویڈیو اسٹریمز کیپچر کرتا ہے۔",
+      "VideoInput.Disable": "اس ان پٹ کو غیر فعال کریں۔",
+      "VideoInput.SourceURL": "ویڈیو سورس URL",
+      "VideoInput.ImageFeed": "URL ایک لائیو اپ ڈیٹ شدہ واحد تصویری فائل ہے۔",
+      "VideoInput.Username": "صارف نام (اختیاری)",
+      "VideoInput.Password": "پاس ورڈ (اختیاری)",
+      "Widget.Config.fps": "زیادہ سے زیادہ فریم فی سیکنڈ",
+      "VideoOutput.Width": "آؤٹ پٹ اسٹریم کی چوڑائی۔",
+      "VideoOutput.SnapshotQuality": "لائیو امیج کا معیار۔"
+    },
+    "250": {
+      "Title": "ویڈیو ریکارڈر",
+      "Description": "کسی بھی ان پٹ سورس سے آڈیو اور ویڈیو اسٹریمز کو ریکارڈ کرتا ہے۔ ریکارڈنگ مسلسل، شیڈول، یا الارم واقعات کے ذریعہ متحرک ہوسکتی ہیں۔",
+      "NVR.EnableRecording": "ویڈیو ریکارڈنگ کو فعال کریں۔",
+      "NVR.RecordOnAlarm": "الارم پر ریکارڈ کریں۔",
+      "NVR.ContinuousRecording": "مسلسل ریکارڈنگ۔"
     }
   },
   "scheduler_preset_action_genie_command": "جنی کمانڈ",
   "scheduler_preset_action_config_wish": "قدرتی زبان کا عمل",
-  "scheduler_preset_action_config_wish.placeholder": "کوشش کریں: \"گرمی کو 22° پر سیٹ کریں اور طلوع آفتاب کا منظر شروع کریں\""
+  "scheduler_preset_action_config_wish.placeholder": "کوشش کریں: \"گرمی کو 22° پر سیٹ کریں اور طلوع آفتاب کا منظر شروع کریں\"",
+  "scheduler_preset_action_command_video_record_start": "ویڈیو ریکارڈنگ شروع کریں۔",
+  "scheduler_preset_action_command_video_record_stop": "ویڈیو ریکارڈ کرنا بند کریں۔"
 }

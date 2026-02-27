@@ -294,19 +294,22 @@
       "Description": "Урьдчилан бэлтгэгдсэн YOLO загварыг ашиглан объектуудыг илрүүлэх.",
       "ML.ObjectDetection": "Объект илрүүлэхийг идэвхжүүлэх",
       "ML.ObjectDetection.TriggerDetect": "Сэрүүлгийг өдөөх зүйлсийн таслалаар тусгаарлагдсан жагсаалт (англи хэл дээр). (жишээ нь: муур, нохой, хүн, үүргэвч, чемодан)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO загварын файлын зам (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO загварын файлын зам (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Секундэд хамгийн их хүсэлт (RPS)"
     },
     "911": {
       "Title": "Позын тооцоолол",
       "Description": "Захиалгат ONNX загвар эсвэл өгөгдмөл урьдчилан бэлтгэгдсэн YOLO загвар (хүний поз) ашиглан байрлалын тооцоололоор гол цэгийг илрүүлэх.",
       "ML.PoseEstimation": "Позын тооцооллыг идэвхжүүлэх",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO загварын файлын зам (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO загварын файлын зам (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Секундэд хамгийн их хүсэлт (RPS)"
     },
     "912": {
       "Title": "Жишээ сегментчилэл",
       "Description": "Урьдчилан бэлтгэгдсэн YOLO загварыг ашиглан объект болон тэдгээрийн тоймыг илрүүлэх.",
       "ML.InstanceSegmentation": "Жишээ сегментчиллийг идэвхжүүлэх",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO загварын файлын зам (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO загварын файлын зам (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Секундэд хамгийн их хүсэлт (RPS)"
     },
     "930": {
       "Title": "Gemini зорилго зохицуулагч",
@@ -376,9 +379,30 @@
       "Title": "Өдөр тутмын эрчим хүчний хураангуй",
       "Description": "Төхөөрөмжийн өдөр тутмын эрчим хүчний хэрэглээ (Вт.ц).",
       "Widget.Statistics.DailyReport": "Өдөр тутмын Wh тайланд оруулах"
+    },
+    "200": {
+      "Title": "Видео оролт",
+      "Description": "Шууд хяналт, бодит цагийн боловсруулалт, тасралтгүй бичлэг хийх зорилгоор аудио болон видео дамжуулалтыг авдаг.",
+      "VideoInput.Disable": "Энэ оролтыг идэвхгүй болгох",
+      "VideoInput.SourceURL": "Видео эх сурвалжийн URL",
+      "VideoInput.ImageFeed": "URL нь шууд шинэчлэгддэг дан зургийн файл юм.",
+      "VideoInput.Username": "Хэрэглэгчийн нэр (заавал биш)",
+      "VideoInput.Password": "Нууц үг (заавал биш)",
+      "Widget.Config.fps": "Секундэд хамгийн их фрэйм",
+      "VideoOutput.Width": "Гаралтын урсгалын өргөн.",
+      "VideoOutput.SnapshotQuality": "Амьд зургийн чанар."
+    },
+    "250": {
+      "Title": "Видео бичигч",
+      "Description": "Дурын оролтын эх үүсвэрээс аудио болон видео урсгалыг бичдэг. Бичлэгийг тасралтгүй, хуваарьтай эсвэл дохиоллын үйл явдлаас үүдэн идэвхжүүлж болно.",
+      "NVR.EnableRecording": "Видео бичлэгийг идэвхжүүлэх",
+      "NVR.RecordOnAlarm": "Сэрүүлэг дээр бичлэг хийх",
+      "NVR.ContinuousRecording": "Тасралтгүй бичлэг."
     }
   },
   "scheduler_preset_action_genie_command": "Жин команд",
   "scheduler_preset_action_config_wish": "Байгалийн хэлний үйлдэл",
-  "scheduler_preset_action_config_wish.placeholder": "Дараахыг туршаад үзээрэй: \"Дулааныг 22° болгож, нар мандах үзэгдлийг эхлүүлнэ үү\""
+  "scheduler_preset_action_config_wish.placeholder": "Дараахыг туршаад үзээрэй: \"Дулааныг 22° болгож, нар мандах үзэгдлийг эхлүүлнэ үү\"",
+  "scheduler_preset_action_command_video_record_start": "Видео бичлэг хийж эхлэх",
+  "scheduler_preset_action_command_video_record_stop": "Видео бичлэгийг зогсоох"
 }

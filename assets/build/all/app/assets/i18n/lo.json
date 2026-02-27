@@ -536,5 +536,15 @@
   "original_language": "ພາສາຕົ້ນສະບັບ",
   "origin_country": "ປະເທດຕົ້ນກຳເນີດ",
   "production_companies": "ບໍລິສັດຜະລິດ",
-  "movie_cast": "ນັກສະແດງ"
+  "movie_cast": "ນັກສະແດງ",
+  "live": "ສົດ",
+  "recordings": "ການບັນທຶກສຽງ",
+  "no_recordings": "ບໍ່ມີການບັນທຶກສຽງ.",
+  "live_feed": "ຟີດສົດ",
+  "fullscreen_exit": "ອອກຈາກໜ້າຈໍເຕັມ",
+  "play_media": "ຫຼິ້ນສື່",
+  "start_recording": "ເລີ່ມການບັນທຶກ",
+  "stop_recording": "ຢຸດການບັນທຶກ",
+  "toggle_smart_recording": "ບັນທຶກອັດຕະໂນມັດເມື່ອມີສັນຍານເຕືອນ",
+  "search_metadata": "ຂໍ້ມູນເມຕາຄົ້ນຫາ"
 }

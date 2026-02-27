@@ -536,5 +536,15 @@
   "original_language": "Lang orijinal la",
   "origin_country": "Peyi orijin",
   "production_companies": "Konpayi Pwodiksyon",
-  "movie_cast": "Aktè yo"
+  "movie_cast": "Aktè yo",
+  "live": "An dirèk",
+  "recordings": "Anrejistreman",
+  "no_recordings": "Pa gen anrejistreman.",
+  "live_feed": "Fil An Dirèk",
+  "fullscreen_exit": "Sòti nan Plen ekran an",
+  "play_media": "Jwe Medya",
+  "start_recording": "Kòmanse Anrejistreman",
+  "stop_recording": "Sispann Anrejistreman an",
+  "toggle_smart_recording": "Anrejistreman otomatik sou alam",
+  "search_metadata": "Rechèch Metadone"
 }

@@ -294,19 +294,22 @@
       "Description": "Détectez des objets à l’aide d’un modèle YOLO pré-entraîné.",
       "ML.ObjectDetection": "Activer la détection d'objets",
       "ML.ObjectDetection.TriggerDetect": "Liste séparée par des virgules de choses (en anglais) qui déclencheront l'alarme. (ex. : chat, chien, personne, sac à dos, valise)",
-      "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Nombre maximal de requêtes par seconde (RPS)"
     },
     "911": {
       "Title": "Estimation de la pose",
       "Description": "Détection de points clés via l'estimation de la pose, à l'aide de modèles ONNX personnalisés ou du modèle YOLO pré-entraîné par défaut (spécifique à la pose humaine).",
       "ML.PoseEstimation": "Activer l'estimation de la pose",
-      "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Nombre maximal de requêtes par seconde (RPS)"
     },
     "912": {
       "Title": "Segmentation des instances",
       "Description": "Détectez les objets et leurs contours à l'aide d'un modèle YOLO pré-entraîné.",
       "ML.InstanceSegmentation": "Activer la segmentation des instances",
-      "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Chemin du fichier modèle YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Nombre maximal de requêtes par seconde (RPS)"
     },
     "930": {
       "Title": "Gestionnaire d'intention Gemini",
@@ -376,9 +379,30 @@
       "Title": "Résumé énergétique quotidien",
       "Description": "Consommation énergétique quotidienne (Wh) par appareil.",
       "Widget.Statistics.DailyReport": "Inclure dans le rapport quotidien Wh"
+    },
+    "200": {
+      "Title": "Entrée vidéo",
+      "Description": "Capture les flux audio et vidéo pour la surveillance en direct, le traitement en temps réel et l'enregistrement continu.",
+      "VideoInput.Disable": "Désactiver cette entrée",
+      "VideoInput.SourceURL": "URL de la source vidéo",
+      "VideoInput.ImageFeed": "L'URL correspond à un fichier image unique mis à jour en temps réel.",
+      "VideoInput.Username": "Nom d'utilisateur (facultatif)",
+      "VideoInput.Password": "Mot de passe (facultatif)",
+      "Widget.Config.fps": "Images par seconde maximales",
+      "VideoOutput.Width": "Largeur du flux de sortie.",
+      "VideoOutput.SnapshotQuality": "Qualité d'image en direct."
+    },
+    "250": {
+      "Title": "Magnétoscope",
+      "Description": "Enregistre les flux audio et vidéo provenant de n'importe quelle source d'entrée. Les enregistrements peuvent être continus, programmés ou déclenchés par des alarmes.",
+      "NVR.EnableRecording": "Activer l'enregistrement vidéo",
+      "NVR.RecordOnAlarm": "Enregistrement sur alarme",
+      "NVR.ContinuousRecording": "Enregistrement continu."
     }
   },
   "scheduler_preset_action_genie_command": "Commande du génie",
   "scheduler_preset_action_config_wish": "Action en langage naturel",
-  "scheduler_preset_action_config_wish.placeholder": "Essayez : « Réglez la température à 22° et lancez la scène Lever de soleil »"
+  "scheduler_preset_action_config_wish.placeholder": "Essayez : « Réglez la température à 22° et lancez la scène Lever de soleil »",
+  "scheduler_preset_action_command_video_record_start": "Démarrer l'enregistrement vidéo",
+  "scheduler_preset_action_command_video_record_stop": "Arrêter l'enregistrement vidéo"
 }

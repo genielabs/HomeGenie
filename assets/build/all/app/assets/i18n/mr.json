@@ -536,5 +536,15 @@
   "original_language": "मूळ भाषा",
   "origin_country": "मूळ देश",
   "production_companies": "उत्पादन कंपनी",
-  "movie_cast": "अभिनेते"
+  "movie_cast": "अभिनेते",
+  "live": "राहतात",
+  "recordings": "रेकॉर्डिंग्ज",
+  "no_recordings": "रेकॉर्डिंग नाहीत.",
+  "live_feed": "लाईव्ह फीड",
+  "fullscreen_exit": "फुलस्क्रीनमधून बाहेर पडा",
+  "play_media": "मीडिया प्ले करा",
+  "start_recording": "रेकॉर्डिंग सुरू करा",
+  "stop_recording": "रेकॉर्डिंग थांबवा",
+  "toggle_smart_recording": "अलार्मवर ऑटो-रेकॉर्डिंग",
+  "search_metadata": "मेटाडेटा शोधा"
 }

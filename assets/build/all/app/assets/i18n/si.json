@@ -536,5 +536,15 @@
   "original_language": "මුල් භාෂාව",
   "origin_country": "මුල් රට",
   "production_companies": "නිෂ්පාදන සමාගම",
-  "movie_cast": "නළුවන්"
+  "movie_cast": "නළුවන්",
+  "live": "සජීවී",
+  "recordings": "පටිගත කිරීම්",
+  "no_recordings": "පටිගත කිරීම් නැත.",
+  "live_feed": "සජීවී සංග්‍රහය",
+  "fullscreen_exit": "පූර්ණ තිරයෙන් ඉවත් වන්න",
+  "play_media": "මාධ්‍ය වාදනය කරන්න",
+  "start_recording": "පටිගත කිරීම ආරම්භ කරන්න",
+  "stop_recording": "පටිගත කිරීම නවත්වන්න",
+  "toggle_smart_recording": "අනතුරු ඇඟවීමේ ස්වයංක්‍රීය පටිගත කිරීම",
+  "search_metadata": "පාරදත්ත සොයන්න"
 }

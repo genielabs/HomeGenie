@@ -536,5 +536,15 @@
   "original_language": "Originalspråk",
   "origin_country": "Opprinnelsesland",
   "production_companies": "Produksjonsselskap",
-  "movie_cast": "Skuespillere"
+  "movie_cast": "Skuespillere",
+  "live": "Bo",
+  "recordings": "Innspillinger",
+  "no_recordings": "Ingen opptak.",
+  "live_feed": "Direktesending",
+  "fullscreen_exit": "Avslutt fullskjerm",
+  "play_media": "Spill av media",
+  "start_recording": "Start opptak",
+  "stop_recording": "Stopp opptaket",
+  "toggle_smart_recording": "Automatisk opptak ved alarm",
+  "search_metadata": "Søk i metadata"
 }

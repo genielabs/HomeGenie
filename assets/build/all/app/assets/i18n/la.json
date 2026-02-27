@@ -536,5 +536,15 @@
   "original_language": "Lingua Originalis",
   "origin_country": "Patria Originis",
   "production_companies": "Societas Productionis",
-  "movie_cast": "Actores"
+  "movie_cast": "Actores",
+  "live": "Vive",
+  "recordings": "Inscriptiones",
+  "no_recordings": "Nullae inscriptiones.",
+  "live_feed": "Transitus Vivus",
+  "fullscreen_exit": "Exire a Pleno Scrinio",
+  "play_media": "Ludere Media",
+  "start_recording": "Incipe Recordare",
+  "stop_recording": "Desine inscriptionem",
+  "toggle_smart_recording": "Auto-registratio in Alarma",
+  "search_metadata": "Metadata Investigationis"
 }

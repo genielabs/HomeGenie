@@ -294,19 +294,22 @@
       "Description": "Oppdag objekter ved hjelp av en forhåndstrent YOLO-modell.",
       "ML.ObjectDetection": "Aktiver objektgjenkjenning",
       "ML.ObjectDetection.TriggerDetect": "Kommaseparert liste over ting (på engelsk) som vil utløse alarmen. (f.eks.: katt, hund, person, ryggsekk, koffert)",
-      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO-modellfilen (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO-modellfilen (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimalt antall forespørsler per sekund (RPS)"
     },
     "911": {
       "Title": "Positionsestimering",
       "Description": "Nøkkelpunktdeteksjon via positureestimering, ved bruk av tilpassede ONNX-modeller eller den standard forhåndstrente YOLO-modellen (spesifikk for menneskelig positur).",
       "ML.PoseEstimation": "Aktiver positurestimering",
-      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO-modellfilen (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO-modellfilen (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimalt antall forespørsler per sekund (RPS)"
     },
     "912": {
       "Title": "Instanssegmentering",
       "Description": "Oppdag objekter og deres omriss ved hjelp av en forhåndstrent YOLO-modell.",
       "ML.InstanceSegmentation": "Aktiver forekomstsegmentering",
-      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO-modellfilen (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Sti til YOLO-modellfilen (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimalt antall forespørsler per sekund (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Daglig energisammendrag",
       "Description": "Daglig energiforbruk (Wh) per enhet.",
       "Widget.Statistics.DailyReport": "Inkluder i den daglige Wh-rapporten"
+    },
+    "200": {
+      "Title": "Videoinngang",
+      "Description": "Tar opp lyd- og videostrømmer for liveovervåking, sanntidsbehandling og kontinuerlig opptak.",
+      "VideoInput.Disable": "Deaktiver denne inngangen",
+      "VideoInput.SourceURL": "URL-adresse for videokilde",
+      "VideoInput.ImageFeed": "URL er en enkeltbildefil som oppdateres live.",
+      "VideoInput.Username": "Brukernavn (valgfritt)",
+      "VideoInput.Password": "Passord (valgfritt)",
+      "Widget.Config.fps": "Maks. antall bilder per sekund",
+      "VideoOutput.Width": "Utgangsstrømbredde.",
+      "VideoOutput.SnapshotQuality": "Live bildekvalitet."
+    },
+    "250": {
+      "Title": "Videoopptaker",
+      "Description": "Tar opp lyd- og videostrømmer fra enhver inngangskilde. Opptak kan være kontinuerlige, planlagte eller utløses av alarmhendelser.",
+      "NVR.EnableRecording": "Aktiver videoopptak",
+      "NVR.RecordOnAlarm": "Opptak ved alarm",
+      "NVR.ContinuousRecording": "Kontinuerlig opptak."
     }
   },
   "scheduler_preset_action_genie_command": "Genie-kommandoen",
   "scheduler_preset_action_config_wish": "Naturlig språkhandling",
-  "scheduler_preset_action_config_wish.placeholder": "Prøv: «Sett varmen til 22° og start soloppgangsscenen»"
+  "scheduler_preset_action_config_wish.placeholder": "Prøv: «Sett varmen til 22° og start soloppgangsscenen»",
+  "scheduler_preset_action_command_video_record_start": "Start videoopptak",
+  "scheduler_preset_action_command_video_record_stop": "Stopp videoopptak"
 }

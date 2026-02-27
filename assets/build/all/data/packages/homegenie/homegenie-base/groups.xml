@@ -9,4 +9,29 @@
       </ModuleReference>
     </Modules>
   </Group>
+  <Group>
+    <Name>AI Vision Hub</Name>
+    <Modules>
+      <ModuleReference>
+        <Address>1</Address>
+        <Domain>Media.Video</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>2</Address>
+        <Domain>Media.Video</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>3</Address>
+        <Domain>Media.Video</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>4</Address>
+        <Domain>Media.Video</Domain>
+      </ModuleReference>
+      <ModuleReference>
+        <Address>5</Address>
+        <Domain>Media.Video</Domain>
+      </ModuleReference>
+    </Modules>
+  </Group>
 </ArrayOfGroup>

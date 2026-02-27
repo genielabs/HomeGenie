@@ -536,5 +536,15 @@
   "original_language": "Оригінальна мова",
   "origin_country": "Країна походження",
   "production_companies": "Виробнича компанія",
-  "movie_cast": "Актори"
+  "movie_cast": "Актори",
+  "live": "Живий",
+  "recordings": "Записи",
+  "no_recordings": "Немає записів.",
+  "live_feed": "Прямий ефір",
+  "fullscreen_exit": "Вийти з повноекранного режиму",
+  "play_media": "Відтворити медіа",
+  "start_recording": "Почати запис",
+  "stop_recording": "Зупинити запис",
+  "toggle_smart_recording": "Автоматичний запис за сигналом тривоги",
+  "search_metadata": "Пошук метаданих"
 }

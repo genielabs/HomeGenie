@@ -294,19 +294,22 @@
       "Description": "Braith réada ag baint úsáide as samhail YOLO réamh-oiliúna.",
       "ML.ObjectDetection": "Cumasaigh braiteadh réad",
       "ML.ObjectDetection.TriggerDetect": "Liosta rudaí (i mBéarla) a chuirfidh an t-aláram ar siúl, scartha le camóga. (m.sh.: cat, madra, duine, mála droma, mála taistil)",
-      "ConfigureOptions.Yolo.ModelPath": "Cosán chomhaid mhúnla YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Cosán chomhaid mhúnla YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Uasmhéid Iarratais in aghaidh an tSoicind (RPS)"
     },
     "911": {
       "Title": "Meastachán Staidiúir",
       "Description": "Brathphointe eochair trí mheastachán staidiúir, ag baint úsáide as samhlacha ONNX saincheaptha nó an tsamhail YOLO réamh-oiliúna réamhshocraithe (shonrach do staidiúir an duine).",
       "ML.PoseEstimation": "Cumasaigh meastachán staidiúir",
-      "ConfigureOptions.Yolo.ModelPath": "Cosán chomhaid mhúnla YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Cosán chomhaid mhúnla YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Uasmhéid Iarratais in aghaidh an tSoicind (RPS)"
     },
     "912": {
       "Title": "Deighilt Cásanna",
       "Description": "Braith rudaí agus a n-imlínte ag baint úsáide as samhail YOLO réamh-oiliúna.",
       "ML.InstanceSegmentation": "Cumasaigh deighilt samplaí",
-      "ConfigureOptions.Yolo.ModelPath": "Cosán chomhaid mhúnla YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Cosán chomhaid mhúnla YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Uasmhéid Iarratais in aghaidh an tSoicind (RPS)"
     },
     "930": {
       "Title": "Láimhseálaí Intinne Gemini",
@@ -376,9 +379,30 @@
       "Title": "Achoimre Laethúil ar Fhuinneamh",
       "Description": "Tomhaltas fuinnimh laethúil (Wh) de réir gléis.",
       "Widget.Statistics.DailyReport": "Cuir san áireamh sa tuarascáil Laethúil Wh"
+    },
+    "200": {
+      "Title": "Ionchur Físeáin",
+      "Description": "Gabhann sé sruthanna fuaime agus físe le haghaidh monatóireachta beo, próiseála fíor-ama, agus taifeadadh leanúnach.",
+      "VideoInput.Disable": "Díchumasaigh an t-ionchur seo",
+      "VideoInput.SourceURL": "URL foinse físe",
+      "VideoInput.ImageFeed": "Is comhad íomhá aonair nuashonraithe beo é URL.",
+      "VideoInput.Username": "Ainm úsáideora (roghnach)",
+      "VideoInput.Password": "Pasfhocal (roghnach)",
+      "Widget.Config.fps": "Uasmhéid frámaí in aghaidh an tsoicind",
+      "VideoOutput.Width": "Leithead srutha aschuir.",
+      "VideoOutput.SnapshotQuality": "Cáilíocht íomhá beo."
+    },
+    "250": {
+      "Title": "Taifeadán Físeáin",
+      "Description": "Taifeadann sé sruthanna fuaime agus físe ó aon fhoinse ionchuir. Is féidir taifeadtaí a bheith leanúnach, sceidealaithe, nó spreagtha ag imeachtaí aláraim.",
+      "NVR.EnableRecording": "Cumasaigh Taifeadadh Físe",
+      "NVR.RecordOnAlarm": "Taifead ar Aláram",
+      "NVR.ContinuousRecording": "Taifeadadh Leanúnach."
     }
   },
   "scheduler_preset_action_genie_command": "Ordú Genie",
   "scheduler_preset_action_config_wish": "Gníomh Teanga Nádúrtha",
-  "scheduler_preset_action_config_wish.placeholder": "Bain triail as: \"Socraigh an teas go 22° agus cuir tús leis an radharc Éirí Gréine\""
+  "scheduler_preset_action_config_wish.placeholder": "Bain triail as: \"Socraigh an teas go 22° agus cuir tús leis an radharc Éirí Gréine\"",
+  "scheduler_preset_action_command_video_record_start": "Tosaigh ag Taifeadadh Físeáin",
+  "scheduler_preset_action_command_video_record_stop": "Stop a Thaifeadadh Físeáin"
 }

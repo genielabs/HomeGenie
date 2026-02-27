@@ -294,19 +294,22 @@
       "Description": "使用預先訓練的 YOLO 模型偵測物體。",
       "ML.ObjectDetection": "啟用物體偵測",
       "ML.ObjectDetection.TriggerDetect": "以逗號分隔的將觸發警報的事物清單（英文）。 （例如：貓、狗、人、背包、手提箱）",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO模型檔案（.onnx）路徑"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO模型檔案（.onnx）路徑",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "每秒最大請求數 (RPS)"
     },
     "911": {
       "Title": "姿勢估計",
       "Description": "透過姿勢估計進行關鍵點檢測，使用自訂 ONNX 模型或預設預訓練的 YOLO 模型（針對人體姿勢）。",
       "ML.PoseEstimation": "啟用姿勢估計",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO模型檔案（.onnx）路徑"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO模型檔案（.onnx）路徑",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "每秒最大請求數 (RPS)"
     },
     "912": {
       "Title": "實例分割",
       "Description": "使用預先訓練的 YOLO 模型偵測物體及其輪廓。",
       "ML.InstanceSegmentation": "啟用實例分割",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO模型檔案（.onnx）路徑"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO模型檔案（.onnx）路徑",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "每秒最大請求數 (RPS)"
     },
     "930": {
       "Title": "雙子座意圖處理程序",
@@ -376,9 +379,30 @@
       "Title": "每日能量概要",
       "Description": "各設備每日能耗（瓦時）。",
       "Widget.Statistics.DailyReport": "納入每日WH報告"
+    },
+    "200": {
+      "Title": "視訊輸入",
+      "Description": "擷取音訊和視訊串流，用於即時監控、即時處理和連續錄製。",
+      "VideoInput.Disable": "停用此輸入",
+      "VideoInput.SourceURL": "視訊來源網址",
+      "VideoInput.ImageFeed": "URL 是一個即時更新的單一圖像檔案。",
+      "VideoInput.Username": "使用者名稱（可選）",
+      "VideoInput.Password": "密碼（可選）",
+      "Widget.Config.fps": "每秒最大影格數",
+      "VideoOutput.Width": "輸出流寬度。",
+      "VideoOutput.SnapshotQuality": "即時影像品質。"
+    },
+    "250": {
+      "Title": "錄影機",
+      "Description": "可錄製來自任何輸入來源的音訊和視訊串流。錄製可以是連續的、定時的，也可以由警報事件觸發。",
+      "NVR.EnableRecording": "啟用視訊錄製",
+      "NVR.RecordOnAlarm": "警報錄音",
+      "NVR.ContinuousRecording": "連續錄製。"
     }
   },
   "scheduler_preset_action_genie_command": "精靈指令",
   "scheduler_preset_action_config_wish": "自然語言行動",
-  "scheduler_preset_action_config_wish.placeholder": "試試：“將溫度設定為 22°，然後開始日出場景”"
+  "scheduler_preset_action_config_wish.placeholder": "試試：“將溫度設定為 22°，然後開始日出場景”",
+  "scheduler_preset_action_command_video_record_start": "開始錄製影片",
+  "scheduler_preset_action_command_video_record_stop": "停止錄製影片"
 }

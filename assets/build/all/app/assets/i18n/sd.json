@@ -536,5 +536,15 @@
   "original_language": "اصلي ٻولي",
   "origin_country": "اصلي ملڪ",
   "production_companies": "پيداوار ڪمپني",
-  "movie_cast": "اداڪار"
+  "movie_cast": "اداڪار",
+  "live": "جيو",
+  "recordings": "رڪارڊنگز",
+  "no_recordings": "ڪابه رڪارڊنگ ناهي.",
+  "live_feed": "لائيو فيڊ",
+  "fullscreen_exit": "پوري اسڪرين مان نڪرو",
+  "play_media": "ميڊيا هلايو",
+  "start_recording": "رڪارڊنگ شروع ڪريو",
+  "stop_recording": "رڪارڊنگ بند ڪريو",
+  "toggle_smart_recording": "الارم تي خودڪار رڪارڊ",
+  "search_metadata": "ميٽا ڊيٽا ڳوليو"
 }

@@ -536,5 +536,15 @@
   "original_language": "Orihinal na Wika",
   "origin_country": "Bansang Pinagmulan",
   "production_companies": "Kompanya ng Produksyon",
-  "movie_cast": "Mga aktor"
+  "movie_cast": "Mga aktor",
+  "live": "Mabuhay",
+  "recordings": "Mga Pag-record",
+  "no_recordings": "Walang mga recording.",
+  "live_feed": "Live na Feed",
+  "fullscreen_exit": "Lumabas sa Fullscreen",
+  "play_media": "Maglaro ng Media",
+  "start_recording": "Simulan ang Pagre-record",
+  "stop_recording": "Itigil ang Pagre-record",
+  "toggle_smart_recording": "Awtomatikong pag-record sa Alarm",
+  "search_metadata": "Metadata ng Paghahanap"
 }

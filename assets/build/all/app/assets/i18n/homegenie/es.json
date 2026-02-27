@@ -294,19 +294,22 @@
       "Description": "Detecta objetos utilizando un modelo YOLO previamente entrenado.",
       "ML.ObjectDetection": "Habilitar la detección de objetos",
       "ML.ObjectDetection.TriggerDetect": "Lista separada por comas de cosas (en inglés) que activarán la alarma. (ej: gato, perro, persona, mochila, maleta)",
-      "ConfigureOptions.Yolo.ModelPath": "Ruta del archivo del modelo YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ruta del archivo del modelo YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Máximo de solicitudes por segundo (RPS)"
     },
     "911": {
       "Title": "Estimación de pose",
       "Description": "Detección de puntos clave mediante estimación de pose, utilizando modelos ONNX personalizados o el modelo YOLO preentrenado predeterminado (específico de pose humana).",
       "ML.PoseEstimation": "Habilitar estimación de pose",
-      "ConfigureOptions.Yolo.ModelPath": "Ruta del archivo del modelo YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ruta del archivo del modelo YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Máximo de solicitudes por segundo (RPS)"
     },
     "912": {
       "Title": "Segmentación de instancias",
       "Description": "Detecta objetos y sus contornos utilizando un modelo YOLO previamente entrenado.",
       "ML.InstanceSegmentation": "Habilitar la segmentación de instancias",
-      "ConfigureOptions.Yolo.ModelPath": "Ruta del archivo del modelo YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ruta del archivo del modelo YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Máximo de solicitudes por segundo (RPS)"
     },
     "930": {
       "Title": "Controlador de intenciones de Géminis",
@@ -376,9 +379,30 @@
       "Title": "Resumen diario de energía",
       "Description": "Consumo diario de energía (Wh) por dispositivo.",
       "Widget.Statistics.DailyReport": "Incluir en el informe diario de Wh"
+    },
+    "200": {
+      "Title": "Entrada de vídeo",
+      "Description": "Captura transmisiones de audio y video para monitoreo en vivo, procesamiento en tiempo real y grabación continua.",
+      "VideoInput.Disable": "Deshabilitar esta entrada",
+      "VideoInput.SourceURL": "URL de la fuente del vídeo",
+      "VideoInput.ImageFeed": "URL es un archivo de imagen único actualizado en vivo.",
+      "VideoInput.Username": "Nombre de usuario (opcional)",
+      "VideoInput.Password": "Contraseña (opcional)",
+      "Widget.Config.fps": "Máximo de fotogramas por segundo",
+      "VideoOutput.Width": "Ancho del flujo de salida.",
+      "VideoOutput.SnapshotQuality": "Calidad de imagen en vivo."
+    },
+    "250": {
+      "Title": "Grabadora de video",
+      "Description": "Graba transmisiones de audio y video desde cualquier fuente de entrada. Las grabaciones pueden ser continuas, programadas o activadas por eventos de alarma.",
+      "NVR.EnableRecording": "Habilitar grabación de vídeo",
+      "NVR.RecordOnAlarm": "Grabar en alarma",
+      "NVR.ContinuousRecording": "Grabación continua."
     }
   },
   "scheduler_preset_action_genie_command": "Comando Genie",
   "scheduler_preset_action_config_wish": "Acción del lenguaje natural",
-  "scheduler_preset_action_config_wish.placeholder": "Prueba: \"Pon la calefacción a 22° y empieza la escena del Amanecer\""
+  "scheduler_preset_action_config_wish.placeholder": "Prueba: \"Pon la calefacción a 22° y empieza la escena del Amanecer\"",
+  "scheduler_preset_action_command_video_record_start": "Iniciar grabación de vídeo",
+  "scheduler_preset_action_command_video_record_stop": "Detener la grabación de vídeo"
 }

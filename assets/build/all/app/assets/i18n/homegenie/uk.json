@@ -294,19 +294,22 @@
       "Description": "Виявляти об'єкти за допомогою попередньо навченої моделі YOLO.",
       "ML.ObjectDetection": "Увімкнути виявлення об'єктів",
       "ML.ObjectDetection.TriggerDetect": "Список речей (англійською мовою), які увімкнуть сигнал тривоги, розділений комами. (наприклад: кіт, собака, людина, рюкзак, валіза)",
-      "ConfigureOptions.Yolo.ModelPath": "Шлях до файлу моделі YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Шлях до файлу моделі YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Максимальна кількість запитів за секунду (RPS)"
     },
     "911": {
       "Title": "Оцінка пози",
       "Description": "Виявлення ключових точок за допомогою оцінки пози, використовуючи користувацькі моделі ONNX або попередньо навчену модель YOLO за замовчуванням (специфічну для пози людини).",
       "ML.PoseEstimation": "Увімкнути оцінку пози",
-      "ConfigureOptions.Yolo.ModelPath": "Шлях до файлу моделі YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Шлях до файлу моделі YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Максимальна кількість запитів за секунду (RPS)"
     },
     "912": {
       "Title": "Сегментація екземплярів",
       "Description": "Виявляйте об'єкти та їх контури за допомогою попередньо навченої моделі YOLO.",
       "ML.InstanceSegmentation": "Увімкнути сегментацію екземплярів",
-      "ConfigureOptions.Yolo.ModelPath": "Шлях до файлу моделі YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Шлях до файлу моделі YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Максимальна кількість запитів за секунду (RPS)"
     },
     "930": {
       "Title": "Обробник намірів Gemini",
@@ -376,9 +379,30 @@
       "Title": "Щоденний огляд енергії",
       "Description": "Добове споживання енергії (Вт·год) пристроєм.",
       "Widget.Statistics.DailyReport": "Включити до щоденного звіту про Wh"
+    },
+    "200": {
+      "Title": "Відеовхід",
+      "Description": "Записує аудіо- та відеопотоки для моніторингу в реальному часі, обробки в режимі реального часу та безперервного запису.",
+      "VideoInput.Disable": "Вимкнути цей вхід",
+      "VideoInput.SourceURL": "URL-адреса джерела відео",
+      "VideoInput.ImageFeed": "URL-адреса — це файл одного зображення, що оновлюється в режимі реального часу.",
+      "VideoInput.Username": "Ім'я користувача (необов'язково)",
+      "VideoInput.Password": "Пароль (необов'язково)",
+      "Widget.Config.fps": "Макс. кадрів за секунду",
+      "VideoOutput.Width": "Ширина вихідного потоку.",
+      "VideoOutput.SnapshotQuality": "Якість зображення в реальному часі."
+    },
+    "250": {
+      "Title": "Відеореєстратор",
+      "Description": "Записує аудіо- та відеопотоки з будь-якого джерела вхідного сигналу. Записи можуть бути безперервними, запланованими або ініційованими подіями тривоги.",
+      "NVR.EnableRecording": "Увімкнути відеозапис",
+      "NVR.RecordOnAlarm": "Запис за сигналом тривоги",
+      "NVR.ContinuousRecording": "Безперервний запис."
     }
   },
   "scheduler_preset_action_genie_command": "Команда Джина",
   "scheduler_preset_action_config_wish": "Дія природної мови",
-  "scheduler_preset_action_config_wish.placeholder": "Спробуйте: «Встановіть температуру на 22° та запустіть сцену зі сходом сонця»."
+  "scheduler_preset_action_config_wish.placeholder": "Спробуйте: «Встановіть температуру на 22° та запустіть сцену зі сходом сонця».",
+  "scheduler_preset_action_command_video_record_start": "Почати запис відео",
+  "scheduler_preset_action_command_video_record_stop": "Зупинити запис відео"
 }

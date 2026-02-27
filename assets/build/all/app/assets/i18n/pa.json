@@ -536,5 +536,15 @@
   "original_language": "ਮੂਲ ਭਾਸ਼ਾ",
   "origin_country": "ਉਦਗਮ ਦੇਸ਼",
   "production_companies": "ਉਤਪਾਦਨ ਕੰਪਨੀ",
-  "movie_cast": "ਅਦਾਕਾਰ"
+  "movie_cast": "ਅਦਾਕਾਰ",
+  "live": "ਲਾਈਵ",
+  "recordings": "ਰਿਕਾਰਡਿੰਗਾਂ",
+  "no_recordings": "ਕੋਈ ਰਿਕਾਰਡਿੰਗ ਨਹੀਂ।",
+  "live_feed": "ਲਾਈਵ ਫੀਡ",
+  "fullscreen_exit": "ਪੂਰੀ ਸਕ੍ਰੀਨ ਤੋਂ ਬਾਹਰ ਜਾਓ",
+  "play_media": "ਮੀਡੀਆ ਚਲਾਓ",
+  "start_recording": "ਰਿਕਾਰਡਿੰਗ ਸ਼ੁਰੂ ਕਰੋ",
+  "stop_recording": "ਰਿਕਾਰਡਿੰਗ ਬੰਦ ਕਰੋ",
+  "toggle_smart_recording": "ਅਲਾਰਮ 'ਤੇ ਆਟੋ-ਰਿਕਾਰਡ ਕਰੋ",
+  "search_metadata": "ਮੈਟਾਡੇਟਾ ਖੋਜੋ"
 }

@@ -294,19 +294,22 @@
       "Description": "Detecteer objecten met behulp van een vooraf getraind YOLO-model.",
       "ML.ObjectDetection": "Objectdetectie inschakelen",
       "ML.ObjectDetection.TriggerDetect": "Door komma's gescheiden lijst met dingen (in het Engels) die het alarm kunnen activeren. (bijv.: kat, hond, persoon, rugzak, koffer)",
-      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO-modelbestand (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO-modelbestand (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maximaal aantal verzoeken per seconde (RPS)"
     },
     "911": {
       "Title": "Schatting van de houding",
       "Description": "Detectie van belangrijke punten via houdingschatting, met behulp van aangepaste ONNX-modellen of het standaard vooraf getrainde YOLO-model (specifiek voor de houding van de mens).",
       "ML.PoseEstimation": "Positie-schatting inschakelen",
-      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO-modelbestand (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO-modelbestand (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maximaal aantal verzoeken per seconde (RPS)"
     },
     "912": {
       "Title": "Instantiesegmentatie",
       "Description": "Detecteer objecten en hun contouren met behulp van een vooraf getraind YOLO-model.",
       "ML.InstanceSegmentation": "Instantiesegmentatie inschakelen",
-      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO-modelbestand (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Pad van YOLO-modelbestand (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maximaal aantal verzoeken per seconde (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Dagelijkse energie-overzicht",
       "Description": "Dagelijks energieverbruik (Wh) per apparaat.",
       "Widget.Statistics.DailyReport": "Opnemen in het dagelijkse Wh-rapport"
+    },
+    "200": {
+      "Title": "Video-ingang",
+      "Description": "Legt audio- en videostreams vast voor live monitoring, realtime verwerking en continue opname.",
+      "VideoInput.Disable": "Schakel deze invoer uit",
+      "VideoInput.SourceURL": "URL van de videobron",
+      "VideoInput.ImageFeed": "De URL is een live bijgewerkt afbeeldingsbestand.",
+      "VideoInput.Username": "Gebruikersnaam (optioneel)",
+      "VideoInput.Password": "Wachtwoord (optioneel)",
+      "Widget.Config.fps": "Maximale frames per seconde",
+      "VideoOutput.Width": "Breedte van de uitvoerstroom.",
+      "VideoOutput.SnapshotQuality": "Live beeldkwaliteit."
+    },
+    "250": {
+      "Title": "Videorecorder",
+      "Description": "Neemt audio- en videostreams op vanuit elke ingangsbron. Opnames kunnen continu, volgens een schema of geactiveerd door alarmgebeurtenissen plaatsvinden.",
+      "NVR.EnableRecording": "Video-opname inschakelen",
+      "NVR.RecordOnAlarm": "Opname bij alarm",
+      "NVR.ContinuousRecording": "Continue opname."
     }
   },
   "scheduler_preset_action_genie_command": "Genie Command",
   "scheduler_preset_action_config_wish": "Natuurlijke taalactie",
-  "scheduler_preset_action_config_wish.placeholder": "Probeer: \"Stel de temperatuur in op 22° en start de zonsopgangscène\""
+  "scheduler_preset_action_config_wish.placeholder": "Probeer: \"Stel de temperatuur in op 22° en start de zonsopgangscène\"",
+  "scheduler_preset_action_command_video_record_start": "Start met het opnemen van video",
+  "scheduler_preset_action_command_video_record_stop": "Stop met het opnemen van de video."
 }

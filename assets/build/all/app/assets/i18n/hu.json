@@ -536,5 +536,15 @@
   "original_language": "Eredeti nyelv",
   "origin_country": "Származási ország",
   "production_companies": "Produkciós cég",
-  "movie_cast": "Színészek"
+  "movie_cast": "Színészek",
+  "live": "Élő",
+  "recordings": "Felvételek",
+  "no_recordings": "Nincsenek felvételek.",
+  "live_feed": "Élő közvetítés",
+  "fullscreen_exit": "Kilépés a teljes képernyős módból",
+  "play_media": "Média lejátszása",
+  "start_recording": "Felvétel indítása",
+  "stop_recording": "Felvétel leállítása",
+  "toggle_smart_recording": "Automatikus felvétel riasztáskor",
+  "search_metadata": "Metaadatok keresése"
 }

@@ -1,0 +1,3 @@
+{
+  "ffmpeg_required": "Modulio `{{module_name}}` veikimui reikalinga **FFmpeg** programa. Įdiekite ją iš oficialios svetainės: - [https://ffmpeg.org](https://ffmpeg.org). Jei jums šios funkcijos nereikia, galite ją išjungti skyriuje **Automatizavimo programos** arba spustelėdami žemiau esantį mygtuką."
+}

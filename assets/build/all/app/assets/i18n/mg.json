@@ -536,5 +536,15 @@
   "original_language": "Fiteny tany am-boalohany",
   "origin_country": "Firenena nihaviana",
   "production_companies": "Orinasa mpamokatra",
-  "movie_cast": "mpilalao"
+  "movie_cast": "mpilalao",
+  "live": "velona",
+  "recordings": "noraisim-peo",
+  "no_recordings": "Tsy misy fandraisam-peo.",
+  "live_feed": "Fampahalalana Mivantana",
+  "fullscreen_exit": "Mivoaha amin'ny efijery feno",
+  "play_media": "Milalao Media",
+  "start_recording": "Atombohy ny fandraketana",
+  "stop_recording": "Atsaharo ny fandraketana",
+  "toggle_smart_recording": "Fandraketana mandeha ho azy amin'ny fanairana",
+  "search_metadata": "Fikarohana Metadata"
 }

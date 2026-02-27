@@ -294,19 +294,22 @@
       "Description": "පෙර පුහුණු කළ YOLO ආකෘතියක් භාවිතයෙන් වස්තූන් හඳුනා ගන්න.",
       "ML.ObjectDetection": "වස්තු අනාවරණය සබල කරන්න",
       "ML.ObjectDetection.TriggerDetect": "අනතුරු ඇඟවීම අවුලුවන දේවල් (ඉංග්‍රීසියෙන්) කොමාවෙන් වෙන් කරන ලද ලැයිස්තුව. (උදා: පූසා, බල්ලා, පුද්ගලයා, බෑගය, ගමන් මල්ල)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO ආකෘති ගොනුවේ මාර්ගය (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO ආකෘති ගොනුවේ මාර්ගය (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "තත්පරයට උපරිම ඉල්ලීම් (RPS)"
     },
     "911": {
       "Title": "ඉරියව් ඇස්තමේන්තුව",
       "Description": "අභිරුචි ONNX ආකෘති හෝ පෙරනිමි පෙර-පුහුණු YOLO ආකෘතිය (මානව ඉරියව්-විශේෂිත) භාවිතයෙන් ඉරියව් ඇස්තමේන්තුව හරහා යතුරු ලක්ෂ්‍ය හඳුනාගැනීම.",
       "ML.PoseEstimation": "ඉරියව් ඇස්තමේන්තුව සබල කරන්න",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO ආකෘති ගොනුවේ මාර්ගය (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO ආකෘති ගොනුවේ මාර්ගය (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "තත්පරයට උපරිම ඉල්ලීම් (RPS)"
     },
     "912": {
       "Title": "අවස්ථා ඛණ්ඩනය",
       "Description": "පෙර පුහුණු කළ YOLO ආකෘතියක් භාවිතයෙන් වස්තූන් සහ ඒවායේ දළ සටහන් හඳුනා ගන්න.",
       "ML.InstanceSegmentation": "නිදර්ශන ඛණ්ඩනය සක්‍රීය කරන්න",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO ආකෘති ගොනුවේ (.onnx) මාර්ගය"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO ආකෘති ගොනුවේ (.onnx) මාර්ගය",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "තත්පරයට උපරිම ඉල්ලීම් (RPS)"
     },
     "930": {
       "Title": "මිථුන අභිප්‍රායන් හසුරුවන්නා",
@@ -376,9 +379,30 @@
       "Title": "දෛනික බලශක්ති සාරාංශය",
       "Description": "උපාංගය අනුව දෛනික බලශක්ති පරිභෝජනය (Wh).",
       "Widget.Statistics.DailyReport": "දිනපතා Wh වාර්තාවට ඇතුළත් කරන්න"
+    },
+    "200": {
+      "Title": "වීඩියෝ ආදානය",
+      "Description": "සජීවී නිරීක්ෂණය, තත්‍ය කාලීන සැකසුම් සහ අඛණ්ඩ පටිගත කිරීම සඳහා ශ්‍රව්‍ය සහ දෘශ්‍ය ප්‍රවාහ ග්‍රහණය කරයි.",
+      "VideoInput.Disable": "මෙම ආදානය අක්‍රීය කරන්න",
+      "VideoInput.SourceURL": "වීඩියෝ මූලාශ්‍ර URL එක",
+      "VideoInput.ImageFeed": "URL යනු සජීවීව යාවත්කාලීන කරන ලද තනි රූප ගොනුවකි.",
+      "VideoInput.Username": "පරිශීලක නාමය (විකල්ප)",
+      "VideoInput.Password": "මුරපදය (විකල්ප)",
+      "Widget.Config.fps": "තත්පරයට උපරිම රාමු",
+      "VideoOutput.Width": "ප්‍රතිදාන ප්‍රවාහ පළල.",
+      "VideoOutput.SnapshotQuality": "සජීවී රූපයේ ගුණාත්මකභාවය."
+    },
+    "250": {
+      "Title": "වීඩියෝ පටිගත කරන්නා",
+      "Description": "ඕනෑම ආදාන මූලාශ්‍රයකින් ශ්‍රව්‍ය සහ දෘශ්‍ය ප්‍රවාහ පටිගත කරයි. පටිගත කිරීම් අඛණ්ඩව, කාලසටහන්ගත කළ හැකි හෝ අනතුරු ඇඟවීමේ සිදුවීම් මගින් අවුලුවනු ලැබේ.",
+      "NVR.EnableRecording": "වීඩියෝ පටිගත කිරීම සබල කරන්න",
+      "NVR.RecordOnAlarm": "අනතුරු ඇඟවීමේ පටිගත කරන්න",
+      "NVR.ContinuousRecording": "අඛණ්ඩ පටිගත කිරීම."
     }
   },
   "scheduler_preset_action_genie_command": "ජෙනී විධානය",
   "scheduler_preset_action_config_wish": "ස්වභාවික භාෂා ක්‍රියාව",
-  "scheduler_preset_action_config_wish.placeholder": "උත්සාහ කරන්න: \"තාපය 22° ට සකසා හිරු උදාව දර්ශනය ආරම්භ කරන්න\""
+  "scheduler_preset_action_config_wish.placeholder": "උත්සාහ කරන්න: \"තාපය 22° ට සකසා හිරු උදාව දර්ශනය ආරම්භ කරන්න\"",
+  "scheduler_preset_action_command_video_record_start": "වීඩියෝ පටිගත කිරීම ආරම්භ කරන්න",
+  "scheduler_preset_action_command_video_record_stop": "වීඩියෝ පටිගත කිරීම නවත්වන්න"
 }

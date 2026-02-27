@@ -536,5 +536,15 @@
   "original_language": "原文",
   "origin_country": "原产地",
   "production_companies": "生产公司",
-  "movie_cast": "演员"
+  "movie_cast": "演员",
+  "live": "居住",
+  "recordings": "录音",
+  "no_recordings": "没有录音。",
+  "live_feed": "实时画面",
+  "fullscreen_exit": "退出全屏模式",
+  "play_media": "播放媒体",
+  "start_recording": "开始录制",
+  "stop_recording": "停止录制",
+  "toggle_smart_recording": "报警时自动录制",
+  "search_metadata": "搜索元数据"
 }

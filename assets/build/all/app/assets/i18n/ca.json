@@ -536,5 +536,15 @@
   "original_language": "Idioma original",
   "origin_country": "País d'origen",
   "production_companies": "productora",
-  "movie_cast": "Actors"
+  "movie_cast": "Actors",
+  "live": "En directe",
+  "recordings": "Enregistraments",
+  "no_recordings": "Sense enregistraments.",
+  "live_feed": "Transmissió en directe",
+  "fullscreen_exit": "Surt de la pantalla completa",
+  "play_media": "Reprodueix contingut multimèdia",
+  "start_recording": "Comença a gravar",
+  "stop_recording": "Atura l'enregistrament",
+  "toggle_smart_recording": "Gravació automàtica en alarma",
+  "search_metadata": "Cerca de metadades"
 }

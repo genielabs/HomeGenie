@@ -294,19 +294,22 @@
       "Description": "Greina hluti með því að nota fyrirfram þjálfaða YOLO líkan.",
       "ML.ObjectDetection": "Virkja greiningu hluta",
       "ML.ObjectDetection.TriggerDetect": "Listi yfir hluti (á ensku) sem munu virkja viðvörunina, aðskilinn með kommu. (t.d.: köttur, hundur, manneskja, bakpoki, ferðataska)",
-      "ConfigureOptions.Yolo.ModelPath": "Slóð YOLO líkanskrár (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Slóð YOLO líkanskrár (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Hámarksbeiðnir á sekúndu (RPS)"
     },
     "911": {
       "Title": "Mat á stellingu",
       "Description": "Lykilpunktagreining með stellingarmati, með því að nota sérsniðnar ONNX líkön eða sjálfgefna forþjálfaða YOLO líkanið (sértækt fyrir stellingu manna).",
       "ML.PoseEstimation": "Virkja stöðuáætlun",
-      "ConfigureOptions.Yolo.ModelPath": "Slóð YOLO líkanskrár (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Slóð YOLO líkanskrár (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Hámarksbeiðnir á sekúndu (RPS)"
     },
     "912": {
       "Title": "Tilviksskipting",
       "Description": "Greina hluti og útlínur þeirra með því að nota fyrirfram þjálfaða YOLO líkan.",
       "ML.InstanceSegmentation": "Virkja tilvikaskiptingu",
-      "ConfigureOptions.Yolo.ModelPath": "Slóð YOLO líkanskrár (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Slóð YOLO líkanskrár (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Hámarksbeiðnir á sekúndu (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Daglegt orkuyfirlit",
       "Description": "Dagleg orkunotkun (Wh) eftir tæki.",
       "Widget.Statistics.DailyReport": "Hafa með í daglegri Wh skýrslu"
+    },
+    "200": {
+      "Title": "Myndbandsinntak",
+      "Description": "Tekur upp hljóð- og myndstrauma fyrir beina eftirlit, rauntímavinnslu og samfellda upptöku.",
+      "VideoInput.Disable": "Slökkva á þessum inntaki",
+      "VideoInput.SourceURL": "Vefslóð myndbandsuppruna",
+      "VideoInput.ImageFeed": "URL er skrá með einni mynd sem er uppfærð í beinni.",
+      "VideoInput.Username": "Notandanafn (valfrjálst)",
+      "VideoInput.Password": "Lykilorð (valfrjálst)",
+      "Widget.Config.fps": "Hámarks rammar á sekúndu",
+      "VideoOutput.Width": "Breidd úttaksstraums.",
+      "VideoOutput.SnapshotQuality": "Myndgæði í beinni."
+    },
+    "250": {
+      "Title": "Myndbandsupptökutæki",
+      "Description": "Tekur upp hljóð- og myndstrauma frá hvaða inntaksuppsprettu sem er. Upptökur geta verið samfelldar, áætlaðar eða ræstar af viðvörunaratburðum.",
+      "NVR.EnableRecording": "Virkja myndbandsupptöku",
+      "NVR.RecordOnAlarm": "Upptaka við viðvörun",
+      "NVR.ContinuousRecording": "Stöðug upptaka."
     }
   },
   "scheduler_preset_action_genie_command": "Skipun Genie",
   "scheduler_preset_action_config_wish": "Náttúruleg tungumálaaðgerð",
-  "scheduler_preset_action_config_wish.placeholder": "Prófaðu: „Stilltu hitann á 22° og byrjaðu sólarupprásarsenuna“"
+  "scheduler_preset_action_config_wish.placeholder": "Prófaðu: „Stilltu hitann á 22° og byrjaðu sólarupprásarsenuna“",
+  "scheduler_preset_action_command_video_record_start": "Byrja að taka upp myndband",
+  "scheduler_preset_action_command_video_record_stop": "Hætta upptöku myndbands"
 }

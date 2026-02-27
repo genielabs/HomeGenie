@@ -294,19 +294,22 @@
       "Description": "Detectează obiecte folosind un model YOLO pre-antrenat.",
       "ML.ObjectDetection": "Activează detectarea obiectelor",
       "ML.ObjectDetection.TriggerDetect": "Listă de lucruri separate prin virgulă (în engleză) care vor declanșa alarma. (de exemplu: pisică, câine, persoană, rucsac, valiză)",
-      "ConfigureOptions.Yolo.ModelPath": "Calea fișierului model YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Calea fișierului model YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Număr maxim de solicitări pe secundă (RPS)"
     },
     "911": {
       "Title": "Estimarea poziției",
       "Description": "Detectarea punctelor cheie prin estimarea poziției, utilizând modele ONNX personalizate sau modelul implicit YOLO pre-antrenat (specific poziției umane).",
       "ML.PoseEstimation": "Activează estimarea poziției",
-      "ConfigureOptions.Yolo.ModelPath": "Calea fișierului model YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Calea fișierului model YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Număr maxim de solicitări pe secundă (RPS)"
     },
     "912": {
       "Title": "Segmentarea instanței",
       "Description": "Detectează obiecte și contururile acestora folosind un model YOLO pre-antrenat.",
       "ML.InstanceSegmentation": "Activează segmentarea instanței",
-      "ConfigureOptions.Yolo.ModelPath": "Calea fișierului model YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Calea fișierului model YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Număr maxim de solicitări pe secundă (RPS)"
     },
     "930": {
       "Title": "Gemeni Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Rezumatul zilnic al energiei",
       "Description": "Consumul zilnic de energie (Wh) în funcție de dispozitiv.",
       "Widget.Statistics.DailyReport": "Includeți în raportul Daily Wh"
+    },
+    "200": {
+      "Title": "Intrare video",
+      "Description": "Capturează fluxuri audio și video pentru monitorizare live, procesare în timp real și înregistrare continuă.",
+      "VideoInput.Disable": "Dezactivați această intrare",
+      "VideoInput.SourceURL": "URL-ul sursei video",
+      "VideoInput.ImageFeed": "URL-ul este un fișier de imagine unic actualizat în timp real.",
+      "VideoInput.Username": "Nume de utilizator (opțional)",
+      "VideoInput.Password": "Parolă (opțională)",
+      "Widget.Config.fps": "Număr maxim de cadre pe secundă",
+      "VideoOutput.Width": "Lățimea fluxului de ieșire.",
+      "VideoOutput.SnapshotQuality": "Calitatea imaginii live."
+    },
+    "250": {
+      "Title": "Înregistrator video",
+      "Description": "Înregistrează fluxuri audio și video de la orice sursă de intrare. Înregistrările pot fi continue, programate sau declanșate de evenimente de alarmă.",
+      "NVR.EnableRecording": "Activează înregistrarea video",
+      "NVR.RecordOnAlarm": "Înregistrare la alarmă",
+      "NVR.ContinuousRecording": "Înregistrare continuă."
     }
   },
   "scheduler_preset_action_genie_command": "Comandamentul Geniilor",
   "scheduler_preset_action_config_wish": "Acțiune în limbaj natural",
-  "scheduler_preset_action_config_wish.placeholder": "Încearcă: „Setează temperatura la 22° și pornește scena Răsărit de soare”"
+  "scheduler_preset_action_config_wish.placeholder": "Încearcă: „Setează temperatura la 22° și pornește scena Răsărit de soare”",
+  "scheduler_preset_action_command_video_record_start": "Începeți înregistrarea videoclipului",
+  "scheduler_preset_action_command_video_record_stop": "Opriți înregistrarea video"
 }

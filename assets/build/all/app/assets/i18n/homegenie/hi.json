@@ -294,19 +294,22 @@
       "Description": "पूर्व-प्रशिक्षित YOLO मॉडल का उपयोग करके वस्तुओं का पता लगाएं।",
       "ML.ObjectDetection": "ऑब्जेक्ट पहचान सक्षम करें",
       "ML.ObjectDetection.TriggerDetect": "अल्पविराम से अलग की गई चीजों की सूची (अंग्रेजी में) जो अलार्म को ट्रिगर करेंगी। (उदाहरण: बिल्ली, कुत्ता, व्यक्ति, बैग, सूटकेस)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO मॉडल फ़ाइल का पथ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO मॉडल फ़ाइल का पथ (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "प्रति सेकंड अधिकतम अनुरोध (RPS)"
     },
     "911": {
       "Title": "मुद्रा अनुमान",
       "Description": "कस्टम ONNX मॉडल या डिफ़ॉल्ट पूर्व-प्रशिक्षित YOLO मॉडल (मानव मुद्रा-विशिष्ट) का उपयोग करके मुद्रा अनुमान के माध्यम से मुख्य बिंदु का पता लगाना।",
       "ML.PoseEstimation": "पोज़ अनुमान सक्षम करें",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO मॉडल फ़ाइल का पथ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO मॉडल फ़ाइल का पथ (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "प्रति सेकंड अधिकतम अनुरोध (RPS)"
     },
     "912": {
       "Title": "उदाहरण विभाजन",
       "Description": "पूर्व-प्रशिक्षित YOLO मॉडल का उपयोग करके वस्तुओं और उनकी रूपरेखा का पता लगाएं।",
       "ML.InstanceSegmentation": "इंस्टेंस सेगमेंटेशन सक्षम करें",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO मॉडल फ़ाइल का पथ (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO मॉडल फ़ाइल का पथ (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "प्रति सेकंड अधिकतम अनुरोध (RPS)"
     },
     "930": {
       "Title": "जेमिनी इंटेंट हैंडलर",
@@ -376,9 +379,30 @@
       "Title": "दैनिक ऊर्जा सारांश",
       "Description": "प्रति उपकरण दैनिक ऊर्जा खपत (Wh)।",
       "Widget.Statistics.DailyReport": "दैनिक Wh रिपोर्ट में शामिल करें"
+    },
+    "200": {
+      "Title": "वीडियो इनपुट",
+      "Description": "यह लाइव मॉनिटरिंग, रीयल-टाइम प्रोसेसिंग और निरंतर रिकॉर्डिंग के लिए ऑडियो और वीडियो स्ट्रीम कैप्चर करता है।",
+      "VideoInput.Disable": "इस इनपुट को अक्षम करें",
+      "VideoInput.SourceURL": "वीडियो स्रोत यूआरएल",
+      "VideoInput.ImageFeed": "URL एक लाइव-अपडेट होने वाली एकल छवि फ़ाइल है।",
+      "VideoInput.Username": "उपयोगकर्ता नाम (वैकल्पिक)",
+      "VideoInput.Password": "पासवर्ड (वैकल्पिक)",
+      "Widget.Config.fps": "अधिकतम फ्रेम प्रति सेकंड",
+      "VideoOutput.Width": "आउटपुट स्ट्रीम की चौड़ाई।",
+      "VideoOutput.SnapshotQuality": "लाइव इमेज की गुणवत्ता।"
+    },
+    "250": {
+      "Title": "वीडियो रिकॉर्डर",
+      "Description": "यह किसी भी इनपुट स्रोत से ऑडियो और वीडियो स्ट्रीम रिकॉर्ड करता है। रिकॉर्डिंग निरंतर, निर्धारित समय पर या अलार्म बजने पर ट्रिगर हो सकती है।",
+      "NVR.EnableRecording": "वीडियो रिकॉर्डिंग चालू करें",
+      "NVR.RecordOnAlarm": "अलार्म पर रिकॉर्ड करें",
+      "NVR.ContinuousRecording": "निरंतर रिकॉर्डिंग।"
     }
   },
   "scheduler_preset_action_genie_command": "जिनी कमांड",
   "scheduler_preset_action_config_wish": "प्राकृतिक भाषा क्रिया",
-  "scheduler_preset_action_config_wish.placeholder": "यह आजमाएं: \"तापमान को 22° पर सेट करें और सूर्योदय का दृश्य शुरू करें\""
+  "scheduler_preset_action_config_wish.placeholder": "यह आजमाएं: \"तापमान को 22° पर सेट करें और सूर्योदय का दृश्य शुरू करें\"",
+  "scheduler_preset_action_command_video_record_start": "वीडियो रिकॉर्डिंग शुरू करें",
+  "scheduler_preset_action_command_video_record_stop": "वीडियो रिकॉर्डिंग बंद करें"
 }

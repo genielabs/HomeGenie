@@ -536,5 +536,15 @@
   "original_language": "اللغة الأصلية",
   "origin_country": "بلد المنشأ",
   "production_companies": "شركة إنتاج",
-  "movie_cast": "ممثلون"
+  "movie_cast": "ممثلون",
+  "live": "يعيش",
+  "recordings": "التسجيلات",
+  "no_recordings": "ممنوع التسجيل.",
+  "live_feed": "بث مباشر",
+  "fullscreen_exit": "الخروج من وضع ملء الشاشة",
+  "play_media": "بلاي ميديا",
+  "start_recording": "ابدأ التسجيل",
+  "stop_recording": "أوقف التسجيل",
+  "toggle_smart_recording": "التسجيل التلقائي عند التنبيه",
+  "search_metadata": "البحث في البيانات الوصفية"
 }

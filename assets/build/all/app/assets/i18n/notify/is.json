@@ -1,0 +1,3 @@
+{
+  "ffmpeg_required": "`{{module_name}}` einingin krefst **FFmpeg** til að virka. Vinsamlegast settu hana upp af opinberu vefsíðunni: - [https://ffmpeg.org](https://ffmpeg.org) Ef þú þarft ekki á þessum eiginleika að halda geturðu gert hana óvirka í hlutanum **Sjálfvirkniforrit** eða með því að smella á hnappinn hér að neðan."
+}

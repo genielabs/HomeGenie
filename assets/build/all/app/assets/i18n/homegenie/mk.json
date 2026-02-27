@@ -294,19 +294,22 @@
       "Description": "Детектирајте објекти користејќи претходно обучен модел YOLO.",
       "ML.ObjectDetection": "Овозможи откривање објекти",
       "ML.ObjectDetection.TriggerDetect": "Список на работи одделени со запирки (на англиски) што ќе го активираат алармот. (на пр.: мачка, куче, лице, ранец, куфер)",
-      "ConfigureOptions.Yolo.ModelPath": "Патека на датотеката со модел YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Патека на датотеката со модел YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Максимален број на барања во секунда (RPS)"
     },
     "911": {
       "Title": "Проценка на позата",
       "Description": "Детекција на клучни точки преку проценка на позата, користејќи прилагодени ONNX модели или стандардниот претходно обучен модел YOLO (специфичен за човечката поза).",
       "ML.PoseEstimation": "Овозможи проценка на позата",
-      "ConfigureOptions.Yolo.ModelPath": "Патека на датотеката со модел YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Патека на датотеката со модел YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Максимален број на барања во секунда (RPS)"
     },
     "912": {
       "Title": "Сегментација на инстанца",
       "Description": "Детектирајте објекти и нивните контури користејќи претходно обучен модел YOLO.",
       "ML.InstanceSegmentation": "Овозможи сегментација на инстанца",
-      "ConfigureOptions.Yolo.ModelPath": "Патека на датотеката со модел YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Патека на датотеката со модел YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Максимален број на барања во секунда (RPS)"
     },
     "930": {
       "Title": "Ракувач на намери на Gemini",
@@ -376,9 +379,30 @@
       "Title": "Дневен преглед на енергија",
       "Description": "Дневна потрошувачка на енергија (Wh) по уред.",
       "Widget.Statistics.DailyReport": "Вклучи во дневниот извештај за тежина"
+    },
+    "200": {
+      "Title": "Видео влез",
+      "Description": "Снима аудио и видео потоци за следење во живо, обработка во реално време и континуирано снимање.",
+      "VideoInput.Disable": "Оневозможи го овој внес",
+      "VideoInput.SourceURL": "URL-адреса на изворот на видеото",
+      "VideoInput.ImageFeed": "URL е датотека со единечна слика што се ажурира во живо.",
+      "VideoInput.Username": "Корисничко име (опционално)",
+      "VideoInput.Password": "Лозинка (опционално)",
+      "Widget.Config.fps": "Максимален број на слики во секунда",
+      "VideoOutput.Width": "Ширина на излезниот поток.",
+      "VideoOutput.SnapshotQuality": "Квалитет на слика во живо."
+    },
+    "250": {
+      "Title": "Видео рекордер",
+      "Description": "Снима аудио и видео потоци од кој било влезен извор. Снимањата можат да бидат континуирани, закажани или активирани од алармни настани.",
+      "NVR.EnableRecording": "Овозможи снимање видео",
+      "NVR.RecordOnAlarm": "Снимај на аларм",
+      "NVR.ContinuousRecording": "Континуирано снимање."
     }
   },
   "scheduler_preset_action_genie_command": "Џини Команда",
   "scheduler_preset_action_config_wish": "Акција за природен јазик",
-  "scheduler_preset_action_config_wish.placeholder": "Обидете се: „Поставете ја топлината на 22° и започнете ја сцената со изгрејсонце“"
+  "scheduler_preset_action_config_wish.placeholder": "Обидете се: „Поставете ја топлината на 22° и започнете ја сцената со изгрејсонце“",
+  "scheduler_preset_action_command_video_record_start": "Започни со снимање видео",
+  "scheduler_preset_action_command_video_record_stop": "Престани со снимање видео"
 }

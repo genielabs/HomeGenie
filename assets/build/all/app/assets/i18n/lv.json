@@ -536,5 +536,15 @@
   "original_language": "Oriģinālvaloda",
   "origin_country": "Izcelsmes valsts",
   "production_companies": "Ražošanas uzņēmums",
-  "movie_cast": "Aktieri"
+  "movie_cast": "Aktieri",
+  "live": "Tiešraide",
+  "recordings": "Ieraksti",
+  "no_recordings": "Nav ierakstu.",
+  "live_feed": "Tiešraides plūsma",
+  "fullscreen_exit": "Iziet no pilnekrāna režīma",
+  "play_media": "Atskaņot multividi",
+  "start_recording": "Sākt ierakstīšanu",
+  "stop_recording": "Apturēt ierakstīšanu",
+  "toggle_smart_recording": "Automātiska ierakstīšana trauksmes gadījumā",
+  "search_metadata": "Meklēšanas metadati"
 }

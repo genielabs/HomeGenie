@@ -535,5 +535,15 @@
   "original_language": "Lingua originale",
   "origin_country": "Paese di origine",
   "production_companies": "Casa di produzione",
-  "movie_cast": "Attori"
+  "movie_cast": "Attori",
+  "live": "Diretta",
+  "recordings": "Registrazioni",
+  "no_recordings": "Nessuna registrazione.",
+  "live_feed": "Diretta",
+  "fullscreen_exit": "Esci da schermo intero",
+  "play_media": "Riproduci",
+  "start_recording": "Avvia registrazione",
+  "stop_recording": "Interrompi registrazione",
+  "toggle_smart_recording": "Registrazione automatica su allarme",
+  "search_metadata": "Ricerca Metadati"
 }

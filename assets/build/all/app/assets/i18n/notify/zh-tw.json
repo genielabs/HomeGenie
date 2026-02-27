@@ -1,0 +1,3 @@
+{
+  "ffmpeg_required": "`{{module_name}}` 模組需要 **FFmpeg** 才能運作。請從官方網站 [https://ffmpeg.org](https://ffmpeg.org) 安裝。如果您不需要此功能，可以在「自動化程式」部分停用此模組，或點擊下方按鈕。"
+}

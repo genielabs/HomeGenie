@@ -536,5 +536,15 @@
   "original_language": "Język oryginalny",
   "origin_country": "Kraj pochodzenia",
   "production_companies": "Firma produkcyjna",
-  "movie_cast": "Aktorzy"
+  "movie_cast": "Aktorzy",
+  "live": "Na żywo",
+  "recordings": "Nagrania",
+  "no_recordings": "Brak nagrań.",
+  "live_feed": "Transmisja na żywo",
+  "fullscreen_exit": "Wyjdź z trybu pełnoekranowego",
+  "play_media": "Odtwórz multimedia",
+  "start_recording": "Rozpocznij nagrywanie",
+  "stop_recording": "Zatrzymaj nagrywanie",
+  "toggle_smart_recording": "Automatyczne nagrywanie w przypadku alarmu",
+  "search_metadata": "Wyszukaj metadane"
 }

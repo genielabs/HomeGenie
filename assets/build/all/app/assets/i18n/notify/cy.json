@@ -1,0 +1,3 @@
+{
+  "ffmpeg_required": "Mae angen **FFmpeg** ar y modiwl `{{module_name}}` i weithredu. Gosodwch ef o'r wefan swyddogol: - [https://ffmpeg.org](https://ffmpeg.org) Os nad oes angen y nodwedd hon arnoch, gallwch analluogi'r modiwl hwn yn yr adran **Rhaglenni Awtomeiddio**, neu drwy glicio'r botwm isod."
+}

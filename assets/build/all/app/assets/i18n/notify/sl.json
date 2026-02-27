@@ -1,0 +1,3 @@
+{
+  "ffmpeg_required": "Modul `{{module_name}}` za delovanje zahteva **FFmpeg**. Namestite ga z uradne spletne strani: - [https://ffmpeg.org](https://ffmpeg.org) Če te funkcije ne potrebujete, jo lahko onemogočite v razdelku **Programi za avtomatizacijo** ali s klikom na spodnji gumb."
+}

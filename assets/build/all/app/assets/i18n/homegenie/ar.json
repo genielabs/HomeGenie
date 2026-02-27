@@ -294,19 +294,22 @@
       "Description": "اكتشاف الكائنات باستخدام نموذج YOLO المدرب مسبقًا.",
       "ML.ObjectDetection": "تمكين اكتشاف الكائنات",
       "ML.ObjectDetection.TriggerDetect": "قائمة مفصولة بفواصل للأشياء (باللغة الإنجليزية) التي ستؤدي إلى تشغيل الإنذار. (على سبيل المثال: قطة، كلب، شخص، حقيبة ظهر، حقيبة سفر)",
-      "ConfigureOptions.Yolo.ModelPath": "مسار ملف نموذج YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "مسار ملف نموذج YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "الحد الأقصى للطلبات في الثانية (RPS)"
     },
     "911": {
       "Title": "تقدير الوضع",
       "Description": "اكتشاف النقاط الرئيسية من خلال تقدير الوضع، باستخدام نماذج ONNX المخصصة أو نموذج YOLO المدرب مسبقًا الافتراضي (محدد للوضع البشري).",
       "ML.PoseEstimation": "تمكين تقدير الوضع",
-      "ConfigureOptions.Yolo.ModelPath": "مسار ملف نموذج YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "مسار ملف نموذج YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "الحد الأقصى للطلبات في الثانية (RPS)"
     },
     "912": {
       "Title": "تجزئة المثيلات",
       "Description": "اكتشاف الكائنات ومخططاتها باستخدام نموذج YOLO المدرب مسبقًا.",
       "ML.InstanceSegmentation": "تمكين تقسيم المثيلات",
-      "ConfigureOptions.Yolo.ModelPath": "مسار ملف نموذج YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "مسار ملف نموذج YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "الحد الأقصى للطلبات في الثانية (RPS)"
     },
     "930": {
       "Title": "معالج نوايا الجوزاء",
@@ -376,9 +379,30 @@
       "Title": "ملخص الطاقة اليومي",
       "Description": "استهلاك الطاقة اليومي (واط ساعة) لكل جهاز.",
       "Widget.Statistics.DailyReport": "أدرج في تقرير ديلي واتش"
+    },
+    "200": {
+      "Title": "إدخال الفيديو",
+      "Description": "يلتقط تدفقات الصوت والفيديو للمراقبة المباشرة والمعالجة في الوقت الفعلي والتسجيل المستمر.",
+      "VideoInput.Disable": "قم بتعطيل هذا الإدخال",
+      "VideoInput.SourceURL": "رابط مصدر الفيديو",
+      "VideoInput.ImageFeed": "عنوان URL عبارة عن ملف صورة واحد يتم تحديثه بشكل مباشر.",
+      "VideoInput.Username": "اسم المستخدم (اختياري)",
+      "VideoInput.Password": "كلمة المرور (اختياري)",
+      "Widget.Config.fps": "الحد الأقصى للإطارات في الثانية",
+      "VideoOutput.Width": "عرض تدفق الإخراج.",
+      "VideoOutput.SnapshotQuality": "جودة الصورة الحية."
+    },
+    "250": {
+      "Title": "مسجل فيديو",
+      "Description": "يسجل تدفقات الصوت والفيديو من أي مصدر إدخال. يمكن أن تكون التسجيلات مستمرة أو مجدولة أو يتم تشغيلها بواسطة أحداث الإنذار.",
+      "NVR.EnableRecording": "تفعيل تسجيل الفيديو",
+      "NVR.RecordOnAlarm": "التسجيل عند الإنذار",
+      "NVR.ContinuousRecording": "التسجيل المستمر."
     }
   },
   "scheduler_preset_action_genie_command": "أوامر الجني",
   "scheduler_preset_action_config_wish": "لغة طبيعية",
-  "scheduler_preset_action_config_wish.placeholder": "جرب: \"اضبط درجة الحرارة على 22 درجة وابدأ مشهد شروق الشمس\""
+  "scheduler_preset_action_config_wish.placeholder": "جرب: \"اضبط درجة الحرارة على 22 درجة وابدأ مشهد شروق الشمس\"",
+  "scheduler_preset_action_command_video_record_start": "ابدأ تسجيل الفيديو",
+  "scheduler_preset_action_command_video_record_stop": "أوقف تسجيل الفيديو"
 }

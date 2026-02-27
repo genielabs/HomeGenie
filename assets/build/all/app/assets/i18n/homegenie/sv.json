@@ -294,19 +294,22 @@
       "Description": "Identifiera objekt med hjälp av en förtränad YOLO-modell.",
       "ML.ObjectDetection": "Aktivera objektdetektering",
       "ML.ObjectDetection.TriggerDetect": "Kommaavgränsad lista över saker (på engelska) som utlöser larmet. (t.ex.: katt, hund, person, ryggsäck, resväska)",
-      "ConfigureOptions.Yolo.ModelPath": "Sökväg till YOLO-modellfilen (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Sökväg till YOLO-modellfilen (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Max antal förfrågningar per sekund (RPS)"
     },
     "911": {
       "Title": "Poseuppskattning",
       "Description": "Nyckelpunktsdetektering via posestimering, med hjälp av anpassade ONNX-modeller eller den förtränade standardmodellen YOLO (specifik för mänskliga poser).",
       "ML.PoseEstimation": "Aktivera poseuppskattning",
-      "ConfigureOptions.Yolo.ModelPath": "Sökväg till YOLO-modellfilen (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Sökväg till YOLO-modellfilen (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Max antal förfrågningar per sekund (RPS)"
     },
     "912": {
       "Title": "Instanssegmentering",
       "Description": "Identifiera objekt och deras konturer med hjälp av en förtränad YOLO-modell.",
       "ML.InstanceSegmentation": "Aktivera instanssegmentering",
-      "ConfigureOptions.Yolo.ModelPath": "Sökväg till YOLO-modellfilen (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Sökväg till YOLO-modellfilen (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maximalt antal förfrågningar per sekund (RPS)"
     },
     "930": {
       "Title": "Gemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Daglig energiöversikt",
       "Description": "Daglig energiförbrukning (Wh) per enhet.",
       "Widget.Statistics.DailyReport": "Inkludera i den dagliga Wh-rapporten"
+    },
+    "200": {
+      "Title": "Videoingång",
+      "Description": "Spelar in ljud- och videoströmmar för liveövervakning, realtidsbearbetning och kontinuerlig inspelning.",
+      "VideoInput.Disable": "Inaktivera den här ingången",
+      "VideoInput.SourceURL": "Videokällans URL",
+      "VideoInput.ImageFeed": "URL är en liveuppdaterad enskild bildfil.",
+      "VideoInput.Username": "Användarnamn (valfritt)",
+      "VideoInput.Password": "Lösenord (valfritt)",
+      "Widget.Config.fps": "Max antal bilder per sekund",
+      "VideoOutput.Width": "Utgångsströmmens bredd.",
+      "VideoOutput.SnapshotQuality": "Live-bildkvalitet."
+    },
+    "250": {
+      "Title": "Videobandspelare",
+      "Description": "Spelar in ljud- och videoströmmar från valfri ingångskälla. Inspelningar kan vara kontinuerliga, schemalagda eller utlösas av larmhändelser.",
+      "NVR.EnableRecording": "Aktivera videoinspelning",
+      "NVR.RecordOnAlarm": "Inspelning vid larm",
+      "NVR.ContinuousRecording": "Kontinuerlig inspelning."
     }
   },
   "scheduler_preset_action_genie_command": "Genie-kommandot",
   "scheduler_preset_action_config_wish": "Naturligt språk",
-  "scheduler_preset_action_config_wish.placeholder": "Försök: \"Ställ in värmen på 22° och starta soluppgångsscenen\""
+  "scheduler_preset_action_config_wish.placeholder": "Försök: \"Ställ in värmen på 22° och starta soluppgångsscenen\"",
+  "scheduler_preset_action_command_video_record_start": "Börja spela in video",
+  "scheduler_preset_action_command_video_record_stop": "Stoppa videoinspelning"
 }

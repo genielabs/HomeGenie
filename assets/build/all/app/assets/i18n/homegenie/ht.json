@@ -294,19 +294,22 @@
       "Description": "Detekte objè yo lè l sèvi avèk yon modèl YOLO ki te deja antrene.",
       "ML.ObjectDetection": "Aktive deteksyon objè yo",
       "ML.ObjectDetection.TriggerDetect": "Lis bagay separe pa virgil (an Angle) ki pral deklanche alam lan. (pa egzanp: chat, chen, moun, sakado, valiz)",
-      "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO la (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO la (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimòm Demann Pa Segonn (RPS)"
     },
     "911": {
       "Title": "Estimasyon Poz",
       "Description": "Deteksyon pwen kle atravè estimasyon poze, lè l sèvi avèk modèl ONNX koutim oswa modèl YOLO pre-antre pa defo a (espesifik pou yon poze imen).",
       "ML.PoseEstimation": "Aktive estimasyon pozisyon an",
-      "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO la (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO la (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimòm Demann Pa Segonn (RPS)"
     },
     "912": {
       "Title": "Segmantasyon Enstans",
       "Description": "Detekte objè ak kontou yo lè l sèvi avèk yon modèl YOLO ki te deja antrene.",
       "ML.InstanceSegmentation": "Aktive segmentasyon egzanp lan",
-      "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO la (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Chemen fichye modèl YOLO la (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimòm Demann Pa Segonn (RPS)"
     },
     "930": {
       "Title": "Jemini Intent Handler",
@@ -376,9 +379,30 @@
       "Title": "Rezime Enèji Chak Jou",
       "Description": "Konsomasyon enèji chak jou (Wh) pa aparèy.",
       "Widget.Statistics.DailyReport": "Mete nan rapò chak jou Wh la"
+    },
+    "200": {
+      "Title": "Antre Videyo",
+      "Description": "Kaptire kouran odyo ak videyo pou siveyans an dirèk, pwosesis an tan reyèl, ak anrejistreman kontinyèl.",
+      "VideoInput.Disable": "Dezaktive antre sa a",
+      "VideoInput.SourceURL": "Adrès URL sous videyo a",
+      "VideoInput.ImageFeed": "URL la se yon fichye imaj endividyèl ki mete ajou an dirèk.",
+      "VideoInput.Username": "Non itilizatè (opsyonèl)",
+      "VideoInput.Password": "Modpas (opsyonèl)",
+      "Widget.Config.fps": "Maksimòm imaj pa segonn",
+      "VideoOutput.Width": "Lajè kouran pwodiksyon an.",
+      "VideoOutput.SnapshotQuality": "Kalite imaj an dirèk."
+    },
+    "250": {
+      "Title": "Anrejistrè Videyo",
+      "Description": "Anrejistre kouran odyo ak videyo ki soti nan nenpòt sous antre. Anrejistreman yo ka kontinyèl, pwograme, oswa deklanche pa evènman alam.",
+      "NVR.EnableRecording": "Aktive Anrejistreman Videyo",
+      "NVR.RecordOnAlarm": "Anrejistre sou alam",
+      "NVR.ContinuousRecording": "Anrejistreman kontinyèl."
     }
   },
   "scheduler_preset_action_genie_command": "Kòmandman Jeni",
   "scheduler_preset_action_config_wish": "Aksyon Lang Natirèl",
-  "scheduler_preset_action_config_wish.placeholder": "Eseye: \"Mete chalè a sou 22° epi kòmanse sèn Lever solèy la\""
+  "scheduler_preset_action_config_wish.placeholder": "Eseye: \"Mete chalè a sou 22° epi kòmanse sèn Lever solèy la\"",
+  "scheduler_preset_action_command_video_record_start": "Kòmanse Anrejistre Videyo",
+  "scheduler_preset_action_command_video_record_stop": "Sispann Anrejistreman Videyo"
 }

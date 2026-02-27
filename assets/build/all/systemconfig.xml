@@ -64,6 +64,11 @@
                 <Option Name="UrlAlias.2" Value="api/HomeAutomation.HomeGenie/Logging/RealTime.EventStream:events" />
                 <Option Name="UrlAlias.3" Value="hg/html/pages/control/widgets/homegenie/generic/images/*:app/assets/widgets/compat/images/*" />
                 <Option Name="UrlAlias.4" Value="widgets/*:app/../data/widgets/*" />
+                <Option Name="UrlAlias.5" Value="media/*:app/../data/media/*" />
+                <Option Name="HttpCacheIgnore.1" Value="\.mp4$" />
+                <Option Name="HttpCacheIgnore.2" Value="\.webm$" />
+                <Option Name="HttpCacheIgnore.3" Value="\.m3u8$" />
+                <Option Name="HttpCacheIgnore.4" Value="\.ts$" />
                 <Option Name="EnableFileCaching" Value="false" />
                 <Option Name="AuthenticationRealm" Value="HomeGenie Secure Zone" />
             </Options>

@@ -294,19 +294,22 @@
       "Description": "Sejbien ta' oġġetti bl-użu ta' mudell YOLO imħarreġ minn qabel.",
       "ML.ObjectDetection": "Ippermetti l-iskoperta tal-oġġetti",
       "ML.ObjectDetection.TriggerDetect": "Lista ta' affarijiet separati b'virgola (bl-Ingliż) li jattivaw l-allarm. (eż.: qattus, kelb, persuna, backpack, bagalja)",
-      "ConfigureOptions.Yolo.ModelPath": "Mogħdija tal-fajl tal-mudell YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Mogħdija tal-fajl tal-mudell YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Talbiet Massimi Kull Sekonda (RPS)"
     },
     "911": {
       "Title": "Stima tal-Poża",
       "Description": "Sejbien ta' punti ewlenin permezz ta' stima tal-poża, bl-użu ta' mudelli ONNX apposta jew il-mudell YOLO imħarreġ minn qabel (speċifiku għall-poża umana).",
       "ML.PoseEstimation": "Ippermetti l-istima tal-poża",
-      "ConfigureOptions.Yolo.ModelPath": "Mogħdija tal-fajl tal-mudell YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Mogħdija tal-fajl tal-mudell YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Talbiet Massimi Kull Sekonda (RPS)"
     },
     "912": {
       "Title": "Segmentazzjoni tal-Istanza",
       "Description": "Sejbien ta' oġġetti u l-kontorni tagħhom bl-użu ta' mudell YOLO imħarreġ minn qabel.",
       "ML.InstanceSegmentation": "Ippermetti s-segmentazzjoni tal-istanza",
-      "ConfigureOptions.Yolo.ModelPath": "Mogħdija tal-fajl tal-mudell YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Mogħdija tal-fajl tal-mudell YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Talbiet Massimi Kull Sekonda (RPS)"
     },
     "930": {
       "Title": "Immaniġġjar tal-Intenzjoni Gemini",
@@ -376,9 +379,30 @@
       "Title": "Sommarju tal-Enerġija ta' Kuljum",
       "Description": "Konsum ta' enerġija kuljum (Wh) skont l-apparat.",
       "Widget.Statistics.DailyReport": "Inkludi fir-rapport ta' Daily Wh"
+    },
+    "200": {
+      "Title": "Input tal-Vidjo",
+      "Description": "Jaqbad flussi awdjo u vidjo għal monitoraġġ dirett, ipproċessar f'ħin reali, u reġistrazzjoni kontinwa.",
+      "VideoInput.Disable": "Iddiżattiva dan l-input",
+      "VideoInput.SourceURL": "URL tas-sors tal-vidjo",
+      "VideoInput.ImageFeed": "Il-URL huwa fajl ta' immaġni waħda aġġornata direttament.",
+      "VideoInput.Username": "Isem tal-utent (mhux obbligatorju)",
+      "VideoInput.Password": "Password (mhux obbligatorja)",
+      "Widget.Config.fps": "Frejms massimi kull sekonda",
+      "VideoOutput.Width": "Wisa' tal-fluss tal-ħruġ.",
+      "VideoOutput.SnapshotQuality": "Kwalità tal-immaġni diretta."
+    },
+    "250": {
+      "Title": "Reġistratur tal-Vidjo",
+      "Description": "Jirrekordja flussi awdjo u vidjo minn kwalunkwe sors ta' input. Ir-reġistrazzjonijiet jistgħu jkunu kontinwi, skedati, jew attivati minn avvenimenti ta' allarm.",
+      "NVR.EnableRecording": "Ippermetti r-Reġistrazzjoni tal-Vidjo",
+      "NVR.RecordOnAlarm": "Irrekordja fuq Allarm",
+      "NVR.ContinuousRecording": "Reġistrazzjoni Kontinwa."
     }
   },
   "scheduler_preset_action_genie_command": "Kmand tal-Ġenji",
   "scheduler_preset_action_config_wish": "Azzjoni tal-Lingwa Naturali",
-  "scheduler_preset_action_config_wish.placeholder": "Ipprova: \"Issettja s-sħana għal 22° u ibda x-xena tax-Xemx li Jbex\""
+  "scheduler_preset_action_config_wish.placeholder": "Ipprova: \"Issettja s-sħana għal 22° u ibda x-xena tax-Xemx li Jbex\"",
+  "scheduler_preset_action_command_video_record_start": "Ibda r-Reġistrazzjoni tal-Vidjo",
+  "scheduler_preset_action_command_video_record_stop": "Waqqaf ir-Reġistrazzjoni tal-Vidjo"
 }

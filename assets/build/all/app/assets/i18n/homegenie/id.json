@@ -294,19 +294,22 @@
       "Description": "Mendeteksi objek menggunakan model YOLO yang telah dilatih sebelumnya.",
       "ML.ObjectDetection": "Aktifkan deteksi objek",
       "ML.ObjectDetection.TriggerDetect": "Daftar hal-hal (dalam bahasa Inggris) yang dipisahkan koma yang akan memicu alarm. (misalnya: kucing, anjing, orang, ransel, koper)",
-      "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Permintaan Maksimum Per Detik (RPS)"
     },
     "911": {
       "Title": "Estimasi Pose",
       "Description": "Deteksi titik kunci melalui estimasi pose, menggunakan model ONNX khusus atau model YOLO terlatih bawaan (pose khusus manusia).",
       "ML.PoseEstimation": "Aktifkan estimasi pose",
-      "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Permintaan Maksimum Per Detik (RPS)"
     },
     "912": {
       "Title": "Segmentasi Instansi",
       "Description": "Deteksi objek dan garis besarnya menggunakan model YOLO yang telah dilatih sebelumnya.",
       "ML.InstanceSegmentation": "Aktifkan segmentasi instans",
-      "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Jalur berkas model YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Permintaan Maksimum Per Detik (RPS)"
     },
     "930": {
       "Title": "Penangan Maksud Gemini",
@@ -376,9 +379,30 @@
       "Title": "Ringkasan Energi Harian",
       "Description": "Konsumsi energi harian (Wh) per perangkat.",
       "Widget.Statistics.DailyReport": "Sertakan dalam laporan Harian Wh"
+    },
+    "200": {
+      "Title": "Input Video",
+      "Description": "Merekam aliran audio dan video untuk pemantauan langsung, pemrosesan waktu nyata, dan perekaman berkelanjutan.",
+      "VideoInput.Disable": "Nonaktifkan input ini",
+      "VideoInput.SourceURL": "URL sumber video",
+      "VideoInput.ImageFeed": "URL tersebut merupakan berkas gambar tunggal yang diperbarui secara langsung.",
+      "VideoInput.Username": "Nama pengguna (opsional)",
+      "VideoInput.Password": "Kata sandi (opsional)",
+      "Widget.Config.fps": "Jumlah frame per detik maksimum",
+      "VideoOutput.Width": "Lebar aliran keluaran.",
+      "VideoOutput.SnapshotQuality": "Kualitas gambar langsung."
+    },
+    "250": {
+      "Title": "Perekam Video",
+      "Description": "Merekam aliran audio dan video dari sumber input apa pun. Perekaman dapat dilakukan secara terus menerus, terjadwal, atau dipicu oleh peristiwa alarm.",
+      "NVR.EnableRecording": "Aktifkan Perekaman Video",
+      "NVR.RecordOnAlarm": "Rekam Saat Alarm Berbunyi",
+      "NVR.ContinuousRecording": "Perekaman Berkelanjutan."
     }
   },
   "scheduler_preset_action_genie_command": "Perintah Jin",
   "scheduler_preset_action_config_wish": "Tindakan Bahasa Alami",
-  "scheduler_preset_action_config_wish.placeholder": "Coba: \"Atur suhu ke 22° dan mulai adegan Matahari Terbit\""
+  "scheduler_preset_action_config_wish.placeholder": "Coba: \"Atur suhu ke 22° dan mulai adegan Matahari Terbit\"",
+  "scheduler_preset_action_command_video_record_start": "Mulai Merekam Video",
+  "scheduler_preset_action_command_video_record_stop": "Hentikan Perekaman Video"
 }

@@ -294,19 +294,22 @@
       "Description": "사전 학습된 YOLO 모델을 사용하여 객체를 감지합니다.",
       "ML.ObjectDetection": "객체 감지 활성화",
       "ML.ObjectDetection.TriggerDetect": "경보를 울리는 물건들을 쉼표로 구분하여 나열한 영어 목록입니다. (예: 고양이, 개, 사람, 배낭, 여행 가방)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO 모델 파일(.onnx)의 경로"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO 모델 파일(.onnx)의 경로",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "초당 최대 요청 수(RPS)"
     },
     "911": {
       "Title": "포즈 추정",
       "Description": "사용자 정의 ONNX 모델이나 기본 사전 학습된 YOLO 모델(인간 포즈별)을 사용하여 포즈 추정을 통해 주요 포인트를 감지합니다.",
       "ML.PoseEstimation": "포즈 추정 활성화",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO 모델 파일(.onnx)의 경로"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO 모델 파일(.onnx)의 경로",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "초당 최대 요청 수(RPS)"
     },
     "912": {
       "Title": "인스턴스 분할",
       "Description": "사전 학습된 YOLO 모델을 사용하여 객체와 객체 윤곽을 감지합니다.",
       "ML.InstanceSegmentation": "인스턴스 분할 활성화",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO 모델 파일(.onnx)의 경로"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO 모델 파일(.onnx)의 경로",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "초당 최대 요청 수(RPS)"
     },
     "930": {
       "Title": "제미니 인텐트 핸들러",
@@ -376,9 +379,30 @@
       "Title": "일일 에너지 요약",
       "Description": "기기별 일일 에너지 소비량(Wh).",
       "Widget.Statistics.DailyReport": "일일 Wh 보고서에 포함"
+    },
+    "200": {
+      "Title": "비디오 입력",
+      "Description": "실시간 모니터링, 실시간 처리 및 연속 녹화를 위해 오디오 및 비디오 스트림을 캡처합니다.",
+      "VideoInput.Disable": "이 입력란을 비활성화하세요",
+      "VideoInput.SourceURL": "동영상 소스 URL",
+      "VideoInput.ImageFeed": "URL은 실시간으로 업데이트되는 단일 이미지 파일입니다.",
+      "VideoInput.Username": "사용자 이름 (선택 사항)",
+      "VideoInput.Password": "비밀번호 (선택 사항)",
+      "Widget.Config.fps": "초당 최대 프레임 수",
+      "VideoOutput.Width": "출력 스트림 폭.",
+      "VideoOutput.SnapshotQuality": "실시간 영상 화질."
+    },
+    "250": {
+      "Title": "비디오 레코더",
+      "Description": "모든 입력 소스에서 오디오 및 비디오 스트림을 녹화합니다. 녹화는 연속 녹화, 예약 녹화 또는 알람 발생 시 녹화 시작이 가능합니다.",
+      "NVR.EnableRecording": "동영상 녹화 활성화",
+      "NVR.RecordOnAlarm": "알람 녹음",
+      "NVR.ContinuousRecording": "연속 녹화."
     }
   },
   "scheduler_preset_action_genie_command": "지니 커맨드",
   "scheduler_preset_action_config_wish": "자연어 동작",
-  "scheduler_preset_action_config_wish.placeholder": "\"온도를 22도로 설정하고 일출 장면을 시작해 보세요.\""
+  "scheduler_preset_action_config_wish.placeholder": "\"온도를 22도로 설정하고 일출 장면을 시작해 보세요.\"",
+  "scheduler_preset_action_command_video_record_start": "동영상 녹화 시작",
+  "scheduler_preset_action_command_video_record_stop": "동영상 녹화 중지"
 }

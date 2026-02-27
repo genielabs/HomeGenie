@@ -536,5 +536,15 @@
   "original_language": "Забони аслӣ",
   "origin_country": "Кишвари аслӣ",
   "production_companies": "Ширкати истеҳсолӣ",
-  "movie_cast": "Ҳунармандон"
+  "movie_cast": "Ҳунармандон",
+  "live": "Зинда",
+  "recordings": "Сабтҳо",
+  "no_recordings": "Сабтҳо нестанд.",
+  "live_feed": "Лавҳаи зинда",
+  "fullscreen_exit": "Баромадан аз экрани пурра",
+  "play_media": "Медиаро бозӣ кунед",
+  "start_recording": "Оғози сабт",
+  "stop_recording": "Сабтро қатъ кунед",
+  "toggle_smart_recording": "Сабти худкор дар ҳолати ҳушдор",
+  "search_metadata": "Ҷустуҷӯи метамаълумот"
 }

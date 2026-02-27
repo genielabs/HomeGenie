@@ -294,19 +294,22 @@
       "Description": "تشخیص اشیاء با استفاده از یک مدل YOLO از پیش آموزش دیده.",
       "ML.ObjectDetection": "فعال کردن تشخیص اشیاء",
       "ML.ObjectDetection.TriggerDetect": "فهرستی از چیزهایی که با ویرگول از هم جدا می‌شوند (به انگلیسی) که باعث به صدا درآمدن زنگ هشدار می‌شوند. (مثلاً: گربه، سگ، شخص، کوله پشتی، چمدان)",
-      "ConfigureOptions.Yolo.ModelPath": "مسیر فایل مدل YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "مسیر فایل مدل YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "حداکثر درخواست در ثانیه (RPS)"
     },
     "911": {
       "Title": "تخمین ژست",
       "Description": "تشخیص نقاط کلیدی از طریق تخمین حالت بدن، با استفاده از مدل‌های سفارشی ONNX یا مدل پیش‌فرض و از پیش آموزش‌دیده YOLO (مختص حالت بدن انسان).",
       "ML.PoseEstimation": "فعال کردن تخمین ژست",
-      "ConfigureOptions.Yolo.ModelPath": "مسیر فایل مدل YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "مسیر فایل مدل YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "حداکثر درخواست در ثانیه (RPS)"
     },
     "912": {
       "Title": "تقسیم‌بندی نمونه",
       "Description": "تشخیص اشیاء و خطوط بیرونی آنها با استفاده از یک مدل از پیش آموزش دیده YOLO.",
       "ML.InstanceSegmentation": "فعال کردن تقسیم‌بندی نمونه",
-      "ConfigureOptions.Yolo.ModelPath": "مسیر فایل مدل YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "مسیر فایل مدل YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "حداکثر درخواست در ثانیه (RPS)"
     },
     "930": {
       "Title": "هندلر اینتنت جمینی",
@@ -376,9 +379,30 @@
       "Title": "خلاصه انرژی روزانه",
       "Description": "مصرف انرژی روزانه (Wh) به تفکیک دستگاه.",
       "Widget.Statistics.DailyReport": "در گزارش روزانه Wh لحاظ شود"
+    },
+    "200": {
+      "Title": "ورودی ویدئو",
+      "Description": "جریان‌های صوتی و تصویری را برای نظارت زنده، پردازش در زمان واقعی و ضبط مداوم ضبط می‌کند.",
+      "VideoInput.Disable": "غیرفعال کردن این ورودی",
+      "VideoInput.SourceURL": "آدرس منبع ویدیو",
+      "VideoInput.ImageFeed": "URL یک فایل تصویری واحد است که به صورت زنده به‌روزرسانی می‌شود.",
+      "VideoInput.Username": "نام کاربری (اختیاری)",
+      "VideoInput.Password": "رمز عبور (اختیاری)",
+      "Widget.Config.fps": "حداکثر فریم در ثانیه",
+      "VideoOutput.Width": "عرض جریان خروجی.",
+      "VideoOutput.SnapshotQuality": "کیفیت تصویر زنده"
+    },
+    "250": {
+      "Title": "ضبط کننده ویدیو",
+      "Description": "ضبط جریان‌های صوتی و تصویری از هر منبع ورودی. ضبط‌ها می‌توانند مداوم، برنامه‌ریزی شده یا توسط رویدادهای هشدار دهنده فعال شوند.",
+      "NVR.EnableRecording": "فعال کردن ضبط ویدیو",
+      "NVR.RecordOnAlarm": "ضبط در حالت هشدار",
+      "NVR.ContinuousRecording": "ضبط مداوم."
     }
   },
   "scheduler_preset_action_genie_command": "فرماندهی جنی",
   "scheduler_preset_action_config_wish": "اقدام زبان طبیعی",
-  "scheduler_preset_action_config_wish.placeholder": "امتحان کنید: «گرما را روی ۲۲ درجه تنظیم کنید و صحنه طلوع آفتاب را شروع کنید»"
+  "scheduler_preset_action_config_wish.placeholder": "امتحان کنید: «گرما را روی ۲۲ درجه تنظیم کنید و صحنه طلوع آفتاب را شروع کنید»",
+  "scheduler_preset_action_command_video_record_start": "شروع ضبط ویدیو",
+  "scheduler_preset_action_command_video_record_stop": "ضبط ویدیو را متوقف کنید"
 }

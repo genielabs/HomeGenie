@@ -294,19 +294,22 @@
       "Description": "Detectar objectes mitjançant un model YOLO preentrenat.",
       "ML.ObjectDetection": "Activa la detecció d'objectes",
       "ML.ObjectDetection.TriggerDetect": "Llista separada per comes de coses (en anglès) que activaran l'alarma. (per exemple: gat, gos, persona, motxilla, maleta)",
-      "ConfigureOptions.Yolo.ModelPath": "Ruta del fitxer del model YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ruta del fitxer del model YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Sol·licituds màximes per segon (RPS)"
     },
     "911": {
       "Title": "Estimació de la postura",
       "Description": "Detecció de punts clau mitjançant estimació de poses, utilitzant models ONNX personalitzats o el model YOLO preentrenat per defecte (específic de la pose humana).",
       "ML.PoseEstimation": "Activa l'estimació de la postura",
-      "ConfigureOptions.Yolo.ModelPath": "Ruta del fitxer del model YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ruta del fitxer del model YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Sol·licituds màximes per segon (RPS)"
     },
     "912": {
       "Title": "Segmentació d'instàncies",
       "Description": "Detecta objectes i els seus contorns mitjançant un model YOLO preentrenat.",
       "ML.InstanceSegmentation": "Habilita la segmentació d'instàncies",
-      "ConfigureOptions.Yolo.ModelPath": "Ruta del fitxer del model YOLO (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "Ruta del fitxer del model YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Sol·licituds màximes per segon (RPS)"
     },
     "930": {
       "Title": "Gestor d'intencions de Bessons",
@@ -376,9 +379,30 @@
       "Title": "Resum d'energia diària",
       "Description": "Consum d'energia diari (Wh) per dispositiu.",
       "Widget.Statistics.DailyReport": "Inclou a l'informe Daily Wh"
+    },
+    "200": {
+      "Title": "Entrada de vídeo",
+      "Description": "Captura fluxos d'àudio i vídeo per a monitorització en directe, processament en temps real i enregistrament continu.",
+      "VideoInput.Disable": "Desactiva aquesta entrada",
+      "VideoInput.SourceURL": "URL de la font del vídeo",
+      "VideoInput.ImageFeed": "L'URL és un fitxer d'imatge únic actualitzat en directe.",
+      "VideoInput.Username": "Nom d'usuari (opcional)",
+      "VideoInput.Password": "Contrasenya (opcional)",
+      "Widget.Config.fps": "Màxim de fotogrames per segon",
+      "VideoOutput.Width": "Amplada del flux de sortida.",
+      "VideoOutput.SnapshotQuality": "Qualitat d'imatge en directe."
+    },
+    "250": {
+      "Title": "Gravador de vídeo",
+      "Description": "Enregistra fluxos d'àudio i vídeo des de qualsevol font d'entrada. Els enregistraments poden ser continus, programats o activats per esdeveniments d'alarma.",
+      "NVR.EnableRecording": "Activa l'enregistrament de vídeo",
+      "NVR.RecordOnAlarm": "Gravació en alarma",
+      "NVR.ContinuousRecording": "Enregistrament continu."
     }
   },
   "scheduler_preset_action_genie_command": "Comandament Geni",
   "scheduler_preset_action_config_wish": "Acció de llenguatge natural",
-  "scheduler_preset_action_config_wish.placeholder": "Prova: \"Posa la calefacció a 22° i comença l'escena de la sortida del sol\""
+  "scheduler_preset_action_config_wish.placeholder": "Prova: \"Posa la calefacció a 22° i comença l'escena de la sortida del sol\"",
+  "scheduler_preset_action_command_video_record_start": "Comença a gravar vídeo",
+  "scheduler_preset_action_command_video_record_stop": "Atura la gravació de vídeo"
 }

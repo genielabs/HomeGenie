@@ -536,5 +536,15 @@
   "original_language": "Orijinal Dil",
   "origin_country": "Mənşə ölkəsi",
   "production_companies": "İstehsal Şirkəti",
-  "movie_cast": "Aktyorlar"
+  "movie_cast": "Aktyorlar",
+  "live": "Canlı",
+  "recordings": "Yazılar",
+  "no_recordings": "Səsyazma yoxdur.",
+  "live_feed": "Canlı Yayım",
+  "fullscreen_exit": "Tam ekrandan çıxın",
+  "play_media": "Medianı Oxudun",
+  "start_recording": "Yazmağa Başlayın",
+  "stop_recording": "Yazını Dayandırın",
+  "toggle_smart_recording": "Siqnalda avtomatik qeyd",
+  "search_metadata": "Metadata Axtarışı"
 }

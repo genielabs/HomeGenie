@@ -536,5 +536,15 @@
   "original_language": "Оригинальный язык",
   "origin_country": "Страна происхождения",
   "production_companies": "Производственная компания",
-  "movie_cast": "Актеры"
+  "movie_cast": "Актеры",
+  "live": "Жить",
+  "recordings": "Записи",
+  "no_recordings": "Записей нет.",
+  "live_feed": "Прямая трансляция",
+  "fullscreen_exit": "Выйти из полноэкранного режима",
+  "play_media": "Воспроизвести медиа",
+  "start_recording": "Начать запись",
+  "stop_recording": "Остановить запись",
+  "toggle_smart_recording": "Автоматическая запись при срабатывании сигнализации",
+  "search_metadata": "Метаданные поиска"
 }

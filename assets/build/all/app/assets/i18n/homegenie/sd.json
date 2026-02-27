@@ -294,19 +294,22 @@
       "Description": "اڳ ۾ تربيت يافته YOLO ماڊل استعمال ڪندي شين کي ڳوليو.",
       "ML.ObjectDetection": "شين جي ڳولا کي فعال ڪريو",
       "ML.ObjectDetection.TriggerDetect": "ڪاما سان الڳ ٿيل شين جي فهرست (انگريزي ۾) جيڪي الارم کي متحرڪ ڪنديون. (مثال طور: ٻلي، ڪتو، ماڻهو، بيڪ پيڪ، سوٽ ڪيس)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO ماڊل فائل جو رستو (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO ماڊل فائل جو رستو (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "وڌ ۾ وڌ درخواستون في سيڪنڊ (RPS)"
     },
     "911": {
       "Title": "پوز جو اندازو",
       "Description": "ڪسٽم ONNX ماڊلز يا ڊفالٽ اڳ-تربيت يافته YOLO ماڊل (انساني پوز لاءِ مخصوص) استعمال ڪندي پوز جي تخميني ذريعي ڪي پوائنٽ جي سڃاڻپ.",
       "ML.PoseEstimation": "پوز جو اندازو فعال ڪريو",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO ماڊل فائل جو رستو (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO ماڊل فائل جو رستو (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "وڌ ۾ وڌ درخواستون في سيڪنڊ (RPS)"
     },
     "912": {
       "Title": "مثال جي ڀاڱيداري",
       "Description": "اڳ ۾ تربيت يافته YOLO ماڊل استعمال ڪندي شين ۽ انهن جي خاڪن کي ڳوليو.",
       "ML.InstanceSegmentation": "مثال جي ڀاڱيداري کي فعال ڪريو",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO ماڊل فائل جو رستو (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO ماڊل فائل جو رستو (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "وڌ ۾ وڌ درخواستون في سيڪنڊ (RPS)"
     },
     "930": {
       "Title": "جيميني انٽينٽ هينڊلر",
@@ -376,9 +379,30 @@
       "Title": "روزاني توانائي جو خلاصو",
       "Description": "ڊوائيس جي حساب سان روزاني توانائي جو استعمال (Wh).",
       "Widget.Statistics.DailyReport": "روزاني Wh رپورٽ ۾ شامل ڪريو"
+    },
+    "200": {
+      "Title": "وڊيو ان پٽ",
+      "Description": "لائيو مانيٽرنگ، ريئل ٽائيم پروسيسنگ، ۽ مسلسل رڪارڊنگ لاءِ آڊيو ۽ وڊيو اسٽريمز کي ڪيپچر ڪري ٿو.",
+      "VideoInput.Disable": "هن ان پٽ کي بند ڪريو",
+      "VideoInput.SourceURL": "وڊيو سورس URL",
+      "VideoInput.ImageFeed": "URL هڪ لائيو اپڊيٽ ٿيل سنگل تصويري فائل آهي.",
+      "VideoInput.Username": "استعمال ڪندڙ جو نالو (اختياري)",
+      "VideoInput.Password": "پاسورڊ (اختياري)",
+      "Widget.Config.fps": "وڌ ۾ وڌ فريم في سيڪنڊ",
+      "VideoOutput.Width": "آئوٽ پُٽ اسٽريم جي ويڪر.",
+      "VideoOutput.SnapshotQuality": "لائيو تصوير جي معيار."
+    },
+    "250": {
+      "Title": "وڊيو رڪارڊر",
+      "Description": "ڪنهن به ان پٽ ذريعن کان آڊيو ۽ وڊيو اسٽريم رڪارڊ ڪري ٿو. رڪارڊنگ مسلسل، شيڊول ٿيل، يا الارم واقعن جي ڪري شروع ٿي سگهي ٿي.",
+      "NVR.EnableRecording": "وڊيو رڪارڊنگ کي فعال ڪريو",
+      "NVR.RecordOnAlarm": "الارم تي رڪارڊ ڪريو",
+      "NVR.ContinuousRecording": "مسلسل رڪارڊنگ."
     }
   },
   "scheduler_preset_action_genie_command": "جيني ڪمانڊ",
   "scheduler_preset_action_config_wish": "قدرتي ٻولي جو عمل",
-  "scheduler_preset_action_config_wish.placeholder": "ڪوشش ڪريو: \"گرمي کي 22° تي سيٽ ڪريو ۽ سج اڀرڻ جو منظر شروع ڪريو\""
+  "scheduler_preset_action_config_wish.placeholder": "ڪوشش ڪريو: \"گرمي کي 22° تي سيٽ ڪريو ۽ سج اڀرڻ جو منظر شروع ڪريو\"",
+  "scheduler_preset_action_command_video_record_start": "وڊيو رڪارڊنگ شروع ڪريو",
+  "scheduler_preset_action_command_video_record_stop": "وڊيو رڪارڊ ڪرڻ بند ڪريو"
 }

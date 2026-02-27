@@ -536,5 +536,15 @@
   "original_language": "Originalo kalba",
   "origin_country": "Kilmės šalis",
   "production_companies": "Gamybos įmonė",
-  "movie_cast": "Aktoriai"
+  "movie_cast": "Aktoriai",
+  "live": "Tiesiogiai",
+  "recordings": "Įrašai",
+  "no_recordings": "Nėra įrašų.",
+  "live_feed": "Tiesioginis srautas",
+  "fullscreen_exit": "Išeiti iš viso ekrano režimo",
+  "play_media": "Žaisti mediją",
+  "start_recording": "Pradėti įrašymą",
+  "stop_recording": "Sustabdyti įrašymą",
+  "toggle_smart_recording": "Automatinis įrašymas įsijungus žadintuvui",
+  "search_metadata": "Paieškos metaduomenys"
 }

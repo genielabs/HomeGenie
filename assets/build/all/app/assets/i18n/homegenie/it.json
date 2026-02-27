@@ -224,6 +224,10 @@
         "Secondi",
     "scheduler_preset_action_config_message":
         "Messaggio",
+    "scheduler_preset_action_command_video_record_start":
+        "Avvia registrazione video",
+    "scheduler_preset_action_command_video_record_stop":
+        "Interrompi registrazione video",
 " ":"--------------- PROGRAM EDITOR ------------------",
   "save_and_build":
     "Salva e compila",
@@ -532,7 +536,9 @@
       "ML.ObjectDetection.TriggerDetect":
         "Elenco separato da virgole di cose (in Inglese) che fanno scattare l'allarme. (e.g.: cat, dog, person, backpack, suitcase)",
       "ConfigureOptions.Yolo.ModelPath":
-        "Percorso file del modello YOLO (.onnx)"
+        "Percorso file del modello YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond":
+        "Numero massimo di richieste al secondo (RPS)"
     },
 
     "911": {
@@ -543,7 +549,9 @@
       "ML.PoseEstimation":
         "Abilita stima della posa",
       "ConfigureOptions.Yolo.ModelPath":
-        "Percorso file del modello YOLO (.onnx)"
+        "Percorso file del modello YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond":
+        "Numero massimo di richieste al secondo (RPS)"
     },
 
     "912": {
@@ -554,7 +562,9 @@
       "ML.InstanceSegmentation":
         "Abilita la segmentazione delle istanze",
       "ConfigureOptions.Yolo.ModelPath":
-        "Percorso del file modello YOLO (.onnx)"
+        "Percorso del file modello YOLO (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond":
+        "Numero massimo di richieste al secondo (RPS)"
     },
 
     "930": {
@@ -669,6 +679,44 @@
         "Consumo energetico giornaliero (Wh) per dispositivo.",
       "Widget.Statistics.DailyReport":
         "Includi nel report giornaliero Wh"
+    },
+
+
+    "200": {
+      "Title":
+          "Ingresso Video",
+      "Description":
+          "Cattura flussi audio e video per il monitoraggio dal vivo, l'elaborazione in tempo reale e la registrazione continua.",
+      "VideoInput.Disable":
+          "Disabilita questo ingresso",
+      "VideoInput.SourceURL":
+          "URL della sorgente video",
+      "VideoInput.ImageFeed":
+          "L'URL è un'immagine singola aggiornata in tempo reale.",
+      "VideoInput.Username":
+          "Nome utente (opzionale)",
+      "VideoInput.Password":
+          "Password (opzionale)",
+      "Widget.Config.fps":
+          "Massimo frame per secondo",
+      "VideoOutput.Width":
+          "Larghezza del flusso in uscita.",
+      "VideoOutput.SnapshotQuality":
+          "Qualità dell'immagine dal vivo."
+    },
+
+    "250": {
+      "Title":
+          "Registratore Video",
+      "Description":
+          "Registra flussi audio e video da qualsiasi sorgente di ingresso. Le registrazioni possono essere continue, programmate o attivate da eventi di allarme.",
+      "NVR.EnableRecording":
+          "Abilita la registrazione video",
+      "NVR.RecordOnAlarm":
+          "Registra su allarme",
+      "NVR.ContinuousRecording":
+          "Registrazione continua."
     }
+
   }
 }

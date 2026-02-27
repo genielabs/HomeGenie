@@ -536,5 +536,15 @@
   "original_language": "Эх хэл",
   "origin_country": "Гарал үүслийн улс",
   "production_companies": "Үйлдвэрлэлийн компани",
-  "movie_cast": "Жүжигчид"
+  "movie_cast": "Жүжигчид",
+  "live": "Шууд",
+  "recordings": "Бичлэгүүд",
+  "no_recordings": "Бичлэг байхгүй.",
+  "live_feed": "Шууд дамжуулалт",
+  "fullscreen_exit": "Бүтэн дэлгэцээс гарах",
+  "play_media": "Медиа тоглуулах",
+  "start_recording": "Бичлэг хийж эхлэх",
+  "stop_recording": "Бичлэгийг зогсоох",
+  "toggle_smart_recording": "Сэрүүлэг дээр автоматаар бичлэг хийх",
+  "search_metadata": "Мета өгөгдлийг хайх"
 }

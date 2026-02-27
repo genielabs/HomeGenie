@@ -294,19 +294,22 @@
       "Description": "Aurrez entrenatutako YOLO eredu bat erabiliz objektuak detektatu.",
       "ML.ObjectDetection": "Objektuen detekzioa gaitu",
       "ML.ObjectDetection.TriggerDetect": "Alarma eragingo duten gauzen zerrenda komaz bereizita (ingelesez). (adibidez: katua, txakurra, pertsona, motxila, maleta)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO modelo fitxategiaren bidea (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO modelo fitxategiaren bidea (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Eskaera maximoak segundoko (RPS)"
     },
     "911": {
       "Title": "Jarreraren Estimazioa",
       "Description": "Puntu gakoen detekzioa jarreraren estimazioaren bidez, ONNX eredu pertsonalizatuak edo aurrez entrenatutako YOLO eredu lehenetsia (gizakien jarrera espezifikoa) erabiliz.",
       "ML.PoseEstimation": "Gaitu jarreraren estimazioa",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO modelo fitxategiaren bidea (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO modelo fitxategiaren bidea (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Eskaera maximoak segundoko (RPS)"
     },
     "912": {
       "Title": "Instantzia Segmentazioa",
       "Description": "Detektatu objektuak eta haien eskemak aurrez entrenatutako YOLO eredu bat erabiliz.",
       "ML.InstanceSegmentation": "Gaitu instantzien segmentazioa",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO modelo fitxategiaren bidea (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO modelo fitxategiaren bidea (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Eskaera maximoak segundoko (RPS)"
     },
     "930": {
       "Title": "Gemini Asmoen Kudeatzailea",
@@ -376,9 +379,30 @@
       "Title": "Eguneko Energia Laburpena",
       "Description": "Gailuaren eguneroko energia-kontsumoa (Wh).",
       "Widget.Statistics.DailyReport": "Sartu Eguneroko Wh txostenean"
+    },
+    "200": {
+      "Title": "Bideo sarrera",
+      "Description": "Audio eta bideo jarioak jasotzen ditu zuzeneko monitorizaziorako, denbora errealeko prozesatzeko eta etengabeko grabaziorako.",
+      "VideoInput.Disable": "Desgaitu sarrera hau",
+      "VideoInput.SourceURL": "Bideoaren iturburuaren URLa",
+      "VideoInput.ImageFeed": "URLa zuzeneko eguneratzeko irudi-fitxategi bakarra da.",
+      "VideoInput.Username": "Erabiltzaile-izena (aukerakoa)",
+      "VideoInput.Password": "Pasahitza (aukerakoa)",
+      "Widget.Config.fps": "Fotograma maximoak segundoko",
+      "VideoOutput.Width": "Irteerako korrontearen zabalera.",
+      "VideoOutput.SnapshotQuality": "Zuzeneko irudiaren kalitatea."
+    },
+    "250": {
+      "Title": "Bideo-grabagailua",
+      "Description": "Edozein sarrera-iturritako audio eta bideo jarioak grabatzen ditu. Grabaketak jarraituak, programatuak edo alarma-gertaerek eragin ditzakete.",
+      "NVR.EnableRecording": "Bideo grabaketa gaitu",
+      "NVR.RecordOnAlarm": "Alarma batean grabatu",
+      "NVR.ContinuousRecording": "Grabaketa jarraitua."
     }
   },
   "scheduler_preset_action_genie_command": "Genio Komandoa",
   "scheduler_preset_action_config_wish": "Hizkuntza Naturalaren Ekintza",
-  "scheduler_preset_action_config_wish.placeholder": "Saiatu: \"Ezarri beroa 22°-tan eta hasi egunsentiaren eszena\""
+  "scheduler_preset_action_config_wish.placeholder": "Saiatu: \"Ezarri beroa 22°-tan eta hasi egunsentiaren eszena\"",
+  "scheduler_preset_action_command_video_record_start": "Hasi bideoa grabatzen",
+  "scheduler_preset_action_command_video_record_stop": "Bideoa grabatzeari utzi"
 }

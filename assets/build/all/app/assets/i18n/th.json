@@ -536,5 +536,15 @@
   "original_language": "ภาษาต้นฉบับ",
   "origin_country": "ประเทศต้นกำเนิด",
   "production_companies": "บริษัทผู้ผลิต",
-  "movie_cast": "นักแสดง"
+  "movie_cast": "นักแสดง",
+  "live": "สด",
+  "recordings": "การบันทึก",
+  "no_recordings": "ไม่มีการบันทึกใดๆ",
+  "live_feed": "ถ่ายทอดสด",
+  "fullscreen_exit": "ออกจากโหมดเต็มหน้าจอ",
+  "play_media": "เล่นมีเดีย",
+  "start_recording": "เริ่มบันทึก",
+  "stop_recording": "หยุดบันทึก",
+  "toggle_smart_recording": "บันทึกอัตโนมัติเมื่อนาฬิกาปลุกดังขึ้น",
+  "search_metadata": "ค้นหาข้อมูลเมตา"
 }

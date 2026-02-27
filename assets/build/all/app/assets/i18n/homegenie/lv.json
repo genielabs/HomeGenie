@@ -294,19 +294,22 @@
       "Description": "Noteikt objektus, izmantojot iepriekš apmācītu YOLO modeli.",
       "ML.ObjectDetection": "Iespējot objektu noteikšanu",
       "ML.ObjectDetection.TriggerDetect": "Ar komatiem atdalīts lietu saraksts (angļu valodā), kas aktivizēs trauksmi. (piemēram: kaķis, suns, cilvēks, mugursoma, koferis)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO modeļa faila ceļš (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO modeļa faila ceļš (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimālais pieprasījumu skaits sekundē (RPS)"
     },
     "911": {
       "Title": "Pozas novērtējums",
       "Description": "Atslēgpunktu noteikšana, izmantojot pozas novērtējumu, pielāgotus ONNX modeļus vai noklusējuma iepriekš apmācītu YOLO modeli (cilvēka pozai specifisku).",
       "ML.PoseEstimation": "Iespējot pozas novērtēšanu",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO modeļa faila ceļš (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO modeļa faila ceļš (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimālais pieprasījumu skaits sekundē (RPS)"
     },
     "912": {
       "Title": "Instances segmentācija",
       "Description": "Noteikt objektus un to kontūras, izmantojot iepriekš apmācītu YOLO modeli.",
       "ML.InstanceSegmentation": "Iespējot instances segmentāciju",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO modeļa faila ceļš (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO modeļa faila ceļš (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "Maksimālais pieprasījumu skaits sekundē (RPS)"
     },
     "930": {
       "Title": "Gemini nodomu apstrādātājs",
@@ -376,9 +379,30 @@
       "Title": "Dienas enerģijas kopsavilkums",
       "Description": "Dienas enerģijas patēriņš (Wh) pa ierīcēm.",
       "Widget.Statistics.DailyReport": "Iekļaut ikdienas Wh pārskatā"
+    },
+    "200": {
+      "Title": "Video ieeja",
+      "Description": "Uztver audio un video straumes tiešraides uzraudzībai, apstrādei reāllaikā un nepārtrauktai ierakstīšanai.",
+      "VideoInput.Disable": "Atspējot šo ievadi",
+      "VideoInput.SourceURL": "Video avota URL",
+      "VideoInput.ImageFeed": "URL ir tiešraidē atjaunināts viena attēla fails.",
+      "VideoInput.Username": "Lietotājvārds (pēc izvēles)",
+      "VideoInput.Password": "Parole (pēc izvēles)",
+      "Widget.Config.fps": "Maks. kadru skaits sekundē",
+      "VideoOutput.Width": "Izvades straumes platums.",
+      "VideoOutput.SnapshotQuality": "Tiešraides attēla kvalitāte."
+    },
+    "250": {
+      "Title": "Video ierakstītājs",
+      "Description": "Ieraksta audio un video plūsmas no jebkura ievades avota. Ieraksti var būt nepārtraukti, ieplānoti vai aktivizēti ar trauksmes notikumiem.",
+      "NVR.EnableRecording": "Iespējot video ierakstīšanu",
+      "NVR.RecordOnAlarm": "Ierakstīt trauksmes brīdī",
+      "NVR.ContinuousRecording": "Nepārtraukta ierakstīšana."
     }
   },
   "scheduler_preset_action_genie_command": "Džinu pavēlniecība",
   "scheduler_preset_action_config_wish": "Dabiskās valodas darbība",
-  "scheduler_preset_action_config_wish.placeholder": "Izmēģiniet: \"Iestatiet temperatūru uz 22° un sāciet saullēkta ainu\"."
+  "scheduler_preset_action_config_wish.placeholder": "Izmēģiniet: \"Iestatiet temperatūru uz 22° un sāciet saullēkta ainu\".",
+  "scheduler_preset_action_command_video_record_start": "Sākt video ierakstīšanu",
+  "scheduler_preset_action_command_video_record_stop": "Apturēt video ierakstīšanu"
 }

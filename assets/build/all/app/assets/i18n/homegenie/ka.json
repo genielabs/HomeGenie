@@ -294,19 +294,22 @@
       "Description": "ობიექტების აღმოჩენა წინასწარ გაწვრთნილი YOLO მოდელის გამოყენებით.",
       "ML.ObjectDetection": "ობიექტების ამოცნობის ჩართვა",
       "ML.ObjectDetection.TriggerDetect": "მძიმით გამოყოფილი ნივთების სია (ინგლისურ ენაზე), რომლებიც სიგნალიზაციას გაააქტიურებენ. (მაგ.: კატა, ძაღლი, ადამიანი, ზურგჩანთა, ჩემოდანი)",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO მოდელის ფაილის გზა (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO მოდელის ფაილის გზა (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "წამში მაქსიმალური მოთხოვნები (RPS)"
     },
     "911": {
       "Title": "პოზის შეფასება",
       "Description": "საკვანძო წერტილების აღმოჩენა პოზის შეფასების გზით, მორგებული ONNX მოდელების ან წინასწარ გაწვრთნილი YOLO მოდელის (ადამიანის პოზისთვის სპეციფიკური) გამოყენებით.",
       "ML.PoseEstimation": "პოზის შეფასების ჩართვა",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO მოდელის ფაილის გზა (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO მოდელის ფაილის გზა (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "წამში მაქსიმალური მოთხოვნები (RPS)"
     },
     "912": {
       "Title": "ეგზემპლარის სეგმენტაცია",
       "Description": "ობიექტების და მათი კონტურების აღმოჩენა წინასწარ გაწვრთნილი YOLO მოდელის გამოყენებით.",
       "ML.InstanceSegmentation": "ეგზემპლარის სეგმენტაციის ჩართვა",
-      "ConfigureOptions.Yolo.ModelPath": "YOLO მოდელის ფაილის გზა (.onnx)"
+      "ConfigureOptions.Yolo.ModelPath": "YOLO მოდელის ფაილის გზა (.onnx)",
+      "ConfigureOptions.Yolo.RequestsPerSecond": "წამში მაქსიმალური მოთხოვნები (RPS)"
     },
     "930": {
       "Title": "ტყუპების განზრახვის დამმუშავებელი",
@@ -376,9 +379,30 @@
       "Title": "ყოველდღიური ენერგიის შეჯამება",
       "Description": "მოწყობილობის მიერ ყოველდღიური ენერგიის მოხმარება (Wt.s.).",
       "Widget.Statistics.DailyReport": "ყოველდღიური Wh ანგარიშში ჩართვა"
+    },
+    "200": {
+      "Title": "ვიდეო შეყვანა",
+      "Description": "იღებს აუდიო და ვიდეო ნაკადებს პირდაპირი მონიტორინგისთვის, რეალურ დროში დამუშავებისთვის და უწყვეტი ჩაწერისთვის.",
+      "VideoInput.Disable": "ამ შეყვანის გამორთვა",
+      "VideoInput.SourceURL": "ვიდეოს წყაროს URL",
+      "VideoInput.ImageFeed": "URL არის ერთიანი სურათის ფაილი, რომელიც პირდაპირ ეთერში განახლდება.",
+      "VideoInput.Username": "მომხმარებლის სახელი (არასავალდებულო)",
+      "VideoInput.Password": "პაროლი (არასავალდებულო)",
+      "Widget.Config.fps": "მაქსიმალური კადრი წამში",
+      "VideoOutput.Width": "გამომავალი ნაკადის სიგანე.",
+      "VideoOutput.SnapshotQuality": "ცოცხალი გამოსახულების ხარისხი."
+    },
+    "250": {
+      "Title": "ვიდეოჩამწერი",
+      "Description": "იწერს აუდიო და ვიდეო ნაკადებს ნებისმიერი შეყვანის წყაროდან. ჩანაწერები შეიძლება იყოს უწყვეტი, დაგეგმილი ან გააქტიურებული სიგნალიზაციის მოვლენებით.",
+      "NVR.EnableRecording": "ვიდეოჩანაწერის ჩართვა",
+      "NVR.RecordOnAlarm": "ჩაწერა სიგნალიზაციის დროს",
+      "NVR.ContinuousRecording": "უწყვეტი ჩაწერა."
     }
   },
   "scheduler_preset_action_genie_command": "ჯინის სარდლობა",
   "scheduler_preset_action_config_wish": "ბუნებრივი ენის მოქმედება",
-  "scheduler_preset_action_config_wish.placeholder": "სცადეთ: „დააყენეთ ტემპერატურა 22°-ზე და დაიწყეთ მზის ამოსვლის სცენა“"
+  "scheduler_preset_action_config_wish.placeholder": "სცადეთ: „დააყენეთ ტემპერატურა 22°-ზე და დაიწყეთ მზის ამოსვლის სცენა“",
+  "scheduler_preset_action_command_video_record_start": "ვიდეოს ჩაწერის დაწყება",
+  "scheduler_preset_action_command_video_record_stop": "ვიდეოს ჩაწერის შეჩერება"
 }

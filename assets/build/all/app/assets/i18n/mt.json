@@ -536,5 +536,15 @@
   "original_language": "Lingwa Oriġinali",
   "origin_country": "Pajjiż tal-Oriġini",
   "production_companies": "Kumpanija tal-Produzzjoni",
-  "movie_cast": "Atturi"
+  "movie_cast": "Atturi",
+  "live": "Ħaj",
+  "recordings": "Reġistrazzjonijiet",
+  "no_recordings": "L-ebda reġistrazzjoni.",
+  "live_feed": "Għalf Dirett",
+  "fullscreen_exit": "Oħroġ mill-Fullscreen",
+  "play_media": "Daqq il-Midja",
+  "start_recording": "Ibda r-Reġistrazzjoni",
+  "stop_recording": "Waqqaf ir-Reġistrazzjoni",
+  "toggle_smart_recording": "Reġistrazzjoni awtomatika fuq Allarm",
+  "search_metadata": "Metadata tat-Tiftix"
 }
