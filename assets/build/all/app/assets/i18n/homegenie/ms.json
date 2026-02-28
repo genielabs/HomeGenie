@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Tindakan Bahasa Semula Jadi",
   "scheduler_preset_action_config_wish.placeholder": "Cuba: \"Tetapkan suhu kepada 22° dan mulakan pemandangan Matahari Terbit\"",
   "scheduler_preset_action_command_video_record_start": "Mula Merakam Video",
-  "scheduler_preset_action_command_video_record_stop": "Hentikan Rakaman Video"
+  "scheduler_preset_action_command_video_record_stop": "Hentikan Rakaman Video",
+  "program_status_disposed": "Ditamatkan"
 }

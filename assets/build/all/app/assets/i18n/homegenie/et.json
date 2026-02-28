@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Loomuliku keele toiming",
   "scheduler_preset_action_config_wish.placeholder": "Proovi: „Seadista temperatuur 22°C peale ja käivita päikesetõusu stseen”",
   "scheduler_preset_action_command_video_record_start": "Alusta video salvestamist",
-  "scheduler_preset_action_command_video_record_stop": "Peata video salvestamine"
+  "scheduler_preset_action_command_video_record_stop": "Peata video salvestamine",
+  "program_status_disposed": "Lõpetatud"
 }

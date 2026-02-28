@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Hizkuntza Naturalaren Ekintza",
   "scheduler_preset_action_config_wish.placeholder": "Saiatu: \"Ezarri beroa 22°-tan eta hasi egunsentiaren eszena\"",
   "scheduler_preset_action_command_video_record_start": "Hasi bideoa grabatzen",
-  "scheduler_preset_action_command_video_record_stop": "Bideoa grabatzeari utzi"
+  "scheduler_preset_action_command_video_record_stop": "Bideoa grabatzeari utzi",
+  "program_status_disposed": "Amaitua"
 }

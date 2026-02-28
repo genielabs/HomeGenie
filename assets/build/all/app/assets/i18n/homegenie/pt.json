@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Ação de linguagem natural",
   "scheduler_preset_action_config_wish.placeholder": "Experimente: \"Ajuste a temperatura para 22° e inicie a cena Nascer do Sol\"",
   "scheduler_preset_action_command_video_record_start": "Iniciar gravação de vídeo",
-  "scheduler_preset_action_command_video_record_stop": "Pare de gravar vídeo"
+  "scheduler_preset_action_command_video_record_stop": "Pare de gravar vídeo",
+  "program_status_disposed": "Terminado"
 }

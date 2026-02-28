@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "ბუნებრივი ენის მოქმედება",
   "scheduler_preset_action_config_wish.placeholder": "სცადეთ: „დააყენეთ ტემპერატურა 22°-ზე და დაიწყეთ მზის ამოსვლის სცენა“",
   "scheduler_preset_action_command_video_record_start": "ვიდეოს ჩაწერის დაწყება",
-  "scheduler_preset_action_command_video_record_stop": "ვიდეოს ჩაწერის შეჩერება"
+  "scheduler_preset_action_command_video_record_stop": "ვიდეოს ჩაწერის შეჩერება",
+  "program_status_disposed": "შეწყვეტილია"
 }

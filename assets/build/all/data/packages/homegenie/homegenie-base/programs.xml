@@ -3268,7 +3268,7 @@ if (!FfmpegHelper.IsAvailable())
       $"in the **Automation Programs** section or by clicking the button below" +
       $"[program_disable,translate=NOTIFY.ffmpeg_required]"
   );
-  Pause(10);
+  Pause(15);
   return false;
 }
 
@@ -3550,6 +3550,7 @@ public class FfmpegStreamer
     private readonly object _frameLock = new object();
 
     public bool IsRunning { get; private set; } = false;
+    private bool _configurationChanged = false;
     private NetHelper netHelper;
 
     // Event to notify parent if the process dies unexpectedly
@@ -3571,6 +3572,7 @@ public class FfmpegStreamer
             || enableSnapshot != _enableSnapshot || snapshotOutputPath != _snapshotOutputPath
             || snapshotQuality != _snapshotQuality)
         {
+            _configurationChanged = true;
             Stop();
 
             _mode = mode; _url = url; _user = user; _pass = pass; _fps = fps; _width = width;
@@ -3590,6 +3592,11 @@ public class FfmpegStreamer
         if (!_enableHls &amp;&amp; !_enableSnapshot) return;
 
         IsRunning = true;
+        if (_configurationChanged)
+        {
+            _configurationChanged = false;
+            Thread.Sleep(3000);
+        }
         _cts = new CancellationTokenSource();
 
         var argsBuilder = new StringBuilder();
@@ -3804,17 +3811,29 @@ public class FfmpegStreamer
         IsRunning = false; // Flag immediately
         _cts?.Cancel();
 
-        try
+        if (_process != null)
         {
-            if (_process != null &amp;&amp; !_process.HasExited)
+            try
             {
-                // Give it a chance to close gracefully (important for mp4 atom writing)
-                if (_mode == FfmpegInputMode.Push) _process.StandardInput.Close();
-
-                if (!_process.WaitForExit(500))
-                    _process.Kill();
+                if (!_process.HasExited &amp;&amp; _mode == FfmpegInputMode.Push)
+                {
+                    _process.StandardInput.Close();
+                }
             }
-        } catch {}
+            catch { /* ignored */ }
+
+            try
+            {
+                if (!_process.HasExited)
+                {
+                    if (!_process.WaitForExit(2000))
+                    {
+                        _process.Kill(true);
+                    }
+                }
+            }
+            catch { /* ignored */ }
+        }
 
         _process = null;
         _cts = null;
@@ -3876,16 +3895,16 @@ public static class FfmpegHelper
     }
 }
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.5</PackageVersion>
       <Id>video-input</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>647609ECAAA8C3B2E44C1E4E90C7EAE6</Checksum>
+      <Checksum>9E89B7B28FEDACA61ABCD0BC30FEBBC8</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>200</Address>
@@ -3984,7 +4003,7 @@ When.ProgramStopping(() =&gt; {
     var workerList = new List&lt;CameraWorker&gt;(activeWorkers.Values);
     foreach (var w in workerList)
     {
-        w.Stop();
+        w.Stop(0, true);
     }
     activeWorkers.Clear();
     return true;
@@ -4147,7 +4166,7 @@ while (Program.IsRunning)
             if (!validAddresses.Contains(workerAddr))
             {
                 //Program.Notify("NVR System", "Feature disabled. Stopping worker: " + workerAddr);
-                kvp.Value.Stop();
+                kvp.Value.Stop(0, true);
                 workersToRemove.Add(workerAddr);
             }
         }
@@ -4242,7 +4261,7 @@ public class CameraWorker
     /// &lt;summary&gt;
     /// Stops the capture loop and finalizes the recording.
     /// &lt;/summary&gt;
-    public void Stop()
+    public void Stop(int delay, bool forceImmediate)
     {
         _shouldStop = true;
         if (_workerThread != null &amp;&amp; _workerThread.IsAlive)
@@ -4251,7 +4270,7 @@ public class CameraWorker
             if (!_workerThread.Join(2000))
                 _workerThread.Interrupt();
         }
-        _recorder.Stop(0);
+        _recorder.Stop(0, forceImmediate);
     }
 
     /// &lt;summary&gt;
@@ -4591,15 +4610,27 @@ public class FFmpegRecorder
     /// &lt;summary&gt;
     /// Stops the recording process and terminates FFmpeg.
     /// &lt;/summary&gt;
-    public void Stop(int delay)
+    public void Stop(int delay = 0, bool forceImmediate = false)
     {
         if (!_isRecording) return;
-        try
-        {
-            var ouputFile = _currentOutputMp4File;
-            var process = _ffmpegProcess;
-            Task.Run(() =&gt; {
-                Thread.Sleep(delay);
+
+        var ouputFile = _currentOutputMp4File;
+        var process = _ffmpegProcess;
+
+        _ffmpegProcess = null;
+        _ffmpegInputStream = null;
+        _isRecording = false;
+        _currentRecordingSessionFolder = "";
+        _currentOutputMp4File = "";
+
+        Action killAction = () =&gt; {
+            try
+            {
+                if (delay &gt; 0 &amp;&amp; !forceImmediate)
+                {
+                    Thread.Sleep(delay);
+                }
+
                 if (process != null &amp;&amp; !process.HasExited)
                 {
                     // Send the character 'q' to FFmpeg's Standard Input
@@ -4607,46 +4638,50 @@ public class FFmpegRecorder
                     {
                         try
                         {
-                            StreamWriter writer = process.StandardInput;
-                            writer.WriteLine("q");
-                            writer.Close();
+                            process.StandardInput.WriteLine("q");
+                            process.StandardInput.Close();
                         }
                         catch { /* Ignored */ }
                     }
-                    process.WaitForExit(10000);
+
+                    process.WaitForExit(forceImmediate ? 1000 : 10000);
 
                     // last resort
                     if (!process.HasExited)
                     {
-                        process.Kill();
+                        try { process.Kill(); } catch { }
                     }
 
                     process.Dispose();
 
                     // remove live playlist.*
-                    var dir = new DirectoryInfo(Path.Combine(Path.GetDirectoryName(ouputFile)));
-                    foreach (var file in dir.EnumerateFiles("playlist*")) {
-                        file.Delete();
-                    }
+                    try
+                    {
+                        var dir = new DirectoryInfo(Path.Combine(Path.GetDirectoryName(ouputFile)));
+                        if (dir.Exists)
+                        {
+                            foreach (var file in dir.EnumerateFiles("playlist*")) {
+                                file.Delete();
+                            }
+                        }
+                    } catch { }
 
-                    if (!string.IsNullOrWhiteSpace(ouputFile))
+                    if (!string.IsNullOrWhiteSpace(ouputFile) &amp;&amp; !forceImmediate)
                     {
                         MediaInfoService.GetMediaInfo(ouputFile);
                     }
                 }
-            });
-        }
-        catch (Exception)
+            }
+            catch { /* Ignored */ }
+        };
+
+        if (forceImmediate)
         {
-            // Ignored
+            killAction();
         }
-        finally
+        else
         {
-            _ffmpegProcess = null;
-            _ffmpegInputStream = null;
-            _isRecording = false;
-            _currentRecordingSessionFolder = "";
-            _currentOutputMp4File = "";
+            Task.Run(killAction);
         }
     }
 }
@@ -5172,9 +5207,9 @@ public class ThumbnailHelper
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.5</PackageVersion>
       <Id>video-recorder</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>23F8E51526FE777858AF5B8081A4D5B7</Checksum>
+      <Checksum>65B5F0EB261A81B8364054F7891D0F97</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>250</Address>

@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Табигый тил аракети",
   "scheduler_preset_action_config_wish.placeholder": "Төмөнкүлөрдү колдонуп көрүңүз: \"Жылуулукту 22° кылып, күн чыгышын баштаңыз\"",
   "scheduler_preset_action_command_video_record_start": "Видео жаздырууну баштоо",
-  "scheduler_preset_action_command_video_record_stop": "Видео жаздырууну токтотуу"
+  "scheduler_preset_action_command_video_record_stop": "Видео жаздырууну токтотуу",
+  "program_status_disposed": "Токтотулган"
 }

@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Aktionen in natürlicher Sprache",
   "scheduler_preset_action_config_wish.placeholder": "Versuchen Sie Folgendes: „Stellen Sie die Heizung auf 22° ein und starten Sie die Sonnenaufgangsszene.“",
   "scheduler_preset_action_command_video_record_start": "Videoaufnahme starten",
-  "scheduler_preset_action_command_video_record_stop": "Videoaufnahme stoppen"
+  "scheduler_preset_action_command_video_record_stop": "Videoaufnahme stoppen",
+  "program_status_disposed": "Beendet"
 }

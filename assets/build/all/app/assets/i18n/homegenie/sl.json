@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Dejanje naravnega jezika",
   "scheduler_preset_action_config_wish.placeholder": "Poskusite: \"Nastavite temperaturo na 22° in zaženite prizor sončnega vzhoda.\"",
   "scheduler_preset_action_command_video_record_start": "Začni snemanje videa",
-  "scheduler_preset_action_command_video_record_stop": "Ustavi snemanje videa"
+  "scheduler_preset_action_command_video_record_stop": "Ustavi snemanje videa",
+  "program_status_disposed": "Prekinjeno"
 }

@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Ayyukan Harshe na Halitta",
   "scheduler_preset_action_config_wish.placeholder": "Gwada: \"Saita zafin zuwa 22° kuma fara yanayin fitowar rana\"",
   "scheduler_preset_action_command_video_record_start": "Fara Rikodin Bidiyo",
-  "scheduler_preset_action_command_video_record_stop": "Dakatar da Rikodin Bidiyo"
+  "scheduler_preset_action_command_video_record_stop": "Dakatar da Rikodin Bidiyo",
+  "program_status_disposed": "An ƙare"
 }

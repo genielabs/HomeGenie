@@ -253,6 +253,8 @@
     "Stopping",
   "program_status_stopped":
     "Stopped",
+  "program_status_disposed":
+    "Terminato",
   "program_status_interrupted":
     "Interrotto",
   "program_status_disabled":

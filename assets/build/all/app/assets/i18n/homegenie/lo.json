@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "ການກະທຳທາງພາສາທຳມະຊາດ",
   "scheduler_preset_action_config_wish.placeholder": "ລອງ: \"ຕັ້ງຄວາມຮ້ອນໄວ້ທີ່ 22° ແລະ ເລີ່ມຕົ້ນສາກຕາເວັນຂຶ້ນ\"",
   "scheduler_preset_action_command_video_record_start": "ເລີ່ມການບັນທຶກວິດີໂອ",
-  "scheduler_preset_action_command_video_record_stop": "ຢຸດການບັນທຶກວິດີໂອ"
+  "scheduler_preset_action_command_video_record_stop": "ຢຸດການບັນທຶກວິດີໂອ",
+  "program_status_disposed": "ຢຸດຕິແລ້ວ"
 }

@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Zochita za Chilankhulo Chachilengedwe",
   "scheduler_preset_action_config_wish.placeholder": "Yesani: \"Ikani kutentha pa 22° ndipo yambani chiwonetsero cha Kutuluka kwa Dzuwa\"",
   "scheduler_preset_action_command_video_record_start": "Yambani Kujambula Kanema",
-  "scheduler_preset_action_command_video_record_stop": "Siyani Kujambula Kanema"
+  "scheduler_preset_action_command_video_record_stop": "Siyani Kujambula Kanema",
+  "program_status_disposed": "Yathetsedwa"
 }

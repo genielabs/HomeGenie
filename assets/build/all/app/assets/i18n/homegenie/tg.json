@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Амали забони табиӣ",
   "scheduler_preset_action_config_wish.placeholder": "Кӯшиш кунед: \"Ҳароратро ба 22° муқаррар кунед ва манзараи тулӯи офтобро оғоз кунед\"",
   "scheduler_preset_action_command_video_record_start": "Сабти видеоро оғоз кунед",
-  "scheduler_preset_action_command_video_record_stop": "Сабти видеоро қатъ кунед"
+  "scheduler_preset_action_command_video_record_stop": "Сабти видеоро қатъ кунед",
+  "program_status_disposed": "Қатъ карда шуд"
 }

@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Дзеянне з натуральнай мовай",
   "scheduler_preset_action_config_wish.placeholder": "Паспрабуйце: «Усталюйце тэмпературу на 22° і ўключыце сцэну ўзыходу сонца».",
   "scheduler_preset_action_command_video_record_start": "Пачаць запіс відэа",
-  "scheduler_preset_action_command_video_record_stop": "Спыніць запіс відэа"
+  "scheduler_preset_action_command_video_record_stop": "Спыніць запіс відэа",
+  "program_status_disposed": "Спынена"
 }

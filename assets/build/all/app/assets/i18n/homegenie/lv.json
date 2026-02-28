@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Dabiskās valodas darbība",
   "scheduler_preset_action_config_wish.placeholder": "Izmēģiniet: \"Iestatiet temperatūru uz 22° un sāciet saullēkta ainu\".",
   "scheduler_preset_action_command_video_record_start": "Sākt video ierakstīšanu",
-  "scheduler_preset_action_command_video_record_stop": "Apturēt video ierakstīšanu"
+  "scheduler_preset_action_command_video_record_stop": "Apturēt video ierakstīšanu",
+  "program_status_disposed": "Izbeigts"
 }

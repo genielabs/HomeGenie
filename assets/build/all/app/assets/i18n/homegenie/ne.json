@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "प्राकृतिक भाषा कार्य",
   "scheduler_preset_action_config_wish.placeholder": "प्रयास गर्नुहोस्: \"ताप २२° मा सेट गर्नुहोस् र सूर्योदय दृश्य सुरु गर्नुहोस्\"",
   "scheduler_preset_action_command_video_record_start": "भिडियो रेकर्डिङ सुरु गर्नुहोस्",
-  "scheduler_preset_action_command_video_record_stop": "भिडियो रेकर्डिङ रोक्नुहोस्"
+  "scheduler_preset_action_command_video_record_stop": "भिडियो रेकर्डिङ रोक्नुहोस्",
+  "program_status_disposed": "समाप्त भयो"
 }

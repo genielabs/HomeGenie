@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Hành động ngôn ngữ tự nhiên",
   "scheduler_preset_action_config_wish.placeholder": "Hãy thử: \"Đặt nhiệt độ ở mức 22° và bắt đầu cảnh bình minh\"",
   "scheduler_preset_action_command_video_record_start": "Bắt đầu quay video",
-  "scheduler_preset_action_command_video_record_stop": "Dừng quay video"
+  "scheduler_preset_action_command_video_record_stop": "Dừng quay video",
+  "program_status_disposed": "Đã chấm dứt"
 }

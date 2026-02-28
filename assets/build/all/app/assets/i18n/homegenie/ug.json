@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "تەبىئىي تىل ھەرىكىتى",
   "scheduler_preset_action_config_wish.placeholder": "سىناپ بېقىڭ: «تېمپېراتۇرىنى 22° غا تەڭشەپ، قۇياش چىقىش كۆرۈنۈشىنى باشلاڭ».",
   "scheduler_preset_action_command_video_record_start": "ۋىدېئو خاتىرىلەشنى باشلاڭ",
-  "scheduler_preset_action_command_video_record_stop": "ۋىدېئو خاتىرىلەشنى توختىتىش"
+  "scheduler_preset_action_command_video_record_stop": "ۋىدېئو خاتىرىلەشنى توختىتىش",
+  "program_status_disposed": "توختىتىلدى"
 }

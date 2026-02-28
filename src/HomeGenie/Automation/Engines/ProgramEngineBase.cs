@@ -195,17 +195,12 @@ namespace HomeGenie.Automation.Engines
 
         public void StopProgram()
         {
-            if (Stopping != null)
+            if (_programThread != null && ProgramBlock.IsRunning)
             {
-                try
-                {
-                    Stopping();
-                }
-                catch
-                {
-                    // ignored
-                }
+                HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus, "Stopping");
             }
+
+            var stoppingCallback = Stopping;
             ProgramBlock.IsRunning = false;
             //
             // cleanup and deallocation stuff here
@@ -222,22 +217,20 @@ namespace HomeGenie.Automation.Engines
             }
             _registeredApi.Clear();
             //
-            ((IProgramEngine) this).Unload();
-
-            if (_programThread == null) return;
-            HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus, "Stopping");
-            try
+            if (stoppingCallback != null)
             {
-                if (!_programThread.Join(HomeGenie.ProgramManager.Enabled ? 5000: 1000))
+                try
                 {
-                    _programThread.Interrupt();
+                    stoppingCallback();
+                }
+                catch
+                {
+                    // ignored
                 }
             }
-            catch
-            {
-                // ignored
-            }
-            _programThread = null;
+            //
+            ((IProgramEngine) this).Unload();
+            DisposeProgram();
         }
 
         public virtual List<ProgramError> Compile()
@@ -269,6 +262,26 @@ namespace HomeGenie.Automation.Engines
         }
 
         #endregion
+
+        private void DisposeProgram()
+        {
+            if (_programThread != null)
+            {
+                try
+                {
+                    if (!_programThread.Join(HomeGenie.ProgramManager.Enabled ? 10000 : 1000))
+                    {
+                        _programThread.Interrupt();
+                    }
+                }
+                catch
+                {
+                    // ignored
+                }
+            }
+            _programThread = null;
+            HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus, "Disposed");
+        }
 
         private void CheckProgramSchedule()
         {

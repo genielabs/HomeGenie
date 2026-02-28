@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Çalakiya Zimanê Xwezayî",
   "scheduler_preset_action_config_wish.placeholder": "Biceribîne: \"Germiyê deyne ser 22° û dîmena Hilatina Rojê bide destpêkirin\"",
   "scheduler_preset_action_command_video_record_start": "Dest bi Tomarkirina Vîdyoyê Bike",
-  "scheduler_preset_action_command_video_record_stop": "Tomarkirina Vîdyoyê Rawestîne"
+  "scheduler_preset_action_command_video_record_stop": "Tomarkirina Vîdyoyê Rawestîne",
+  "program_status_disposed": "Bi dawî hat"
 }

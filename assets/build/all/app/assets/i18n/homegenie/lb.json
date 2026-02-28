@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Aktioun vun der natierlecher Sprooch",
   "scheduler_preset_action_config_wish.placeholder": "Probéier: \"Setzt d'Hëtzt op 22° a start d'Sonnenopgangsszene\"",
   "scheduler_preset_action_command_video_record_start": "Video ophuelen ufänken",
-  "scheduler_preset_action_command_video_record_stop": "Video-Opnam stoppen"
+  "scheduler_preset_action_command_video_record_stop": "Video-Opnam stoppen",
+  "program_status_disposed": "Ofgeschloss"
 }

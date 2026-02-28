@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Δράση Φυσικής Γλώσσας",
   "scheduler_preset_action_config_wish.placeholder": "Δοκιμάστε: \"Ρυθμίστε τη θερμότητα στους 22° και ξεκινήστε τη σκηνή της ανατολής του ηλίου\"",
   "scheduler_preset_action_command_video_record_start": "Έναρξη εγγραφής βίντεο",
-  "scheduler_preset_action_command_video_record_stop": "Διακοπή εγγραφής βίντεο"
+  "scheduler_preset_action_command_video_record_stop": "Διακοπή εγγραφής βίντεο",
+  "program_status_disposed": "Τερματίστηκε"
 }

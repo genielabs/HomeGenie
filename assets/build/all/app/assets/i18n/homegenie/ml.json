@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "സ്വാഭാവിക ഭാഷാ പ്രവർത്തനം",
   "scheduler_preset_action_config_wish.placeholder": "\"താപനില 22° ആക്കി സൂര്യോദയ രംഗം ആരംഭിക്കൂ\" എന്ന് ശ്രമിക്കുക.",
   "scheduler_preset_action_command_video_record_start": "വീഡിയോ റെക്കോർഡിംഗ് ആരംഭിക്കുക",
-  "scheduler_preset_action_command_video_record_stop": "വീഡിയോ റെക്കോർഡിംഗ് നിർത്തുക"
+  "scheduler_preset_action_command_video_record_stop": "വീഡിയോ റെക്കോർഡിംഗ് നിർത്തുക",
+  "program_status_disposed": "അവസാനിപ്പിച്ചു"
 }

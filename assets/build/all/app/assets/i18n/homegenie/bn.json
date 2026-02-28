@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "প্রাকৃতিক ভাষা কর্ম",
   "scheduler_preset_action_config_wish.placeholder": "চেষ্টা করুন: \"তাপ ২২° এ সেট করুন এবং সূর্যোদয়ের দৃশ্য শুরু করুন\"",
   "scheduler_preset_action_command_video_record_start": "ভিডিও রেকর্ডিং শুরু করুন",
-  "scheduler_preset_action_command_video_record_stop": "ভিডিও রেকর্ডিং বন্ধ করুন"
+  "scheduler_preset_action_command_video_record_stop": "ভিডিও রেকর্ডিং বন্ধ করুন",
+  "program_status_disposed": "সমাপ্ত"
 }

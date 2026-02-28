@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "ස්වභාවික භාෂා ක්‍රියාව",
   "scheduler_preset_action_config_wish.placeholder": "උත්සාහ කරන්න: \"තාපය 22° ට සකසා හිරු උදාව දර්ශනය ආරම්භ කරන්න\"",
   "scheduler_preset_action_command_video_record_start": "වීඩියෝ පටිගත කිරීම ආරම්භ කරන්න",
-  "scheduler_preset_action_command_video_record_stop": "වීඩියෝ පටිගත කිරීම නවත්වන්න"
+  "scheduler_preset_action_command_video_record_stop": "වීඩියෝ පටිගත කිරීම නවත්වන්න",
+  "program_status_disposed": "අවසන් කරන ලදී"
 }

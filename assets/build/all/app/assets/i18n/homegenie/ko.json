@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "자연어 동작",
   "scheduler_preset_action_config_wish.placeholder": "\"온도를 22도로 설정하고 일출 장면을 시작해 보세요.\"",
   "scheduler_preset_action_command_video_record_start": "동영상 녹화 시작",
-  "scheduler_preset_action_command_video_record_stop": "동영상 녹화 중지"
+  "scheduler_preset_action_command_video_record_stop": "동영상 녹화 중지",
+  "program_status_disposed": "종료됨"
 }

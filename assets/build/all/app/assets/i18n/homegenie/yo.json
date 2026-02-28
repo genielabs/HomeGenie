@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Ìṣe Èdè Àdánidá",
   "scheduler_preset_action_config_wish.placeholder": "Gbìyànjú: \"Ṣètò ooru sí 22° kí o sì bẹ̀rẹ̀ sí í rí ìrísí ìlà oòrùn\"",
   "scheduler_preset_action_command_video_record_start": "Bẹ̀rẹ̀ sí Gbígbà Fídíò sílẹ̀",
-  "scheduler_preset_action_command_video_record_stop": "Dáwọ́ Gbígbàsílẹ̀ Fídíò dúró"
+  "scheduler_preset_action_command_video_record_stop": "Dáwọ́ Gbígbàsílẹ̀ Fídíò dúró",
+  "program_status_disposed": "Ti fopin si"
 }

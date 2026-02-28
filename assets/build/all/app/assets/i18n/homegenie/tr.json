@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Doğal Dil Eylemi",
   "scheduler_preset_action_config_wish.placeholder": "Şunu deneyin: \"Isıyı 22 dereceye ayarlayın ve Gün Doğumu sahnesini başlatın\"",
   "scheduler_preset_action_command_video_record_start": "Video Kaydını Başlat",
-  "scheduler_preset_action_command_video_record_stop": "Video kaydını durdur"
+  "scheduler_preset_action_command_video_record_stop": "Video kaydını durdur",
+  "program_status_disposed": "Sonlandırıldı"
 }

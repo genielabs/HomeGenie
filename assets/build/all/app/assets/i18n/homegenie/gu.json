@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "કુદરતી ભાષા ક્રિયા",
   "scheduler_preset_action_config_wish.placeholder": "\"ગરમી 22° પર સેટ કરો અને સૂર્યોદયનો દ્રશ્ય શરૂ કરો\" આનો પ્રયાસ કરો.",
   "scheduler_preset_action_command_video_record_start": "વિડિઓ રેકોર્ડ કરવાનું શરૂ કરો",
-  "scheduler_preset_action_command_video_record_stop": "વિડિઓ રેકોર્ડ કરવાનું બંધ કરો"
+  "scheduler_preset_action_command_video_record_stop": "વિડિઓ રેકોર્ડ કરવાનું બંધ કરો",
+  "program_status_disposed": "સમાપ્ત"
 }

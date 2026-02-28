@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Բնական լեզվի գործողություն",
   "scheduler_preset_action_config_wish.placeholder": "Փորձեք. «Ջերմությունը սահմանեք 22°-ի և սկսեք Արևածագի տեսարանը»",
   "scheduler_preset_action_command_video_record_start": "Սկսել տեսանյութի ձայնագրումը",
-  "scheduler_preset_action_command_video_record_stop": "Դադարեցնել տեսանյութի ձայնագրությունը"
+  "scheduler_preset_action_command_video_record_stop": "Դադարեցնել տեսանյութի ձայնագրությունը",
+  "program_status_disposed": "Դադարեցված է"
 }

@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Akcia v prirodzenom jazyku",
   "scheduler_preset_action_config_wish.placeholder": "Skúste: „Nastavte teplotu na 22 ° a spustite scénu s východom slnka.“",
   "scheduler_preset_action_command_video_record_start": "Spustiť nahrávanie videa",
-  "scheduler_preset_action_command_video_record_stop": "Zastaviť nahrávanie videa"
+  "scheduler_preset_action_command_video_record_stop": "Zastaviť nahrávanie videa",
+  "program_status_disposed": "Ukončené"
 }

@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "இயற்கை மொழி செயல்",
   "scheduler_preset_action_config_wish.placeholder": "\"வெப்பத்தை 22° ஆக அமைத்து சூரிய உதயக் காட்சியைத் தொடங்கு\" என்பதை முயற்சிக்கவும்.",
   "scheduler_preset_action_command_video_record_start": "வீடியோவைப் பதிவுசெய்யத் தொடங்கு",
-  "scheduler_preset_action_command_video_record_stop": "வீடியோ பதிவு செய்வதை நிறுத்து"
+  "scheduler_preset_action_command_video_record_stop": "வீடியோ பதிவு செய்வதை நிறுத்து",
+  "program_status_disposed": "நிறுத்தப்பட்டது"
 }

@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "การกระทำภาษาธรรมชาติ",
   "scheduler_preset_action_config_wish.placeholder": "ลองทำตามนี้: \"ตั้งค่าความร้อนเป็น 22° แล้วเริ่มฉากพระอาทิตย์ขึ้น\"",
   "scheduler_preset_action_command_video_record_start": "เริ่มบันทึกวิดีโอ",
-  "scheduler_preset_action_command_video_record_stop": "หยุดบันทึกวิดีโอ"
+  "scheduler_preset_action_command_video_record_stop": "หยุดบันทึกวิดีโอ",
+  "program_status_disposed": "ยุติแล้ว"
 }

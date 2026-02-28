@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Akcja języka naturalnego",
   "scheduler_preset_action_config_wish.placeholder": "Spróbuj: „Ustaw temperaturę na 22° i uruchom scenę Wschodu słońca”",
   "scheduler_preset_action_command_video_record_start": "Rozpocznij nagrywanie wideo",
-  "scheduler_preset_action_command_video_record_stop": "Zatrzymaj nagrywanie wideo"
+  "scheduler_preset_action_command_video_record_stop": "Zatrzymaj nagrywanie wideo",
+  "program_status_disposed": "Zakończony"
 }

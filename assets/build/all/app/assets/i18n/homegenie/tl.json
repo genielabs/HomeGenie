@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Aksyon sa Likas na Wika",
   "scheduler_preset_action_config_wish.placeholder": "Subukan: \"Itakda ang init sa 22° at simulan ang eksena ng Pagsikat ng Araw\"",
   "scheduler_preset_action_command_video_record_start": "Simulan ang Pag-record ng Video",
-  "scheduler_preset_action_command_video_record_stop": "Itigil ang Pagre-record ng Video"
+  "scheduler_preset_action_command_video_record_stop": "Itigil ang Pagre-record ng Video",
+  "program_status_disposed": "Tinapos"
 }

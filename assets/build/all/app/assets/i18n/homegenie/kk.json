@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Табиғи тіл әрекеті",
   "scheduler_preset_action_config_wish.placeholder": "Мынаны қолданып көріңіз: \"Температураны 22°-қа қойып, күн шығу көрінісін бастаңыз\".",
   "scheduler_preset_action_command_video_record_start": "Бейне жазуды бастау",
-  "scheduler_preset_action_command_video_record_stop": "Бейне жазуды тоқтату"
+  "scheduler_preset_action_command_video_record_stop": "Бейне жазуды тоқтату",
+  "program_status_disposed": "Тоқтатылды"
 }

@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "प्राकृतिक भाषा क्रिया",
   "scheduler_preset_action_config_wish.placeholder": "यह आजमाएं: \"तापमान को 22° पर सेट करें और सूर्योदय का दृश्य शुरू करें\"",
   "scheduler_preset_action_command_video_record_start": "वीडियो रिकॉर्डिंग शुरू करें",
-  "scheduler_preset_action_command_video_record_stop": "वीडियो रिकॉर्डिंग बंद करें"
+  "scheduler_preset_action_command_video_record_stop": "वीडियो रिकॉर्डिंग बंद करें",
+  "program_status_disposed": "समाप्त"
 }

@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Acció de llenguatge natural",
   "scheduler_preset_action_config_wish.placeholder": "Prova: \"Posa la calefacció a 22° i comença l'escena de la sortida del sol\"",
   "scheduler_preset_action_command_video_record_start": "Comença a gravar vídeo",
-  "scheduler_preset_action_command_video_record_stop": "Atura la gravació de vídeo"
+  "scheduler_preset_action_command_video_record_stop": "Atura la gravació de vídeo",
+  "program_status_disposed": "Finalitzat"
 }

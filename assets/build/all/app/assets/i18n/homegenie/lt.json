@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Natūralios kalbos veiksmas",
   "scheduler_preset_action_config_wish.placeholder": "Pabandykite: „Nustatykite 22° temperatūrą ir paleiskite saulėtekio sceną“.",
   "scheduler_preset_action_command_video_record_start": "Pradėti vaizdo įrašymą",
-  "scheduler_preset_action_command_video_record_stop": "Sustabdyti vaizdo įrašymą"
+  "scheduler_preset_action_command_video_record_stop": "Sustabdyti vaizdo įrašymą",
+  "program_status_disposed": "Nutraukta"
 }

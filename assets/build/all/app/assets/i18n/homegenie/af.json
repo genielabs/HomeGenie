@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Natuurlike Taalaksie",
   "scheduler_preset_action_config_wish.placeholder": "Probeer: \"Stel die hitte op 22° en begin die Sonsopkoms-toneel\"",
   "scheduler_preset_action_command_video_record_start": "Begin video-opname",
-  "scheduler_preset_action_command_video_record_stop": "Stop die opname van video"
+  "scheduler_preset_action_command_video_record_stop": "Stop die opname van video",
+  "program_status_disposed": "Beëindig"
 }

@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Mahi Reo Māori",
   "scheduler_preset_action_config_wish.placeholder": "Whakamātauria: \"Whakatakotoria te wera ki te 22° ka tīmata te tirohanga o te Rāwhiti\"",
   "scheduler_preset_action_command_video_record_start": "Tīmata te Tuhi Ataata",
-  "scheduler_preset_action_command_video_record_stop": "Kati te Tuhi Ataata"
+  "scheduler_preset_action_command_video_record_stop": "Kati te Tuhi Ataata",
+  "program_status_disposed": "Kua mutu"
 }

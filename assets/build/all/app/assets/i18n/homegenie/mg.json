@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Hetsika amin'ny fiteny voajanahary",
   "scheduler_preset_action_config_wish.placeholder": "Andramo: \"Apetraho amin'ny 22° ny hafanana ary atombohy ny fiposahan'ny masoandro\"",
   "scheduler_preset_action_command_video_record_start": "Atombohy ny fandraketana horonan-tsary",
-  "scheduler_preset_action_command_video_record_stop": "Atsaharo ny fandraketana horonan-tsary"
+  "scheduler_preset_action_command_video_record_stop": "Atsaharo ny fandraketana horonan-tsary",
+  "program_status_disposed": "faranana"
 }

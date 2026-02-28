@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "قدرتی زبان کا عمل",
   "scheduler_preset_action_config_wish.placeholder": "کوشش کریں: \"گرمی کو 22° پر سیٹ کریں اور طلوع آفتاب کا منظر شروع کریں\"",
   "scheduler_preset_action_command_video_record_start": "ویڈیو ریکارڈنگ شروع کریں۔",
-  "scheduler_preset_action_command_video_record_stop": "ویڈیو ریکارڈ کرنا بند کریں۔"
+  "scheduler_preset_action_command_video_record_stop": "ویڈیو ریکارڈ کرنا بند کریں۔",
+  "program_status_disposed": "ختم"
 }

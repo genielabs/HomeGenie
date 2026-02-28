@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Gníomh Teanga Nádúrtha",
   "scheduler_preset_action_config_wish.placeholder": "Bain triail as: \"Socraigh an teas go 22° agus cuir tús leis an radharc Éirí Gréine\"",
   "scheduler_preset_action_command_video_record_start": "Tosaigh ag Taifeadadh Físeáin",
-  "scheduler_preset_action_command_video_record_stop": "Stop a Thaifeadadh Físeáin"
+  "scheduler_preset_action_command_video_record_stop": "Stop a Thaifeadadh Físeáin",
+  "program_status_disposed": "Foirceannta"
 }

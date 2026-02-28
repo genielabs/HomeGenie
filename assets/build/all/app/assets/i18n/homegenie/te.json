@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "సహజ భాషా చర్య",
   "scheduler_preset_action_config_wish.placeholder": "\"వేడిని 22°కి సెట్ చేసి సూర్యోదయ దృశ్యాన్ని ప్రారంభించండి\" అని ప్రయత్నించండి.",
   "scheduler_preset_action_command_video_record_start": "వీడియో రికార్డింగ్ ప్రారంభించండి",
-  "scheduler_preset_action_command_video_record_stop": "వీడియో రికార్డింగ్ ఆపివేయి"
+  "scheduler_preset_action_command_video_record_stop": "వీడియో రికార్డింగ్ ఆపివేయి",
+  "program_status_disposed": "రద్దు చేయబడింది"
 }

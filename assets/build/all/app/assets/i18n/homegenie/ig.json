@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Omume Asụsụ Okike",
   "scheduler_preset_action_config_wish.placeholder": "Nwaa: \"Tọọ okpomọkụ ahụ ruo 22° wee malite ihe nkiri Ọwụwa Anyanwụ\"",
   "scheduler_preset_action_command_video_record_start": "Malite ịdekọ vidiyo",
-  "scheduler_preset_action_command_video_record_stop": "Kwụsị Ịdekọ Vidiyo"
+  "scheduler_preset_action_command_video_record_stop": "Kwụsị Ịdekọ Vidiyo",
+  "program_status_disposed": "Akwụsịla"
 }

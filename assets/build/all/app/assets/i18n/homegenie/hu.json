@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Természetes nyelvi cselekvés",
   "scheduler_preset_action_config_wish.placeholder": "Próbáld ki: „Állítsd a hőmérsékletet 22°C-ra, és indítsd el a Napfelkelte jelenetet”",
   "scheduler_preset_action_command_video_record_start": "Videófelvétel indítása",
-  "scheduler_preset_action_command_video_record_stop": "Videófelvétel leállítása"
+  "scheduler_preset_action_command_video_record_stop": "Videófelvétel leállítása",
+  "program_status_disposed": "Lezárva"
 }

@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Acțiune în limbaj natural",
   "scheduler_preset_action_config_wish.placeholder": "Încearcă: „Setează temperatura la 22° și pornește scena Răsărit de soare”",
   "scheduler_preset_action_command_video_record_start": "Începeți înregistrarea videoclipului",
-  "scheduler_preset_action_command_video_record_stop": "Opriți înregistrarea video"
+  "scheduler_preset_action_command_video_record_stop": "Opriți înregistrarea video",
+  "program_status_disposed": "Terminat"
 }

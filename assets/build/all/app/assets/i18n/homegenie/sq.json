@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Veprimi i Gjuhës Natyrore",
   "scheduler_preset_action_config_wish.placeholder": "Provo: \"Vendos nxehtësinë në 22° dhe fillo skenën e Lindjes së Diellit\"",
   "scheduler_preset_action_command_video_record_start": "Filloni regjistrimin e videos",
-  "scheduler_preset_action_command_video_record_stop": "Ndalo regjistrimin e videos"
+  "scheduler_preset_action_command_video_record_stop": "Ndalo regjistrimin e videos",
+  "program_status_disposed": "Përfunduar"
 }

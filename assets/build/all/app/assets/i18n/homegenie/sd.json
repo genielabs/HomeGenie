@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "قدرتي ٻولي جو عمل",
   "scheduler_preset_action_config_wish.placeholder": "ڪوشش ڪريو: \"گرمي کي 22° تي سيٽ ڪريو ۽ سج اڀرڻ جو منظر شروع ڪريو\"",
   "scheduler_preset_action_command_video_record_start": "وڊيو رڪارڊنگ شروع ڪريو",
-  "scheduler_preset_action_command_video_record_stop": "وڊيو رڪارڊ ڪرڻ بند ڪريو"
+  "scheduler_preset_action_command_video_record_stop": "وڊيو رڪارڊ ڪرڻ بند ڪريو",
+  "program_status_disposed": "ختم ٿيل"
 }

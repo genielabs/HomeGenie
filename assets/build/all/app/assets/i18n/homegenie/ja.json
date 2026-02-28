@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "自然言語アクション",
   "scheduler_preset_action_config_wish.placeholder": "試してみましょう: 「暖房を 22 度に設定して日の出シーンを開始してください」",
   "scheduler_preset_action_command_video_record_start": "ビデオ録画を開始",
-  "scheduler_preset_action_command_video_record_stop": "ビデオ録画を停止"
+  "scheduler_preset_action_command_video_record_stop": "ビデオ録画を停止",
+  "program_status_disposed": "終了しました"
 }

@@ -724,7 +724,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
     "text"
   ).AddOption(
     YoloRequestsPerSecond,
-    "5",
+    "15",
     "2. Max Requests Per Second (RPS)",
     "slider:1:30:1"
   );
@@ -757,6 +757,16 @@ if (String.IsNullOrEmpty(yoloModelPath))
     return;
 }
 
+var breathe = () =&gt; {
+    if (requestsPerSecond.DecimalValue &gt; 0)
+    {
+        Pause(1D / requestsPerSecond.DecimalValue);
+    }
+    else
+    {
+        Pause(0.2); // default is 5 RPS max
+    }
+};
 
 // For details about this implemention see
 // *ML.net* and *YoloSharp* documentation
@@ -773,18 +783,18 @@ try
             Pause(1);
             continue;
         }
-        inputModules.Command("Camera.GetPicture").Submit((m, data) =&gt; {
+        inputModules.Each((module) =&gt; {
+            var data = module.Command("Camera.GetPicture").GetValue();
             if (data == null || ((byte[])data).Length == 0)
             {
                 // I/O errors might occasionally occur and can be ignored
-                return;
+                return false;
             }
             try
             {
                 var result = detectPredictor.Segment((byte[])data);
                 //Console.WriteLine($"Result: {result}");
                 //Console.WriteLine($"Speed:  {result.Speed}");
-                var module = Modules.InDomain(m.Domain).WithAddress(m.Address).Get();
                 if (result.Count() &gt; 0)
                 {
                     var output = new List&lt;SegmentResult&gt;();
@@ -857,23 +867,18 @@ try
                 errorOccurred = true;
                 //Console.WriteLine(e.Message);
             }
-        });
-        if (errorOccurred)
-        {
-            errorOccurred = false;
-            Pause(3);
-        }
-        else
-        {
-            if (requestsPerSecond.DecimalValue &gt; 0)
+            if (errorOccurred)
             {
-                Pause(1D / requestsPerSecond.DecimalValue);
+                errorOccurred = false;
+                Pause(3);
             }
             else
             {
-                Pause(0.2); // default is 5 RPS max
+                breathe();
             }
-        }
+            return false;
+        });
+        breathe();
     }
 }
 catch (Exception e)
@@ -1004,16 +1009,16 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     return contour;
 }
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>instance-segmentation</Id>
-      <Version>1.0.3</Version>
+      <Version>1.0.4</Version>
       <Required>true</Required>
-      <Checksum>AD92A3DD40DDDFBFE4A69385C64AF26A</Checksum>
+      <Checksum>3528F3E52DBF04D625ADB9BCA5DDE645</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>912</Address>
@@ -2000,7 +2005,7 @@ public ModelParams GetOptimizedParams(string modelPath)
     "text"
   ).AddOption(
     YoloRequestsPerSecond,
-    "5",
+    "15",
     "2. Max Requests Per Second (RPS)",
     "slider:1:30:1"
   );
@@ -2033,10 +2038,19 @@ if (String.IsNullOrEmpty(modelPath))
     return;
 }
 
+var breathe = () =&gt; {
+    if (requestsPerSecond.DecimalValue &gt; 0)
+    {
+        Pause(1D / requestsPerSecond.DecimalValue);
+    }
+    else
+    {
+        Pause(0.2); // default is 5 RPS max
+    }
+};
 
 // For details about this implemention see
 // *ML.net* and *YoloSharp* documentation
-
 
 try
 {
@@ -2049,18 +2063,18 @@ try
             Pause(1);
             continue;
         }
-        inputModules.Command("Camera.GetPicture").Submit((m, data) =&gt; {
+        inputModules.Each((module) =&gt; {
+            var data = module.Command("Camera.GetPicture").GetValue();
             if (data == null || ((byte[])data).Length == 0)
             {
                 // I/O errors might occasionally occur and can be ignored
-                return;
+                return false;
             }
             try
             {
                 var result = detectPredictor.Detect((byte[])data, new YoloConfiguration { Confidence = 0.35f });
                 //Console.WriteLine($"Result: {result}");
                 //Console.WriteLine($"Speed:  {result.Speed}");
-                var module = Modules.InDomain(m.Domain).WithAddress(m.Address).Get();
                 if (result.Count() &gt; 0)
                 {
                     var jsonResults = "";
@@ -2127,15 +2141,13 @@ try
                 errorOccurred = false;
                 Pause(3);
             }
+            else
+            {
+                breathe();
+            }
+            return false;
         });
-        if (requestsPerSecond.DecimalValue &gt; 0)
-        {
-            Pause(1D / requestsPerSecond.DecimalValue);
-        }
-        else
-        {
-            Pause(0.2); // default is 5 RPS max
-        }
+        breathe();
     }
 }
 catch (Exception e)
@@ -2156,16 +2168,16 @@ ObjectDetect = "Sensor.ObjectDetect",
 ObjectDetectSubject = "Sensor.ObjectDetect.Subject",
 VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>object-detection</Id>
-      <Version>1.0.3</Version>
+      <Version>1.0.4</Version>
       <Required>true</Required>
-      <Checksum>9BBE2416C9A0E9AC60ADCEF095CA1C86</Checksum>
+      <Checksum>543179FB402664F2184C5E4545D458D5</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>910</Address>
@@ -2209,7 +2221,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     "text"
   ).AddOption(
     YoloRequestsPerSecond,
-    "5",
+    "15",
     "2. Max Requests Per Second (RPS)",
     "slider:1:30:1"
   );
@@ -2242,6 +2254,16 @@ if (String.IsNullOrEmpty(yoloModelPath))
     return;
 }
 
+var breathe = () =&gt; {
+    if (requestsPerSecond.DecimalValue &gt; 0)
+    {
+        Pause(1D / requestsPerSecond.DecimalValue);
+    }
+    else
+    {
+        Pause(0.2); // default is 5 RPS max
+    }
+};
 
 // For details about this implemention see
 // *ML.net* and *YoloSharp* documentation
@@ -2258,15 +2280,15 @@ try
             Pause(1);
             continue;
         }
-        inputModules.Command("Camera.GetPicture").Submit((m, data) =&gt; {
+        inputModules.Each((module) =&gt; {
+            var data = module.Command("Camera.GetPicture").GetValue();
             if (data == null || ((byte[])data).Length == 0)
             {
                 // I/O errors might occasionally occur and can be ignored
-                return;
+                return false;
             }
             try
             {
-                var module = Modules.InDomain(m.Domain).WithAddress(m.Address).Get();
                 var result = detectPredictor.Pose((byte[])data);
                 //Console.WriteLine($"Result: {result}");
                 //Console.WriteLine($"Speed:  {result.Speed}");
@@ -2301,23 +2323,18 @@ try
                 errorOccurred = true;
                 Program.Notify(e.Message);
             }
-        });
-        if (errorOccurred)
-        {
-            errorOccurred = false;
-            Pause(3);
-        }
-        else
-        {
-            if (requestsPerSecond.DecimalValue &gt; 0)
+            return false;
+            if (errorOccurred)
             {
-                Pause(1D / requestsPerSecond.DecimalValue);
+                errorOccurred = false;
+                Pause(3);
             }
             else
             {
-                Pause(0.2); // default is 5 RPS max
+                breathe();
             }
-        }
+        });
+        breathe();
     }
 }
 catch (Exception e)
@@ -2337,16 +2354,16 @@ ObjectDetect = "Sensor.ObjectDetect",
 ObjectDetectSubject = "Sensor.ObjectDetect.Subject",
 VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>pose-estimation</Id>
-      <Version>1.0.3</Version>
+      <Version>1.0.4</Version>
       <Required>true</Required>
-      <Checksum>B6C921277F8E9E598F3050ED3D92A7AA</Checksum>
+      <Checksum>E14D24AB2677F4CBCB5DCBC2D022DD9F</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>911</Address>

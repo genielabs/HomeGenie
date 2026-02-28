@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Акција природног језика",
   "scheduler_preset_action_config_wish.placeholder": "Пробајте: „Подесите температуру на 22° и покрените сцену изласка сунца“",
   "scheduler_preset_action_command_video_record_start": "Почни снимање видеа",
-  "scheduler_preset_action_command_video_record_stop": "Заустави снимање видеа"
+  "scheduler_preset_action_command_video_record_stop": "Заустави снимање видеа",
+  "program_status_disposed": "Прекинуто"
 }

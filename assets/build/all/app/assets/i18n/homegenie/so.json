@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Ficilka Luqadda Dabiiciga ah",
   "scheduler_preset_action_config_wish.placeholder": "Isku day: \"Kuleylka dhig 22° oo bilow muuqaalka Qorrax-soo-baxa\"",
   "scheduler_preset_action_command_video_record_start": "Bilow Duubista Fiidiyowga",
-  "scheduler_preset_action_command_video_record_stop": "Jooji Duubista Fiidiyowga"
+  "scheduler_preset_action_command_video_record_stop": "Jooji Duubista Fiidiyowga",
+  "program_status_disposed": "La joojiyay"
 }

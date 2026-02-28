@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "自然语言行动",
   "scheduler_preset_action_config_wish.placeholder": "试试：“将温度设置为 22°，然后开始日出场景”",
   "scheduler_preset_action_command_video_record_start": "开始录制视频",
-  "scheduler_preset_action_command_video_record_stop": "停止录制视频"
+  "scheduler_preset_action_command_video_record_stop": "停止录制视频",
+  "program_status_disposed": "终止"
 }

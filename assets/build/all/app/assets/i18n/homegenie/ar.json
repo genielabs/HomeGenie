@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "لغة طبيعية",
   "scheduler_preset_action_config_wish.placeholder": "جرب: \"اضبط درجة الحرارة على 22 درجة وابدأ مشهد شروق الشمس\"",
   "scheduler_preset_action_command_video_record_start": "ابدأ تسجيل الفيديو",
-  "scheduler_preset_action_command_video_record_stop": "أوقف تسجيل الفيديو"
+  "scheduler_preset_action_command_video_record_stop": "أوقف تسجيل الفيديو",
+  "program_status_disposed": "إنهاء"
 }

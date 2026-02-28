@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Aksyon Lang Natirèl",
   "scheduler_preset_action_config_wish.placeholder": "Eseye: \"Mete chalè a sou 22° epi kòmanse sèn Lever solèy la\"",
   "scheduler_preset_action_command_video_record_start": "Kòmanse Anrejistre Videyo",
-  "scheduler_preset_action_command_video_record_stop": "Sispann Anrejistreman Videyo"
+  "scheduler_preset_action_command_video_record_stop": "Sispann Anrejistreman Videyo",
+  "program_status_disposed": "Fini"
 }

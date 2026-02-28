@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Təbii Dil Fəaliyyəti",
   "scheduler_preset_action_config_wish.placeholder": "Sınayın: \"İstiliyi 22°-yə qoyun və Günəşin doğuş səhnəsini başlayın\"",
   "scheduler_preset_action_command_video_record_start": "Video Yazmağa Başlayın",
-  "scheduler_preset_action_command_video_record_stop": "Video Yazını Dayandırın"
+  "scheduler_preset_action_command_video_record_stop": "Video Yazını Dayandırın",
+  "program_status_disposed": "Xitam verildi"
 }

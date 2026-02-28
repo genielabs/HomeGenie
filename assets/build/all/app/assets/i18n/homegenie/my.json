@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "သဘာဝဘာသာစကားလုပ်ဆောင်ချက်",
   "scheduler_preset_action_config_wish.placeholder": "စမ်းကြည့်ပါ- \"အပူချိန်ကို ၂၂° ထားပြီး နေထွက်မြင်ကွင်းကို စတင်ပါ\"",
   "scheduler_preset_action_command_video_record_start": "ဗီဒီယိုရိုက်ကူးခြင်း စတင်ပါ",
-  "scheduler_preset_action_command_video_record_stop": "ဗီဒီယိုရိုက်ကူးခြင်းကို ရပ်ပါ"
+  "scheduler_preset_action_command_video_record_stop": "ဗီဒီယိုရိုက်ကူးခြင်းကို ရပ်ပါ",
+  "program_status_disposed": "ရပ်ဆိုင်းလိုက်ပါပြီ"
 }

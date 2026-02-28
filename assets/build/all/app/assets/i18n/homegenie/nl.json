@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Natuurlijke taalactie",
   "scheduler_preset_action_config_wish.placeholder": "Probeer: \"Stel de temperatuur in op 22° en start de zonsopgangscène\"",
   "scheduler_preset_action_command_video_record_start": "Start met het opnemen van video",
-  "scheduler_preset_action_command_video_record_stop": "Stop met het opnemen van de video."
+  "scheduler_preset_action_command_video_record_stop": "Stop met het opnemen van de video.",
+  "program_status_disposed": "Beëindigd"
 }

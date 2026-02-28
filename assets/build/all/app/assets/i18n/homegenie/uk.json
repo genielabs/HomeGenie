@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Дія природної мови",
   "scheduler_preset_action_config_wish.placeholder": "Спробуйте: «Встановіть температуру на 22° та запустіть сцену зі сходом сонця».",
   "scheduler_preset_action_command_video_record_start": "Почати запис відео",
-  "scheduler_preset_action_command_video_record_stop": "Зупинити запис відео"
+  "scheduler_preset_action_command_video_record_stop": "Зупинити запис відео",
+  "program_status_disposed": "Припинено"
 }

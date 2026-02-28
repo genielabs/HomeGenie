@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "ପ୍ରାକୃତିକ ଭାଷା କାର୍ଯ୍ୟ",
   "scheduler_preset_action_config_wish.placeholder": "ଚେଷ୍ଟା କରନ୍ତୁ: \"ତାପକୁ 22° ରେ ସେଟ୍ କରନ୍ତୁ ଏବଂ ସୂର୍ଯ୍ୟୋଦୟ ଦୃଶ୍ୟ ଆରମ୍ଭ କରନ୍ତୁ\"",
   "scheduler_preset_action_command_video_record_start": "ଭିଡିଓ ରେକର୍ଡିଂ ଆରମ୍ଭ କରନ୍ତୁ",
-  "scheduler_preset_action_command_video_record_stop": "ଭିଡିଓ ରେକର୍ଡିଂ ବନ୍ଦ କରନ୍ତୁ"
+  "scheduler_preset_action_command_video_record_stop": "ଭିଡିଓ ରେକର୍ଡିଂ ବନ୍ଦ କରନ୍ତୁ",
+  "program_status_disposed": "ସମାପ୍ତ କରାଗଲା"
 }

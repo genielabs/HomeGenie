@@ -404,5 +404,6 @@
   "scheduler_preset_action_config_wish": "Действия на естественном языке",
   "scheduler_preset_action_config_wish.placeholder": "Попробуйте: \"Установите температуру на 22° и запустите сцену \"Восход солнца\"\".",
   "scheduler_preset_action_command_video_record_start": "Начать запись видео",
-  "scheduler_preset_action_command_video_record_stop": "Остановить запись видео"
+  "scheduler_preset_action_command_video_record_stop": "Остановить запись видео",
+  "program_status_disposed": "Завершено"
 }
