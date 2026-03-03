@@ -32,6 +32,10 @@
         <Address>5</Address>
         <Domain>Media.Video</Domain>
       </ModuleReference>
+      <ModuleReference>
+        <Address>6</Address>
+        <Domain>Media.Video</Domain>
+      </ModuleReference>
     </Modules>
   </Group>
 </ArrayOfGroup>

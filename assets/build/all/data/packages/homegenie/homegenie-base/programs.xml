@@ -3268,7 +3268,7 @@ if (!FfmpegHelper.IsAvailable())
       $"in the **Automation Programs** section or by clicking the button below" +
       $"[program_disable,translate=NOTIFY.ffmpeg_required]"
   );
-  Pause(15);
+  Pause(10);
   return false;
 }
 
@@ -3501,7 +3501,7 @@ Program.GoBackground();
 </ScriptSource>
     <ScriptContext>#using System.Diagnostics
 
-const int VideoModulesCount = 5;
+const int VideoModulesCount = 6;
 const string MediaVideoDomain = "Media.Video";
 const string VideoInputDisable = "VideoInput.Disable";
 const string VideoInputSourceUrl = "VideoInput.SourceURL";
@@ -3592,17 +3592,29 @@ public class FfmpegStreamer
         if (!_enableHls &amp;&amp; !_enableSnapshot) return;
 
         IsRunning = true;
+
         if (_configurationChanged)
         {
             _configurationChanged = false;
-            Thread.Sleep(3000);
+            
+            Task.Run(async () =&gt; 
+            {
+                await Task.Delay(3000); 
+                ExecuteFfmpegStart();
+            });
         }
+        else
+        {
+            ExecuteFfmpegStart();
+        }
+    }
+
+    private void ExecuteFfmpegStart()
+    {
         _cts = new CancellationTokenSource();
 
         var argsBuilder = new StringBuilder();
 
-        // CORREZIONE: Mettiamo -y (overwrite) QUI, così vale per TUTTI i modi (Push e Pull).
-        // Essenziale ora che non cancelliamo più la cartella intera.
         argsBuilder.Append("-y ");
 
         // --- INPUT CONFIGURATION ---
@@ -3902,9 +3914,9 @@ public static class FfmpegHelper
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.5</PackageVersion>
       <Id>video-input</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>9E89B7B28FEDACA61ABCD0BC30FEBBC8</Checksum>
+      <Checksum>EE013ACBF939D795E826A018BB5698D7</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>200</Address>
