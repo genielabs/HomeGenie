@@ -61,17 +61,21 @@ Download the `.zip` archive corresponding to your operating system and architect
 | Raspberry Pi (64-bit) | `homegenie_*_linux-arm64.zip`      |
 | .NET Framework 4.7.2  | `homegenie_*_net472.zip`           |
 
-After downloading, unzip the archive. A new `homegenie` folder will be created.
+After downloading, unzip the archive to your preferred location. 
 
-### Running from a Terminal
+### 🚀 Starting HomeGenie
 
-Navigate to the `homegenie` directory and execute the `HomeGenie` command:
+Inside the extracted folder, you will find the `homegenie` directory
+containing the application binaries, along with a handy startup script
+specifically tailored for your operating system.
 
-```shell
-cd homegenie
-./HomeGenie
-```
-To stop the application, press `CTRL + C`.
+Simply run the startup script to launch the server:
+
+*   **Windows:** Double-click `start.bat`
+*   **macOS:** Double-click `start.command`
+*   **Linux / Raspberry Pi:** Run `./start.sh` from the terminal (or double-click if your file manager supports executing shell scripts).
+
+To gracefully stop the application, press `CTRL + C` in the terminal window.
 
 ### Running as a System Service
 

@@ -38,7 +38,7 @@
     <PackageReference Include="Esprima" Version="3.0.5" />
     <PackageReference Include="IronPython" Version="3.4.2" />
     <PackageReference Include="IronPython.StdLib" Version="3.4.2" />
-    <PackageReference Include="Jint" Version="4.6.1" />
+    <PackageReference Include="Jint" Version="4.6.2" />
     <PackageReference Include="KNX.net" Version="1.1.10" />
     <PackageReference Include="SerialPortStream" Version="2.4.2" />
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
