@@ -43,4 +43,14 @@ navigation, visualize trends through interactive charts, and apply advanced data
 to understand your environment better. From temperature to luminance, gain deep insights into your system's performance
 and behavior.
 
+### VisionCore: Real-Time AI Vision & Smart NVR
+
+![homegenie_ai_visioncore_hub_05.jpg](homegenie_ai_visioncore_hub_05.jpg)
+
+Give your ecosystem the gift of sight. **VisionCore** is the native computer vision and NVR subsystem that transforms standard video feeds into intelligent data streams. By combining high-performance FFmpeg processing with the latest **YOLO** AI models, HomeGenie understands the physical world in real time.
+*   **Smart Event Recording:** Move beyond simple motion detection. Trigger high-quality MP4 recordings based on specific AI detections, such as people, vehicles, or custom objects, complete with pre- and post-event buffering.
+*   **AI Vision Hub:** Monitor multiple live streams simultaneously through a zero-latency dashboard. VisionCore utilizes a multiplexed binary transport (WebSockets & MessagePack) to deliver high-fps video and AI overlays without needing a dedicated GPU.
+*   **Actionable Visual Context:** Feed real-time visual metadata directly into the automation engine or Local AI (Lailama) to create sophisticated, context-aware responses to environmental changes.
+
+
 [← Back to Main README](../../../README.md)
