@@ -11,7 +11,8 @@
 *.suo
 *.pidb
 Thumbs.db
-**/.idea/*
+.run
+.idea
 **/*.DotSettings.user
 
 # Nuget packages
@@ -19,7 +20,7 @@ Thumbs.db
 !**/packages/repositories.config
 
 
-# temporary (old structure files will be removed soon)
+# temporary (old structure files, will be removed)
 
 HomeGenie_Windows/\.vs/
 Doxy/homegenie_api*
