@@ -546,5 +546,12 @@
   "start_recording": "පටිගත කිරීම ආරම්භ කරන්න",
   "stop_recording": "පටිගත කිරීම නවත්වන්න",
   "toggle_smart_recording": "අනතුරු ඇඟවීමේ ස්වයංක්‍රීය පටිගත කිරීම",
-  "search_metadata": "පාරදත්ත සොයන්න"
+  "search_metadata": "පාරදත්ත සොයන්න",
+  "actions": "ක්‍රියා",
+  "save_generated_widget": "ජනනය කළ විජට් එක සුරකින්න",
+  "update": "යාවත්කාලීන කරන්න",
+  "save_as": "ලෙස සුරකින්න...",
+  "update_directly_message": "{{name}} කෙලින්ම යාවත්කාලීන කරන්න",
+  "auto_update_widget": "වත්මන් විජට් එක ස්වයංක්‍රීයව යාවත්කාලීන කරන්න",
+  "ai_genie_speech": "හඬ ප්‍රතිදානය"
 }

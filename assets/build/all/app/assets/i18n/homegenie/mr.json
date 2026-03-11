@@ -324,7 +324,8 @@
       "Description": "विजेट निर्मितीसाठी तुमचा वैयक्तिक एआय जिनी. जेमिनीद्वारे समर्थित, हे तुम्हाला होमजेनी एडिटरमध्ये थेट HTML, CSS आणि JavaScript कोड लिहिण्यास आणि डीबग करण्यास मदत करते. हे वैशिष्ट्य सक्रिय करण्यासाठी, एक वैध API की प्रविष्ट करा. मोफत API की मिळविण्यासाठी https://aistudio.google.com/app/apikey वरील सूचनांचे अनुसरण करा.",
       "ConfigureOptions.ApiKey": "गुगल जेमिनी एआय एपीआय की",
       "ConfigureOptions.ModelId": "मॉडेल आयडी",
-      "ConfigureOptions.SystemInstructions": "सिस्टम सूचना"
+      "ConfigureOptions.SystemInstructions": "सिस्टम सूचना",
+      "ConfigureOptions.EnableDeepKnowledge": "सखोल ज्ञान सक्षम करा (प्रोग्राम आणि विजेट्स वाचा)"
     },
     "940": {
       "Title": "स्थानिक एआय",

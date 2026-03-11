@@ -546,5 +546,12 @@
   "start_recording": "రికార్డింగ్ ప్రారంభించండి",
   "stop_recording": "రికార్డింగ్ ఆపివేయి",
   "toggle_smart_recording": "అలారంపై ఆటో-రికార్డ్",
-  "search_metadata": "మెటాడేటాను శోధించు"
+  "search_metadata": "మెటాడేటాను శోధించు",
+  "actions": "చర్యలు",
+  "save_generated_widget": "జనరేట్ చేసిన విడ్జెట్‌ను సేవ్ చేయి",
+  "update": "నవీకరణ",
+  "save_as": "ఇలా సేవ్ చేయి...",
+  "update_directly_message": "{{name}} ని నేరుగా నవీకరించు",
+  "auto_update_widget": "ప్రస్తుత విడ్జెట్‌ను స్వయంచాలకంగా నవీకరించు",
+  "ai_genie_speech": "వాయిస్ అవుట్‌పుట్"
 }

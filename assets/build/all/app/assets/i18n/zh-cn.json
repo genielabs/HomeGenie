@@ -546,5 +546,12 @@
   "start_recording": "开始录制",
   "stop_recording": "停止录制",
   "toggle_smart_recording": "报警时自动录制",
-  "search_metadata": "搜索元数据"
+  "search_metadata": "搜索元数据",
+  "actions": "行动",
+  "save_generated_widget": "保存生成的组件",
+  "update": "更新",
+  "save_as": "另存为...",
+  "update_directly_message": "直接更新 {{name}}",
+  "auto_update_widget": "自动更新当前小部件",
+  "ai_genie_speech": "语音输出"
 }

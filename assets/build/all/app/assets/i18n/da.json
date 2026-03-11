@@ -546,5 +546,12 @@
   "start_recording": "Start optagelse",
   "stop_recording": "Stop optagelse",
   "toggle_smart_recording": "Automatisk optagelse ved alarm",
-  "search_metadata": "Søg i metadata"
+  "search_metadata": "Søg i metadata",
+  "actions": "Handlinger",
+  "save_generated_widget": "Gem genereret widget",
+  "update": "Opdatering",
+  "save_as": "Gem som...",
+  "update_directly_message": "Opdater {{name}} direkte",
+  "auto_update_widget": "Opdater den aktuelle widget automatisk",
+  "ai_genie_speech": "Stemmeoutput"
 }

@@ -546,5 +546,12 @@
   "start_recording": "Սկսել ձայնագրությունը",
   "stop_recording": "Դադարեցնել ձայնագրությունը",
   "toggle_smart_recording": "Ավտոմատ ձայնագրում զարթուցիչի վրա",
-  "search_metadata": "Որոնել մետատվյալներ"
+  "search_metadata": "Որոնել մետատվյալներ",
+  "actions": "Գործողություններ",
+  "save_generated_widget": "Պահպանել ստեղծված վիջեթը",
+  "update": "Թարմացում",
+  "save_as": "Պահպանել որպես...",
+  "update_directly_message": "Անմիջապես թարմացրեք {{name}}-ը",
+  "auto_update_widget": "Ավտոմատ թարմացնել ընթացիկ վիջեթը",
+  "ai_genie_speech": "Ձայնային ելք"
 }

@@ -546,5 +546,12 @@
   "start_recording": "रेकर्डिङ सुरु गर्नुहोस्",
   "stop_recording": "रेकर्डिङ रोक्नुहोस्",
   "toggle_smart_recording": "अलार्ममा स्वतः रेकर्ड गर्नुहोस्",
-  "search_metadata": "मेटाडेटा खोज्नुहोस्"
+  "search_metadata": "मेटाडेटा खोज्नुहोस्",
+  "actions": "कार्यहरू",
+  "save_generated_widget": "उत्पन्न विजेट बचत गर्नुहोस्",
+  "update": "अपडेट गर्नुहोस्",
+  "save_as": "यस रूपमा बचत गर्नुहोस्...",
+  "update_directly_message": "{{name}} लाई सिधै अपडेट गर्नुहोस्",
+  "auto_update_widget": "हालको विजेट स्वतः अपडेट गर्नुहोस्",
+  "ai_genie_speech": "आवाज आउटपुट"
 }

@@ -546,5 +546,12 @@
   "start_recording": "Alusta salvestamist",
   "stop_recording": "Peata salvestamine",
   "toggle_smart_recording": "Automaatne salvestamine alarmi korral",
-  "search_metadata": "Otsi metaandmeid"
+  "search_metadata": "Otsi metaandmeid",
+  "actions": "Toimingud",
+  "save_generated_widget": "Salvesta genereeritud vidin",
+  "update": "Värskendus",
+  "save_as": "Salvesta nimega...",
+  "update_directly_message": "Värskenda otse {{name}}",
+  "auto_update_widget": "Praeguse vidina automaatne värskendamine",
+  "ai_genie_speech": "Hääleväljund"
 }

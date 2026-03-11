@@ -288,6 +288,9 @@ namespace HomeGenie.Automation.Engines
             }
 #endif
 
+            HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus,
+                ProgramBlock.IsEnabled ? "Idle" : "Disabled" );
+
             if (errors.Count != 0)
                 return errors;
 

@@ -324,7 +324,8 @@
       "Description": "Widget oluşturmanız için kişisel yapay zeka cininiz. Gemini destekli bu özellik, HTML, CSS ve JavaScript kodlarını doğrudan HomeGenie düzenleyicisinde yazmanıza ve hata ayıklamanıza yardımcı olur. Bu özelliği etkinleştirmek için geçerli bir API anahtarı girin. Ücretsiz bir API anahtarı almak için https://aistudio.google.com/app/apikey adresindeki talimatları izleyin.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API anahtarı",
       "ConfigureOptions.ModelId": "Model Kimliği",
-      "ConfigureOptions.SystemInstructions": "Sistem Talimatları"
+      "ConfigureOptions.SystemInstructions": "Sistem Talimatları",
+      "ConfigureOptions.EnableDeepKnowledge": "Derinlemesine Bilgi Edinin (Programları ve araçları okuyun)"
     },
     "940": {
       "Title": "Yerel Yapay Zeka",

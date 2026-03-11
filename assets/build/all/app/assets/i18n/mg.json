@@ -546,5 +546,12 @@
   "start_recording": "Atombohy ny fandraketana",
   "stop_recording": "Atsaharo ny fandraketana",
   "toggle_smart_recording": "Fandraketana mandeha ho azy amin'ny fanairana",
-  "search_metadata": "Fikarohana Metadata"
+  "search_metadata": "Fikarohana Metadata",
+  "actions": "asa",
+  "save_generated_widget": "Tehirizo ny Widget Noforonina",
+  "update": "vaovao farany",
+  "save_as": "Tehirizo Amin'ny maha...",
+  "update_directly_message": "Havaozy mivantana ny {{name}}",
+  "auto_update_widget": "Havaozy ho azy ny widget ankehitriny",
+  "ai_genie_speech": "Famoahana feo"
 }

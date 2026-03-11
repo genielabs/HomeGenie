@@ -324,7 +324,8 @@
       "Description": "Ẹmi AI ti ara ẹni fun ẹda ẹrọ ailorukọ. Agbara nipasẹ Gemini, o ṣe iranlọwọ fun ọ lati kọ ati ṣatunṣe HTML, CSS, ati koodu JavaScript taara laarin olootu HomeGenie. Lati mu ẹya ara ẹrọ yii ṣiṣẹ, tẹ bọtini API to wulo. Tẹle awọn ilana ni https://aistudio.google.com/app/apikey lati gba bọtini API ọfẹ kan.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API bọtini",
       "ConfigureOptions.ModelId": "ID awoṣe",
-      "ConfigureOptions.SystemInstructions": "Àwọn Ìtọ́ni Ètò"
+      "ConfigureOptions.SystemInstructions": "Àwọn Ìtọ́ni Ètò",
+      "ConfigureOptions.EnableDeepKnowledge": "Mu Imọ Jinlẹ Ṣiṣẹ (Ka awọn eto ati awọn ẹrọ ailorukọ)"
     },
     "940": {
       "Title": "AI agbegbe",

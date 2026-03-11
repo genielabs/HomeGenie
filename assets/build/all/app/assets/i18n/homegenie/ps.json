@@ -324,7 +324,8 @@
       "Description": "ستاسو شخصي مصنوعي ذهانت جینی د ویجیټ جوړولو لپاره. د جیمیني لخوا پرمخ وړل کیږي، دا تاسو سره د هوم جینی ایډیټر کې مستقیم د HTML، CSS، او جاواسکریپټ کوډ لیکلو او ډیبګ کولو کې مرسته کوي. د دې ځانګړتیا فعالولو لپاره، یو باوري API کیلي دننه کړئ. د وړیا API کیلي ترلاسه کولو لپاره په https://aistudio.google.com/app/apikey کې لارښوونې تعقیب کړئ.",
       "ConfigureOptions.ApiKey": "د ګوګل جیمني AI API کیلي",
       "ConfigureOptions.ModelId": "د ماډل ID",
-      "ConfigureOptions.SystemInstructions": "د سیسټم لارښوونې"
+      "ConfigureOptions.SystemInstructions": "د سیسټم لارښوونې",
+      "ConfigureOptions.EnableDeepKnowledge": "ژوره پوهه فعاله کړئ (پروګرامونه او ویجټونه ولولئ)"
     },
     "940": {
       "Title": "سیمه ییز AI",

@@ -546,5 +546,12 @@
   "start_recording": "Comença a gravar",
   "stop_recording": "Atura l'enregistrament",
   "toggle_smart_recording": "Gravació automàtica en alarma",
-  "search_metadata": "Cerca de metadades"
+  "search_metadata": "Cerca de metadades",
+  "actions": "Accions",
+  "save_generated_widget": "Desa el widget generat",
+  "update": "Actualització",
+  "save_as": "Desa com a...",
+  "update_directly_message": "Actualitza {{name}} directament",
+  "auto_update_widget": "Actualitza automàticament el widget actual",
+  "ai_genie_speech": "Sortida de veu"
 }

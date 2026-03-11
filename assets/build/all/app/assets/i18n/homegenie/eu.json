@@ -324,7 +324,8 @@
       "Description": "Widgetak sortzeko zure IA jenio pertsonala. Gemini-k bultzatuta, HTML, CSS eta JavaScript kodea idazten eta arazten laguntzen dizu zuzenean HomeGenie editorean. Funtzio hau aktibatzeko, sartu API gako baliodun bat. Jarraitu https://aistudio.google.com/app/apikey helbideko argibideei doako API gako bat lortzeko.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API gakoa",
       "ConfigureOptions.ModelId": "Modeloaren IDa",
-      "ConfigureOptions.SystemInstructions": "Sistemaren argibideak"
+      "ConfigureOptions.SystemInstructions": "Sistemaren argibideak",
+      "ConfigureOptions.EnableDeepKnowledge": "Gaitu Ezagutza Sakona (Irakurri programak eta widgetak)"
     },
     "940": {
       "Title": "Tokiko IA",

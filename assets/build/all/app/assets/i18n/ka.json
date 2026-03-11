@@ -546,5 +546,12 @@
   "start_recording": "ჩაწერის დაწყება",
   "stop_recording": "ჩაწერის შეჩერება",
   "toggle_smart_recording": "ავტომატური ჩაწერა სიგნალიზაციაზე",
-  "search_metadata": "მეტამონაცემების ძიება"
+  "search_metadata": "მეტამონაცემების ძიება",
+  "actions": "მოქმედებები",
+  "save_generated_widget": "გენერირებული ვიჯეტის შენახვა",
+  "update": "განახლება",
+  "save_as": "შენახვა როგორც...",
+  "update_directly_message": "{{name}}-ის პირდაპირ განახლება",
+  "auto_update_widget": "მიმდინარე ვიჯეტის ავტომატური განახლება",
+  "ai_genie_speech": "ხმის გამომავალი"
 }

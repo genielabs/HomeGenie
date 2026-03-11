@@ -546,5 +546,12 @@
   "start_recording": "ثبت پیل کړئ",
   "stop_recording": "ثبت کول بند کړئ",
   "toggle_smart_recording": "په الارم کې اتومات ثبت کول",
-  "search_metadata": "میټاډاټا ولټوئ"
+  "search_metadata": "میټاډاټا ولټوئ",
+  "actions": "کړنې",
+  "save_generated_widget": "تولید شوی ویجیټ خوندي کړئ",
+  "update": "تازه کول",
+  "save_as": "خوندي کړئ لکه...",
+  "update_directly_message": "په مستقیم ډول {{name}} تازه کړئ",
+  "auto_update_widget": "اوسنی ویجیټ په اتوماتيک ډول تازه کړئ",
+  "ai_genie_speech": "د غږ محصول"
 }

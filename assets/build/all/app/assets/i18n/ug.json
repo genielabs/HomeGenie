@@ -546,5 +546,12 @@
   "start_recording": "خاتىرىلەشنى باشلاڭ",
   "stop_recording": "خاتىرىلەشنى توختىتىش",
   "toggle_smart_recording": "سىگنالدا ئاپتوماتىك خاتىرىلەش",
-  "search_metadata": "مېتا سانلىق مەلۇماتلىرىنى ئىزدەش"
+  "search_metadata": "مېتا سانلىق مەلۇماتلىرىنى ئىزدەش",
+  "actions": "ھەرىكەتلەر",
+  "save_generated_widget": "ھاسىل قىلىنغان ۋىجېتنى ساقلاش",
+  "update": "يېڭىلاش",
+  "save_as": "ساقلاش شەكلى...",
+  "update_directly_message": "{{name}} نى بىۋاسىتە يېڭىلاڭ",
+  "auto_update_widget": "نۆۋەتتىكى ۋىجېتنى ئاپتوماتىك يېڭىلاش",
+  "ai_genie_speech": "ئاۋاز چىقىرىش"
 }

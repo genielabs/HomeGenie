@@ -546,5 +546,12 @@
   "start_recording": "Почати запис",
   "stop_recording": "Зупинити запис",
   "toggle_smart_recording": "Автоматичний запис за сигналом тривоги",
-  "search_metadata": "Пошук метаданих"
+  "search_metadata": "Пошук метаданих",
+  "actions": "Дії",
+  "save_generated_widget": "Зберегти згенерований віджет",
+  "update": "Оновлення",
+  "save_as": "Зберегти як...",
+  "update_directly_message": "Оновити {{name}} безпосередньо",
+  "auto_update_widget": "Автоматичне оновлення поточного віджета",
+  "ai_genie_speech": "Голосовий вивід"
 }

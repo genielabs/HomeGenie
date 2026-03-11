@@ -546,5 +546,12 @@
   "start_recording": "பதிவு செய்யத் தொடங்கு",
   "stop_recording": "பதிவு செய்வதை நிறுத்து",
   "toggle_smart_recording": "அலாரத்தில் தானியங்கி பதிவு",
-  "search_metadata": "மெட்டாடேட்டாவைத் தேடு"
+  "search_metadata": "மெட்டாடேட்டாவைத் தேடு",
+  "actions": "செயல்கள்",
+  "save_generated_widget": "உருவாக்கப்பட்ட விட்ஜெட்டைச் சேமிக்கவும்",
+  "update": "புதுப்பிப்பு",
+  "save_as": "இவ்வாறு சேமி...",
+  "update_directly_message": "{{name}} ஐ நேரடியாகப் புதுப்பிக்கவும்",
+  "auto_update_widget": "தற்போதைய விட்ஜெட்டைத் தானாகப் புதுப்பி",
+  "ai_genie_speech": "குரல் வெளியீடு"
 }

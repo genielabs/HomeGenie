@@ -546,5 +546,12 @@
   "start_recording": "ਰਿਕਾਰਡਿੰਗ ਸ਼ੁਰੂ ਕਰੋ",
   "stop_recording": "ਰਿਕਾਰਡਿੰਗ ਬੰਦ ਕਰੋ",
   "toggle_smart_recording": "ਅਲਾਰਮ 'ਤੇ ਆਟੋ-ਰਿਕਾਰਡ ਕਰੋ",
-  "search_metadata": "ਮੈਟਾਡੇਟਾ ਖੋਜੋ"
+  "search_metadata": "ਮੈਟਾਡੇਟਾ ਖੋਜੋ",
+  "actions": "ਕਾਰਵਾਈਆਂ",
+  "save_generated_widget": "ਤਿਆਰ ਕੀਤਾ ਵਿਜੇਟ ਸੁਰੱਖਿਅਤ ਕਰੋ",
+  "update": "ਅੱਪਡੇਟ",
+  "save_as": "ਇਸ ਤਰ੍ਹਾਂ ਸੇਵ ਕਰੋ...",
+  "update_directly_message": "{{name}} ਨੂੰ ਸਿੱਧਾ ਅੱਪਡੇਟ ਕਰੋ",
+  "auto_update_widget": "ਮੌਜੂਦਾ ਵਿਜੇਟ ਨੂੰ ਆਟੋ-ਅੱਪਡੇਟ ਕਰੋ",
+  "ai_genie_speech": "ਵੌਇਸ ਆਉਟਪੁੱਟ"
 }

@@ -546,5 +546,12 @@
   "start_recording": "Yozib olishni boshlash",
   "stop_recording": "Yozib olishni to'xtatish",
   "toggle_smart_recording": "Signalda avtomatik yozib olish",
-  "search_metadata": "Metadatalarni qidirish"
+  "search_metadata": "Metadatalarni qidirish",
+  "actions": "Harakatlar",
+  "save_generated_widget": "Yaratilgan vidjetni saqlash",
+  "update": "Yangilash",
+  "save_as": "Saqlash...",
+  "update_directly_message": "{{name}} ni to'g'ridan-to'g'ri yangilang",
+  "auto_update_widget": "Joriy vidjetni avtomatik yangilash",
+  "ai_genie_speech": "Ovoz chiqishi"
 }

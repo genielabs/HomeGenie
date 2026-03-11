@@ -546,5 +546,12 @@
   "start_recording": "เริ่มบันทึก",
   "stop_recording": "หยุดบันทึก",
   "toggle_smart_recording": "บันทึกอัตโนมัติเมื่อนาฬิกาปลุกดังขึ้น",
-  "search_metadata": "ค้นหาข้อมูลเมตา"
+  "search_metadata": "ค้นหาข้อมูลเมตา",
+  "actions": "การกระทำ",
+  "save_generated_widget": "บันทึกวิดเจ็ตที่สร้างขึ้น",
+  "update": "อัปเดต",
+  "save_as": "บันทึกเป็น...",
+  "update_directly_message": "อัปเดต {{name}} โดยตรง",
+  "auto_update_widget": "อัปเดตวิดเจ็ตปัจจุบันโดยอัตโนมัติ",
+  "ai_genie_speech": "เอาต์พุตเสียง"
 }

@@ -546,5 +546,12 @@
   "start_recording": "Жазуды бастау",
   "stop_recording": "Жазуды тоқтату",
   "toggle_smart_recording": "Дабылда автоматты түрде жазу",
-  "search_metadata": "Метадеректерді іздеу"
+  "search_metadata": "Метадеректерді іздеу",
+  "actions": "Әрекеттер",
+  "save_generated_widget": "Жасалған виджетті сақтау",
+  "update": "Жаңарту",
+  "save_as": "Басқаша сақтау...",
+  "update_directly_message": "{{name}} тікелей жаңартыңыз",
+  "auto_update_widget": "Ағымдағы виджетті автоматты түрде жаңарту",
+  "ai_genie_speech": "Дауыс шығысы"
 }

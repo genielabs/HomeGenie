@@ -324,7 +324,8 @@
       "Description": "Geniul tău personal cu inteligență artificială pentru crearea de widgeturi. Bazat pe Gemini, te ajută să scrii și să depanezi cod HTML, CSS și JavaScript direct în editorul HomeGenie. Pentru a activa această funcție, introdu o cheie API validă. Urmează instrucțiunile de la https://aistudio.google.com/app/apikey pentru a obține o cheie API gratuită.",
       "ConfigureOptions.ApiKey": "Cheia API Google Gemini AI",
       "ConfigureOptions.ModelId": "ID-ul modelului",
-      "ConfigureOptions.SystemInstructions": "Instrucțiuni de sistem"
+      "ConfigureOptions.SystemInstructions": "Instrucțiuni de sistem",
+      "ConfigureOptions.EnableDeepKnowledge": "Activează cunoștințe aprofundate (citește programe și widget-uri)"
     },
     "940": {
       "Title": "IA locală",

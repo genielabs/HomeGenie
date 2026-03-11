@@ -236,7 +236,7 @@ var UpdateEnergyLoad = new Func&lt;bool&gt;(()=&gt;{
       {
         double w = wattsParam.DecimalValue;
         if (updateCounter) {
-          try 
+          try
           {
             double currentVal = wattsParam.DecimalValue;
             double defaultValue = (currentVal &gt;= 0 &amp;&amp; currentVal &lt;= WATT_VALUE_ERROR_MAX) ? currentVal : 0;;
@@ -372,7 +372,7 @@ while (Program.IsRunning)
       <Id>energy-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
-      <Checksum>4A80A0FA167AB77E50A7BE7C791DB106</Checksum>
+      <Checksum>5E0E0E71644DB51B0936777939FBFE19</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>81</Address>
@@ -559,7 +559,7 @@ if (!String.IsNullOrWhiteSpace(localIp) &amp;&amp; !String.IsNullOrWhiteSpace(re
 }
 else if (!String.IsNullOrWhiteSpace(localIp))
 {
-  if (localPort &gt; 0)  
+  if (localPort &gt; 0)
   {
     knx.EndPoint(localIp, localPort);
   }
@@ -574,7 +574,7 @@ try
 {
   knx
     .Connect()
-    .OnStatusReceived((address, state) =&gt; { 
+    .OnStatusReceived((address, state) =&gt; {
       knxModules.Each((module) =&gt; {
         if (module.Parameter(ADDRESS_PROPERTY).Value == address) {
           module.Emit("Status.Level", (state != null &amp;&amp; (int)state[0] &gt; 0) ? "1" : "0");
@@ -657,7 +657,7 @@ Api.Handle(MODULES_DOMAIN, ( args ) =&gt; {
         break;
     }
     return new ResponseStatus(Status.Ok);
-  } catch (Exception e) { 
+  } catch (Exception e) {
     Program.Notify(MODULES_DOMAIN + " ERROR!", e.Message);
     return new ResponseStatus(Status.Error, e.Message);
   }
@@ -678,7 +678,7 @@ const string ADDRESS_PROPERTY = "KNX.Address";
       <Id>knx-client</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>
-      <Checksum>076B23980AA39814E0DDDD8B83D306A7</Checksum>
+      <Checksum>CE44C84387121CA9F973447DDCD09B2C</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>27</Address>
@@ -977,7 +977,7 @@ public async Task&lt;List&lt;MigEvent&gt;&gt; LoadEventsAsync(string filePath)
 {
     var events = new List&lt;MigEvent&gt;();
     if (File.Exists(filePath)) {
-        byte[] bytes = await File.ReadAllBytesAsync(filePath);        
+        byte[] bytes = await File.ReadAllBytesAsync(filePath);
         events = MessagePackSerializer.Deserialize&lt;List&lt;MigEvent&gt;&gt;(bytes);
     }
     return events;
@@ -1007,7 +1007,7 @@ public List&lt;MigEvent&gt; GetLast48HoursEvents(string dataFilePath)
       <Id>security-alarm-system</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
-      <Checksum>A98DE2DFA612AB4E540466D20FD922D1</Checksum>
+      <Checksum>18B6656FAFBE9DAADFF4D6048842ED3C</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>90</Address>
@@ -1067,9 +1067,9 @@ var GetDomainAddress = new Func&lt;string, dynamic&gt;((domainAddress)=&gt;{
 
 When.ModuleParameterIsChanging((module, parameter) =&gt; {
 
-  if (module.IsOfDeviceType("Sensor|DoorWindow"))
+  if (module.IsOfDeviceType("Sensor|DoorWindow|VideoInput"))
   {
-    if (parameter.Name == "Sensor.MotionDetect" || parameter.Name == "Status.Level")
+    if (parameter.Name == "Sensor.MotionDetect" || parameter.Name == "Sensor.ObjectDetect" || parameter.Name == "Status.Level")
     {
       var motionlevel = parameter.DecimalValue;
       if (motionlevel &gt; 0)
@@ -1145,9 +1145,9 @@ const string SMART_DEVICE_LAST_EVENT = "HomeGenie.SmartLights.LastEvent";
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.3</PackageVersion>
       <Id>smart-device</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>780B640438C9E7438A505478A660358D</Checksum>
+      <Checksum>F628A20FAD4D4ECF691E87FB7BBD561C</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>145</Address>
@@ -1251,7 +1251,7 @@ var RunLogic = new Func&lt;ModuleHelper, string, bool&gt;((thermostat, mode) =&g
     // If setpoint was reached, wait 120 seconds and at least one dregree change before re-activating setpoint check, unless setpoint has been changed
     if (operatingState.Value == "Pending" + mode &amp;&amp; (operatingState.IdleTime &lt; 120 || Math.Abs(temperature.DecimalValue - setPoint.DecimalValue) &lt; 1) &amp;&amp; operatingState.IdleTime &lt; setPoint.IdleTime)
       return true;
-    // Check setpoint for the current mode  
+    // Check setpoint for the current mode
     var setPointReached = true;
     if (mode.StartsWith("Heat")) {
       setPointReached = Math.Round(temperature.DecimalValue, 1) &gt;= Math.Round(setPoint.DecimalValue, 1);
@@ -1432,7 +1432,7 @@ const string OPTION_ENSURE_COMMAND_DELIVERY = "EnsureCommandDelivery";
       <Id>smart-thermostat</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>12B076F8FDA17BAFD0DD79BF7861B07A</Checksum>
+      <Checksum>3C59D59BFA2B8C2165425F3A6552EDB4</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>78</Address>

@@ -546,5 +546,12 @@
   "start_recording": "Bẹ̀rẹ̀ Ṣíṣísílẹ̀",
   "stop_recording": "Dá gbígbàsílẹ̀ dúró",
   "toggle_smart_recording": "Igbasilẹ laifọwọyi lori Itaniji",
-  "search_metadata": "Ṣe àwárí Metadata"
+  "search_metadata": "Ṣe àwárí Metadata",
+  "actions": "Àwọn ìṣe",
+  "save_generated_widget": "Fipamọ Ohun elo ti a ti ṣẹda",
+  "update": "Imudojuiwọn",
+  "save_as": "Fipamọ́ Bíi...",
+  "update_directly_message": "Ṣe àtúnṣe {{name}} taara",
+  "auto_update_widget": "Ṣe àtúnṣe ohun èlò ìṣiṣẹ́ lọ́wọ́lọ́wọ́ láìfọwọ́sowọ́pọ̀",
+  "ai_genie_speech": "Ìgbéjáde Ohùn"
 }

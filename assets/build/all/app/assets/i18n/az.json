@@ -546,5 +546,12 @@
   "start_recording": "Yazmağa Başlayın",
   "stop_recording": "Yazını Dayandırın",
   "toggle_smart_recording": "Siqnalda avtomatik qeyd",
-  "search_metadata": "Metadata Axtarışı"
+  "search_metadata": "Metadata Axtarışı",
+  "actions": "Hərəkətlər",
+  "save_generated_widget": "Yaradılmış Vidceti Yadda Saxla",
+  "update": "Yeniləmə",
+  "save_as": "Kimi saxla...",
+  "update_directly_message": "{{name}}-i birbaşa yeniləyin",
+  "auto_update_widget": "Cari vidceti avtomatik yeniləyin",
+  "ai_genie_speech": "Səs çıxışı"
 }

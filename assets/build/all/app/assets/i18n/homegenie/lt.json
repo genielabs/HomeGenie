@@ -324,7 +324,8 @@
       "Description": "Jūsų asmeninis dirbtinio intelekto džinas valdikliams kurti. Sukurtas „Gemini“ pagrindu, jis padeda rašyti ir derinti HTML, CSS ir „JavaScript“ kodus tiesiai „HomeGenie“ redaktoriuje. Norėdami suaktyvinti šią funkciją, įveskite galiojantį API raktą. Vadovaukitės instrukcijomis, pateiktomis adresu https://aistudio.google.com/app/apikey, kad gautumėte nemokamą API raktą.",
       "ConfigureOptions.ApiKey": "„Google Gemini“ dirbtinio intelekto API raktas",
       "ConfigureOptions.ModelId": "Modelio ID",
-      "ConfigureOptions.SystemInstructions": "Sistemos instrukcijos"
+      "ConfigureOptions.SystemInstructions": "Sistemos instrukcijos",
+      "ConfigureOptions.EnableDeepKnowledge": "Įgalinti giliąsias žinias (skaityti programas ir valdiklius)"
     },
     "940": {
       "Title": "Vietinis dirbtinis intelektas",

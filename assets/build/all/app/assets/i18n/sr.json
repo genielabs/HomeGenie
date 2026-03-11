@@ -546,5 +546,12 @@
   "start_recording": "Почни снимање",
   "stop_recording": "Заустави снимање",
   "toggle_smart_recording": "Аутоматско снимање при аларму",
-  "search_metadata": "Претрага метаподатака"
+  "search_metadata": "Претрага метаподатака",
+  "actions": "Акције",
+  "save_generated_widget": "Сачувај генерисани виџет",
+  "update": "Ажурирање",
+  "save_as": "Сачувај као...",
+  "update_directly_message": "Ажурирајте {{name}} директно",
+  "auto_update_widget": "Аутоматски ажурирај тренутни виџет",
+  "ai_genie_speech": "Гласовни излаз"
 }

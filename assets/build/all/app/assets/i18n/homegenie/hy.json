@@ -324,7 +324,8 @@
       "Description": "Ձեր անձնական արհեստական բանականության ջինը վիջեթներ ստեղծելու համար: Gemini-ի հզորությամբ այն օգնում է ձեզ գրել և վրիպազերծել HTML, CSS և JavaScript կոդը անմիջապես HomeGenie խմբագրիչում: Այս գործառույթը ակտիվացնելու համար մուտքագրեք վավեր API բանալի: Հետևեք https://aistudio.google.com/app/apikey կայքում տեղադրված հրահանգներին՝ անվճար API բանալի ստանալու համար:",
       "ConfigureOptions.ApiKey": "Google Gemini AI API բանալի",
       "ConfigureOptions.ModelId": "Մոդելի ID",
-      "ConfigureOptions.SystemInstructions": "Համակարգի հրահանգներ"
+      "ConfigureOptions.SystemInstructions": "Համակարգի հրահանգներ",
+      "ConfigureOptions.EnableDeepKnowledge": "Միացնել խորը գիտելիքները (կարդալ ծրագրեր և վիջեթներ)"
     },
     "940": {
       "Title": "Տեղական արհեստական բանականություն",

@@ -324,7 +324,8 @@
       "Description": "Vaš osebni duh umetne inteligence za ustvarjanje gradnikov. Poganja ga Gemini in vam pomaga pisati ter odpravljati napake v kodi HTML, CSS in JavaScript neposredno v urejevalniku HomeGenie. Če želite aktivirati to funkcijo, vnesite veljaven ključ API. Sledite navodilom na https://aistudio.google.com/app/apikey, da dobite brezplačen ključ API.",
       "ConfigureOptions.ApiKey": "Ključ API-ja za umetno inteligenco Google Gemini",
       "ConfigureOptions.ModelId": "ID modela",
-      "ConfigureOptions.SystemInstructions": "Sistemska navodila"
+      "ConfigureOptions.SystemInstructions": "Sistemska navodila",
+      "ConfigureOptions.EnableDeepKnowledge": "Omogoči poglobljeno znanje (branje programov in pripomočkov)"
     },
     "940": {
       "Title": "Lokalna umetna inteligenca",

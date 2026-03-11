@@ -546,5 +546,12 @@
   "start_recording": "ເລີ່ມການບັນທຶກ",
   "stop_recording": "ຢຸດການບັນທຶກ",
   "toggle_smart_recording": "ບັນທຶກອັດຕະໂນມັດເມື່ອມີສັນຍານເຕືອນ",
-  "search_metadata": "ຂໍ້ມູນເມຕາຄົ້ນຫາ"
+  "search_metadata": "ຂໍ້ມູນເມຕາຄົ້ນຫາ",
+  "actions": "ການກະທຳ",
+  "save_generated_widget": "ບັນທຶກ Widget ທີ່ສ້າງຂຶ້ນ",
+  "update": "ອັບເດດ",
+  "save_as": "ບັນທຶກເປັນ...",
+  "update_directly_message": "ອັບເດດ {{name}} ໂດຍກົງ",
+  "auto_update_widget": "ອັບເດດວິດເຈັດປັດຈຸບັນໂດຍອັດຕະໂນມັດ",
+  "ai_genie_speech": "ຜົນຜະລິດສຽງ"
 }

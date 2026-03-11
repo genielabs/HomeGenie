@@ -324,7 +324,8 @@
       "Description": "Vaš osobni AI duh za izradu widgeta. Pokretan Geminijem, pomaže vam u pisanju i ispravljanju pogrešaka HTML, CSS i JavaScript koda izravno unutar HomeGenie editora. Da biste aktivirali ovu značajku, unesite važeći API ključ. Slijedite upute na https://aistudio.google.com/app/apikey kako biste dobili besplatni API ključ.",
       "ConfigureOptions.ApiKey": "Ključ Google Gemini AI API-ja",
       "ConfigureOptions.ModelId": "ID modela",
-      "ConfigureOptions.SystemInstructions": "Sistemske upute"
+      "ConfigureOptions.SystemInstructions": "Sistemske upute",
+      "ConfigureOptions.EnableDeepKnowledge": "Omogući duboko znanje (čitaj programe i widgete)"
     },
     "940": {
       "Title": "Lokalna umjetna inteligencija",

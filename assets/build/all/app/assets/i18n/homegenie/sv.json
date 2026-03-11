@@ -324,7 +324,8 @@
       "Description": "Din personliga AI-genie för att skapa widgets. Drivs av Gemini, hjälper den dig att skriva och felsöka HTML-, CSS- och JavaScript-kod direkt i HomeGenie-redigeraren. För att aktivera den här funktionen, ange en giltig API-nyckel. Följ instruktionerna på https://aistudio.google.com/app/apikey för att få en gratis API-nyckel.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-nyckel",
       "ConfigureOptions.ModelId": "Modell-ID",
-      "ConfigureOptions.SystemInstructions": "Systeminstruktioner"
+      "ConfigureOptions.SystemInstructions": "Systeminstruktioner",
+      "ConfigureOptions.EnableDeepKnowledge": "Aktivera djupgående kunskap (Läs program och widgetar)"
     },
     "940": {
       "Title": "Lokal AI",

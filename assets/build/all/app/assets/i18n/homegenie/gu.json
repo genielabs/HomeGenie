@@ -324,7 +324,8 @@
       "Description": "વિજેટ બનાવવા માટે તમારી વ્યક્તિગત AI જીની. જેમિની દ્વારા સંચાલિત, તે તમને HomeGenie એડિટરમાં સીધા HTML, CSS અને JavaScript કોડ લખવા અને ડીબગ કરવામાં મદદ કરે છે. આ સુવિધાને સક્રિય કરવા માટે, માન્ય API કી દાખલ કરો. મફત API કી મેળવવા માટે https://aistudio.google.com/app/apikey પરની સૂચનાઓનું પાલન કરો.",
       "ConfigureOptions.ApiKey": "ગૂગલ જેમિની એઆઈ એપીઆઈ કી",
       "ConfigureOptions.ModelId": "મોડેલ ID",
-      "ConfigureOptions.SystemInstructions": "સિસ્ટમ સૂચનાઓ"
+      "ConfigureOptions.SystemInstructions": "સિસ્ટમ સૂચનાઓ",
+      "ConfigureOptions.EnableDeepKnowledge": "ઊંડા જ્ઞાનને સક્ષમ કરો (પ્રોગ્રામ્સ અને વિજેટ્સ વાંચો)"
     },
     "940": {
       "Title": "સ્થાનિક AI",

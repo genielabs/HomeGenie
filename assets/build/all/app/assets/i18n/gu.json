@@ -546,5 +546,12 @@
   "start_recording": "રેકોર્ડિંગ શરૂ કરો",
   "stop_recording": "રેકોર્ડિંગ બંધ કરો",
   "toggle_smart_recording": "એલાર્મ પર ઓટો-રેકોર્ડ",
-  "search_metadata": "મેટાડેટા શોધો"
+  "search_metadata": "મેટાડેટા શોધો",
+  "actions": "ક્રિયાઓ",
+  "save_generated_widget": "જનરેટ કરેલ વિજેટ સાચવો",
+  "update": "અપડેટ",
+  "save_as": "આ રીતે સાચવો...",
+  "update_directly_message": "{{name}} ને સીધા જ અપડેટ કરો",
+  "auto_update_widget": "વર્તમાન વિજેટને આપમેળે અપડેટ કરો",
+  "ai_genie_speech": "વૉઇસ આઉટપુટ"
 }

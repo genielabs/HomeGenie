@@ -546,5 +546,12 @@
   "start_recording": "Бичлэг хийж эхлэх",
   "stop_recording": "Бичлэгийг зогсоох",
   "toggle_smart_recording": "Сэрүүлэг дээр автоматаар бичлэг хийх",
-  "search_metadata": "Мета өгөгдлийг хайх"
+  "search_metadata": "Мета өгөгдлийг хайх",
+  "actions": "Үйлдлүүд",
+  "save_generated_widget": "Үүсгэсэн виджетийг хадгалах",
+  "update": "Шинэчлэлт",
+  "save_as": "Хадгалах...",
+  "update_directly_message": "{{name}}-г шууд шинэчилнэ үү",
+  "auto_update_widget": "Одоогийн виджетийг автоматаар шинэчлэх",
+  "ai_genie_speech": "Дууны гаралт"
 }

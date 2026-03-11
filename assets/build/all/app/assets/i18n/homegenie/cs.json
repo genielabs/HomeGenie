@@ -324,7 +324,8 @@
       "Description": "Váš osobní džin s umělou inteligencí pro tvorbu widgetů. Poháněn technologií Gemini vám pomáhá psát a ladit kód HTML, CSS a JavaScript přímo v editoru HomeGenie. Chcete-li tuto funkci aktivovat, zadejte platný klíč API. Postupujte podle pokynů na adrese https://aistudio.google.com/app/apikey a získejte bezplatný klíč API.",
       "ConfigureOptions.ApiKey": "Klíč Google Gemini API pro umělou inteligenci",
       "ConfigureOptions.ModelId": "ID modelu",
-      "ConfigureOptions.SystemInstructions": "Systémové instrukce"
+      "ConfigureOptions.SystemInstructions": "Systémové instrukce",
+      "ConfigureOptions.EnableDeepKnowledge": "Povolit hluboké znalosti (číst programy a widgety)"
     },
     "940": {
       "Title": "Lokální umělá inteligence",

@@ -546,5 +546,12 @@
   "start_recording": "ରେକର୍ଡିଂ ଆରମ୍ଭ କରନ୍ତୁ",
   "stop_recording": "ରେକର୍ଡିଂ ବନ୍ଦ କରନ୍ତୁ",
   "toggle_smart_recording": "ଆଲାର୍ମରେ ସ୍ୱତଃ ରେକର୍ଡ କରନ୍ତୁ",
-  "search_metadata": "ମେଟାଡାଟା ସନ୍ଧାନ କରନ୍ତୁ"
+  "search_metadata": "ମେଟାଡାଟା ସନ୍ଧାନ କରନ୍ତୁ",
+  "actions": "କାର୍ଯ୍ୟ",
+  "save_generated_widget": "ଜେନେରେଟେଡ୍ ୱିଜେଟ୍ ସେଭ୍ କରନ୍ତୁ",
+  "update": "ଅପଡେଟ୍‌ କରନ୍ତୁ",
+  "save_as": "ଭାବରେ ସେଭ୍ କରନ୍ତୁ...",
+  "update_directly_message": "ସିଧାସଳଖ {{name}} ଅପଡେଟ୍ କରନ୍ତୁ",
+  "auto_update_widget": "ବର୍ତ୍ତମାନର ୱିଜେଟ୍ ସ୍ୱତଃ-ଅପଡେଟ୍ କରନ୍ତୁ",
+  "ai_genie_speech": "ଭଏସ୍ ଆଉଟପୁଟ୍"
 }

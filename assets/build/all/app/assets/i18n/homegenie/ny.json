@@ -324,7 +324,8 @@
       "Description": "AI genie wanu wopanga widget. Mothandizidwa ndi Gemini, imakuthandizani kulemba ndikusintha HTML, CSS, ndi JavaScript code mwachindunji mkati mwa mkonzi wa HomeGenie. Kuti mutsegule izi, lowetsani kiyi yolondola ya API. Tsatirani malangizo pa https://aistudio.google.com/app/apikey kuti mupeze kiyi yaulere ya API.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API kiyi",
       "ConfigureOptions.ModelId": "ID yachitsanzo",
-      "ConfigureOptions.SystemInstructions": "Malangizo a Machitidwe"
+      "ConfigureOptions.SystemInstructions": "Malangizo a Machitidwe",
+      "ConfigureOptions.EnableDeepKnowledge": "Yambitsani Chidziwitso Chakuya (Werengani mapulogalamu ndi ma widget)"
     },
     "940": {
       "Title": "AI Yapafupi",

@@ -324,7 +324,8 @@
       "Description": "Ҷинҳои шахсии AI барои эҷоди виджет. Аз ҷониби Gemini таҳия шудааст, он ба шумо кӯмак мекунад, ки коди HTML, CSS ва JavaScript-ро мустақиман дар дохили муҳаррири HomeGenie нависед ва ислоҳ кунед. Барои фаъол кардани ин хусусият, калиди дурусти API-ро ворид кунед. Барои гирифтани калиди ройгони API дастурҳоро дар https://aistudio.google.com/app/apikey иҷро кунед.",
       "ConfigureOptions.ApiKey": "Калиди API Google Gemini AI",
       "ConfigureOptions.ModelId": "Модели ID",
-      "ConfigureOptions.SystemInstructions": "Дастурҳои система"
+      "ConfigureOptions.SystemInstructions": "Дастурҳои система",
+      "ConfigureOptions.EnableDeepKnowledge": "Дониши амиқро фаъол созед (Барномаҳо ва виджетҳоро хонед)"
     },
     "940": {
       "Title": "зеҳни сунъии маҳаллӣ",

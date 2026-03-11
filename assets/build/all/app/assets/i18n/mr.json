@@ -546,5 +546,12 @@
   "start_recording": "रेकॉर्डिंग सुरू करा",
   "stop_recording": "रेकॉर्डिंग थांबवा",
   "toggle_smart_recording": "अलार्मवर ऑटो-रेकॉर्डिंग",
-  "search_metadata": "मेटाडेटा शोधा"
+  "search_metadata": "मेटाडेटा शोधा",
+  "actions": "क्रिया",
+  "save_generated_widget": "जनरेट केलेले विजेट सेव्ह करा",
+  "update": "अपडेट करा",
+  "save_as": "म्हणून जतन करा...",
+  "update_directly_message": "{{name}} थेट अपडेट करा",
+  "auto_update_widget": "सध्याचे विजेट ऑटो-अपडेट करा",
+  "ai_genie_speech": "व्हॉइस आउटपुट"
 }

@@ -324,7 +324,8 @@
       "Description": "Ang iyong personal na AI genie para sa paggawa ng widget. Pinapatakbo ng Gemini, tinutulungan ka nitong magsulat at mag-debug ng HTML, CSS, at JavaScript code nang direkta sa loob ng editor ng HomeGenie. Para i-activate ang feature na ito, maglagay ng valid na API key. Sundin ang mga tagubilin sa https://aistudio.google.com/app/apikey para makakuha ng libreng API key.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API key",
       "ConfigureOptions.ModelId": "Model ID",
-      "ConfigureOptions.SystemInstructions": "Mga Tagubilin sa Sistema"
+      "ConfigureOptions.SystemInstructions": "Mga Tagubilin sa Sistema",
+      "ConfigureOptions.EnableDeepKnowledge": "Paganahin ang Malalim na Kaalaman (Magbasa ng mga programa at widget)"
     },
     "940": {
       "Title": "Lokal na AI",

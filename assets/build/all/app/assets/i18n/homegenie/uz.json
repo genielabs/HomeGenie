@@ -324,7 +324,8 @@
       "Description": "Vidjet yaratish uchun shaxsiy AI jiningiz. Gemini tomonidan quvvatlanadi, u to'g'ridan-to'g'ri HomeGenie muharririda HTML, CSS va JavaScript kodlarini yozish va disk raskadrovka qilishga yordam beradi. Ushbu xususiyatni faollashtirish uchun yaroqli API kalitini kiriting. Bepul API kalitini olish uchun https://aistudio.google.com/app/apikey manzilidagi ko‘rsatmalarga amal qiling.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API kaliti",
       "ConfigureOptions.ModelId": "Model ID",
-      "ConfigureOptions.SystemInstructions": "Tizim ko'rsatmalari"
+      "ConfigureOptions.SystemInstructions": "Tizim ko'rsatmalari",
+      "ConfigureOptions.EnableDeepKnowledge": "Chuqur bilimlarni yoqish (Dasturlar va vidjetlarni o'qish)"
     },
     "940": {
       "Title": "Mahalliy AI",

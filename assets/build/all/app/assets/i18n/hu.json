@@ -546,5 +546,12 @@
   "start_recording": "Felvétel indítása",
   "stop_recording": "Felvétel leállítása",
   "toggle_smart_recording": "Automatikus felvétel riasztáskor",
-  "search_metadata": "Metaadatok keresése"
+  "search_metadata": "Metaadatok keresése",
+  "actions": "Műveletek",
+  "save_generated_widget": "Mentse a generált widgetet",
+  "update": "Frissítés",
+  "save_as": "Mentés másként...",
+  "update_directly_message": "Frissítse közvetlenül a {{name}} elemet",
+  "auto_update_widget": "Aktuális widget automatikus frissítése",
+  "ai_genie_speech": "Hangkimenet"
 }

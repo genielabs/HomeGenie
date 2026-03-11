@@ -546,5 +546,12 @@
   "start_recording": "ابدأ التسجيل",
   "stop_recording": "أوقف التسجيل",
   "toggle_smart_recording": "التسجيل التلقائي عند التنبيه",
-  "search_metadata": "البحث في البيانات الوصفية"
+  "search_metadata": "البحث في البيانات الوصفية",
+  "actions": "الإجراءات",
+  "save_generated_widget": "حفظ الأداة المُنشأة",
+  "update": "تحديث",
+  "save_as": "حفظ باسم...",
+  "update_directly_message": "قم بتحديث {{name}} مباشرةً",
+  "auto_update_widget": "تحديث الأداة الحالية تلقائيًا",
+  "ai_genie_speech": "مخرج صوتي"
 }

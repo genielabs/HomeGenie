@@ -324,7 +324,8 @@
       "Description": "ವಿಜೆಟ್ ರಚನೆಗಾಗಿ ನಿಮ್ಮ ವೈಯಕ್ತಿಕ AI ಜೀನಿ. ಜೆಮಿನಿಯಿಂದ ನಡೆಸಲ್ಪಡುವ ಇದು, ಹೋಮ್‌ಜೆನಿ ಸಂಪಾದಕದಲ್ಲಿಯೇ HTML, CSS ಮತ್ತು ಜಾವಾಸ್ಕ್ರಿಪ್ಟ್ ಕೋಡ್ ಅನ್ನು ಬರೆಯಲು ಮತ್ತು ಡೀಬಗ್ ಮಾಡಲು ನಿಮಗೆ ಸಹಾಯ ಮಾಡುತ್ತದೆ. ಈ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು, ಮಾನ್ಯವಾದ API ಕೀಲಿಯನ್ನು ನಮೂದಿಸಿ. ಉಚಿತ API ಕೀಲಿಯನ್ನು ಪಡೆಯಲು https://aistudio.google.com/app/apikey ನಲ್ಲಿನ ಸೂಚನೆಗಳನ್ನು ಅನುಸರಿಸಿ.",
       "ConfigureOptions.ApiKey": "ಗೂಗಲ್ ಜೆಮಿನಿ AI API ಕೀ",
       "ConfigureOptions.ModelId": "ಮಾದರಿ ಐಡಿ",
-      "ConfigureOptions.SystemInstructions": "ಸಿಸ್ಟಮ್ ಸೂಚನೆಗಳು"
+      "ConfigureOptions.SystemInstructions": "ಸಿಸ್ಟಮ್ ಸೂಚನೆಗಳು",
+      "ConfigureOptions.EnableDeepKnowledge": "ಆಳವಾದ ಜ್ಞಾನವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ (ಪ್ರೋಗ್ರಾಂಗಳು ಮತ್ತು ವಿಜೆಟ್‌ಗಳನ್ನು ಓದಿ)"
     },
     "940": {
       "Title": "ಸ್ಥಳೀಯ AI",

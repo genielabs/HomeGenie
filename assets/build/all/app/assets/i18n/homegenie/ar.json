@@ -324,7 +324,8 @@
       "Description": "أداة الذكاء الاصطناعي الخاصة بك لإنشاء الأدوات. تعمل هذه الأداة بواسطة Gemini، وتساعدك على كتابة وتصحيح أكواد HTML وCSS وJavaScript مباشرةً داخل محرر HomeGenie. لتفعيل هذه الميزة، أدخل مفتاح API صالحًا. اتبع التعليمات على الرابط https://aistudio.google.com/app/apikey للحصول على مفتاح API مجاني.",
       "ConfigureOptions.ApiKey": "مفتاح API لـ Google Gemini AI",
       "ConfigureOptions.ModelId": "معرف النموذج",
-      "ConfigureOptions.SystemInstructions": "تعليمات النظام"
+      "ConfigureOptions.SystemInstructions": "تعليمات النظام",
+      "ConfigureOptions.EnableDeepKnowledge": "تفعيل المعرفة المتعمقة (قراءة البرامج والأدوات)"
     },
     "940": {
       "Title": "الذكاء الاصطناعي المحلي",

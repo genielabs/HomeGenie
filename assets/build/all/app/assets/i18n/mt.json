@@ -546,5 +546,12 @@
   "start_recording": "Ibda r-Reġistrazzjoni",
   "stop_recording": "Waqqaf ir-Reġistrazzjoni",
   "toggle_smart_recording": "Reġistrazzjoni awtomatika fuq Allarm",
-  "search_metadata": "Metadata tat-Tiftix"
+  "search_metadata": "Metadata tat-Tiftix",
+  "actions": "Azzjonijiet",
+  "save_generated_widget": "Issejvja l-Widget Iġġenerat",
+  "update": "Aġġornament",
+  "save_as": "Issejvja Bħala...",
+  "update_directly_message": "Aġġorna {{name}} direttament",
+  "auto_update_widget": "Aġġorna l-widget kurrenti awtomatikament",
+  "ai_genie_speech": "Ħruġ tal-Vuċi"
 }

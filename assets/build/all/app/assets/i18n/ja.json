@@ -546,5 +546,12 @@
   "start_recording": "録画を開始",
   "stop_recording": "録画を停止",
   "toggle_smart_recording": "アラームで自動録画",
-  "search_metadata": "検索メタデータ"
+  "search_metadata": "検索メタデータ",
+  "actions": "アクション",
+  "save_generated_widget": "生成されたウィジェットを保存",
+  "update": "アップデート",
+  "save_as": "名前を付けて保存...",
+  "update_directly_message": "{{name}} を直接更新する",
+  "auto_update_widget": "現在のウィジェットを自動更新",
+  "ai_genie_speech": "音声出力"
 }

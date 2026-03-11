@@ -546,5 +546,12 @@
   "start_recording": "Starta inspelning",
   "stop_recording": "Stoppa inspelningen",
   "toggle_smart_recording": "Automatisk inspelning vid larm",
-  "search_metadata": "Sökmetadata"
+  "search_metadata": "Sökmetadata",
+  "actions": "Åtgärder",
+  "save_generated_widget": "Spara genererad widget",
+  "update": "Uppdatera",
+  "save_as": "Spara som...",
+  "update_directly_message": "Uppdatera {{name}} direkt",
+  "auto_update_widget": "Uppdatera aktuell widget automatiskt",
+  "ai_genie_speech": "Röstutgång"
 }

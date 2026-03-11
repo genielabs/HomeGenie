@@ -546,5 +546,12 @@
   "start_recording": "ریکارڈنگ شروع کریں۔",
   "stop_recording": "ریکارڈنگ بند کرو",
   "toggle_smart_recording": "الارم پر آٹو ریکارڈ",
-  "search_metadata": "میٹا ڈیٹا تلاش کریں۔"
+  "search_metadata": "میٹا ڈیٹا تلاش کریں۔",
+  "actions": "اعمال",
+  "save_generated_widget": "پیدا شدہ ویجیٹ کو محفوظ کریں۔",
+  "update": "اپڈیٹ کریں۔",
+  "save_as": "محفوظ کریں بطور...",
+  "update_directly_message": "{{name}} کو براہ راست اپ ڈیٹ کریں۔",
+  "auto_update_widget": "موجودہ ویجیٹ کو خود بخود اپ ڈیٹ کریں۔",
+  "ai_genie_speech": "وائس آؤٹ پٹ"
 }

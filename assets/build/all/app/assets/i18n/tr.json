@@ -546,5 +546,12 @@
   "start_recording": "Kaydı Başlat",
   "stop_recording": "Kaydı Durdur",
   "toggle_smart_recording": "Alarmda otomatik kayıt",
-  "search_metadata": "Arama Meta Verileri"
+  "search_metadata": "Arama Meta Verileri",
+  "actions": "Eylemler",
+  "save_generated_widget": "Oluşturulan Widget'ı Kaydet",
+  "update": "Güncelleme",
+  "save_as": "Farklı Kaydet...",
+  "update_directly_message": "{{name}}'ı doğrudan güncelleyin",
+  "auto_update_widget": "Mevcut widget'ı otomatik olarak güncelle",
+  "ai_genie_speech": "Ses Çıkışı"
 }

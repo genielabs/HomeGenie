@@ -546,5 +546,12 @@
   "start_recording": "Rozpocznij nagrywanie",
   "stop_recording": "Zatrzymaj nagrywanie",
   "toggle_smart_recording": "Automatyczne nagrywanie w przypadku alarmu",
-  "search_metadata": "Wyszukaj metadane"
+  "search_metadata": "Wyszukaj metadane",
+  "actions": "Akcje",
+  "save_generated_widget": "Zapisz wygenerowany widżet",
+  "update": "Aktualizacja",
+  "save_as": "Zapisz jako...",
+  "update_directly_message": "Aktualizuj {{name}} bezpośrednio",
+  "auto_update_widget": "Automatyczna aktualizacja bieżącego widżetu",
+  "ai_genie_speech": "Wyjście głosowe"
 }

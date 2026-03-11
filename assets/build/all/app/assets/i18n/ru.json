@@ -546,5 +546,12 @@
   "start_recording": "Начать запись",
   "stop_recording": "Остановить запись",
   "toggle_smart_recording": "Автоматическая запись при срабатывании сигнализации",
-  "search_metadata": "Метаданные поиска"
+  "search_metadata": "Метаданные поиска",
+  "actions": "Действия",
+  "save_generated_widget": "Сохранить сгенерированный виджет",
+  "update": "Обновлять",
+  "save_as": "Сохранить как...",
+  "update_directly_message": "Обновите {{name}} напрямую",
+  "auto_update_widget": "Автоматическое обновление текущего виджета",
+  "ai_genie_speech": "Голосовой вывод"
 }

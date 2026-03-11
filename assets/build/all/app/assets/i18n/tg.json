@@ -546,5 +546,12 @@
   "start_recording": "Оғози сабт",
   "stop_recording": "Сабтро қатъ кунед",
   "toggle_smart_recording": "Сабти худкор дар ҳолати ҳушдор",
-  "search_metadata": "Ҷустуҷӯи метамаълумот"
+  "search_metadata": "Ҷустуҷӯи метамаълумот",
+  "actions": "Амалҳо",
+  "save_generated_widget": "Захира кардани виджети тавлидшуда",
+  "update": "Навсозӣ",
+  "save_as": "Захира кардан ҳамчун...",
+  "update_directly_message": "{{name}}-ро мустақиман навсозӣ кунед",
+  "auto_update_widget": "Виҷети ҷорӣро ба таври худкор навсозӣ кунед",
+  "ai_genie_speech": "Баромади овозӣ"
 }

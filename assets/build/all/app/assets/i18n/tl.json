@@ -546,5 +546,12 @@
   "start_recording": "Simulan ang Pagre-record",
   "stop_recording": "Itigil ang Pagre-record",
   "toggle_smart_recording": "Awtomatikong pag-record sa Alarm",
-  "search_metadata": "Metadata ng Paghahanap"
+  "search_metadata": "Metadata ng Paghahanap",
+  "actions": "Mga Aksyon",
+  "save_generated_widget": "I-save ang Nabuong Widget",
+  "update": "I-update",
+  "save_as": "I-save Bilang...",
+  "update_directly_message": "I-update nang direkta ang {{name}}",
+  "auto_update_widget": "Awtomatikong i-update ang kasalukuyang widget",
+  "ai_genie_speech": "Output ng Boses"
 }

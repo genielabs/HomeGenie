@@ -324,7 +324,8 @@
       "Description": "Genius tuus personalis intellegentiae artificialis ad creationem instrumentorum. A Gemini impulsus, te adiuvat ut codicem HTML, CSS, et JavaScript directe intra editorem HomeGenie scribere et corrigere possis. Ad hanc functionem activandam, clavem API validam inscribe. Instructiones apud https://aistudio.google.com/app/apikey sequere ut clavem API gratuitam accipias.",
       "ConfigureOptions.ApiKey": "Clavis API Google Gemini AI",
       "ConfigureOptions.ModelId": "Identificatio exemplaris",
-      "ConfigureOptions.SystemInstructions": "Instructiones Systematis"
+      "ConfigureOptions.SystemInstructions": "Instructiones Systematis",
+      "ConfigureOptions.EnableDeepKnowledge": "Permitte Cognitionem Profundam (Lege programmata et instrumenta)"
     },
     "940": {
       "Title": "Intellegentia Artificialis Localis",

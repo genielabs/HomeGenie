@@ -504,11 +504,11 @@
 
     "145": {
         "Title":
-            "Smart Device",
+            "Dispositivo Smart",
         "Description":
             "Accende/Spegne il dispositivo in base al movimento e alla luce ambientale.",
         "HomeGenie.SmartLights.Enable":
-            "Abilita 'Smart Device'",
+            "Abilita 'Dispositivo Smart'",
         "HomeGenie.SmartLights.OnMotionDetect":
             "Controlla con sensore (opzionale)",
         "HomeGenie.SmartLights.CheckLuminosity":
@@ -593,6 +593,8 @@
         "Chiave API Google Gemini AI",
       "ConfigureOptions.ModelId":
         "ID Modello",
+      "ConfigureOptions.EnableDeepKnowledge":
+        "Abilita conoscenza approfondita (leggi programmi e widget)",
       "ConfigureOptions.SystemInstructions":
         "Istruzioni di Sistema"
     },

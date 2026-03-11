@@ -324,7 +324,8 @@
       "Description": "Вашият личен AI джин за създаване на джаджи. Задвижван от Gemini, той ви помага да пишете и отстранявате грешки в HTML, CSS и JavaScript код директно в редактора HomeGenie. За да активирате тази функция, въведете валиден API ключ. Следвайте инструкциите на https://aistudio.google.com/app/apikey, за да получите безплатен API ключ.",
       "ConfigureOptions.ApiKey": "Ключ за Google Gemini AI API",
       "ConfigureOptions.ModelId": "Идентификационен номер на модела",
-      "ConfigureOptions.SystemInstructions": "Системни инструкции"
+      "ConfigureOptions.SystemInstructions": "Системни инструкции",
+      "ConfigureOptions.EnableDeepKnowledge": "Активиране на задълбочени знания (четене на програми и джаджи)"
     },
     "940": {
       "Title": "Локален изкуствен интелект",

@@ -546,5 +546,12 @@
   "start_recording": "Mulakan Rakaman",
   "stop_recording": "Hentikan Rakaman",
   "toggle_smart_recording": "Rakam automatik pada Penggera",
-  "search_metadata": "Carian Metadata"
+  "search_metadata": "Carian Metadata",
+  "actions": "Tindakan",
+  "save_generated_widget": "Simpan Widget yang Dihasilkan",
+  "update": "Kemas kini",
+  "save_as": "Simpan Sebagai...",
+  "update_directly_message": "Kemas kini {{name}} secara langsung",
+  "auto_update_widget": "Kemas kini widget semasa secara automatik",
+  "ai_genie_speech": "Output Suara"
 }

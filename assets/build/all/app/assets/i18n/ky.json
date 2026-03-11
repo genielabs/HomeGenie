@@ -546,5 +546,12 @@
   "start_recording": "Жаздырууну баштоо",
   "stop_recording": "Жаздырууну токтотуу",
   "toggle_smart_recording": "Сигнализацияда автоматтык түрдө жаздыруу",
-  "search_metadata": "Метадайындарды издөө"
+  "search_metadata": "Метадайындарды издөө",
+  "actions": "Аракеттер",
+  "save_generated_widget": "Түзүлгөн виджетти сактоо",
+  "update": "Жаңыртуу",
+  "save_as": "Сактоо...",
+  "update_directly_message": "{{name}} түз жаңыртыңыз",
+  "auto_update_widget": "Учурдагы виджетти автоматтык түрдө жаңыртуу",
+  "ai_genie_speech": "Үн чыгаруу"
 }

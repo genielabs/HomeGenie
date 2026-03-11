@@ -546,5 +546,12 @@
   "start_recording": "Aloita tallennus",
   "stop_recording": "Lopeta tallennus",
   "toggle_smart_recording": "Automaattinen tallennus hälytyksestä",
-  "search_metadata": "Haku metatiedot"
+  "search_metadata": "Haku metatiedot",
+  "actions": "Toiminnot",
+  "save_generated_widget": "Tallenna luotu widget",
+  "update": "Päivittää",
+  "save_as": "Tallenna nimellä...",
+  "update_directly_message": "Päivitä {{name}} suoraan",
+  "auto_update_widget": "Päivitä nykyinen widget automaattisesti",
+  "ai_genie_speech": "Äänilähtö"
 }

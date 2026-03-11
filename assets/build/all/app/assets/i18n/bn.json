@@ -546,5 +546,12 @@
   "start_recording": "রেকর্ডিং শুরু করুন",
   "stop_recording": "রেকর্ডিং বন্ধ করুন",
   "toggle_smart_recording": "অ্যালার্মে অটো-রেকর্ড করুন",
-  "search_metadata": "মেটাডেটা অনুসন্ধান করুন"
+  "search_metadata": "মেটাডেটা অনুসন্ধান করুন",
+  "actions": "কর্ম",
+  "save_generated_widget": "জেনারেটেড উইজেট সংরক্ষণ করুন",
+  "update": "আপডেট",
+  "save_as": "এই রূপে সংরক্ষণ করুন...",
+  "update_directly_message": "সরাসরি {{name}} আপডেট করুন",
+  "auto_update_widget": "বর্তমান উইজেটটি স্বয়ংক্রিয়ভাবে আপডেট করুন",
+  "ai_genie_speech": "ভয়েস আউটপুট"
 }

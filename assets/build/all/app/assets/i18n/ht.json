@@ -546,5 +546,12 @@
   "start_recording": "Kòmanse Anrejistreman",
   "stop_recording": "Sispann Anrejistreman an",
   "toggle_smart_recording": "Anrejistreman otomatik sou alam",
-  "search_metadata": "Rechèch Metadone"
+  "search_metadata": "Rechèch Metadone",
+  "actions": "Aksyon yo",
+  "save_generated_widget": "Sove Widjèt ki te pwodui a",
+  "update": "Mizajou",
+  "save_as": "Anrejistre kòm...",
+  "update_directly_message": "Mizajou {{name}} dirèkteman",
+  "auto_update_widget": "Mizajou otomatik widjèt aktyèl la",
+  "ai_genie_speech": "Sòti Vwa"
 }

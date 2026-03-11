@@ -546,5 +546,12 @@
   "start_recording": "Dest bi Tomarkirinê Bike",
   "stop_recording": "Tomarkirinê Rawestîne",
   "toggle_smart_recording": "Tomarkirina otomatîk li ser alarmê",
-  "search_metadata": "Lêgerîna Metadatayan"
+  "search_metadata": "Lêgerîna Metadatayan",
+  "actions": "Çalakî",
+  "save_generated_widget": "Widgetê Çêkirî Tomar Bike",
+  "update": "Nûvekirin",
+  "save_as": "Tomar bike wekî...",
+  "update_directly_message": "Rasterast {{name}} nûve bike",
+  "auto_update_widget": "Widgetê heyî bixweber nûve bike",
+  "ai_genie_speech": "Derketina Deng"
 }

@@ -593,6 +593,8 @@
         "Google Gemini AI API key",
       "ConfigureOptions.ModelId":
         "Model ID",
+      "ConfigureOptions.EnableDeepKnowledge":
+        "Enable Deep Knowledge (Read programs & widgets)",
       "ConfigureOptions.SystemInstructions":
         "System Instructions"
     },

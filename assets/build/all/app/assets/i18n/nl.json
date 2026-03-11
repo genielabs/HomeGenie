@@ -546,5 +546,12 @@
   "start_recording": "Start opnemen",
   "stop_recording": "Stop met opnemen",
   "toggle_smart_recording": "Automatische opname bij alarm",
-  "search_metadata": "Zoekmetadata"
+  "search_metadata": "Zoekmetadata",
+  "actions": "Acties",
+  "save_generated_widget": "Widget opslaan",
+  "update": "Update",
+  "save_as": "Opslaan als...",
+  "update_directly_message": "Werk {{name}} rechtstreeks bij",
+  "auto_update_widget": "De huidige widget wordt automatisch bijgewerkt.",
+  "ai_genie_speech": "Spraakuitvoer"
 }

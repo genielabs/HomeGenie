@@ -546,5 +546,12 @@
   "start_recording": "開始錄製",
   "stop_recording": "停止錄製",
   "toggle_smart_recording": "警報時自動錄製",
-  "search_metadata": "搜尋元數據"
+  "search_metadata": "搜尋元數據",
+  "actions": "行動",
+  "save_generated_widget": "儲存生成的元件",
+  "update": "更新",
+  "save_as": "另存為...",
+  "update_directly_message": "直接更新 {{name}}",
+  "auto_update_widget": "自動更新目前小工具",
+  "ai_genie_speech": "語音輸出"
 }

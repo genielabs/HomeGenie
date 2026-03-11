@@ -546,5 +546,12 @@
   "start_recording": "ರೆಕಾರ್ಡಿಂಗ್ ಪ್ರಾರಂಭಿಸಿ",
   "stop_recording": "ರೆಕಾರ್ಡಿಂಗ್ ನಿಲ್ಲಿಸಿ",
   "toggle_smart_recording": "ಅಲಾರಾಂನಲ್ಲಿ ಸ್ವಯಂ-ರೆಕಾರ್ಡ್ ಮಾಡಿ",
-  "search_metadata": "ಮೆಟಾಡೇಟಾ ಹುಡುಕಿ"
+  "search_metadata": "ಮೆಟಾಡೇಟಾ ಹುಡುಕಿ",
+  "actions": "ಕ್ರಿಯೆಗಳು",
+  "save_generated_widget": "ರಚಿಸಿದ ವಿಜೆಟ್ ಅನ್ನು ಉಳಿಸಿ",
+  "update": "ನವೀಕರಿಸಿ",
+  "save_as": "ಹೀಗೆ ಉಳಿಸಿ...",
+  "update_directly_message": "{{name}} ಅನ್ನು ನೇರವಾಗಿ ನವೀಕರಿಸಿ",
+  "auto_update_widget": "ಪ್ರಸ್ತುತ ವಿಜೆಟ್ ಅನ್ನು ಸ್ವಯಂ-ನವೀಕರಿಸಿ",
+  "ai_genie_speech": "ಧ್ವನಿ ಔಟ್ಪುಟ್"
 }

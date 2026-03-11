@@ -546,5 +546,12 @@
   "start_recording": "Opnam ufänken",
   "stop_recording": "Opnam stoppen",
   "toggle_smart_recording": "Automatesch Opnam bei Alarm",
-  "search_metadata": "Metadaten duerchsichen"
+  "search_metadata": "Metadaten duerchsichen",
+  "actions": "Aktiounen",
+  "save_generated_widget": "Generéierte Widget späicheren",
+  "update": "Aktualiséierung",
+  "save_as": "Späicheren als...",
+  "update_directly_message": "Aktualiséiert {{name}} direkt",
+  "auto_update_widget": "Aktuellen Widget automatesch aktualiséieren",
+  "ai_genie_speech": "Stëmmausgang"
 }

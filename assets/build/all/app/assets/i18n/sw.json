@@ -546,5 +546,12 @@
   "start_recording": "Anza Kurekodi",
   "stop_recording": "Acha Kurekodi",
   "toggle_smart_recording": "Rekodi kiotomatiki kwenye Kengele",
-  "search_metadata": "Tafuta Metadata"
+  "search_metadata": "Tafuta Metadata",
+  "actions": "Vitendo",
+  "save_generated_widget": "Hifadhi Wijeti Iliyozalishwa",
+  "update": "Sasisho",
+  "save_as": "Hifadhi Kama...",
+  "update_directly_message": "Sasisha {{name}} moja kwa moja",
+  "auto_update_widget": "Sasisha kiotomatiki wijeti ya sasa",
+  "ai_genie_speech": "Toa Sauti"
 }

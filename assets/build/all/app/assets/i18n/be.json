@@ -546,5 +546,12 @@
   "start_recording": "Пачаць запіс",
   "stop_recording": "Спыніць запіс",
   "toggle_smart_recording": "Аўтаматычны запіс па трывозе",
-  "search_metadata": "Пошук метададзеных"
+  "search_metadata": "Пошук метададзеных",
+  "actions": "Дзеянні",
+  "save_generated_widget": "Захаваць згенераваны віджэт",
+  "update": "Абнаўленне",
+  "save_as": "Захаваць як...",
+  "update_directly_message": "Абнавіць {{name}} непасрэдна",
+  "auto_update_widget": "Аўтаматычна абнаўляць бягучы віджэт",
+  "ai_genie_speech": "Галасавы вывад"
 }

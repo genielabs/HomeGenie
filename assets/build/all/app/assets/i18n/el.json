@@ -546,5 +546,12 @@
   "start_recording": "Έναρξη εγγραφής",
   "stop_recording": "Διακοπή εγγραφής",
   "toggle_smart_recording": "Αυτόματη εγγραφή σε συναγερμό",
-  "search_metadata": "Αναζήτηση μεταδεδομένων"
+  "search_metadata": "Αναζήτηση μεταδεδομένων",
+  "actions": "Ενέργειες",
+  "save_generated_widget": "Αποθήκευση δημιουργημένου γραφικού στοιχείου",
+  "update": "Εκσυγχρονίζω",
+  "save_as": "Αποθήκευση ως...",
+  "update_directly_message": "Ενημέρωση {{name}} απευθείας",
+  "auto_update_widget": "Αυτόματη ενημέρωση τρέχοντος γραφικού στοιχείου",
+  "ai_genie_speech": "Φωνητική έξοδος"
 }

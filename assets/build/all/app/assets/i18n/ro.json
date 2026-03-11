@@ -546,5 +546,12 @@
   "start_recording": "Începeți înregistrarea",
   "stop_recording": "Opriți înregistrarea",
   "toggle_smart_recording": "Înregistrare automată la alarmă",
-  "search_metadata": "Metadate de căutare"
+  "search_metadata": "Metadate de căutare",
+  "actions": "Acțiuni",
+  "save_generated_widget": "Salvați widgetul generat",
+  "update": "Actualizare",
+  "save_as": "Salvare ca...",
+  "update_directly_message": "Actualizați direct {{name}}",
+  "auto_update_widget": "Actualizare automată a widgetului curent",
+  "ai_genie_speech": "Ieșire vocală"
 }

@@ -546,5 +546,12 @@
   "start_recording": "Bilow duubista",
   "stop_recording": "Jooji Duubista",
   "toggle_smart_recording": "Diiwaanka otomaatiga ah ee Alarm-ka",
-  "search_metadata": "Raadinta Xogta-xogta"
+  "search_metadata": "Raadi Xogta Xogta",
+  "actions": "Ficillada",
+  "save_generated_widget": "Keydi Qalabka La Soo Saaray",
+  "update": "Cusbooneysii",
+  "save_as": "Keydi Sida...",
+  "update_directly_message": "Si toos ah u cusbooneysii {{name}}",
+  "auto_update_widget": "Si otomaatig ah u cusbooneysii aaladda hadda jirta",
+  "ai_genie_speech": "Soo saarista Codka"
 }

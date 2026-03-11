@@ -51,6 +51,7 @@
 
     <!-- Keep these. These are used in CSharpAppFactory -->
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" NoWarn="NU1510" />
+    <PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
     <PackageReference Include="System.ObjectModel" Version="4.3.0" NoWarn="NU1510" />
     <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1"  NoWarn="NU1510"/>
     <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.2" NoWarn="NU1510" />
@@ -61,6 +62,7 @@
     <PackageReference Include="MQTTnet" Version="4.3.7.1207" />
     <PackageReference Include="NCrontab" Version="3.4.0" />
     <PackageReference Include="SuperSocket.ClientEngine.Core" Version="0.10.0" />
+    <PackageReference Include="System.Xml.ReaderWriter" Version="4.3.1" />
     <PackageReference Include="UnitsNet" Version="5.75.0" />
 
     <PackageReference Include="HG.NWaves" Version="0.9.6" />

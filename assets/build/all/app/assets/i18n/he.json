@@ -546,5 +546,12 @@
   "start_recording": "התחל הקלטה",
   "stop_recording": "הפסקת ההקלטה",
   "toggle_smart_recording": "הקלטה אוטומטית בעת אזעקה",
-  "search_metadata": "חיפוש מטא-נתונים"
+  "search_metadata": "חיפוש מטא-נתונים",
+  "actions": "פעולות",
+  "save_generated_widget": "שמור את הווידג'ט שנוצר",
+  "update": "לְעַדְכֵּן",
+  "save_as": "שמור בשם...",
+  "update_directly_message": "עדכן את {{name}} ישירות",
+  "auto_update_widget": "עדכון אוטומטי של הווידג'ט הנוכחי",
+  "ai_genie_speech": "פלט קולי"
 }

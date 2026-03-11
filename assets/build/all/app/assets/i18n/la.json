@@ -546,5 +546,12 @@
   "start_recording": "Incipe Recordare",
   "stop_recording": "Desine inscriptionem",
   "toggle_smart_recording": "Auto-registratio in Alarma",
-  "search_metadata": "Metadata Investigationis"
+  "search_metadata": "Metadata Investigationis",
+  "actions": "Actiones",
+  "save_generated_widget": "Instrumentum Generatum Serva",
+  "update": "Renovatio",
+  "save_as": "Servare Ut...",
+  "update_directly_message": "{{name}} directe renova.",
+  "auto_update_widget": "Automatice renova instrumentum praesens",
+  "ai_genie_speech": "Vox Emissa"
 }

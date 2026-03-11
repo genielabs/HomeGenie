@@ -546,5 +546,12 @@
   "start_recording": "Mulai Merekam",
   "stop_recording": "Hentikan Perekaman",
   "toggle_smart_recording": "Rekam otomatis saat alarm berbunyi",
-  "search_metadata": "Metadata Pencarian"
+  "search_metadata": "Metadata Pencarian",
+  "actions": "Tindakan",
+  "save_generated_widget": "Simpan Widget yang Dihasilkan",
+  "update": "Memperbarui",
+  "save_as": "Simpan Sebagai...",
+  "update_directly_message": "Perbarui {{name}} secara langsung",
+  "auto_update_widget": "Perbarui widget saat ini secara otomatis",
+  "ai_genie_speech": "Keluaran Suara"
 }

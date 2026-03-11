@@ -546,5 +546,12 @@
   "start_recording": "Iniciar grabación",
   "stop_recording": "Detener la grabación",
   "toggle_smart_recording": "Grabación automática en caso de alarma",
-  "search_metadata": "Metadatos de búsqueda"
+  "search_metadata": "Metadatos de búsqueda",
+  "actions": "Comportamiento",
+  "save_generated_widget": "Guardar widget generado",
+  "update": "Actualizar",
+  "save_as": "Guardar como...",
+  "update_directly_message": "Actualizar {{name}} directamente",
+  "auto_update_widget": "Actualizar automáticamente el widget actual",
+  "ai_genie_speech": "Salida de voz"
 }

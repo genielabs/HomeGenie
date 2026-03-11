@@ -545,5 +545,12 @@
   "start_recording": "Start Recording",
   "stop_recording": "Stop Recording",
   "toggle_smart_recording": "Auto-record on Alarm",
-  "search_metadata": "Search Metadata"
+  "search_metadata": "Search Metadata",
+  "actions": "Actions",
+  "save_generated_widget": "Save Generated Widget",
+  "update": "Update",
+  "save_as": "Save As...",
+  "update_directly_message": "Update {{name}} directly",
+  "auto_update_widget": "Auto-update current widget",
+  "ai_genie_speech": "Voice Output"
 }

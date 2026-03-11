@@ -546,5 +546,12 @@
   "start_recording": "Yambani Kujambula",
   "stop_recording": "Siyani Kujambula",
   "toggle_smart_recording": "Lembani zokha pa Alamu",
-  "search_metadata": "Sakani Metadata"
+  "search_metadata": "Sakani Metadata",
+  "actions": "Zochita",
+  "save_generated_widget": "Sungani Chida Chopangidwa",
+  "update": "Zosintha",
+  "save_as": "Sungani Monga...",
+  "update_directly_message": "Sinthani {{name}} mwachindunji",
+  "auto_update_widget": "Sinthani zokha chida chamakono",
+  "ai_genie_speech": "Kutulutsa Mawu"
 }

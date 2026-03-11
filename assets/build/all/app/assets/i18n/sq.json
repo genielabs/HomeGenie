@@ -546,5 +546,12 @@
   "start_recording": "Fillo regjistrimin",
   "stop_recording": "Ndalo regjistrimin",
   "toggle_smart_recording": "Regjistrim automatik në alarm",
-  "search_metadata": "Kërko metadata"
+  "search_metadata": "Kërko metadata",
+  "actions": "Veprime",
+  "save_generated_widget": "Ruaj Widget-in e Gjeneruar",
+  "update": "Përditëso",
+  "save_as": "Ruaj si...",
+  "update_directly_message": "Përditëso {{name}} direkt",
+  "auto_update_widget": "Përditëso automatikisht vegël aktuale",
+  "ai_genie_speech": "Dalja e zërit"
 }

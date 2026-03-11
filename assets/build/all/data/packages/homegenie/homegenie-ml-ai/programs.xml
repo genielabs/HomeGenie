@@ -519,34 +519,35 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
     <ScriptSetup>// Path to the external markdown file for system instructions
 var systemPromptFile = Path.Combine(Data.GetFolder(), "gemini_system_prompt.txt");
 
-// This method is used to register this program as a "AI intent handler"
-Program.Implements(
-    "@AI:WidgetGenie",
-    API_URL
-).AddOption("ApiKey", "?", "Google Gemini AI API key", "text")
- .AddOption("ModelId", DEFAULT_MODEL_ID, "Model ID", "text")
- .AddOption("SystemInstructions", "", "System Instructions", $"editor:file:{systemPromptFile}:markdown")
- .Run();
+Program.Setup(() =&gt; {
+    // This method is used to register this program as a "AI intent handler"
+    Program.Implements(
+        "@AI:WidgetGenie",
+        "AI.WidgetGenie/Gemini"
+    ).AddOption("ApiKey", "?", "1. Google Gemini AI API key", "password")
+     .AddOption("ModelId", "gemini-1.5-flash", "2. Model ID (Requires 1.5 Flash/Pro for Caching)", "text")
+     .AddOption("EnableDeepKnowledge", "On", "3. Enable Deep Knowledge (Read programs &amp; widgets)", "checkbox")
+     .AddOption("SystemInstructions", "", "4. System Instructions", $"editor:file:{systemPromptFile}:markdown");
+});
+
+Program.Run();
 </ScriptSetup>
     <ScriptSource>// ===================================================================
-// GEMINI INTENT HANDLER - UPDATED FOR CENTRALIZED HISTORY SERVICE
+// GEMINI WIDGET GENIE - WITH DEEP KNOWLEDGE &amp; CACHING
 // ===================================================================
-// 1. Validate configuration
+
+string API_URL = "AI.WidgetGenie/Gemini";
 string geminiApiKey = Program.Option("ApiKey").Value.Trim();
 string geminiModelId = Program.Option("ModelId").Value.Trim();
-if (geminiApiKey.Length != 39 || !geminiApiKey.StartsWith("AIzaSy") || string.IsNullOrEmpty(geminiModelId))
-{
-    string error = "Gemini Intent Handler is not properly configured.";
-    //Program.Notify($"ERROR: {error} Please configure the program options.");
+bool useDeepKnowledge = Program.Option("EnableDeepKnowledge").Value == "On";
+
+if (geminiApiKey.Length != 39 || !geminiApiKey.StartsWith("AIzaSy") || string.IsNullOrEmpty(geminiModelId)) {
     Program.Emit("Status.Init", "NotConfigured");
-}
-else
-{
+} else {
     Program.Emit("Status.Init", "Ready");
 }
 
 bool reconfigureRequired = false;
-// Register event handler to trigger a restart if configuration options change.
 When.ModuleParameterChanged((module, parameter) =&gt; {
   if (module.Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
     reconfigureRequired = true;
@@ -554,141 +555,263 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
   return true;
 });
 
-// Helper to get the current StoreId (unique for this module)
 string storeId = Program.Module.Address;
+
+// Cache Management Variables
+string currentCacheName = "";
+DateTime cacheExpiration = DateTime.MinValue;
+// --- FUNZIONE OTTIMIZZATA PER LEGGERE programs.xml ---
+Func&lt;string, string&gt; GetSlimmedXml = (filePath) =&gt; {
+    if (!File.Exists(filePath)) return "";
+    try {
+        var doc = new System.Xml.XmlDocument();
+        doc.Load(filePath);
+        StringBuilder sb = new StringBuilder();
+        var programs = doc.SelectNodes("//ProgramBlock");
+//        foreach (System.Xml.XmlNode pg in programs) {
+        foreach (System.Xml.XmlNode pg in doc.SelectNodes("//ProgramBlock[IsEnabled='true']")) {
+            string name = pg.SelectSingleNode("Name")?.InnerText ?? "Unnamed";
+            string setup = pg.SelectSingleNode("ScriptSetup")?.InnerText ?? "";
+            string source = pg.SelectSingleNode("ScriptSource")?.InnerText ?? "";
+            
+            if (string.IsNullOrWhiteSpace(source) &amp;&amp; string.IsNullOrWhiteSpace(setup)) continue;
+
+            sb.AppendLine($"PROGRAM: {name}");
+            if (!string.IsNullOrWhiteSpace(setup)) sb.AppendLine("SETUP:\n" + setup);
+            if (!string.IsNullOrWhiteSpace(source)) sb.AppendLine("SOURCE:\n" + source);
+            sb.AppendLine("---");
+        }
+        return sb.ToString();
+    } catch { 
+        return "Error slimming XML, fallback to raw read..."; 
+    }
+};
+// --- FUNCTION: BUILD DEEP CONTEXT ---
+Func&lt;string&gt; BuildContext = () =&gt; {
+    var promptFile = Path.Combine(Data.GetFolder(), "gemini_system_prompt.txt");
+    string context = "";
+    try { context = File.ReadAllText(promptFile); } catch { context = "You are a HomeGenie developer."; }
+
+    if (useDeepKnowledge) {
+        Program.Log.Info("Building Deep Knowledge Context...");
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine(context);
+        sb.AppendLine("\n=======================================================");
+        sb.AppendLine("HOMEGENIE SYSTEM SOURCE CODE (REFERENCE MATERIAL)");
+        sb.AppendLine("=======================================================\n");
+
+        // 1. Read programs.xml
+        try {
+            string hgRoot = Path.GetFullPath(Path.Combine(Data.GetFolder(), "..", ".."));
+            string programsFile = Path.Combine("./", "programs.xml");
+            if (File.Exists(programsFile)) {
+                sb.AppendLine("--- FILE: programs.xml (C# Backend Logic) ---");
+                sb.AppendLine(GetSlimmedXml(programsFile));
+                sb.AppendLine("---------------------------------------------\n");
+            }
+        } catch (Exception ex) { Program.Log.Warn("Could not read programs.xml: " + ex.Message); }
+
+        // 2. Read Widgets (HTML, CSS, JS)
+        try {
+            string programRoot = Path.GetFullPath(Path.Combine(Data.GetFolder(), "..", ".."));
+            // Adjust the path to where your widgets actually are (e.g. html/widgets)
+            string widgetsFolder = Path.Combine(programRoot, "widgets"); 
+            
+            if (Directory.Exists(widgetsFolder)) {
+                var extensions = new[] { ".html", ".css", ".js" };
+                var files = Directory.GetFiles(widgetsFolder, "*.*", SearchOption.AllDirectories)
+                                     .Where(f =&gt; extensions.Contains(Path.GetExtension(f).ToLower()));
+
+                foreach (var file in files) {
+                    string relativePath = file.Replace(widgetsFolder, "").TrimStart(Path.DirectorySeparatorChar);
+                    sb.AppendLine($"--- FILE: {relativePath} ---");
+                    sb.AppendLine(File.ReadAllText(file));
+                    sb.AppendLine($"--- END FILE: {relativePath} ---\n");
+                }
+            }
+        } catch (Exception ex) { Program.Log.Warn("Could not read widgets: " + ex.Message); }
+
+        context = sb.ToString();
+    }
+    return context;
+};
+
+// --- FUNCTION: CREATE CACHE ---
+DateTime rateLimitResetTime = DateTime.MinValue;
+bool isQuotaExceeded = false;
+Func&lt;string, bool&gt; EnsureCache = (fullContext) =&gt; {
+    if (!useDeepKnowledge) return false;
+    if (!string.IsNullOrEmpty(currentCacheName) &amp;&amp; DateTime.UtcNow &lt; cacheExpiration) return true;
+
+    Program.Log.Info("Uploading context to Gemini Cache...");
+    var cacheUrl = $"https://generativelanguage.googleapis.com/v1beta/cachedContents?key={geminiApiKey}";
+    
+    var cachePayload = new {
+        model = $"models/{geminiModelId}",
+        system_instruction = new { parts = new[] { new { text = fullContext } } },
+        ttl = "3600s"
+    };
+
+    try {
+        var data = Net.WebService(cacheUrl)
+            .AddHeader("Content-Type", "application/json")
+            .Post(JsonConvert.SerializeObject(cachePayload))
+            .GetData();
+            
+        if (data != null &amp;&amp; data.name != null) {
+            currentCacheName = data.name.ToString();
+            cacheExpiration = DateTime.UtcNow.AddMinutes(55);
+            Program.Log.Info($"Cache created successfully: {currentCacheName}");
+            return true;
+        }
+    } catch (Exception ex) {
+        if (ex.Message.Contains("429")) {
+            Program.Log.Warn("Gemini Cache Quota exceeded (429). Using standard mode (no cache).");
+        } else {
+            Program.Log.Warn($"Caching failed: {ex.Message}");
+        }
+        currentCacheName = "";
+    }
+    return false;
+};
 
 // ===================================================================
 // API HANDLER: Process a new user message
 // ===================================================================
-Api.Handle($"{API_URL}/{API_PROCESS}", (userCommand) =&gt;
+Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
 {
+    if (isQuotaExceeded &amp;&amp; DateTime.UtcNow &lt; rateLimitResetTime) {
+        return new ResponseText($"**AI Temporaneamente Non Disponibile:** Raggiunto il limite di richieste (Errore 429). Riprova tra {Math.Ceiling((rateLimitResetTime - DateTime.UtcNow).TotalMinutes)} minuti.");
+    }
 
-    // 2. Fetch the current history from the centralized System Service
-    var storeId = Program.Module.Address;
     var result = Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId });
     var payloadContents = JArray.FromObject(result).ToObject&lt;List&lt;ChatMessage&gt;&gt;();
 
-    // 3. Prepare the new user message
     var userMessage = ChatMessage.Create("user", userCommand as string);
-
-    // 4. Add User Message to the centralized history immediately
-    Api.Call("System.Utility/ChatHistory/Add", new {
-        StoreId = storeId,
-        Message = userMessage
-    });
-
-    // 5. Prepare the System Prompt
-    var systemPromptFile = Path.Combine(Data.GetFolder(), "gemini_system_prompt.txt");
-    var promptText = "";
-    try { promptText = File.ReadAllText(systemPromptFile); } catch { promptText = "You are a helpful home automation assistant."; }
-
-    // 6. Build the API Request Payload (History + New Message)
+    Api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = userMessage });
     payloadContents.Add(userMessage);
 
-    var payload = new
-    {
-        contents = payloadContents,
-        system_instruction = new { parts = new[] { new { text = promptText } } },
-        generationConfig = new { temperature = 0.3 }
+    string fullContext = BuildContext();
+    bool hasCache = EnsureCache(fullContext);
+    if (isQuotaExceeded) {
+        return new ResponseText("**Errore Quota:** Non è stato possibile caricare il contesto. Riprova tra qualche minuto.");
+    }
+
+    // Build the Generation Config forcing JSON output
+    var genConfig = new {
+        temperature = 0.2,
+        response_mime_type = "application/json",
+        response_schema = new {
+            type = "object",
+            properties = new {
+                explanation = new { type = "string", description = "Explanation of the solution" },
+                html = new { type = "string", description = "HTML code (empty if none)" },
+                css = new { type = "string", description = "CSS code (empty if none)" },
+                javascript = new { type = "string", description = "Javascript code (empty if none)" }
+            },
+            required = new[] { "explanation", "html", "css", "javascript" }
+        }
     };
+
+    // Construct Payload dynamically based on cache status
+    object payload;
+    if (hasCache) {
+        payload = new {
+            contents = payloadContents,
+            cached_content = currentCacheName,
+            generationConfig = genConfig
+        };
+    } else {
+        payload = new {
+            contents = payloadContents,
+            system_instruction = new { parts = new[] { new { text = fullContext } } },
+            generationConfig = genConfig
+        };
+    }
 
     try
     {
-        // 7. Send the request to Gemini API
-        string payloadJson = JsonConvert.SerializeObject(payload);
-        string geminiRequestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
+        string payloadJson = JsonConvert.SerializeObject(payload, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+        string requestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
 
-        var data = Net
-            .WebService(geminiRequestUrl)
-            .WithTimeout(120)
-            .AddHeader("Content-Type", "application/json")
-            .Post(payloadJson)
-            .GetData();
-
-        // 8. Process the AI response
-        string geminiResponse = data?.candidates?[0]?.content?.parts?[0]?.text;
-
-        if (!string.IsNullOrEmpty(geminiResponse))
+        var data = Net.WebService(requestUrl).WithTimeout(120).AddHeader("Content-Type", "application/json").Post(payloadJson).GetData();
+        if (data != null &amp;&amp; data.candidates != null &amp;&amp; data.candidates.Count &gt; 0)
         {
-            // 9. Add Model Response to the centralized history
-            var modelResponse = ChatMessage.Create("model", geminiResponse);
-            Api.Call("System.Utility/ChatHistory/Add", new {
-                StoreId = storeId,
-                Message = modelResponse
-            });
+            string rawResponse = data.candidates[0].content.parts[0].text;
 
-            return new ResponseText(geminiResponse);
+            if (!string.IsNullOrEmpty(rawResponse))
+            {
+                // Qui rawResponse è la stringa JSON inviata da Gemini, questa va parsata
+                var jsonObj = JObject.Parse(rawResponse);
+                StringBuilder formattedResponse = new StringBuilder();
+                
+                formattedResponse.AppendLine(jsonObj["explanation"]?.ToString());
+                
+                string html = jsonObj["html"]?.ToString();
+                if (!string.IsNullOrWhiteSpace(html)) formattedResponse.AppendLine($"\n```html\n{html}\n```");
+                
+                string css = jsonObj["css"]?.ToString();
+                if (!string.IsNullOrWhiteSpace(css)) formattedResponse.AppendLine($"\n```css\n{css}\n```");
+                
+                string js = jsonObj["javascript"]?.ToString();
+                if (!string.IsNullOrWhiteSpace(js)) formattedResponse.AppendLine($"\n```javascript\n{js}\n```");
+
+                string finalReply = formattedResponse.ToString();
+
+                var modelResponse = ChatMessage.Create("model", finalReply);
+                Api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = modelResponse });
+
+                return new ResponseText(finalReply);
+            }
         }
-        else
-        {
-            Program.Log.Warn("Gemini returned an empty response.");
-            return new ResponseText("**Error:** The AI returned an empty response.");
-        }
+        return new ResponseText("**Error:** The AI returned an empty response.");
     }
     catch (Exception ex)
     {
-        Program.Notify($"Gemini API Error: {ex.Message}");
+        if (ex.Message.Contains("(429)")) {
+            isQuotaExceeded = true;
+            rateLimitResetTime = DateTime.UtcNow.AddMinutes(2);
+            return new ResponseText("**Errore 429:** Troppe richieste in corso. Ho messo in pausa le interrogazioni per un paio di minuti.");
+        }
+        Program.Log.Error($"Gemini API Error: {ex.Message}");
         return new ResponseText($"**Error:** Could not contact Gemini service. `{ex.Message}`");
     }
 });
 
-// ===================================================================
-// API HANDLER: Get the current chat history
-// ===================================================================
-Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt;
-{
-    return Api.Call("System.Utility/ChatHistory/Get", new { StoreId = Program.Module.Address });
-});
+// APIs for History
+Api.Handle($"{API_URL}/History.Get", (p) =&gt; Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/History.Clear", (p) =&gt; Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId }));
 
-// ===================================================================
-// API HANDLER: Clear the chat history
-// ===================================================================
-Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (p) =&gt;
-{
-    var storeId = Program.Module.Address;
-    Program.Log.Info($"Clearing history for module {storeId}...");
-    return Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId });
-});
-
-// Run in background to keep API endpoints active
-while (Program.IsRunning &amp;&amp; !reconfigureRequired)
-{
-    Pause(1);
-}
-</ScriptSource>
-    <ScriptContext>const string API_URL = "AI.WidgetGenie/Gemini";
-const string DEFAULT_MODEL_ID = "gemini-flash-latest";
-
-const string API_PROCESS = "Prompt.Submit";
-const string API_HISTORY_GET = "History.Get";
-const string API_HISTORY_CLEAR = "History.Clear";
-
-// POJO
-
+while (Program.IsRunning &amp;&amp; !reconfigureRequired) { Pause(1); }</ScriptSource>
+    <ScriptContext>
 public class MessagePart {
     [JsonProperty("text")]
     public string Text { get; set; }
 }
+
 public class ChatMessage {
     [JsonProperty("role")]
     public string Role { get; set; }
     [JsonProperty("parts")]
     public List&lt;MessagePart&gt; Parts { get; set; } = new List&lt;MessagePart&gt;();
+    
     public static ChatMessage Create(string role, string text) {
-        return new ChatMessage { Role = role, Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = text } } };
+        return new ChatMessage { 
+            Role = role, 
+            Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = text } } 
+        };
     }
-}
-</ScriptContext>
-    <ScriptErrors />
+}</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-widget-genie</Id>
-      <Version>1.0.6</Version>
+      <Version>1.0.7</Version>
       <Required>true</Required>
-      <Checksum>3F9DBFDC62D1F2946F131F1BD7EB23C2</Checksum>
+      <Checksum>8CBE23BAAEE9EAF6030E35051D5E33A1</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>931</Address>
@@ -1009,7 +1132,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     return contour;
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -2168,7 +2291,7 @@ ObjectDetect = "Sensor.ObjectDetect",
 ObjectDetectSubject = "Sensor.ObjectDetect.Subject",
 VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -2354,7 +2477,7 @@ ObjectDetect = "Sensor.ObjectDetect",
 ObjectDetectSubject = "Sensor.ObjectDetect.Subject",
 VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>

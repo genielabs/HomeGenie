@@ -546,5 +546,12 @@
   "start_recording": "Hasi grabaketa",
   "stop_recording": "Gelditu grabaketa",
   "toggle_smart_recording": "Alarma automatikoki grabatu",
-  "search_metadata": "Bilaketa-metadatuak"
+  "search_metadata": "Bilaketa-metadatuak",
+  "actions": "Ekintzak",
+  "save_generated_widget": "Gorde sortutako widgeta",
+  "update": "Eguneratu",
+  "save_as": "Gorde honela...",
+  "update_directly_message": "Eguneratu {{name}} zuzenean",
+  "auto_update_widget": "Eguneratu uneko widgeta automatikoki",
+  "ai_genie_speech": "Ahots-irteera"
 }

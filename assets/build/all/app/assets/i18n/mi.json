@@ -546,5 +546,12 @@
   "start_recording": "Tīmata te Hopu",
   "stop_recording": "Kati te Tuhi",
   "toggle_smart_recording": "Tuhi-aunoa i te Whakaoho",
-  "search_metadata": "Rapu Raraunga Whānui"
+  "search_metadata": "Rapu Raraunga Whānui",
+  "actions": "Ngā Mahi",
+  "save_generated_widget": "Tiakina te Widget i Hangaia",
+  "update": "Whakahōu",
+  "save_as": "Tiaki Hei...",
+  "update_directly_message": "Whakahōu tika i a {{name}}",
+  "auto_update_widget": "Whakahōu aunoa i te widget o nāianei",
+  "ai_genie_speech": "Putanga Reo"
 }

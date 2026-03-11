@@ -546,5 +546,12 @@
   "start_recording": "Spustit nahrávání",
   "stop_recording": "Zastavit nahrávání",
   "toggle_smart_recording": "Automatické nahrávání při alarmu",
-  "search_metadata": "Vyhledávání metadat"
+  "search_metadata": "Vyhledávání metadat",
+  "actions": "Akce",
+  "save_generated_widget": "Uložit vygenerovaný widget",
+  "update": "Aktualizovat",
+  "save_as": "Uložit jako...",
+  "update_directly_message": "Aktualizovat {{name}} přímo",
+  "auto_update_widget": "Automaticky aktualizovat aktuální widget",
+  "ai_genie_speech": "Hlasový výstup"
 }

@@ -273,6 +273,7 @@ namespace HomeGenie.Automation.Scripting
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Collections.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Text.RegularExpressions.dll")),
                     MetadataReference.CreateFromFile(typeof(System.Text.Json.JsonSerializer).Assembly.Location),
+                    MetadataReference.CreateFromFile(typeof(System.Xml.XmlDocument).Assembly.Location),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.Primitives.dll")),
                     MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.NameResolution.dll")),

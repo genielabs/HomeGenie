@@ -546,5 +546,12 @@
   "start_recording": "رڪارڊنگ شروع ڪريو",
   "stop_recording": "رڪارڊنگ بند ڪريو",
   "toggle_smart_recording": "الارم تي خودڪار رڪارڊ",
-  "search_metadata": "ميٽا ڊيٽا ڳوليو"
+  "search_metadata": "ميٽا ڊيٽا ڳوليو",
+  "actions": "عمل",
+  "save_generated_widget": "ٺاهيل ويجيٽ محفوظ ڪريو",
+  "update": "تازه ڪاري",
+  "save_as": "محفوظ ڪريو جيئن...",
+  "update_directly_message": "{{name}} کي سڌو سنئون اپڊيٽ ڪريو",
+  "auto_update_widget": "موجوده ويجيٽ کي خودڪار طور تي اپڊيٽ ڪريو",
+  "ai_genie_speech": "وائيس آئوٽ پٽ"
 }

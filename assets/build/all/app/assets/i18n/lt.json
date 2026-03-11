@@ -546,5 +546,12 @@
   "start_recording": "Pradėti įrašymą",
   "stop_recording": "Sustabdyti įrašymą",
   "toggle_smart_recording": "Automatinis įrašymas įsijungus žadintuvui",
-  "search_metadata": "Paieškos metaduomenys"
+  "search_metadata": "Paieškos metaduomenys",
+  "actions": "Veiksmai",
+  "save_generated_widget": "Išsaugoti sugeneruotą valdiklį",
+  "update": "Atnaujinimas",
+  "save_as": "Įrašyti kaip...",
+  "update_directly_message": "Atnaujinti {{name}} tiesiogiai",
+  "auto_update_widget": "Automatiškai atnaujinti dabartinį valdiklį",
+  "ai_genie_speech": "Balso išvestis"
 }

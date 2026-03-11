@@ -545,5 +545,12 @@
   "start_recording": "Avvia registrazione",
   "stop_recording": "Interrompi registrazione",
   "toggle_smart_recording": "Registrazione automatica su allarme",
-  "search_metadata": "Ricerca Metadati"
+  "search_metadata": "Ricerca Metadati",
+  "actions": "Azioni",
+  "save_generated_widget": "Salva Widget Generato",
+  "update": "Aggiorna",
+  "save_as": "Salva come...",
+  "update_directly_message": "Aggiorna {{name}} direttamente",
+  "auto_update_widget": "Aggiorna automaticamente widget aperto",
+  "ai_genie_speech": "Sintesi Vocale"
 }

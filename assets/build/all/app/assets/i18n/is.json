@@ -546,5 +546,12 @@
   "start_recording": "Hefja upptöku",
   "stop_recording": "Hætta upptöku",
   "toggle_smart_recording": "Sjálfvirk upptaka við viðvörun",
-  "search_metadata": "Leita í lýsigögnum"
+  "search_metadata": "Leita í lýsigögnum",
+  "actions": "Aðgerðir",
+  "save_generated_widget": "Vista myndaða græju",
+  "update": "Uppfæra",
+  "save_as": "Vista sem...",
+  "update_directly_message": "Uppfæra {{name}} beint",
+  "auto_update_widget": "Uppfæra núverandi græju sjálfkrafa",
+  "ai_genie_speech": "Röddúttak"
 }

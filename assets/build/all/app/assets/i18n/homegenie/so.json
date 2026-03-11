@@ -324,7 +324,8 @@
       "Description": "Genie-gaaga gaarka ah ee AI ee abuuritaanka widget-kaaga. Waxaa ku shaqeeya Gemini, waxay kaa caawinaysaa inaad qorto oo aad ka saarto HTML, CSS, iyo JavaScript code si toos ah gudaha tifaftiraha HomeGenie. Si aad u dhaqaajiso sifadan, geli furaha API sax ah. Raac tilmaamaha https://aistudio.google.com/app/apikey si aad u hesho furaha API bilaashka ah.",
       "ConfigureOptions.ApiKey": "Google Gemini AI furaha",
       "ConfigureOptions.ModelId": "Aqoonsiga Model",
-      "ConfigureOptions.SystemInstructions": "Tilmaamaha Nidaamka"
+      "ConfigureOptions.SystemInstructions": "Tilmaamaha Nidaamka",
+      "ConfigureOptions.EnableDeepKnowledge": "Karti Aqoon Qoto Dheer (Akhri barnaamijyada iyo aaladaha)"
     },
     "940": {
       "Title": "AI-ga maxalliga ah",

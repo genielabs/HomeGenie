@@ -546,5 +546,12 @@
   "start_recording": "Стартиране на запис",
   "stop_recording": "Спиране на записа",
   "toggle_smart_recording": "Автоматично записване при аларма",
-  "search_metadata": "Търсене в метаданни"
+  "search_metadata": "Търсене в метаданни",
+  "actions": "Действия",
+  "save_generated_widget": "Запазване на генерирания уиджет",
+  "update": "Актуализация",
+  "save_as": "Запази като...",
+  "update_directly_message": "Актуализирайте {{name}} директно",
+  "auto_update_widget": "Автоматично актуализиране на текущия уиджет",
+  "ai_genie_speech": "Гласов изход"
 }

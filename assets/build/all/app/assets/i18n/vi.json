@@ -546,5 +546,12 @@
   "start_recording": "Bắt đầu ghi âm",
   "stop_recording": "Dừng ghi âm",
   "toggle_smart_recording": "Tự động ghi âm khi có báo động",
-  "search_metadata": "Siêu dữ liệu tìm kiếm"
+  "search_metadata": "Siêu dữ liệu tìm kiếm",
+  "actions": "Hành động",
+  "save_generated_widget": "Lưu tiện ích đã tạo",
+  "update": "Cập nhật",
+  "save_as": "Lưu thành...",
+  "update_directly_message": "Cập nhật trực tiếp {{name}}",
+  "auto_update_widget": "Tự động cập nhật tiện ích hiện tại",
+  "ai_genie_speech": "Âm thanh đầu ra"
 }

@@ -324,7 +324,8 @@
       "Description": "ဝစ်ဂျက်ဖန်တီးမှုအတွက် သင်၏ကိုယ်ပိုင် AI ပါရမီရှင်။ Gemini မှ စွမ်းဆောင်ထားသောကြောင့် ၎င်းသည် သင့်အား HomeGenie တည်းဖြတ်မှုအတွင်း HTML၊ CSS နှင့် JavaScript ကုဒ်များကို တိုက်ရိုက်ရေးသားပြီး အမှားရှာရန် ကူညီပေးသည်။ ဤအင်္ဂါရပ်ကို အသက်သွင်းရန်အတွက် မှန်ကန်သော API သော့ကို ထည့်သွင်းပါ။ အခမဲ့ API သော့ကို ရယူရန် https://aistudio.google.com/app/apikey တွင် ညွှန်ကြားချက်များကို လိုက်နာပါ။",
       "ConfigureOptions.ApiKey": "Google Gemini AI API သော့",
       "ConfigureOptions.ModelId": "မော်ဒယ် ID",
-      "ConfigureOptions.SystemInstructions": "စနစ်ညွှန်ကြားချက်များ"
+      "ConfigureOptions.SystemInstructions": "စနစ်ညွှန်ကြားချက်များ",
+      "ConfigureOptions.EnableDeepKnowledge": "Deep Knowledge ကိုဖွင့်ပါ (ပရိုဂရမ်များနှင့် ဝစ်ဂျက်များကိုဖတ်ပါ)"
     },
     "940": {
       "Title": "ဒေသတွင်း AI",

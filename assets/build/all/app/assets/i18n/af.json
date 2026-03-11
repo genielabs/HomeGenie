@@ -546,5 +546,12 @@
   "start_recording": "Begin Opname",
   "stop_recording": "Stop opname",
   "toggle_smart_recording": "Outomatiese opname by alarm",
-  "search_metadata": "Soek Metadata"
+  "search_metadata": "Soek Metadata",
+  "actions": "Aksies",
+  "save_generated_widget": "Stoor gegenereerde widget",
+  "update": "Opdatering",
+  "save_as": "Stoor as...",
+  "update_directly_message": "Dateer {{name}} direk op",
+  "auto_update_widget": "Dateer huidige widget outomaties op",
+  "ai_genie_speech": "Stemuitvoer"
 }

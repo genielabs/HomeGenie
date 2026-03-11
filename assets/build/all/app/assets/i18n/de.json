@@ -546,5 +546,12 @@
   "start_recording": "Aufnahme starten",
   "stop_recording": "Aufnahme stoppen",
   "toggle_smart_recording": "Automatische Aufnahme bei Alarm",
-  "search_metadata": "Suchmetadaten"
+  "search_metadata": "Suchmetadaten",
+  "actions": "Aktionen",
+  "save_generated_widget": "Generiertes Widget speichern",
+  "update": "Aktualisieren",
+  "save_as": "Speichern unter...",
+  "update_directly_message": "Aktualisiere {{name}} direkt",
+  "auto_update_widget": "Aktuelles Widget automatisch aktualisieren",
+  "ai_genie_speech": "Sprachausgabe"
 }

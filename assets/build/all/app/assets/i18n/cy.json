@@ -546,5 +546,12 @@
   "start_recording": "Dechrau Recordio",
   "stop_recording": "Stopio Recordio",
   "toggle_smart_recording": "Recordio'n awtomatig ar Larwm",
-  "search_metadata": "Chwilio Metadata"
+  "search_metadata": "Chwilio Metadata",
+  "actions": "Camau gweithredu",
+  "save_generated_widget": "Cadw'r Teclyn a Gynhyrchwyd",
+  "update": "Diweddariad",
+  "save_as": "Cadw Fel...",
+  "update_directly_message": "Diweddaru {{name}} yn uniongyrchol",
+  "auto_update_widget": "Diweddaru'r teclyn cyfredol yn awtomatig",
+  "ai_genie_speech": "Allbwn Llais"
 }

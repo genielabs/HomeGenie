@@ -546,5 +546,12 @@
   "start_recording": "شروع ضبط",
   "stop_recording": "ضبط را متوقف کنید",
   "toggle_smart_recording": "ضبط خودکار در حالت آلارم",
-  "search_metadata": "جستجوی فراداده"
+  "search_metadata": "جستجوی فراداده",
+  "actions": "اقدامات",
+  "save_generated_widget": "ذخیره ویجت تولید شده",
+  "update": "به‌روزرسانی",
+  "save_as": "ذخیره به عنوان...",
+  "update_directly_message": "به‌روزرسانی مستقیم {{name}}",
+  "auto_update_widget": "به‌روزرسانی خودکار ویجت فعلی",
+  "ai_genie_speech": "خروجی صدا"
 }

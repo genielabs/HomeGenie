@@ -546,5 +546,12 @@
   "start_recording": "Malite ndekọ",
   "stop_recording": "Kwụsị Ndekọ",
   "toggle_smart_recording": "Ndekọ akpaghị aka na mkpu",
-  "search_metadata": "Chọọ Metadata"
+  "search_metadata": "Chọọ Metadata",
+  "actions": "Omume",
+  "save_generated_widget": "Chekwaa Ngwaọrụ Emepụtara",
+  "update": "Mmelite",
+  "save_as": "Chekwa Dị ka...",
+  "update_directly_message": "Melite {{name}} ozugbo",
+  "auto_update_widget": "Melite wijetị dị ugbu a na akpaghị aka",
+  "ai_genie_speech": "Mbupute olu"
 }

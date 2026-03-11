@@ -324,7 +324,8 @@
       "Description": "Сиздин виджет түзүү үчүн жеке AI жиниңиз. Gemini тарабынан иштетилген ал HTML, CSS жана JavaScript кодун түз HomeGenie редакторунун ичинде жазууга жана оңдоого жардам берет. Бул функцияны иштетүү үчүн жарактуу API ачкычын киргизиңиз. Акысыз API ачкычын алуу үчүн https://aistudio.google.com/app/apikey дарегиндеги нускамаларды аткарыңыз.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API ачкычы",
       "ConfigureOptions.ModelId": "Модель ID",
-      "ConfigureOptions.SystemInstructions": "Системалык көрсөтмөлөр"
+      "ConfigureOptions.SystemInstructions": "Системалык көрсөтмөлөр",
+      "ConfigureOptions.EnableDeepKnowledge": "Терең билимди иштетүү (Программаларды жана виджеттерди окуу)"
     },
     "940": {
       "Title": "Жергиликтүү жасалма интеллект",

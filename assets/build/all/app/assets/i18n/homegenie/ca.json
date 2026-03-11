@@ -324,7 +324,8 @@
       "Description": "El vostre geni personal d'IA per a la creació de widgets. Amb la tecnologia de Gemini, us ajuda a escriure i depurar codi HTML, CSS i JavaScript directament dins de l'editor HomeGenie. Per activar aquesta funció, introduïu una clau API vàlida. Seguiu les instruccions a https://aistudio.google.com/app/apikey per obtenir una clau API gratuïta.",
       "ConfigureOptions.ApiKey": "Clau de l'API d'IA de Google Gemini",
       "ConfigureOptions.ModelId": "ID del model",
-      "ConfigureOptions.SystemInstructions": "Instruccions del sistema"
+      "ConfigureOptions.SystemInstructions": "Instruccions del sistema",
+      "ConfigureOptions.EnableDeepKnowledge": "Habilita el coneixement profund (Llegeix programes i widgets)"
     },
     "940": {
       "Title": "IA local",

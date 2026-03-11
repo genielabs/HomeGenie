@@ -546,5 +546,12 @@
   "start_recording": "መቅዳት ይጀምሩ",
   "stop_recording": "መቅዳት አቁም",
   "toggle_smart_recording": "በማንቂያ ላይ በራስ-ሰር መቅዳት",
-  "search_metadata": "ሜታዳታ ፈልግ"
+  "search_metadata": "ሜታዳታ ፈልግ",
+  "actions": "እርምጃዎች",
+  "save_generated_widget": "የመነጨውን መግብር አስቀምጥ",
+  "update": "አዘምን",
+  "save_as": "አስቀምጥ እንደ...",
+  "update_directly_message": "በቀጥታ {{name}} ያዘምኑ",
+  "auto_update_widget": "የአሁኑን መግብር በራስ-ሰር አዘምን",
+  "ai_genie_speech": "የድምጽ ውፅዓት"
 }
