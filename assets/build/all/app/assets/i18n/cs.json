@@ -553,5 +553,9 @@
   "save_as": "Uložit jako...",
   "update_directly_message": "Aktualizovat {{name}} přímo",
   "auto_update_widget": "Automaticky aktualizovat aktuální widget",
-  "ai_genie_speech": "Hlasový výstup"
+  "ai_genie_speech": "Hlasový výstup",
+  "click_to_expand": "Kliknutím rozbalíte",
+  "save_program": "Uložit program",
+  "enter_program_name": "Zadejte název pro tuto automatizaci:",
+  "language_mismatch": "Neshoda jazyků"
 }

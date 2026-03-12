@@ -553,5 +553,9 @@
   "save_as": "ساقلاش شەكلى...",
   "update_directly_message": "{{name}} نى بىۋاسىتە يېڭىلاڭ",
   "auto_update_widget": "نۆۋەتتىكى ۋىجېتنى ئاپتوماتىك يېڭىلاش",
-  "ai_genie_speech": "ئاۋاز چىقىرىش"
+  "ai_genie_speech": "ئاۋاز چىقىرىش",
+  "click_to_expand": "كېڭەيتىش ئۈچۈن چېكىڭ",
+  "save_program": "پروگرامما ساقلاش",
+  "enter_program_name": "بۇ ئاپتوماتلاشتۇرۇش ئۈچۈن بىر ئىسىم كىرگۈزۈڭ:",
+  "language_mismatch": "تىل ماس كەلمەسلىكى"
 }

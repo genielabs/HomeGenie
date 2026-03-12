@@ -553,5 +553,9 @@
   "save_as": "አስቀምጥ እንደ...",
   "update_directly_message": "በቀጥታ {{name}} ያዘምኑ",
   "auto_update_widget": "የአሁኑን መግብር በራስ-ሰር አዘምን",
-  "ai_genie_speech": "የድምጽ ውፅዓት"
+  "ai_genie_speech": "የድምጽ ውፅዓት",
+  "click_to_expand": "ለማስፋት ጠቅ ያድርጉ",
+  "save_program": "ፕሮግራም አስቀምጥ",
+  "enter_program_name": "ለዚህ አውቶሜሽን ስም ያስገቡ፡",
+  "language_mismatch": "የቋንቋ አለመዛመድ"
 }

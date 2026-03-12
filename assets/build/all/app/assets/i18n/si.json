@@ -553,5 +553,9 @@
   "save_as": "ලෙස සුරකින්න...",
   "update_directly_message": "{{name}} කෙලින්ම යාවත්කාලීන කරන්න",
   "auto_update_widget": "වත්මන් විජට් එක ස්වයංක්‍රීයව යාවත්කාලීන කරන්න",
-  "ai_genie_speech": "හඬ ප්‍රතිදානය"
+  "ai_genie_speech": "හඬ ප්‍රතිදානය",
+  "click_to_expand": "පුළුල් කිරීමට ක්ලික් කරන්න",
+  "save_program": "වැඩසටහන සුරකින්න",
+  "enter_program_name": "මෙම ස්වයංක්‍රීයකරණය සඳහා නමක් ඇතුළත් කරන්න:",
+  "language_mismatch": "භාෂා නොගැලපීම"
 }

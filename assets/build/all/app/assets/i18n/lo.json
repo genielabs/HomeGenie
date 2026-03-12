@@ -553,5 +553,9 @@
   "save_as": "ບັນທຶກເປັນ...",
   "update_directly_message": "ອັບເດດ {{name}} ໂດຍກົງ",
   "auto_update_widget": "ອັບເດດວິດເຈັດປັດຈຸບັນໂດຍອັດຕະໂນມັດ",
-  "ai_genie_speech": "ຜົນຜະລິດສຽງ"
+  "ai_genie_speech": "ຜົນຜະລິດສຽງ",
+  "click_to_expand": "ຄລິກເພື່ອຂະຫຍາຍ",
+  "save_program": "ບັນທຶກໂປຣແກຣມ",
+  "enter_program_name": "ໃສ່ຊື່ສຳລັບລະບົບອັດຕະໂນມັດນີ້:",
+  "language_mismatch": "ພາສາບໍ່ກົງກັນ"
 }

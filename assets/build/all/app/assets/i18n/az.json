@@ -553,5 +553,9 @@
   "save_as": "Kimi saxla...",
   "update_directly_message": "{{name}}-i birbaşa yeniləyin",
   "auto_update_widget": "Cari vidceti avtomatik yeniləyin",
-  "ai_genie_speech": "Səs çıxışı"
+  "ai_genie_speech": "Səs çıxışı",
+  "click_to_expand": "Genişləndirmək üçün klikləyin",
+  "save_program": "Proqramı yadda saxla",
+  "enter_program_name": "Bu avtomatlaşdırma üçün ad daxil edin:",
+  "language_mismatch": "Dil uyğunsuzluğu"
 }

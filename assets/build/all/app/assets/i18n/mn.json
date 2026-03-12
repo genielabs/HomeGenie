@@ -553,5 +553,9 @@
   "save_as": "Хадгалах...",
   "update_directly_message": "{{name}}-г шууд шинэчилнэ үү",
   "auto_update_widget": "Одоогийн виджетийг автоматаар шинэчлэх",
-  "ai_genie_speech": "Дууны гаралт"
+  "ai_genie_speech": "Дууны гаралт",
+  "click_to_expand": "Дэлгэрэнгүй үзэхийн тулд дарна уу",
+  "save_program": "Хөтөлбөрийг хадгалах",
+  "enter_program_name": "Энэ автоматжуулалтын нэрийг оруулна уу:",
+  "language_mismatch": "Хэлний тохиромжгүй байдал"
 }

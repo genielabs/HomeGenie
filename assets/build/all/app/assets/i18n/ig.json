@@ -553,5 +553,9 @@
   "save_as": "Chekwa Dị ka...",
   "update_directly_message": "Melite {{name}} ozugbo",
   "auto_update_widget": "Melite wijetị dị ugbu a na akpaghị aka",
-  "ai_genie_speech": "Mbupute olu"
+  "ai_genie_speech": "Mbupute olu",
+  "click_to_expand": "Pịa iji gbasaa",
+  "save_program": "Chekwa Mmemme",
+  "enter_program_name": "Tinye aha maka akpaaka a:",
+  "language_mismatch": "Enweghị otu asụsụ"
 }

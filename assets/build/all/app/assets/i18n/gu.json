@@ -553,5 +553,9 @@
   "save_as": "આ રીતે સાચવો...",
   "update_directly_message": "{{name}} ને સીધા જ અપડેટ કરો",
   "auto_update_widget": "વર્તમાન વિજેટને આપમેળે અપડેટ કરો",
-  "ai_genie_speech": "વૉઇસ આઉટપુટ"
+  "ai_genie_speech": "વૉઇસ આઉટપુટ",
+  "click_to_expand": "વિસ્તૃત કરવા માટે ક્લિક કરો",
+  "save_program": "કાર્યક્રમ સાચવો",
+  "enter_program_name": "આ ઓટોમેશન માટે નામ દાખલ કરો:",
+  "language_mismatch": "ભાષાનો મેળ ખાતો નથી"
 }

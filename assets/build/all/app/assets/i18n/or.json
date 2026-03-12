@@ -553,5 +553,9 @@
   "save_as": "ଭାବରେ ସେଭ୍ କରନ୍ତୁ...",
   "update_directly_message": "ସିଧାସଳଖ {{name}} ଅପଡେଟ୍ କରନ୍ତୁ",
   "auto_update_widget": "ବର୍ତ୍ତମାନର ୱିଜେଟ୍ ସ୍ୱତଃ-ଅପଡେଟ୍ କରନ୍ତୁ",
-  "ai_genie_speech": "ଭଏସ୍ ଆଉଟପୁଟ୍"
+  "ai_genie_speech": "ଭଏସ୍ ଆଉଟପୁଟ୍",
+  "click_to_expand": "ବିସ୍ତାର କରିବାକୁ କ୍ଲିକ୍ କରନ୍ତୁ",
+  "save_program": "ପ୍ରୋଗ୍ରାମ୍ ସେଭ୍ କରନ୍ତୁ",
+  "enter_program_name": "ଏହି ସ୍ୱୟଂଚାଳିତକରଣ ପାଇଁ ଏକ ନାମ ଲେଖନ୍ତୁ:",
+  "language_mismatch": "ଭାଷା ମେଳ ଖାଉନାହିଁ"
 }

@@ -553,5 +553,9 @@
   "save_as": "Gorde honela...",
   "update_directly_message": "Eguneratu {{name}} zuzenean",
   "auto_update_widget": "Eguneratu uneko widgeta automatikoki",
-  "ai_genie_speech": "Ahots-irteera"
+  "ai_genie_speech": "Ahots-irteera",
+  "click_to_expand": "Klik egin zabaltzeko",
+  "save_program": "Gorde programa",
+  "enter_program_name": "Sartu automatizazio honen izena:",
+  "language_mismatch": "Hizkuntza desadostasuna"
 }

@@ -553,5 +553,9 @@
   "save_as": "Басқаша сақтау...",
   "update_directly_message": "{{name}} тікелей жаңартыңыз",
   "auto_update_widget": "Ағымдағы виджетті автоматты түрде жаңарту",
-  "ai_genie_speech": "Дауыс шығысы"
+  "ai_genie_speech": "Дауыс шығысы",
+  "click_to_expand": "Кеңейту үшін басыңыз",
+  "save_program": "Бағдарламаны сақтау",
+  "enter_program_name": "Осы автоматизация үшін атау енгізіңіз:",
+  "language_mismatch": "Тіл сәйкессіздігі"
 }

@@ -11,7 +11,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.ApiKey</Name>
-        <Value>?</Value>
+        <Value />
         <Description>Google Gemini AI API key</Description>
         <FieldType>text</FieldType>
         <ParentId>0</ParentId>
@@ -55,7 +55,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
     <Properties>
       <ModuleParameter>
         <Name>ConfigureOptions.ApiKey</Name>
-        <Value>?</Value>
+        <Value />
         <Description>Google Gemini AI API key</Description>
         <FieldType>text</FieldType>
         <ParentId>0</ParentId>

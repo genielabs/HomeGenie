@@ -553,5 +553,9 @@
   "save_as": "Saglabāt kā...",
   "update_directly_message": "Atjaunināt {{name}} tieši",
   "auto_update_widget": "Automātiski atjaunināt pašreizējo logrīku",
-  "ai_genie_speech": "Balss izvade"
+  "ai_genie_speech": "Balss izvade",
+  "click_to_expand": "Noklikšķiniet, lai izvērstu",
+  "save_program": "Saglabāt programmu",
+  "enter_program_name": "Ievadiet šīs automatizācijas nosaukumu:",
+  "language_mismatch": "Valodas neatbilstība"
 }

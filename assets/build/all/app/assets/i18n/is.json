@@ -553,5 +553,9 @@
   "save_as": "Vista sem...",
   "update_directly_message": "Uppfæra {{name}} beint",
   "auto_update_widget": "Uppfæra núverandi græju sjálfkrafa",
-  "ai_genie_speech": "Röddúttak"
+  "ai_genie_speech": "Röddúttak",
+  "click_to_expand": "Smelltu til að stækka",
+  "save_program": "Vista forrit",
+  "enter_program_name": "Sláðu inn nafn fyrir þessa sjálfvirkni:",
+  "language_mismatch": "Tungumálamisræmi"
 }

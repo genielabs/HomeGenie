@@ -553,5 +553,9 @@
   "save_as": "Desa com a...",
   "update_directly_message": "Actualitza {{name}} directament",
   "auto_update_widget": "Actualitza automàticament el widget actual",
-  "ai_genie_speech": "Sortida de veu"
+  "ai_genie_speech": "Sortida de veu",
+  "click_to_expand": "Feu clic per expandir",
+  "save_program": "Desa el programa",
+  "enter_program_name": "Introduïu un nom per a aquesta automatització:",
+  "language_mismatch": "Discrepància lingüística"
 }

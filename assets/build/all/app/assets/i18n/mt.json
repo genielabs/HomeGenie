@@ -553,5 +553,9 @@
   "save_as": "Issejvja Bħala...",
   "update_directly_message": "Aġġorna {{name}} direttament",
   "auto_update_widget": "Aġġorna l-widget kurrenti awtomatikament",
-  "ai_genie_speech": "Ħruġ tal-Vuċi"
+  "ai_genie_speech": "Ħruġ tal-Vuċi",
+  "click_to_expand": "Ikklikkja biex tespandi",
+  "save_program": "Issejvja l-Programm",
+  "enter_program_name": "Daħħal isem għal din l-awtomazzjoni:",
+  "language_mismatch": "Nuqqas ta' qbil fil-lingwa"
 }

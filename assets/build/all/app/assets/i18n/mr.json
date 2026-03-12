@@ -553,5 +553,9 @@
   "save_as": "म्हणून जतन करा...",
   "update_directly_message": "{{name}} थेट अपडेट करा",
   "auto_update_widget": "सध्याचे विजेट ऑटो-अपडेट करा",
-  "ai_genie_speech": "व्हॉइस आउटपुट"
+  "ai_genie_speech": "व्हॉइस आउटपुट",
+  "click_to_expand": "विस्तृत करण्यासाठी क्लिक करा",
+  "save_program": "कार्यक्रम जतन करा",
+  "enter_program_name": "या ऑटोमेशनसाठी नाव एंटर करा:",
+  "language_mismatch": "भाषा जुळत नाही"
 }

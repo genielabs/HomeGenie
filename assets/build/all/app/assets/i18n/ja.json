@@ -553,5 +553,9 @@
   "save_as": "名前を付けて保存...",
   "update_directly_message": "{{name}} を直接更新する",
   "auto_update_widget": "現在のウィジェットを自動更新",
-  "ai_genie_speech": "音声出力"
+  "ai_genie_speech": "音声出力",
+  "click_to_expand": "クリックして拡大",
+  "save_program": "プログラムを保存",
+  "enter_program_name": "この自動化の名前を入力してください:",
+  "language_mismatch": "言語の不一致"
 }

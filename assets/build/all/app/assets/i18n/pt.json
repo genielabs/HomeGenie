@@ -553,5 +553,9 @@
   "save_as": "Salvar como...",
   "update_directly_message": "Atualize {{name}} diretamente",
   "auto_update_widget": "Atualizar automaticamente o widget atual",
-  "ai_genie_speech": "Saída de voz"
+  "ai_genie_speech": "Saída de voz",
+  "click_to_expand": "Clique para expandir",
+  "save_program": "Salvar programa",
+  "enter_program_name": "Insira um nome para esta automação:",
+  "language_mismatch": "Incompatibilidade de idiomas"
 }

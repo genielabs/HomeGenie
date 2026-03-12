@@ -553,5 +553,9 @@
   "save_as": "Stoor as...",
   "update_directly_message": "Dateer {{name}} direk op",
   "auto_update_widget": "Dateer huidige widget outomaties op",
-  "ai_genie_speech": "Stemuitvoer"
+  "ai_genie_speech": "Stemuitvoer",
+  "click_to_expand": "Klik om uit te brei",
+  "save_program": "Stoor Program",
+  "enter_program_name": "Voer 'n naam vir hierdie outomatisering in:",
+  "language_mismatch": "Taalwanpassing"
 }

@@ -553,5 +553,9 @@
   "save_as": "এই রূপে সংরক্ষণ করুন...",
   "update_directly_message": "সরাসরি {{name}} আপডেট করুন",
   "auto_update_widget": "বর্তমান উইজেটটি স্বয়ংক্রিয়ভাবে আপডেট করুন",
-  "ai_genie_speech": "ভয়েস আউটপুট"
+  "ai_genie_speech": "ভয়েস আউটপুট",
+  "click_to_expand": "প্রসারিত করতে ক্লিক করুন",
+  "save_program": "প্রোগ্রাম সংরক্ষণ করুন",
+  "enter_program_name": "এই অটোমেশনের জন্য একটি নাম লিখুন:",
+  "language_mismatch": "ভাষার অমিল"
 }

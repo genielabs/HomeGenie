@@ -553,5 +553,9 @@
   "save_as": "Simpan Sebagai...",
   "update_directly_message": "Perbarui {{name}} secara langsung",
   "auto_update_widget": "Perbarui widget saat ini secara otomatis",
-  "ai_genie_speech": "Keluaran Suara"
+  "ai_genie_speech": "Keluaran Suara",
+  "click_to_expand": "Klik untuk memperluas",
+  "save_program": "Program Tabungan",
+  "enter_program_name": "Masukkan nama untuk otomatisasi ini:",
+  "language_mismatch": "Ketidaksesuaian bahasa"
 }

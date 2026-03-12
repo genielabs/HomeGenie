@@ -553,5 +553,9 @@
   "save_as": "محفوظ ڪريو جيئن...",
   "update_directly_message": "{{name}} کي سڌو سنئون اپڊيٽ ڪريو",
   "auto_update_widget": "موجوده ويجيٽ کي خودڪار طور تي اپڊيٽ ڪريو",
-  "ai_genie_speech": "وائيس آئوٽ پٽ"
+  "ai_genie_speech": "وائيس آئوٽ پٽ",
+  "click_to_expand": "وڌائڻ لاءِ ڪلڪ ڪريو",
+  "save_program": "پروگرام محفوظ ڪريو",
+  "enter_program_name": "هن آٽوميشن لاءِ نالو داخل ڪريو:",
+  "language_mismatch": "ٻولي جي بي ترتيبي"
 }

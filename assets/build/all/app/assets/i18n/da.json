@@ -553,5 +553,9 @@
   "save_as": "Gem som...",
   "update_directly_message": "Opdater {{name}} direkte",
   "auto_update_widget": "Opdater den aktuelle widget automatisk",
-  "ai_genie_speech": "Stemmeoutput"
+  "ai_genie_speech": "Stemmeoutput",
+  "click_to_expand": "Klik for at udvide",
+  "save_program": "Gem program",
+  "enter_program_name": "Indtast et navn til denne automatisering:",
+  "language_mismatch": "Sproglig uoverensstemmelse"
 }

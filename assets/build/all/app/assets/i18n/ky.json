@@ -553,5 +553,9 @@
   "save_as": "Сактоо...",
   "update_directly_message": "{{name}} түз жаңыртыңыз",
   "auto_update_widget": "Учурдагы виджетти автоматтык түрдө жаңыртуу",
-  "ai_genie_speech": "Үн чыгаруу"
+  "ai_genie_speech": "Үн чыгаруу",
+  "click_to_expand": "Кеңейтүү үчүн басыңыз",
+  "save_program": "Программаны сактоо",
+  "enter_program_name": "Бул автоматташтыруу үчүн аталыш киргизиңиз:",
+  "language_mismatch": "Тил дал келбестиги"
 }

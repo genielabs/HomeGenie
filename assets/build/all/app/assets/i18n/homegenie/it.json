@@ -504,11 +504,11 @@
 
     "145": {
         "Title":
-            "Dispositivo Smart",
+            "Dispositivo smart",
         "Description":
             "Accende/Spegne il dispositivo in base al movimento e alla luce ambientale.",
         "HomeGenie.SmartLights.Enable":
-            "Abilita 'Dispositivo Smart'",
+            "Abilita 'Dispositivo smart'",
         "HomeGenie.SmartLights.OnMotionDetect":
             "Controlla con sensore (opzionale)",
         "HomeGenie.SmartLights.CheckLuminosity":

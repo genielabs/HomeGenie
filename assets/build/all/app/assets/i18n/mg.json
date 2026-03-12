@@ -553,5 +553,9 @@
   "save_as": "Tehirizo Amin'ny maha...",
   "update_directly_message": "Havaozy mivantana ny {{name}}",
   "auto_update_widget": "Havaozy ho azy ny widget ankehitriny",
-  "ai_genie_speech": "Famoahana feo"
+  "ai_genie_speech": "Famoahana feo",
+  "click_to_expand": "Tsindrio raha hanitatra",
+  "save_program": "Tehirizo ny fandaharana",
+  "enter_program_name": "Ampidiro anarana ho an'ity automatique ity:",
+  "language_mismatch": "Tsy fitoviana amin'ny fiteny"
 }

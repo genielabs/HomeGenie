@@ -553,5 +553,9 @@
   "save_as": "Keydi Sida...",
   "update_directly_message": "Si toos ah u cusbooneysii {{name}}",
   "auto_update_widget": "Si otomaatig ah u cusbooneysii aaladda hadda jirta",
-  "ai_genie_speech": "Soo saarista Codka"
+  "ai_genie_speech": "Soo saarista Codka",
+  "click_to_expand": "Guji si aad u ballaariso",
+  "save_program": "Badbaadi Barnaamijka",
+  "enter_program_name": "Gali magac loogu talagalay otomaatigan:",
+  "language_mismatch": "Isbarbardhigga luqadda"
 }

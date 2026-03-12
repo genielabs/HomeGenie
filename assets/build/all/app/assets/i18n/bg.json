@@ -553,5 +553,9 @@
   "save_as": "Запази като...",
   "update_directly_message": "Актуализирайте {{name}} директно",
   "auto_update_widget": "Автоматично актуализиране на текущия уиджет",
-  "ai_genie_speech": "Гласов изход"
+  "ai_genie_speech": "Гласов изход",
+  "click_to_expand": "Кликнете, за да разгънете",
+  "save_program": "Запазване на програмата",
+  "enter_program_name": "Въведете име за тази автоматизация:",
+  "language_mismatch": "Несъответствие на езика"
 }

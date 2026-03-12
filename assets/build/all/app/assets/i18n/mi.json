@@ -553,5 +553,9 @@
   "save_as": "Tiaki Hei...",
   "update_directly_message": "Whakahōu tika i a {{name}}",
   "auto_update_widget": "Whakahōu aunoa i te widget o nāianei",
-  "ai_genie_speech": "Putanga Reo"
+  "ai_genie_speech": "Putanga Reo",
+  "click_to_expand": "Pāwhiritia hei whakawhanui",
+  "save_program": "Tiaki Papatono",
+  "enter_program_name": "Tāuruhia he ingoa mō tēnei aunoatanga:",
+  "language_mismatch": "Te kore ōrite o te reo"
 }

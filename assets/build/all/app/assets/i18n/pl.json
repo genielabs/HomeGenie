@@ -553,5 +553,9 @@
   "save_as": "Zapisz jako...",
   "update_directly_message": "Aktualizuj {{name}} bezpośrednio",
   "auto_update_widget": "Automatyczna aktualizacja bieżącego widżetu",
-  "ai_genie_speech": "Wyjście głosowe"
+  "ai_genie_speech": "Wyjście głosowe",
+  "click_to_expand": "Kliknij, aby rozwinąć",
+  "save_program": "Zapisz program",
+  "enter_program_name": "Wprowadź nazwę tej automatyzacji:",
+  "language_mismatch": "Niezgodność językowa"
 }

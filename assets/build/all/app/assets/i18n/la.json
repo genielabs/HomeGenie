@@ -553,5 +553,9 @@
   "save_as": "Servare Ut...",
   "update_directly_message": "{{name}} directe renova.",
   "auto_update_widget": "Automatice renova instrumentum praesens",
-  "ai_genie_speech": "Vox Emissa"
+  "ai_genie_speech": "Vox Emissa",
+  "click_to_expand": "Preme ut expandas",
+  "save_program": "Servare Programma",
+  "enter_program_name": "Nomen huic automationi inscribe:",
+  "language_mismatch": "Discrepantia linguae"
 }

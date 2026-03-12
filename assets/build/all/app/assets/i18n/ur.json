@@ -553,5 +553,9 @@
   "save_as": "محفوظ کریں بطور...",
   "update_directly_message": "{{name}} کو براہ راست اپ ڈیٹ کریں۔",
   "auto_update_widget": "موجودہ ویجیٹ کو خود بخود اپ ڈیٹ کریں۔",
-  "ai_genie_speech": "وائس آؤٹ پٹ"
+  "ai_genie_speech": "وائس آؤٹ پٹ",
+  "click_to_expand": "پھیلانے کے لیے کلک کریں۔",
+  "save_program": "پروگرام کو محفوظ کریں۔",
+  "enter_program_name": "اس آٹومیشن کے لیے ایک نام درج کریں:",
+  "language_mismatch": "زبان کی مماثلت"
 }

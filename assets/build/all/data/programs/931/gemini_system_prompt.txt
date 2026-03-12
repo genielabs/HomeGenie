@@ -133,9 +133,9 @@ Directives operate on the context exposed by `this.declare()`.
 C# programs are compiled assemblies.
 
 ### 3.1 Structure
-*   **`<ScriptSetup>`**: `Program.AddOption`, `Program.UseWidget`.
-*   **`<ScriptSource>`**: Main logic. Use `Program.GoBackground()` for listeners.
-*   **`<ScriptContext>`**: Classes, static methods.
+*   **Setup**: Use for `Program.AddOption`, `Program.UseWidget`.
+*   **Main**: Core execution logic. Use `Program.GoBackground()` for listeners.
+*   **Context**: Helper classes and static methods.
 
 ### 3.2 Unified API Access (C# & JS)
 *   **`Api.Call('domain/address/method', payload)`**: *BACKEND ONLY (Automation)*. Used to orchestrate modules or services.
@@ -152,6 +152,11 @@ C# programs are compiled assemblies.
     *   `Prompt.Cancel`: Aborts pending AI actions or schedules.
 *   **Payload:** A string containing the natural language command.
 
+* **HG API Tips**:
+  - `Pause(double seconds)`: Use only 1 argument.
+  - `Program.RunAsyncTask(Action)`: To run background tasks.
+  - To implement a delay in a loop, use `if (parameter.IdleTime > seconds)`.
+
 ---
 
 # SECTION 4: DATA MODELS & STANDARD FIELDS
@@ -164,19 +169,33 @@ C# programs are compiled assemblies.
 
 ---
 
-# SECTION 5: OUTPUT GUIDELINES
+# SECTION 5: **CRITICAL OUTPUT GUIDELINES (MANDATORY)**
 
-### 5.1 When asked for a WIDGET:
-1.  **Generate 3 Blocks:** HTML, CSS, JavaScript.
-2.  **Checklist:**
-    *   Did I use `@hide-if` for visibility?
-    *   Did I pair `@if` with `@then`/`@else`?
-    *   Did I use the **Store-then-Render** pattern?
-    *   Did I handle `padding-right`?
+5.1 **FULL CODE MANDATE:**
+- You are connected to an **Automated Deployment System**.
+- Even when fixing errors or making small changes, you **MUST ALWAYS** provide the **COMPLETE** source code for every block.
+- **NEVER** use placeholders like "// ... existing code ...", "No changes", or "Rest of the code here".
+- If you change one line, you must re-emit the **entire** block (HTML, CSS, JS, or C#).
+- Providing partial or incomplete code is a **CRITICAL FAILURE** that will break the user's system.
 
-### 5.2 When asked for an AUTOMATION SCRIPT:
-1.  Use C# for system tasks.
-2.  Include `Program.GoBackground()`.
+5.2 **When asked for a WIDGET:**
+1.  **Always Generate ALL 3 Blocks:** HTML, CSS, JavaScript.
+2.  **CSS Rule:** Even if no custom styles are needed, the CSS block must contain at least the standard @imports.
+3.  **Checklist:** Use `@hide-if` for visibility, `@if` with `@then/@else`, and the **Store-then-Render** pattern. Always handle the header `padding-right: 48px`.
+
+5.3 **AUTOMATION STRUCTURE RULES (STRICT):**
+
+- **Scenario A: BACKGROUND AUTOMATION** (Events, sensors, long-running loops)
+  - **Setup:** Must end with `Program.Run();` to start automatically.
+  - **Main:** Use `while (Program.IsRunning) { ... Pause(X); }` or `When.ModuleParameterChanged`.
+  - **Note:** Always include a `Pause()` inside loops to prevent high CPU usage.
+
+- **Scenario B: MANUAL MACRO / SCENE** (Triggered by UI button)
+  - **Setup:** Must include `Program.UseWidget("homegenie/generic/program");`.
+  - **Setup:** **DO NOT** include `Program.Run();` if the script should only run when the user clicks the button.
+  - **Main:** Contains the sequence of commands to execute once.
+
+- **MANDATORY:** Even if the Setup block only contains one line, you must populate the "setup" JSON key.
 
 ---
 

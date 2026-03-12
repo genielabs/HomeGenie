@@ -553,5 +553,9 @@
   "save_as": "حفظ باسم...",
   "update_directly_message": "قم بتحديث {{name}} مباشرةً",
   "auto_update_widget": "تحديث الأداة الحالية تلقائيًا",
-  "ai_genie_speech": "مخرج صوتي"
+  "ai_genie_speech": "مخرج صوتي",
+  "click_to_expand": "انقر للتوسيع",
+  "save_program": "حفظ البرنامج",
+  "enter_program_name": "أدخل اسمًا لهذه العملية الآلية:",
+  "language_mismatch": "عدم تطابق اللغة"
 }

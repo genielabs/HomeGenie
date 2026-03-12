@@ -553,5 +553,9 @@
   "save_as": "Պահպանել որպես...",
   "update_directly_message": "Անմիջապես թարմացրեք {{name}}-ը",
   "auto_update_widget": "Ավտոմատ թարմացնել ընթացիկ վիջեթը",
-  "ai_genie_speech": "Ձայնային ելք"
+  "ai_genie_speech": "Ձայնային ելք",
+  "click_to_expand": "Սեղմեք՝ ընդարձակելու համար",
+  "save_program": "Պահպանել ծրագիրը",
+  "enter_program_name": "Մուտքագրեք այս ավտոմատացման անունը՝",
+  "language_mismatch": "Լեզվի անհամապատասխանություն"
 }

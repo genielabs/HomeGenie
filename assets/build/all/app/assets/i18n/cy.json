@@ -553,5 +553,9 @@
   "save_as": "Cadw Fel...",
   "update_directly_message": "Diweddaru {{name}} yn uniongyrchol",
   "auto_update_widget": "Diweddaru'r teclyn cyfredol yn awtomatig",
-  "ai_genie_speech": "Allbwn Llais"
+  "ai_genie_speech": "Allbwn Llais",
+  "click_to_expand": "Cliciwch i ehangu",
+  "save_program": "Cadw Rhaglen",
+  "enter_program_name": "Rhowch enw ar gyfer yr awtomeiddio hwn:",
+  "language_mismatch": "Anghydwedd iaith"
 }

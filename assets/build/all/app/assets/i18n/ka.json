@@ -553,5 +553,9 @@
   "save_as": "შენახვა როგორც...",
   "update_directly_message": "{{name}}-ის პირდაპირ განახლება",
   "auto_update_widget": "მიმდინარე ვიჯეტის ავტომატური განახლება",
-  "ai_genie_speech": "ხმის გამომავალი"
+  "ai_genie_speech": "ხმის გამომავალი",
+  "click_to_expand": "გაშლისთვის დააწკაპუნეთ",
+  "save_program": "პროგრამის შენახვა",
+  "enter_program_name": "შეიყვანეთ ამ ავტომატიზაციის სახელი:",
+  "language_mismatch": "ენობრივი შეუსაბამობა"
 }

@@ -553,5 +553,9 @@
   "save_as": "Ajiye Kamar yadda...",
   "update_directly_message": "Sabunta {{name}} kai tsaye",
   "auto_update_widget": "Sabunta widget ɗin yanzu ta atomatik",
-  "ai_genie_speech": "Fitar da Murya"
+  "ai_genie_speech": "Fitar da Murya",
+  "click_to_expand": "Danna don faɗaɗawa",
+  "save_program": "Ajiye Shirin",
+  "enter_program_name": "Shigar da suna don wannan sarrafa kansa:",
+  "language_mismatch": "Rashin daidaiton harshe"
 }

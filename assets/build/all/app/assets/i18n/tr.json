@@ -553,5 +553,9 @@
   "save_as": "Farklı Kaydet...",
   "update_directly_message": "{{name}}'ı doğrudan güncelleyin",
   "auto_update_widget": "Mevcut widget'ı otomatik olarak güncelle",
-  "ai_genie_speech": "Ses Çıkışı"
+  "ai_genie_speech": "Ses Çıkışı",
+  "click_to_expand": "Genişletmek için tıklayın",
+  "save_program": "Kaydetme Programı",
+  "enter_program_name": "Bu otomasyon için bir ad girin:",
+  "language_mismatch": "Dil uyumsuzluğu"
 }

@@ -553,5 +553,9 @@
   "save_as": "Spremi kao...",
   "update_directly_message": "Izravno ažurirajte {{name}}",
   "auto_update_widget": "Automatsko ažuriranje trenutnog widgeta",
-  "ai_genie_speech": "Glasovni izlaz"
+  "ai_genie_speech": "Glasovni izlaz",
+  "click_to_expand": "Kliknite za proširenje",
+  "save_program": "Spremi program",
+  "enter_program_name": "Unesite naziv za ovu automatizaciju:",
+  "language_mismatch": "Neusklađenost jezika"
 }

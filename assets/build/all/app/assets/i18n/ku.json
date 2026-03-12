@@ -553,5 +553,9 @@
   "save_as": "Tomar bike wekî...",
   "update_directly_message": "Rasterast {{name}} nûve bike",
   "auto_update_widget": "Widgetê heyî bixweber nûve bike",
-  "ai_genie_speech": "Derketina Deng"
+  "ai_genie_speech": "Derketina Deng",
+  "click_to_expand": "Ji bo berfirehkirinê bitikîne",
+  "save_program": "Bernameya Tomarkirinê",
+  "enter_program_name": "Navekî ji bo vê otomasyonê binivîse:",
+  "language_mismatch": "Nelihevhatina ziman"
 }

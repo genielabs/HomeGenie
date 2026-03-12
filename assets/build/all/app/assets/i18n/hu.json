@@ -553,5 +553,9 @@
   "save_as": "Mentés másként...",
   "update_directly_message": "Frissítse közvetlenül a {{name}} elemet",
   "auto_update_widget": "Aktuális widget automatikus frissítése",
-  "ai_genie_speech": "Hangkimenet"
+  "ai_genie_speech": "Hangkimenet",
+  "click_to_expand": "Kattints a kibontáshoz",
+  "save_program": "Program mentése",
+  "enter_program_name": "Adjon nevet ennek az automatizálásnak:",
+  "language_mismatch": "Nyelvi eltérés"
 }

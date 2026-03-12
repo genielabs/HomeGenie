@@ -553,5 +553,9 @@
   "save_as": "Lagre som...",
   "update_directly_message": "Oppdater {{name}} direkte",
   "auto_update_widget": "Oppdater gjeldende widget automatisk",
-  "ai_genie_speech": "Taleutgang"
+  "ai_genie_speech": "Taleutgang",
+  "click_to_expand": "Klikk for å utvide",
+  "save_program": "Lagre program",
+  "enter_program_name": "Skriv inn et navn for denne automatiseringen:",
+  "language_mismatch": "Språkavvik"
 }

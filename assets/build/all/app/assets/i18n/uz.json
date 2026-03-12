@@ -553,5 +553,9 @@
   "save_as": "Saqlash...",
   "update_directly_message": "{{name}} ni to'g'ridan-to'g'ri yangilang",
   "auto_update_widget": "Joriy vidjetni avtomatik yangilash",
-  "ai_genie_speech": "Ovoz chiqishi"
+  "ai_genie_speech": "Ovoz chiqishi",
+  "click_to_expand": "Kengaytirish uchun bosing",
+  "save_program": "Dasturni saqlash",
+  "enter_program_name": "Ushbu avtomatlashtirish uchun nom kiriting:",
+  "language_mismatch": "Til mos kelmasligi"
 }

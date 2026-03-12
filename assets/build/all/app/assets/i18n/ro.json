@@ -553,5 +553,9 @@
   "save_as": "Salvare ca...",
   "update_directly_message": "Actualizați direct {{name}}",
   "auto_update_widget": "Actualizare automată a widgetului curent",
-  "ai_genie_speech": "Ieșire vocală"
+  "ai_genie_speech": "Ieșire vocală",
+  "click_to_expand": "Faceți clic pentru a extinde",
+  "save_program": "Salvați programul",
+  "enter_program_name": "Introduceți un nume pentru această automatizare:",
+  "language_mismatch": "Nepotrivire de limbă"
 }

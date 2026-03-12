@@ -553,5 +553,9 @@
   "save_as": "I-save Bilang...",
   "update_directly_message": "I-update nang direkta ang {{name}}",
   "auto_update_widget": "Awtomatikong i-update ang kasalukuyang widget",
-  "ai_genie_speech": "Output ng Boses"
+  "ai_genie_speech": "Output ng Boses",
+  "click_to_expand": "I-click para palawakin",
+  "save_program": "Programa ng Pag-save",
+  "enter_program_name": "Maglagay ng pangalan para sa automation na ito:",
+  "language_mismatch": "Hindi pagkakatugma ng wika"
 }

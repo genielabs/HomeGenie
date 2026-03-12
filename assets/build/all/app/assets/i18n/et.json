@@ -553,5 +553,9 @@
   "save_as": "Salvesta nimega...",
   "update_directly_message": "Värskenda otse {{name}}",
   "auto_update_widget": "Praeguse vidina automaatne värskendamine",
-  "ai_genie_speech": "Hääleväljund"
+  "ai_genie_speech": "Hääleväljund",
+  "click_to_expand": "Klõpsake laiendamiseks",
+  "save_program": "Salvesta programm",
+  "enter_program_name": "Sisestage sellele automatiseerimisele nimi:",
+  "language_mismatch": "Keeleline mittevastavus"
 }

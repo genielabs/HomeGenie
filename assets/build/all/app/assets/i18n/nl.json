@@ -553,5 +553,9 @@
   "save_as": "Opslaan als...",
   "update_directly_message": "Werk {{name}} rechtstreeks bij",
   "auto_update_widget": "De huidige widget wordt automatisch bijgewerkt.",
-  "ai_genie_speech": "Spraakuitvoer"
+  "ai_genie_speech": "Spraakuitvoer",
+  "click_to_expand": "Klik om uit te breiden",
+  "save_program": "Programma opslaan",
+  "enter_program_name": "Geef deze automatisering een naam:",
+  "language_mismatch": "Taalverschil"
 }

@@ -553,5 +553,9 @@
   "save_as": "Сохранить как...",
   "update_directly_message": "Обновите {{name}} напрямую",
   "auto_update_widget": "Автоматическое обновление текущего виджета",
-  "ai_genie_speech": "Голосовой вывод"
+  "ai_genie_speech": "Голосовой вывод",
+  "click_to_expand": "Нажмите, чтобы развернуть",
+  "save_program": "Сохранить программу",
+  "enter_program_name": "Введите название для этой автоматизации:",
+  "language_mismatch": "Языковое несоответствие"
 }

@@ -553,5 +553,9 @@
   "save_as": "Зберегти як...",
   "update_directly_message": "Оновити {{name}} безпосередньо",
   "auto_update_widget": "Автоматичне оновлення поточного віджета",
-  "ai_genie_speech": "Голосовий вивід"
+  "ai_genie_speech": "Голосовий вивід",
+  "click_to_expand": "Натисніть, щоб розгорнути",
+  "save_program": "Зберегти програму",
+  "enter_program_name": "Введіть назву для цієї автоматизації:",
+  "language_mismatch": "Невідповідність мов"
 }

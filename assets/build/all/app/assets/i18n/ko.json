@@ -553,5 +553,9 @@
   "save_as": "다른 이름으로 저장...",
   "update_directly_message": "{{name}}을 직접 업데이트하세요",
   "auto_update_widget": "현재 위젯 자동 업데이트",
-  "ai_genie_speech": "음성 출력"
+  "ai_genie_speech": "음성 출력",
+  "click_to_expand": "클릭하여 펼치기",
+  "save_program": "프로그램 저장",
+  "enter_program_name": "이 자동화의 이름을 입력하세요:",
+  "language_mismatch": "언어 불일치"
 }

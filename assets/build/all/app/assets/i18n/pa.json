@@ -553,5 +553,9 @@
   "save_as": "ਇਸ ਤਰ੍ਹਾਂ ਸੇਵ ਕਰੋ...",
   "update_directly_message": "{{name}} ਨੂੰ ਸਿੱਧਾ ਅੱਪਡੇਟ ਕਰੋ",
   "auto_update_widget": "ਮੌਜੂਦਾ ਵਿਜੇਟ ਨੂੰ ਆਟੋ-ਅੱਪਡੇਟ ਕਰੋ",
-  "ai_genie_speech": "ਵੌਇਸ ਆਉਟਪੁੱਟ"
+  "ai_genie_speech": "ਵੌਇਸ ਆਉਟਪੁੱਟ",
+  "click_to_expand": "ਵਿਸਤਾਰ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
+  "save_program": "ਪ੍ਰੋਗਰਾਮ ਸੇਵ ਕਰੋ",
+  "enter_program_name": "ਇਸ ਆਟੋਮੇਸ਼ਨ ਲਈ ਇੱਕ ਨਾਮ ਦਰਜ ਕਰੋ:",
+  "language_mismatch": "ਭਾਸ਼ਾ ਮੇਲ ਨਹੀਂ ਖਾਂਦੀ"
 }

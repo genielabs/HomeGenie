@@ -553,5 +553,9 @@
   "save_as": "Fipamọ́ Bíi...",
   "update_directly_message": "Ṣe àtúnṣe {{name}} taara",
   "auto_update_widget": "Ṣe àtúnṣe ohun èlò ìṣiṣẹ́ lọ́wọ́lọ́wọ́ láìfọwọ́sowọ́pọ̀",
-  "ai_genie_speech": "Ìgbéjáde Ohùn"
+  "ai_genie_speech": "Ìgbéjáde Ohùn",
+  "click_to_expand": "Tẹ lati faagun",
+  "save_program": "Fi Ètò Pamọ́",
+  "enter_program_name": "Tẹ orukọ kan sii fun adaṣiṣẹ yii:",
+  "language_mismatch": "Àìbáramu èdè"
 }

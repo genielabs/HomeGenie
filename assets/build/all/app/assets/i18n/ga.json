@@ -553,5 +553,9 @@
   "save_as": "Sábháil Mar...",
   "update_directly_message": "Nuashonraigh {{name}} go díreach",
   "auto_update_widget": "Nuashonraigh an giuirléid reatha go huathoibríoch",
-  "ai_genie_speech": "Aschur Gutha"
+  "ai_genie_speech": "Aschur Gutha",
+  "click_to_expand": "Cliceáil chun leathnú",
+  "save_program": "Sábháil Clár",
+  "enter_program_name": "Cuir isteach ainm don uathoibriú seo:",
+  "language_mismatch": "Mí-oiriúnacht teanga"
 }

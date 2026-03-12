@@ -553,5 +553,9 @@
   "save_as": "Spara som...",
   "update_directly_message": "Uppdatera {{name}} direkt",
   "auto_update_widget": "Uppdatera aktuell widget automatiskt",
-  "ai_genie_speech": "Röstutgång"
+  "ai_genie_speech": "Röstutgång",
+  "click_to_expand": "Klicka för att expandera",
+  "save_program": "Spara program",
+  "enter_program_name": "Ange ett namn för denna automatisering:",
+  "language_mismatch": "Språkfelmatchning"
 }

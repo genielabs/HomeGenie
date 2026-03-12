@@ -553,5 +553,9 @@
   "save_as": "Hifadhi Kama...",
   "update_directly_message": "Sasisha {{name}} moja kwa moja",
   "auto_update_widget": "Sasisha kiotomatiki wijeti ya sasa",
-  "ai_genie_speech": "Toa Sauti"
+  "ai_genie_speech": "Toa Sauti",
+  "click_to_expand": "Bofya ili kupanua",
+  "save_program": "Programu ya Hifadhi",
+  "enter_program_name": "Ingiza jina la otomatiki hii:",
+  "language_mismatch": "Kutolingana kwa lugha"
 }

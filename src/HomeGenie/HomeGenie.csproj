@@ -38,7 +38,7 @@
     <PackageReference Include="Esprima" Version="3.0.5" />
     <PackageReference Include="IronPython" Version="3.4.2" />
     <PackageReference Include="IronPython.StdLib" Version="3.4.2" />
-    <PackageReference Include="Jint" Version="4.6.2" />
+    <PackageReference Include="Jint" Version="4.6.3" />
     <PackageReference Include="KNX.net" Version="1.1.10" />
     <PackageReference Include="SerialPortStream" Version="2.4.2" />
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
@@ -80,16 +80,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="10.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="10.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="10.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="10.0.4" />
   </ItemGroup>
 
 
   <!-- .NET IoT and other -->
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.3.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
     <PackageReference Include="System.Device.Gpio" Version="4.1.0" />
     <PackageReference Include="Iot.Device.Bindings" Version="4.1.0" />

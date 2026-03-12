@@ -553,5 +553,9 @@
   "save_as": "இவ்வாறு சேமி...",
   "update_directly_message": "{{name}} ஐ நேரடியாகப் புதுப்பிக்கவும்",
   "auto_update_widget": "தற்போதைய விட்ஜெட்டைத் தானாகப் புதுப்பி",
-  "ai_genie_speech": "குரல் வெளியீடு"
+  "ai_genie_speech": "குரல் வெளியீடு",
+  "click_to_expand": "விரிவாக்க கிளிக் செய்யவும்",
+  "save_program": "நிரலைச் சேமிக்கவும்",
+  "enter_program_name": "இந்த ஆட்டோமேஷனுக்கு ஒரு பெயரை உள்ளிடவும்:",
+  "language_mismatch": "மொழிப் பொருத்தமின்மை"
 }

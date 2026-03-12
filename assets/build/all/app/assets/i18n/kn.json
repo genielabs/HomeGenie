@@ -553,5 +553,9 @@
   "save_as": "ಹೀಗೆ ಉಳಿಸಿ...",
   "update_directly_message": "{{name}} ಅನ್ನು ನೇರವಾಗಿ ನವೀಕರಿಸಿ",
   "auto_update_widget": "ಪ್ರಸ್ತುತ ವಿಜೆಟ್ ಅನ್ನು ಸ್ವಯಂ-ನವೀಕರಿಸಿ",
-  "ai_genie_speech": "ಧ್ವನಿ ಔಟ್ಪುಟ್"
+  "ai_genie_speech": "ಧ್ವನಿ ಔಟ್ಪುಟ್",
+  "click_to_expand": "ವಿಸ್ತರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ",
+  "save_program": "ಪ್ರೋಗ್ರಾಂ ಉಳಿಸಿ",
+  "enter_program_name": "ಈ ಯಾಂತ್ರೀಕರಣಕ್ಕೆ ಹೆಸರನ್ನು ನಮೂದಿಸಿ:",
+  "language_mismatch": "ಭಾಷೆ ಹೊಂದಿಕೆಯಾಗುತ್ತಿಲ್ಲ"
 }

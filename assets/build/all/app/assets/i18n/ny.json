@@ -553,5 +553,9 @@
   "save_as": "Sungani Monga...",
   "update_directly_message": "Sinthani {{name}} mwachindunji",
   "auto_update_widget": "Sinthani zokha chida chamakono",
-  "ai_genie_speech": "Kutulutsa Mawu"
+  "ai_genie_speech": "Kutulutsa Mawu",
+  "click_to_expand": "Dinani kuti mukulitse",
+  "save_program": "Pulogalamu Yosunga",
+  "enter_program_name": "Lowetsani dzina la makina awa odziyimira pawokha:",
+  "language_mismatch": "Kusagwirizana kwa zilankhulo"
 }

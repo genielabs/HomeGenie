@@ -553,5 +553,9 @@
   "save_as": "के रूप रक्षित करें...",
   "update_directly_message": "{{name}} को सीधे अपडेट करें",
   "auto_update_widget": "वर्तमान विजेट को स्वतः अपडेट करें",
-  "ai_genie_speech": "ध्वनि आउटपुट"
+  "ai_genie_speech": "ध्वनि आउटपुट",
+  "click_to_expand": "विस्तार करने के लिए क्लिक करें",
+  "save_program": "बचत कार्यक्रम",
+  "enter_program_name": "इस ऑटोमेशन के लिए एक नाम दर्ज करें:",
+  "language_mismatch": "भाषा बेमेल"
 }

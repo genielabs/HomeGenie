@@ -552,5 +552,9 @@
   "save_as": "Save As...",
   "update_directly_message": "Update {{name}} directly",
   "auto_update_widget": "Auto-update current widget",
-  "ai_genie_speech": "Voice Output"
+  "ai_genie_speech": "Voice Output",
+  "click_to_expand": "Click to expand",
+  "save_program": "Save Program",
+  "enter_program_name": "Enter a name for this automation:",
+  "language_mismatch": "Language mismatch"
 }

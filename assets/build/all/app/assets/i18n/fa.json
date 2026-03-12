@@ -553,5 +553,9 @@
   "save_as": "ذخیره به عنوان...",
   "update_directly_message": "به‌روزرسانی مستقیم {{name}}",
   "auto_update_widget": "به‌روزرسانی خودکار ویجت فعلی",
-  "ai_genie_speech": "خروجی صدا"
+  "ai_genie_speech": "خروجی صدا",
+  "click_to_expand": "برای گسترش کلیک کنید",
+  "save_program": "ذخیره برنامه",
+  "enter_program_name": "یک نام برای این اتوماسیون وارد کنید:",
+  "language_mismatch": "عدم تطابق زبان"
 }

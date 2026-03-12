@@ -553,5 +553,9 @@
   "save_as": "Tallenna nimellä...",
   "update_directly_message": "Päivitä {{name}} suoraan",
   "auto_update_widget": "Päivitä nykyinen widget automaattisesti",
-  "ai_genie_speech": "Äänilähtö"
+  "ai_genie_speech": "Äänilähtö",
+  "click_to_expand": "Napsauta laajentaaksesi",
+  "save_program": "Tallenna ohjelma",
+  "enter_program_name": "Anna tälle automaatiolle nimi:",
+  "language_mismatch": "Kielivirhe"
 }

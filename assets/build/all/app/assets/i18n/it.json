@@ -552,5 +552,9 @@
   "save_as": "Salva come...",
   "update_directly_message": "Aggiorna {{name}} direttamente",
   "auto_update_widget": "Aggiorna automaticamente widget aperto",
-  "ai_genie_speech": "Sintesi Vocale"
+  "ai_genie_speech": "Sintesi Vocale",
+  "click_to_expand": "Clicca per espandere",
+  "save_program": "Salva Programma",
+  "enter_program_name": "Inserisci un nome per questa automazione:",
+  "language_mismatch": "Linguaggio differente"
 }

@@ -553,5 +553,9 @@
   "save_as": "Įrašyti kaip...",
   "update_directly_message": "Atnaujinti {{name}} tiesiogiai",
   "auto_update_widget": "Automatiškai atnaujinti dabartinį valdiklį",
-  "ai_genie_speech": "Balso išvestis"
+  "ai_genie_speech": "Balso išvestis",
+  "click_to_expand": "Spustelėkite, kad išskleistumėte",
+  "save_program": "Išsaugoti programą",
+  "enter_program_name": "Įveskite šios automatizacijos pavadinimą:",
+  "language_mismatch": "Kalbos neatitikimas"
 }

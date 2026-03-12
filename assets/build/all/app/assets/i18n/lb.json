@@ -553,5 +553,9 @@
   "save_as": "Späicheren als...",
   "update_directly_message": "Aktualiséiert {{name}} direkt",
   "auto_update_widget": "Aktuellen Widget automatesch aktualiséieren",
-  "ai_genie_speech": "Stëmmausgang"
+  "ai_genie_speech": "Stëmmausgang",
+  "click_to_expand": "Klickt fir ze vergréisseren",
+  "save_program": "Programm späicheren",
+  "enter_program_name": "Gitt en Numm fir dës Automatiséierung an:",
+  "language_mismatch": "Sproochlech Ongläichheet"
 }

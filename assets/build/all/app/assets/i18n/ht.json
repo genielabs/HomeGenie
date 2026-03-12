@@ -553,5 +553,9 @@
   "save_as": "Anrejistre kòm...",
   "update_directly_message": "Mizajou {{name}} dirèkteman",
   "auto_update_widget": "Mizajou otomatik widjèt aktyèl la",
-  "ai_genie_speech": "Sòti Vwa"
+  "ai_genie_speech": "Sòti Vwa",
+  "click_to_expand": "Klike pou elaji",
+  "save_program": "Sove Pwogram nan",
+  "enter_program_name": "Mete yon non pou automatisation sa a:",
+  "language_mismatch": "Lang ki pa matche"
 }

@@ -553,5 +553,9 @@
   "save_as": "သိမ်းဆည်းရန်...",
   "update_directly_message": "{{name}} ကို တိုက်ရိုက် အပ်ဒိတ်လုပ်ပါ",
   "auto_update_widget": "လက်ရှိဝစ်ဂျက်ကို အလိုအလျောက် အပ်ဒိတ်လုပ်ပါ",
-  "ai_genie_speech": "အသံထွက်"
+  "ai_genie_speech": "အသံထွက်",
+  "click_to_expand": "ချဲ့ကြည့်ရန် နှိပ်ပါ",
+  "save_program": "ပရိုဂရမ်ကို သိမ်းဆည်းပါ",
+  "enter_program_name": "ဤအလိုအလျောက်စနစ်အတွက် အမည်တစ်ခုထည့်ပါ-",
+  "language_mismatch": "ဘာသာစကား မကိုက်ညီမှု"
 }

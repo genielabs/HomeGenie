@@ -553,5 +553,9 @@
   "save_as": "خوندي کړئ لکه...",
   "update_directly_message": "په مستقیم ډول {{name}} تازه کړئ",
   "auto_update_widget": "اوسنی ویجیټ په اتوماتيک ډول تازه کړئ",
-  "ai_genie_speech": "د غږ محصول"
+  "ai_genie_speech": "د غږ محصول",
+  "click_to_expand": "د پراخولو لپاره کلیک وکړئ",
+  "save_program": "پروګرام خوندي کړئ",
+  "enter_program_name": "د دې اتوماتیک لپاره نوم دننه کړئ:",
+  "language_mismatch": "د ژبې بې اتفاقي"
 }

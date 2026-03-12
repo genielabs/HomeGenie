@@ -284,7 +284,7 @@ var systemPromptFile = Path.Combine(Data.GetFolder(), "gemini_system_prompt.txt"
 Program.Implements(
     "@AI:IntentHandler",
     API_URL
-).AddOption(OPTION_API_KEY, "", "1. Google Gemini AI API key", "text")
+).AddOption(OPTION_API_KEY, "", "1. Google Gemini AI API key", "password")
  .AddOption(OPTION_MODEL_ID, DEFAULT_MODEL_ID, "2. Model ID", "text")
  .AddOption(OPTION_SEND_CONTEXT_DATA, "", "3. Share system and module context with the AI", "checkbox")
  .AddOption(OPTION_SYSTEM_INSTRUCTIONS, "", "4. System Instructions", $"editor:file:{systemPromptFile}:markdown")
@@ -491,16 +491,16 @@ public class ChatMessage {
     }
 }
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-intent-handler</Id>
-      <Version>1.0.9</Version>
+      <Version>1.0.10</Version>
       <Required>true</Required>
-      <Checksum>A5FF200261E243A1CFAD464578344DD9</Checksum>
+      <Checksum>2D9B69D26CEFA69FF07BCA366770202B</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>930</Address>
@@ -524,8 +524,8 @@ Program.Setup(() =&gt; {
     Program.Implements(
         "@AI:WidgetGenie",
         "AI.WidgetGenie/Gemini"
-    ).AddOption("ApiKey", "?", "1. Google Gemini AI API key", "password")
-     .AddOption("ModelId", "gemini-1.5-flash", "2. Model ID (Requires 1.5 Flash/Pro for Caching)", "text")
+    ).AddOption("ApiKey", "", "1. Google Gemini AI API key", "password")
+     .AddOption("ModelId", "gemini-2.5-flash", "2. Model ID (Requires 1.5 Flash/Pro for Caching)", "text")
      .AddOption("EnableDeepKnowledge", "On", "3. Enable Deep Knowledge (Read programs &amp; widgets)", "checkbox")
      .AddOption("SystemInstructions", "", "4. System Instructions", $"editor:file:{systemPromptFile}:markdown");
 });
@@ -560,7 +560,6 @@ string storeId = Program.Module.Address;
 // Cache Management Variables
 string currentCacheName = "";
 DateTime cacheExpiration = DateTime.MinValue;
-// --- FUNZIONE OTTIMIZZATA PER LEGGERE programs.xml ---
 Func&lt;string, string&gt; GetSlimmedXml = (filePath) =&gt; {
     if (!File.Exists(filePath)) return "";
     try {
@@ -681,7 +680,7 @@ Func&lt;string, bool&gt; EnsureCache = (fullContext) =&gt; {
 Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
 {
     if (isQuotaExceeded &amp;&amp; DateTime.UtcNow &lt; rateLimitResetTime) {
-        return new ResponseText($"**AI Temporaneamente Non Disponibile:** Raggiunto il limite di richieste (Errore 429). Riprova tra {Math.Ceiling((rateLimitResetTime - DateTime.UtcNow).TotalMinutes)} minuti.");
+        return new ResponseText($"**AI Temporarily Unavailable:** Rate limit reached (Error 429). Please try again in {Math.Ceiling((rateLimitResetTime - DateTime.UtcNow).TotalMinutes)} minutes.");
     }
 
     var result = Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId });
@@ -694,7 +693,7 @@ Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
     string fullContext = BuildContext();
     bool hasCache = EnsureCache(fullContext);
     if (isQuotaExceeded) {
-        return new ResponseText("**Errore Quota:** Non è stato possibile caricare il contesto. Riprova tra qualche minuto.");
+        return new ResponseText("**Quota Error:** Could not load the context. Please try again in a few minutes.");
     }
 
     // Build the Generation Config forcing JSON output
@@ -704,12 +703,29 @@ Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
         response_schema = new {
             type = "object",
             properties = new {
-                explanation = new { type = "string", description = "Explanation of the solution" },
-                html = new { type = "string", description = "HTML code (empty if none)" },
-                css = new { type = "string", description = "CSS code (empty if none)" },
-                javascript = new { type = "string", description = "Javascript code (empty if none)" }
+                explanation = new { type = "string" },
+                solution_type = new { type = "string", @enum = new[] { "widget", "automation" } },
+                language = new { type = "string", @enum = new[] { "csharp", "javascript", "python" } },
+                widget = new {
+                    type = "object",
+                    properties = new {
+                        html = new { type = "string" },
+                        css = new { type = "string" },
+                        javascript = new { type = "string" }
+                    },
+                    required = new[] { "html", "css", "javascript" }
+                },
+                automation = new {
+                    type = "object",
+                    properties = new {
+                        setup = new { type = "string", description = "AddOption and Program.Run() only" },
+                        main = new { type = "string", description = "Core logic and listeners (MANDATORY)" },
+                        context = new { type = "string" }
+                    },
+                    required = new[] { "setup", "main" }
+                }
             },
-            required = new[] { "explanation", "html", "css", "javascript" }
+            required = new[] { "explanation", "solution_type", "language" }
         }
     };
 
@@ -741,20 +757,46 @@ Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
 
             if (!string.IsNullOrEmpty(rawResponse))
             {
-                // Qui rawResponse è la stringa JSON inviata da Gemini, questa va parsata
                 var jsonObj = JObject.Parse(rawResponse);
                 StringBuilder formattedResponse = new StringBuilder();
-                
+
                 formattedResponse.AppendLine(jsonObj["explanation"]?.ToString());
-                
-                string html = jsonObj["html"]?.ToString();
-                if (!string.IsNullOrWhiteSpace(html)) formattedResponse.AppendLine($"\n```html\n{html}\n```");
-                
-                string css = jsonObj["css"]?.ToString();
-                if (!string.IsNullOrWhiteSpace(css)) formattedResponse.AppendLine($"\n```css\n{css}\n```");
-                
-                string js = jsonObj["javascript"]?.ToString();
-                if (!string.IsNullOrWhiteSpace(js)) formattedResponse.AppendLine($"\n```javascript\n{js}\n```");
+
+                string type = jsonObj["solution_type"]?.ToString();
+                string lang = jsonObj["language"]?.ToString() ?? "javascript";
+
+                if (type == "widget") {
+                    var w = jsonObj["widget"];
+                    if (w != null) {
+                        string html = w["html"]?.ToString() ?? "";
+                        string css = w["css"]?.ToString() ?? "";
+                        string js = w["javascript"]?.ToString() ?? "";
+
+                        // Fallback
+                        if (string.IsNullOrWhiteSpace(css)) {
+                            css = "@import 'assets/styles/widget-ui.css';\n@import 'assets/styles/flex-layout-attribute.min.css';";
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(html)) formattedResponse.AppendLine($"\n```html\n{html}\n```");
+                        formattedResponse.AppendLine($"\n```css\n{css}\n```"); // Lo mettiamo sempre
+                        if (!string.IsNullOrWhiteSpace(js)) formattedResponse.AppendLine($"\n```javascript\n{js}\n```");
+                    }
+                } else if (type == "automation") {
+                    var a = jsonObj["automation"];
+                    if (a != null) {
+                        // 1. Setup: UI Options and Initializations
+                        if (!string.IsNullOrWhiteSpace(a["setup"]?.ToString())) 
+                            formattedResponse.AppendLine($"\n**Setup:**\n```{lang}\n{a["setup"]}\n```");
+                        
+                        // 2. Main: The core logic (Refactored from "source")
+                        if (!string.IsNullOrWhiteSpace(a["main"]?.ToString())) 
+                            formattedResponse.AppendLine($"\n**Main:**\n```{lang}\n{a["main"]}\n```");
+                            
+                        // 3. Context: Optional, typically for C# classes/methods
+                        if (!string.IsNullOrWhiteSpace(a["context"]?.ToString())) 
+                            formattedResponse.AppendLine($"\n**Context:**\n```{lang}\n{a["context"]}\n```");
+                    }
+                }
 
                 string finalReply = formattedResponse.ToString();
 
@@ -809,9 +851,9 @@ public class ChatMessage {
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-widget-genie</Id>
-      <Version>1.0.7</Version>
+      <Version>1.0.8</Version>
       <Required>true</Required>
-      <Checksum>8CBE23BAAEE9EAF6030E35051D5E33A1</Checksum>
+      <Checksum>905BE4A8243F0EE4928403E763F4ECC7</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>931</Address>

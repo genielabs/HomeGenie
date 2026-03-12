@@ -553,5 +553,9 @@
   "save_as": "Lưu thành...",
   "update_directly_message": "Cập nhật trực tiếp {{name}}",
   "auto_update_widget": "Tự động cập nhật tiện ích hiện tại",
-  "ai_genie_speech": "Âm thanh đầu ra"
+  "ai_genie_speech": "Âm thanh đầu ra",
+  "click_to_expand": "Nhấp để mở rộng",
+  "save_program": "Lưu chương trình",
+  "enter_program_name": "Nhập tên cho quy trình tự động hóa này:",
+  "language_mismatch": "Không khớp ngôn ngữ"
 }

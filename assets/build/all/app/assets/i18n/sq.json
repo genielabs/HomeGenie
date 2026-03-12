@@ -553,5 +553,9 @@
   "save_as": "Ruaj si...",
   "update_directly_message": "Përditëso {{name}} direkt",
   "auto_update_widget": "Përditëso automatikisht vegël aktuale",
-  "ai_genie_speech": "Dalja e zërit"
+  "ai_genie_speech": "Dalja e zërit",
+  "click_to_expand": "Kliko për të zgjeruar",
+  "save_program": "Programi i Ruajtjes",
+  "enter_program_name": "Futni një emër për këtë automatizim:",
+  "language_mismatch": "Mospërputhje gjuhësore"
 }

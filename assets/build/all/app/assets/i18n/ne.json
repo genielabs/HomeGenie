@@ -553,5 +553,9 @@
   "save_as": "यस रूपमा बचत गर्नुहोस्...",
   "update_directly_message": "{{name}} लाई सिधै अपडेट गर्नुहोस्",
   "auto_update_widget": "हालको विजेट स्वतः अपडेट गर्नुहोस्",
-  "ai_genie_speech": "आवाज आउटपुट"
+  "ai_genie_speech": "आवाज आउटपुट",
+  "click_to_expand": "विस्तार गर्न क्लिक गर्नुहोस्",
+  "save_program": "कार्यक्रम बचत गर्नुहोस्",
+  "enter_program_name": "यो स्वचालनको लागि नाम प्रविष्ट गर्नुहोस्:",
+  "language_mismatch": "भाषा बेमेल"
 }

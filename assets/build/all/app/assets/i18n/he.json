@@ -553,5 +553,9 @@
   "save_as": "שמור בשם...",
   "update_directly_message": "עדכן את {{name}} ישירות",
   "auto_update_widget": "עדכון אוטומטי של הווידג'ט הנוכחי",
-  "ai_genie_speech": "פלט קולי"
+  "ai_genie_speech": "פלט קולי",
+  "click_to_expand": "לחץ/י להרחבה",
+  "save_program": "שמירת תוכנית",
+  "enter_program_name": "הזן שם לאוטומציה זו:",
+  "language_mismatch": "אי התאמה בשפה"
 }

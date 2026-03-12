@@ -553,5 +553,9 @@
   "save_as": "另存為...",
   "update_directly_message": "直接更新 {{name}}",
   "auto_update_widget": "自動更新目前小工具",
-  "ai_genie_speech": "語音輸出"
+  "ai_genie_speech": "語音輸出",
+  "click_to_expand": "點擊展開",
+  "save_program": "保存程式",
+  "enter_program_name": "請為此自動化流程輸入名稱：",
+  "language_mismatch": "語言不匹配"
 }

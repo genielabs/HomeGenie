@@ -553,5 +553,9 @@
   "save_as": "ఇలా సేవ్ చేయి...",
   "update_directly_message": "{{name}} ని నేరుగా నవీకరించు",
   "auto_update_widget": "ప్రస్తుత విడ్జెట్‌ను స్వయంచాలకంగా నవీకరించు",
-  "ai_genie_speech": "వాయిస్ అవుట్‌పుట్"
+  "ai_genie_speech": "వాయిస్ అవుట్‌పుట్",
+  "click_to_expand": "విస్తరించడానికి క్లిక్ చేయండి",
+  "save_program": "ప్రోగ్రామ్‌ను సేవ్ చేయండి",
+  "enter_program_name": "ఈ ఆటోమేషన్ కోసం ఒక పేరును నమోదు చేయండి:",
+  "language_mismatch": "భాష సరిపోలలేదు"
 }

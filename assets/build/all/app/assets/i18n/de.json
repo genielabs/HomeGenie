@@ -553,5 +553,9 @@
   "save_as": "Speichern unter...",
   "update_directly_message": "Aktualisiere {{name}} direkt",
   "auto_update_widget": "Aktuelles Widget automatisch aktualisieren",
-  "ai_genie_speech": "Sprachausgabe"
+  "ai_genie_speech": "Sprachausgabe",
+  "click_to_expand": "Zum Vergrößern klicken",
+  "save_program": "Programm speichern",
+  "enter_program_name": "Geben Sie einen Namen für diese Automatisierung ein:",
+  "language_mismatch": "Sprachliche Diskrepanz"
 }

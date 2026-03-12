@@ -553,5 +553,9 @@
   "save_as": "Захаваць як...",
   "update_directly_message": "Абнавіць {{name}} непасрэдна",
   "auto_update_widget": "Аўтаматычна абнаўляць бягучы віджэт",
-  "ai_genie_speech": "Галасавы вывад"
+  "ai_genie_speech": "Галасавы вывад",
+  "click_to_expand": "Націсніце, каб разгарнуць",
+  "save_program": "Захаваць праграму",
+  "enter_program_name": "Увядзіце назву для гэтай аўтаматызацыі:",
+  "language_mismatch": "Неадпаведнасць моў"
 }
