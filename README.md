@@ -22,6 +22,10 @@ It gives you full control over your environment while keeping your data strictly
 
 ![HomeGenie Dashboard](https://genielabs.github.io/HomeGenie/images/2.0/homegenie_2_dashboard_01.png)
 
+HomeGenie also features optional built-in AI.
+With simple chat commands, you can control your devices,
+build custom widgets, or create new automations.
+
 A demo configuration is included for an immediate, hands-on experience.
 The setup is entirely portable and lightweight: just download the ZIP, extract, and run.
 
