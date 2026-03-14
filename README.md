@@ -18,7 +18,7 @@
 HomeGenie is an open-source, cloud-independent ecosystem for smart automation.
 It provides everything you need to run your system locally, including firmware for DIY devices,
 a lightweight backend service, and mobile and tablet apps.
-It gives you full control over your environment while keeping your data strictly private.
+It gives you full control over your environment, keeping your data strictly private.
 
 ![HomeGenie Dashboard](https://genielabs.github.io/HomeGenie/images/2.0/homegenie_2_dashboard_01.png)
 
@@ -67,7 +67,6 @@ Download the `.zip` archive corresponding to your operating system and architect
 | Linux (x64)           | `homegenie_*_linux-x64.zip`        |
 | Raspberry Pi (32-bit) | `homegenie_*_linux-arm.zip`        |
 | Raspberry Pi (64-bit) | `homegenie_*_linux-arm64.zip`      |
-| .NET Framework 4.7.2  | `homegenie_*_net472.zip`           |
 
 After downloading, unzip the archive to your preferred location. 
 
