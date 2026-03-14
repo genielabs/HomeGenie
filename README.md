@@ -16,15 +16,14 @@
 
 
 HomeGenie is an open-source, cloud-independent ecosystem for smart automation.
-It provides everything you need to run your smart home locally—including custom firmware for smart devices,
+It provides everything you need to run your system locally, including firmware for DIY devices,
 a lightweight backend service, and mobile and tablet apps.
-The goal is to give you full control over your environment while keeping your data strictly private.
-
-To make building your setup easier, you can optionally enable the built-in AI that
-lets you describe what you need in plain language, and the system will automatically generate
-custom widgets, write automation scripts, and fix code errors in real-time.
+It gives you full control over your environment while keeping your data strictly private.
 
 ![HomeGenie Dashboard](https://genielabs.github.io/HomeGenie/images/2.0/homegenie_2_dashboard_01.png)
+
+A demo configuration is included for an immediate, hands-on experience.
+The setup is entirely portable and lightweight: just download the ZIP, extract, and run.
 
 ## ✨ Key Features
 
