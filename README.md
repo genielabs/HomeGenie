@@ -15,9 +15,14 @@
 </p>
 
 
-HomeGenie is a **versatile, open-source platform for programmable intelligence**, written in .NET. Designed for tinkerers, developers, and DIY enthusiasts, it provides a powerful, server-centric solution that runs on a wide range of hardware, from a Raspberry Pi to a dedicated home server.
+HomeGenie is an open-source, cloud-independent ecosystem for smart automation.
+It provides everything you need to run your smart home locally—including custom firmware for smart devices,
+a lightweight backend service, and mobile and tablet apps.
+The goal is to give you full control over your environment while keeping your data strictly private.
 
-With its robust **Local-First, Agentic AI capabilities** and extensive hardware support, HomeGenie offers the freedom to create complex automation scenarios and integrate a vast array of devices, all while ensuring your data and logic remain securely within your own network.
+To make building your setup easier, you can optionally enable the built-in AI that
+lets you describe what you need in plain language, and the system will automatically generate
+custom widgets, write automation scripts, and fix code errors in real-time.
 
 ![HomeGenie Dashboard](https://genielabs.github.io/HomeGenie/images/2.0/homegenie_2_dashboard_01.png)
 
