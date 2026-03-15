@@ -557,5 +557,13 @@
   "click_to_expand": "Cliceáil chun leathnú",
   "save_program": "Sábháil Clár",
   "enter_program_name": "Cuir isteach ainm don uathoibriú seo:",
-  "language_mismatch": "Mí-oiriúnacht teanga"
+  "language_mismatch": "Mí-oiriúnacht teanga",
+  "ai_genie_import_chat_history": "Stair allmhairithe",
+  "ai_genie_export_chat_history": "Stair onnmhairithe",
+  "copy": "Cóipeáil",
+  "copied": "Cóipeáilte!",
+  "error": "Earráid!",
+  "copied_to_clipboard": "Cóipeáilte chuig an ghearrthaisce.",
+  "message_deleted": "Teachtaireacht scriosta",
+  "clear_chat_to_import": "Glan an comhrá reatha chun ceann nua a allmhairiú."
 }

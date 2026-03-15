@@ -557,5 +557,13 @@
   "click_to_expand": "விரிவாக்க கிளிக் செய்யவும்",
   "save_program": "நிரலைச் சேமிக்கவும்",
   "enter_program_name": "இந்த ஆட்டோமேஷனுக்கு ஒரு பெயரை உள்ளிடவும்:",
-  "language_mismatch": "மொழிப் பொருத்தமின்மை"
+  "language_mismatch": "மொழிப் பொருத்தமின்மை",
+  "ai_genie_import_chat_history": "இறக்குமதி வரலாறு",
+  "ai_genie_export_chat_history": "ஏற்றுமதி வரலாறு",
+  "copy": "நகலெடு",
+  "copied": "நகல் எடுக்கப்பட்டது!",
+  "error": "பிழை!",
+  "copied_to_clipboard": "கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது.",
+  "message_deleted": "செய்தி நீக்கப்பட்டது",
+  "clear_chat_to_import": "புதிய அரட்டையை இறக்குமதி செய்ய தற்போதைய அரட்டையை அழிக்கவும்."
 }

@@ -557,5 +557,13 @@
   "click_to_expand": "প্রসারিত করতে ক্লিক করুন",
   "save_program": "প্রোগ্রাম সংরক্ষণ করুন",
   "enter_program_name": "এই অটোমেশনের জন্য একটি নাম লিখুন:",
-  "language_mismatch": "ভাষার অমিল"
+  "language_mismatch": "ভাষার অমিল",
+  "ai_genie_import_chat_history": "আমদানির ইতিহাস",
+  "ai_genie_export_chat_history": "রপ্তানির ইতিহাস",
+  "copy": "কপি",
+  "copied": "কপি করা হয়েছে!",
+  "error": "ত্রুটি!",
+  "copied_to_clipboard": "ক্লিপবোর্ডে কপি করা হয়েছে।",
+  "message_deleted": "বার্তা মুছে ফেলা হয়েছে",
+  "clear_chat_to_import": "নতুন চ্যাট আমদানি করতে বর্তমান চ্যাটটি সাফ করুন।"
 }

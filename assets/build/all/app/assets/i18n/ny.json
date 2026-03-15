@@ -557,5 +557,13 @@
   "click_to_expand": "Dinani kuti mukulitse",
   "save_program": "Pulogalamu Yosunga",
   "enter_program_name": "Lowetsani dzina la makina awa odziyimira pawokha:",
-  "language_mismatch": "Kusagwirizana kwa zilankhulo"
+  "language_mismatch": "Kusagwirizana kwa zilankhulo",
+  "ai_genie_import_chat_history": "Tumizani mbiri",
+  "ai_genie_export_chat_history": "Mbiri yotumizira kunja",
+  "copy": "Koperani",
+  "copied": "Kopedwa!",
+  "error": "Cholakwika!",
+  "copied_to_clipboard": "Yakopedwa ku bolodi la zithunzi.",
+  "message_deleted": "Uthenga wachotsedwa",
+  "clear_chat_to_import": "Chotsani macheza omwe alipo kuti mulowetse atsopano."
 }

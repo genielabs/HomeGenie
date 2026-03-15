@@ -557,5 +557,13 @@
   "click_to_expand": "విస్తరించడానికి క్లిక్ చేయండి",
   "save_program": "ప్రోగ్రామ్‌ను సేవ్ చేయండి",
   "enter_program_name": "ఈ ఆటోమేషన్ కోసం ఒక పేరును నమోదు చేయండి:",
-  "language_mismatch": "భాష సరిపోలలేదు"
+  "language_mismatch": "భాష సరిపోలలేదు",
+  "ai_genie_import_chat_history": "దిగుమతి చరిత్ర",
+  "ai_genie_export_chat_history": "ఎగుమతి చరిత్ర",
+  "copy": "కాపీ చేయండి",
+  "copied": "కాపీ చేయబడింది!",
+  "error": "లోపం!",
+  "copied_to_clipboard": "క్లిప్‌బోర్డ్‌కి కాపీ చేయబడింది.",
+  "message_deleted": "సందేశం తొలగించబడింది",
+  "clear_chat_to_import": "కొత్తదాన్ని దిగుమతి చేసుకోవడానికి ప్రస్తుత చాట్‌ను క్లియర్ చేయండి."
 }

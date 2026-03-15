@@ -557,5 +557,13 @@
   "click_to_expand": "Spustelėkite, kad išskleistumėte",
   "save_program": "Išsaugoti programą",
   "enter_program_name": "Įveskite šios automatizacijos pavadinimą:",
-  "language_mismatch": "Kalbos neatitikimas"
+  "language_mismatch": "Kalbos neatitikimas",
+  "ai_genie_import_chat_history": "Importavimo istorija",
+  "ai_genie_export_chat_history": "Eksporto istorija",
+  "copy": "Kopijuoti",
+  "copied": "Nukopijuota!",
+  "error": "Klaida!",
+  "copied_to_clipboard": "Nukopijuota į iškarpinę.",
+  "message_deleted": "Žinutė ištrinta",
+  "clear_chat_to_import": "Išvalykite dabartinį pokalbį, kad galėtumėte importuoti naują."
 }

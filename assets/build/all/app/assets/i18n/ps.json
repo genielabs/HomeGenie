@@ -557,5 +557,13 @@
   "click_to_expand": "د پراخولو لپاره کلیک وکړئ",
   "save_program": "پروګرام خوندي کړئ",
   "enter_program_name": "د دې اتوماتیک لپاره نوم دننه کړئ:",
-  "language_mismatch": "د ژبې بې اتفاقي"
+  "language_mismatch": "د ژبې بې اتفاقي",
+  "ai_genie_import_chat_history": "د واردولو تاریخ",
+  "ai_genie_export_chat_history": "د صادراتو تاریخ",
+  "copy": "کاپي",
+  "copied": "کاپي شوی!",
+  "error": "تېروتنه!",
+  "copied_to_clipboard": "کلپ بورډ ته کاپي شوی.",
+  "message_deleted": "پیغام ړنګ شو",
+  "clear_chat_to_import": "د نوي واردولو لپاره اوسنی چیٹ پاک کړئ."
 }

@@ -27,6 +27,10 @@ const hoursCss = ($el) => {
 // Component implementation
 
 class AnalogClock extends ControllerInstance {
+  settings = {
+    defaultSize: 'small'
+  };
+
   onInit() {
     // declare methods that can be used
     // in the scripting scope of the view

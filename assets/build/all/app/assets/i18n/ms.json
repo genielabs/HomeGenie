@@ -557,5 +557,13 @@
   "click_to_expand": "Klik untuk mengembangkan",
   "save_program": "Simpan Program",
   "enter_program_name": "Masukkan nama untuk automasi ini:",
-  "language_mismatch": "Ketidakpadanan bahasa"
+  "language_mismatch": "Ketidakpadanan bahasa",
+  "ai_genie_import_chat_history": "Sejarah import",
+  "ai_genie_export_chat_history": "Sejarah eksport",
+  "copy": "Salin",
+  "copied": "Disalin!",
+  "error": "Ralat!",
+  "copied_to_clipboard": "Disalin ke papan keratan.",
+  "message_deleted": "Mesej dipadamkan",
+  "clear_chat_to_import": "Kosongkan sembang semasa untuk mengimport sembang baharu."
 }

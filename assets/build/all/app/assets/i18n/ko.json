@@ -557,5 +557,13 @@
   "click_to_expand": "클릭하여 펼치기",
   "save_program": "프로그램 저장",
   "enter_program_name": "이 자동화의 이름을 입력하세요:",
-  "language_mismatch": "언어 불일치"
+  "language_mismatch": "언어 불일치",
+  "ai_genie_import_chat_history": "가져오기 내역",
+  "ai_genie_export_chat_history": "수출 내역",
+  "copy": "복사",
+  "copied": "복사했어요!",
+  "error": "오류!",
+  "copied_to_clipboard": "클립보드에 복사되었습니다.",
+  "message_deleted": "메시지가 삭제되었습니다.",
+  "clear_chat_to_import": "새 채팅을 가져오려면 현재 채팅을 지우세요."
 }

@@ -1,0 +1,39 @@
+<div class="container" layout="column top-stretch">
+  <!-- HEADER: Contains shutter name and status. Applies padding for Safe Zone. -->
+  <div class="header" layout="row center-justify">
+    <strong #name>Shutter</strong>
+    <span #status_text class="status">Closed</span>
+  </div>
+
+  <!-- BODY: Main controls -->
+  <div class="body" layout="column center-center">
+
+    <!-- Visual level indicator -->
+    <div class="shutter-indicator" #shutter_indicator @set="updateShutterIndicator($this)">
+      <span class="level-display" #level_display>0%</span>
+    </div>
+
+    <!-- Level slider -->
+    <div class="control-group" layout="row center-left">
+      <span class="material-symbols icon">blinds</span>
+      <input type="range" min="0" max="100"
+                   class="slider level-slider"
+                   @sync #level_percent
+                   (input)="setLevel(this.value)" />
+    </div>
+
+    <!-- Control buttons -->
+    <div class="control-buttons" layout="row center-center">
+      <button (click)="openShutter()">
+                <span class="material-symbols icon">unfold_less</span>
+            </button>
+      <button (click)="stopShutter()">
+                <span class="material-symbols icon">stop</span>
+            </button>
+      <button (click)="closeShutter()">
+                <span class="material-symbols icon">unfold_more</span>
+            </button>
+    </div>
+
+  </div>
+</div>

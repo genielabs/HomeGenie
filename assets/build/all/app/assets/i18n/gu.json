@@ -557,5 +557,13 @@
   "click_to_expand": "વિસ્તૃત કરવા માટે ક્લિક કરો",
   "save_program": "કાર્યક્રમ સાચવો",
   "enter_program_name": "આ ઓટોમેશન માટે નામ દાખલ કરો:",
-  "language_mismatch": "ભાષાનો મેળ ખાતો નથી"
+  "language_mismatch": "ભાષાનો મેળ ખાતો નથી",
+  "ai_genie_import_chat_history": "આયાત ઇતિહાસ",
+  "ai_genie_export_chat_history": "નિકાસ ઇતિહાસ",
+  "copy": "કૉપિ કરો",
+  "copied": "નકલ કરી!",
+  "error": "ભૂલ!",
+  "copied_to_clipboard": "ક્લિપબોર્ડ પર કૉપિ કરી.",
+  "message_deleted": "સંદેશ કાઢી નાખ્યો",
+  "clear_chat_to_import": "નવી ચેટ આયાત કરવા માટે વર્તમાન ચેટ સાફ કરો."
 }

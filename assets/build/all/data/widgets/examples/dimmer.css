@@ -1,41 +1,94 @@
+@import 'assets/styles/widget-ui.css';
+@import 'assets/styles/flex-layout-attribute.min.css';
+
 :host {
-    font-family: sans-serif;
-    min-width: 312px;
-    min-height: 180px;
+  display: block;
+  height: 100%;
+  font-family: sans-serif;
+  /* Variabile per gestire il colore del glow centralmente */
+  --glow-color: var(--accent-color);
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 18px;
-    font-size: 1.1em;
-}
-.header h3 {
-  margin: 0;
+.body {
+  height: 100%;
 }
 
 .container {
-    padding: 16px;
-    margin-top: 32px;
+  height: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
-.level-text {
-    color: var(--text-color);
-    margin-right: 32px;
+.header {
+  padding-right: 48px;
+  color: var(--text-color);
+  flex-shrink: 0;
 }
 
-.slider-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+.dimmer-ring {
+  position: relative;
+  height: var(--container-height, 140px); 
+  cursor: pointer;
+  touch-action: none;
 }
 
-.slider {
-    flex-grow: 1;
-    accent-color: var(--accent-color);
+/* Assicuriamoci che l'SVG scali perfettamente dentro il nuovo dimmer-ring */
+svg {
+  width: 100%;
+  height: 100%;
+  /* overflow: visible è fondamentale affinché l'alone luminoso non venga tagliato ai bordi */
+  overflow: visible;
+}
+
+.track {
+  fill: none;
+  stroke: var(--divider-color);
+  stroke-width: 8;
+}
+
+.progress {
+  fill: none;
+  stroke: var(--glow-color);
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.1s linear, filter 0.3s, stroke 0.3s;
+  stroke-dasharray: 263.89;
+  
+  /* L'effetto Glow nativo applicato direttamente sul cerchio di progresso */
+  filter: drop-shadow(0 0 3px var(--glow-color));
+}
+
+.center-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
 }
 
 .icon {
-    fill: var(--secondary-text-color);
+  font-size: 48px;
+  color: var(--disabled-color);
+  transition: color 0.3s;
+  pointer-events: none;
+}
+
+.active-icon {
+  /* Facciamo in modo che anche l'icona segua il colore del glow quando è accesa */
+  color: var(--glow-color);
+}
+
+.percentage {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--text-color);
+  pointer-events: none;
 }

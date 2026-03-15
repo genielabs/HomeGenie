@@ -557,5 +557,13 @@
   "click_to_expand": "Cliquez pour agrandir",
   "save_program": "Programme de sauvegarde",
   "enter_program_name": "Saisissez un nom pour cette automatisation :",
-  "language_mismatch": "Incompatibilité linguistique"
+  "language_mismatch": "Incompatibilité linguistique",
+  "ai_genie_import_chat_history": "Historique d'importation",
+  "ai_genie_export_chat_history": "Historique d'exportation",
+  "copy": "Copie",
+  "copied": "Copié !",
+  "error": "Erreur!",
+  "copied_to_clipboard": "Copié dans le presse-papiers.",
+  "message_deleted": "Message supprimé",
+  "clear_chat_to_import": "Effacer la conversation actuelle pour en importer une nouvelle."
 }

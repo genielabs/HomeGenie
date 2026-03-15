@@ -104,6 +104,11 @@ class FpvControl extends ControllerInstance {
       },
       isConfigured: () => {
         return this.boundModule != null;
+      },
+      config: () => {
+        if (!this.boundModule) {
+          this.configure();
+        }
       }
     });
 
@@ -172,8 +177,7 @@ class FpvControl extends ControllerInstance {
   }
 
   updateGamepadStatus() {
-    if (!gamepadLoopActive)
-    {
+    if (!gamepadLoopActive) {
       //console.log('GamePad loop exit.');
       return;
     }

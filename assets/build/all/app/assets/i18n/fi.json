@@ -557,5 +557,13 @@
   "click_to_expand": "Napsauta laajentaaksesi",
   "save_program": "Tallenna ohjelma",
   "enter_program_name": "Anna tälle automaatiolle nimi:",
-  "language_mismatch": "Kielivirhe"
+  "language_mismatch": "Kielivirhe",
+  "ai_genie_import_chat_history": "Tuontihistoria",
+  "ai_genie_export_chat_history": "Vientihistoria",
+  "copy": "Kopioida",
+  "copied": "Kopioitu!",
+  "error": "Virhe!",
+  "copied_to_clipboard": "Kopioitu leikepöydälle.",
+  "message_deleted": "Viesti poistettu",
+  "clear_chat_to_import": "Tyhjennä nykyinen keskustelu tuodaksesi uuden."
 }

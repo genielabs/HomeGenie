@@ -557,5 +557,13 @@
   "click_to_expand": "ចុចដើម្បីពង្រីក",
   "save_program": "រក្សាទុកកម្មវិធី",
   "enter_program_name": "បញ្ចូលឈ្មោះសម្រាប់ស្វ័យប្រវត្តិកម្មនេះ៖",
-  "language_mismatch": "ភាពមិនស៊ីគ្នានៃភាសា"
+  "language_mismatch": "ភាពមិនស៊ីគ្នានៃភាសា",
+  "ai_genie_import_chat_history": "ប្រវត្តិនាំចូល",
+  "ai_genie_export_chat_history": "នាំចេញប្រវត្តិ",
+  "copy": "ចម្លង",
+  "copied": "បានចម្លងហើយ!",
+  "error": "កំហុស!",
+  "copied_to_clipboard": "បានចម្លងទៅក្ដារតម្បៀតខ្ទាស់។",
+  "message_deleted": "សារត្រូវបានលុប",
+  "clear_chat_to_import": "សម្អាត​ការជជែក​បច្ចុប្បន្ន ដើម្បី​នាំចូល​ការជជែក​ថ្មី។"
 }

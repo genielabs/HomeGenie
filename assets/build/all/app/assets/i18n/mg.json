@@ -557,5 +557,13 @@
   "click_to_expand": "Tsindrio raha hanitatra",
   "save_program": "Tehirizo ny fandaharana",
   "enter_program_name": "Ampidiro anarana ho an'ity automatique ity:",
-  "language_mismatch": "Tsy fitoviana amin'ny fiteny"
+  "language_mismatch": "Tsy fitoviana amin'ny fiteny",
+  "ai_genie_import_chat_history": "Tantaran'ny fanafarana",
+  "ai_genie_export_chat_history": "Tantaran'ny fanondranana",
+  "copy": "dika mitovy",
+  "copied": "Nadika!",
+  "error": "Diso! (or) Fahadisoana!",
+  "copied_to_clipboard": "Nadika tao amin'ny takelaka famintinana.",
+  "message_deleted": "Voafafa ny hafatra",
+  "clear_chat_to_import": "Fafao ny resaka ankehitriny mba hampidirana iray vaovao."
 }

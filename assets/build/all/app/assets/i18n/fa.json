@@ -557,5 +557,13 @@
   "click_to_expand": "برای گسترش کلیک کنید",
   "save_program": "ذخیره برنامه",
   "enter_program_name": "یک نام برای این اتوماسیون وارد کنید:",
-  "language_mismatch": "عدم تطابق زبان"
+  "language_mismatch": "عدم تطابق زبان",
+  "ai_genie_import_chat_history": "تاریخچه واردات",
+  "ai_genie_export_chat_history": "سابقه صادرات",
+  "copy": "کپی",
+  "copied": "کپی شده!",
+  "error": "خطا!",
+  "copied_to_clipboard": "در کلیپ‌بورد کپی شد.",
+  "message_deleted": "پیام حذف شد",
+  "clear_chat_to_import": "برای وارد کردن یک چت جدید، چت فعلی را پاک کنید."
 }

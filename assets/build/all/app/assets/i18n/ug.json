@@ -557,5 +557,13 @@
   "click_to_expand": "كېڭەيتىش ئۈچۈن چېكىڭ",
   "save_program": "پروگرامما ساقلاش",
   "enter_program_name": "بۇ ئاپتوماتلاشتۇرۇش ئۈچۈن بىر ئىسىم كىرگۈزۈڭ:",
-  "language_mismatch": "تىل ماس كەلمەسلىكى"
+  "language_mismatch": "تىل ماس كەلمەسلىكى",
+  "ai_genie_import_chat_history": "ئىمپورت تارىخى",
+  "ai_genie_export_chat_history": "ئېكسپورت تارىخى",
+  "copy": "كۆچۈرۈش",
+  "copied": "كۆچۈرۈلدى!",
+  "error": "خاتالىق!",
+  "copied_to_clipboard": "چاپلاش تاختىسىغا كۆچۈرۈلدى.",
+  "message_deleted": "ئۇچۇر ئۆچۈرۈلدى",
+  "clear_chat_to_import": "يېڭىسىنى ئىمپورت قىلىش ئۈچۈن نۆۋەتتىكى سۆھبەتنى تازىلاڭ."
 }

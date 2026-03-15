@@ -557,5 +557,13 @@
   "click_to_expand": "विस्तार गर्न क्लिक गर्नुहोस्",
   "save_program": "कार्यक्रम बचत गर्नुहोस्",
   "enter_program_name": "यो स्वचालनको लागि नाम प्रविष्ट गर्नुहोस्:",
-  "language_mismatch": "भाषा बेमेल"
+  "language_mismatch": "भाषा बेमेल",
+  "ai_genie_import_chat_history": "आयात इतिहास",
+  "ai_genie_export_chat_history": "निर्यात इतिहास",
+  "copy": "प्रतिलिपि गर्नुहोस्",
+  "copied": "प्रतिलिपि गरियो!",
+  "error": "त्रुटि!",
+  "copied_to_clipboard": "क्लिपबोर्डमा प्रतिलिपि गरियो।",
+  "message_deleted": "सन्देश मेटाइयो",
+  "clear_chat_to_import": "नयाँ च्याट आयात गर्न हालको च्याट खाली गर्नुहोस्।"
 }

@@ -557,5 +557,13 @@
   "click_to_expand": "Klik for at udvide",
   "save_program": "Gem program",
   "enter_program_name": "Indtast et navn til denne automatisering:",
-  "language_mismatch": "Sproglig uoverensstemmelse"
+  "language_mismatch": "Sproglig uoverensstemmelse",
+  "ai_genie_import_chat_history": "Importhistorik",
+  "ai_genie_export_chat_history": "Eksporthistorik",
+  "copy": "Kopi",
+  "copied": "Kopieret!",
+  "error": "Fejl!",
+  "copied_to_clipboard": "Kopieret til udklipsholder.",
+  "message_deleted": "Beskeden er slettet",
+  "clear_chat_to_import": "Ryd den aktuelle chat for at importere en ny."
 }

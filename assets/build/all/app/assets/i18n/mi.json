@@ -557,5 +557,13 @@
   "click_to_expand": "Pāwhiritia hei whakawhanui",
   "save_program": "Tiaki Papatono",
   "enter_program_name": "Tāuruhia he ingoa mō tēnei aunoatanga:",
-  "language_mismatch": "Te kore ōrite o te reo"
+  "language_mismatch": "Te kore ōrite o te reo",
+  "ai_genie_import_chat_history": "Hītori kawemai",
+  "ai_genie_export_chat_history": "Hītori kaweake",
+  "copy": "Tārua",
+  "copied": "Kua tāruatia!",
+  "error": "Hapa!",
+  "copied_to_clipboard": "I tāruatia ki te papatuhituhi.",
+  "message_deleted": "Kua mukua te karere",
+  "clear_chat_to_import": "Ūkuia te kōrerorero o nāianei hei kawemai i tētahi kōrerorero hou."
 }

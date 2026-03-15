@@ -557,5 +557,13 @@
   "click_to_expand": "Tẹ lati faagun",
   "save_program": "Fi Ètò Pamọ́",
   "enter_program_name": "Tẹ orukọ kan sii fun adaṣiṣẹ yii:",
-  "language_mismatch": "Àìbáramu èdè"
+  "language_mismatch": "Àìbáramu èdè",
+  "ai_genie_import_chat_history": "Ìtàn ìgbéwọlé",
+  "ai_genie_export_chat_history": "Ìtàn ìkójáde",
+  "copy": "Dáakọ",
+  "copied": "Ti daakọ!",
+  "error": "Àṣìṣe!",
+  "copied_to_clipboard": "A daakọ si agekuru fidio.",
+  "message_deleted": "Ifiranṣẹ ti paarẹ",
+  "clear_chat_to_import": "Pa ìfọ̀rọ̀wérọ̀ lọ́wọ́lọ́wọ́ rẹ́ láti gbé tuntun wọlé."
 }

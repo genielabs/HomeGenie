@@ -557,5 +557,13 @@
   "click_to_expand": "وڌائڻ لاءِ ڪلڪ ڪريو",
   "save_program": "پروگرام محفوظ ڪريو",
   "enter_program_name": "هن آٽوميشن لاءِ نالو داخل ڪريو:",
-  "language_mismatch": "ٻولي جي بي ترتيبي"
+  "language_mismatch": "ٻولي جي بي ترتيبي",
+  "ai_genie_import_chat_history": "درآمد جي تاريخ",
+  "ai_genie_export_chat_history": "برآمد جي تاريخ",
+  "copy": "ڪاپي",
+  "copied": "ڪاپي ٿيل!",
+  "error": "غلطي!",
+  "copied_to_clipboard": "ڪلپ بورڊ ڏانهن نقل ڪيو ويو.",
+  "message_deleted": "پيغام ڊهي ويو",
+  "clear_chat_to_import": "نئين چيٽ درآمد ڪرڻ لاءِ موجوده چيٽ صاف ڪريو."
 }

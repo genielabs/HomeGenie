@@ -557,5 +557,13 @@
   "click_to_expand": "Preme ut expandas",
   "save_program": "Servare Programma",
   "enter_program_name": "Nomen huic automationi inscribe:",
-  "language_mismatch": "Discrepantia linguae"
+  "language_mismatch": "Discrepantia linguae",
+  "ai_genie_import_chat_history": "Historia importationis",
+  "ai_genie_export_chat_history": "Historia exportationis",
+  "copy": "Exemplar",
+  "copied": "Exscriptum!",
+  "error": "Error!",
+  "copied_to_clipboard": "In tabulam excerptam.",
+  "message_deleted": "Nuntius deletus est",
+  "clear_chat_to_import": "Colloquium praesentem dele ut novum importes."
 }

@@ -557,5 +557,13 @@
   "click_to_expand": "Kliknite za razširitev",
   "save_program": "Shrani program",
   "enter_program_name": "Vnesite ime za to avtomatizacijo:",
-  "language_mismatch": "Neujemanje jezika"
+  "language_mismatch": "Neujemanje jezika",
+  "ai_genie_import_chat_history": "Zgodovina uvoza",
+  "ai_genie_export_chat_history": "Zgodovina izvoza",
+  "copy": "Kopiraj",
+  "copied": "Kopirano!",
+  "error": "Napaka!",
+  "copied_to_clipboard": "Kopirano v odložišče.",
+  "message_deleted": "Sporočilo izbrisano",
+  "clear_chat_to_import": "Počisti trenutni klepet, da uvoziš novega."
 }

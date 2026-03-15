@@ -557,5 +557,13 @@
   "click_to_expand": "Кликнете, за да разгънете",
   "save_program": "Запазване на програмата",
   "enter_program_name": "Въведете име за тази автоматизация:",
-  "language_mismatch": "Несъответствие на езика"
+  "language_mismatch": "Несъответствие на езика",
+  "ai_genie_import_chat_history": "История на импортирането",
+  "ai_genie_export_chat_history": "История на експортирането",
+  "copy": "Копиране",
+  "copied": "Копирано!",
+  "error": "Грешка!",
+  "copied_to_clipboard": "Копирано в клипборда.",
+  "message_deleted": "Съобщението е изтрито",
+  "clear_chat_to_import": "Изчистете текущия чат, за да импортирате нов."
 }

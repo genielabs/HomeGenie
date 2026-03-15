@@ -57,6 +57,9 @@ namespace HomeGenie.Automation.Engines
 
         public readonly AutoResetEvent RoutedEventAck = new AutoResetEvent(false);
 
+        private int _runCount = 0;
+        private DateTime _lastRunReset = DateTime.Now;
+
         protected ProgramEngineBase(ProgramBlock pb)
         {
             ProgramBlock = pb;
@@ -312,6 +315,25 @@ namespace HomeGenie.Automation.Engines
                     {
                         if (ProgramBlock.IsEnabled && WillProgramRun())
                         {
+                            if ((DateTime.Now - _lastRunReset).TotalSeconds < 1)
+                            {
+                                _runCount++;
+                            }
+                            else
+                            {
+                                _runCount = 1; // Reset se sono passati più di 5 secondi
+                                _lastRunReset = DateTime.Now;
+                            }
+                            if (_runCount > 20)
+                            {
+                                ProgramBlock.IsEnabled = false;
+                                var e = new Exception("Program disabled: too many rapid restarts detected. Check for loop errors in Setup/Main.");
+                                _log.Error(e, "Program {0} forced disable.",
+                                    ProgramBlock.Address);
+                                HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError,
+                                    PrepareExceptionMessage(CodeBlockEnum.TC, e));
+                                return;
+                            }
                             ProgramBlock.WillRun = false;
                             StartProgram(null);
                         }

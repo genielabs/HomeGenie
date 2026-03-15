@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" (click)="config()">
 
     <!-- Temperature Icon from https://www.svgrepo.com/svg/499946/temperature -->
     <svg viewBox="0 0 1024 1024" class="icon" version="1.1">
@@ -21,4 +21,4 @@
     <div #unit class="unit"></div>
 
 </div>
-<div #title class="title">No module bound</div>
+<div #title class="title" (click)="config()">No module bound</div>

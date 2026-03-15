@@ -557,5 +557,13 @@
   "click_to_expand": "පුළුල් කිරීමට ක්ලික් කරන්න",
   "save_program": "වැඩසටහන සුරකින්න",
   "enter_program_name": "මෙම ස්වයංක්‍රීයකරණය සඳහා නමක් ඇතුළත් කරන්න:",
-  "language_mismatch": "භාෂා නොගැලපීම"
+  "language_mismatch": "භාෂා නොගැලපීම",
+  "ai_genie_import_chat_history": "ආයාත ඉතිහාසය",
+  "ai_genie_export_chat_history": "අපනයන ඉතිහාසය",
+  "copy": "පිටපත් කරන්න",
+  "copied": "පිටපත් කරන ලදී!",
+  "error": "දෝෂයක්!",
+  "copied_to_clipboard": "පසුරු පුවරුවට පිටපත් කරන ලදී.",
+  "message_deleted": "පණිවිඩය මකා දමන ලදී",
+  "clear_chat_to_import": "අලුත් එකක් ආයාත කිරීමට වත්මන් කතාබහ හිස් කරන්න."
 }

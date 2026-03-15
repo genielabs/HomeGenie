@@ -557,5 +557,13 @@
   "click_to_expand": "Klik untuk memperluas",
   "save_program": "Program Tabungan",
   "enter_program_name": "Masukkan nama untuk otomatisasi ini:",
-  "language_mismatch": "Ketidaksesuaian bahasa"
+  "language_mismatch": "Ketidaksesuaian bahasa",
+  "ai_genie_import_chat_history": "Riwayat impor",
+  "ai_genie_export_chat_history": "Riwayat ekspor",
+  "copy": "Menyalin",
+  "copied": "Disalin!",
+  "error": "Kesalahan!",
+  "copied_to_clipboard": "Disalin ke papan klip.",
+  "message_deleted": "Pesan dihapus",
+  "clear_chat_to_import": "Hapus obrolan yang ada untuk mengimpor obrolan baru."
 }

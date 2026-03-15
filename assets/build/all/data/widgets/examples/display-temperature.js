@@ -21,6 +21,10 @@ class DisplayTemperature extends ControllerInstance {
     // the temperature field of the bound module
     const field = bm?.field(fieldName);
 
+    this.declare({
+      config: () => !bm && this.configure()
+    });
+
     if (bm && field) {
 
       const formatValue = utils.format.fieldValue;

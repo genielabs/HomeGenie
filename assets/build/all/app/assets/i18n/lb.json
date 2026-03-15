@@ -557,5 +557,13 @@
   "click_to_expand": "Klickt fir ze vergréisseren",
   "save_program": "Programm späicheren",
   "enter_program_name": "Gitt en Numm fir dës Automatiséierung an:",
-  "language_mismatch": "Sproochlech Ongläichheet"
+  "language_mismatch": "Sproochlech Ongläichheet",
+  "ai_genie_import_chat_history": "Importverlaf",
+  "ai_genie_export_chat_history": "Exportverlaf",
+  "copy": "Kopéieren",
+  "copied": "Kopéiert!",
+  "error": "Feeler!",
+  "copied_to_clipboard": "An d'Zwëschespäicher kopéiert.",
+  "message_deleted": "Message geläscht",
+  "clear_chat_to_import": "Läscht den aktuellen Chat fir en neien z'importéieren."
 }

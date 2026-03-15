@@ -253,6 +253,9 @@ class LocalAiChat extends ControllerInstance {
 
     // Do nothing if there's no input or no module bound.
     if (!userInput || !this.boundModule) {
+      if (!this.boundModule) {
+        this.configure();
+      }
       return;
     }
 

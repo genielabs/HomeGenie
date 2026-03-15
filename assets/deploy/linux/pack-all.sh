@@ -12,7 +12,7 @@ do
 
   mv ${runtime} homegenie
 
-  # Generate startup script based on runtime
+  # Generate the startup script based on the runtime, handling the Restart logic (Exit Code 1)
   case $runtime in
     win-*)
       # Windows
@@ -20,43 +20,68 @@ do
       cat << 'EOF' > $SCRIPT_NAME
 @echo off
 title HomeGenie Server
+cd /d "%~dp0homegenie"
+
+:run
 echo ==========================================
 echo   Starting HomeGenie...
 echo ==========================================
-cd /d "%~dp0homegenie"
 HomeGenie.exe
-pause
+
+:: Check if the exit code is 1 (Restart requested)
+if %ERRORLEVEL% equ 1 (
+    echo.
+    echo [System] Restart requested...
+    echo.
+    goto run
+)
+
+:: If exited with 0 or any other code, terminate
+if %ERRORLEVEL% neq 0 (
+    echo.
+    echo [System] HomeGenie stopped with error code %ERRORLEVEL%
+    pause
+)
 EOF
       ;;
 
-    osx-*)
-      # Mac
-      SCRIPT_NAME="start.command"
-      cat << 'EOF' > $SCRIPT_NAME
-#!/bin/bash
-echo "=========================================="
-echo "  Starting HomeGenie for Mac..."
-echo "=========================================="
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-cd "$DIR/homegenie"
-chmod +x ./HomeGenie
-./HomeGenie
-EOF
-      chmod +x $SCRIPT_NAME
-      ;;
+    osx-*|linux-*)
+      # Mac / Linux
+      if [[ $runtime == osx-* ]]; then
+          SCRIPT_NAME="start.command"
+      else
+          SCRIPT_NAME="start.sh"
+      fi
 
-    linux-*)
-      # Linux
-      SCRIPT_NAME="start.sh"
       cat << 'EOF' > $SCRIPT_NAME
 #!/bin/bash
-echo "=========================================="
-echo "  Starting HomeGenie for Linux..."
-echo "=========================================="
+# Get the absolute path of the script
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 cd "$DIR/homegenie"
+
+# Ensure the executable has correct permissions
 chmod +x ./HomeGenie
-./HomeGenie
+
+while true; do
+    echo "=========================================="
+    echo "  Starting HomeGenie..."
+    echo "=========================================="
+
+    ./HomeGenie
+    EXIT_CODE=$?
+
+    # If the exit code is 1, continue the loop (restart)
+    if [ $EXIT_CODE -eq 1 ]; then
+        echo ""
+        echo "[System] Restart requested. Re-launching..."
+        echo ""
+        sleep 1
+    else
+        # Exit the loop for any other code
+        echo "[System] HomeGenie stopped (Exit Code: $EXIT_CODE)"
+        exit $EXIT_CODE
+    fi
+done
 EOF
       chmod +x $SCRIPT_NAME
       ;;

@@ -557,5 +557,13 @@
   "click_to_expand": "Faceți clic pentru a extinde",
   "save_program": "Salvați programul",
   "enter_program_name": "Introduceți un nume pentru această automatizare:",
-  "language_mismatch": "Nepotrivire de limbă"
+  "language_mismatch": "Nepotrivire de limbă",
+  "ai_genie_import_chat_history": "Istoricul importurilor",
+  "ai_genie_export_chat_history": "Istoricul exporturilor",
+  "copy": "Copie",
+  "copied": "Copiat!",
+  "error": "Eroare!",
+  "copied_to_clipboard": "Copiat în clipboard.",
+  "message_deleted": "Mesaj șters",
+  "clear_chat_to_import": "Ștergeți chatul curent pentru a importa unul nou."
 }

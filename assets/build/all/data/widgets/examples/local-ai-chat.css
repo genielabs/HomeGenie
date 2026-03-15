@@ -22,7 +22,7 @@ think {
 }
 
 .warn-message {
-  margin-top: 12px;
+  margin-top: 16px;
   border: solid 1px var(--warn-color);
   border-radius:4px;padding:6px;
   color: var(--text-color);
@@ -55,7 +55,7 @@ p {
   background-color: transparent;
   flex-grow: 2;
   overflow-y: auto;
-  padding: 16px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -97,6 +97,7 @@ p {
   padding: 10px;
   border-top: 1px solid var(--divider-color);
   gap: 10px;
+  margin-bottom: 10px;
 }
 
 textarea {
@@ -115,39 +116,6 @@ textarea {
 textarea:focus {
   outline: none;
   border-color: var(--accent-color);
-}
-
-button {
-  stroke: var(--accent-color);
-  border: solid 1px rgba(127, 127, 127, 0.35);
-  background-color: rgba(127, 127, 127, 0.05);
-  color: var(--text-color);
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 48px;
-  height: 48px;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  border: solid 1px rgba(127, 127, 127, 0.5);
-  background-color: rgba(127, 127, 127, 0.15);
-}
-button:active {
-  background-color: rgba(127, 127, 127, 0.35);
-}
-
-button:disabled span {
-  opacity: 0.5;
-  display: none;
-}
-
-button:disabled {
-  background-color: var(--disabled-color);
-  cursor: not-allowed;
 }
 
 div[\#chat_history] pre {
@@ -361,4 +329,8 @@ div[\#chat_history] p>code {
   margin-top:52px;
   padding:12px;
   margin: 4px;
+}
+
+button {
+  height: 56px;
 }

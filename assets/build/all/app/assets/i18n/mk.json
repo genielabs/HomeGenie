@@ -557,5 +557,13 @@
   "click_to_expand": "Кликнете за да проширите",
   "save_program": "Зачувај програма",
   "enter_program_name": "Внесете име за оваа автоматизација:",
-  "language_mismatch": "Јазична несовпаѓање"
+  "language_mismatch": "Јазична несовпаѓање",
+  "ai_genie_import_chat_history": "Историја на увоз",
+  "ai_genie_export_chat_history": "Историја на извоз",
+  "copy": "Копирај",
+  "copied": "Копирано!",
+  "error": "Грешка!",
+  "copied_to_clipboard": "Копирано во таблата со исечоци.",
+  "message_deleted": "Пораката е избришана",
+  "clear_chat_to_import": "Исчисти го тековниот разговор за да увезеш нов."
 }

@@ -557,5 +557,13 @@
   "click_to_expand": "ချဲ့ကြည့်ရန် နှိပ်ပါ",
   "save_program": "ပရိုဂရမ်ကို သိမ်းဆည်းပါ",
   "enter_program_name": "ဤအလိုအလျောက်စနစ်အတွက် အမည်တစ်ခုထည့်ပါ-",
-  "language_mismatch": "ဘာသာစကား မကိုက်ညီမှု"
+  "language_mismatch": "ဘာသာစကား မကိုက်ညီမှု",
+  "ai_genie_import_chat_history": "တင်သွင်းမှုမှတ်တမ်း",
+  "ai_genie_export_chat_history": "တင်ပို့မှုမှတ်တမ်း",
+  "copy": "မိတ္တူကူးပါ",
+  "copied": "ကူးယူပြီးပါပြီ။",
+  "error": "အမှား!",
+  "copied_to_clipboard": "ကလစ်ဘုတ်သို့ ကူးယူပြီးပါပြီ။",
+  "message_deleted": "မက်ဆေ့ချ်ကို ဖျက်လိုက်ပါပြီ",
+  "clear_chat_to_import": "အသစ်တစ်ခုထည့်သွင်းရန် လက်ရှိချတ်ကို ရှင်းလင်းပါ။"
 }

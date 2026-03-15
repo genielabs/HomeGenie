@@ -557,5 +557,13 @@
   "click_to_expand": "I-click para palawakin",
   "save_program": "Programa ng Pag-save",
   "enter_program_name": "Maglagay ng pangalan para sa automation na ito:",
-  "language_mismatch": "Hindi pagkakatugma ng wika"
+  "language_mismatch": "Hindi pagkakatugma ng wika",
+  "ai_genie_import_chat_history": "Kasaysayan ng pag-import",
+  "ai_genie_export_chat_history": "Kasaysayan ng pag-export",
+  "copy": "Kopyahin",
+  "copied": "Kinopya!",
+  "error": "Mali!",
+  "copied_to_clipboard": "Kinopya sa clipboard.",
+  "message_deleted": "Nabura ang mensahe",
+  "clear_chat_to_import": "I-clear ang kasalukuyang chat para mag-import ng bago."
 }

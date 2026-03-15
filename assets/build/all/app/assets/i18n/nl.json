@@ -557,5 +557,13 @@
   "click_to_expand": "Klik om uit te breiden",
   "save_program": "Programma opslaan",
   "enter_program_name": "Geef deze automatisering een naam:",
-  "language_mismatch": "Taalverschil"
+  "language_mismatch": "Taalverschil",
+  "ai_genie_import_chat_history": "Importgeschiedenis",
+  "ai_genie_export_chat_history": "Exportgeschiedenis",
+  "copy": "Kopiëren",
+  "copied": "Gekopieerd!",
+  "error": "Fout!",
+  "copied_to_clipboard": "Gekopieerd naar het klembord.",
+  "message_deleted": "Bericht verwijderd",
+  "clear_chat_to_import": "Wis de huidige chat om een nieuwe te importeren."
 }

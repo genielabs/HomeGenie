@@ -557,5 +557,13 @@
   "click_to_expand": "Smelltu til að stækka",
   "save_program": "Vista forrit",
   "enter_program_name": "Sláðu inn nafn fyrir þessa sjálfvirkni:",
-  "language_mismatch": "Tungumálamisræmi"
+  "language_mismatch": "Tungumálamisræmi",
+  "ai_genie_import_chat_history": "Innflutningsferill",
+  "ai_genie_export_chat_history": "Útflutningssaga",
+  "copy": "Afrita",
+  "copied": "Afritað!",
+  "error": "Villa!",
+  "copied_to_clipboard": "Afritað á klippiborð.",
+  "message_deleted": "Skilaboðum eytt",
+  "clear_chat_to_import": "Hreinsaðu núverandi spjall til að flytja inn nýtt."
 }

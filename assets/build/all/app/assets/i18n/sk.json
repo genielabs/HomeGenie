@@ -557,5 +557,13 @@
   "click_to_expand": "Kliknite pre rozbalenie",
   "save_program": "Uložiť program",
   "enter_program_name": "Zadajte názov pre túto automatizáciu:",
-  "language_mismatch": "Nezhoda jazykov"
+  "language_mismatch": "Nezhoda jazykov",
+  "ai_genie_import_chat_history": "História importu",
+  "ai_genie_export_chat_history": "História exportu",
+  "copy": "Kopírovať",
+  "copied": "Skopírované!",
+  "error": "Chyba!",
+  "copied_to_clipboard": "Skopírované do schránky.",
+  "message_deleted": "Správa bola odstránená",
+  "clear_chat_to_import": "Vymažte aktuálny chat a importujte nový."
 }

@@ -557,5 +557,13 @@
   "click_to_expand": "Սեղմեք՝ ընդարձակելու համար",
   "save_program": "Պահպանել ծրագիրը",
   "enter_program_name": "Մուտքագրեք այս ավտոմատացման անունը՝",
-  "language_mismatch": "Լեզվի անհամապատասխանություն"
+  "language_mismatch": "Լեզվի անհամապատասխանություն",
+  "ai_genie_import_chat_history": "Ներմուծման պատմություն",
+  "ai_genie_export_chat_history": "Արտահանման պատմություն",
+  "copy": "Պատճենել",
+  "copied": "Պատճենված է!",
+  "error": "Սխալ!",
+  "copied_to_clipboard": "Պատճենվել է սեղմատախտակին։",
+  "message_deleted": "Հաղորդագրությունը ջնջված է",
+  "clear_chat_to_import": "Մաքրեք ընթացիկ զրույցը՝ նորը ներմուծելու համար։"
 }

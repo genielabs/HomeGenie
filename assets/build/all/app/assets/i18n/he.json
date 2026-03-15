@@ -557,5 +557,13 @@
   "click_to_expand": "לחץ/י להרחבה",
   "save_program": "שמירת תוכנית",
   "enter_program_name": "הזן שם לאוטומציה זו:",
-  "language_mismatch": "אי התאמה בשפה"
+  "language_mismatch": "אי התאמה בשפה",
+  "ai_genie_import_chat_history": "היסטוריית ייבוא",
+  "ai_genie_export_chat_history": "היסטוריית ייצוא",
+  "copy": "לְהַעְתִיק",
+  "copied": "מוּעֲתָק!",
+  "error": "שְׁגִיאָה!",
+  "copied_to_clipboard": "הועתק ללוח.",
+  "message_deleted": "ההודעה נמחקה",
+  "clear_chat_to_import": "נקה את הצ'אט הנוכחי כדי לייבא צ'אט חדש."
 }

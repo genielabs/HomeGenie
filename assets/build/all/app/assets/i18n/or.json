@@ -557,5 +557,13 @@
   "click_to_expand": "ବିସ୍ତାର କରିବାକୁ କ୍ଲିକ୍ କରନ୍ତୁ",
   "save_program": "ପ୍ରୋଗ୍ରାମ୍ ସେଭ୍ କରନ୍ତୁ",
   "enter_program_name": "ଏହି ସ୍ୱୟଂଚାଳିତକରଣ ପାଇଁ ଏକ ନାମ ଲେଖନ୍ତୁ:",
-  "language_mismatch": "ଭାଷା ମେଳ ଖାଉନାହିଁ"
+  "language_mismatch": "ଭାଷା ମେଳ ଖାଉନାହିଁ",
+  "ai_genie_import_chat_history": "ଇତିବୃତ୍ତି ଆମଦାନୀ କରନ୍ତୁ",
+  "ai_genie_export_chat_history": "ଏକ୍ସପୋର୍ଟ ଇତିହାସ",
+  "copy": "କପି କରନ୍ତୁ",
+  "copied": "କପି କରାଯାଇଛି!",
+  "error": "ତ୍ରୁଟି!",
+  "copied_to_clipboard": "କ୍ଲିପବୋର୍ଡକୁ କପି କରାଯାଇଛି।",
+  "message_deleted": "ମେସେଜ୍ ଡିଲିଟ୍ କରାଯାଇଛି",
+  "clear_chat_to_import": "ଏକ ନୂତନ ଚାଟ୍ ଇମ୍ପୋର୍ଟ କରିବାକୁ ବର୍ତ୍ତମାନର ଚାଟ୍ ଖାଲି କରନ୍ତୁ।"
 }

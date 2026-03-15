@@ -557,5 +557,13 @@
   "click_to_expand": "Κάντε κλικ για ανάπτυξη",
   "save_program": "Πρόγραμμα Αποθήκευσης",
   "enter_program_name": "Εισαγάγετε ένα όνομα για αυτόν τον αυτοματισμό:",
-  "language_mismatch": "Γλωσσική αναντιστοιχία"
+  "language_mismatch": "Γλωσσική αναντιστοιχία",
+  "ai_genie_import_chat_history": "Ιστορικό εισαγωγών",
+  "ai_genie_export_chat_history": "Ιστορικό εξαγωγών",
+  "copy": "Αντίγραφο",
+  "copied": "Αντιγράφηκε!",
+  "error": "Σφάλμα!",
+  "copied_to_clipboard": "Αντιγράφηκε στο πρόχειρο.",
+  "message_deleted": "Το μήνυμα διαγράφηκε",
+  "clear_chat_to_import": "Διαγράψτε την τρέχουσα συνομιλία για να εισαγάγετε μια νέα."
 }

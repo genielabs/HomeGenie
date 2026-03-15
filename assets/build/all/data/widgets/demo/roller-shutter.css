@@ -1,0 +1,112 @@
+@import 'assets/styles/widget-ui.css';
+@import 'assets/styles/flex-layout-attribute.min.css';
+
+:host {
+  font-family: sans-serif;
+  display: block;
+  height: 100%;
+}
+
+.container {
+  padding: 12px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.header {
+  padding-right: 48px;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
+
+.status {
+  font-size: 0.9em;
+  color: var(--secondary-text-color);
+}
+
+.body {
+  flex: 1;
+  gap: 16px;
+  padding-top: 12px;
+}
+
+.shutter-indicator {
+  width: 100px;
+  height: 100px;
+  border-radius: 12px;
+  border: 2px solid var(--divider-color);
+  background-color: var(--background-color);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.shutter-indicator::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-image: repeating-linear-gradient(0deg, color-mix(in srgb, var(--accent-color) 50%, transparent));
+  transition: height 0.3s ease-in-out;
+  height: var(--shutter-fill-height);
+}
+
+.level-display {
+  position: relative;
+  z-index: 1;
+  font-size: 1.8em;
+  font-weight: bold;
+  color: var(--text-color);
+  padding: 4px;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+.control-group {
+  width: 100%;
+  gap: 12px;
+}
+
+.icon {
+  font-size: 28px;
+  color: var(--secondary-text-color);
+}
+
+.slider {
+  width: calc(100% - 72px) !important;
+}
+
+.control-buttons {
+  width: 100%;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+button {
+  background: transparent;
+  border: 2px solid var(--divider-color);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background-color: rgba(100, 100, 100, 0.5);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

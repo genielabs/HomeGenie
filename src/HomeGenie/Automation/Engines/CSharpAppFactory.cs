@@ -241,7 +241,6 @@ namespace HomeGenie.Automation.Scripting
                 .Replace("{setup}", parsedCode.SetupCode)
                 .Replace("{context}", parsedCode.ContextCode);
 #if NETCOREAPP
-            var dotNetCoreDir = Path.GetDirectoryName(typeof(object).GetTypeInfo().Assembly.Location);
             var homeGenieDir = Path.GetDirectoryName(typeof(HomeGenieService).GetTypeInfo().Assembly.Location);
 
             var diagnosticOptions = new Dictionary<string, ReportDiagnostic>
@@ -251,136 +250,90 @@ namespace HomeGenie.Automation.Scripting
             var compilationOptions = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
                 .WithSpecificDiagnosticOptions(diagnosticOptions);
 
+            var assemblyPaths = new HashSet<string>();
+            var basicAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+            foreach (var assembly in basicAssemblies)
+            {
+                // Aggiungiamo solo assembly "reali" (non dinamici) che hanno un percorso fisico
+                if (!assembly.IsDynamic && !string.IsNullOrEmpty(assembly.Location))
+                {
+                    assemblyPaths.Add(assembly.Location);
+                }
+            }
+
+            // Core librarires
+            assemblyPaths.Add(typeof(object).Assembly.Location);
+            assemblyPaths.Add(typeof(HomeGenieService).Assembly.Location);
+            assemblyPaths.Add(typeof(Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo).Assembly.Location); // dynamic
+
+            // Old libraries dotNetCoreDir
+            assemblyPaths.Add(typeof(System.Net.Dns).Assembly.Location); // NameResolution
+            assemblyPaths.Add(typeof(System.Net.HttpStatusCode).Assembly.Location); // Primitives
+            assemblyPaths.Add(typeof(System.ComponentModel.Component).Assembly.Location); // ComponentModel.Primitives
+            assemblyPaths.Add(typeof(System.Collections.ObjectModel.ObservableCollection<>).Assembly.Location); // ObjectModel
+
+            // Data / Signal processing / Machine Learning / Computer Vision / ONXX
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.Extensions.Logging.Abstractions.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.Extensions.Options.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.ML.CpuMath.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.ML.Core.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.ML.Data.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.ML.DataView.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.ML.ImageAnalytics.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.ML.KMeansClustering.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.ML.OnnxRuntime.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.ML.OnnxTransformer.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.ML.PCA.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.ML.Probabilistic.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.ML.Probabilistic.Compiler.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.ML.Probabilistic.Learners.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.ML.Probabilistic.Learners.Classifier.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.ML.Probabilistic.Learners.Recommender.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.ML.StandardTrainers.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.ML.Transforms.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "NWaves.dll"));
+
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "SixLabors.ImageSharp.dll"));
+
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "YoloSharp.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "LLamaSharp.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "LLamaSharp.KernelMemory.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "LLamaSharp.SemanticKernel.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.KernelMemory.Abstractions.dll"));
+
+            // IO and Utility
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "MessagePack.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "MessagePack.Annotations.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "MIG.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "MIG.HomeAutomation.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "CM19Lib.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "LiteDB.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "GLabs.Logging.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Newtonsoft.Json.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "SerialPortLib.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "NetClientLib.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "UPnP.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "MQTTnet.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "OnvifDiscovery.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "YamlDotNet.dll"));
+
+            // RaspberrySharp / Microsoft IoT Framework
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "System.Device.Gpio.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Iot.Device.Bindings.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "UnitsNet.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Raspberry.IO.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Raspberry.IO.Components.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Raspberry.IO.GeneralPurpose.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Raspberry.IO.InterIntegratedCircuit.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Raspberry.IO.SerialPeripheralInterface.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Raspberry.System.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Innovative.Geometry.Angle.dll"));
+            assemblyPaths.Add(Path.Combine(homeGenieDir, "Innovative.SolarCalculator.dll"));
+
+            var references = assemblyPaths.Select(path => MetadataReference.CreateFromFile(path)).ToList();
             var compilation = CSharpCompilation.Create("a")
                 .WithOptions(compilationOptions)
-                .AddReferences(
-
-                    MetadataReference.CreateFromFile(typeof(object).GetTypeInfo().Assembly.Location),
-                    MetadataReference.CreateFromFile(typeof(Enum).GetTypeInfo().Assembly.Location),
-                    MetadataReference.CreateFromFile(typeof(Console).GetTypeInfo().Assembly.Location),
-                    MetadataReference.CreateFromFile(typeof(Queryable).GetTypeInfo().Assembly.Location),
-                    MetadataReference.CreateFromFile(typeof(Uri).GetTypeInfo().Assembly.Location),
-                    MetadataReference.CreateFromFile(typeof(HttpListener).GetTypeInfo().Assembly.Location),
-                    MetadataReference.CreateFromFile(typeof(DynamicObject).GetTypeInfo().Assembly.Location),
-                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Runtime.dll")),
-                    MetadataReference.CreateFromFile(Assembly.Load("netstandard").Location),
-                    MetadataReference.CreateFromFile(Assembly.Load("mscorlib").Location),
-                    MetadataReference.CreateFromFile(typeof(Thread).GetTypeInfo().Assembly.Location),
-                    MetadataReference.CreateFromFile(typeof(Stopwatch).GetTypeInfo().Assembly.Location),
-                    MetadataReference.CreateFromFile(typeof(Enumerable).GetTypeInfo().Assembly.Location),
-                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Windows.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Threading.Thread.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Collections.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Text.RegularExpressions.dll")),
-                    MetadataReference.CreateFromFile(typeof(System.Text.Json.JsonSerializer).Assembly.Location),
-                    MetadataReference.CreateFromFile(typeof(System.Xml.XmlDocument).Assembly.Location),
-                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.Primitives.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.NameResolution.dll")),
-
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "HomeGenie.dll")),
-
-                    // Other
-                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Collections.Concurrent.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.ComponentModel.Primitives.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Diagnostics.Process.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Memory.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Net.Http.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.ObjectModel.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(dotNetCoreDir, "System.Core.dll")),
-                    MetadataReference.CreateFromFile(typeof(CSharpArgumentInfo).GetTypeInfo().Assembly.Location),
-
-                    // Data / Signal processing / Machine Learning / Computer Vision / ONXX
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.Extensions.Logging.Abstractions.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.Extensions.Options.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.CpuMath.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.Core.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.Data.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.DataView.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.ImageAnalytics.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.KMeansClustering.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.OnnxRuntime.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.OnnxTransformer.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.PCA.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.Probabilistic.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.Probabilistic.Compiler.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.Probabilistic.Learners.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.Probabilistic.Learners.Classifier.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.Probabilistic.Learners.Recommender.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.StandardTrainers.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.ML.Transforms.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "NWaves.dll")),
-#if NET6_0_OR_GREATER
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "SixLabors.ImageSharp.dll")),
-#endif
-#if NET8_0_OR_GREATER
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "YoloSharp.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LLamaSharp.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LLamaSharp.KernelMemory.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LLamaSharp.SemanticKernel.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.KernelMemory.Abstractions.dll")),
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.dll")),
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Core.dll")),
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Extensions.DependencyInjection.dll")),
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Databases.InMemory.dll")),
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.Abstractions.dll")),
-                    //
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.Anthropic.dll")),
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Anthropic.dll")),
-                    //
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.Azure.dll")),
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Azure.AI.OpenAI.dll")),
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Polyfills.dll")),
-                    //
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.DeepSeek.dll")),
-                    //
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.Google.dll")),
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "GenerativeAI.dll")),
-                    //
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.HuggingFace.dll")),
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "HuggingFace.dll")),
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Microsoft.Bcl.AsyncInterfaces.dll")),
-                    //
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.LLamaSharp.dll")),
-                    //
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.Ollama.dll")),
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Ollama.dll")),
-                    //
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LangChain.Providers.OpenAI.dll")),
-//                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "tryAGI.OpenAI.dll")),
-#endif
-                    // IO and Utility
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MessagePack.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MessagePack.Annotations.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MIG.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MIG.HomeAutomation.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "CM19Lib.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "LiteDB.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "GLabs.Logging.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Newtonsoft.Json.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "SerialPortLib.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "NetClientLib.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "UPnP.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "MQTTnet.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "OnvifDiscovery.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "YamlDotNet.dll")),
-
-                    // RaspberrySharp / Microsoft IoT Framework
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "System.Device.Gpio.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Iot.Device.Bindings.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "UnitsNet.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Raspberry.IO.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Raspberry.IO.Components.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Raspberry.IO.GeneralPurpose.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir,
-                        "Raspberry.IO.InterIntegratedCircuit.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir,
-                        "Raspberry.IO.SerialPeripheralInterface.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Raspberry.System.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Innovative.Geometry.Angle.dll")),
-                    MetadataReference.CreateFromFile(Path.Combine(homeGenieDir, "Innovative.SolarCalculator.dll"))
-                )
+                .AddReferences(references)
                 .AddSyntaxTrees(CSharpSyntaxTree.ParseText(source));
 
             var assemblyPdbFile = outputDllFile + ".pdb";

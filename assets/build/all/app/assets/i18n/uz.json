@@ -557,5 +557,13 @@
   "click_to_expand": "Kengaytirish uchun bosing",
   "save_program": "Dasturni saqlash",
   "enter_program_name": "Ushbu avtomatlashtirish uchun nom kiriting:",
-  "language_mismatch": "Til mos kelmasligi"
+  "language_mismatch": "Til mos kelmasligi",
+  "ai_genie_import_chat_history": "Import tarixi",
+  "ai_genie_export_chat_history": "Eksport tarixi",
+  "copy": "Nusxalash",
+  "copied": "Nusxalandi!",
+  "error": "Xato!",
+  "copied_to_clipboard": "Buferga nusxalandi.",
+  "message_deleted": "Xabar o'chirildi",
+  "clear_chat_to_import": "Yangi chatni import qilish uchun joriy chatni tozalang."
 }

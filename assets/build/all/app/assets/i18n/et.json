@@ -557,5 +557,13 @@
   "click_to_expand": "Klõpsake laiendamiseks",
   "save_program": "Salvesta programm",
   "enter_program_name": "Sisestage sellele automatiseerimisele nimi:",
-  "language_mismatch": "Keeleline mittevastavus"
+  "language_mismatch": "Keeleline mittevastavus",
+  "ai_genie_import_chat_history": "Impordi ajalugu",
+  "ai_genie_export_chat_history": "Ekspordi ajalugu",
+  "copy": "Kopeeri",
+  "copied": "Kopeeritud!",
+  "error": "Viga!",
+  "copied_to_clipboard": "Lõikelauale kopeeritud.",
+  "message_deleted": "Sõnum kustutatud",
+  "clear_chat_to_import": "Uue vestluse importimiseks tühjenda praegune vestlus."
 }

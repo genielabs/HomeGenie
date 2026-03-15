@@ -557,5 +557,13 @@
   "click_to_expand": "Cliciwch i ehangu",
   "save_program": "Cadw Rhaglen",
   "enter_program_name": "Rhowch enw ar gyfer yr awtomeiddio hwn:",
-  "language_mismatch": "Anghydwedd iaith"
+  "language_mismatch": "Anghydwedd iaith",
+  "ai_genie_import_chat_history": "Hanes mewnforio",
+  "ai_genie_export_chat_history": "Hanes allforio",
+  "copy": "Copïo",
+  "copied": "Wedi'i gopïo!",
+  "error": "Gwall!",
+  "copied_to_clipboard": "Wedi'i gopïo i'r clipfwrdd.",
+  "message_deleted": "Neges wedi'i dileu",
+  "clear_chat_to_import": "Cliriwch y sgwrs gyfredol i fewnforio un newydd."
 }

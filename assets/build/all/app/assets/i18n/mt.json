@@ -557,5 +557,13 @@
   "click_to_expand": "Ikklikkja biex tespandi",
   "save_program": "Issejvja l-Programm",
   "enter_program_name": "Daħħal isem għal din l-awtomazzjoni:",
-  "language_mismatch": "Nuqqas ta' qbil fil-lingwa"
+  "language_mismatch": "Nuqqas ta' qbil fil-lingwa",
+  "ai_genie_import_chat_history": "Storja tal-importazzjoni",
+  "ai_genie_export_chat_history": "Storja tal-esportazzjoni",
+  "copy": "Kopja",
+  "copied": "Ikkupjat!",
+  "error": "Żball!",
+  "copied_to_clipboard": "Ikkupjat fil-clipboard.",
+  "message_deleted": "Messaġġ imħassar",
+  "clear_chat_to_import": "Neħħi ċ-chat kurrenti biex timporta waħda ġdida."
 }

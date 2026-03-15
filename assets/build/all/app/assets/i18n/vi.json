@@ -557,5 +557,13 @@
   "click_to_expand": "Nhấp để mở rộng",
   "save_program": "Lưu chương trình",
   "enter_program_name": "Nhập tên cho quy trình tự động hóa này:",
-  "language_mismatch": "Không khớp ngôn ngữ"
+  "language_mismatch": "Không khớp ngôn ngữ",
+  "ai_genie_import_chat_history": "Lịch sử nhập khẩu",
+  "ai_genie_export_chat_history": "Lịch sử xuất khẩu",
+  "copy": "Sao chép",
+  "copied": "Đã sao chép!",
+  "error": "Lỗi!",
+  "copied_to_clipboard": "Đã sao chép vào clipboard.",
+  "message_deleted": "Tin nhắn đã bị xóa",
+  "clear_chat_to_import": "Xóa đoạn chat hiện tại để nhập đoạn chat mới."
 }

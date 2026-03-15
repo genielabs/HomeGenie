@@ -557,5 +557,13 @@
   "click_to_expand": "ವಿಸ್ತರಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ",
   "save_program": "ಪ್ರೋಗ್ರಾಂ ಉಳಿಸಿ",
   "enter_program_name": "ಈ ಯಾಂತ್ರೀಕರಣಕ್ಕೆ ಹೆಸರನ್ನು ನಮೂದಿಸಿ:",
-  "language_mismatch": "ಭಾಷೆ ಹೊಂದಿಕೆಯಾಗುತ್ತಿಲ್ಲ"
+  "language_mismatch": "ಭಾಷೆ ಹೊಂದಿಕೆಯಾಗುತ್ತಿಲ್ಲ",
+  "ai_genie_import_chat_history": "ಆಮದು ಇತಿಹಾಸ",
+  "ai_genie_export_chat_history": "ರಫ್ತು ಇತಿಹಾಸ",
+  "copy": "ನಕಲಿಸಿ",
+  "copied": "ನಕಲಿಸಲಾಗಿದೆ!",
+  "error": "ದೋಷ!",
+  "copied_to_clipboard": "ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲಿಸಿ.",
+  "message_deleted": "ಸಂದೇಶವನ್ನು ಅಳಿಸಲಾಗಿದೆ",
+  "clear_chat_to_import": "ಹೊಸದನ್ನು ಆಮದು ಮಾಡಿಕೊಳ್ಳಲು ಪ್ರಸ್ತುತ ಚಾಟ್ ಅನ್ನು ತೆರವುಗೊಳಿಸಿ."
 }

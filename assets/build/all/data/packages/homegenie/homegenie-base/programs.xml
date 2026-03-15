@@ -40,6 +40,25 @@ Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
             }
             return new { Count = currentHistory.Count };
 
+        case "RemoveAt":
+
+            int index = data?.Index ?? -1;
+            if (index &gt;= 0 &amp;&amp; index &lt; currentHistory.Count) {
+                currentHistory.RemoveAt(index);
+                HistoryStore.Save(dataFolder, storeId);
+                return new { Count = currentHistory.Count };
+            }
+            return new ResponseStatus(Status.Error, "Invalid index");
+
+        case "Export":
+            return currentHistory;
+
+        case "Import":
+            var newHistory = data?.Data?.ToString() ?? "";
+            HistoryStore.Stores[storeId] = JsonConvert.DeserializeObject&lt;List&lt;ChatMessage&gt;&gt;(newHistory);
+            HistoryStore.Save(dataFolder, storeId);
+            return newHistory;
+
         case "Clear":
 
             currentHistory.Clear();
@@ -124,16 +143,16 @@ public static class HistoryStore
     }
 }
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.5</PackageVersion>
       <Id>chat-history-service</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>F9D8FF9BC10DC6A37F321E56444BAA64</Checksum>
+      <Checksum>FCD2121C711BF832DD56B18E91EA1AAC</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>577</Address>

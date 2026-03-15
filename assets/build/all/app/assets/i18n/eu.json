@@ -557,5 +557,13 @@
   "click_to_expand": "Klik egin zabaltzeko",
   "save_program": "Gorde programa",
   "enter_program_name": "Sartu automatizazio honen izena:",
-  "language_mismatch": "Hizkuntza desadostasuna"
+  "language_mismatch": "Hizkuntza desadostasuna",
+  "ai_genie_import_chat_history": "Inportazio-historia",
+  "ai_genie_export_chat_history": "Esportazio-historia",
+  "copy": "Kopiatu",
+  "copied": "Kopiatu da!",
+  "error": "Errorea!",
+  "copied_to_clipboard": "Arbelean kopiatu da.",
+  "message_deleted": "Mezua ezabatuta",
+  "clear_chat_to_import": "Garbitu uneko txata berri bat inportatzeko."
 }

@@ -557,5 +557,13 @@
   "click_to_expand": "Feu clic per expandir",
   "save_program": "Desa el programa",
   "enter_program_name": "Introduïu un nom per a aquesta automatització:",
-  "language_mismatch": "Discrepància lingüística"
+  "language_mismatch": "Discrepància lingüística",
+  "ai_genie_import_chat_history": "Historial d'importacions",
+  "ai_genie_export_chat_history": "Historial d'exportació",
+  "copy": "Còpia",
+  "copied": "Copiat!",
+  "error": "Error!",
+  "copied_to_clipboard": "Copiat al porta-retalls.",
+  "message_deleted": "Missatge suprimit",
+  "clear_chat_to_import": "Esborra el xat actual per importar-ne un de nou."
 }

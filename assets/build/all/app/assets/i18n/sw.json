@@ -557,5 +557,13 @@
   "click_to_expand": "Bofya ili kupanua",
   "save_program": "Programu ya Hifadhi",
   "enter_program_name": "Ingiza jina la otomatiki hii:",
-  "language_mismatch": "Kutolingana kwa lugha"
+  "language_mismatch": "Kutolingana kwa lugha",
+  "ai_genie_import_chat_history": "Ingiza historia",
+  "ai_genie_export_chat_history": "Historia ya usafirishaji",
+  "copy": "Nakili",
+  "copied": "Imenakiliwa!",
+  "error": "Hitilafu!",
+  "copied_to_clipboard": "Imenakiliwa kwenye ubao wa kunakili.",
+  "message_deleted": "Ujumbe umefutwa",
+  "clear_chat_to_import": "Futa gumzo la sasa ili kuingiza gumzo jipya."
 }

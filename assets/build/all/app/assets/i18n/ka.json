@@ -557,5 +557,13 @@
   "click_to_expand": "გაშლისთვის დააწკაპუნეთ",
   "save_program": "პროგრამის შენახვა",
   "enter_program_name": "შეიყვანეთ ამ ავტომატიზაციის სახელი:",
-  "language_mismatch": "ენობრივი შეუსაბამობა"
+  "language_mismatch": "ენობრივი შეუსაბამობა",
+  "ai_genie_import_chat_history": "იმპორტის ისტორია",
+  "ai_genie_export_chat_history": "ექსპორტის ისტორია",
+  "copy": "კოპირება",
+  "copied": "კოპირებულია!",
+  "error": "შეცდომა!",
+  "copied_to_clipboard": "კოპირებულია ბუფერში.",
+  "message_deleted": "შეტყობინება წაიშალა",
+  "clear_chat_to_import": "ახლის იმპორტისთვის, მიმდინარე ჩატის გასუფთავება."
 }

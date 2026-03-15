@@ -557,5 +557,13 @@
   "click_to_expand": "Кеңейту үшін басыңыз",
   "save_program": "Бағдарламаны сақтау",
   "enter_program_name": "Осы автоматизация үшін атау енгізіңіз:",
-  "language_mismatch": "Тіл сәйкессіздігі"
+  "language_mismatch": "Тіл сәйкессіздігі",
+  "ai_genie_import_chat_history": "Импорт тарихы",
+  "ai_genie_export_chat_history": "Экспорттау тарихы",
+  "copy": "Көшіру",
+  "copied": "Көшірілген!",
+  "error": "Қате!",
+  "copied_to_clipboard": "Буферге көшірілді.",
+  "message_deleted": "Хабар жойылды",
+  "clear_chat_to_import": "Жаңа чатты импорттау үшін ағымдағы чатты тазалаңыз."
 }

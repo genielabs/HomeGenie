@@ -557,5 +557,13 @@
   "click_to_expand": "Kattints a kibontáshoz",
   "save_program": "Program mentése",
   "enter_program_name": "Adjon nevet ennek az automatizálásnak:",
-  "language_mismatch": "Nyelvi eltérés"
+  "language_mismatch": "Nyelvi eltérés",
+  "ai_genie_import_chat_history": "Importálási előzmények",
+  "ai_genie_export_chat_history": "Exportálási előzmények",
+  "copy": "Másolat",
+  "copied": "Másolva!",
+  "error": "Hiba!",
+  "copied_to_clipboard": "Vágólapra másolva.",
+  "message_deleted": "Üzenet törölve",
+  "clear_chat_to_import": "Töröld az aktuális csevegést egy új importálásához."
 }

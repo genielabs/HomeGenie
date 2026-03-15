@@ -557,5 +557,13 @@
   "click_to_expand": "Danna don faɗaɗawa",
   "save_program": "Ajiye Shirin",
   "enter_program_name": "Shigar da suna don wannan sarrafa kansa:",
-  "language_mismatch": "Rashin daidaiton harshe"
+  "language_mismatch": "Rashin daidaiton harshe",
+  "ai_genie_import_chat_history": "Tarihin shigo da kaya",
+  "ai_genie_export_chat_history": "Tarihin fitarwa",
+  "copy": "Kwafi",
+  "copied": "An kwafi!",
+  "error": "Kuskure!",
+  "copied_to_clipboard": "An kwafi zuwa allo mai allo.",
+  "message_deleted": "An goge saƙon",
+  "clear_chat_to_import": "Share tattaunawar da ake yi yanzu don shigo da sabuwa."
 }

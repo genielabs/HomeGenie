@@ -557,5 +557,13 @@
   "click_to_expand": "Klike pou elaji",
   "save_program": "Sove Pwogram nan",
   "enter_program_name": "Mete yon non pou automatisation sa a:",
-  "language_mismatch": "Lang ki pa matche"
+  "language_mismatch": "Lang ki pa matche",
+  "ai_genie_import_chat_history": "Istwa enpòtasyon",
+  "ai_genie_export_chat_history": "Istwa ekspòtasyon",
+  "copy": "Kopi",
+  "copied": "Kopye!",
+  "error": "Erè!",
+  "copied_to_clipboard": "Kopye nan clipboard la.",
+  "message_deleted": "Mesaj efase",
+  "clear_chat_to_import": "Efase chat aktyèl la pou enpòte yon nouvo."
 }

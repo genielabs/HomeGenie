@@ -557,5 +557,13 @@
   "click_to_expand": "Genişləndirmək üçün klikləyin",
   "save_program": "Proqramı yadda saxla",
   "enter_program_name": "Bu avtomatlaşdırma üçün ad daxil edin:",
-  "language_mismatch": "Dil uyğunsuzluğu"
+  "language_mismatch": "Dil uyğunsuzluğu",
+  "ai_genie_import_chat_history": "İdxal tarixçəsi",
+  "ai_genie_export_chat_history": "İxrac tarixçəsi",
+  "copy": "Kopyalayın",
+  "copied": "Kopyalandı!",
+  "error": "Xəta!",
+  "copied_to_clipboard": "Panoya kopyalandı.",
+  "message_deleted": "Mesaj silindi",
+  "clear_chat_to_import": "Yenisini idxal etmək üçün cari söhbəti silin."
 }

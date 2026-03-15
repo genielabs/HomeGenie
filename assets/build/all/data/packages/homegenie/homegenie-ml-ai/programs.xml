@@ -435,23 +435,17 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
     }
 });
 
-// ===================================================================
-// API HANDLER: Get the current chat history
-// ===================================================================
-Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt;
-{
-    return Api.Call("System.Utility/ChatHistory/Get", new { StoreId = Program.Module.Address });
-});
 
+var storeId = Program.Module.Address;
 // ===================================================================
-// API HANDLER: Clear the chat history
+// CHAT HISTORY API HANDLERS
 // ===================================================================
-Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (p) =&gt;
-{
-    var storeId = Program.Module.Address;
-    Program.Log.Info($"Clearing history for module {storeId}...");
-    return Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId });
-});
+Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_REMOVE_AT}", (i) =&gt; Api.Call("System.Utility/ChatHistory/RemoveAt", new { StoreId = storeId, Index = i }));
+Api.Handle($"{API_URL}/{API_HISTORY_EXPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Export", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_IMPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Import", new { StoreId = storeId, Data = p }));
+
 
 // Run the program in the background
 while (Program.IsRunning &amp;&amp; !reconfigureRequired)
@@ -466,6 +460,9 @@ const string API_URL = "AI.IntentHandlers/Gemini";
 const string API_PROMPT_SUBMIT = "Prompt.Submit";
 const string API_HISTORY_GET = "History.Get";
 const string API_HISTORY_CLEAR = "History.Clear";
+const string API_HISTORY_REMOVE_AT = "History.RemoveAt";
+const string API_HISTORY_EXPORT = "History.Export";
+const string API_HISTORY_IMPORT = "History.Import";
 
 const string OPTION_API_KEY = "ApiKey";
 const string OPTION_MODEL_ID = "ModelId";
@@ -491,16 +488,16 @@ public class ChatMessage {
     }
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-intent-handler</Id>
-      <Version>1.0.10</Version>
+      <Version>1.0.11</Version>
       <Required>true</Required>
-      <Checksum>2D9B69D26CEFA69FF07BCA366770202B</Checksum>
+      <Checksum>55A8D125133F0FF6437D57D40EB3331C</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>930</Address>
@@ -572,7 +569,7 @@ Func&lt;string, string&gt; GetSlimmedXml = (filePath) =&gt; {
             string name = pg.SelectSingleNode("Name")?.InnerText ?? "Unnamed";
             string setup = pg.SelectSingleNode("ScriptSetup")?.InnerText ?? "";
             string source = pg.SelectSingleNode("ScriptSource")?.InnerText ?? "";
-            
+
             if (string.IsNullOrWhiteSpace(source) &amp;&amp; string.IsNullOrWhiteSpace(setup)) continue;
 
             sb.AppendLine($"PROGRAM: {name}");
@@ -581,8 +578,8 @@ Func&lt;string, string&gt; GetSlimmedXml = (filePath) =&gt; {
             sb.AppendLine("---");
         }
         return sb.ToString();
-    } catch { 
-        return "Error slimming XML, fallback to raw read..."; 
+    } catch {
+        return "Error slimming XML, fallback to raw read...";
     }
 };
 // --- FUNCTION: BUILD DEEP CONTEXT ---
@@ -614,8 +611,8 @@ Func&lt;string&gt; BuildContext = () =&gt; {
         try {
             string programRoot = Path.GetFullPath(Path.Combine(Data.GetFolder(), "..", ".."));
             // Adjust the path to where your widgets actually are (e.g. html/widgets)
-            string widgetsFolder = Path.Combine(programRoot, "widgets"); 
-            
+            string widgetsFolder = Path.Combine(programRoot, "widgets");
+
             if (Directory.Exists(widgetsFolder)) {
                 var extensions = new[] { ".html", ".css", ".js" };
                 var files = Directory.GetFiles(widgetsFolder, "*.*", SearchOption.AllDirectories)
@@ -644,7 +641,7 @@ Func&lt;string, bool&gt; EnsureCache = (fullContext) =&gt; {
 
     Program.Log.Info("Uploading context to Gemini Cache...");
     var cacheUrl = $"https://generativelanguage.googleapis.com/v1beta/cachedContents?key={geminiApiKey}";
-    
+
     var cachePayload = new {
         model = $"models/{geminiModelId}",
         system_instruction = new { parts = new[] { new { text = fullContext } } },
@@ -656,7 +653,7 @@ Func&lt;string, bool&gt; EnsureCache = (fullContext) =&gt; {
             .AddHeader("Content-Type", "application/json")
             .Post(JsonConvert.SerializeObject(cachePayload))
             .GetData();
-            
+
         if (data != null &amp;&amp; data.name != null) {
             currentCacheName = data.name.ToString();
             cacheExpiration = DateTime.UtcNow.AddMinutes(55);
@@ -785,15 +782,15 @@ Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
                     var a = jsonObj["automation"];
                     if (a != null) {
                         // 1. Setup: UI Options and Initializations
-                        if (!string.IsNullOrWhiteSpace(a["setup"]?.ToString())) 
+                        if (!string.IsNullOrWhiteSpace(a["setup"]?.ToString()))
                             formattedResponse.AppendLine($"\n**Setup:**\n```{lang}\n{a["setup"]}\n```");
-                        
+
                         // 2. Main: The core logic (Refactored from "source")
-                        if (!string.IsNullOrWhiteSpace(a["main"]?.ToString())) 
+                        if (!string.IsNullOrWhiteSpace(a["main"]?.ToString()))
                             formattedResponse.AppendLine($"\n**Main:**\n```{lang}\n{a["main"]}\n```");
-                            
+
                         // 3. Context: Optional, typically for C# classes/methods
-                        if (!string.IsNullOrWhiteSpace(a["context"]?.ToString())) 
+                        if (!string.IsNullOrWhiteSpace(a["context"]?.ToString()))
                             formattedResponse.AppendLine($"\n**Context:**\n```{lang}\n{a["context"]}\n```");
                     }
                 }
@@ -820,12 +817,21 @@ Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
     }
 });
 
-// APIs for History
-Api.Handle($"{API_URL}/History.Get", (p) =&gt; Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId }));
-Api.Handle($"{API_URL}/History.Clear", (p) =&gt; Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId }));
+// APIs for Chat History
+Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_REMOVE_AT}", (i) =&gt; Api.Call("System.Utility/ChatHistory/RemoveAt", new { StoreId = storeId, Index = i }));
+Api.Handle($"{API_URL}/{API_HISTORY_EXPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Export", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_IMPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Import", new { StoreId = storeId, Data = p }));
 
-while (Program.IsRunning &amp;&amp; !reconfigureRequired) { Pause(1); }</ScriptSource>
-    <ScriptContext>
+while (Program.IsRunning &amp;&amp; !reconfigureRequired) { Pause(1); }
+</ScriptSource>
+    <ScriptContext>const string API_HISTORY_GET = "History.Get";
+const string API_HISTORY_CLEAR = "History.Clear";
+const string API_HISTORY_REMOVE_AT = "History.RemoveAt";
+const string API_HISTORY_EXPORT = "History.Export";
+const string API_HISTORY_IMPORT = "History.Import";
+
 public class MessagePart {
     [JsonProperty("text")]
     public string Text { get; set; }
@@ -836,24 +842,24 @@ public class ChatMessage {
     public string Role { get; set; }
     [JsonProperty("parts")]
     public List&lt;MessagePart&gt; Parts { get; set; } = new List&lt;MessagePart&gt;();
-    
+
     public static ChatMessage Create(string role, string text) {
-        return new ChatMessage { 
-            Role = role, 
-            Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = text } } 
+        return new ChatMessage {
+            Role = role,
+            Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = text } }
         };
     }
 }</ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-widget-genie</Id>
-      <Version>1.0.8</Version>
+      <Version>1.0.9</Version>
       <Required>true</Required>
-      <Checksum>905BE4A8243F0EE4928403E763F4ECC7</Checksum>
+      <Checksum>9FD7E31708997C961851E704CC69EE03</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>931</Address>

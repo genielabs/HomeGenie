@@ -557,5 +557,13 @@
   "click_to_expand": "വികസിപ്പിക്കാൻ ക്ലിക്കുചെയ്യുക",
   "save_program": "പ്രോഗ്രാം സേവ് ചെയ്യുക",
   "enter_program_name": "ഈ ഓട്ടോമേഷന് ഒരു പേര് നൽകുക:",
-  "language_mismatch": "ഭാഷാ പൊരുത്തക്കേട്"
+  "language_mismatch": "ഭാഷാ പൊരുത്തക്കേട്",
+  "ai_genie_import_chat_history": "ഇറക്കുമതി ചരിത്രം",
+  "ai_genie_export_chat_history": "കയറ്റുമതി ചരിത്രം",
+  "copy": "പകർത്തുക",
+  "copied": "പകർത്തി!",
+  "error": "പിശക്!",
+  "copied_to_clipboard": "ക്ലിപ്പ്ബോർഡിലേക്ക് പകർത്തി.",
+  "message_deleted": "സന്ദേശം ഇല്ലാതാക്കി",
+  "clear_chat_to_import": "പുതിയൊരെണ്ണം ഇറക്കുമതി ചെയ്യാൻ നിലവിലുള്ള ചാറ്റ് മായ്‌ക്കുക."
 }

@@ -557,5 +557,13 @@
   "click_to_expand": "Guji si aad u ballaariso",
   "save_program": "Badbaadi Barnaamijka",
   "enter_program_name": "Gali magac loogu talagalay otomaatigan:",
-  "language_mismatch": "Isbarbardhigga luqadda"
+  "language_mismatch": "Isbarbardhigga luqadda",
+  "ai_genie_import_chat_history": "Taariikhda soo dejinta",
+  "ai_genie_export_chat_history": "Taariikhda dhoofinta",
+  "copy": "Nuqul ka samee",
+  "copied": "La koobiyeeyay!",
+  "error": "Khalad!",
+  "copied_to_clipboard": "Waxaa lagu koobiyeyn karaa clipboard-ka.",
+  "message_deleted": "Fariintii waa la tirtiray",
+  "clear_chat_to_import": "Tirtir sheekada hadda jirta si aad mid cusub u soo dejiso."
 }

@@ -97,10 +97,16 @@ Api.Handle("HomeAutomation.PhilipsHue", ( args ) =&gt; {
         {
           if (module.IsOff) bridgeApiCall(lightNumber, "{ \"on\" : true }");
           var color = GetHsb(module.Parameter("Status.ColorHsb").Value);
-          var bri = (double.Parse(parameter) / 100D).ToString(CultureInfo.InvariantCulture);
-          module.Emit("Status.ColorHsb", color.H+','+color.S+','+bri);
-          module.Emit("Status.Level", bri);
-          bridgeApiCall(lightNumber, "{ \"bri\" : " + ((int)(double.Parse(parameter) * 2.5)).ToString(CultureInfo.InvariantCulture) + " }");
+          double levelValue;
+          if (!double.TryParse(parameter.Replace(",", "."), NumberStyles.Float, CultureInfo.InvariantCulture, out levelValue))
+          {
+              Program.Log.Error("Control.Level: Invalid parameter format: " + parameter);
+              break; 
+          }
+          levelValue = levelValue / 100.0;
+          module.Emit("Status.ColorHsb", color.H+','+color.S+','+levelValue.ToString(CultureInfo.InvariantCulture));
+          module.Emit("Status.Level", levelValue);
+          bridgeApiCall(lightNumber, "{ \"bri\" : " + ((int)(levelValue * 2.5)).ToString(CultureInfo.InvariantCulture) + " }");
         }
         break;
       // eg. http://&lt;hg_address&gt;/api/HomeAutomation.PhilipsHue/&lt;light_number&gt;/Control.ColorHsb/&lt;hue&gt;,&lt;sat&gt;,&lt;bri&gt;,&lt;transition_duration&gt;
@@ -136,16 +142,16 @@ Api.Handle("HomeAutomation.PhilipsHue", ( args ) =&gt; {
 Program.GoBackground();
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.3</PackageVersion>
       <Id>philips-hue-bridge</Id>
-      <Version>1.0.3</Version>
+      <Version>1.0.4</Version>
       <Required>false</Required>
-      <Checksum>DCE0B39D4DFCABC808C8640D673894D6</Checksum>
+      <Checksum>F01EC8CC5A6077025FCA277889F3C28D</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>26</Address>
@@ -559,7 +565,7 @@ if (!String.IsNullOrWhiteSpace(localIp) &amp;&amp; !String.IsNullOrWhiteSpace(re
 }
 else if (!String.IsNullOrWhiteSpace(localIp))
 {
-  if (localPort &gt; 0)
+  if (localPort &gt; 0)  
   {
     knx.EndPoint(localIp, localPort);
   }
@@ -574,7 +580,7 @@ try
 {
   knx
     .Connect()
-    .OnStatusReceived((address, state) =&gt; {
+    .OnStatusReceived((address, state) =&gt; { 
       knxModules.Each((module) =&gt; {
         if (module.Parameter(ADDRESS_PROPERTY).Value == address) {
           module.Emit("Status.Level", (state != null &amp;&amp; (int)state[0] &gt; 0) ? "1" : "0");
@@ -657,7 +663,7 @@ Api.Handle(MODULES_DOMAIN, ( args ) =&gt; {
         break;
     }
     return new ResponseStatus(Status.Ok);
-  } catch (Exception e) {
+  } catch (Exception e) { 
     Program.Notify(MODULES_DOMAIN + " ERROR!", e.Message);
     return new ResponseStatus(Status.Error, e.Message);
   }
@@ -676,9 +682,9 @@ const string ADDRESS_PROPERTY = "KNX.Address";
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.3</PackageVersion>
       <Id>knx-client</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>false</Required>
-      <Checksum>CE44C84387121CA9F973447DDCD09B2C</Checksum>
+      <Checksum>076B23980AA39814E0DDDD8B83D306A7</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>27</Address>
@@ -977,7 +983,7 @@ public async Task&lt;List&lt;MigEvent&gt;&gt; LoadEventsAsync(string filePath)
 {
     var events = new List&lt;MigEvent&gt;();
     if (File.Exists(filePath)) {
-        byte[] bytes = await File.ReadAllBytesAsync(filePath);
+        byte[] bytes = await File.ReadAllBytesAsync(filePath);        
         events = MessagePackSerializer.Deserialize&lt;List&lt;MigEvent&gt;&gt;(bytes);
     }
     return events;
@@ -998,16 +1004,16 @@ public List&lt;MigEvent&gt; GetLast48HoursEvents(string dataFilePath)
     return recentEvents;
 }
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.3</PackageVersion>
       <Id>security-alarm-system</Id>
-      <Version>1.0.5</Version>
+      <Version>1.0.6</Version>
       <Required>true</Required>
-      <Checksum>18B6656FAFBE9DAADFF4D6048842ED3C</Checksum>
+      <Checksum>A98DE2DFA612AB4E540466D20FD922D1</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>90</Address>
@@ -1138,7 +1144,7 @@ const string SMART_DEVICE_SWITCH_OFF_TIMEOUT = "HomeGenie.SmartLights.SwitchOffT
 
 const string SMART_DEVICE_LAST_EVENT = "HomeGenie.SmartLights.LastEvent";
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -1251,7 +1257,7 @@ var RunLogic = new Func&lt;ModuleHelper, string, bool&gt;((thermostat, mode) =&g
     // If setpoint was reached, wait 120 seconds and at least one dregree change before re-activating setpoint check, unless setpoint has been changed
     if (operatingState.Value == "Pending" + mode &amp;&amp; (operatingState.IdleTime &lt; 120 || Math.Abs(temperature.DecimalValue - setPoint.DecimalValue) &lt; 1) &amp;&amp; operatingState.IdleTime &lt; setPoint.IdleTime)
       return true;
-    // Check setpoint for the current mode
+    // Check setpoint for the current mode  
     var setPointReached = true;
     if (mode.StartsWith("Heat")) {
       setPointReached = Math.Round(temperature.DecimalValue, 1) &gt;= Math.Round(setPoint.DecimalValue, 1);
@@ -1430,9 +1436,9 @@ const string OPTION_ENSURE_COMMAND_DELIVERY = "EnsureCommandDelivery";
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.3</PackageVersion>
       <Id>smart-thermostat</Id>
-      <Version>1.0.3</Version>
+      <Version>1.0.4</Version>
       <Required>true</Required>
-      <Checksum>3C59D59BFA2B8C2165425F3A6552EDB4</Checksum>
+      <Checksum>12B076F8FDA17BAFD0DD79BF7861B07A</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>78</Address>

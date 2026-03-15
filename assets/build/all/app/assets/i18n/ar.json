@@ -557,5 +557,13 @@
   "click_to_expand": "انقر للتوسيع",
   "save_program": "حفظ البرنامج",
   "enter_program_name": "أدخل اسمًا لهذه العملية الآلية:",
-  "language_mismatch": "عدم تطابق اللغة"
+  "language_mismatch": "عدم تطابق اللغة",
+  "ai_genie_import_chat_history": "سجل الاستيراد",
+  "ai_genie_export_chat_history": "سجل التصدير",
+  "copy": "ينسخ",
+  "copied": "تم النسخ!",
+  "error": "خطأ!",
+  "copied_to_clipboard": "تم نسخها إلى الحافظة.",
+  "message_deleted": "تم حذف الرسالة",
+  "clear_chat_to_import": "امسح المحادثة الحالية لاستيراد محادثة جديدة."
 }

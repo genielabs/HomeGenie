@@ -557,5 +557,13 @@
   "click_to_expand": "Klikk for å utvide",
   "save_program": "Lagre program",
   "enter_program_name": "Skriv inn et navn for denne automatiseringen:",
-  "language_mismatch": "Språkavvik"
+  "language_mismatch": "Språkavvik",
+  "ai_genie_import_chat_history": "Importlogg",
+  "ai_genie_export_chat_history": "Eksportlogg",
+  "copy": "Kopiere",
+  "copied": "Kopiert!",
+  "error": "Feil!",
+  "copied_to_clipboard": "Kopiert til utklippstavlen.",
+  "message_deleted": "Meldingen er slettet",
+  "clear_chat_to_import": "Fjern gjeldende chat for å importere en ny."
 }

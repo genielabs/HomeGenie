@@ -557,5 +557,13 @@
   "click_to_expand": "Klicka för att expandera",
   "save_program": "Spara program",
   "enter_program_name": "Ange ett namn för denna automatisering:",
-  "language_mismatch": "Språkfelmatchning"
+  "language_mismatch": "Språkfelmatchning",
+  "ai_genie_import_chat_history": "Importhistorik",
+  "ai_genie_export_chat_history": "Exporthistorik",
+  "copy": "Kopiera",
+  "copied": "Kopierad!",
+  "error": "Fel!",
+  "copied_to_clipboard": "Kopierad till urklipp.",
+  "message_deleted": "Meddelandet raderat",
+  "clear_chat_to_import": "Rensa aktuell chatt för att importera en ny."
 }

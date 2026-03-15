@@ -398,6 +398,10 @@ declare class ControllerInstance extends ContextController {
    */
   showSettings(): void;
   /**
+   * Programmatically opens the custom widget's configuration dialog (Bound Module select).
+   */
+  configure(): void;
+  /**
    * Retrieves the localized string for a specific key from the project's translation files.
    * @param key The translation key defined in the i18n assets.
    * @returns An observable Subject that emits the localized value.

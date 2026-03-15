@@ -557,5 +557,13 @@
   "click_to_expand": "Klik om uit te brei",
   "save_program": "Stoor Program",
   "enter_program_name": "Voer 'n naam vir hierdie outomatisering in:",
-  "language_mismatch": "Taalwanpassing"
+  "language_mismatch": "Taalwanpassing",
+  "ai_genie_import_chat_history": "Invoergeskiedenis",
+  "ai_genie_export_chat_history": "Uitvoergeskiedenis",
+  "copy": "Kopieer",
+  "copied": "Gekopieer!",
+  "error": "Fout!",
+  "copied_to_clipboard": "Na knipbord gekopieer.",
+  "message_deleted": "Boodskap uitgevee",
+  "clear_chat_to_import": "Vee huidige klets uit om 'n nuwe een in te voer."
 }

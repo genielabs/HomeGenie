@@ -557,5 +557,13 @@
   "click_to_expand": "ለማስፋት ጠቅ ያድርጉ",
   "save_program": "ፕሮግራም አስቀምጥ",
   "enter_program_name": "ለዚህ አውቶሜሽን ስም ያስገቡ፡",
-  "language_mismatch": "የቋንቋ አለመዛመድ"
+  "language_mismatch": "የቋንቋ አለመዛመድ",
+  "ai_genie_import_chat_history": "የማስመጣት ታሪክ",
+  "ai_genie_export_chat_history": "የውጪ ታሪክ",
+  "copy": "ቅጂ",
+  "copied": "ተገልብጧል!",
+  "error": "ስህተት!",
+  "copied_to_clipboard": "ወደ ቅንጥብ ሰሌዳ ተገልብጧል።",
+  "message_deleted": "መልዕክት ተሰርዟል",
+  "clear_chat_to_import": "አዲስ ለማስመጣት የአሁኑን ውይይት ያጽዱ።"
 }

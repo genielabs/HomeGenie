@@ -557,5 +557,13 @@
   "click_to_expand": "Pịa iji gbasaa",
   "save_program": "Chekwa Mmemme",
   "enter_program_name": "Tinye aha maka akpaaka a:",
-  "language_mismatch": "Enweghị otu asụsụ"
+  "language_mismatch": "Enweghị otu asụsụ",
+  "ai_genie_import_chat_history": "Akụkọ mbubata",
+  "ai_genie_export_chat_history": "Akụkọ mbupu",
+  "copy": "Detuo",
+  "copied": "E depụtaghachiri ya!",
+  "error": "Njehie!",
+  "copied_to_clipboard": "E depụtaghachiri ya na klipbọọdụ.",
+  "message_deleted": "Ehichapụrụ ozi ahụ",
+  "clear_chat_to_import": "Hichapụ nkata dị ugbu a iji bubata nke ọhụrụ."
 }

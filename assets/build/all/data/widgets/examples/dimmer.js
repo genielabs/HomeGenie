@@ -1,114 +1,109 @@
-/**
- * Controller for the Dimmer Widget.
- * This class manages a dimmer control, syncing its level (0-100%) with a bound module
- * that likely expects a normalized value (0.0-1.0). It also handles command throttling
- * to prevent overwhelming the target device.
- */
-class Dimmer extends ControllerInstance {
-  // Widget Settings
-  settings = {
-    moduleSelect: {
-      // In the widget settings dialog
-      // show only modules with this field
-      typeFilter: 'Dimmer,Color'
-    }
-  };
+class CircularDimmer extends ControllerInstance {
+  settings = { moduleSelect: { fieldFilter: 'Status.Level', typeFilter: 'Dimmer,Color' }, sizeOptions: ['small', 'medium', 'big'], defaultSize: 'small' };
+  state = { level: 0, isOn: false, isDragging: false };
+  throttleTimer = null;
+  resizeObserver = null;
 
-  /**
-   * A flag to prevent sending multiple commands simultaneously.
-   * When `true`, new commands are queued or ignored.
-   * @type {boolean}
-   */
-  busy = false;
-
-  /**
-   * A flag to prevent sending multiple commands simultaneously.
-   * When `true`, new commands are queued or ignored.
-   * @type {boolean}
-   */
-  levelRetry = 0;
-
-  /**
-   * `onInit` lifecycle hook, called before the component's view is created.
-   * Used here to expose methods and set up data subscriptions.
-   */
-  onInit() {
-
-    // Expose the `setLevel` method so it can be called from the component's view (HTML),
-    // for example, by a slider's change event.
-    this.declare({
-      setLevel: this.setLevel
-    });
-
-    // Exit if no module is bound to this widget.
-    if (!this.boundModule) {
-      return;
-    }
-
-    // Find the field that reports the dimmer's current level.
-    const levelField = this.boundModule.field('Status.Level');
-    if (levelField) {
-      // Subscribe to future changes of the level field.
-      // When the module reports a new level, update the model.
-      this.subscribe(levelField, (field) => {
-        // The module's value is expected to be normalized (0.0 to 1.0).
-        // Convert it to a percentage for the UI.
-        this.model().level_percent = Math.round(field.value * 100);
-      });
-    }
-  }
-
-  /**
-   * `onCreate` lifecycle hook, called after the view is created.
-   * Used to set the initial state of the widget.
-   */
   onCreate() {
-    if (!this.boundModule) {
-      this.model().name = 'No module bound';
-      return;
+    this.declare({ 
+      toggle: () => this.toggle(), 
+      startDrag: (e) => this.startDrag(e),
+      getOffset: () => {
+        const circ = 2 * Math.PI * 42;
+        return circ - (this.state.level / 100) * circ;
+      },
+      level: () => this.state.level,
+      isOn: () => this.state.isOn
+    });
+
+    this.resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const newHeight = entry.contentRect.height - 24;
+        if (newHeight < 320) {
+          this.view().get().style.setProperty('--container-height', newHeight + 'px');
+        }
+      }
+    });
+    this.resizeObserver.observe(this.view().get());
+
+    if (this.boundModule) {
+      this.model().name = this.boundModule.name;
+      const levelField = this.boundModule.field('Status.Level');
+      
+      // Initial state sync
+      if (levelField) {
+        this.syncState(levelField);
+        this.subscribe(levelField, (f) => this.syncState(f));
+      }
     }
 
-    // The view and the model now exist.
-    // Sync the initial state from the bound module to the component's model.
-    const levelField = this.boundModule.field('Status.Level');
-    // Get the initial value from the field, defaulting to 0 if not found.
-    const initialValue = levelField ? levelField.value : 0;
-
-    // Set the initial model properties.
-    this.model().name = this.boundModule.name;
-    this.model().level_percent = Math.round(initialValue * 100);
+    var ch = Math.round(this.view().position().rect.height) - 24;
+    this.view().get().style.setProperty('--container-height', ch + 'px');
   }
 
-  /**
-   * Sets the dimmer level. This method is exposed to the view.
-   * @param {number} percentValue The new level, as a percentage (0-100).
-   */
-  setLevel(percentValue) {
-    if (!this.boundModule) return;
+  syncState(f) {
+    this.state.level = Math.round(f.decimalValue * 100);
+    this.state.isOn = f.decimalValue > 0;
+    this.model().status_text = this.state.isOn ? 'On' : 'Off';
+    this.update();
+  }
 
-    // If a command is already in flight, don't send another one.
-    // Instead, schedule a retry with the latest value after a 100ms delay.
-    // This effectively "debounces" rapid input from a slider.
-    if (this.busy) {
-      clearTimeout(this.levelRetry);
-      this.levelRetry = setTimeout(() => this.setLevel(percentValue), 100);
+  toggle() {
+    if (!this.state.isDragging) {
+      this.boundModule.control(this.state.isOn ? 'Control.Off' : 'Control.On');
+    }
+  }
+
+  startDrag(e) {
+    if (!this.boundModule) {
+      this.configure();
       return;
     }
+    this.state.isDragging = false;
+    const ring = this.field('ring').get();
+    const rect = ring.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
 
-    // Immediately update the model to provide instant visual feedback to the user.
-    this.model().level_percent = percentValue;
+    const calculateLevel = (ev) => {
+      const angle = Math.atan2(ev.clientY - centerY, ev.clientX - centerX) * (180 / Math.PI);
+      return Math.round(((angle + 90 + 360) % 360 / 360) * 100);
+    };
 
-    // Lock the control to prevent further commands until this one is acknowledged.
-    this.busy = true;
+    this.moveHandler = (ev) => {
+      const dist = Math.sqrt(Math.pow(ev.clientX - e.clientX, 2) + Math.pow(ev.clientY - e.clientY, 2));
+      if (dist > 5) this.state.isDragging = true;
+      
+      this.state.level = calculateLevel(ev);
+      this.update();
+      if (!this.throttleTimer) {
+        this.throttleTimer = setTimeout(() => {
+          this.boundModule.control('Control.Level', this.state.level);
+          this.throttleTimer = null;
+        }, 100);
+      }
+    };
 
-    // Send the 'Control.Level' command to the bound module.
-    // The value is normalized back to the 0.0-1.0 range, assuming the control expects it.
-    // NOTE: The current code sends `percentValue` (0-100). If the module expects
-    // a normalized value, this should be `percentValue / 100`.
-    this.boundModule.control('Control.Level', percentValue).subscribe(() => {
-      // The command has been acknowledged by the module.
-      // Unlock the control to allow new commands.
-      this.busy = false;
-    });
+    this.stopHandler = () => {
+      window.removeEventListener('pointermove', this.moveHandler);
+      window.removeEventListener('pointerup', this.stopHandler);
+      if (!this.state.isDragging) {
+         this.state.level = calculateLevel(e);
+         this.boundModule.control('Control.Level', this.state.level);
+      }
+      setTimeout(() => this.state.isDragging = false, 100);
+    };
+
+    window.addEventListener('pointermove', this.moveHandler);
+    window.addEventListener('pointerup', this.stopHandler);
+  }
+
+  onDispose() {
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
+    if (this.moveHandler) window.removeEventListener('pointermove', this.moveHandler);
+    if (this.stopHandler) window.removeEventListener('pointerup', this.stopHandler);
+    if (this.throttleTimer) clearTimeout(this.throttleTimer);
   }
 }

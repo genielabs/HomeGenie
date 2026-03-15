@@ -557,5 +557,13 @@
   "click_to_expand": "คลิกเพื่อขยาย",
   "save_program": "โปรแกรมประหยัด",
   "enter_program_name": "ตั้งชื่อให้กับการทำงานอัตโนมัตินี้:",
-  "language_mismatch": "ความไม่สอดคล้องกันทางภาษา"
+  "language_mismatch": "ความไม่สอดคล้องกันทางภาษา",
+  "ai_genie_import_chat_history": "ประวัติการนำเข้า",
+  "ai_genie_export_chat_history": "ประวัติการส่งออก",
+  "copy": "สำเนา",
+  "copied": "คัดลอกแล้ว!",
+  "error": "ข้อผิดพลาด!",
+  "copied_to_clipboard": "คัดลอกไปยังคลิปบอร์ดแล้ว",
+  "message_deleted": "ข้อความถูกลบแล้ว",
+  "clear_chat_to_import": "ล้างแชทปัจจุบันเพื่อนำเข้าแชทใหม่"
 }

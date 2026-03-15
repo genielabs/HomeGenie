@@ -5,7 +5,8 @@ class ToggleButton extends ControllerInstance {
       // In the widget settings dialog
       // show only modules with this field
       typeFilter: 'dimmer,color,light'
-    }
+    },
+    defaultSize: 'small'
   };
 
   onCreate() {
@@ -22,7 +23,12 @@ class ToggleButton extends ControllerInstance {
     // declare fields visible in the view template scripting scope
     this.declare({
       // toggles the bound module on/off
-      toggle: () => bm?.control('Control.Toggle'),
+      toggle: () => {
+        if (!bm) {
+          this.configure();
+        }
+        bm?.control('Control.Toggle');
+      },
       // adds button "pressed" class if level is > 0
       buttonState: ($el) => (+statusLevel?.value > 0)
           ? $el.addClass('pressed')

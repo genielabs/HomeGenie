@@ -557,5 +557,13 @@
   "click_to_expand": "Genişletmek için tıklayın",
   "save_program": "Kaydetme Programı",
   "enter_program_name": "Bu otomasyon için bir ad girin:",
-  "language_mismatch": "Dil uyumsuzluğu"
+  "language_mismatch": "Dil uyumsuzluğu",
+  "ai_genie_import_chat_history": "İçe aktarma geçmişi",
+  "ai_genie_export_chat_history": "İhracat geçmişi",
+  "copy": "Kopyala",
+  "copied": "Kopyalandı!",
+  "error": "Hata!",
+  "copied_to_clipboard": "Panoya kopyalandı.",
+  "message_deleted": "Mesaj silindi",
+  "clear_chat_to_import": "Yeni bir sohbeti içe aktarmak için mevcut sohbeti temizleyin."
 }

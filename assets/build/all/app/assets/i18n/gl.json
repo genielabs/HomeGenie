@@ -557,5 +557,13 @@
   "click_to_expand": "Fai clic para expandir",
   "save_program": "Gardar programa",
   "enter_program_name": "Introduza un nome para esta automatización:",
-  "language_mismatch": "Discrepancia lingüística"
+  "language_mismatch": "Discrepancia lingüística",
+  "ai_genie_import_chat_history": "Historial de importacións",
+  "ai_genie_export_chat_history": "Historial de exportacións",
+  "copy": "Copiar",
+  "copied": "Copiado!",
+  "error": "Erro!",
+  "copied_to_clipboard": "Copiado ao portapapeis.",
+  "message_deleted": "Mensaxe eliminada",
+  "clear_chat_to_import": "Limpar o chat actual para importar un novo."
 }

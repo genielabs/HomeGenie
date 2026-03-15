@@ -557,5 +557,13 @@
   "click_to_expand": "點擊展開",
   "save_program": "保存程式",
   "enter_program_name": "請為此自動化流程輸入名稱：",
-  "language_mismatch": "語言不匹配"
+  "language_mismatch": "語言不匹配",
+  "ai_genie_import_chat_history": "導入歷史記錄",
+  "ai_genie_export_chat_history": "出口歷史",
+  "copy": "複製",
+  "copied": "已複製！",
+  "error": "錯誤！",
+  "copied_to_clipboard": "已複製到剪貼簿。",
+  "message_deleted": "訊息已刪除",
+  "clear_chat_to_import": "清除目前聊天記錄以匯入新的聊天記錄。"
 }

@@ -557,5 +557,13 @@
   "click_to_expand": "ຄລິກເພື່ອຂະຫຍາຍ",
   "save_program": "ບັນທຶກໂປຣແກຣມ",
   "enter_program_name": "ໃສ່ຊື່ສຳລັບລະບົບອັດຕະໂນມັດນີ້:",
-  "language_mismatch": "ພາສາບໍ່ກົງກັນ"
+  "language_mismatch": "ພາສາບໍ່ກົງກັນ",
+  "ai_genie_import_chat_history": "ນຳເຂົ້າປະຫວັດ",
+  "ai_genie_export_chat_history": "ປະຫວັດການສົ່ງອອກ",
+  "copy": "ສຳເນົາ",
+  "copied": "ສຳເນົາແລ້ວ!",
+  "error": "ຜິດພາດ!",
+  "copied_to_clipboard": "ສຳເນົາໃສ່ຄລິບບອດແລ້ວ.",
+  "message_deleted": "ຂໍ້ຄວາມຖືກລຶບແລ້ວ",
+  "clear_chat_to_import": "ລຶບລ້າງການສົນທະນາປັດຈຸບັນເພື່ອນຳເຂົ້າການສົນທະນາໃໝ່."
 }

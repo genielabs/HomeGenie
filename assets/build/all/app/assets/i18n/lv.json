@@ -557,5 +557,13 @@
   "click_to_expand": "Noklikšķiniet, lai izvērstu",
   "save_program": "Saglabāt programmu",
   "enter_program_name": "Ievadiet šīs automatizācijas nosaukumu:",
-  "language_mismatch": "Valodas neatbilstība"
+  "language_mismatch": "Valodas neatbilstība",
+  "ai_genie_import_chat_history": "Importēšanas vēsture",
+  "ai_genie_export_chat_history": "Eksporta vēsture",
+  "copy": "Kopēt",
+  "copied": "Nokopēts!",
+  "error": "Kļūda!",
+  "copied_to_clipboard": "Kopēts starpliktuvē.",
+  "message_deleted": "Ziņojums dzēsts",
+  "clear_chat_to_import": "Notīrīt pašreizējo tērzēšanu, lai importētu jaunu."
 }

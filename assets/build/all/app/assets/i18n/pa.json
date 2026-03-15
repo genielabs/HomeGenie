@@ -557,5 +557,13 @@
   "click_to_expand": "ਵਿਸਤਾਰ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
   "save_program": "ਪ੍ਰੋਗਰਾਮ ਸੇਵ ਕਰੋ",
   "enter_program_name": "ਇਸ ਆਟੋਮੇਸ਼ਨ ਲਈ ਇੱਕ ਨਾਮ ਦਰਜ ਕਰੋ:",
-  "language_mismatch": "ਭਾਸ਼ਾ ਮੇਲ ਨਹੀਂ ਖਾਂਦੀ"
+  "language_mismatch": "ਭਾਸ਼ਾ ਮੇਲ ਨਹੀਂ ਖਾਂਦੀ",
+  "ai_genie_import_chat_history": "ਆਯਾਤ ਇਤਿਹਾਸ",
+  "ai_genie_export_chat_history": "ਨਿਰਯਾਤ ਇਤਿਹਾਸ",
+  "copy": "ਕਾਪੀ ਕਰੋ",
+  "copied": "ਕਾਪੀ ਕੀਤਾ ਗਿਆ!",
+  "error": "ਗਲਤੀ!",
+  "copied_to_clipboard": "ਕਲਿੱਪਬੋਰਡ 'ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ।",
+  "message_deleted": "ਸੁਨੇਹਾ ਮਿਟਾਇਆ ਗਿਆ",
+  "clear_chat_to_import": "ਨਵੀਂ ਚੈਟ ਆਯਾਤ ਕਰਨ ਲਈ ਮੌਜੂਦਾ ਚੈਟ ਕਲੀਅਰ ਕਰੋ।"
 }

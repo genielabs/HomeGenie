@@ -557,5 +557,13 @@
   "click_to_expand": "विस्तृत करण्यासाठी क्लिक करा",
   "save_program": "कार्यक्रम जतन करा",
   "enter_program_name": "या ऑटोमेशनसाठी नाव एंटर करा:",
-  "language_mismatch": "भाषा जुळत नाही"
+  "language_mismatch": "भाषा जुळत नाही",
+  "ai_genie_import_chat_history": "आयात इतिहास",
+  "ai_genie_export_chat_history": "निर्यात इतिहास",
+  "copy": "कॉपी करा",
+  "copied": "कॉपी केले!",
+  "error": "चूक!",
+  "copied_to_clipboard": "क्लिपबोर्डवर कॉपी केले.",
+  "message_deleted": "मेसेज हटवला",
+  "clear_chat_to_import": "नवीन चॅट आयात करण्यासाठी सध्याचे चॅट साफ करा."
 }
