@@ -565,5 +565,15 @@
   "error": "Errorea!",
   "copied_to_clipboard": "Arbelean kopiatu da.",
   "message_deleted": "Mezua ezabatuta",
-  "clear_chat_to_import": "Garbitu uneko txata berri bat inportatzeko."
+  "clear_chat_to_import": "Garbitu uneko txata berri bat inportatzeko.",
+  "all_groups": "Talde guztiak",
+  "show_selected_groups": "Erakutsi hautatutako taldeak",
+  "show_deactivated_items": "Erakutsi desaktibatutako elementuak",
+  "show_upgradable_programs": "Erakutsi berritu daitezkeen programak",
+  "selected_groups": "Hautatutako taldeak",
+  "deactivated_programs_count": "Desaktibatutako programak: {{count}}",
+  "upgradable_programs": "Programa berritzaileak",
+  "unsaved_changes": "Gorde gabeko aldaketak",
+  "save_to_apply_program_changes": "Gorde programan aldaketak aplikatzeko.",
+  "imported_program_name_group": "\"{{name}}\" ({{address}}) programa \"{{group}}\" taldean inportatu da."
 }

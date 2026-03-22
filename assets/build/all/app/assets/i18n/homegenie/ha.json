@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Kunna Rikodin Bidiyo",
       "NVR.RecordOnAlarm": "Yi rikodi akan Ƙararrawa",
       "NVR.ContinuousRecording": "Rikodi Mai Ci Gaba."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Manajan Aiki na Kai-tsaye. Maida harshen halitta zuwa ayyukan aiki na wakili: yana rubutawa, gwadawa, da kuma aiwatar da shirye-shiryen C# a ainihin lokaci don kammala kowane aiki da aka bayar. Don kunna wannan fasalin, shigar da ingantaccen maɓallin API. Bi umarnin a https://aistudio.google.com/app/apikey don samun maɓallin API kyauta.",
+      "ConfigureOptions.ApiKey": "Maɓallin API na Google Gemini AI",
+      "ConfigureOptions.ModelId": "Lambar Samfura",
+      "ConfigureOptions.EnableDeepKnowledge": "Kunna Zurfin Ilimi (Karanta shirye-shirye da widgets)",
+      "ConfigureOptions.SystemInstructions": "Umarnin Tsarin"
     }
   },
   "scheduler_preset_action_genie_command": "Kwamandan Genie",

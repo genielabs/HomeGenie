@@ -565,5 +565,15 @@
   "error": "Lỗi!",
   "copied_to_clipboard": "Đã sao chép vào clipboard.",
   "message_deleted": "Tin nhắn đã bị xóa",
-  "clear_chat_to_import": "Xóa đoạn chat hiện tại để nhập đoạn chat mới."
+  "clear_chat_to_import": "Xóa đoạn chat hiện tại để nhập đoạn chat mới.",
+  "all_groups": "Tất cả các nhóm",
+  "show_selected_groups": "Hiển thị các nhóm đã chọn",
+  "show_deactivated_items": "Hiển thị các mục đã bị vô hiệu hóa",
+  "show_upgradable_programs": "Hiển thị các chương trình có thể nâng cấp",
+  "selected_groups": "Các nhóm được chọn",
+  "deactivated_programs_count": "Các chương trình đã bị vô hiệu hóa: {{count}}",
+  "upgradable_programs": "Chương trình có thể nâng cấp",
+  "unsaved_changes": "Thay đổi chưa được lưu",
+  "save_to_apply_program_changes": "Lưu lại để áp dụng các thay đổi cho chương trình.",
+  "imported_program_name_group": "Đã nhập chương trình \"{{name}}\" ({{address}}) trong nhóm \"{{group}}\"."
 }

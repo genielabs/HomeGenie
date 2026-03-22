@@ -565,5 +565,15 @@
   "error": "Gwall!",
   "copied_to_clipboard": "Wedi'i gopïo i'r clipfwrdd.",
   "message_deleted": "Neges wedi'i dileu",
-  "clear_chat_to_import": "Cliriwch y sgwrs gyfredol i fewnforio un newydd."
+  "clear_chat_to_import": "Cliriwch y sgwrs gyfredol i fewnforio un newydd.",
+  "all_groups": "Pob Grŵp",
+  "show_selected_groups": "Dangos grwpiau a ddewiswyd",
+  "show_deactivated_items": "Dangos eitemau wedi'u dadactifadu",
+  "show_upgradable_programs": "Dangos rhaglenni y gellir eu huwchraddio",
+  "selected_groups": "Grwpiau dethol",
+  "deactivated_programs_count": "Rhaglenni wedi'u dadactifadu: {{count}}",
+  "upgradable_programs": "Rhaglenni Uwchraddadwy",
+  "unsaved_changes": "Newidiadau heb eu cadw",
+  "save_to_apply_program_changes": "Cadwch i gymhwyso newidiadau i'r rhaglen.",
+  "imported_program_name_group": "Mewnforiwyd rhaglen \"{{name}}\" ({{address}}) yn y grŵp \"{{group}}\"."
 }

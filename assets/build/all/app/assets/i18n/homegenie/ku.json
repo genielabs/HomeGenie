@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Tomarkirina Vîdyoyê Çalak Bike",
       "NVR.RecordOnAlarm": "Tomarkirina li ser alarmê",
       "NVR.ContinuousRecording": "Tomarkirina Berdewam."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Gerînendeyê Otomasyona we ya jîr. Zimanê xwezayî veguherîne karên ajantî: ew bernameyên C# di wextê rast de dinivîse, diceribîne û bicîh tîne da ku her peywirek diyarkirî temam bike. Ji bo çalakkirina vê taybetmendiyê, mifteyek API-yê ya derbasdar binivîse. Ji bo ku mifteyek API-yê ya belaş bistînin, rêwerzên li https://aistudio.google.com/app/apikey bişopînin.",
+      "ConfigureOptions.ApiKey": "Mifteya API ya Google Gemini AI",
+      "ConfigureOptions.ModelId": "Nasnameya Modelê",
+      "ConfigureOptions.EnableDeepKnowledge": "Zanîna Kûr Çalak Bike (Bername û widgetan Bixwîne)",
+      "ConfigureOptions.SystemInstructions": "Rênimayên Sîstemê"
     }
   },
   "scheduler_preset_action_genie_command": "Fermandariya Genie",

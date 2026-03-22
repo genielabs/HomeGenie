@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Washa Kurekodi Video",
       "NVR.RecordOnAlarm": "Rekodi Kwenye Kengele",
       "NVR.ContinuousRecording": "Kurekodi Kuendelea."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Meneja wako mahiri wa Otomatiki. Badilisha lugha asilia kuwa mtiririko wa kazi wa kiajenti: huandika, hujaribu, na kutekeleza programu za C# kwa wakati halisi ili kukamilisha kazi yoyote iliyotolewa. Ili kuamilisha kipengele hiki, weka kitufe halali cha API. Fuata maagizo katika https://aistudio.google.com/app/apikey ili kupata kitufe cha API bila malipo.",
+      "ConfigureOptions.ApiKey": "Ufunguo wa API ya AI ya Google Gemini",
+      "ConfigureOptions.ModelId": "Kitambulisho cha Mfano",
+      "ConfigureOptions.EnableDeepKnowledge": "Wezesha Maarifa ya Kina (Soma programu na wijeti)",
+      "ConfigureOptions.SystemInstructions": "Maelekezo ya Mfumo"
     }
   },
   "scheduler_preset_action_genie_command": "Amri ya Jini",

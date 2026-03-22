@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Įjungti vaizdo įrašymą",
       "NVR.RecordOnAlarm": "Įrašyti įjungus žadintuvą",
       "NVR.ContinuousRecording": "Nuolatinis įrašymas."
+    },
+    "932": {
+      "Title": "Dvyniai Automanas",
+      "Description": "Jūsų išmanusis automatizavimo tvarkyklė. Natūralią kalbą paverskite agentiniais darbo srautais: ji rašo, testuoja ir vykdo C# programas realiuoju laiku, kad atliktų bet kurią užduotį. Norėdami suaktyvinti šią funkciją, įveskite galiojantį API raktą. Vadovaukitės instrukcijomis, pateiktomis adresu https://aistudio.google.com/app/apikey, kad gautumėte nemokamą API raktą.",
+      "ConfigureOptions.ApiKey": "„Google Gemini“ dirbtinio intelekto API raktas",
+      "ConfigureOptions.ModelId": "Modelio ID",
+      "ConfigureOptions.EnableDeepKnowledge": "Įgalinti giliąsias žinias (skaityti programas ir valdiklius)",
+      "ConfigureOptions.SystemInstructions": "Sistemos instrukcijos"
     }
   },
   "scheduler_preset_action_genie_command": "Džinų komanda",

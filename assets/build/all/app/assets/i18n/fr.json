@@ -565,5 +565,15 @@
   "error": "Erreur!",
   "copied_to_clipboard": "Copié dans le presse-papiers.",
   "message_deleted": "Message supprimé",
-  "clear_chat_to_import": "Effacer la conversation actuelle pour en importer une nouvelle."
+  "clear_chat_to_import": "Effacer la conversation actuelle pour en importer une nouvelle.",
+  "all_groups": "Tous les groupes",
+  "show_selected_groups": "Afficher les groupes sélectionnés",
+  "show_deactivated_items": "Afficher les éléments désactivés",
+  "show_upgradable_programs": "Afficher les programmes pouvant être mis à niveau",
+  "selected_groups": "Groupes sélectionnés",
+  "deactivated_programs_count": "Programmes désactivés : {{count}}",
+  "upgradable_programs": "Programmes évolutifs",
+  "unsaved_changes": "Modifications non enregistrées",
+  "save_to_apply_program_changes": "Enregistrez pour appliquer les modifications au programme.",
+  "imported_program_name_group": "Programme importé \"{{name}}\" ({{address}}) dans le groupe \"{{group}}\"."
 }

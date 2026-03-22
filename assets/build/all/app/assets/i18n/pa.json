@@ -565,5 +565,15 @@
   "error": "ਗਲਤੀ!",
   "copied_to_clipboard": "ਕਲਿੱਪਬੋਰਡ 'ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ।",
   "message_deleted": "ਸੁਨੇਹਾ ਮਿਟਾਇਆ ਗਿਆ",
-  "clear_chat_to_import": "ਨਵੀਂ ਚੈਟ ਆਯਾਤ ਕਰਨ ਲਈ ਮੌਜੂਦਾ ਚੈਟ ਕਲੀਅਰ ਕਰੋ।"
+  "clear_chat_to_import": "ਨਵੀਂ ਚੈਟ ਆਯਾਤ ਕਰਨ ਲਈ ਮੌਜੂਦਾ ਚੈਟ ਕਲੀਅਰ ਕਰੋ।",
+  "all_groups": "ਸਾਰੇ ਸਮੂਹ",
+  "show_selected_groups": "ਚੁਣੇ ਹੋਏ ਗਰੁੱਪ ਦਿਖਾਓ",
+  "show_deactivated_items": "ਅਕਿਰਿਆਸ਼ੀਲ ਆਈਟਮਾਂ ਦਿਖਾਓ",
+  "show_upgradable_programs": "ਅੱਪਗ੍ਰੇਡੇਬਲ ਪ੍ਰੋਗਰਾਮ ਦਿਖਾਓ",
+  "selected_groups": "ਚੁਣੇ ਹੋਏ ਸਮੂਹ",
+  "deactivated_programs_count": "ਅਕਿਰਿਆਸ਼ੀਲ ਪ੍ਰੋਗਰਾਮ: {{count}}",
+  "upgradable_programs": "ਅੱਪਗ੍ਰੇਡੇਬਲ ਪ੍ਰੋਗਰਾਮ",
+  "unsaved_changes": "ਅਣਰੱਖਿਅਤ ਬਦਲਾਅ",
+  "save_to_apply_program_changes": "ਪ੍ਰੋਗਰਾਮ ਵਿੱਚ ਬਦਲਾਅ ਲਾਗੂ ਕਰਨ ਲਈ ਸੇਵ ਕਰੋ।",
+  "imported_program_name_group": "\"{{group}}\" ਸਮੂਹ ਵਿੱਚ ਆਯਾਤ ਕੀਤਾ ਪ੍ਰੋਗਰਾਮ \"{{name}}\" ({{address}})।"
 }

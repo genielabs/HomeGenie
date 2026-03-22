@@ -565,5 +565,15 @@
   "error": "Diso! (or) Fahadisoana!",
   "copied_to_clipboard": "Nadika tao amin'ny takelaka famintinana.",
   "message_deleted": "Voafafa ny hafatra",
-  "clear_chat_to_import": "Fafao ny resaka ankehitriny mba hampidirana iray vaovao."
+  "clear_chat_to_import": "Fafao ny resaka ankehitriny mba hampidirana iray vaovao.",
+  "all_groups": "Vondrona rehetra",
+  "show_selected_groups": "Asehoy ireo vondrona voafantina",
+  "show_deactivated_items": "Asehoy ireo zavatra tsy ampiasaina",
+  "show_upgradable_programs": "Asehoy ireo fandaharana azo havaozina",
+  "selected_groups": "Vondrona voafantina",
+  "deactivated_programs_count": "Fandaharana tsy mandeha: {{count}}",
+  "upgradable_programs": "Fandaharana azo havaozina",
+  "unsaved_changes": "Fanovana tsy voatahiry",
+  "save_to_apply_program_changes": "Tehirizo mba hampiharana ireo fanovana ao amin'ny fandaharana.",
+  "imported_program_name_group": "Fandaharana \"{{name}}\" ({{address}}) nafarana tao amin'ny vondrona \"{{group}}\"."
 }

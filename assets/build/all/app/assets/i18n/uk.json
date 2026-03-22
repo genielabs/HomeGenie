@@ -565,5 +565,15 @@
   "error": "Помилка!",
   "copied_to_clipboard": "Скопійовано в буфер обміну.",
   "message_deleted": "Повідомлення видалено",
-  "clear_chat_to_import": "Очистіть поточний чат, щоб імпортувати новий."
+  "clear_chat_to_import": "Очистіть поточний чат, щоб імпортувати новий.",
+  "all_groups": "Усі групи",
+  "show_selected_groups": "Показати вибрані групи",
+  "show_deactivated_items": "Показати деактивовані елементи",
+  "show_upgradable_programs": "Показати програми, які можна оновити",
+  "selected_groups": "Вибрані групи",
+  "deactivated_programs_count": "Деактивовані програми: {{count}}",
+  "upgradable_programs": "Оновлювані програми",
+  "unsaved_changes": "Незбережені зміни",
+  "save_to_apply_program_changes": "Зберегти, щоб застосувати зміни до програми.",
+  "imported_program_name_group": "Імпортовано програму \"{{name}}\" ({{address}}) у групу \"{{group}}\"."
 }

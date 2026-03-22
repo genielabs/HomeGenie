@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Galluogi Recordio Fideo",
       "NVR.RecordOnAlarm": "Recordio Ar Larwm",
       "NVR.ContinuousRecording": "Recordio Parhaus."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Eich Rheolwr Awtomeiddio clyfar. Trowch iaith naturiol yn llifau gwaith asiantaidd: mae'n ysgrifennu, profi, a gweithredu rhaglenni C# mewn amser real i gwblhau unrhyw dasg benodol. I actifadu'r nodwedd hon, nodwch allwedd API ddilys. Dilynwch y cyfarwyddiadau yn https://aistudio.google.com/app/apikey i gael allwedd API am ddim.",
+      "ConfigureOptions.ApiKey": "Allwedd API Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID Model",
+      "ConfigureOptions.EnableDeepKnowledge": "Galluogi Gwybodaeth Ddwfn (Darllen rhaglenni a widgets)",
+      "ConfigureOptions.SystemInstructions": "Cyfarwyddiadau System"
     }
   },
   "scheduler_preset_action_genie_command": "Gorchymyn Genie",

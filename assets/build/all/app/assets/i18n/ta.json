@@ -565,5 +565,15 @@
   "error": "பிழை!",
   "copied_to_clipboard": "கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது.",
   "message_deleted": "செய்தி நீக்கப்பட்டது",
-  "clear_chat_to_import": "புதிய அரட்டையை இறக்குமதி செய்ய தற்போதைய அரட்டையை அழிக்கவும்."
+  "clear_chat_to_import": "புதிய அரட்டையை இறக்குமதி செய்ய தற்போதைய அரட்டையை அழிக்கவும்.",
+  "all_groups": "அனைத்து குழுக்களும்",
+  "show_selected_groups": "தேர்ந்தெடுக்கப்பட்ட குழுக்களைக் காட்டு",
+  "show_deactivated_items": "செயலிழக்கப்பட்ட உருப்படிகளைக் காட்டு",
+  "show_upgradable_programs": "மேம்படுத்தக்கூடிய நிரல்களைக் காட்டு",
+  "selected_groups": "தேர்ந்தெடுக்கப்பட்ட குழுக்கள்",
+  "deactivated_programs_count": "செயலிழக்கப்பட்ட நிரல்கள்: {{count}}",
+  "upgradable_programs": "மேம்படுத்தக்கூடிய திட்டங்கள்",
+  "unsaved_changes": "சேமிக்கப்படாத மாற்றங்கள்",
+  "save_to_apply_program_changes": "நிரலில் மாற்றங்களைப் பயன்படுத்த சேமிக்கவும்.",
+  "imported_program_name_group": "\"{{group}}\" என்ற குழுவில் \"{{name}}\" ({{address}}) என்ற நிரல் இறக்குமதி செய்யப்பட்டது."
 }

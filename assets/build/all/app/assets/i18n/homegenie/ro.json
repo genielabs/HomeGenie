@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Activează înregistrarea video",
       "NVR.RecordOnAlarm": "Înregistrare la alarmă",
       "NVR.ContinuousRecording": "Înregistrare continuă."
+    },
+    "932": {
+      "Title": "Gemeni Automan",
+      "Description": "Managerul tău inteligent de automatizare. Transformă limbajul natural în fluxuri de lucru agențice: scrie, testează și execută programe C# în timp real pentru a finaliza orice sarcină dată. Pentru a activa această funcție, introdu o cheie API validă. Urmează instrucțiunile de la https://aistudio.google.com/app/apikey pentru a obține o cheie API gratuită.",
+      "ConfigureOptions.ApiKey": "Cheia API Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID-ul modelului",
+      "ConfigureOptions.EnableDeepKnowledge": "Activează cunoștințe aprofundate (citește programe și widget-uri)",
+      "ConfigureOptions.SystemInstructions": "Instrucțiuni de sistem"
     }
   },
   "scheduler_preset_action_genie_command": "Comandamentul Geniilor",

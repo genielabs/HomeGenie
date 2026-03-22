@@ -565,5 +565,15 @@
   "error": "Gabim!",
   "copied_to_clipboard": "U kopjua në kujtesën e përkohshme.",
   "message_deleted": "Mesazhi u fshi",
-  "clear_chat_to_import": "Fshi bisedën aktuale për të importuar një të re."
+  "clear_chat_to_import": "Fshi bisedën aktuale për të importuar një të re.",
+  "all_groups": "Të gjitha grupet",
+  "show_selected_groups": "Shfaq grupet e zgjedhura",
+  "show_deactivated_items": "Shfaq artikujt e çaktivizuar",
+  "show_upgradable_programs": "Shfaq programet që mund të përmirësohen",
+  "selected_groups": "Grupet e zgjedhura",
+  "deactivated_programs_count": "Programet e çaktivizuara: {{count}}",
+  "upgradable_programs": "Programe të Përmirësueshme",
+  "unsaved_changes": "Ndryshime të paruajtura",
+  "save_to_apply_program_changes": "Ruaj për të aplikuar ndryshimet në program.",
+  "imported_program_name_group": "Programi i importuar \"{{name}}\" ({{address}}) në grupin \"{{group}}\"."
 }

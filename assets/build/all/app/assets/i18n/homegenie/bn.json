@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "ভিডিও রেকর্ডিং সক্ষম করুন",
       "NVR.RecordOnAlarm": "অ্যালার্মে রেকর্ড করুন",
       "NVR.ContinuousRecording": "ক্রমাগত রেকর্ডিং।"
+    },
+    "932": {
+      "Title": "জেমিনি অটোম্যান",
+      "Description": "আপনার স্মার্ট অটোমেশন ম্যানেজার। স্বাভাবিক ভাষাকে এজেন্টিক ওয়ার্কফ্লোতে পরিণত করুন: এটি যেকোনো প্রদত্ত কাজ সম্পন্ন করার জন্য রিয়েল-টাইমে C# প্রোগ্রাম লেখে, পরীক্ষা করে এবং এক্সিকিউট করে। এই ফিচারটি সক্রিয় করতে, একটি বৈধ API কী প্রবেশ করান। একটি বিনামূল্যের API কী পেতে https://aistudio.google.com/app/apikey-এ দেওয়া নির্দেশাবলী অনুসরণ করুন।",
+      "ConfigureOptions.ApiKey": "গুগল জেমিনি এআই এপিআই কী",
+      "ConfigureOptions.ModelId": "মডেল আইডি",
+      "ConfigureOptions.EnableDeepKnowledge": "গভীর জ্ঞান অর্জন করুন (প্রোগ্রাম ও উইজেট পড়ুন)",
+      "ConfigureOptions.SystemInstructions": "সিস্টেম নির্দেশাবলী"
     }
   },
   "scheduler_preset_action_genie_command": "জিনি কমান্ড",

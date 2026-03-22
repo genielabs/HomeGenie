@@ -565,5 +565,15 @@
   "error": "Şaşî!",
   "copied_to_clipboard": "Li panoyê hat kopîkirin.",
   "message_deleted": "Peyam hat jêbirin",
-  "clear_chat_to_import": "Ji bo hinartina sohbeta nû, sohbeta heyî paqij bike."
+  "clear_chat_to_import": "Ji bo hinartina sohbeta nû, sohbeta heyî paqij bike.",
+  "all_groups": "Hemû Kom",
+  "show_selected_groups": "Grûpên bijartî nîşan bide",
+  "show_deactivated_items": "Tiştên neçalakkirî nîşan bide",
+  "show_upgradable_programs": "Bernameyên ku dikarin werin nûvekirin nîşan bide",
+  "selected_groups": "Grûpên bijartî",
+  "deactivated_programs_count": "Bernameyên neçalakkirî: {{count}}",
+  "upgradable_programs": "Bernameyên Nûjenkirî",
+  "unsaved_changes": "Guhertinên netomarkirî",
+  "save_to_apply_program_changes": "Ji bo sepandina guhertinan li bernameyê tomar bike.",
+  "imported_program_name_group": "Bernameya \"{{name}}\" ({{address}}) di koma \"{{group}}\" de hatiye îtxalkirin."
 }

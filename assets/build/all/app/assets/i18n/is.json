@@ -565,5 +565,15 @@
   "error": "Villa!",
   "copied_to_clipboard": "Afritað á klippiborð.",
   "message_deleted": "Skilaboðum eytt",
-  "clear_chat_to_import": "Hreinsaðu núverandi spjall til að flytja inn nýtt."
+  "clear_chat_to_import": "Hreinsaðu núverandi spjall til að flytja inn nýtt.",
+  "all_groups": "Allir hópar",
+  "show_selected_groups": "Sýna valda hópa",
+  "show_deactivated_items": "Sýna óvirkar vörur",
+  "show_upgradable_programs": "Sýna uppfæranleg forrit",
+  "selected_groups": "Valdir hópar",
+  "deactivated_programs_count": "Óvirk forrit: {{count}}",
+  "upgradable_programs": "Uppfæranleg forrit",
+  "unsaved_changes": "Óvistaðar breytingar",
+  "save_to_apply_program_changes": "Vista til að virkja breytingarnar á forritinu.",
+  "imported_program_name_group": "Flutti inn forritið \"{{name}}\" ({{address}}) í hópinn \"{{group}}\"."
 }

@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Овозможи снимање видео",
       "NVR.RecordOnAlarm": "Снимај на аларм",
       "NVR.ContinuousRecording": "Континуирано снимање."
+    },
+    "932": {
+      "Title": "Близнаци Автомен",
+      "Description": "Вашиот паметен менаџер за автоматизација. Претворете го природниот јазик во агентски работни процеси: тој пишува, тестира и извршува C# програми во реално време за да заврши која било задача. За да ја активирате оваа функција, внесете важечки API клуч. Следете ги упатствата на https://aistudio.google.com/app/apikey за да добиете бесплатен API клуч.",
+      "ConfigureOptions.ApiKey": "API клуч за Google Gemini AI",
+      "ConfigureOptions.ModelId": "ИД на модел",
+      "ConfigureOptions.EnableDeepKnowledge": "Овозможи длабинско знаење (Читање програми и виџети)",
+      "ConfigureOptions.SystemInstructions": "Системски инструкции"
     }
   },
   "scheduler_preset_action_genie_command": "Џини Команда",

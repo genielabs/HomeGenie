@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Yambitsani Kujambula Kanema",
       "NVR.RecordOnAlarm": "Lembani pa Alamu",
       "NVR.ContinuousRecording": "Kujambula Kosalekeza."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Woyang'anira wanu wanzeru wa Automation. Sinthani chilankhulo chachilengedwe kukhala ntchito zogwirira ntchito: chimalemba, kuyesa, ndikuyendetsa mapulogalamu a C# nthawi yeniyeni kuti amalize ntchito iliyonse. Kuti muyambitse izi, lowetsani kiyi yovomerezeka ya API. Tsatirani malangizo omwe ali pa https://aistudio.google.com/app/apikey kuti mupeze kiyi ya API yaulere.",
+      "ConfigureOptions.ApiKey": "Kiyi ya Google Gemini AI API",
+      "ConfigureOptions.ModelId": "ID ya Chitsanzo",
+      "ConfigureOptions.EnableDeepKnowledge": "Yambitsani Chidziwitso Chakuya (Werengani mapulogalamu ndi ma widget)",
+      "ConfigureOptions.SystemInstructions": "Malangizo a Machitidwe"
     }
   },
   "scheduler_preset_action_genie_command": "Lamulo la Genie",

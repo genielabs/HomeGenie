@@ -565,5 +565,15 @@
   "error": "Eroare!",
   "copied_to_clipboard": "Copiat în clipboard.",
   "message_deleted": "Mesaj șters",
-  "clear_chat_to_import": "Ștergeți chatul curent pentru a importa unul nou."
+  "clear_chat_to_import": "Ștergeți chatul curent pentru a importa unul nou.",
+  "all_groups": "Toate grupurile",
+  "show_selected_groups": "Afișați grupurile selectate",
+  "show_deactivated_items": "Afișează articolele dezactivate",
+  "show_upgradable_programs": "Afișați programele actualizabile",
+  "selected_groups": "Grupuri selectate",
+  "deactivated_programs_count": "Programe dezactivate: {{count}}",
+  "upgradable_programs": "Programe actualizabile",
+  "unsaved_changes": "Modificări nesalvate",
+  "save_to_apply_program_changes": "Salvați pentru a aplica modificările aduse programului.",
+  "imported_program_name_group": "Programul „{{name}}” ({{address}}) a fost importat în grupul „{{group}}”."
 }

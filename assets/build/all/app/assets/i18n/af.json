@@ -565,5 +565,15 @@
   "error": "Fout!",
   "copied_to_clipboard": "Na knipbord gekopieer.",
   "message_deleted": "Boodskap uitgevee",
-  "clear_chat_to_import": "Vee huidige klets uit om 'n nuwe een in te voer."
+  "clear_chat_to_import": "Vee huidige klets uit om 'n nuwe een in te voer.",
+  "all_groups": "Alle Groepe",
+  "show_selected_groups": "Wys geselekteerde groepe",
+  "show_deactivated_items": "Wys gedeaktiveerde items",
+  "show_upgradable_programs": "Wys opgradeerbare programme",
+  "selected_groups": "Geselekteerde groepe",
+  "deactivated_programs_count": "Gedeaktiveerde programme: {{count}}",
+  "upgradable_programs": "Opgradeerbare programme",
+  "unsaved_changes": "Ongestoorde veranderinge",
+  "save_to_apply_program_changes": "Stoor om veranderinge aan die program toe te pas.",
+  "imported_program_name_group": "Program \"{{name}}\" ({{address}}) is in groep \"{{group}}\" ingevoer."
 }

@@ -565,5 +565,15 @@
   "error": "Error!",
   "copied_to_clipboard": "In tabulam excerptam.",
   "message_deleted": "Nuntius deletus est",
-  "clear_chat_to_import": "Colloquium praesentem dele ut novum importes."
+  "clear_chat_to_import": "Colloquium praesentem dele ut novum importes.",
+  "all_groups": "Omnes Greges",
+  "show_selected_groups": "Greges selectos monstra",
+  "show_deactivated_items": "Res inactivas ostende",
+  "show_upgradable_programs": "Programmata emendabilia monstra",
+  "selected_groups": "Greges selecti",
+  "deactivated_programs_count": "Programmata inactiva: {{count}}",
+  "upgradable_programs": "Programmata Emendabilia",
+  "unsaved_changes": "Mutationes non servatae",
+  "save_to_apply_program_changes": "Serva ut mutationes programmati adhibeantur.",
+  "imported_program_name_group": "Importatum est programma \"{{name}}\" ({{address}}) in grege \"{{group}}\"."
 }

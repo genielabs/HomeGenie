@@ -565,5 +565,15 @@
   "error": "Kuskure!",
   "copied_to_clipboard": "An kwafi zuwa allo mai allo.",
   "message_deleted": "An goge saƙon",
-  "clear_chat_to_import": "Share tattaunawar da ake yi yanzu don shigo da sabuwa."
+  "clear_chat_to_import": "Share tattaunawar da ake yi yanzu don shigo da sabuwa.",
+  "all_groups": "Duk Ƙungiyoyi",
+  "show_selected_groups": "Nuna ƙungiyoyin da aka zaɓa",
+  "show_deactivated_items": "Nuna abubuwan da aka kashe",
+  "show_upgradable_programs": "Nuna shirye-shirye masu haɓakawa",
+  "selected_groups": "Ƙungiyoyi da aka zaɓa",
+  "deactivated_programs_count": "Shirye-shiryen da aka kashe: {{count}}",
+  "upgradable_programs": "Shirye-shiryen da Za a iya Ingantawa",
+  "unsaved_changes": "Canje-canjen da ba a adana ba",
+  "save_to_apply_program_changes": "Ajiye don amfani da canje-canje ga shirin.",
+  "imported_program_name_group": "An shigo da shirin \"{{name}}\" ({{address}}) a cikin rukunin \"{{group}}\"."
 }

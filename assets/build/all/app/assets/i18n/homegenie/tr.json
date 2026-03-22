@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Video kaydını etkinleştirin",
       "NVR.RecordOnAlarm": "Alarmı Kaydet",
       "NVR.ContinuousRecording": "Sürekli Kayıt."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Akıllı Otomasyon Yöneticiniz. Doğal dili ajan tabanlı iş akışlarına dönüştürün: verilen herhangi bir görevi tamamlamak için gerçek zamanlı olarak C# programları yazar, test eder ve yürütür. Bu özelliği etkinleştirmek için geçerli bir API anahtarı girin. Ücretsiz bir API anahtarı almak için https://aistudio.google.com/app/apikey adresindeki talimatları izleyin.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API anahtarı",
+      "ConfigureOptions.ModelId": "Model Kimliği",
+      "ConfigureOptions.EnableDeepKnowledge": "Derinlemesine Bilgi Edinin (Programları ve araçları okuyun)",
+      "ConfigureOptions.SystemInstructions": "Sistem Talimatları"
     }
   },
   "scheduler_preset_action_genie_command": "Cin Komutu",

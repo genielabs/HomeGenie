@@ -45,7 +45,6 @@ namespace HomeGenie.Automation
         private bool isEngineEnabled;
 
         public const int USERSPACE_PROGRAMS_START = 1000;
-        public const int PACKAGE_PROGRAMS_START = 100000;
 
         public class RoutedEvent
         {
@@ -111,7 +110,7 @@ namespace HomeGenie.Automation
         {
             int pid = USERSPACE_PROGRAMS_START;
             var userPrograms = automationPrograms
-                .FindAll(p => p.Address >= USERSPACE_PROGRAMS_START && p.Address < PACKAGE_PROGRAMS_START)
+                .FindAll(p => p.Address >= USERSPACE_PROGRAMS_START)
                 .OrderBy(p => p.Address);
             foreach (ProgramBlock program in userPrograms)
             {
@@ -120,8 +119,11 @@ namespace HomeGenie.Automation
                 else
                     break;
             }
-            // TODO: it should return -1 if all user programs are already allocated
-            return pid;
+            if (hgService.SystemConfiguration.HomeGenie.ProgramIdNext < pid)
+            {
+                hgService.SystemConfiguration.HomeGenie.ProgramIdNext = pid;
+            }
+            return hgService.SystemConfiguration.HomeGenie.ProgramIdNext++;
         }
 
         public void ProgramAdd(ProgramBlock program)
@@ -142,6 +144,8 @@ namespace HomeGenie.Automation
             {
                 program.Engine.StartScheduler();
             }
+            // store next available program id number
+            HomeGenie.SystemConfiguration.Update();
         }
 
         public ProgramBlock ProgramGet(int pid)

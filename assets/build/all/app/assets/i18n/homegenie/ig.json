@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Mee ka ndekọ vidiyo rụọ ọrụ",
       "NVR.RecordOnAlarm": "Dekọọ na Mkpu",
       "NVR.ContinuousRecording": "Ndekọ Na-aga n'ihu."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Onye njikwa akpaaka gị mara mma. Gbanwee asụsụ okike ka ọ bụrụ usoro ọrụ nnọchite anya: ọ na-ede, na-anwale, ma na-eme mmemme C# n'oge ozugbo iji mezue ọrụ ọ bụla enyere. Iji mee ka atụmatụ a rụọ ọrụ, tinye igodo API dị irè. Soro ntuziaka dị na https://aistudio.google.com/app/apikey iji nweta igodo API n'efu.",
+      "ConfigureOptions.ApiKey": "Igodo API Google Gemini AI",
+      "ConfigureOptions.ModelId": "NJ ụdị",
+      "ConfigureOptions.EnableDeepKnowledge": "Mee ka ihe ọmụma miri emi rụọ ọrụ (Gụọ mmemme na wijetị)",
+      "ConfigureOptions.SystemInstructions": "Ntuziaka Sistemụ"
     }
   },
   "scheduler_preset_action_genie_command": "Iwu Genie",

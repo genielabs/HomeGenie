@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Activar a gravación de vídeo",
       "NVR.RecordOnAlarm": "Gravar con alarma",
       "NVR.ContinuousRecording": "Gravación continua."
+    },
+    "932": {
+      "Title": "Automan Xemelgos",
+      "Description": "O teu xestor de automatización intelixente. Converte a linguaxe natural en fluxos de traballo axentes: escribe, proba e executa programas C# en tempo real para completar calquera tarefa. Para activar esta función, introduce unha clave API válida. Sigue as instrucións en https://aistudio.google.com/app/apikey para obter unha clave API gratuíta.",
+      "ConfigureOptions.ApiKey": "Clave da API de IA de Google Gemini",
+      "ConfigureOptions.ModelId": "ID do modelo",
+      "ConfigureOptions.EnableDeepKnowledge": "Activar coñecemento profundo (ler programas e widgets)",
+      "ConfigureOptions.SystemInstructions": "Instrucións do sistema"
     }
   },
   "scheduler_preset_action_genie_command": "Comando Xenio",

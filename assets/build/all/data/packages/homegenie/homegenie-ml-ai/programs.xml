@@ -277,6 +277,468 @@ Program.GoBackground();
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
+    <ScriptSetup>var systemPromptFile = Path.Combine(Data.GetFolder(), "gemini_system_prompt.txt");
+
+Program.Setup(() =&gt; {
+    // Register this program as Automation Manager
+    Program.Implements(
+        "@AI:Automan",
+        "AI.Automan/Gemini"
+    ).AddOption("ApiKey", "", "1. Google Gemini AI API key", "password")
+     .AddOption("ModelId", "gemini-2.5-flash", "2. Model ID", "text")
+     .AddOption("EnableDeepKnowledge", "On", "3. Enable Deep Knowledge (Read programs &amp; widgets)", "checkbox")
+     .AddOption("SystemInstructions", "", "4. System Instructions", $"editor:file:{systemPromptFile}:markdown");
+});
+
+Program.Run();</ScriptSetup>
+    <ScriptSource>// ===================================================================
+// GEMINI AUTOMAN - ASYNC QUEUE &amp; DEBOUNCING
+// ===================================================================
+
+string API_URL = "AI.Automan/Gemini";
+string geminiApiKey = Program.Option("ApiKey").Value.Trim();
+string geminiModelId = Program.Option("ModelId").Value.Trim();
+bool useDeepKnowledge = Program.Option("EnableDeepKnowledge").Value == "On";
+string storeId = Program.Module.Address;
+
+if (geminiApiKey.Length != 39 || !geminiApiKey.StartsWith("AIzaSy") || string.IsNullOrEmpty(geminiModelId)) {
+    Program.Emit("Status.Init", "NotConfigured");
+} else {
+    Program.Emit("Status.Init", "Ready");
+}
+
+bool reconfigureRequired = false;
+
+When.ModuleParameterChanged((module, parameter) =&gt; {
+    if (module.Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
+        reconfigureRequired = true;
+    }
+    
+    string childId = module.Instance.Address;
+    string childName = module.Instance.Name;
+    // REACTIVE MONITORING AND AUTO-CLEANUP
+    if (parameter.Name == "Automan.Program.Status") {
+        string childStatus = parameter.Value;
+        // We only log states other than Completed to avoid spam
+        Program.Log.Info($"Child program '{childName}' (ID: {childId}) reports status: '{childStatus}'");
+    } else if (parameter.Name == "Automan.Program.Request" &amp;&amp; parameter.Value.ToLower() == "quit") {
+        Program.Log.Info($"Received 'Quit' signal from '{childName}' (ID: {childId}). Starting auto-cleanup...");
+        try {
+            Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Disable/" + childId);
+            Program.Log.Info($"Child program {childId} successfully disabled.");
+        } catch (Exception ex) {
+            Program.Log.Error($"Error disabling child program {childId}: {ex.Message}");
+        }
+    }
+    
+    return true;
+});
+
+// Cache &amp; Deep Knowledge Management Variables
+string currentCacheName = "";
+DateTime cacheExpiration = DateTime.MinValue;
+
+Func&lt;string, string&gt; GetSlimmedXml = (filePath) =&gt; {
+    if (!File.Exists(filePath)) return "";
+    try {
+        var doc = new System.Xml.XmlDocument();
+        doc.Load(filePath);
+        StringBuilder sb = new StringBuilder();
+        foreach (System.Xml.XmlNode pg in doc.SelectNodes("//ProgramBlock[IsEnabled='true']")) {
+            string name = pg.SelectSingleNode("Name")?.InnerText ?? "Unnamed";
+            string setup = pg.SelectSingleNode("ScriptSetup")?.InnerText ?? "";
+            string source = pg.SelectSingleNode("ScriptSource")?.InnerText ?? "";
+            if (string.IsNullOrWhiteSpace(source) &amp;&amp; string.IsNullOrWhiteSpace(setup)) continue;
+            sb.AppendLine($"PROGRAM: {name}");
+            if (!string.IsNullOrWhiteSpace(setup)) sb.AppendLine("SETUP:\n" + setup);
+            if (!string.IsNullOrWhiteSpace(source)) sb.AppendLine("SOURCE:\n" + source);
+            sb.AppendLine("---");
+        }
+        return sb.ToString();
+    } catch { return "Error slimming XML..."; }
+};
+
+Func&lt;string&gt; BuildContext = () =&gt; {
+    var promptFile = Path.Combine(Data.GetFolder(), "gemini_system_prompt.txt");
+    string context = "";
+    try { context = File.ReadAllText(promptFile); } catch { context = "You are a HomeGenie developer."; }
+
+    if (useDeepKnowledge) {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine(context);
+        sb.AppendLine("\n=======================================================");
+        sb.AppendLine("HOMEGENIE SYSTEM SOURCE CODE (REFERENCE MATERIAL)");
+        sb.AppendLine("=======================================================\n");
+
+        try {
+            string programsFile = Path.Combine("./", "programs.xml");
+            if (File.Exists(programsFile)) {
+                sb.AppendLine("--- FILE: programs.xml (C# Backend Logic) ---");
+                sb.AppendLine(GetSlimmedXml(programsFile));
+                sb.AppendLine("---------------------------------------------\n");
+            }
+        } catch (Exception ex) { Program.Log.Warn("Could not read programs.xml: " + ex.Message); }
+
+        context = sb.ToString();
+    }
+    
+    context += "\n\nIMPORTANT INSTRUCTIONS FOR Automan:\n" +
+    "You are the HomeGenie Automan (Automation Manager). You must create an autonomous C# automation program based on the user's request.\n" +
+    "- Provide a clear Name, Setup code, and Main code.\n" +
+    "- You MUST use `Program.Emit(\"Automan.Program.Status\", \"Running\");` inside your Main block to report your state.\n" +
+    "- Return ONLY valid C# code. Do NOT generate UI widgets.";
+
+    return context;
+};
+
+DateTime rateLimitResetTime = DateTime.MinValue;
+bool isQuotaExceeded = false;
+
+Func&lt;string, bool&gt; EnsureCache = (fullContext) =&gt; {
+    if (!useDeepKnowledge) return false;
+    if (!string.IsNullOrEmpty(currentCacheName) &amp;&amp; DateTime.UtcNow &lt; cacheExpiration) return true;
+
+    Program.Log.Info("Uploading context to Gemini Cache...");
+    var cacheUrl = $"https://generativelanguage.googleapis.com/v1beta/cachedContents?key={geminiApiKey}";
+    var cachePayload = new {
+        model = $"models/{geminiModelId}",
+        system_instruction = new { parts = new[] { new { text = fullContext } } },
+        ttl = "3600s"
+    };
+
+    try {
+        var data = Net.WebService(cacheUrl).AddHeader("Content-Type", "application/json").Post(JsonConvert.SerializeObject(cachePayload)).GetData();
+        if (data != null &amp;&amp; data.name != null) {
+            currentCacheName = data.name.ToString();
+            cacheExpiration = DateTime.UtcNow.AddMinutes(55);
+            return true;
+        }
+    } catch { currentCacheName = ""; }
+    return false;
+};
+
+// ===================================================================
+// THE CENTRAL GENERATION ENGINE (AUTOMAN)
+// ===================================================================
+Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&gt; {
+    var result = Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId });
+    var payloadContents = new List&lt;ChatMessage&gt;();
+    if (result != null) {
+        payloadContents = JArray.FromObject(result).ToObject&lt;List&lt;ChatMessage&gt;&gt;();
+    }
+
+    string displayCommand = isBackground ? $"[Scheduled Task]\n{userCommand}" : userCommand;
+    var userMessage = ChatMessage.Create("user", displayCommand);
+    
+    Api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = userMessage });
+    payloadContents.Add(userMessage);
+
+    string fullContext = BuildContext();
+    bool hasCache = EnsureCache(fullContext);
+
+    var genConfig = new {
+        temperature = 0.2,
+        response_mime_type = "application/json",
+        response_schema = new {
+            type = "object",
+            properties = new {
+                explanation = new { type = "string" },
+                name = new { type = "string" },
+                language = new { type = "string", @enum = new[] { "csharp", "python", "javascript" } },
+                setup = new { type = "string" },
+                main = new { type = "string" },
+                context = new { type = "string" }
+            },
+            required = new[] { "explanation", "name", "setup", "main" }
+        }
+    };
+
+    int maxAttempts = 5; 
+    int currentAttempt = 1;
+    bool isDeployed = false;
+    string programId = "";
+    string finalUiResponse = "";
+
+    List&lt;string&gt; explanationsList = new List&lt;string&gt;();
+
+    while (currentAttempt &lt;= maxAttempts &amp;&amp; !isDeployed)
+    {
+        object payload;
+        if (hasCache) {
+            payload = new { contents = payloadContents, cached_content = currentCacheName, generationConfig = genConfig };
+        } else {
+            payload = new { contents = payloadContents, system_instruction = new { parts = new[] { new { text = fullContext } } }, generationConfig = genConfig };
+        }
+
+        try
+        {
+            string payloadJson = JsonConvert.SerializeObject(payload, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            string requestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
+
+            var data = Net.WebService(requestUrl).WithTimeout(120).AddHeader("Content-Type", "application/json").Post(payloadJson).GetData();
+            
+            if (data != null &amp;&amp; data.candidates != null &amp;&amp; data.candidates.Count &gt; 0)
+            {
+                string rawResponse = data.candidates[0].content.parts[0].text;
+                var jsonObj = JObject.Parse(rawResponse);
+                
+                string pExplanation = jsonObj["explanation"]?.ToString() ?? "";
+                string pName = jsonObj["name"]?.ToString() ?? "Automan_Generated_Program";
+                string pLanguage = jsonObj["language"]?.ToString() ?? "csharp";
+
+                string pContext = jsonObj["context"]?.ToString() ?? "";
+                string pSetup = jsonObj["setup"]?.ToString() ?? "";
+                string pMain = jsonObj["main"]?.ToString() ?? "";
+                if (!string.IsNullOrWhiteSpace(pExplanation)) {
+                    explanationsList.Add(pExplanation);
+                }
+
+                // Phase 1: Program Creation
+                string programDescription = explanationsList.FirstOrDefault() ?? ""; // use always the initial description
+                if (string.IsNullOrEmpty(programId)) {
+                    string programBlockJson = JsonConvert.SerializeObject(new { Type = pLanguage, Group = "Automan", Name = $"{pName}", Description = $"{programDescription}", IsEnabled = false });
+                    var addRes = Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Add", programBlockJson);
+                    if (addRes != null) {
+                        string resStr = addRes is string ? (string)addRes : JsonConvert.SerializeObject(addRes);
+                        var jRes = JObject.Parse(resStr);
+                        programId = jRes["ResponseValue"]?.ToString() ?? jRes["response"]?["ResponseValue"]?.ToString();
+                    }
+                }
+
+                // Check for valid ID extraction
+                if (string.IsNullOrEmpty(programId)) {
+                    var errorPayload = new {
+                        automan_deploy = new {
+                            status = "error",
+                            error_message = "Critical Error: Unable to extract the ID of the newly created program."
+                        }
+                    };
+                    finalUiResponse = JsonConvert.SerializeObject(errorPayload, Formatting.Indented);
+                    break;
+                }
+
+                // Phase 2: Compilation and Code Injection
+                string compilePayloadJson = JsonConvert.SerializeObject(new { Type = pLanguage, Address = int.Parse(programId), Group = "Automan", Name = $"{pName}", Description = $"{programDescription}", ScriptSetup = pSetup, ScriptSource = pMain, ScriptContext = pContext, IsEnabled = false });
+                var compileRes = Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Compile", compilePayloadJson);
+                
+                bool hasCompilerErrors = false;
+                string errorString = "";
+
+                if (compileRes != null) {
+                    try {
+                        string resStr = compileRes is string ? (string)compileRes : JsonConvert.SerializeObject(compileRes);
+                        var jToken = JToken.Parse(resStr);
+                        JToken compilerOutput = null;
+
+                        if (jToken.Type == JTokenType.Array) compilerOutput = jToken;
+                        else if (jToken.Type == JTokenType.Object) compilerOutput = jToken["ResponseValue"] ?? jToken["response"]?["ResponseValue"];
+                        
+                        if (compilerOutput != null &amp;&amp; compilerOutput.Type == JTokenType.Array &amp;&amp; compilerOutput.HasValues) {
+                            hasCompilerErrors = true;
+                            errorString = string.Join("\n", compilerOutput.Select(e =&gt; e.ToString()));
+                        }
+                    } catch (Exception ex) { Program.Log.Warn($"Compiler output parsing failed: {ex.Message}"); }
+                }
+
+                // Phase 3: Self-Healing or Deployment
+                if (hasCompilerErrors)
+                {
+                    Program.Log.Warn($"Attempt {currentAttempt} failed. Errors: {errorString}");
+                    payloadContents.Add(ChatMessage.Create("model", rawResponse));
+                    payloadContents.Add(ChatMessage.Create("user", $"COMPILATION FAILED with the following errors:\n{errorString}\n\nPlease fix the C# code. Ensure variables exist and syntax is correct. Return the complete corrected JSON."));
+                    currentAttempt++;
+                    Pause(10);
+                }
+                else
+                {
+                    isDeployed = true;
+                    Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Enable/" + programId);
+                    
+                    // Generate structured success metadata
+                    var successPayload = new {
+                        automan_deploy = new {
+                            status = "success",
+                            program_id = programId,
+                            name = pName,
+                            language = pLanguage,
+                            explanation = pExplanation,
+                            attempts = currentAttempt
+                        }
+                    };
+                    finalUiResponse = JsonConvert.SerializeObject(successPayload, Formatting.Indented);
+                    
+                    var modelResponse = ChatMessage.Create("model", finalUiResponse);
+                    Api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = modelResponse });
+
+                    Program.Emit("Widget.Refresh", "history_updated");
+                }
+            } else { break; }
+        }
+        catch (Exception ex)
+        {
+            Program.Log.Error($"API Error: {ex.Message}");
+            if (ex.Message.Contains("(429)")) { 
+                isQuotaExceeded = true; 
+                rateLimitResetTime = DateTime.UtcNow.AddMinutes(2);
+                if (isBackground) throw; // Rethrow to re-queue the task
+                
+                var quotaPayload = new {
+                    automan_deploy = new {
+                        status = "quota_exceeded",
+                        error_message = "Rate limit reached (429). The system is pausing requests."
+                    }
+                };
+                finalUiResponse = JsonConvert.SerializeObject(quotaPayload, Formatting.Indented);
+            }
+            else 
+            {
+                var sysErrorPayload = new {
+                    automan_deploy = new {
+                        status = "error",
+                        error_message = $"System Error: {ex.Message}"
+                    }
+                };
+                finalUiResponse = JsonConvert.SerializeObject(sysErrorPayload, Formatting.Indented);
+            }
+            break;
+        }
+    }
+
+    // Final fallback if all retry attempts fail
+    if (!isDeployed &amp;&amp; string.IsNullOrEmpty(finalUiResponse)) {
+        var failPayload = new {
+            automan_deploy = new {
+                status = "compile_failed",
+                attempts = maxAttempts,
+                error_message = $"Deploy Failure. Failed to generate valid code after {maxAttempts} attempts."
+            }
+        };
+        finalUiResponse = JsonConvert.SerializeObject(failPayload, Formatting.Indented);
+        Api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = ChatMessage.Create("model", finalUiResponse) });
+    }
+
+    return finalUiResponse;
+};
+
+List&lt;string&gt; taskQueue = new List&lt;string&gt;();
+object queueLock = new object();
+
+Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt; {
+    if (isQuotaExceeded &amp;&amp; DateTime.UtcNow &lt; rateLimitResetTime) {
+        return new ResponseText($"**AI Temporarily Unavailable:** Rate limit reached.");
+    }
+    var request = Api.Parse(userCommand);
+    var data = userCommand is string ? WebUtility.UrlDecode(userCommand as string) : request?.Data is string ? request?.Data as string : Encoding.Default.GetString(request?.Data as byte[]);
+    string response = ProcessPrompt(data, false);
+    return new ResponseText(response);
+});
+
+// Agentic task scheduling
+Api.Handle($"{API_URL}/Prompt.Schedule", (userCommand) =&gt; {
+    var request = Api.Parse(userCommand);
+    var data = userCommand is string ? WebUtility.UrlDecode(userCommand as string) : request?.Data is string ? request?.Data as string : Encoding.Default.GetString(request?.Data as byte[]);
+    lock (queueLock) {
+        taskQueue.Add(data);
+    }
+    Program.Log.Info($"New task queued. Tasks waiting: {taskQueue.Count}");
+    return new ResponseText("Task scheduled successfully.");
+});
+
+Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_REMOVE_AT}", (i) =&gt; Api.Call("System.Utility/ChatHistory/RemoveAt", new { StoreId = storeId, Index = i }));
+Api.Handle($"{API_URL}/{API_HISTORY_EXPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Export", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_IMPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Import", new { StoreId = storeId, Data = (p as dynamic).Data }));
+
+// ===================================================================
+// AUTOMAN WORKER
+// ===================================================================
+while (Program.IsRunning &amp;&amp; !reconfigureRequired) {
+    
+    if (isQuotaExceeded) {
+        if (DateTime.UtcNow &lt; rateLimitResetTime) {
+            Pause(5);
+            continue;
+        } else {
+            isQuotaExceeded = false;
+            Program.Log.Info($"429 rate limit expired. Restarting queue.");
+        }
+    }
+
+    string nextTask = null;
+    lock (queueLock) {
+        if (taskQueue.Count &gt; 0) {
+            nextTask = taskQueue[0];
+            taskQueue.RemoveAt(0); // (FIFO)
+        }
+    }
+
+    if (nextTask != null) {
+        Program.Log.Info($"Dequeued new task...");
+        try {
+            ProcessPrompt(nextTask, true);
+            Pause(3);
+        } catch (Exception ex) {
+            if (ex.Message.Contains("(429)")) {
+                Program.Log.Warn($"Rate limit hitted. Re-queuing task.");
+                lock (queueLock) {
+                    taskQueue.Insert(0, nextTask);
+                }
+            } else {
+                Program.Log.Error($"Critical error executing task: {ex.Message}");
+            }
+        }
+    }
+
+    Pause(1);
+}
+</ScriptSource>
+    <ScriptContext>const string API_HISTORY_GET = "History.Get";
+const string API_HISTORY_CLEAR = "History.Clear";
+const string API_HISTORY_REMOVE_AT = "History.RemoveAt";
+const string API_HISTORY_EXPORT = "History.Export";
+const string API_HISTORY_IMPORT = "History.Import";
+
+public class MessagePart {
+    [JsonProperty("text")]
+    public string Text { get; set; }
+}
+
+public class ChatMessage {
+    [JsonProperty("role")]
+    public string Role { get; set; }[JsonProperty("parts")]
+    public List&lt;MessagePart&gt; Parts { get; set; } = new List&lt;MessagePart&gt;();
+
+    public static ChatMessage Create(string role, string text) {
+        return new ChatMessage {
+            Role = role,
+            Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = text } }
+        };
+    }
+}</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-ml-ai</PackageId>
+      <PackageVersion>1.0.4</PackageVersion>
+      <Id>gemini-automan</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>DE5D2EF3B0C42AB5092399B957940049</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>932</Address>
+    <Name>Gemini Automan</Name>
+    <Description>Your smart Automation Manager. Turn natural language into agentic workflows: it writes, tests, and executes C# programs in real-time to complete any given task. To activate this feature, enter a valid API key. Follow the instructions at https://aistudio.google.com/app/apikey to get a free API key.</Description>
+    <Group>AI - Machine Learning</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
     <ScriptSetup>// Path to the external markdown file for system instructions
 var systemPromptFile = Path.Combine(Data.GetFolder(), "gemini_system_prompt.txt");
 
@@ -321,13 +783,16 @@ string allowedTypes = "Dimmer,Light,Color,Switch,Shutter,DoorLock,Thermostat";
 // ===================================================================
 Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
 {
+    var request = Api.Parse(userCommand);
+    var msg = userCommand is string ? WebUtility.UrlDecode(userCommand as string) : request?.Data is string ? request?.Data as string : Encoding.Default.GetString(request?.Data as byte[]);
+
     // Get the current history from the centralized service
     var storeId = Program.Module.Address;
     var result = Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId });
     var payloadContents = JArray.FromObject(result).ToObject&lt;List&lt;ChatMessage&gt;&gt;();
 
     // Prepare the current user message
-    var userMessage = ChatMessage.Create("user", userCommand as string);
+    var userMessage = ChatMessage.Create("user", msg);
 
     // Combine them for the AI request payload
     // This list now contains [History] + [Current Message]
@@ -444,7 +909,7 @@ Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt; Api.Call("System.Utility/Ch
 Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId }));
 Api.Handle($"{API_URL}/{API_HISTORY_REMOVE_AT}", (i) =&gt; Api.Call("System.Utility/ChatHistory/RemoveAt", new { StoreId = storeId, Index = i }));
 Api.Handle($"{API_URL}/{API_HISTORY_EXPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Export", new { StoreId = storeId }));
-Api.Handle($"{API_URL}/{API_HISTORY_IMPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Import", new { StoreId = storeId, Data = p }));
+Api.Handle($"{API_URL}/{API_HISTORY_IMPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Import", new { StoreId = storeId, Data = (p as dynamic).Data }));
 
 
 // Run the program in the background
@@ -495,9 +960,9 @@ public class ChatMessage {
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-intent-handler</Id>
-      <Version>1.0.11</Version>
+      <Version>1.0.12</Version>
       <Required>true</Required>
-      <Checksum>55A8D125133F0FF6437D57D40EB3331C</Checksum>
+      <Checksum>BC3A3BE5BCA8C3041DDBE1901490BF0F</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>930</Address>
@@ -522,7 +987,7 @@ Program.Setup(() =&gt; {
         "@AI:WidgetGenie",
         "AI.WidgetGenie/Gemini"
     ).AddOption("ApiKey", "", "1. Google Gemini AI API key", "password")
-     .AddOption("ModelId", "gemini-2.5-flash", "2. Model ID (Requires 1.5 Flash/Pro for Caching)", "text")
+     .AddOption("ModelId", "gemini-2.5-flash", "2. Model ID", "text")
      .AddOption("EnableDeepKnowledge", "On", "3. Enable Deep Knowledge (Read programs &amp; widgets)", "checkbox")
      .AddOption("SystemInstructions", "", "4. System Instructions", $"editor:file:{systemPromptFile}:markdown");
 });
@@ -676,6 +1141,9 @@ Func&lt;string, bool&gt; EnsureCache = (fullContext) =&gt; {
 // ===================================================================
 Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
 {
+    var request = Api.Parse(userCommand);
+    var msg = userCommand is string ? WebUtility.UrlDecode(userCommand as string) : request?.Data is string ? request?.Data as string : Encoding.Default.GetString(request?.Data as byte[]);
+
     if (isQuotaExceeded &amp;&amp; DateTime.UtcNow &lt; rateLimitResetTime) {
         return new ResponseText($"**AI Temporarily Unavailable:** Rate limit reached (Error 429). Please try again in {Math.Ceiling((rateLimitResetTime - DateTime.UtcNow).TotalMinutes)} minutes.");
     }
@@ -683,7 +1151,7 @@ Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
     var result = Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId });
     var payloadContents = JArray.FromObject(result).ToObject&lt;List&lt;ChatMessage&gt;&gt;();
 
-    var userMessage = ChatMessage.Create("user", userCommand as string);
+    var userMessage = ChatMessage.Create("user", msg);
     Api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = userMessage });
     payloadContents.Add(userMessage);
 
@@ -822,7 +1290,7 @@ Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt; Api.Call("System.Utility/Ch
 Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId }));
 Api.Handle($"{API_URL}/{API_HISTORY_REMOVE_AT}", (i) =&gt; Api.Call("System.Utility/ChatHistory/RemoveAt", new { StoreId = storeId, Index = i }));
 Api.Handle($"{API_URL}/{API_HISTORY_EXPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Export", new { StoreId = storeId }));
-Api.Handle($"{API_URL}/{API_HISTORY_IMPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Import", new { StoreId = storeId, Data = p }));
+Api.Handle($"{API_URL}/{API_HISTORY_IMPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Import", new { StoreId = storeId, Data = (p as dynamic).Data }));
 
 while (Program.IsRunning &amp;&amp; !reconfigureRequired) { Pause(1); }
 </ScriptSource>
@@ -857,9 +1325,9 @@ public class ChatMessage {
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-widget-genie</Id>
-      <Version>1.0.9</Version>
+      <Version>1.0.10</Version>
       <Required>true</Required>
-      <Checksum>9FD7E31708997C961851E704CC69EE03</Checksum>
+      <Checksum>97E47ED8CE0CB34D3CC2F493C5C3873D</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>931</Address>
@@ -1706,8 +2174,9 @@ else
     // --- 8. API ENDPOINTS: INFERENCE AND CHAT ---
 
     Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userInput) =&gt; {
+        var request = Api.Parse(userInput);
         // Direct intent submission (e.g. from external modules or scripts)
-        string input = WebUtility.UrlDecode((string)userInput);
+        var input = userInput is string ? WebUtility.UrlDecode(userInput as string) : request?.Data is string ? request?.Data as string : Encoding.Default.GetString(request?.Data as byte[]);
         if (!String.IsNullOrWhiteSpace(input))
         {
             bool sendContextData = (Program.Option(OPTION_SEND_CONTEXT_DATA).Value == "On");
@@ -1716,8 +2185,9 @@ else
         return new ResponseStatus(Status.Ok, "Processing: " + input);
 
     }).Handle($"{API_URL}/{API_PROMPT_SCHEDULE}", (command) =&gt; {
+        var request = Api.Parse(command);
         // Direct intent submission (e.g. from external modules or scripts)
-        string input = WebUtility.UrlDecode((string)command);
+        var input = command is string ? WebUtility.UrlDecode(command as string) : request?.Data is string ? request?.Data as string : Encoding.Default.GetString(request?.Data as byte[]);
         if (!String.IsNullOrWhiteSpace(input))
         {
           return new ResponseStatus(Status.Ok, processInput(input, true, false, true));
@@ -1759,6 +2229,10 @@ else
 
     });
 
+    Api.Handle($"{API_URL}/{API_HISTORY_REMOVE_AT}", (i) =&gt; Api.Call("System.Utility/ChatHistory/RemoveAt", new { StoreId = storeId, Index = i }));
+    Api.Handle($"{API_URL}/{API_HISTORY_EXPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Export", new { StoreId = storeId }));
+    Api.Handle($"{API_URL}/{API_HISTORY_IMPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Import", new { StoreId = storeId, Data = (p as dynamic).Data }));
+
     Program.Emit(FIELD_STATUS_ERROR, "");
 
   } catch (Exception e) {
@@ -1796,6 +2270,9 @@ const string API_PROMPT_SCHEDULE = "Prompt.Schedule";
 const string API_PROMPT_CANCEL = "Prompt.Cancel";
 const string API_HISTORY_GET = "History.Get";
 const string API_HISTORY_CLEAR = "History.Clear";
+const string API_HISTORY_REMOVE_AT = "History.RemoveAt";
+const string API_HISTORY_EXPORT = "History.Export";
+const string API_HISTORY_IMPORT = "History.Import";
 
 /* Module Option Keys */
 const string OPTION_SEND_CONTEXT_DATA = "SendContextData";
@@ -2140,9 +2617,9 @@ public ModelParams GetOptimizedParams(string modelPath)
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.0.8</Version>
+      <Version>1.0.9</Version>
       <Required>true</Required>
-      <Checksum>72D704836A3B445B5F72BC38EFE7BDEE</Checksum>
+      <Checksum>DFAD6FD52F1730CD34A0A2B4E3467809</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>

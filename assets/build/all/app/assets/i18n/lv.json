@@ -565,5 +565,15 @@
   "error": "Kļūda!",
   "copied_to_clipboard": "Kopēts starpliktuvē.",
   "message_deleted": "Ziņojums dzēsts",
-  "clear_chat_to_import": "Notīrīt pašreizējo tērzēšanu, lai importētu jaunu."
+  "clear_chat_to_import": "Notīrīt pašreizējo tērzēšanu, lai importētu jaunu.",
+  "all_groups": "Visas grupas",
+  "show_selected_groups": "Rādīt atlasītās grupas",
+  "show_deactivated_items": "Rādīt deaktivizētus vienumus",
+  "show_upgradable_programs": "Rādīt jaunināmas programmas",
+  "selected_groups": "Atlasītās grupas",
+  "deactivated_programs_count": "Deaktivizētās programmas: {{count}}",
+  "upgradable_programs": "Jaunināmas programmas",
+  "unsaved_changes": "Nesaglabātās izmaiņas",
+  "save_to_apply_program_changes": "Saglabāt, lai izmaiņas lietotu programmā.",
+  "imported_program_name_group": "Importēta programma \"{{name}}\" ({{address}}) grupā \"{{group}}\"."
 }

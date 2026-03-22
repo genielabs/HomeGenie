@@ -84,6 +84,13 @@ Simply run the startup script to launch the server:
 
 To gracefully stop the application, press `CTRL + C` in the terminal window.
 
+### 🛡️ Securing Your Installation (Sandboxing)
+
+Since HomeGenie features advanced AI automation engines (like *Gemini Automan*) capable of generating, compiling, and executing C# code on the fly, we highly recommend running the application in a restricted, sandboxed environment to ensure maximum system security when executing AI-generated code.
+
+*   **Dedicated System User (Linux - Recommended):** Run the server using a dedicated, non-root user (e.g., `homegenie`) with a `nologin` shell. Grant this user read/write permissions **strictly** to the HomeGenie installation folder, isolating it from the rest of your OS.
+*   **Containerization:** Alternatively, deploy HomeGenie using **Docker**, utilizing read-only volume mounts for the host system and restricting write access exclusively to the `homegenie` directory.
+
 ### Running as a System Service
 
 HomeGenie can be run directly from a terminal for easy setup and testing,

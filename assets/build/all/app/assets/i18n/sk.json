@@ -565,5 +565,15 @@
   "error": "Chyba!",
   "copied_to_clipboard": "Skopírované do schránky.",
   "message_deleted": "Správa bola odstránená",
-  "clear_chat_to_import": "Vymažte aktuálny chat a importujte nový."
+  "clear_chat_to_import": "Vymažte aktuálny chat a importujte nový.",
+  "all_groups": "Všetky skupiny",
+  "show_selected_groups": "Zobraziť vybrané skupiny",
+  "show_deactivated_items": "Zobraziť deaktivované položky",
+  "show_upgradable_programs": "Zobraziť aktualizovateľné programy",
+  "selected_groups": "Vybrané skupiny",
+  "deactivated_programs_count": "Deaktivované programy: {{count}}",
+  "upgradable_programs": "Aktualizovateľné programy",
+  "unsaved_changes": "Neuložené zmeny",
+  "save_to_apply_program_changes": "Uložte, ak chcete zmeny v programe použiť.",
+  "imported_program_name_group": "Importovaný program „{{name}}“ ({{address}}) v skupine „{{group}}“."
 }

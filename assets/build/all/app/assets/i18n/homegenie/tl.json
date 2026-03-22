@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Paganahin ang Pagre-record ng Video",
       "NVR.RecordOnAlarm": "Mag-record sa Alarma",
       "NVR.ContinuousRecording": "Patuloy na Pagtatala."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Ang iyong matalinong Automation Manager. Gawing agentic workflows ang natural na wika: isinusulat, sinusubukan, at isinasagawa nito ang mga programang C# nang real-time upang makumpleto ang anumang gawain. Para i-activate ang feature na ito, maglagay ng wastong API key. Sundin ang mga tagubilin sa https://aistudio.google.com/app/apikey para makakuha ng libreng API key.",
+      "ConfigureOptions.ApiKey": "Key ng Google Gemini AI API",
+      "ConfigureOptions.ModelId": "ID ng Modelo",
+      "ConfigureOptions.EnableDeepKnowledge": "Paganahin ang Malalim na Kaalaman (Magbasa ng mga programa at widget)",
+      "ConfigureOptions.SystemInstructions": "Mga Tagubilin sa Sistema"
     }
   },
   "scheduler_preset_action_genie_command": "Utos ng Genie",

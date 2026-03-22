@@ -565,5 +565,15 @@
   "error": "Грешка!",
   "copied_to_clipboard": "Копирано у међуспремник.",
   "message_deleted": "Порука је обрисана",
-  "clear_chat_to_import": "Обришите тренутни ћаскање да бисте увезли ново."
+  "clear_chat_to_import": "Обришите тренутни ћаскање да бисте увезли ново.",
+  "all_groups": "Све групе",
+  "show_selected_groups": "Прикажи изабране групе",
+  "show_deactivated_items": "Прикажи деактивиране ставке",
+  "show_upgradable_programs": "Прикажи програме који се могу надоградити",
+  "selected_groups": "Одабране групе",
+  "deactivated_programs_count": "Деактивирани програми: {{count}}",
+  "upgradable_programs": "Надоградиви програми",
+  "unsaved_changes": "Несачуване промене",
+  "save_to_apply_program_changes": "Сачувај да бисте применили измене у програму.",
+  "imported_program_name_group": "Увезен је програм „{{name}}“ ({{address}}) у групу „{{group}}“."
 }

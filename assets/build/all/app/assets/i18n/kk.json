@@ -565,5 +565,15 @@
   "error": "Қате!",
   "copied_to_clipboard": "Буферге көшірілді.",
   "message_deleted": "Хабар жойылды",
-  "clear_chat_to_import": "Жаңа чатты импорттау үшін ағымдағы чатты тазалаңыз."
+  "clear_chat_to_import": "Жаңа чатты импорттау үшін ағымдағы чатты тазалаңыз.",
+  "all_groups": "Барлық топтар",
+  "show_selected_groups": "Таңдалған топтарды көрсету",
+  "show_deactivated_items": "Өшірілген элементтерді көрсету",
+  "show_upgradable_programs": "Жаңартылатын бағдарламаларды көрсету",
+  "selected_groups": "Таңдалған топтар",
+  "deactivated_programs_count": "Өшірілген бағдарламалар: {{count}}",
+  "upgradable_programs": "Жаңартылатын бағдарламалар",
+  "unsaved_changes": "Сақталмаған өзгерістер",
+  "save_to_apply_program_changes": "Бағдарламаға өзгерістер енгізу үшін сақтау.",
+  "imported_program_name_group": "\"{{group}}\" тобындағы \"{{name}}\" ({{address}}) бағдарламасы импортталды."
 }

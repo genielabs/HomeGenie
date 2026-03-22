@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "ဗီဒီယိုရိုက်ကူးခြင်းကို ဖွင့်ပါ",
       "NVR.RecordOnAlarm": "နှိုးစက်ဖြင့် မှတ်တမ်းတင်ခြင်း",
       "NVR.ContinuousRecording": "စဉ်ဆက်မပြတ် မှတ်တမ်းတင်ခြင်း။"
+    },
+    "932": {
+      "Title": "ဂျီမီနီယမ် အော်တိုမန်း",
+      "Description": "သင့်ရဲ့ smart Automation Manager။ သဘာဝဘာသာစကားကို agentic workflows အဖြစ်သို့ ပြောင်းလဲပါ- ၎င်းသည် မည်သည့်တာဝန်ကိုမဆို ပြီးမြောက်စေရန်အတွက် C# ပရိုဂရမ်များကို ရေးသား၊ စမ်းသပ်ပြီး real-time လုပ်ဆောင်ပေးသည်။ ဤအင်္ဂါရပ်ကို အသက်သွင်းရန်၊ တရားဝင် API key တစ်ခုကို ရိုက်ထည့်ပါ။ အခမဲ့ API key တစ်ခုရယူရန် https://aistudio.google.com/app/apikey ရှိ ညွှန်ကြားချက်များကို လိုက်နာပါ။",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API သော့",
+      "ConfigureOptions.ModelId": "မော်ဒယ် ID",
+      "ConfigureOptions.EnableDeepKnowledge": "Deep Knowledge ကိုဖွင့်ပါ (ပရိုဂရမ်များနှင့် ဝစ်ဂျက်များကိုဖတ်ပါ)",
+      "ConfigureOptions.SystemInstructions": "စနစ်ညွှန်ကြားချက်များ"
     }
   },
   "scheduler_preset_action_genie_command": "ဂျီနီ အမိန့်ပေးချက်",

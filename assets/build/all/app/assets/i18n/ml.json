@@ -565,5 +565,15 @@
   "error": "പിശക്!",
   "copied_to_clipboard": "ക്ലിപ്പ്ബോർഡിലേക്ക് പകർത്തി.",
   "message_deleted": "സന്ദേശം ഇല്ലാതാക്കി",
-  "clear_chat_to_import": "പുതിയൊരെണ്ണം ഇറക്കുമതി ചെയ്യാൻ നിലവിലുള്ള ചാറ്റ് മായ്‌ക്കുക."
+  "clear_chat_to_import": "പുതിയൊരെണ്ണം ഇറക്കുമതി ചെയ്യാൻ നിലവിലുള്ള ചാറ്റ് മായ്‌ക്കുക.",
+  "all_groups": "എല്ലാ ഗ്രൂപ്പുകളും",
+  "show_selected_groups": "തിരഞ്ഞെടുത്ത ഗ്രൂപ്പുകൾ കാണിക്കുക",
+  "show_deactivated_items": "നിർജ്ജീവമാക്കിയ ഇനങ്ങൾ കാണിക്കുക",
+  "show_upgradable_programs": "അപ്‌ഗ്രേഡുചെയ്യാവുന്ന പ്രോഗ്രാമുകൾ കാണിക്കുക",
+  "selected_groups": "തിരഞ്ഞെടുത്ത ഗ്രൂപ്പുകൾ",
+  "deactivated_programs_count": "നിർജ്ജീവമാക്കിയ പ്രോഗ്രാമുകൾ: {{count}}",
+  "upgradable_programs": "അപ്‌ഗ്രേഡബിൾ പ്രോഗ്രാമുകൾ",
+  "unsaved_changes": "സംരക്ഷിക്കാത്ത മാറ്റങ്ങൾ",
+  "save_to_apply_program_changes": "പ്രോഗ്രാമിൽ മാറ്റങ്ങൾ പ്രയോഗിക്കാൻ സംരക്ഷിക്കുക.",
+  "imported_program_name_group": "\"{{group}}\" ഗ്രൂപ്പിൽ നിന്ന് \"{{name}}\" ({{address}}) എന്ന പ്രോഗ്രാം ഇറക്കുമതി ചെയ്തു."
 }

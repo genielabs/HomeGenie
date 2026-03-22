@@ -29,6 +29,7 @@ using System.Xml.Serialization;
 using MIG.Config;
 
 using HomeGenie.Service;
+using HomeGenie.Automation;
 
 namespace HomeGenie.Data
 {
@@ -139,6 +140,7 @@ namespace HomeGenie.Data
         }
 
         public string EnableLogFile { get; set; }
+        public int ProgramIdNext { get; set; } = ProgramManager.USERSPACE_PROGRAMS_START;
     }
 
 }

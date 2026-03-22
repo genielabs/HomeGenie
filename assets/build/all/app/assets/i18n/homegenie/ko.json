@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "동영상 녹화 활성화",
       "NVR.RecordOnAlarm": "알람 녹음",
       "NVR.ContinuousRecording": "연속 녹화."
+    },
+    "932": {
+      "Title": "제미니 오토맨",
+      "Description": "스마트 자동화 관리자. 자연어를 에이전트 기반 워크플로로 전환하세요. C# 프로그램을 실시간으로 작성, 테스트 및 실행하여 모든 작업을 완료합니다. 이 기능을 활성화하려면 유효한 API 키를 입력하세요. 무료 API 키를 발급받으려면 https://aistudio.google.com/app/apikey의 지침을 따르세요.",
+      "ConfigureOptions.ApiKey": "구글 제미니 AI API 키",
+      "ConfigureOptions.ModelId": "모델 ID",
+      "ConfigureOptions.EnableDeepKnowledge": "심층 지식 활성화 (프로그램 및 위젯 읽기)",
+      "ConfigureOptions.SystemInstructions": "시스템 지침"
     }
   },
   "scheduler_preset_action_genie_command": "지니 커맨드",

@@ -565,5 +565,15 @@
   "error": "غلطی!",
   "copied_to_clipboard": "کلپ بورڈ پر کاپی ہو گیا۔",
   "message_deleted": "پیغام حذف کر دیا گیا۔",
-  "clear_chat_to_import": "نیا درآمد کرنے کے لیے موجودہ چیٹ کو صاف کریں۔"
+  "clear_chat_to_import": "نیا درآمد کرنے کے لیے موجودہ چیٹ کو صاف کریں۔",
+  "all_groups": "تمام گروپس",
+  "show_selected_groups": "منتخب گروپس دکھائیں۔",
+  "show_deactivated_items": "غیر فعال اشیاء دکھائیں۔",
+  "show_upgradable_programs": "اپ گریڈ کے قابل پروگرام دکھائیں۔",
+  "selected_groups": "منتخب گروپس",
+  "deactivated_programs_count": "غیر فعال پروگرامز: {{count}}",
+  "upgradable_programs": "اپ گریڈ ایبل پروگرام",
+  "unsaved_changes": "غیر محفوظ شدہ تبدیلیاں",
+  "save_to_apply_program_changes": "پروگرام میں تبدیلیاں لاگو کرنے کے لیے محفوظ کریں۔",
+  "imported_program_name_group": "پروگرام \"{{name}}\" ({{address}}) گروپ \"{{group}}\" میں درآمد کیا گیا۔"
 }

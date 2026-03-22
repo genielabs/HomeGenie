@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Dayakan Rakaman Video",
       "NVR.RecordOnAlarm": "Rakam Semasa Penggera",
       "NVR.ContinuousRecording": "Rakaman Berterusan."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Pengurus Automasi pintar anda. Tukarkan bahasa semula jadi kepada aliran kerja agentik: ia menulis, menguji dan melaksanakan program C# dalam masa nyata untuk menyelesaikan sebarang tugasan yang diberikan. Untuk mengaktifkan ciri ini, masukkan kunci API yang sah. Ikuti arahan di https://aistudio.google.com/app/apikey untuk mendapatkan kunci API percuma.",
+      "ConfigureOptions.ApiKey": "Kunci API Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID Model",
+      "ConfigureOptions.EnableDeepKnowledge": "Dayakan Pengetahuan Mendalam (Baca program & widget)",
+      "ConfigureOptions.SystemInstructions": "Arahan Sistem"
     }
   },
   "scheduler_preset_action_genie_command": "Perintah Jin",

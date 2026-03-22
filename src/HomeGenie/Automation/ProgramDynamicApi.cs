@@ -91,7 +91,7 @@ namespace HomeGenie
                 // explicit command API handlers registered in the form <domain>/<address>/<command>
                 // receives only the remaining part of the request after the <command>
                 var args = command.OriginalRequest.Substring(registeredApi.Length).Trim('/');
-                return handler(args);
+                return handler(new MigInterfaceCommand(args, command.Data));
             }
 
             // else

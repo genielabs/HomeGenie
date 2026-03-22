@@ -25,20 +25,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-#if NETCOREAPP
-using System.Diagnostics;
-using System.Dynamic;
-using System.Net;
-using System.Threading;
 using HomeGenie.Service;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Emit;
-using Microsoft.CSharp.RuntimeBinder;
-#else
-using Microsoft.CSharp;
-using System.CodeDom.Compiler;
-#endif
 
 namespace HomeGenie.Automation.Engines
 {
@@ -62,15 +52,12 @@ namespace HomeGenie.Automation.Engines
             "System.Threading.Tasks",
             "System.Security.Cryptography",
             "System.Security.Cryptography.X509Certificates",
-#if NETCOREAPP
             "System.Device.Gpio",
             "System.Device.I2c",
             "Iot.Device",
             "Iot.Device.Common",
             "System.Text.Json",
             "JsonSerializer = System.Text.Json.JsonSerializer",
-#endif
-#if NET8_0_OR_GREATER
             // yolo
             "Compunet.YoloSharp",
             "Compunet.YoloSharp.Plotting",
@@ -89,11 +76,6 @@ namespace HomeGenie.Automation.Engines
             "LLamaSharp.SemanticKernel",
             "LLamaSharp.SemanticKernel.TextCompletion",
             "Microsoft.SemanticKernel",
-//            "LangChain.Providers",
-//            "LangChain.Providers.HuggingFace.Downloader",
-//            "LangChain.Providers.LLamaSharp",
-//            "static LangChain.Chains.Chain",
-#endif
             "Microsoft.Extensions.Options",
             "Microsoft.Extensions.Logging.Abstractions",
             "Newtonsoft.Json",
@@ -119,13 +101,13 @@ namespace HomeGenie.Automation.Engines
             "NWaves.Filters.Base",
             "NWaves.Operations",
             "NWaves.Utils",
-#if NET6_0_OR_GREATER
             "SixLabors.ImageSharp",
             "SixLabors.ImageSharp.PixelFormats",
             "SixLabors.ImageSharp.Processing",
             "SixLabors.ImageSharp.Formats.Png",
-#endif
-#if !NETCOREAPP
+
+/*
+// Must be explicitly referenced with `#using` (prefer using .NET IoT)
             "Raspberry",
             "Raspberry.Timers",
             "Raspberry.IO",
@@ -154,7 +136,8 @@ namespace HomeGenie.Automation.Engines
             "Raspberry.IO.GeneralPurpose.Configuration",
             "Raspberry.IO.InterIntegratedCircuit",
             "Raspberry.IO.SerialPeripheralInterface",
-#endif
+*/
+
             "UnitsNet", // used both by Raspberry.IO and Microsoft.IoT
             "Utility = HomeGenie.Service.Utility",
             "YamlDotNet.Serialization",
@@ -163,11 +146,7 @@ namespace HomeGenie.Automation.Engines
 
         public static int ProgramCodeOffset => Includes.Count() + 12;
 
-#if NETCOREAPP
         public static EmitResult CompileScript(string scriptSetup, string scriptSource, string scriptContext, string outputDllFile)
-#else
-        public static CompilerResults CompileScript(string scriptSetup, string scriptSource, string scriptContext, string outputDllFile)
-#endif
         {
             var source = @"#pragma warning disable 0168 // variable declared but not used.
 #pragma warning disable 0219 // variable assigned but not used.
@@ -240,7 +219,7 @@ namespace HomeGenie.Automation.Scripting
                 .Replace("{source}", parsedCode.MainCode)
                 .Replace("{setup}", parsedCode.SetupCode)
                 .Replace("{context}", parsedCode.ContextCode);
-#if NETCOREAPP
+
             var homeGenieDir = Path.GetDirectoryName(typeof(HomeGenieService).GetTypeInfo().Assembly.Location);
 
             var diagnosticOptions = new Dictionary<string, ReportDiagnostic>
@@ -357,110 +336,6 @@ namespace HomeGenie.Automation.Scripting
                 // TODO:
             }
             return result;
-#else
-            var providerOptions = new Dictionary<string, string>
-            {
-                //{ "CompilerVersion", "v4.0" }
-            };
-            var provider = new CSharpCodeProvider(providerOptions);
-            var compilerParams = new CompilerParameters
-            {
-                GenerateInMemory = false,
-                GenerateExecutable = false,
-                IncludeDebugInformation = true,
-                TreatWarningsAsErrors = false,
-                OutputAssembly = outputDllFile
-                // *** Useful for debugging
-                //,TempFiles = new TempFileCollection {KeepFiles = true}
-            };
-
-            // Build compiler options
-            string memoryDllPath = "System.Memory.dll";
-            string aliasName = "mem";
-            compilerParams.CompilerOptions = $"/r:{aliasName}=\"{memoryDllPath}\"";
-            string warningCode = "1701,1702";
-            compilerParams.CompilerOptions += $" /nowarn:{warningCode}";
-
-            // Mono runtime 2/3 compatibility fix
-            // TODO: this may not be required anymore
-            var relocateSystemAsm = false;
-            var type = Type.GetType("Mono.Runtime");
-            if (type != null)
-            {
-                MethodInfo displayName = type.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
-                if (displayName != null)
-                {
-                    int major;
-                    if (Int32.TryParse(displayName.Invoke(null, null).ToString().Substring(0, 1), out major) && major > 2)
-                    {
-                        relocateSystemAsm = true;
-                    }
-                }
-            }
-            if (!relocateSystemAsm)
-            {
-                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-                foreach (var assembly in assemblies)
-                {
-                    var assemblyName = assembly.GetName();
-                    switch (assemblyName.Name.ToLower())
-                    {
-                        case "system":
-                        case "system.core":
-                        case "microsoft.csharp":
-                            compilerParams.ReferencedAssemblies.Add(assembly.Location);
-                            break;
-                    }
-                }
-            }
-            else
-            {
-                compilerParams.ReferencedAssemblies.Add("System.dll");
-                compilerParams.ReferencedAssemblies.Add("System.Core.dll");
-                compilerParams.ReferencedAssemblies.Add("Microsoft.CSharp.dll");
-            }
-            compilerParams.ReferencedAssemblies.Add("Microsoft.Extensions.Options.dll");
-            compilerParams.ReferencedAssemblies.Add("Microsoft.Extensions.Logging.Abstractions.dll");
-
-            compilerParams.ReferencedAssemblies.Add("System.Net.Http.dll");
-
-            compilerParams.ReferencedAssemblies.Add("HomeGenie.exe");
-            compilerParams.ReferencedAssemblies.Add("MessagePack.dll");
-            compilerParams.ReferencedAssemblies.Add("MessagePack.Annotations.dll");
-            compilerParams.ReferencedAssemblies.Add("MIG.dll");
-            compilerParams.ReferencedAssemblies.Add("MIG.HomeAutomation.dll");
-            compilerParams.ReferencedAssemblies.Add("CM19Lib.dll");
-            compilerParams.ReferencedAssemblies.Add("LiteDB.dll");
-            compilerParams.ReferencedAssemblies.Add("GLabs.Logging.dll");
-            compilerParams.ReferencedAssemblies.Add("Newtonsoft.Json.dll");
-
-            compilerParams.ReferencedAssemblies.Add("SerialPortLib.dll");
-            compilerParams.ReferencedAssemblies.Add("NetClientLib.dll");
-
-            compilerParams.ReferencedAssemblies.Add("OnvifDiscovery.dll");
-
-            compilerParams.ReferencedAssemblies.Add("UPnP.dll");
-
-            compilerParams.ReferencedAssemblies.Add("MQTTnet.dll");
-
-            compilerParams.ReferencedAssemblies.Add("NWaves.dll");
-
-            compilerParams.ReferencedAssemblies.Add("YamlDotNet.dll");
-
-            compilerParams.ReferencedAssemblies.Add("Raspberry.IO.dll");
-            compilerParams.ReferencedAssemblies.Add("Raspberry.IO.Components.dll");
-            compilerParams.ReferencedAssemblies.Add("Raspberry.IO.GeneralPurpose.dll");
-            compilerParams.ReferencedAssemblies.Add("Raspberry.IO.InterIntegratedCircuit.dll");
-            compilerParams.ReferencedAssemblies.Add("Raspberry.IO.SerialPeripheralInterface.dll");
-            compilerParams.ReferencedAssemblies.Add("Raspberry.System.dll");
-            compilerParams.ReferencedAssemblies.Add("UnitsNet.dll");
-
-            compilerParams.ReferencedAssemblies.Add(Path.Combine("Innovative.Geometry.Angle.dll"));
-            compilerParams.ReferencedAssemblies.Add(Path.Combine("Innovative.SolarCalculator.dll"));
-
-            // compile and generate script assembly
-            return provider.CompileAssemblyFromSource(compilerParams, source);
-#endif
         }
 
         public static ParseCodeResult ParseCode(string scriptSetup, string scriptSource, string scriptContext)

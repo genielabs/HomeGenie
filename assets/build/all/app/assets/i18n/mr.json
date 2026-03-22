@@ -565,5 +565,15 @@
   "error": "चूक!",
   "copied_to_clipboard": "क्लिपबोर्डवर कॉपी केले.",
   "message_deleted": "मेसेज हटवला",
-  "clear_chat_to_import": "नवीन चॅट आयात करण्यासाठी सध्याचे चॅट साफ करा."
+  "clear_chat_to_import": "नवीन चॅट आयात करण्यासाठी सध्याचे चॅट साफ करा.",
+  "all_groups": "सर्व गट",
+  "show_selected_groups": "निवडलेले गट दाखवा",
+  "show_deactivated_items": "निष्क्रिय केलेले आयटम दाखवा",
+  "show_upgradable_programs": "अपग्रेड करण्यायोग्य प्रोग्राम्स दाखवा",
+  "selected_groups": "निवडलेले गट",
+  "deactivated_programs_count": "निष्क्रिय केलेले प्रोग्राम: {{count}}",
+  "upgradable_programs": "अपग्रेड करण्यायोग्य प्रोग्राम्स",
+  "unsaved_changes": "न जतन केलेले बदल",
+  "save_to_apply_program_changes": "प्रोग्रॅममध्ये बदल लागू करण्यासाठी सेव्ह करा.",
+  "imported_program_name_group": "\"{{group}}\" या ग्रुपमध्ये \"{{name}}\" ({{address}}) हा प्रोग्राम इम्पोर्ट केला."
 }

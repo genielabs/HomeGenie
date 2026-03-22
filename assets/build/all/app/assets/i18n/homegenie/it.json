@@ -599,6 +599,21 @@
         "Istruzioni di Sistema"
     },
 
+    "932": {
+      "Title":
+        "Gemini Automan",
+      "Description":
+        "Il tuo Automation Manager intelligente. Trasforma il linguaggio naturale in workflow agentici: scrive, testa ed esegue programmi C# in tempo reale per completare qualsiasi compito. Per attivare la funzione, inserisci una chiave API valida seguendo le istruzioni su https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey":
+        "Chiave API Google Gemini AI",
+      "ConfigureOptions.ModelId":
+        "ID Modello",
+      "ConfigureOptions.EnableDeepKnowledge":
+        "Abilita Deep Knowledge (lettura programmi e widget)",
+      "ConfigureOptions.SystemInstructions":
+        "Istruzioni di sistema"
+    },
+
     "940": {
       "Title":
         "IA Locale",

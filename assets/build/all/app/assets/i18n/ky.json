@@ -565,5 +565,15 @@
   "error": "Ката!",
   "copied_to_clipboard": "Алмашуу буферине көчүрүлдү.",
   "message_deleted": "Билдирүү өчүрүлдү",
-  "clear_chat_to_import": "Жаңысын импорттоо үчүн учурдагы чатты тазалаңыз."
+  "clear_chat_to_import": "Жаңысын импорттоо үчүн учурдагы чатты тазалаңыз.",
+  "all_groups": "Бардык топтор",
+  "show_selected_groups": "Тандалган топторду көрсөтүү",
+  "show_deactivated_items": "Өчүрүлгөн нерселерди көрсөтүү",
+  "show_upgradable_programs": "Жаңыртыла турган программаларды көрсөтүү",
+  "selected_groups": "Тандалган топтор",
+  "deactivated_programs_count": "Өчүрүлгөн программалар: {{count}}",
+  "upgradable_programs": "Жаңыртыла турган программалар",
+  "unsaved_changes": "Сакталбаган өзгөртүүлөр",
+  "save_to_apply_program_changes": "Программага өзгөртүүлөрдү киргизүү үчүн сактоо.",
+  "imported_program_name_group": "\"{{group}}\" тобундагы \"{{name}}\" ({{address}}) программасы импорттолгон."
 }

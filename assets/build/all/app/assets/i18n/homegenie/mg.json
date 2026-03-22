@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Alefaso ny fandraketana horonan-tsary",
       "NVR.RecordOnAlarm": "Raketo an-tsoratra rehefa misy fanairana",
       "NVR.ContinuousRecording": "Fandraketana mitohy."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Ny mpitantana ny automation marani-tsaina anao. Avadiho ho lasa workflows agentic ny fiteny voajanahary: manoratra, manandrana ary manatanteraka programa C# amin'ny fotoana tena izy izy io mba hamitana izay asa omena. Mba hampandehanana ity endri-javatra ity dia ampidiro ny lakile API manan-kery. Araho ny torolàlana ao amin'ny https://aistudio.google.com/app/apikey mba hahazoana lakile API maimaim-poana.",
+      "ConfigureOptions.ApiKey": "Fanalahidin'ny API Google Gemini AI",
+      "ConfigureOptions.ModelId": "Laharan'ny modely",
+      "ConfigureOptions.EnableDeepKnowledge": "Alefaso ny Fahalalana Lalina (Vakio ireo fandaharana sy widgets)",
+      "ConfigureOptions.SystemInstructions": "Torolàlana momba ny rafitra"
     }
   },
   "scheduler_preset_action_genie_command": "Didin'ny Génie",

@@ -62,7 +62,7 @@ namespace HomeGenie.Service
             foreach (var program in homegenie.ProgramManager.Programs)
             {
                 // TODO: deprecate Arduino??
-                if (program.Type.ToLower() == "arduino" && (program.Address >= ProgramManager.USERSPACE_PROGRAMS_START && program.Address < ProgramManager.PACKAGE_PROGRAMS_START))
+                if (program.Type.ToLower() == "arduino" && (program.Address >= ProgramManager.USERSPACE_PROGRAMS_START))
                 {
                     string arduinoFolder = Path.Combine("programs", "arduino", program.Address.ToString());
                     string[] filePaths = Directory.GetFiles(arduinoFolder);
@@ -356,7 +356,7 @@ namespace HomeGenie.Service
                 var currentProgram = homegenie.ProgramManager.Programs.Find(p => p.Address == program.Address);
                 program.IsRunning = false;
                 // Only restore USER-SPACE PROGRAMS
-                if (selectedPrograms.Contains("," + program.Address + ",") && (program.Address >= ProgramManager.USERSPACE_PROGRAMS_START && program.Address < ProgramManager.PACKAGE_PROGRAMS_START))
+                if (selectedPrograms.Contains("," + program.Address + ",") && (program.Address >= ProgramManager.USERSPACE_PROGRAMS_START))
                 {
                     if (currentProgram == null)
                     {
@@ -402,7 +402,7 @@ namespace HomeGenie.Service
                         homegenie.ProgramManager.ProgramCompile(program);
                     }
                 }
-                else if (currentProgram != null && (program.Address < ProgramManager.USERSPACE_PROGRAMS_START || program.Address >= ProgramManager.PACKAGE_PROGRAMS_START))
+                else if (currentProgram != null && (program.Address < ProgramManager.USERSPACE_PROGRAMS_START))
                 {
                     // Only restore Enabled/Disabled status for SYSTEM PROGRAMS and packages
                     currentProgram.IsEnabled = program.IsEnabled;

@@ -565,5 +565,15 @@
   "error": "غلطي!",
   "copied_to_clipboard": "ڪلپ بورڊ ڏانهن نقل ڪيو ويو.",
   "message_deleted": "پيغام ڊهي ويو",
-  "clear_chat_to_import": "نئين چيٽ درآمد ڪرڻ لاءِ موجوده چيٽ صاف ڪريو."
+  "clear_chat_to_import": "نئين چيٽ درآمد ڪرڻ لاءِ موجوده چيٽ صاف ڪريو.",
+  "all_groups": "سڀ گروپ",
+  "show_selected_groups": "چونڊيل گروپ ڏيکاريو",
+  "show_deactivated_items": "غير فعال شيون ڏيکاريو",
+  "show_upgradable_programs": "اپ گريڊيبل پروگرام ڏيکاريو",
+  "selected_groups": "چونڊيل گروپ",
+  "deactivated_programs_count": "غير فعال پروگرام: {{count}}",
+  "upgradable_programs": "اپ گريڊيبل پروگرام",
+  "unsaved_changes": "غير محفوظ ٿيل تبديليون",
+  "save_to_apply_program_changes": "پروگرام ۾ تبديليون لاڳو ڪرڻ لاءِ محفوظ ڪريو.",
+  "imported_program_name_group": "\"{{group}}\" گروپ ۾ درآمد ٿيل پروگرام \"{{name}}\" ({{address}})."
 }

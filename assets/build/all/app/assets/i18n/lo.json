@@ -565,5 +565,15 @@
   "error": "ຜິດພາດ!",
   "copied_to_clipboard": "ສຳເນົາໃສ່ຄລິບບອດແລ້ວ.",
   "message_deleted": "ຂໍ້ຄວາມຖືກລຶບແລ້ວ",
-  "clear_chat_to_import": "ລຶບລ້າງການສົນທະນາປັດຈຸບັນເພື່ອນຳເຂົ້າການສົນທະນາໃໝ່."
+  "clear_chat_to_import": "ລຶບລ້າງການສົນທະນາປັດຈຸບັນເພື່ອນຳເຂົ້າການສົນທະນາໃໝ່.",
+  "all_groups": "ກຸ່ມທັງໝົດ",
+  "show_selected_groups": "ສະແດງກຸ່ມທີ່ເລືອກ",
+  "show_deactivated_items": "ສະແດງລາຍການທີ່ປິດການໃຊ້ງານແລ້ວ",
+  "show_upgradable_programs": "ສະແດງໂປຣແກຣມທີ່ສາມາດອັບເກຣດໄດ້",
+  "selected_groups": "ກຸ່ມທີ່ເລືອກ",
+  "deactivated_programs_count": "ໂປຣແກຣມທີ່ປິດໃຊ້ງານແລ້ວ: {{count}}",
+  "upgradable_programs": "ໂປຣແກຣມທີ່ສາມາດຍົກລະດັບໄດ້",
+  "unsaved_changes": "ການປ່ຽນແປງທີ່ບໍ່ໄດ້ບັນທຶກໄວ້",
+  "save_to_apply_program_changes": "ບັນທຶກເພື່ອນຳໃຊ້ການປ່ຽນແປງໃສ່ໂປຣແກຣມ.",
+  "imported_program_name_group": "ນຳເຂົ້າໂປຣແກຣມ \"{{name}}\" ({{address}}) ໃນກຸ່ມ \"{{group}}\" ແລ້ວ."
 }

@@ -565,5 +565,15 @@
   "error": "Njehie!",
   "copied_to_clipboard": "E depụtaghachiri ya na klipbọọdụ.",
   "message_deleted": "Ehichapụrụ ozi ahụ",
-  "clear_chat_to_import": "Hichapụ nkata dị ugbu a iji bubata nke ọhụrụ."
+  "clear_chat_to_import": "Hichapụ nkata dị ugbu a iji bubata nke ọhụrụ.",
+  "all_groups": "Otu niile",
+  "show_selected_groups": "Gosi otu ndị ahọpụtara",
+  "show_deactivated_items": "Gosi ihe ndị agbanyụrụ",
+  "show_upgradable_programs": "Gosi mmemme ndị a ga-emelite",
+  "selected_groups": "Ndị otu ahọpụtara",
+  "deactivated_programs_count": "Mmemme ndị gbanyụrụ agbanyụ: {{count}}",
+  "upgradable_programs": "Mmemme Ndị A Ga-emelite",
+  "unsaved_changes": "Mgbanwe ndị a na-echekwabeghị",
+  "save_to_apply_program_changes": "Chekwaa iji tinye mgbanwe na mmemme ahụ.",
+  "imported_program_name_group": "Mmemme e bubatara \"{{name}}\" ({{address}}) n'ime otu \"{{group}}\"."
 }

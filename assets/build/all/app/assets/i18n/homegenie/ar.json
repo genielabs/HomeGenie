@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "تفعيل تسجيل الفيديو",
       "NVR.RecordOnAlarm": "التسجيل عند الإنذار",
       "NVR.ContinuousRecording": "التسجيل المستمر."
+    },
+    "932": {
+      "Title": "جيميني أوتومان",
+      "Description": "مدير الأتمتة الذكي الخاص بك. حوّل اللغة الطبيعية إلى سير عمل آلي: فهو يكتب ويختبر وينفذ برامج C# في الوقت الفعلي لإنجاز أي مهمة. لتفعيل هذه الميزة، أدخل مفتاح API صالحًا. اتبع التعليمات على https://aistudio.google.com/app/apikey للحصول على مفتاح API مجاني.",
+      "ConfigureOptions.ApiKey": "مفتاح واجهة برمجة تطبيقات الذكاء الاصطناعي من جوجل جيميني",
+      "ConfigureOptions.ModelId": "معرف النموذج",
+      "ConfigureOptions.EnableDeepKnowledge": "تفعيل المعرفة المتعمقة (قراءة البرامج والأدوات)",
+      "ConfigureOptions.SystemInstructions": "تعليمات النظام"
     }
   },
   "scheduler_preset_action_genie_command": "أوامر الجني",

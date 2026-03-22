@@ -565,5 +565,15 @@
   "error": "Mali!",
   "copied_to_clipboard": "Kinopya sa clipboard.",
   "message_deleted": "Nabura ang mensahe",
-  "clear_chat_to_import": "I-clear ang kasalukuyang chat para mag-import ng bago."
+  "clear_chat_to_import": "I-clear ang kasalukuyang chat para mag-import ng bago.",
+  "all_groups": "Lahat ng Grupo",
+  "show_selected_groups": "Ipakita ang mga napiling grupo",
+  "show_deactivated_items": "Ipakita ang mga na-deactivate na item",
+  "show_upgradable_programs": "Ipakita ang mga programang maaaring i-upgrade",
+  "selected_groups": "Mga piling grupo",
+  "deactivated_programs_count": "Mga programang hindi naaktibo: {{count}}",
+  "upgradable_programs": "Mga Programang Maa-upgrade",
+  "unsaved_changes": "Mga hindi na-save na pagbabago",
+  "save_to_apply_program_changes": "I-save upang ilapat ang mga pagbabago sa programa.",
+  "imported_program_name_group": "Na-import na programang \"{{name}}\" ({{address}}) sa grupong \"{{group}}\"."
 }

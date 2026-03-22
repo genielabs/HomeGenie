@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Միացնել տեսագրությունը",
       "NVR.RecordOnAlarm": "Ձայնագրել զարթուցիչի վրա",
       "NVR.ContinuousRecording": "Շարունակական ձայնագրություն։"
+    },
+    "932": {
+      "Title": "Երկվորյակ ավտոմեն",
+      "Description": "Ձեր խելացի ավտոմատացման մենեջերը։ Բնական լեզուն վերածեք գործակալական աշխատանքային հոսքերի. այն գրում, փորձարկում և կատարում է C# ծրագրեր իրական ժամանակում՝ ցանկացած տրված առաջադրանք կատարելու համար։ Այս գործառույթը ակտիվացնելու համար մուտքագրեք վավեր API բանալի։ Հետևեք https://aistudio.google.com/app/apikey կայքում տեղադրված հրահանգներին՝ անվճար API բանալի ստանալու համար։",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API բանալի",
+      "ConfigureOptions.ModelId": "Մոդելի ID",
+      "ConfigureOptions.EnableDeepKnowledge": "Միացնել խորը գիտելիքները (կարդալ ծրագրեր և վիջեթներ)",
+      "ConfigureOptions.SystemInstructions": "Համակարգի հրահանգներ"
     }
   },
   "scheduler_preset_action_genie_command": "Ջինի հրամանատարություն",

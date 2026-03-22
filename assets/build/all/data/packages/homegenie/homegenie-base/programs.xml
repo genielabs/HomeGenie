@@ -54,7 +54,8 @@ Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
             return currentHistory;
 
         case "Import":
-            var newHistory = data?.Data?.ToString() ?? "";
+            byte[] rawData = data.Value&lt;byte[]&gt;("Data");
+            var newHistory = Encoding.UTF8.GetString(rawData);
             HistoryStore.Stores[storeId] = JsonConvert.DeserializeObject&lt;List&lt;ChatMessage&gt;&gt;(newHistory);
             HistoryStore.Save(dataFolder, storeId);
             return newHistory;
@@ -150,9 +151,9 @@ public static class HistoryStore
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.5</PackageVersion>
       <Id>chat-history-service</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>FCD2121C711BF832DD56B18E91EA1AAC</Checksum>
+      <Checksum>58CDCA16DD78D66E781A38AA9254FEF1</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>577</Address>
@@ -3926,7 +3927,7 @@ public static class FfmpegHelper
     }
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>

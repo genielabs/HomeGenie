@@ -565,5 +565,15 @@
   "error": "ದೋಷ!",
   "copied_to_clipboard": "ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲಿಸಿ.",
   "message_deleted": "ಸಂದೇಶವನ್ನು ಅಳಿಸಲಾಗಿದೆ",
-  "clear_chat_to_import": "ಹೊಸದನ್ನು ಆಮದು ಮಾಡಿಕೊಳ್ಳಲು ಪ್ರಸ್ತುತ ಚಾಟ್ ಅನ್ನು ತೆರವುಗೊಳಿಸಿ."
+  "clear_chat_to_import": "ಹೊಸದನ್ನು ಆಮದು ಮಾಡಿಕೊಳ್ಳಲು ಪ್ರಸ್ತುತ ಚಾಟ್ ಅನ್ನು ತೆರವುಗೊಳಿಸಿ.",
+  "all_groups": "ಎಲ್ಲಾ ಗುಂಪುಗಳು",
+  "show_selected_groups": "ಆಯ್ಕೆಮಾಡಿದ ಗುಂಪುಗಳನ್ನು ತೋರಿಸಿ",
+  "show_deactivated_items": "ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿದ ಐಟಂಗಳನ್ನು ತೋರಿಸಿ",
+  "show_upgradable_programs": "ನವೀಕರಿಸಬಹುದಾದ ಕಾರ್ಯಕ್ರಮಗಳನ್ನು ತೋರಿಸಿ",
+  "selected_groups": "ಆಯ್ಕೆ ಮಾಡಿದ ಗುಂಪುಗಳು",
+  "deactivated_programs_count": "ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿದ ಕಾರ್ಯಕ್ರಮಗಳು: {{count}}",
+  "upgradable_programs": "ನವೀಕರಿಸಬಹುದಾದ ಕಾರ್ಯಕ್ರಮಗಳು",
+  "unsaved_changes": "ಉಳಿಸದ ಬದಲಾವಣೆಗಳು",
+  "save_to_apply_program_changes": "ಪ್ರೋಗ್ರಾಂಗೆ ಬದಲಾವಣೆಗಳನ್ನು ಅನ್ವಯಿಸಲು ಉಳಿಸಿ.",
+  "imported_program_name_group": "\"{{group}}\" ಗುಂಪಿನಲ್ಲಿ \"{{name}}\" ({{address}}) ಪ್ರೋಗ್ರಾಂ ಅನ್ನು ಆಮದು ಮಾಡಿಕೊಳ್ಳಲಾಗಿದೆ."
 }

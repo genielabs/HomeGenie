@@ -565,5 +565,15 @@
   "error": "Грешка!",
   "copied_to_clipboard": "Копирано в клипборда.",
   "message_deleted": "Съобщението е изтрито",
-  "clear_chat_to_import": "Изчистете текущия чат, за да импортирате нов."
+  "clear_chat_to_import": "Изчистете текущия чат, за да импортирате нов.",
+  "all_groups": "Всички групи",
+  "show_selected_groups": "Показване на избраните групи",
+  "show_deactivated_items": "Показване на деактивирани елементи",
+  "show_upgradable_programs": "Показване на програми, които могат да се надграждат",
+  "selected_groups": "Избрани групи",
+  "deactivated_programs_count": "Деактивирани програми: {{count}}",
+  "upgradable_programs": "Надграждаеми програми",
+  "unsaved_changes": "Незапазени промени",
+  "save_to_apply_program_changes": "Запазете, за да приложите промените към програмата.",
+  "imported_program_name_group": "Импортирана е програма \"{{name}}\" ({{address}}) в група \"{{group}}\"."
 }

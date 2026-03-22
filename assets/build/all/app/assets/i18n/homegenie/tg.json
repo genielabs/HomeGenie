@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Сабти видеоро фаъол созед",
       "NVR.RecordOnAlarm": "Сабт дар ҳолати ҳушдор",
       "NVR.ContinuousRecording": "Сабти пайваста."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Менеҷери автоматикунонии интеллектуалии шумо. Забони табииро ба ҷараёнҳои кории агентӣ табдил диҳед: он барномаҳои C#-ро дар вақти воқеӣ менависад, месанҷад ва иҷро мекунад, то ҳар як вазифаи додашударо иҷро кунад. Барои фаъол кардани ин хусусият, калиди дурусти API-ро ворид кунед. Барои гирифтани калиди ройгони API, дастурҳоро дар https://aistudio.google.com/app/apikey иҷро кунед.",
+      "ConfigureOptions.ApiKey": "Калиди API-и Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID-и модел",
+      "ConfigureOptions.EnableDeepKnowledge": "Дониши амиқро фаъол созед (Барномаҳо ва виджетҳоро хонед)",
+      "ConfigureOptions.SystemInstructions": "Дастурҳои система"
     }
   },
   "scheduler_preset_action_genie_command": "Фармондеҳии Ҷин",

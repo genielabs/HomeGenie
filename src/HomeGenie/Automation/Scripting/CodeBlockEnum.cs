@@ -3,18 +3,18 @@
     public enum CodeBlockEnum
     {
         /// <summary>
-        /// Startup code
+        /// Program Setup code
         /// </summary>
-        TC,
+        TC,  // TODO: refactor to ProgramSetup
 
         /// <summary>
-        /// Program code
+        /// Program Main code
         /// </summary>
-        CR,
-        
+        CR,  // TODO: refactor to ProgramMain
+
         /// <summary>
-        /// Program class context
+        /// Program Context code
         /// </summary>
-        PC
+        PC  // TODO: refactor to ProgramContext
     }
 }

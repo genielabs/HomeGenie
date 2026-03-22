@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Mu Gbigbasilẹ Fidio ṣiṣẹ",
       "NVR.RecordOnAlarm": "Gba silẹ lori Itaniji",
       "NVR.ContinuousRecording": "Gbigbasilẹ ti nlọ lọwọ."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Olùṣàkóso Àdánidá Ọlọ́gbọ́n rẹ. Yí èdè àdánidá padà sí iṣẹ́ ìṣiṣẹ́ aṣojú: ó ń kọ, dán wò, ó sì ń ṣe àwọn ètò C# ní àkókò gidi láti parí iṣẹ́ èyíkéyìí tí a bá fún ọ. Láti mu iṣẹ́ yìí ṣiṣẹ́, tẹ kọ́kọ́rọ́ API tó wúlò. Tẹ̀lé àwọn ìtọ́ni ní https://aistudio.google.com/app/apikey láti gba kọ́kọ́rọ́ API ọ̀fẹ́.",
+      "ConfigureOptions.ApiKey": "Kọ́kọ́rọ́ API Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID awoṣe",
+      "ConfigureOptions.EnableDeepKnowledge": "Mu Imọ Jinlẹ Ṣiṣẹ (Ka awọn eto ati awọn ẹrọ ailorukọ)",
+      "ConfigureOptions.SystemInstructions": "Àwọn Ìtọ́ni Ètò"
     }
   },
   "scheduler_preset_action_genie_command": "Àṣẹ Ẹ̀mí",

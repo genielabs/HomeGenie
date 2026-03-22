@@ -565,5 +565,15 @@
   "error": "エラー！",
   "copied_to_clipboard": "クリップボードにコピーされました。",
   "message_deleted": "メッセージが削除されました",
-  "clear_chat_to_import": "新しいチャットをインポートするには、現在のチャットをクリアしてください。"
+  "clear_chat_to_import": "新しいチャットをインポートするには、現在のチャットをクリアしてください。",
+  "all_groups": "すべてのグループ",
+  "show_selected_groups": "選択したグループを表示する",
+  "show_deactivated_items": "無効化されたアイテムを表示する",
+  "show_upgradable_programs": "アップグレード可能なプログラムを表示する",
+  "selected_groups": "選択されたグループ",
+  "deactivated_programs_count": "無効化されたプログラム: {{count}}",
+  "upgradable_programs": "アップグレード可能なプログラム",
+  "unsaved_changes": "保存されていない変更",
+  "save_to_apply_program_changes": "プログラムの変更を適用するには、保存してください。",
+  "imported_program_name_group": "グループ「{{group}}」にプログラム「{{name}}」({{address}})をインポートしました。"
 }

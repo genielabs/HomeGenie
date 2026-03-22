@@ -30,10 +30,8 @@ using HomeGenie.Automation.Scripting;
 using HomeGenie.Service;
 using HomeGenie.Service.Constants;
 
-#if NETCOREAPP
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Emit;
-#endif
 
 namespace HomeGenie.Automation.Engines
 {
@@ -48,26 +46,8 @@ namespace HomeGenie.Automation.Engines
         private MethodInfo _methodSetup;
         private Assembly _scriptAssembly;
 
-#if !NETCOREAPP
-        private static bool _isShadowCopySet;
-#endif
-
         public CSharpEngine(ProgramBlock pb) : base(pb)
         {
-#if NETFRAMEWORK
-            // This static flag prevents the setup from running more than once
-            if (_isShadowCopySet) return;
-            _isShadowCopySet = true;
-
-            var domain = AppDomain.CurrentDomain;
-
-            // This is required for Mono compatibility to allow runtime assembly recompilation.
-            // It's obsolete, but necessary.
-#pragma warning disable CS0618
-            domain.SetShadowCopyPath(Path.Combine(domain.BaseDirectory, "programs"));
-            domain.SetShadowCopyFiles();
-#pragma warning restore CS0618
-#endif
         }
 
         public bool Load()
@@ -116,12 +96,7 @@ namespace HomeGenie.Automation.Engines
 
             CleanupFiles();
 
-            // DO NOT CHANGE THE FOLLOWING LINES OF CODE
-            // it is a lil' trick for mono compatibility
-            // since it will be caching the assembly when using the same name
-            // and use the old one instead of the new one
             var tempFile = Path.Combine("programs", Guid.NewGuid() + ".dll");
-#if NETCOREAPP
             EmitResult result = null;
             try
             {
@@ -210,83 +185,6 @@ namespace HomeGenie.Automation.Engines
                     }
                 }
             }
-#else
-            var result = new System.CodeDom.Compiler.CompilerResults(null);
-            try
-            {
-                result = CSharpAppFactory.CompileScript(ProgramBlock.ScriptSetup, ProgramBlock.ScriptSource, ProgramBlock.ScriptContext, tempFile);
-            }
-            catch (Exception ex)
-            {
-                // report errors during post-compilation process
-                result.Errors.Add(new System.CodeDom.Compiler.CompilerError(ProgramBlock.Name, 0, 0, "-1", ex.Message));
-            }
-
-            if (result.Errors.Count > 0)
-            {
-                var parsedCode = CSharpAppFactory.ParseCode(ProgramBlock.ScriptSetup, ProgramBlock.ScriptSource, ProgramBlock.ScriptContext);
-                var contextLines = parsedCode.ContextCode.Split('\n').Length;
-                var sourceLines = parsedCode.MainCode.Split('\n').Length;
-                foreach (System.CodeDom.Compiler.CompilerError error in result.Errors)
-                {
-                    var errorRow = (error.Line - CSharpAppFactory.ProgramCodeOffset) - parsedCode.UserIncludes.Count - 1;
-                    var errorCol = error.Column + 1;
-                    if (errorRow <= 0)
-                    {
-                        errors.Add(new ProgramError
-                        {
-                            Line = 0,
-                            EndLine = 0,
-                            Column = 0,
-                            EndColumn = 0,
-                            ErrorMessage = error.ErrorText,
-                            ErrorNumber = error.ErrorNumber,
-                            CodeBlock = CodeBlockEnum.PC
-                        });
-                        continue;
-                    }
-                    var blockType = CodeBlockEnum.CR;
-                    if (errorRow <= contextLines)
-                    {
-                        blockType = CodeBlockEnum.PC;
-                    }
-                    else
-                    {
-                        errorRow -= (contextLines - 1 + 6);
-                        if (errorRow >= sourceLines + CSharpAppFactory.ConditionCodeOffset)
-                        {
-                            errorRow -= (sourceLines + CSharpAppFactory.ConditionCodeOffset);
-                            blockType = CodeBlockEnum.TC;
-                        }
-                        //if (contextLines > 0)
-                        //{
-                        //    errorRow -= contextLines - 1;
-                        //    errorEndRow -= contextLines - 1;
-                        //}
-                    }
-                    if (!error.IsWarning)
-                    {
-                        errors.Add(new ProgramError
-                        {
-                            Line = errorRow,
-                            EndLine = errorRow,
-                            Column = errorCol,
-                            EndColumn = error.Column + 1,
-                            ErrorMessage = error.ErrorText,
-                            ErrorNumber = error.ErrorNumber,
-                            CodeBlock = blockType
-                        });
-                    }
-                    else
-                    {
-                        var warning = String.Format("{0},{1},{2}: {3}", blockType, errorRow, errorCol,
-                            error.ErrorText);
-                        HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.CompilerWarning,
-                            warning);
-                    }
-                }
-            }
-#endif
 
             HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.ProgramStatus,
                 ProgramBlock.IsEnabled ? "Idle" : "Disabled" );
@@ -296,9 +194,6 @@ namespace HomeGenie.Automation.Engines
 
             // move/copy new assembly files
             // rename temp file to production file
-#if !NETCOREAPP
-            _scriptAssembly = result.CompiledAssembly;
-#endif
             try
             {
                 //string tmpfile = new Uri(value.CodeBase).LocalPath;

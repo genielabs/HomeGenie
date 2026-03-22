@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Videofelvétel engedélyezése",
       "NVR.RecordOnAlarm": "Felvétel riasztáskor",
       "NVR.ContinuousRecording": "Folyamatos felvétel."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Az intelligens automatizáláskezelőd. Alakítsd át a természetes nyelvet ügynöki munkafolyamatokká: valós időben ír, tesztel és hajt végre C# programokat bármely adott feladat elvégzéséhez. A funkció aktiválásához adj meg egy érvényes API-kulcsot. Kövesd a https://aistudio.google.com/app/apikey oldalon található utasításokat egy ingyenes API-kulcs megszerzéséhez.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API kulcs",
+      "ConfigureOptions.ModelId": "Modellazonosító",
+      "ConfigureOptions.EnableDeepKnowledge": "Mély tudás engedélyezése (programok és widgetek olvasása)",
+      "ConfigureOptions.SystemInstructions": "Rendszerutasítások"
     }
   },
   "scheduler_preset_action_genie_command": "Dzsinn Parancsnokság",

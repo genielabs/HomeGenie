@@ -565,5 +565,15 @@
   "error": "تېروتنه!",
   "copied_to_clipboard": "کلپ بورډ ته کاپي شوی.",
   "message_deleted": "پیغام ړنګ شو",
-  "clear_chat_to_import": "د نوي واردولو لپاره اوسنی چیٹ پاک کړئ."
+  "clear_chat_to_import": "د نوي واردولو لپاره اوسنی چیٹ پاک کړئ.",
+  "all_groups": "ټولې ډلې",
+  "show_selected_groups": "غوره شوي ډلې وښایاست",
+  "show_deactivated_items": "غیر فعال شوي توکي ښکاره کړئ",
+  "show_upgradable_programs": "د لوړولو وړ پروګرامونه وښایاست",
+  "selected_groups": "غوره شوي ډلې",
+  "deactivated_programs_count": "غیر فعال شوي پروګرامونه: {{count}}",
+  "upgradable_programs": "د لوړولو وړ پروګرامونه",
+  "unsaved_changes": "نه خوندي شوي بدلونونه",
+  "save_to_apply_program_changes": "په پروګرام کې د بدلونونو د پلي کولو لپاره خوندي کړئ.",
+  "imported_program_name_group": "په \"{{group}}\" ګروپ کې وارد شوی پروګرام \"{{name}}\" ({{address}})."
 }

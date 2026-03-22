@@ -599,6 +599,21 @@
         "System Instructions"
     },
 
+    "932": {
+      "Title":
+        "Gemini Automan",
+      "Description":
+        "Your smart Automation Manager. Turn natural language into agentic workflows: it writes, tests, and executes C# programs in real-time to complete any given task. To activate this feature, enter a valid API key. Follow the instructions at https://aistudio.google.com/app/apikey to get a free API key.",
+      "ConfigureOptions.ApiKey":
+        "Google Gemini AI API key",
+      "ConfigureOptions.ModelId":
+        "Model ID",
+      "ConfigureOptions.EnableDeepKnowledge":
+        "Enable Deep Knowledge (Read programs & widgets)",
+      "ConfigureOptions.SystemInstructions":
+        "System Instructions"
+    },
+
     "940": {
       "Title":
         "Local AI",

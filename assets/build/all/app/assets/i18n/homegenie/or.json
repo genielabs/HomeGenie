@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "ଭିଡିଓ ରେକର୍ଡିଂ ସକ୍ଷମ କରନ୍ତୁ",
       "NVR.RecordOnAlarm": "ଆଲାର୍ମରେ ରେକର୍ଡ କରନ୍ତୁ",
       "NVR.ContinuousRecording": "ନିରନ୍ତର ରେକର୍ଡିଂ।"
+    },
+    "932": {
+      "Title": "ଜେମିନି ଅଟୋମ୍ୟାନ୍",
+      "Description": "ଆପଣଙ୍କର ସ୍ମାର୍ଟ ଅଟୋମେସନ୍ ମ୍ୟାନେଜର। ପ୍ରାକୃତିକ ଭାଷାକୁ ଏଜେଣ୍ଟିକ୍ କାର୍ଯ୍ୟପ୍ରବାହରେ ପରିଣତ କରନ୍ତୁ: ଏହା ଯେକୌଣସି କାର୍ଯ୍ୟ ସମାପ୍ତ କରିବା ପାଇଁ ରିଅଲ୍-ଟାଇମ୍‌ରେ C# ପ୍ରୋଗ୍ରାମ୍‌ଗୁଡ଼ିକୁ ଲେଖେ, ପରୀକ୍ଷା କରେ ଏବଂ କାର୍ଯ୍ୟକାରୀ କରେ। ଏହି ବୈଶିଷ୍ଟ୍ୟକୁ ସକ୍ରିୟ କରିବାକୁ, ଏକ ବୈଧ API କୀ ପ୍ରବେଶ କରନ୍ତୁ। ଏକ ମାଗଣା API କୀ ପାଇବା ପାଇଁ https://aistudio.google.com/app/apikey ରେ ଥିବା ନିର୍ଦ୍ଦେଶାବଳୀ ଅନୁସରଣ କରନ୍ତୁ।",
+      "ConfigureOptions.ApiKey": "ଗୁଗୁଲ୍ ଜେମିନି ଏଆଇ ଏପିଆଇ କୀ",
+      "ConfigureOptions.ModelId": "ମଡେଲ୍ ଆଇଡି",
+      "ConfigureOptions.EnableDeepKnowledge": "ଗଭୀର ଜ୍ଞାନ (ପ୍ରୋଗ୍ରାମ୍ ଏବଂ ୱିଜେଟ୍ ପଢ଼ନ୍ତୁ) ସକ୍ଷମ କରନ୍ତୁ",
+      "ConfigureOptions.SystemInstructions": "ସିଷ୍ଟମ୍ ନିର୍ଦ୍ଦେଶାବଳୀ"
     }
   },
   "scheduler_preset_action_genie_command": "ଜେନି କମାଣ୍ଡ",

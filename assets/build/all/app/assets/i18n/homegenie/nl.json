@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Video-opname inschakelen",
       "NVR.RecordOnAlarm": "Opname bij alarm",
       "NVR.ContinuousRecording": "Continue opname."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Jouw slimme automatiseringsmanager. Zet natuurlijke taal om in agentgestuurde workflows: hij schrijft, test en voert C#-programma's in realtime uit om elke gewenste taak te voltooien. Om deze functie te activeren, voer je een geldige API-sleutel in. Volg de instructies op https://aistudio.google.com/app/apikey om een gratis API-sleutel te verkrijgen.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API-sleutel",
+      "ConfigureOptions.ModelId": "Model-ID",
+      "ConfigureOptions.EnableDeepKnowledge": "Diepgaande kennis inschakelen (programma's en widgets lezen)",
+      "ConfigureOptions.SystemInstructions": "Systeeminstructies"
     }
   },
   "scheduler_preset_action_genie_command": "Genie Command",

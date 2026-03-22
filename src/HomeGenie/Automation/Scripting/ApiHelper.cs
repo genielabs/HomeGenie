@@ -2,7 +2,6 @@ using System;
 using HomeGenie.Service;
 using HomeGenie.Service.Constants;
 using MIG;
-using Newtonsoft.Json;
 using WebSocketSharp;
 
 namespace HomeGenie.Automation.Scripting

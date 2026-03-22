@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "啟用視訊錄製",
       "NVR.RecordOnAlarm": "警報錄音",
       "NVR.ContinuousRecording": "連續錄製。"
+    },
+    "932": {
+      "Title": "雙子座自動人",
+      "Description": "您的智慧自動化管理器。將自然語言轉換為智能體工作流程：它能即時編寫、測試和執行 C# 程序，完成任何給定任務。若要啟動此功能，請輸入有效的 API 金鑰。請造訪 https://aistudio.google.com/app/apikey 並依照指示取得免費 API 金鑰。",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API 金鑰",
+      "ConfigureOptions.ModelId": "型號 ID",
+      "ConfigureOptions.EnableDeepKnowledge": "啟用深度知識（讀取程式和小工具）",
+      "ConfigureOptions.SystemInstructions": "系統說明"
     }
   },
   "scheduler_preset_action_genie_command": "精靈指令",

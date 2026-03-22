@@ -565,5 +565,15 @@
   "error": "Hata!",
   "copied_to_clipboard": "Panoya kopyalandı.",
   "message_deleted": "Mesaj silindi",
-  "clear_chat_to_import": "Yeni bir sohbeti içe aktarmak için mevcut sohbeti temizleyin."
+  "clear_chat_to_import": "Yeni bir sohbeti içe aktarmak için mevcut sohbeti temizleyin.",
+  "all_groups": "Tüm Gruplar",
+  "show_selected_groups": "Seçilen grupları göster",
+  "show_deactivated_items": "Devre dışı bırakılmış öğeleri göster",
+  "show_upgradable_programs": "Yükseltilebilir programları göster",
+  "selected_groups": "Seçilen gruplar",
+  "deactivated_programs_count": "Devre dışı bırakılan programlar: {{count}}",
+  "upgradable_programs": "Yükseltilebilir Programlar",
+  "unsaved_changes": "Kaydedilmemiş değişiklikler",
+  "save_to_apply_program_changes": "Değişikliklerin programa uygulanması için kaydedin.",
+  "imported_program_name_group": "\"{{group}}\" grubuna \"{{name}}\" ({{address}}) programı içe aktarıldı."
 }

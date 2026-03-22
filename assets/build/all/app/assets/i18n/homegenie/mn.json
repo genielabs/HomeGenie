@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Видео бичлэгийг идэвхжүүлэх",
       "NVR.RecordOnAlarm": "Сэрүүлэг дээр бичлэг хийх",
       "NVR.ContinuousRecording": "Тасралтгүй бичлэг."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Таны ухаалаг Автоматжуулалтын Менежер. Байгалийн хэлийг агентлаг ажлын урсгал болгон хувирга: энэ нь өгөгдсөн аливаа даалгаврыг гүйцэтгэхийн тулд C# програмуудыг бодит цаг хугацаанд бичиж, туршиж, ажиллуулдаг. Энэ функцийг идэвхжүүлэхийн тулд хүчинтэй API түлхүүр оруулна уу. Үнэгүй API түлхүүр авахын тулд https://aistudio.google.com/app/apikey хаягаар орж зааврыг дагана уу.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API түлхүүр",
+      "ConfigureOptions.ModelId": "Загварын дугаар",
+      "ConfigureOptions.EnableDeepKnowledge": "Гүнзгий мэдлэгийг идэвхжүүлэх (Програм болон виджетүүдийг унших)",
+      "ConfigureOptions.SystemInstructions": "Системийн зааварчилгаа"
     }
   },
   "scheduler_preset_action_genie_command": "Жин команд",

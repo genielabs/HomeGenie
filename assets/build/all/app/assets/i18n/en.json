@@ -564,5 +564,15 @@
   "error": "Error!",
   "copied_to_clipboard": "Copied to clipboard.",
   "message_deleted": "Message deleted",
-  "clear_chat_to_import": "Clear current chat to import a new one."
+  "clear_chat_to_import": "Clear current chat to import a new one.",
+  "all_groups": "All Groups",
+  "show_selected_groups": "Show selected groups",
+  "show_deactivated_items": "Show deactivated items",
+  "show_upgradable_programs": "Show upgradable programs",
+  "selected_groups": "Selected groups",
+  "deactivated_programs_count": "Deactivated programs: {{count}}",
+  "upgradable_programs": "Upgradable Programs",
+  "unsaved_changes": "Unsaved changes",
+  "save_to_apply_program_changes": "Save to apply changes to the program.",
+  "imported_program_name_group": "Imported program \"{{name}}\" ({{address}}) in group \"{{group}}\"."
 }

@@ -147,7 +147,7 @@
   },
   {
     "id": "genie_command",
-    "script": "const prompt = '$wish$';\n  $$.api.call('AI.IntentHandlers/Lailama/Prompt.Schedule/' + encodeURIComponent(prompt));\n",
+    "script": "const prompt = '$wish$';\n  $$.api.call('AI.IntentHandlers/Lailama/Prompt.Schedule', prompt);\n",
     "config": {
       "wish": {
         "type": "textarea",

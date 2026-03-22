@@ -565,5 +565,15 @@
   "error": "错误！",
   "copied_to_clipboard": "已复制到剪贴板。",
   "message_deleted": "消息已删除",
-  "clear_chat_to_import": "清除当前聊天记录以导入新的聊天记录。"
+  "clear_chat_to_import": "清除当前聊天记录以导入新的聊天记录。",
+  "all_groups": "所有组",
+  "show_selected_groups": "显示选定组",
+  "show_deactivated_items": "显示已停用项目",
+  "show_upgradable_programs": "显示可升级程序",
+  "selected_groups": "选定群体",
+  "deactivated_programs_count": "已停用的程序：{{count}}",
+  "upgradable_programs": "可升级程序",
+  "unsaved_changes": "未保存的更改",
+  "save_to_apply_program_changes": "保存以应用对程序的更改。",
+  "imported_program_name_group": "从组“{{group}}”中导入程序“{{name}}”（{{address}}）。"
 }

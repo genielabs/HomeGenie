@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "فعال کردن ضبط ویدیو",
       "NVR.RecordOnAlarm": "ضبط در حالت هشدار",
       "NVR.ContinuousRecording": "ضبط مداوم."
+    },
+    "932": {
+      "Title": "جمینی اتومن",
+      "Description": "مدیر اتوماسیون هوشمند شما. زبان طبیعی را به گردش‌های کاری عامل‌محور تبدیل کنید: این برنامه، برنامه‌های C# را به صورت بلادرنگ می‌نویسد، آزمایش می‌کند و اجرا می‌کند تا هر وظیفه‌ای را انجام دهد. برای فعال کردن این ویژگی، یک کلید API معتبر وارد کنید. برای دریافت یک کلید API رایگان، دستورالعمل‌های https://aistudio.google.com/app/apikey را دنبال کنید.",
+      "ConfigureOptions.ApiKey": "کلید API هوش مصنوعی گوگل جمینی",
+      "ConfigureOptions.ModelId": "شناسه مدل",
+      "ConfigureOptions.EnableDeepKnowledge": "فعال کردن دانش عمیق (خواندن برنامه‌ها و ابزارک‌ها)",
+      "ConfigureOptions.SystemInstructions": "دستورالعمل‌های سیستم"
     }
   },
   "scheduler_preset_action_genie_command": "فرماندهی جنی",

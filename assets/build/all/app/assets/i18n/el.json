@@ -565,5 +565,15 @@
   "error": "Σφάλμα!",
   "copied_to_clipboard": "Αντιγράφηκε στο πρόχειρο.",
   "message_deleted": "Το μήνυμα διαγράφηκε",
-  "clear_chat_to_import": "Διαγράψτε την τρέχουσα συνομιλία για να εισαγάγετε μια νέα."
+  "clear_chat_to_import": "Διαγράψτε την τρέχουσα συνομιλία για να εισαγάγετε μια νέα.",
+  "all_groups": "Όλες οι ομάδες",
+  "show_selected_groups": "Εμφάνιση επιλεγμένων ομάδων",
+  "show_deactivated_items": "Εμφάνιση απενεργοποιημένων στοιχείων",
+  "show_upgradable_programs": "Εμφάνιση προγραμμάτων με δυνατότητα αναβάθμισης",
+  "selected_groups": "Επιλεγμένες ομάδες",
+  "deactivated_programs_count": "Απενεργοποιημένα προγράμματα: {{count}}",
+  "upgradable_programs": "Αναβαθμίσιμα προγράμματα",
+  "unsaved_changes": "Μη αποθηκευμένες αλλαγές",
+  "save_to_apply_program_changes": "Αποθήκευση για να εφαρμοστούν οι αλλαγές στο πρόγραμμα.",
+  "imported_program_name_group": "Εισήχθη το πρόγραμμα \"{{name}}\" ({{address}}) στην ομάδα \"{{group}}\"."
 }

@@ -565,5 +565,15 @@
   "error": "Napaka!",
   "copied_to_clipboard": "Kopirano v odložišče.",
   "message_deleted": "Sporočilo izbrisano",
-  "clear_chat_to_import": "Počisti trenutni klepet, da uvoziš novega."
+  "clear_chat_to_import": "Počisti trenutni klepet, da uvoziš novega.",
+  "all_groups": "Vse skupine",
+  "show_selected_groups": "Prikaži izbrane skupine",
+  "show_deactivated_items": "Prikaži deaktivirane elemente",
+  "show_upgradable_programs": "Prikaži nadgradljive programe",
+  "selected_groups": "Izbrane skupine",
+  "deactivated_programs_count": "Deaktivirani programi: {{count}}",
+  "upgradable_programs": "Nadgradljivi programi",
+  "unsaved_changes": "Neshranjene spremembe",
+  "save_to_apply_program_changes": "Shrani, da uveljavite spremembe v programu.",
+  "imported_program_name_group": "Uvožen program »{{name}}« ({{address}}) v skupino »{{group}}«."
 }

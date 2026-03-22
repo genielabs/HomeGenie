@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "వీడియో రికార్డింగ్‌ను ప్రారంభించండి",
       "NVR.RecordOnAlarm": "అలారంలో రికార్డ్ చేయి",
       "NVR.ContinuousRecording": "నిరంతర రికార్డింగ్."
+    },
+    "932": {
+      "Title": "జెమిని ఆటోమాన్",
+      "Description": "మీ స్మార్ట్ ఆటోమేషన్ మేనేజర్. సహజ భాషను ఏజెంటిక్ వర్క్‌ఫ్లోలుగా మార్చండి: ఇది ఏ పనినైనా పూర్తి చేయడానికి C# ప్రోగ్రామ్‌లను నిజ సమయంలో వ్రాస్తుంది, పరీక్షిస్తుంది మరియు అమలు చేస్తుంది. ఈ ఫీచర్‌ను యాక్టివేట్ చేయడానికి, చెల్లుబాటు అయ్యే API కీని నమోదు చేయండి. ఉచిత API కీని పొందడానికి https://aistudio.google.com/app/apikey వద్ద ఉన్న సూచనలను అనుసరించండి.",
+      "ConfigureOptions.ApiKey": "గూగుల్ జెమిని AI API కీ",
+      "ConfigureOptions.ModelId": "మోడల్ ID",
+      "ConfigureOptions.EnableDeepKnowledge": "లోతైన జ్ఞానాన్ని పొందండి (ప్రోగ్రామ్‌లు & విడ్జెట్‌లను చదవండి)",
+      "ConfigureOptions.SystemInstructions": "సిస్టమ్ సూచనలు"
     }
   },
   "scheduler_preset_action_genie_command": "జెనీ కమాండ్",

@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Virkja myndbandsupptöku",
       "NVR.RecordOnAlarm": "Upptaka við viðvörun",
       "NVR.ContinuousRecording": "Stöðug upptaka."
+    },
+    "932": {
+      "Title": "Tvíbura-sjálfvirki",
+      "Description": "Snjall sjálfvirknistjórinn þinn. Breyttu náttúrulegu tungumáli í verkflæði fyrir umboðsmenn: það skrifar, prófar og keyrir C# forrit í rauntíma til að klára hvaða verkefni sem er. Til að virkja þennan eiginleika skaltu slá inn gilt API-lykil. Fylgdu leiðbeiningunum á https://aistudio.google.com/app/apikey til að fá ókeypis API-lykil.",
+      "ConfigureOptions.ApiKey": "Lykill fyrir Google Gemini gervigreindarforritaskil",
+      "ConfigureOptions.ModelId": "Gerðarauðkenni",
+      "ConfigureOptions.EnableDeepKnowledge": "Virkja djúpa þekkingu (Lesa forrit og búnað)",
+      "ConfigureOptions.SystemInstructions": "Leiðbeiningar um kerfið"
     }
   },
   "scheduler_preset_action_genie_command": "Skipun Genie",

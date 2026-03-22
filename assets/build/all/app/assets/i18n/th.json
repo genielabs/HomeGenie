@@ -565,5 +565,15 @@
   "error": "ข้อผิดพลาด!",
   "copied_to_clipboard": "คัดลอกไปยังคลิปบอร์ดแล้ว",
   "message_deleted": "ข้อความถูกลบแล้ว",
-  "clear_chat_to_import": "ล้างแชทปัจจุบันเพื่อนำเข้าแชทใหม่"
+  "clear_chat_to_import": "ล้างแชทปัจจุบันเพื่อนำเข้าแชทใหม่",
+  "all_groups": "ทุกกลุ่ม",
+  "show_selected_groups": "แสดงกลุ่มที่เลือก",
+  "show_deactivated_items": "แสดงรายการที่ถูกปิดใช้งาน",
+  "show_upgradable_programs": "แสดงโปรแกรมที่สามารถอัปเกรดได้",
+  "selected_groups": "กลุ่มที่เลือก",
+  "deactivated_programs_count": "โปรแกรมที่ถูกปิดใช้งาน: {{count}}",
+  "upgradable_programs": "โปรแกรมที่สามารถอัปเกรดได้",
+  "unsaved_changes": "การเปลี่ยนแปลงที่ยังไม่ได้บันทึก",
+  "save_to_apply_program_changes": "บันทึกเพื่อบันทึกการเปลี่ยนแปลงในโปรแกรม",
+  "imported_program_name_group": "นำเข้าโปรแกรม \"{{name}}\" ({{address}}) ในกลุ่ม \"{{group}}\""
 }

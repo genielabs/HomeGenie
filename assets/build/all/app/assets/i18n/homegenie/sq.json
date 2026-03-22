@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Aktivizo regjistrimin e videos",
       "NVR.RecordOnAlarm": "Regjistro në alarm",
       "NVR.ContinuousRecording": "Regjistrim i vazhdueshëm."
+    },
+    "932": {
+      "Title": "Automani i Binjakëve",
+      "Description": "Menaxheri juaj inteligjent i automatizimit. Shndërrojeni gjuhën natyrore në rrjedha pune agjentike: ajo shkruan, teston dhe ekzekuton programe C# në kohë reale për të përfunduar çdo detyrë të caktuar. Për të aktivizuar këtë funksion, futni një çelës API të vlefshëm. Ndiqni udhëzimet në https://aistudio.google.com/app/apikey për të marrë një çelës API falas.",
+      "ConfigureOptions.ApiKey": "Çelësi API i Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID e modelit",
+      "ConfigureOptions.EnableDeepKnowledge": "Aktivizo Njohuri të Thella (Lexoni programe dhe widget-e)",
+      "ConfigureOptions.SystemInstructions": "Udhëzimet e Sistemit"
     }
   },
   "scheduler_preset_action_genie_command": "Komanda e Xhindëve",

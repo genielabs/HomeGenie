@@ -565,5 +565,15 @@
   "error": "Khalad!",
   "copied_to_clipboard": "Waxaa lagu koobiyeyn karaa clipboard-ka.",
   "message_deleted": "Fariintii waa la tirtiray",
-  "clear_chat_to_import": "Tirtir sheekada hadda jirta si aad mid cusub u soo dejiso."
+  "clear_chat_to_import": "Tirtir sheekada hadda jirta si aad mid cusub u soo dejiso.",
+  "all_groups": "Dhammaan Kooxaha",
+  "show_selected_groups": "Muuji kooxaha la xushay",
+  "show_deactivated_items": "Muuji walxaha la damiyay",
+  "show_upgradable_programs": "Muuji barnaamijyada la cusboonaysiin karo",
+  "selected_groups": "Kooxaha la xushay",
+  "deactivated_programs_count": "Barnaamijyada la damiyay: {{count}}",
+  "upgradable_programs": "Barnaamijyada La Cusboonaysiin Karo",
+  "unsaved_changes": "Isbeddellada aan la keydin",
+  "save_to_apply_program_changes": "Keydso si aad u codsato isbeddelada barnaamijka.",
+  "imported_program_name_group": "Barnaamij la soo dejiyay oo la yiraahdo \"{{name}}\" ({{address}}) oo ku jira kooxda \"{{group}}\"."
 }

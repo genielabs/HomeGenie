@@ -565,5 +565,15 @@
   "error": "Kesalahan!",
   "copied_to_clipboard": "Disalin ke papan klip.",
   "message_deleted": "Pesan dihapus",
-  "clear_chat_to_import": "Hapus obrolan yang ada untuk mengimpor obrolan baru."
+  "clear_chat_to_import": "Hapus obrolan yang ada untuk mengimpor obrolan baru.",
+  "all_groups": "Semua Grup",
+  "show_selected_groups": "Tampilkan grup terpilih",
+  "show_deactivated_items": "Tampilkan item yang dinonaktifkan",
+  "show_upgradable_programs": "Tampilkan program yang dapat ditingkatkan",
+  "selected_groups": "Kelompok terpilih",
+  "deactivated_programs_count": "Program yang dinonaktifkan: {{count}}",
+  "upgradable_programs": "Program yang Dapat Diupgrade",
+  "unsaved_changes": "Perubahan yang belum disimpan",
+  "save_to_apply_program_changes": "Simpan untuk menerapkan perubahan pada program.",
+  "imported_program_name_group": "Program yang diimpor \"{{name}}\" ({{address}}) dalam grup \"{{group}}\"."
 }

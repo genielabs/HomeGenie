@@ -565,5 +565,15 @@
   "error": "Хатогӣ!",
   "copied_to_clipboard": "Ба буфер нусхабардорӣ карда шуд.",
   "message_deleted": "Паём нест карда шуд",
-  "clear_chat_to_import": "Барои ворид кардани чати нав, чати ҷориро тоза кунед."
+  "clear_chat_to_import": "Барои ворид кардани чати нав, чати ҷориро тоза кунед.",
+  "all_groups": "Ҳамаи Гурӯҳҳо",
+  "show_selected_groups": "Гурӯҳҳои интихобшударо нишон диҳед",
+  "show_deactivated_items": "Нишон додани ашёҳои ғайрифаъол",
+  "show_upgradable_programs": "Барномаҳои навсозӣшавандаро нишон диҳед",
+  "selected_groups": "Гурӯҳҳои интихобшуда",
+  "deactivated_programs_count": "Барномаҳои ғайрифаъол: {{count}}",
+  "upgradable_programs": "Барномаҳои навсозӣшаванда",
+  "unsaved_changes": "Тағйироти захиранашуда",
+  "save_to_apply_program_changes": "Барои татбиқ кардани тағйирот ба барнома захира кунед.",
+  "imported_program_name_group": "Барномаи \"{{name}}\" ({{address}}) дар гурӯҳи \"{{group}}\" ворид карда шуд."
 }

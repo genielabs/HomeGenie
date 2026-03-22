@@ -565,5 +565,15 @@
   "error": "Klaida!",
   "copied_to_clipboard": "Nukopijuota į iškarpinę.",
   "message_deleted": "Žinutė ištrinta",
-  "clear_chat_to_import": "Išvalykite dabartinį pokalbį, kad galėtumėte importuoti naują."
+  "clear_chat_to_import": "Išvalykite dabartinį pokalbį, kad galėtumėte importuoti naują.",
+  "all_groups": "Visos grupės",
+  "show_selected_groups": "Rodyti pasirinktas grupes",
+  "show_deactivated_items": "Rodyti deaktyvuotus elementus",
+  "show_upgradable_programs": "Rodyti atnaujinamas programas",
+  "selected_groups": "Pasirinktos grupės",
+  "deactivated_programs_count": "Išaktyvintos programos: {{count}}",
+  "upgradable_programs": "Atnaujinamos programos",
+  "unsaved_changes": "Neišsaugoti pakeitimai",
+  "save_to_apply_program_changes": "Išsaugoti, kad pakeitimai būtų pritaikyti programoje.",
+  "imported_program_name_group": "Importuota programa „{{name}}“ ({{address}}) grupėje „{{group}}“."
 }

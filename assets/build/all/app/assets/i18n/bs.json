@@ -565,5 +565,15 @@
   "error": "Greška!",
   "copied_to_clipboard": "Kopirano u međuspremnik.",
   "message_deleted": "Poruka je izbrisana",
-  "clear_chat_to_import": "Obrišite trenutni chat da biste uvezli novi."
+  "clear_chat_to_import": "Obrišite trenutni chat da biste uvezli novi.",
+  "all_groups": "Sve grupe",
+  "show_selected_groups": "Prikaži odabrane grupe",
+  "show_deactivated_items": "Prikaži deaktivirane stavke",
+  "show_upgradable_programs": "Prikaži programe koji se mogu nadograditi",
+  "selected_groups": "Odabrane grupe",
+  "deactivated_programs_count": "Deaktivirani programi: {{count}}",
+  "upgradable_programs": "Nadogradivi programi",
+  "unsaved_changes": "Nesačuvane promjene",
+  "save_to_apply_program_changes": "Sačuvaj da biste primijenili promjene u programu.",
+  "imported_program_name_group": "Uvezen je program \"{{name}}\" ({{address}}) u grupu \"{{group}}\"."
 }

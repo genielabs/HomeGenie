@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "הפעל הקלטת וידאו",
       "NVR.RecordOnAlarm": "הקלטה בעת אזעקה",
       "NVR.ContinuousRecording": "הקלטה רציפה."
+    },
+    "932": {
+      "Title": "אוטומן ג'מיני",
+      "Description": "מנהל האוטומציה החכם שלך. הפוך שפה טבעית לזרימות עבודה סוכניות: הוא כותב, בודק ומבצע תוכניות C# בזמן אמת כדי להשלים כל משימה נתונה. כדי להפעיל תכונה זו, הזן מפתח API תקף. פעל לפי ההוראות בכתובת https://aistudio.google.com/app/apikey כדי לקבל מפתח API בחינם.",
+      "ConfigureOptions.ApiKey": "מפתח ה-API של גוגל ג'מיני לבינה מלאכותית",
+      "ConfigureOptions.ModelId": "מזהה דגם",
+      "ConfigureOptions.EnableDeepKnowledge": "הפעלת ידע מעמיק (קריאת תוכניות ווידג'טים)",
+      "ConfigureOptions.SystemInstructions": "הוראות מערכת"
     }
   },
   "scheduler_preset_action_genie_command": "פיקוד ג'יני",

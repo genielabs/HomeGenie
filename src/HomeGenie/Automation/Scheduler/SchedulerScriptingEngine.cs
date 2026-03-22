@@ -138,7 +138,7 @@ namespace HomeGenie.Automation.Scheduler
                 {
                     scriptEngine.Execute(InitScript + "\nfunction __action__() {\n" + eventItem.Script + "\n}\n");
                 }
-                catch (Exception e)
+                catch
                 {
                     System.Diagnostics.Debugger.Break();
                     // TODO: log exception

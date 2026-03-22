@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Daar duubista fiidiyowga",
       "NVR.RecordOnAlarm": "Ku duub Digniinta",
       "NVR.ContinuousRecording": "Duubista Joogtada ah."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Maareeyahaaga otomaatiga ah ee caqliga badan. Luqadda dabiiciga ah u beddel shaqo-socod wakiil ah: waxay qortaa, tijaabisaa, oo fulisaa barnaamijyada C# waqtiga dhabta ah si ay u dhammaystirto hawl kasta oo la bixiyo. Si aad u hawlgeliso sifadan, geli furaha API ee ansax ah. Raac tilmaamaha ku yaal https://aistudio.google.com/app/apikey si aad u hesho furaha API ee bilaashka ah.",
+      "ConfigureOptions.ApiKey": "Furaha Google Gemini AI API",
+      "ConfigureOptions.ModelId": "Aqoonsiga Moodeelka",
+      "ConfigureOptions.EnableDeepKnowledge": "Karti Aqoon Qoto Dheer (Akhri barnaamijyada iyo aaladaha)",
+      "ConfigureOptions.SystemInstructions": "Tilmaamaha Nidaamka"
     }
   },
   "scheduler_preset_action_genie_command": "Taliska Genie",

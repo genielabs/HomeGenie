@@ -434,20 +434,7 @@ namespace HomeGenie.Service.Handlers
                     break;
 
                 case "Programs.Add":
-                    try
-                    {
-                        // This works with HG > 1.4.x
-                        newProgram = JsonConvert.DeserializeObject<ProgramBlock>(streamContent);
-                    }
-                    catch
-                    {
-                        // TODO: deprecate this
-                        // this is for backward compatibility with HG v1.3.x
-                        newProgram = new ProgramBlock() {
-                            Group = migCommand.GetOption(0),
-                            Name = streamContent
-                        };
-                    }
+                    newProgram = JsonConvert.DeserializeObject<ProgramBlock>(streamContent);
                     if (newProgram != null)
                     {
                         newProgram.Address = homegenie.ProgramManager.GeneratePid();

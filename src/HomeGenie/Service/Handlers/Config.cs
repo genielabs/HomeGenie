@@ -586,9 +586,9 @@ namespace HomeGenie.Service.Handlers
                     var newProgramList = new List<ProgramBlock>();
                     foreach (ProgramBlock program in newProgramsData)
                     {
-                        if (program.Address >= ProgramManager.USERSPACE_PROGRAMS_START && program.Address < ProgramManager.PACKAGE_PROGRAMS_START)
+                        if (program.Address >= ProgramManager.USERSPACE_PROGRAMS_START)
                         {
-                            ProgramBlock p = new ProgramBlock();
+                            var p = new ProgramBlock();
                             p.Address = program.Address;
                             p.Name = program.Name;
                             p.Description = program.Description;

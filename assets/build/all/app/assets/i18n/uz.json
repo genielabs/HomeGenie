@@ -565,5 +565,15 @@
   "error": "Xato!",
   "copied_to_clipboard": "Buferga nusxalandi.",
   "message_deleted": "Xabar o'chirildi",
-  "clear_chat_to_import": "Yangi chatni import qilish uchun joriy chatni tozalang."
+  "clear_chat_to_import": "Yangi chatni import qilish uchun joriy chatni tozalang.",
+  "all_groups": "Barcha guruhlar",
+  "show_selected_groups": "Tanlangan guruhlarni ko'rsatish",
+  "show_deactivated_items": "O'chirilgan elementlarni ko'rsatish",
+  "show_upgradable_programs": "Yangilanadigan dasturlarni ko'rsatish",
+  "selected_groups": "Tanlangan guruhlar",
+  "deactivated_programs_count": "O'chirilgan dasturlar: {{count}}",
+  "upgradable_programs": "Yangilanadigan dasturlar",
+  "unsaved_changes": "Saqlanmagan o'zgarishlar",
+  "save_to_apply_program_changes": "Dasturga o'zgarishlarni qo'llash uchun saqlash.",
+  "imported_program_name_group": "\"{{group}}\" guruhidagi \"{{name}}\" ({{address}}) dasturi import qilindi."
 }

@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "وڊيو رڪارڊنگ کي فعال ڪريو",
       "NVR.RecordOnAlarm": "الارم تي رڪارڊ ڪريو",
       "NVR.ContinuousRecording": "مسلسل رڪارڊنگ."
+    },
+    "932": {
+      "Title": "جيمينائي آٽومين",
+      "Description": "توهان جو سمارٽ آٽوميشن مئنيجر. قدرتي ٻولي کي ايجنٽڪ ورڪ فلو ۾ تبديل ڪريو: اهو ڪنهن به ڪم کي مڪمل ڪرڻ لاءِ حقيقي وقت ۾ C# پروگرام لکي ٿو، جانچ ڪري ٿو، ۽ عمل ڪري ٿو. هن خصوصيت کي چالو ڪرڻ لاءِ، هڪ صحيح API ڪي داخل ڪريو. مفت API ڪي حاصل ڪرڻ لاءِ https://aistudio.google.com/app/apikey تي ڏنل هدايتن تي عمل ڪريو.",
+      "ConfigureOptions.ApiKey": "گوگل جيمنائي اي آءِ API ڪي",
+      "ConfigureOptions.ModelId": "ماڊل سڃاڻپ",
+      "ConfigureOptions.EnableDeepKnowledge": "گہرے علم کي فعال ڪريو (پروگرام ۽ ويجيٽس پڙهو)",
+      "ConfigureOptions.SystemInstructions": "سسٽم جون هدايتون"
     }
   },
   "scheduler_preset_action_genie_command": "جيني ڪمانڊ",

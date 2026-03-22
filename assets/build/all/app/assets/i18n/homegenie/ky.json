@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Видео жаздырууну иштетүү",
       "NVR.RecordOnAlarm": "Ойготкучту жаздыруу",
       "NVR.ContinuousRecording": "Үзгүлтүксүз жаздыруу."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Сиздин акылдуу автоматташтыруу менеджериңиз. Табигый тилди агенттик жумуш агымдарына айландырыңыз: ал каалаган тапшырманы аткаруу үчүн C# программаларын реалдуу убакыт режиминде жазат, текшерет жана аткарат. Бул функцияны иштетүү үчүн жарактуу API ачкычын киргизиңиз. Акысыз API ачкычын алуу үчүн https://aistudio.google.com/app/apikey дарегиндеги көрсөтмөлөрдү аткарыңыз.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API ачкычы",
+      "ConfigureOptions.ModelId": "Моделдин IDси",
+      "ConfigureOptions.EnableDeepKnowledge": "Терең билимди иштетүү (Программаларды жана виджеттерди окуу)",
+      "ConfigureOptions.SystemInstructions": "Системалык көрсөтмөлөр"
     }
   },
   "scheduler_preset_action_genie_command": "Жиндер командасы",

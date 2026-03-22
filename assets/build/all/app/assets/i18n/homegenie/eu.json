@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Bideo grabaketa gaitu",
       "NVR.RecordOnAlarm": "Alarma batean grabatu",
       "NVR.ContinuousRecording": "Grabaketa jarraitua."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Zure Automatizazio Kudeatzaile Adimenduna. Bihurtu hizkuntza naturala lan-fluxu eragileetan: C# programak idazten, probatzen eta exekutatzen ditu denbora errealean edozein zeregin burutzeko. Funtzio hau aktibatzeko, sartu API gako baliodun bat. Jarraitu https://aistudio.google.com/app/apikey helbideko argibideei doako API gako bat lortzeko.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API gakoa",
+      "ConfigureOptions.ModelId": "Modeloaren IDa",
+      "ConfigureOptions.EnableDeepKnowledge": "Gaitu Ezagutza Sakona (Irakurri programak eta widgetak)",
+      "ConfigureOptions.SystemInstructions": "Sistemaren argibideak"
     }
   },
   "scheduler_preset_action_genie_command": "Genio Komandoa",

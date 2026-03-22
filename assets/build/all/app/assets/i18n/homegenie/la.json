@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Activatio Registrationis Video",
       "NVR.RecordOnAlarm": "Recordatio in Alarma",
       "NVR.ContinuousRecording": "Continua Registratio."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Administrator Automationis callidus tuus. Linguam naturalem in fluxus operandi agentes converte: programmata C# in tempore reali scribit, probat, et exsequitur ad quodvis negotium datum perficiendum. Ad hanc functionem activandam, clavem API validam inscribe. Instructiones apud https://aistudio.google.com/app/apikey sequere ut clavem API gratuitam accipias.",
+      "ConfigureOptions.ApiKey": "Clavis API Google Gemini AI",
+      "ConfigureOptions.ModelId": "Identificatio exemplaris",
+      "ConfigureOptions.EnableDeepKnowledge": "Permitte Cognitionem Profundam (Lege programmata et instrumenta)",
+      "ConfigureOptions.SystemInstructions": "Instructiones Systematis"
     }
   },
   "scheduler_preset_action_genie_command": "Mandatum Genii",

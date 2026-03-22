@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "ವೀಡಿಯೊ ರೆಕಾರ್ಡಿಂಗ್ ಸಕ್ರಿಯಗೊಳಿಸಿ",
       "NVR.RecordOnAlarm": "ಅಲಾರಾಂನಲ್ಲಿ ರೆಕಾರ್ಡ್ ಮಾಡಿ",
       "NVR.ContinuousRecording": "ನಿರಂತರ ರೆಕಾರ್ಡಿಂಗ್."
+    },
+    "932": {
+      "Title": "ಜೆಮಿನಿ ಆಟೋಮ್ಯಾನ್",
+      "Description": "ನಿಮ್ಮ ಸ್ಮಾರ್ಟ್ ಆಟೊಮೇಷನ್ ಮ್ಯಾನೇಜರ್. ನೈಸರ್ಗಿಕ ಭಾಷೆಯನ್ನು ಏಜೆಂಟ್ ವರ್ಕ್‌ಫ್ಲೋಗಳಾಗಿ ಪರಿವರ್ತಿಸಿ: ಯಾವುದೇ ನಿರ್ದಿಷ್ಟ ಕಾರ್ಯವನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ಇದು ನೈಜ ಸಮಯದಲ್ಲಿ C# ಪ್ರೋಗ್ರಾಂಗಳನ್ನು ಬರೆಯುತ್ತದೆ, ಪರೀಕ್ಷಿಸುತ್ತದೆ ಮತ್ತು ಕಾರ್ಯಗತಗೊಳಿಸುತ್ತದೆ. ಈ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು, ಮಾನ್ಯವಾದ API ಕೀಲಿಯನ್ನು ನಮೂದಿಸಿ. ಉಚಿತ API ಕೀಲಿಯನ್ನು ಪಡೆಯಲು https://aistudio.google.com/app/apikey ನಲ್ಲಿನ ಸೂಚನೆಗಳನ್ನು ಅನುಸರಿಸಿ.",
+      "ConfigureOptions.ApiKey": "ಗೂಗಲ್ ಜೆಮಿನಿ AI API ಕೀ",
+      "ConfigureOptions.ModelId": "ಮಾದರಿ ಐಡಿ",
+      "ConfigureOptions.EnableDeepKnowledge": "ಆಳವಾದ ಜ್ಞಾನವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ (ಪ್ರೋಗ್ರಾಂಗಳು ಮತ್ತು ವಿಜೆಟ್‌ಗಳನ್ನು ಓದಿ)",
+      "ConfigureOptions.SystemInstructions": "ಸಿಸ್ಟಮ್ ಸೂಚನೆಗಳು"
     }
   },
   "scheduler_preset_action_genie_command": "ಜಿನೀ ಕಮಾಂಡ್",

@@ -565,5 +565,15 @@
   "error": "गलती!",
   "copied_to_clipboard": "क्लिपबोर्ड पर कॉपी कर लिया गया।",
   "message_deleted": "संदेश हटा दिया गया",
-  "clear_chat_to_import": "नई चैट आयात करने के लिए वर्तमान चैट को साफ़ करें।"
+  "clear_chat_to_import": "नई चैट आयात करने के लिए वर्तमान चैट को साफ़ करें।",
+  "all_groups": "सभी समूह",
+  "show_selected_groups": "चयनित समूहों को दिखाएँ",
+  "show_deactivated_items": "निष्क्रिय आइटम दिखाएँ",
+  "show_upgradable_programs": "अपग्रेड करने योग्य प्रोग्राम दिखाएँ",
+  "selected_groups": "चयनित समूह",
+  "deactivated_programs_count": "निष्क्रिय किए गए प्रोग्राम: {{count}}",
+  "upgradable_programs": "अपग्रेड करने योग्य प्रोग्राम",
+  "unsaved_changes": "असहेजित परिवर्तन",
+  "save_to_apply_program_changes": "प्रोग्राम में बदलाव लागू करने के लिए सेव करें।",
+  "imported_program_name_group": "समूह \"{{group}}\" में आयातित प्रोग्राम \"{{name}}\" ({{address}}) है।"
 }

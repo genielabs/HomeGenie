@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Whakahohehia te Hopu Ataata",
       "NVR.RecordOnAlarm": "Tuhia i te Whakaoho",
       "NVR.ContinuousRecording": "Te Tuhi Tonu."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Tō Kaiwhakahaere Aunoatanga atamai. Hurihia te reo tūturu hei rerengamahi ā-ringa: ka tuhi, ka whakamātautau, ka whakahaere hoki i ngā kaupapa C# i te wā tūturu hei whakaoti i tētahi mahi. Hei whakahohe i tēnei āhuatanga, whakaurua he kī API tika. Whāia ngā tohutohu i https://aistudio.google.com/app/apikey hei tiki i tētahi kī API kore utu.",
+      "ConfigureOptions.ApiKey": "Kī API Google Gemini AI",
+      "ConfigureOptions.ModelId": "Tauira Tauira",
+      "ConfigureOptions.EnableDeepKnowledge": "Whakahohe i te Mātauranga Hōhonu (Pānuihia ngā hōtaka me ngā widget)",
+      "ConfigureOptions.SystemInstructions": "Ngā Tohutohu Pūnaha"
     }
   },
   "scheduler_preset_action_genie_command": "Te Whakahau a te Ira Tangata",

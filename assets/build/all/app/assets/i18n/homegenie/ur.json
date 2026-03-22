@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "ویڈیو ریکارڈنگ کو فعال کریں۔",
       "NVR.RecordOnAlarm": "الارم پر ریکارڈ کریں۔",
       "NVR.ContinuousRecording": "مسلسل ریکارڈنگ۔"
+    },
+    "932": {
+      "Title": "جیمنی آٹومین",
+      "Description": "آپ کا سمارٹ آٹومیشن مینیجر۔ قدرتی زبان کو ایجنٹی ورک فلو میں تبدیل کریں: یہ کسی بھی کام کو مکمل کرنے کے لیے اصل وقت میں C# پروگرام لکھتا، جانچتا اور ان پر عمل درآمد کرتا ہے۔ اس خصوصیت کو چالو کرنے کے لیے، ایک درست API کلید درج کریں۔ مفت API کلید حاصل کرنے کے لیے https://aistudio.google.com/app/apikey پر دی گئی ہدایات پر عمل کریں۔",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API کلید",
+      "ConfigureOptions.ModelId": "ماڈل ID",
+      "ConfigureOptions.EnableDeepKnowledge": "گہرے علم کو فعال کریں (پروگرام اور ویجٹ پڑھیں)",
+      "ConfigureOptions.SystemInstructions": "سسٹم کی ہدایات"
     }
   },
   "scheduler_preset_action_genie_command": "جنی کمانڈ",

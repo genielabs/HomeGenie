@@ -565,5 +565,15 @@
   "error": "Fehler!",
   "copied_to_clipboard": "In die Zwischenablage kopiert.",
   "message_deleted": "Nachricht gelöscht",
-  "clear_chat_to_import": "Den aktuellen Chat löschen, um einen neuen zu importieren."
+  "clear_chat_to_import": "Den aktuellen Chat löschen, um einen neuen zu importieren.",
+  "all_groups": "Alle Gruppen",
+  "show_selected_groups": "Ausgewählte Gruppen anzeigen",
+  "show_deactivated_items": "Deaktivierte Elemente anzeigen",
+  "show_upgradable_programs": "Upgradefähige Programme anzeigen",
+  "selected_groups": "Ausgewählte Gruppen",
+  "deactivated_programs_count": "Deaktivierte Programme: {{count}}",
+  "upgradable_programs": "Aktualisierbare Programme",
+  "unsaved_changes": "Nicht gespeicherte Änderungen",
+  "save_to_apply_program_changes": "Speichern Sie die Änderungen, um sie im Programm anzuwenden.",
+  "imported_program_name_group": "Das Programm \"{{name}}\" ({{address}}) wurde in die Gruppe \"{{group}}\" importiert."
 }

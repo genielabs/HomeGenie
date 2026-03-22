@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "เปิดใช้งานการบันทึกวิดีโอ",
       "NVR.RecordOnAlarm": "บันทึกเมื่อมีสัญญาณเตือน",
       "NVR.ContinuousRecording": "การบันทึกอย่างต่อเนื่อง"
+    },
+    "932": {
+      "Title": "เจมินี ออโต้แมน",
+      "Description": "ตัวจัดการระบบอัตโนมัติอัจฉริยะของคุณ เปลี่ยนภาษาธรรมชาติให้เป็นเวิร์กโฟลว์แบบอัตโนมัติ: มันจะเขียน ทดสอบ และเรียกใช้โปรแกรม C# แบบเรียลไทม์เพื่อทำงานที่ได้รับมอบหมายให้เสร็จสมบูรณ์ หากต้องการเปิดใช้งานคุณสมบัตินี้ โปรดป้อนคีย์ API ที่ถูกต้อง ทำตามคำแนะนำที่ https://aistudio.google.com/app/apikey เพื่อรับคีย์ API ฟรี",
+      "ConfigureOptions.ApiKey": "คีย์ API ของ Google Gemini AI",
+      "ConfigureOptions.ModelId": "รหัสรุ่น",
+      "ConfigureOptions.EnableDeepKnowledge": "เปิดใช้งานความรู้เชิงลึก (อ่านโปรแกรมและวิดเจ็ต)",
+      "ConfigureOptions.SystemInstructions": "คำแนะนำการใช้งานระบบ"
     }
   },
   "scheduler_preset_action_genie_command": "คำสั่งจินนี่",

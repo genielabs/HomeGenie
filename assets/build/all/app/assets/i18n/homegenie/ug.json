@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "ۋىدېئو خاتىرىلەشنى قوزغىتىش",
       "NVR.RecordOnAlarm": "سىگنالدا خاتىرىلەش",
       "NVR.ContinuousRecording": "ئۈزلۈكسىز خاتىرىلەش."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "سىزنىڭ ئەقلىي ئىقتىدارلىق ئاپتوماتلاشتۇرۇش باشقۇرغۇچىڭىز. تەبىئىي تىلنى ئورگانىك ئىش ئېقىمىغا ئايلاندۇرۇڭ: ئۇ ھەر قانداق بىر ۋەزىپىنى تاماملاش ئۈچۈن C# پروگراممىلىرىنى ھەقىقىي ۋاقىتتا يېزىپ، سىناق قىلىپ ۋە ئىجرا قىلىدۇ. بۇ ئىقتىدارنى قوزغىتىش ئۈچۈن، ئۈنۈملۈك API ئاچقۇچىنى كىرگۈزۈڭ. ھەقسىز API ئاچقۇچىغا ئېرىشىش ئۈچۈن https://aistudio.google.com/app/apikey دىكى كۆرسەتمىلەرگە ئەگىشىڭ.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API ئاچقۇچى",
+      "ConfigureOptions.ModelId": "مودېل نومۇرى",
+      "ConfigureOptions.EnableDeepKnowledge": "چوڭقۇر بىلىملەرنى قوزغىتىش (پروگراممىلار ۋە كىچىك پروگراممىلارنى ئوقۇش)",
+      "ConfigureOptions.SystemInstructions": "سىستېما كۆرسەتمىلىرى"
     }
   },
   "scheduler_preset_action_genie_command": "جىن قوماندانلىقى",

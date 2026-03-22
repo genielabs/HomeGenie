@@ -565,5 +565,15 @@
   "error": "Алдаа!",
   "copied_to_clipboard": "Түр санах ой руу хуулсан.",
   "message_deleted": "Мессежийг устгасан",
-  "clear_chat_to_import": "Шинэ чат импортлохын тулд одоогийн чатыг арилгана уу."
+  "clear_chat_to_import": "Шинэ чат импортлохын тулд одоогийн чатыг арилгана уу.",
+  "all_groups": "Бүх бүлгүүд",
+  "show_selected_groups": "Сонгосон бүлгүүдийг харуулах",
+  "show_deactivated_items": "Идэвхгүй болгосон зүйлсийг харуулах",
+  "show_upgradable_programs": "Шинэчлэх боломжтой програмуудыг харуулах",
+  "selected_groups": "Сонгосон бүлгүүд",
+  "deactivated_programs_count": "Идэвхгүй болгосон хөтөлбөрүүд: {{count}}",
+  "upgradable_programs": "Шинэчлэх боломжтой програмууд",
+  "unsaved_changes": "Хадгалаагүй өөрчлөлтүүд",
+  "save_to_apply_program_changes": "Хөтөлбөрт өөрчлөлт оруулахын тулд хадгална уу.",
+  "imported_program_name_group": "\"{{group}}\" бүлэгт \"{{name}}\" ({{address}}) програмыг импортолсон."
 }

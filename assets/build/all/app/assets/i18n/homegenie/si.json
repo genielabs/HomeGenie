@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "වීඩියෝ පටිගත කිරීම සබල කරන්න",
       "NVR.RecordOnAlarm": "අනතුරු ඇඟවීමේ පටිගත කරන්න",
       "NVR.ContinuousRecording": "අඛණ්ඩ පටිගත කිරීම."
+    },
+    "932": {
+      "Title": "ජෙමිනි ඔටෝමෑන්",
+      "Description": "ඔබේ දක්ෂ ස්වයංක්‍රීයකරණ කළමනාකරු. ස්වාභාවික භාෂාව නියෝජිත වැඩ ප්‍රවාහ බවට පත් කරන්න: එය ඕනෑම කාර්යයක් සම්පූර්ණ කිරීම සඳහා තත්‍ය කාලීනව C# වැඩසටහන් ලියයි, පරීක්ෂා කරයි සහ ක්‍රියාත්මක කරයි. මෙම විශේෂාංගය සක්‍රිය කිරීමට, වලංගු API යතුරක් ඇතුළත් කරන්න. නොමිලේ API යතුරක් ලබා ගැනීමට https://aistudio.google.com/app/apikey හි උපදෙස් අනුගමනය කරන්න.",
+      "ConfigureOptions.ApiKey": "ගූගල් මිථුන AI API යතුර",
+      "ConfigureOptions.ModelId": "මාදිලි හැඳුනුම්පත",
+      "ConfigureOptions.EnableDeepKnowledge": "ගැඹුරු දැනුම සක්‍රීය කරන්න (වැඩසටහන් සහ විජට් කියවන්න)",
+      "ConfigureOptions.SystemInstructions": "පද්ධති උපදෙස්"
     }
   },
   "scheduler_preset_action_genie_command": "ජෙනී විධානය",

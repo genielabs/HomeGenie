@@ -565,5 +565,15 @@
   "error": "లోపం!",
   "copied_to_clipboard": "క్లిప్‌బోర్డ్‌కి కాపీ చేయబడింది.",
   "message_deleted": "సందేశం తొలగించబడింది",
-  "clear_chat_to_import": "కొత్తదాన్ని దిగుమతి చేసుకోవడానికి ప్రస్తుత చాట్‌ను క్లియర్ చేయండి."
+  "clear_chat_to_import": "కొత్తదాన్ని దిగుమతి చేసుకోవడానికి ప్రస్తుత చాట్‌ను క్లియర్ చేయండి.",
+  "all_groups": "అన్ని సమూహాలు",
+  "show_selected_groups": "ఎంచుకున్న సమూహాలను చూపించు",
+  "show_deactivated_items": "నిష్క్రియం చేయబడిన అంశాలను చూపించు",
+  "show_upgradable_programs": "అప్‌గ్రేడ్ చేయగల ప్రోగ్రామ్‌లను చూపించు",
+  "selected_groups": "ఎంపిక చేసిన సమూహాలు",
+  "deactivated_programs_count": "నిష్క్రియం చేయబడిన ప్రోగ్రామ్‌లు: {{count}}",
+  "upgradable_programs": "అప్‌గ్రేడ్ చేయగల ప్రోగ్రామ్‌లు",
+  "unsaved_changes": "సేవ్ చేయని మార్పులు",
+  "save_to_apply_program_changes": "ప్రోగ్రామ్‌కు మార్పులను వర్తింపజేయడానికి సేవ్ చేయండి.",
+  "imported_program_name_group": "\"{{group}}\" గ్రూప్‌లో \"{{name}}\" ({{address}}) ప్రోగ్రామ్ దిగుమతి చేయబడింది."
 }

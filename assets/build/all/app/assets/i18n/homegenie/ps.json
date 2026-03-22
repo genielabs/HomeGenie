@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "د ویډیو ثبت کول فعال کړئ",
       "NVR.RecordOnAlarm": "په الارم کې ثبت کول",
       "NVR.ContinuousRecording": "دوامداره ثبت کول."
+    },
+    "932": {
+      "Title": "جیمني آټومن",
+      "Description": "ستاسو هوښیار اتومات مدیر. طبیعي ژبه د اجنټ کاري جریان ته واړوئ: دا په ریښتیني وخت کې د C# پروګرامونه لیکي، ازموینه کوي او اجرا کوي ترڅو هر ورکړل شوی کار بشپړ کړي. د دې ځانګړتیا فعالولو لپاره، یو باوري API کیلي دننه کړئ. د وړیا API کیلي ترلاسه کولو لپاره په https://aistudio.google.com/app/apikey کې لارښوونې تعقیب کړئ.",
+      "ConfigureOptions.ApiKey": "د ګوګل جیمني AI API کیلي",
+      "ConfigureOptions.ModelId": "د ماډل ID",
+      "ConfigureOptions.EnableDeepKnowledge": "ژوره پوهه فعاله کړئ (پروګرامونه او ویجټونه ولولئ)",
+      "ConfigureOptions.SystemInstructions": "د سیسټم لارښوونې"
     }
   },
   "scheduler_preset_action_genie_command": "د جینی قومانده",

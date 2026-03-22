@@ -186,10 +186,42 @@ namespace HomeGenie.Service
                 using (var reader = new StreamReader(modulesDatabase))
                 {
                     var modules = (List<Module>)serializer.Deserialize(reader);
-                    foreach (var module in modules)
+                    if (modules != null)
                     {
-                        homegenie.Modules.RemoveAll((m) => m.Domain == module.Domain && module.Address == m.Address);
-                        homegenie.Modules.Add(module);
+                        foreach (var incomingModule in modules)
+                        {
+                            var existingModule = homegenie.Modules.FirstOrDefault(m =>
+                                m.Domain == incomingModule.Domain &&
+                                m.Address == incomingModule.Address);
+
+                            if (existingModule != null)
+                            {
+                                //existingModule.Name = incomingModule.Name;
+                                //existingModule.Description = incomingModule.Description;
+                                //existingModule.DeviceType = incomingModule.DeviceType;
+                                foreach (var incomingProp in incomingModule.Properties)
+                                {
+                                    var existingProp =
+                                        existingModule.Properties.FirstOrDefault(p => p.Name == incomingProp.Name);
+                                    if (existingProp != null)
+                                    {
+                                        //if (incomingProp.UpdateTime > existingProp.UpdateTime)
+                                        //{
+                                        //    existingProp.Value = incomingProp.Value;
+                                        //    existingProp.UpdateTime = incomingProp.UpdateTime;
+                                        //}
+                                    }
+                                    else
+                                    {
+                                        existingModule.Properties.Add(incomingProp);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                homegenie.Modules.Add(incomingModule);
+                            }
+                        }
                     }
                     homegenie.UpdateModulesDatabase();
                 }

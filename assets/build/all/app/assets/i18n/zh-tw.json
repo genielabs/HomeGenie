@@ -565,5 +565,15 @@
   "error": "錯誤！",
   "copied_to_clipboard": "已複製到剪貼簿。",
   "message_deleted": "訊息已刪除",
-  "clear_chat_to_import": "清除目前聊天記錄以匯入新的聊天記錄。"
+  "clear_chat_to_import": "清除目前聊天記錄以匯入新的聊天記錄。",
+  "all_groups": "所有組",
+  "show_selected_groups": "顯示選定群組",
+  "show_deactivated_items": "顯示已停用項目",
+  "show_upgradable_programs": "顯示可升級程式",
+  "selected_groups": "選定群體",
+  "deactivated_programs_count": "已停用的程式：{{count}}",
+  "upgradable_programs": "可升級程式",
+  "unsaved_changes": "未儲存的更改",
+  "save_to_apply_program_changes": "儲存以應用對程式的變更。",
+  "imported_program_name_group": "從群組「{{group}}」匯入程式「{{name}}」（{{address}}）。"
 }

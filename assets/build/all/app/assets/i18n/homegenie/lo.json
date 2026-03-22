@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "ເປີດໃຊ້ການບັນທຶກວິດີໂອ",
       "NVR.RecordOnAlarm": "ບັນທຶກໃນເວລາປຸກ",
       "NVR.ContinuousRecording": "ການບັນທຶກຢ່າງຕໍ່ເນື່ອງ."
+    },
+    "932": {
+      "Title": "ຈີມິໂນ ອໍໂຕແມນ",
+      "Description": "ຜູ້ຈັດການອັດຕະໂນມັດອັດສະລິຍະຂອງທ່ານ. ປ່ຽນພາສາທຳມະຊາດໃຫ້ກາຍເປັນຂະບວນການເຮັດວຽກແບບຕົວແທນ: ມັນຂຽນ, ທົດສອບ ແລະ ປະຕິບັດໂປຣແກຣມ C# ໃນເວລາຈິງເພື່ອເຮັດສຳເລັດໜ້າວຽກໃດໜຶ່ງ. ເພື່ອເປີດໃຊ້ຄຸນສົມບັດນີ້, ໃຫ້ໃສ່ລະຫັດ API ທີ່ຖືກຕ້ອງ. ປະຕິບັດຕາມຄຳແນະນຳທີ່ https://aistudio.google.com/app/apikey ເພື່ອຮັບລະຫັດ API ຟຣີ.",
+      "ConfigureOptions.ApiKey": "ລະຫັດ API ຂອງ Google Gemini AI",
+      "ConfigureOptions.ModelId": "ລະຫັດຮຸ່ນ",
+      "ConfigureOptions.EnableDeepKnowledge": "ເປີດໃຊ້ຄວາມຮູ້ເລິກເຊິ່ງ (ອ່ານໂປຣແກຣມ ແລະ ວິດເຈັດ)",
+      "ConfigureOptions.SystemInstructions": "ຄຳແນະນຳກ່ຽວກັບລະບົບ"
     }
   },
   "scheduler_preset_action_genie_command": "ຄຳສັ່ງຂອງ Genie",

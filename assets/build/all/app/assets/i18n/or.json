@@ -565,5 +565,15 @@
   "error": "ତ୍ରୁଟି!",
   "copied_to_clipboard": "କ୍ଲିପବୋର୍ଡକୁ କପି କରାଯାଇଛି।",
   "message_deleted": "ମେସେଜ୍ ଡିଲିଟ୍ କରାଯାଇଛି",
-  "clear_chat_to_import": "ଏକ ନୂତନ ଚାଟ୍ ଇମ୍ପୋର୍ଟ କରିବାକୁ ବର୍ତ୍ତମାନର ଚାଟ୍ ଖାଲି କରନ୍ତୁ।"
+  "clear_chat_to_import": "ଏକ ନୂତନ ଚାଟ୍ ଇମ୍ପୋର୍ଟ କରିବାକୁ ବର୍ତ୍ତମାନର ଚାଟ୍ ଖାଲି କରନ୍ତୁ।",
+  "all_groups": "ସମସ୍ତ ଗୋଷ୍ଠୀ",
+  "show_selected_groups": "ଚୟନିତ ଗୋଷ୍ଠୀଗୁଡ଼ିକୁ ଦେଖାନ୍ତୁ",
+  "show_deactivated_items": "ନିଷ୍କ୍ରିୟ ହୋଇଥିବା ଆଇଟମଗୁଡ଼ିକୁ ଦେଖାନ୍ତୁ",
+  "show_upgradable_programs": "ଅପଗ୍ରେଡେବଲ୍ ପ୍ରୋଗ୍ରାମଗୁଡ଼ିକ ଦେଖାନ୍ତୁ",
+  "selected_groups": "ଚୟନିତ ଗୋଷ୍ଠୀଗୁଡ଼ିକ",
+  "deactivated_programs_count": "ନିଷ୍କ୍ରିୟ ପ୍ରୋଗ୍ରାମଗୁଡ଼ିକ: {{count}}",
+  "upgradable_programs": "ଅପଗ୍ରେଡେବଲ୍ ପ୍ରୋଗ୍ରାମ୍",
+  "unsaved_changes": "ସେଭ୍ ହୋଇନଥିବା ପରିବର୍ତ୍ତନଗୁଡ଼ିକ",
+  "save_to_apply_program_changes": "ପ୍ରୋଗ୍ରାମରେ ପରିବର୍ତ୍ତନ ଲାଗୁ କରିବା ପାଇଁ ସେଭ୍ କରନ୍ତୁ।",
+  "imported_program_name_group": "\"{{group}}\" ଗୋଷ୍ଠୀରେ ଇମ୍ପୋର୍ଟ କରାଯାଇଥିବା ପ୍ରୋଗ୍ରାମ \"{{name}}\" ({{address}})।"
 }

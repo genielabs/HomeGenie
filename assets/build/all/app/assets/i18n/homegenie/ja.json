@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "ビデオ録画を有効にする",
       "NVR.RecordOnAlarm": "アラーム時に録画",
       "NVR.ContinuousRecording": "連続録画。"
+    },
+    "932": {
+      "Title": "ジェミニ・オートマン",
+      "Description": "スマートな自動化マネージャー。自然言語をエージェント型ワークフローに変換します。C#プログラムをリアルタイムで作成、テスト、実行し、あらゆるタスクを完了させます。この機能を有効にするには、有効なAPIキーを入力してください。無料のAPIキーを取得するには、https://aistudio.google.com/app/apikey の手順に従ってください。",
+      "ConfigureOptions.ApiKey": "Google Gemini AI APIキー",
+      "ConfigureOptions.ModelId": "モデルID",
+      "ConfigureOptions.EnableDeepKnowledge": "深い知識を有効化する（プログラムとウィジェットの読み取り）",
+      "ConfigureOptions.SystemInstructions": "システム手順"
     }
   },
   "scheduler_preset_action_genie_command": "ジーニーコマンド",

@@ -565,5 +565,15 @@
   "error": "Żball!",
   "copied_to_clipboard": "Ikkupjat fil-clipboard.",
   "message_deleted": "Messaġġ imħassar",
-  "clear_chat_to_import": "Neħħi ċ-chat kurrenti biex timporta waħda ġdida."
+  "clear_chat_to_import": "Neħħi ċ-chat kurrenti biex timporta waħda ġdida.",
+  "all_groups": "Il-Gruppi Kollha",
+  "show_selected_groups": "Uri l-gruppi magħżula",
+  "show_deactivated_items": "Uri oġġetti diżattivati",
+  "show_upgradable_programs": "Uri programmi li jistgħu jiġu aġġornati",
+  "selected_groups": "Gruppi magħżula",
+  "deactivated_programs_count": "Programmi diżattivati: {{count}}",
+  "upgradable_programs": "Programmi li jistgħu jiġu aġġornati",
+  "unsaved_changes": "Bidliet mhux salvati",
+  "save_to_apply_program_changes": "Issejvja biex tapplika l-bidliet fil-programm.",
+  "imported_program_name_group": "Il-programm \"{{name}}\" ({{address}}) ġie importat fil-grupp \"{{group}}\"."
 }

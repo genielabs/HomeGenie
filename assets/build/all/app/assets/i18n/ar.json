@@ -565,5 +565,15 @@
   "error": "خطأ!",
   "copied_to_clipboard": "تم نسخها إلى الحافظة.",
   "message_deleted": "تم حذف الرسالة",
-  "clear_chat_to_import": "امسح المحادثة الحالية لاستيراد محادثة جديدة."
+  "clear_chat_to_import": "امسح المحادثة الحالية لاستيراد محادثة جديدة.",
+  "all_groups": "جميع المجموعات",
+  "show_selected_groups": "عرض مجموعات متعددة",
+  "show_deactivated_items": "عرض العناصر غير النشطة",
+  "show_upgradable_programs": "عرض البرامج القابلة للتحديث",
+  "selected_groups": "المجموعات المختارة",
+  "deactivated_programs_count": "البرامج المعطلة: {{count}}",
+  "upgradable_programs": "برامج قابلة للتحديث",
+  "unsaved_changes": "التغييرات غير المحفوظة",
+  "save_to_apply_program_changes": "احفظ التغييرات لتطبيقها على البرنامج.",
+  "imported_program_name_group": "تم استيراد البرنامج \"{{name}}\" ({{address}}) في المجموعة \"{{group}}\"."
 }

@@ -565,5 +565,15 @@
   "error": "შეცდომა!",
   "copied_to_clipboard": "კოპირებულია ბუფერში.",
   "message_deleted": "შეტყობინება წაიშალა",
-  "clear_chat_to_import": "ახლის იმპორტისთვის, მიმდინარე ჩატის გასუფთავება."
+  "clear_chat_to_import": "ახლის იმპორტისთვის, მიმდინარე ჩატის გასუფთავება.",
+  "all_groups": "ყველა ჯგუფი",
+  "show_selected_groups": "არჩეული ჯგუფების ჩვენება",
+  "show_deactivated_items": "დეაქტივირებული ერთეულების ჩვენება",
+  "show_upgradable_programs": "განახლებადი პროგრამების ჩვენება",
+  "selected_groups": "არჩეული ჯგუფები",
+  "deactivated_programs_count": "დეაქტივირებული პროგრამები: {{count}}",
+  "upgradable_programs": "განახლებადი პროგრამები",
+  "unsaved_changes": "შეუნახავი ცვლილებები",
+  "save_to_apply_program_changes": "შეინახეთ პროგრამაში ცვლილებების გამოსაყენებლად.",
+  "imported_program_name_group": "იმპორტირებული პროგრამა „{{name}}“ ({{address}}) ჯგუფში „{{group}}“."
 }

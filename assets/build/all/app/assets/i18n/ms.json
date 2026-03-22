@@ -565,5 +565,15 @@
   "error": "Ralat!",
   "copied_to_clipboard": "Disalin ke papan keratan.",
   "message_deleted": "Mesej dipadamkan",
-  "clear_chat_to_import": "Kosongkan sembang semasa untuk mengimport sembang baharu."
+  "clear_chat_to_import": "Kosongkan sembang semasa untuk mengimport sembang baharu.",
+  "all_groups": "Semua Kumpulan",
+  "show_selected_groups": "Tunjukkan kumpulan yang dipilih",
+  "show_deactivated_items": "Tunjukkan item yang dinyahaktifkan",
+  "show_upgradable_programs": "Tunjukkan program yang boleh dinaik taraf",
+  "selected_groups": "Kumpulan yang dipilih",
+  "deactivated_programs_count": "Program dinyahaktifkan: {{count}}",
+  "upgradable_programs": "Program Boleh Dinaik Taraf",
+  "unsaved_changes": "Perubahan yang tidak disimpan",
+  "save_to_apply_program_changes": "Simpan untuk menggunakan perubahan pada program.",
+  "imported_program_name_group": "Program \"{{name}}\" ({{address}}) yang diimport dalam kumpulan \"{{group}}\"."
 }

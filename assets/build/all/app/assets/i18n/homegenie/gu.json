@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "વિડિઓ રેકોર્ડિંગ સક્ષમ કરો",
       "NVR.RecordOnAlarm": "એલાર્મ પર રેકોર્ડ કરો",
       "NVR.ContinuousRecording": "સતત રેકોર્ડિંગ."
+    },
+    "932": {
+      "Title": "જેમિની ઓટોમેન",
+      "Description": "તમારા સ્માર્ટ ઓટોમેશન મેનેજર. કુદરતી ભાષાને એજન્ટિક વર્કફ્લોમાં ફેરવો: તે કોઈપણ કાર્ય પૂર્ણ કરવા માટે રીઅલ-ટાઇમમાં C# પ્રોગ્રામ લખે છે, પરીક્ષણ કરે છે અને એક્ઝિક્યુટ કરે છે. આ સુવિધાને સક્રિય કરવા માટે, માન્ય API કી દાખલ કરો. મફત API કી મેળવવા માટે https://aistudio.google.com/app/apikey પરની સૂચનાઓનું પાલન કરો.",
+      "ConfigureOptions.ApiKey": "ગૂગલ જેમિની એઆઈ એપીઆઈ કી",
+      "ConfigureOptions.ModelId": "મોડેલ ID",
+      "ConfigureOptions.EnableDeepKnowledge": "ડીપ નોલેજ (પ્રોગ્રામ્સ અને વિજેટ્સ વાંચો) સક્ષમ કરો",
+      "ConfigureOptions.SystemInstructions": "સિસ્ટમ સૂચનાઓ"
     }
   },
   "scheduler_preset_action_genie_command": "જીની કમાન્ડ",

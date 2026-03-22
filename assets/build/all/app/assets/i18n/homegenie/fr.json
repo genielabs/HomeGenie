@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Activer l'enregistrement vidéo",
       "NVR.RecordOnAlarm": "Enregistrement sur alarme",
       "NVR.ContinuousRecording": "Enregistrement continu."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Votre gestionnaire d'automatisation intelligent. Transformez le langage naturel en flux de travail automatisés : il écrit, teste et exécute des programmes C# en temps réel pour accomplir n'importe quelle tâche. Pour activer cette fonctionnalité, saisissez une clé API valide. Suivez les instructions sur https://aistudio.google.com/app/apikey pour obtenir une clé API gratuite.",
+      "ConfigureOptions.ApiKey": "Clé API Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID du modèle",
+      "ConfigureOptions.EnableDeepKnowledge": "Activer les connaissances approfondies (Lire les programmes et les widgets)",
+      "ConfigureOptions.SystemInstructions": "Instructions système"
     }
   },
   "scheduler_preset_action_genie_command": "Commande du génie",

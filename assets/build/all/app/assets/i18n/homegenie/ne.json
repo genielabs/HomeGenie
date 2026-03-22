@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "भिडियो रेकर्डिङ सक्षम गर्नुहोस्",
       "NVR.RecordOnAlarm": "अलार्ममा रेकर्ड गर्नुहोस्",
       "NVR.ContinuousRecording": "निरन्तर रेकर्डिङ।"
+    },
+    "932": {
+      "Title": "जेमिनी अटोम्यान",
+      "Description": "तपाईंको स्मार्ट स्वचालन प्रबन्धक। प्राकृतिक भाषालाई एजेन्टिक कार्यप्रवाहमा परिणत गर्नुहोस्: यसले कुनै पनि कार्य पूरा गर्न वास्तविक समयमा C# प्रोग्रामहरू लेख्छ, परीक्षण गर्छ र कार्यान्वयन गर्छ। यो सुविधा सक्रिय गर्न, मान्य API कुञ्जी प्रविष्ट गर्नुहोस्। नि:शुल्क API कुञ्जी प्राप्त गर्न https://aistudio.google.com/app/apikey मा निर्देशनहरू पालना गर्नुहोस्।",
+      "ConfigureOptions.ApiKey": "गुगल जेमिनी एआई एपीआई कुञ्जी",
+      "ConfigureOptions.ModelId": "मोडेल आईडी",
+      "ConfigureOptions.EnableDeepKnowledge": "गहिरो ज्ञान सक्षम गर्नुहोस् (कार्यक्रमहरू र विजेटहरू पढ्नुहोस्)",
+      "ConfigureOptions.SystemInstructions": "प्रणाली निर्देशनहरू"
     }
   },
   "scheduler_preset_action_genie_command": "जिनी कमान्ड",

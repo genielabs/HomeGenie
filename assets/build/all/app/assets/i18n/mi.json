@@ -565,5 +565,15 @@
   "error": "Hapa!",
   "copied_to_clipboard": "I tāruatia ki te papatuhituhi.",
   "message_deleted": "Kua mukua te karere",
-  "clear_chat_to_import": "Ūkuia te kōrerorero o nāianei hei kawemai i tētahi kōrerorero hou."
+  "clear_chat_to_import": "Ūkuia te kōrerorero o nāianei hei kawemai i tētahi kōrerorero hou.",
+  "all_groups": "Ngā Rōpū Katoa",
+  "show_selected_groups": "Whakaaturia ngā rōpū kua tīpakohia",
+  "show_deactivated_items": "Whakaatuhia ngā tūemi kua whakakorea",
+  "show_upgradable_programs": "Whakaaturia ngā kaupapa ka taea te whakapai ake",
+  "selected_groups": "Ngā rōpū kua tīpakohia",
+  "deactivated_programs_count": "Ngā kaupapa kua whakakorea: {{count}}",
+  "upgradable_programs": "Ngā Papatono Whakapai Ake",
+  "unsaved_changes": "Ngā huringa kāore anō kia tiakina",
+  "save_to_apply_program_changes": "Tiaki hei whakamahi i ngā huringa ki te hōtaka.",
+  "imported_program_name_group": "I kawemaihia te kaupapa \"{{name}}\" ({{address}}) i roto i te rōpū \"{{group}}\"."
 }

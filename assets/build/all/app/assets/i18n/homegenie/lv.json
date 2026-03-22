@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Iespējot video ierakstīšanu",
       "NVR.RecordOnAlarm": "Ierakstīt trauksmes brīdī",
       "NVR.ContinuousRecording": "Nepārtraukta ierakstīšana."
+    },
+    "932": {
+      "Title": "Dvīņu Automan",
+      "Description": "Jūsu viedais automatizācijas pārvaldnieks. Pārveidojiet dabisko valodu aģentūru darbplūsmās: tas raksta, testē un izpilda C# programmas reāllaikā, lai pabeigtu jebkuru uzdevumu. Lai aktivizētu šo funkciju, ievadiet derīgu API atslēgu. Izpildiet norādījumus vietnē https://aistudio.google.com/app/apikey, lai iegūtu bezmaksas API atslēgu.",
+      "ConfigureOptions.ApiKey": "Google Gemini mākslīgā intelekta API atslēga",
+      "ConfigureOptions.ModelId": "Modeļa ID",
+      "ConfigureOptions.EnableDeepKnowledge": "Iespējot padziļinātas zināšanas (lasīt programmas un logrīkus)",
+      "ConfigureOptions.SystemInstructions": "Sistēmas instrukcijas"
     }
   },
   "scheduler_preset_action_genie_command": "Džinu pavēlniecība",

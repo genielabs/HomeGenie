@@ -565,5 +565,15 @@
   "error": "Feil!",
   "copied_to_clipboard": "Kopiert til utklippstavlen.",
   "message_deleted": "Meldingen er slettet",
-  "clear_chat_to_import": "Fjern gjeldende chat for å importere en ny."
+  "clear_chat_to_import": "Fjern gjeldende chat for å importere en ny.",
+  "all_groups": "Alle grupper",
+  "show_selected_groups": "Vis valgte grupper",
+  "show_deactivated_items": "Vis deaktiverte elementer",
+  "show_upgradable_programs": "Vis oppgraderbare programmer",
+  "selected_groups": "Utvalgte grupper",
+  "deactivated_programs_count": "Deaktiverte programmer: {{count}}",
+  "upgradable_programs": "Oppgraderbare programmer",
+  "unsaved_changes": "Ulagrede endringer",
+  "save_to_apply_program_changes": "Lagre for å bruke endringene i programmet.",
+  "imported_program_name_group": "Importerte programmet «{{name}}» ({{address}}) i gruppen «{{group}}»."
 }

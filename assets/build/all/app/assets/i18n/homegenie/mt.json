@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Ippermetti r-Reġistrazzjoni tal-Vidjo",
       "NVR.RecordOnAlarm": "Irrekordja fuq Allarm",
       "NVR.ContinuousRecording": "Reġistrazzjoni Kontinwa."
+    },
+    "932": {
+      "Title": "Awtoman tal-Gemini",
+      "Description": "Il-Maniġer tal-Awtomazzjoni intelliġenti tiegħek. Ibdel il-lingwa naturali f'flussi tax-xogħol aġentiċi: jikteb, jittestja, u jesegwixxi programmi C# f'ħin reali biex ilesti kwalunkwe kompitu partikolari. Biex tattiva din il-karatteristika, daħħal ċavetta API valida. Segwi l-istruzzjonijiet fuq https://aistudio.google.com/app/apikey biex tikseb ċavetta API b'xejn.",
+      "ConfigureOptions.ApiKey": "Ċavetta tal-API tal-AI tal-Google Gemini",
+      "ConfigureOptions.ModelId": "ID tal-Mudell",
+      "ConfigureOptions.EnableDeepKnowledge": "Ippermetti Għarfien Profond (Aqra programmi u widgets)",
+      "ConfigureOptions.SystemInstructions": "Istruzzjonijiet tas-Sistema"
     }
   },
   "scheduler_preset_action_genie_command": "Kmand tal-Ġenji",

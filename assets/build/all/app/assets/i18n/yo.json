@@ -565,5 +565,15 @@
   "error": "Àṣìṣe!",
   "copied_to_clipboard": "A daakọ si agekuru fidio.",
   "message_deleted": "Ifiranṣẹ ti paarẹ",
-  "clear_chat_to_import": "Pa ìfọ̀rọ̀wérọ̀ lọ́wọ́lọ́wọ́ rẹ́ láti gbé tuntun wọlé."
+  "clear_chat_to_import": "Pa ìfọ̀rọ̀wérọ̀ lọ́wọ́lọ́wọ́ rẹ́ láti gbé tuntun wọlé.",
+  "all_groups": "Gbogbo Àwọn Ẹgbẹ́",
+  "show_selected_groups": "Fi àwọn ẹgbẹ́ tí a yàn hàn",
+  "show_deactivated_items": "Fi àwọn ohun tí a ti pa iṣẹ́ hàn",
+  "show_upgradable_programs": "Fi awọn eto ti a le tunṣe han",
+  "selected_groups": "Àwọn ẹgbẹ́ tí a yàn",
+  "deactivated_programs_count": "Àwọn ètò tí a ti mú ṣiṣẹ́: {{count}}",
+  "upgradable_programs": "Àwọn Ètò Tí A Lè Ṣe Àtúnṣe",
+  "unsaved_changes": "Àwọn àyípadà tí a kò fipamọ́",
+  "save_to_apply_program_changes": "Fipamọ́ láti lo àwọn àtúnṣe sí ètò náà.",
+  "imported_program_name_group": "Ètò tí a kó wọlé \"{{name}}\" ({{address}}) nínú ẹgbẹ́ \"{{group}}\"."
 }

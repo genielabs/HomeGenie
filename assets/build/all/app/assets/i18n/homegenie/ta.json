@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "வீடியோ பதிவை இயக்கு",
       "NVR.RecordOnAlarm": "அலாரத்தில் பதிவு செய்",
       "NVR.ContinuousRecording": "தொடர்ச்சியான பதிவு."
+    },
+    "932": {
+      "Title": "ஜெமினி ஆட்டோமேன்",
+      "Description": "உங்கள் திறன்மிகு தானியக்க மேலாளர். இயல் மொழியை முகவர் சார்ந்த பணிப்பாய்வுகளாக மாற்றுங்கள்: இது கொடுக்கப்பட்ட எந்தவொரு பணியையும் முடிக்க, C# நிரல்களை நிகழ் நேரத்தில் எழுதி, சோதித்து, இயக்குகிறது. இந்த அம்சத்தைச் செயல்படுத்த, செல்லுபடியாகும் API சாவியை உள்ளிடவும். இலவச API சாவியைப் பெற, https://aistudio.google.com/app/apikey இல் உள்ள வழிமுறைகளைப் பின்பற்றவும்.",
+      "ConfigureOptions.ApiKey": "கூகிள் ஜெமினி AI API விசை",
+      "ConfigureOptions.ModelId": "மாடல் ஐடி",
+      "ConfigureOptions.EnableDeepKnowledge": "ஆழ்ந்த அறிவைச் செயல்படுத்துங்கள் (நிரல்கள் மற்றும் விட்ஜெட்களைப் படிக்கவும்)",
+      "ConfigureOptions.SystemInstructions": "கணினி வழிமுறைகள்"
     }
   },
   "scheduler_preset_action_genie_command": "ஜெனி கட்டளை",

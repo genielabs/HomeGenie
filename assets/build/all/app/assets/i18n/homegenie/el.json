@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Ενεργοποίηση εγγραφής βίντεο",
       "NVR.RecordOnAlarm": "Εγγραφή σε συναγερμό",
       "NVR.ContinuousRecording": "Συνεχής καταγραφή."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Ο έξυπνος Διαχειριστής Αυτοματισμού σας. Μετατρέψτε τη φυσική γλώσσα σε ροές εργασίας πρακτόρων: γράφει, δοκιμάζει και εκτελεί προγράμματα C# σε πραγματικό χρόνο για να ολοκληρώσει οποιαδήποτε δεδομένη εργασία. Για να ενεργοποιήσετε αυτήν τη λειτουργία, εισαγάγετε ένα έγκυρο κλειδί API. Ακολουθήστε τις οδηγίες στη διεύθυνση https://aistudio.google.com/app/apikey για να λάβετε ένα δωρεάν κλειδί API.",
+      "ConfigureOptions.ApiKey": "Κλειδί API AI Google Gemini",
+      "ConfigureOptions.ModelId": "Αναγνωριστικό μοντέλου",
+      "ConfigureOptions.EnableDeepKnowledge": "Ενεργοποίηση Βαθιάς Γνώσης (Ανάγνωση προγραμμάτων και γραφικών στοιχείων)",
+      "ConfigureOptions.SystemInstructions": "Οδηγίες συστήματος"
     }
   },
   "scheduler_preset_action_genie_command": "Διοίκηση Τζίνι",

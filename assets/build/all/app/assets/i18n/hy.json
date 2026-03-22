@@ -565,5 +565,15 @@
   "error": "Սխալ!",
   "copied_to_clipboard": "Պատճենվել է սեղմատախտակին։",
   "message_deleted": "Հաղորդագրությունը ջնջված է",
-  "clear_chat_to_import": "Մաքրեք ընթացիկ զրույցը՝ նորը ներմուծելու համար։"
+  "clear_chat_to_import": "Մաքրեք ընթացիկ զրույցը՝ նորը ներմուծելու համար։",
+  "all_groups": "Բոլոր խմբերը",
+  "show_selected_groups": "Ցուցադրել ընտրված խմբերը",
+  "show_deactivated_items": "Ցուցադրել անջատված տարրերը",
+  "show_upgradable_programs": "Ցուցադրել թարմացվող ծրագրերը",
+  "selected_groups": "Ընտրված խմբեր",
+  "deactivated_programs_count": "Անջատված ծրագրեր՝ {{count}}",
+  "upgradable_programs": "Թարմացվող ծրագրեր",
+  "unsaved_changes": "Չպահպանված փոփոխություններ",
+  "save_to_apply_program_changes": "Պահպանել՝ ծրագրում փոփոխությունները կիրառելու համար։",
+  "imported_program_name_group": "«{{name}}» ({{address}}) ծրագիրը ներմուծվել է «{{group}}» խմբում։"
 }

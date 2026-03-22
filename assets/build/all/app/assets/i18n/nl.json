@@ -565,5 +565,15 @@
   "error": "Fout!",
   "copied_to_clipboard": "Gekopieerd naar het klembord.",
   "message_deleted": "Bericht verwijderd",
-  "clear_chat_to_import": "Wis de huidige chat om een nieuwe te importeren."
+  "clear_chat_to_import": "Wis de huidige chat om een nieuwe te importeren.",
+  "all_groups": "Alle groepen",
+  "show_selected_groups": "Toon geselecteerde groepen",
+  "show_deactivated_items": "Toon gedeactiveerde items",
+  "show_upgradable_programs": "Toon upgradebare programma's",
+  "selected_groups": "Geselecteerde groepen",
+  "deactivated_programs_count": "Gedeactiveerde programma's: {{count}}",
+  "upgradable_programs": "Upgradebare programma's",
+  "unsaved_changes": "Niet-opgeslagen wijzigingen",
+  "save_to_apply_program_changes": "Sla de wijzigingen op om ze in het programma toe te passen.",
+  "imported_program_name_group": "Geïmporteerd programma \"{{name}}\" ({{address}}) in groep \"{{group}}\"."
 }

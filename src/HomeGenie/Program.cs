@@ -46,11 +46,7 @@ namespace HomeGenie
         {
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
             AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
-#if NETFRAMEWORK
-            // This is critical for runtime assembly loading and recompilation on Mono/.NET Framework.
-            // It prevents file locks on dynamically loaded/compiled DLLs by loading them from a shadow copy.
-            AppDomain.CurrentDomain.SetupInformation.ShadowCopyFiles = "true";
-#endif
+
             Console.CancelKeyPress += Console_CancelKeyPress;
 
             var hostBuilder = Host.CreateDefaultBuilder(args);
@@ -68,13 +64,12 @@ namespace HomeGenie
                 services.AddHostedService<ServiceWorker>();
             });
 
-#if !NETFRAMEWORK
-    #if NET6_0_OR_GREATER
+
             if (Environment.OSVersion.Platform == PlatformID.Unix)
             {
                 hostBuilder.UseSystemd();
             }
-    #endif
+
             if (Environment.OSVersion.Platform != PlatformID.Unix && Environment.OSVersion.Platform != PlatformID.MacOSX)
             {
                 hostBuilder.UseWindowsService(options =>
@@ -82,7 +77,6 @@ namespace HomeGenie
                     options.ServiceName = ServiceName;
                 });
             }
-#endif
 
             _serviceHost = hostBuilder.Build();
 

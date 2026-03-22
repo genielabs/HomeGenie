@@ -565,5 +565,15 @@
   "error": "ભૂલ!",
   "copied_to_clipboard": "ક્લિપબોર્ડ પર કૉપિ કરી.",
   "message_deleted": "સંદેશ કાઢી નાખ્યો",
-  "clear_chat_to_import": "નવી ચેટ આયાત કરવા માટે વર્તમાન ચેટ સાફ કરો."
+  "clear_chat_to_import": "નવી ચેટ આયાત કરવા માટે વર્તમાન ચેટ સાફ કરો.",
+  "all_groups": "બધા જૂથો",
+  "show_selected_groups": "પસંદ કરેલા જૂથો બતાવો",
+  "show_deactivated_items": "નિષ્ક્રિય કરેલી આઇટમ્સ બતાવો",
+  "show_upgradable_programs": "અપગ્રેડ કરી શકાય તેવા પ્રોગ્રામ્સ બતાવો",
+  "selected_groups": "પસંદ કરેલા જૂથો",
+  "deactivated_programs_count": "નિષ્ક્રિય કરેલ પ્રોગ્રામ્સ: {{count}}",
+  "upgradable_programs": "અપગ્રેડેબલ પ્રોગ્રામ્સ",
+  "unsaved_changes": "વણસાચવેલા ફેરફારો",
+  "save_to_apply_program_changes": "પ્રોગ્રામમાં ફેરફારો લાગુ કરવા માટે સાચવો.",
+  "imported_program_name_group": "\"{{group}}\" જૂથમાં \"{{name}}\" ({{address}}) પ્રોગ્રામ આયાત કર્યો."
 }

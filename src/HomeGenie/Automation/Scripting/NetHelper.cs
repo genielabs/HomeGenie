@@ -377,7 +377,7 @@ namespace HomeGenie.Automation.Scripting
                     {
                         webClient.UseDefaultCredentials = true;
                     }
-                    webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)");
+                    webClient.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36");
                     if (_customHeaders.Count > 0)
                         webClient.Headers.Add(_customHeaders);
                     if (_method == "")
@@ -386,8 +386,8 @@ namespace HomeGenie.Automation.Scripting
                     }
                     else
                     {
-                        byte[] data = Encoding.UTF8.GetBytes(_putData);
-                        byte[] responsebytes = webClient.UploadData(_webServiceUrl, _method, data);
+                        var data = Encoding.UTF8.GetBytes(_putData);
+                        var responsebytes = webClient.UploadData(_webServiceUrl, _method, data);
                         returnvalue = Encoding.UTF8.GetString(responsebytes);
                     }
                 }
@@ -450,7 +450,7 @@ namespace HomeGenie.Automation.Scripting
                     {
                         webClient.UseDefaultCredentials = true;
                     }
-                    webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)");
+                    webClient.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36");
                     if (_customHeaders.Count > 0)
                         webClient.Headers.Add(_customHeaders);
                     responseBytes = webClient.DownloadData(_webServiceUrl);

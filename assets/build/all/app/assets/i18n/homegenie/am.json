@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "የቪዲዮ ቀረጻን ያንቁ",
       "NVR.RecordOnAlarm": "ማንቂያ ላይ ቅዳ",
       "NVR.ContinuousRecording": "ቀጣይነት ያለው ቀረጻ።"
+    },
+    "932": {
+      "Title": "ጀሚኒ አውቶማን",
+      "Description": "የእርስዎ ብልጥ አውቶሜሽን አስተዳዳሪ። ተፈጥሯዊ ቋንቋን ወደ ወኪል የስራ ፍሰቶች ይቀይሩት፡ ማንኛውንም የተሰጠ ተግባር ለማጠናቀቅ የC# ፕሮግራሞችን በእውነተኛ ጊዜ ይጽፋል፣ ይፈትሻል እና ያስፈጽማል። ይህንን ባህሪ ለማግበር ትክክለኛ የኤፒአይ ቁልፍ ያስገቡ። ነፃ የኤፒአይ ቁልፍ ለማግኘት በ https://aistudio.google.com/app/apikey ላይ ያሉትን መመሪያዎች ይከተሉ።",
+      "ConfigureOptions.ApiKey": "የጉግል ጀሚኒ የኤአይ ኤፒአይ ቁልፍ",
+      "ConfigureOptions.ModelId": "የሞዴል መታወቂያ",
+      "ConfigureOptions.EnableDeepKnowledge": "ጥልቅ እውቀትን አንቃ (ፕሮግራሞችን እና መግብሮችን ያንብቡ)",
+      "ConfigureOptions.SystemInstructions": "የስርዓት መመሪያዎች"
     }
   },
   "scheduler_preset_action_genie_command": "የጂኒ ኮማንድ",

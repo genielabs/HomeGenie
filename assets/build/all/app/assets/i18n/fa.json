@@ -565,5 +565,15 @@
   "error": "خطا!",
   "copied_to_clipboard": "در کلیپ‌بورد کپی شد.",
   "message_deleted": "پیام حذف شد",
-  "clear_chat_to_import": "برای وارد کردن یک چت جدید، چت فعلی را پاک کنید."
+  "clear_chat_to_import": "برای وارد کردن یک چت جدید، چت فعلی را پاک کنید.",
+  "all_groups": "همه گروه‌ها",
+  "show_selected_groups": "نمایش گروه‌های انتخاب‌شده",
+  "show_deactivated_items": "نمایش موارد غیرفعال",
+  "show_upgradable_programs": "نمایش برنامه‌های قابل ارتقا",
+  "selected_groups": "گروه‌های منتخب",
+  "deactivated_programs_count": "برنامه‌های غیرفعال‌شده: {{count}}",
+  "upgradable_programs": "برنامه‌های قابل ارتقا",
+  "unsaved_changes": "تغییرات ذخیره نشده",
+  "save_to_apply_program_changes": "برای اعمال تغییرات در برنامه، آن را ذخیره کنید.",
+  "imported_program_name_group": "برنامه‌ی \"{{name}}\" ({{address}}) در گروه \"{{group}}\" وارد شده است."
 }

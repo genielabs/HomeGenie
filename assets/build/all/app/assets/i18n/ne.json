@@ -565,5 +565,15 @@
   "error": "त्रुटि!",
   "copied_to_clipboard": "क्लिपबोर्डमा प्रतिलिपि गरियो।",
   "message_deleted": "सन्देश मेटाइयो",
-  "clear_chat_to_import": "नयाँ च्याट आयात गर्न हालको च्याट खाली गर्नुहोस्।"
+  "clear_chat_to_import": "नयाँ च्याट आयात गर्न हालको च्याट खाली गर्नुहोस्।",
+  "all_groups": "सबै समूहहरू",
+  "show_selected_groups": "चयन गरिएका समूहहरू देखाउनुहोस्",
+  "show_deactivated_items": "निष्क्रिय पारिएका वस्तुहरू देखाउनुहोस्",
+  "show_upgradable_programs": "अपग्रेड गर्न मिल्ने कार्यक्रमहरू देखाउनुहोस्",
+  "selected_groups": "चयन गरिएका समूहहरू",
+  "deactivated_programs_count": "निष्क्रिय पारिएका कार्यक्रमहरू: {{count}}",
+  "upgradable_programs": "स्तरोन्नति गर्न सकिने कार्यक्रमहरू",
+  "unsaved_changes": "सुरक्षित नगरिएका परिवर्तनहरू",
+  "save_to_apply_program_changes": "कार्यक्रममा परिवर्तनहरू लागू गर्न बचत गर्नुहोस्।",
+  "imported_program_name_group": "\"{{group}}\" समूहमा \"{{name}}\" ({{address}}) कार्यक्रम आयात गरियो।"
 }

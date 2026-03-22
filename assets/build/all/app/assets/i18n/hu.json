@@ -565,5 +565,15 @@
   "error": "Hiba!",
   "copied_to_clipboard": "Vágólapra másolva.",
   "message_deleted": "Üzenet törölve",
-  "clear_chat_to_import": "Töröld az aktuális csevegést egy új importálásához."
+  "clear_chat_to_import": "Töröld az aktuális csevegést egy új importálásához.",
+  "all_groups": "Minden csoport",
+  "show_selected_groups": "Kijelölt csoportok megjelenítése",
+  "show_deactivated_items": "Deaktivált elemek megjelenítése",
+  "show_upgradable_programs": "Frissíthető programok megjelenítése",
+  "selected_groups": "Kiválasztott csoportok",
+  "deactivated_programs_count": "Deaktivált programok: {{count}}",
+  "upgradable_programs": "Frissíthető programok",
+  "unsaved_changes": "Nem mentett változtatások",
+  "save_to_apply_program_changes": "Mentés a módosítások programba való alkalmazásához.",
+  "imported_program_name_group": "A(z) \"{{name}}\" ({{address}}) program importálva lett a(z) \"{{group}}\" csoportba."
 }

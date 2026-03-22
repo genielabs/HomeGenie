@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Aktiveer video-opname",
       "NVR.RecordOnAlarm": "Opneem by alarm",
       "NVR.ContinuousRecording": "Deurlopende opname."
+    },
+    "932": {
+      "Title": "Tweeling-Automan",
+      "Description": "Jou slim Outomatiseringsbestuurder. Verander natuurlike taal in agentiese werkvloeie: dit skryf, toets en voer C#-programme intyds uit om enige gegewe taak te voltooi. Om hierdie funksie te aktiveer, voer 'n geldige API-sleutel in. Volg die instruksies by https://aistudio.google.com/app/apikey om 'n gratis API-sleutel te kry.",
+      "ConfigureOptions.ApiKey": "Google Gemini KI API-sleutel",
+      "ConfigureOptions.ModelId": "Model-ID",
+      "ConfigureOptions.EnableDeepKnowledge": "Aktiveer diepgaande kennis (lees programme en widgets)",
+      "ConfigureOptions.SystemInstructions": "Stelselinstruksies"
     }
   },
   "scheduler_preset_action_genie_command": "Genie-opdrag",

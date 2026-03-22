@@ -565,5 +565,15 @@
   "error": "Ошибка!",
   "copied_to_clipboard": "Скопировано в буфер обмена.",
   "message_deleted": "Сообщение удалено",
-  "clear_chat_to_import": "Чтобы импортировать новый чат, очистите текущий."
+  "clear_chat_to_import": "Чтобы импортировать новый чат, очистите текущий.",
+  "all_groups": "Все группы",
+  "show_selected_groups": "Показать выбранные группы",
+  "show_deactivated_items": "Показать деактивированные элементы",
+  "show_upgradable_programs": "Показать программы, доступные для обновления",
+  "selected_groups": "Избранные группы",
+  "deactivated_programs_count": "Деактивированные программы: {{count}}",
+  "upgradable_programs": "Программы с возможностью обновления",
+  "unsaved_changes": "Несохраненные изменения",
+  "save_to_apply_program_changes": "Сохраните изменения, чтобы применить их к программе.",
+  "imported_program_name_group": "Импортирована программа \"{{name}}\" ({{address}}) в группе \"{{group}}\"."
 }

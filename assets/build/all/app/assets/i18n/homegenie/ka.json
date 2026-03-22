@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "ვიდეოჩანაწერის ჩართვა",
       "NVR.RecordOnAlarm": "ჩაწერა სიგნალიზაციის დროს",
       "NVR.ContinuousRecording": "უწყვეტი ჩაწერა."
+    },
+    "932": {
+      "Title": "ტყუპების ავტომენი",
+      "Description": "თქვენი ჭკვიანი ავტომატიზაციის მენეჯერი. გადააქციეთ ბუნებრივი ენა აგენტურ სამუშაო ნაკადებად: ის წერს, ამოწმებს და ასრულებს C# პროგრამებს რეალურ დროში ნებისმიერი მოცემული დავალების შესასრულებლად. ამ ფუნქციის გასააქტიურებლად, შეიყვანეთ მოქმედი API გასაღები. მიჰყევით ინსტრუქციებს https://aistudio.google.com/app/apikey-ზე, რომ მიიღოთ უფასო API გასაღები.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API გასაღები",
+      "ConfigureOptions.ModelId": "მოდელის ID",
+      "ConfigureOptions.EnableDeepKnowledge": "ღრმა ცოდნის ჩართვა (პროგრამებისა და ვიჯეტების წაკითხვა)",
+      "ConfigureOptions.SystemInstructions": "სისტემის ინსტრუქციები"
     }
   },
   "scheduler_preset_action_genie_command": "ჯინის სარდლობა",

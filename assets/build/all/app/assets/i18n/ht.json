@@ -565,5 +565,15 @@
   "error": "Erè!",
   "copied_to_clipboard": "Kopye nan clipboard la.",
   "message_deleted": "Mesaj efase",
-  "clear_chat_to_import": "Efase chat aktyèl la pou enpòte yon nouvo."
+  "clear_chat_to_import": "Efase chat aktyèl la pou enpòte yon nouvo.",
+  "all_groups": "Tout Gwoup yo",
+  "show_selected_groups": "Montre gwoup yo chwazi yo",
+  "show_deactivated_items": "Montre atik ki dezaktive yo",
+  "show_upgradable_programs": "Montre pwogram ki ka amelyore",
+  "selected_groups": "Gwoup yo chwazi",
+  "deactivated_programs_count": "Pwogram dezaktive: {{count}}",
+  "upgradable_programs": "Pwogram ki ka amelyore",
+  "unsaved_changes": "Chanjman ki pa sove yo",
+  "save_to_apply_program_changes": "Sove pou aplike chanjman yo nan pwogram nan.",
+  "imported_program_name_group": "Pwogram \"{{name}}\" ({{address}}) enpòte nan gwoup \"{{group}}\"."
 }

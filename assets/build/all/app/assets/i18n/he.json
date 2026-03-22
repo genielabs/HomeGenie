@@ -565,5 +565,15 @@
   "error": "שְׁגִיאָה!",
   "copied_to_clipboard": "הועתק ללוח.",
   "message_deleted": "ההודעה נמחקה",
-  "clear_chat_to_import": "נקה את הצ'אט הנוכחי כדי לייבא צ'אט חדש."
+  "clear_chat_to_import": "נקה את הצ'אט הנוכחי כדי לייבא צ'אט חדש.",
+  "all_groups": "כל הקבוצות",
+  "show_selected_groups": "הצג קבוצות שנבחרו",
+  "show_deactivated_items": "הצג פריטים מושבתים",
+  "show_upgradable_programs": "הצג תוכניות הניתנות לשדרוג",
+  "selected_groups": "קבוצות נבחרות",
+  "deactivated_programs_count": "תוכניות מושבתות: {{count}}",
+  "upgradable_programs": "תוכניות הניתנות לשדרוג",
+  "unsaved_changes": "שינויים שלא נשמרו",
+  "save_to_apply_program_changes": "שמור כדי להחיל את השינויים על התוכנית.",
+  "imported_program_name_group": "יובאה התוכנית \"{{name}}\" ({{address}}) לקבוצה \"{{group}}\"."
 }

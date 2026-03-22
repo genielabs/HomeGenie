@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Aktive Anrejistreman Videyo",
       "NVR.RecordOnAlarm": "Anrejistre sou alam",
       "NVR.ContinuousRecording": "Anrejistreman kontinyèl."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Manadjè Otomatizasyon entelijan ou an. Transfòme lang natirèl an workflows ajantik: li ekri, teste, epi egzekite pwogram C# an tan reyèl pou konplete nenpòt travay. Pou aktive fonksyon sa a, antre yon kle API ki valab. Swiv enstriksyon yo nan https://aistudio.google.com/app/apikey pou jwenn yon kle API gratis.",
+      "ConfigureOptions.ApiKey": "Kle API Google Gemini AI a",
+      "ConfigureOptions.ModelId": "ID Modèl",
+      "ConfigureOptions.EnableDeepKnowledge": "Aktive Konesans Pwofon (Li pwogram ak widjèt)",
+      "ConfigureOptions.SystemInstructions": "Enstriksyon Sistèm yo"
     }
   },
   "scheduler_preset_action_genie_command": "Kòmandman Jeni",

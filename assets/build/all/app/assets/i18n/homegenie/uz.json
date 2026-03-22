@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Video yozib olishni yoqish",
       "NVR.RecordOnAlarm": "Yozib olish signali",
       "NVR.ContinuousRecording": "Uzluksiz yozib olish."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Sizning aqlli avtomatlashtirish menejeringiz. Tabiiy tilni agent ish oqimlariga aylantiring: u har qanday berilgan vazifani bajarish uchun real vaqt rejimida C# dasturlarini yozadi, sinovdan o'tkazadi va bajaradi. Ushbu funksiyani faollashtirish uchun haqiqiy API kalitini kiriting. Bepul API kalitini olish uchun https://aistudio.google.com/app/apikey manzilidagi ko'rsatmalarga amal qiling.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API kaliti",
+      "ConfigureOptions.ModelId": "Model identifikatori",
+      "ConfigureOptions.EnableDeepKnowledge": "Chuqur bilimlarni yoqish (Dasturlar va vidjetlarni o'qish)",
+      "ConfigureOptions.SystemInstructions": "Tizim ko'rsatmalari"
     }
   },
   "scheduler_preset_action_genie_command": "Jin qo'mondonligi",

@@ -23,6 +23,7 @@ The following is a list of common `<command>`:
 ### Lights and Appliances
 - `Control.On`, `Control.Off`: Power control for any switch or light.
 - `Control.Level/{value}`: Brightness (0-100) for `Dimmer` and `Color`.
+- `Control.Toggle`: Invert the actual on/off status of a switch or light.
 - `Control.ColorHsb/{h},{s},{b}[,{transition_seconds}]`: Color for `Color` type.
   - Note: h, s, b are normalized fractions (0 to 1.0).
 

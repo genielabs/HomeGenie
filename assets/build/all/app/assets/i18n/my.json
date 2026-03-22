@@ -565,5 +565,15 @@
   "error": "အမှား!",
   "copied_to_clipboard": "ကလစ်ဘုတ်သို့ ကူးယူပြီးပါပြီ။",
   "message_deleted": "မက်ဆေ့ချ်ကို ဖျက်လိုက်ပါပြီ",
-  "clear_chat_to_import": "အသစ်တစ်ခုထည့်သွင်းရန် လက်ရှိချတ်ကို ရှင်းလင်းပါ။"
+  "clear_chat_to_import": "အသစ်တစ်ခုထည့်သွင်းရန် လက်ရှိချတ်ကို ရှင်းလင်းပါ။",
+  "all_groups": "အဖွဲ့အားလုံး",
+  "show_selected_groups": "ရွေးချယ်ထားသော အဖွဲ့များကို ပြပါ",
+  "show_deactivated_items": "ပိတ်ထားသော အရာများကို ပြပါ",
+  "show_upgradable_programs": "အဆင့်မြှင့်တင်နိုင်သော ပရိုဂရမ်များကို ပြပါ",
+  "selected_groups": "ရွေးချယ်ထားသော အဖွဲ့များ",
+  "deactivated_programs_count": "ပိတ်ထားသော ပရိုဂရမ်များ- {{count}}",
+  "upgradable_programs": "အဆင့်မြှင့်တင်နိုင်သော ပရိုဂရမ်များ",
+  "unsaved_changes": "မသိမ်းဆည်းရသေးသော ပြောင်းလဲမှုများ",
+  "save_to_apply_program_changes": "ပရိုဂရမ်တွင် ပြောင်းလဲမှုများ သက်ရောက်စေရန် သိမ်းဆည်းပါ။",
+  "imported_program_name_group": "\"{{group}}\" အုပ်စုတွင် \"{{name}}\" ({{address}}) ပရိုဂရမ်ကို ထည့်သွင်းထားသည်။"
 }

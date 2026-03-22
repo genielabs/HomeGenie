@@ -565,5 +565,15 @@
   "error": "Cholakwika!",
   "copied_to_clipboard": "Yakopedwa ku bolodi la zithunzi.",
   "message_deleted": "Uthenga wachotsedwa",
-  "clear_chat_to_import": "Chotsani macheza omwe alipo kuti mulowetse atsopano."
+  "clear_chat_to_import": "Chotsani macheza omwe alipo kuti mulowetse atsopano.",
+  "all_groups": "Magulu Onse",
+  "show_selected_groups": "Onetsani magulu osankhidwa",
+  "show_deactivated_items": "Onetsani zinthu zomwe zachotsedwa",
+  "show_upgradable_programs": "Onetsani mapulogalamu omwe angasinthidwe",
+  "selected_groups": "Magulu osankhidwa",
+  "deactivated_programs_count": "Mapulogalamu osagwiritsidwa ntchito: {{count}}",
+  "upgradable_programs": "Mapulogalamu Osinthika",
+  "unsaved_changes": "Zosintha zosasungidwa",
+  "save_to_apply_program_changes": "Sungani kuti mugwiritse ntchito zosintha pa pulogalamuyo.",
+  "imported_program_name_group": "Pulogalamu yotumizidwa kunja \"{{name}}\" ({{address}}) mu gulu \"{{group}}\"."
 }

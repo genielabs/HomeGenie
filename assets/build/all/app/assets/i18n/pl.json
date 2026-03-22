@@ -565,5 +565,15 @@
   "error": "Błąd!",
   "copied_to_clipboard": "Skopiowano do schowka.",
   "message_deleted": "Wiadomość usunięta",
-  "clear_chat_to_import": "Wyczyść bieżący czat, aby zaimportować nowy."
+  "clear_chat_to_import": "Wyczyść bieżący czat, aby zaimportować nowy.",
+  "all_groups": "Wszystkie grupy",
+  "show_selected_groups": "Pokaż wybrane grupy",
+  "show_deactivated_items": "Pokaż dezaktywowane elementy",
+  "show_upgradable_programs": "Pokaż programy, które można uaktualnić",
+  "selected_groups": "Wybrane grupy",
+  "deactivated_programs_count": "Dezaktywowane programy: {{count}}",
+  "upgradable_programs": "Programy z możliwością aktualizacji",
+  "unsaved_changes": "Niezapisane zmiany",
+  "save_to_apply_program_changes": "Zapisz, aby zastosować zmiany w programie.",
+  "imported_program_name_group": "Zaimportowano program „{{name}}” ({{address}}) do grupy „{{group}}”."
 }

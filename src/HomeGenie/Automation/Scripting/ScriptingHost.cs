@@ -21,7 +21,7 @@
  */
 
 using System;
-
+using System.Threading;
 using GLabs.Logging;
 
 using HomeGenie.Service;
@@ -108,7 +108,15 @@ namespace HomeGenie.Automation.Scripting
 
         public void Pause(double seconds)
         {
-            System.Threading.Thread.Sleep((int)(seconds * 1000));
+            var endTime = DateTime.UtcNow.AddSeconds(seconds);
+            while (DateTime.UtcNow < endTime)
+            {
+                if (!Program.IsRunning || !Program.IsEnabled)
+                {
+                    throw new ThreadInterruptedException("Program interrupted.");
+                }
+                Thread.Sleep(200);
+            }
         }
 
         public void Delay(double seconds)

@@ -565,5 +565,15 @@
   "error": "Fel!",
   "copied_to_clipboard": "Kopierad till urklipp.",
   "message_deleted": "Meddelandet raderat",
-  "clear_chat_to_import": "Rensa aktuell chatt för att importera en ny."
+  "clear_chat_to_import": "Rensa aktuell chatt för att importera en ny.",
+  "all_groups": "Alla grupper",
+  "show_selected_groups": "Visa valda grupper",
+  "show_deactivated_items": "Visa inaktiverade objekt",
+  "show_upgradable_programs": "Visa uppgraderingsbara program",
+  "selected_groups": "Valda grupper",
+  "deactivated_programs_count": "Inaktiverade program: {{count}}",
+  "upgradable_programs": "Uppgraderingsbara program",
+  "unsaved_changes": "Osparade ändringar",
+  "save_to_apply_program_changes": "Spara för att tillämpa ändringarna i programmet.",
+  "imported_program_name_group": "Importerade programmet \"{{name}}\" ({{address}}) till gruppen \"{{group}}\"."
 }

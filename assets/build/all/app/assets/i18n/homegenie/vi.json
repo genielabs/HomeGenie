@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Bật chế độ quay video",
       "NVR.RecordOnAlarm": "Ghi âm khi có báo động",
       "NVR.ContinuousRecording": "Ghi hình liên tục."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Trình quản lý tự động hóa thông minh của bạn. Chuyển ngôn ngữ tự nhiên thành quy trình làm việc tự động: nó viết, kiểm thử và thực thi các chương trình C# trong thời gian thực để hoàn thành bất kỳ tác vụ nào được giao. Để kích hoạt tính năng này, hãy nhập khóa API hợp lệ. Làm theo hướng dẫn tại https://aistudio.google.com/app/apikey để nhận khóa API miễn phí.",
+      "ConfigureOptions.ApiKey": "Khóa API Google Gemini AI",
+      "ConfigureOptions.ModelId": "Mã số mẫu",
+      "ConfigureOptions.EnableDeepKnowledge": "Kích hoạt kiến thức chuyên sâu (Đọc chương trình và tiện ích)",
+      "ConfigureOptions.SystemInstructions": "Hướng dẫn hệ thống"
     }
   },
   "scheduler_preset_action_genie_command": "Lệnh Genie",

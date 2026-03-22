@@ -565,5 +565,15 @@
   "error": "Feeler!",
   "copied_to_clipboard": "An d'Zwëschespäicher kopéiert.",
   "message_deleted": "Message geläscht",
-  "clear_chat_to_import": "Läscht den aktuellen Chat fir en neien z'importéieren."
+  "clear_chat_to_import": "Läscht den aktuellen Chat fir en neien z'importéieren.",
+  "all_groups": "All Gruppen",
+  "show_selected_groups": "Ausgewielte Gruppen weisen",
+  "show_deactivated_items": "Deaktivéiert Elementer weisen",
+  "show_upgradable_programs": "Upgradéierbar Programmer weisen",
+  "selected_groups": "Ausgewielte Gruppen",
+  "deactivated_programs_count": "Deaktivéiert Programmer: {{count}}",
+  "upgradable_programs": "Upgradéierbar Programmer",
+  "unsaved_changes": "Net gespäichert Ännerungen",
+  "save_to_apply_program_changes": "Späicheren fir d'Ännerungen am Programm anzewenden.",
+  "imported_program_name_group": "Programm \"{{name}}\" ({{address}}) an d'Grupp \"{{group}}\" importéiert."
 }

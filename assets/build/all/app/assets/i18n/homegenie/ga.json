@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Cumasaigh Taifeadadh Físe",
       "NVR.RecordOnAlarm": "Taifead ar Aláram",
       "NVR.ContinuousRecording": "Taifeadadh Leanúnach."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Do Bhainisteoir Uathoibrithe cliste. Tiontaigh teanga nádúrtha ina shreabhadh oibre gníomhaire: scríobhann, déanann sé tástáil ar, agus forghníomhaíonn sé cláir C# i bhfíor-am chun aon tasc ar leith a chur i gcrích. Chun an ghné seo a ghníomhachtú, cuir isteach eochair API bhailí. Lean na treoracha ag https://aistudio.google.com/app/apikey chun eochair API saor in aisce a fháil.",
+      "ConfigureOptions.ApiKey": "Eochair API AI Google Gemini",
+      "ConfigureOptions.ModelId": "Aitheantas Múnla",
+      "ConfigureOptions.EnableDeepKnowledge": "Cumasaigh Eolas Domhain (Léigh cláir & giuirléidí)",
+      "ConfigureOptions.SystemInstructions": "Treoracha Córais"
     }
   },
   "scheduler_preset_action_genie_command": "Ordú Genie",

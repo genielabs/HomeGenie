@@ -565,5 +565,15 @@
   "error": "දෝෂයක්!",
   "copied_to_clipboard": "පසුරු පුවරුවට පිටපත් කරන ලදී.",
   "message_deleted": "පණිවිඩය මකා දමන ලදී",
-  "clear_chat_to_import": "අලුත් එකක් ආයාත කිරීමට වත්මන් කතාබහ හිස් කරන්න."
+  "clear_chat_to_import": "අලුත් එකක් ආයාත කිරීමට වත්මන් කතාබහ හිස් කරන්න.",
+  "all_groups": "සියලුම කණ්ඩායම්",
+  "show_selected_groups": "තෝරාගත් කණ්ඩායම් පෙන්වන්න",
+  "show_deactivated_items": "අක්‍රිය කළ අයිතම පෙන්වන්න",
+  "show_upgradable_programs": "උත්ශ්‍රේණි කළ හැකි වැඩසටහන් පෙන්වන්න",
+  "selected_groups": "තෝරාගත් කණ්ඩායම්",
+  "deactivated_programs_count": "අක්‍රිය කළ වැඩසටහන්: {{count}}",
+  "upgradable_programs": "වැඩිදියුණු කළ හැකි වැඩසටහන්",
+  "unsaved_changes": "නොසුරකින ලද වෙනස්කම්",
+  "save_to_apply_program_changes": "වැඩසටහනට වෙනස්කම් යෙදීමට සුරකින්න.",
+  "imported_program_name_group": "\"{{group}}\" කාණ්ඩයේ \"{{name}}\" ({{address}}) වැඩසටහන ආයාත කරන ලදී."
 }

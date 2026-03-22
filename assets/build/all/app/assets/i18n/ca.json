@@ -565,5 +565,15 @@
   "error": "Error!",
   "copied_to_clipboard": "Copiat al porta-retalls.",
   "message_deleted": "Missatge suprimit",
-  "clear_chat_to_import": "Esborra el xat actual per importar-ne un de nou."
+  "clear_chat_to_import": "Esborra el xat actual per importar-ne un de nou.",
+  "all_groups": "Tots els grups",
+  "show_selected_groups": "Mostra els grups seleccionats",
+  "show_deactivated_items": "Mostra els elements desactivats",
+  "show_upgradable_programs": "Mostra els programes actualitzables",
+  "selected_groups": "Grups seleccionats",
+  "deactivated_programs_count": "Programes desactivats: {{count}}",
+  "upgradable_programs": "Programes actualitzables",
+  "unsaved_changes": "Canvis no desats",
+  "save_to_apply_program_changes": "Desa per aplicar els canvis al programa.",
+  "imported_program_name_group": "S'ha importat el programa \"{{name}}\" ({{address}}) al grup \"{{group}}\"."
 }

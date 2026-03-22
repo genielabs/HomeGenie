@@ -565,5 +565,15 @@
   "error": "ত্রুটি!",
   "copied_to_clipboard": "ক্লিপবোর্ডে কপি করা হয়েছে।",
   "message_deleted": "বার্তা মুছে ফেলা হয়েছে",
-  "clear_chat_to_import": "নতুন চ্যাট আমদানি করতে বর্তমান চ্যাটটি সাফ করুন।"
+  "clear_chat_to_import": "নতুন চ্যাট আমদানি করতে বর্তমান চ্যাটটি সাফ করুন।",
+  "all_groups": "সকল গ্রুপ",
+  "show_selected_groups": "নির্বাচিত গোষ্ঠীগুলি দেখান",
+  "show_deactivated_items": "নিষ্ক্রিয় আইটেমগুলি দেখান",
+  "show_upgradable_programs": "আপগ্রেডযোগ্য প্রোগ্রামগুলি দেখান",
+  "selected_groups": "নির্বাচিত গোষ্ঠী",
+  "deactivated_programs_count": "নিষ্ক্রিয় প্রোগ্রাম: {{count}}",
+  "upgradable_programs": "আপগ্রেডযোগ্য প্রোগ্রাম",
+  "unsaved_changes": "সংরক্ষিত নয় এমন পরিবর্তন",
+  "save_to_apply_program_changes": "প্রোগ্রামে পরিবর্তনগুলো প্রয়োগ করতে সংরক্ষণ করুন।",
+  "imported_program_name_group": "\"{{group}}\" গ্রুপে \"{{name}}\" ({{address}}) প্রোগ্রামটি আমদানি করা হয়েছে।"
 }

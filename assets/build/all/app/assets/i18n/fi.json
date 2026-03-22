@@ -565,5 +565,15 @@
   "error": "Virhe!",
   "copied_to_clipboard": "Kopioitu leikepöydälle.",
   "message_deleted": "Viesti poistettu",
-  "clear_chat_to_import": "Tyhjennä nykyinen keskustelu tuodaksesi uuden."
+  "clear_chat_to_import": "Tyhjennä nykyinen keskustelu tuodaksesi uuden.",
+  "all_groups": "Kaikki ryhmät",
+  "show_selected_groups": "Näytä valitut ryhmät",
+  "show_deactivated_items": "Näytä deaktivoidut kohteet",
+  "show_upgradable_programs": "Näytä päivitettävät ohjelmat",
+  "selected_groups": "Valitut ryhmät",
+  "deactivated_programs_count": "Deaktivoidut ohjelmat: {{count}}",
+  "upgradable_programs": "Päivitettävät ohjelmat",
+  "unsaved_changes": "Tallentamattomat muutokset",
+  "save_to_apply_program_changes": "Tallenna, jos haluat ottaa muutokset käyttöön ohjelmassa.",
+  "imported_program_name_group": "Ohjelma \"{{name}}\" ({{address}}) tuotiin ryhmään \"{{group}}\"."
 }

@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Video Yazını Aktivləşdirin",
       "NVR.RecordOnAlarm": "Siqnalizasiyada Qeyd",
       "NVR.ContinuousRecording": "Davamlı Qeyd."
+    },
+    "932": {
+      "Title": "Əkizlər Avtomanı",
+      "Description": "Ağıllı Avtomatlaşdırma Meneceriniz. Təbii dili agent iş axınlarına çevirin: istənilən tapşırığı yerinə yetirmək üçün real vaxt rejimində C# proqramlarını yazır, sınaqdan keçirir və icra edir. Bu funksiyanı aktivləşdirmək üçün etibarlı API açarı daxil edin. Pulsuz API açarı əldə etmək üçün https://aistudio.google.com/app/apikey ünvanındakı təlimatları izləyin.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API açarı",
+      "ConfigureOptions.ModelId": "Model ID-si",
+      "ConfigureOptions.EnableDeepKnowledge": "Dərin Biliyi Aktivləşdirin (Proqramları və vidjetləri oxuyun)",
+      "ConfigureOptions.SystemInstructions": "Sistem Təlimatları"
     }
   },
   "scheduler_preset_action_genie_command": "Cin Komandanlığı",

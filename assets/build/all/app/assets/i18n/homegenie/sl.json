@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Omogoči snemanje videa",
       "NVR.RecordOnAlarm": "Snemanje ob alarmu",
       "NVR.ContinuousRecording": "Neprekinjeno snemanje."
+    },
+    "932": {
+      "Title": "Dvojček Avtoman",
+      "Description": "Vaš pametni upravitelj avtomatizacije. Spremenite naravni jezik v agentne delovne procese: piše, testira in izvaja programe C# v realnem času, da dokonča katero koli nalogo. Če želite aktivirati to funkcijo, vnesite veljaven ključ API. Sledite navodilom na https://aistudio.google.com/app/apikey, da dobite brezplačen ključ API.",
+      "ConfigureOptions.ApiKey": "Ključ API-ja za umetno inteligenco Google Gemini",
+      "ConfigureOptions.ModelId": "ID modela",
+      "ConfigureOptions.EnableDeepKnowledge": "Omogoči poglobljeno znanje (branje programov in pripomočkov)",
+      "ConfigureOptions.SystemInstructions": "Sistemska navodila"
     }
   },
   "scheduler_preset_action_genie_command": "Ukaz Genie",

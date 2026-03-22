@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Ota videotallennus käyttöön",
       "NVR.RecordOnAlarm": "Tallenna hälytyksestä",
       "NVR.ContinuousRecording": "Jatkuva tallennus."
+    },
+    "932": {
+      "Title": "Kaksosten Automan",
+      "Description": "Älykäs automaatiomenenhallintajärjestelmäsi. Muunna luonnollinen kieli agenttiseksi työnkuluksi: se kirjoittaa, testaa ja suorittaa C#-ohjelmia reaaliajassa minkä tahansa tehtävän suorittamiseksi. Aktivoi tämä ominaisuus antamalla kelvollinen API-avain. Saat ilmaisen API-avaimen noudattamalla ohjeita osoitteessa https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI -API-avain",
+      "ConfigureOptions.ModelId": "Mallitunnus",
+      "ConfigureOptions.EnableDeepKnowledge": "Ota käyttöön syvällinen tietämys (lue ohjelmia ja widgetejä)",
+      "ConfigureOptions.SystemInstructions": "Järjestelmäohjeet"
     }
   },
   "scheduler_preset_action_genie_command": "Genie-komento",

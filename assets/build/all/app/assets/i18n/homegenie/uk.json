@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Увімкнути відеозапис",
       "NVR.RecordOnAlarm": "Запис за сигналом тривоги",
       "NVR.ContinuousRecording": "Безперервний запис."
+    },
+    "932": {
+      "Title": "Близнюки Автомен",
+      "Description": "Ваш розумний менеджер автоматизації. Перетворіть природну мову на агентні робочі процеси: він пише, тестує та виконує програми на C# у режимі реального часу для виконання будь-якого завдання. Щоб активувати цю функцію, введіть дійсний ключ API. Дотримуйтесь інструкцій на сторінці https://aistudio.google.com/app/apikey, щоб отримати безкоштовний ключ API.",
+      "ConfigureOptions.ApiKey": "Ключ API штучного інтелекту Google Gemini",
+      "ConfigureOptions.ModelId": "Ідентифікатор моделі",
+      "ConfigureOptions.EnableDeepKnowledge": "Увімкнути глибокі знання (читати програми та віджети)",
+      "ConfigureOptions.SystemInstructions": "Системні інструкції"
     }
   },
   "scheduler_preset_action_genie_command": "Команда Джина",

@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Бейнежазбаны қосу",
       "NVR.RecordOnAlarm": "Дабыл жазуы",
       "NVR.ContinuousRecording": "Үздіксіз жазу."
+    },
+    "932": {
+      "Title": "Егіздер Автоман",
+      "Description": "Сіздің ақылды автоматтандыру менеджеріңіз. Табиғи тілді агенттік жұмыс процестеріне айналдырыңыз: ол кез келген тапсырманы орындау үшін C# бағдарламаларын нақты уақыт режимінде жазады, тексереді және орындайды. Бұл мүмкіндікті іске қосу үшін жарамды API кілтін енгізіңіз. Тегін API кілтін алу үшін https://aistudio.google.com/app/apikey сайтындағы нұсқауларды орындаңыз.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API кілті",
+      "ConfigureOptions.ModelId": "Модель идентификаторы",
+      "ConfigureOptions.EnableDeepKnowledge": "Терең білімді қосу (бағдарламалар мен виджеттерді оқу)",
+      "ConfigureOptions.SystemInstructions": "Жүйелік нұсқаулар"
     }
   },
   "scheduler_preset_action_genie_command": "Жын командасы",

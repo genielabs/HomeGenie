@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Aktivera videoinspelning",
       "NVR.RecordOnAlarm": "Inspelning vid larm",
       "NVR.ContinuousRecording": "Kontinuerlig inspelning."
+    },
+    "932": {
+      "Title": "Gemini Automan",
+      "Description": "Din smarta automationshanterare. Förvandla naturligt språk till agentiska arbetsflöden: den skriver, testar och kör C#-program i realtid för att slutföra vilken uppgift som helst. För att aktivera den här funktionen, ange en giltig API-nyckel. Följ instruktionerna på https://aistudio.google.com/app/apikey för att få en gratis API-nyckel.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API-nyckel",
+      "ConfigureOptions.ModelId": "Modell-ID",
+      "ConfigureOptions.EnableDeepKnowledge": "Aktivera djupgående kunskap (Läs program och widgetar)",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktioner"
     }
   },
   "scheduler_preset_action_genie_command": "Genie-kommandot",

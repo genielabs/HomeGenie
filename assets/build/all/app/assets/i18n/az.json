@@ -565,5 +565,15 @@
   "error": "Xəta!",
   "copied_to_clipboard": "Panoya kopyalandı.",
   "message_deleted": "Mesaj silindi",
-  "clear_chat_to_import": "Yenisini idxal etmək üçün cari söhbəti silin."
+  "clear_chat_to_import": "Yenisini idxal etmək üçün cari söhbəti silin.",
+  "all_groups": "Bütün Qruplar",
+  "show_selected_groups": "Seçilmiş qrupları göstər",
+  "show_deactivated_items": "Deaktiv edilmiş elementləri göstər",
+  "show_upgradable_programs": "Yenilənə bilən proqramları göstər",
+  "selected_groups": "Seçilmiş qruplar",
+  "deactivated_programs_count": "Deaktiv edilmiş proqramlar: {{count}}",
+  "upgradable_programs": "Yenilənə bilən Proqramlar",
+  "unsaved_changes": "Yadda saxlanılmamış dəyişikliklər",
+  "save_to_apply_program_changes": "Proqrama dəyişiklikləri tətbiq etmək üçün yadda saxla.",
+  "imported_program_name_group": "\"{{group}}\" qrupunda \"{{name}}\" ({{address}}) proqramı idxal edildi."
 }

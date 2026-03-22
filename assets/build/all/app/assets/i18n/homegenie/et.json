@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Luba video salvestamine",
       "NVR.RecordOnAlarm": "Salvesta äratuse ajal",
       "NVR.ContinuousRecording": "Pidev salvestamine."
+    },
+    "932": {
+      "Title": "Kaksikute automan",
+      "Description": "Sinu nutikas automatiseerimishaldur. Muuda loomulik keel agentlikeks töövoogudeks: see kirjutab, testib ja käivitab C# programme reaalajas mis tahes ülesande täitmiseks. Selle funktsiooni aktiveerimiseks sisesta kehtiv API-võti. Tasuta API-võtme saamiseks järgi juhiseid aadressil https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Google Gemini tehisintellekti API võti",
+      "ConfigureOptions.ModelId": "Mudeli ID",
+      "ConfigureOptions.EnableDeepKnowledge": "Süvateadmiste lubamine (programmide ja vidinate lugemine)",
+      "ConfigureOptions.SystemInstructions": "Süsteemi juhised"
     }
   },
   "scheduler_preset_action_genie_command": "Džinni käsk",

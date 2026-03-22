@@ -565,5 +565,15 @@
   "error": "오류!",
   "copied_to_clipboard": "클립보드에 복사되었습니다.",
   "message_deleted": "메시지가 삭제되었습니다.",
-  "clear_chat_to_import": "새 채팅을 가져오려면 현재 채팅을 지우세요."
+  "clear_chat_to_import": "새 채팅을 가져오려면 현재 채팅을 지우세요.",
+  "all_groups": "모든 그룹",
+  "show_selected_groups": "선택한 그룹 표시",
+  "show_deactivated_items": "비활성화된 항목 표시",
+  "show_upgradable_programs": "업그레이드 가능한 프로그램을 보여주세요",
+  "selected_groups": "선택된 그룹",
+  "deactivated_programs_count": "비활성화된 프로그램: {{count}}",
+  "upgradable_programs": "업그레이드 가능한 프로그램",
+  "unsaved_changes": "저장되지 않은 변경 사항",
+  "save_to_apply_program_changes": "변경 사항을 프로그램에 적용하려면 저장하세요.",
+  "imported_program_name_group": "그룹 \"{{group}}\"에 프로그램 \"{{name}}\"({{address}})을 가져왔습니다."
 }

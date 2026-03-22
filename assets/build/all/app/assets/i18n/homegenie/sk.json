@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "Povoliť nahrávanie videa",
       "NVR.RecordOnAlarm": "Nahrávanie pri alarme",
       "NVR.ContinuousRecording": "Nepretržité nahrávanie."
+    },
+    "932": {
+      "Title": "Blíženci Automan",
+      "Description": "Váš inteligentný správca automatizácie. Premeňte prirodzený jazyk na agentické pracovné postupy: píše, testuje a spúšťa programy v jazyku C# v reálnom čase na dokončenie akejkoľvek zadanej úlohy. Ak chcete túto funkciu aktivovať, zadajte platný kľúč API. Postupujte podľa pokynov na stránke https://aistudio.google.com/app/apikey a získajte bezplatný kľúč API.",
+      "ConfigureOptions.ApiKey": "Kľúč API pre umelú inteligenciu Google Gemini",
+      "ConfigureOptions.ModelId": "ID modelu",
+      "ConfigureOptions.EnableDeepKnowledge": "Povoliť hlboké znalosti (čítať programy a widgety)",
+      "ConfigureOptions.SystemInstructions": "Systémové pokyny"
     }
   },
   "scheduler_preset_action_genie_command": "Džinsky príkaz",

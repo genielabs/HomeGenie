@@ -565,5 +565,15 @@
   "error": "ስህተት!",
   "copied_to_clipboard": "ወደ ቅንጥብ ሰሌዳ ተገልብጧል።",
   "message_deleted": "መልዕክት ተሰርዟል",
-  "clear_chat_to_import": "አዲስ ለማስመጣት የአሁኑን ውይይት ያጽዱ።"
+  "clear_chat_to_import": "አዲስ ለማስመጣት የአሁኑን ውይይት ያጽዱ።",
+  "all_groups": "ሁሉም ቡድኖች",
+  "show_selected_groups": "የተመረጡ ቡድኖችን አሳይ",
+  "show_deactivated_items": "የቦዘኑ ንጥሎችን አሳይ",
+  "show_upgradable_programs": "ሊሻሻሉ የሚችሉ ፕሮግራሞችን አሳይ",
+  "selected_groups": "የተመረጡ ቡድኖች",
+  "deactivated_programs_count": "የተቦዘኑ ፕሮግራሞች፡ {{count}}",
+  "upgradable_programs": "ሊሻሻሉ የሚችሉ ፕሮግራሞች",
+  "unsaved_changes": "ያልተቀመጡ ለውጦች",
+  "save_to_apply_program_changes": "በፕሮግራሙ ላይ ለውጦችን ለመተግበር ያስቀምጡ።",
+  "imported_program_name_group": "\"{{name}}\" ({{address}}) በ\"{{group}}\" ቡድን ውስጥ የገባ ፕሮግራም።"
 }

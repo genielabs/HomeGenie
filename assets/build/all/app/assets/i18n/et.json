@@ -565,5 +565,15 @@
   "error": "Viga!",
   "copied_to_clipboard": "Lõikelauale kopeeritud.",
   "message_deleted": "Sõnum kustutatud",
-  "clear_chat_to_import": "Uue vestluse importimiseks tühjenda praegune vestlus."
+  "clear_chat_to_import": "Uue vestluse importimiseks tühjenda praegune vestlus.",
+  "all_groups": "Kõik grupid",
+  "show_selected_groups": "Kuva valitud grupid",
+  "show_deactivated_items": "Kuva deaktiveeritud üksused",
+  "show_upgradable_programs": "Kuva uuendatavad programmid",
+  "selected_groups": "Valitud rühmad",
+  "deactivated_programs_count": "Deaktiveeritud programmid: {{count}}",
+  "upgradable_programs": "Täiendatavad programmid",
+  "unsaved_changes": "Salvestamata muudatused",
+  "save_to_apply_program_changes": "Muudatuste rakendamiseks programmis salvestage.",
+  "imported_program_name_group": "Imporditud programm \"{{name}}\" ({{address}}) gruppi \"{{group}}\"."
 }

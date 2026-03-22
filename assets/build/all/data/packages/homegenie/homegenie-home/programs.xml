@@ -142,7 +142,7 @@ Api.Handle("HomeAutomation.PhilipsHue", ( args ) =&gt; {
 Program.GoBackground();
 </ScriptSource>
     <ScriptContext />
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -743,6 +743,16 @@ if (String.IsNullOrWhiteSpace(securityArmed.Value)) {
 
 // Events History
 var historyDataFile = Path.Combine(Data.GetFolder(), $"{SECURITY_SYSTEM_ADDRESS}_alarm_system_history.dat");
+if (!File.Exists(historyDataFile)) {
+  try
+  {
+    File.Copy($"{historyDataFile}.demo", historyDataFile);
+  }
+  catch
+  {
+    // ignored
+  }
+}
 // Tell HomeGenie to include this data file in system backups
 Data.AddToSystemBackup(historyDataFile);
 // Load saved history
@@ -1011,9 +1021,9 @@ public List&lt;MigEvent&gt; GetLast48HoursEvents(string dataFilePath)
       <PackageId>homegenie-home</PackageId>
       <PackageVersion>1.0.3</PackageVersion>
       <Id>security-alarm-system</Id>
-      <Version>1.0.6</Version>
+      <Version>1.0.7</Version>
       <Required>true</Required>
-      <Checksum>A98DE2DFA612AB4E540466D20FD922D1</Checksum>
+      <Checksum>20C2ED406A7D626D7FE722AC2985E519</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>90</Address>
@@ -1144,7 +1154,7 @@ const string SMART_DEVICE_SWITCH_OFF_TIMEOUT = "HomeGenie.SmartLights.SwitchOffT
 
 const string SMART_DEVICE_LAST_EVENT = "HomeGenie.SmartLights.LastEvent";
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>

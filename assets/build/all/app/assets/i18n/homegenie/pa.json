@@ -399,6 +399,14 @@
       "NVR.EnableRecording": "ਵੀਡੀਓ ਰਿਕਾਰਡਿੰਗ ਚਾਲੂ ਕਰੋ",
       "NVR.RecordOnAlarm": "ਅਲਾਰਮ 'ਤੇ ਰਿਕਾਰਡ ਕਰੋ",
       "NVR.ContinuousRecording": "ਨਿਰੰਤਰ ਰਿਕਾਰਡਿੰਗ।"
+    },
+    "932": {
+      "Title": "ਜੈਮਿਨੀ ਆਟੋਮੈਨ",
+      "Description": "ਤੁਹਾਡਾ ਸਮਾਰਟ ਆਟੋਮੇਸ਼ਨ ਮੈਨੇਜਰ। ਕੁਦਰਤੀ ਭਾਸ਼ਾ ਨੂੰ ਏਜੰਟਿਕ ਵਰਕਫਲੋ ਵਿੱਚ ਬਦਲੋ: ਇਹ ਕਿਸੇ ਵੀ ਕੰਮ ਨੂੰ ਪੂਰਾ ਕਰਨ ਲਈ ਰੀਅਲ-ਟਾਈਮ ਵਿੱਚ C# ਪ੍ਰੋਗਰਾਮ ਲਿਖਦਾ ਹੈ, ਟੈਸਟ ਕਰਦਾ ਹੈ ਅਤੇ ਚਲਾਉਂਦਾ ਹੈ। ਇਸ ਵਿਸ਼ੇਸ਼ਤਾ ਨੂੰ ਕਿਰਿਆਸ਼ੀਲ ਕਰਨ ਲਈ, ਇੱਕ ਵੈਧ API ਕੁੰਜੀ ਦਰਜ ਕਰੋ। ਇੱਕ ਮੁਫ਼ਤ API ਕੁੰਜੀ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ https://aistudio.google.com/app/apikey 'ਤੇ ਦਿੱਤੇ ਨਿਰਦੇਸ਼ਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ।",
+      "ConfigureOptions.ApiKey": "ਗੂਗਲ ਜੈਮਿਨੀ ਏਆਈ ਏਪੀਆਈ ਕੁੰਜੀ",
+      "ConfigureOptions.ModelId": "ਮਾਡਲ ਆਈਡੀ",
+      "ConfigureOptions.EnableDeepKnowledge": "ਡੂੰਘੇ ਗਿਆਨ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ (ਪ੍ਰੋਗਰਾਮ ਅਤੇ ਵਿਜੇਟਸ ਪੜ੍ਹੋ)",
+      "ConfigureOptions.SystemInstructions": "ਸਿਸਟਮ ਨਿਰਦੇਸ਼"
     }
   },
   "scheduler_preset_action_genie_command": "ਜਿਨੀ ਕਮਾਂਡ",

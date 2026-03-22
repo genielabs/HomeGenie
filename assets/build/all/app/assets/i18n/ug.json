@@ -565,5 +565,15 @@
   "error": "خاتالىق!",
   "copied_to_clipboard": "چاپلاش تاختىسىغا كۆچۈرۈلدى.",
   "message_deleted": "ئۇچۇر ئۆچۈرۈلدى",
-  "clear_chat_to_import": "يېڭىسىنى ئىمپورت قىلىش ئۈچۈن نۆۋەتتىكى سۆھبەتنى تازىلاڭ."
+  "clear_chat_to_import": "يېڭىسىنى ئىمپورت قىلىش ئۈچۈن نۆۋەتتىكى سۆھبەتنى تازىلاڭ.",
+  "all_groups": "بارلىق گۇرۇپپىلار",
+  "show_selected_groups": "تاللانغان گۇرۇپپىلارنى كۆرسىتىش",
+  "show_deactivated_items": "ئىشتىن چىقىرىۋېتىلگەن بۇيۇملارنى كۆرسىتىش",
+  "show_upgradable_programs": "يېڭىلىغىلى بولىدىغان پروگراممىلارنى كۆرسىتىش",
+  "selected_groups": "تاللانغان گۇرۇپپىلار",
+  "deactivated_programs_count": "تاقىۋېتىلگەن پروگراممىلار: {{count}}",
+  "upgradable_programs": "يېڭىلىغىلى بولىدىغان پروگراممىلار",
+  "unsaved_changes": "ساقلانمىغان ئۆزگەرتىشلەر",
+  "save_to_apply_program_changes": "پروگراممىغا ئۆزگەرتىشلەرنى قوللىنىش ئۈچۈن ساقلاڭ.",
+  "imported_program_name_group": "«{{group}}» گۇرۇپپىسىدىكى «{{name}}» ({{address}}) پروگراممىسى ئىمپورت قىلىندى."
 }

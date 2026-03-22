@@ -565,5 +565,15 @@
   "error": "Earráid!",
   "copied_to_clipboard": "Cóipeáilte chuig an ghearrthaisce.",
   "message_deleted": "Teachtaireacht scriosta",
-  "clear_chat_to_import": "Glan an comhrá reatha chun ceann nua a allmhairiú."
+  "clear_chat_to_import": "Glan an comhrá reatha chun ceann nua a allmhairiú.",
+  "all_groups": "Gach Grúpa",
+  "show_selected_groups": "Taispeáin grúpaí roghnaithe",
+  "show_deactivated_items": "Taispeáin míreanna díghníomhachtaithe",
+  "show_upgradable_programs": "Taispeáin cláir in-uasghrádaithe",
+  "selected_groups": "Grúpaí roghnaithe",
+  "deactivated_programs_count": "Cláir dhíghníomhachtaithe: {{count}}",
+  "upgradable_programs": "Cláir In-Uasghrádaithe",
+  "unsaved_changes": "Athruithe gan sábháil",
+  "save_to_apply_program_changes": "Sábháil chun athruithe a chur i bhfeidhm ar an gclár.",
+  "imported_program_name_group": "Iompórtáladh an clár \"{{name}}\" ({{address}}) sa ghrúpa \"{{group}}\"."
 }
