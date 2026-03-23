@@ -16,30 +16,43 @@
 
 
 HomeGenie is an open-source, cloud-independent ecosystem for smart automation.
-It provides everything you need to run your system locally, including firmware for DIY devices,
-a lightweight backend service, and mobile and tablet apps.
-It gives you full control over your environment, keeping your data strictly private.
+It delivers a complete, privacy-focused, local-first experience.
+This includes firmware for DIY devices, an efficient backend service,
+and dedicated mobile and tablet apps.  
+Take absolute control over your environment while keeping your data strictly private.
 
 ![HomeGenie Dashboard](https://genielabs.github.io/HomeGenie/images/2.0/homegenie_2_dashboard_01.png)
 
-HomeGenie also features optional built-in AI.
-With simple chat commands, you can control your devices,
-build custom widgets, or create new automations.
+Create automations easily with the Visual Editor, or activate the built-in AI features
+to control devices, build custom widgets, or create complex automations in seconds.
 
-A demo configuration is included for an immediate, hands-on experience.
-The setup is entirely portable and lightweight: just download the ZIP, extract, and run.
+**Getting started is effortless.** HomeGenie's UI supports **more than 90 languages**,
+and a **built-in demo** configuration guarantees an immediate, practical experience
+from the very first moment.
+The entire setup is portable and lightweight: just **download the ZIP, extract, and run.**
 
 ## ✨ Key Features
 
-- **100% Local Agentic AI:** Run state-of-the-art LLMs directly on your HomeGenie server for autonomous reasoning, context awareness, and natural language control. Your data stays private, your intelligence stays local.
-- **AI Vision Suite:** Full integration of YOLO (Object Detection, Instance Segmentation, Pose Estimation) directly on server, ESP32-CAM modules, and generic IP cameras.
-- **Universal API & Programmability:** Automate anything with a fluent API programmable in **C#**, **JavaScript**, and **Python**. Create custom programs and widgets with full developer tools.
-- **Advanced Scheduler with Genie Commands:** Supports extended cron expressions, variables, conditions, and AI-driven natural language tasks for flexible automations.
-- **Customizable Dashboard & Widgets:** A modern, responsive UI with a powerful built-in editor to create and customize your own widgets using HTML, JavaScript, and CSS.
-- **Multi-protocol Support:** Integrated drivers for X10, Z-Wave, ZigBee, GPIO, SPI, I2C, IR/RF, and more.
-- **Smart Display & FPV Car Integration:** Transform ESP32 hardware into interactive smart displays or AI-powered FPV robotic platforms.
-- **Visual Programming:** Create complex scenarios intuitively with the Visual Program editor—no coding skills required.
-- **Voice Control & i18n:** Integrated support for voice commands and a fully localized UI across over 90 languages.
+- **100% Local Agentic AI:** Run state-of-the-art LLMs directly on your HomeGenie
+  server for autonomous reasoning, context awareness, and natural language control.
+  Your data stays private, your intelligence stays local.
+- **AI Vision Suite:** Full integration of YOLO (Object Detection, Instance Segmentation,
+  Pose Estimation) directly on server, ESP32-CAM modules, and generic IP cameras.
+- **Universal API & Programmability:** Automate anything with a fluent API programmable
+  in **C#**, **JavaScript**, and **Python**. Create custom programs and widgets with
+  full developer tools.
+- **Advanced Scheduler with Genie Commands:** Supports extended cron expressions,
+  variables, conditions, and AI-driven natural language tasks for flexible automations.
+- **Customizable Dashboard & Widgets:** A modern, responsive UI with a powerful built-in
+  editor to create and customize your own widgets using HTML, JavaScript, and CSS.
+- **Multi-protocol Support:** Integrated drivers for X10, Z-Wave, ZigBee, GPIO, SPI,
+  I2C, IR/RF, and more.
+- **Smart Display & FPV Car Integration:** Transform ESP32 hardware into interactive
+  smart displays or AI-powered FPV robotic platforms.
+- **Visual Programming:** Create complex scenarios intuitively with the Visual Program
+  editor—no coding skills required.
+- **Voice Control & i18n:** Integrated support for voice commands and a fully localized
+  UI across over 90 languages.
 - **Extensible:** Features groups, configuration backup, a package repository, and much more.
 
 [Full Features and Image Gallery](./docs/images/2.0/README.md)
@@ -80,16 +93,25 @@ Simply run the startup script to launch the server:
 
 *   **Windows:** Double-click `start.bat`
 *   **macOS:** Double-click `start.command`
-*   **Linux / Raspberry Pi:** Run `./start.sh` from the terminal (or double-click if your file manager supports executing shell scripts).
+*   **Linux / Raspberry Pi:** Run `./start.sh` from the terminal
+    (or double-click if your file manager supports executing shell scripts).
 
 To gracefully stop the application, press `CTRL + C` in the terminal window.
 
 ### 🛡️ Securing Your Installation (Sandboxing)
 
-Since HomeGenie features advanced AI automation engines (like *Gemini Automan*) capable of generating, compiling, and executing C# code on the fly, we highly recommend running the application in a restricted, sandboxed environment to ensure maximum system security when executing AI-generated code.
+Since HomeGenie features advanced AI automation engines (like *Gemini Automan*)
+capable of generating, compiling, and executing C# code on the fly, we highly
+recommend running the application in a restricted, sandboxed environment to
+ensure maximum system security when executing AI-generated code.
 
-*   **Dedicated System User (Linux - Recommended):** Run the server using a dedicated, non-root user (e.g., `homegenie`) with a `nologin` shell. Grant this user read/write permissions **strictly** to the HomeGenie installation folder, isolating it from the rest of your OS.
-*   **Containerization:** Alternatively, deploy HomeGenie using **Docker**, utilizing read-only volume mounts for the host system and restricting write access exclusively to the `homegenie` directory.
+*   **Dedicated System User (Linux - Recommended):** Run the server using
+    a dedicated, non-root user (e.g., `homegenie`) with a `nologin` shell.
+    Grant this user read/write permissions **strictly** to the HomeGenie
+    installation folder, isolating it from the rest of your OS.
+*   **Containerization:** Alternatively, deploy HomeGenie using **Docker**,
+    utilizing read-only volume mounts for the host system and restricting
+    write access exclusively to the `data` directory.
 
 ### Running as a System Service
 
@@ -140,7 +162,9 @@ or installed as a system service for continuous, unattended operation.
 
 #### Windows
 
-HomeGenie can be installed as a Windows Service using the built-in commands. Open a Command Prompt **as an Administrator**, navigate to the `homegenie` directory, and run:
+HomeGenie can be installed as a Windows Service using the built-in commands.
+Open a Command Prompt **as an Administrator**, navigate to the `homegenie`
+directory, and run:
 ```shell
 HomeGenie.exe --service install
 HomeGenie.exe --service start
@@ -149,16 +173,19 @@ For more options, see the [official .NET documentation](https://learn.microsoft.
 
 ### Accessing the UI
 
-Once running, the HomeGenie user interface can be accessed from any web browser at: `http://<server_ip>:<port>/`
+Once running, the HomeGenie user interface can be accessed from any web
+browser at: `http://<server_ip>:<port>/`
 
 -   `<server_ip>` is the IP address of the machine running HomeGenie.
 -   The default `<port>` is **80**, or the first available port starting from **8080**.
 
-You can find the exact address and port used by checking the `serviceaddress.txt` file in the `homegenie` application folder.
+You can find the exact address and port used by checking the `serviceaddress.txt`
+file in the `homegenie` application folder.
 
 ## 🛠️ Post-Installation (Linux)
 
-To grant HomeGenie access to hardware like serial ports, USB devices, and GPIO, you may need to run additional commands.
+To grant HomeGenie access to hardware like serial ports, USB devices, and GPIO,
+you may need to run additional commands.
 
 #### Audio & Voice Synthesis
 
@@ -183,7 +210,8 @@ sudo usermod -a -G gpio homegenie
     ```shell
     sudo apt install libusb-1.0-0
     ```
-2.  Create a udev rule to grant access. Create the file `/etc/udev/rules.d/98-homegenie.rules` with the following content:
+2.  Create a udev rule to grant access. Create the file `/etc/udev/rules.d/98-homegenie.rules`
+    with the following content:
     ```
     # CM15 and CM19 X10 USB controllers
     SUBSYSTEM=="usb", ATTRS{idVendor}=="0bc7", ATTRS{idProduct}=="0001", MODE="0660", GROUP="dialout"
@@ -203,7 +231,7 @@ Contributions are welcome! Please read the [**CONTRIBUTING.md**](https://github.
 ### Repository Structure
 
 The main solution file is `HomeGenie.sln` located in the repository root.
--   `src/HomeGenie`: The main application project, multi-targeted for `.NET Framework 4.7.2` and modern `.NET (6.0+)`.
+-   `src/HomeGenie`: The main application project, (.NET 10).
 -   `src/HomeGenie.Tests`: Unit and integration tests.
 -   `src/SupportLibraries`: Utility libraries used by HomeGenie.
 -   `assets/`: Contains build assets, UI source code, and deployment scripts.
@@ -219,4 +247,5 @@ The main solution file is `HomeGenie.sln` located in the repository root.
 
 ### Disclaimer
 
-This software is provided "as is", without warranty of any kind. See the [LICENSE](LICENSE) file for more details.
+This software is provided "as is", without warranty of any kind.
+See the [LICENSE](LICENSE) file for more details.
