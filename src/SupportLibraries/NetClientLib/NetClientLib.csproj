@@ -14,8 +14,14 @@
     <AssemblyName>NetClientLib</AssemblyName>
     <ReleaseVersion>1.1</ReleaseVersion>
     <TargetFramework>net10.0</TargetFramework>
+    <Configurations>Debug;Release;Cuda12;Vulkan</Configurations>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
-
+  <PropertyGroup Condition=" '$(Configuration)' == 'Cuda12' Or '$(Configuration)' == 'Vulkan' ">
+    <Optimize>true</Optimize>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="OnvifDiscovery" Version="1.2.2" />
   </ItemGroup>

@@ -90,7 +90,9 @@ class MyWidget extends ControllerInstance {
 When generating backend logic, respect the HomeGenie C# architecture.
 
 ### 3.1 Structure & Code Organization (CRITICAL)
-*   **Setup Block**: Use for `Program.AddOption`, `Program.UseWidget`. End with `Program.Run();` only if it's a background automation.
+*   **Setup Block (Architecture & Lifecycle):** The `Setup` script is polled continuously by the scheduler. Therefore, it MUST be strictly divided into two phases:
+    *   **PHASE 1: ONE-TIME CONFIGURATION:** ALL UI configuration APIs (`Program.AddOption`, `Program.UseWidget`, etc.) MUST be wrapped inside the `Program.Setup(() => { ... });` callback. This guarantees they are executed only once when the program is enabled.
+    *   **PHASE 2: CONTINUOUS EVALUATION (Trigger):** The logic that decides when to fire `Program.Run()` MUST be placed OUTSIDE the `Program.Setup` callback, in the global scope of the Setup block.
 *   **Main Block**: Core execution logic. Use `Program.GoBackground()` for listeners. **DO NOT define classes or structs inside the Main block.** Keep it clean and human-readable.
 *   **Context Block**: Helper classes, static methods, and ALL namespace imports. If you need a custom class or an external library, define it here.
 
@@ -109,6 +111,16 @@ When using `Net.WebService(url)` in C#, choose the correct method based on respo
 ### 3.4 Interruption-Safe Control (PERFORMANCE BEST-PRACTICE)
 *   **Preferred API:** Prefer using `Pause(seconds)` (or `hg.Pause(seconds)` for Python/JS automations) for any form of delay or loop throttling. Avoid `Thread.Sleep` or `time.sleep`.
 *   **Loop Throttling:** Every loop MUST include `Pause(seconds)` to ensure the program remains responsive to system commands and CPU usage remains minimal.
+
+### 3.5 Automation Scenarios (STRICT)
+- **Scenario A: BACKGROUND AUTOMATION** (Events, sensors, loops)
+  - **Setup:** Put UI config inside `Program.Setup(() => { ... });`. End the global scope with an unconditional `Program.Run();`.
+  - **Main:** Use `while (Program.IsRunning) { ... Pause(X); }` or `When.ModuleParameterChanged`. The Main block MUST NEVER EXIT.
+  - **Note:** Always include a `Pause()` inside loops to prevent CPU spiking.
+- **Scenario B: MANUAL MACRO / SCENE** (Triggered by UI button)
+  - **Setup:** MUST include `Program.UseWidget("homegenie/generic/program");` INSIDE the `Program.Setup(() => { ... });` callback. **DO NOT** include `Program.Run();` anywhere.
+  - **Main:** Contains the sequence of commands to execute once.
+- **MANDATORY:** Even if the Setup block only contains one line, you must populate the "setup" JSON key.
 
 ---
 

@@ -23,27 +23,35 @@ Every program MUST report its state and progress to the Automan UI using `Progra
 
 Every output must strictly adhere to the JSON schema providing these keys: `explanation`, `name`, `setup`, `main`.
 
-### 2.1 The Setup Block
-*   **Purpose:** Configuration, options, and initialization.
-*   **CRITICAL RULE - ONE-OFF TASKS:** If the program is a one-time task (Action -> Complete), you MUST implement the "Lock-Out" mechanism to prevent re-execution.
-*   **LANGUAGE-SPECIFIC RUN LOGIC:**
-    *   **C#:** `if (Program.Parameter("Automan.Program.Status").Value != "Completed") { Program.Run(); }`
-    *   **Python:** `if hg.Program.Parameter("Automan.Program.Status").Value != "Completed": hg.Program.Run()`
-    *   **JavaScript:** `if (hg.Program.Parameter("Automan.Program.Status").Value !== "Completed") { hg.Program.Run(); }`
-*   **Manual Execution:** If the user explicitly asks for "manual start only", DO NOT include the `Run()` command in the Setup block.
-*   **Continuous Tasks:** For background listeners or daemons, use the language-appropriate `Run()` command without the state check.
-*   **FILE EXPOSURE VIA UI:** If your program generates a file that the user might want to inspect or edit, you MUST expose it in the Setup block using the `AddOption` API with the file-editor directive.
-    *   **Syntax:** `Program.AddOption("Automan.File.1", "", "Description", $"editor:file:{Path.Combine(Data.GetFolder(), "file_name.md")}:markdown");`
-    *   **Mandatory:** Use this whenever you save a file to disk so the user can easily open it from the "Configure" button in the HomeGenie UI.
-*   **FILE EDITOR DIRECTIVE:** When exposing a file via `AddOption` using `editor:file:{path}:{type}`, you MUST dynamically set the `{type}` based on the file extension to enable correct syntax highlighting in the HomeGenie editor:
-    *   `*.txt`, `*.md` -> `:markdown`
-    *   `*.cs` -> `:csharp`
-    *   `*.py` -> `:python`
-    *   `*.js` -> `:javascript`
-    *   `*.sh`, `*.bash` -> `:bash`
-    *   `*.html` -> `:html`
-    *   `*.css` -> `:css`
-    *   `*.json` -> `:json`
+### 2.1 The Setup Block (Architecture & Lifecycle)
+*   **CRITICAL ARCHITECTURE NOTE (THE POLLING EVALUATOR):** The `Setup` script is polled continuously by the HomeGenie scheduler. However, UI configuration must only happen ONCE when the program is enabled. Therefore, the Setup block is strictly divided into two phases:
+
+*   **PHASE 1: ONE-TIME CONFIGURATION (The Callback)**
+    *   ALL configuration APIs (`Program.AddOption`, `Program.AddFeature`, `Program.UseWidget`, etc.) MUST be strictly wrapped inside the `Program.Setup(() => { ... });` callback. This guarantees they are executed only once.
+    *   **UI REUSABILITY:** NEVER hard-code sensitive data (API keys, URLs, targets). Expose them using `Program.AddOption("Category.Name", "DefaultValue", "Description", "text|password|number")` INSIDE the callback.
+    *   **FILE EXPOSURE:** If generating a file, expose it INSIDE the callback: `Program.AddOption("Automan.File.1", "", "Description", $"editor:file:{Path.Combine(Data.GetFolder(), "file.md")}:markdown");`. (Types: :markdown, :csharp, :python, :javascript, :html, :json).
+
+*   **PHASE 2: CONTINUOUS EVALUATION (The Trigger)**
+    *   The logic that evaluates conditions and decides when to fire `Program.Run()` MUST be placed OUTSIDE the `Program.Setup` callback, in the global scope of the Setup block.
+    *   **STARTUP LOGIC (Choose the correct pattern):**
+        *   **ONE-OFF TASKS (Prevent Restart Loop):** You MUST use the lock-out check to prevent the program from looping infinitely after completion:
+            *   *C#:* `if (Program.Parameter("Automan.Program.Status").Value != "Completed") { Program.Run(); }`
+            *   *Python:* `if hg.Program.Parameter("Automan.Program.Status").Value != "Completed": hg.Program.Run()`
+            *   *JavaScript:* `if (hg.Program.Parameter("Automan.Program.Status").Value !== "Completed") { hg.Program.Run(); }`
+        *   **CONTINUOUS DAEMONS:** Use an unconditional `Program.Run();` (outside the callback). *WARNING:* The `Main` block MUST NEVER EXIT (use an infinite `while` loop), otherwise it causes a fatal restart loop.
+        *   **MANUAL EXECUTION:** If the user asks for "manual start only", DO NOT include the `Run()` command at all.
+
+**TEMPLATE EXAMPLE (C#):**
+```csharp
+// PHASE 1: Executed only once
+Program.Setup(() => {
+    Program.AddOption("MyConfig.ApiKey", "", "API Key", "password");
+});
+
+// PHASE 2: Evaluated continuously
+if (Program.Parameter("Automan.Program.Status").Value != "Completed") {
+    Program.Run();
+}
 
 ### 2.2 The Main Block
 *   **Entry Point:** Must start with the mandatory heartbeat: `Program.Emit("Automan.Program.Status", "Running");`

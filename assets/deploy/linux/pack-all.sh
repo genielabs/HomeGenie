@@ -3,8 +3,8 @@ mkdir artifacts
 
 # net10.0
 
-runtimes=( linux-arm linux-arm64 linux-x64 osx-x64 win-x64 )
-cd net10.0
+runtimes=( linux-arm linux-arm64 linux-x64 linux-x64-cuda12 linux-x64-vulkan osx-x64 win-x64 win-x64-cuda12 win-x64-vulkan )
+cd out
 
 for runtime in "${runtimes[@]}"
 do
@@ -26,7 +26,7 @@ cd /d "%~dp0homegenie"
 echo ==========================================
 echo   Starting HomeGenie...
 echo ==========================================
-HomeGenie.exe
+HomeGenie.exe --start-browser
 
 :: Check if the exit code is 1 (Restart requested)
 if %ERRORLEVEL% equ 1 (
@@ -67,7 +67,7 @@ while true; do
     echo "  Starting HomeGenie..."
     echo "=========================================="
 
-    ./HomeGenie
+    ./HomeGenie --start-browser
     EXIT_CODE=$?
 
     # If the exit code is 1, continue the loop (restart)

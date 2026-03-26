@@ -71,15 +71,36 @@ For detailed guides, API references, and tutorials, visit the official documenta
 
 You can find the latest release assets on the [**GitHub Releases**](https://github.com/genielabs/HomeGenie/releases) page.
 
-Download the `.zip` archive corresponding to your operating system and architecture:
+### 1. Choose your version
+Download the `.zip` archive corresponding to your operating system, architecture, and
+**hardware acceleration** needs:
 
-| Platform              | Archive Name                       |
-|-----------------------|------------------------------------|
-| Windows (x64)         | `homegenie_*_win-x64.zip`          |
-| macOS (x64)           | `homegenie_*_osx-x64.zip`          |
-| Linux (x64)           | `homegenie_*_linux-x64.zip`        |
-| Raspberry Pi (32-bit) | `homegenie_*_linux-arm.zip`        |
-| Raspberry Pi (64-bit) | `homegenie_*_linux-arm64.zip`      |
+|  Platform   | Architecture | Variant            | Optimized For                | Technical Notes                                                |
+|:------------|:-------------|:-------------------|:-----------------------------|:---------------------------------------------------------------|
+| **Windows** | x64          | `win-x64`          | Standard (CPU only)          | Maximum stability, no GPU requirements.                        |
+|             | x64          | `win-x64-cuda12`   | **NVIDIA GPUs**              | High performance via **CUDA 12** (LLM & Vision).               |
+|             | x64          | `win-x64-vulkan`   | **AMD, Intel & NVIDIA**      | LLM via **Vulkan**, Vision via **DirectX 12 (DirectML)**.      |
+| **Linux**   | x64          | `linux-x64`        | Standard (CPU only)          | For servers or PCs without dedicated GPUs.                     |
+|             | x64          | `linux-x64-cuda12` | **NVIDIA GPUs**              | High performance via **CUDA 12** (LLM & Vision).               |
+|             | x64          | `linux-x64-vulkan` | **Generic GPUs**             | LLM via **Vulkan**, **Vision via CPU** (No DirectML on Linux). |
+|             | ARM64        | `linux-arm64`      | Raspberry Pi 3, 4, 5, Zero 2 | Optimized for 64-bit ARM SoCs (CPU-based).                     |
+|             | ARM          | `linux-arm`        | Raspberry Pi 2               | Legacy 32-bit ARM support.                                     |
+| **macOS**   | x64 / ARM    | `osx-x64`          | Intel & Apple Silicon        | **Metal** support for Apple M1/M2/M3 acceleration.             |
+
+### 2. Which one should I choose?
+
+*   **🚀 NVIDIA Users:** Download the **`cuda12`** variant for the best performance in LLMs
+    and Computer Vision. (Requires up-to-date NVIDIA Drivers).
+*   **🎮 AMD / Intel / Windows Users:** Use the **`vulkan`** variant to leverage your GPU for AI
+    tasks. It's the best choice for non-NVIDIA hardware on Windows (via DirectX 12).
+*   **🍎 macOS Users:** The **`osx-x64`** build supports **Apple Silicon (Metal)** and Intel
+    natively for maximum speed on Mac devices.
+*   **☁️ Server / Older PCs:** If you don't have a dedicated GPU or are running a headless
+    server, the **standard versions** (without suffixes) are the most stable and lightweight.
+*   **🍓 Raspberry Pi / ARM:** Choose **`linux-arm64`** (for Pi 4/5 64-bit) or **`linux-arm`**
+    (for older 32-bit systems).
+
+### 3. Setup
 
 After downloading, unzip the archive to your preferred location. 
 
@@ -97,6 +118,20 @@ Simply run the startup script to launch the server:
     (or double-click if your file manager supports executing shell scripts).
 
 To gracefully stop the application, press `CTRL + C` in the terminal window.
+
+### 🎨 Desktop App Experience (PWA)
+
+By default, HomeGenie now launches as a desktop-style Progressive Web App (PWA).
+The startup scripts (`start.bat`, `start.sh`, etc.) are pre-configured to pass
+the `--start-browser` argument to the `HomeGenie` executable, opening the UI in
+a dedicated, app-like window for a seamless experience.
+
+**Tip:** If HomeGenie is already running in the background, launching the startup
+script again will not start a second server. Instead, it will conveniently open a
+new app window connected directly to your existing session.
+
+For a traditional server-only or headless experience, simply edit the startup script
+and remove the `--start-browser` flag from the execution command.
 
 ### 🛡️ Securing Your Installation (Sandboxing)
 

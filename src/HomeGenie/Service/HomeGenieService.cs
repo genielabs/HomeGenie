@@ -1,5 +1,5 @@
 /*
-   Copyright 2012-2025 G-Labs (https://github.com/genielabs)
+   Copyright 2012-2026 G-Labs (https://github.com/genielabs)
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU Affero General Public License as
@@ -688,6 +688,11 @@ namespace HomeGenie.Service
                 );
                 // log service address to file
                 File.WriteAllText("serviceaddress.txt", String.Format("HG_SERVICE_HOST={0}\nHG_SERVICE_PORT={1}\n", serviceHost, servicePort));
+                // launch browser if flag was passed
+                if (Program.StartBrowser)
+                {
+                    Program.LaunchPwa($"http://localhost:{servicePort}");
+                }
             }
             else
             {

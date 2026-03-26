@@ -27,6 +27,8 @@
     <NoWarn>$(NoWarn);SYSLIB0024;NU1701;SYSLIB0014</NoWarn>
     <TargetFramework>net10.0</TargetFramework>
     <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+    <Configurations>Debug;Release;Cuda12;Vulkan</Configurations>
+    <Platforms>AnyCPU</Platforms>
 
   </PropertyGroup>
 
@@ -38,7 +40,7 @@
     <PackageReference Include="Esprima" Version="3.0.5" />
     <PackageReference Include="IronPython" Version="3.4.2" />
     <PackageReference Include="IronPython.StdLib" Version="3.4.2" />
-    <PackageReference Include="Jint" Version="4.6.3" />
+    <PackageReference Include="Jint" Version="4.6.4" />
     <PackageReference Include="KNX.net" Version="1.1.10" />
     <PackageReference Include="SerialPortStream" Version="2.4.2" />
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
@@ -94,14 +96,6 @@
     <PackageReference Include="Microsoft.ML.Probabilistic.Learners" Version="0.4.2504.701" />
   </ItemGroup>
 
-  <!-- HomeGenie with GPU support requires +400MB of files and CUDA binaries - currently to be tested -->
-  <!--
-  <ItemGroup Condition=" '$(RuntimeIdentifier)' != 'linux-arm' and '$(RuntimeIdentifier)' != 'linux-arm64'">
-    <PackageReference Include="Microsoft.ML.OnnxRuntime.Gpu" Version="1.20.1" />
-    <PackageReference Include="Microsoft.ML.OnnxRuntime.Gpu.Linux" Version="1.20.1" />
-    <PackageReference Include="Microsoft.ML.OnnxRuntime.Gpu.Windows" Version="1.20.1" />
-  </ItemGroup>
-  -->
 
   <ItemGroup Condition=" '$(RuntimeIdentifier)' != 'linux-arm' ">
     <PackageReference Include="LLamaSharp" Version="0.26.0" />
@@ -111,6 +105,47 @@
     <PackageReference Include="YoloSharp" Version="6.1.0" />
   </ItemGroup>
 
+
+  <PropertyGroup>
+    <IncludeCuda12Backend Condition="'$(IncludeCuda12Backend)' == ''">false</IncludeCuda12Backend>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IncludeCuda12Backend)' == 'true'">
+    <DefineConstants>$(DefineConstants);USE_CUDA12</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Cuda12' ">
+    <IncludeCuda12Backend>true</IncludeCuda12Backend>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(Configuration)' == 'Cuda12' ">
+    <PackageReference Include="LLamaSharp.Backend.Cuda12.Linux"
+                      Version="0.26.0"
+                      Condition="'$(RuntimeIdentifier)' == 'linux-x64'" />
+    <PackageReference Include="LLamaSharp.Backend.Cuda12.Windows"
+                      Version="0.26.0"
+                      Condition="'$(RuntimeIdentifier)' == 'win-x64'" />
+    <PackageReference Include="YoloSharp.Gpu"
+                      Version="6.1.0" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <IncludeVulkanBackend Condition="'$(IncludeVulkanBackend)' == ''">false</IncludeVulkanBackend>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IncludeVulkanBackend)' == 'true'">
+    <DefineConstants>$(DefineConstants);USE_VULKAN</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Vulkan' ">
+    <IncludeVulkanBackend>true</IncludeVulkanBackend>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(Configuration)' == 'Vulkan' ">
+    <PackageReference Include="LLamaSharp.Backend.Vulkan.Linux"
+                      Version="0.26.0"
+                      Condition="'$(RuntimeIdentifier)' == 'linux-x64'" />
+    <PackageReference Include="LLamaSharp.Backend.Vulkan.Windows"
+                      Version="0.26.0"
+                      Condition="'$(RuntimeIdentifier)' == 'win-x64'" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime.DirectML" Version="1.23.0" />
+  </ItemGroup>
+
+
   <ItemGroup>
     <ProjectReference Include="..\SupportLibraries\NetClientLib\NetClientLib.csproj" />
   </ItemGroup>
@@ -119,22 +154,26 @@
     <None Remove="appsettings.json" />
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
 
   <!-- Copy license files -->
   <ItemGroup>
-    <Content Include="$(MSBuildProjectDirectory)/../../LICENSE" CopyToOutputDirectory="PreserveNewest" Link="LICENSE.TXT" />
-    <Content Include="$(MSBuildProjectDirectory)/../../NOTICE" CopyToOutputDirectory="PreserveNewest" Link="NOTICE.TXT" />
+    <Content Include="$(MSBuildProjectDirectory)/../../LICENSE" Link="LICENSE.TXT"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="$(MSBuildProjectDirectory)/../../NOTICE" Link="NOTICE.TXT"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 
   <!-- Copy assets to target folder -->
   <ItemGroup>
-    <Files Include="$(ProjectDir)../../assets/build/all/**" />
+    <None Include="$(ProjectDir)../../assets/build/all/**"
+          CopyToOutputDirectory="PreserveNewest"
+          CopyToPublishDirectory="PreserveNewest"
+          Link="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
-
-  <Target Name="CopyFiles" AfterTargets="Build">
-    <Copy SourceFiles="@(Files)" DestinationFolder="$(TargetDir)/%(RecursiveDir)" />
-  </Target>
 
 </Project>
