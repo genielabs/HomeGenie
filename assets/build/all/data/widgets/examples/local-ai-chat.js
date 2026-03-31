@@ -397,10 +397,9 @@ class LocalAiChat extends ControllerInstance {
   intent(cmd, data) {
     const bm = this.boundModule;
     if (bm) {
-      data = encodeURIComponent(data);
       const intentHandlerApi = bm.field('@AI:IntentHandler');
       if (intentHandlerApi) {
-        this.apiCall(`${intentHandlerApi.value}/${cmd}/${data}`)
+        this.apiCall(`${intentHandlerApi.value}/${cmd}`, `${data}`)
             .subscribe(res => {
               //console.log(res);
             });

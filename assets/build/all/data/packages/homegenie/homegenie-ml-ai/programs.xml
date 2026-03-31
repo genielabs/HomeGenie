@@ -475,7 +475,7 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
             string payloadJson = JsonConvert.SerializeObject(payload, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             string requestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
 
-            var data = Net.WebService(requestUrl).WithTimeout(120).AddHeader("Content-Type", "application/json").Post(payloadJson).GetData();
+            var data = Net.WebService(requestUrl).WithTimeout(180).AddHeader("Content-Type", "application/json").Post(payloadJson).GetData();
             
             if (data != null &amp;&amp; data.candidates != null &amp;&amp; data.candidates.Count &gt; 0)
             {
@@ -553,7 +553,7 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
                 {
                     isDeployed = true;
                     Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Enable/" + programId);
-                    
+
                     // Generate structured success metadata
                     var successPayload = new {
                         automan_deploy = new {
@@ -644,6 +644,22 @@ Api.Handle($"{API_URL}/Prompt.Schedule", (userCommand) =&gt; {
     return new ResponseText("Task scheduled successfully.");
 });
 
+// Prompt.Ask for text-only processing
+Api.Handle($"{API_URL}/Prompt.Ask", (prompt) =&gt; {
+    var request = Api.Parse(prompt);
+    var promptText = prompt is string ? WebUtility.UrlDecode(prompt as string) : request?.Data is string ? request?.Data as string : Encoding.Default.GetString(request?.Data as byte[]);
+    var payload = new { contents = new[] { new { role = "user", parts = new[] { new { text = promptText } } } } };
+    try {
+        string payloadJson = JsonConvert.SerializeObject(payload);
+        string requestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
+        var data = Net.WebService(requestUrl).WithTimeout(180).AddHeader("Content-Type", "application/json").Post(payloadJson).GetData();
+        if (data != null &amp;&amp; data.candidates != null &amp;&amp; data.candidates.Count &gt; 0) {
+            return data.candidates[0].content.parts[0].text.ToString();
+        }
+    } catch (Exception ex) { return new ResponseText($"Error: {ex.Message}"); }
+    return new ResponseText("Empty AI response.");
+});
+
 Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId }));
 Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId }));
 Api.Handle($"{API_URL}/{API_HISTORY_REMOVE_AT}", (i) =&gt; Api.Call("System.Utility/ChatHistory/RemoveAt", new { StoreId = storeId, Index = i }));
@@ -723,9 +739,9 @@ public class ChatMessage {
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-automan</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.2</Version>
       <Required>true</Required>
-      <Checksum>DE5D2EF3B0C42AB5092399B957940049</Checksum>
+      <Checksum>25E413812E175DE3AB3DB67CAD8C5112</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>932</Address>
@@ -822,7 +838,7 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
         // 4. Send the request to Gemini API
         string payloadJson = JsonConvert.SerializeObject(payload);
         string geminiRequestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
-        var data = Net.WebService(geminiRequestUrl).WithTimeout(120).AddHeader("Content-Type", "application/json").Post(payloadJson).GetData();
+        var data = Net.WebService(geminiRequestUrl).WithTimeout(180).AddHeader("Content-Type", "application/json").Post(payloadJson).GetData();
 
         // 5. Process the response
         string rawGeminiResponseJson = data?.candidates?[0]?.content?.parts?[0]?.text;
@@ -953,16 +969,16 @@ public class ChatMessage {
     }
 }
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-intent-handler</Id>
-      <Version>1.0.12</Version>
+      <Version>1.0.13</Version>
       <Required>true</Required>
-      <Checksum>BC3A3BE5BCA8C3041DDBE1901490BF0F</Checksum>
+      <Checksum>6E9D446AEAB409B216782F002D4CBEFC</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>930</Address>
@@ -1215,7 +1231,7 @@ Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
         string payloadJson = JsonConvert.SerializeObject(payload, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
         string requestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
 
-        var data = Net.WebService(requestUrl).WithTimeout(120).AddHeader("Content-Type", "application/json").Post(payloadJson).GetData();
+        var data = Net.WebService(requestUrl).WithTimeout(180).AddHeader("Content-Type", "application/json").Post(payloadJson).GetData();
         if (data != null &amp;&amp; data.candidates != null &amp;&amp; data.candidates.Count &gt; 0)
         {
             string rawResponse = data.candidates[0].content.parts[0].text;
@@ -1318,16 +1334,16 @@ public class ChatMessage {
         };
     }
 }</ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-widget-genie</Id>
-      <Version>1.0.10</Version>
+      <Version>1.0.11</Version>
       <Required>true</Required>
-      <Checksum>97E47ED8CE0CB34D3CC2F493C5C3873D</Checksum>
+      <Checksum>E911E4CCC8B96DF017ACB3E2C147EE9D</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>931</Address>

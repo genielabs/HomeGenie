@@ -23,6 +23,6 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="OnvifDiscovery" Version="1.2.2" />
+    <PackageReference Include="OnvifDiscovery" Version="2.1.1" />
   </ItemGroup>
 </Project>
