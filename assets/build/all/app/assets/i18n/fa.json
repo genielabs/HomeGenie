@@ -575,5 +575,8 @@
   "upgradable_programs": "برنامه‌های قابل ارتقا",
   "unsaved_changes": "تغییرات ذخیره نشده",
   "save_to_apply_program_changes": "برای اعمال تغییرات در برنامه، آن را ذخیره کنید.",
-  "imported_program_name_group": "برنامه‌ی \"{{name}}\" ({{address}}) در گروه \"{{group}}\" وارد شده است."
+  "imported_program_name_group": "برنامه‌ی \"{{name}}\" ({{address}}) در گروه \"{{group}}\" وارد شده است.",
+  "error_compiling_program": "**خطا هنگام ساخت برنامه {{address}}**",
+  "line_number": "شماره خط",
+  "ask_ai": "از هوش مصنوعی بپرسید"
 }

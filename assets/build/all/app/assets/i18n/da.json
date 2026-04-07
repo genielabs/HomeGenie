@@ -575,5 +575,8 @@
   "upgradable_programs": "Opgraderbare programmer",
   "unsaved_changes": "Ikke-gemte ændringer",
   "save_to_apply_program_changes": "Gem for at anvende ændringerne i programmet.",
-  "imported_program_name_group": "Importerede programmet \"{{name}}\" ({{address}}) i gruppen \"{{group}}\"."
+  "imported_program_name_group": "Importerede programmet \"{{name}}\" ({{address}}) i gruppen \"{{group}}\".",
+  "error_compiling_program": "**FEJL UNDER OPBYGNING AF PROGRAM {{address}}**",
+  "line_number": "Linjenummer",
+  "ask_ai": "Spørg AI"
 }

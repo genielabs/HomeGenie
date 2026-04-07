@@ -575,5 +575,8 @@
   "upgradable_programs": "Ngā Papatono Whakapai Ake",
   "unsaved_changes": "Ngā huringa kāore anō kia tiakina",
   "save_to_apply_program_changes": "Tiaki hei whakamahi i ngā huringa ki te hōtaka.",
-  "imported_program_name_group": "I kawemaihia te kaupapa \"{{name}}\" ({{address}}) i roto i te rōpū \"{{group}}\"."
+  "imported_program_name_group": "I kawemaihia te kaupapa \"{{name}}\" ({{address}}) i roto i te rōpū \"{{group}}\".",
+  "error_compiling_program": "**HAPA I TE WĀ E HANGA ANA I TE PŪTAKE {{address}}**",
+  "line_number": "Tau rārangi",
+  "ask_ai": "Pātai atu ki te AI"
 }

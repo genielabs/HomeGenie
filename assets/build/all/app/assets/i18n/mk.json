@@ -575,5 +575,8 @@
   "upgradable_programs": "Програми што може да се надградат",
   "unsaved_changes": "Незачувани промени",
   "save_to_apply_program_changes": "Зачувај за да ги примениш промените во програмата.",
-  "imported_program_name_group": "Увезена е програмата „{{name}}“ ({{address}}) во групата „{{group}}“."
+  "imported_program_name_group": "Увезена е програмата „{{name}}“ ({{address}}) во групата „{{group}}“.",
+  "error_compiling_program": "**ГРЕШКА ПРИ ГРАДЕЊЕ НА ПРОГРАМАТА {{address}}**",
+  "line_number": "Број на линија",
+  "ask_ai": "Прашај ја вештачката интелигенција"
 }

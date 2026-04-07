@@ -575,5 +575,8 @@
   "upgradable_programs": "Жаңыртыла турган программалар",
   "unsaved_changes": "Сакталбаган өзгөртүүлөр",
   "save_to_apply_program_changes": "Программага өзгөртүүлөрдү киргизүү үчүн сактоо.",
-  "imported_program_name_group": "\"{{group}}\" тобундагы \"{{name}}\" ({{address}}) программасы импорттолгон."
+  "imported_program_name_group": "\"{{group}}\" тобундагы \"{{name}}\" ({{address}}) программасы импорттолгон.",
+  "error_compiling_program": "**ПРОГРАММАНЫ ТҮЗҮҮДӨ КАТА {{address}}**",
+  "line_number": "Сап номери",
+  "ask_ai": "Жасалма интеллекттен сураңыз"
 }

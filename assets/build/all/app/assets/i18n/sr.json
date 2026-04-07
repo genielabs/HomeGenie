@@ -575,5 +575,8 @@
   "upgradable_programs": "Надоградиви програми",
   "unsaved_changes": "Несачуване промене",
   "save_to_apply_program_changes": "Сачувај да бисте применили измене у програму.",
-  "imported_program_name_group": "Увезен је програм „{{name}}“ ({{address}}) у групу „{{group}}“."
+  "imported_program_name_group": "Увезен је програм „{{name}}“ ({{address}}) у групу „{{group}}“.",
+  "error_compiling_program": "**ГРЕШКА ПРИ ИЗРАДИ ПРОГРАМА {{address}}**",
+  "line_number": "Број линије",
+  "ask_ai": "Питајте вештачку интелигенцију"
 }

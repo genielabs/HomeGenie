@@ -575,5 +575,8 @@
   "upgradable_programs": "Shirye-shiryen da Za a iya Ingantawa",
   "unsaved_changes": "Canje-canjen da ba a adana ba",
   "save_to_apply_program_changes": "Ajiye don amfani da canje-canje ga shirin.",
-  "imported_program_name_group": "An shigo da shirin \"{{name}}\" ({{address}}) a cikin rukunin \"{{group}}\"."
+  "imported_program_name_group": "An shigo da shirin \"{{name}}\" ({{address}}) a cikin rukunin \"{{group}}\".",
+  "error_compiling_program": "**KUSKURE A LOKACIN GININ SHIRIN {{address}}**",
+  "line_number": "Lambar layi",
+  "ask_ai": "Tambayi AI"
 }

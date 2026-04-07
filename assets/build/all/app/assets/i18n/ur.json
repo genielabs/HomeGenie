@@ -575,5 +575,8 @@
   "upgradable_programs": "اپ گریڈ ایبل پروگرام",
   "unsaved_changes": "غیر محفوظ شدہ تبدیلیاں",
   "save_to_apply_program_changes": "پروگرام میں تبدیلیاں لاگو کرنے کے لیے محفوظ کریں۔",
-  "imported_program_name_group": "پروگرام \"{{name}}\" ({{address}}) گروپ \"{{group}}\" میں درآمد کیا گیا۔"
+  "imported_program_name_group": "پروگرام \"{{name}}\" ({{address}}) گروپ \"{{group}}\" میں درآمد کیا گیا۔",
+  "error_compiling_program": "**پروگرام کی تعمیر کے دوران خرابی {{address}}**",
+  "line_number": "لائن نمبر",
+  "ask_ai": "AI سے پوچھیں۔"
 }

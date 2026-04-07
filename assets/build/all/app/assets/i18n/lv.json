@@ -575,5 +575,8 @@
   "upgradable_programs": "Jaunināmas programmas",
   "unsaved_changes": "Nesaglabātās izmaiņas",
   "save_to_apply_program_changes": "Saglabāt, lai izmaiņas lietotu programmā.",
-  "imported_program_name_group": "Importēta programma \"{{name}}\" ({{address}}) grupā \"{{group}}\"."
+  "imported_program_name_group": "Importēta programma \"{{name}}\" ({{address}}) grupā \"{{group}}\".",
+  "error_compiling_program": "**KĻŪDA, VEIDOJOT PROGRAMMU {{address}}**",
+  "line_number": "Rindas numurs",
+  "ask_ai": "Jautājiet mākslīgajam intelektam"
 }

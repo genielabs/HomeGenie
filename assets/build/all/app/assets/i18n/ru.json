@@ -575,5 +575,8 @@
   "upgradable_programs": "Программы с возможностью обновления",
   "unsaved_changes": "Несохраненные изменения",
   "save_to_apply_program_changes": "Сохраните изменения, чтобы применить их к программе.",
-  "imported_program_name_group": "Импортирована программа \"{{name}}\" ({{address}}) в группе \"{{group}}\"."
+  "imported_program_name_group": "Импортирована программа \"{{name}}\" ({{address}}) в группе \"{{group}}\".",
+  "error_compiling_program": "**ОШИБКА ПРИ СБОРКЕ ПРОГРАММЫ {{address}}**",
+  "line_number": "Номер строки",
+  "ask_ai": "Спросите ИИ"
 }

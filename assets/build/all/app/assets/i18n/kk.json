@@ -575,5 +575,8 @@
   "upgradable_programs": "Жаңартылатын бағдарламалар",
   "unsaved_changes": "Сақталмаған өзгерістер",
   "save_to_apply_program_changes": "Бағдарламаға өзгерістер енгізу үшін сақтау.",
-  "imported_program_name_group": "\"{{group}}\" тобындағы \"{{name}}\" ({{address}}) бағдарламасы импортталды."
+  "imported_program_name_group": "\"{{group}}\" тобындағы \"{{name}}\" ({{address}}) бағдарламасы импортталды.",
+  "error_compiling_program": "**Бағдарламаны құру кезіндегі қате {{address}}**",
+  "line_number": "Жол нөмірі",
+  "ask_ai": "AI сұраңыз"
 }

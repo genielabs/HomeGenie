@@ -1045,18 +1045,21 @@ Func&lt;string, string&gt; GetSlimmedXml = (filePath) =&gt; {
         doc.Load(filePath);
         StringBuilder sb = new StringBuilder();
         var programs = doc.SelectNodes("//ProgramBlock");
-//        foreach (System.Xml.XmlNode pg in programs) {
-        foreach (System.Xml.XmlNode pg in doc.SelectNodes("//ProgramBlock[IsEnabled='true']")) {
+        foreach (System.Xml.XmlNode pg in programs) {
+//        foreach (System.Xml.XmlNode pg in doc.SelectNodes("//ProgramBlock[IsEnabled='true']")) {
             string name = pg.SelectSingleNode("Name")?.InnerText ?? "Unnamed";
+            string address = pg.SelectSingleNode("Address")?.InnerText ?? "0";
             string setup = pg.SelectSingleNode("ScriptSetup")?.InnerText ?? "";
             string source = pg.SelectSingleNode("ScriptSource")?.InnerText ?? "";
+            string context = pg.SelectSingleNode("ScriptContext")?.InnerText ?? "";
 
             if (string.IsNullOrWhiteSpace(source) &amp;&amp; string.IsNullOrWhiteSpace(setup)) continue;
 
-            sb.AppendLine($"PROGRAM: {name}");
-            if (!string.IsNullOrWhiteSpace(setup)) sb.AppendLine("SETUP:\n" + setup);
-            if (!string.IsNullOrWhiteSpace(source)) sb.AppendLine("SOURCE:\n" + source);
-            sb.AppendLine("---");
+            sb.AppendLine($"--- PROGRAM: {address} NAME: {name} ---");
+            if (!string.IsNullOrWhiteSpace(setup)) sb.AppendLine("[SETUP]\n" + setup);
+            if (!string.IsNullOrWhiteSpace(source)) sb.AppendLine("[MAIN]\n" + source);
+            if (!string.IsNullOrWhiteSpace(context)) sb.AppendLine("[CONTEXT]\n" + context);
+            sb.AppendLine($"--- END PROGRAM: {address} ---\n");
         }
         return sb.ToString();
     } catch {
@@ -1334,16 +1337,16 @@ public class ChatMessage {
         };
     }
 }</ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-widget-genie</Id>
-      <Version>1.0.11</Version>
+      <Version>1.0.12</Version>
       <Required>true</Required>
-      <Checksum>E911E4CCC8B96DF017ACB3E2C147EE9D</Checksum>
+      <Checksum>C01D076F20DD9CE05790FD4FDE8825ED</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>931</Address>

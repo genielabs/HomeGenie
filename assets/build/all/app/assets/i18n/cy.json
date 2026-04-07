@@ -575,5 +575,8 @@
   "upgradable_programs": "Rhaglenni Uwchraddadwy",
   "unsaved_changes": "Newidiadau heb eu cadw",
   "save_to_apply_program_changes": "Cadwch i gymhwyso newidiadau i'r rhaglen.",
-  "imported_program_name_group": "Mewnforiwyd rhaglen \"{{name}}\" ({{address}}) yn y grŵp \"{{group}}\"."
+  "imported_program_name_group": "Mewnforiwyd rhaglen \"{{name}}\" ({{address}}) yn y grŵp \"{{group}}\".",
+  "error_compiling_program": "**GWALL WRTH ADEILADU'R RHAGLEN {{address}}**",
+  "line_number": "Rhif llinell",
+  "ask_ai": "Gofynnwch i AI"
 }

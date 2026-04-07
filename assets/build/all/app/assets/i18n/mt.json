@@ -575,5 +575,8 @@
   "upgradable_programs": "Programmi li jistgħu jiġu aġġornati",
   "unsaved_changes": "Bidliet mhux salvati",
   "save_to_apply_program_changes": "Issejvja biex tapplika l-bidliet fil-programm.",
-  "imported_program_name_group": "Il-programm \"{{name}}\" ({{address}}) ġie importat fil-grupp \"{{group}}\"."
+  "imported_program_name_group": "Il-programm \"{{name}}\" ({{address}}) ġie importat fil-grupp \"{{group}}\".",
+  "error_compiling_program": "**ŻBALL WAQT IL-BINI TAL-PROGRAMM {{address}}**",
+  "line_number": "Numru tal-linja",
+  "ask_ai": "Staqsi lill-AI"
 }

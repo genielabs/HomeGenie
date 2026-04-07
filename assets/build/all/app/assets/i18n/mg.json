@@ -575,5 +575,8 @@
   "upgradable_programs": "Fandaharana azo havaozina",
   "unsaved_changes": "Fanovana tsy voatahiry",
   "save_to_apply_program_changes": "Tehirizo mba hampiharana ireo fanovana ao amin'ny fandaharana.",
-  "imported_program_name_group": "Fandaharana \"{{name}}\" ({{address}}) nafarana tao amin'ny vondrona \"{{group}}\"."
+  "imported_program_name_group": "Fandaharana \"{{name}}\" ({{address}}) nafarana tao amin'ny vondrona \"{{group}}\".",
+  "error_compiling_program": "**DESO NAHITA TEO AM-PANANGANANA NY FANDAHARAM-POTOANA {{address}}**",
+  "line_number": "Laharana andalana",
+  "ask_ai": "Anontanio ny AI"
 }

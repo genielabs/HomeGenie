@@ -575,5 +575,8 @@
   "upgradable_programs": "Шинэчлэх боломжтой програмууд",
   "unsaved_changes": "Хадгалаагүй өөрчлөлтүүд",
   "save_to_apply_program_changes": "Хөтөлбөрт өөрчлөлт оруулахын тулд хадгална уу.",
-  "imported_program_name_group": "\"{{group}}\" бүлэгт \"{{name}}\" ({{address}}) програмыг импортолсон."
+  "imported_program_name_group": "\"{{group}}\" бүлэгт \"{{name}}\" ({{address}}) програмыг импортолсон.",
+  "error_compiling_program": "**ХӨТӨЛБӨР БАРЬЖ БАЙХ ҮЕД АЛДАА {{address}}**",
+  "line_number": "Мөрийн дугаар",
+  "ask_ai": "Хиймэл оюун ухаанаас асуу"
 }

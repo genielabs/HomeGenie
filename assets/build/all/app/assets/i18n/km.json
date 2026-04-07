@@ -575,5 +575,8 @@
   "upgradable_programs": "កម្មវិធីដែលអាចធ្វើឱ្យប្រសើរឡើងបាន",
   "unsaved_changes": "ការផ្លាស់ប្ដូរដែលមិនទាន់បានរក្សាទុក",
   "save_to_apply_program_changes": "រក្សាទុកដើម្បីអនុវត្តការផ្លាស់ប្តូរចំពោះកម្មវិធី។",
-  "imported_program_name_group": "បាននាំចូលកម្មវិធី \"{{name}}\" ({{address}}) នៅក្នុងក្រុម \"{{group}}\"។"
+  "imported_program_name_group": "បាននាំចូលកម្មវិធី \"{{name}}\" ({{address}}) នៅក្នុងក្រុម \"{{group}}\"។",
+  "error_compiling_program": "**កំហុសពេលកំពុងបង្កើតកម្មវិធី {{address}}**",
+  "line_number": "លេខបន្ទាត់",
+  "ask_ai": "សួរ AI"
 }

@@ -575,5 +575,8 @@
   "upgradable_programs": "स्तरोन्नति गर्न सकिने कार्यक्रमहरू",
   "unsaved_changes": "सुरक्षित नगरिएका परिवर्तनहरू",
   "save_to_apply_program_changes": "कार्यक्रममा परिवर्तनहरू लागू गर्न बचत गर्नुहोस्।",
-  "imported_program_name_group": "\"{{group}}\" समूहमा \"{{name}}\" ({{address}}) कार्यक्रम आयात गरियो।"
+  "imported_program_name_group": "\"{{group}}\" समूहमा \"{{name}}\" ({{address}}) कार्यक्रम आयात गरियो।",
+  "error_compiling_program": "**कार्यक्रम निर्माण गर्दा भएको त्रुटि {{address}}**",
+  "line_number": "लाइन नम्बर",
+  "ask_ai": "एआईलाई सोध्नुहोस्"
 }

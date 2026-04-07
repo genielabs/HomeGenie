@@ -575,5 +575,8 @@
   "upgradable_programs": "Mga Programang Maa-upgrade",
   "unsaved_changes": "Mga hindi na-save na pagbabago",
   "save_to_apply_program_changes": "I-save upang ilapat ang mga pagbabago sa programa.",
-  "imported_program_name_group": "Na-import na programang \"{{name}}\" ({{address}}) sa grupong \"{{group}}\"."
+  "imported_program_name_group": "Na-import na programang \"{{name}}\" ({{address}}) sa grupong \"{{group}}\".",
+  "error_compiling_program": "**ERROR HABANG GINAGAWA ANG PROGRAMA {{address}}**",
+  "line_number": "Numero ng linya",
+  "ask_ai": "Magtanong sa AI"
 }

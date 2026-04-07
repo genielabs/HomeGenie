@@ -575,5 +575,8 @@
   "upgradable_programs": "Program yang Dapat Diupgrade",
   "unsaved_changes": "Perubahan yang belum disimpan",
   "save_to_apply_program_changes": "Simpan untuk menerapkan perubahan pada program.",
-  "imported_program_name_group": "Program yang diimpor \"{{name}}\" ({{address}}) dalam grup \"{{group}}\"."
+  "imported_program_name_group": "Program yang diimpor \"{{name}}\" ({{address}}) dalam grup \"{{group}}\".",
+  "error_compiling_program": "**TERJADI KESALAHAN SAAT MEMBANGUN PROGRAM {{address}}**",
+  "line_number": "Nomor baris",
+  "ask_ai": "Tanyakan pada AI"
 }

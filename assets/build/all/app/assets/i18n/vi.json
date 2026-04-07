@@ -575,5 +575,8 @@
   "upgradable_programs": "Chương trình có thể nâng cấp",
   "unsaved_changes": "Thay đổi chưa được lưu",
   "save_to_apply_program_changes": "Lưu lại để áp dụng các thay đổi cho chương trình.",
-  "imported_program_name_group": "Đã nhập chương trình \"{{name}}\" ({{address}}) trong nhóm \"{{group}}\"."
+  "imported_program_name_group": "Đã nhập chương trình \"{{name}}\" ({{address}}) trong nhóm \"{{group}}\".",
+  "error_compiling_program": "**LỖI KHI BIÊN DỊCH CHƯƠNG TRÌNH {{address}}**",
+  "line_number": "Số dòng",
+  "ask_ai": "Hỏi AI"
 }

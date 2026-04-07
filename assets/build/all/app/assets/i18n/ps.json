@@ -575,5 +575,8 @@
   "upgradable_programs": "د لوړولو وړ پروګرامونه",
   "unsaved_changes": "نه خوندي شوي بدلونونه",
   "save_to_apply_program_changes": "په پروګرام کې د بدلونونو د پلي کولو لپاره خوندي کړئ.",
-  "imported_program_name_group": "په \"{{group}}\" ګروپ کې وارد شوی پروګرام \"{{name}}\" ({{address}})."
+  "imported_program_name_group": "په \"{{group}}\" ګروپ کې وارد شوی پروګرام \"{{name}}\" ({{address}}).",
+  "error_compiling_program": "**د پروګرام د جوړولو پرمهال تېروتنه {{address}}**",
+  "line_number": "د کرښې شمېره",
+  "ask_ai": "له AI څخه پوښتنه وکړئ"
 }

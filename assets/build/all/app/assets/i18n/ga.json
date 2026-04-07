@@ -575,5 +575,8 @@
   "upgradable_programs": "Cláir In-Uasghrádaithe",
   "unsaved_changes": "Athruithe gan sábháil",
   "save_to_apply_program_changes": "Sábháil chun athruithe a chur i bhfeidhm ar an gclár.",
-  "imported_program_name_group": "Iompórtáladh an clár \"{{name}}\" ({{address}}) sa ghrúpa \"{{group}}\"."
+  "imported_program_name_group": "Iompórtáladh an clár \"{{name}}\" ({{address}}) sa ghrúpa \"{{group}}\".",
+  "error_compiling_program": "**EARRÁID AGUS AN CLÁR Á THÓGÁIL {{address}}**",
+  "line_number": "Uimhir líne",
+  "ask_ai": "Iarr ar AI"
 }

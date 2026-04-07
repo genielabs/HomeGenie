@@ -575,5 +575,8 @@
   "upgradable_programs": "Barnaamijyada La Cusboonaysiin Karo",
   "unsaved_changes": "Isbeddellada aan la keydin",
   "save_to_apply_program_changes": "Keydso si aad u codsato isbeddelada barnaamijka.",
-  "imported_program_name_group": "Barnaamij la soo dejiyay oo la yiraahdo \"{{name}}\" ({{address}}) oo ku jira kooxda \"{{group}}\"."
+  "imported_program_name_group": "Barnaamij la soo dejiyay oo la yiraahdo \"{{name}}\" ({{address}}) oo ku jira kooxda \"{{group}}\".",
+  "error_compiling_program": "**KHALAD INTA BARNAAMIJKA DHISMO {{address}}**",
+  "line_number": "Lambarka xariiqda",
+  "ask_ai": "Weydii AI"
 }

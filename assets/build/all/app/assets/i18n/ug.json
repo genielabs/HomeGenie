@@ -575,5 +575,8 @@
   "upgradable_programs": "يېڭىلىغىلى بولىدىغان پروگراممىلار",
   "unsaved_changes": "ساقلانمىغان ئۆزگەرتىشلەر",
   "save_to_apply_program_changes": "پروگراممىغا ئۆزگەرتىشلەرنى قوللىنىش ئۈچۈن ساقلاڭ.",
-  "imported_program_name_group": "«{{group}}» گۇرۇپپىسىدىكى «{{name}}» ({{address}}) پروگراممىسى ئىمپورت قىلىندى."
+  "imported_program_name_group": "«{{group}}» گۇرۇپپىسىدىكى «{{name}}» ({{address}}) پروگراممىسى ئىمپورت قىلىندى.",
+  "error_compiling_program": "**Program {{address}}** نى قۇرۇش جەريانىدا خاتالىق كۆرۈلدى",
+  "line_number": "قۇر نومۇرى",
+  "ask_ai": "سۈنئىي ئەقىلدىن سوراڭ"
 }

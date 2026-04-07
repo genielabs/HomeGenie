@@ -575,5 +575,8 @@
   "upgradable_programs": "ನವೀಕರಿಸಬಹುದಾದ ಕಾರ್ಯಕ್ರಮಗಳು",
   "unsaved_changes": "ಉಳಿಸದ ಬದಲಾವಣೆಗಳು",
   "save_to_apply_program_changes": "ಪ್ರೋಗ್ರಾಂಗೆ ಬದಲಾವಣೆಗಳನ್ನು ಅನ್ವಯಿಸಲು ಉಳಿಸಿ.",
-  "imported_program_name_group": "\"{{group}}\" ಗುಂಪಿನಲ್ಲಿ \"{{name}}\" ({{address}}) ಪ್ರೋಗ್ರಾಂ ಅನ್ನು ಆಮದು ಮಾಡಿಕೊಳ್ಳಲಾಗಿದೆ."
+  "imported_program_name_group": "\"{{group}}\" ಗುಂಪಿನಲ್ಲಿ \"{{name}}\" ({{address}}) ಪ್ರೋಗ್ರಾಂ ಅನ್ನು ಆಮದು ಮಾಡಿಕೊಳ್ಳಲಾಗಿದೆ.",
+  "error_compiling_program": "**ಕಾರ್ಯಕ್ರಮ ನಿರ್ಮಿಸುವಾಗ ದೋಷ {{address}}**",
+  "line_number": "ಸಾಲಿನ ಸಂಖ್ಯೆ",
+  "ask_ai": "AI ಕೇಳಿ"
 }

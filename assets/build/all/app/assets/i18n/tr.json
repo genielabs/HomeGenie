@@ -575,5 +575,8 @@
   "upgradable_programs": "Yükseltilebilir Programlar",
   "unsaved_changes": "Kaydedilmemiş değişiklikler",
   "save_to_apply_program_changes": "Değişikliklerin programa uygulanması için kaydedin.",
-  "imported_program_name_group": "\"{{group}}\" grubuna \"{{name}}\" ({{address}}) programı içe aktarıldı."
+  "imported_program_name_group": "\"{{group}}\" grubuna \"{{name}}\" ({{address}}) programı içe aktarıldı.",
+  "error_compiling_program": "**{{address}} PROGRAMI OLUŞTURULURKEN HATA OLUŞTU**",
+  "line_number": "Satır numarası",
+  "ask_ai": "Yapay zekaya sor"
 }

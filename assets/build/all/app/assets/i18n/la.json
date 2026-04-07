@@ -575,5 +575,8 @@
   "upgradable_programs": "Programmata Emendabilia",
   "unsaved_changes": "Mutationes non servatae",
   "save_to_apply_program_changes": "Serva ut mutationes programmati adhibeantur.",
-  "imported_program_name_group": "Importatum est programma \"{{name}}\" ({{address}}) in grege \"{{group}}\"."
+  "imported_program_name_group": "Importatum est programma \"{{name}}\" ({{address}}) in grege \"{{group}}\".",
+  "error_compiling_program": "**ERROR DUM PROGRAMMA CONSTRUITUR {{address}}**",
+  "line_number": "Numerus lineae",
+  "ask_ai": "Interroga AI"
 }

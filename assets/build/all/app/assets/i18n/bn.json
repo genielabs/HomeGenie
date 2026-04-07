@@ -575,5 +575,8 @@
   "upgradable_programs": "আপগ্রেডযোগ্য প্রোগ্রাম",
   "unsaved_changes": "সংরক্ষিত নয় এমন পরিবর্তন",
   "save_to_apply_program_changes": "প্রোগ্রামে পরিবর্তনগুলো প্রয়োগ করতে সংরক্ষণ করুন।",
-  "imported_program_name_group": "\"{{group}}\" গ্রুপে \"{{name}}\" ({{address}}) প্রোগ্রামটি আমদানি করা হয়েছে।"
+  "imported_program_name_group": "\"{{group}}\" গ্রুপে \"{{name}}\" ({{address}}) প্রোগ্রামটি আমদানি করা হয়েছে।",
+  "error_compiling_program": "{{address}} প্রোগ্রাম বিল্ড করার সময় ত্রুটি",
+  "line_number": "লাইন নম্বর",
+  "ask_ai": "এআইকে জিজ্ঞাসা করুন"
 }

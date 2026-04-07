@@ -575,5 +575,8 @@
   "upgradable_programs": "Оновлювані програми",
   "unsaved_changes": "Незбережені зміни",
   "save_to_apply_program_changes": "Зберегти, щоб застосувати зміни до програми.",
-  "imported_program_name_group": "Імпортовано програму \"{{name}}\" ({{address}}) у групу \"{{group}}\"."
+  "imported_program_name_group": "Імпортовано програму \"{{name}}\" ({{address}}) у групу \"{{group}}\".",
+  "error_compiling_program": "**ПОМИЛКА ПІД ЧАС СТВОРЕННЯ ПРОГРАМИ {{address}}**",
+  "line_number": "Номер рядка",
+  "ask_ai": "Запитайте ШІ"
 }

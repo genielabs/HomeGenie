@@ -575,5 +575,8 @@
   "upgradable_programs": "Programes actualitzables",
   "unsaved_changes": "Canvis no desats",
   "save_to_apply_program_changes": "Desa per aplicar els canvis al programa.",
-  "imported_program_name_group": "S'ha importat el programa \"{{name}}\" ({{address}}) al grup \"{{group}}\"."
+  "imported_program_name_group": "S'ha importat el programa \"{{name}}\" ({{address}}) al grup \"{{group}}\".",
+  "error_compiling_program": "**ERROR EN LA CONSTRUCCIÓ DEL PROGRAMA {{address}}**",
+  "line_number": "Número de línia",
+  "ask_ai": "Pregunta a la IA"
 }

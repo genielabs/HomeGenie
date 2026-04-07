@@ -575,5 +575,8 @@
   "upgradable_programs": "Nadgradljivi programi",
   "unsaved_changes": "Neshranjene spremembe",
   "save_to_apply_program_changes": "Shrani, da uveljavite spremembe v programu.",
-  "imported_program_name_group": "Uvožen program »{{name}}« ({{address}}) v skupino »{{group}}«."
+  "imported_program_name_group": "Uvožen program »{{name}}« ({{address}}) v skupino »{{group}}«.",
+  "error_compiling_program": "**NAPAKA MED IZDELAVO PROGRAMA {{address}}**",
+  "line_number": "Številka vrstice",
+  "ask_ai": "Vprašajte umetno inteligenco"
 }

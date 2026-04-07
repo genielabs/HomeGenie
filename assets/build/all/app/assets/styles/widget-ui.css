@@ -1,8 +1,7 @@
-span.material-symbols-outlined {
+.material-symbols-outlined {
   font-family: 'Material Symbols Outlined', sans-serif;
 
   font-size: 24px;
-  width: 24px;
 
   font-variation-settings:
     'opsz' 24,
@@ -11,11 +10,10 @@ span.material-symbols-outlined {
     'GRAD' 0;
 
 }
-span.material-symbols {
+.material-symbols {
   font-family: 'Material Symbols Outlined', sans-serif;
 
   font-size: 24px;
-  width: 24px;
 
   font-variation-settings:
     'opsz' 24,

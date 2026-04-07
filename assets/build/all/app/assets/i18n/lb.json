@@ -575,5 +575,8 @@
   "upgradable_programs": "Upgradéierbar Programmer",
   "unsaved_changes": "Net gespäichert Ännerungen",
   "save_to_apply_program_changes": "Späicheren fir d'Ännerungen am Programm anzewenden.",
-  "imported_program_name_group": "Programm \"{{name}}\" ({{address}}) an d'Grupp \"{{group}}\" importéiert."
+  "imported_program_name_group": "Programm \"{{name}}\" ({{address}}) an d'Grupp \"{{group}}\" importéiert.",
+  "error_compiling_program": "**FEELER BEIM OPBAU VUM PROGRAMM {{address}}**",
+  "line_number": "Zeilnummer",
+  "ask_ai": "Frot d'KI"
 }

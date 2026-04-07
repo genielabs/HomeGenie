@@ -575,5 +575,8 @@
   "upgradable_programs": "अपग्रेड करण्यायोग्य प्रोग्राम्स",
   "unsaved_changes": "न जतन केलेले बदल",
   "save_to_apply_program_changes": "प्रोग्रॅममध्ये बदल लागू करण्यासाठी सेव्ह करा.",
-  "imported_program_name_group": "\"{{group}}\" या ग्रुपमध्ये \"{{name}}\" ({{address}}) हा प्रोग्राम इम्पोर्ट केला."
+  "imported_program_name_group": "\"{{group}}\" या ग्रुपमध्ये \"{{name}}\" ({{address}}) हा प्रोग्राम इम्पोर्ट केला.",
+  "error_compiling_program": "**{{address}} प्रोग्राम तयार करताना त्रुटी**",
+  "line_number": "ओळ क्रमांक",
+  "ask_ai": "एआयला विचारा"
 }

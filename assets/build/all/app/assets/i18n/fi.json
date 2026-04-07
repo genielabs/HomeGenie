@@ -575,5 +575,8 @@
   "upgradable_programs": "Päivitettävät ohjelmat",
   "unsaved_changes": "Tallentamattomat muutokset",
   "save_to_apply_program_changes": "Tallenna, jos haluat ottaa muutokset käyttöön ohjelmassa.",
-  "imported_program_name_group": "Ohjelma \"{{name}}\" ({{address}}) tuotiin ryhmään \"{{group}}\"."
+  "imported_program_name_group": "Ohjelma \"{{name}}\" ({{address}}) tuotiin ryhmään \"{{group}}\".",
+  "error_compiling_program": "**VIRHE OHJELMAN RAKENNUKSESSA {{address}}**",
+  "line_number": "Rivinumero",
+  "ask_ai": "Kysy tekoälystä"
 }

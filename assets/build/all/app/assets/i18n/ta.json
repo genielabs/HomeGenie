@@ -575,5 +575,8 @@
   "upgradable_programs": "மேம்படுத்தக்கூடிய திட்டங்கள்",
   "unsaved_changes": "சேமிக்கப்படாத மாற்றங்கள்",
   "save_to_apply_program_changes": "நிரலில் மாற்றங்களைப் பயன்படுத்த சேமிக்கவும்.",
-  "imported_program_name_group": "\"{{group}}\" என்ற குழுவில் \"{{name}}\" ({{address}}) என்ற நிரல் இறக்குமதி செய்யப்பட்டது."
+  "imported_program_name_group": "\"{{group}}\" என்ற குழுவில் \"{{name}}\" ({{address}}) என்ற நிரல் இறக்குமதி செய்யப்பட்டது.",
+  "error_compiling_program": "**நிரலை உருவாக்கும்போது பிழை ஏற்பட்டது {{address}}**",
+  "line_number": "வரி எண்",
+  "ask_ai": "AI-யிடம் கேளுங்கள்"
 }

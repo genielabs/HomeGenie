@@ -575,5 +575,8 @@
   "upgradable_programs": "अपग्रेड करने योग्य प्रोग्राम",
   "unsaved_changes": "असहेजित परिवर्तन",
   "save_to_apply_program_changes": "प्रोग्राम में बदलाव लागू करने के लिए सेव करें।",
-  "imported_program_name_group": "समूह \"{{group}}\" में आयातित प्रोग्राम \"{{name}}\" ({{address}}) है।"
+  "imported_program_name_group": "समूह \"{{group}}\" में आयातित प्रोग्राम \"{{name}}\" ({{address}}) है।",
+  "error_compiling_program": "**प्रोग्राम {{address}} के निर्माण में त्रुटि**",
+  "line_number": "लाइन नंबर",
+  "ask_ai": "आस्क एआई"
 }

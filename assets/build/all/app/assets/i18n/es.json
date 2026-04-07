@@ -575,5 +575,8 @@
   "upgradable_programs": "Programas actualizables",
   "unsaved_changes": "Cambios no guardados",
   "save_to_apply_program_changes": "Guarda los cambios para aplicarlos al programa.",
-  "imported_program_name_group": "Programa importado \"{{name}}\" ({{address}}) en el grupo \"{{group}}\"."
+  "imported_program_name_group": "Programa importado \"{{name}}\" ({{address}}) en el grupo \"{{group}}\".",
+  "error_compiling_program": "**ERROR AL CONSTRUIR EL PROGRAMA {{address}}**",
+  "line_number": "Número de línea",
+  "ask_ai": "Pregúntale a la IA"
 }

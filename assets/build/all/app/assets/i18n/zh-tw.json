@@ -575,5 +575,8 @@
   "upgradable_programs": "可升級程式",
   "unsaved_changes": "未儲存的更改",
   "save_to_apply_program_changes": "儲存以應用對程式的變更。",
-  "imported_program_name_group": "從群組「{{group}}」匯入程式「{{name}}」（{{address}}）。"
+  "imported_program_name_group": "從群組「{{group}}」匯入程式「{{name}}」（{{address}}）。",
+  "error_compiling_program": "**建構程式 {{address}} 時出錯**",
+  "line_number": "行號",
+  "ask_ai": "問問人工智慧"
 }

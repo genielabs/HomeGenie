@@ -575,5 +575,8 @@
   "upgradable_programs": "Upgradebare programma's",
   "unsaved_changes": "Niet-opgeslagen wijzigingen",
   "save_to_apply_program_changes": "Sla de wijzigingen op om ze in het programma toe te passen.",
-  "imported_program_name_group": "Geïmporteerd programma \"{{name}}\" ({{address}}) in groep \"{{group}}\"."
+  "imported_program_name_group": "Geïmporteerd programma \"{{name}}\" ({{address}}) in groep \"{{group}}\".",
+  "error_compiling_program": "**FOUT TIJDENS HET BOUWEN VAN PROGRAMMA {{address}}**",
+  "line_number": "Regelnummer",
+  "ask_ai": "Vraag het aan AI"
 }

@@ -575,5 +575,8 @@
   "upgradable_programs": "โปรแกรมที่สามารถอัปเกรดได้",
   "unsaved_changes": "การเปลี่ยนแปลงที่ยังไม่ได้บันทึก",
   "save_to_apply_program_changes": "บันทึกเพื่อบันทึกการเปลี่ยนแปลงในโปรแกรม",
-  "imported_program_name_group": "นำเข้าโปรแกรม \"{{name}}\" ({{address}}) ในกลุ่ม \"{{group}}\""
+  "imported_program_name_group": "นำเข้าโปรแกรม \"{{name}}\" ({{address}}) ในกลุ่ม \"{{group}}\"",
+  "error_compiling_program": "**เกิดข้อผิดพลาดขณะสร้างโปรแกรม {{address}}**",
+  "line_number": "หมายเลขบรรทัด",
+  "ask_ai": "ถาม AI"
 }

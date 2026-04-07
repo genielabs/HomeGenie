@@ -575,5 +575,8 @@
   "upgradable_programs": "અપગ્રેડેબલ પ્રોગ્રામ્સ",
   "unsaved_changes": "વણસાચવેલા ફેરફારો",
   "save_to_apply_program_changes": "પ્રોગ્રામમાં ફેરફારો લાગુ કરવા માટે સાચવો.",
-  "imported_program_name_group": "\"{{group}}\" જૂથમાં \"{{name}}\" ({{address}}) પ્રોગ્રામ આયાત કર્યો."
+  "imported_program_name_group": "\"{{group}}\" જૂથમાં \"{{name}}\" ({{address}}) પ્રોગ્રામ આયાત કર્યો.",
+  "error_compiling_program": "**કાર્યક્રમના નિર્માણ દરમિયાન ભૂલ {{address}}**",
+  "line_number": "રેખા નંબર",
+  "ask_ai": "AI ને પૂછો"
 }

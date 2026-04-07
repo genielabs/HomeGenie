@@ -575,5 +575,8 @@
   "upgradable_programs": "Programu Zinazoweza Kuboreshwa",
   "unsaved_changes": "Mabadiliko ambayo hayajahifadhiwa",
   "save_to_apply_program_changes": "Hifadhi ili kutumia mabadiliko kwenye programu.",
-  "imported_program_name_group": "Programu iliyoingizwa \"{{name}}\" ({{address}}) katika kundi \"{{group}}\"."
+  "imported_program_name_group": "Programu iliyoingizwa \"{{name}}\" ({{address}}) katika kundi \"{{group}}\".",
+  "error_compiling_program": "**KOSA WAKATI WA KUJENGA PROGRAMU {{address}}**",
+  "line_number": "Nambari ya mstari",
+  "ask_ai": "Uliza AI"
 }

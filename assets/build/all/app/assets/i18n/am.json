@@ -575,5 +575,8 @@
   "upgradable_programs": "ሊሻሻሉ የሚችሉ ፕሮግራሞች",
   "unsaved_changes": "ያልተቀመጡ ለውጦች",
   "save_to_apply_program_changes": "በፕሮግራሙ ላይ ለውጦችን ለመተግበር ያስቀምጡ።",
-  "imported_program_name_group": "\"{{name}}\" ({{address}}) በ\"{{group}}\" ቡድን ውስጥ የገባ ፕሮግራም።"
+  "imported_program_name_group": "\"{{name}}\" ({{address}}) በ\"{{group}}\" ቡድን ውስጥ የገባ ፕሮግራም።",
+  "error_compiling_program": "**ፕሮግራሙን በመገንባት ላይ ስህተት {{address}}**",
+  "line_number": "የመስመር ቁጥር",
+  "ask_ai": "የኤአይአይ ይጠይቁ"
 }

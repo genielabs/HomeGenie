@@ -575,5 +575,8 @@
   "upgradable_programs": "Atnaujinamos programos",
   "unsaved_changes": "Neišsaugoti pakeitimai",
   "save_to_apply_program_changes": "Išsaugoti, kad pakeitimai būtų pritaikyti programoje.",
-  "imported_program_name_group": "Importuota programa „{{name}}“ ({{address}}) grupėje „{{group}}“."
+  "imported_program_name_group": "Importuota programa „{{name}}“ ({{address}}) grupėje „{{group}}“.",
+  "error_compiling_program": "**KLAIDA KURIANT PROGRAMĄ {{address}}**",
+  "line_number": "Eilutės numeris",
+  "ask_ai": "Klauskite dirbtinio intelekto"
 }

@@ -575,5 +575,8 @@
   "upgradable_programs": "ໂປຣແກຣມທີ່ສາມາດຍົກລະດັບໄດ້",
   "unsaved_changes": "ການປ່ຽນແປງທີ່ບໍ່ໄດ້ບັນທຶກໄວ້",
   "save_to_apply_program_changes": "ບັນທຶກເພື່ອນຳໃຊ້ການປ່ຽນແປງໃສ່ໂປຣແກຣມ.",
-  "imported_program_name_group": "ນຳເຂົ້າໂປຣແກຣມ \"{{name}}\" ({{address}}) ໃນກຸ່ມ \"{{group}}\" ແລ້ວ."
+  "imported_program_name_group": "ນຳເຂົ້າໂປຣແກຣມ \"{{name}}\" ({{address}}) ໃນກຸ່ມ \"{{group}}\" ແລ້ວ.",
+  "error_compiling_program": "**ເກີດຂໍ້ຜິດພາດໃນຂະນະທີ່ສ້າງໂປຣແກຣມ {{address}}**",
+  "line_number": "ໝາຍເລກສາຍ",
+  "ask_ai": "ຖາມ AI"
 }

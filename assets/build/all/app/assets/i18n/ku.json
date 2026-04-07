@@ -575,5 +575,8 @@
   "upgradable_programs": "Bernameyên Nûjenkirî",
   "unsaved_changes": "Guhertinên netomarkirî",
   "save_to_apply_program_changes": "Ji bo sepandina guhertinan li bernameyê tomar bike.",
-  "imported_program_name_group": "Bernameya \"{{name}}\" ({{address}}) di koma \"{{group}}\" de hatiye îtxalkirin."
+  "imported_program_name_group": "Bernameya \"{{name}}\" ({{address}}) di koma \"{{group}}\" de hatiye îtxalkirin.",
+  "error_compiling_program": "**ÇEWTI DEMA AVAKIRINA BERNAMEYÊ {{address}}**",
+  "line_number": "Hejmara rêzê",
+  "ask_ai": "Bipirse AI"
 }

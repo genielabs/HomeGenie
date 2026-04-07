@@ -575,5 +575,8 @@
   "upgradable_programs": "Frissíthető programok",
   "unsaved_changes": "Nem mentett változtatások",
   "save_to_apply_program_changes": "Mentés a módosítások programba való alkalmazásához.",
-  "imported_program_name_group": "A(z) \"{{name}}\" ({{address}}) program importálva lett a(z) \"{{group}}\" csoportba."
+  "imported_program_name_group": "A(z) \"{{name}}\" ({{address}}) program importálva lett a(z) \"{{group}}\" csoportba.",
+  "error_compiling_program": "**HIBA A PROGRAM FEJLESZTÉSE KÖZBEN {{address}}**",
+  "line_number": "Sorszám",
+  "ask_ai": "Kérdezze a mesterséges intelligenciát"
 }

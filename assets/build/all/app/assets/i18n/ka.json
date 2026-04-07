@@ -575,5 +575,8 @@
   "upgradable_programs": "განახლებადი პროგრამები",
   "unsaved_changes": "შეუნახავი ცვლილებები",
   "save_to_apply_program_changes": "შეინახეთ პროგრამაში ცვლილებების გამოსაყენებლად.",
-  "imported_program_name_group": "იმპორტირებული პროგრამა „{{name}}“ ({{address}}) ჯგუფში „{{group}}“."
+  "imported_program_name_group": "იმპორტირებული პროგრამა „{{name}}“ ({{address}}) ჯგუფში „{{group}}“.",
+  "error_compiling_program": "**შეცდომა პროგრამის შექმნისას {{address}}**",
+  "line_number": "ხაზის ნომერი",
+  "ask_ai": "ჰკითხეთ ხელოვნურ ინტელექტს"
 }

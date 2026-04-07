@@ -575,5 +575,8 @@
   "upgradable_programs": "업그레이드 가능한 프로그램",
   "unsaved_changes": "저장되지 않은 변경 사항",
   "save_to_apply_program_changes": "변경 사항을 프로그램에 적용하려면 저장하세요.",
-  "imported_program_name_group": "그룹 \"{{group}}\"에 프로그램 \"{{name}}\"({{address}})을 가져왔습니다."
+  "imported_program_name_group": "그룹 \"{{group}}\"에 프로그램 \"{{name}}\"({{address}})을 가져왔습니다.",
+  "error_compiling_program": "**프로그램 {{address}} 빌드 중 오류 발생**",
+  "line_number": "줄 번호",
+  "ask_ai": "AI에게 물어보세요"
 }

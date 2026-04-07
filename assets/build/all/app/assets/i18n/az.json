@@ -575,5 +575,8 @@
   "upgradable_programs": "Yenilənə bilən Proqramlar",
   "unsaved_changes": "Yadda saxlanılmamış dəyişikliklər",
   "save_to_apply_program_changes": "Proqrama dəyişiklikləri tətbiq etmək üçün yadda saxla.",
-  "imported_program_name_group": "\"{{group}}\" qrupunda \"{{name}}\" ({{address}}) proqramı idxal edildi."
+  "imported_program_name_group": "\"{{group}}\" qrupunda \"{{name}}\" ({{address}}) proqramı idxal edildi.",
+  "error_compiling_program": "**PROQRAMIN QURULMASI ZAMANI XƏTA {{address}}**",
+  "line_number": "Sətir nömrəsi",
+  "ask_ai": "Süni intellektdən soruşun"
 }

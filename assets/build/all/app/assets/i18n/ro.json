@@ -575,5 +575,8 @@
   "upgradable_programs": "Programe actualizabile",
   "unsaved_changes": "Modificări nesalvate",
   "save_to_apply_program_changes": "Salvați pentru a aplica modificările aduse programului.",
-  "imported_program_name_group": "Programul „{{name}}” ({{address}}) a fost importat în grupul „{{group}}”."
+  "imported_program_name_group": "Programul „{{name}}” ({{address}}) a fost importat în grupul „{{group}}”.",
+  "error_compiling_program": "**EROARE LA CONSTRUIREA PROGRAMULUI {{address}}**",
+  "line_number": "Numărul liniei",
+  "ask_ai": "Întreabă-i pe cei din inteligența artificială"
 }

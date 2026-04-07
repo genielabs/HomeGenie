@@ -575,5 +575,8 @@
   "upgradable_programs": "Αναβαθμίσιμα προγράμματα",
   "unsaved_changes": "Μη αποθηκευμένες αλλαγές",
   "save_to_apply_program_changes": "Αποθήκευση για να εφαρμοστούν οι αλλαγές στο πρόγραμμα.",
-  "imported_program_name_group": "Εισήχθη το πρόγραμμα \"{{name}}\" ({{address}}) στην ομάδα \"{{group}}\"."
+  "imported_program_name_group": "Εισήχθη το πρόγραμμα \"{{name}}\" ({{address}}) στην ομάδα \"{{group}}\".",
+  "error_compiling_program": "**ΣΦΑΛΜΑ ΚΑΤΑ ΤΗ ΔΗΜΙΟΥΡΓΙΑ ΤΟΥ ΠΡΟΓΡΑΜΜΑΤΟΣ {{address}}**",
+  "line_number": "Αριθμός γραμμής",
+  "ask_ai": "Ρωτήστε την Τεχνητή Νοημοσύνη"
 }

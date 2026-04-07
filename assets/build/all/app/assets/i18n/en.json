@@ -574,5 +574,8 @@
   "upgradable_programs": "Upgradable Programs",
   "unsaved_changes": "Unsaved changes",
   "save_to_apply_program_changes": "Save to apply changes to the program.",
-  "imported_program_name_group": "Imported program \"{{name}}\" ({{address}}) in group \"{{group}}\"."
+  "imported_program_name_group": "Imported program \"{{name}}\" ({{address}}) in group \"{{group}}\".",
+  "error_compiling_program": "**ERROR WHILE BUILDING PROGRAM {{address}}**",
+  "line_number": "Line number",
+  "ask_ai": "Ask AI"
 }

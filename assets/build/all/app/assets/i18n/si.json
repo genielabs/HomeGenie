@@ -575,5 +575,8 @@
   "upgradable_programs": "වැඩිදියුණු කළ හැකි වැඩසටහන්",
   "unsaved_changes": "නොසුරකින ලද වෙනස්කම්",
   "save_to_apply_program_changes": "වැඩසටහනට වෙනස්කම් යෙදීමට සුරකින්න.",
-  "imported_program_name_group": "\"{{group}}\" කාණ්ඩයේ \"{{name}}\" ({{address}}) වැඩසටහන ආයාත කරන ලදී."
+  "imported_program_name_group": "\"{{group}}\" කාණ්ඩයේ \"{{name}}\" ({{address}}) වැඩසටහන ආයාත කරන ලදී.",
+  "error_compiling_program": "**වැඩසටහන ගොඩනැගීමේදී දෝෂයක් {{address}}**",
+  "line_number": "රේඛා අංකය",
+  "ask_ai": "AI අහන්න"
 }

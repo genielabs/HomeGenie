@@ -575,5 +575,8 @@
   "upgradable_programs": "အဆင့်မြှင့်တင်နိုင်သော ပရိုဂရမ်များ",
   "unsaved_changes": "မသိမ်းဆည်းရသေးသော ပြောင်းလဲမှုများ",
   "save_to_apply_program_changes": "ပရိုဂရမ်တွင် ပြောင်းလဲမှုများ သက်ရောက်စေရန် သိမ်းဆည်းပါ။",
-  "imported_program_name_group": "\"{{group}}\" အုပ်စုတွင် \"{{name}}\" ({{address}}) ပရိုဂရမ်ကို ထည့်သွင်းထားသည်။"
+  "imported_program_name_group": "\"{{group}}\" အုပ်စုတွင် \"{{name}}\" ({{address}}) ပရိုဂရမ်ကို ထည့်သွင်းထားသည်။",
+  "error_compiling_program": "**ပရိုဂရမ်တည်ဆောက်နေစဉ် အမှားအယွင်း {{address}}**",
+  "line_number": "လိုင်းနံပါတ်",
+  "ask_ai": "AI ကို မေးပါ"
 }

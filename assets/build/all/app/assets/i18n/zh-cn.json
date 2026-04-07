@@ -575,5 +575,8 @@
   "upgradable_programs": "可升级程序",
   "unsaved_changes": "未保存的更改",
   "save_to_apply_program_changes": "保存以应用对程序的更改。",
-  "imported_program_name_group": "从组“{{group}}”中导入程序“{{name}}”（{{address}}）。"
+  "imported_program_name_group": "从组“{{group}}”中导入程序“{{name}}”（{{address}}）。",
+  "error_compiling_program": "**构建程序 {{address}} 时出错**",
+  "line_number": "行号",
+  "ask_ai": "问问人工智能"
 }

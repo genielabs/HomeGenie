@@ -1,0 +1,86 @@
+@import 'assets/styles/widget-ui.css';
+@import 'assets/styles/flex-layout-attribute.min.css';
+
+:host {
+  font-family: sans-serif;
+  display: block;
+  height: 100%;
+}
+
+.container {
+  padding: 12px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.header {
+  /* SAFE ZONE: Only the header needs to dodge the top-right button */
+  padding-right: 48px;
+  color: var(--text-color);
+}
+
+.status {
+  font-size: 0.9em;
+  color: var(--secondary-text-color);
+}
+
+.body {
+  flex: 1;
+}
+
+button {
+  background: var(--card-color);
+  border: 2px solid var(--divider-color);
+  border-radius: 50%;
+  width: 120px;
+  /* Large button */
+  height: 120px;
+  /* Large button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Active button state: thicker border and "lit up" */
+button.active-state {
+  border: 3px solid var(--accent-color);
+  /* 3px border, accent color */
+  box-shadow: 0 0 12px var(--accent-color);
+  /* Glow effect */
+}
+
+/* Active button state on hover */
+button.active-state:hover {
+  border: 3px solid var(--accent-color);
+  /* Keeps 3px border */
+  box-shadow: 0 0 16px var(--accent-color);
+  /* Slightly stronger glow */
+}
+
+.icon {
+  font-size: 80px;
+  /* Large icon */
+  color: var(--disabled-color);
+  transition: color 0.3s, font-variation-settings 0.3s;
+  font-variation-settings: 'FILL'0;
+  /* Default: not filled */
+}
+
+.active-state .icon {
+  color: var(--accent-color);
+  font-variation-settings: 'FILL'1;
+  /* Filled when active */
+}

@@ -29,7 +29,7 @@
 
 .dimmer-ring {
   position: relative;
-  height: var(--container-height, 140px); 
+  height: var(--container-height, 140px);
   cursor: pointer;
   touch-action: none;
 }
@@ -55,7 +55,7 @@ svg {
   stroke-linecap: round;
   transition: stroke-dashoffset 0.1s linear, filter 0.3s, stroke 0.3s;
   stroke-dasharray: 263.89;
-  
+
   /* L'effetto Glow nativo applicato direttamente sul cerchio di progresso */
   filter: drop-shadow(0 0 3px var(--glow-color));
 }
@@ -76,6 +76,7 @@ svg {
 
 .icon {
   font-size: 48px;
+  margin-bottom: 16px;
   color: var(--disabled-color);
   transition: color 0.3s;
   pointer-events: none;

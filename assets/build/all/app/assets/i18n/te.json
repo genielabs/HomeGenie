@@ -575,5 +575,8 @@
   "upgradable_programs": "అప్‌గ్రేడ్ చేయగల ప్రోగ్రామ్‌లు",
   "unsaved_changes": "సేవ్ చేయని మార్పులు",
   "save_to_apply_program_changes": "ప్రోగ్రామ్‌కు మార్పులను వర్తింపజేయడానికి సేవ్ చేయండి.",
-  "imported_program_name_group": "\"{{group}}\" గ్రూప్‌లో \"{{name}}\" ({{address}}) ప్రోగ్రామ్ దిగుమతి చేయబడింది."
+  "imported_program_name_group": "\"{{group}}\" గ్రూప్‌లో \"{{name}}\" ({{address}}) ప్రోగ్రామ్ దిగుమతి చేయబడింది.",
+  "error_compiling_program": "**{{address}} ప్రోగ్రామ్‌ను నిర్మించేటప్పుడు లోపం**",
+  "line_number": "లైన్ సంఖ్య",
+  "ask_ai": "AIని అడగండి"
 }

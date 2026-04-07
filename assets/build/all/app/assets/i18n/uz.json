@@ -575,5 +575,8 @@
   "upgradable_programs": "Yangilanadigan dasturlar",
   "unsaved_changes": "Saqlanmagan o'zgarishlar",
   "save_to_apply_program_changes": "Dasturga o'zgarishlarni qo'llash uchun saqlash.",
-  "imported_program_name_group": "\"{{group}}\" guruhidagi \"{{name}}\" ({{address}}) dasturi import qilindi."
+  "imported_program_name_group": "\"{{group}}\" guruhidagi \"{{name}}\" ({{address}}) dasturi import qilindi.",
+  "error_compiling_program": "**Dasturni yaratishda xatolik yuz berdi {{address}}**",
+  "line_number": "Qator raqami",
+  "ask_ai": "AI dan so'rang"
 }

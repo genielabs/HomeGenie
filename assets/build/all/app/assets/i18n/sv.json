@@ -575,5 +575,8 @@
   "upgradable_programs": "Uppgraderingsbara program",
   "unsaved_changes": "Osparade ändringar",
   "save_to_apply_program_changes": "Spara för att tillämpa ändringarna i programmet.",
-  "imported_program_name_group": "Importerade programmet \"{{name}}\" ({{address}}) till gruppen \"{{group}}\"."
+  "imported_program_name_group": "Importerade programmet \"{{name}}\" ({{address}}) till gruppen \"{{group}}\".",
+  "error_compiling_program": "**FEL VID SKAPNING AV PROGRAM {{address}}**",
+  "line_number": "Radnummer",
+  "ask_ai": "Fråga AI"
 }

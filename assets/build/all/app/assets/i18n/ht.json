@@ -575,5 +575,8 @@
   "upgradable_programs": "Pwogram ki ka amelyore",
   "unsaved_changes": "Chanjman ki pa sove yo",
   "save_to_apply_program_changes": "Sove pou aplike chanjman yo nan pwogram nan.",
-  "imported_program_name_group": "Pwogram \"{{name}}\" ({{address}}) enpòte nan gwoup \"{{group}}\"."
+  "imported_program_name_group": "Pwogram \"{{name}}\" ({{address}}) enpòte nan gwoup \"{{group}}\".",
+  "error_compiling_program": "**ERÈ PANDAN KONSTRIKSYON PWÒGRAM NAN {{address}}**",
+  "line_number": "Nimewo liy",
+  "ask_ai": "Mande IA a"
 }

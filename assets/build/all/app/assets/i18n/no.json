@@ -575,5 +575,8 @@
   "upgradable_programs": "Oppgraderbare programmer",
   "unsaved_changes": "Ulagrede endringer",
   "save_to_apply_program_changes": "Lagre for å bruke endringene i programmet.",
-  "imported_program_name_group": "Importerte programmet «{{name}}» ({{address}}) i gruppen «{{group}}»."
+  "imported_program_name_group": "Importerte programmet «{{name}}» ({{address}}) i gruppen «{{group}}».",
+  "error_compiling_program": "**FEIL UNDER PROGRAMMETS BYGGING {{address}}**",
+  "line_number": "Linjenummer",
+  "ask_ai": "Spør AI"
 }

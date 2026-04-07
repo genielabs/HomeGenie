@@ -575,5 +575,8 @@
   "upgradable_programs": "Абнаўляльныя праграмы",
   "unsaved_changes": "Незахаваныя змены",
   "save_to_apply_program_changes": "Захаваць, каб прымяніць змены да праграмы.",
-  "imported_program_name_group": "Імпартавана праграма \"{{name}}\" ({{address}}) у групу \"{{group}}\"."
+  "imported_program_name_group": "Імпартавана праграма \"{{name}}\" ({{address}}) у групу \"{{group}}\".",
+  "error_compiling_program": "**ПАМЫЛКА ПРЫ СКЛАДАННІ ПРАГРАМЫ {{address}}**",
+  "line_number": "Нумар радка",
+  "ask_ai": "Спытайце ў штучнага інтэлекту"
 }

@@ -575,5 +575,8 @@
   "upgradable_programs": "Täiendatavad programmid",
   "unsaved_changes": "Salvestamata muudatused",
   "save_to_apply_program_changes": "Muudatuste rakendamiseks programmis salvestage.",
-  "imported_program_name_group": "Imporditud programm \"{{name}}\" ({{address}}) gruppi \"{{group}}\"."
+  "imported_program_name_group": "Imporditud programm \"{{name}}\" ({{address}}) gruppi \"{{group}}\".",
+  "error_compiling_program": "**VIGA PROGRAMMI {{address}}** KOOSTAMISEL",
+  "line_number": "Rea number",
+  "ask_ai": "Küsi tehisintellektilt"
 }

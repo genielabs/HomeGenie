@@ -575,5 +575,8 @@
   "upgradable_programs": "അപ്‌ഗ്രേഡബിൾ പ്രോഗ്രാമുകൾ",
   "unsaved_changes": "സംരക്ഷിക്കാത്ത മാറ്റങ്ങൾ",
   "save_to_apply_program_changes": "പ്രോഗ്രാമിൽ മാറ്റങ്ങൾ പ്രയോഗിക്കാൻ സംരക്ഷിക്കുക.",
-  "imported_program_name_group": "\"{{group}}\" ഗ്രൂപ്പിൽ നിന്ന് \"{{name}}\" ({{address}}) എന്ന പ്രോഗ്രാം ഇറക്കുമതി ചെയ്തു."
+  "imported_program_name_group": "\"{{group}}\" ഗ്രൂപ്പിൽ നിന്ന് \"{{name}}\" ({{address}}) എന്ന പ്രോഗ്രാം ഇറക്കുമതി ചെയ്തു.",
+  "error_compiling_program": "**പ്രോഗ്രാം നിർമ്മിക്കുമ്പോൾ പിശക് {{address}}**",
+  "line_number": "ലൈൻ നമ്പർ",
+  "ask_ai": "AI യോട് ചോദിക്കുക"
 }

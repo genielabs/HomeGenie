@@ -575,5 +575,8 @@
   "upgradable_programs": "ଅପଗ୍ରେଡେବଲ୍ ପ୍ରୋଗ୍ରାମ୍",
   "unsaved_changes": "ସେଭ୍ ହୋଇନଥିବା ପରିବର୍ତ୍ତନଗୁଡ଼ିକ",
   "save_to_apply_program_changes": "ପ୍ରୋଗ୍ରାମରେ ପରିବର୍ତ୍ତନ ଲାଗୁ କରିବା ପାଇଁ ସେଭ୍ କରନ୍ତୁ।",
-  "imported_program_name_group": "\"{{group}}\" ଗୋଷ୍ଠୀରେ ଇମ୍ପୋର୍ଟ କରାଯାଇଥିବା ପ୍ରୋଗ୍ରାମ \"{{name}}\" ({{address}})।"
+  "imported_program_name_group": "\"{{group}}\" ଗୋଷ୍ଠୀରେ ଇମ୍ପୋର୍ଟ କରାଯାଇଥିବା ପ୍ରୋଗ୍ରାମ \"{{name}}\" ({{address}})।",
+  "error_compiling_program": "**ନିର୍ମାଣ କାର୍ଯ୍ୟକ୍ରମ ସମୟରେ ତ୍ରୁଟି {{address}}**",
+  "line_number": "ଲାଇନ୍‍ ନମ୍ବର",
+  "ask_ai": "AI କୁ ପଚାରନ୍ତୁ"
 }

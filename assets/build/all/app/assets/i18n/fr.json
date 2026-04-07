@@ -575,5 +575,8 @@
   "upgradable_programs": "Programmes évolutifs",
   "unsaved_changes": "Modifications non enregistrées",
   "save_to_apply_program_changes": "Enregistrez pour appliquer les modifications au programme.",
-  "imported_program_name_group": "Programme importé \"{{name}}\" ({{address}}) dans le groupe \"{{group}}\"."
+  "imported_program_name_group": "Programme importé \"{{name}}\" ({{address}}) dans le groupe \"{{group}}\".",
+  "error_compiling_program": "**ERREUR LORS DE LA CRÉATION DU PROGRAMME {{address}}**",
+  "line_number": "Numéro de ligne",
+  "ask_ai": "Demandez à l'IA"
 }

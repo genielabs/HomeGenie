@@ -575,5 +575,8 @@
   "upgradable_programs": "Aktualisierbare Programme",
   "unsaved_changes": "Nicht gespeicherte Änderungen",
   "save_to_apply_program_changes": "Speichern Sie die Änderungen, um sie im Programm anzuwenden.",
-  "imported_program_name_group": "Das Programm \"{{name}}\" ({{address}}) wurde in die Gruppe \"{{group}}\" importiert."
+  "imported_program_name_group": "Das Programm \"{{name}}\" ({{address}}) wurde in die Gruppe \"{{group}}\" importiert.",
+  "error_compiling_program": "**FEHLER BEIM ERSTELLEN DES PROGRAMMS {{address}}**",
+  "line_number": "Zeilennummer",
+  "ask_ai": "Frag die KI"
 }

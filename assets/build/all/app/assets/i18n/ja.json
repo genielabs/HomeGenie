@@ -575,5 +575,8 @@
   "upgradable_programs": "アップグレード可能なプログラム",
   "unsaved_changes": "保存されていない変更",
   "save_to_apply_program_changes": "プログラムの変更を適用するには、保存してください。",
-  "imported_program_name_group": "グループ「{{group}}」にプログラム「{{name}}」({{address}})をインポートしました。"
+  "imported_program_name_group": "グループ「{{group}}」にプログラム「{{name}}」({{address}})をインポートしました。",
+  "error_compiling_program": "**プログラム{{address}}の構築中にエラーが発生しました**",
+  "line_number": "行番号",
+  "ask_ai": "AIに質問する"
 }

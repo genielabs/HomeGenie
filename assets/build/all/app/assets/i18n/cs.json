@@ -575,5 +575,8 @@
   "upgradable_programs": "Upgradovatelné programy",
   "unsaved_changes": "Neuložené změny",
   "save_to_apply_program_changes": "Uložte pro použití změn v programu.",
-  "imported_program_name_group": "Importován program „{{name}}“ ({{address}}) ve skupině „{{group}}“."
+  "imported_program_name_group": "Importován program „{{name}}“ ({{address}}) ve skupině „{{group}}“.",
+  "error_compiling_program": "**CHYBA PŘI VYTVOŘENÍ PROGRAMU {{address}}**",
+  "line_number": "Číslo řádku",
+  "ask_ai": "Zeptejte se umělé inteligence"
 }

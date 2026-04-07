@@ -1,0 +1,19 @@
+<div class="container" layout="column top-stretch">
+    <!-- HEADER: Contains Name & Status. Applies Safe Zone Padding -->
+    <div class="header" layout="row center-justify">
+        <strong #name>Unknown</strong>
+        <span #status_text class="status">Off</span>
+    </div>
+
+    <!-- BODY: Main controls. Uses full width. -->
+    <div class="body" layout="row center-center">
+        <button (click)="toggle()"
+                @if="isOn()"
+                @then="$this.addClass('active-state')"
+                @else="$this.removeClass('active-state')">
+            <!-- The icon's appearance changes based on 'isOn()' state -->
+            <span class="material-symbols icon"
+                  #icon>lightbulb</span>
+        </button>
+    </div>
+</div>

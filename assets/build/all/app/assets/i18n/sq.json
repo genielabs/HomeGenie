@@ -575,5 +575,8 @@
   "upgradable_programs": "Programe të Përmirësueshme",
   "unsaved_changes": "Ndryshime të paruajtura",
   "save_to_apply_program_changes": "Ruaj për të aplikuar ndryshimet në program.",
-  "imported_program_name_group": "Programi i importuar \"{{name}}\" ({{address}}) në grupin \"{{group}}\"."
+  "imported_program_name_group": "Programi i importuar \"{{name}}\" ({{address}}) në grupin \"{{group}}\".",
+  "error_compiling_program": "**GABIM GJATË NDËRTIMIT TË PROGRAMIT {{address}}**",
+  "line_number": "Numri i linjës",
+  "ask_ai": "Pyete Inteligjencën Artificiale"
 }

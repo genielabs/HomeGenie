@@ -575,5 +575,8 @@
   "upgradable_programs": "Opgradeerbare programme",
   "unsaved_changes": "Ongestoorde veranderinge",
   "save_to_apply_program_changes": "Stoor om veranderinge aan die program toe te pas.",
-  "imported_program_name_group": "Program \"{{name}}\" ({{address}}) is in groep \"{{group}}\" ingevoer."
+  "imported_program_name_group": "Program \"{{name}}\" ({{address}}) is in groep \"{{group}}\" ingevoer.",
+  "error_compiling_program": "**FOUT TERWYL PROGRAM {{address}} BOU**",
+  "line_number": "Lynnommer",
+  "ask_ai": "Vra KI"
 }

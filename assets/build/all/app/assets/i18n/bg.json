@@ -575,5 +575,8 @@
   "upgradable_programs": "Надграждаеми програми",
   "unsaved_changes": "Незапазени промени",
   "save_to_apply_program_changes": "Запазете, за да приложите промените към програмата.",
-  "imported_program_name_group": "Импортирана е програма \"{{name}}\" ({{address}}) в група \"{{group}}\"."
+  "imported_program_name_group": "Импортирана е програма \"{{name}}\" ({{address}}) в група \"{{group}}\".",
+  "error_compiling_program": "**ГРЕШКА ПРИ СЪЗДАВАНЕ НА ПРОГРАМА {{address}}**",
+  "line_number": "Номер на ред",
+  "ask_ai": "Попитайте ИИ"
 }

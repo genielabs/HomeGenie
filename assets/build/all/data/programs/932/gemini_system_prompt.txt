@@ -108,6 +108,20 @@ Even in Python or JavaScript, you MUST maintain Automan telemetry using the `hg.
 *   **Reactivity:** Using `Pause()` ensures an **immediate and graceful exit** when a program is disabled or deleted, as the runtime can trigger an interrupt instantly.
 *   **Loop Throttling:** Every loop MUST include `Pause(seconds)` to ensure the program remains responsive to system commands and CPU usage remains minimal.
 
+### 3.5 Data Analysis
+*   **DATA ANALYSIS & HISTORY**: To query historical data, refer to API implemented by the "DataMonitor" program (ID: 540). Use Unix timestamps in milliseconds.
+      * Example for fetching the last 24h of temperature data:
+        ```csharp
+        double endUnix = (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds;
+        double startUnix = endUnix - (24 * 60 * 60 * 1000);
+
+        dynamic result = Api.Call($"HomeAutomation.HomeGenie/Config/Modules.StatisticsGet/{sensor.Instance.Domain}/{sensor.Instance.Address}/Sensor.Temperature/RawData/{startUnix}/{endUnix}");
+
+        if (result?.History == null) return new { status = "error", message = "Nessuno storico trovato" };
+        var history = result.History.ToObject<List<HomeGenie.Data.ValueStatistics.StatValue>>();
+        ```
+*   AVAILABLE LIBRARIES: You have full access to `ML.Net` for machine learning and predictive analytics, and `NWaves` for digital signal processing (DSP) and audio analysis. Feel free to use them in your C# code if the user's request involves AI models, forecasting, or signal processing.
+
 ---
 
 # SECTION 4: DEPLOYMENT & SELF-HEALING PROTOCOL

@@ -575,5 +575,8 @@
   "upgradable_programs": "Àwọn Ètò Tí A Lè Ṣe Àtúnṣe",
   "unsaved_changes": "Àwọn àyípadà tí a kò fipamọ́",
   "save_to_apply_program_changes": "Fipamọ́ láti lo àwọn àtúnṣe sí ètò náà.",
-  "imported_program_name_group": "Ètò tí a kó wọlé \"{{name}}\" ({{address}}) nínú ẹgbẹ́ \"{{group}}\"."
+  "imported_program_name_group": "Ètò tí a kó wọlé \"{{name}}\" ({{address}}) nínú ẹgbẹ́ \"{{group}}\".",
+  "error_compiling_program": "**ÀṢÀṢẸ NÍGBÀ TÍ A Ń KỌ́ Ètò {{address}}**",
+  "line_number": "Nọ́mbà ìlà",
+  "ask_ai": "Beere lọwọ AI"
 }

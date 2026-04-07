@@ -575,5 +575,8 @@
   "upgradable_programs": "Mmemme Ndị A Ga-emelite",
   "unsaved_changes": "Mgbanwe ndị a na-echekwabeghị",
   "save_to_apply_program_changes": "Chekwaa iji tinye mgbanwe na mmemme ahụ.",
-  "imported_program_name_group": "Mmemme e bubatara \"{{name}}\" ({{address}}) n'ime otu \"{{group}}\"."
+  "imported_program_name_group": "Mmemme e bubatara \"{{name}}\" ({{address}}) n'ime otu \"{{group}}\".",
+  "error_compiling_program": "**Njehie mgbe m na-ewu ihe omume {{address}}**",
+  "line_number": "Nọmba ahịrị",
+  "ask_ai": "Jụọ AI"
 }

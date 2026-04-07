@@ -575,5 +575,8 @@
   "upgradable_programs": "Uppfæranleg forrit",
   "unsaved_changes": "Óvistaðar breytingar",
   "save_to_apply_program_changes": "Vista til að virkja breytingarnar á forritinu.",
-  "imported_program_name_group": "Flutti inn forritið \"{{name}}\" ({{address}}) í hópinn \"{{group}}\"."
+  "imported_program_name_group": "Flutti inn forritið \"{{name}}\" ({{address}}) í hópinn \"{{group}}\".",
+  "error_compiling_program": "**VILLA VIÐ BYGGINGU Á FORRITINU {{address}}**",
+  "line_number": "Línunúmer",
+  "ask_ai": "Spyrðu gervigreind"
 }

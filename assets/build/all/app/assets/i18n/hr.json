@@ -575,5 +575,8 @@
   "upgradable_programs": "Nadogradivi programi",
   "unsaved_changes": "Nespremljene promjene",
   "save_to_apply_program_changes": "Spremi kako biste primijenili promjene u programu.",
-  "imported_program_name_group": "Uvezen je program \"{{name}}\" ({{address}}) u grupu \"{{group}}\"."
+  "imported_program_name_group": "Uvezen je program \"{{name}}\" ({{address}}) u grupu \"{{group}}\".",
+  "error_compiling_program": "**POGREŠKA PRI IZGRADNJI PROGRAMA {{address}}**",
+  "line_number": "Broj retka",
+  "ask_ai": "Pitajte umjetnu inteligenciju"
 }

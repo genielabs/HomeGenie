@@ -575,5 +575,8 @@
   "upgradable_programs": "תוכניות הניתנות לשדרוג",
   "unsaved_changes": "שינויים שלא נשמרו",
   "save_to_apply_program_changes": "שמור כדי להחיל את השינויים על התוכנית.",
-  "imported_program_name_group": "יובאה התוכנית \"{{name}}\" ({{address}}) לקבוצה \"{{group}}\"."
+  "imported_program_name_group": "יובאה התוכנית \"{{name}}\" ({{address}}) לקבוצה \"{{group}}\".",
+  "error_compiling_program": "**שגיאה בעת בניית התוכנית {{address}}**",
+  "line_number": "מספר שורה",
+  "ask_ai": "שאל את הבינה המלאכותית"
 }

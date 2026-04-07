@@ -575,5 +575,8 @@
   "upgradable_programs": "برامج قابلة للتحديث",
   "unsaved_changes": "التغييرات غير المحفوظة",
   "save_to_apply_program_changes": "احفظ التغييرات لتطبيقها على البرنامج.",
-  "imported_program_name_group": "تم استيراد البرنامج \"{{name}}\" ({{address}}) في المجموعة \"{{group}}\"."
+  "imported_program_name_group": "تم استيراد البرنامج \"{{name}}\" ({{address}}) في المجموعة \"{{group}}\".",
+  "error_compiling_program": "**خطأ أثناء إنشاء البرنامج {{address}}**",
+  "line_number": "رقم السطر",
+  "ask_ai": "اسأل الذكاء الاصطناعي"
 }

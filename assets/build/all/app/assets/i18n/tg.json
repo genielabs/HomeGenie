@@ -575,5 +575,8 @@
   "upgradable_programs": "Барномаҳои навсозӣшаванда",
   "unsaved_changes": "Тағйироти захиранашуда",
   "save_to_apply_program_changes": "Барои татбиқ кардани тағйирот ба барнома захира кунед.",
-  "imported_program_name_group": "Барномаи \"{{name}}\" ({{address}}) дар гурӯҳи \"{{group}}\" ворид карда шуд."
+  "imported_program_name_group": "Барномаи \"{{name}}\" ({{address}}) дар гурӯҳи \"{{group}}\" ворид карда шуд.",
+  "error_compiling_program": "**ХАТОГӢ ҲАНГОМИ СОХТАНИ БАРНОМА {{address}}**",
+  "line_number": "Рақами сатр",
+  "ask_ai": "Аз AI пурсед"
 }
