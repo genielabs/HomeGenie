@@ -1585,9 +1585,22 @@ namespace HomeGenie.Service.Handlers
                     case "html":
                     case "js":
                     case "css":
-                        using (TextWriter widgetWriter = new StreamWriter(Path.Combine(filePath, GetWidgetFileBaseName(widgetPath) + "." + fileType)))
+                        string baseName = Path.Combine(filePath, GetWidgetFileBaseName(widgetPath));
+                        using (TextWriter widgetWriter = new StreamWriter(baseName + "." + fileType))
                         {
                             widgetWriter.Write(widgetData);
+                        }
+                        if (fileType == "js")
+                        {
+                            string widgetName = Path.GetFileName(widgetPath);
+                            string customId = widgetPath.Replace("/", "-");
+
+                            string jsModuleTemplate = File.ReadAllText(Path.Combine(widgetBasePath, ".template.module.js"));
+                            string jsModule = jsModuleTemplate
+                                .Replace("{{CustomId}}", customId)
+                                .Replace("{{WidgetName}}", widgetName);
+
+                            File.WriteAllText(baseName + ".module.js", jsModule);
                         }
                         status = Status.Ok;
                         break;
@@ -1624,6 +1637,11 @@ namespace HomeGenie.Service.Handlers
                         File.Delete(filePath + "js");
                         status = Status.Ok;
                     }
+                    if (File.Exists(filePath + ".module.js"))
+                    {
+                        File.Delete(filePath + ".module.js");
+                        status = Status.Ok;
+                    }
                     request.ResponseData = new ResponseStatus(status);
                 }
                 break;
@@ -1647,6 +1665,12 @@ namespace HomeGenie.Service.Handlers
                     Utility.AddFileToZip(widgetBundle, Path.Combine(inputPath, baseName + ".html"), Path.Combine(outputPath, baseName + ".html"));
                     Utility.AddFileToZip(widgetBundle, Path.Combine(inputPath, baseName + ".css"), Path.Combine(outputPath, baseName + ".css"));
                     Utility.AddFileToZip(widgetBundle, Path.Combine(inputPath, baseName + ".js"), Path.Combine(outputPath, baseName + ".js"));
+                    string moduleFile = Path.Combine(inputPath, baseName + ".module.js");
+                    if (File.Exists(moduleFile))
+                    {
+                        Utility.AddFileToZip(widgetBundle, moduleFile,
+                            Path.Combine(outputPath, baseName + ".module.js"));
+                    }
                     // add widget.info data file
                     string infoFilePath = Path.Combine(inputPath, "widget.info");
                     File.WriteAllText(infoFilePath, "{}\n");

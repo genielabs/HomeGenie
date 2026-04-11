@@ -1,0 +1,16 @@
+@import 'assets/styles/widget-ui.css';
+@import 'assets/styles/flex-layout-attribute.min.css';
+
+:host {
+    height: 100%;
+}
+
+.container {
+  height: 100%;
+}
+
+examples-time-clock {
+   border:solid 1px var(--divider-color);
+   border-radius: 6px;
+   padding: 6px;
+}

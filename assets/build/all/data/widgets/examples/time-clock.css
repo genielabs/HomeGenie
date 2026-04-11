@@ -1,34 +1,32 @@
 :host {
-  text-align: center;
-  border: solid #afafaf09;
-  border-radius: 12px;
-  min-width: 312px;
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+    text-align: center;
+    font-size: 80%;
 }
-.header {
-    display: -webkit-flex;
+.info {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding-top: 8px;
-    padding-left: 4px;
-    padding-right: 4px;
+    padding-bottom: 8px;
 }
 .time {
-    font-size: 300%;
+    font-size: 250%;
+    font-family: monospace;
     line-height: 100%;
+    opacity: 0.75;
 }
 .date,.day {
     font-size: 80%;
     font-weight: 700;
     line-height: 100%;
+    white-space: nowrap;
 }
 .frame {
+    height: 100%;
     display: inline-block;
     width: auto;
-    padding: 16px;
-    border-radius: 12px;
+    border-radius: 6px;
+}
+.translucent {
+    opacity: 0.5;
 }

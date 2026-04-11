@@ -80,13 +80,13 @@ class MyWidget extends ControllerInstance {
     *   **Subscribe (CRITICAL EXISTENCE CHECK):** You **MUST ALWAYS** verify that a field exists before subscribing to it. Failing to do so causes a FATAL runtime crash.
         *   *Correct:* `const f = this.boundModule.field('Sensor.Name'); if (f) { this.subscribe(f, callback); }`
 *   **`onDispose()`**: **MANDATORY FOR MEMORY SAFETY**. You MUST always generate this method in the controller class. It is strictly required to clear timers (`setInterval`, `clearTimeout`) and remove custom event handlers to prevent memory leaks. Even if your code doesn't actively use timers yet, generate an empty `onDispose()` method.
-*   **`this.update()`**: Call this to force a View refresh (re-evaluate `@if` methods) when logic state changes.
 *   **`this.apiCall('domain/address/method', payload)`**: *FRONTEND ONLY (UI/Widgets)*. Sends a request from the widget to a backend service. Returns an Observable.
     *   **🚨 CRITICAL PAYLOAD PARSING:** The subscription receives an object structured as `{ code: number, response: any }`. **You MUST use `data.response` to access the actual JSON/array returned by the backend API.** Do not assume the raw array/object is returned directly at the root.
     *   *Correct Usage:* `this.apiCall('Custom/MyApi').subscribe({ next: (data) => { const payload = data.response; /* process payload */ } });`
 *   **`this.configure()`**: *FRONTEND ONLY*. Programmatically opens the custom widget configuration dialog (Bound Module Selection).
 *   **`this.showSettings()`**: *FRONTEND ONLY*. Programmatically opens the module settings dialog.
 *   **`this.translate(key)`**: Returns the localized string for the given key from `assets/i18n`.
+*   **`this.init, this.create, this.dispose, this.update, this.log`**: Are RESERVED methods NEVER OVERWRITE them.
 
 ### 2.4 State Management Strategy (CRITICAL)
 When handling multiple fields, avoid passing values as arguments to a central update function.
