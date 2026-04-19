@@ -35,7 +35,7 @@
   <!-- Packages common to all target frameworks -->
 
   <ItemGroup>
-    <PackageReference Include="Angle" Version="3.6.0" />
+    <PackageReference Include="Angle" Version="3.6.1" />
     <PackageReference Include="CommonMark.NET" Version="0.15.1" />
     <PackageReference Include="Esprima" Version="3.0.5" />
     <PackageReference Include="IronPython" Version="3.4.2" />
@@ -44,7 +44,7 @@
     <PackageReference Include="KNX.net" Version="1.1.10" />
     <PackageReference Include="SerialPortStream" Version="2.4.2" />
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
-    <PackageReference Include="SolarCalculator" Version="3.6.0" />
+    <PackageReference Include="SolarCalculator" Version="3.6.1" />
 
     <PackageReference Include="CronExpressionDescriptor" Version="2.45.0" />
     <PackageReference Include="LiteDB" Version="5.0.21" />
@@ -69,9 +69,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.5" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="10.0.5" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="10.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="10.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="10.0.6" />
   </ItemGroup>
 
 

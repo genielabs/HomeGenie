@@ -313,7 +313,7 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
     if (module.Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
         reconfigureRequired = true;
     }
-    
+
     string childId = module.Instance.Address;
     string childName = module.Instance.Name;
     // REACTIVE MONITORING AND AUTO-CLEANUP
@@ -330,7 +330,7 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
             Program.Log.Error($"Error disabling child program {childId}: {ex.Message}");
         }
     }
-    
+
     return true;
 });
 
@@ -381,7 +381,7 @@ Func&lt;string&gt; BuildContext = () =&gt; {
 
         context = sb.ToString();
     }
-    
+
     context += "\n\nIMPORTANT INSTRUCTIONS FOR Automan:\n" +
     "You are the HomeGenie Automan (Automation Manager). You must create an autonomous C# automation program based on the user's request.\n" +
     "- Provide a clear Name, Setup code, and Main code.\n" +
@@ -429,7 +429,7 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
 
     string displayCommand = isBackground ? $"[Scheduled Task]\n{userCommand}" : userCommand;
     var userMessage = ChatMessage.Create("user", displayCommand);
-    
+
     Api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = userMessage });
     payloadContents.Add(userMessage);
 
@@ -453,7 +453,7 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
         }
     };
 
-    int maxAttempts = 5; 
+    int maxAttempts = 5;
     int currentAttempt = 1;
     bool isDeployed = false;
     string programId = "";
@@ -476,12 +476,12 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
             string requestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
 
             var data = Net.WebService(requestUrl).WithTimeout(180).AddHeader("Content-Type", "application/json").Post(payloadJson).GetData();
-            
+
             if (data != null &amp;&amp; data.candidates != null &amp;&amp; data.candidates.Count &gt; 0)
             {
                 string rawResponse = data.candidates[0].content.parts[0].text;
                 var jsonObj = JObject.Parse(rawResponse);
-                
+
                 string pExplanation = jsonObj["explanation"]?.ToString() ?? "";
                 string pName = jsonObj["name"]?.ToString() ?? "Automan_Generated_Program";
                 string pLanguage = jsonObj["language"]?.ToString() ?? "csharp";
@@ -520,7 +520,7 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
                 // Phase 2: Compilation and Code Injection
                 string compilePayloadJson = JsonConvert.SerializeObject(new { Type = pLanguage, Address = int.Parse(programId), Group = "Automan", Name = $"{pName}", Description = $"{programDescription}", ScriptSetup = pSetup, ScriptSource = pMain, ScriptContext = pContext, IsEnabled = false });
                 var compileRes = Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Compile", compilePayloadJson);
-                
+
                 bool hasCompilerErrors = false;
                 string errorString = "";
 
@@ -532,7 +532,7 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
 
                         if (jToken.Type == JTokenType.Array) compilerOutput = jToken;
                         else if (jToken.Type == JTokenType.Object) compilerOutput = jToken["ResponseValue"] ?? jToken["response"]?["ResponseValue"];
-                        
+
                         if (compilerOutput != null &amp;&amp; compilerOutput.Type == JTokenType.Array &amp;&amp; compilerOutput.HasValues) {
                             hasCompilerErrors = true;
                             errorString = string.Join("\n", compilerOutput.Select(e =&gt; e.ToString()));
@@ -566,7 +566,7 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
                         }
                     };
                     finalUiResponse = JsonConvert.SerializeObject(successPayload, Formatting.Indented);
-                    
+
                     var modelResponse = ChatMessage.Create("model", finalUiResponse);
                     Api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = modelResponse });
 
@@ -577,11 +577,11 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
         catch (Exception ex)
         {
             Program.Log.Error($"API Error: {ex.Message}");
-            if (ex.Message.Contains("(429)")) { 
-                isQuotaExceeded = true; 
+            if (ex.Message.Contains("(429)")) {
+                isQuotaExceeded = true;
                 rateLimitResetTime = DateTime.UtcNow.AddMinutes(2);
                 if (isBackground) throw; // Rethrow to re-queue the task
-                
+
                 var quotaPayload = new {
                     automan_deploy = new {
                         status = "quota_exceeded",
@@ -590,7 +590,7 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
                 };
                 finalUiResponse = JsonConvert.SerializeObject(quotaPayload, Formatting.Indented);
             }
-            else 
+            else
             {
                 var sysErrorPayload = new {
                     automan_deploy = new {
@@ -670,7 +670,7 @@ Api.Handle($"{API_URL}/{API_HISTORY_IMPORT}", (p) =&gt; Api.Call("System.Utility
 // AUTOMAN WORKER
 // ===================================================================
 while (Program.IsRunning &amp;&amp; !reconfigureRequired) {
-    
+
     if (isQuotaExceeded) {
         if (DateTime.UtcNow &lt; rateLimitResetTime) {
             Pause(5);
@@ -732,7 +732,7 @@ public class ChatMessage {
         };
     }
 }</ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -969,7 +969,7 @@ public class ChatMessage {
     }
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
@@ -2042,12 +2042,10 @@ else
     // Perform a dummy inference to pre-populate the KV cache and avoid latency on first use.
     Program.Emit(FIELD_STATUS_INIT, "WarmingUp");
     try {
-        var preWarmupState = session.GetSessionState();
         var warmupParams = new InferenceParams() { MaxTokens = 1 };
         Task.Run(async () =&gt; {
             await foreach (var token in session.ChatAsync(new ChatHistory.Message(AuthorRole.User, " "), warmupParams)) { }
         }).GetAwaiter().GetResult();
-        session.LoadSession(preWarmupState);
     } catch (Exception ex) {
         Program.Log.Warn($"Warmup warning: {ex.Message}");
     }
@@ -2316,7 +2314,6 @@ const string FIELD_DOWNLOAD_PROGRESS = "Status.Download.Progress";
 
 /* Resource Settings */
 const string CONFIG_FILE_NAME = "models.yaml";
-const int PARAMS_GPU_LAYER_SIZE = 0; // Set &gt; 0 to enable GPU offloading (VRAM)
 
 // ===================================================================
 // DATA MODELS AND CONFIGURATION LOADING
@@ -2596,7 +2593,7 @@ public ModelParams GetOptimizedParams(string modelPath)
     // Common settings for all profiles
     p.FlashAttention = true;
     p.UseMemorymap = true;
-    p.GpuLayerCount = 33; // Attempt GPU offloading; falls back to CPU automatically if no GPU is detected
+    p.GpuLayerCount = -1; // Attempt GPU offloading; falls back to CPU automatically if no GPU is detected
 
     if (totalRamGB &lt;= 8)
     {
@@ -2629,16 +2626,16 @@ public ModelParams GetOptimizedParams(string modelPath)
     return p;
 }
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.0.9</Version>
+      <Version>1.0.10</Version>
       <Required>true</Required>
-      <Checksum>DFAD6FD52F1730CD34A0A2B4E3467809</Checksum>
+      <Checksum>71202C02B1AEEEB0FB2EC673285869E5</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>
