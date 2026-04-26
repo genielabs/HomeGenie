@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Modell-ID",
       "ConfigureOptions.EnableDeepKnowledge": "Déifgräifend Wëssen aktivéieren (Programmer & Widgets liesen)",
       "ConfigureOptions.SystemInstructions": "Systeminstruktiounen"
+    },
+    "580": {
+      "Title": "HomeGenie Panel Notifikatiounen",
+      "Description": "Leet Ännerungen am Apparatzoustand an Alarmer iwwer Echtzäit-Push-Notifikatiounen un d'HomeGenie Panel App weider.",
+      "HomeGeniePanel.Notifications": "Notifikatioune schécken",
+      "ConfigureOptions.RegisteredDevices": "Registréiert Panelgeräter (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Genie Kommando",

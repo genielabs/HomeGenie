@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "モデルID",
       "ConfigureOptions.EnableDeepKnowledge": "深い知識を有効化する（プログラムとウィジェットの読み取り）",
       "ConfigureOptions.SystemInstructions": "システム手順"
+    },
+    "580": {
+      "Title": "HomeGenieパネル通知",
+      "Description": "デバイスの状態変化やアラームを、リアルタイムのプッシュ通知を介してHomeGenie Panelアプリに送信します。",
+      "HomeGeniePanel.Notifications": "通知を送信する",
+      "ConfigureOptions.RegisteredDevices": "登録済みパネルデバイス（JSON形式）"
     }
   },
   "scheduler_preset_action_genie_command": "ジーニーコマンド",

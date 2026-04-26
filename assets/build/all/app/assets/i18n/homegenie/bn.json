@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "মডেল আইডি",
       "ConfigureOptions.EnableDeepKnowledge": "গভীর জ্ঞান অর্জন করুন (প্রোগ্রাম ও উইজেট পড়ুন)",
       "ConfigureOptions.SystemInstructions": "সিস্টেম নির্দেশাবলী"
+    },
+    "580": {
+      "Title": "হোমজিনি প্যানেল বিজ্ঞপ্তি",
+      "Description": "ডিভাইসের অবস্থার পরিবর্তন এবং অ্যালার্মগুলো রিয়েল-টাইম পুশ নোটিফিকেশনের মাধ্যমে HomeGenie Panel অ্যাপে পাঠিয়ে দেয়।",
+      "HomeGeniePanel.Notifications": "বিজ্ঞপ্তি পাঠান",
+      "ConfigureOptions.RegisteredDevices": "নিবন্ধিত প্যানেল ডিভাইস (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "জিনি কমান্ড",

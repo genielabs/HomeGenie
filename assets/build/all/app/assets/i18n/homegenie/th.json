@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "รหัสรุ่น",
       "ConfigureOptions.EnableDeepKnowledge": "เปิดใช้งานความรู้เชิงลึก (อ่านโปรแกรมและวิดเจ็ต)",
       "ConfigureOptions.SystemInstructions": "คำแนะนำการใช้งานระบบ"
+    },
+    "580": {
+      "Title": "การแจ้งเตือนแผงควบคุม HomeGenie",
+      "Description": "ส่งการแจ้งเตือนแบบเรียลไทม์ไปยังแอป HomeGenie Panel เพื่อแจ้งการเปลี่ยนแปลงสถานะของอุปกรณ์และสัญญาณเตือนต่างๆ",
+      "HomeGeniePanel.Notifications": "ส่งการแจ้งเตือน",
+      "ConfigureOptions.RegisteredDevices": "อุปกรณ์แผงควบคุมที่ลงทะเบียนแล้ว (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "คำสั่งจินนี่",

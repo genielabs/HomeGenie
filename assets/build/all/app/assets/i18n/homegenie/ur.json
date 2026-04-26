@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ماڈل ID",
       "ConfigureOptions.EnableDeepKnowledge": "گہرے علم کو فعال کریں (پروگرام اور ویجٹ پڑھیں)",
       "ConfigureOptions.SystemInstructions": "سسٹم کی ہدایات"
+    },
+    "580": {
+      "Title": "ہوم جینی پینل کی اطلاعات",
+      "Description": "ریئل ٹائم پش نوٹیفیکیشنز کے ذریعے آلہ کی حالت میں تبدیلیوں اور الارم کو HomeGenie Panel ایپ پر روٹ کرتا ہے۔",
+      "HomeGeniePanel.Notifications": "اطلاعات بھیجیں۔",
+      "ConfigureOptions.RegisteredDevices": "رجسٹرڈ پینل ڈیوائسز (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "جنی کمانڈ",

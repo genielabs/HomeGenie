@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "លេខសម្គាល់ម៉ូដែល",
       "ConfigureOptions.EnableDeepKnowledge": "បើកដំណើរការចំណេះដឹងស៊ីជម្រៅ (អានកម្មវិធី និងធាតុក្រាហ្វិក)",
       "ConfigureOptions.SystemInstructions": "ការណែនាំអំពីប្រព័ន្ធ"
+    },
+    "580": {
+      "Title": "ការជូនដំណឹងអំពីបន្ទះ HomeGenie",
+      "Description": "បញ្ជូនការផ្លាស់ប្តូរស្ថានភាពឧបករណ៍ និងសំឡេងរោទិ៍ទៅកាន់កម្មវិធី HomeGenie Panel តាមរយៈការជូនដំណឹងតាមពេលវេលាជាក់ស្តែង។",
+      "HomeGeniePanel.Notifications": "ផ្ញើការជូនដំណឹង",
+      "ConfigureOptions.RegisteredDevices": "ឧបករណ៍បន្ទះដែលបានចុះឈ្មោះ (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "ពាក្យបញ្ជា Genie",

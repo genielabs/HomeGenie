@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Nasnameya Modelê",
       "ConfigureOptions.EnableDeepKnowledge": "Zanîna Kûr Çalak Bike (Bername û widgetan Bixwîne)",
       "ConfigureOptions.SystemInstructions": "Rênimayên Sîstemê"
+    },
+    "580": {
+      "Title": "Agahdariyên Panela HomeGenie",
+      "Description": "Guhertinên rewşa cîhazê û alarman bi rêya agahdariyên push ên demrast ji sepana HomeGenie Panel re dişîne.",
+      "HomeGeniePanel.Notifications": "Agahdariyan bişîne",
+      "ConfigureOptions.RegisteredDevices": "Amûrên Panelê yên Qeydkirî (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Fermandariya Genie",

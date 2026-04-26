@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ИД на модел",
       "ConfigureOptions.EnableDeepKnowledge": "Овозможи длабинско знаење (Читање програми и виџети)",
       "ConfigureOptions.SystemInstructions": "Системски инструкции"
+    },
+    "580": {
+      "Title": "Известувања на панелот HomeGenie",
+      "Description": "Ги насочува промените на состојбата на уредот и алармите кон апликацијата HomeGenie Panel преку push известувања во реално време.",
+      "HomeGeniePanel.Notifications": "Испрати известувања",
+      "ConfigureOptions.RegisteredDevices": "Регистрирани панелни уреди (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Џини Команда",

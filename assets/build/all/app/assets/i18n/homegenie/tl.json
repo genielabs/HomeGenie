@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ID ng Modelo",
       "ConfigureOptions.EnableDeepKnowledge": "Paganahin ang Malalim na Kaalaman (Magbasa ng mga programa at widget)",
       "ConfigureOptions.SystemInstructions": "Mga Tagubilin sa Sistema"
+    },
+    "580": {
+      "Title": "Mga Abiso sa Panel ng HomeGenie",
+      "Description": "Idinadaan ang mga pagbabago sa estado ng device at mga alarma sa HomeGenie Panel app sa pamamagitan ng mga real-time na push notification.",
+      "HomeGeniePanel.Notifications": "Magpadala ng mga abiso",
+      "ConfigureOptions.RegisteredDevices": "Mga Rehistradong Panel Device (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Utos ng Genie",

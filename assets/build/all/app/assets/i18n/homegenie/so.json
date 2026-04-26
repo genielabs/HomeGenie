@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Aqoonsiga Moodeelka",
       "ConfigureOptions.EnableDeepKnowledge": "Karti Aqoon Qoto Dheer (Akhri barnaamijyada iyo aaladaha)",
       "ConfigureOptions.SystemInstructions": "Tilmaamaha Nidaamka"
+    },
+    "580": {
+      "Title": "Ogeysiisyada Guddiga HomeGenie",
+      "Description": "Waxay u gudbisaa isbeddelada xaaladda qalabka iyo digniinaha barnaamijka HomeGenie Panel iyada oo loo marayo ogeysiisyada riixitaanka waqtiga-dhabta ah.",
+      "HomeGeniePanel.Notifications": "Dir ogeysiisyada",
+      "ConfigureOptions.RegisteredDevices": "Qalabka Guddiga Diiwaangashan (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Taliska Genie",

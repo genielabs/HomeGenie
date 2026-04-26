@@ -700,6 +700,16 @@
         "Includi nel report giornaliero Wh"
     },
 
+    "580": {
+      "Title":
+        "Notifiche HomeGenie Panel",
+      "Description":
+        "Inoltra i cambiamenti di stato dei dispositivi e gli allarmi all'app HomeGenie Panel tramite notifiche push in tempo reale.",
+      "HomeGeniePanel.Notifications":
+        "Invia notifiche",
+      "ConfigureOptions.RegisteredDevices":
+        "Dispositivi Panel registrati (JSON)"
+    },
 
     "200": {
       "Title":

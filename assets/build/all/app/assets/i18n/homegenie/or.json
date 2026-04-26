@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ମଡେଲ୍ ଆଇଡି",
       "ConfigureOptions.EnableDeepKnowledge": "ଗଭୀର ଜ୍ଞାନ (ପ୍ରୋଗ୍ରାମ୍ ଏବଂ ୱିଜେଟ୍ ପଢ଼ନ୍ତୁ) ସକ୍ଷମ କରନ୍ତୁ",
       "ConfigureOptions.SystemInstructions": "ସିଷ୍ଟମ୍ ନିର୍ଦ୍ଦେଶାବଳୀ"
+    },
+    "580": {
+      "Title": "ହୋମଜେନି ପ୍ୟାନେଲ୍ ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକ",
+      "Description": "ରିଅଲ୍-ଟାଇମ୍ ପୁସ୍ ବିଜ୍ଞପ୍ତି ମାଧ୍ୟମରେ ଡିଭାଇସ୍ ସ୍ଥିତି ପରିବର୍ତ୍ତନ ଏବଂ ଆଲାର୍ମଗୁଡ଼ିକୁ HomeGenie Panel ଆପକୁ ପଠାଏ।",
+      "HomeGeniePanel.Notifications": "ବିଜ୍ଞପ୍ତି ପଠାନ୍ତୁ",
+      "ConfigureOptions.RegisteredDevices": "ପଞ୍ଜିକୃତ ପ୍ୟାନେଲ୍ ଡିଭାଇସଗୁଡ଼ିକ (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "ଜେନି କମାଣ୍ଡ",

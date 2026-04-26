@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ID-ul modelului",
       "ConfigureOptions.EnableDeepKnowledge": "Activează cunoștințe aprofundate (citește programe și widget-uri)",
       "ConfigureOptions.SystemInstructions": "Instrucțiuni de sistem"
+    },
+    "580": {
+      "Title": "Notificări ale panoului HomeGenie",
+      "Description": "Transmite modificările stării dispozitivului și alarmele către aplicația HomeGenie Panel prin notificări push în timp real.",
+      "HomeGeniePanel.Notifications": "Trimiteți notificări",
+      "ConfigureOptions.RegisteredDevices": "Dispozitive de panou înregistrate (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Comandamentul Geniilor",

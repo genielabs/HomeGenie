@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Моделдин IDси",
       "ConfigureOptions.EnableDeepKnowledge": "Терең билимди иштетүү (Программаларды жана виджеттерди окуу)",
       "ConfigureOptions.SystemInstructions": "Системалык көрсөтмөлөр"
+    },
+    "580": {
+      "Title": "HomeGenie панелинин эскертмелери",
+      "Description": "Түзмөктүн абалынын өзгөрүшүн жана ойготкучтарды реалдуу убакыттагы push эскертмелери аркылуу HomeGenie Panel тиркемесине багыттайт.",
+      "HomeGeniePanel.Notifications": "Эскертмелерди жөнөтүү",
+      "ConfigureOptions.RegisteredDevices": "Катталган панелдик түзмөктөр (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Жиндер командасы",

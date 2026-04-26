@@ -144,12 +144,12 @@ public static class HistoryStore
     }
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.5</PackageVersion>
+      <PackageVersion>1.0.6</PackageVersion>
       <Id>chat-history-service</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -222,7 +222,7 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.5</PackageVersion>
+      <PackageVersion>1.0.6</PackageVersion>
       <Id>client-configs</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -593,7 +593,7 @@ void SaveConfig(string filePath, YamlConfig config)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.5</PackageVersion>
+      <PackageVersion>1.0.6</PackageVersion>
       <Id>daily-energy-report</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -871,7 +871,7 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.5</PackageVersion>
+      <PackageVersion>1.0.6</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -1517,7 +1517,7 @@ public class DownloadManager : IDisposable
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.5</PackageVersion>
+      <PackageVersion>1.0.6</PackageVersion>
       <Id>download-manager</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1560,7 +1560,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.5</PackageVersion>
+      <PackageVersion>1.0.6</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1888,7 +1888,7 @@ string GetDbName()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.5</PackageVersion>
+      <PackageVersion>1.0.6</PackageVersion>
       <Id>energy-use-statistics</Id>
       <Version>1.0.9</Version>
       <Required>false</Required>
@@ -2063,7 +2063,7 @@ void InsertData(LiteDatabase db, LoggerEvent data) {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.5</PackageVersion>
+      <PackageVersion>1.0.6</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -2218,7 +2218,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.5</PackageVersion>
+      <PackageVersion>1.0.6</PackageVersion>
       <Id>file-manager</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2233,6 +2233,216 @@ Program.GoBackground();
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>false</Cloneable>
     <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.Setup(() =&gt; 
+{
+    // 1. Adds the feature to forms to enable selective notifications
+    Program.AddFeature("", "Light,Dimmer,Color,Switch,Sensor,DoorWindow,DoorLock,Shutter", "HomeGeniePanel.Notifications", "Send notifications", "checkbox");
+
+    // 2. Option to view/manage the list of registered devices
+    string devicesPath = Path.Combine(Data.GetFolder(), "panel_devices.json");
+    Program.AddOption("RegisteredDevices", "[]", "Registered Panel Devices (JSON)", $"editor:file:{devicesPath}:json");
+});
+
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>// ===================================================================
+// HOMEGENIE PANEL NOTIFICATION SERVICE
+// ===================================================================
+
+string devicesPath = Path.Combine(Data.GetFolder(), "panel_devices.json");
+
+// --- 1. API HANDLER
+// HomeAutomation.HomeGenie/Config/Notifications.Register/&lt;token&gt;/&lt;model&gt;
+Api.Handle("HomeAutomation.HomeGenie/Config/Notifications.Register", (args) =&gt; 
+{
+    var request = Api.Parse(args);
+    string token = request.Domain;
+    string model = WebUtility.UrlDecode(request.Address);
+
+    if (string.IsNullOrEmpty(token)) return new ResponseStatus(Status.Error, "Token missing");
+
+    var devices = DeviceRegistry.Load(devicesPath);
+    var existing = devices.FirstOrDefault(d =&gt; d.Token == token);
+
+    if (existing == null)
+    {
+        devices.Add(new PanelDevice { 
+            Token = token, 
+            Model = model, 
+            RegisteredAt = DateTime.Now 
+        });
+        Program.Log.Info($"New Panel registered: {model} ({token})");
+    }
+    else 
+    {
+        existing.Model = model;
+        existing.LastSeen = DateTime.Now;
+    }
+
+    DeviceRegistry.Save(devicesPath, devices);
+    return new ResponseStatus(Status.Ok, "Registered");
+});
+
+// --- 2. EVENT LISTENER ---
+When.ModuleParameterChanged((module, parameter) =&gt; 
+{
+    // Check if the module has the feature enabled
+    if (module.HasFeature("HomeGeniePanel.Notifications")) {
+        
+        bool shouldNotify = false;
+        string message = "";
+
+        // Relevant parameter filtering logic
+        switch (parameter.Name) {
+            case "Status.Level":
+                shouldNotify = true;
+                string state = parameter.DecimalValue &gt; 0 ? "ON" : "OFF";
+                if (module.IsOfDeviceType("Shutter"))
+                {
+                    state = parameter.DecimalValue &gt; 0 ? "OPEN" : "CLOSED";
+                }
+                message = $"{module.Instance.Name} is now {state}";
+                break;
+
+            case "Sensor.MotionDetect":
+                if (parameter.DecimalValue &gt; 0) 
+                {
+                    shouldNotify = true;
+                    message = $"Motion detected in {module.Instance.Name}";
+                }
+                break;
+
+            case "Sensor.DoorWindow":
+                shouldNotify = true;
+                message = $"{module.Instance.Name} is {(parameter.DecimalValue &gt; 0 ? "Open" : "Closed")}";
+                break;
+
+            case "Sensor.Alarm":
+            case "Sensor.ObjectDetect":
+                if (parameter.DecimalValue &gt; 0) 
+                {
+                    shouldNotify = true;
+                    message = $"ALARM: {module.Instance.Name} detected activity!";
+                }
+                break;
+
+            case "Status.DoorLock":
+                shouldNotify = true;
+                message = $"{module.Instance.Name} is {(parameter.DecimalValue &gt; 0 ? "Locked" : "Unlocked")}";
+                break;
+        }
+
+        if (shouldNotify) 
+        {
+            var devices = DeviceRegistry.Load(devicesPath);
+
+            foreach (var device in devices) 
+            {
+                var targetDevice = device; // local capture
+
+                Program.RunAsyncTask(async () =&gt; 
+                {
+                    try 
+                    {
+                        var payload = new 
+                        { 
+                            token = targetDevice.Token, 
+                            title = "HomeGenie Update", 
+                            body = message
+                        };
+                        
+                        string jsonPayload = Newtonsoft.Json.JsonConvert.SerializeObject(payload);
+
+                        // Use static client instance instead of creating a new one for each request
+                        var request = new HttpRequestMessage(HttpMethod.Post, "https://push.homegenie.workers.dev");
+                        request.Headers.Add("x-hg-key", "PYKqr2hUhdASrkWJGWuKpM+C7rbXaQTFcvFYz4d8IJBLK1bz4R6kw1");
+                        request.Content = new StringContent(jsonPayload, System.Text.Encoding.UTF8, "application/json");                            
+                        
+                        var response = await HttpHelper.Client.SendAsync(request);
+                        
+                        if (!response.IsSuccessStatusCode) {
+                            string err = await response.Content.ReadAsStringAsync();
+                            Program.Log.Error($"Proxy Error[{response.StatusCode}]: {err}");
+                        } else {
+                            Program.Log.Info($"Notification sent to {targetDevice.Model}");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Program.Log.Error($"Failed to send to proxy: {ex.Message}");
+                    }
+                });
+            }
+        }
+    }
+    return true;
+});
+
+Program.GoBackground();
+</ScriptSource>
+    <ScriptContext>#using System.Net.Http
+
+public class PanelDevice {
+    public string Token { get; set; }
+    public string Model { get; set; }
+    public DateTime RegisteredAt { get; set; }
+    public DateTime LastSeen { get; set; }
+}
+
+public static class DeviceRegistry {
+    public static List&lt;PanelDevice&gt; Load(string path) {
+        try {
+            if (File.Exists(path)) {
+                string json = File.ReadAllText(path);
+                return JsonConvert.DeserializeObject&lt;List&lt;PanelDevice&gt;&gt;(json) ?? new List&lt;PanelDevice&gt;();
+            }
+        } catch { }
+        return new List&lt;PanelDevice&gt;();
+    }
+
+    public static void Save(string path, List&lt;PanelDevice&gt; devices) {
+        try {
+            string json = JsonConvert.SerializeObject(devices, Formatting.Indented);
+            File.WriteAllText(path, json);
+        } catch { }
+    }
+}
+
+public static class HttpHelper {
+    public static readonly HttpClient Client = new HttpClient();
+}
+</ScriptContext>
+    <ScriptErrors>[]</ScriptErrors>
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.6</PackageVersion>
+      <Id>homegenie-panel-notifications</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>B5C1B49A8DF1FCA09442648765D62BE2</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>580</Address>
+    <Name>HomeGenie Panel Notifications</Name>
+    <Description>Routes device state changes and alarms to the HomeGenie Panel app via real-time push notifications.</Description>
+    <Group>Utilità</Group>
+    <Features>
+      <ProgramFeature>
+        <FieldType>checkbox</FieldType>
+        <ForDomains />
+        <ForTypes>Light,Dimmer,Color,Switch,Sensor,DoorWindow,DoorLock,Shutter</ForTypes>
+        <Property>HomeGeniePanel.Notifications</Property>
+        <Description>Send notifications</Description>
+      </ProgramFeature>
+    </Features>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>CSharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
@@ -2279,7 +2489,7 @@ public string[] GetHourLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.5</PackageVersion>
+      <PackageVersion>1.0.6</PackageVersion>
       <Id>hourly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -2741,7 +2951,7 @@ class MqttCommand: MigInterfaceCommand {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.5</PackageVersion>
+      <PackageVersion>1.0.6</PackageVersion>
       <Id>mqtt-network</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
@@ -3000,7 +3210,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.5</PackageVersion>
+      <PackageVersion>1.0.6</PackageVersion>
       <Id>openweathermap</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -3092,7 +3302,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.5</PackageVersion>
+      <PackageVersion>1.0.6</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -3184,7 +3394,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.5</PackageVersion>
+      <PackageVersion>1.0.6</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -3256,7 +3466,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.5</PackageVersion>
+      <PackageVersion>1.0.6</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -3932,7 +4142,7 @@ public static class FfmpegHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.5</PackageVersion>
+      <PackageVersion>1.0.6</PackageVersion>
       <Id>video-input</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -5237,7 +5447,7 @@ public class ThumbnailHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.5</PackageVersion>
+      <PackageVersion>1.0.6</PackageVersion>
       <Id>video-recorder</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -5318,7 +5528,7 @@ public string[] GetDayLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.5</PackageVersion>
+      <PackageVersion>1.0.6</PackageVersion>
       <Id>weekly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>

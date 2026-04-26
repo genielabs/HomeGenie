@@ -700,6 +700,17 @@
         "Include in Daily Wh report"
     },
 
+    "580": {
+      "Title":
+        "HomeGenie Panel Notifications",
+      "Description":
+        "Routes device state changes and alarms to the HomeGenie Panel app via real-time push notifications.",
+      "HomeGeniePanel.Notifications":
+        "Send notifications",
+      "ConfigureOptions.RegisteredDevices":
+        "Registered Panel Devices (JSON)"
+    },
+
     "200": {
       "Title":
           "Video Input",

@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Modeļa ID",
       "ConfigureOptions.EnableDeepKnowledge": "Iespējot padziļinātas zināšanas (lasīt programmas un logrīkus)",
       "ConfigureOptions.SystemInstructions": "Sistēmas instrukcijas"
+    },
+    "580": {
+      "Title": "HomeGenie paneļa paziņojumi",
+      "Description": "Nosūta ierīces stāvokļa izmaiņas un trauksmes signālus uz HomeGenie Panel lietotni, izmantojot reāllaika push paziņojumus.",
+      "HomeGeniePanel.Notifications": "Sūtīt paziņojumus",
+      "ConfigureOptions.RegisteredDevices": "Reģistrētas paneļa ierīces (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Džinu pavēlniecība",

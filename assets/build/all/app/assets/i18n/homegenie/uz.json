@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Model identifikatori",
       "ConfigureOptions.EnableDeepKnowledge": "Chuqur bilimlarni yoqish (Dasturlar va vidjetlarni o'qish)",
       "ConfigureOptions.SystemInstructions": "Tizim ko'rsatmalari"
+    },
+    "580": {
+      "Title": "HomeGenie paneli bildirishnomalari",
+      "Description": "Qurilma holatidagi o'zgarishlar va signallarni real vaqt rejimida push-bildirishnomalar orqali HomeGenie Panel ilovasiga yo'naltiradi.",
+      "HomeGeniePanel.Notifications": "Bildirishnomalarni yuborish",
+      "ConfigureOptions.RegisteredDevices": "Ro'yxatdan o'tgan panel qurilmalari (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Jin qo'mondonligi",

@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Model ID-si",
       "ConfigureOptions.EnableDeepKnowledge": "Dərin Biliyi Aktivləşdirin (Proqramları və vidjetləri oxuyun)",
       "ConfigureOptions.SystemInstructions": "Sistem Təlimatları"
+    },
+    "580": {
+      "Title": "HomeGenie Panel Bildirişləri",
+      "Description": "Cihazın vəziyyətindəki dəyişiklikləri və siqnalları real vaxt rejimində push bildirişləri vasitəsilə HomeGenie Panel tətbiqinə yönləndirir.",
+      "HomeGeniePanel.Notifications": "Bildirişlər göndərin",
+      "ConfigureOptions.RegisteredDevices": "Qeydiyyatdan Keçmiş Panel Cihazları (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Cin Komandanlığı",

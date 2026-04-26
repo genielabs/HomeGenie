@@ -739,9 +739,9 @@ public class ChatMessage {
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-automan</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>25E413812E175DE3AB3DB67CAD8C5112</Checksum>
+      <Checksum>A2C670BB89DCFF8789C23BD089D09B36</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>932</Address>
@@ -2626,7 +2626,7 @@ public ModelParams GetOptimizedParams(string modelPath)
     return p;
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>

@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "የሞዴል መታወቂያ",
       "ConfigureOptions.EnableDeepKnowledge": "ጥልቅ እውቀትን አንቃ (ፕሮግራሞችን እና መግብሮችን ያንብቡ)",
       "ConfigureOptions.SystemInstructions": "የስርዓት መመሪያዎች"
+    },
+    "580": {
+      "Title": "HomeGenie ፓነል ማሳወቂያዎች",
+      "Description": "የመሣሪያ ሁኔታ ለውጦችን እና ማንቂያዎችን በእውነተኛ ጊዜ የግፊት ማሳወቂያዎች በኩል ወደ HomeGenie ፓነል መተግበሪያ ያስተላልፋል።",
+      "HomeGeniePanel.Notifications": "ማሳወቂያዎችን ላክ",
+      "ConfigureOptions.RegisteredDevices": "የተመዘገቡ የፓናል መሳሪያዎች (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "የጂኒ ኮማንድ",

@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Identificatio exemplaris",
       "ConfigureOptions.EnableDeepKnowledge": "Permitte Cognitionem Profundam (Lege programmata et instrumenta)",
       "ConfigureOptions.SystemInstructions": "Instructiones Systematis"
+    },
+    "580": {
+      "Title": "Notificationes Tabulae HomeGenie",
+      "Description": "Mutationes status machinae et admonitiones ad applicationem HomeGenie Panel per notificationes impulsivas in tempore reali dirigit.",
+      "HomeGeniePanel.Notifications": "Notitias mitte",
+      "ConfigureOptions.RegisteredDevices": "Instrumenta Tabulae Registrata (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Mandatum Genii",

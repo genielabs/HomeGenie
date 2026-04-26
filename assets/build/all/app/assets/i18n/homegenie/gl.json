@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ID do modelo",
       "ConfigureOptions.EnableDeepKnowledge": "Activar coñecemento profundo (ler programas e widgets)",
       "ConfigureOptions.SystemInstructions": "Instrucións do sistema"
+    },
+    "580": {
+      "Title": "Notificacións do panel HomeGenie",
+      "Description": "Envía os cambios de estado do dispositivo e as alarmas á aplicación HomeGenie Panel mediante notificacións push en tempo real.",
+      "HomeGeniePanel.Notifications": "Enviar notificacións",
+      "ConfigureOptions.RegisteredDevices": "Dispositivos de panel rexistrados (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Comando Xenio",

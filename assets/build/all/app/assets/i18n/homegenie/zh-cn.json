@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "型号 ID",
       "ConfigureOptions.EnableDeepKnowledge": "启用深度知识（读取程序和小部件）",
       "ConfigureOptions.SystemInstructions": "系统说明"
+    },
+    "580": {
+      "Title": "HomeGenie面板通知",
+      "Description": "将设备状态变化和警报通过实时推送通知发送到 HomeGenie Panel 应用程序。",
+      "HomeGeniePanel.Notifications": "发送通知",
+      "ConfigureOptions.RegisteredDevices": "已注册面板设备（JSON）"
     }
   },
   "scheduler_preset_action_genie_command": "精灵指令",

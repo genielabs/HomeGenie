@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Mallitunnus",
       "ConfigureOptions.EnableDeepKnowledge": "Ota käyttöön syvällinen tietämys (lue ohjelmia ja widgetejä)",
       "ConfigureOptions.SystemInstructions": "Järjestelmäohjeet"
+    },
+    "580": {
+      "Title": "HomeGenie-paneelin ilmoitukset",
+      "Description": "Reitittää laitteen tilan muutokset ja hälytykset HomeGenie Panel -sovellukseen reaaliaikaisten push-ilmoitusten kautta.",
+      "HomeGeniePanel.Notifications": "Lähetä ilmoituksia",
+      "ConfigureOptions.RegisteredDevices": "Rekisteröidyt paneelilaitteet (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Genie-komento",

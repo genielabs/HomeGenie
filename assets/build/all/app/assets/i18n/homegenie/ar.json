@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "معرف النموذج",
       "ConfigureOptions.EnableDeepKnowledge": "تفعيل المعرفة المتعمقة (قراءة البرامج والأدوات)",
       "ConfigureOptions.SystemInstructions": "تعليمات النظام"
+    },
+    "580": {
+      "Title": "إشعارات لوحة HomeGenie",
+      "Description": "يقوم بتوجيه تغييرات حالة الجهاز والتنبيهات إلى تطبيق HomeGenie Panel عبر إشعارات الدفع في الوقت الفعلي.",
+      "HomeGeniePanel.Notifications": "إرسال الإشعارات",
+      "ConfigureOptions.RegisteredDevices": "أجهزة اللوحة المسجلة (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "أوامر الجني",

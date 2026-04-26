@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "شناسه مدل",
       "ConfigureOptions.EnableDeepKnowledge": "فعال کردن دانش عمیق (خواندن برنامه‌ها و ابزارک‌ها)",
       "ConfigureOptions.SystemInstructions": "دستورالعمل‌های سیستم"
+    },
+    "580": {
+      "Title": "اعلان‌های پنل HomeGenie",
+      "Description": "تغییرات وضعیت دستگاه و هشدارها را از طریق اعلان‌های فوری به برنامه HomeGenie Panel هدایت می‌کند.",
+      "HomeGeniePanel.Notifications": "ارسال اعلان‌ها",
+      "ConfigureOptions.RegisteredDevices": "دستگاه‌های پنل ثبت‌شده (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "فرماندهی جنی",

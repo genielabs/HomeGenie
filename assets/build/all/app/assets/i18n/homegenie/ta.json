@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "மாடல் ஐடி",
       "ConfigureOptions.EnableDeepKnowledge": "ஆழ்ந்த அறிவைச் செயல்படுத்துங்கள் (நிரல்கள் மற்றும் விட்ஜெட்களைப் படிக்கவும்)",
       "ConfigureOptions.SystemInstructions": "கணினி வழிமுறைகள்"
+    },
+    "580": {
+      "Title": "ஹோம்ஜீனி பேனல் அறிவிப்புகள்",
+      "Description": "சாதனத்தின் நிலை மாற்றங்களையும் எச்சரிக்கைகளையும் நிகழ்நேர புஷ் அறிவிப்புகள் வழியாக HomeGenie Panel செயலிக்கு அனுப்புகிறது.",
+      "HomeGeniePanel.Notifications": "அறிவிப்புகளை அனுப்பு",
+      "ConfigureOptions.RegisteredDevices": "பதிவுசெய்யப்பட்ட பேனல் சாதனங்கள் (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "ஜெனி கட்டளை",

@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Laharan'ny modely",
       "ConfigureOptions.EnableDeepKnowledge": "Alefaso ny Fahalalana Lalina (Vakio ireo fandaharana sy widgets)",
       "ConfigureOptions.SystemInstructions": "Torolàlana momba ny rafitra"
+    },
+    "580": {
+      "Title": "Fampandrenesana avy amin'ny HomeGenie Panel",
+      "Description": "Mampita ny fiovan'ny toetran'ny fitaovana sy ny fanairana mankany amin'ny fampiharana HomeGenie Panel amin'ny alàlan'ny fampandrenesana mivantana.",
+      "HomeGeniePanel.Notifications": "Mandefasa fampandrenesana",
+      "ConfigureOptions.RegisteredDevices": "Fitaovana Panel Voasoratra Ara-dalàna (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Didin'ny Génie",

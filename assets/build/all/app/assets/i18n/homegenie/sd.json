@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ماڊل سڃاڻپ",
       "ConfigureOptions.EnableDeepKnowledge": "گہرے علم کي فعال ڪريو (پروگرام ۽ ويجيٽس پڙهو)",
       "ConfigureOptions.SystemInstructions": "سسٽم جون هدايتون"
+    },
+    "580": {
+      "Title": "هوم جيني پينل نوٽيفڪيشن",
+      "Description": "ريئل ٽائيم پش نوٽيفڪيشن ذريعي ڊوائيس جي حالت ۾ تبديلين ۽ الارم کي هوم جيني پينل ايپ ڏانهن روٽ ڪري ٿو.",
+      "HomeGeniePanel.Notifications": "اطلاع موڪليو",
+      "ConfigureOptions.RegisteredDevices": "رجسٽرڊ پينل ڊوائيسز (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "جيني ڪمانڊ",

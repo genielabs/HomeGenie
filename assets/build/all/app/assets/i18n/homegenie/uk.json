@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Ідентифікатор моделі",
       "ConfigureOptions.EnableDeepKnowledge": "Увімкнути глибокі знання (читати програми та віджети)",
       "ConfigureOptions.SystemInstructions": "Системні інструкції"
+    },
+    "580": {
+      "Title": "Сповіщення панелі HomeGenie",
+      "Description": "Спрямовує зміни стану пристрою та тривоги до програми HomeGenie Panel за допомогою push-сповіщень у режимі реального часу.",
+      "HomeGeniePanel.Notifications": "Надсилати сповіщення",
+      "ConfigureOptions.RegisteredDevices": "Зареєстровані панельні пристрої (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Команда Джина",

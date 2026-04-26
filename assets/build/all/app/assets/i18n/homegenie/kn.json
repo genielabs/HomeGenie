@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ಮಾದರಿ ಐಡಿ",
       "ConfigureOptions.EnableDeepKnowledge": "ಆಳವಾದ ಜ್ಞಾನವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ (ಪ್ರೋಗ್ರಾಂಗಳು ಮತ್ತು ವಿಜೆಟ್‌ಗಳನ್ನು ಓದಿ)",
       "ConfigureOptions.SystemInstructions": "ಸಿಸ್ಟಮ್ ಸೂಚನೆಗಳು"
+    },
+    "580": {
+      "Title": "ಹೋಮ್‌ಜೆನಿ ಪ್ಯಾನಲ್ ಅಧಿಸೂಚನೆಗಳು",
+      "Description": "ಸಾಧನದ ಸ್ಥಿತಿಯ ಬದಲಾವಣೆಗಳು ಮತ್ತು ಅಲಾರಂಗಳನ್ನು ನೈಜ-ಸಮಯದ ಪುಶ್ ಅಧಿಸೂಚನೆಗಳ ಮೂಲಕ HomeGenie Panel ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ರವಾನಿಸುತ್ತದೆ.",
+      "HomeGeniePanel.Notifications": "ಅಧಿಸೂಚನೆಗಳನ್ನು ಕಳುಹಿಸಿ",
+      "ConfigureOptions.RegisteredDevices": "ನೋಂದಾಯಿತ ಪ್ಯಾನಲ್ ಸಾಧನಗಳು (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "ಜಿನೀ ಕಮಾಂಡ್",

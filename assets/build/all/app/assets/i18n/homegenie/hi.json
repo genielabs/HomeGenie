@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "मॉडल आईडी",
       "ConfigureOptions.EnableDeepKnowledge": "गहन ज्ञान को सक्षम करें (प्रोग्राम और विजेट पढ़ें)",
       "ConfigureOptions.SystemInstructions": "सिस्टम निर्देश"
+    },
+    "580": {
+      "Title": "HomeGenie पैनल सूचनाएं",
+      "Description": "यह ऐप डिवाइस की स्थिति में होने वाले बदलावों और अलार्म की जानकारी को रीयल-टाइम पुश नोटिफिकेशन के माध्यम से HomeGenie पैनल ऐप तक पहुंचाता है।",
+      "HomeGeniePanel.Notifications": "सूचनाएं भेजें",
+      "ConfigureOptions.RegisteredDevices": "पंजीकृत पैनल उपकरण (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "जिनी कमांड",

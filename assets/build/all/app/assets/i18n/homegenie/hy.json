@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Մոդելի ID",
       "ConfigureOptions.EnableDeepKnowledge": "Միացնել խորը գիտելիքները (կարդալ ծրագրեր և վիջեթներ)",
       "ConfigureOptions.SystemInstructions": "Համակարգի հրահանգներ"
+    },
+    "580": {
+      "Title": "HomeGenie վահանակի ծանուցումներ",
+      "Description": "Սարքի վիճակի փոփոխությունները և ահազանգերը ուղղորդում է HomeGenie Panel հավելվածին՝ իրական ժամանակի push ծանուցումների միջոցով։",
+      "HomeGeniePanel.Notifications": "Ուղարկել ծանուցումներ",
+      "ConfigureOptions.RegisteredDevices": "Գրանցված վահանակային սարքեր (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Ջինի հրամանատարություն",

@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ИД модела",
       "ConfigureOptions.EnableDeepKnowledge": "Омогући дубоко знање (читај програме и виџете)",
       "ConfigureOptions.SystemInstructions": "Системска упутства"
+    },
+    "580": {
+      "Title": "Обавештења HomeGenie панела",
+      "Description": "Усмерава промене стања уређаја и аларме у апликацију HomeGenie Panel путем push обавештења у реалном времену.",
+      "HomeGeniePanel.Notifications": "Шаљи обавештења",
+      "ConfigureOptions.RegisteredDevices": "Регистровани панел уређаји (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Команда Џина",

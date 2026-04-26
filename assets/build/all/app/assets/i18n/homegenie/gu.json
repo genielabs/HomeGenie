@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "મોડેલ ID",
       "ConfigureOptions.EnableDeepKnowledge": "ડીપ નોલેજ (પ્રોગ્રામ્સ અને વિજેટ્સ વાંચો) સક્ષમ કરો",
       "ConfigureOptions.SystemInstructions": "સિસ્ટમ સૂચનાઓ"
+    },
+    "580": {
+      "Title": "હોમજીની પેનલ સૂચનાઓ",
+      "Description": "રીઅલ-ટાઇમ પુશ સૂચનાઓ દ્વારા ઉપકરણની સ્થિતિમાં ફેરફાર અને એલાર્મને હોમજેની પેનલ એપ્લિકેશન પર રૂટ કરે છે.",
+      "HomeGeniePanel.Notifications": "સૂચનાઓ મોકલો",
+      "ConfigureOptions.RegisteredDevices": "રજિસ્ટર્ડ પેનલ ડિવાઇસ (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "જીની કમાન્ડ",

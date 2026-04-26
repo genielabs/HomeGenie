@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "මාදිලි හැඳුනුම්පත",
       "ConfigureOptions.EnableDeepKnowledge": "ගැඹුරු දැනුම සක්‍රීය කරන්න (වැඩසටහන් සහ විජට් කියවන්න)",
       "ConfigureOptions.SystemInstructions": "පද්ධති උපදෙස්"
+    },
+    "580": {
+      "Title": "HomeGenie පැනල් දැනුම්දීම්",
+      "Description": "උපාංග තත්ත්‍වයේ වෙනස්කම් සහ අනතුරු ඇඟවීම් තත්‍ය කාලීන තල්ලු දැනුම්දීම් හරහා HomeGenie Panel යෙදුම වෙත යොමු කරයි.",
+      "HomeGeniePanel.Notifications": "දැනුම්දීම් යවන්න",
+      "ConfigureOptions.RegisteredDevices": "ලියාපදිංචි පැනල උපාංග (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "ජෙනී විධානය",

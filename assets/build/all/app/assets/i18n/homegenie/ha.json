@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Lambar Samfura",
       "ConfigureOptions.EnableDeepKnowledge": "Kunna Zurfin Ilimi (Karanta shirye-shirye da widgets)",
       "ConfigureOptions.SystemInstructions": "Umarnin Tsarin"
+    },
+    "580": {
+      "Title": "Sanarwa na Kwamitin GidaGenie",
+      "Description": "Yana canja yanayin na'urar da ƙararrawa zuwa manhajar HomeGenie Panel ta hanyar sanarwar turawa ta ainihin lokaci.",
+      "HomeGeniePanel.Notifications": "Aika sanarwa",
+      "ConfigureOptions.RegisteredDevices": "Na'urorin Rukunin Rijista (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Kwamandan Genie",

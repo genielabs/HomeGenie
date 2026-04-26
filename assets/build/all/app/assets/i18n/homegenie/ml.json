@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "മോഡൽ ഐഡി",
       "ConfigureOptions.EnableDeepKnowledge": "ആഴത്തിലുള്ള അറിവ് പ്രാപ്തമാക്കുക (പ്രോഗ്രാമുകളും വിജറ്റുകളും വായിക്കുക)",
       "ConfigureOptions.SystemInstructions": "സിസ്റ്റം നിർദ്ദേശങ്ങൾ"
+    },
+    "580": {
+      "Title": "ഹോംജെനി പാനൽ അറിയിപ്പുകൾ",
+      "Description": "ഉപകരണ നിലയിലെ മാറ്റങ്ങളും അലാറങ്ങളും തത്സമയ പുഷ് അറിയിപ്പുകൾ വഴി ഹോംജെനി പാനൽ ആപ്പിലേക്ക് നയിക്കുന്നു.",
+      "HomeGeniePanel.Notifications": "അറിയിപ്പുകൾ അയയ്ക്കുക",
+      "ConfigureOptions.RegisteredDevices": "രജിസ്റ്റർ ചെയ്ത പാനൽ ഉപകരണങ്ങൾ (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "ജെനി കമാൻഡ്",

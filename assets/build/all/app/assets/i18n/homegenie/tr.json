@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Model Kimliği",
       "ConfigureOptions.EnableDeepKnowledge": "Derinlemesine Bilgi Edinin (Programları ve araçları okuyun)",
       "ConfigureOptions.SystemInstructions": "Sistem Talimatları"
+    },
+    "580": {
+      "Title": "HomeGenie Panel Bildirimleri",
+      "Description": "Cihaz durum değişikliklerini ve alarmları gerçek zamanlı anlık bildirimler aracılığıyla HomeGenie Panel uygulamasına yönlendirir.",
+      "HomeGeniePanel.Notifications": "Bildirim gönder",
+      "ConfigureOptions.RegisteredDevices": "Kayıtlı Panel Cihazları (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Cin Komutu",

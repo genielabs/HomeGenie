@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ID-и модел",
       "ConfigureOptions.EnableDeepKnowledge": "Дониши амиқро фаъол созед (Барномаҳо ва виджетҳоро хонед)",
       "ConfigureOptions.SystemInstructions": "Дастурҳои система"
+    },
+    "580": {
+      "Title": "Огоҳиномаҳои панели HomeGenie",
+      "Description": "Тағйирот дар ҳолати дастгоҳ ва огоҳиномаҳоро тавассути огоҳиномаҳои push-и вақти воқеӣ ба барномаи HomeGenie Panel равона мекунад.",
+      "HomeGeniePanel.Notifications": "Огоҳиномаҳоро фиристед",
+      "ConfigureOptions.RegisteredDevices": "Дастгоҳҳои панели бақайдгирифташуда (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Фармондеҳии Ҷин",

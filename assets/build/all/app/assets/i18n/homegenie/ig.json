@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "NJ ụdị",
       "ConfigureOptions.EnableDeepKnowledge": "Mee ka ihe ọmụma miri emi rụọ ọrụ (Gụọ mmemme na wijetị)",
       "ConfigureOptions.SystemInstructions": "Ntuziaka Sistemụ"
+    },
+    "580": {
+      "Title": "Ọkwa Panel HomeGenie",
+      "Description": "Na-ebugharị mgbanwe na mkpu ọnọdụ ngwaọrụ na ngwa HomeGenie Panel site na ọkwa nkwado ozugbo.",
+      "HomeGeniePanel.Notifications": "Zipu ọkwa",
+      "ConfigureOptions.RegisteredDevices": "Ngwaọrụ Panel Edebanyere Aha (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Iwu Genie",

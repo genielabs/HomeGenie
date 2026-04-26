@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "מזהה דגם",
       "ConfigureOptions.EnableDeepKnowledge": "הפעלת ידע מעמיק (קריאת תוכניות ווידג'טים)",
       "ConfigureOptions.SystemInstructions": "הוראות מערכת"
+    },
+    "580": {
+      "Title": "התראות פאנל HomeGenie",
+      "Description": "מנתב שינויים במצב המכשיר והתראות לאפליקציית HomeGenie Panel באמצעות התראות דחיפה בזמן אמת.",
+      "HomeGeniePanel.Notifications": "שלח התראות",
+      "ConfigureOptions.RegisteredDevices": "התקני פאנל רשומים (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "פיקוד ג'יני",

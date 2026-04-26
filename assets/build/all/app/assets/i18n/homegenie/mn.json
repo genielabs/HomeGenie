@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Загварын дугаар",
       "ConfigureOptions.EnableDeepKnowledge": "Гүнзгий мэдлэгийг идэвхжүүлэх (Програм болон виджетүүдийг унших)",
       "ConfigureOptions.SystemInstructions": "Системийн зааварчилгаа"
+    },
+    "580": {
+      "Title": "HomeGenie самбарын мэдэгдлүүд",
+      "Description": "Төхөөрөмжийн төлөвийн өөрчлөлт болон сэрүүлгийг бодит цагийн түлхэх мэдэгдлээр дамжуулан HomeGenie Panel апп руу чиглүүлдэг.",
+      "HomeGeniePanel.Notifications": "Мэдэгдэл илгээх",
+      "ConfigureOptions.RegisteredDevices": "Бүртгэлтэй самбарын төхөөрөмжүүд (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Жин команд",

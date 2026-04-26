@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ID e modelit",
       "ConfigureOptions.EnableDeepKnowledge": "Aktivizo Njohuri të Thella (Lexoni programe dhe widget-e)",
       "ConfigureOptions.SystemInstructions": "Udhëzimet e Sistemit"
+    },
+    "580": {
+      "Title": "Njoftimet e Panelit HomeGenie",
+      "Description": "I drejton ndryshimet e gjendjes së pajisjes dhe alarmet në aplikacionin HomeGenie Panel nëpërmjet njoftimeve push në kohë reale.",
+      "HomeGeniePanel.Notifications": "Dërgo njoftime",
+      "ConfigureOptions.RegisteredDevices": "Pajisjet e Panelit të Regjistruara (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Komanda e Xhindëve",

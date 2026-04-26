@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Ідэнтыфікатар мадэлі",
       "ConfigureOptions.EnableDeepKnowledge": "Уключыць глыбокія веды (чытанне праграм і віджэтаў)",
       "ConfigureOptions.SystemInstructions": "Сістэмныя інструкцыі"
+    },
+    "580": {
+      "Title": "Апавяшчэнні панэлі HomeGenie",
+      "Description": "Напраўляе змены стану прылады і сігналы трывогі ў праграму HomeGenie Panel праз push-апавяшчэнні ў рэжыме рэальнага часу.",
+      "HomeGeniePanel.Notifications": "Адпраўляць апавяшчэнні",
+      "ConfigureOptions.RegisteredDevices": "Зарэгістраваныя прылады панэлі (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Каманда джына",

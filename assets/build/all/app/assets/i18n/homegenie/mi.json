@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Tauira Tauira",
       "ConfigureOptions.EnableDeepKnowledge": "Whakahohe i te Mātauranga Hōhonu (Pānuihia ngā hōtaka me ngā widget)",
       "ConfigureOptions.SystemInstructions": "Ngā Tohutohu Pūnaha"
+    },
+    "580": {
+      "Title": "Ngā Pānui mō te Paewhiri HomeGenie",
+      "Description": "Ka tukuna ngā huringa āhua o te pūrere me ngā whakaoho ki te taupānga HomeGenie Panel mā ngā whakamōhiotanga pana wā-tūturu.",
+      "HomeGeniePanel.Notifications": "Tukuna ngā whakamōhiotanga",
+      "ConfigureOptions.RegisteredDevices": "Ngā Pūrere Paewhiri Rēhita (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Te Whakahau a te Ira Tangata",

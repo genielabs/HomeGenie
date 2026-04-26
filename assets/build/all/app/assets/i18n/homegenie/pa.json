@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ਮਾਡਲ ਆਈਡੀ",
       "ConfigureOptions.EnableDeepKnowledge": "ਡੂੰਘੇ ਗਿਆਨ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ (ਪ੍ਰੋਗਰਾਮ ਅਤੇ ਵਿਜੇਟਸ ਪੜ੍ਹੋ)",
       "ConfigureOptions.SystemInstructions": "ਸਿਸਟਮ ਨਿਰਦੇਸ਼"
+    },
+    "580": {
+      "Title": "ਹੋਮਜੀਨੀ ਪੈਨਲ ਸੂਚਨਾਵਾਂ",
+      "Description": "ਰੀਅਲ-ਟਾਈਮ ਪੁਸ਼ ਸੂਚਨਾਵਾਂ ਰਾਹੀਂ ਡਿਵਾਈਸ ਸਥਿਤੀ ਵਿੱਚ ਬਦਲਾਅ ਅਤੇ ਅਲਾਰਮਾਂ ਨੂੰ HomeGenie ਪੈਨਲ ਐਪ ਵੱਲ ਭੇਜਦਾ ਹੈ।",
+      "HomeGeniePanel.Notifications": "ਸੂਚਨਾਵਾਂ ਭੇਜੋ",
+      "ConfigureOptions.RegisteredDevices": "ਰਜਿਸਟਰਡ ਪੈਨਲ ਡਿਵਾਈਸਾਂ (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "ਜਿਨੀ ਕਮਾਂਡ",

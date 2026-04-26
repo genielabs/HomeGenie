@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "د ماډل ID",
       "ConfigureOptions.EnableDeepKnowledge": "ژوره پوهه فعاله کړئ (پروګرامونه او ویجټونه ولولئ)",
       "ConfigureOptions.SystemInstructions": "د سیسټم لارښوونې"
+    },
+    "580": {
+      "Title": "د هوم جینی پینل خبرتیاوې",
+      "Description": "د وسیلې حالت بدلونونه او الارمونه د ریښتیني وخت فشار خبرتیاو له لارې د هوم جیني پینل ایپ ته لیږدوي.",
+      "HomeGeniePanel.Notifications": "خبرتیاوې واستوئ",
+      "ConfigureOptions.RegisteredDevices": "ثبت شوي پینل وسایل (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "د جینی قومانده",

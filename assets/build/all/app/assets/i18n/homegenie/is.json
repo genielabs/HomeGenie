@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Gerðarauðkenni",
       "ConfigureOptions.EnableDeepKnowledge": "Virkja djúpa þekkingu (Lesa forrit og búnað)",
       "ConfigureOptions.SystemInstructions": "Leiðbeiningar um kerfið"
+    },
+    "580": {
+      "Title": "Tilkynningar um HomeGenie-spjaldið",
+      "Description": "Beinir breytingum á stöðu tækisins og viðvörunum til HomeGenie Panel appsins með rauntíma tilkynningum.",
+      "HomeGeniePanel.Notifications": "Senda tilkynningar",
+      "ConfigureOptions.RegisteredDevices": "Skráðir spjaldtæki (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Skipun Genie",

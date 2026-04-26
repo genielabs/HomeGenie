@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ID Modèl",
       "ConfigureOptions.EnableDeepKnowledge": "Aktive Konesans Pwofon (Li pwogram ak widjèt)",
       "ConfigureOptions.SystemInstructions": "Enstriksyon Sistèm yo"
+    },
+    "580": {
+      "Title": "Notifikasyon Panèl HomeGenie",
+      "Description": "Transmèt chanjman eta aparèy yo ak alam yo bay aplikasyon HomeGenie Panel la atravè notifikasyon an tan reyèl.",
+      "HomeGeniePanel.Notifications": "Voye notifikasyon",
+      "ConfigureOptions.RegisteredDevices": "Aparèy Panel Anrejistre (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Kòmandman Jeni",

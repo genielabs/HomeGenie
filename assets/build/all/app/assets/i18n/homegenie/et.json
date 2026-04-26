@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Mudeli ID",
       "ConfigureOptions.EnableDeepKnowledge": "Süvateadmiste lubamine (programmide ja vidinate lugemine)",
       "ConfigureOptions.SystemInstructions": "Süsteemi juhised"
+    },
+    "580": {
+      "Title": "HomeGenie paneeli teavitused",
+      "Description": "Suunab seadme oleku muutused ja alarmid HomeGenie paneeli rakendusse reaalajas tõuketeavituste kaudu.",
+      "HomeGeniePanel.Notifications": "Saada teavitusi",
+      "ConfigureOptions.RegisteredDevices": "Registreeritud paneeliseadmed (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Džinni käsk",

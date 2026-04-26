@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Modell-ID",
       "ConfigureOptions.EnableDeepKnowledge": "Aktiver dyp kunnskap (les programmer og widgeter)",
       "ConfigureOptions.SystemInstructions": "Systeminstruksjoner"
+    },
+    "580": {
+      "Title": "HomeGenie-panelvarsler",
+      "Description": "Sender endringer i enhetens tilstand og alarmer til HomeGenie Panel-appen via push-varsler i sanntid.",
+      "HomeGeniePanel.Notifications": "Send varsler",
+      "ConfigureOptions.RegisteredDevices": "Registrerte panelenheter (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Genie-kommandoen",

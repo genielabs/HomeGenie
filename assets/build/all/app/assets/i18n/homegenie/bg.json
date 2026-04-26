@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Идентификационен номер на модела",
       "ConfigureOptions.EnableDeepKnowledge": "Активиране на задълбочени знания (четене на програми и джаджи)",
       "ConfigureOptions.SystemInstructions": "Системни инструкции"
+    },
+    "580": {
+      "Title": "Известия от панела HomeGenie",
+      "Description": "Пренасочва промените в състоянието на устройството и алармите към приложението HomeGenie Panel чрез push известия в реално време.",
+      "HomeGeniePanel.Notifications": "Изпращане на известия",
+      "ConfigureOptions.RegisteredDevices": "Регистрирани панелни устройства (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Команда на Джин",

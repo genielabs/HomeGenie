@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Aitheantas Múnla",
       "ConfigureOptions.EnableDeepKnowledge": "Cumasaigh Eolas Domhain (Léigh cláir & giuirléidí)",
       "ConfigureOptions.SystemInstructions": "Treoracha Córais"
+    },
+    "580": {
+      "Title": "Fógraí Painéil HomeGenie",
+      "Description": "Treoraíonn sé athruithe ar staid na ngléasanna agus aláraim chuig an aip HomeGenie Panel trí fhógraí brú fíor-ama.",
+      "HomeGeniePanel.Notifications": "Seol fógraí",
+      "ConfigureOptions.RegisteredDevices": "Gléasanna Painéil Cláraithe (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Ordú Genie",

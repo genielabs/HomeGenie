@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ID tal-Mudell",
       "ConfigureOptions.EnableDeepKnowledge": "Ippermetti Għarfien Profond (Aqra programmi u widgets)",
       "ConfigureOptions.SystemInstructions": "Istruzzjonijiet tas-Sistema"
+    },
+    "580": {
+      "Title": "Notifiki tal-Panel HomeGenie",
+      "Description": "Jirrotta l-bidliet fl-istat tal-apparat u l-allarmi lejn l-app HomeGenie Panel permezz ta' notifiki push f'ħin reali.",
+      "HomeGeniePanel.Notifications": "Ibgħat notifiki",
+      "ConfigureOptions.RegisteredDevices": "Apparati tal-Panel Reġistrati (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Kmand tal-Ġenji",

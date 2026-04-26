@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Mã số mẫu",
       "ConfigureOptions.EnableDeepKnowledge": "Kích hoạt kiến thức chuyên sâu (Đọc chương trình và tiện ích)",
       "ConfigureOptions.SystemInstructions": "Hướng dẫn hệ thống"
+    },
+    "580": {
+      "Title": "Thông báo trên bảng điều khiển HomeGenie",
+      "Description": "Chuyển hướng các thay đổi trạng thái thiết bị và cảnh báo đến ứng dụng HomeGenie Panel thông qua thông báo đẩy theo thời gian thực.",
+      "HomeGeniePanel.Notifications": "Gửi thông báo",
+      "ConfigureOptions.RegisteredDevices": "Thiết bị bảng điều khiển đã đăng ký (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Lệnh Genie",

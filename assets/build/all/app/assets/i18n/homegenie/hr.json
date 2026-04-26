@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ID modela",
       "ConfigureOptions.EnableDeepKnowledge": "Omogući duboko znanje (čitaj programe i widgete)",
       "ConfigureOptions.SystemInstructions": "Sistemske upute"
+    },
+    "580": {
+      "Title": "Obavijesti HomeGenie panela",
+      "Description": "Usmjerava promjene stanja uređaja i alarme u aplikaciju HomeGenie Panel putem push obavijesti u stvarnom vremenu.",
+      "HomeGeniePanel.Notifications": "Pošalji obavijesti",
+      "ConfigureOptions.RegisteredDevices": "Registrirani uređaji s panela (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Naredba Genie",

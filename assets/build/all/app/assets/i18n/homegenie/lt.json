@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Modelio ID",
       "ConfigureOptions.EnableDeepKnowledge": "Įgalinti giliąsias žinias (skaityti programas ir valdiklius)",
       "ConfigureOptions.SystemInstructions": "Sistemos instrukcijos"
+    },
+    "580": {
+      "Title": "„HomeGenie“ skydelio pranešimai",
+      "Description": "Įrenginio būsenos pakeitimus ir signalizacijas nukreipia į „HomeGenie Panel“ programėlę per realaus laiko tiesioginius pranešimus.",
+      "HomeGeniePanel.Notifications": "Siųsti pranešimus",
+      "ConfigureOptions.RegisteredDevices": "Registruoti skydo įrenginiai (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Džinų komanda",

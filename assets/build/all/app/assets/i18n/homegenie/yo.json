@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ID awoṣe",
       "ConfigureOptions.EnableDeepKnowledge": "Mu Imọ Jinlẹ Ṣiṣẹ (Ka awọn eto ati awọn ẹrọ ailorukọ)",
       "ConfigureOptions.SystemInstructions": "Àwọn Ìtọ́ni Ètò"
+    },
+    "580": {
+      "Title": "Àwọn Ìfitónilétí Páìlì HomeGenie",
+      "Description": "Ó ń darí àwọn àyípadà àti àwọn ìkìlọ̀ sí àpìlẹ̀ HomeGenie Panel nípasẹ̀ àwọn ìkìlọ̀ títẹ̀ ní àkókò gidi.",
+      "HomeGeniePanel.Notifications": "Fi awọn iwifunni ranṣẹ",
+      "ConfigureOptions.RegisteredDevices": "Àwọn Ẹ̀rọ Pánẹ́lì Tí A Forukọsilẹ (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Àṣẹ Ẹ̀mí",

@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "မော်ဒယ် ID",
       "ConfigureOptions.EnableDeepKnowledge": "Deep Knowledge ကိုဖွင့်ပါ (ပရိုဂရမ်များနှင့် ဝစ်ဂျက်များကိုဖတ်ပါ)",
       "ConfigureOptions.SystemInstructions": "စနစ်ညွှန်ကြားချက်များ"
+    },
+    "580": {
+      "Title": "HomeGenie Panel အသိပေးချက်များ",
+      "Description": "စက်ပစ္စည်းအခြေအနေပြောင်းလဲမှုများနှင့် နှိုးစက်များကို အချိန်နှင့်တပြေးညီ push အသိပေးချက်များမှတစ်ဆင့် HomeGenie Panel အက်ပ်သို့ လမ်းကြောင်းပြောင်းပေးသည်။",
+      "HomeGeniePanel.Notifications": "အကြောင်းကြားချက်များ ပို့ပါ",
+      "ConfigureOptions.RegisteredDevices": "မှတ်ပုံတင်ထားသော Panel စက်ပစ္စည်းများ (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "ဂျီနီ အမိန့်ပေးချက်",

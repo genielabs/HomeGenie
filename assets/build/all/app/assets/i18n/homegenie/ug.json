@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "مودېل نومۇرى",
       "ConfigureOptions.EnableDeepKnowledge": "چوڭقۇر بىلىملەرنى قوزغىتىش (پروگراممىلار ۋە كىچىك پروگراممىلارنى ئوقۇش)",
       "ConfigureOptions.SystemInstructions": "سىستېما كۆرسەتمىلىرى"
+    },
+    "580": {
+      "Title": "HomeGenie تاختىسى ئۇقتۇرۇشلىرى",
+      "Description": "ئۈسكۈنە ھالىتىدىكى ئۆزگىرىشلەر ۋە سىگناللارنى ھەقىقىي ۋاقىتلىق ئۇچۇر يوللاش ئارقىلىق HomeGenie Panel ئەپكە يوللايدۇ.",
+      "HomeGeniePanel.Notifications": "ئۇقتۇرۇشلارنى ئەۋەتىڭ",
+      "ConfigureOptions.RegisteredDevices": "تىزىملاتقان تاختا ئۈسكۈنىلىرى (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "جىن قوماندانلىقى",

@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Модель идентификаторы",
       "ConfigureOptions.EnableDeepKnowledge": "Терең білімді қосу (бағдарламалар мен виджеттерді оқу)",
       "ConfigureOptions.SystemInstructions": "Жүйелік нұсқаулар"
+    },
+    "580": {
+      "Title": "HomeGenie панелінің хабарландырулары",
+      "Description": "Құрылғы күйінің өзгерістері мен дабылдарын нақты уақыт режиміндегі push хабарландырулары арқылы HomeGenie Panel қолданбасына бағыттайды.",
+      "HomeGeniePanel.Notifications": "Хабарландырулар жіберу",
+      "ConfigureOptions.RegisteredDevices": "Тіркелген панельдік құрылғылар (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Жын командасы",

@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Идентификатор модели",
       "ConfigureOptions.EnableDeepKnowledge": "Включите функцию «Глубокое знание» (программы и виджеты для чтения).",
       "ConfigureOptions.SystemInstructions": "Системные инструкции"
+    },
+    "580": {
+      "Title": "Уведомления панели HomeGenie",
+      "Description": "Перенаправляет изменения состояния устройств и оповещения в приложение HomeGenie Panel посредством push-уведомлений в режиме реального времени.",
+      "HomeGeniePanel.Notifications": "Отправить уведомления",
+      "ConfigureOptions.RegisteredDevices": "Зарегистрированные панельные устройства (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Командование Джиннов",

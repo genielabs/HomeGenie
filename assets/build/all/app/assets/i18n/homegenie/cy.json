@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ID Model",
       "ConfigureOptions.EnableDeepKnowledge": "Galluogi Gwybodaeth Ddwfn (Darllen rhaglenni a widgets)",
       "ConfigureOptions.SystemInstructions": "Cyfarwyddiadau System"
+    },
+    "580": {
+      "Title": "Hysbysiadau Panel HomeGenie",
+      "Description": "Yn llwybro newidiadau cyflwr dyfais a larymau i ap Panel HomeGenie trwy hysbysiadau gwthio amser real.",
+      "HomeGeniePanel.Notifications": "Anfon hysbysiadau",
+      "ConfigureOptions.RegisteredDevices": "Dyfeisiau Panel Cofrestredig (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Gorchymyn Genie",

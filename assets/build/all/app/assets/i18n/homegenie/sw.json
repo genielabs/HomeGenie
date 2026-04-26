@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Kitambulisho cha Mfano",
       "ConfigureOptions.EnableDeepKnowledge": "Wezesha Maarifa ya Kina (Soma programu na wijeti)",
       "ConfigureOptions.SystemInstructions": "Maelekezo ya Mfumo"
+    },
+    "580": {
+      "Title": "Arifa za Paneli za NyumbaniGenie",
+      "Description": "Huelekeza mabadiliko ya hali ya kifaa na kengele kwenye programu ya HomeGenie Panel kupitia arifa za muda halisi.",
+      "HomeGeniePanel.Notifications": "Tuma arifa",
+      "ConfigureOptions.RegisteredDevices": "Vifaa vya Paneli Vilivyosajiliwa (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Amri ya Jini",

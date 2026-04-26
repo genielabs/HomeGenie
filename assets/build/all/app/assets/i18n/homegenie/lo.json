@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ລະຫັດຮຸ່ນ",
       "ConfigureOptions.EnableDeepKnowledge": "ເປີດໃຊ້ຄວາມຮູ້ເລິກເຊິ່ງ (ອ່ານໂປຣແກຣມ ແລະ ວິດເຈັດ)",
       "ConfigureOptions.SystemInstructions": "ຄຳແນະນຳກ່ຽວກັບລະບົບ"
+    },
+    "580": {
+      "Title": "ການແຈ້ງເຕືອນແຜງ HomeGenie",
+      "Description": "ສົ່ງການປ່ຽນແປງສະຖານະຂອງອຸປະກອນ ແລະ ສັນຍານເຕືອນໄປຫາແອັບ HomeGenie Panel ຜ່ານການແຈ້ງເຕືອນແບບເວລາຈິງ.",
+      "HomeGeniePanel.Notifications": "ສົ່ງການແຈ້ງເຕືອນ",
+      "ConfigureOptions.RegisteredDevices": "ອຸປະກອນແຜງທີ່ລົງທະບຽນ (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "ຄຳສັ່ງຂອງ Genie",

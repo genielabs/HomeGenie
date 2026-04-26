@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "모델 ID",
       "ConfigureOptions.EnableDeepKnowledge": "심층 지식 활성화 (프로그램 및 위젯 읽기)",
       "ConfigureOptions.SystemInstructions": "시스템 지침"
+    },
+    "580": {
+      "Title": "HomeGenie 패널 알림",
+      "Description": "기기 상태 변경 및 알람을 실시간 푸시 알림을 통해 HomeGenie Panel 앱으로 전송합니다.",
+      "HomeGeniePanel.Notifications": "알림 보내기",
+      "ConfigureOptions.RegisteredDevices": "등록된 패널 장치(JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "지니 커맨드",

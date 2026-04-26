@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Model-ID",
       "ConfigureOptions.EnableDeepKnowledge": "Aktiveer diepgaande kennis (lees programme en widgets)",
       "ConfigureOptions.SystemInstructions": "Stelselinstruksies"
+    },
+    "580": {
+      "Title": "HomeGenie Paneel Kennisgewings",
+      "Description": "Roeteer toestelstatusveranderinge en alarms na die HomeGenie Panel-app via intydse stootkennisgewings.",
+      "HomeGeniePanel.Notifications": "Stuur kennisgewings",
+      "ConfigureOptions.RegisteredDevices": "Geregistreerde Paneeltoestelle (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Genie-opdrag",

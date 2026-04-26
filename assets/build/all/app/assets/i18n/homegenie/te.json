@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "మోడల్ ID",
       "ConfigureOptions.EnableDeepKnowledge": "లోతైన జ్ఞానాన్ని పొందండి (ప్రోగ్రామ్‌లు & విడ్జెట్‌లను చదవండి)",
       "ConfigureOptions.SystemInstructions": "సిస్టమ్ సూచనలు"
+    },
+    "580": {
+      "Title": "హోమ్‌జీనీ ప్యానెల్ నోటిఫికేషన్‌లు",
+      "Description": "రియల్-టైమ్ పుష్ నోటిఫికేషన్‌ల ద్వారా పరికర స్థితి మార్పులు మరియు అలారాలను హోమ్‌జీనీ ప్యానెల్ యాప్‌కు పంపుతుంది.",
+      "HomeGeniePanel.Notifications": "నోటిఫికేషన్‌లను పంపండి",
+      "ConfigureOptions.RegisteredDevices": "రిజిస్టర్డ్ ప్యానెల్ పరికరాలు (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "జెనీ కమాండ్",

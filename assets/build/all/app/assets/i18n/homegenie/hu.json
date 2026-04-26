@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Modellazonosító",
       "ConfigureOptions.EnableDeepKnowledge": "Mély tudás engedélyezése (programok és widgetek olvasása)",
       "ConfigureOptions.SystemInstructions": "Rendszerutasítások"
+    },
+    "580": {
+      "Title": "HomeGenie Panel értesítések",
+      "Description": "Valós idejű push értesítéseken keresztül továbbítja az eszközállapot-változásokat és riasztásokat a HomeGenie Panel alkalmazásba.",
+      "HomeGeniePanel.Notifications": "Értesítések küldése",
+      "ConfigureOptions.RegisteredDevices": "Regisztrált paneleszközök (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Dzsinn Parancsnokság",

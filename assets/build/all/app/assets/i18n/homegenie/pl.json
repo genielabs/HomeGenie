@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Identyfikator modelu",
       "ConfigureOptions.EnableDeepKnowledge": "Włącz Deep Knowledge (Odczyt programów i widżetów)",
       "ConfigureOptions.SystemInstructions": "Instrukcje systemowe"
+    },
+    "580": {
+      "Title": "Powiadomienia panelu HomeGenie",
+      "Description": "Przesyła zmiany stanu urządzenia i alarmy do aplikacji HomeGenie Panel za pośrednictwem powiadomień push w czasie rzeczywistym.",
+      "HomeGeniePanel.Notifications": "Wysyłaj powiadomienia",
+      "ConfigureOptions.RegisteredDevices": "Zarejestrowane urządzenia panelowe (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Dowództwo Dżina",

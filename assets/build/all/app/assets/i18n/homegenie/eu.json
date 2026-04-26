@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Modeloaren IDa",
       "ConfigureOptions.EnableDeepKnowledge": "Gaitu Ezagutza Sakona (Irakurri programak eta widgetak)",
       "ConfigureOptions.SystemInstructions": "Sistemaren argibideak"
+    },
+    "580": {
+      "Title": "HomeGenie panelaren jakinarazpenak",
+      "Description": "Gailuaren egoera-aldaketak eta alarmak HomeGenie Panel aplikaziora bideratzen ditu denbora errealeko push jakinarazpenen bidez.",
+      "HomeGeniePanel.Notifications": "Bidali jakinarazpenak",
+      "ConfigureOptions.RegisteredDevices": "Erregistratutako panel gailuak (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Genio Komandoa",

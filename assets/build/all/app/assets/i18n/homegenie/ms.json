@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ID Model",
       "ConfigureOptions.EnableDeepKnowledge": "Dayakan Pengetahuan Mendalam (Baca program & widget)",
       "ConfigureOptions.SystemInstructions": "Arahan Sistem"
+    },
+    "580": {
+      "Title": "Pemberitahuan Panel HomeGenie",
+      "Description": "Menghalakan perubahan keadaan peranti dan penggera ke aplikasi Panel HomeGenie melalui pemberitahuan tolak masa nyata.",
+      "HomeGeniePanel.Notifications": "Hantar pemberitahuan",
+      "ConfigureOptions.RegisteredDevices": "Peranti Panel Berdaftar (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Perintah Jin",

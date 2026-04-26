@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "मोडेल आईडी",
       "ConfigureOptions.EnableDeepKnowledge": "गहिरो ज्ञान सक्षम गर्नुहोस् (कार्यक्रमहरू र विजेटहरू पढ्नुहोस्)",
       "ConfigureOptions.SystemInstructions": "प्रणाली निर्देशनहरू"
+    },
+    "580": {
+      "Title": "HomeGenie प्यानल सूचनाहरू",
+      "Description": "वास्तविक-समय पुश सूचनाहरू मार्फत उपकरणको स्थिति परिवर्तन र अलार्महरूलाई HomeGenie Panel एपमा रुट गर्छ।",
+      "HomeGeniePanel.Notifications": "सूचनाहरू पठाउनुहोस्",
+      "ConfigureOptions.RegisteredDevices": "दर्ता गरिएका प्यानल उपकरणहरू (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "जिनी कमान्ड",

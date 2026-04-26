@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "მოდელის ID",
       "ConfigureOptions.EnableDeepKnowledge": "ღრმა ცოდნის ჩართვა (პროგრამებისა და ვიჯეტების წაკითხვა)",
       "ConfigureOptions.SystemInstructions": "სისტემის ინსტრუქციები"
+    },
+    "580": {
+      "Title": "HomeGenie პანელის შეტყობინებები",
+      "Description": "მოწყობილობის მდგომარეობის ცვლილებებსა და სიგნალიზაციას რეალურ დროში push შეტყობინებების საშუალებით HomeGenie Panel აპლიკაციაში გადასცემს.",
+      "HomeGeniePanel.Notifications": "შეტყობინებების გაგზავნა",
+      "ConfigureOptions.RegisteredDevices": "რეგისტრირებული პანელის მოწყობილობები (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "ჯინის სარდლობა",

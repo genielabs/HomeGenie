@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ID ya Chitsanzo",
       "ConfigureOptions.EnableDeepKnowledge": "Yambitsani Chidziwitso Chakuya (Werengani mapulogalamu ndi ma widget)",
       "ConfigureOptions.SystemInstructions": "Malangizo a Machitidwe"
+    },
+    "580": {
+      "Title": "Zidziwitso za HomeGenie Panel",
+      "Description": "Imatumiza kusintha kwa momwe chipangizocho chikugwirira ntchito ndi ma alamu ku pulogalamu ya HomeGenie Panel kudzera pa zidziwitso zokankhira nthawi yeniyeni.",
+      "HomeGeniePanel.Notifications": "Tumizani zidziwitso",
+      "ConfigureOptions.RegisteredDevices": "Zipangizo Zolembetsedwa za Panel (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Lamulo la Genie",

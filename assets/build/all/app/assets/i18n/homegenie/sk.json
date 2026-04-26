@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "ID modelu",
       "ConfigureOptions.EnableDeepKnowledge": "Povoliť hlboké znalosti (čítať programy a widgety)",
       "ConfigureOptions.SystemInstructions": "Systémové pokyny"
+    },
+    "580": {
+      "Title": "Upozornenia panela HomeGenie",
+      "Description": "Smeruje zmeny stavu zariadenia a alarmy do aplikácie HomeGenie Panel prostredníctvom push notifikácií v reálnom čase.",
+      "HomeGeniePanel.Notifications": "Odosielať upozornenia",
+      "ConfigureOptions.RegisteredDevices": "Registrované panelové zariadenia (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Džinsky príkaz",

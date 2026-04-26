@@ -407,6 +407,12 @@
       "ConfigureOptions.ModelId": "Αναγνωριστικό μοντέλου",
       "ConfigureOptions.EnableDeepKnowledge": "Ενεργοποίηση Βαθιάς Γνώσης (Ανάγνωση προγραμμάτων και γραφικών στοιχείων)",
       "ConfigureOptions.SystemInstructions": "Οδηγίες συστήματος"
+    },
+    "580": {
+      "Title": "Ειδοποιήσεις Πίνακα HomeGenie",
+      "Description": "Δρομολογεί τις αλλαγές κατάστασης της συσκευής και τους συναγερμούς στην εφαρμογή HomeGenie Panel μέσω ειδοποιήσεων push σε πραγματικό χρόνο.",
+      "HomeGeniePanel.Notifications": "Αποστολή ειδοποιήσεων",
+      "ConfigureOptions.RegisteredDevices": "Εγγεγραμμένες συσκευές πίνακα (JSON)"
     }
   },
   "scheduler_preset_action_genie_command": "Διοίκηση Τζίνι",
