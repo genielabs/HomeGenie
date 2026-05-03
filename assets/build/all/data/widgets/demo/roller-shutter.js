@@ -72,7 +72,6 @@ class RollerShutterWidget extends ControllerInstance {
     this.model().level_percent = this.state.levelPercent;
     this.model().status_text = this.state.statusText;
     this.model().level_display = `${this.state.levelPercent}%`;
-    this.update(); // Force view update
   }
 
   openShutter() {

@@ -1,6 +1,30 @@
 # ------------------
-# Qwen3
+# Gemma
 # ------------------
+
+"unsloth/gemma-4-E4B-it-Q5_K_M.gguf":
+  Name: unsloth/gemma-4-E4B-it-GGUF
+  Repository: https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF
+  Url: https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main/gemma-4-E4B-it-Q5_K_M.gguf?download=true
+  Template: chatml
+
+
+
+# ------------------
+# Qwen
+# ------------------
+
+"unsloth/Qwen3.5-4B-Q8_0.gguf":
+  Name: unsloth/Qwen3.5-4B-GGUF
+  Repository: https://huggingface.co/unsloth/Qwen3.5-4B-GGUF
+  Url: https://huggingface.co/unsloth/Qwen3.5-4B-GGUF/resolve/main/Qwen3.5-4B-Q8_0.gguf?download=true
+  Template: chatml
+
+"khazarai/Qwen3-4B-Thinking-2507.Q8_0.gguf":
+  Name: khazarai/Qwen3-4B-Qwen3.6-plus-Reasoning-Distilled-GGUF
+  Repository: https://huggingface.co/khazarai/Qwen3-4B-Qwen3.6-plus-Reasoning-Distilled-GGUF
+  Url: https://huggingface.co/khazarai/Qwen3-4B-Qwen3.6-plus-Reasoning-Distilled-GGUF/resolve/main/Qwen3-4B-Thinking-2507.Q8_0.gguf?download=true
+  Template: chatml
 
 "unsloth/Qwen3-4B-Instruct-2507-UD-Q5_K_XL.gguf":
   Name: unsloth/Qwen3-4B-Instruct-2507-GGUF

@@ -50,7 +50,6 @@ class LightbulbWidget extends ControllerInstance {
   refreshUI() {
     this.model().status_text = this.state.isOn ? 'On' : 'Off';
     // The icon text remains 'lightbulb', its appearance is controlled by CSS classes
-    this.update(); // Force view update
   }
 
   toggle() {

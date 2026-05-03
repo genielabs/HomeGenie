@@ -5,8 +5,8 @@ class CircularDimmer extends ControllerInstance {
   resizeObserver = null;
 
   onCreate() {
-    this.declare({ 
-      toggle: () => this.toggle(), 
+    this.declare({
+      toggle: () => this.toggle(),
       startDrag: (e) => this.startDrag(e),
       getOffset: () => {
         const circ = 2 * Math.PI * 42;
@@ -29,7 +29,7 @@ class CircularDimmer extends ControllerInstance {
     if (this.boundModule) {
       this.model().name = this.boundModule.name;
       const levelField = this.boundModule.field('Status.Level');
-      
+
       // Initial state sync
       if (levelField) {
         this.syncState(levelField);
@@ -45,7 +45,6 @@ class CircularDimmer extends ControllerInstance {
     this.state.level = Math.round(f.decimalValue * 100);
     this.state.isOn = f.decimalValue > 0;
     this.model().status_text = this.state.isOn ? 'On' : 'Off';
-    this.update();
   }
 
   toggle() {
@@ -73,9 +72,8 @@ class CircularDimmer extends ControllerInstance {
     this.moveHandler = (ev) => {
       const dist = Math.sqrt(Math.pow(ev.clientX - e.clientX, 2) + Math.pow(ev.clientY - e.clientY, 2));
       if (dist > 5) this.state.isDragging = true;
-      
+
       this.state.level = calculateLevel(ev);
-      this.update();
       if (!this.throttleTimer) {
         this.throttleTimer = setTimeout(() => {
           this.boundModule.control('Control.Level', this.state.level);
