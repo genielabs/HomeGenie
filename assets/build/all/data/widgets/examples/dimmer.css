@@ -5,8 +5,6 @@
   display: block;
   height: 100%;
   font-family: sans-serif;
-  /* Variabile per gestire il colore del glow centralmente */
-  --glow-color: var(--accent-color);
 }
 
 .body {
@@ -22,6 +20,7 @@
 }
 
 .header {
+  height: 12px;
   padding-right: 48px;
   color: var(--text-color);
   flex-shrink: 0;
@@ -34,11 +33,9 @@
   touch-action: none;
 }
 
-/* Assicuriamoci che l'SVG scali perfettamente dentro il nuovo dimmer-ring */
 svg {
   width: 100%;
   height: 100%;
-  /* overflow: visible è fondamentale affinché l'alone luminoso non venga tagliato ai bordi */
   overflow: visible;
 }
 
@@ -50,14 +47,12 @@ svg {
 
 .progress {
   fill: none;
-  stroke: var(--glow-color);
+  stroke: var(--accent-color);
   stroke-width: 8;
   stroke-linecap: round;
   transition: stroke-dashoffset 0.1s linear, filter 0.3s, stroke 0.3s;
   stroke-dasharray: 263.89;
-
-  /* L'effetto Glow nativo applicato direttamente sul cerchio di progresso */
-  filter: drop-shadow(0 0 3px var(--glow-color));
+  filter: drop-shadow(0 0 3px var(--accent-color, #ff0));
 }
 
 .center-content {
@@ -69,22 +64,21 @@ svg {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  padding: 24px;
   cursor: pointer;
   z-index: 10;
 }
 
 .icon {
   font-size: 48px;
-  margin-bottom: 16px;
-  color: var(--disabled-color);
+  color: var(--secondary-text-color);
   transition: color 0.3s;
   pointer-events: none;
 }
 
 .active-icon {
-  /* Facciamo in modo che anche l'icona segua il colore del glow quando è accesa */
-  color: var(--glow-color);
+  color: var(--accent-color);
 }
 
 .percentage {
@@ -92,4 +86,16 @@ svg {
   font-weight: bold;
   color: var(--text-color);
   pointer-events: none;
+}
+
+.dimmer-ring svg {
+  cursor: grab;
+}
+
+.center-content {
+  pointer-events: none; 
+}
+
+.center-content .icon, .center-content .percentage {
+  pointer-events: auto;
 }

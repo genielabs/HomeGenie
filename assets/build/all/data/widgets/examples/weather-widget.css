@@ -1,98 +1,95 @@
 :host {
-    font-family: sans-serif;
-    display: block;
-    min-width: 300px;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .container {
-    padding: 16px;
-    color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+  color: var(--text-color);
 }
 
 .current-weather {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--divider-color);
-    margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 16px;
 }
 
 .icon-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 70px;
-    height: 70px;
+  width: 100px;
+  height: 100px;
 }
 
 .weather-icon-img,
 .forecast-icon-img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: opacity 0.3s ease;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity 0.3s ease;
 }
 
 .forecast-icon-img {
-    width: 40px;
-    height: 40px;
-}
-
-.details {
-    flex-grow: 1;
+  width: 40px;
+  height: 40px;
 }
 
 .city {
-    font-size: 1.4em;
-    font-weight: bold;
-    margin-bottom: 4px;
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: bold;
+  margin-bottom: 4px;
 }
 
 .temperature {
   font-family: serif;
-    font-size: 300%;
-    font-weight: normal;
-    color: var(--primary-color);
-    margin-top: 12px;
-    margin-bottom: 12px;
+  font-size: 400%;
+  font-weight: normal;
+  color: var(--primary-color);
 }
 
 .description {
-    font-size: 1.1em;
-    text-transform: capitalize;
-    color: var(--accent-color);
+  font-size: 1.1em;
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--accent-color);
+  border-bottom: 1px solid rgba(127, 127, 127, 0.3);
+  padding-bottom: 16px;
 }
 
 .forecast-container {
-    display: flex;
-    justify-content: space-around;
-    padding-top: 12px;
-    text-align: center;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 12px;
+  text-align: center;
 }
 
 .forecast-day {
-    font-size: 0.9em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    padding: 8px;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
+  font-size: 0.9em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
 }
 
 .forecast-day:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .forecast-day div {
-    font-size: 1em;
-    font-weight: bold;
+  font-size: 1em;
+  font-weight: bold;
 }
 
 .forecast-day span {
-    font-size: 0.9em;
-    color: var(--secondary-text-color);
+  font-size: 0.9em;
+  color: var(--secondary-text-color);
 }

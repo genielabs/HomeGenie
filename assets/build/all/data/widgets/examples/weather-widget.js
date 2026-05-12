@@ -10,7 +10,8 @@ class WeatherWidget extends ControllerInstance {
       // In the widget settings dialog
       // show only modules with this field
       fieldFilter: 'Conditions.City'
-    }
+    },
+    defaultSize: 'medium'
   };
 
   /**

@@ -37,7 +37,7 @@ namespace HomeGenie.Automation.Engines
 {
     public abstract class ProgramEngineBase
     {
-        private static readonly Logger _log = LogManager.GetLogger("ProgramEngine");
+        private Logger Log => LogManager.GetLogger("ProgramEngine");
 
         // Main program threads
         private Thread _startupThread;
@@ -143,7 +143,7 @@ namespace HomeGenie.Automation.Engines
                         // so user can notice and fix it
                         var error = new List<ProgramError> {GetFormattedError(result.Exception, false)};
                         ProgramBlock.ScriptErrors = JsonConvert.SerializeObject(error);
-                        _log.Error(result.Exception, "Error while running program {0}", ProgramBlock.Address);
+                        Log.Error(result.Exception, "Error while running program {0}", ProgramBlock.Address);
                         if (HomeGenie.ProgramManager != null)
                         {
                             HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError,
@@ -299,7 +299,7 @@ namespace HomeGenie.Automation.Engines
                 }
                 catch (Exception e)
                 {
-                    _log.Error(e.Message, "Program Scheduler Exception",
+                    Log.Error(e.Message, "Program Scheduler Exception",
                         ProgramBlock.Address);
                     //throw;
                 }
@@ -328,7 +328,7 @@ namespace HomeGenie.Automation.Engines
                             {
                                 ProgramBlock.IsEnabled = false;
                                 var e = new Exception("Program disabled: too many rapid restarts detected. Check for loop errors in Setup/Main.");
-                                _log.Error(e, "Program {0} forced disable.",
+                                Log.Error(e, "Program {0} forced disable.",
                                     ProgramBlock.Address);
                                 HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError,
                                     PrepareExceptionMessage(CodeBlockEnum.TC, e));
@@ -341,7 +341,7 @@ namespace HomeGenie.Automation.Engines
                 }
                 catch (Exception e)
                 {
-                    _log.Error(e.Message, "Program Scheduler Exception",
+                    Log.Error(e.Message, "Program Scheduler Exception",
                         ProgramBlock.Address);
                     //throw;
                 }
@@ -361,7 +361,7 @@ namespace HomeGenie.Automation.Engines
                     // so user can notice and fix it
                     var error = new List<ProgramError> {GetFormattedError(result.Exception, true)};
                     ProgramBlock.ScriptErrors = JsonConvert.SerializeObject(error);
-                    _log.Error(result.Exception, "Error while running setup code in program {0}",
+                    Log.Error(result.Exception, "Error while running setup code in program {0}",
                         ProgramBlock.Address);
                     HomeGenie.ProgramManager.RaiseProgramModuleEvent(ProgramBlock, Properties.RuntimeError,
                         PrepareExceptionMessage(CodeBlockEnum.TC, result.Exception));

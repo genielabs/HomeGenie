@@ -1,15 +1,15 @@
 <div class="container">
     <!-- Current Weather Section -->
+    <div class="city" #city>Not configured</div>
     <div class="current-weather">
         <div class="icon-container">
             <img class="weather-icon-img" #weather_icon_img src="assets/widgets/weather/images/fill/01d.svg" alt="Weather Icon">
         </div>
         <div class="details">
-            <div class="city" #city>Not configured</div>
             <div class="temperature"><span #temperature>20</span>°</div>
-            <div class="description" #description>Select a bound module</div>
         </div>
     </div>
+    <div class="description" #description>---</div>
     <!-- Forecast Section -->
     <div class="forecast-container">
         <div class="forecast-day">

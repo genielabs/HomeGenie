@@ -1,32 +1,43 @@
 :host {
-    text-align: center;
-    font-size: 80%;
+  text-align: center;
+  font-size: 80%;
+  height: 100%;
 }
+
 .info {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-top: 8px;
-    padding-bottom: 8px;
+  display: flex;
+  align-self: center;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 132px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
+
 .time {
-    font-size: 250%;
-    font-family: monospace;
-    line-height: 100%;
-    opacity: 0.75;
+  font-size: 250%;
+  font-family: monospace;
+  line-height: 100%;
+  opacity: 0.75;
 }
-.date,.day {
-    font-size: 80%;
-    font-weight: 700;
-    line-height: 100%;
-    white-space: nowrap;
+
+.date,
+.day {
+  font-size: 80%;
+  font-weight: 700;
+  line-height: 100%;
+  white-space: nowrap;
 }
+
 .frame {
-    height: 100%;
-    display: inline-block;
-    width: auto;
-    border-radius: 6px;
+  width: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 6px;
 }
+
 .translucent {
-    opacity: 0.5;
+  opacity: 0.5;
 }

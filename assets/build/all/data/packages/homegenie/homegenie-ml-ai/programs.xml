@@ -11,6 +11,46 @@
 // current system status (Weather, Energy, Security, and live states).
 // ===================================================================
 
+Api.Handle("System.Utility/ContextEngine/GetStatus", (args) =&gt; {
+    var statusSb = new StringBuilder();
+
+    var controlModules = new List&lt;ModuleHelper&gt;();
+    var sensorModules = new List&lt;ModuleHelper&gt;();
+    string allowedTypes = "Dimmer,Light,Color,Switch,Shutter,DoorLock,Thermostat,Sensor,DoorWindow";
+
+    Modules.OfDeviceType(allowedTypes).Each((m) =&gt; {
+        var instance = m.Instance;
+        var deviceType = instance.DeviceType.ToString().ToLower();
+        if ((deviceType == "sensor" || deviceType == "doorwindow") &amp;&amp; instance.Domain != "HomeAutomation.SecuritySystem")
+            sensorModules.Add(m);
+        else
+            controlModules.Add(m);
+        return false;
+    });
+
+    var weather = Modules.InDomain("HomeAutomation.HomeGenie.Automation").WithAddress("34").Get();
+    if (weather.Instance != null) statusSb.AppendLine("Weather: " + PromptHelpers.GetWeatherStatus(weather));
+
+    var energy = Modules.InDomain("HomeAutomation.EnergyMonitor").WithAddress("1").Get();
+    if (energy.Instance != null) statusSb.AppendLine("Energy: " + PromptHelpers.GetEnergyStatus(energy));
+
+    var alarm = Modules.InDomain("HomeAutomation.SecuritySystem").WithAddress("Main").Get();
+    if (alarm.Instance != null) statusSb.AppendLine("Alarm: " + PromptHelpers.GetSecurityStatus(alarm));
+
+    statusSb.AppendLine("\nDEVICES STATUS:");
+    foreach (var m in controlModules) {
+        var info = PromptHelpers.GetModuleStatus(m);
+        if (!string.IsNullOrEmpty(info)) statusSb.AppendLine(info);
+    }
+
+    foreach (var m in sensorModules) {
+        var info = PromptHelpers.GetModuleStatus(m);
+        if (!string.IsNullOrEmpty(info)) statusSb.AppendLine(info);
+    }
+
+    return statusSb.ToString();
+});
+
 Api.Handle("System.Utility/ContextEngine", (args) =&gt; {
     var request = Api.Parse(args);
     string template = (string)request.Data;
@@ -254,16 +294,16 @@ Program.GoBackground();
     }
 }
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>context-engine</Id>
-      <Version>1.0.3</Version>
+      <Version>1.0.4</Version>
       <Required>true</Required>
-      <Checksum>0E7FEC9D423A27CE2D47D79047C5CB1A</Checksum>
+      <Checksum>B1EF2335B63012D6A1159361E9D5B680</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>578</Address>
@@ -810,42 +850,132 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
     // Prepare the current user message
     var userMessage = ChatMessage.Create("user", msg);
 
-    // Combine them for the AI request payload
-    // This list now contains [History] + [Current Message]
-    payloadContents.Add(userMessage);
+    // We use a List of objects for the active session to support mixed types
+    // (the strongly typed ChatMessage history and the anonymous tool call objects)
+    var sessionContents = new List&lt;object&gt;();
+    foreach (var c in payloadContents) sessionContents.Add(c);
+    sessionContents.Add(userMessage);
 
     // Path to the external markdown file for system instructions
     var systemPromptFile = Path.Combine(Data.GetFolder(), "gemini_system_prompt.txt");
     var promptText = "";
-    try { promptText = File.ReadAllText(systemPromptFile); } catch (Exception e) { /* Handle error */ }
+    try { promptText = File.ReadAllText(systemPromptFile); } catch (Exception) { /* Handle error */ }
 
     bool sendContextData = (Program.Option(OPTION_SEND_CONTEXT_DATA).Value == "On");
+    object toolsList = null;
+
     if (sendContextData)
     {
-        promptText = promptText.Replace("\n%%AVAILABLE_DEVICES%%", "%%AVAILABLE_DEVICES%%\n\n%%SYSTEM_STATUS%%");
+        // If context data is enabled, instruct the model to use the tool and declare it
+        promptText = promptText.Replace("\n%%AVAILABLE_DEVICES%%", "%%AVAILABLE_DEVICES%%\n\n[IMPORTANT] To read the real-time status of the home (weather, energy, sensors, devices states), you MUST call the `get_home_status` function.");
+
+        toolsList = new[] {
+            new {
+                function_declarations = new[] {
+                    new {
+                        name = "get_home_status",
+                        description = "Retrieves the real-time status of all home devices, including lights, doors, environmental sensors (weather, temperature), energy consumption, and alarm system. Call this function when the user asks about the state of the house, or to check if a device is already in the requested state."
+                    }
+                }
+            }
+        };
     }
 
     var systemPrompt = (string)Api.Call("System.Utility/ContextEngine/Render", promptText);
-    var payload = new
-    {
-        contents = payloadContents,
-        system_instruction = new { parts = new[] { new { text = systemPrompt } } },
-        generationConfig = new { temperature = 0.3 }
-    };
 
     try
     {
-        // 4. Send the request to Gemini API
-        string payloadJson = JsonConvert.SerializeObject(payload);
-        string geminiRequestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
-        var data = Net.WebService(geminiRequestUrl).WithTimeout(180).AddHeader("Content-Type", "application/json").Post(payloadJson).GetData();
+        bool toolCallActive = true;
+        int loopCount = 0;
+        string rawGeminiResponseJson = "";
 
-        // 5. Process the response
-        string rawGeminiResponseJson = data?.candidates?[0]?.content?.parts?[0]?.text;
+        // Loop to handle tool calling sequences (max 3 iterations to prevent infinite loops)
+        while (toolCallActive &amp;&amp; loopCount &lt; 3)
+        {
+            loopCount++;
+
+            var payload = new
+            {
+                contents = sessionContents,
+                system_instruction = new { parts = new[] { new { text = systemPrompt } } },
+                tools = toolsList,
+                generationConfig = new { temperature = 0.3 }
+            };
+
+            // Serialize with Ignore so 'tools' is omitted from the JSON payload if it is null
+            string payloadJson = JsonConvert.SerializeObject(payload, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            string geminiRequestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
+
+            var data = Net.WebService(geminiRequestUrl).WithTimeout(180).AddHeader("Content-Type", "application/json").Post(payloadJson).GetData();
+
+            // Safely navigate the dynamic response
+            dynamic candidates = data?.candidates;
+            if (candidates == null)
+            {
+                throw new Exception($"Received an empty or invalid candidates array. Response: {JsonConvert.SerializeObject(data)}");
+            }
+
+            dynamic modelContent = candidates[0]?.content;
+            dynamic part = modelContent?.parts?[0];
+
+            if (part == null)
+            {
+                throw new Exception("Received an empty or invalid response part from the AI.");
+            }
+
+            if (part.functionCall != null)
+            {
+                string functionName = (string)part.functionCall.name;
+
+                string callId = null;
+                try { callId = (string)part.functionCall.id; } catch { }
+
+                sessionContents.Add(modelContent);
+
+                string toolExecutionResult = "";
+                if (functionName == "get_home_status")
+                {
+                    toolExecutionResult = (string)Api.Call("System.Utility/ContextEngine/GetStatus", null);
+                    if (string.IsNullOrWhiteSpace(toolExecutionResult)) toolExecutionResult = "System status is currently unavailable.";
+                }
+                else
+                {
+                    toolExecutionResult = $"Error: Function '{functionName}' not found.";
+                }
+
+                sessionContents.Add(new {
+                    role = "user",
+                    parts = new[] {
+                        new {
+                            functionResponse = new {
+                                name = functionName,
+                                id = callId,
+                                response = new {
+                                    content = toolExecutionResult
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Re-enter the loop: Gemini will now see the tool result and generate the final answer
+                continue;
+            }
+            else if (part.text != null)
+            {
+                // No tool called, we received the final text response
+                rawGeminiResponseJson = (string)part.text;
+                toolCallActive = false;
+            }
+            else
+            {
+                throw new Exception("Response part contained neither text nor functionCall.");
+            }
+        }
 
         if (string.IsNullOrEmpty(rawGeminiResponseJson))
         {
-            string error = "Received an empty or invalid response from the AI.";
+            string error = "The AI failed to generate a valid text response after processing.";
             Program.Notify($"ERROR: {error}");
             return new ResponseText($"**Error:** {error}");
         }
@@ -893,14 +1023,17 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
             StoreId = storeId,
             Message = userMessage
         });
+
         // B. Create the Model response message using the interleaved parts [text, api-call, text...]
         var modelResponse = new ChatMessage
         {
             Role = "model",
             Parts = messageParts
         };
+
         // C. Add the Model response to the system service
         // The service automatically handles persistence (saving to JSON)
+        // Note: Ephemeral tool calls/responses from the session are intentionally omitted from persistent chat history
         Api.Call("System.Utility/ChatHistory/Add", new {
             StoreId = storeId,
             Message = modelResponse
@@ -915,7 +1048,6 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
         return new ResponseText($"**Error:** An exception occurred while contacting the AI service. Please check the logs.\n\n`{ex.Message}`");
     }
 });
-
 
 var storeId = Program.Module.Address;
 // ===================================================================
@@ -969,16 +1101,16 @@ public class ChatMessage {
     }
 }
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-intent-handler</Id>
-      <Version>1.0.13</Version>
+      <Version>1.0.14</Version>
       <Required>true</Required>
-      <Checksum>6E9D446AEAB409B216782F002D4CBEFC</Checksum>
+      <Checksum>543B0C0F0873A4F0B27934773884565D</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>930</Address>
