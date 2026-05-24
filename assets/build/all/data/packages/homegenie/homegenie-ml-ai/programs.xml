@@ -299,11 +299,11 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.4</PackageVersion>
+      <PackageVersion>1.0.5</PackageVersion>
       <Id>context-engine</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
-      <Checksum>B1EF2335B63012D6A1159361E9D5B680</Checksum>
+      <Checksum>48B0C25346A7C81CD6A7158515780BB8</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>578</Address>
@@ -875,6 +875,10 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
                     new {
                         name = "get_home_status",
                         description = "Retrieves the real-time status of all home devices, including lights, doors, environmental sensors (weather, temperature), energy consumption, and alarm system. Call this function when the user asks about the state of the house, or to check if a device is already in the requested state."
+                    },
+                    new {
+                        name = "get_time",
+                        description = "Retrieves the current date/time. Call this function when you need to know the current date/time."
                     }
                 }
             }
@@ -937,6 +941,10 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
                 {
                     toolExecutionResult = (string)Api.Call("System.Utility/ContextEngine/GetStatus", null);
                     if (string.IsNullOrWhiteSpace(toolExecutionResult)) toolExecutionResult = "System status is currently unavailable.";
+                }
+                else if (functionName == "get_time")
+                {
+                    toolExecutionResult = DateTime.UtcNow.ToString();
                 }
                 else
                 {
@@ -1101,16 +1109,16 @@ public class ChatMessage {
     }
 }
 </ScriptContext>
-    <ScriptErrors>[]</ScriptErrors>
+    <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-intent-handler</Id>
-      <Version>1.0.14</Version>
+      <Version>1.0.15</Version>
       <Required>true</Required>
-      <Checksum>543B0C0F0873A4F0B27934773884565D</Checksum>
+      <Checksum>22030EF1B999BDF3A3F5A0CEF8EB1AEF</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>930</Address>
