@@ -325,7 +325,7 @@ Program.Setup(() =&gt; {
         "@AI:Automan",
         "AI.Automan/Gemini"
     ).AddOption("ApiKey", "", "1. Google Gemini AI API key", "password")
-     .AddOption("ModelId", "gemini-2.5-flash", "2. Model ID", "text")
+     .AddOption("ModelId", "gemini-flash-latest", "2. Model ID", "text")
      .AddOption("EnableDeepKnowledge", "On", "3. Enable Deep Knowledge (Read programs &amp; widgets)", "checkbox")
      .AddOption("SystemInstructions", "", "4. System Instructions", $"editor:file:{systemPromptFile}:markdown");
 });
@@ -772,16 +772,16 @@ public class ChatMessage {
         };
     }
 }</ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-automan</Id>
-      <Version>1.0.3</Version>
+      <Version>1.0.4</Version>
       <Required>true</Required>
-      <Checksum>A2C670BB89DCFF8789C23BD089D09B36</Checksum>
+      <Checksum>05BDE67BD7432A1491D9F03FAED1899E</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>932</Address>
@@ -944,7 +944,7 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
                 }
                 else if (functionName == "get_time")
                 {
-                    toolExecutionResult = DateTime.UtcNow.ToString();
+                    toolExecutionResult = DateTimeOffset.Now.ToString("yyyy-MM-dd HH:mm:ss zzz");
                 }
                 else
                 {
@@ -1090,7 +1090,7 @@ const string OPTION_MODEL_ID = "ModelId";
 const string OPTION_SEND_CONTEXT_DATA = "SendContextData";
 const string OPTION_SYSTEM_INSTRUCTIONS = "SystemInstructions";
 
-const string DEFAULT_MODEL_ID = "gemini-2.5-flash-lite";
+const string DEFAULT_MODEL_ID = "gemini-flash-latest";
 
 
 // POJO
@@ -1109,16 +1109,16 @@ public class ChatMessage {
     }
 }
 </ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-intent-handler</Id>
-      <Version>1.0.15</Version>
+      <Version>1.0.16</Version>
       <Required>true</Required>
-      <Checksum>22030EF1B999BDF3A3F5A0CEF8EB1AEF</Checksum>
+      <Checksum>DA2C87D3E2682B3B0FAC29C3701D9F83</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>930</Address>
@@ -1143,7 +1143,7 @@ Program.Setup(() =&gt; {
         "@AI:WidgetGenie",
         "AI.WidgetGenie/Gemini"
     ).AddOption("ApiKey", "", "1. Google Gemini AI API key", "password")
-     .AddOption("ModelId", "gemini-2.5-flash", "2. Model ID", "text")
+     .AddOption("ModelId", "gemini-flash-latest", "2. Model ID", "text")
      .AddOption("EnableDeepKnowledge", "On", "3. Enable Deep Knowledge (Read programs &amp; widgets)", "checkbox")
      .AddOption("SystemInstructions", "", "4. System Instructions", $"editor:file:{systemPromptFile}:markdown");
 });
@@ -1477,16 +1477,16 @@ public class ChatMessage {
         };
     }
 }</ScriptContext>
-    <ScriptErrors />
+    <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.4</PackageVersion>
       <Id>gemini-widget-genie</Id>
-      <Version>1.0.12</Version>
+      <Version>1.0.13</Version>
       <Required>true</Required>
-      <Checksum>C01D076F20DD9CE05790FD4FDE8825ED</Checksum>
+      <Checksum>D5762297431812A848F81E3F31EE5CF8</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>931</Address>

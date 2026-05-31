@@ -20,6 +20,12 @@
   Url: https://huggingface.co/unsloth/Qwen3.5-4B-GGUF/resolve/main/Qwen3.5-4B-Q8_0.gguf?download=true
   Template: chatml
 
+"Jackrong/Qwen3.5-9B-DeepSeek-V4-Flash-Q5_K_M.gguf":
+  Name: Jackrong/Qwen3.5-9B-DeepSeek-V4-Flash-GGUF
+  Repository: https://huggingface.co/Jackrong/Qwen3.5-9B-DeepSeek-V4-Flash-GGUF
+  Url: https://huggingface.co/Jackrong/Qwen3.5-9B-DeepSeek-V4-Flash-GGUF/resolve/main/Qwen3.5-9B-DeepSeek-V4-Flash-Q5_K_M.gguf?download=true
+  Template: chatml
+
 "khazarai/Qwen3-4B-Thinking-2507.Q8_0.gguf":
   Name: khazarai/Qwen3-4B-Qwen3.6-plus-Reasoning-Distilled-GGUF
   Repository: https://huggingface.co/khazarai/Qwen3-4B-Qwen3.6-plus-Reasoning-Distilled-GGUF

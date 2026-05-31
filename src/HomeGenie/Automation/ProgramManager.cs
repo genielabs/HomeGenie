@@ -108,22 +108,17 @@ namespace HomeGenie.Automation
 
         public int GeneratePid()
         {
-            int pid = USERSPACE_PROGRAMS_START;
-            var userPrograms = automationPrograms
-                .FindAll(p => p.Address >= USERSPACE_PROGRAMS_START)
-                .OrderBy(p => p.Address);
-            foreach (ProgramBlock program in userPrograms)
-            {
-                if (pid == program.Address)
-                    pid = program.Address + 1;
-                else
-                    break;
-            }
-            if (hgService.SystemConfiguration.HomeGenie.ProgramIdNext < pid)
-            {
-                hgService.SystemConfiguration.HomeGenie.ProgramIdNext = pid;
-            }
-            return hgService.SystemConfiguration.HomeGenie.ProgramIdNext++;
+            int maxAddress = automationPrograms
+                .Where(p => p.Address >= USERSPACE_PROGRAMS_START)
+                .Select(p => p.Address)
+                .DefaultIfEmpty(USERSPACE_PROGRAMS_START - 1)
+                .Max();
+
+            int pid = Math.Max(USERSPACE_PROGRAMS_START, hgService.SystemConfiguration.HomeGenie.ProgramIdNext);
+            pid = Math.Max(pid, maxAddress + 1);
+
+            hgService.SystemConfiguration.HomeGenie.ProgramIdNext = pid + 1;
+            return pid;
         }
 
         public void ProgramAdd(ProgramBlock program)

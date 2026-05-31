@@ -67,8 +67,14 @@ class MyWidget extends ControllerInstance {
         // - 'Color' = Color LED light (RGB/HSB)
         typeFilter: 'Light,Dimmer,Color'
     },
-    defaultSize: 'medium', // Leave it blank '' to allow any custom widget size
-    sizeOptions: ['small', 'medium', 'big'] // small=289.5x148, medium=289.5x296, big=460x296
+    /**
+     * @type {'' | 'small' | 'medium' | 'big'}
+     * @description The default widget size. Use an empty string '' for an unconstrained,
+     * CSS-driven size. Standard sizes: small (289.5x148), medium (289.5x296), big (460x296).
+     */
+    defaultSize: 'medium',
+    // Allowed user presets. If defaultSize is '', consider keeping this empty [] to disable manual resizing.
+    sizeOptions: ['small', 'medium', 'big']
   };
 }
 ```
