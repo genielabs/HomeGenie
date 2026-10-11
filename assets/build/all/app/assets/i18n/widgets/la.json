@@ -11,6 +11,9 @@
     "switches_control": "Commutatores"
   },
   "$ai_chat": {
+    "title": "AI Chat Widget",
+    "no_bound_module": "Nullus modulus LLM tenetur. Quaeso aperire uncinos ad ligaturam linguae exemplar.",
+
     "intro": "Salve! Intellegentia artificialis localis tua sum. Quomodo te adiuvare possum?",
     "start_typing_prompt": "Incipe scribere admonitionem...",
     "download_title": "Fasciculum LLM requisitum detrahe:",

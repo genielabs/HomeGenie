@@ -11,6 +11,9 @@
     "switches_control": "Switch"
   },
   "$ai_chat": {
+    "title": "AI Chat Widget",
+    "no_bound_module": "Pa gen modil LLM mare. Tanpri louvri paramèt widget yo pou mare yon modèl lang.",
+
     "intro": "Bonjou! Mwen se IA lokal ou a. Kijan m ka ede w?",
     "start_typing_prompt": "Kòmanse tape yon envit...",
     "download_title": "Telechaje fichye LLM ki nesesè a:",

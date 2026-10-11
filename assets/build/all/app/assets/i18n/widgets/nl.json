@@ -11,6 +11,9 @@
     "switches_control": "Schakelaars"
   },
   "$ai_chat": {
+    "title": "AI-chatwidget",
+    "no_bound_module": "Geen LLM-module gebonden. Open de widgetinstellingen om een ​​taalmodel te binden.",
+
     "intro": "Hallo! Ik ben uw lokale AI. Hoe kan ik u helpen?",
     "start_typing_prompt": "Begin met het typen van een prompt...",
     "download_title": "Download het benodigde LLM-bestand:",

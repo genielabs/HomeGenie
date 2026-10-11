@@ -11,6 +11,9 @@
     "switches_control": "Schalter"
   },
   "$ai_chat": {
+    "title": "KI-Chat-Widget",
+    "no_bound_module": "Kein LLM-Modul gebunden. Bitte öffnen Sie die Widget-Einstellungen, um ein Sprachmodell zu binden.",
+
     "intro": "Hallo! Ich bin Ihre lokale KI. Wie kann ich Ihnen helfen?",
     "start_typing_prompt": "Beginnen Sie mit der Eingabeaufforderung...",
     "download_title": "Erforderliche LLM-Datei herunterladen:",

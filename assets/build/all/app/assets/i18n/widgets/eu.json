@@ -11,6 +11,9 @@
     "switches_control": "etengailuak"
   },
   "$ai_chat": {
+    "title": "AI Txat Widget",
+    "no_bound_module": "LLM modulurik ez dago lotuta. Mesedez, ireki widgetaren ezarpenak hizkuntza-eredu bat lotzeko.",
+
     "intro": "Kaixo! Zure tokiko IA naiz. Nola lagundu zaitzaket?",
     "start_typing_prompt": "Hasi gonbidapen bat idazten...",
     "download_title": "Deskargatu beharrezko LLM fitxategia:",

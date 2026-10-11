@@ -11,6 +11,9 @@
     "switches_control": "Whakawhiti"
   },
   "$ai_chat": {
+    "title": "AI Chat Widget",
+    "no_bound_module": "Kaore he waahanga LLM i herea. Tuwhera koa nga tautuhinga widget hei here i tetahi tauira reo.",
+
     "intro": "Kia ora! Ko au tō koutou AI ā-rohe. Me pēhea taku āwhina i a koe?",
     "start_typing_prompt": "Tīmata te pato i tētahi tohu...",
     "download_title": "Tikiake i te kōnae LLM e hiahiatia ana:",

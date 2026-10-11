@@ -11,6 +11,9 @@
     "switches_control": "Skakelaars"
   },
   "$ai_chat": {
+    "title": "AI Chat Widget",
+    "no_bound_module": "Geen LLM-module gebonde nie. Maak asseblief die legstukinstellings oop om 'n taalmodel te bind.",
+
     "intro": "Hallo! Ek is jou plaaslike KI. Hoe kan ek jou help?",
     "start_typing_prompt": "Begin om 'n aanwysingswoord te tik...",
     "download_title": "Laai die vereiste LLM-lêer af:",

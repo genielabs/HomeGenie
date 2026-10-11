@@ -11,6 +11,9 @@
     "switches_control": "Masinthidwe"
   },
   "$ai_chat": {
+    "title": "AI Chat Widget",
+    "no_bound_module": "Palibe gawo la LLM lomangidwa. Chonde tsegulani zochunira za widget kuti mumange mtundu wachilankhulo.",
+
     "intro": "Moni! Ine ndine katswiri wa zamaganizo wa m'dera lanu. Kodi ndingakuthandizeni bwanji?",
     "start_typing_prompt": "Yambani kulemba pempho...",
     "download_title": "Tsitsani fayilo ya LLM yomwe mukufuna:",

@@ -51,6 +51,8 @@ The entire setup is portable and lightweight: just **download the ZIP, extract, 
   smart displays or AI-powered FPV robotic platforms.
 - **Visual Programming:** Create complex scenarios intuitively with the Visual Program
   editor—no coding skills required.
+- **Local Speech Recognition & Synthesis:** Use Whisper recognition and Piper voices
+  in AI chats through MIG.Audio, with microphone capture and audio playback in the browser.
 - **Voice Control & i18n:** Integrated support for voice commands and a fully localized
   UI across over 90 languages.
 - **Extensible:** Features groups, configuration backup, a package repository, and much more.
@@ -66,6 +68,9 @@ For detailed guides, API references, and tutorials, visit the official documenta
   <a href="https://deepwiki.com/genielabs/HomeGenie"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
 </p>
 
+
+For local voice setup, model downloads, chat options, and API examples, see
+[Local speech recognition and synthesis](docs/local-audio.md).
 
 ## 💾 Installation
 
@@ -222,7 +227,12 @@ file in the `homegenie` application folder.
 To grant HomeGenie access to hardware like serial ports, USB devices, and GPIO,
 you may need to run additional commands.
 
-#### Audio & Voice Synthesis
+#### Legacy Server Audio & Voice Synthesis
+
+These optional tools are used by legacy server-side audio features. The MIG.Audio
+chat integration uses its own recognition and synthesis engines and plays audio
+in the browser; it does not require Pico TTS, ALSA playback utilities, or LAME.
+See the [local audio guide](docs/local-audio.md) for setup and runtime requirements.
 
 ```shell
 # For audio playback
@@ -273,6 +283,7 @@ The main solution file is `HomeGenie.sln` located in the repository root.
 
 ### Related Projects
 
+- https://github.com/genielabs/mig-audio
 - https://github.com/genielabs/mig-service-dotnet
 - https://github.com/genielabs/homegenie-mini
 - https://play.google.com/store/apps/details?id=com.glabs.homegenieplus

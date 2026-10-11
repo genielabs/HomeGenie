@@ -11,6 +11,9 @@
     "switches_control": "Afbrydere"
   },
   "$ai_chat": {
+    "title": "AI Chat Widget",
+    "no_bound_module": "Intet LLM-modul bundet. Åbn venligst widgetindstillingerne for at binde en sprogmodel.",
+
     "intro": "Hej! Jeg er din lokale kunstige intelligens. Hvordan kan jeg hjælpe dig?",
     "start_typing_prompt": "Begynd at skrive en prompt...",
     "download_title": "Download den nødvendige LLM-fil:",

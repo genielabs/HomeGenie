@@ -11,6 +11,9 @@
     "switches_control": "Yipada"
   },
   "$ai_chat": {
+    "title": "AI Widget Awo",
+    "no_bound_module": "Ko si LLM module owun. Jọwọ ṣii awọn eto ẹrọ ailorukọ lati di awoṣe ede kan.",
+
     "intro": "Ẹ n lẹ o! Èmi ni AI agbègbè yín. Báwo ni mo ṣe lè ràn yín lọ́wọ́?",
     "start_typing_prompt": "Bẹ̀rẹ̀ sí í tẹ ìbéèrè kan...",
     "download_title": "Ṣe igbasilẹ faili LLM ti a beere:",

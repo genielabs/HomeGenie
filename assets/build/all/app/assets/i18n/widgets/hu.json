@@ -11,6 +11,9 @@
     "switches_control": "Kapcsolók"
   },
   "$ai_chat": {
+    "title": "AI Chat Widget",
+    "no_bound_module": "Nincs LLM modul kötve. Nyissa meg a widget beállításait egy nyelvi modell összerendeléséhez.",
+
     "intro": "Üdvözlöm! Én vagyok a helyi mesterséges intelligencia. Miben segíthetek?",
     "start_typing_prompt": "Kezdj el gépelni egy promptot...",
     "download_title": "Töltse le a szükséges LLM fájlt:",

@@ -11,6 +11,9 @@
     "switches_control": "Schalter"
   },
   "$ai_chat": {
+    "title": "AI Chat Widget",
+    "no_bound_module": "Nee LLM Modul gebonnen. Maacht w.e.g. d'Widget-Astellungen op fir e Sproochmodell ze binden.",
+
     "intro": "Moien! Ech sinn Är lokal KI. Wéi kann ech Iech hëllefen?",
     "start_typing_prompt": "Fänkt un, eng Ufro ze schreiwen...",
     "download_title": "Déi néideg LLM-Datei eroflueden:",

@@ -11,6 +11,9 @@
     "switches_control": "Comutatoare"
   },
   "$ai_chat": {
+    "title": "Widget de chat AI",
+    "no_bound_module": "Niciun modul LLM legat. Vă rugăm să deschideți setările widgetului pentru a lega un model de limbă.",
+
     "intro": "Salut! Sunt inteligența artificială locală. Cum te pot ajuta?",
     "start_typing_prompt": "Începeți să tastați o solicitare...",
     "download_title": "Descărcați fișierul LLM necesar:",

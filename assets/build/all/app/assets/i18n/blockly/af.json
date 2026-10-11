@@ -32,7 +32,7 @@
   "toolbox_actions_run_tooltip": "Begin die gekose program.",
   "toolbox_actions_wait_message0": "Wag vir %1 om te eindig",
   "toolbox_actions_wait_tooltip": "Wag totdat die gekose program eindig.",
-  "toolbox_actions_emit_message0": "Stel %1 uit",
+  "toolbox_actions_emit_message0": "Stuur %1 %2 uit",
   "toolbox_actions_emit_tooltip": "Gee die gegewe parameterwaarde uit.",
   "toolbox_actions_emit_parameter_placeholder": "parameter",
   "toolbox_actions_emit_value_placeholder": "waarde",

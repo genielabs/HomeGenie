@@ -11,6 +11,9 @@
     "switches_control": "Interruptors"
   },
   "$ai_chat": {
+    "title": "Giny de xat AI",
+    "no_bound_module": "No hi ha cap mòdul LLM vinculat. Obriu la configuració del widget per vincular un model d'idioma.",
+
     "intro": "Hola! Sóc la teva IA local. Com et puc ajudar?",
     "start_typing_prompt": "Comença a escriure una indicació...",
     "download_title": "Descarrega el fitxer LLM necessari:",

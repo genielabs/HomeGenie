@@ -11,6 +11,9 @@
     "switches_control": "Prepínače"
   },
   "$ai_chat": {
+    "title": "Widget AI Chat",
+    "no_bound_module": "Nie je viazaný žiadny modul LLM. Ak chcete naviazať jazykový model, otvorte nastavenia miniaplikácie.",
+
     "intro": "Ahoj! Som vaša miestna umelá inteligencia. Ako vám môžem pomôcť?",
     "start_typing_prompt": "Začnite písať výzvu...",
     "download_title": "Stiahnite si požadovaný súbor LLM:",

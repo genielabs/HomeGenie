@@ -11,6 +11,9 @@
     "switches_control": "Switshis"
   },
   "$ai_chat": {
+    "title": "AI Chat Widget",
+    "no_bound_module": "Dim modiwl LLM wedi'i rwymo. Agorwch y gosodiadau teclyn i rwymo model iaith.",
+
     "intro": "Helô! Fi yw eich AI lleol. Sut alla i eich helpu chi?",
     "start_typing_prompt": "Dechreuwch deipio awgrym...",
     "download_title": "Lawrlwythwch y ffeil LLM sydd ei hangen:",

@@ -11,6 +11,9 @@
     "switches_control": "מתגים"
   },
   "$ai_chat": {
+    "title": "AI Chat Widget",
+    "no_bound_module": "ללא מודול LLM קשור. אנא פתח את הגדרות הווידג'ט כדי לאגד מודל שפה.",
+
     "intro": "שלום! אני הבינה המלאכותית המקומית שלכם. איך אני יכול לעזור לכם?",
     "start_typing_prompt": "התחל להקליד הנחיה...",
     "download_title": "הורד את קובץ ה-LLM הנדרש:",

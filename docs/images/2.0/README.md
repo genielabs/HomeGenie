@@ -15,6 +15,13 @@ API calls to orchestrate multiple devices seamlessly. See the exact JavaScript c
 unparalleled transparency and programmability.
 
 
+### Local Voice for AI Chats
+
+Use Whisper speech recognition and Piper synthesis on the HomeGenie server through
+MIG.Audio. Enable the interfaces in Settings, then choose local speech from the chat
+options. Record, review the transcript, and send it when ready; spoken responses
+play in the browser. See the [local audio guide](../../local-audio.md).
+
 ### Your Central Hub: Intuitive & Customizable Dashboards.
 
 ![homegenie_2_dashboard_01.png](homegenie_2_dashboard_01.png)

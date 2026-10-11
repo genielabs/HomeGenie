@@ -11,6 +11,9 @@
     "switches_control": "Lülitid"
   },
   "$ai_chat": {
+    "title": "AI vestlusvidin",
+    "no_bound_module": "LLM-moodul pole seotud. Keelemudeli sidumiseks avage vidina seaded.",
+
     "intro": "Tere! Olen teie kohalik tehisintellekt. Kuidas saan teid aidata?",
     "start_typing_prompt": "Hakka viipa kirjutama...",
     "download_title": "Laadige alla vajalik LLM-fail:",

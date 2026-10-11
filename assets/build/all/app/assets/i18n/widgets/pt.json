@@ -11,6 +11,9 @@
     "switches_control": "Interruptores"
   },
   "$ai_chat": {
+    "title": "Widget de bate-papo com IA",
+    "no_bound_module": "Nenhum módulo LLM vinculado. Abra as configurações do widget para vincular um modelo de idioma.",
+
     "intro": "Olá! Sou a sua IA local. Como posso ajudar?",
     "start_typing_prompt": "Comece a digitar um comando...",
     "download_title": "Baixe o arquivo LLM necessário:",

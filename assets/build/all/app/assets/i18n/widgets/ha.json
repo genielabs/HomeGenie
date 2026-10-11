@@ -11,6 +11,9 @@
     "switches_control": "Sauyawa"
   },
   "$ai_chat": {
+    "title": "AI Chat Widget\nSaukewa:",
+    "no_bound_module": "Babu LLM module da aka ɗaure. Da fatan za a buɗe saitunan widget don ɗaure samfurin harshe.",
+
     "intro": "Sannu! Ni ne AI na yankinku. Ta yaya zan iya taimaka muku?",
     "start_typing_prompt": "Fara rubuta saƙo...",
     "download_title": "Sauke fayil ɗin LLM da ake buƙata:",

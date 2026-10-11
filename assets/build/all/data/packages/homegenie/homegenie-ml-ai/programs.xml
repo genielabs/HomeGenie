@@ -301,7 +301,7 @@ Program.GoBackground();
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.5</PackageVersion>
       <Id>context-engine</Id>
-      <Version>1.0.4</Version>
+      <Version>1.0.5</Version>
       <Required>true</Required>
       <Checksum>48B0C25346A7C81CD6A7158515780BB8</Checksum>
     </PackageInfo>

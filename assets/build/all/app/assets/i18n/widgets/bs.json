@@ -11,6 +11,9 @@
     "switches_control": "Prekidači"
   },
   "$ai_chat": {
+    "title": "AI widget za ćaskanje",
+    "no_bound_module": "Nije vezan LLM modul. Molimo otvorite postavke vidžeta da povežete jezički model.",
+
     "intro": "Zdravo! Ja sam vaša lokalna umjetna inteligencija. Kako vam mogu pomoći?",
     "start_typing_prompt": "Počni kucati upit...",
     "download_title": "Preuzmite potrebnu LLM datoteku:",

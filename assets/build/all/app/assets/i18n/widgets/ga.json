@@ -11,6 +11,9 @@
     "switches_control": "Lasca"
   },
   "$ai_chat": {
+    "title": "Giuirléid Comhrá AI",
+    "no_bound_module": "Níl modúl LLM faoi cheangal. Oscail na socruithe giuirléid chun samhail teanga a cheangal.",
+
     "intro": "Haigh! Is mise d'Intleacht Shaorga áitiúil. Conas is féidir liom cabhrú leat?",
     "start_typing_prompt": "Tosaigh ag clóscríobh leid...",
     "download_title": "Íoslódáil an comhad LLM riachtanach:",

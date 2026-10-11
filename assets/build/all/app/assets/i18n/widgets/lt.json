@@ -11,6 +11,9 @@
     "switches_control": "Jungikliai"
   },
   "$ai_chat": {
+    "title": "AI pokalbių valdiklis",
+    "no_bound_module": "Nėra susieto LLM modulio. Norėdami susieti kalbos modelį, atidarykite valdiklio nustatymus.",
+
     "intro": "Sveiki! Aš esu jūsų vietinis dirbtinis intelektas. Kuo galiu jums padėti?",
     "start_typing_prompt": "Pradėkite rašyti raginimą...",
     "download_title": "Atsisiųskite reikiamą LLM failą:",

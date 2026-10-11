@@ -11,6 +11,9 @@
     "switches_control": "Mga switch"
   },
   "$ai_chat": {
+    "title": "AI Chat Widget",
+    "no_bound_module": "Walang LLM module na nakatali. Mangyaring buksan ang mga setting ng widget upang magbigkis ng modelo ng wika.",
+
     "intro": "Kumusta! Ako ang lokal na AI ninyo. Paano kita matutulungan?",
     "start_typing_prompt": "Simulan ang pag-type ng prompt...",
     "download_title": "I-download ang kinakailangang LLM file:",

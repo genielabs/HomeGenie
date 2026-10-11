@@ -18,6 +18,14 @@ Please note that the software is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
 implied, as detailed in the license.
 
+LOCAL SPEECH
+------------
+Enable local speech recognition and synthesis in Settings > Configuration >
+Interfaces, or during initial setup. Missing models download automatically to
+data/models. Chat options let you select local speech when available.
+Browser microphone capture requires HTTPS or localhost.
+Guide: https://github.com/genielabs/HomeGenie/blob/master/docs/local-audio.md
+
 RESOURCES AND DOCUMENTATION
 ---------------------------
 Project Website:    https://homegenie.it/

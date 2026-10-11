@@ -11,6 +11,9 @@
     "switches_control": "Sakelar"
   },
   "$ai_chat": {
+    "title": "Widget Obrolan AI",
+    "no_bound_module": "Tidak ada modul LLM yang terikat. Silakan buka pengaturan widget untuk mengikat model bahasa.",
+
     "intro": "Halo! Saya adalah AI lokal Anda. Bagaimana saya bisa membantu Anda?",
     "start_typing_prompt": "Mulailah mengetikkan perintah...",
     "download_title": "Unduh berkas LLM yang dibutuhkan:",

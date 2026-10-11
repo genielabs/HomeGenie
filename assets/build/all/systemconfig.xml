@@ -82,6 +82,21 @@
         </Gateway>
     </Gateways>
     <Interfaces>
+      <Interface Domain="Audio.VoiceRecognizer" AssemblyName="MIG.Audio.dll" IsEnabled="false">
+        <Options>
+          <Option Name="ModelName" Value="ggml-base.bin" />
+          <Option Name="Language" Value="auto" />
+          <Option Name="Threads" Value="6" />
+          <Option Name="Acceleration" Value="cpu" />
+        </Options>
+      </Interface>
+      <Interface Domain="Audio.VoiceSynthesizer" AssemblyName="MIG.Audio.dll" IsEnabled="false">
+        <Options>
+          <Option Name="Voice" Value="it_IT-paola-medium" />
+          <Option Name="Speed" Value="1.0" />
+          <Option Name="Threads" Value="2" />
+        </Options>
+      </Interface>
       <Interface Domain="Protocols.UPnP" AssemblyName="MIG.Protocols.dll" IsEnabled="true">
         <Options />
       </Interface>

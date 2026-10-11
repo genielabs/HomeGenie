@@ -11,6 +11,9 @@
     "switches_control": "Kalitlar"
   },
   "$ai_chat": {
+    "title": "AI Chat vidjeti",
+    "no_bound_module": "LLM moduli bogʻlanmagan. Til modelini ulash uchun vidjet sozlamalarini oching.",
+
     "intro": "Salom! Men sizning mahalliy AIman. Sizga qanday yordam bera olaman?",
     "start_typing_prompt": "So'rov yozishni boshlang...",
     "download_title": "Kerakli LLM faylini yuklab oling:",

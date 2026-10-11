@@ -11,6 +11,9 @@
     "switches_control": "Anahtarlar"
   },
   "$ai_chat": {
+    "title": "AI Sohbet Widget'ı",
+    "no_bound_module": "Hiçbir LLM modülü bağlı değil. Bir dil modelini bağlamak için lütfen widget ayarlarını açın.",
+
     "intro": "Merhaba! Ben yerel yapay zekânızım. Size nasıl yardımcı olabilirim?",
     "start_typing_prompt": "Komut istemini yazmaya başlayın...",
     "download_title": "Gerekli LLM dosyasını indirin:",

@@ -11,6 +11,9 @@
     "switches_control": "Swiċċijiet"
   },
   "$ai_chat": {
+    "title": "AI Chat Widget",
+    "no_bound_module": "L-ebda modulu LLM marbut. Jekk jogħġbok iftaħ is-settings tal-widget biex torbot mudell tal-lingwa.",
+
     "intro": "Bongu! Jiena l-AI lokali tiegħek. Kif nista' ngħinek?",
     "start_typing_prompt": "Ibda ittajpja prompt...",
     "download_title": "Niżżel il-fajl LLM meħtieġ:",

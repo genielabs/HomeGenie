@@ -11,6 +11,9 @@
     "switches_control": "Przełączniki"
   },
   "$ai_chat": {
+    "title": "Widżet czatu AI",
+    "no_bound_module": "Brak powiązanego modułu LLM. Otwórz ustawienia widżetu, aby powiązać model językowy.",
+
     "intro": "Cześć! Jestem Twoim lokalnym AI. W czym mogę pomóc?",
     "start_typing_prompt": "Rozpocznij pisanie monitu...",
     "download_title": "Pobierz wymagany plik LLM:",

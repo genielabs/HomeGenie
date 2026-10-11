@@ -147,7 +147,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>philips-hue-bridge</Id>
       <Version>1.0.4</Version>
       <Required>false</Required>
@@ -186,11 +186,20 @@ var dataFilePath = Path.Combine(Data.GetFolder(), $"energy_monitor{energyMonitor
 try
 {
   using (BinaryReader reader = new BinaryReader(File.Open(dataFilePath, FileMode.Open))) {
-    wattCounter.SetData(reader.ReadDouble());
-    wattCounterToday.SetData(reader.ReadDouble());
+    var savedCounter = reader.ReadDouble();
+    var savedCounterToday = reader.ReadDouble();
     int count = reader.ReadInt32();
+    if (count &lt; 0 || reader.BaseStream.Length - reader.BaseStream.Position != (long)count * 16) {
+      throw new InvalidDataException("Invalid energy monitor history length.");
+    }
+    var history = new List&lt;ValueStatistics.StatValue&gt;();
     for (int i = 0; i &lt; count; i++) {
-        wattLoad.Statistics.History.Add(new ValueStatistics.StatValue(reader.ReadDouble(), DateTime.FromBinary(reader.ReadInt64())));
+      history.Add(new ValueStatistics.StatValue(reader.ReadDouble(), DateTime.FromBinary(reader.ReadInt64())));
+    }
+    wattCounter.SetData(savedCounter);
+    wattCounterToday.SetData(savedCounterToday);
+    foreach (var item in history) {
+      wattLoad.Statistics.History.Add(item);
     }
   }
 }
@@ -198,6 +207,10 @@ catch (Exception e)
 {
   Program.Log.Warn(e);
 }
+
+// initialize numeric counters even when no valid history is available
+wattCounter.SetData(wattCounter.DecimalValue);
+wattCounterToday.SetData(wattCounterToday.DecimalValue);
 
 // initialize
 if (energyMonitor.Instance.Name == "") {
@@ -301,13 +314,29 @@ var UpdateEnergyLoad = new Func&lt;bool&gt;(()=&gt;{
     if (updateCounter)
     {
       // persist watt load data
-      using (BinaryWriter writer = new BinaryWriter(File.Open(dataFilePath, FileMode.Create))) {
-        writer.Write(wattCounter.GetData&lt;double&gt;());
-        writer.Write(wattCounterToday.GetData&lt;double&gt;());
-        writer.Write(wattLoad.Statistics.History.Count);
-        foreach (var item in wattLoad.Statistics.History) {
-          writer.Write(item.Value);
-          writer.Write(item.Timestamp.ToBinary());
+      var temporaryFilePath = dataFilePath + ".tmp";
+      try {
+        var history = wattLoad.Statistics.History.ToArray();
+        using (BinaryWriter writer = new BinaryWriter(File.Open(temporaryFilePath, FileMode.Create))) {
+          writer.Write(wattCounter.DecimalValue);
+          writer.Write(wattCounterToday.DecimalValue);
+          writer.Write(history.Length);
+          foreach (var item in history) {
+            writer.Write(item.Value);
+            writer.Write(item.Timestamp.ToBinary());
+          }
+        }
+        File.Move(temporaryFilePath, dataFilePath, true);
+      }
+      catch (Exception e) {
+        Program.Log.Warn(e);
+      }
+      finally {
+        try {
+          if (File.Exists(temporaryFilePath)) File.Delete(temporaryFilePath);
+        }
+        catch (Exception e) {
+          Program.Log.Warn(e);
         }
       }
     }
@@ -374,11 +403,11 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>energy-monitor</Id>
-      <Version>1.0.5</Version>
+      <Version>1.0.6</Version>
       <Required>true</Required>
-      <Checksum>5E0E0E71644DB51B0936777939FBFE19</Checksum>
+      <Checksum>9C2F7FF644F98579B7A5FF41C7C50943</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>81</Address>
@@ -442,7 +471,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>energy-saving-mode</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -492,7 +521,7 @@ Modules
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>group-lights-off</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -525,7 +554,7 @@ Modules
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>group-lights-on</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -680,7 +709,7 @@ const string ADDRESS_PROPERTY = "KNX.Address";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>knx-client</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -1019,7 +1048,7 @@ public List&lt;MigEvent&gt; GetLast48HoursEvents(string dataFilePath)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>security-alarm-system</Id>
       <Version>1.0.7</Version>
       <Required>true</Required>
@@ -1159,7 +1188,7 @@ const string SMART_DEVICE_LAST_EVENT = "HomeGenie.SmartLights.LastEvent";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>smart-device</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -1444,7 +1473,7 @@ const string OPTION_ENSURE_COMMAND_DELIVERY = "EnsureCommandDelivery";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>smart-thermostat</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -1519,7 +1548,7 @@ Pause(10);</ScriptSource>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>sunrise-colors-scenario</Id>
       <Version>1.0.1</Version>
       <Required>false</Required>
@@ -1681,7 +1710,7 @@ const string WEMO_DOMAIN = "HomeAutomation.WeMo";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-home</PackageId>
-      <PackageVersion>1.0.3</PackageVersion>
+      <PackageVersion>1.0.4</PackageVersion>
       <Id>wemo</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>

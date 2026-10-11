@@ -11,6 +11,9 @@
     "switches_control": "Keçidlər"
   },
   "$ai_chat": {
+    "title": "AI Chat Widget",
+    "no_bound_module": "LLM modulu bağlanmayıb. Dil modelini birləşdirmək üçün vidcet parametrlərini açın.",
+
     "intro": "Salam! Mən sizin yerli süni intellektinizəm. Sizə necə kömək edə bilərəm?",
     "start_typing_prompt": "Bir sorğu yazmağa başlayın...",
     "download_title": "Tələb olunan LLM faylını yükləyin:",

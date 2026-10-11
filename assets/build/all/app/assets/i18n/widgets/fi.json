@@ -11,6 +11,9 @@
     "switches_control": "Kytkimet"
   },
   "$ai_chat": {
+    "title": "AI Chat Widget",
+    "no_bound_module": "Ei LLM-moduulia sidottu. Sido kielimalli avaamalla widgetin asetukset.",
+
     "intro": "Hei! Olen paikallinen tekoälynne. Kuinka voin auttaa teitä?",
     "start_typing_prompt": "Aloita kirjoittamaan kehotetta...",
     "download_title": "Lataa tarvittava LLM-tiedosto:",

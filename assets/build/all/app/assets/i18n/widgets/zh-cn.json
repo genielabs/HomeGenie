@@ -11,6 +11,9 @@
     "switches_control": "开关"
   },
   "$ai_chat": {
+    "title": "人工智能聊天小部件",
+    "no_bound_module": "没有法学硕士模块绑定。请打开小组件设置来绑定语言模型。",
+
     "intro": "您好！我是您的本地人工智能。我能帮您什么吗？",
     "start_typing_prompt": "开始输入提示信息……",
     "download_title": "下载所需的LLM文件：",

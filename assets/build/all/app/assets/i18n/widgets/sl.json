@@ -11,6 +11,9 @@
     "switches_control": "Stikala"
   },
   "$ai_chat": {
+    "title": "AI Chat Widget",
+    "no_bound_module": "Ni vezanega na modul LLM. Odprite nastavitve gradnika, da povežete jezikovni model.",
+
     "intro": "Pozdravljeni! Sem vaša lokalna umetna inteligenca. Kako vam lahko pomagam?",
     "start_typing_prompt": "Začni tipkati poziv ...",
     "download_title": "Prenesite zahtevano datoteko LLM:",

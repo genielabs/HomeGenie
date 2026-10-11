@@ -11,6 +11,9 @@
     "switches_control": "スイッチ"
   },
   "$ai_chat": {
+    "title": "AIチャットウィジェット",
+    "no_bound_module": "LLM モジュールがバインドされていません。ウィジェット設定を開いて言語モデルをバインドしてください。",
+
     "intro": "こんにちは！あなたの地域のAIです。何かお困りごとはございませんか？",
     "start_typing_prompt": "プロンプトの入力を開始します...",
     "download_title": "必要な LLM ファイルをダウンロードします:",

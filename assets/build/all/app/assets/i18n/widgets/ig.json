@@ -11,6 +11,9 @@
     "switches_control": "Mgbanwe"
   },
   "$ai_chat": {
+    "title": "Wijetị Nkata AI",
+    "no_bound_module": "Enweghị modul LLM jikọtara. Biko mepee ntọala wijetị iji kekọta ụdị asụsụ.",
+
     "intro": "Ndewo! Abụ m onye na-ahụ maka ọgụgụ isi obodo gị. Kedu ka m ga-esi nyere gị aka?",
     "start_typing_prompt": "Malite ịpịnye ihe ozugbo...",
     "download_title": "Budata faịlụ LLM achọrọ:",

@@ -537,6 +537,15 @@ namespace HomeGenie.Service
             return Utility.UpdateXmlDatabase(groups, filename, UpdateDatabaseErrorHandler);
         }
 
+        // TsList protects mutations, but Json.NET enumerates nested lists directly.
+        // Lock those lists while making the detached persistence snapshot.
+        private static Module CloneModuleForPersistence(Module module)
+        {
+            lock (module.Properties.LockObject)
+            lock (module.Stores.LockObject)
+                return module.DeepClone();
+        }
+
         public bool UpdateModulesDatabase()
         {
             bool success = false;
@@ -546,7 +555,7 @@ namespace HomeGenie.Service
                 try
                 {
                     // Due to encrypted values, we must clone modules before encrypting and saving
-                    var clonedModules = systemModules.DeepClone();
+                    var clonedModules = systemModules.Select(CloneModuleForPersistence).ToList();
                     // add virtual modules
                     for (int i = 0; i < virtualModules.Count; i++)
                     {
@@ -560,7 +569,7 @@ namespace HomeGenie.Service
                         }
 
                         // add new module
-                        module = virtualModule.DeepClone();
+                        module = CloneModuleForPersistence(virtualModule);
                         clonedModules.Add(module);
                         Utility.ModuleParameterSet(
                             module,

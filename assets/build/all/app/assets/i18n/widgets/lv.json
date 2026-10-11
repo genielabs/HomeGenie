@@ -11,6 +11,9 @@
     "switches_control": "Slēdži"
   },
   "$ai_chat": {
+    "title": "AI tērzēšanas logrīks",
+    "no_bound_module": "Nav piesaistīts LLM modulis. Lūdzu, atveriet logrīka iestatījumus, lai piesaistītu valodas modeli.",
+
     "intro": "Sveiki! Esmu jūsu vietējais mākslīgais intelekts. Kā varu jums palīdzēt?",
     "start_typing_prompt": "Sāciet rakstīt uzvedni...",
     "download_title": "Lejupielādējiet nepieciešamo LLM failu:",

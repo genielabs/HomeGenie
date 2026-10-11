@@ -11,6 +11,9 @@
     "switches_control": "Công tắc"
   },
   "$ai_chat": {
+    "title": "Tiện ích trò chuyện AI",
+    "no_bound_module": "Không có mô-đun LLM nào bị ràng buộc. Vui lòng mở cài đặt tiện ích để liên kết mô hình ngôn ngữ.",
+
     "intro": "Chào! Tôi là trí tuệ nhân tạo địa phương của bạn. Tôi có thể giúp gì cho bạn?",
     "start_typing_prompt": "Bắt đầu nhập lời nhắc...",
     "download_title": "Tải xuống tệp LLM cần thiết:",

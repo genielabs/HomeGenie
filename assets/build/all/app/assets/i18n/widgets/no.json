@@ -11,6 +11,9 @@
     "switches_control": "Brytere"
   },
   "$ai_chat": {
+    "title": "AI Chat-widget",
+    "no_bound_module": "Ingen LLM-modul bundet. Åpne widgetinnstillingene for å binde en språkmodell.",
+
     "intro": "Hallo! Jeg er din lokale AI. Hvordan kan jeg hjelpe deg?",
     "start_typing_prompt": "Begynn å skrive en melding...",
     "download_title": "Last ned nødvendig LLM-fil:",

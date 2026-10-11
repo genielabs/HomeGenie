@@ -11,6 +11,9 @@
     "switches_control": "Rofar"
   },
   "$ai_chat": {
+    "title": "AI spjallgræja",
+    "no_bound_module": "Engin LLM eining bundin. Vinsamlegast opnaðu græjustillingarnar til að binda tungumálalíkan.",
+
     "intro": "Hæ! Ég er gervigreindin þín á staðnum. Hvernig get ég aðstoðað þig?",
     "start_typing_prompt": "Byrjaðu að skrifa fyrirmæli...",
     "download_title": "Sækja nauðsynlega LLM skrá:",

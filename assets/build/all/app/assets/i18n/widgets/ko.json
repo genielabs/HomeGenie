@@ -11,6 +11,9 @@
     "switches_control": "스위치"
   },
   "$ai_chat": {
+    "title": "AI 채팅 위젯",
+    "no_bound_module": "LLM 모듈이 바인딩되지 않았습니다. 언어 모델을 바인딩하려면 위젯 설정을 열어주세요.",
+
     "intro": "안녕하세요! 저는 여러분의 지역 AI입니다. 어떻게 도와드릴까요?",
     "start_typing_prompt": "프롬프트 입력을 시작하세요...",
     "download_title": "필요한 LLM 파일을 다운로드하십시오.",

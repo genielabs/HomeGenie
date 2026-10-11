@@ -11,6 +11,9 @@
     "switches_control": "Guhêrbar"
   },
   "$ai_chat": {
+    "title": "AI Chat Widget",
+    "no_bound_module": "No module LLM ve girêdayî ye. Ji kerema xwe mîhengên widgetê vekin da ku modelek zimanî girêdin.",
+
     "intro": "Silav! Ez AI-ya herêmî ya we me. Ez çawa dikarim alîkariya we bikim?",
     "start_typing_prompt": "Dest bi nivîsandina fermanekê bike...",
     "download_title": "Pelê LLM-ê yê pêwîst dakêşin:",

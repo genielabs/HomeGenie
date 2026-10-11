@@ -11,6 +11,9 @@
     "switches_control": "Suis"
   },
   "$ai_chat": {
+    "title": "Widget Sembang AI",
+    "no_bound_module": "Tiada modul LLM terikat. Sila buka tetapan widget untuk mengikat model bahasa.",
+
     "intro": "Halo! Saya AI tempatan anda. Bagaimanakah saya boleh membantu anda?",
     "start_typing_prompt": "Mula menaip gesaan...",
     "download_title": "Muat turun fail LLM yang diperlukan:",
