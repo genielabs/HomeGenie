@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Selesaikan perekaman dan transkripsikan",
   "ai_genie_local_recognition_unavailable": "Pengakuan lokal tidak tersedia. Periksa antarmuka dan model di Pengaturan.",
   "ai_genie_download_error": "Pengunduhan terhenti",
-  "ai_genie_download_paused": "Unduhan dijeda"
+  "ai_genie_download_paused": "Unduhan dijeda",
+  "automan_program_created": "Program dibuat",
+  "automan_program_updated": "Program diperbarui",
+  "ai_genie_preparing_speech": "Menyiapkan audio",
+  "ai_genie_playing_speech": "Membaca dengan suara",
+  "service_restart_timeout": "Layanan belum dimulai ulang. Tutup jendela ini dan periksa server."
 }

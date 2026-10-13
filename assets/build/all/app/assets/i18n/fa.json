@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "ضبط را تمام کنید و رونویسی کنید",
   "ai_genie_local_recognition_unavailable": "تشخیص محلی در دسترس نیست. رابط و مدل را در تنظیمات بررسی کنید.",
   "ai_genie_download_error": "دانلود قطع شد",
-  "ai_genie_download_paused": "دانلود متوقف شد"
+  "ai_genie_download_paused": "دانلود متوقف شد",
+  "automan_program_created": "برنامه ایجاد شد",
+  "automan_program_updated": "برنامه به‌روزرسانی شد",
+  "ai_genie_preparing_speech": "در حال آماده‌سازی صدا",
+  "ai_genie_playing_speech": "در حال خواندن با صدای بلند",
+  "service_restart_timeout": "سرویس هنوز دوباره راه‌اندازی نشده است. این پنجره را ببندید و سرور را بررسی کنید."
 }

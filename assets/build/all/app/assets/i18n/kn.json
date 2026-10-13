@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "ರೆಕಾರ್ಡಿಂಗ್ ಮುಗಿಸಿ ಮತ್ತು ಲಿಪ್ಯಂತರ ಮಾಡಿ",
   "ai_genie_local_recognition_unavailable": "ಸ್ಥಳೀಯ ಗುರುತಿಸುವಿಕೆ ಲಭ್ಯವಿಲ್ಲ. ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ಇಂಟರ್ಫೇಸ್ ಮತ್ತು ಮಾದರಿಯನ್ನು ಪರಿಶೀಲಿಸಿ.",
   "ai_genie_download_error": "ಡೌನ್‌ಲೋಡ್ ಅಡಚಣೆಯಾಗಿದೆ",
-  "ai_genie_download_paused": "ಡೌನ್‌ಲೋಡ್ ವಿರಾಮಗೊಳಿಸಲಾಗಿದೆ"
+  "ai_genie_download_paused": "ಡೌನ್‌ಲೋಡ್ ವಿರಾಮಗೊಳಿಸಲಾಗಿದೆ",
+  "automan_program_created": "ಪ್ರೋಗ್ರಾಂ ರಚಿಸಲಾಗಿದೆ",
+  "automan_program_updated": "ಪ್ರೋಗ್ರಾಂ ನವೀಕರಿಸಲಾಗಿದೆ",
+  "ai_genie_preparing_speech": "ಆಡಿಯೊ ಸಿದ್ಧಪಡಿಸಲಾಗುತ್ತಿದೆ",
+  "ai_genie_playing_speech": "ಗಟ್ಟಿಯಾಗಿ ಓದಲಾಗುತ್ತಿದೆ",
+  "service_restart_timeout": "ಸೇವೆ ಇನ್ನೂ ಮರುಪ್ರಾರಂಭವಾಗಿಲ್ಲ. ಈ ವಿಂಡೋವನ್ನು ಮುಚ್ಚಿ ಮತ್ತು ಸರ್ವರ್ ಅನ್ನು ಪರಿಶೀಲಿಸಿ."
 }

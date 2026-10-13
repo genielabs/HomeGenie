@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Acabar la gravació i la transcripció",
   "ai_genie_local_recognition_unavailable": "El reconeixement local no està disponible. Comproveu la interfície i el model a Configuració.",
   "ai_genie_download_error": "Descàrrega interrompuda",
-  "ai_genie_download_paused": "Descàrrega en pausa"
+  "ai_genie_download_paused": "Descàrrega en pausa",
+  "automan_program_created": "Programa creat",
+  "automan_program_updated": "Programa actualitzat",
+  "ai_genie_preparing_speech": "Preparant l'àudio",
+  "ai_genie_playing_speech": "Llegint en veu alta",
+  "service_restart_timeout": "El servei encara no s'ha reiniciat. Tanqueu aquesta finestra i comproveu el servidor."
 }

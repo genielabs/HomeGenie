@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Завършете записа и транскрибирайте",
   "ai_genie_local_recognition_unavailable": "Не е налично локално разпознаване. Проверете интерфейса и модела в Настройки.",
   "ai_genie_download_error": "Изтеглянето е прекъснато",
-  "ai_genie_download_paused": "Изтеглянето е на пауза"
+  "ai_genie_download_paused": "Изтеглянето е на пауза",
+  "automan_program_created": "Програмата е създадена",
+  "automan_program_updated": "Програмата е актуализирана",
+  "ai_genie_preparing_speech": "Подготовка на аудио",
+  "ai_genie_playing_speech": "Четене на глас",
+  "service_restart_timeout": "Услугата все още не е рестартирана. Затворете този прозорец и проверете сървъра."
 }

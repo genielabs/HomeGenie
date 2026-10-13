@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Remata a gravación e transcribe",
   "ai_genie_local_recognition_unavailable": "O recoñecemento local non está dispoñible. Comprobe a interface e o modelo en Configuración.",
   "ai_genie_download_error": "Descarga interrompida",
-  "ai_genie_download_paused": "Descarga en pausa"
+  "ai_genie_download_paused": "Descarga en pausa",
+  "automan_program_created": "Programa creado",
+  "automan_program_updated": "Programa actualizado",
+  "ai_genie_preparing_speech": "Preparando o audio",
+  "ai_genie_playing_speech": "Lendo en voz alta",
+  "service_restart_timeout": "O servizo aínda non se reiniciou. Pecha esta xanela e comproba o servidor."
 }

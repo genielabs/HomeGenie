@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Vitao ny fandraketana sy soratana\nSary",
   "ai_genie_local_recognition_unavailable": "Tsy misy ny fanekena eo an-toerana. Jereo ny interface sy ny modely ao amin'ny Settings.\nSary",
   "ai_genie_download_error": "Tapaka ny fampidinana\nSary",
-  "ai_genie_download_paused": "Niato ny fampidinana\nSary"
+  "ai_genie_download_paused": "Niato ny fampidinana\nSary",
+  "automan_program_created": "Voaforona ny programa",
+  "automan_program_updated": "Nohavaozina ny programa",
+  "ai_genie_preparing_speech": "Manomana feo",
+  "ai_genie_playing_speech": "Mamaky amin’ny feo avo",
+  "service_restart_timeout": "Mbola tsy nanomboka indray ny serivisy. Akatony ity varavarankely ity ary jereo ny mpizara."
 }

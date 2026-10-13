@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "रिकॉर्डिंग समाप्त करें और प्रतिलेखन करें",
   "ai_genie_local_recognition_unavailable": "स्थानीय मान्यता अनुपलब्ध. सेटिंग्स में इंटरफ़ेस और मॉडल की जाँच करें।",
   "ai_genie_download_error": "डाउनलोड बाधित",
-  "ai_genie_download_paused": "डाउनलोड रुका हुआ है"
+  "ai_genie_download_paused": "डाउनलोड रुका हुआ है",
+  "automan_program_created": "प्रोग्राम बनाया गया",
+  "automan_program_updated": "प्रोग्राम अपडेट किया गया",
+  "ai_genie_preparing_speech": "ऑडियो तैयार हो रहा है",
+  "ai_genie_playing_speech": "बोलकर पढ़ा जा रहा है",
+  "service_restart_timeout": "सेवा अभी तक पुनः शुरू नहीं हुई है। यह विंडो बंद करें और सर्वर की जाँच करें।"
 }

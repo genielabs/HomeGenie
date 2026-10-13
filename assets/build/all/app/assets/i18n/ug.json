@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "خاتىرىلەشنى تاماملاڭ",
   "ai_genie_local_recognition_unavailable": "يەرلىك تونۇشنى ئىشلەتكىلى بولمايدۇ. تەڭشەكتىكى كۆرۈنمە يۈز ۋە مودېلنى تەكشۈرۈڭ.",
   "ai_genie_download_error": "چۈشۈرۈش ئۈزۈلۈپ قالدى",
-  "ai_genie_download_paused": "چۈشۈرۈش توختىتىلدى"
+  "ai_genie_download_paused": "چۈشۈرۈش توختىتىلدى",
+  "automan_program_created": "پروگرامما قۇرۇلدى",
+  "automan_program_updated": "پروگرامما يېڭىلاندى",
+  "ai_genie_preparing_speech": "ئاۋاز تەييارلىنىۋاتىدۇ",
+  "ai_genie_playing_speech": "ئۈنلۈك ئوقۇۋاتىدۇ",
+  "service_restart_timeout": "مۇلازىمەت تېخى قايتا قوزغالمىدى. بۇ كۆزنەكنى تاقاپ، مۇلازىمېتىرنى تەكشۈرۈڭ."
 }

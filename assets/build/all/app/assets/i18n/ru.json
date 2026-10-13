@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Завершить запись и расшифровать",
   "ai_genie_local_recognition_unavailable": "Локальное распознавание недоступно. Проверьте интерфейс и модель в Настройках.",
   "ai_genie_download_error": "Загрузка прервана",
-  "ai_genie_download_paused": "Загрузка приостановлена"
+  "ai_genie_download_paused": "Загрузка приостановлена",
+  "automan_program_created": "Программа создана",
+  "automan_program_updated": "Программа обновлена",
+  "ai_genie_preparing_speech": "Подготовка аудио",
+  "ai_genie_playing_speech": "Чтение вслух",
+  "service_restart_timeout": "Служба ещё не перезапустилась. Закройте это окно и проверьте сервер."
 }

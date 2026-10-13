@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Tapusin ang pagre-record at pag-transcribe",
   "ai_genie_local_recognition_unavailable": "Hindi available ang lokal na pagkilala. Suriin ang interface at modelo sa Mga Setting.",
   "ai_genie_download_error": "Naantala ang pag-download",
-  "ai_genie_download_paused": "Naka-pause ang pag-download"
+  "ai_genie_download_paused": "Naka-pause ang pag-download",
+  "automan_program_created": "Nagawa ang programa",
+  "automan_program_updated": "Na-update ang programa",
+  "ai_genie_preparing_speech": "Inihahanda ang audio",
+  "ai_genie_playing_speech": "Binabasa nang malakas",
+  "service_restart_timeout": "Hindi pa nagre-restart ang serbisyo. Isara ang window na ito at suriin ang server."
 }

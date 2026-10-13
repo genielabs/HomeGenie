@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Consummavi memoria et transcribo",
   "ai_genie_local_recognition_unavailable": "Recognitio locorum unavailable. Reprehendo interface et exemplar in Occasus.",
   "ai_genie_download_error": "Download interrupit",
-  "ai_genie_download_paused": "Download constiterunt"
+  "ai_genie_download_paused": "Download constiterunt",
+  "automan_program_created": "Programma creatum",
+  "automan_program_updated": "Programma renovatum",
+  "ai_genie_preparing_speech": "Sonus paratur",
+  "ai_genie_playing_speech": "Lectio clara voce",
+  "service_restart_timeout": "Ministerium nondum denuo inceptum est. Hanc fenestram claude et servitorem inspice."
 }

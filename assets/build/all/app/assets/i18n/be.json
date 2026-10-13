@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Скончыце запіс і расшыфруйце",
   "ai_genie_local_recognition_unavailable": "Лакальнае распазнаванне недаступнае. Праверце інтэрфейс і мадэль у наладах.",
   "ai_genie_download_error": "Спампоўка перапынена",
-  "ai_genie_download_paused": "Спампоўка прыпынена"
+  "ai_genie_download_paused": "Спампоўка прыпынена",
+  "automan_program_created": "Праграма створана",
+  "automan_program_updated": "Праграма абноўлена",
+  "ai_genie_preparing_speech": "Падрыхтоўка аўдыя",
+  "ai_genie_playing_speech": "Чытанне ўголас",
+  "service_restart_timeout": "Служба яшчэ не перазапусцілася. Закрыйце гэта акно і праверце сервер."
 }

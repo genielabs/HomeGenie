@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "రికార్డింగ్‌ని ముగించి లిప్యంతరీకరణ చేయండి",
   "ai_genie_local_recognition_unavailable": "స్థానిక గుర్తింపు అందుబాటులో లేదు. సెట్టింగ్‌లలో ఇంటర్‌ఫేస్ మరియు మోడల్‌ని తనిఖీ చేయండి.",
   "ai_genie_download_error": "డౌన్‌లోడ్ అంతరాయం కలిగింది",
-  "ai_genie_download_paused": "డౌన్‌లోడ్ పాజ్ చేయబడింది"
+  "ai_genie_download_paused": "డౌన్‌లోడ్ పాజ్ చేయబడింది",
+  "automan_program_created": "ప్రోగ్రామ్ సృష్టించబడింది",
+  "automan_program_updated": "ప్రోగ్రామ్ నవీకరించబడింది",
+  "ai_genie_preparing_speech": "ఆడియో సిద్ధమవుతోంది",
+  "ai_genie_playing_speech": "బిగ్గరగా చదువుతోంది",
+  "service_restart_timeout": "సేవ ఇంకా పునఃప్రారంభం కాలేదు. ఈ విండోను మూసివేసి సర్వర్‌ను తనిఖీ చేయండి."
 }

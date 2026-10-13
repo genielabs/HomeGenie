@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "ਰਿਕਾਰਡਿੰਗ ਅਤੇ ਪ੍ਰਤੀਲਿਪੀ ਨੂੰ ਪੂਰਾ ਕਰੋ",
   "ai_genie_local_recognition_unavailable": "ਸਥਾਨਕ ਮਾਨਤਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਇੰਟਰਫੇਸ ਅਤੇ ਮਾਡਲ ਦੀ ਜਾਂਚ ਕਰੋ।",
   "ai_genie_download_error": "ਡਾਊਨਲੋਡ ਵਿੱਚ ਰੁਕਾਵਟ ਆਈ",
-  "ai_genie_download_paused": "ਡਾਊਨਲੋਡ ਰੋਕਿਆ ਗਿਆ"
+  "ai_genie_download_paused": "ਡਾਊਨਲੋਡ ਰੋਕਿਆ ਗਿਆ",
+  "automan_program_created": "ਪ੍ਰੋਗਰਾਮ ਬਣਾਇਆ ਗਿਆ",
+  "automan_program_updated": "ਪ੍ਰੋਗਰਾਮ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ",
+  "ai_genie_preparing_speech": "ਆਡੀਓ ਤਿਆਰ ਹੋ ਰਹੀ ਹੈ",
+  "ai_genie_playing_speech": "ਉੱਚੀ ਆਵਾਜ਼ ਵਿੱਚ ਪੜ੍ਹਿਆ ਜਾ ਰਿਹਾ ਹੈ",
+  "service_restart_timeout": "ਸੇਵਾ ਅਜੇ ਮੁੜ ਸ਼ੁਰੂ ਨਹੀਂ ਹੋਈ। ਇਹ ਵਿੰਡੋ ਬੰਦ ਕਰੋ ਅਤੇ ਸਰਵਰ ਦੀ ਜਾਂਚ ਕਰੋ।"
 }

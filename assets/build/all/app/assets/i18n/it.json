@@ -488,7 +488,8 @@
   "Light 2": "Luce 2",
   "Light 4": "Luce 4",
   "Light 5": "Luce 5",
-  "not_found": "Non trovato","homegenie_about": "Informazioni su HomeGenie",
+  "not_found": "Non trovato",
+  "homegenie_about": "Informazioni su HomeGenie",
   "homegenie_about_slogan": "L'Intelligenza Programmabile con IA Agentica locale al 100%.",
   "homegenie_version_label": "Versione",
   "homegenie_support_community_title": "Supporto e Comunità",
@@ -595,5 +596,10 @@
   "ai_genie_finish_recording": "Termina registrazione e trascrivi",
   "ai_genie_local_recognition_unavailable": "Riconoscimento locale non disponibile. Verifica interfaccia e modello nelle impostazioni.",
   "ai_genie_download_error": "Download interrotto",
-  "ai_genie_download_paused": "Download in pausa"
+  "ai_genie_download_paused": "Download in pausa",
+  "automan_program_created": "Programma creato",
+  "automan_program_updated": "Programma aggiornato",
+  "ai_genie_preparing_speech": "Preparazione audio",
+  "ai_genie_playing_speech": "Lettura in corso",
+  "service_restart_timeout": "Il servizio non risulta ancora riavviato. Chiudi questa finestra e controlla il backend."
 }

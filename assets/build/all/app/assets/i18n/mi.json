@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Whakaotihia te tuhi me te tuhi",
   "ai_genie_local_recognition_unavailable": "Kaore i te waatea te tohu a-rohe. Tirohia te atanga me te tauira i roto i nga Tautuhinga.",
   "ai_genie_download_error": "Kua haukotia te tikiake",
-  "ai_genie_download_paused": "Kua whakataa te tikiake"
+  "ai_genie_download_paused": "Kua whakataa te tikiake",
+  "automan_program_created": "Kua waihangatia te papatono",
+  "automan_program_updated": "Kua whakahōutia te papatono",
+  "ai_genie_preparing_speech": "Kei te whakarite oro",
+  "ai_genie_playing_speech": "Kei te pānui ā-waha",
+  "service_restart_timeout": "Kāore anō te ratonga kia tīmata anō. Katia tēnei matapihi, ka tirohia te tūmau."
 }

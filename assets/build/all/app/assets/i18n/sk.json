@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Dokončite nahrávanie a prepisujte",
   "ai_genie_local_recognition_unavailable": "Miestne rozpoznávanie nie je k dispozícii. Skontrolujte rozhranie a model v Nastaveniach.",
   "ai_genie_download_error": "Sťahovanie bolo prerušené",
-  "ai_genie_download_paused": "Sťahovanie pozastavené"
+  "ai_genie_download_paused": "Sťahovanie pozastavené",
+  "automan_program_created": "Program vytvorený",
+  "automan_program_updated": "Program aktualizovaný",
+  "ai_genie_preparing_speech": "Príprava zvuku",
+  "ai_genie_playing_speech": "Čítanie nahlas",
+  "service_restart_timeout": "Služba sa ešte nereštartovala. Zatvorte toto okno a skontrolujte server."
 }

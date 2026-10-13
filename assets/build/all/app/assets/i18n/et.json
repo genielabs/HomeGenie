@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Lõpetage salvestamine ja transkribeerimine",
   "ai_genie_local_recognition_unavailable": "Kohalik tuvastamine pole saadaval. Kontrollige liidest ja mudelit jaotises Seaded.",
   "ai_genie_download_error": "Allalaadimine katkestati",
-  "ai_genie_download_paused": "Allalaadimine on peatatud"
+  "ai_genie_download_paused": "Allalaadimine on peatatud",
+  "automan_program_created": "Programm loodud",
+  "automan_program_updated": "Programm uuendatud",
+  "ai_genie_preparing_speech": "Heli ettevalmistamine",
+  "ai_genie_playing_speech": "Ettelugemine",
+  "service_restart_timeout": "Teenus pole veel taaskäivitunud. Sulge see aken ja kontrolli serverit."
 }

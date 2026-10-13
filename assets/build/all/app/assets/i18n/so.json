@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "dhame duubista oo qor",
   "ai_genie_local_recognition_unavailable": "Aqoonsiga maxalliga ah lama heli karo. Hubi interface-ka iyo qaabka Settings.",
   "ai_genie_download_error": "Soo dejintu waa la joojiyay",
-  "ai_genie_download_paused": "Soo dejintu waa joogsatay"
+  "ai_genie_download_paused": "Soo dejintu waa joogsatay",
+  "automan_program_created": "Barnaamijka waa la abuuray",
+  "automan_program_updated": "Barnaamijka waa la cusboonaysiiyay",
+  "ai_genie_preparing_speech": "Codka ayaa la diyaarinayaa",
+  "ai_genie_playing_speech": "Kor ayaa loo akhrinayaa",
+  "service_restart_timeout": "Adeeggu weli dib uma bilaaban. Xir daaqaddan oo hubi server-ka."
 }

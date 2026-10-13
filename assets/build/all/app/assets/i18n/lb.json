@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Präis\nFäerdeg Opnahmen an transkriberen",
   "ai_genie_local_recognition_unavailable": "Lokal Unerkennung net verfügbar. Kuckt d'Interface an de Modell an Astellungen.",
   "ai_genie_download_error": "Download ënnerbrach",
-  "ai_genie_download_paused": "Download gestoppt"
+  "ai_genie_download_paused": "Download gestoppt",
+  "automan_program_created": "Programm erstallt",
+  "automan_program_updated": "Programm aktualiséiert",
+  "ai_genie_preparing_speech": "Audio gëtt virbereet",
+  "ai_genie_playing_speech": "Vir liesen",
+  "service_restart_timeout": "De Service ass nach net nei gestart. Maacht dës Fënster zou a kontrolléiert de Server."
 }

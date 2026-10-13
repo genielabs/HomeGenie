@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Críochnaigh an taifeadadh agus tras-scríobh",
   "ai_genie_local_recognition_unavailable": "Níl aitheantas áitiúil ar fáil. Seiceáil an comhéadan agus an tsamhail sna Socruithe.",
   "ai_genie_download_error": "Íosluchtaigh briste",
-  "ai_genie_download_paused": "Íosluchtaigh stoptha"
+  "ai_genie_download_paused": "Íosluchtaigh stoptha",
+  "automan_program_created": "Clár cruthaithe",
+  "automan_program_updated": "Clár nuashonraithe",
+  "ai_genie_preparing_speech": "Fuaim á hullmhú",
+  "ai_genie_playing_speech": "Ag léamh os ard",
+  "service_restart_timeout": "Níor atosaigh an tseirbhís fós. Dún an fhuinneog seo agus seiceáil an freastalaí."
 }

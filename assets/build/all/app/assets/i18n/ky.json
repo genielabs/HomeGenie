@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Жаздырууну бүтүрүп, транскрипциялоо",
   "ai_genie_local_recognition_unavailable": "Жергиликтүү таануу жеткиликсиз. Жөндөөлөрдөн интерфейсти жана моделди текшериңиз.",
   "ai_genie_download_error": "Жүктөп алуу үзгүлтүккө учурады",
-  "ai_genie_download_paused": "Жүктөп алуу тындырылды"
+  "ai_genie_download_paused": "Жүктөп алуу тындырылды",
+  "automan_program_created": "Программа түзүлдү",
+  "automan_program_updated": "Программа жаңыртылды",
+  "ai_genie_preparing_speech": "Үн даярдалууда",
+  "ai_genie_playing_speech": "Үн чыгарып окуу",
+  "service_restart_timeout": "Кызмат али кайра иштей элек. Бул терезени жаап, серверди текшериңиз."
 }

@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "રેકોર્ડિંગ અને ટ્રાંસ્ક્રાઇબ સમાપ્ત કરો",
   "ai_genie_local_recognition_unavailable": "સ્થાનિક ઓળખ અનુપલબ્ધ. સેટિંગ્સમાં ઇન્ટરફેસ અને મોડેલ તપાસો.",
   "ai_genie_download_error": "ડાઉનલોડ વિક્ષેપિત",
-  "ai_genie_download_paused": "ડાઉનલોડ થોભાવ્યું"
+  "ai_genie_download_paused": "ડાઉનલોડ થોભાવ્યું",
+  "automan_program_created": "પ્રોગ્રામ બનાવવામાં આવ્યો",
+  "automan_program_updated": "પ્રોગ્રામ અપડેટ થયો",
+  "ai_genie_preparing_speech": "ઓડિયો તૈયાર થઈ રહ્યો છે",
+  "ai_genie_playing_speech": "મોટેથી વાંચી રહ્યું છે",
+  "service_restart_timeout": "સેવા હજી ફરી શરૂ થઈ નથી. આ વિન્ડો બંધ કરો અને સર્વર તપાસો."
 }

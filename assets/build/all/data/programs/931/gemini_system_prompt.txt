@@ -156,6 +156,9 @@ Directives operate on the context exposed by `this.declare()`.
     ```
 *   **Never** use `position: relative` combined with `height: 100%` for the main `.container` if it acts as a wrapper for absolute elements (like a canvas or a game HUD).
 
+### 2.10 FLEX SCROLL CONTAINERS (FLA)
+When an element inside a flex column container (`layout="column ..."`) needs to scroll vertically while keeping headers or status bars fixed, ALWAYS apply the FLA attribute `self="size-x1"` to that scrolling element, combined with `overflow-y: auto;` and `min-height: 0;`. This constrains the element along the container's main flex axis, preventing layout collapse and guaranteeing smooth, isolated vertical scrolling.
+
 ---
 
 # SECTION 3: AUTOMATION PROGRAMS (BACKEND C#)

@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Fini anrejistreman epi transkri",
   "ai_genie_local_recognition_unavailable": "Rekonesans lokal pa disponib. Tcheke koòdone a ak modèl nan Anviwònman.",
   "ai_genie_download_error": "Download entèwonp",
-  "ai_genie_download_paused": "Download pran poz"
+  "ai_genie_download_paused": "Download pran poz",
+  "automan_program_created": "Pwogram kreye",
+  "automan_program_updated": "Pwogram mete ajou",
+  "ai_genie_preparing_speech": "Preparasyon odyo",
+  "ai_genie_playing_speech": "Lekti awotvwa",
+  "service_restart_timeout": "Sèvis la poko rekòmanse. Fèmen fenèt sa a epi verifye sèvè a."
 }

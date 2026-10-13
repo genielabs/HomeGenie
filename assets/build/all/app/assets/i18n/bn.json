@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "রেকর্ডিং শেষ করুন এবং প্রতিলিপি করুন",
   "ai_genie_local_recognition_unavailable": "স্থানীয় স্বীকৃতি অনুপলব্ধ. সেটিংসে ইন্টারফেস এবং মডেল পরীক্ষা করুন।",
   "ai_genie_download_error": "ডাউনলোড বাধাগ্রস্ত হয়েছে",
-  "ai_genie_download_paused": "ডাউনলোড বিরাম দেওয়া হয়েছে৷"
+  "ai_genie_download_paused": "ডাউনলোড বিরাম দেওয়া হয়েছে৷",
+  "automan_program_created": "প্রোগ্রাম তৈরি হয়েছে",
+  "automan_program_updated": "প্রোগ্রাম আপডেট হয়েছে",
+  "ai_genie_preparing_speech": "অডিও প্রস্তুত হচ্ছে",
+  "ai_genie_playing_speech": "উচ্চস্বরে পড়া হচ্ছে",
+  "service_restart_timeout": "পরিষেবাটি এখনও পুনরায় চালু হয়নি। এই উইন্ডোটি বন্ধ করুন এবং সার্ভার পরীক্ষা করুন।"
 }

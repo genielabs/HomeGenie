@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Amaitu grabaketa eta transkribatu",
   "ai_genie_local_recognition_unavailable": "Tokiko aitorpena ez dago erabilgarri. Egiaztatu interfazea eta eredua Ezarpenak atalean.",
   "ai_genie_download_error": "Deskarga eten da",
-  "ai_genie_download_paused": "Deskarga pausatu da"
+  "ai_genie_download_paused": "Deskarga pausatu da",
+  "automan_program_created": "Programa sortu da",
+  "automan_program_updated": "Programa eguneratu da",
+  "ai_genie_preparing_speech": "Audioa prestatzen",
+  "ai_genie_playing_speech": "Ozen irakurtzen",
+  "service_restart_timeout": "Zerbitzua ez da oraindik berrabiarazi. Itxi leiho hau eta egiaztatu zerbitzaria."
 }

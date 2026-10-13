@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "መቅዳት ጨርስ እና ገልብጥ",
   "ai_genie_local_recognition_unavailable": "የአካባቢ እውቅና የለም። በይነገጹን እና ሞዴሉን በቅንብሮች ውስጥ ያረጋግጡ።",
   "ai_genie_download_error": "ማውረድ ተቋርጧል",
-  "ai_genie_download_paused": "ማውረድ ባለበት ቆሟል"
+  "ai_genie_download_paused": "ማውረድ ባለበት ቆሟል",
+  "automan_program_created": "ፕሮግራሙ ተፈጥሯል",
+  "automan_program_updated": "ፕሮግራሙ ተዘምኗል",
+  "ai_genie_preparing_speech": "ድምፅ በማዘጋጀት ላይ",
+  "ai_genie_playing_speech": "ጮክ ብሎ በማንበብ ላይ",
+  "service_restart_timeout": "አገልግሎቱ ገና እንደገና አልተጀመረም። ይህን መስኮት ይዝጉና አገልጋዩን ያረጋግጡ።"
 }

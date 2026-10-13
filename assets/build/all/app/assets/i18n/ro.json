@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Terminați înregistrarea și transcrieți",
   "ai_genie_local_recognition_unavailable": "Recunoașterea locală indisponibilă. Verificați interfața și modelul în Setări.",
   "ai_genie_download_error": "Descărcarea a fost întreruptă",
-  "ai_genie_download_paused": "Descărcarea a fost întreruptă"
+  "ai_genie_download_paused": "Descărcarea a fost întreruptă",
+  "automan_program_created": "Program creat",
+  "automan_program_updated": "Program actualizat",
+  "ai_genie_preparing_speech": "Pregătire audio",
+  "ai_genie_playing_speech": "Citire cu voce tare",
+  "service_restart_timeout": "Serviciul nu a repornit încă. Închideți această fereastră și verificați serverul."
 }

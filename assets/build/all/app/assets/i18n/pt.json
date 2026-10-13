@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Concluir a gravação e transcrever",
   "ai_genie_local_recognition_unavailable": "Reconhecimento local indisponível. Verifique a interface e o modelo em Configurações.",
   "ai_genie_download_error": "Download interrompido",
-  "ai_genie_download_paused": "Download pausado"
+  "ai_genie_download_paused": "Download pausado",
+  "automan_program_created": "Programa criado",
+  "automan_program_updated": "Programa atualizado",
+  "ai_genie_preparing_speech": "Preparando áudio",
+  "ai_genie_playing_speech": "Leitura em voz alta",
+  "service_restart_timeout": "O serviço ainda não foi reiniciado. Feche esta janela e verifique o servidor."
 }

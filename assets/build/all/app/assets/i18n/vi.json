@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Kết thúc ghi âm và phiên âm",
   "ai_genie_local_recognition_unavailable": "Nhận dạng cục bộ không có sẵn. Kiểm tra giao diện và model trong Cài đặt.",
   "ai_genie_download_error": "Tải xuống bị gián đoạn",
-  "ai_genie_download_paused": "Đã tạm dừng tải xuống"
+  "ai_genie_download_paused": "Đã tạm dừng tải xuống",
+  "automan_program_created": "Đã tạo chương trình",
+  "automan_program_updated": "Đã cập nhật chương trình",
+  "ai_genie_preparing_speech": "Đang chuẩn bị âm thanh",
+  "ai_genie_playing_speech": "Đang đọc thành tiếng",
+  "service_restart_timeout": "Dịch vụ chưa khởi động lại. Hãy đóng cửa sổ này và kiểm tra máy chủ."
 }

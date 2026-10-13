@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Завршете го снимањето и препишете",
   "ai_genie_local_recognition_unavailable": "Локалното препознавање е недостапно. Проверете ги интерфејсот и моделот во Поставки.",
   "ai_genie_download_error": "Преземањето е прекинато",
-  "ai_genie_download_paused": "Преземањето е паузирано"
+  "ai_genie_download_paused": "Преземањето е паузирано",
+  "automan_program_created": "Програмата е создадена",
+  "automan_program_updated": "Програмата е ажурирана",
+  "ai_genie_preparing_speech": "Подготовка на аудио",
+  "ai_genie_playing_speech": "Читање наглас",
+  "service_restart_timeout": "Услугата сè уште не е рестартирана. Затворете го овој прозорец и проверете го серверот."
 }

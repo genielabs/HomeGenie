@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Përfundoni regjistrimin dhe transkriptoni",
   "ai_genie_local_recognition_unavailable": "Njohja lokale nuk ofrohet. Kontrolloni ndërfaqen dhe modelin te \"Cilësimet\".",
   "ai_genie_download_error": "Shkarkimi u ndërpre",
-  "ai_genie_download_paused": "Shkarkimi u ndërpre"
+  "ai_genie_download_paused": "Shkarkimi u ndërpre",
+  "automan_program_created": "Programi u krijua",
+  "automan_program_updated": "Programi u përditësua",
+  "ai_genie_preparing_speech": "Po përgatitet audioja",
+  "ai_genie_playing_speech": "Po lexohet me zë",
+  "service_restart_timeout": "Shërbimi ende nuk është rinisur. Mbyllni këtë dritare dhe kontrolloni serverin."
 }

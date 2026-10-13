@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Fejezze be a felvételt és az átírást",
   "ai_genie_local_recognition_unavailable": "A helyi felismerés nem érhető el. Ellenőrizze az interfészt és a modellt a Beállításokban.",
   "ai_genie_download_error": "Letöltés megszakadt",
-  "ai_genie_download_paused": "Letöltés szünetel"
+  "ai_genie_download_paused": "Letöltés szünetel",
+  "automan_program_created": "Program létrehozva",
+  "automan_program_updated": "Program frissítve",
+  "ai_genie_preparing_speech": "Hang előkészítése",
+  "ai_genie_playing_speech": "Felolvasás folyamatban",
+  "service_restart_timeout": "A szolgáltatás még nem indult újra. Zárja be ezt az ablakot, és ellenőrizze a szervert."
 }

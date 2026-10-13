@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "रेकॉर्डिंग पूर्ण करा आणि नक्कल करा",
   "ai_genie_local_recognition_unavailable": "स्थानिक ओळख अनुपलब्ध. सेटिंग्जमध्ये इंटरफेस आणि मॉडेल तपासा.",
   "ai_genie_download_error": "डाउनलोड व्यत्यय आला",
-  "ai_genie_download_paused": "डाउनलोड थांबवले"
+  "ai_genie_download_paused": "डाउनलोड थांबवले",
+  "automan_program_created": "प्रोग्राम तयार केला",
+  "automan_program_updated": "प्रोग्राम अद्ययावत केला",
+  "ai_genie_preparing_speech": "ऑडिओ तयार होत आहे",
+  "ai_genie_playing_speech": "मोठ्याने वाचले जात आहे",
+  "service_restart_timeout": "सेवा अजून पुन्हा सुरू झालेली नाही. ही विंडो बंद करा आणि सर्व्हर तपासा."
 }

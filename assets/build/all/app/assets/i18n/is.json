@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Ljúktu við upptöku og umritaðu",
   "ai_genie_local_recognition_unavailable": "Staðbundin viðurkenning ekki tiltæk. Athugaðu viðmótið og líkanið í Stillingar.",
   "ai_genie_download_error": "Niðurhal truflað",
-  "ai_genie_download_paused": "Hlé gert á niðurhali"
+  "ai_genie_download_paused": "Hlé gert á niðurhali",
+  "automan_program_created": "Forrit búið til",
+  "automan_program_updated": "Forrit uppfært",
+  "ai_genie_preparing_speech": "Hljóð undirbúið",
+  "ai_genie_playing_speech": "Lesið upphátt",
+  "service_restart_timeout": "Þjónustan hefur ekki enn endurræst. Lokaðu þessum glugga og athugaðu netþjóninn."
 }

@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Сабт ва транскрипсияро анҷом диҳед",
   "ai_genie_local_recognition_unavailable": "Шиносоии маҳаллӣ дастрас нест. Интерфейс ва моделро дар Танзимот санҷед.",
   "ai_genie_download_error": "Зеркашӣ қатъ карда шуд",
-  "ai_genie_download_paused": "Зеркашӣ таваққуф карда шуд"
+  "ai_genie_download_paused": "Зеркашӣ таваққуф карда шуд",
+  "automan_program_created": "Барнома сохта шуд",
+  "automan_program_updated": "Барнома нав карда шуд",
+  "ai_genie_preparing_speech": "Омодасозии садо",
+  "ai_genie_playing_speech": "Бо овози баланд хондан",
+  "service_restart_timeout": "Хидмат ҳанӯз аз нав оғоз нашудааст. Ин тирезаро пӯшед ва серверро санҷед."
 }

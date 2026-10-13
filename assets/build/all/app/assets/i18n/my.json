@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "မှတ်တမ်းတင်ပြီး စာသားမှတ်တမ်းကို အပြီးသတ်ပါ။",
   "ai_genie_local_recognition_unavailable": "ဒေသတွင်း အသိအမှတ်ပြုမှု မရနိုင်ပါ။ ဆက်တင်များတွင် အင်တာဖေ့စ်နှင့် မော်ဒယ်ကို စစ်ဆေးပါ။",
   "ai_genie_download_error": "ဒေါင်းလုဒ် ပြတ်တောက်သွားသည်။",
-  "ai_genie_download_paused": "ဒေါင်းလုဒ်ကို ခေတ္တရပ်ထားသည်။"
+  "ai_genie_download_paused": "ဒေါင်းလုဒ်ကို ခေတ္တရပ်ထားသည်။",
+  "automan_program_created": "ပရိုဂရမ် ဖန်တီးပြီးပါပြီ",
+  "automan_program_updated": "ပရိုဂရမ် အပ်ဒိတ်လုပ်ပြီးပါပြီ",
+  "ai_genie_preparing_speech": "အသံ ပြင်ဆင်နေသည်",
+  "ai_genie_playing_speech": "အသံထွက် ဖတ်နေသည်",
+  "service_restart_timeout": "ဝန်ဆောင်မှုသည် ပြန်လည်မစတင်ရသေးပါ။ ဤဝင်းဒိုးကို ပိတ်ပြီး ဆာဗာကို စစ်ဆေးပါ။"
 }

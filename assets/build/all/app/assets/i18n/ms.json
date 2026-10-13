@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Selesai rakaman dan transkripsi",
   "ai_genie_local_recognition_unavailable": "Pengiktirafan tempatan tidak tersedia. Semak antara muka dan model dalam Tetapan.",
   "ai_genie_download_error": "Muat turun terganggu",
-  "ai_genie_download_paused": "Muat turun dijeda"
+  "ai_genie_download_paused": "Muat turun dijeda",
+  "automan_program_created": "Program dicipta",
+  "automan_program_updated": "Program dikemas kini",
+  "ai_genie_preparing_speech": "Menyediakan audio",
+  "ai_genie_playing_speech": "Membaca dengan lantang",
+  "service_restart_timeout": "Perkhidmatan belum dimulakan semula. Tutup tetingkap ini dan periksa pelayan."
 }

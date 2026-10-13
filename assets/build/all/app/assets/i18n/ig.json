@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Mechaa ndekọ wee degharịa ya",
   "ai_genie_local_recognition_unavailable": "Nkwado mpaghara adịghị. Lelee interface na ihe nlereanya na Ntọala.",
   "ai_genie_download_error": "Akwụsịla nbudata",
-  "ai_genie_download_paused": "Nbudata kwụsịtụrụ"
+  "ai_genie_download_paused": "Nbudata kwụsịtụrụ",
+  "automan_program_created": "Emepụtara mmemme",
+  "automan_program_updated": "Emelitere mmemme",
+  "ai_genie_preparing_speech": "A na-akwadebe ụda",
+  "ai_genie_playing_speech": "A na-agụpụta n’olu",
+  "service_restart_timeout": "Ọrụ ahụ amalitebeghị ọzọ. Mechie windo a ma lelee sava ahụ."
 }

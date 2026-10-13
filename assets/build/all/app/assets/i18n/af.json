@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Voltooi opname en transkribeer",
   "ai_genie_local_recognition_unavailable": "Plaaslike erkenning nie beskikbaar nie. Gaan die koppelvlak en model na in Instellings.",
   "ai_genie_download_error": "Aflaai onderbreek",
-  "ai_genie_download_paused": "Aflaai is onderbreek"
+  "ai_genie_download_paused": "Aflaai is onderbreek",
+  "automan_program_created": "Program geskep",
+  "automan_program_updated": "Program opgedateer",
+  "ai_genie_preparing_speech": "Oudio word voorberei",
+  "ai_genie_playing_speech": "Lees hardop",
+  "service_restart_timeout": "Die diens het nog nie herbegin nie. Maak hierdie venster toe en kontroleer die bediener."
 }

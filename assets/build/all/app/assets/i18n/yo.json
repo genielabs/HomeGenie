@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Pari gbigbasilẹ ki o kọ silẹ",
   "ai_genie_local_recognition_unavailable": "Ti idanimọ agbegbe ko si. Ṣayẹwo wiwo ati awoṣe ni Eto.",
   "ai_genie_download_error": "Gbigbasilẹ Idilọwọ",
-  "ai_genie_download_paused": "Gbigba lati ayelujara duro"
+  "ai_genie_download_paused": "Gbigba lati ayelujara duro",
+  "automan_program_created": "A ti ṣẹ̀dá ètò",
+  "automan_program_updated": "A ti ṣe àtúnṣe ètò",
+  "ai_genie_preparing_speech": "Ń pèsè ohùn",
+  "ai_genie_playing_speech": "Ń kà sókè",
+  "service_restart_timeout": "Iṣẹ́ náà kò tíì tún bẹ̀rẹ̀. Pa fèrèsé yìí dé kí o sì ṣàyẹ̀wò olupin."
 }

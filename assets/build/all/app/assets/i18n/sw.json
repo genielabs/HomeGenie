@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Maliza kurekodi na kuandika",
   "ai_genie_local_recognition_unavailable": "Utambuzi wa eneo haupatikani. Angalia kiolesura na muundo katika Mipangilio.",
   "ai_genie_download_error": "Upakuaji umekatizwa",
-  "ai_genie_download_paused": "Upakuaji umesitishwa"
+  "ai_genie_download_paused": "Upakuaji umesitishwa",
+  "automan_program_created": "Programu imeundwa",
+  "automan_program_updated": "Programu imesasishwa",
+  "ai_genie_preparing_speech": "Inaandaa sauti",
+  "ai_genie_playing_speech": "Inasoma kwa sauti",
+  "service_restart_timeout": "Huduma bado haijaanza upya. Funga dirisha hili na ukague seva."
 }

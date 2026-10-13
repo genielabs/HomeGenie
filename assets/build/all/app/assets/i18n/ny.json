@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Malizitsani kujambula ndi kulemba",
   "ai_genie_local_recognition_unavailable": "Zodziwika kwanuko sizikupezeka. Chongani mawonekedwe ndi chitsanzo mu Zikhazikiko.\nMtengo wa",
   "ai_genie_download_error": "Kutsitsa kwasokonezedwa",
-  "ai_genie_download_paused": "Kutsitsa kwayimitsidwa"
+  "ai_genie_download_paused": "Kutsitsa kwayimitsidwa",
+  "automan_program_created": "Pulogalamu yapangidwa",
+  "automan_program_updated": "Pulogalamu yasinthidwa",
+  "ai_genie_preparing_speech": "Kukonza mawu",
+  "ai_genie_playing_speech": "Kuwerenga mokweza",
+  "service_restart_timeout": "Ntchitoyi sinayambirenso. Tsekani zenerali ndipo onani seva."
 }

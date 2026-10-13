@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "បញ្ចប់ការថត និងចម្លង",
   "ai_genie_local_recognition_unavailable": "ការទទួលស្គាល់ក្នុងស្រុកមិនអាចប្រើបានទេ។ ពិនិត្យចំណុចប្រទាក់ និងម៉ូដែលនៅក្នុងការកំណត់។",
   "ai_genie_download_error": "ការទាញយកត្រូវបានរំខាន",
-  "ai_genie_download_paused": "ការទាញយកត្រូវបានផ្អាក"
+  "ai_genie_download_paused": "ការទាញយកត្រូវបានផ្អាក",
+  "automan_program_created": "បានបង្កើតកម្មវិធី",
+  "automan_program_updated": "បានធ្វើបច្ចុប្បន្នភាពកម្មវិធី",
+  "ai_genie_preparing_speech": "កំពុងរៀបចំសំឡេង",
+  "ai_genie_playing_speech": "កំពុងអានឮៗ",
+  "service_restart_timeout": "សេវាកម្មមិនទាន់បានចាប់ផ្តើមឡើងវិញទេ។ បិទបង្អួចនេះ ហើយពិនិត្យម៉ាស៊ីនមេ។"
 }

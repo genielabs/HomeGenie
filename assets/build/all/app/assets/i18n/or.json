@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "ରେକର୍ଡିଂ ଶେଷ କରନ୍ତୁ ଏବଂ ଟ୍ରାନ୍ସକ୍ରିପସନ୍ କରନ୍ତୁ |",
   "ai_genie_local_recognition_unavailable": "ସ୍ଥାନୀୟ ସ୍ୱୀକୃତି ଉପଲବ୍ଧ ନାହିଁ | ସେଟିଂସମୂହରେ ଇଣ୍ଟରଫେସ୍ ଏବଂ ମଡେଲ୍ ଯାଞ୍ଚ କରନ୍ତୁ |",
   "ai_genie_download_error": "ଡାଉନଲୋଡ୍ ବାଧାପ୍ରାପ୍ତ |",
-  "ai_genie_download_paused": "ଡାଉନଲୋଡ୍ ବିରତ |"
+  "ai_genie_download_paused": "ଡାଉନଲୋଡ୍ ବିରତ |",
+  "automan_program_created": "ପ୍ରୋଗ୍ରାମ ସୃଷ୍ଟି ହୋଇଛି",
+  "automan_program_updated": "ପ୍ରୋଗ୍ରାମ ଅପଡେଟ୍ ହୋଇଛି",
+  "ai_genie_preparing_speech": "ଅଡିଓ ପ୍ରସ୍ତୁତ ହେଉଛି",
+  "ai_genie_playing_speech": "ଉଚ୍ଚ ସ୍ୱରରେ ପଢ଼ାଯାଉଛି",
+  "service_restart_timeout": "ସେବା ଏପର୍ଯ୍ୟନ୍ତ ପୁନଃ ଆରମ୍ଭ ହୋଇନାହିଁ। ଏହି ୱିଣ୍ଡୋ ବନ୍ଦ କରନ୍ତୁ ଏବଂ ସର୍ଭର ଯାଞ୍ଚ କରନ୍ତୁ।"
 }

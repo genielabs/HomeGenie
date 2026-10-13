@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Yozishni tugating va transkripsiya qiling",
   "ai_genie_local_recognition_unavailable": "Mahalliy tanib bo‘lmaydi. Sozlamalarda interfeys va modelni tekshiring.",
   "ai_genie_download_error": "Yuklab olish uzildi",
-  "ai_genie_download_paused": "Yuklab olish toʻxtatildi"
+  "ai_genie_download_paused": "Yuklab olish toʻxtatildi",
+  "automan_program_created": "Dastur yaratildi",
+  "automan_program_updated": "Dastur yangilandi",
+  "ai_genie_preparing_speech": "Audio tayyorlanmoqda",
+  "ai_genie_playing_speech": "Ovoz chiqarib o‘qilmoqda",
+  "service_restart_timeout": "Xizmat hali qayta ishga tushmadi. Ushbu oynani yoping va serverni tekshiring."
 }

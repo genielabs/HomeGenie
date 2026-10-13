@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "完成錄音並轉錄",
   "ai_genie_local_recognition_unavailable": "本地識別不可用。在“設定”中檢查介面和型號。",
   "ai_genie_download_error": "下載中斷",
-  "ai_genie_download_paused": "下載已暫停"
+  "ai_genie_download_paused": "下載已暫停",
+  "automan_program_created": "程式已建立",
+  "automan_program_updated": "程式已更新",
+  "ai_genie_preparing_speech": "正在準備音訊",
+  "ai_genie_playing_speech": "正在朗讀",
+  "service_restart_timeout": "服務尚未重新啟動。請關閉此視窗並檢查伺服器。"
 }

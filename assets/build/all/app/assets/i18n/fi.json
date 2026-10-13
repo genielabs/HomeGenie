@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Viimeistele tallennus ja litteroi",
   "ai_genie_local_recognition_unavailable": "Paikallinen tunnistus ei ole käytettävissä. Tarkista käyttöliittymä ja malli asetuksista.",
   "ai_genie_download_error": "Lataus keskeytetty",
-  "ai_genie_download_paused": "Lataus keskeytetty"
+  "ai_genie_download_paused": "Lataus keskeytetty",
+  "automan_program_created": "Ohjelma luotu",
+  "automan_program_updated": "Ohjelma päivitetty",
+  "ai_genie_preparing_speech": "Valmistellaan ääntä",
+  "ai_genie_playing_speech": "Luetaan ääneen",
+  "service_restart_timeout": "Palvelu ei ole vielä käynnistynyt uudelleen. Sulje tämä ikkuna ja tarkista palvelin."
 }

@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Zakończ nagrywanie i dokonaj transkrypcji",
   "ai_genie_local_recognition_unavailable": "Rozpoznawanie lokalne niedostępne. Sprawdź interfejs i model w Ustawieniach.",
   "ai_genie_download_error": "Pobieranie zostało przerwane",
-  "ai_genie_download_paused": "Pobieranie wstrzymane"
+  "ai_genie_download_paused": "Pobieranie wstrzymane",
+  "automan_program_created": "Program utworzony",
+  "automan_program_updated": "Program zaktualizowany",
+  "ai_genie_preparing_speech": "Przygotowywanie dźwięku",
+  "ai_genie_playing_speech": "Czytanie na głos",
+  "service_restart_timeout": "Usługa jeszcze się nie uruchomiła ponownie. Zamknij to okno i sprawdź serwer."
 }

@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Pabeidziet ierakstīšanu un pārrakstīšanu",
   "ai_genie_local_recognition_unavailable": "Vietējā atpazīšana nav pieejama. Pārbaudiet saskarni un modeli sadaļā Iestatījumi.",
   "ai_genie_download_error": "Lejupielāde pārtraukta",
-  "ai_genie_download_paused": "Lejupielāde ir apturēta"
+  "ai_genie_download_paused": "Lejupielāde ir apturēta",
+  "automan_program_created": "Programma izveidota",
+  "automan_program_updated": "Programma atjaunināta",
+  "ai_genie_preparing_speech": "Audio sagatavošana",
+  "ai_genie_playing_speech": "Lasīšana balsī",
+  "service_restart_timeout": "Pakalpojums vēl nav restartēts. Aizveriet šo logu un pārbaudiet serveri."
 }

@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "रेकर्डिङ र ट्रान्सक्राइब समाप्त गर्नुहोस्",
   "ai_genie_local_recognition_unavailable": "स्थानीय पहिचान उपलब्ध छैन। सेटिङ्हरूमा इन्टरफेस र मोडेल जाँच गर्नुहोस्।",
   "ai_genie_download_error": "डाउनलोड अवरोध भयो",
-  "ai_genie_download_paused": "डाउनलोड रोकियो"
+  "ai_genie_download_paused": "डाउनलोड रोकियो",
+  "automan_program_created": "प्रोग्राम सिर्जना गरियो",
+  "automan_program_updated": "प्रोग्राम अद्यावधिक गरियो",
+  "ai_genie_preparing_speech": "अडियो तयार हुँदैछ",
+  "ai_genie_playing_speech": "ठूलो स्वरमा पढिँदैछ",
+  "service_restart_timeout": "सेवा अझै पुनः सुरु भएको छैन। यो विन्डो बन्द गर्नुहोस् र सर्भर जाँच गर्नुहोस्।"
 }

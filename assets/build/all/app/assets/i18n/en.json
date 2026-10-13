@@ -1,5 +1,5 @@
 {
-  "home":"Home",
+  "home": "Home",
   "setup": "Setup",
   "preferences": "Preferences",
   "logging": "Logging",
@@ -595,5 +595,10 @@
   "ai_genie_finish_recording": "Finish recording and transcribe",
   "ai_genie_local_recognition_unavailable": "Local recognition unavailable. Check the interface and model in Settings.",
   "ai_genie_download_error": "Download interrupted",
-  "ai_genie_download_paused": "Download paused"
+  "ai_genie_download_paused": "Download paused",
+  "automan_program_created": "Program created",
+  "automan_program_updated": "Program updated",
+  "ai_genie_preparing_speech": "Preparing audio",
+  "ai_genie_playing_speech": "Reading aloud",
+  "service_restart_timeout": "The service has not restarted yet. Close this dialog and check the backend."
 }

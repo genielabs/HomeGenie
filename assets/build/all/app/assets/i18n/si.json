@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "පටිගත කිරීම අවසන් කර පිටපත් කරන්න",
   "ai_genie_local_recognition_unavailable": "දේශීය හඳුනාගැනීමක් නොමැත. සැකසුම් තුළ අතුරු මුහුණත සහ ආකෘතිය පරීක්ෂා කරන්න.",
   "ai_genie_download_error": "බාගැනීම බාධා විය",
-  "ai_genie_download_paused": "බාගැනීම විරාම කරන ලදී"
+  "ai_genie_download_paused": "බාගැනීම විරාම කරන ලදී",
+  "automan_program_created": "වැඩසටහන සාදන ලදී",
+  "automan_program_updated": "වැඩසටහන යාවත්කාලීන කරන ලදී",
+  "ai_genie_preparing_speech": "ශ්‍රව්‍ය සූදානම් කරමින්",
+  "ai_genie_playing_speech": "හඬ නඟා කියවමින්",
+  "service_restart_timeout": "සේවාව තවමත් නැවත ආරම්භ වී නැත. මෙම කවුළුව වසා සේවාදායකය පරීක්ෂා කරන්න."
 }

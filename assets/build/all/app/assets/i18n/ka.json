@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "დაასრულეთ ჩაწერა და გადაწერეთ",
   "ai_genie_local_recognition_unavailable": "ადგილობრივი ამოცნობა მიუწვდომელია. შეამოწმეთ ინტერფეისი და მოდელი პარამეტრებში.",
   "ai_genie_download_error": "ჩამოტვირთვა შეწყდა",
-  "ai_genie_download_paused": "ჩამოტვირთვა შეჩერებულია"
+  "ai_genie_download_paused": "ჩამოტვირთვა შეჩერებულია",
+  "automan_program_created": "პროგრამა შეიქმნა",
+  "automan_program_updated": "პროგრამა განახლდა",
+  "ai_genie_preparing_speech": "აუდიოს მომზადება",
+  "ai_genie_playing_speech": "ხმამაღლა კითხვა",
+  "service_restart_timeout": "სერვისი ჯერ არ გადატვირთულა. დახურეთ ეს ფანჯარა და შეამოწმეთ სერვერი."
 }

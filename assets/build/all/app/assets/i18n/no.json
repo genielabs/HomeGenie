@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Fullfør opptak og transkriber",
   "ai_genie_local_recognition_unavailable": "Lokal anerkjennelse utilgjengelig. Sjekk grensesnittet og modellen i Innstillinger.",
   "ai_genie_download_error": "Nedlastingen ble avbrutt",
-  "ai_genie_download_paused": "Nedlasting stoppet midlertidig"
+  "ai_genie_download_paused": "Nedlasting stoppet midlertidig",
+  "automan_program_created": "Program opprettet",
+  "automan_program_updated": "Program oppdatert",
+  "ai_genie_preparing_speech": "Forbereder lyd",
+  "ai_genie_playing_speech": "Leser høyt",
+  "service_restart_timeout": "Tjenesten har ikke startet på nytt ennå. Lukk dette vinduet og kontroller serveren."
 }

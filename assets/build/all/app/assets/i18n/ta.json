@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "ரெக்கார்டிங்கை முடித்து எழுதவும்",
   "ai_genie_local_recognition_unavailable": "உள்ளூர் அங்கீகாரம் கிடைக்கவில்லை. அமைப்புகளில் இடைமுகம் மற்றும் மாதிரியை சரிபார்க்கவும்.",
   "ai_genie_download_error": "பதிவிறக்கம் தடைபட்டது",
-  "ai_genie_download_paused": "பதிவிறக்கம் இடைநிறுத்தப்பட்டது"
+  "ai_genie_download_paused": "பதிவிறக்கம் இடைநிறுத்தப்பட்டது",
+  "automan_program_created": "நிரல் உருவாக்கப்பட்டது",
+  "automan_program_updated": "நிரல் புதுப்பிக்கப்பட்டது",
+  "ai_genie_preparing_speech": "ஒலி தயாராகிறது",
+  "ai_genie_playing_speech": "சத்தமாக வாசிக்கிறது",
+  "service_restart_timeout": "சேவை இன்னும் மீண்டும் தொடங்கவில்லை. இந்தச் சாளரத்தை மூடிவிட்டு சேவையகத்தைச் சரிபார்க்கவும்."
 }

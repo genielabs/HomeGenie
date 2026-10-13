@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "റെക്കോർഡിംഗ് പൂർത്തിയാക്കി ട്രാൻസ്ക്രൈബ് ചെയ്യുക",
   "ai_genie_local_recognition_unavailable": "പ്രാദേശിക അംഗീകാരം ലഭ്യമല്ല. ക്രമീകരണങ്ങളിൽ ഇൻ്റർഫേസും മോഡലും പരിശോധിക്കുക.",
   "ai_genie_download_error": "ഡൗൺലോഡ് തടസ്സപ്പെട്ടു",
-  "ai_genie_download_paused": "ഡൗൺലോഡ് താൽക്കാലികമായി നിർത്തി"
+  "ai_genie_download_paused": "ഡൗൺലോഡ് താൽക്കാലികമായി നിർത്തി",
+  "automan_program_created": "പ്രോഗ്രാം സൃഷ്ടിച്ചു",
+  "automan_program_updated": "പ്രോഗ്രാം പുതുക്കി",
+  "ai_genie_preparing_speech": "ഓഡിയോ തയ്യാറാക്കുന്നു",
+  "ai_genie_playing_speech": "ഉച്ചത്തിൽ വായിക്കുന്നു",
+  "service_restart_timeout": "സേവനം ഇതുവരെ പുനരാരംഭിച്ചിട്ടില്ല. ഈ വിൻഡോ അടച്ച് സെർവർ പരിശോധിക്കുക."
 }

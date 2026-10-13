@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Užbaikite įrašymą ir perrašykite",
   "ai_genie_local_recognition_unavailable": "Vietinis atpažinimas nepasiekiamas. Patikrinkite sąsają ir modelį nustatymuose.",
   "ai_genie_download_error": "Atsisiuntimas nutrauktas",
-  "ai_genie_download_paused": "Atsisiuntimas pristabdytas"
+  "ai_genie_download_paused": "Atsisiuntimas pristabdytas",
+  "automan_program_created": "Programa sukurta",
+  "automan_program_updated": "Programa atnaujinta",
+  "ai_genie_preparing_speech": "Ruošiamas garsas",
+  "ai_genie_playing_speech": "Skaitoma balsu",
+  "service_restart_timeout": "Paslauga dar nepasileido iš naujo. Uždarykite šį langą ir patikrinkite serverį."
 }

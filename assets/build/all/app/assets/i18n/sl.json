@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Dokončajte snemanje in prepišite",
   "ai_genie_local_recognition_unavailable": "Lokalno prepoznavanje ni na voljo. Preverite vmesnik in model v nastavitvah.",
   "ai_genie_download_error": "Prenos prekinjen",
-  "ai_genie_download_paused": "Prenos zaustavljen"
+  "ai_genie_download_paused": "Prenos zaustavljen",
+  "automan_program_created": "Program ustvarjen",
+  "automan_program_updated": "Program posodobljen",
+  "ai_genie_preparing_speech": "Priprava zvoka",
+  "ai_genie_playing_speech": "Branje na glas",
+  "service_restart_timeout": "Storitev se še ni znova zagnala. Zaprite to okno in preverite strežnik."
 }

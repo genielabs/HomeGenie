@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Kaydı bitirin ve metne dönüştürün",
   "ai_genie_local_recognition_unavailable": "Yerel tanıma kullanılamıyor. Ayarlar'da arayüzü ve modeli kontrol edin.",
   "ai_genie_download_error": "İndirme işlemi kesintiye uğradı",
-  "ai_genie_download_paused": "İndirme duraklatıldı"
+  "ai_genie_download_paused": "İndirme duraklatıldı",
+  "automan_program_created": "Program oluşturuldu",
+  "automan_program_updated": "Program güncellendi",
+  "ai_genie_preparing_speech": "Ses hazırlanıyor",
+  "ai_genie_playing_speech": "Sesli okunuyor",
+  "service_restart_timeout": "Hizmet henüz yeniden başlamadı. Bu pencereyi kapatın ve sunucuyu kontrol edin."
 }

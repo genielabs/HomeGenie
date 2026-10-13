@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "録音と文字起こしを終了する",
   "ai_genie_local_recognition_unavailable": "ローカル認識は利用できません。設定でインターフェースとモデルを確認してください。",
   "ai_genie_download_error": "ダウンロードが中断されました",
-  "ai_genie_download_paused": "ダウンロードが一時停止されました"
+  "ai_genie_download_paused": "ダウンロードが一時停止されました",
+  "automan_program_created": "プログラムを作成しました",
+  "automan_program_updated": "プログラムを更新しました",
+  "ai_genie_preparing_speech": "音声を準備中",
+  "ai_genie_playing_speech": "読み上げ中",
+  "service_restart_timeout": "サービスはまだ再起動していません。このウィンドウを閉じて、サーバーを確認してください。"
 }

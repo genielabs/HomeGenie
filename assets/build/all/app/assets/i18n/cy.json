@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Gorffen recordio a thrawsgrifio",
   "ai_genie_local_recognition_unavailable": "Nid yw cydnabyddiaeth leol ar gael. Gwiriwch y rhyngwyneb a'r model yn y Gosodiadau.",
   "ai_genie_download_error": "Wedi torri ar draws y llwytho i lawr",
-  "ai_genie_download_paused": "Wedi seibio lawrlwythiad"
+  "ai_genie_download_paused": "Wedi seibio lawrlwythiad",
+  "automan_program_created": "Rhaglen wedi’i chreu",
+  "automan_program_updated": "Rhaglen wedi’i diweddaru",
+  "ai_genie_preparing_speech": "Paratoi sain",
+  "ai_genie_playing_speech": "Darllen yn uchel",
+  "service_restart_timeout": "Nid yw’r gwasanaeth wedi ailgychwyn eto. Caewch y ffenestr hon a gwiriwch y gweinydd."
 }

@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Temm ir-reġistrazzjoni u traskrivi",
   "ai_genie_local_recognition_unavailable": "Rikonoxximent lokali mhux disponibbli. Iċċekkja l-interface u l-mudell fis-Settings.",
   "ai_genie_download_error": "Download interrott",
-  "ai_genie_download_paused": "It-tniżżil waqaf"
+  "ai_genie_download_paused": "It-tniżżil waqaf",
+  "automan_program_created": "Il-programm inħoloq",
+  "automan_program_updated": "Il-programm ġie aġġornat",
+  "ai_genie_preparing_speech": "Qed jitħejja l-awdjo",
+  "ai_genie_playing_speech": "Qari b’leħen għoli",
+  "service_restart_timeout": "Is-servizz għadu ma reġax beda. Agħlaq din it-tieqa u ċċekkja s-server."
 }

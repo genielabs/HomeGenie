@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "เสร็จสิ้นการบันทึกและถอดเสียง",
   "ai_genie_local_recognition_unavailable": "การรับรู้ในท้องถิ่นไม่พร้อมใช้งาน ตรวจสอบอินเทอร์เฟซและรุ่นในการตั้งค่า",
   "ai_genie_download_error": "การดาวน์โหลดถูกขัดจังหวะ",
-  "ai_genie_download_paused": "ดาวน์โหลดหยุดชั่วคราว"
+  "ai_genie_download_paused": "ดาวน์โหลดหยุดชั่วคราว",
+  "automan_program_created": "สร้างโปรแกรมแล้ว",
+  "automan_program_updated": "อัปเดตโปรแกรมแล้ว",
+  "ai_genie_preparing_speech": "กำลังเตรียมเสียง",
+  "ai_genie_playing_speech": "กำลังอ่านออกเสียง",
+  "service_restart_timeout": "บริการยังไม่เริ่มใหม่ ปิดหน้าต่างนี้แล้วตรวจสอบเซิร์ฟเวอร์"
 }

@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "رڪارڊنگ ختم ڪريو ۽ نقل ڪريو",
   "ai_genie_local_recognition_unavailable": "مقامي سڃاڻپ دستياب ناهي. سيٽنگون ۾ انٽرفيس ۽ ماڊل چيڪ ڪريو.",
   "ai_genie_download_error": "ڊائون لوڊ ۾ رڪاوٽ",
-  "ai_genie_download_paused": "ڊائون لوڊ روڪيو ويو"
+  "ai_genie_download_paused": "ڊائون لوڊ روڪيو ويو",
+  "automan_program_created": "پروگرام ٺاهي ويو",
+  "automan_program_updated": "پروگرام اپڊيٽ ڪيو ويو",
+  "ai_genie_preparing_speech": "آواز تيار ٿي رهيو آهي",
+  "ai_genie_playing_speech": "وڏي آواز ۾ پڙهيو پيو وڃي",
+  "service_restart_timeout": "سروس اڃا ٻيهر شروع نه ٿي آهي. هي ونڊو بند ڪريو ۽ سرور چيڪ ڪريو."
 }

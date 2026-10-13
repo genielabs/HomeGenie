@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Бичлэг хийж дуусаад сийрүүлээрэй",
   "ai_genie_local_recognition_unavailable": "Орон нутгийн хүлээн зөвшөөрөх боломжгүй. Тохиргоо дотроос интерфейс болон загварыг шалгана уу.",
   "ai_genie_download_error": "Татаж авах тасалдсан",
-  "ai_genie_download_paused": "Татаж авахыг түр зогсоосон"
+  "ai_genie_download_paused": "Татаж авахыг түр зогсоосон",
+  "automan_program_created": "Программ үүсгэлээ",
+  "automan_program_updated": "Программ шинэчиллээ",
+  "ai_genie_preparing_speech": "Дуу бэлтгэж байна",
+  "ai_genie_playing_speech": "Чангаар уншиж байна",
+  "service_restart_timeout": "Үйлчилгээ хараахан дахин асаагүй байна. Энэ цонхыг хааж, серверийг шалгана уу."
 }

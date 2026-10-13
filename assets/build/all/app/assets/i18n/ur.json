@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "ریکارڈنگ ختم کریں اور نقل کریں۔",
   "ai_genie_local_recognition_unavailable": "مقامی شناخت دستیاب نہیں ہے۔ سیٹنگز میں انٹرفیس اور ماڈل چیک کریں۔",
   "ai_genie_download_error": "ڈاؤن لوڈ میں خلل پڑا",
-  "ai_genie_download_paused": "ڈاؤن لوڈ موقوف ہے۔"
+  "ai_genie_download_paused": "ڈاؤن لوڈ موقوف ہے۔",
+  "automan_program_created": "پروگرام بنایا گیا",
+  "automan_program_updated": "پروگرام اپ ڈیٹ کیا گیا",
+  "ai_genie_preparing_speech": "آڈیو تیار ہو رہی ہے",
+  "ai_genie_playing_speech": "بلند آواز میں پڑھا جا رہا ہے",
+  "service_restart_timeout": "سروس ابھی تک دوبارہ شروع نہیں ہوئی۔ یہ ونڈو بند کریں اور سرور کو چیک کریں۔"
 }

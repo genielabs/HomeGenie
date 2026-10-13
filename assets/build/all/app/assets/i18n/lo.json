@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "ສຳເລັດການບັນທຶກ ແລະຖອດຂໍ້ຄວາມ",
   "ai_genie_local_recognition_unavailable": "ການຮັບຮູ້ທ້ອງຖິ່ນບໍ່ສາມາດໃຊ້ໄດ້. ກວດເບິ່ງການໂຕ້ຕອບ ແລະຮູບແບບໃນການຕັ້ງຄ່າ.",
   "ai_genie_download_error": "ການດາວໂຫຼດຖືກລົບກວນ",
-  "ai_genie_download_paused": "ຢຸດການດາວໂຫຼດໄວ້ຊົ່ວຄາວ"
+  "ai_genie_download_paused": "ຢຸດການດາວໂຫຼດໄວ້ຊົ່ວຄາວ",
+  "automan_program_created": "ສ້າງໂປຣແກຣມແລ້ວ",
+  "automan_program_updated": "ອັບເດດໂປຣແກຣມແລ້ວ",
+  "ai_genie_preparing_speech": "ກຳລັງກະກຽມສຽງ",
+  "ai_genie_playing_speech": "ກຳລັງອ່ານອອກສຽງ",
+  "service_restart_timeout": "ບໍລິການຍັງບໍ່ໄດ້ເລີ່ມໃໝ່. ປິດໜ້າຕ່າງນີ້ ແລະກວດສອບເຊີບເວີ."
 }

@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Ολοκληρώστε την εγγραφή και μεταγράψτε",
   "ai_genie_local_recognition_unavailable": "Η τοπική αναγνώριση δεν είναι διαθέσιμη. Ελέγξτε τη διεπαφή και το μοντέλο στις Ρυθμίσεις.",
   "ai_genie_download_error": "Η λήψη διακόπηκε",
-  "ai_genie_download_paused": "Η λήψη διακόπηκε"
+  "ai_genie_download_paused": "Η λήψη διακόπηκε",
+  "automan_program_created": "Το πρόγραμμα δημιουργήθηκε",
+  "automan_program_updated": "Το πρόγραμμα ενημερώθηκε",
+  "ai_genie_preparing_speech": "Προετοιμασία ήχου",
+  "ai_genie_playing_speech": "Ανάγνωση φωναχτά",
+  "service_restart_timeout": "Η υπηρεσία δεν έχει επανεκκινηθεί ακόμη. Κλείστε αυτό το παράθυρο και ελέγξτε τον διακομιστή."
 }

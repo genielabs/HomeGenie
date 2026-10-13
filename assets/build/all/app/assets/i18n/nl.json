@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Beëindig de opname en transcribeer",
   "ai_genie_local_recognition_unavailable": "Lokale herkenning niet beschikbaar. Controleer de interface en het model in Instellingen.",
   "ai_genie_download_error": "Downloaden onderbroken",
-  "ai_genie_download_paused": "Downloaden onderbroken"
+  "ai_genie_download_paused": "Downloaden onderbroken",
+  "automan_program_created": "Programma aangemaakt",
+  "automan_program_updated": "Programma bijgewerkt",
+  "ai_genie_preparing_speech": "Audio voorbereiden",
+  "ai_genie_playing_speech": "Voorlezen",
+  "service_restart_timeout": "De service is nog niet opnieuw gestart. Sluit dit venster en controleer de server."
 }

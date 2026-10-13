@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "סיים להקליט ותמלל",
   "ai_genie_local_recognition_unavailable": "זיהוי מקומי אינו זמין. בדוק את הממשק והדגם בהגדרות.",
   "ai_genie_download_error": "ההורדה נקטעה",
-  "ai_genie_download_paused": "ההורדה מושהית"
+  "ai_genie_download_paused": "ההורדה מושהית",
+  "automan_program_created": "התוכנית נוצרה",
+  "automan_program_updated": "התוכנית עודכנה",
+  "ai_genie_preparing_speech": "הכנת שמע",
+  "ai_genie_playing_speech": "הקראה בקול",
+  "service_restart_timeout": "השירות עדיין לא הופעל מחדש. סגור חלון זה ובדוק את השרת."
 }

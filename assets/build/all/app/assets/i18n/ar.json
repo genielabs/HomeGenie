@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "إنهاء التسجيل والنسخ",
   "ai_genie_local_recognition_unavailable": "الاعتراف المحلي غير متاح. تحقق من الواجهة والنموذج في الإعدادات.",
   "ai_genie_download_error": "تمت مقاطعة التنزيل",
-  "ai_genie_download_paused": "تم إيقاف التنزيل مؤقتًا"
+  "ai_genie_download_paused": "تم إيقاف التنزيل مؤقتًا",
+  "automan_program_created": "تم إنشاء البرنامج",
+  "automan_program_updated": "تم تحديث البرنامج",
+  "ai_genie_preparing_speech": "جارٍ تحضير الصوت",
+  "ai_genie_playing_speech": "جارٍ القراءة بصوت عالٍ",
+  "service_restart_timeout": "لم تتم إعادة تشغيل الخدمة بعد. أغلق هذه النافذة وتحقق من الخادم."
 }

@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Beenden Sie die Aufnahme und transkribieren Sie",
   "ai_genie_local_recognition_unavailable": "Lokale Erkennung nicht verfügbar. Überprüfen Sie die Schnittstelle und das Modell in den Einstellungen.",
   "ai_genie_download_error": "Download unterbrochen",
-  "ai_genie_download_paused": "Download angehalten"
+  "ai_genie_download_paused": "Download angehalten",
+  "automan_program_created": "Programm erstellt",
+  "automan_program_updated": "Programm aktualisiert",
+  "ai_genie_preparing_speech": "Audio wird vorbereitet",
+  "ai_genie_playing_speech": "Vorlesen läuft",
+  "service_restart_timeout": "Der Dienst wurde noch nicht neu gestartet. Schließen Sie dieses Fenster und überprüfen Sie den Server."
 }

@@ -596,5 +596,10 @@
   "ai_genie_finish_recording": "Avsluta inspelningen och transkribera",
   "ai_genie_local_recognition_unavailable": "Lokal igenkänning inte tillgänglig. Kontrollera gränssnittet och modellen i Inställningar.",
   "ai_genie_download_error": "Nedladdningen avbröts",
-  "ai_genie_download_paused": "Nedladdning pausad"
+  "ai_genie_download_paused": "Nedladdning pausad",
+  "automan_program_created": "Program skapat",
+  "automan_program_updated": "Program uppdaterat",
+  "ai_genie_preparing_speech": "Förbereder ljud",
+  "ai_genie_playing_speech": "Läser högt",
+  "service_restart_timeout": "Tjänsten har inte startat om ännu. Stäng det här fönstret och kontrollera servern."
 }
