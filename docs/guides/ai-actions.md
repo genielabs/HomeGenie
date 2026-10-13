@@ -1,6 +1,6 @@
 # AI Action Executor
 
-AI Action Executor (program 581, Utilities) is a required base service. Gemini Intent Handler and Local AI use it independently of model/provider lifecycles. This version adds stable action identities and recorded API outcomes; approval policies and program/widget actions remain future work.
+AI Action Executor (program 581, Utilities) is a required base service. Gemini Intent Handler and Local AI use it independently of model/provider lifecycles. The service records stable API outcomes and supports provider-independent program deployment and recovery. Widget installation and approval policies remain later milestones.
 
 ## Endpoints
 
@@ -10,6 +10,10 @@ Prefix: `/api/System.Utility/ActionExecutor/`.
 - `Execute`: raw legacy text, or a JSON request envelope, to ordered execution results.
 - `Results`: request ID, or `{ "requestId": "..." }`, to recorded results; no execution.
 - `ExtractAndExecute`: legacy combined path; executes and returns display segments.
+- `Program.Deploy`: one validated program deployment/compiler-repair attempt.
+- `Program.Recover`: recover an unsuccessful deployment with a known outcome.
+
+See [Program deployment](ai-program-deployment.md) for request contracts, ownership restrictions and recovery behavior.
 
 The `/api/HomeAutomation.HomeGenie.Automation/940/{Extract,Execute,ExtractAndExecute}` endpoints remain delegates while Local AI runs. Use service endpoints when Local AI may be disabled.
 

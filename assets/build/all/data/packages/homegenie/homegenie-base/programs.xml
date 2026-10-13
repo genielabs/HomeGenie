@@ -5576,7 +5576,9 @@ Api.Handle("System.Utility/ActionExecutor/Extract", input =&gt; {
     return ExecuteActionRequest(input);
 }).Handle("System.Utility/ActionExecutor/ExtractAndExecute", input =&gt; {
     return ExtractAndExecute(Api, ReadActionResponse(input));
-}).Handle("System.Utility/ActionExecutor/Results", input =&gt; GetActionResults(input));
+}).Handle("System.Utility/ActionExecutor/Results", input =&gt; GetActionResults(input))
+ .Handle("System.Utility/ActionExecutor/Program.Deploy", input =&gt; ExecuteProgramDeployment(input))
+ .Handle("System.Utility/ActionExecutor/Program.Recover", input =&gt; ExecuteProgramDeployment(input, true));
 Program.GoBackground();
 </ScriptSource>
     <ScriptContext>#using System.Text.RegularExpressions
@@ -5633,6 +5635,11 @@ public List&lt;ApiCommandExecution&gt; ExecuteActionRequest(object input)
     if (!Regex.IsMatch(requestId, @"\A[A-Za-z0-9_-]{1,128}\z"))
         throw new InvalidOperationException("Invalid action request ID.");
     if (envelope?["actions"] != null &amp;&amp; !(envelope["actions"] is JArray)) throw new InvalidOperationException("Invalid structured action list.");
+    if (envelope?["actions"] is JArray typedActions &amp;&amp; typedActions.Count == 1 &amp;&amp;
+        new[] { "program-deploy", "program-recover" }.Contains(typedActions[0]["type"]?.ToString())) {
+        var deployment = (JObject)typedActions[0].DeepClone(); deployment["requestId"] = requestId;
+        return new List&lt;ApiCommandExecution&gt; { ExecuteProgramDeployment(deployment, deployment["type"].ToString() == "program-recover") };
+    }
     var commands = new List&lt;string&gt;();
     if (envelope?["actions"] is JArray actions) {
         foreach (var action in actions) {
@@ -5795,17 +5802,196 @@ public List&lt;string&gt; ExtractAndExecute(dynamic api, string response) {
     ExecuteApiCommands(api, CodeBlockExtractor.ExtractCommands(segments));
     return segments;
 }
+
+// A deployment session owns its assigned program ID across compiler repair attempts.
+public class ProgramDeploymentSession
+{
+    public string Mode { get; set; }
+    public string Target { get; set; }
+    public string ProgramId { get; set; }
+    public JObject Original { get; set; }
+    public string State { get; set; }
+    public int Attempt { get; set; }
+}
+
+public JObject DeploymentJson(object value)
+{
+    if (value == null) throw new InvalidOperationException("The API returned no result.");
+    var token = value is string text ? JToken.Parse(text) : JToken.FromObject(value);
+    if (!(token is JObject obj)) throw new InvalidOperationException("Expected an API object.");
+    return obj;
+}
+
+public void RequireDeploymentSuccess(object value)
+{
+    var obj = DeploymentJson(value);
+    string status = (obj["Status"] ?? obj["response"]?["Status"])?.ToString();
+    if (!string.Equals(status, "Ok", StringComparison.OrdinalIgnoreCase) &amp;&amp; status != "0")
+        throw new InvalidOperationException("The API did not confirm success.");
+}
+
+public JArray DeploymentCompilerErrors(object value)
+{
+    if (value == null) throw new InvalidOperationException("The compiler returned no result.");
+    var token = value is string text ? JToken.Parse(text) : JToken.FromObject(value);
+    if (token is JObject obj) token = obj["ResponseValue"] ?? obj["response"]?["ResponseValue"];
+    if (token?.Type == JTokenType.String) token = JToken.Parse(token.ToString());
+    if (!(token is JArray errors)) throw new InvalidOperationException("Invalid compiler response.");
+    return errors;
+}
+
+public string DeploymentSessionFile(string requestId)
+{
+    string folder = Path.Combine(Data.GetFolder(), "program-deployments");
+    Directory.CreateDirectory(folder);
+    return Path.Combine(folder, requestId + ".json");
+}
+
+public void SaveDeploymentSession(string file, ProgramDeploymentSession session)
+{
+    File.WriteAllText(file + ".tmp", JsonConvert.SerializeObject(session), new UTF8Encoding(false));
+    File.Move(file + ".tmp", file, true);
+}
+
+public ApiCommandExecution ExecuteProgramDeployment(object input, bool recover = false)
+{
+    var request = input is JObject supplied ? supplied : JObject.Parse(ReadActionResponse(input));
+    string requestId = request["requestId"]?.Value&lt;string&gt;();
+    if (!Regex.IsMatch(requestId ?? "", @"\A[A-Za-z0-9_-]{1,128}\z"))
+        throw new InvalidOperationException("Invalid deployment request ID.");
+    int attempt = recover ? 0 : request["attempt"]?.Value&lt;int&gt;() ?? 1;
+    if (!recover &amp;&amp; (attempt &lt; 1 || attempt &gt; 5)) throw new InvalidOperationException("Invalid deployment attempt.");
+    string mode = request["mode"]?.Value&lt;string&gt;();
+    string target = request["program_id"]?.Value&lt;string&gt;() ?? "";
+    JObject program = request["program"] as JObject;
+    if (!recover) {
+        if (mode != "create" &amp;&amp; mode != "update") throw new InvalidOperationException("Invalid deployment mode.");
+        if ((mode == "create" &amp;&amp; target.Length &gt; 0) || (mode == "update" &amp;&amp; !Regex.IsMatch(target, @"\A[1-9][0-9]*\z")))
+            throw new InvalidOperationException("Invalid deployment target.");
+        if (program == null || new[] { "name", "language", "setup", "main", "context", "description" }
+            .Any(key =&gt; program[key] != null &amp;&amp; program[key].Type != JTokenType.String))
+            throw new InvalidOperationException("Invalid program sources.");
+        if (string.IsNullOrWhiteSpace(program["name"]?.Value&lt;string&gt;()) || program["setup"] == null ||
+            string.IsNullOrWhiteSpace(program["main"]?.Value&lt;string&gt;()) ||
+            !new[] { "csharp", "python", "javascript" }.Contains(program["language"]?.Value&lt;string&gt;()))
+            throw new InvalidOperationException("Incomplete program sources.");
+        // Canonical payload includes every field that can change the installed program.
+        program = new JObject(new[] { "name", "language", "setup", "main", "context", "description" }
+            .Select(key =&gt; new JProperty(key, program[key]?.Value&lt;string&gt;() ?? "")));
+    }
+    string canonical = recover ? "recover" : new JObject {
+        ["mode"] = mode, ["target"] = target, ["program"] = program
+    }.ToString(Formatting.None);
+    string fingerprint = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(Encoding.UTF8.GetBytes(canonical)));
+    string command = "program-" + (recover ? "recover" : "deploy") + "/" + fingerprint;
+    string actionId = requestId + ":" + (recover ? "recover" : "deploy-" + attempt);
+    lock (ActionLedger.Gate) {
+        string folder = Data.GetFolder();
+        var records = ActionLedger.Load(folder);
+        if (records.TryGetValue(actionId, out var previous)) {
+            var replay = ActionLedger.Copy(previous); replay.Replayed = true;
+            if (previous.Command != command) {
+                replay.State = "failed"; replay.Success = false; replay.Error = "Deployment ID is assigned to a different payload.";
+            }
+            return replay;
+        }
+        string file = DeploymentSessionFile(requestId);
+        var session = File.Exists(file)
+            ? JsonConvert.DeserializeObject&lt;ProgramDeploymentSession&gt;(File.ReadAllText(file))
+                ?? throw new InvalidOperationException("Invalid deployment session.")
+            : null;
+        if (!recover &amp;&amp; session != null &amp;&amp; (session.Mode != mode || session.Target != target))
+            throw new InvalidOperationException("Deployment target cannot change during repair.");
+        if (session != null &amp;&amp; session.State == "unknown")
+            throw new InvalidOperationException("Deployment outcome is unknown; automatic mutation is blocked.");
+        if (!recover &amp;&amp; session != null &amp;&amp; (session.State != "compile_failed" || attempt != session.Attempt + 1))
+            throw new InvalidOperationException("Only the next compiler repair attempt is allowed.");
+        if (!recover &amp;&amp; session == null &amp;&amp; attempt != 1) throw new InvalidOperationException("Deployment must start at attempt 1.");
+        if (recover &amp;&amp; session == null) return new ApiCommandExecution {
+            RequestId = requestId, ActionId = actionId, Command = command, State = "completed", Success = true,
+            Response = new { status = "unchanged", program_id = "" }
+        };
+        var result = new ApiCommandExecution { RequestId = requestId, ActionId = actionId, Index = attempt,
+            Command = command, State = "unknown", Error = "Deployment may be in progress; do not retry automatically." };
+        records[actionId] = result; ActionLedger.Save(folder, records);
+        var clock = System.Diagnostics.Stopwatch.StartNew();
+        bool mutationStarted = false;
+        try {
+            if (session == null) {
+                session = new ProgramDeploymentSession { Mode = mode, Target = target, ProgramId = target, State = "prepared" };
+                if (mode == "update") {
+                    var original = DeploymentJson(Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Get/" + target));
+                    if (original["Address"]?.ToString() != target || original["Group"]?.ToString() != "Automan")
+                        throw new InvalidOperationException("Only existing Automan programs may be updated.");
+                    session.Original = (JObject)original.DeepClone();
+                }
+                SaveDeploymentSession(file, session);
+            }
+            if (recover) {
+                if (session.State == "completed") throw new InvalidOperationException("A completed deployment cannot be rolled back automatically.");
+                if (session.Original != null) {
+                    session.State = "unknown"; SaveDeploymentSession(file, session); mutationStarted = true;
+                    var original = (JObject)session.Original.DeepClone(); original["IsEnabled"] = false;
+                    var errors = DeploymentCompilerErrors(Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Compile", original.ToString(Formatting.None)));
+                    if (errors.Count &gt; 0) throw new InvalidOperationException("The previous program could not be recompiled.");
+                    if (session.Original["IsEnabled"]?.Value&lt;bool&gt;() == true)
+                        RequireDeploymentSuccess(Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Enable/" + session.ProgramId));
+                    session.State = "restored";
+                } else session.State = "retained_disabled";
+                result.Response = new { status = session.State, program_id = session.ProgramId };
+                result.State = "completed"; result.Success = true; result.Error = null;
+            } else {
+                session.Attempt = attempt; session.State = "unknown";
+                SaveDeploymentSession(file, session);
+                mutationStarted = true;
+                if (session.ProgramId.Length == 0) {
+                    var added = DeploymentJson(Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Add", JsonConvert.SerializeObject(new {
+                        Type = program["language"].Value&lt;string&gt;(), Group = "Automan", Name = program["name"].Value&lt;string&gt;(),
+                        Description = program["description"].Value&lt;string&gt;(), IsEnabled = false
+                    })));
+                    string id = (added["ResponseValue"] ?? added["response"]?["ResponseValue"])?.ToString();
+                    if (!Regex.IsMatch(id ?? "", @"\A[1-9][0-9]*\z")) throw new InvalidOperationException("Unable to obtain the new program ID.");
+                    session.ProgramId = id; SaveDeploymentSession(file, session);
+                }
+                var payload = session.Original == null ? new JObject() : (JObject)session.Original.DeepClone();
+                payload["Address"] = int.Parse(session.ProgramId); payload["Group"] = "Automan";
+                payload["Type"] = program["language"]; payload["Name"] = program["name"]; payload["Description"] = program["description"];
+                payload["ScriptSetup"] = program["setup"]; payload["ScriptSource"] = program["main"]; payload["ScriptContext"] = program["context"];
+                payload["IsEnabled"] = false;
+                var errors = DeploymentCompilerErrors(Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Compile", payload.ToString(Formatting.None)));
+                if (errors.Count &gt; 0) {
+                    session.State = "compile_failed"; result.State = "failed"; result.Error = "Program compilation failed.";
+                    result.Response = new { status = "compile_failed", program_id = session.ProgramId, compiler_errors = errors };
+                } else {
+                    if (session.Original == null || session.Original["IsEnabled"]?.Value&lt;bool&gt;() == true)
+                        RequireDeploymentSuccess(Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Enable/" + session.ProgramId));
+                    session.State = "completed"; result.State = "completed"; result.Success = true; result.Error = null;
+                    result.Response = new { status = "success", program_id = session.ProgramId };
+                }
+            }
+            SaveDeploymentSession(file, session);
+        } catch (Exception ex) {
+            result.State = mutationStarted ? "unknown" : "failed";
+            result.Success = false; result.Error = ex.Message;
+            result.Response = new { status = result.State, program_id = session?.ProgramId ?? "" };
+        }
+        result.DurationMs = clock.ElapsedMilliseconds; result.CompletedAt = DateTimeOffset.UtcNow;
+        try { ActionLedger.Save(folder, records); }
+        catch (Exception) { result.State = "unknown"; result.Success = false; result.Error = "Deployment result could not be persisted."; }
+        return result;
+    }
+}
 </ScriptContext>
     <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.10</PackageVersion>
       <Id>ai-action-executor</Id>
-      <Version>1.1.0</Version>
+      <Version>1.2.0</Version>
       <Required>true</Required>
-      <Checksum>EAEBF01DC372A472D0411FE4BD3F5FE2</Checksum>
+      <Checksum>E0369F89E08813E6E18E8A86DF0C4260</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>581</Address>

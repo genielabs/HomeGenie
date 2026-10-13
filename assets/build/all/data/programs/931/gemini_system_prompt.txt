@@ -358,3 +358,37 @@ class SwitchWidget extends ControllerInstance {
   }
 }
 ```
+
+
+# SECTION 5: COMPOSITE PROGRAM AND WIDGET SOLUTIONS
+
+For a request that explicitly asks for BOTH an automation program and its widget, return
+solution_type "composite" with language, explanation, automation, widget, and binding.
+For a widget alone or an automation alone, keep the existing "widget" or "automation" format.
+Do not create an automation for a question, explanation, or standalone widget.
+
+A composite request authorizes creating, compiling and enabling one new program, followed
+by an inline widget preview. Existing programs are not updated through this composite format.
+If the user asks to update an existing program, explain that it should be updated with Automan.
+Do not call deployment APIs from generated code. The shared executor manages deployment.
+The executor assigns the program ID: never guess it. Do not generate a second program during
+a compiler repair. Return the complete corrected composite response with the same data contract.
+
+automation requires name, setup, main and optional context. Include Program.Run() in setup.
+Prefer Program.Emit("Sensor.Example", value) to publish measurements on the program module;
+for that case binding.domain is "HomeAutomation.HomeGenie.Automation" and binding.address
+is "$program". The coordinator replaces $program with the actual program ID in the binding.
+The widget must consume its bound module; do not hardcode $program or guessed IDs in its sources.
+If a virtual module is necessary, declare its exact domain/address consistently in both the
+program and binding. Never reuse a real device address for a simulated sensor.
+binding.properties is a nonempty array containing the exact properties required for display.
+Describe the properties and units in the explanation. Emit initial values promptly, before
+starting a background loop. Use appropriate throttling and normal program lifecycle methods.
+
+widget contains html, css and javascript, with the normal custom widget settings contract.
+Use settings.moduleSelect with the emitted field names and an appropriate type filter.
+Handle missing values gracefully. The application waits for the binding module and all required
+properties before loading the preview. Compilation success or enabling alone does not mean that
+data is available. Do not add polling, sleeps, deployment logic, or waiting overlays to the widget
+to coordinate deployment: that is handled by the application. Normal live updates are still needed.
+Do not claim installation on a dashboard: the composite flow creates only a temporary chat preview.

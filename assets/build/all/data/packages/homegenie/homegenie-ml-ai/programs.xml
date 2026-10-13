@@ -559,7 +559,9 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
         string programId = "";
         string selectedAction = "";
         string finalUiResponse = "";
-        JObject originalProgram = null;
+        bool deploymentStarted = false;
+        bool deploymentUnknown = false;
+        string recoveryStatus = "";
 
         while (currentAttempt &lt;= maxAttempts &amp;&amp; !isDeployed) {
             object payload = hasCache
@@ -613,61 +615,29 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
                     break;
                 }
 
-                if (action == "update") {
-                    string requestedId = jsonObj["program_id"]?.ToString();
-                    if (string.IsNullOrEmpty(requestedId) || !managedPrograms.ContainsKey(requestedId)
-                        || (programId.Length &gt; 0 &amp;&amp; programId != requestedId))
-                        throw new InvalidOperationException("Select an existing Automan program by its exact program_id before updating it.");
-                    programId = requestedId;
-                    if (originalProgram == null) {
-                        var liveResult = Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Get/" + programId);
-                        var live = liveResult is string ? JToken.Parse((string)liveResult) : JToken.FromObject(liveResult);
-                        if (!(live is JObject) || live["Address"]?.ToString() != programId || live["Group"]?.ToString() != "Automan")
-                            throw new InvalidOperationException("The selected Automan program is no longer available.");
-                        originalProgram = (JObject)live.DeepClone();
-                        // Keep a durable copy before changing the existing code.
-                        var backupFolder = Path.Combine(Data.GetFolder(), "automan-backups");
-                        Directory.CreateDirectory(backupFolder);
-                        File.WriteAllText(Path.Combine(backupFolder, programId + "-" + DateTime.UtcNow.Ticks + ".json"), originalProgram.ToString());
-                    }
-                } else if (programId.Length == 0) {
-                    var addResult = telemetry.CallAction("HomeAutomation.HomeGenie/Automation/Programs.Add", JsonConvert.SerializeObject(new {
-                        Type = language, Group = "Automan", Name = name, Description = explanation, IsEnabled = false
-                    }));
-                    var added = addResult is string ? JToken.Parse((string)addResult) : JToken.FromObject(addResult);
-                    programId = added["ResponseValue"]?.ToString() ?? added["response"]?["ResponseValue"]?.ToString();
-                    int parsedId;
-                    if (!int.TryParse(programId, out parsedId) || parsedId &lt;= 0) throw new InvalidOperationException("Unable to obtain the new program ID.");
-                }
-
-                // Clone the complete original record to preserve data, options and metadata.
-                var compilePayload = originalProgram == null ? new JObject() : (JObject)originalProgram.DeepClone();
-                compilePayload["Type"] = language;
-                compilePayload["Address"] = int.Parse(programId);
-                compilePayload["Group"] = "Automan";
-                compilePayload["Name"] = name;
-                compilePayload["Description"] = explanation;
-                compilePayload["ScriptSetup"] = setup;
-                compilePayload["ScriptSource"] = main;
-                compilePayload["ScriptContext"] = context;
-                compilePayload["IsEnabled"] = false;
-                updateStarted = originalProgram != null;
-                var compileResult = telemetry.CallAction("HomeAutomation.HomeGenie/Automation/Programs.Compile", compilePayload.ToString(Formatting.None));
-                var compilerOutput = compileResult is string ? JToken.Parse((string)compileResult) : JToken.FromObject(compileResult);
-                if (compilerOutput.Type == JTokenType.Object) compilerOutput = compilerOutput["ResponseValue"] ?? compilerOutput["response"]?["ResponseValue"];
-                if (compilerOutput != null &amp;&amp; compilerOutput.Type == JTokenType.String) compilerOutput = JToken.Parse(compilerOutput.ToString());
-                if (!(compilerOutput is JArray)) throw new InvalidOperationException("Invalid compiler response; deployment was not confirmed.");
-                if (compilerOutput.HasValues) {
+                string requestedId = action == "update" ? jsonObj["program_id"]?.ToString() ?? "" : "";
+                if (action == "update" &amp;&amp; (!managedPrograms.ContainsKey(requestedId) || (programId.Length &gt; 0 &amp;&amp; programId != requestedId)))
+                    throw new InvalidOperationException("Select an existing Automan program by its exact program_id before updating it.");
+                updateStarted = action == "update";
+                deploymentStarted = true; deploymentUnknown = true;
+                var deploymentResult = telemetry.CallAction("System.Utility/ActionExecutor/Program.Deploy", JsonConvert.SerializeObject(new {
+                    requestId = telemetry.RequestId, attempt = currentAttempt, mode = action, program_id = requestedId,
+                    program = new { name, language, setup, main, context, description = explanation }
+                }));
+                JToken deployment = deploymentResult is string ? JToken.Parse((string)deploymentResult) : JToken.FromObject((object)deploymentResult);
+                string deploymentState = deployment["State"]?.ToString();
+                programId = deployment["Response"]?["program_id"]?.ToString() ?? programId;
+                deploymentUnknown = deploymentState != "completed" &amp;&amp; deploymentState != "failed";
+                if (deployment["Response"]?["status"]?.ToString() == "compile_failed") {
                     payloadContents.Add(ChatMessage.Create("model", rawResponse));
-                    payloadContents.Add(ChatMessage.Create("user", "COMPILATION FAILED:\n" + compilerOutput.ToString()
+                    payloadContents.Add(ChatMessage.Create("user", "COMPILATION FAILED:\n" + deployment["Response"]["compiler_errors"].ToString()
                         + "\nReturn corrected JSON with the same action and program_id, and the complete code. Do not create another program."));
                     currentAttempt++;
                     if (currentAttempt &lt;= maxAttempts) Pause(10);
                     continue;
                 }
-
-                bool enableProgram = originalProgram == null || originalProgram["IsEnabled"]?.Value&lt;bool&gt;() == true;
-                if (enableProgram) telemetry.CallAction("HomeAutomation.HomeGenie/Automation/Programs.Enable/" + programId);
+                if (deploymentState != "completed" || deployment["Success"]?.Value&lt;bool&gt;() != true)
+                    throw new InvalidOperationException(deployment["Error"]?.ToString() ?? "Program deployment was not confirmed.");
                 isDeployed = true;
                 finalUiResponse = JsonConvert.SerializeObject(new {
                     automan_deploy = new { status = "success", action = action, program_id = programId,
@@ -678,29 +648,34 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
                 bool quota = ex.Message.Contains("(429)");
                 if (quota) { isQuotaExceeded = true; rateLimitResetTime = DateTime.UtcNow.AddMinutes(2); }
                 finalUiResponse = JsonConvert.SerializeObject(new {
-                    automan_deploy = new { status = quota ? "quota_exceeded" : "error", error_message = ex.Message }
+                    automan_deploy = new { status = deploymentUnknown ? "unknown" : quota ? "quota_exceeded" : "error", error_message = ex.Message,
+                        program_id = programId, deployment_request_id = telemetry.RequestId }
                 }, Formatting.Indented);
                 break;
             }
         }
 
-        if (!isDeployed &amp;&amp; updateStarted &amp;&amp; originalProgram != null) {
+        if (!isDeployed &amp;&amp; deploymentStarted &amp;&amp; !deploymentUnknown) {
             try {
-                var restored = telemetry.CallAction("HomeAutomation.HomeGenie/Automation/Programs.Compile", originalProgram.ToString(Formatting.None));
-                var restoredOutput = restored is string ? JToken.Parse((string)restored) : JToken.FromObject(restored);
-                if (!(restoredOutput is JArray) || restoredOutput.HasValues) throw new InvalidOperationException("Previous code could not be recompiled.");
-                if (originalProgram["IsEnabled"]?.Value&lt;bool&gt;() == true)
-                    telemetry.CallAction("HomeAutomation.HomeGenie/Automation/Programs.Enable/" + programId);
-                Program.Log.Info("Restored previous version of Automan program " + programId);
+                var recoveryResult = telemetry.CallAction("System.Utility/ActionExecutor/Program.Recover",
+                    JsonConvert.SerializeObject(new { requestId = telemetry.RequestId }));
+                JToken recovery = recoveryResult is string ? JToken.Parse((string)recoveryResult) : JToken.FromObject((object)recoveryResult);
+                if (recovery["State"]?.ToString() != "completed" || recovery["Success"]?.Value&lt;bool&gt;() != true)
+                    throw new InvalidOperationException(recovery["Error"]?.ToString() ?? "Recovery was not confirmed.");
+                recoveryStatus = recovery["Response"]?["status"]?.ToString() ?? "";
             } catch (Exception ex) {
                 finalUiResponse = JsonConvert.SerializeObject(new { automan_deploy = new {
-                    status = "error", error_message = "Update failed and automatic recovery failed: " + ex.Message + ". The previous program is saved in automan-backups."
+                    status = "unknown", program_id = programId, deployment_request_id = telemetry.RequestId,
+                    error_message = "Deployment failed and recovery was not confirmed: " + ex.Message
                 } }, Formatting.Indented);
             }
         }
         if (string.IsNullOrEmpty(finalUiResponse)) finalUiResponse = JsonConvert.SerializeObject(new {
             automan_deploy = new { status = "compile_failed", attempts = maxAttempts,
-                error_message = "Failed to compile the requested program. Any existing program was restored." }
+                program_id = programId, deployment_request_id = telemetry.RequestId, recovery = recoveryStatus,
+                error_message = recoveryStatus == "restored" ? "Compilation failed; the previous program was restored."
+                    : recoveryStatus == "retained_disabled" ? "Compilation failed; the new program remains disabled for inspection."
+                    : "Failed to compile the requested program." }
         }, Formatting.Indented);
         string telemetryOutcome = "completed";
         try { var status = JObject.Parse(finalUiResponse)["automan_deploy"]?["status"]?.ToString();
@@ -872,7 +847,8 @@ public class ChatRequestMetrics
             else {
                 try {
                     var token = result is string ? JToken.Parse((string)result) : JToken.FromObject(result);
-                    failed = token.Type == JTokenType.Object &amp;&amp; token["Status"]?.ToString() == "Error";
+                    failed = token.Type == JTokenType.Object &amp;&amp; (token["Status"]?.ToString() == "Error"
+                        || token["State"]?.ToString() == "failed" || token["State"]?.ToString() == "unknown");
                     if (command.EndsWith("Programs.Compile") &amp;&amp; token is JArray errors &amp;&amp; errors.Count &gt; 0) failed = true;
                 } catch (Newtonsoft.Json.JsonException) { }
             }
@@ -892,11 +868,11 @@ public class ChatRequestMetrics
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.14</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>gemini-automan</Id>
-      <Version>1.0.8</Version>
+      <Version>1.0.9</Version>
       <Required>true</Required>
-      <Checksum>445AE240A5077BF727571ECB3BBF15D2</Checksum>
+      <Checksum>1D3F44335C94EB6EB9BCFA76C381B6BF</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>932</Address>
@@ -1531,7 +1507,7 @@ Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
             type = "object",
             properties = new {
                 explanation = new { type = "string" },
-                solution_type = new { type = "string", @enum = new[] { "widget", "automation" } },
+                solution_type = new { type = "string", @enum = new[] { "widget", "automation", "composite" } },
                 language = new { type = "string", @enum = new[] { "csharp", "javascript", "python" } },
                 widget = new {
                     type = "object",
@@ -1545,17 +1521,29 @@ Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
                 automation = new {
                     type = "object",
                     properties = new {
-                        setup = new { type = "string", description = "AddOption and Program.Run() only" },
+                        name = new { type = "string" },
+                        setup = new { type = "string", description = "Options and Program.Run()" },
                         main = new { type = "string", description = "Core logic and listeners (MANDATORY)" },
                         context = new { type = "string" }
                     },
                     required = new[] { "setup", "main" }
+                },
+                binding = new {
+                    type = "object",
+                    properties = new {
+                        domain = new { type = "string" },
+                        address = new { type = "string", description = "$program for Program.Emit, otherwise exact virtual module address" },
+                        properties = new { type = "array", items = new { type = "string" } }
+                    },
+                    required = new[] { "domain", "address", "properties" }
                 }
             },
             required = new[] { "explanation", "solution_type", "language" }
         }
     };
 
+      JObject committedBinding = null;
+      for (int deploymentAttempt = 1; deploymentAttempt &lt;= 5; deploymentAttempt++) {
     // Construct Payload dynamically based on cache status
     object payload;
     if (hasCache) {
@@ -1590,6 +1578,51 @@ Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
                 string type = jsonObj["solution_type"]?.ToString();
                 string lang = jsonObj["language"]?.ToString() ?? "javascript";
 
+                if (committedBinding != null &amp;&amp; type != "composite")
+                    throw new InvalidOperationException("A compiler repair must return the complete composite solution.");
+                if (type == "composite") {
+                    // Validate the complete contract before creating any program.
+                    JObject binding = CompositeSolutionContract.Validate(jsonObj);
+                    if (committedBinding != null &amp;&amp; !JToken.DeepEquals(committedBinding, binding))
+                        throw new InvalidOperationException("A compiler repair cannot change the widget data contract.");
+                    committedBinding = binding;
+                    var a = (JObject)jsonObj["automation"];
+                    var w = (JObject)jsonObj["widget"];
+                    telemetry.GenerationComplete();
+                    object deploymentResult = telemetry.CallAction("System.Utility/ActionExecutor/Program.Deploy", JsonConvert.SerializeObject(new {
+                        requestId = telemetry.RequestId, attempt = deploymentAttempt, mode = "create", program_id = "",
+                        program = new { name = (string)a["name"], language = lang, setup = (string)a["setup"],
+                            main = (string)a["main"], context = (string)a["context"] ?? "", description = (string)jsonObj["explanation"] ?? "" }
+                    }));
+                    JToken deployment = deploymentResult is string ? JToken.Parse((string)deploymentResult) : JToken.FromObject(deploymentResult);
+                    string state = (string)deployment["State"] ?? "unknown";
+                    string programId = (string)deployment["Response"]?["program_id"] ?? "";
+                    bool success = state == "completed" &amp;&amp; deployment["Success"]?.Value&lt;bool&gt;() == true;
+                    if (deployment["Response"]?["status"]?.ToString() == "compile_failed" &amp;&amp; deploymentAttempt &lt; 5) {
+                        payloadContents.Add(ChatMessage.Create("model", rawResponse));
+                        payloadContents.Add(ChatMessage.Create("user", "COMPILATION FAILED:\n" + deployment["Response"]["compiler_errors"]
+                            + "\nReturn the complete corrected composite JSON, including widget and binding. Keep the same module/property contract. Do not create a different solution."));
+                        continue;
+                    }
+                    string recoveryError = "";
+                    if (!success &amp;&amp; state == "failed") {
+                        object recovered = telemetry.CallAction("System.Utility/ActionExecutor/Program.Recover",
+                            JsonConvert.SerializeObject(new { requestId = telemetry.RequestId }));
+                        JToken recovery = recovered is string ? JToken.Parse((string)recovered) : JToken.FromObject(recovered);
+                        if (recovery["Success"]?.Value&lt;bool&gt;() != true) recoveryError = (string)recovery["Error"] ?? "Recovery was not confirmed.";
+                    }
+                    var solution = new {
+                        version = 1, requestId = telemetry.RequestId, explanation = (string)jsonObj["explanation"],
+                        program = new { id = programId, name = (string)a["name"], state = success ? "completed" : state,
+                            error = success ? "" : (string)deployment["Error"] ?? "Program deployment failed.", recoveryError },
+                        widget = new { html = (string)w["html"], css = (string)w["css"] ?? "", javascript = (string)w["javascript"],
+                            dependsOn = "program", state = success ? "waiting" : "blocked",
+                            binding = CompositeSolutionContract.Resolve(binding, programId) }
+                    };
+                    string reply = JsonConvert.SerializeObject(new { ai_solution = solution });
+                    telemetry.SaveReply(ChatMessage.Create("model", reply), success ? "completed" : "error");
+                    return new ResponseText(reply);
+                }
                 if (type == "widget") {
                     var w = jsonObj["widget"];
                     if (w != null) {
@@ -1633,6 +1666,8 @@ Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
             }
         }
         return new ResponseText(telemetry.Error("**Error:** The AI returned an empty response."));
+      }
+      return new ResponseText(telemetry.Error("**Error:** Program deployment did not complete."));
     }
     catch (Exception ex)
     {
@@ -1716,10 +1751,66 @@ public class ChatRequestMetrics
         if (persist) api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = message, Metadata = Snapshot(outcome) });
         replySaved = true;
     }
+    public dynamic CallAction(string command, object data = null)
+    {
+        var timer = System.Diagnostics.Stopwatch.StartNew();
+        bool failed = false;
+        try {
+            object result = api.Call(command, data);
+            if (result == null) failed = true;
+            else {
+                try {
+                    var token = result is string ? JToken.Parse((string)result) : JToken.FromObject(result);
+                    failed = token.Type == JTokenType.Object &amp;&amp; (token["Status"]?.ToString() == "Error"
+                        || token["State"]?.ToString() == "failed" || token["State"]?.ToString() == "unknown");
+                    if (command.EndsWith("Programs.Compile") &amp;&amp; token is JArray errors &amp;&amp; errors.Count &gt; 0) failed = true;
+                } catch (Newtonsoft.Json.JsonException) { }
+            }
+            return result;
+        } catch { failed = true; throw; }
+        finally { ActionsCompleted(timer.ElapsedMilliseconds, 1, failed ? 1 : 0); }
+    }
     public string Error(string text, string outcome = "error")
     {
         SaveReply(new { role = "model", parts = new[] { new { text } } }, outcome);
         return text;
+    }
+}
+
+public static class CompositeSolutionContract
+{
+    public static JObject Validate(JObject solution)
+    {
+        var program = solution["automation"] as JObject;
+        var widget = solution["widget"] as JObject;
+        var binding = solution["binding"] as JObject;
+        if (program == null || widget == null || binding == null)
+            throw new InvalidOperationException("A composite solution requires automation, widget and binding.");
+        foreach (var key in new[] { "name", "main" })
+            if (program[key]?.Type != JTokenType.String || string.IsNullOrWhiteSpace((string)program[key]))
+                throw new InvalidOperationException("Missing automation " + key + ".");
+        if (program["setup"]?.Type != JTokenType.String || widget["html"]?.Type != JTokenType.String
+            || string.IsNullOrWhiteSpace((string)widget["html"]) || widget["javascript"]?.Type != JTokenType.String)
+            throw new InvalidOperationException("Incomplete composite sources.");
+        if (!new[] { "csharp", "javascript", "python" }.Contains((string)solution["language"]))
+            throw new InvalidOperationException("Unsupported automation language.");
+        string domain = (string)binding["domain"], address = (string)binding["address"];
+        if (string.IsNullOrWhiteSpace(domain) || domain.IndexOfAny(new[] { '/', ':', '\\' }) &gt;= 0
+            || string.IsNullOrWhiteSpace(address) || address.IndexOfAny(new[] { '/', ':', '\\' }) &gt;= 0)
+            throw new InvalidOperationException("Invalid module reference.");
+        if (address == "$program" &amp;&amp; domain != "HomeAutomation.HomeGenie.Automation")
+            throw new InvalidOperationException("$program refers to the automation program module.");
+        var properties = binding["properties"] as JArray;
+        if (properties == null || properties.Count == 0 || properties.Count &gt; 64
+            || properties.Any(p =&gt; p.Type != JTokenType.String || string.IsNullOrWhiteSpace((string)p)))
+            throw new InvalidOperationException("Declare the properties required by the widget.");
+        return (JObject)binding.DeepClone();
+    }
+    public static JObject Resolve(JObject binding, string programId)
+    {
+        var resolved = (JObject)binding.DeepClone();
+        if ((string)resolved["address"] == "$program") resolved["address"] = programId;
+        return resolved;
     }
 }
 </ScriptContext>
@@ -1728,11 +1819,11 @@ public class ChatRequestMetrics
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.14</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>gemini-widget-genie</Id>
-      <Version>1.0.14</Version>
+      <Version>1.0.15</Version>
       <Required>true</Required>
-      <Checksum>870167C0508D51ABFEC3167D153B02F9</Checksum>
+      <Checksum>23ED0DFCB9DE09DB8F539F8D46F73EC6</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>931</Address>
