@@ -26,9 +26,14 @@ Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
             return JsonConvert.DeserializeObject&lt;List&lt;ChatMessage&gt;&gt;(JsonConvert.SerializeObject(currentHistory));
 
         case "GetContext":
-            // Only provider-supported fields; failed/cancelled output is diagnostic history.
+            // Failed/cancelled/pending turns remain in history, not in model context.
+            var completedRequests = new HashSet&lt;string&gt;(currentHistory
+                .Where(m =&gt; m.Role == "model" &amp;&amp; m.Metadata?["outcome"]?.ToString() == "completed")
+                .Select(m =&gt; m.Metadata?["requestId"]?.ToString()).Where(id =&gt; !string.IsNullOrEmpty(id)));
             return currentHistory.Where(m =&gt; m.Metadata == null ||
-                (m.Metadata["outcome"]?.ToString() != "error" &amp;&amp; m.Metadata["outcome"]?.ToString() != "cancelled"))
+                (m.Metadata["outcome"]?.ToString() == "completed") ||
+                (m.Role == "user" &amp;&amp; m.Metadata["outcome"]?.ToString() == "submitted" &amp;&amp;
+                 completedRequests.Contains(m.Metadata["requestId"]?.ToString() ?? "")))
                 .Select(m =&gt; new { role = m.Role, parts = m.Parts }).ToList();
 
         case "Add":
@@ -165,11 +170,11 @@ public static class HistoryStore
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>chat-history-service</Id>
-      <Version>1.0.3</Version>
+      <Version>1.0.4</Version>
       <Required>true</Required>
-      <Checksum>239ACA54460CC7C33358BB99BFCBC837</Checksum>
+      <Checksum>97412D1E8E6AB50F064310F83FDB0153</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>577</Address>
@@ -238,7 +243,7 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>client-configs</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -609,7 +614,7 @@ void SaveConfig(string filePath, YamlConfig config)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>daily-energy-report</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -887,7 +892,7 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -1533,7 +1538,7 @@ public class DownloadManager : IDisposable
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>download-manager</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1576,7 +1581,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1904,7 +1909,7 @@ string GetDbName()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>energy-use-statistics</Id>
       <Version>1.0.9</Version>
       <Required>false</Required>
@@ -2079,7 +2084,7 @@ void InsertData(LiteDatabase db, LoggerEvent data) {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -2234,7 +2239,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>file-manager</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2436,7 +2441,7 @@ public static class HttpHelper {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>homegenie-panel-notifications</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2505,7 +2510,7 @@ public string[] GetHourLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>hourly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -2967,7 +2972,7 @@ class MqttCommand: MigInterfaceCommand {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>mqtt-network</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
@@ -3226,7 +3231,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>openweathermap</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -3318,7 +3323,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -3410,7 +3415,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -3482,7 +3487,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -4158,7 +4163,7 @@ public static class FfmpegHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>video-input</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -5463,7 +5468,7 @@ public class ThumbnailHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>video-recorder</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -5544,7 +5549,7 @@ public string[] GetDayLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.9</PackageVersion>
       <Id>weekly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -5555,6 +5560,258 @@ public string[] GetDayLabels()
     <Name>Weekly Energy Consumption</Name>
     <Description>Bar chart displaying the average Watts/Hour consumption for each day of the week (Mon-Sun). Data is aggregated across all hours of the day and sourced from the Energy Use Statistics API.</Description>
     <Group>Data Processing</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.Run();
+</ScriptSetup>
+    <ScriptSource>// Shared action service; no model or inference engine is required.
+Api.Handle("System.Utility/ActionExecutor/Extract", input =&gt; {
+    return ExtractResponse(ReadActionResponse(input));
+}).Handle("System.Utility/ActionExecutor/Execute", input =&gt; {
+    return ExecuteActionRequest(input);
+}).Handle("System.Utility/ActionExecutor/ExtractAndExecute", input =&gt; {
+    return ExtractAndExecute(Api, ReadActionResponse(input));
+}).Handle("System.Utility/ActionExecutor/Results", input =&gt; GetActionResults(input));
+Program.GoBackground();
+</ScriptSource>
+    <ScriptContext>#using System.Text.RegularExpressions
+
+public class ApiCommandExecution
+{
+    public int Index { get; set; }
+    public string Command { get; set; }
+    public bool Success { get; set; }
+    public object Response { get; set; }
+    public string Error { get; set; }
+    public string ActionId { get; set; }
+    public string RequestId { get; set; }
+    public string State { get; set; }
+    public long DurationMs { get; set; }
+    public bool Replayed { get; set; }
+    public DateTimeOffset? CompletedAt { get; set; }
+}
+
+public static class ActionLedger
+{
+    public static readonly object Gate = new object();
+    public static Dictionary&lt;string, ApiCommandExecution&gt; Load(string folder)
+    {
+        string file = Path.Combine(folder, "action-results.json");
+        return File.Exists(file)
+            ? JsonConvert.DeserializeObject&lt;Dictionary&lt;string, ApiCommandExecution&gt;&gt;(File.ReadAllText(file))
+                ?? throw new InvalidOperationException("Invalid action ledger.")
+            : new Dictionary&lt;string, ApiCommandExecution&gt;();
+    }
+    public static void Save(string folder, Dictionary&lt;string, ApiCommandExecution&gt; records)
+    {
+        Directory.CreateDirectory(folder);
+        string file = Path.Combine(folder, "action-results.json");
+        string temporary = file + ".tmp";
+        File.WriteAllText(temporary, JsonConvert.SerializeObject(records), new UTF8Encoding(false));
+        File.Move(temporary, file, true);
+    }
+    public static ApiCommandExecution Copy(ApiCommandExecution result) =&gt;
+        JsonConvert.DeserializeObject&lt;ApiCommandExecution&gt;(JsonConvert.SerializeObject(result));
+}
+
+public List&lt;ApiCommandExecution&gt; ExecuteActionRequest(object input)
+{
+    string text = ReadActionResponse(input);
+    JObject envelope = null;
+    if (text.TrimStart().StartsWith("{")) {
+        try {
+            var parsed = JObject.Parse(text);
+            if (parsed["requestId"] != null || parsed["actions"] != null || parsed["response"] != null) envelope = parsed;
+        } catch (Newtonsoft.Json.JsonException) { }
+    }
+    string requestId = envelope?["requestId"]?.ToString() ?? Guid.NewGuid().ToString("N");
+    if (!Regex.IsMatch(requestId, @"\A[A-Za-z0-9_-]{1,128}\z"))
+        throw new InvalidOperationException("Invalid action request ID.");
+    if (envelope?["actions"] != null &amp;&amp; !(envelope["actions"] is JArray)) throw new InvalidOperationException("Invalid structured action list.");
+    var commands = new List&lt;string&gt;();
+    if (envelope?["actions"] is JArray actions) {
+        foreach (var action in actions) {
+            if (action["type"]?.ToString() != "api-call") throw new InvalidOperationException("Unsupported action type.");
+            string domain = action["target"]?["domain"]?.ToString();
+            string address = action["target"]?["address"]?.ToString();
+            string command = action["command"]?.ToString();
+            if (!Regex.IsMatch(domain ?? "", @"\A[A-Za-z][A-Za-z0-9_.]*\z") ||
+                !Regex.IsMatch(address ?? "", @"\A[^/\s]+\z") || !Regex.IsMatch(command ?? "", @"\A[^/\s]+\z"))
+                throw new InvalidOperationException("Invalid structured action target.");
+            var arguments = action["arguments"] as JArray ?? new JArray();
+            if (arguments.Any(arg =&gt; arg.Type != JTokenType.String || arg.ToString().Contains('/') || arg.ToString().Contains('\n') || arg.ToString().Contains('\r')))
+                throw new InvalidOperationException("Invalid structured action arguments.");
+            commands.Add(domain + "/" + address + "/" + command + (arguments.Count == 0 ? "" : "/" + string.Join("/", arguments.Select(a =&gt; a.ToString()))));
+        }
+    } else {
+        string response = envelope == null ? text : envelope["response"]?.Value&lt;string&gt;() ?? "";
+        commands = CodeBlockExtractor.ExtractCommands(ExtractResponse(response));
+    }
+    return ExecuteApiCommands(Api, commands, requestId);
+}
+
+public List&lt;ApiCommandExecution&gt; ExecuteApiCommands(dynamic api, IEnumerable&lt;string&gt; proposedCommands, string requestId = null)
+{
+    requestId = requestId ?? Guid.NewGuid().ToString("N");
+    var results = new List&lt;ApiCommandExecution&gt;();
+    lock (ActionLedger.Gate) {
+        string folder = Data.GetFolder();
+        // A corrupt or unreadable ledger must prevent execution, never silently reset IDs.
+        var records = ActionLedger.Load(folder);
+        int index = 0;
+        foreach (string proposed in proposedCommands ?? Enumerable.Empty&lt;string&gt;()) {
+            string command = (proposed ?? "").Trim();
+            if (command.StartsWith("/api/")) command = command.Substring(5);
+            string actionId = requestId + ":" + index;
+            if (records.TryGetValue(actionId, out var previous)) {
+                var replay = ActionLedger.Copy(previous);
+                replay.Replayed = true;
+                if (previous.Command != command) {
+                    replay.Command = command; replay.State = "failed"; replay.Success = false;
+                    replay.Error = "Action ID is already assigned to a different command.";
+                }
+                results.Add(replay); index++; continue;
+            }
+            var result = new ApiCommandExecution { Index = index++, Command = command, ActionId = actionId,
+                RequestId = requestId, State = "unknown", Error = "Execution may be in progress or interrupted; do not retry automatically." };
+            results.Add(result);
+            if (!Regex.IsMatch(command, @"\A[A-Za-z][A-Za-z0-9_.]*/[^/\s]+/[^/\s]+(?:/[^\r\n]*)?\z") || command.StartsWith("System.Utility/ActionExecutor/")) {
+                result.State = "failed"; result.Error = "Invalid HomeGenie API command.";
+                result.CompletedAt = DateTimeOffset.UtcNow; records[actionId] = result; ActionLedger.Save(folder, records); continue;
+            }
+            // Durable reservation before side effects: crash recovery retains unknown outcome.
+            records[actionId] = result; ActionLedger.Save(folder, records);
+            var timer = System.Diagnostics.Stopwatch.StartNew();
+            try {
+                result.Response = api.Call(command);
+                JToken response = null;
+                if (result.Response != null) {
+                    try { response = result.Response is string value ? JToken.Parse(value) : JToken.FromObject(result.Response); }
+                    catch (Newtonsoft.Json.JsonException) { response = JValue.CreateString(result.Response.ToString()); }
+                }
+                string status = response is JObject obj ? (obj["Status"] ?? obj["response"]?["Status"])?.ToString() : null;
+                if (result.Response == null) { result.State = "unknown"; result.Error = "API returned no result; execution outcome is unknown."; }
+                else if ((string.Equals(status, "Error", StringComparison.OrdinalIgnoreCase) || status == "1")) {
+                    result.State = "failed"; result.Error = (response["Message"] ?? response["response"]?["Message"])?.ToString() ?? "API command failed.";
+                } else { result.State = "completed"; result.Success = true; result.Error = null; }
+            } catch (Exception ex) {
+                // Exceptions can occur after a side effect; they cannot prove failure.
+                result.State = "unknown"; result.Error = "Execution outcome is unknown (" + ex.GetType().Name + ").";
+            }
+            result.DurationMs = timer.ElapsedMilliseconds; result.CompletedAt = DateTimeOffset.UtcNow;
+            try { ActionLedger.Save(folder, records); }
+            catch (Exception) {
+                result.State = "unknown"; result.Success = false;
+                result.Error = "Execution result could not be persisted; do not retry automatically.";
+            }
+        }
+    }
+    return results;
+}
+
+public List&lt;ApiCommandExecution&gt; GetActionResults(object input)
+{
+    string text = ReadActionResponse(input);
+    string requestId = text;
+    if (text.TrimStart().StartsWith("{")) requestId = JObject.Parse(text)["requestId"]?.ToString();
+    if (!Regex.IsMatch(requestId ?? "", @"\A[A-Za-z0-9_-]{1,128}\z")) throw new InvalidOperationException("Invalid action request ID.");
+    lock (ActionLedger.Gate) return ActionLedger.Load(Data.GetFolder()).Values.Where(r =&gt; r.RequestId == requestId)
+        .OrderBy(r =&gt; r.Index).Select(ActionLedger.Copy).ToList();
+}
+
+public class CodeBlockExtractor
+{
+    public static List&lt;string&gt; ExtractInterleaved(string sourceText)
+    {
+        var result = new List&lt;string&gt;();
+        if (string.IsNullOrEmpty(sourceText)) return result;
+        // Mask reasoning while retaining source offsets and original display text.
+        string visible = Regex.Replace(sourceText, @"&lt;think\b[^&gt;]*&gt;[\s\S]*?(?:&lt;/think\s*&gt;|$)",
+            m =&gt; Regex.Replace(m.Value, @"[^\r\n]", " "), RegexOptions.IgnoreCase);
+        var opening = new Regex(@"^[ \t]*(?&lt;fence&gt;`{3,}|~{3,})(?&lt;label&gt;[^\r\n]*)\r?\n", RegexOptions.Multiline);
+        int cursor = 0, textStart = 0;
+        while (cursor &lt; visible.Length)
+        {
+            var start = opening.Match(visible, cursor);
+            if (!start.Success) break;
+            string fence = start.Groups["fence"].Value;
+            var closing = new Regex(@"^[ \t]*" + Regex.Escape(fence[0].ToString()) + "{" + fence.Length + @",}[ \t]*\r?$", RegexOptions.Multiline);
+            var end = closing.Match(visible, start.Index + start.Length);
+            if (!end.Success) break;
+            int blockEnd = end.Index + end.Length;
+            if (fence[0] == '`' &amp;&amp; start.Groups["label"].Value.Trim() == "api-call")
+            {
+                AddText(result, sourceText.Substring(textStart, start.Index - textStart));
+                AddText(result, sourceText.Substring(start.Index, blockEnd - start.Index));
+                textStart = blockEnd;
+            }
+            cursor = blockEnd;
+        }
+        AddText(result, sourceText.Substring(textStart));
+        return result;
+    }
+
+    private static void AddText(List&lt;string&gt; result, string text)
+    {
+        if (!string.IsNullOrWhiteSpace(text)) result.Add(text.Trim());
+    }
+
+    public static List&lt;string&gt; ExtractCommands(IEnumerable&lt;string&gt; segments)
+    {
+        var commands = new List&lt;string&gt;();
+        foreach (string segment in segments ?? Enumerable.Empty&lt;string&gt;())
+        {
+            var match = Regex.Match(segment ?? "", @"\A(?&lt;fence&gt;`{3,})api-call[ \t]*\r?\n(?&lt;body&gt;[\s\S]*?)\r?\n\k&lt;fence&gt;[ \t]*\z");
+            if (!match.Success) continue;
+            foreach (string line in match.Groups["body"].Value.Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries))
+                if (!string.IsNullOrWhiteSpace(line)) commands.Add(line.Trim());
+        }
+        return commands;
+    }
+}
+
+public string ReadActionResponse(object input)
+{
+    var request = Api.Parse(input);
+    if (request.Data is byte[] bytes &amp;&amp; bytes.Length &gt; 0) return Encoding.UTF8.GetString(bytes);
+    if (request.Data is string text &amp;&amp; text.Length &gt; 0) return text;
+    if (request.Data != null &amp;&amp; !(request.Data is byte[])) return JsonConvert.SerializeObject(request.Data);
+    return WebUtility.UrlDecode(request.OriginalRequest ?? "");
+}
+
+public List&lt;string&gt; ExtractResponse(string response)
+{
+    return CodeBlockExtractor.ExtractInterleaved(response);
+}
+
+
+public List&lt;string&gt; ExtractAndExecute(dynamic api, string response) {
+    var segments = ExtractResponse(response);
+    ExecuteApiCommands(api, CodeBlockExtractor.ExtractCommands(segments));
+    return segments;
+}
+</ScriptContext>
+    <ScriptErrors />
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.9</PackageVersion>
+      <Id>ai-action-executor</Id>
+      <Version>1.1.0</Version>
+      <Required>true</Required>
+      <Checksum>EAEBF01DC372A472D0411FE4BD3F5FE2</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>581</Address>
+    <Name>AI Action Executor</Name>
+    <Description>Shared service for extracting AI action proposals and explicitly executing HomeGenie API commands. Independent of cloud providers and local inference engines.</Description>
+    <Group>Utilities</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>false</Cloneable>

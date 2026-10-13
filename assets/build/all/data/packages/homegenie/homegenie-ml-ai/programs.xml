@@ -299,7 +299,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.12</PackageVersion>
+      <PackageVersion>1.0.14</PackageVersion>
       <Id>context-engine</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -892,7 +892,7 @@ public class ChatRequestMetrics
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.12</PackageVersion>
+      <PackageVersion>1.0.14</PackageVersion>
       <Id>gemini-automan</Id>
       <Version>1.0.8</Version>
       <Required>true</Required>
@@ -1167,11 +1167,12 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
             }
         }
 
-        var extracted = Api.Call($"{Program.Module.Domain}/940/Extract/{WebUtility.UrlEncode(jsonResponse)}");
+        var extracted = Api.Call("System.Utility/ActionExecutor/Extract", jsonResponse);
         // Extraction is side-effect free; execution is explicitly requested once.
         var actionTimer = System.Diagnostics.Stopwatch.StartNew();
-        var executionResult = Api.Call($"{Program.Module.Domain}/940/Execute", jsonResponse);
+        var executionResult = Api.Call("System.Utility/ActionExecutor/Execute", new { requestId = telemetry.RequestId, response = jsonResponse });
         var executionArray = executionResult == null ? new JArray() : JArray.FromObject(executionResult);
+        telemetry.SetActionResults(executionArray);
         telemetry.ActionsCompleted(actionTimer.ElapsedMilliseconds, executionArray.Count,
             executionArray.Count(item =&gt; item["Success"]?.Value&lt;bool&gt;() != true));
         var messageParts = (extracted as List&lt;string&gt;)
@@ -1271,6 +1272,8 @@ public class ChatRequestMetrics
     readonly System.Diagnostics.Stopwatch clock = System.Diagnostics.Stopwatch.StartNew();
     readonly DateTimeOffset startedAt = DateTimeOffset.UtcNow;
     public string RequestId { get; } = Guid.NewGuid().ToString("N");
+    public object ActionResults { get; private set; }
+    public void SetActionResults(object results) { ActionResults = results; }
     public long? FirstTokenMs { get; private set; }
     public long? GenerationMs { get; private set; }
     public long ActionsMs { get; private set; }
@@ -1289,7 +1292,7 @@ public class ChatRequestMetrics
         requestId = RequestId, startedAt = startedAt.ToString("O"), outcome,
         durationMs = clock.ElapsedMilliseconds, firstTokenMs = FirstTokenMs,
         generationMs = GenerationMs, actionsMs = ActionsMs,
-        actionCount = ActionCount, failedActions = FailedActions
+        actionCount = ActionCount, failedActions = FailedActions, actions = ActionResults
     };
     public void SaveUser(object message)
     { if (persist) api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = message, Metadata = Snapshot("submitted") }); }
@@ -1311,11 +1314,11 @@ public class ChatRequestMetrics
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.12</PackageVersion>
+      <PackageVersion>1.0.14</PackageVersion>
       <Id>gemini-intent-handler</Id>
-      <Version>1.0.19</Version>
+      <Version>1.0.21</Version>
       <Required>true</Required>
-      <Checksum>3C00582BF9AD37D1788C41BB07865980</Checksum>
+      <Checksum>46514958734FC85BE17845B3BB4C2375</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>930</Address>
@@ -1725,7 +1728,7 @@ public class ChatRequestMetrics
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.12</PackageVersion>
+      <PackageVersion>1.0.14</PackageVersion>
       <Id>gemini-widget-genie</Id>
       <Version>1.0.14</Version>
       <Required>true</Required>
@@ -2055,7 +2058,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.12</PackageVersion>
+      <PackageVersion>1.0.14</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -2246,10 +2249,9 @@ Api.Handle($"{Program.Module.Domain}/{Program.Module.Address}/DownloadStart", (p
 Api.Handle($"{Program.Module.Domain}/{Program.Module.Address}/Extract", (modelResponse) =&gt; {
     return ExtractResponse(ReadActionResponse(modelResponse));
 }).Handle($"{Program.Module.Domain}/{Program.Module.Address}/Execute", (modelResponse) =&gt; {
-    var segments = ExtractResponse(ReadActionResponse(modelResponse));
-    return ExecuteApiCommands(Api, CodeBlockExtractor.ExtractCommands(segments));
+    return ExecuteResponse(ReadActionResponse(modelResponse));
 }).Handle($"{Program.Module.Domain}/{Program.Module.Address}/ExtractAndExecute", (modelResponse) =&gt; {
-    return ExtractAndExecute(Api, ReadActionResponse(modelResponse));
+    return ExtractAndExecute(ReadActionResponse(modelResponse));
 });
 
 
@@ -2514,7 +2516,8 @@ else
             var messageSegments = ExtractResponse(fullReply);
             telemetry.GenerationComplete();
             var actionTimer = System.Diagnostics.Stopwatch.StartNew();
-            var actionResults = ExecuteApiCommands(Api, CodeBlockExtractor.ExtractCommands(messageSegments));
+            var actionResults = ExecuteResponse(fullReply, telemetry.RequestId);
+            telemetry.SetActionResults(actionResults);
             telemetry.ActionsCompleted(actionTimer.ElapsedMilliseconds, actionResults.Count, actionResults.Count(r =&gt; !r.Success));
 
             var modelResponse = new ChatMessage {
@@ -2525,6 +2528,7 @@ else
             if (!noHistory)
             {
               telemetry.SaveReply(modelResponse);
+              Program.Emit("Widget.Refresh", "action_results");
             }
 
             if (sendContextData)
@@ -2892,62 +2896,17 @@ async Task ProcessAsync(IAsyncEnumerable&lt;string&gt; asyncEnumerable, Action&l
 
 public class ApiCommandExecution
 {
+    public string ActionId { get; set; }
+    public string RequestId { get; set; }
+    public string State { get; set; }
+    public long DurationMs { get; set; }
+    public bool Replayed { get; set; }
+    public DateTimeOffset? CompletedAt { get; set; }
     public int Index { get; set; }
     public string Command { get; set; }
     public bool Success { get; set; }
     public object Response { get; set; }
     public string Error { get; set; }
-}
-
-public class CodeBlockExtractor
-{
-    public static List&lt;string&gt; ExtractInterleaved(string sourceText)
-    {
-        var result = new List&lt;string&gt;();
-        if (string.IsNullOrEmpty(sourceText)) return result;
-        // Mask reasoning while retaining source offsets and original display text.
-        string visible = Regex.Replace(sourceText, @"&lt;think\b[^&gt;]*&gt;[\s\S]*?(?:&lt;/think\s*&gt;|$)",
-            m =&gt; Regex.Replace(m.Value, @"[^\r\n]", " "), RegexOptions.IgnoreCase);
-        var opening = new Regex(@"^[ \t]*(?&lt;fence&gt;`{3,}|~{3,})(?&lt;label&gt;[^\r\n]*)\r?\n", RegexOptions.Multiline);
-        int cursor = 0, textStart = 0;
-        while (cursor &lt; visible.Length)
-        {
-            var start = opening.Match(visible, cursor);
-            if (!start.Success) break;
-            string fence = start.Groups["fence"].Value;
-            var closing = new Regex(@"^[ \t]*" + Regex.Escape(fence[0].ToString()) + "{" + fence.Length + @",}[ \t]*\r?$", RegexOptions.Multiline);
-            var end = closing.Match(visible, start.Index + start.Length);
-            if (!end.Success) break;
-            int blockEnd = end.Index + end.Length;
-            if (fence[0] == '`' &amp;&amp; start.Groups["label"].Value.Trim() == "api-call")
-            {
-                AddText(result, sourceText.Substring(textStart, start.Index - textStart));
-                AddText(result, sourceText.Substring(start.Index, blockEnd - start.Index));
-                textStart = blockEnd;
-            }
-            cursor = blockEnd;
-        }
-        AddText(result, sourceText.Substring(textStart));
-        return result;
-    }
-
-    private static void AddText(List&lt;string&gt; result, string text)
-    {
-        if (!string.IsNullOrWhiteSpace(text)) result.Add(text.Trim());
-    }
-
-    public static List&lt;string&gt; ExtractCommands(IEnumerable&lt;string&gt; segments)
-    {
-        var commands = new List&lt;string&gt;();
-        foreach (string segment in segments ?? Enumerable.Empty&lt;string&gt;())
-        {
-            var match = Regex.Match(segment ?? "", @"\A(?&lt;fence&gt;`{3,})api-call[ \t]*\r?\n(?&lt;body&gt;[\s\S]*?)\r?\n\k&lt;fence&gt;[ \t]*\z");
-            if (!match.Success) continue;
-            foreach (string line in match.Groups["body"].Value.Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries))
-                if (!string.IsNullOrWhiteSpace(line)) commands.Add(line.Trim());
-        }
-        return commands;
-    }
 }
 
 public string ReadActionResponse(object input)
@@ -2960,52 +2919,26 @@ public string ReadActionResponse(object input)
 
 public List&lt;string&gt; ExtractResponse(string response)
 {
-    return CodeBlockExtractor.ExtractInterleaved(response);
+    object result = Api.Call("System.Utility/ActionExecutor/Extract", response);
+    if (result == null) throw new InvalidOperationException("AI Action Executor is unavailable.");
+    var segments = JToken.FromObject(result) as JArray;
+    if (segments == null) throw new InvalidOperationException("Invalid AI Action Executor extraction response.");
+    return segments.ToObject&lt;List&lt;string&gt;&gt;();
 }
 
-public List&lt;ApiCommandExecution&gt; ExecuteApiCommands(dynamic api, IEnumerable&lt;string&gt; proposedCommands)
+public List&lt;ApiCommandExecution&gt; ExecuteResponse(string response, string requestId = null)
 {
-    var results = new List&lt;ApiCommandExecution&gt;();
-    int index = 0;
-    foreach (string proposed in proposedCommands ?? Enumerable.Empty&lt;string&gt;())
-    {
-        string command = (proposed ?? "").Trim();
-        if (command.StartsWith("/api/")) command = command.Substring(5);
-        var result = new ApiCommandExecution { Index = index++, Command = command };
-        results.Add(result);
-        if (!Regex.IsMatch(command, @"\A[A-Za-z][A-Za-z0-9_.]*/[^/\s]+/[^/\s]+(?:/[^\r\n]*)?\z"))
-        {
-            result.Error = "Invalid HomeGenie API command.";
-            continue;
-        }
-        try
-        {
-            Program.Log.Info($"Executing: {command}");
-            result.Response = api.Call(command);
-            var response = result.Response == null ? null : JToken.FromObject(result.Response);
-            string status = response is JObject obj ? (obj["Status"] ?? obj["response"]?["Status"])?.ToString() : null;
-            result.Success = result.Response != null &amp;&amp; status != "Error";
-            if (!result.Success) result.Error = response is JObject error
-                ? (error["Message"] ?? error["response"]?["Message"])?.ToString() ?? "API command failed."
-                : "API command returned no result.";
-        }
-        catch (Exception ex)
-        {
-            result.Error = ex.Message;
-            Program.Log.Error($"API Error: {command} - {ex.Message}");
-        }
-    }
-    return results;
+    object result = Api.Call("System.Utility/ActionExecutor/Execute", requestId == null ? (object)response : new { requestId, response });
+    if (result == null) throw new InvalidOperationException("AI Action Executor is unavailable.");
+    var actions = JToken.FromObject(result) as JArray;
+    if (actions == null) throw new InvalidOperationException("Invalid AI Action Executor execution response.");
+    return actions.ToObject&lt;List&lt;ApiCommandExecution&gt;&gt;();
 }
 
-// Compatibility path: extraction is pure; execution remains an explicit second step.
-public List&lt;string&gt; ExtractAndExecute(dynamic api, string response)
+public object ExtractAndExecute(string response)
 {
-    var segments = ExtractResponse(response);
-    ExecuteApiCommands(api, CodeBlockExtractor.ExtractCommands(segments));
-    return segments;
+    return Api.Call("System.Utility/ActionExecutor/ExtractAndExecute", response);
 }
-
 
 /**
  * Returns the total available system or container memory in Gigabytes.
@@ -3075,6 +3008,8 @@ public class ChatRequestMetrics
     readonly System.Diagnostics.Stopwatch clock = System.Diagnostics.Stopwatch.StartNew();
     readonly DateTimeOffset startedAt = DateTimeOffset.UtcNow;
     public string RequestId { get; } = Guid.NewGuid().ToString("N");
+    public object ActionResults { get; private set; }
+    public void SetActionResults(object results) { ActionResults = results; }
     public long? FirstTokenMs { get; private set; }
     public long? GenerationMs { get; private set; }
     public long ActionsMs { get; private set; }
@@ -3093,7 +3028,7 @@ public class ChatRequestMetrics
         requestId = RequestId, startedAt = startedAt.ToString("O"), outcome,
         durationMs = clock.ElapsedMilliseconds, firstTokenMs = FirstTokenMs,
         generationMs = GenerationMs, actionsMs = ActionsMs,
-        actionCount = ActionCount, failedActions = FailedActions
+        actionCount = ActionCount, failedActions = FailedActions, actions = ActionResults
     };
     public void SaveUser(object message)
     { if (persist) api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = message, Metadata = Snapshot("submitted") }); }
@@ -3115,11 +3050,11 @@ public class ChatRequestMetrics
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.12</PackageVersion>
+      <PackageVersion>1.0.14</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.0.14</Version>
+      <Version>1.0.16</Version>
       <Required>true</Required>
-      <Checksum>3971F9E96E4212BE5FA67F8F096A5231</Checksum>
+      <Checksum>BF77FCB2B11D877219C96039A82FD3DD</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>
@@ -3321,7 +3256,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.12</PackageVersion>
+      <PackageVersion>1.0.14</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -3507,7 +3442,7 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.12</PackageVersion>
+      <PackageVersion>1.0.14</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
