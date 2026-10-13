@@ -299,7 +299,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.12</PackageVersion>
       <Id>context-engine</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -498,10 +498,15 @@ object promptLock = new object();
 
 Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&gt; {
     lock (promptLock) {
-        var result = Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId });
+        var telemetry = new ChatRequestMetrics(Api, storeId);
+        try {
+        var result = Api.Call("System.Utility/ChatHistory/GetContext", new { StoreId = storeId });
         var payloadContents = result == null ? new List&lt;ChatMessage&gt;() : JArray.FromObject(result).ToObject&lt;List&lt;ChatMessage&gt;&gt;();
         var userMessage = ChatMessage.Create("user", isBackground ? $"[Scheduled Task]\n{userCommand}" : userCommand);
-        Api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = userMessage });
+        telemetry.SaveUser(userMessage);
+
+        if (isQuotaExceeded &amp;&amp; DateTime.UtcNow &lt; rateLimitResetTime)
+            return telemetry.Error("**AI Temporarily Unavailable:** Rate limit reached.");
 
         // This inventory is fresh for each turn, independently of the Gemini cache.
         var managedPrograms = new Dictionary&lt;string, JObject&gt;();
@@ -516,7 +521,7 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
             string inventoryError = JsonConvert.SerializeObject(new { automan_deploy = new {
                 status = "error", error_message = "Unable to load existing programs: " + ex.Message
             } }, Formatting.Indented);
-            Api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = ChatMessage.Create("model", inventoryError) });
+            telemetry.SaveReply(ChatMessage.Create("model", inventoryError), "error");
             Program.Emit("Widget.Refresh", "history_updated");
             return inventoryError;
         }
@@ -563,6 +568,7 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
             try {
                 string requestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
                 dynamic data = CallGemini(requestUrl, JsonConvert.SerializeObject(payload, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
+                telemetry.GenerationComplete();
                 if (data == null || data.candidates == null || data.candidates.Count == 0) throw new InvalidOperationException("Empty AI response.");
                 var candidate = (JObject)data.candidates[0];
                 string finishReason = candidate["finishReason"]?.ToString();
@@ -625,7 +631,7 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
                         File.WriteAllText(Path.Combine(backupFolder, programId + "-" + DateTime.UtcNow.Ticks + ".json"), originalProgram.ToString());
                     }
                 } else if (programId.Length == 0) {
-                    var addResult = Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Add", JsonConvert.SerializeObject(new {
+                    var addResult = telemetry.CallAction("HomeAutomation.HomeGenie/Automation/Programs.Add", JsonConvert.SerializeObject(new {
                         Type = language, Group = "Automan", Name = name, Description = explanation, IsEnabled = false
                     }));
                     var added = addResult is string ? JToken.Parse((string)addResult) : JToken.FromObject(addResult);
@@ -646,7 +652,7 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
                 compilePayload["ScriptContext"] = context;
                 compilePayload["IsEnabled"] = false;
                 updateStarted = originalProgram != null;
-                var compileResult = Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Compile", compilePayload.ToString(Formatting.None));
+                var compileResult = telemetry.CallAction("HomeAutomation.HomeGenie/Automation/Programs.Compile", compilePayload.ToString(Formatting.None));
                 var compilerOutput = compileResult is string ? JToken.Parse((string)compileResult) : JToken.FromObject(compileResult);
                 if (compilerOutput.Type == JTokenType.Object) compilerOutput = compilerOutput["ResponseValue"] ?? compilerOutput["response"]?["ResponseValue"];
                 if (compilerOutput != null &amp;&amp; compilerOutput.Type == JTokenType.String) compilerOutput = JToken.Parse(compilerOutput.ToString());
@@ -661,7 +667,7 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
                 }
 
                 bool enableProgram = originalProgram == null || originalProgram["IsEnabled"]?.Value&lt;bool&gt;() == true;
-                if (enableProgram) Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Enable/" + programId);
+                if (enableProgram) telemetry.CallAction("HomeAutomation.HomeGenie/Automation/Programs.Enable/" + programId);
                 isDeployed = true;
                 finalUiResponse = JsonConvert.SerializeObject(new {
                     automan_deploy = new { status = "success", action = action, program_id = programId,
@@ -680,11 +686,11 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
 
         if (!isDeployed &amp;&amp; updateStarted &amp;&amp; originalProgram != null) {
             try {
-                var restored = Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Compile", originalProgram.ToString(Formatting.None));
+                var restored = telemetry.CallAction("HomeAutomation.HomeGenie/Automation/Programs.Compile", originalProgram.ToString(Formatting.None));
                 var restoredOutput = restored is string ? JToken.Parse((string)restored) : JToken.FromObject(restored);
                 if (!(restoredOutput is JArray) || restoredOutput.HasValues) throw new InvalidOperationException("Previous code could not be recompiled.");
                 if (originalProgram["IsEnabled"]?.Value&lt;bool&gt;() == true)
-                    Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Enable/" + programId);
+                    telemetry.CallAction("HomeAutomation.HomeGenie/Automation/Programs.Enable/" + programId);
                 Program.Log.Info("Restored previous version of Automan program " + programId);
             } catch (Exception ex) {
                 finalUiResponse = JsonConvert.SerializeObject(new { automan_deploy = new {
@@ -696,10 +702,16 @@ Func&lt;string, bool, string&gt; ProcessPrompt = (userCommand, isBackground) =&g
             automan_deploy = new { status = "compile_failed", attempts = maxAttempts,
                 error_message = "Failed to compile the requested program. Any existing program was restored." }
         }, Formatting.Indented);
-        Api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = ChatMessage.Create("model", finalUiResponse) });
+        string telemetryOutcome = "completed";
+        try { var status = JObject.Parse(finalUiResponse)["automan_deploy"]?["status"]?.ToString();
+            if (status != null &amp;&amp; status != "success") telemetryOutcome = "error"; } catch (Newtonsoft.Json.JsonException) { }
+        telemetry.SaveReply(ChatMessage.Create("model", finalUiResponse), telemetryOutcome);
         Program.Emit("Widget.Refresh", "history_updated");
         if (isBackground &amp;&amp; !updateStarted &amp;&amp; isQuotaExceeded) throw new Exception("Rate limit reached (429).");
         return finalUiResponse;
+        } catch (Exception) {
+            return telemetry.Error("**Error:** Automan request failed. Please check the logs.");
+        }
     }
 };
 
@@ -707,9 +719,6 @@ List&lt;string&gt; taskQueue = new List&lt;string&gt;();
 object queueLock = new object();
 
 Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt; {
-    if (isQuotaExceeded &amp;&amp; DateTime.UtcNow &lt; rateLimitResetTime) {
-        return new ResponseText($"**AI Temporarily Unavailable:** Rate limit reached.");
-    }
     var request = Api.Parse(userCommand);
     var data = userCommand is string ? WebUtility.UrlDecode(userCommand as string) : request?.Data is string ? request?.Data as string : Encoding.Default.GetString(request?.Data as byte[]);
     string response = ProcessPrompt(data, false);
@@ -814,17 +823,80 @@ public class ChatMessage {
             Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = text } }
         };
     }
-}</ScriptContext>
+}
+// Diagnostics stay in the history envelope, never in provider message objects.
+public class ChatRequestMetrics
+{
+    readonly dynamic api;
+    readonly string storeId;
+    readonly bool persist;
+    readonly System.Diagnostics.Stopwatch clock = System.Diagnostics.Stopwatch.StartNew();
+    readonly DateTimeOffset startedAt = DateTimeOffset.UtcNow;
+    public string RequestId { get; } = Guid.NewGuid().ToString("N");
+    public long? FirstTokenMs { get; private set; }
+    public long? GenerationMs { get; private set; }
+    public long ActionsMs { get; private set; }
+    public int ActionCount { get; private set; }
+    public int FailedActions { get; private set; }
+    bool replySaved;
+
+    public ChatRequestMetrics(dynamic api, string storeId, bool persist = true)
+    { this.api = api; this.storeId = storeId; this.persist = persist; }
+
+    public void FirstToken() { if (!FirstTokenMs.HasValue) FirstTokenMs = clock.ElapsedMilliseconds; }
+    public void GenerationComplete() { GenerationMs = clock.ElapsedMilliseconds; }
+    public void ActionsCompleted(long elapsedMs, int count, int failed)
+    { ActionsMs += elapsedMs; ActionCount += count; FailedActions += failed; }
+    public object Snapshot(string outcome) =&gt; new {
+        requestId = RequestId, startedAt = startedAt.ToString("O"), outcome,
+        durationMs = clock.ElapsedMilliseconds, firstTokenMs = FirstTokenMs,
+        generationMs = GenerationMs, actionsMs = ActionsMs,
+        actionCount = ActionCount, failedActions = FailedActions
+    };
+    public void SaveUser(object message)
+    { if (persist) api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = message, Metadata = Snapshot("submitted") }); }
+    public void SaveReply(object message, string outcome = "completed")
+    {
+        if (replySaved) return;
+        if (persist) api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = message, Metadata = Snapshot(outcome) });
+        replySaved = true;
+    }
+
+    public dynamic CallAction(string command, object data = null)
+    {
+        var timer = System.Diagnostics.Stopwatch.StartNew();
+        bool failed = false;
+        try {
+            object result = api.Call(command, data);
+            if (result == null) failed = true;
+            else {
+                try {
+                    var token = result is string ? JToken.Parse((string)result) : JToken.FromObject(result);
+                    failed = token.Type == JTokenType.Object &amp;&amp; token["Status"]?.ToString() == "Error";
+                    if (command.EndsWith("Programs.Compile") &amp;&amp; token is JArray errors &amp;&amp; errors.Count &gt; 0) failed = true;
+                } catch (Newtonsoft.Json.JsonException) { }
+            }
+            return result;
+        } catch { failed = true; throw; }
+        finally { ActionsCompleted(timer.ElapsedMilliseconds, 1, failed ? 1 : 0); }
+    }
+    public string Error(string text, string outcome = "error")
+    {
+        SaveReply(new { role = "model", parts = new[] { new { text } } }, outcome);
+        return text;
+    }
+}
+</ScriptContext>
     <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.12</PackageVersion>
       <Id>gemini-automan</Id>
-      <Version>1.0.7</Version>
+      <Version>1.0.8</Version>
       <Required>true</Required>
-      <Checksum>BFCAD79B62C29C7A9D5C79BA06E87EEF</Checksum>
+      <Checksum>445AE240A5077BF727571ECB3BBF15D2</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>932</Address>
@@ -884,14 +956,17 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
 {
     var request = Api.Parse(userCommand);
     var msg = userCommand is string ? WebUtility.UrlDecode(userCommand as string) : request?.Data is string ? request?.Data as string : Encoding.Default.GetString(request?.Data as byte[]);
+    var telemetry = new ChatRequestMetrics(Api, Program.Module.Address);
 
     // Get the current history from the centralized service
     var storeId = Program.Module.Address;
-    var result = Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId });
+    var result = Api.Call("System.Utility/ChatHistory/GetContext", new { StoreId = storeId });
     var payloadContents = JArray.FromObject(result).ToObject&lt;List&lt;ChatMessage&gt;&gt;();
 
     // Prepare the current user message
     var userMessage = ChatMessage.Create("user", msg);
+    // Preserve submitted messages even when the provider fails or times out.
+    telemetry.SaveUser(userMessage);
 
     // We use a List of objects for the active session to support mixed types
     // (the strongly typed ChatMessage history and the anonymous tool call objects)
@@ -930,8 +1005,11 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
 
     var systemPrompt = (string)Api.Call("System.Utility/ContextEngine/Render", promptText);
 
+    string requestId = telemetry.RequestId;
+    var requestTimer = System.Diagnostics.Stopwatch.StartNew();
     try
     {
+        Program.Log.Info($"Gemini request={requestId} started; context={sendContextData}; history={payloadContents.Count}");
         bool toolCallActive = true;
         int loopCount = 0;
         string rawGeminiResponseJson = "";
@@ -953,14 +1031,37 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
             string payloadJson = JsonConvert.SerializeObject(payload, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             string geminiRequestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
 
-            var data = Net.WebService(geminiRequestUrl).WithTimeout(180).AddHeader("Content-Type", "application/json").Post(payloadJson).GetData();
-
-            // Safely navigate the dynamic response
-            dynamic candidates = data?.candidates;
-            if (candidates == null)
+            var callTimer = System.Diagnostics.Stopwatch.StartNew();
+            JObject response;
+            using (var httpRequest = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Post, geminiRequestUrl))
+            using (var timeout = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(180)))
             {
-                throw new Exception($"Received an empty or invalid candidates array. Response: {JsonConvert.SerializeObject(data)}");
+                httpRequest.Content = new System.Net.Http.StringContent(payloadJson, Encoding.UTF8, "application/json");
+                using (var httpResponse = GeminiHttp.SendAsync(httpRequest, timeout.Token).GetAwaiter().GetResult())
+                {
+                    string body = httpResponse.Content.ReadAsStringAsync(timeout.Token).GetAwaiter().GetResult();
+                    Program.Log.Info($"Gemini request={requestId} round={loopCount} http={(int)httpResponse.StatusCode} elapsedMs={callTimer.ElapsedMilliseconds} bytes={Encoding.UTF8.GetByteCount(body)}");
+                    if (!httpResponse.IsSuccessStatusCode)
+                    {
+                        string providerStatus = "unknown";
+                        try { providerStatus = (string)JObject.Parse(body)["error"]?["status"] ?? "unknown"; } catch (Newtonsoft.Json.JsonException) { }
+                        // Log only the documented status identifier, never the provider's raw message/body.
+                        if (!Regex.IsMatch(providerStatus, @"^[A-Z_]{1,64}$")) providerStatus = "unknown";
+                        throw new InvalidOperationException($"AI service HTTP {(int)httpResponse.StatusCode} ({providerStatus}).");
+                    }
+                    try { response = JObject.Parse(body); }
+                    catch (Newtonsoft.Json.JsonException) { throw new InvalidOperationException("AI service returned an invalid JSON object."); }
+                }
             }
+            var candidateArray = response["candidates"] as JArray;
+            if (candidateArray == null || candidateArray.Count == 0)
+            {
+                string reason = (string)response["promptFeedback"]?["blockReason"] ?? "missing candidates";
+                if (!Regex.IsMatch(reason, @"^[A-Za-z_ ]{1,64}$")) reason = "missing candidates";
+                throw new InvalidOperationException($"AI service returned no candidates ({reason}).");
+            }
+            Program.Log.Info($"Gemini request={requestId} round={loopCount} candidates={candidateArray.Count}");
+            dynamic candidates = candidateArray;
 
             dynamic modelContent = candidates[0]?.content;
             dynamic part = modelContent?.parts?[0];
@@ -973,12 +1074,14 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
             if (part.functionCall != null)
             {
                 string functionName = (string)part.functionCall.name;
+                Program.Log.Info($"Gemini request={requestId} round={loopCount} tool={(functionName == "get_home_status" || functionName == "get_time" ? functionName : "unknown")}");
 
                 string callId = null;
                 try { callId = (string)part.functionCall.id; } catch { }
 
                 sessionContents.Add(modelContent);
 
+                var toolTimer = System.Diagnostics.Stopwatch.StartNew();
                 string toolExecutionResult = "";
                 if (functionName == "get_home_status")
                 {
@@ -994,6 +1097,7 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
                     toolExecutionResult = $"Error: Function '{functionName}' not found.";
                 }
 
+                telemetry.ActionsCompleted(toolTimer.ElapsedMilliseconds, 1, functionName == "get_home_status" || functionName == "get_time" ? 0 : 1);
                 sessionContents.Add(new {
                     role = "user",
                     parts = new[] {
@@ -1016,6 +1120,7 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
             {
                 // No tool called, we received the final text response
                 rawGeminiResponseJson = (string)part.text;
+                telemetry.GenerationComplete();
                 toolCallActive = false;
             }
             else
@@ -1028,7 +1133,7 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
         {
             string error = "The AI failed to generate a valid text response after processing.";
             Program.Notify($"ERROR: {error}");
-            return new ResponseText($"**Error:** {error}");
+            return new ResponseText(telemetry.Error($"**Error:** {error}"));
         }
 
         string jsonResponse = rawGeminiResponseJson;
@@ -1063,17 +1168,19 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
         }
 
         var extracted = Api.Call($"{Program.Module.Domain}/940/Extract/{WebUtility.UrlEncode(jsonResponse)}");
+        // Extraction is side-effect free; execution is explicitly requested once.
+        var actionTimer = System.Diagnostics.Stopwatch.StartNew();
+        var executionResult = Api.Call($"{Program.Module.Domain}/940/Execute", jsonResponse);
+        var executionArray = executionResult == null ? new JArray() : JArray.FromObject(executionResult);
+        telemetry.ActionsCompleted(actionTimer.ElapsedMilliseconds, executionArray.Count,
+            executionArray.Count(item =&gt; item["Success"]?.Value&lt;bool&gt;() != true));
         var messageParts = (extracted as List&lt;string&gt;)
                 .Select(segment =&gt; new MessagePart { Text = segment + "\n" })
                 .ToList();
 
         // --- 6. UPDATE CENTRALIZED HISTORY SERVICE ---
 
-        // A. Add the User message to the system service
-        Api.Call("System.Utility/ChatHistory/Add", new {
-            StoreId = storeId,
-            Message = userMessage
-        });
+        // The user message was persisted before contacting the provider.
 
         // B. Create the Model response message using the interleaved parts [text, api-call, text...]
         var modelResponse = new ChatMessage
@@ -1085,18 +1192,18 @@ Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userCommand) =&gt;
         // C. Add the Model response to the system service
         // The service automatically handles persistence (saving to JSON)
         // Note: Ephemeral tool calls/responses from the session are intentionally omitted from persistent chat history
-        Api.Call("System.Utility/ChatHistory/Add", new {
-            StoreId = storeId,
-            Message = modelResponse
-        });
+        telemetry.SaveReply(modelResponse);
 
         // 7. Return the friendly answer to the UI
+        Program.Log.Info($"Gemini request={requestId} completed elapsedMs={requestTimer.ElapsedMilliseconds}");
         return new ResponseText(String.Join('\n', (extracted as List&lt;string&gt;)));
     }
     catch (Exception ex)
     {
-        Program.Notify($"Error while calling Gemini API: {ex.Message}");
-        return new ResponseText($"**Error:** An exception occurred while contacting the AI service. Please check the logs.\n\n`{ex.Message}`");
+        string detail = ex is OperationCanceledException ? "AI service request timed out." : ex is InvalidOperationException ? ex.Message : $"Unexpected AI response ({ex.GetType().Name}).";
+        Program.Log.Error($"Gemini request={requestId} failed elapsedMs={requestTimer.ElapsedMilliseconds}; {detail}");
+        Program.Notify($"Gemini request {requestId}: {detail}");
+        return new ResponseText(telemetry.Error($"**Error:** {detail} Reference: `{requestId}`. Please check the logs."));
     }
 });
 
@@ -1151,17 +1258,64 @@ public class ChatMessage {
         return new ChatMessage { Role = role, Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = text } } };
     }
 }
+
+// Shared connection pool; request cancellation enforces the per-call timeout.
+static readonly System.Net.Http.HttpClient GeminiHttp = new System.Net.Http.HttpClient { Timeout = System.Threading.Timeout.InfiniteTimeSpan };
+
+// Diagnostics stay in the history envelope, never in provider message objects.
+public class ChatRequestMetrics
+{
+    readonly dynamic api;
+    readonly string storeId;
+    readonly bool persist;
+    readonly System.Diagnostics.Stopwatch clock = System.Diagnostics.Stopwatch.StartNew();
+    readonly DateTimeOffset startedAt = DateTimeOffset.UtcNow;
+    public string RequestId { get; } = Guid.NewGuid().ToString("N");
+    public long? FirstTokenMs { get; private set; }
+    public long? GenerationMs { get; private set; }
+    public long ActionsMs { get; private set; }
+    public int ActionCount { get; private set; }
+    public int FailedActions { get; private set; }
+    bool replySaved;
+
+    public ChatRequestMetrics(dynamic api, string storeId, bool persist = true)
+    { this.api = api; this.storeId = storeId; this.persist = persist; }
+
+    public void FirstToken() { if (!FirstTokenMs.HasValue) FirstTokenMs = clock.ElapsedMilliseconds; }
+    public void GenerationComplete() { GenerationMs = clock.ElapsedMilliseconds; }
+    public void ActionsCompleted(long elapsedMs, int count, int failed)
+    { ActionsMs += elapsedMs; ActionCount += count; FailedActions += failed; }
+    public object Snapshot(string outcome) =&gt; new {
+        requestId = RequestId, startedAt = startedAt.ToString("O"), outcome,
+        durationMs = clock.ElapsedMilliseconds, firstTokenMs = FirstTokenMs,
+        generationMs = GenerationMs, actionsMs = ActionsMs,
+        actionCount = ActionCount, failedActions = FailedActions
+    };
+    public void SaveUser(object message)
+    { if (persist) api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = message, Metadata = Snapshot("submitted") }); }
+    public void SaveReply(object message, string outcome = "completed")
+    {
+        if (replySaved) return;
+        if (persist) api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = message, Metadata = Snapshot(outcome) });
+        replySaved = true;
+    }
+    public string Error(string text, string outcome = "error")
+    {
+        SaveReply(new { role = "model", parts = new[] { new { text } } }, outcome);
+        return text;
+    }
+}
 </ScriptContext>
     <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.12</PackageVersion>
       <Id>gemini-intent-handler</Id>
-      <Version>1.0.16</Version>
+      <Version>1.0.19</Version>
       <Required>true</Required>
-      <Checksum>DA2C87D3E2682B3B0FAC29C3701D9F83</Checksum>
+      <Checksum>3C00582BF9AD37D1788C41BB07865980</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>930</Address>
@@ -1345,22 +1499,25 @@ Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
 {
     var request = Api.Parse(userCommand);
     var msg = userCommand is string ? WebUtility.UrlDecode(userCommand as string) : request?.Data is string ? request?.Data as string : Encoding.Default.GetString(request?.Data as byte[]);
+    var telemetry = new ChatRequestMetrics(Api, Program.Module.Address);
 
-    if (isQuotaExceeded &amp;&amp; DateTime.UtcNow &lt; rateLimitResetTime) {
-        return new ResponseText($"**AI Temporarily Unavailable:** Rate limit reached (Error 429). Please try again in {Math.Ceiling((rateLimitResetTime - DateTime.UtcNow).TotalMinutes)} minutes.");
-    }
-
-    var result = Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId });
+    var result = Api.Call("System.Utility/ChatHistory/GetContext", new { StoreId = storeId });
     var payloadContents = JArray.FromObject(result).ToObject&lt;List&lt;ChatMessage&gt;&gt;();
 
     var userMessage = ChatMessage.Create("user", msg);
-    Api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = userMessage });
+    telemetry.SaveUser(userMessage);
     payloadContents.Add(userMessage);
 
+    if (isQuotaExceeded &amp;&amp; DateTime.UtcNow &lt; rateLimitResetTime) {
+        return new ResponseText(telemetry.Error($"**AI Temporarily Unavailable:** Rate limit reached (Error 429). Please try again in {Math.Ceiling((rateLimitResetTime - DateTime.UtcNow).TotalMinutes)} minutes."));
+    }
+
+    try
+    {
     string fullContext = BuildContext();
     bool hasCache = EnsureCache(fullContext);
     if (isQuotaExceeded) {
-        return new ResponseText("**Quota Error:** Could not load the context. Please try again in a few minutes.");
+        return new ResponseText(telemetry.Error("**Quota Error:** Could not load the context. Please try again in a few minutes."));
     }
 
     // Build the Generation Config forcing JSON output
@@ -1412,8 +1569,6 @@ Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
         };
     }
 
-    try
-    {
         string payloadJson = JsonConvert.SerializeObject(payload, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
         string requestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
 
@@ -1465,25 +1620,26 @@ Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
                     }
                 }
 
+                telemetry.GenerationComplete();
                 string finalReply = formattedResponse.ToString();
 
                 var modelResponse = ChatMessage.Create("model", finalReply);
-                Api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = modelResponse });
+                telemetry.SaveReply(modelResponse);
 
                 return new ResponseText(finalReply);
             }
         }
-        return new ResponseText("**Error:** The AI returned an empty response.");
+        return new ResponseText(telemetry.Error("**Error:** The AI returned an empty response."));
     }
     catch (Exception ex)
     {
         if (ex.Message.Contains("(429)")) {
             isQuotaExceeded = true;
             rateLimitResetTime = DateTime.UtcNow.AddMinutes(2);
-            return new ResponseText("**Errore 429:** Troppe richieste in corso. Ho messo in pausa le interrogazioni per un paio di minuti.");
+            return new ResponseText(telemetry.Error("**Errore 429:** Troppe richieste in corso. Ho messo in pausa le interrogazioni per un paio di minuti."));
         }
         Program.Log.Error($"Gemini API Error: {ex.Message}");
-        return new ResponseText($"**Error:** Could not contact Gemini service. `{ex.Message}`");
+        return new ResponseText(telemetry.Error($"**Error:** Could not contact Gemini service. `{ex.Message}`"));
     }
 });
 
@@ -1519,17 +1675,61 @@ public class ChatMessage {
             Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = text } }
         };
     }
-}</ScriptContext>
+}
+// Diagnostics stay in the history envelope, never in provider message objects.
+public class ChatRequestMetrics
+{
+    readonly dynamic api;
+    readonly string storeId;
+    readonly bool persist;
+    readonly System.Diagnostics.Stopwatch clock = System.Diagnostics.Stopwatch.StartNew();
+    readonly DateTimeOffset startedAt = DateTimeOffset.UtcNow;
+    public string RequestId { get; } = Guid.NewGuid().ToString("N");
+    public long? FirstTokenMs { get; private set; }
+    public long? GenerationMs { get; private set; }
+    public long ActionsMs { get; private set; }
+    public int ActionCount { get; private set; }
+    public int FailedActions { get; private set; }
+    bool replySaved;
+
+    public ChatRequestMetrics(dynamic api, string storeId, bool persist = true)
+    { this.api = api; this.storeId = storeId; this.persist = persist; }
+
+    public void FirstToken() { if (!FirstTokenMs.HasValue) FirstTokenMs = clock.ElapsedMilliseconds; }
+    public void GenerationComplete() { GenerationMs = clock.ElapsedMilliseconds; }
+    public void ActionsCompleted(long elapsedMs, int count, int failed)
+    { ActionsMs += elapsedMs; ActionCount += count; FailedActions += failed; }
+    public object Snapshot(string outcome) =&gt; new {
+        requestId = RequestId, startedAt = startedAt.ToString("O"), outcome,
+        durationMs = clock.ElapsedMilliseconds, firstTokenMs = FirstTokenMs,
+        generationMs = GenerationMs, actionsMs = ActionsMs,
+        actionCount = ActionCount, failedActions = FailedActions
+    };
+    public void SaveUser(object message)
+    { if (persist) api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = message, Metadata = Snapshot("submitted") }); }
+    public void SaveReply(object message, string outcome = "completed")
+    {
+        if (replySaved) return;
+        if (persist) api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = message, Metadata = Snapshot(outcome) });
+        replySaved = true;
+    }
+    public string Error(string text, string outcome = "error")
+    {
+        SaveReply(new { role = "model", parts = new[] { new { text } } }, outcome);
+        return text;
+    }
+}
+</ScriptContext>
     <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.12</PackageVersion>
       <Id>gemini-widget-genie</Id>
-      <Version>1.0.13</Version>
+      <Version>1.0.14</Version>
       <Required>true</Required>
-      <Checksum>D5762297431812A848F81E3F31EE5CF8</Checksum>
+      <Checksum>870167C0508D51ABFEC3167D153B02F9</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>931</Address>
@@ -1855,7 +2055,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.12</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -2044,10 +2244,12 @@ Api.Handle($"{Program.Module.Domain}/{Program.Module.Address}/DownloadStart", (p
 
 // --- 2.1 INFERENCE POST-PROCESSING HELPER METHOD (shared for using by other programs)
 Api.Handle($"{Program.Module.Domain}/{Program.Module.Address}/Extract", (modelResponse) =&gt; {
-    // Post-Process AI reply and execute local commands
-    var request = Api.Parse(modelResponse);
-    var response = WebUtility.UrlDecode(request.OriginalRequest);
-    return ExtractAndExecute(Api, response);
+    return ExtractResponse(ReadActionResponse(modelResponse));
+}).Handle($"{Program.Module.Domain}/{Program.Module.Address}/Execute", (modelResponse) =&gt; {
+    var segments = ExtractResponse(ReadActionResponse(modelResponse));
+    return ExecuteApiCommands(Api, CodeBlockExtractor.ExtractCommands(segments));
+}).Handle($"{Program.Module.Domain}/{Program.Module.Address}/ExtractAndExecute", (modelResponse) =&gt; {
+    return ExtractAndExecute(Api, ReadActionResponse(modelResponse));
 });
 
 
@@ -2192,7 +2394,7 @@ else
     // SYNC: Fetch clean history from the System Service and sync LLamaSharp session
     string storeId = Program.Module.Address;
     try {
-        var result = Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId });
+        var result = Api.Call("System.Utility/ChatHistory/GetContext", new { StoreId = storeId });
         dynamic unifiedlHistory = JArray.FromObject(result).ToObject&lt;List&lt;ChatMessage&gt;&gt;();
 
         if (unifiedlHistory != null) {
@@ -2232,7 +2434,7 @@ else
     } catch (Exception ex) {
         Program.Log.Warn($"Warmup warning: {ex.Message}");
     }
-    Program.Emit(FIELD_STATUS_INIT, "Ready");
+    // Ready is emitted after chat APIs are registered.
 
 
     // --- 7. INFERENCE LOGIC AND TOKEN PROCESSING ---
@@ -2246,8 +2448,11 @@ else
       */
     var processInput = new Func&lt;string, bool, bool, bool, string&gt;((rawInput, synchronous, sendContextData, noHistory) =&gt; {
 
+        var telemetry = new ChatRequestMetrics(Api, storeId, !noHistory);
+        telemetry.SaveUser(ChatMessage.Create("user", rawInput));
         if (generationCts != null) generationCts.Dispose();
         generationCts = new CancellationTokenSource();
+        var requestCts = generationCts;
 
         string fullInput = rawInput;
         if (sendContextData)
@@ -2257,24 +2462,16 @@ else
         }
 
 
-        // 2. PERSIST USER MESSAGE: Save the CLEAN raw input to the service
-        if (!noHistory)
-        {
-          Api.Call("System.Utility/ChatHistory/Add", new {
-              StoreId = storeId,
-              Message = ChatMessage.Create("user", rawInput)
-          });
-        }
-
         // 3. TEMPLATING: Prepare input for the engine (but don't save this to history!)
         string templatedInput = BuildUserPrompt(templateType, fullInput);
 
         var process = new Func&lt;bool, string&gt;((sync) =&gt; {
+            try {
             // Send the templated input to the engine
             var sessionChat = session.ChatAsync(
                 new ChatHistory.Message(AuthorRole.User, templatedInput),
                 LailamaInferenceParams,
-                cancellationToken: generationCts.Token
+                cancellationToken: requestCts.Token
             );
 
             string streamBuffer = "";
@@ -2285,6 +2482,7 @@ else
 
             ProcessAsync(sessionChat, (token) =&gt; {
                 if (string.IsNullOrEmpty(token)) return;
+                telemetry.FirstToken();
                 streamBuffer += token;
                 fullReply += token;
 
@@ -2309,8 +2507,15 @@ else
             }
             Program.Emit(FIELD_TOKENS_STREAM, "");
 
+            // Some inference backends finish normally when cancelled. Never execute a partial reply.
+            requestCts.Token.ThrowIfCancellationRequested();
+
             // 4. COMMAND EXECUTION AND PERSISTENCE
-            var messageSegments = ExtractAndExecute(Api, fullReply);
+            var messageSegments = ExtractResponse(fullReply);
+            telemetry.GenerationComplete();
+            var actionTimer = System.Diagnostics.Stopwatch.StartNew();
+            var actionResults = ExecuteApiCommands(Api, CodeBlockExtractor.ExtractCommands(messageSegments));
+            telemetry.ActionsCompleted(actionTimer.ElapsedMilliseconds, actionResults.Count, actionResults.Count(r =&gt; !r.Success));
 
             var modelResponse = new ChatMessage {
                 Role = "model",
@@ -2319,10 +2524,7 @@ else
 
             if (!noHistory)
             {
-              Api.Call("System.Utility/ChatHistory/Add", new {
-                  StoreId = storeId,
-                  Message = modelResponse
-              });
+              telemetry.SaveReply(modelResponse);
             }
 
             if (sendContextData)
@@ -2356,6 +2558,13 @@ else
             }
 
             return fullReply;
+            } catch (OperationCanceledException) {
+                telemetry.Error("[STOPPED]", "cancelled");
+                throw;
+            } catch (Exception) {
+                telemetry.Error("**Error:** Local AI inference failed. Please check the logs.");
+                throw;
+            }
         });
 
         if (synchronous) return process(true);
@@ -2364,7 +2573,7 @@ else
             try { process(false); }
             catch (OperationCanceledException) { Program.Log.Info("Inference stopped."); }
             catch (Exception ex) { Program.Emit(FIELD_STATUS_ERROR, ex.Message); }
-            finally { generationCts?.Dispose(); generationCts = null; }
+            finally { requestCts.Dispose(); if (ReferenceEquals(generationCts, requestCts)) generationCts = null; }
         });
 
         return "";
@@ -2433,6 +2642,7 @@ else
     Api.Handle($"{API_URL}/{API_HISTORY_EXPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Export", new { StoreId = storeId }));
     Api.Handle($"{API_URL}/{API_HISTORY_IMPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Import", new { StoreId = storeId, Data = (p as dynamic).Data }));
 
+    Program.Emit(FIELD_STATUS_INIT, "Ready");
     Program.Emit(FIELD_STATUS_ERROR, "");
 
   } catch (Exception e) {
@@ -2680,75 +2890,122 @@ async Task ProcessAsync(IAsyncEnumerable&lt;string&gt; asyncEnumerable, Action&l
     }
 }
 
-public class ApiCallBlock
+public class ApiCommandExecution
 {
-    public string Content { get; set; }
-    public int StartIndex { get; set; }
-    public int EndIndex { get; set; }
+    public int Index { get; set; }
+    public string Command { get; set; }
+    public bool Success { get; set; }
+    public object Response { get; set; }
+    public string Error { get; set; }
 }
 
 public class CodeBlockExtractor
 {
-    // Regex che cattura l'intero blocco comprese le etichette di apertura e chiusura
-    private const string ApiCallPattern = @"(```api-call[\s\S]*?```)";
-
-    /**
-     * Extracts interleaved text and API blocks.
-     * API segments are returned exactly as: ```api-call\n...\n```
-     */
     public static List&lt;string&gt; ExtractInterleaved(string sourceText)
     {
         var result = new List&lt;string&gt;();
         if (string.IsNullOrEmpty(sourceText)) return result;
-
-        // Regex.Split con il pattern tra parentesi tonde include i "delimitatori" nel risultato
-        var parts = Regex.Split(sourceText, ApiCallPattern, RegexOptions.Singleline);
-
-        foreach (var part in parts)
+        // Mask reasoning while retaining source offsets and original display text.
+        string visible = Regex.Replace(sourceText, @"&lt;think\b[^&gt;]*&gt;[\s\S]*?(?:&lt;/think\s*&gt;|$)",
+            m =&gt; Regex.Replace(m.Value, @"[^\r\n]", " "), RegexOptions.IgnoreCase);
+        var opening = new Regex(@"^[ \t]*(?&lt;fence&gt;`{3,}|~{3,})(?&lt;label&gt;[^\r\n]*)\r?\n", RegexOptions.Multiline);
+        int cursor = 0, textStart = 0;
+        while (cursor &lt; visible.Length)
         {
-            if (string.IsNullOrEmpty(part)) continue;
-
-            // Aggiungiamo il segmento alla lista (sia esso testo o blocco api-call)
-            result.Add(part.Trim());
+            var start = opening.Match(visible, cursor);
+            if (!start.Success) break;
+            string fence = start.Groups["fence"].Value;
+            var closing = new Regex(@"^[ \t]*" + Regex.Escape(fence[0].ToString()) + "{" + fence.Length + @",}[ \t]*\r?$", RegexOptions.Multiline);
+            var end = closing.Match(visible, start.Index + start.Length);
+            if (!end.Success) break;
+            int blockEnd = end.Index + end.Length;
+            if (fence[0] == '`' &amp;&amp; start.Groups["label"].Value.Trim() == "api-call")
+            {
+                AddText(result, sourceText.Substring(textStart, start.Index - textStart));
+                AddText(result, sourceText.Substring(start.Index, blockEnd - start.Index));
+                textStart = blockEnd;
+            }
+            cursor = blockEnd;
         }
-
+        AddText(result, sourceText.Substring(textStart));
         return result;
     }
+
+    private static void AddText(List&lt;string&gt; result, string text)
+    {
+        if (!string.IsNullOrWhiteSpace(text)) result.Add(text.Trim());
+    }
+
+    public static List&lt;string&gt; ExtractCommands(IEnumerable&lt;string&gt; segments)
+    {
+        var commands = new List&lt;string&gt;();
+        foreach (string segment in segments ?? Enumerable.Empty&lt;string&gt;())
+        {
+            var match = Regex.Match(segment ?? "", @"\A(?&lt;fence&gt;`{3,})api-call[ \t]*\r?\n(?&lt;body&gt;[\s\S]*?)\r?\n\k&lt;fence&gt;[ \t]*\z");
+            if (!match.Success) continue;
+            foreach (string line in match.Groups["body"].Value.Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries))
+                if (!string.IsNullOrWhiteSpace(line)) commands.Add(line.Trim());
+        }
+        return commands;
+    }
 }
 
-/**
- * Executes API calls and returns the interleaved list [text, ```api-call\n...\n```, text, ...]
- */
-public List&lt;string&gt; ExtractAndExecute(dynamic Api, string response)
+public string ReadActionResponse(object input)
 {
-    var segments = CodeBlockExtractor.ExtractInterleaved(response);
-    foreach (var segment in segments)
-    {
-        if (segment.StartsWith("```api-call"))
-        {
-            string commandsRaw = segment
-                .Replace("```api-call", "")
-                .Replace("```", "")
-                .Trim();
+    var request = Api.Parse(input);
+    if (request.Data is byte[] bytes &amp;&amp; bytes.Length &gt; 0) return Encoding.UTF8.GetString(bytes);
+    if (request.Data is string text &amp;&amp; text.Length &gt; 0) return text;
+    return WebUtility.UrlDecode(request.OriginalRequest ?? "");
+}
 
-            var commands = commandsRaw.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach(var cmd in commands)
-            {
-                string cleanCmd = cmd.Trim();
-                if (!string.IsNullOrEmpty(cleanCmd))
-                {
-                    Program.Log.Info($"Executing: {cleanCmd}");
-                    try {
-                        Api.Call($"/api/{cleanCmd}");
-                    } catch (Exception e) {
-                        Program.Log.Error($"API Error: {cleanCmd} - {e.Message}");
-                    }
-                }
-            }
+public List&lt;string&gt; ExtractResponse(string response)
+{
+    return CodeBlockExtractor.ExtractInterleaved(response);
+}
+
+public List&lt;ApiCommandExecution&gt; ExecuteApiCommands(dynamic api, IEnumerable&lt;string&gt; proposedCommands)
+{
+    var results = new List&lt;ApiCommandExecution&gt;();
+    int index = 0;
+    foreach (string proposed in proposedCommands ?? Enumerable.Empty&lt;string&gt;())
+    {
+        string command = (proposed ?? "").Trim();
+        if (command.StartsWith("/api/")) command = command.Substring(5);
+        var result = new ApiCommandExecution { Index = index++, Command = command };
+        results.Add(result);
+        if (!Regex.IsMatch(command, @"\A[A-Za-z][A-Za-z0-9_.]*/[^/\s]+/[^/\s]+(?:/[^\r\n]*)?\z"))
+        {
+            result.Error = "Invalid HomeGenie API command.";
+            continue;
+        }
+        try
+        {
+            Program.Log.Info($"Executing: {command}");
+            result.Response = api.Call(command);
+            var response = result.Response == null ? null : JToken.FromObject(result.Response);
+            string status = response is JObject obj ? (obj["Status"] ?? obj["response"]?["Status"])?.ToString() : null;
+            result.Success = result.Response != null &amp;&amp; status != "Error";
+            if (!result.Success) result.Error = response is JObject error
+                ? (error["Message"] ?? error["response"]?["Message"])?.ToString() ?? "API command failed."
+                : "API command returned no result.";
+        }
+        catch (Exception ex)
+        {
+            result.Error = ex.Message;
+            Program.Log.Error($"API Error: {command} - {ex.Message}");
         }
     }
+    return results;
+}
+
+// Compatibility path: extraction is pure; execution remains an explicit second step.
+public List&lt;string&gt; ExtractAndExecute(dynamic api, string response)
+{
+    var segments = ExtractResponse(response);
+    ExecuteApiCommands(api, CodeBlockExtractor.ExtractCommands(segments));
     return segments;
 }
+
 
 /**
  * Returns the total available system or container memory in Gigabytes.
@@ -2808,17 +3065,61 @@ public ModelParams GetOptimizedParams(string modelPath)
 
     return p;
 }
+
+// Diagnostics stay in the history envelope, never in provider message objects.
+public class ChatRequestMetrics
+{
+    readonly dynamic api;
+    readonly string storeId;
+    readonly bool persist;
+    readonly System.Diagnostics.Stopwatch clock = System.Diagnostics.Stopwatch.StartNew();
+    readonly DateTimeOffset startedAt = DateTimeOffset.UtcNow;
+    public string RequestId { get; } = Guid.NewGuid().ToString("N");
+    public long? FirstTokenMs { get; private set; }
+    public long? GenerationMs { get; private set; }
+    public long ActionsMs { get; private set; }
+    public int ActionCount { get; private set; }
+    public int FailedActions { get; private set; }
+    bool replySaved;
+
+    public ChatRequestMetrics(dynamic api, string storeId, bool persist = true)
+    { this.api = api; this.storeId = storeId; this.persist = persist; }
+
+    public void FirstToken() { if (!FirstTokenMs.HasValue) FirstTokenMs = clock.ElapsedMilliseconds; }
+    public void GenerationComplete() { GenerationMs = clock.ElapsedMilliseconds; }
+    public void ActionsCompleted(long elapsedMs, int count, int failed)
+    { ActionsMs += elapsedMs; ActionCount += count; FailedActions += failed; }
+    public object Snapshot(string outcome) =&gt; new {
+        requestId = RequestId, startedAt = startedAt.ToString("O"), outcome,
+        durationMs = clock.ElapsedMilliseconds, firstTokenMs = FirstTokenMs,
+        generationMs = GenerationMs, actionsMs = ActionsMs,
+        actionCount = ActionCount, failedActions = FailedActions
+    };
+    public void SaveUser(object message)
+    { if (persist) api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = message, Metadata = Snapshot("submitted") }); }
+    public void SaveReply(object message, string outcome = "completed")
+    {
+        if (replySaved) return;
+        if (persist) api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = message, Metadata = Snapshot(outcome) });
+        replySaved = true;
+    }
+    public string Error(string text, string outcome = "error")
+    {
+        SaveReply(new { role = "model", parts = new[] { new { text } } }, outcome);
+        return text;
+    }
+}
 </ScriptContext>
     <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.12</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.0.10</Version>
+      <Version>1.0.14</Version>
       <Required>true</Required>
-      <Checksum>71202C02B1AEEEB0FB2EC673285869E5</Checksum>
+      <Checksum>3971F9E96E4212BE5FA67F8F096A5231</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>
@@ -3020,7 +3321,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.12</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -3206,7 +3507,7 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.7</PackageVersion>
+      <PackageVersion>1.0.12</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>

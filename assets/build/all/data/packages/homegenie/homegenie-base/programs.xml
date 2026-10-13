@@ -12,21 +12,31 @@ string dataFolder = Data.GetFolder();
 Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
     var request = Api.Parse(args);
 
-    dynamic data = (request.Data is string) ? JObject.Parse((string)request.Data) : JObject.FromObject(request.Data);
+    object payload = request.Data;
+    JObject data = payload is byte[] bytes ? JObject.Parse(Encoding.UTF8.GetString(bytes))
+        : payload is string text ? JObject.Parse(text) : JObject.FromObject(payload ?? new { });
 
-    string storeId = data?.StoreId?.ToString() ?? "default";
+    string storeId = data["StoreId"]?.ToString() ?? "default";
+    lock (HistoryStore.SyncRoot) {
     var currentHistory = HistoryStore.GetStore(dataFolder, storeId);
-
     switch(request.Command) {
 
         case "Get":
 
-            return currentHistory;
+            return JsonConvert.DeserializeObject&lt;List&lt;ChatMessage&gt;&gt;(JsonConvert.SerializeObject(currentHistory));
+
+        case "GetContext":
+            // Only provider-supported fields; failed/cancelled output is diagnostic history.
+            return currentHistory.Where(m =&gt; m.Metadata == null ||
+                (m.Metadata["outcome"]?.ToString() != "error" &amp;&amp; m.Metadata["outcome"]?.ToString() != "cancelled"))
+                .Select(m =&gt; new { role = m.Role, parts = m.Parts }).ToList();
 
         case "Add":
 
-            var msg = JsonConvert.DeserializeObject&lt;ChatMessage&gt;(data.Message.ToString());
+            ChatMessage msg = JsonConvert.DeserializeObject&lt;ChatMessage&gt;(data["Message"].ToString());
             if (msg != null) {
+                if (!msg.CreatedAt.HasValue) msg.CreatedAt = DateTimeOffset.UtcNow;
+                if (data["Metadata"] is JObject metadata) msg.Metadata = (JObject)metadata.DeepClone();
                 currentHistory.Add(msg);
                 HistoryStore.Save(dataFolder, storeId);
             }
@@ -42,7 +52,7 @@ Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
 
         case "RemoveAt":
 
-            int index = data?.Index ?? -1;
+            int index = data["Index"]?.Value&lt;int&gt;() ?? -1;
             if (index &gt;= 0 &amp;&amp; index &lt; currentHistory.Count) {
                 currentHistory.RemoveAt(index);
                 HistoryStore.Save(dataFolder, storeId);
@@ -51,7 +61,7 @@ Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
             return new ResponseStatus(Status.Error, "Invalid index");
 
         case "Export":
-            return currentHistory;
+            return JsonConvert.DeserializeObject&lt;List&lt;ChatMessage&gt;&gt;(JsonConvert.SerializeObject(currentHistory));
 
         case "Import":
             byte[] rawData = data.Value&lt;byte[]&gt;("Data");
@@ -69,6 +79,7 @@ Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
         default:
             return new ResponseStatus(Status.Error, $"Unknown command: {request.Command}");
     }
+    }
 });
 
 Program.GoBackground();
@@ -84,6 +95,10 @@ public class MessagePart
 
 public class ChatMessage
 {
+    [JsonProperty("createdAt", NullValueHandling = NullValueHandling.Ignore)]
+    public DateTimeOffset? CreatedAt { get; set; }
+    [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
+    public JObject Metadata { get; set; }
     [JsonProperty("role")]
     public string Role { get; set; }
     [JsonProperty("parts")]
@@ -102,6 +117,7 @@ public class ChatMessage
 
 public static class HistoryStore
 {
+    public static readonly object SyncRoot = new object();
     // Dizionario che tiene in memoria le diverse cronologie caricate
     public static Dictionary&lt;string, List&lt;ChatMessage&gt;&gt; Stores { get; set; } = new Dictionary&lt;string, List&lt;ChatMessage&gt;&gt;();
 
@@ -149,11 +165,11 @@ public static class HistoryStore
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>chat-history-service</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>58CDCA16DD78D66E781A38AA9254FEF1</Checksum>
+      <Checksum>239ACA54460CC7C33358BB99BFCBC837</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>577</Address>
@@ -222,7 +238,7 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>client-configs</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -593,7 +609,7 @@ void SaveConfig(string filePath, YamlConfig config)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>daily-energy-report</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -871,7 +887,7 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -1517,7 +1533,7 @@ public class DownloadManager : IDisposable
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>download-manager</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1560,7 +1576,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1888,7 +1904,7 @@ string GetDbName()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>energy-use-statistics</Id>
       <Version>1.0.9</Version>
       <Required>false</Required>
@@ -2063,7 +2079,7 @@ void InsertData(LiteDatabase db, LoggerEvent data) {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -2218,7 +2234,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>file-manager</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2420,7 +2436,7 @@ public static class HttpHelper {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>homegenie-panel-notifications</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2489,7 +2505,7 @@ public string[] GetHourLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>hourly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -2951,7 +2967,7 @@ class MqttCommand: MigInterfaceCommand {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>mqtt-network</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
@@ -3210,7 +3226,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>openweathermap</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -3302,7 +3318,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -3394,7 +3410,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -3466,7 +3482,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -4142,7 +4158,7 @@ public static class FfmpegHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>video-input</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -5447,7 +5463,7 @@ public class ThumbnailHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>video-recorder</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -5528,7 +5544,7 @@ public string[] GetDayLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.6</PackageVersion>
+      <PackageVersion>1.0.7</PackageVersion>
       <Id>weekly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>

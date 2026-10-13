@@ -20098,6 +20098,7 @@ class AiGenieChatComponent {
 
   setAiGenie(genie) {
     this.selectedAiChatGenie = genie;
+    this.viewMessages = [];
     this.moduleEventSubscription?.unsubscribe();
     this.selectedModule = this.yot.getModuleByRef(genie?.module);
 
@@ -20140,7 +20141,7 @@ class AiGenieChatComponent {
           this.finishTokenStream(false);
         }
 
-        if (event.key === 'Widget.Refresh') {
+        if (event.key === 'Widget.Refresh' || event.key === 'Status.Init' && event.value === 'Ready') {
           this.isLoading = true;
           this.chatService.loadHistory(null, {
             success: () => {
@@ -20148,6 +20149,12 @@ class AiGenieChatComponent {
               this.cdr.detectChanges();
               this.scrollToEnd();
               this.isLoading = false;
+              this.errorMessage = '';
+            },
+            error: err => {
+              this.isLoading = false;
+              this.errorMessage = err?.message || String(err);
+              this.cdr.markForCheck();
             }
           });
         }
@@ -20175,7 +20182,7 @@ class AiGenieChatComponent {
         messagesDiv.classList.add('smooth-scroll');
       },
       error: err => {
-        this.errorMessage = err;
+        this.errorMessage = err?.message || String(err);
         this.isLoading = false;
         messagesDiv.classList.add('smooth-scroll');
       }
@@ -50191,6 +50198,7 @@ class AiChatService {
         this.voiceControlStatus = VoiceControlStatus.Idle;
         this.onVoiceControlInput = new rxjs__WEBPACK_IMPORTED_MODULE_5__.Subject();
         this.promptHint = '';
+        this.historyRequestVersion = 0;
         this.listenSubscription = voiceControlService
             .listenStarted.subscribe(() => {
             this.voiceControlStatus = VoiceControlStatus.Listening;
@@ -50214,6 +50222,8 @@ class AiChatService {
         });
     }
     ngOnDestroy() {
+        this.historyRequestVersion++;
+        this.historyRequest?.unsubscribe();
         this.voiceControlService.stop();
         this.listenSubscription.unsubscribe();
         this.errorSubscription.unsubscribe();
@@ -50224,13 +50234,18 @@ class AiChatService {
             options?.success();
             return;
         }
+        this.historyRequestVersion++;
+        this.historyRequest?.unsubscribe();
         this.scrollPosition = 0;
         this.selectedAiChatGenie = genie;
         this.clearChat();
         if (this.selectedAiChatGenie?.providerId === 0) {
             // builtin chatbot for basic commands
             // add an intro message to the history.
+            const selectionVersion = this.historyRequestVersion;
             this.yot.translate.get('ai_chatbot_teaser').subscribe((text) => {
+                if (selectionVersion !== this.historyRequestVersion)
+                    return;
                 this.addMessage('ai', text);
             });
             options?.success();
@@ -50249,18 +50264,33 @@ class AiChatService {
      */
     loadHistory(history, options) {
         this.currentUserInput = '';
+        const version = ++this.historyRequestVersion;
+        this.historyRequest?.unsubscribe();
+        const genie = this.selectedAiChatGenie;
         if (history == null) {
-            this.yot.getDefaultAdapter()
-                .apiCall(`${this.selectedAiChatGenie.apiUrl}/History.Get`, undefined, {} /* this disables ws routing */)
+            this.historyRequest = this.yot.getDefaultAdapter()
+                .apiCall(`${genie.apiUrl}/History.Get`, undefined, {})
                 .subscribe({
                 next: (result) => {
+                    if (version !== this.historyRequestVersion || this.selectedAiChatGenie !== genie)
+                        return;
+                    if (!Array.isArray(result?.response)) {
+                        options?.error(new Error(result?.response?.Message || 'Chat history is not available yet.'));
+                        return;
+                    }
                     this.loadHistory(result.response);
                     options?.success();
                 },
                 error: (err) => {
+                    if (version !== this.historyRequestVersion || this.selectedAiChatGenie !== genie)
+                        return;
                     options?.error(err);
                 }
             });
+            return;
+        }
+        if (!Array.isArray(history)) {
+            options?.error(new Error('Invalid chat history response.'));
             return;
         }
         if (this.selectedAiChatGenie.interface === '@AI:IntentHandler') {
@@ -50405,7 +50435,9 @@ class AiChatService {
         }
         return {
             author: message.role,
-            text: displayText
+            text: displayText,
+            createdAt: message.createdAt,
+            metadata: message.metadata
         };
     }
     /**
@@ -50539,7 +50571,9 @@ class AiChatService {
     transformHistoryMessage(historyMsg) {
         return {
             author: historyMsg.role === 'model' ? 'ai' : 'user',
-            text: (historyMsg.parts || []).map(p => p.text).join('\n')
+            text: (historyMsg.parts || []).map(p => p.text).join('\n'),
+            createdAt: historyMsg.createdAt,
+            metadata: historyMsg.metadata
         };
     }
     hasHistory() {
