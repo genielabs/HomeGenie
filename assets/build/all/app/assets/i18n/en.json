@@ -600,5 +600,7 @@
   "automan_program_updated": "Program updated",
   "ai_genie_preparing_speech": "Preparing audio",
   "ai_genie_playing_speech": "Reading aloud",
-  "service_restart_timeout": "The service has not restarted yet. Close this dialog and check the backend."
+  "service_restart_timeout": "The service has not restarted yet. Close this dialog and check the backend.",
+  "ai_chat_move_left": "Move chat to the left",
+  "ai_chat_move_right": "Move chat to the right"
 }

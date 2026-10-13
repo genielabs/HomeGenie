@@ -601,5 +601,7 @@
   "automan_program_updated": "Kua whakahōutia te papatono",
   "ai_genie_preparing_speech": "Kei te whakarite oro",
   "ai_genie_playing_speech": "Kei te pānui ā-waha",
-  "service_restart_timeout": "Kāore anō te ratonga kia tīmata anō. Katia tēnei matapihi, ka tirohia te tūmau."
+  "service_restart_timeout": "Kāore anō te ratonga kia tīmata anō. Katia tēnei matapihi, ka tirohia te tūmau.",
+  "ai_chat_move_left": "Nuku kōrerorero ki te taha mauī",
+  "ai_chat_move_right": "Nuku kōrerorero ki te taha matau"
 }

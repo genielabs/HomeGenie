@@ -601,5 +601,7 @@
   "automan_program_updated": "Proqram yeniləndi",
   "ai_genie_preparing_speech": "Səs hazırlanır",
   "ai_genie_playing_speech": "Ucadan oxunur",
-  "service_restart_timeout": "Xidmət hələ yenidən başlamayıb. Bu pəncərəni bağlayın və serveri yoxlayın."
+  "service_restart_timeout": "Xidmət hələ yenidən başlamayıb. Bu pəncərəni bağlayın və serveri yoxlayın.",
+  "ai_chat_move_left": "Söhbəti sola köçürün",
+  "ai_chat_move_right": "Söhbəti sağa köçürün"
 }

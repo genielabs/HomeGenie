@@ -601,5 +601,7 @@
   "automan_program_updated": "प्रोग्राम अद्ययावत केला",
   "ai_genie_preparing_speech": "ऑडिओ तयार होत आहे",
   "ai_genie_playing_speech": "मोठ्याने वाचले जात आहे",
-  "service_restart_timeout": "सेवा अजून पुन्हा सुरू झालेली नाही. ही विंडो बंद करा आणि सर्व्हर तपासा."
+  "service_restart_timeout": "सेवा अजून पुन्हा सुरू झालेली नाही. ही विंडो बंद करा आणि सर्व्हर तपासा.",
+  "ai_chat_move_left": "चॅट डावीकडे हलवा",
+  "ai_chat_move_right": "चॅट उजवीकडे हलवा"
 }

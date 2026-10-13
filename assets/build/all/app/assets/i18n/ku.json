@@ -601,5 +601,7 @@
   "automan_program_updated": "Bername hate nûkirin",
   "ai_genie_preparing_speech": "Deng tê amadekirin",
   "ai_genie_playing_speech": "Bi dengê bilind tê xwendin",
-  "service_restart_timeout": "Xizmet hîn ji nû ve dest pê nekiriye. Vê paceyê bigire û serverê kontrol bike."
+  "service_restart_timeout": "Xizmet hîn ji nû ve dest pê nekiriye. Vê paceyê bigire û serverê kontrol bike.",
+  "ai_chat_move_left": "Sohbetê biçe çepê",
+  "ai_chat_move_right": "Sohbetê biguhezînin rastê"
 }

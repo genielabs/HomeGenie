@@ -601,5 +601,7 @@
   "automan_program_updated": "برنامه به‌روزرسانی شد",
   "ai_genie_preparing_speech": "در حال آماده‌سازی صدا",
   "ai_genie_playing_speech": "در حال خواندن با صدای بلند",
-  "service_restart_timeout": "سرویس هنوز دوباره راه‌اندازی نشده است. این پنجره را ببندید و سرور را بررسی کنید."
+  "service_restart_timeout": "سرویس هنوز دوباره راه‌اندازی نشده است. این پنجره را ببندید و سرور را بررسی کنید.",
+  "ai_chat_move_left": "چت را به سمت چپ منتقل کنید",
+  "ai_chat_move_right": "چت را به سمت راست منتقل کنید"
 }

@@ -601,5 +601,7 @@
   "automan_program_updated": "Program zaktualizowany",
   "ai_genie_preparing_speech": "Przygotowywanie dźwięku",
   "ai_genie_playing_speech": "Czytanie na głos",
-  "service_restart_timeout": "Usługa jeszcze się nie uruchomiła ponownie. Zamknij to okno i sprawdź serwer."
+  "service_restart_timeout": "Usługa jeszcze się nie uruchomiła ponownie. Zamknij to okno i sprawdź serwer.",
+  "ai_chat_move_left": "Przesuń czat w lewo",
+  "ai_chat_move_right": "Przesuń czat w prawo"
 }

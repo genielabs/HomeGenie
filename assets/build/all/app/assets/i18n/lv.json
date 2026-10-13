@@ -601,5 +601,7 @@
   "automan_program_updated": "Programma atjaunināta",
   "ai_genie_preparing_speech": "Audio sagatavošana",
   "ai_genie_playing_speech": "Lasīšana balsī",
-  "service_restart_timeout": "Pakalpojums vēl nav restartēts. Aizveriet šo logu un pārbaudiet serveri."
+  "service_restart_timeout": "Pakalpojums vēl nav restartēts. Aizveriet šo logu un pārbaudiet serveri.",
+  "ai_chat_move_left": "Pārvietojiet tērzēšanu pa kreisi",
+  "ai_chat_move_right": "Pārvietojiet tērzēšanu pa labi"
 }

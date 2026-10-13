@@ -601,5 +601,7 @@
   "automan_program_updated": "程式已更新",
   "ai_genie_preparing_speech": "正在準備音訊",
   "ai_genie_playing_speech": "正在朗讀",
-  "service_restart_timeout": "服務尚未重新啟動。請關閉此視窗並檢查伺服器。"
+  "service_restart_timeout": "服務尚未重新啟動。請關閉此視窗並檢查伺服器。",
+  "ai_chat_move_left": "將聊天內容移至左側",
+  "ai_chat_move_right": "將聊天移至右側"
 }

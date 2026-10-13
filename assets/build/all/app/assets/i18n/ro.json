@@ -601,5 +601,7 @@
   "automan_program_updated": "Program actualizat",
   "ai_genie_preparing_speech": "Pregătire audio",
   "ai_genie_playing_speech": "Citire cu voce tare",
-  "service_restart_timeout": "Serviciul nu a repornit încă. Închideți această fereastră și verificați serverul."
+  "service_restart_timeout": "Serviciul nu a repornit încă. Închideți această fereastră și verificați serverul.",
+  "ai_chat_move_left": "Mutați chatul la stânga",
+  "ai_chat_move_right": "Mutați chatul la dreapta"
 }

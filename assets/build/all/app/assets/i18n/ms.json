@@ -601,5 +601,7 @@
   "automan_program_updated": "Program dikemas kini",
   "ai_genie_preparing_speech": "Menyediakan audio",
   "ai_genie_playing_speech": "Membaca dengan lantang",
-  "service_restart_timeout": "Perkhidmatan belum dimulakan semula. Tutup tetingkap ini dan periksa pelayan."
+  "service_restart_timeout": "Perkhidmatan belum dimulakan semula. Tutup tetingkap ini dan periksa pelayan.",
+  "ai_chat_move_left": "Alihkan sembang ke kiri",
+  "ai_chat_move_right": "Alihkan sembang ke kanan"
 }

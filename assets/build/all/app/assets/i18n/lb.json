@@ -601,5 +601,7 @@
   "automan_program_updated": "Programm aktualiséiert",
   "ai_genie_preparing_speech": "Audio gëtt virbereet",
   "ai_genie_playing_speech": "Vir liesen",
-  "service_restart_timeout": "De Service ass nach net nei gestart. Maacht dës Fënster zou a kontrolléiert de Server."
+  "service_restart_timeout": "De Service ass nach net nei gestart. Maacht dës Fënster zou a kontrolléiert de Server.",
+  "ai_chat_move_left": "Beweegt Chat no lénks",
+  "ai_chat_move_right": "Beweegt de Chat no riets"
 }

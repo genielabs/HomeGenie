@@ -601,5 +601,7 @@
   "automan_program_updated": "Pulogalamu yasinthidwa",
   "ai_genie_preparing_speech": "Kukonza mawu",
   "ai_genie_playing_speech": "Kuwerenga mokweza",
-  "service_restart_timeout": "Ntchitoyi sinayambirenso. Tsekani zenerali ndipo onani seva."
+  "service_restart_timeout": "Ntchitoyi sinayambirenso. Tsekani zenerali ndipo onani seva.",
+  "ai_chat_move_left": "Sunthani macheza kumanzere",
+  "ai_chat_move_right": "Sunthani macheza kumanja"
 }

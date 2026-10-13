@@ -601,5 +601,7 @@
   "automan_program_updated": "Барнома нав карда шуд",
   "ai_genie_preparing_speech": "Омодасозии садо",
   "ai_genie_playing_speech": "Бо овози баланд хондан",
-  "service_restart_timeout": "Хидмат ҳанӯз аз нав оғоз нашудааст. Ин тирезаро пӯшед ва серверро санҷед."
+  "service_restart_timeout": "Хидмат ҳанӯз аз нав оғоз нашудааст. Ин тирезаро пӯшед ва серверро санҷед.",
+  "ai_chat_move_left": "Чатро ба тарафи чап ҳаракат кунед",
+  "ai_chat_move_right": "Чатро ба тарафи рост ҳаракат кунед"
 }

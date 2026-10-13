@@ -601,5 +601,7 @@
   "automan_program_updated": "Dastur yangilandi",
   "ai_genie_preparing_speech": "Audio tayyorlanmoqda",
   "ai_genie_playing_speech": "Ovoz chiqarib o‘qilmoqda",
-  "service_restart_timeout": "Xizmat hali qayta ishga tushmadi. Ushbu oynani yoping va serverni tekshiring."
+  "service_restart_timeout": "Xizmat hali qayta ishga tushmadi. Ushbu oynani yoping va serverni tekshiring.",
+  "ai_chat_move_left": "Chatni chapga suring",
+  "ai_chat_move_right": "Chatni o‘ngga suring"
 }

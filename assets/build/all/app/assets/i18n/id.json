@@ -601,5 +601,7 @@
   "automan_program_updated": "Program diperbarui",
   "ai_genie_preparing_speech": "Menyiapkan audio",
   "ai_genie_playing_speech": "Membaca dengan suara",
-  "service_restart_timeout": "Layanan belum dimulai ulang. Tutup jendela ini dan periksa server."
+  "service_restart_timeout": "Layanan belum dimulai ulang. Tutup jendela ini dan periksa server.",
+  "ai_chat_move_left": "Pindahkan obrolan ke kiri",
+  "ai_chat_move_right": "Pindahkan obrolan ke kanan"
 }

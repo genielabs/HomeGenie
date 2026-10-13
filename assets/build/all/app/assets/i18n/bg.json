@@ -601,5 +601,7 @@
   "automan_program_updated": "Програмата е актуализирана",
   "ai_genie_preparing_speech": "Подготовка на аудио",
   "ai_genie_playing_speech": "Четене на глас",
-  "service_restart_timeout": "Услугата все още не е рестартирана. Затворете този прозорец и проверете сървъра."
+  "service_restart_timeout": "Услугата все още не е рестартирана. Затворете този прозорец и проверете сървъра.",
+  "ai_chat_move_left": "Преместете чата наляво",
+  "ai_chat_move_right": "Преместете чата вдясно"
 }

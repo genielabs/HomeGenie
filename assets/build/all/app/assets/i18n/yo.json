@@ -601,5 +601,7 @@
   "automan_program_updated": "A ti ṣe àtúnṣe ètò",
   "ai_genie_preparing_speech": "Ń pèsè ohùn",
   "ai_genie_playing_speech": "Ń kà sókè",
-  "service_restart_timeout": "Iṣẹ́ náà kò tíì tún bẹ̀rẹ̀. Pa fèrèsé yìí dé kí o sì ṣàyẹ̀wò olupin."
+  "service_restart_timeout": "Iṣẹ́ náà kò tíì tún bẹ̀rẹ̀. Pa fèrèsé yìí dé kí o sì ṣàyẹ̀wò olupin.",
+  "ai_chat_move_left": "Gbe iwiregbe si osi",
+  "ai_chat_move_right": "Gbe iwiregbe si ọtun"
 }

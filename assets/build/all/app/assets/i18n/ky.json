@@ -601,5 +601,7 @@
   "automan_program_updated": "Программа жаңыртылды",
   "ai_genie_preparing_speech": "Үн даярдалууда",
   "ai_genie_playing_speech": "Үн чыгарып окуу",
-  "service_restart_timeout": "Кызмат али кайра иштей элек. Бул терезени жаап, серверди текшериңиз."
+  "service_restart_timeout": "Кызмат али кайра иштей элек. Бул терезени жаап, серверди текшериңиз.",
+  "ai_chat_move_left": "Маекти солго жылдырыңыз",
+  "ai_chat_move_right": "Маекти оңго жылдырыңыз"
 }

@@ -601,5 +601,7 @@
   "automan_program_updated": "התוכנית עודכנה",
   "ai_genie_preparing_speech": "הכנת שמע",
   "ai_genie_playing_speech": "הקראה בקול",
-  "service_restart_timeout": "השירות עדיין לא הופעל מחדש. סגור חלון זה ובדוק את השרת."
+  "service_restart_timeout": "השירות עדיין לא הופעל מחדש. סגור חלון זה ובדוק את השרת.",
+  "ai_chat_move_left": "העבר את הצ'אט שמאלה",
+  "ai_chat_move_right": "הזז את הצ'אט ימינה"
 }

@@ -601,5 +601,7 @@
   "automan_program_updated": "Programm uuendatud",
   "ai_genie_preparing_speech": "Heli ettevalmistamine",
   "ai_genie_playing_speech": "Ettelugemine",
-  "service_restart_timeout": "Teenus pole veel taaskäivitunud. Sulge see aken ja kontrolli serverit."
+  "service_restart_timeout": "Teenus pole veel taaskäivitunud. Sulge see aken ja kontrolli serverit.",
+  "ai_chat_move_left": "Liigutage vestlus vasakule",
+  "ai_chat_move_right": "Liigutage vestlus paremale"
 }

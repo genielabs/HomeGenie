@@ -601,5 +601,7 @@
   "automan_program_updated": "Barnaamijka waa la cusboonaysiiyay",
   "ai_genie_preparing_speech": "Codka ayaa la diyaarinayaa",
   "ai_genie_playing_speech": "Kor ayaa loo akhrinayaa",
-  "service_restart_timeout": "Adeeggu weli dib uma bilaaban. Xir daaqaddan oo hubi server-ka."
+  "service_restart_timeout": "Adeeggu weli dib uma bilaaban. Xir daaqaddan oo hubi server-ka.",
+  "ai_chat_move_left": "U dhaqaaq sheekeysiga bidix",
+  "ai_chat_move_right": "U dhaqaaq sheekeysiga dhanka midig"
 }

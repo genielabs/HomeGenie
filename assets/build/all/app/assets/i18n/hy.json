@@ -601,5 +601,7 @@
   "automan_program_updated": "Ծրագիրը թարմացվել է",
   "ai_genie_preparing_speech": "Ձայնի պատրաստում",
   "ai_genie_playing_speech": "Բարձրաձայն ընթերցում",
-  "service_restart_timeout": "Ծառայությունը դեռ չի վերագործարկվել։ Փակեք այս պատուհանը և ստուգեք սերվերը։"
+  "service_restart_timeout": "Ծառայությունը դեռ չի վերագործարկվել։ Փակեք այս պատուհանը և ստուգեք սերվերը։",
+  "ai_chat_move_left": "Տեղափոխեք զրույցը ձախ",
+  "ai_chat_move_right": "Տեղափոխեք զրույցը դեպի աջ"
 }

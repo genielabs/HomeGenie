@@ -601,5 +601,7 @@
   "automan_program_updated": "Pwogram mete ajou",
   "ai_genie_preparing_speech": "Preparasyon odyo",
   "ai_genie_playing_speech": "Lekti awotvwa",
-  "service_restart_timeout": "Sèvis la poko rekòmanse. Fèmen fenèt sa a epi verifye sèvè a."
+  "service_restart_timeout": "Sèvis la poko rekòmanse. Fèmen fenèt sa a epi verifye sèvè a.",
+  "ai_chat_move_left": "Deplase chat sou bò gòch la",
+  "ai_chat_move_right": "Deplase chat sou bò dwat la"
 }

@@ -601,5 +601,7 @@
   "automan_program_updated": "Ohjelma päivitetty",
   "ai_genie_preparing_speech": "Valmistellaan ääntä",
   "ai_genie_playing_speech": "Luetaan ääneen",
-  "service_restart_timeout": "Palvelu ei ole vielä käynnistynyt uudelleen. Sulje tämä ikkuna ja tarkista palvelin."
+  "service_restart_timeout": "Palvelu ei ole vielä käynnistynyt uudelleen. Sulje tämä ikkuna ja tarkista palvelin.",
+  "ai_chat_move_left": "Siirrä chat vasemmalle",
+  "ai_chat_move_right": "Siirrä chat oikealle"
 }

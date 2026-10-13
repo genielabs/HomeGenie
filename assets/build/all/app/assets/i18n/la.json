@@ -601,5 +601,7 @@
   "automan_program_updated": "Programma renovatum",
   "ai_genie_preparing_speech": "Sonus paratur",
   "ai_genie_playing_speech": "Lectio clara voce",
-  "service_restart_timeout": "Ministerium nondum denuo inceptum est. Hanc fenestram claude et servitorem inspice."
+  "service_restart_timeout": "Ministerium nondum denuo inceptum est. Hanc fenestram claude et servitorem inspice.",
+  "ai_chat_move_left": "Movere chat ad sinistram",
+  "ai_chat_move_right": "Movere chat ad dextram"
 }

@@ -601,5 +601,7 @@
   "automan_program_updated": "プログラムを更新しました",
   "ai_genie_preparing_speech": "音声を準備中",
   "ai_genie_playing_speech": "読み上げ中",
-  "service_restart_timeout": "サービスはまだ再起動していません。このウィンドウを閉じて、サーバーを確認してください。"
+  "service_restart_timeout": "サービスはまだ再起動していません。このウィンドウを閉じて、サーバーを確認してください。",
+  "ai_chat_move_left": "チャットを左に移動",
+  "ai_chat_move_right": "チャットを右に移動"
 }

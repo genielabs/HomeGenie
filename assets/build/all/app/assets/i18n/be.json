@@ -601,5 +601,7 @@
   "automan_program_updated": "Праграма абноўлена",
   "ai_genie_preparing_speech": "Падрыхтоўка аўдыя",
   "ai_genie_playing_speech": "Чытанне ўголас",
-  "service_restart_timeout": "Служба яшчэ не перазапусцілася. Закрыйце гэта акно і праверце сервер."
+  "service_restart_timeout": "Служба яшчэ не перазапусцілася. Закрыйце гэта акно і праверце сервер.",
+  "ai_chat_move_left": "Перамясціць чат улева",
+  "ai_chat_move_right": "Перамясціць чат направа"
 }

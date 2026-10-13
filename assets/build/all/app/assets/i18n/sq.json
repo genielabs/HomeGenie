@@ -601,5 +601,7 @@
   "automan_program_updated": "Programi u përditësua",
   "ai_genie_preparing_speech": "Po përgatitet audioja",
   "ai_genie_playing_speech": "Po lexohet me zë",
-  "service_restart_timeout": "Shërbimi ende nuk është rinisur. Mbyllni këtë dritare dhe kontrolloni serverin."
+  "service_restart_timeout": "Shërbimi ende nuk është rinisur. Mbyllni këtë dritare dhe kontrolloni serverin.",
+  "ai_chat_move_left": "Zhvendosni bisedën në të majtë",
+  "ai_chat_move_right": "Zhvendoseni bisedën në të djathtë"
 }

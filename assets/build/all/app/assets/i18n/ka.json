@@ -601,5 +601,7 @@
   "automan_program_updated": "პროგრამა განახლდა",
   "ai_genie_preparing_speech": "აუდიოს მომზადება",
   "ai_genie_playing_speech": "ხმამაღლა კითხვა",
-  "service_restart_timeout": "სერვისი ჯერ არ გადატვირთულა. დახურეთ ეს ფანჯარა და შეამოწმეთ სერვერი."
+  "service_restart_timeout": "სერვისი ჯერ არ გადატვირთულა. დახურეთ ეს ფანჯარა და შეამოწმეთ სერვერი.",
+  "ai_chat_move_left": "გადაიტანეთ ჩატი მარცხნივ",
+  "ai_chat_move_right": "გადაიტანეთ ჩატი მარჯვნივ"
 }

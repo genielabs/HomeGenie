@@ -601,5 +601,7 @@
   "automan_program_updated": "Programm aktualisiert",
   "ai_genie_preparing_speech": "Audio wird vorbereitet",
   "ai_genie_playing_speech": "Vorlesen läuft",
-  "service_restart_timeout": "Der Dienst wurde noch nicht neu gestartet. Schließen Sie dieses Fenster und überprüfen Sie den Server."
+  "service_restart_timeout": "Der Dienst wurde noch nicht neu gestartet. Schließen Sie dieses Fenster und überprüfen Sie den Server.",
+  "ai_chat_move_left": "Chat nach links verschieben",
+  "ai_chat_move_right": "Chat nach rechts verschieben"
 }

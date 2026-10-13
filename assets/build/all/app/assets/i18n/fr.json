@@ -601,5 +601,7 @@
   "automan_program_updated": "Programme mis à jour",
   "ai_genie_preparing_speech": "Préparation de l’audio",
   "ai_genie_playing_speech": "Lecture à voix haute",
-  "service_restart_timeout": "Le service n’a pas encore redémarré. Fermez cette fenêtre et vérifiez le serveur."
+  "service_restart_timeout": "Le service n’a pas encore redémarré. Fermez cette fenêtre et vérifiez le serveur.",
+  "ai_chat_move_left": "Déplacer le chat vers la gauche",
+  "ai_chat_move_right": "Déplacer le chat vers la droite"
 }

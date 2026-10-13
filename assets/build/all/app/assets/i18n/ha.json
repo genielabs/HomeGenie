@@ -601,5 +601,7 @@
   "automan_program_updated": "An sabunta shirin",
   "ai_genie_preparing_speech": "Ana shirya sauti",
   "ai_genie_playing_speech": "Ana karantawa da murya",
-  "service_restart_timeout": "Sabis ɗin bai sake farawa ba tukuna. Rufe wannan taga kuma duba uwar garken."
+  "service_restart_timeout": "Sabis ɗin bai sake farawa ba tukuna. Rufe wannan taga kuma duba uwar garken.",
+  "ai_chat_move_left": "Matsar da hira zuwa hagu",
+  "ai_chat_move_right": "Matsar da hira zuwa dama"
 }

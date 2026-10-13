@@ -601,5 +601,7 @@
   "automan_program_updated": "වැඩසටහන යාවත්කාලීන කරන ලදී",
   "ai_genie_preparing_speech": "ශ්‍රව්‍ය සූදානම් කරමින්",
   "ai_genie_playing_speech": "හඬ නඟා කියවමින්",
-  "service_restart_timeout": "සේවාව තවමත් නැවත ආරම්භ වී නැත. මෙම කවුළුව වසා සේවාදායකය පරීක්ෂා කරන්න."
+  "service_restart_timeout": "සේවාව තවමත් නැවත ආරම්භ වී නැත. මෙම කවුළුව වසා සේවාදායකය පරීක්ෂා කරන්න.",
+  "ai_chat_move_left": "කතාබස් වමට ගෙන යන්න",
+  "ai_chat_move_right": "කතාබස් දකුණට ගෙන යන්න"
 }

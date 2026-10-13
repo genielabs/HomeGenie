@@ -601,5 +601,7 @@
   "automan_program_updated": "Programa actualitzat",
   "ai_genie_preparing_speech": "Preparant l'àudio",
   "ai_genie_playing_speech": "Llegint en veu alta",
-  "service_restart_timeout": "El servei encara no s'ha reiniciat. Tanqueu aquesta finestra i comproveu el servidor."
+  "service_restart_timeout": "El servei encara no s'ha reiniciat. Tanqueu aquesta finestra i comproveu el servidor.",
+  "ai_chat_move_left": "Mou el xat a l'esquerra",
+  "ai_chat_move_right": "Mou el xat a la dreta"
 }

@@ -601,5 +601,7 @@
   "automan_program_updated": "Program aktualizovaný",
   "ai_genie_preparing_speech": "Príprava zvuku",
   "ai_genie_playing_speech": "Čítanie nahlas",
-  "service_restart_timeout": "Služba sa ešte nereštartovala. Zatvorte toto okno a skontrolujte server."
+  "service_restart_timeout": "Služba sa ešte nereštartovala. Zatvorte toto okno a skontrolujte server.",
+  "ai_chat_move_left": "Presuňte čet doľava",
+  "ai_chat_move_right": "Presuňte čet doprava"
 }

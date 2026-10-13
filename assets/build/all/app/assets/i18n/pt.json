@@ -601,5 +601,7 @@
   "automan_program_updated": "Programa atualizado",
   "ai_genie_preparing_speech": "Preparando áudio",
   "ai_genie_playing_speech": "Leitura em voz alta",
-  "service_restart_timeout": "O serviço ainda não foi reiniciado. Feche esta janela e verifique o servidor."
+  "service_restart_timeout": "O serviço ainda não foi reiniciado. Feche esta janela e verifique o servidor.",
+  "ai_chat_move_left": "Mova o bate-papo para a esquerda",
+  "ai_chat_move_right": "Mova o bate-papo para a direita"
 }

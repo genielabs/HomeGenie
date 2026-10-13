@@ -601,5 +601,7 @@
   "automan_program_updated": "تم تحديث البرنامج",
   "ai_genie_preparing_speech": "جارٍ تحضير الصوت",
   "ai_genie_playing_speech": "جارٍ القراءة بصوت عالٍ",
-  "service_restart_timeout": "لم تتم إعادة تشغيل الخدمة بعد. أغلق هذه النافذة وتحقق من الخادم."
+  "service_restart_timeout": "لم تتم إعادة تشغيل الخدمة بعد. أغلق هذه النافذة وتحقق من الخادم.",
+  "ai_chat_move_left": "انقل الدردشة إلى اليسار",
+  "ai_chat_move_right": "انقل الدردشة إلى اليمين"
 }

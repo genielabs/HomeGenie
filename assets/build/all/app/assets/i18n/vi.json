@@ -601,5 +601,7 @@
   "automan_program_updated": "Đã cập nhật chương trình",
   "ai_genie_preparing_speech": "Đang chuẩn bị âm thanh",
   "ai_genie_playing_speech": "Đang đọc thành tiếng",
-  "service_restart_timeout": "Dịch vụ chưa khởi động lại. Hãy đóng cửa sổ này và kiểm tra máy chủ."
+  "service_restart_timeout": "Dịch vụ chưa khởi động lại. Hãy đóng cửa sổ này và kiểm tra máy chủ.",
+  "ai_chat_move_left": "Di chuyển trò chuyện sang trái",
+  "ai_chat_move_right": "Di chuyển trò chuyện sang phải"
 }

@@ -601,5 +601,7 @@
   "automan_program_updated": "پروگرام اپڊيٽ ڪيو ويو",
   "ai_genie_preparing_speech": "آواز تيار ٿي رهيو آهي",
   "ai_genie_playing_speech": "وڏي آواز ۾ پڙهيو پيو وڃي",
-  "service_restart_timeout": "سروس اڃا ٻيهر شروع نه ٿي آهي. هي ونڊو بند ڪريو ۽ سرور چيڪ ڪريو."
+  "service_restart_timeout": "سروس اڃا ٻيهر شروع نه ٿي آهي. هي ونڊو بند ڪريو ۽ سرور چيڪ ڪريو.",
+  "ai_chat_move_left": "چيٽ کي کاٻي پاسي منتقل ڪريو",
+  "ai_chat_move_right": "چيٽ کي ساڄي طرف منتقل ڪريو"
 }

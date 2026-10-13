@@ -601,5 +601,7 @@
   "automan_program_updated": "Programa actualizado",
   "ai_genie_preparing_speech": "Preparando o audio",
   "ai_genie_playing_speech": "Lendo en voz alta",
-  "service_restart_timeout": "O servizo aínda non se reiniciou. Pecha esta xanela e comproba o servidor."
+  "service_restart_timeout": "O servizo aínda non se reiniciou. Pecha esta xanela e comproba o servidor.",
+  "ai_chat_move_left": "Move o chat cara á esquerda",
+  "ai_chat_move_right": "Move o chat cara á dereita"
 }

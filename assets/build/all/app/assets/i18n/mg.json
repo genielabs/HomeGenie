@@ -601,5 +601,7 @@
   "automan_program_updated": "Nohavaozina ny programa",
   "ai_genie_preparing_speech": "Manomana feo",
   "ai_genie_playing_speech": "Mamaky amin’ny feo avo",
-  "service_restart_timeout": "Mbola tsy nanomboka indray ny serivisy. Akatony ity varavarankely ity ary jereo ny mpizara."
+  "service_restart_timeout": "Mbola tsy nanomboka indray ny serivisy. Akatony ity varavarankely ity ary jereo ny mpizara.",
+  "ai_chat_move_left": "Alefaso miankavia ny chat",
+  "ai_chat_move_right": "Alefaso miankavanana ny chat"
 }

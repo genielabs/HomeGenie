@@ -601,5 +601,7 @@
   "automan_program_updated": "Programma bijgewerkt",
   "ai_genie_preparing_speech": "Audio voorbereiden",
   "ai_genie_playing_speech": "Voorlezen",
-  "service_restart_timeout": "De service is nog niet opnieuw gestart. Sluit dit venster en controleer de server."
+  "service_restart_timeout": "De service is nog niet opnieuw gestart. Sluit dit venster en controleer de server.",
+  "ai_chat_move_left": "Verplaats chat naar links",
+  "ai_chat_move_right": "Verplaats chat naar rechts"
 }

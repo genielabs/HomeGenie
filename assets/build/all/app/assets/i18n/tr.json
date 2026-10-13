@@ -601,5 +601,7 @@
   "automan_program_updated": "Program güncellendi",
   "ai_genie_preparing_speech": "Ses hazırlanıyor",
   "ai_genie_playing_speech": "Sesli okunuyor",
-  "service_restart_timeout": "Hizmet henüz yeniden başlamadı. Bu pencereyi kapatın ve sunucuyu kontrol edin."
+  "service_restart_timeout": "Hizmet henüz yeniden başlamadı. Bu pencereyi kapatın ve sunucuyu kontrol edin.",
+  "ai_chat_move_left": "Sohbeti sola taşı",
+  "ai_chat_move_right": "Sohbeti sağa taşı"
 }

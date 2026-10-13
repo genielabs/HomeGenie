@@ -601,5 +601,7 @@
   "automan_program_updated": "Program oppdatert",
   "ai_genie_preparing_speech": "Forbereder lyd",
   "ai_genie_playing_speech": "Leser høyt",
-  "service_restart_timeout": "Tjenesten har ikke startet på nytt ennå. Lukk dette vinduet og kontroller serveren."
+  "service_restart_timeout": "Tjenesten har ikke startet på nytt ennå. Lukk dette vinduet og kontroller serveren.",
+  "ai_chat_move_left": "Flytt chat til venstre",
+  "ai_chat_move_right": "Flytt chat til høyre"
 }

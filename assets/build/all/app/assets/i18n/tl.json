@@ -601,5 +601,7 @@
   "automan_program_updated": "Na-update ang programa",
   "ai_genie_preparing_speech": "Inihahanda ang audio",
   "ai_genie_playing_speech": "Binabasa nang malakas",
-  "service_restart_timeout": "Hindi pa nagre-restart ang serbisyo. Isara ang window na ito at suriin ang server."
+  "service_restart_timeout": "Hindi pa nagre-restart ang serbisyo. Isara ang window na ito at suriin ang server.",
+  "ai_chat_move_left": "Ilipat ang chat sa kaliwa",
+  "ai_chat_move_right": "Ilipat ang chat sa kanan"
 }

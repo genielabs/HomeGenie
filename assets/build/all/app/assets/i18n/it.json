@@ -601,5 +601,7 @@
   "automan_program_updated": "Programma aggiornato",
   "ai_genie_preparing_speech": "Preparazione audio",
   "ai_genie_playing_speech": "Lettura in corso",
-  "service_restart_timeout": "Il servizio non risulta ancora riavviato. Chiudi questa finestra e controlla il backend."
+  "service_restart_timeout": "Il servizio non risulta ancora riavviato. Chiudi questa finestra e controlla il backend.",
+  "ai_chat_move_left": "Sposta la chat a sinistra",
+  "ai_chat_move_right": "Sposta la chat a destra"
 }

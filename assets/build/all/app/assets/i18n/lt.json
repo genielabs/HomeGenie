@@ -601,5 +601,7 @@
   "automan_program_updated": "Programa atnaujinta",
   "ai_genie_preparing_speech": "Ruošiamas garsas",
   "ai_genie_playing_speech": "Skaitoma balsu",
-  "service_restart_timeout": "Paslauga dar nepasileido iš naujo. Uždarykite šį langą ir patikrinkite serverį."
+  "service_restart_timeout": "Paslauga dar nepasileido iš naujo. Uždarykite šį langą ir patikrinkite serverį.",
+  "ai_chat_move_left": "Perkelkite pokalbį į kairę",
+  "ai_chat_move_right": "Perkelkite pokalbį į dešinę"
 }

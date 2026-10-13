@@ -601,5 +601,7 @@
   "automan_program_updated": "Clár nuashonraithe",
   "ai_genie_preparing_speech": "Fuaim á hullmhú",
   "ai_genie_playing_speech": "Ag léamh os ard",
-  "service_restart_timeout": "Níor atosaigh an tseirbhís fós. Dún an fhuinneog seo agus seiceáil an freastalaí."
+  "service_restart_timeout": "Níor atosaigh an tseirbhís fós. Dún an fhuinneog seo agus seiceáil an freastalaí.",
+  "ai_chat_move_left": "Bog an comhrá ar chlé",
+  "ai_chat_move_right": "Bog an comhrá ar dheis"
 }

@@ -601,5 +601,7 @@
   "automan_program_updated": "پروګرام تازه شو",
   "ai_genie_preparing_speech": "غږ چمتو کېږي",
   "ai_genie_playing_speech": "په لوړ غږ لوستل کېږي",
-  "service_restart_timeout": "خدمت لا تر اوسه بیا نه دی پیل شوی. دا کړکۍ وتړئ او سرور وګورئ."
+  "service_restart_timeout": "خدمت لا تر اوسه بیا نه دی پیل شوی. دا کړکۍ وتړئ او سرور وګورئ.",
+  "ai_chat_move_left": "چیټ کیڼ لور ته حرکت وکړئ",
+  "ai_chat_move_right": "چیټ ښي خوا ته حرکت وکړئ"
 }

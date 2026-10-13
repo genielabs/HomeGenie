@@ -601,5 +601,7 @@
   "automan_program_updated": "ፕሮግራሙ ተዘምኗል",
   "ai_genie_preparing_speech": "ድምፅ በማዘጋጀት ላይ",
   "ai_genie_playing_speech": "ጮክ ብሎ በማንበብ ላይ",
-  "service_restart_timeout": "አገልግሎቱ ገና እንደገና አልተጀመረም። ይህን መስኮት ይዝጉና አገልጋዩን ያረጋግጡ።"
+  "service_restart_timeout": "አገልግሎቱ ገና እንደገና አልተጀመረም። ይህን መስኮት ይዝጉና አገልጋዩን ያረጋግጡ።",
+  "ai_chat_move_left": "ውይይት ወደ ግራ ውሰድ",
+  "ai_chat_move_right": "ውይይት ወደ ቀኝ ውሰድ"
 }

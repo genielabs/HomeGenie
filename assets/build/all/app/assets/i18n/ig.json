@@ -601,5 +601,7 @@
   "automan_program_updated": "Emelitere mmemme",
   "ai_genie_preparing_speech": "A na-akwadebe ụda",
   "ai_genie_playing_speech": "A na-agụpụta n’olu",
-  "service_restart_timeout": "Ọrụ ahụ amalitebeghị ọzọ. Mechie windo a ma lelee sava ahụ."
+  "service_restart_timeout": "Ọrụ ahụ amalitebeghị ọzọ. Mechie windo a ma lelee sava ahụ.",
+  "ai_chat_move_left": "Bugharịa nkata gaa n'aka ekpe",
+  "ai_chat_move_right": "Bugharịa nkata gaa n'aka nri"
 }

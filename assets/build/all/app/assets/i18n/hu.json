@@ -601,5 +601,7 @@
   "automan_program_updated": "Program frissítve",
   "ai_genie_preparing_speech": "Hang előkészítése",
   "ai_genie_playing_speech": "Felolvasás folyamatban",
-  "service_restart_timeout": "A szolgáltatás még nem indult újra. Zárja be ezt az ablakot, és ellenőrizze a szervert."
+  "service_restart_timeout": "A szolgáltatás még nem indult újra. Zárja be ezt az ablakot, és ellenőrizze a szervert.",
+  "ai_chat_move_left": "Mozgassa a csevegést balra",
+  "ai_chat_move_right": "Mozgassa a csevegést jobbra"
 }

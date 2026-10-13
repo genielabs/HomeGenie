@@ -601,5 +601,7 @@
   "automan_program_updated": "പ്രോഗ്രാം പുതുക്കി",
   "ai_genie_preparing_speech": "ഓഡിയോ തയ്യാറാക്കുന്നു",
   "ai_genie_playing_speech": "ഉച്ചത്തിൽ വായിക്കുന്നു",
-  "service_restart_timeout": "സേവനം ഇതുവരെ പുനരാരംഭിച്ചിട്ടില്ല. ഈ വിൻഡോ അടച്ച് സെർവർ പരിശോധിക്കുക."
+  "service_restart_timeout": "സേവനം ഇതുവരെ പുനരാരംഭിച്ചിട്ടില്ല. ഈ വിൻഡോ അടച്ച് സെർവർ പരിശോധിക്കുക.",
+  "ai_chat_move_left": "ചാറ്റ് ഇടത്തേക്ക് നീക്കുക",
+  "ai_chat_move_right": "ചാറ്റ് വലത്തേക്ക് നീക്കുക"
 }

@@ -601,5 +601,7 @@
   "automan_program_updated": "Rhaglen wedi’i diweddaru",
   "ai_genie_preparing_speech": "Paratoi sain",
   "ai_genie_playing_speech": "Darllen yn uchel",
-  "service_restart_timeout": "Nid yw’r gwasanaeth wedi ailgychwyn eto. Caewch y ffenestr hon a gwiriwch y gweinydd."
+  "service_restart_timeout": "Nid yw’r gwasanaeth wedi ailgychwyn eto. Caewch y ffenestr hon a gwiriwch y gweinydd.",
+  "ai_chat_move_left": "Symud sgwrs i'r chwith",
+  "ai_chat_move_right": "Symud sgwrs i'r dde"
 }

@@ -601,5 +601,7 @@
   "automan_program_updated": "ອັບເດດໂປຣແກຣມແລ້ວ",
   "ai_genie_preparing_speech": "ກຳລັງກະກຽມສຽງ",
   "ai_genie_playing_speech": "ກຳລັງອ່ານອອກສຽງ",
-  "service_restart_timeout": "ບໍລິການຍັງບໍ່ໄດ້ເລີ່ມໃໝ່. ປິດໜ້າຕ່າງນີ້ ແລະກວດສອບເຊີບເວີ."
+  "service_restart_timeout": "ບໍລິການຍັງບໍ່ໄດ້ເລີ່ມໃໝ່. ປິດໜ້າຕ່າງນີ້ ແລະກວດສອບເຊີບເວີ.",
+  "ai_chat_move_left": "ຍ້າຍການສົນທະນາໄປທາງຊ້າຍ",
+  "ai_chat_move_right": "ຍ້າຍການສົນທະນາໄປທາງຂວາ"
 }

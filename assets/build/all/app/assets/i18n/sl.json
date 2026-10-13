@@ -601,5 +601,7 @@
   "automan_program_updated": "Program posodobljen",
   "ai_genie_preparing_speech": "Priprava zvoka",
   "ai_genie_playing_speech": "Branje na glas",
-  "service_restart_timeout": "Storitev se še ni znova zagnala. Zaprite to okno in preverite strežnik."
+  "service_restart_timeout": "Storitev se še ni znova zagnala. Zaprite to okno in preverite strežnik.",
+  "ai_chat_move_left": "Premakni klepet na levo",
+  "ai_chat_move_right": "Premakni klepet na desno"
 }

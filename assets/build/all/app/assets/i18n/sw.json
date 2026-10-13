@@ -601,5 +601,7 @@
   "automan_program_updated": "Programu imesasishwa",
   "ai_genie_preparing_speech": "Inaandaa sauti",
   "ai_genie_playing_speech": "Inasoma kwa sauti",
-  "service_restart_timeout": "Huduma bado haijaanza upya. Funga dirisha hili na ukague seva."
+  "service_restart_timeout": "Huduma bado haijaanza upya. Funga dirisha hili na ukague seva.",
+  "ai_chat_move_left": "Sogeza gumzo upande wa kushoto",
+  "ai_chat_move_right": "Sogeza gumzo kulia"
 }

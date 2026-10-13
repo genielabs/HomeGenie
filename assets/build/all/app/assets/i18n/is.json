@@ -601,5 +601,7 @@
   "automan_program_updated": "Forrit uppfært",
   "ai_genie_preparing_speech": "Hljóð undirbúið",
   "ai_genie_playing_speech": "Lesið upphátt",
-  "service_restart_timeout": "Þjónustan hefur ekki enn endurræst. Lokaðu þessum glugga og athugaðu netþjóninn."
+  "service_restart_timeout": "Þjónustan hefur ekki enn endurræst. Lokaðu þessum glugga og athugaðu netþjóninn.",
+  "ai_chat_move_left": "Færðu spjallið til vinstri",
+  "ai_chat_move_right": "Færðu spjallið til hægri"
 }

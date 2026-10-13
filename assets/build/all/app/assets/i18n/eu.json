@@ -601,5 +601,7 @@
   "automan_program_updated": "Programa eguneratu da",
   "ai_genie_preparing_speech": "Audioa prestatzen",
   "ai_genie_playing_speech": "Ozen irakurtzen",
-  "service_restart_timeout": "Zerbitzua ez da oraindik berrabiarazi. Itxi leiho hau eta egiaztatu zerbitzaria."
+  "service_restart_timeout": "Zerbitzua ez da oraindik berrabiarazi. Itxi leiho hau eta egiaztatu zerbitzaria.",
+  "ai_chat_move_left": "Eraman txata ezkerrera",
+  "ai_chat_move_right": "Eraman txata eskuinera"
 }

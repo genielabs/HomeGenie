@@ -7911,6 +7911,7 @@ html.side-docked-active-right app-ai-genie-chat.docked-panel {
   position: fixed;
   right: 0;
   top: 0;
+  z-index: 10;
   background: #fff;
   border-left: 1px solid #ddd;
   will-change: width;
@@ -7929,11 +7930,12 @@ html.side-docked-active-left body {
   height: 100vh;
 }
 html.side-docked-active-left .cdk-overlay-container {
-  width: calc(100vw - var(--docked-panel-width));
-  left: var(--docked-panel-width);
+  width: 100%;
+  left: 0;
 }
 html.side-docked-active-left app-root {
-  padding-left: var(--docked-panel-width) !important;
+  display: block;
+  margin-left: var(--docked-panel-width) !important;
   width: calc(100vw - var(--docked-panel-width)) !important;
   height: 100vh !important;
   overflow-y: auto !important; /* LA SCROLLBAR APPARIRA' QUI, AL 60% */
@@ -7948,7 +7950,8 @@ html.side-docked-active-left app-root::-webkit-scrollbar-thumb {
   border: 3px solid var(--secondary-text-color);
 }
 html.side-docked-active-left mat-toolbar {
-  width: 60% !important;
+  width: calc(100vw - var(--docked-panel-width)) !important;
+  left: var(--docked-panel-width);
 }
 html.side-docked-active-left app-ai-genie-chat.docked-panel {
   display: block;
@@ -7957,8 +7960,9 @@ html.side-docked-active-left app-ai-genie-chat.docked-panel {
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 10;
   background: #fff;
-  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
 }
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].rules[0].oneOf[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].rules[0].oneOf[0].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[6].rules[1].use[0]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[6].rules[1].use[1]!./src/fonts.scss ***!

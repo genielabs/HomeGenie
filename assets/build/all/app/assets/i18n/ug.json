@@ -601,5 +601,7 @@
   "automan_program_updated": "پروگرامما يېڭىلاندى",
   "ai_genie_preparing_speech": "ئاۋاز تەييارلىنىۋاتىدۇ",
   "ai_genie_playing_speech": "ئۈنلۈك ئوقۇۋاتىدۇ",
-  "service_restart_timeout": "مۇلازىمەت تېخى قايتا قوزغالمىدى. بۇ كۆزنەكنى تاقاپ، مۇلازىمېتىرنى تەكشۈرۈڭ."
+  "service_restart_timeout": "مۇلازىمەت تېخى قايتا قوزغالمىدى. بۇ كۆزنەكنى تاقاپ، مۇلازىمېتىرنى تەكشۈرۈڭ.",
+  "ai_chat_move_left": "پاراڭنى سولغا يۆتكەڭ",
+  "ai_chat_move_right": "پاراڭنى ئوڭغا يۆتكەڭ"
 }

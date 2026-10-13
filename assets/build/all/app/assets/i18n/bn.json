@@ -601,5 +601,7 @@
   "automan_program_updated": "প্রোগ্রাম আপডেট হয়েছে",
   "ai_genie_preparing_speech": "অডিও প্রস্তুত হচ্ছে",
   "ai_genie_playing_speech": "উচ্চস্বরে পড়া হচ্ছে",
-  "service_restart_timeout": "পরিষেবাটি এখনও পুনরায় চালু হয়নি। এই উইন্ডোটি বন্ধ করুন এবং সার্ভার পরীক্ষা করুন।"
+  "service_restart_timeout": "পরিষেবাটি এখনও পুনরায় চালু হয়নি। এই উইন্ডোটি বন্ধ করুন এবং সার্ভার পরীক্ষা করুন।",
+  "ai_chat_move_left": "বাম দিকে চ্যাট সরান",
+  "ai_chat_move_right": "চ্যাট ডানদিকে সরান"
 }

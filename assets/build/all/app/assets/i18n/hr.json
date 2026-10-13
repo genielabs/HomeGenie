@@ -601,5 +601,7 @@
   "automan_program_updated": "Program je ažuriran",
   "ai_genie_preparing_speech": "Priprema zvuka",
   "ai_genie_playing_speech": "Čitanje naglas",
-  "service_restart_timeout": "Usluga se još nije ponovno pokrenula. Zatvorite ovaj prozor i provjerite poslužitelj."
+  "service_restart_timeout": "Usluga se još nije ponovno pokrenula. Zatvorite ovaj prozor i provjerite poslužitelj.",
+  "ai_chat_move_left": "Pomakni chat ulijevo",
+  "ai_chat_move_right": "Pomakni chat udesno"
 }
