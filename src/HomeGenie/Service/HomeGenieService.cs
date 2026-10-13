@@ -1257,10 +1257,12 @@ namespace HomeGenie.Service
                     }
                     if (interfaceModules.Count > 0)
                     {
+                        // Audio interfaces provide service modules, not automatic control groups.
+                        bool autoGroup = domain != "Audio.VoiceRecognizer" && domain != "Audio.VoiceSynthesizer";
                         var groupName = domain.Split('.').Last();
-                        var domainGroup = Groups.Find((group => group.Name == groupName));
+                        var domainGroup = autoGroup ? Groups.Find((group => group.Name == groupName)) : null;
                         bool modulesGroupAdded = false;
-                        if (domainGroup == null)
+                        if (autoGroup && domainGroup == null)
                         {
                             // Add modules automatically to a group named
                             // like the interface domain name (groupName)
@@ -1292,12 +1294,15 @@ namespace HomeGenie.Service
                                     systemModules.Add(module);
                                 }
 
-                                var groupModule = domainGroup.Modules.Find((mr => mr.Domain == module.Domain && mr.Address == module.Address));
-                                bool exists = (groupModule != null);
-                                if (!exists)
+                                if (domainGroup != null)
                                 {
-                                    domainGroup.Modules.Add(new ModuleReference(){Domain = module.Domain, Address = module.Address});
-                                    modulesGroupAdded = true;
+                                    var groupModule = domainGroup.Modules.Find((mr => mr.Domain == module.Domain && mr.Address == module.Address));
+                                    bool exists = (groupModule != null);
+                                    if (!exists)
+                                    {
+                                        domainGroup.Modules.Add(new ModuleReference(){Domain = module.Domain, Address = module.Address});
+                                        modulesGroupAdded = true;
+                                    }
                                 }
                             }
 

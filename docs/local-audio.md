@@ -96,6 +96,10 @@ are shared by each interface rather than being separate engines per chat.
 For the complete API, options, model management events, native runtime requirements,
 and platform limitations, see the [MIG.Audio README](https://github.com/genielabs/mig-audio#readme).
 
+## Service modules and groups
+
+Voice recognition and synthesis modules remain registered and receive events at their request addresses. HomeGenie does not create control groups automatically for these two interfaces or add new audio modules to existing groups automatically. Existing groups are preserved, and users can still group audio modules manually. This keeps a fresh setup focused on device control groups.
+
 ## Troubleshooting
 
 - If the microphone is unavailable, check HTTPS/localhost and browser permissions.
