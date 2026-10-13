@@ -51,7 +51,7 @@ Widgets are dynamically **loadable Web Components** running in Shadow DOM. They 
 6.  **CONTEXT SEPARATION:**
     *   **`this.model()`**: Reactive Proxy for text/values.
     *   **`this.declare()`**: View Context for Methods/Logic.
-7.  **SHADOW DOM:** CSS is scoped. Use `:host { display: block; }`. The generated CSS must be bulletproof to prevent Shadow DOM layout collapse. Every CSS output **MUST** include the mandatory `:host` and `.container` dimensions as defined in section 2.9.
+7.  **SHADOW DOM:** CSS is scoped. Use `:host { display: block; }`. The generated CSS must be bulletproof to prevent Shadow DOM layout collapse. Define the `:host` and root `.container` layout for the selected preset or free-size mode, following section 2.9.
 
 ### 2.2 Controller Configuration (`settings`)
 Defining the `settings` object in the class is **mandatory**. You MUST always include `defaultSize`.
@@ -60,17 +60,17 @@ Defining the `settings` object in the class is **mandatory**. You MUST always in
 class MyWidget extends ControllerInstance {
   settings = {
     moduleSelect: {
-        fieldFilter: 'Status.Level,Sensor.Temperature',
+        fieldFilter: 'Status.Level',
         // CRITICAL LIGHTING DEFINITIONS FOR 'typeFilter':
         // - 'Light' = Specifically a binary light (0/1 ON/OFF)
-        // - 'Dimmer' = Dimmable light (0-100)
+        // - 'Dimmer' = Dimmable light; check the actual field's value range
         // - 'Color' = Color LED light (RGB/HSB)
         typeFilter: 'Light,Dimmer,Color'
     },
     /**
      * @type {'' | 'small' | 'medium' | 'big'}
      * @description The default widget size. Use an empty string '' for an unconstrained,
-     * CSS-driven size. Standard sizes: small (289.5x148), medium (289.5x296), big (460x296).
+     * CSS-driven size. Let the CustomWidget host apply the selected size.
      */
     defaultSize: 'medium',
     // Allowed user presets. If defaultSize is '', consider keeping this empty [] to disable manual resizing.
@@ -79,20 +79,30 @@ class MyWidget extends ControllerInstance {
 }
 ```
 
+**Module selection contract:**
+* Valid module types are `dimmer`, `color`, `doorlock`, `doorwindow`, `generic`, `light`, `mediareceiver`, `mediatransmitter`, `program`, `sensor`, `switch`, `shutter`, `motor`, `thermostat`, and `videoinput`. Matching is case-insensitive.
+* Use comma-separated names without spaces. Types in `typeFilter` are alternatives (OR); fields in `fieldFilter` are also alternatives (OR). When both filters are set, the module must match BOTH groups (AND). Selection includes online modules only.
+* For a general level display, use `fieldFilter: 'Status.Level'` and omit `typeFilter` unless the widget requires specific device types. A lighting widget must include `Color` when it supports color lights.
+* An omitted, empty, or `any` filter imposes no restriction for that group. At least one active filter is required to populate the module selector; leaving both groups unrestricted currently produces an empty list.
+* `moduleSelect` is OPTIONAL. Omit it for standalone widgets such as games, calculators, clocks, or interactive explanations. Such widgets must work without `boundModule`.
+* If binding is needed, render a useful unbound state and expose a user action calling `this.configure()`. Check that `boundModule` and each required field exist before using them. A field list does not guarantee that every listed field exists.
+* Current CustomWidget CSS declares `small` as 302x168px, `medium` as 302x316px, and `big` as 492x316px, with padding and card constraints applied separately. These are host layout declarations, not guaranteed inner canvas dimensions. Use the actual view size for canvas/chart sizing and adapt on resize.
+* Include `defaultSize` in `sizeOptions` when manual resizing is enabled. Use `sizeOptions: []` to disable manual resizing when a free, CSS-driven layout is appropriate.
+
 ### 2.3 Controller Logic & Framework APIs
 *   **`onInit()`**: Pre-load external libs (e.g., `zuix.using`).
 *   **`onCreate()`**: **MAIN ENTRY POINT**.
     *   **Pattern:** Define a `viewContext` object with Methods and pass it to `this.declare(viewContext)`.
-    *   **Binding Check:** If `moduleSelect` is used, always check `if (!this.boundModule) return;`.
+    *   **Binding Check:** Initialize the view and its methods first. If binding is needed and no module is associated, render the unbound state before returning. Standalone widgets must not depend on a bound module.
     *   **Subscribe (CRITICAL EXISTENCE CHECK):** You **MUST ALWAYS** verify that a field exists before subscribing to it. Failing to do so causes a FATAL runtime crash.
         *   *Correct:* `const f = this.boundModule.field('Sensor.Name'); if (f) { this.subscribe(f, callback); }`
-*   **`onDispose()`**: **MANDATORY FOR MEMORY SAFETY**. You MUST always generate this method in the controller class. It is strictly required to clear timers (`setInterval`, `clearTimeout`) and remove custom event handlers to prevent memory leaks. Even if your code doesn't actively use timers yet, generate an empty `onDispose()` method.
+*   **`onDispose()`**: **MANDATORY FOR MEMORY SAFETY**. You MUST always generate this method in the controller class. It is strictly required to clear interval/timeout handles with `clearInterval`/`clearTimeout`, cancel animation frames with `cancelAnimationFrame`, unsubscribe from subscriptions created directly by the widget, and remove custom event handlers to prevent memory leaks. Even if your code doesn't actively use timers yet, generate an empty `onDispose()` method.
 *   **`this.apiCall('domain/address/method', payload)`**: *FRONTEND ONLY (UI/Widgets)*. Sends a request from the widget to a backend service. Returns an Observable.
     *   **🚨 CRITICAL PAYLOAD PARSING:** The subscription receives an object structured as `{ code: number, response: any }`. **You MUST use `data.response` to access the actual JSON/array returned by the backend API.** Do not assume the raw array/object is returned directly at the root.
     *   *Correct Usage:* `this.apiCall('Custom/MyApi').subscribe({ next: (data) => { const payload = data.response; /* process payload */ } });`
 *   **`this.configure()`**: *FRONTEND ONLY*. Programmatically opens the custom widget configuration dialog (Bound Module Selection).
 *   **`this.showSettings()`**: *FRONTEND ONLY*. Programmatically opens the module settings dialog.
-*   **`this.translate(key)`**: Returns the localized string for the given key from `assets/i18n`.
+*   **`this.translate(key)`**: Returns an Observable from `translate.get('WIDGETS.' + key)`. Subscribe to receive the translated string; do not assign the Observable to a text field. Track and unsubscribe any subscription created directly by your controller in `onDispose()`.
 *   **`this.init, this.create, this.dispose, this.update, this.log`**: Are RESERVED methods NEVER OVERWRITE them.
 
 ### 2.4 State Management Strategy (CRITICAL)
@@ -108,7 +118,7 @@ Components MUST be designed to interact seamlessly with their host environment a
     *   *Why:* Allows the parent page/component to control the widget (e.g., `document.querySelector('my-widget').reset()`).
     *   *Example:* `this.expose('reset', () => this.resetState());`
 *   **`this.trigger(eventName, eventData)`**: Use this to notify the outside world about internal state changes, user interactions, or completed actions. It dispatches a standard DOM `CustomEvent`.
-    *   *Why:* Allows parent components to listen to events using zuix directives like `(my-event)="handler($event)"` or vanilla `addEventListener`.
+    *   *Why:* Allows parent components to listen to events using zuix directives like `(my-event)="handler(event)"` or vanilla `addEventListener`.
     *   *Example:* `this.trigger('value-changed', { newValue: this.state.level });`
 *   **Golden Rule:** If a component receives user input (e.g., a button, a slider, a toggle), it **MUST** use `this.trigger` to emit its new value. If it has a controllable state (e.g., a timer, a media player), it **MUST** use `this.expose` to allow external control.
 
@@ -132,32 +142,40 @@ Directives operate on the context exposed by `this.declare()`.
 ### 2.8 Strict Coding Constraints
 *   **NO HALLUCINATIONS:** Use **ONLY** the methods of the `utils` class explicitly mentioned in this prompt.
 *   **DOM Manipulation Strict Rules:**
-    *   **NEVER** use `$this.text(...)`. You **MUST** use `$this.html(...)` to set text/content securely within zuix.
+    *   **NEVER** use `$this.text(...)`. Use `$this.html(...)` only for trusted HTML. For plain text from users or APIs, use the raw element's `textContent` (for example, `this.field('label').get().textContent = value`) rather than inserting it as HTML.
     *   **FATAL ERROR WARNING:** **NEVER** use `.toggleClass(...)`. This method DOES NOT EXIST in zuix.js ZxQuery. You MUST use explicit `.addClass(...)` and `.removeClass(...)` calls.
 *   **API SCOPE:** Do not confuse `this.apiCall` (Frontend UI) with `Api.Call` (Backend Program).
 
-### 2.9 SHADOW DOM LAYOUT & THE 0x0 COLLAPSE (CRITICAL)
-*   **The "height: 100%" Trap:** In CSS, if `:host` has a `min-height`, setting `height: 100%` on the `.container` will CAUSE IT TO COLLAPSE TO 0x0 if its children are absolutely positioned.
-*   **MANDATORY LAYOUT FIX:** You MUST strictly use absolute anchoring to force the container to fill the host. Every CSS output MUST follow this exact layout structure for the root elements:
+### 2.9 SHADOW DOM LAYOUT
+* The CustomWidget host controls preset sizes. Do not impose a fixed 400px minimum height on a widget using `small`, `medium`, or `big`.
+* For a preset-sized widget with an absolutely positioned root container, anchor that container to a positioned host:
     ```css
     :host {
         display: block;
-        position: relative; /* CRITICAL FOR ABSOLUTE CONTAINER */
+        position: relative;
         width: 100%;
         height: 100%;
-        min-height: 400px; /* Set appropriate min-height based on widget needs */
     }
     .container {
         position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0; /* BULLETPROOF FILL */
+        inset: 0;
+        padding: 12px;
+        box-sizing: border-box;
         overflow: hidden;
-        background: #050505; /* Always provide a default background */
     }
     ```
-*   **Never** use `position: relative` combined with `height: 100%` for the main `.container` if it acts as a wrapper for absolute elements (like a canvas or a game HUD).
+* Keep the background transparent to inherit the application's theme. If the requested design needs a background, use theme variables or an explicitly requested color.
+* For `defaultSize: ''`, provide a content-driven layout or a suitable explicit/minimum host height. Percentage heights require a parent with a defined height; `min-height` alone does not make descendant percentage heights reliable. Use normal-flow content or an anchored container with a properly sized host.
+* Canvas, charts, and games must measure their actual view size and update their dimensions on resize. Dispose any ResizeObserver or custom resize listeners in `onDispose()`.
 
 ### 2.10 FLEX SCROLL CONTAINERS (FLA)
 When an element inside a flex column container (`layout="column ..."`) needs to scroll vertically while keeping headers or status bars fixed, ALWAYS apply the FLA attribute `self="size-x1"` to that scrolling element, combined with `overflow-y: auto;` and `min-height: 0;`. This constrains the element along the container's main flex axis, preventing layout collapse and guaranteeing smooth, isolated vertical scrolling.
+
+### 2.11 Interactive Previews in AI Chat
+* Generated widgets can run directly inside a chat response through the same `CustomWidget` component used on dashboards. The preview uses the same controller APIs, settings menu, module filters, and size presets.
+* Module association and size changes in a chat preview are temporary. Showing a preview does not install the widget or add it to a dashboard; the user uses the separate Save action for installation.
+* Standalone interactive components, including small games, must work without a module or backend calls when those are unnecessary. Device/API commands must follow the user's requested behavior and must not be issued automatically merely because a preview was loaded.
+* The host may recreate or dispose a preview when the chat is closed or its source changes. Initialize state in `onCreate()` and release owned resources in `onDispose()`. Do not depend on the preview DOM remaining alive or on a hard-coded DOM ID outside the widget.
 
 ---
 
@@ -269,9 +287,9 @@ When using `Net.WebService(url)` in C#, choose the correct method based on respo
 @import 'assets/styles/widget-ui.css';
 @import 'assets/styles/flex-layout-attribute.min.css';
 
-:host { font-family: sans-serif; display: block; height: 100%; }
+:host { font-family: sans-serif; display: block; position: relative; width: 100%; height: 100%; }
 
-.container { padding: 12px; height: 100%; box-sizing: border-box; }
+.container { position: absolute; inset: 0; padding: 12px; box-sizing: border-box; overflow: hidden; }
 
 .header { padding-right: 48px; margin-bottom: 8px; color: var(--text-color); }
 .status { font-size: 0.9em; color: var(--secondary-text-color); }
@@ -303,7 +321,11 @@ class SwitchWidget extends ControllerInstance {
     };
     this.declare(viewContext);
 
-    if (!this.boundModule) return;
+    if (!this.boundModule) {
+        this.model().name = 'Set bound module';
+        this.refreshUI();
+        return;
+    }
     this.model().name = this.boundModule.name;
 
     const field = this.boundModule.field('Status.Level');
@@ -325,6 +347,10 @@ class SwitchWidget extends ControllerInstance {
   }
 
   toggle() {
+    if (!this.boundModule) {
+      this.configure();
+      return;
+    }
     if (this.boundModule) {
       const cmd = this.state.isOn ? 'Control.Off' : 'Control.On';
       this.boundModule.control(cmd);
