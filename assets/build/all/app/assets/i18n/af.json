@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Toestelbeheer",
   "ai_chat_capability_automation": "Skep en werk programme op",
   "ai_chat_capability_widgets": "Skep widgets",
-  "ai_chat_capabilities_hint": "Geaktiveerde vermoëns bepaal watter aksies die KI kan uitvoer. Gedeelde inligting word afsonderlik in Konteks gekies. Veranderinge is van toepassing op toekomstige versoeke."
+  "ai_chat_capabilities_hint": "Geaktiveerde vermoëns bepaal watter aksies die KI kan uitvoer. Gedeelde inligting word afsonderlik in Konteks gekies. Veranderinge is van toepassing op toekomstige versoeke.",
+  "notification_active": "Aktiewe kennisgewings",
+  "notification_archived": "Gearchiveerde kennisgewings",
+  "notification_empty": "Geen kennisgewings nie",
+  "notification_list": "Kennisgewinglys",
+  "notification_archive": "Argiveer",
+  "notification_restore": "Herstel",
+  "notification_action_check": "Gaan die aksieresultaat na voordat jy weer probeer.",
+  "notification_genie_upgrade": "Gemini Genie sluit toestelbeheer, outomatiseringsprogramme en legstukke in. Vorige Genies bly beskikbaar. Jy kan hulle deaktiveer wanneer jy gereed is; hul instellings en kletsgeskiedenis sal behou word.",
+  "notification_disable_genies": "Deaktiveer vorige Genies",
+  "notification_disable_genies_confirm": "Deaktiveer die gelyste vorige Genies? Hul instellings en kletsgeskiedenis sal behou word. Jy kan hulle enige tyd weer aktiveer."
 }

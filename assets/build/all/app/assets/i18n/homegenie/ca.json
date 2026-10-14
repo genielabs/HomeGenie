@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Gravació en alarma",
       "NVR.ContinuousRecording": "Enregistrament continu."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Utilitzeu Google Gemini AI per controlar dispositius, crear programes d'automatització i crear ginys a HomeGenie. Trieu les funcionalitats i el context del sistema per compartir des del menú de xat.\nIntroduïu una clau d'API vàlida per habilitar aquesta funció. Obtingueu una clau d'API a https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Clau d'API de Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID del model",
+      "ConfigureOptions.EnableDeepKnowledge": "Opció heretada Deep Knowledge (només per a compatibilitat)",
+      "ConfigureOptions.SystemInstructions": "Instruccions del sistema"
+    },
+
     "932": {
       "Title": "Gemini Automan",
       "Description": "El vostre gestor d'automatització intel·ligent. Converteix el llenguatge natural en fluxos de treball agentius: escriu, prova i executa programes C# en temps real per completar qualsevol tasca. Per activar aquesta funció, introduïu una clau API vàlida. Seguiu les instruccions a https://aistudio.google.com/app/apikey per obtenir una clau API gratuïta.",

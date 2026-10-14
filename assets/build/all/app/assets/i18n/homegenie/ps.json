@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "په الارم کې ثبت کول",
       "NVR.ContinuousRecording": "دوامداره ثبت کول."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "په HomeGenie کې د وسیلو کنټرولولو، د اتومات پروګرامونو جوړولو، او ویجټونو جوړولو لپاره د Google Gemini AI څخه کار واخلئ. د چټ مینو څخه د شریکولو لپاره وړتیاوې او د سیسټم شرایط وټاکئ.\nد دې فیچر د فعالولو لپاره یو باوري API کیلي دننه کړئ. له https://aistudio.google.com/app/apikey څخه د API کیلي ترلاسه کړئ.",
+      "ConfigureOptions.ApiKey": "د Google Gemini AI API کیلي",
+      "ConfigureOptions.ModelId": "د ماډل ID",
+      "ConfigureOptions.EnableDeepKnowledge": "پخوانی Deep Knowledge غوراوی (یوازې د مطابقت لپاره)",
+      "ConfigureOptions.SystemInstructions": "د سیسټم لارښوونې"
+    },
+
     "932": {
       "Title": "جیمني آټومن",
       "Description": "ستاسو هوښیار اتومات مدیر. طبیعي ژبه د اجنټ کاري جریان ته واړوئ: دا په ریښتیني وخت کې د C# پروګرامونه لیکي، ازموینه کوي او اجرا کوي ترڅو هر ورکړل شوی کار بشپړ کړي. د دې ځانګړتیا فعالولو لپاره، یو باوري API کیلي دننه کړئ. د وړیا API کیلي ترلاسه کولو لپاره په https://aistudio.google.com/app/apikey کې لارښوونې تعقیب کړئ.",

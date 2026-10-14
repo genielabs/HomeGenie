@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Apparaatcontrole",
   "ai_chat_capability_automation": "Programma's maken en bijwerken",
   "ai_chat_capability_widgets": "Maak widgets",
-  "ai_chat_capabilities_hint": "Ingeschakelde mogelijkheden bepalen welke acties de AI kan uitvoeren. Gedeelde informatie wordt afzonderlijk geselecteerd in Context. Wijzigingen gelden voor toekomstige aanvragen."
+  "ai_chat_capabilities_hint": "Ingeschakelde mogelijkheden bepalen welke acties de AI kan uitvoeren. Gedeelde informatie wordt afzonderlijk geselecteerd in Context. Wijzigingen gelden voor toekomstige aanvragen.",
+  "notification_active": "Actieve meldingen",
+  "notification_archived": "Gearchiveerde meldingen",
+  "notification_empty": "Geen meldingen",
+  "notification_list": "Meldingenlijst",
+  "notification_archive": "Archiveren",
+  "notification_restore": "Herstellen",
+  "notification_action_check": "Controleer het resultaat van de actie voordat u het opnieuw probeert.",
+  "notification_genie_upgrade": "Gemini Genie bevat apparaatbeheer, automatiseringsprogramma's en widgets. Eerdere Genies blijven beschikbaar. U kunt ze uitschakelen wanneer u er klaar voor bent; hun instellingen en chatgeschiedenis blijven bewaard.",
+  "notification_disable_genies": "Eerdere Genies uitschakelen",
+  "notification_disable_genies_confirm": "De vermelde eerdere Genies uitschakelen? Hun instellingen en chatgeschiedenis blijven bewaard. U kunt ze op elk gewenst moment weer inschakelen."
 }

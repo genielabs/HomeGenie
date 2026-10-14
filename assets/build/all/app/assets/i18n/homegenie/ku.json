@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Tomarkirina li ser alarmê",
       "NVR.ContinuousRecording": "Tomarkirina Berdewam."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Ji bo kontrolkirina cîhazan, çêkirina bernameyên otomasyonê û avakirina widgetan di HomeGenie de Google Gemini AI bikar bînin. Ji pêşeka sohbetê şiyan û naveroka pergalê ya ku were parvekirin hilbijêrin.\nJi bo çalakkirina vê taybetmendiyê mifteyeke API-yê ya derbasdar binivîsin. Mifteyek API-yê ji https://aistudio.google.com/app/apikey bistînin.",
+      "ConfigureOptions.ApiKey": "Mifteya API-yê ya Google Gemini AI",
+      "ConfigureOptions.ModelId": "Nasnameya Modelê",
+      "ConfigureOptions.EnableDeepKnowledge": "Vebijarka kevn a Deep Knowledge (tenê ji bo hevahengiyê)",
+      "ConfigureOptions.SystemInstructions": "Talîmatên pergalê"
+    },
+
     "932": {
       "Title": "Gemini Automan",
       "Description": "Gerînendeyê Otomasyona we ya jîr. Zimanê xwezayî veguherîne karên ajantî: ew bernameyên C# di wextê rast de dinivîse, diceribîne û bicîh tîne da ku her peywirek diyarkirî temam bike. Ji bo çalakkirina vê taybetmendiyê, mifteyek API-yê ya derbasdar binivîse. Ji bo ku mifteyek API-yê ya belaş bistînin, rêwerzên li https://aistudio.google.com/app/apikey bişopînin.",

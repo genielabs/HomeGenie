@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Salvesta äratuse ajal",
       "NVR.ContinuousRecording": "Pidev salvestamine."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Kasutage rakenduses HomeGenie seadmete juhtimiseks, automaatikaprogrammide loomiseks ja vidinate ehitamiseks Google Gemini AI-d. Valige vestlusmenüüst funktsioonid ja süsteemikontekst, mida jagada.\nSelle funktsiooni lubamiseks sisestage kehtiv API-võti. Hankige API-võti aadressilt https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API-võti",
+      "ConfigureOptions.ModelId": "Mudeli ID",
+      "ConfigureOptions.EnableDeepKnowledge": "Aegunud Deep Knowledge'i valik (ainult ühilduvuse tagamiseks)",
+      "ConfigureOptions.SystemInstructions": "Süsteemijuhised"
+    },
+
     "932": {
       "Title": "Kaksikute automan",
       "Description": "Sinu nutikas automatiseerimishaldur. Muuda loomulik keel agentlikeks töövoogudeks: see kirjutab, testib ja käivitab C# programme reaalajas mis tahes ülesande täitmiseks. Selle funktsiooni aktiveerimiseks sisesta kehtiv API-võti. Tasuta API-võtme saamiseks järgi juhiseid aadressil https://aistudio.google.com/app/apikey.",

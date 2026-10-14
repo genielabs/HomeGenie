@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Kontroll tal-apparat",
   "ai_chat_capability_automation": "Oħloq u aġġorna programmi",
   "ai_chat_capability_widgets": "Oħloq widgets",
-  "ai_chat_capabilities_hint": "Il-kapaċitajiet attivati jiddeterminaw liema azzjonijiet tista' twettaq l-AI. L-informazzjoni kondiviża tintgħażel separatament fil-Kuntest. Bidliet japplikaw għal talbiet futuri."
+  "ai_chat_capabilities_hint": "Il-kapaċitajiet attivati jiddeterminaw liema azzjonijiet tista' twettaq l-AI. L-informazzjoni kondiviża tintgħażel separatament fil-Kuntest. Bidliet japplikaw għal talbiet futuri.",
+  "notification_active": "Notifiki attivi",
+  "notification_archived": "Notifiki arkivjati",
+  "notification_empty": "Ebda notifika",
+  "notification_list": "Lista tan-notifiki",
+  "notification_archive": "Arkivja",
+  "notification_restore": "Irrestawra",
+  "notification_action_check": "Iċċekkja r-riżultat tal-azzjoni qabel ma terġa' tipprova.",
+  "notification_genie_upgrade": "Gemini Genie jinkludi kontroll tat-tagħmir, programmi ta' awtomazzjoni u widgets. Il-Genies preċedenti jibqgħu disponibbli. Tista' tiddiżattivahom meta tkun lest; is-settings u l-istorja taċ-chat tagħhom se jinżammu.",
+  "notification_disable_genies": "Iddiżattiva l-Genies preċedenti",
+  "notification_disable_genies_confirm": "Trid tiddiżattiva l-Genies preċedenti elenkati? Is-settings u l-istorja taċ-chat tagħhom se jinżammu. Tista' terġa' tattivahom fi kwalunkwe ħin."
 }

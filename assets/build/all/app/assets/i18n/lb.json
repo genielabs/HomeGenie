@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Apparat Kontroll",
   "ai_chat_capability_automation": "Erstellt an update Programmer",
   "ai_chat_capability_widgets": "Erstellt Widgets",
-  "ai_chat_capabilities_hint": "Aktivéiert Fäegkeeten bestëmmen wéi eng Aktiounen d'AI ka maachen. Gemeinsam Informatioun gëtt separat am Kontext ausgewielt. Ännerungen gëlle fir zukünfteg Ufroen."
+  "ai_chat_capabilities_hint": "Aktivéiert Fäegkeeten bestëmmen wéi eng Aktiounen d'AI ka maachen. Gemeinsam Informatioun gëtt separat am Kontext ausgewielt. Ännerungen gëlle fir zukünfteg Ufroen.",
+  "notification_active": "Aktiv Notifikatiounen",
+  "notification_archived": "Archivéiert Notifikatiounen",
+  "notification_empty": "Keng Notifikatiounen",
+  "notification_list": "Notifikatiounslëscht",
+  "notification_archive": "Archivéieren",
+  "notification_restore": "Zerécksetzen",
+  "notification_action_check": "Iwwerpréift d'Resultat vun der Aktioun, ier Dir et nach eng Kéier probéiert.",
+  "notification_genie_upgrade": "Gemini Genie ëmfaasst Apparatsteierung, Automatiséierungsprogrammer a Widgeten. Déi vireg Genies bleiwen disponibel. Dir kënnt se desaktivéieren, wann Dir bereet sidd; hir Astellungen a Chat-Verleef bleiwen erhalen.",
+  "notification_disable_genies": "Vireg Genies desaktivéieren",
+  "notification_disable_genies_confirm": "Déi opgelëschte vireg Genies desaktivéieren? Hir Astellungen a Chat-Verleef bleiwen erhalen. Dir kënnt se zu all Moment erëm aktivéieren."
 }

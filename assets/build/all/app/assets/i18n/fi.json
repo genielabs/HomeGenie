@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Laitteen ohjaus",
   "ai_chat_capability_automation": "Luo ja päivitä ohjelmia",
   "ai_chat_capability_widgets": "Luo widgetejä",
-  "ai_chat_capabilities_hint": "Käytössä olevat ominaisuudet määräävät, mitä toimia tekoäly voi suorittaa. Jaetut tiedot valitaan erikseen kontekstissa. Muutokset koskevat tulevia pyyntöjä."
+  "ai_chat_capabilities_hint": "Käytössä olevat ominaisuudet määräävät, mitä toimia tekoäly voi suorittaa. Jaetut tiedot valitaan erikseen kontekstissa. Muutokset koskevat tulevia pyyntöjä.",
+  "notification_active": "Aktiiviset ilmoitukset",
+  "notification_archived": "Arkistoidut ilmoitukset",
+  "notification_empty": "Ei ilmoituksia",
+  "notification_list": "Ilmoitusluettelo",
+  "notification_archive": "Arkistoi",
+  "notification_restore": "Palauta",
+  "notification_action_check": "Tarkista toiminnon tulos ennen kuin yrität uudelleen.",
+  "notification_genie_upgrade": "Gemini Genie sisältää laiteohjauksen, automaatio-ohjelmat ja widgetit. Aiemmat Geniet pysyvät käytettävissä. Voit poistaa ne käytöstä, kun olet valmis; niiden asetukset ja keskusteluhistoria säilytetään.",
+  "notification_disable_genies": "Poista aiemmat Geniet käytöstä",
+  "notification_disable_genies_confirm": "Poistetaanko luetteloidut aiemmat Geniet käytöstä? Niiden asetukset ja keskusteluhistoria säilytetään. Voit ottaa ne uudelleen käyttöön milloin tahansa."
 }

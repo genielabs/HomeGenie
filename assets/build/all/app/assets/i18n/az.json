@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Cihaz nəzarəti",
   "ai_chat_capability_automation": "Proqramlar yaradın və yeniləyin",
   "ai_chat_capability_widgets": "Vidjetlər yaradın",
-  "ai_chat_capabilities_hint": "Aktivləşdirilmiş imkanlar AI-nin hansı hərəkətləri yerinə yetirə biləcəyini müəyyənləşdirir. Paylaşılan məlumat Kontekstdə ayrıca seçilir. Dəyişikliklər gələcək sorğulara şamil edilir."
+  "ai_chat_capabilities_hint": "Aktivləşdirilmiş imkanlar AI-nin hansı hərəkətləri yerinə yetirə biləcəyini müəyyənləşdirir. Paylaşılan məlumat Kontekstdə ayrıca seçilir. Dəyişikliklər gələcək sorğulara şamil edilir.",
+  "notification_active": "Aktiv bildirişlər",
+  "notification_archived": "Arxivlənmiş bildirişlər",
+  "notification_empty": "Bildiriş yoxdur",
+  "notification_list": "Bildiriş siyahısı",
+  "notification_archive": "Arxivlə",
+  "notification_restore": "Bərpa et",
+  "notification_action_check": "Yenidən cəhd etməzdən əvvəl əməliyyatın nəticəsini yoxlayın.",
+  "notification_genie_upgrade": "Gemini Genie cihaz idarəetməsini, avtomatlaşdırma proqramlarını və vidcetləri ehtiva edir. Əvvəlki Genies əlçatan olaraq qalır. Hazır olduqda onları deaktiv edə bilərsiniz; parametrləri və söhbət tarixçələri saxlanılacaq.",
+  "notification_disable_genies": "Əvvəlki Genies deaktiv edilsin",
+  "notification_disable_genies_confirm": "Sadalanan əvvəlki Genies deaktiv edilsin? Onların parametrləri və söhbət tarixçələri saxlanılacaq. İstənilən vaxt onları yenidən aktivləşdirə bilərsiniz."
 }

@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Rialú gléas",
   "ai_chat_capability_automation": "Cláir a chruthú agus a nuashonrú",
   "ai_chat_capability_widgets": "Cruthaigh giuirléidí",
-  "ai_chat_capabilities_hint": "Cinneann cumais chumasaithe na gníomhartha is féidir leis an AI a dhéanamh. Roghnaítear faisnéis chomhroinnte ar leithligh i gComhthéacs. Baineann athruithe le hiarratais amach anseo."
+  "ai_chat_capabilities_hint": "Cinneann cumais chumasaithe na gníomhartha is féidir leis an AI a dhéanamh. Roghnaítear faisnéis chomhroinnte ar leithligh i gComhthéacs. Baineann athruithe le hiarratais amach anseo.",
+  "notification_active": "Fógraí gníomhacha",
+  "notification_archived": "Fógraí cartlainne",
+  "notification_empty": "Níl aon fhógra ann",
+  "notification_list": "Liosta fógraí",
+  "notification_archive": "Cuir i gcartlann",
+  "notification_restore": "Athchóirigh",
+  "notification_action_check": "Seiceáil toradh an ghnímh sula ndéanfaidh tú iarracht arís.",
+  "notification_genie_upgrade": "Cuimsíonn Gemini Genie rialú gléasanna, cláir uathoibrithe agus giuirléidí. Tá na Genies roimhe seo ar fáil fós. Is féidir leat iad a dhíchumasú nuair a bheidh tú réidh; coimeádfar a socruithe agus a stair chomhrá.",
+  "notification_disable_genies": "Díchumasaigh Genies roimhe seo",
+  "notification_disable_genies_confirm": "An bhfuil fonn ort na Genies roimhe seo atá liostaithe a dhíchumasú? Coimeádfar a socruithe agus a stair chomhrá. Is féidir leat iad a chumasú arís am ar bith."
 }

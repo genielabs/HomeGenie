@@ -22,8 +22,12 @@
 
 - Result presentation polish: keep short widget status badges such as NORMAL on one line; lead compiler-recovery responses with the outcome and show technical repair details secondarily. Apply the badge rule to shared widget guidance and the result/detail separation when consolidating action feedback.
 
-- Existing-installation migration: design a versioned/idempotent migrator once the unified Genie configuration is stable. Preserve custom prompts, credentials/configuration and histories, back up changes and record a report. Disable the migrator after completion rather than deleting it, so interrupted runs and diagnostics remain recoverable.
+- Existing-installation transition: implemented an optional persistent Gemini Genie notice with confirmed, reversible retirement of the previous specialized Genies. Settings, custom prompts and chat histories remain in place. The current release does not need an automatic migrator; history import normalization remains a separate future milestone.
 
 ### Gemini Genie pilot: selectable capabilities
 
 Implemented persistent module preferences per Genie for device control, automation and widgets, with legacy browser preference initialization and Implements-driven menu support, with request-specific schema filtering and backend checks. API-call result cards and reusable code snippets are restored using backend execution metadata. Next: imported-history normalization, migration of existing Genie configurations and broader multi-action plans.
+
+### Persistent notifications and optional Genie transition
+
+Implemented base service 582 with explicit version-1 persistent messages, bounded disk archive, shared read/archive state and recoverable action results. YoT provides an active/archive list and clickable detail, with local stored API actions and optional confirmation. Gemini Genie offers reversible retirement of the previous specialized Genies; existing configuration and histories stay in place. This supersedes the earlier automatic migrator proposal for the current release. Further work: optional history import normalization, richer notification filters and per-user read state if HomeGenie gains user-scoped accounts.

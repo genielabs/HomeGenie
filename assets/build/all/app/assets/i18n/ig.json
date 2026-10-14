@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Njikwa ngwaọrụ",
   "ai_chat_capability_automation": "Mepụta ma kwalite mmemme",
   "ai_chat_capability_widgets": "Mepụta wijetị",
-  "ai_chat_capabilities_hint": "Ike akwadoro na-ekpebi omume ndị AI nwere ike ime. A na-ahọpụta ozi ekekọrịtara iche na mpaghara. Mgbanwe na-emetụta arịrịọ n'ọdịnihu."
+  "ai_chat_capabilities_hint": "Ike akwadoro na-ekpebi omume ndị AI nwere ike ime. A na-ahọpụta ozi ekekọrịtara iche na mpaghara. Mgbanwe na-emetụta arịrịọ n'ọdịnihu.",
+  "notification_active": "Ọkwa ndị na-arụ ọrụ",
+  "notification_archived": "Ọkwa ndị echekwara",
+  "notification_empty": "Enweghị ọkwa",
+  "notification_list": "Ndepụta ọkwa",
+  "notification_archive": "Chekwaa",
+  "notification_restore": "Weghachi",
+  "notification_action_check": "Lelee nsonaazụ ihe omume ahụ tupu ị nwaa ọzọ.",
+  "notification_genie_upgrade": "Gemini Genie na-agụnye njikwa ngwaọrụ, mmemme akpaaka na wijetị. Genies ndị gara aga ka dịkwa. Ị nwere ike gbanyụọ ha mgbe ị dị njikere; a ga-edobe ntọala na akụkọ mkparịta ụka ha.",
+  "notification_disable_genies": "Gbanyụọ Genies ndị gara aga",
+  "notification_disable_genies_confirm": "Gbanyụọ Genies ndị gara aga edepụtara? A ga-edobe ntọala na akụkọ mkparịta ụka ha. Ị nwere ike ịgbalite ha ọzọ n'oge ọ bụla."
 }

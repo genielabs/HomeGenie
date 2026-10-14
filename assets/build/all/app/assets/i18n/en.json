@@ -614,5 +614,15 @@
   "ai_chat_capability_device": "Device control",
   "ai_chat_capability_automation": "Create and update programs",
   "ai_chat_capability_widgets": "Create widgets",
-  "ai_chat_capabilities_hint": "Enabled capabilities determine which actions the AI can perform. Shared information is selected separately in Context. Changes apply to future requests."
+  "ai_chat_capabilities_hint": "Enabled capabilities determine which actions the AI can perform. Shared information is selected separately in Context. Changes apply to future requests.",
+  "notification_active": "Active",
+  "notification_archived": "Archive",
+  "notification_empty": "No notifications",
+  "notification_list": "List",
+  "notification_archive": "Archive",
+  "notification_restore": "Restore",
+  "notification_action_check": "Check the action result before retrying.",
+  "notification_genie_upgrade": "Gemini Genie includes device control, automation programs and widgets. Previous Genies remain available. You can disable them when you are ready; their settings and chat histories will be kept.",
+  "notification_disable_genies": "Disable previous Genies",
+  "notification_disable_genies_confirm": "Disable the listed previous Genies? Their settings and chat histories will be kept. You can enable them again at any time."
 }

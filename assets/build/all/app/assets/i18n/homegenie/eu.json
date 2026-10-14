@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Alarma batean grabatu",
       "NVR.ContinuousRecording": "Grabaketa jarraitua."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Erabili Google Gemini AI gailuak kontrolatzeko, automatizazio-programak sortzeko eta widget-ak eraikitzeko HomeGenie-n. Aukeratu txat-menutik partekatzeko gaitasunak eta sistemaren testuingurua.\nSartu baliozko API gako bat funtzio hau gaitzeko. Lortu API gakoa hemen: https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI-ren API gakoa",
+      "ConfigureOptions.ModelId": "Modeloarearen IDa",
+      "ConfigureOptions.EnableDeepKnowledge": "Deep Knowledge aukera zaharkitua (bateragarritasunerako soilik)",
+      "ConfigureOptions.SystemInstructions": "Sistemaren argibideak"
+    },
+
     "932": {
       "Title": "Gemini Automan",
       "Description": "Zure Automatizazio Kudeatzaile Adimenduna. Bihurtu hizkuntza naturala lan-fluxu eragileetan: C# programak idazten, probatzen eta exekutatzen ditu denbora errealean edozein zeregin burutzeko. Funtzio hau aktibatzeko, sartu API gako baliodun bat. Jarraitu https://aistudio.google.com/app/apikey helbideko argibideei doako API gako bat lortzeko.",

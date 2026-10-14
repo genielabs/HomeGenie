@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Felvétel riasztáskor",
       "NVR.ContinuousRecording": "Folyamatos felvétel."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Használja a Google Gemini AI-t eszközök vezérlésére, automatizálási programok létrehozására és widgetek építésére a HomeGenie-ben. Válassza ki a megosztani kívánt funkciókat és rendszerkontextust a csevegés menüjében.\nA funkció engedélyezéséhez adjon meg egy érvényes API-kulcsot. Szerezzen API-kulcsot itt: https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API-kulcs",
+      "ConfigureOptions.ModelId": "Modellazonosító",
+      "ConfigureOptions.EnableDeepKnowledge": "Örökölt Deep Knowledge beállítás (csak kompatibilitás)",
+      "ConfigureOptions.SystemInstructions": "Rendszerutasítások"
+    },
+
     "932": {
       "Title": "Gemini Automan",
       "Description": "Az intelligens automatizáláskezelőd. Alakítsd át a természetes nyelvet ügynöki munkafolyamatokká: valós időben ír, tesztel és hajt végre C# programokat bármely adott feladat elvégzéséhez. A funkció aktiválásához adj meg egy érvényes API-kulcsot. Kövesd a https://aistudio.google.com/app/apikey oldalon található utasításokat egy ingyenes API-kulcs megszerzéséhez.",

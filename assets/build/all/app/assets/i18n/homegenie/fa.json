@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "ضبط در حالت هشدار",
       "NVR.ContinuousRecording": "ضبط مداوم."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "از Google Gemini AI برای کنترل دستگاه‌ها، ایجاد برنامه‌های خودکارسازی و ساخت ویجت‌ها در HomeGenie استفاده کنید. قابلیت‌ها و زمینه سیستمی مورد نظر برای اشتراک‌گذاری را از منوی چت انتخاب کنید.\nبرای فعال کردن این قابلیت، یک کلید API معتبر وارد کنید. کلید API را از https://aistudio.google.com/app/apikey دریافت کنید.",
+      "ConfigureOptions.ApiKey": "کلید API مربوط به Google Gemini AI",
+      "ConfigureOptions.ModelId": "شناسه مدل",
+      "ConfigureOptions.EnableDeepKnowledge": "گزینه قدیمی Deep Knowledge (فقط جهت سازگاری)",
+      "ConfigureOptions.SystemInstructions": "دستورالعمل‌های سیستم"
+    },
+
     "932": {
       "Title": "جمینی اتومن",
       "Description": "مدیر اتوماسیون هوشمند شما. زبان طبیعی را به گردش‌های کاری عامل‌محور تبدیل کنید: این برنامه، برنامه‌های C# را به صورت بلادرنگ می‌نویسد، آزمایش می‌کند و اجرا می‌کند تا هر وظیفه‌ای را انجام دهد. برای فعال کردن این ویژگی، یک کلید API معتبر وارد کنید. برای دریافت یک کلید API رایگان، دستورالعمل‌های https://aistudio.google.com/app/apikey را دنبال کنید.",

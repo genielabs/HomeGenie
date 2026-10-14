@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Qurilmani boshqarish",
   "ai_chat_capability_automation": "Dasturlarni yaratish va yangilash",
   "ai_chat_capability_widgets": "Vidjetlar yarating",
-  "ai_chat_capabilities_hint": "Yoqilgan imkoniyatlar AI qanday amallarni bajarishi mumkinligini aniqlaydi. Umumiy ma'lumotlar Kontekstda alohida tanlanadi. O'zgartirishlar kelajakdagi so'rovlarga tegishli."
+  "ai_chat_capabilities_hint": "Yoqilgan imkoniyatlar AI qanday amallarni bajarishi mumkinligini aniqlaydi. Umumiy ma'lumotlar Kontekstda alohida tanlanadi. O'zgartirishlar kelajakdagi so'rovlarga tegishli.",
+  "notification_active": "Faol bildirishnomalar",
+  "notification_archived": "Arxivlangan bildirishnomalar",
+  "notification_empty": "Bildirishnomalar yo‘q",
+  "notification_list": "Bildirishnomalar ro‘yxati",
+  "notification_archive": "Arxivlash",
+  "notification_restore": "Qayta tiklash",
+  "notification_action_check": "Qayta urinishdan oldin amal natijasini tekshiring.",
+  "notification_genie_upgrade": "Gemini Genie qurilmalarni boshqarish, avtomatlashtirish dasturlari va vidjetlarni o‘z ichiga oladi. Avvalgi Genie lar mavjud bo‘lib qoladi. Tayyor bo‘lganingizda ularni o‘chirib qo‘yishingiz mumkin; ularning sozlamalari va chatlar tarixi saqlanadi.",
+  "notification_disable_genies": "Avvalgi Genie larni o‘chirish",
+  "notification_disable_genies_confirm": "Ro‘yxatdagi avvalgi Genie lar o‘chirilsinmi? Ularning sozlamalari va chatlar tarixi saqlanadi. Istalgan vaqtda ularni qayta yoqishingiz mumkin."
 }

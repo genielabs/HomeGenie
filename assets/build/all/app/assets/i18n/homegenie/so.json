@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Ku duub Digniinta",
       "NVR.ContinuousRecording": "Duubista Joogtada ah."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "U isticmaal Google Gemini AI si aad u xakameyso qalabka, u sameyso barnaamijyada otomaatiga, una dhistid widgets-ka HomeGenie. Ka dooro awoodaha iyo macnaha guud ee nidaamka si aad ula wadaagto liiska sheekaysiga.\nGeli furaha API ee saxda ah si aad u shaqaysiiso qaabkan. Ka hel furaha API https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Furaha API ee Google Gemini AI",
+      "ConfigureOptions.ModelId": "Aqoonsiga Model-ka",
+      "ConfigureOptions.EnableDeepKnowledge": "Xulashada hore ee Deep Knowledge (waafaqid kaliya)",
+      "ConfigureOptions.SystemInstructions": "Tilmaamaha nidaamka"
+    },
+
     "932": {
       "Title": "Gemini Automan",
       "Description": "Maareeyahaaga otomaatiga ah ee caqliga badan. Luqadda dabiiciga ah u beddel shaqo-socod wakiil ah: waxay qortaa, tijaabisaa, oo fulisaa barnaamijyada C# waqtiga dhabta ah si ay u dhammaystirto hawl kasta oo la bixiyo. Si aad u hawlgeliso sifadan, geli furaha API ee ansax ah. Raac tilmaamaha ku yaal https://aistudio.google.com/app/apikey si aad u hesho furaha API ee bilaashka ah.",

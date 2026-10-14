@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Controlul dispozitivului",
   "ai_chat_capability_automation": "Creați și actualizați programe",
   "ai_chat_capability_widgets": "Creați widget-uri",
-  "ai_chat_capabilities_hint": "Capacitățile activate determină ce acțiuni poate efectua AI. Informațiile partajate sunt selectate separat în Context. Modificările se aplică solicitărilor viitoare."
+  "ai_chat_capabilities_hint": "Capacitățile activate determină ce acțiuni poate efectua AI. Informațiile partajate sunt selectate separat în Context. Modificările se aplică solicitărilor viitoare.",
+  "notification_active": "Notificări active",
+  "notification_archived": "Notificări arhivate",
+  "notification_empty": "Nicio notificare",
+  "notification_list": "Listă notificări",
+  "notification_archive": "Arhivează",
+  "notification_restore": "Restaurează",
+  "notification_action_check": "Verifică rezultatul acțiunii înainte de a reîncerca.",
+  "notification_genie_upgrade": "Gemini Genie include controlul dispozitivelor, programe de automatizare și widgeturi. Genies anteriori rămân disponibili. Îi poți dezactiva când ești gata; setările și istoricul conversațiilor vor fi păstrate.",
+  "notification_disable_genies": "Dezactivează Genies anteriori",
+  "notification_disable_genies_confirm": "Dezactivezi Genies anteriori listați? Setările și istoricul conversațiilor vor fi păstrate. Îi poți reactiva în orice moment."
 }

@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Kiểm soát thiết bị",
   "ai_chat_capability_automation": "Tạo và cập nhật chương trình",
   "ai_chat_capability_widgets": "Tạo tiện ích",
-  "ai_chat_capabilities_hint": "Các khả năng được kích hoạt sẽ xác định những hành động nào AI có thể thực hiện. Thông tin chia sẻ được chọn riêng trong Ngữ cảnh. Những thay đổi áp dụng cho các yêu cầu trong tương lai."
+  "ai_chat_capabilities_hint": "Các khả năng được kích hoạt sẽ xác định những hành động nào AI có thể thực hiện. Thông tin chia sẻ được chọn riêng trong Ngữ cảnh. Những thay đổi áp dụng cho các yêu cầu trong tương lai.",
+  "notification_active": "Thông báo đang hoạt động",
+  "notification_archived": "Thông báo đã lưu trữ",
+  "notification_empty": "Không có thông báo",
+  "notification_list": "Danh sách thông báo",
+  "notification_archive": "Lưu trữ",
+  "notification_restore": "Khôi phục",
+  "notification_action_check": "Kiểm tra kết quả thao tác trước khi thử lại.",
+  "notification_genie_upgrade": "Gemini Genie bao gồm tính năng điều khiển thiết bị, chương trình tự động hóa và tiện ích con. Các Genie trước đó vẫn khả dụng. Bạn có thể tắt chúng khi sẵn sàng; cài đặt và lịch sử trò chuyện của chúng sẽ được giữ lại.",
+  "notification_disable_genies": "Tắt các Genie trước đây",
+  "notification_disable_genies_confirm": "Tắt các Genie trước đây trong danh sách? Cài đặt và lịch sử trò chuyện của chúng sẽ được giữ lại. Bạn có thể bật lại chúng bất cứ lúc nào."
 }

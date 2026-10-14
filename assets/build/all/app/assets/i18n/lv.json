@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Ierīces vadība",
   "ai_chat_capability_automation": "Programmu izveide un atjaunināšana",
   "ai_chat_capability_widgets": "Izveidojiet logrīkus",
-  "ai_chat_capabilities_hint": "Iespējotās iespējas nosaka, kuras darbības AI var veikt. Kopīgotā informācija tiek atlasīta atsevišķi kontekstā. Izmaiņas attiecas uz turpmākajiem pieprasījumiem."
+  "ai_chat_capabilities_hint": "Iespējotās iespējas nosaka, kuras darbības AI var veikt. Kopīgotā informācija tiek atlasīta atsevišķi kontekstā. Izmaiņas attiecas uz turpmākajiem pieprasījumiem.",
+  "notification_active": "Aktīvie paziņojumi",
+  "notification_archived": "Arhivētie paziņojumi",
+  "notification_empty": "Nav paziņojumu",
+  "notification_list": "Paziņojumu saraksts",
+  "notification_archive": "Arhivēt",
+  "notification_restore": "Atjaunot",
+  "notification_action_check": "Pirms mēģināt vēlreiz, pārbaudiet darbības rezultātu.",
+  "notification_genie_upgrade": "Gemini Genie ietver ierīču vadību, automatizācijas programmas un logrīkus. Iepriekšējie Genie paliek pieejami. Varat tos atspējot, kad esat gatavs; to iestatījumi un tērzēšanas vēsture tiks saglabāta.",
+  "notification_disable_genies": "Atspējot iepriekšējos Genie",
+  "notification_disable_genies_confirm": "Vai atspējot norādītos iepriekšējos Genie? To iestatījumi un tērzēšanas vēsture tiks saglabāta. Varat tos atkal iespējot jebkurā laikā."
 }

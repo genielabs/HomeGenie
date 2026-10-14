@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "장치 제어",
   "ai_chat_capability_automation": "프로그램 생성 및 업데이트",
   "ai_chat_capability_widgets": "위젯 만들기",
-  "ai_chat_capabilities_hint": "활성화된 기능은 AI가 수행할 수 있는 작업을 결정합니다. 공유된 정보는 Context에서 별도로 선택됩니다. 변경사항은 향후 요청에 적용됩니다."
+  "ai_chat_capabilities_hint": "활성화된 기능은 AI가 수행할 수 있는 작업을 결정합니다. 공유된 정보는 Context에서 별도로 선택됩니다. 변경사항은 향후 요청에 적용됩니다.",
+  "notification_active": "활성 알림",
+  "notification_archived": "보관된 알림",
+  "notification_empty": "알림 없음",
+  "notification_list": "알림 목록",
+  "notification_archive": "보관",
+  "notification_restore": "복원",
+  "notification_action_check": "다시 시도하기 전에 작업 결과를 확인하세요.",
+  "notification_genie_upgrade": "Gemini Genie에는 기기 제어, 자동화 프로그램 및 위젯이 포함되어 있습니다. 이전 Genie도 계속 사용할 수 있습니다. 준비가 되면 비활성화할 수 있으며 설정 및 채팅 기록은 유지됩니다.",
+  "notification_disable_genies": "이전 Genie 비활성화",
+  "notification_disable_genies_confirm": "나열된 이전 Genie를 비활성화하시겠습니까? 설정 및 대화 기록은 유지됩니다. 언제든지 다시 활성화할 수 있습니다."
 }

@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "التسجيل عند الإنذار",
       "NVR.ContinuousRecording": "التسجيل المستمر."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "استخدم Google Gemini AI للتحكم في الأجهزة وإنشاء برامج التنفيذ الآلي وإنشاء عناصر واجهة المستخدم في HomeGenie. اختر الإمكانات وسياق النظام للمشاركة من قائمة الدردشة.\nأدخل مفتاح API صالحًا لتفعيل هذه الميزة. احصل على مفتاح API من https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "مفتاح API لـ Google Gemini AI",
+      "ConfigureOptions.ModelId": "معرّف الطراز",
+      "ConfigureOptions.EnableDeepKnowledge": "خيار Deep Knowledge القديم (للتوافق فقط)",
+      "ConfigureOptions.SystemInstructions": "تعليمات النظام"
+    },
+
     "932": {
       "Title": "جيميني أوتومان",
       "Description": "مدير الأتمتة الذكي الخاص بك. حوّل اللغة الطبيعية إلى سير عمل آلي: فهو يكتب ويختبر وينفذ برامج C# في الوقت الفعلي لإنجاز أي مهمة. لتفعيل هذه الميزة، أدخل مفتاح API صالحًا. اتبع التعليمات على https://aistudio.google.com/app/apikey للحصول على مفتاح API مجاني.",

@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Înregistrare la alarmă",
       "NVR.ContinuousRecording": "Înregistrare continuă."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Utilizați Google Gemini AI pentru a controla dispozitive, a crea programe de automatizare și a construi widgeturi în HomeGenie. Alegeți capabilitățile și contextul de sistem de partajat din meniul de chat.\nIntroduceți o cheie API validă pentru a activa această funcție. Obțineți o cheie API la https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Cheie API Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID model",
+      "ConfigureOptions.EnableDeepKnowledge": "Opțiune moștenită Deep Knowledge (doar pentru compatibilitate)",
+      "ConfigureOptions.SystemInstructions": "Instrucțiuni de sistem"
+    },
+
     "932": {
       "Title": "Gemeni Automan",
       "Description": "Managerul tău inteligent de automatizare. Transformă limbajul natural în fluxuri de lucru agențice: scrie, testează și execută programe C# în timp real pentru a finaliza orice sarcină dată. Pentru a activa această funcție, introdu o cheie API validă. Urmează instrucțiunile de la https://aistudio.google.com/app/apikey pentru a obține o cheie API gratuită.",

@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Kontrola cîhazê",
   "ai_chat_capability_automation": "Bernameyan çêbikin û nûve bikin",
   "ai_chat_capability_widgets": "Widgetan biafirînin",
-  "ai_chat_capabilities_hint": "Kapasîteyên çalak diyar dikin ku AI dikare kîjan çalakiyan bike. Agahdariya hevpar di Context de cuda tê hilbijartin. Guhertin ji bo daxwazên pêşerojê derbas dibin."
+  "ai_chat_capabilities_hint": "Kapasîteyên çalak diyar dikin ku AI dikare kîjan çalakiyan bike. Agahdariya hevpar di Context de cuda tê hilbijartin. Guhertin ji bo daxwazên pêşerojê derbas dibin.",
+  "notification_active": "Agahdarkirinên çalak",
+  "notification_archived": "Agahdarkirinên arşîvkirî",
+  "notification_empty": "Agahdarî tune",
+  "notification_list": "Lîsteya agahdarkirinan",
+  "notification_archive": "Arşîv bike",
+  "notification_restore": "Vegere",
+  "notification_action_check": "Beriya ku careke din biceribînî, encama çalakiyê kontrol bike.",
+  "notification_genie_upgrade": "Gemini Genie kontrola amûran, bernameyên otomasyonê û widgetan dihewîne. Genie-yên berê jî dimînin. Dema ku tu amade bûyî dikarî wan neçalak bikî; mîheng û dîroka sohbetên wan dê werin parastin.",
+  "notification_disable_genies": "Genie-yên berê neçalak bike",
+  "notification_disable_genies_confirm": "Genie-yên berê yên lîstekirî bên neçalakkirin? Mîheng û dîroka sohbetên wan dê werin parastin. Tu dikarî wan di her kêliyê de dîsa çalak bikî."
 }

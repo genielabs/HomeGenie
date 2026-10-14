@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Сабт дар ҳолати ҳушдор",
       "NVR.ContinuousRecording": "Сабти пайваста."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Google Gemini AI-ро барои идоракунии дастгоҳҳо, сохтани барномаҳои автоматикунонӣ ва виҷетҳо дар HomeGenie истифода баред. Имкониятҳо ва контексти системаро барои мубодила аз менюи чат интихоб кунед.\nБарои фаъол кардани ин хусусият калиди дурусти API-ро ворид кунед. Калиди API-ро дар https://aistudio.google.com/app/apikey дастрас кунед.",
+      "ConfigureOptions.ApiKey": "Калиди API-и Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID-и модел",
+      "ConfigureOptions.EnableDeepKnowledge": "Опсияи пешинаи Deep Knowledge (танҳо барои мутобиқат)",
+      "ConfigureOptions.SystemInstructions": "Дастурҳои системавӣ"
+    },
+
     "932": {
       "Title": "Gemini Automan",
       "Description": "Менеҷери автоматикунонии интеллектуалии шумо. Забони табииро ба ҷараёнҳои кории агентӣ табдил диҳед: он барномаҳои C#-ро дар вақти воқеӣ менависад, месанҷад ва иҷро мекунад, то ҳар як вазифаи додашударо иҷро кунад. Барои фаъол кардани ин хусусият, калиди дурусти API-ро ворид кунед. Барои гирифтани калиди ройгони API, дастурҳоро дар https://aistudio.google.com/app/apikey иҷро кунед.",

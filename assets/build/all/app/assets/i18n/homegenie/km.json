@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "ថតសំឡេងរោទិ៍",
       "NVR.ContinuousRecording": "ការថតជាបន្តបន្ទាប់។"
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "ប្រើ Google Gemini AI ដើម្បីបញ្ជាឧបករណ៍ បង្កើតកម្មវិធីស្វ័យប្រវត្តិកម្ម និងបង្កើតធាតុក្រាហ្វិកនៅក្នុង HomeGenie។ ជ្រើសរើសសមត្ថភាព និងបរិបទប្រព័ន្ធដើម្បីចែករំលែកពីម៉ឺនុយជជែក។\nបញ្ចូលសោ API ត្រឹមត្រូវដើម្បីបើកមុខងារនេះ។ ទទួលបានសោ API នៅ https://aistudio.google.com/app/apikey។",
+      "ConfigureOptions.ApiKey": "សោ API របស់ Google Gemini AI",
+      "ConfigureOptions.ModelId": "លេខសម្គាល់ម៉ូដែល",
+      "ConfigureOptions.EnableDeepKnowledge": "ជម្រើស Deep Knowledge ចាស់ (សម្រាប់តែភាពត្រូវគ្នាប៉ុណ្ណោះ)",
+      "ConfigureOptions.SystemInstructions": "សេចក្តីណែនាំប្រព័ន្ធ"
+    },
+
     "932": {
       "Title": "ជីមីនី អូតូមែន",
       "Description": "កម្មវិធីគ្រប់គ្រងស្វ័យប្រវត្តិកម្មឆ្លាតវៃរបស់អ្នក។ ប្រែក្លាយភាសាធម្មជាតិទៅជាលំហូរការងារភ្នាក់ងារ៖ វាសរសេរ សាកល្បង និងប្រតិបត្តិកម្មវិធី C# ក្នុងពេលវេលាជាក់ស្តែង ដើម្បីបញ្ចប់កិច្ចការដែលបានផ្តល់ឱ្យ។ ដើម្បីធ្វើឱ្យមុខងារនេះសកម្ម សូមបញ្ចូលសោ API ដែលត្រឹមត្រូវ។ អនុវត្តតាមការណែនាំនៅ https://aistudio.google.com/app/apikey ដើម្បីទទួលបានសោ API ឥតគិតថ្លៃ។",

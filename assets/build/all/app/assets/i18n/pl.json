@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Kontrola urządzenia",
   "ai_chat_capability_automation": "Twórz i aktualizuj programy",
   "ai_chat_capability_widgets": "Twórz widżety",
-  "ai_chat_capabilities_hint": "Włączone możliwości określają, jakie działania może wykonać sztuczna inteligencja. Udostępniane informacje są wybierane osobno w Kontekście. Zmiany dotyczą przyszłych żądań."
+  "ai_chat_capabilities_hint": "Włączone możliwości określają, jakie działania może wykonać sztuczna inteligencja. Udostępniane informacje są wybierane osobno w Kontekście. Zmiany dotyczą przyszłych żądań.",
+  "notification_active": "Aktywne powiadomienia",
+  "notification_archived": "Zarchiwizowane powiadomienia",
+  "notification_empty": "Brak powiadomień",
+  "notification_list": "Lista powiadomień",
+  "notification_archive": "Archiwizuj",
+  "notification_restore": "Przywróć",
+  "notification_action_check": "Sprawdź wynik działania przed ponowieniem próby.",
+  "notification_genie_upgrade": "Gemini Genie zawiera sterowanie urządzeniami, programy automatyzacji i widżety. Poprzednie Genies pozostają dostępne. Możesz je wyłączyć, gdy uznasz to za stosowne; ich ustawienia i historia czatu zostaną zachowane.",
+  "notification_disable_genies": "Wyłącz poprzednie Genies",
+  "notification_disable_genies_confirm": "Wyłączyć wymienione poprzednie Genies? Ich ustawienia i historia czatu zostaną zachowane. Możesz je włączyć ponownie w dowolnym momencie."
 }

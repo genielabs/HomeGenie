@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Nahrávání při alarmu",
       "NVR.ContinuousRecording": "Nepřetržité nahrávání."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Použijte Google Gemini AI k ovládání zařízení, vytváření automatizačních programů a tvorbě widgetů v HomeGenie. V nabídce chatu vyberte funkce a systémový kontext ke sdílení.\nPro aktivaci této funkce zadejte platný klíč API. Získejte klíč API na adrese https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Klíč API pro Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID modelu",
+      "ConfigureOptions.EnableDeepKnowledge": "Starší možnost Deep Knowledge (pouze pro kompatibilitu)",
+      "ConfigureOptions.SystemInstructions": "Systémové pokyny"
+    },
+
     "932": {
       "Title": "Blíženci Automan",
       "Description": "Váš chytrý správce automatizace. Proměňte přirozený jazyk v agentní pracovní postupy: píše, testuje a spouští programy v jazyce C# v reálném čase a dokončuje tak jakýkoli zadaný úkol. Chcete-li tuto funkci aktivovat, zadejte platný klíč API. Postupujte podle pokynů na adrese https://aistudio.google.com/app/apikey a získejte bezplatný klíč API.",

@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "अलार्म पर रिकॉर्ड करें",
       "NVR.ContinuousRecording": "निरंतर रिकॉर्डिंग।"
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "HomeGenie में डिवाइस नियंत्रित करने, ऑटोमेशन प्रोग्राम बनाने और विजेट बनाने के लिए Google Gemini AI का उपयोग करें। चैट मेनू से साझा करने के लिए क्षमताएं और सिस्टम संदर्भ चुनें।\nइस सुविधा को सक्षम करने के लिए एक मान्य API कुंजी दर्ज करें। https://aistudio.google.com/app/apikey पर API कुंजी प्राप्त करें।",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API कुंजी",
+      "ConfigureOptions.ModelId": "मॉडल ID",
+      "ConfigureOptions.EnableDeepKnowledge": "लीगेसी Deep Knowledge विकल्प (केवल संगतता के लिए)",
+      "ConfigureOptions.SystemInstructions": "सिस्टम निर्देश"
+    },
+
     "932": {
       "Title": "जेमिनी ऑटोमैन",
       "Description": "आपका स्मार्ट ऑटोमेशन मैनेजर। प्राकृतिक भाषा को सक्रिय वर्कफ़्लो में बदलें: यह किसी भी दिए गए कार्य को पूरा करने के लिए C# प्रोग्राम लिखता है, परीक्षण करता है और वास्तविक समय में निष्पादित करता है। इस सुविधा को सक्रिय करने के लिए, एक वैध API कुंजी दर्ज करें। मुफ़्त API कुंजी प्राप्त करने के लिए https://aistudio.google.com/app/apikey पर दिए गए निर्देशों का पालन करें।",

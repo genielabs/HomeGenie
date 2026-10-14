@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Ikon na'ura\nSaukewa:",
   "ai_chat_capability_automation": "Ƙirƙiri da sabunta shirye-shirye\nSaukewa:",
   "ai_chat_capability_widgets": "Ƙirƙiri widgets\nSaukewa:",
-  "ai_chat_capabilities_hint": "Ƙarfin da aka kunna yana ƙayyade ayyukan AI na iya yi. An zaɓi bayanin da aka raba daban a cikin Magana. Canje-canje ya shafi buƙatun gaba."
+  "ai_chat_capabilities_hint": "Ƙarfin da aka kunna yana ƙayyade ayyukan AI na iya yi. An zaɓi bayanin da aka raba daban a cikin Magana. Canje-canje ya shafi buƙatun gaba.",
+  "notification_active": "Sanarwa masu aiki",
+  "notification_archived": "Sanarwar da aka adana",
+  "notification_empty": "Babu sanarwa",
+  "notification_list": "Jerin sanarwa",
+  "notification_archive": "Adana",
+  "notification_restore": "Mayar",
+  "notification_action_check": "Duba sakamakon aikin kafin sake gwadawa.",
+  "notification_genie_upgrade": "Gemini Genie ya ƙunshi sarrafa na'ura, shirye-shiryen sarrafa kansa da widget. Tsoffin Genies za su ci gaba da kasancewa. Za ka iya kashe su a duk lokacin da ka shirya; za a adana saitunansu da tarihin taɗi.",
+  "notification_disable_genies": "Kashe tsoffin Genies",
+  "notification_disable_genies_confirm": "A kashe tsoffin Genies da aka lissafa? Za a adana saitunansu da tarihin taɗi. Za ka iya sake kunna su a kowane lokaci."
 }

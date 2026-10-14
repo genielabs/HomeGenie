@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Iṣakoso ẹrọ",
   "ai_chat_capability_automation": "Ṣẹda ati imudojuiwọn awọn eto",
   "ai_chat_capability_widgets": "Ṣẹda ẹrọ ailorukọ",
-  "ai_chat_capabilities_hint": "Awọn agbara ti a mu ṣiṣẹ pinnu iru awọn iṣe ti AI le ṣe. Alaye ti o pin ni a yan lọtọ ni Atokọ. Awọn iyipada kan si awọn ibeere iwaju."
+  "ai_chat_capabilities_hint": "Awọn agbara ti a mu ṣiṣẹ pinnu iru awọn iṣe ti AI le ṣe. Alaye ti o pin ni a yan lọtọ ni Atokọ. Awọn iyipada kan si awọn ibeere iwaju.",
+  "notification_active": "Àwọn ìfitilétí tó ń ṣiṣẹ́",
+  "notification_archived": "Àwọn ìfitilétí tí a fi pamọ́",
+  "notification_empty": "Kò sí ìfitilétí",
+  "notification_list": "Àkójọ ìfitilétí",
+  "notification_archive": "Fi pamọ́",
+  "notification_restore": "Mú padà",
+  "notification_action_check": "Yẹ àbájáde ìgbése náà wò kí o tó tún gbìyànjú.",
+  "notification_genie_upgrade": "Gemini Genie ní ìṣàkóso ẹ̀rọ, àwọn ètò iṣẹ́ aládàáṣe àti àwọn wídíjẹ́ẹ̀tì nínú. Àwọn Genie tẹ́lẹ̀ ṣì wà lárọ̀ọ́wọ́tó. O lè pa wọ́n tì nígbà tí o bá ṣe tán; a ó pa àwọn ètò àti ìtàn ìfọ̀rọ̀wérọ̀ wọn mọ́.",
+  "notification_disable_genies": "Pa àwọn Genie tẹ́lẹ̀ tì",
+  "notification_disable_genies_confirm": "Ṣé kí a pa àwọn Genie tẹ́lẹ̀ tí a tò sílẹ̀ tì? A ó pa àwọn ètò àti ìtàn ìfọ̀rọ̀wérọ̀ wọn mọ́. O lè tún mú wọn ṣiṣẹ́ nígbàkúgbà."
 }

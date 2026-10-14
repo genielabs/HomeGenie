@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Rekodi Kwenye Kengele",
       "NVR.ContinuousRecording": "Kurekodi Kuendelea."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Tumia Google Gemini AI kudhibiti vifaa, kuunda programu za kiotomatiki, na kuunda wijeti katika HomeGenie. Chagua uwezo na muktadha wa mfumo wa kushiriki kutoka kwenye menyu ya gumzo.\nWeka ufunguo halali wa API ili kuwezesha kipengele hiki. Pata ufunguo wa API kwenye https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Ufunguo wa API wa Google Gemini AI",
+      "ConfigureOptions.ModelId": "Kitambulisho cha Muundo",
+      "ConfigureOptions.EnableDeepKnowledge": "Chaguo la awali la Deep Knowledge (utangamano tu)",
+      "ConfigureOptions.SystemInstructions": "Maagizo ya mfumo"
+    },
+
     "932": {
       "Title": "Gemini Automan",
       "Description": "Meneja wako mahiri wa Otomatiki. Badilisha lugha asilia kuwa mtiririko wa kazi wa kiajenti: huandika, hujaribu, na kutekeleza programu za C# kwa wakati halisi ili kukamilisha kazi yoyote iliyotolewa. Ili kuamilisha kipengele hiki, weka kitufe halali cha API. Fuata maagizo katika https://aistudio.google.com/app/apikey ili kupata kitufe cha API bila malipo.",

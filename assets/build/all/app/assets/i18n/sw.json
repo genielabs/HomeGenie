@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Udhibiti wa kifaa",
   "ai_chat_capability_automation": "Unda na usasishe programu",
   "ai_chat_capability_widgets": "Unda vilivyoandikwa",
-  "ai_chat_capabilities_hint": "Uwezo uliowashwa huamua ni hatua zipi AI inaweza kufanya. Taarifa zilizoshirikiwa huchaguliwa tofauti katika Muktadha. Mabadiliko yatatumika kwa maombi yajayo."
+  "ai_chat_capabilities_hint": "Uwezo uliowashwa huamua ni hatua zipi AI inaweza kufanya. Taarifa zilizoshirikiwa huchaguliwa tofauti katika Muktadha. Mabadiliko yatatumika kwa maombi yajayo.",
+  "notification_active": "Arifa zinazotumika",
+  "notification_archived": "Arifa zilizohifadhiwa",
+  "notification_empty": "Hakuna arifa",
+  "notification_list": "Orodha ya arifa",
+  "notification_archive": "Hifadhi",
+  "notification_restore": "Rejesha",
+  "notification_action_check": "Kagua matokeo ya kitendo kabla ya kujaribu tena.",
+  "notification_genie_upgrade": "Gemini Genie inajumuisha udhibiti wa kifaa, programu za kiotomatiki na vidhibiti vidogo. Genies zilizopita bado zinapatikana. Unaweza kuzizima ukiwa tayari; mipangilio yake na historia ya gumzo zitahifadhiwa.",
+  "notification_disable_genies": "Zima Genies zilizopita",
+  "notification_disable_genies_confirm": "Je, unazima Genies zilizopita zilizoonyeshwa? Mipangilio yake na historia ya gumzo zitahifadhiwa. Unaweza kuziwezesha tena wakati wowote."
 }

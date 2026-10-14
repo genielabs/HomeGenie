@@ -537,7 +537,7 @@ public sealed class AiSkillCatalog
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.21</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>context-engine</Id>
       <Version>1.0.8</Version>
       <Required>true</Required>
@@ -1143,7 +1143,7 @@ public static class AiPromptTemplate
       <PackageVersion>1.0.20</PackageVersion>
       <Id>gemini-automan</Id>
       <Version>1.0.10</Version>
-      <Required>true</Required>
+      <Required>false</Required>
       <Checksum>5A1C3511A31652DC1527CA7A65DEA0A9</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -1155,7 +1155,7 @@ public static class AiPromptTemplate
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>false</Cloneable>
     <Type>csharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>// Path to the external markdown file for system instructions
@@ -1601,7 +1601,7 @@ public static class AiPromptTemplate
       <PackageVersion>1.0.20</PackageVersion>
       <Id>gemini-intent-handler</Id>
       <Version>1.0.22</Version>
-      <Required>true</Required>
+      <Required>false</Required>
       <Checksum>4F8910AF1D7EF451A64F12479EDBBFB1</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
@@ -1615,7 +1615,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>true</Cloneable>
     <Type>csharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>// Path to the external markdown file for system instructions
@@ -2280,7 +2280,7 @@ public static class WidgetContextRequest
             if (!(token is JObject dashboard) || dashboard["name"]?.Type != JTokenType.String || !(dashboard["widgets"] is JArray widgets) || widgets.Count &gt; 1000)
                 throw new InvalidOperationException("Invalid dashboard context.");
             output.Add(new JObject { ["name"] = dashboard["name"], ["widgets"] = JArray.FromObject(widgets.OfType&lt;JObject&gt;().Select(w =&gt; new {
-                componentId = w["componentId"], moduleId = w["module"]?["moduleId"], adapterId = w["module"]?["adapterId"]
+                componentId = w["componentId"], moduleId = (w["module"] as JObject)?["moduleId"], adapterId = (w["module"] as JObject)?["adapterId"]
             })) });
         }
         return output;
@@ -2323,9 +2323,9 @@ public static class AiPromptTemplate
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.20</PackageVersion>
       <Id>gemini-widget-genie</Id>
-      <Version>1.0.17</Version>
-      <Required>true</Required>
-      <Checksum>2902E240433862D24DAFB15D4E977C92</Checksum>
+      <Version>1.0.18</Version>
+      <Required>false</Required>
+      <Checksum>1A177758226BE322479F82BFFB1BF03F</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>931</Address>
@@ -2338,7 +2338,7 @@ Follow the instructions at https://aistudio.google.com/app/apikey to get a free 
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>false</Cloneable>
     <Type>csharp</Type>
-    <IsEnabled>true</IsEnabled>
+    <IsEnabled>false</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
     <ScriptSetup>Program
@@ -4229,7 +4229,7 @@ Func&lt;object, JToken&gt; contextToken = value =&gt; value is string text ? JTo
 Func&lt;JObject, JObject&gt; composeGeniePrompt = selected =&gt; {
     string template = File.ReadAllText(Path.Combine(Data.GetFolder(), "gemini_system_prompt.txt"));
     if (template.Contains("#use-skill homegenie-genie")) {
-        if ((bool)selected["automation"]) template += "\n#use-kb homegenie-core/references/automation.md";
+        if ((bool)selected["automation"]) template += "\n#use-kb homegenie-core/references/automation.md\n#use-skill homegenie-orchestration";
         if ((bool)selected["widgets"]) template += "\n#use-kb homegenie-core/references/widgets.md";
     }
     var composed = contextToken(Api.Call("System.Utility/ContextEngine/Prompt.Compose", new { version=1, template }));
@@ -4346,7 +4346,7 @@ Api.Handle(API_URL + "/Context.Preview", input =&gt; {
 // API HANDLER: Process a new user message
 // ===================================================================
 object geniePromptGate = new object();
-Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
+Func&lt;object, bool, object&gt; processGeniePrompt = (userCommand, scheduled) =&gt;
 {
     lock (geniePromptGate) {
     JObject scopedRequest = null;
@@ -4405,6 +4405,7 @@ Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
     try
     {
     string fullContext = preparedContext != null ? (string)preparedContext["systemPrompt"] : BuildContext();
+    if (scheduled) fullContext += "\nSCHEDULED AUTOMATION TASK: The user has already requested this program. Return kind=program with complete sources, not a confirmation question or a plan. Create only the program named in this task; do not schedule the same task recursively.";
     bool hasCache = preparedContext == null &amp;&amp; EnsureCache(fullContext);
     if (isQuotaExceeded) {
         return new ResponseText(telemetry.Error("**Quota Error:** Could not load the context. Please try again in a few minutes."));
@@ -4532,6 +4533,8 @@ Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
                     telemetry.SaveReply(ChatMessage.Create("model", reply), success ? "completed" : "error");
                     return new ResponseText(reply);
                 }
+                if (scheduled &amp;&amp; type != "program" &amp;&amp; type != "context")
+                    throw new InvalidOperationException("A scheduled task must create or update an automation program.");
                 if (type == "device") {
                     if (scopedRequest["context"]?["devices"]?.Value&lt;bool&gt;() != true)
                         throw new InvalidOperationException("Enable Devices context before controlling devices.");
@@ -4652,6 +4655,77 @@ Api.Handle($"{API_URL}/Prompt.Submit", (userCommand) =&gt;
         return new ResponseText(telemetry.Error($"**Error:** {ex.Message}"));
     }
     }
+};
+Api.Handle(API_URL + "/Prompt.Submit", input =&gt; processGeniePrompt(input, false));
+
+
+
+// Scheduled tasks are FIFO, bounded and scoped to this program lifetime.
+var scheduledQueue = new Queue&lt;JObject&gt;();
+var scheduledTasks = new Dictionary&lt;string, JObject&gt;();
+object scheduledGate = new object();
+Func&lt;object, string&gt; promptText = input =&gt; {
+    var parsed = Api.Parse(input);
+    object body = parsed?.Data ?? input;
+    if (body is byte[] bytes) body = Encoding.UTF8.GetString(bytes);
+    if (body is string text) return text;
+    var obj = body as JObject ?? JObject.FromObject(body);
+    return (string)obj["message"] ?? (string)obj["prompt"] ?? "";
+};
+Api.Handle(API_URL + "/Prompt.Schedule", input =&gt; {
+    try {
+        string message = promptText(input);
+        if (string.IsNullOrWhiteSpace(message) || Encoding.UTF8.GetByteCount(message) &gt; 65536)
+            throw new InvalidOperationException("Scheduled prompt is empty or too large.");
+        if (reconfigureRequired || !Program.IsRunning) throw new InvalidOperationException("Genie is restarting.");
+        var capabilities = GenieCapabilities.Normalize(storedChatSetting("AI.Chat.Capabilities"));
+        if (capabilities["automation"]?.Value&lt;bool&gt;() != true) throw new InvalidOperationException("Enable Automation capability first.");
+        string id = Guid.NewGuid().ToString("N");
+        lock (scheduledGate) {
+            if (scheduledQueue.Count &gt;= 32) throw new InvalidOperationException("Scheduled task queue is full.");
+            foreach (var key in scheduledTasks.Where(p =&gt; (string)p.Value["state"] == "completed" || (string)p.Value["state"] == "failed").Select(p =&gt; p.Key).Take(Math.Max(0, scheduledTasks.Count - 99)).ToArray()) scheduledTasks.Remove(key);
+            var task = new JObject { ["taskId"] = id, ["state"] = "queued", ["createdAt"] = DateTimeOffset.UtcNow.ToString("o"),
+                ["request"] = new JObject { ["version"] = 1, ["message"] = "[Scheduled Task]\n" + message,
+                    ["context"] = storedChatSetting("AI.Chat.Context") ?? new JObject(),
+                    ["capabilities"] = new JObject { ["automation"] = true, ["deviceControl"] = false, ["widgets"] = false } } };
+            scheduledTasks[id] = task; scheduledQueue.Enqueue(task);
+        }
+        Program.Emit("Genie.Task.Queued", id);
+        return (object)new JObject { ["Status"] = "Ok", ["taskId"] = id, ["state"] = "queued" };
+    } catch (Exception ex) { return new ResponseStatus(Status.Error, ex.Message); }
+});
+Api.Handle(API_URL + "/Task.Status", input =&gt; {
+    try {
+        string id = promptText(input);
+        lock (scheduledGate) {
+            if (!scheduledTasks.TryGetValue(id, out var task)) return (object)new ResponseStatus(Status.Error, "Unknown task; it may have expired or the Genie restarted.");
+            var summary = (JObject)task.DeepClone(); summary.Remove("request"); return summary;
+        }
+    } catch (Exception ex) { return new ResponseStatus(Status.Error, ex.Message); }
+});
+Api.Handle(API_URL + "/Prompt.Ask", input =&gt; {
+    try {
+        string message = promptText(input);
+        if (string.IsNullOrWhiteSpace(message) || Encoding.UTF8.GetByteCount(message) &gt; 262144) throw new InvalidOperationException("Text prompt is empty or too large.");
+        lock (geniePromptGate) {
+            using (var client = new System.Net.Http.HttpClient()) {
+                client.Timeout = TimeSpan.FromSeconds(180);
+                client.DefaultRequestHeaders.Add("x-goog-api-key", geminiApiKey);
+                string url = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent";
+                string json = JsonConvert.SerializeObject(new { contents = new[] { new { role = "user", parts = new[] { new { text = message } } } } });
+                using (var content = new System.Net.Http.StringContent(json, Encoding.UTF8, "application/json"))
+                using (var response = client.PostAsync(url, content).GetAwaiter().GetResult()) {
+                    if (!response.IsSuccessStatusCode) throw new InvalidOperationException("Gemini returned HTTP " + (int)response.StatusCode + ".");
+                    var data = JObject.Parse(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+                    var candidate = (data["candidates"] as JArray)?.FirstOrDefault() as JObject;
+                    var parts = (candidate?["content"] as JObject)?["parts"] as JArray;
+                    string text = parts == null ? "" : string.Concat(parts.OfType&lt;JObject&gt;().Where(p =&gt; p["thought"]?.Value&lt;bool&gt;() != true &amp;&amp; p["text"]?.Type == JTokenType.String).Select(p =&gt; (string)p["text"]));
+                    if ((string)candidate?["finishReason"] != "STOP" || string.IsNullOrWhiteSpace(text)) throw new InvalidOperationException("Text completion is empty or incomplete.");
+                    return (object)text;
+                }
+            }
+        }
+    } catch (Exception ex) { return new ResponseStatus(Status.Error, ex.Message); }
 });
 
 // APIs for Chat History
@@ -4661,7 +4735,85 @@ Api.Handle($"{API_URL}/{API_HISTORY_REMOVE_AT}", (i) =&gt; Api.Call("System.Util
 Api.Handle($"{API_URL}/{API_HISTORY_EXPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Export", new { StoreId = storeId }));
 Api.Handle($"{API_URL}/{API_HISTORY_IMPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Import", new { StoreId = storeId, Data = (p as dynamic).Data }));
 
-while (Program.IsRunning &amp;&amp; !reconfigureRequired) { Pause(1); }
+// Previous Genies remain available; retirement is an explicit user action.
+var legacyGenieIds = new Dictionary&lt;int,string&gt;{{930,"gemini-intent-handler"},{931,"gemini-widget-genie"},{932,"gemini-automan"}};
+Func&lt;JArray&gt; legacyGenies = () =&gt; {
+    var all=JArray.FromObject(Api.Call("HomeAutomation.HomeGenie/Automation/Programs.List"));
+    return new JArray(all.OfType&lt;JObject&gt;().Where(p=&gt;legacyGenieIds.ContainsKey((int)p["Address"])
+        &amp;&amp; (string)p["PackageInfo"]?["id"]==legacyGenieIds[(int)p["Address"]])
+        .Select(p=&gt;new JObject{["id"]=p["Address"],["name"]=p["Name"],["enabled"]=p["IsEnabled"]}));
+};
+Action publishLegacyNotice = () =&gt; {
+    if(geminiApiKey.Length!=39 || !geminiApiKey.StartsWith("AIzaSy") || string.IsNullOrWhiteSpace(geminiModelId))return;
+    var enabled=new JArray(legacyGenies().OfType&lt;JObject&gt;().Where(p=&gt;p["enabled"]?.Value&lt;bool&gt;()==true));
+    if(enabled.Count==0)return;
+    var note=new JObject{["Version"]=1,["Persistent"]=true,["Id"]="gemini-genie-upgrade",["Title"]="Gemini Genie",
+        ["Message"]="Gemini Genie includes device control, automation programs and widgets. Previous Genies remain available. You can disable them when you are ready; their settings and chat histories will be kept.",
+        ["MessageKey"]="notification_genie_upgrade",["Severity"]="info",
+        ["Details"]=string.Join("\n",enabled.OfType&lt;JObject&gt;().Select(p=&gt;(string)p["id"]+" — "+(string)p["name"])),
+        ["Actions"]=new JArray(new JObject{["Id"]="disable-legacy",["Label"]="Disable previous Genies",["LabelKey"]="notification_disable_genies",["Type"]="api",["Method"]="POST",
+            ["Endpoint"]=API_URL+"/Legacy.Disable",["Idempotent"]=true,["Body"]=new JObject{["ProgramIds"]=new JArray(enabled.Select(p=&gt;p["id"]))},
+            ["Confirmation"]="Disable the listed previous Genies? Their settings and chat histories will be kept. You can enable them again at any time.",["ConfirmationKey"]="notification_disable_genies_confirm"})};
+    Program.Notify("Gemini Genie",note.ToString(Formatting.None));
+};
+Api.Handle(API_URL+"/Legacy.Status", input=&gt;legacyGenies());
+Api.Handle(API_URL+"/Legacy.Disable", input=&gt;{
+    try {
+        if(geminiApiKey.Length!=39||!geminiApiKey.StartsWith("AIzaSy")||string.IsNullOrWhiteSpace(geminiModelId))throw new InvalidOperationException("Configure Gemini Genie before disabling previous Genies.");
+        var request=Api.Parse(input);var data=request?.Data;
+        var body=data is byte[] bytes?JObject.Parse(Encoding.UTF8.GetString(bytes)):data is string text?JObject.Parse(text):JObject.FromObject(data??new{});
+        var ids=body["ProgramIds"] as JArray;if(ids==null||ids.Count==0||ids.Count&gt;3||ids.Any(id=&gt;id.Type!=JTokenType.Integer||!legacyGenieIds.ContainsKey((int)id)))throw new InvalidOperationException("Expected only known previous Genie IDs.");
+        var current=legacyGenies();var results=new JArray();
+        foreach(int id in ids.Values&lt;int&gt;().Distinct()) {
+            var old=current.OfType&lt;JObject&gt;().FirstOrDefault(p=&gt;(int)p["id"]==id);
+            if(old==null){results.Add(new JObject{["id"]=id,["state"]="not-present"});continue;}
+            if(old["enabled"]?.Value&lt;bool&gt;()!=true){results.Add(new JObject{["id"]=id,["state"]="already-disabled"});continue;}
+            try{Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Disable/"+id);var after=legacyGenies().OfType&lt;JObject&gt;().FirstOrDefault(p=&gt;(int)p["id"]==id);
+                if(after?["enabled"]?.Value&lt;bool&gt;()==true)throw new InvalidOperationException("Program is still enabled.");
+                results.Add(new JObject{["id"]=id,["state"]="disabled"});}
+            catch(Exception e){results.Add(new JObject{["id"]=id,["state"]="failed",["error"]=e.Message});}
+        }
+        bool failed=results.Any(p=&gt;(string)p["state"]=="failed");
+        Program.Emit("AI.Genie.LegacyMigration",new JObject{["updatedAt"]=DateTime.UtcNow.ToString("O"),["results"]=results}.ToString(Formatting.None));
+        return new JObject{["Status"]=failed?"Error":"Ok",["Message"]=failed?"Some previous Genies could not be disabled. Check the result and retry.":"Previous Genies disabled. Settings and chat histories were preserved.",["results"]=results};
+    }catch(Exception e){return new ResponseStatus(Status.Error,e.Message);}
+});
+try{publishLegacyNotice();}catch(Exception e){Program.Log.Error("Gemini upgrade notification: "+e.Message);}
+
+while (Program.IsRunning &amp;&amp; !reconfigureRequired) {
+    JObject task = null;
+    lock (scheduledGate) {
+        if (scheduledQueue.Count &gt; 0) {
+            task = scheduledQueue.Dequeue(); task["state"] = "running";
+        }
+    }
+    if (task != null) {
+        string id = (string)task["taskId"];
+        Program.Emit("Genie.Task.Running", id);
+        try {
+            if (GenieCapabilities.Normalize(storedChatSetting("AI.Chat.Capabilities"))["automation"]?.Value&lt;bool&gt;() != true)
+                throw new InvalidOperationException("Automation capability was disabled before execution.");
+            object result = processGeniePrompt(task["request"], true);
+            var response = JObject.FromObject(result);
+            string text = (string)response["ResponseValue"] ?? (string)response["Message"] ?? "";
+            JObject deployment = null;
+            try { deployment = JObject.Parse(text)["automan_deploy"] as JObject; } catch (Newtonsoft.Json.JsonException) { }
+            lock (scheduledGate) {
+                bool success = (string)deployment?["status"] == "success";
+                task["state"] = success ? "completed" : "failed";
+                task["programId"] = deployment?["program_id"];
+                task["message"] = success ? "Program deployed." : text.Substring(0, Math.Min(text.Length, 4096));
+                task.Remove("request");
+                task["completedAt"] = DateTimeOffset.UtcNow.ToString("o");
+            }
+        } catch (Exception ex) {
+            lock (scheduledGate) { task["state"] = "failed"; task["message"] = ex.Message; task.Remove("request"); }
+        }
+        Program.Emit("Genie.Task.Result", new JObject { ["taskId"] = id, ["state"] = task["state"], ["programId"] = task["programId"] }.ToString(Formatting.None));
+        Program.Emit("Widget.Refresh", "1");
+    }
+    Pause(1);
+}
 </ScriptSource>
     <ScriptContext>const string API_HISTORY_GET = "History.Get";
 const string API_HISTORY_CLEAR = "History.Clear";
@@ -4832,7 +4984,7 @@ public static class WidgetContextRequest
             if (!(token is JObject dashboard) || dashboard["name"]?.Type != JTokenType.String || !(dashboard["widgets"] is JArray widgets) || widgets.Count &gt; 1000)
                 throw new InvalidOperationException("Invalid dashboard context.");
             output.Add(new JObject { ["name"] = dashboard["name"], ["widgets"] = JArray.FromObject(widgets.OfType&lt;JObject&gt;().Select(w =&gt; new {
-                componentId = w["componentId"], moduleId = w["module"]?["moduleId"], adapterId = w["module"]?["adapterId"]
+                componentId = w["componentId"], moduleId = (w["module"] as JObject)?["moduleId"], adapterId = (w["module"] as JObject)?["adapterId"]
             })) });
         }
         return output;
@@ -5049,11 +5201,11 @@ public static class GenieCapabilities
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.21</PackageVersion>
+      <PackageVersion>1.0.23</PackageVersion>
       <Id>gemini-genie</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>3679697D41AF3A96BB97A3C53B736CC5</Checksum>
+      <Checksum>666BAC01C8DEA990C5B457D1277B320F</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>933</Address>

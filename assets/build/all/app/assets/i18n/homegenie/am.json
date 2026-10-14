@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "ማንቂያ ላይ ቅዳ",
       "NVR.ContinuousRecording": "ቀጣይነት ያለው ቀረጻ።"
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "በHomeGenie ውስጥ መሣሪያዎችን ለመቆጣጠር፣ የአውቶሜሽን ፕሮግራሞችን ለመፍጠር እና መግብሮችን ለመገንባት Google Gemini AIን ይጠቀሙ። ከውይይት ምናሌው ውስጥ የሚያጋሯቸውን ችሎታዎች እና የስርዓት አውድ ይምረጡ።\nይህን ባህሪ ለማንቃት ትክክለኛ የኤፒአይ ቁልፍ ያስገቡ። የኤፒአይ ቁልፍ በ https://aistudio.google.com/app/apikey ያግኙ።",
+      "ConfigureOptions.ApiKey": "የGoogle Gemini AI ኤፒአይ ቁልፍ",
+      "ConfigureOptions.ModelId": "የሞዴል መታወቂያ",
+      "ConfigureOptions.EnableDeepKnowledge": "የቆየ Deep Knowledge አማራጭ (ለተኳኋኝነት ብቻ)",
+      "ConfigureOptions.SystemInstructions": "የስርዓት መመሪያዎች"
+    },
+
     "932": {
       "Title": "ጀሚኒ አውቶማን",
       "Description": "የእርስዎ ብልጥ አውቶሜሽን አስተዳዳሪ። ተፈጥሯዊ ቋንቋን ወደ ወኪል የስራ ፍሰቶች ይቀይሩት፡ ማንኛውንም የተሰጠ ተግባር ለማጠናቀቅ የC# ፕሮግራሞችን በእውነተኛ ጊዜ ይጽፋል፣ ይፈትሻል እና ያስፈጽማል። ይህንን ባህሪ ለማግበር ትክክለኛ የኤፒአይ ቁልፍ ያስገቡ። ነፃ የኤፒአይ ቁልፍ ለማግኘት በ https://aistudio.google.com/app/apikey ላይ ያሉትን መመሪያዎች ይከተሉ።",

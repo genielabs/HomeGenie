@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "د وسیلې کنټرول",
   "ai_chat_capability_automation": "پروګرامونه جوړ او تازه کړئ",
   "ai_chat_capability_widgets": "ویجټونه جوړ کړئ",
-  "ai_chat_capabilities_hint": "فعال شوي وړتیاوې مشخصوي چې کوم عملونه AI ترسره کولی شي. شریک شوي معلومات په جلا توګه په شرایطو کې غوره شوي. بدلونونه په راتلونکو غوښتنو کې پلي کیږي."
+  "ai_chat_capabilities_hint": "فعال شوي وړتیاوې مشخصوي چې کوم عملونه AI ترسره کولی شي. شریک شوي معلومات په جلا توګه په شرایطو کې غوره شوي. بدلونونه په راتلونکو غوښتنو کې پلي کیږي.",
+  "notification_active": "فعال خبرتیاوې",
+  "notification_archived": "ارشيف شوې خبرتیاوې",
+  "notification_empty": "هیڅ خبرتیا نشته",
+  "notification_list": "د خبرتیاوو لړلیک",
+  "notification_archive": "ارشيف کول",
+  "notification_restore": "بېرته راګرځول",
+  "notification_action_check": "مخکې له دې چې بیا هڅه وکړئ، د عمل پایله وګورئ.",
+  "notification_genie_upgrade": "Gemini Genie کې د وسیلې کنټرول، د اتومات کولو پروګرامونه او ویجټونه شامل دي. پخواني Genies به لا هم شتون ولري. تاسو کولی شئ کله چې چمتو یاست هغوی غیر فعال کړئ؛ د هغوی تنظیمات او د چټ تاریخچه به وساتل شي.",
+  "notification_disable_genies": "پخواني Genies غیر فعال کړئ",
+  "notification_disable_genies_confirm": "ایا لست شوي پخواني Genies غیر فعال شي؟ د هغوی تنظیمات او د چټ تاریخچه به وساتل شي. تاسو کولی شئ هر وخت هغوی بیا فعال کړئ."
 }

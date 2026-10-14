@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Tuhia i te Whakaoho",
       "NVR.ContinuousRecording": "Te Tuhi Tonu."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Whakamahia a Google Gemini AI hei whakahaere pūrere, hei hanga hōtaka aunoatanga, ā, hei waihanga widget hoki ki HomeGenie. Kōwhiria ngā āheinga me te horopaki pūnaha hei tuari mai i te tahua kōrerorero.\nWhakaurua tētahi kī API whaimana hei whakahohe i tēnei āhuatanga. Tikina he kī API i https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Kī API Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID Tauira",
+      "ConfigureOptions.EnableDeepKnowledge": "Kōwhiringa Deep Knowledge tawhito (mō te hototahitanga anake)",
+      "ConfigureOptions.SystemInstructions": "Tohutohu pūnaha"
+    },
+
     "932": {
       "Title": "Gemini Automan",
       "Description": "Tō Kaiwhakahaere Aunoatanga atamai. Hurihia te reo tūturu hei rerengamahi ā-ringa: ka tuhi, ka whakamātautau, ka whakahaere hoki i ngā kaupapa C# i te wā tūturu hei whakaoti i tētahi mahi. Hei whakahohe i tēnei āhuatanga, whakaurua he kī API tika. Whāia ngā tohutohu i https://aistudio.google.com/app/apikey hei tiki i tētahi kī API kore utu.",

@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "ઉપકરણ નિયંત્રણ",
   "ai_chat_capability_automation": "પ્રોગ્રામ્સ બનાવો અને અપડેટ કરો",
   "ai_chat_capability_widgets": "વિજેટ્સ બનાવો",
-  "ai_chat_capabilities_hint": "સક્ષમ ક્ષમતાઓ એ નક્કી કરે છે કે AI કઈ ક્રિયાઓ કરી શકે છે. શેર કરેલી માહિતી સંદર્ભમાં અલગથી પસંદ કરવામાં આવી છે. ફેરફારો ભવિષ્યની વિનંતીઓ પર લાગુ થાય છે."
+  "ai_chat_capabilities_hint": "સક્ષમ ક્ષમતાઓ એ નક્કી કરે છે કે AI કઈ ક્રિયાઓ કરી શકે છે. શેર કરેલી માહિતી સંદર્ભમાં અલગથી પસંદ કરવામાં આવી છે. ફેરફારો ભવિષ્યની વિનંતીઓ પર લાગુ થાય છે.",
+  "notification_active": "સક્રિય સૂચનાઓ",
+  "notification_archived": "આર્કાઇવ કરેલી સૂચનાઓ",
+  "notification_empty": "કોઈ સૂચના નથી",
+  "notification_list": "સૂચના સૂચિ",
+  "notification_archive": "આર્કાઇવ કરો",
+  "notification_restore": "પુનઃસ્થાપિત કરો",
+  "notification_action_check": "ફરી પ્રયાસ કરતા પહેલા ક્રિયાનું પરિણામ તપાસો.",
+  "notification_genie_upgrade": "Gemini Genie માં ડિવાઇસ નિયંત્રણ, ઑટોમેશન પ્રોગ્રામ અને વિજેટ્સ શામેલ છે. અગાઉના Genies ઉપલબ્ધ રહેશે. જ્યારે તમે તૈયાર હોવ ત્યારે તેમને અક્ષમ કરી શકો છો; તેમના સેટિંગ્સ અને ચેટ ઇતિહાસ સાચવવામાં આવશે.",
+  "notification_disable_genies": "અગાઉના Genies અક્ષમ કરો",
+  "notification_disable_genies_confirm": "શું સૂચિબદ્ધ અગાઉના Genies અક્ષમ કરવા છે? તેમના સેટિંગ્સ અને ચેટ ઇતિહાસ સાચવવામાં આવશે. તમે તેમને કોઈપણ સમયે ફરીથી સક્ષમ કરી શકો છો."
 }

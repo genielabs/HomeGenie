@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Kawalan peranti",
   "ai_chat_capability_automation": "Buat dan kemas kini program",
   "ai_chat_capability_widgets": "Buat widget",
-  "ai_chat_capabilities_hint": "Keupayaan yang didayakan menentukan tindakan yang boleh dilakukan oleh AI. Maklumat yang dikongsi dipilih secara berasingan dalam Konteks. Perubahan dikenakan pada permintaan masa hadapan."
+  "ai_chat_capabilities_hint": "Keupayaan yang didayakan menentukan tindakan yang boleh dilakukan oleh AI. Maklumat yang dikongsi dipilih secara berasingan dalam Konteks. Perubahan dikenakan pada permintaan masa hadapan.",
+  "notification_active": "Pemberitahuan aktif",
+  "notification_archived": "Pemberitahuan diarkibkan",
+  "notification_empty": "Tiada pemberitahuan",
+  "notification_list": "Senarai pemberitahuan",
+  "notification_archive": "Arkib",
+  "notification_restore": "Pulihkan",
+  "notification_action_check": "Semak hasil tindakan sebelum mencuba lagi.",
+  "notification_genie_upgrade": "Gemini Genie merangkumi kawalan peranti, program automasi dan widget. Genie terdahulu kekal tersedia. Anda boleh menyahdayakannya apabila sudah bersedia; tetapan dan sejarah sembang akan dikekalkan.",
+  "notification_disable_genies": "Nyahdayakan Genie terdahulu",
+  "notification_disable_genies_confirm": "Nyahdayakan Genie terdahulu yang disenaraikan? Tetapan dan sejarah sembang akan disimpan. Anda boleh mendayakannya semula pada bila-bila masa."
 }

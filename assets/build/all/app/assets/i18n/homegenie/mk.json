@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Снимај на аларм",
       "NVR.ContinuousRecording": "Континуирано снимање."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Користете Google Gemini AI за контрола на уреди, креирање програми за автоматизација и градење виџети во HomeGenie. Изберете ги можностите и системскиот контекст за споделување од менито за разговор.\nВнесете валиден API клуч за да ја овозможите оваа функција. Земете API клуч на https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API клуч",
+      "ConfigureOptions.ModelId": "ID на модел",
+      "ConfigureOptions.EnableDeepKnowledge": "Застарена опција Deep Knowledge (само за компатибилност)",
+      "ConfigureOptions.SystemInstructions": "Системски упатства"
+    },
+
     "932": {
       "Title": "Близнаци Автомен",
       "Description": "Вашиот паметен менаџер за автоматизација. Претворете го природниот јазик во агентски работни процеси: тој пишува, тестира и извршува C# програми во реално време за да заврши која било задача. За да ја активирате оваа функција, внесете важечки API клуч. Следете ги упатствата на https://aistudio.google.com/app/apikey за да добиете бесплатен API клуч.",

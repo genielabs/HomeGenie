@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Cihaz kontrolü",
   "ai_chat_capability_automation": "Program oluşturma ve güncelleme",
   "ai_chat_capability_widgets": "Widget'lar oluşturun",
-  "ai_chat_capabilities_hint": "Etkinleştirilen yetenekler, yapay zekanın hangi eylemleri gerçekleştirebileceğini belirler. Paylaşılan bilgiler Bağlam'da ayrı olarak seçilir. Değişiklikler gelecekteki istekler için geçerlidir."
+  "ai_chat_capabilities_hint": "Etkinleştirilen yetenekler, yapay zekanın hangi eylemleri gerçekleştirebileceğini belirler. Paylaşılan bilgiler Bağlam'da ayrı olarak seçilir. Değişiklikler gelecekteki istekler için geçerlidir.",
+  "notification_active": "Etkin bildirimler",
+  "notification_archived": "Arşivlenmiş bildirimler",
+  "notification_empty": "Bildirim yok",
+  "notification_list": "Bildirim listesi",
+  "notification_archive": "Arşivle",
+  "notification_restore": "Geri yükle",
+  "notification_action_check": "Tekrar denemeden önce işlem sonucunu kontrol edin.",
+  "notification_genie_upgrade": "Gemini Genie; cihaz kontrolü, otomasyon programları ve widget'lar içerir. Önceki Genie'ler kullanılabilir durumda kalır. Hazır olduğunuzda bunları devre dışı bırakabilirsiniz; ayarları ve sohbet geçmişleri korunacaktır.",
+  "notification_disable_genies": "Önceki Genie'leri devre dışı bırak",
+  "notification_disable_genies_confirm": "Listelenen önceki Genie'ler devre dışı bırakılsın mı? Ayarları ve sohbet geçmişleri korunacaktır. İstediğiniz zaman bunları tekrar etkinleştirebilirsiniz."
 }

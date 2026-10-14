@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Kontrol perangkat",
   "ai_chat_capability_automation": "Membuat dan memperbarui program",
   "ai_chat_capability_widgets": "Buat widget",
-  "ai_chat_capabilities_hint": "Kemampuan yang diaktifkan menentukan tindakan apa yang dapat dilakukan AI. Informasi yang dibagikan dipilih secara terpisah dalam Konteks. Perubahan berlaku untuk permintaan di masa mendatang."
+  "ai_chat_capabilities_hint": "Kemampuan yang diaktifkan menentukan tindakan apa yang dapat dilakukan AI. Informasi yang dibagikan dipilih secara terpisah dalam Konteks. Perubahan berlaku untuk permintaan di masa mendatang.",
+  "notification_active": "Notifikasi aktif",
+  "notification_archived": "Notifikasi diarsipkan",
+  "notification_empty": "Tidak ada notifikasi",
+  "notification_list": "Daftar notifikasi",
+  "notification_archive": "Arsipkan",
+  "notification_restore": "Pulihkan",
+  "notification_action_check": "Periksa hasil tindakan sebelum mencoba lagi.",
+  "notification_genie_upgrade": "Gemini Genie menyertakan kontrol perangkat, program otomatisasi, dan widget. Genie sebelumnya tetap tersedia. Anda dapat menonaktifkannya kapan saja; pengaturan dan riwayat obrolannya akan tetap disimpan.",
+  "notification_disable_genies": "Nonaktifkan Genie sebelumnya",
+  "notification_disable_genies_confirm": "Nonaktifkan Genie sebelumnya yang tercantum? Pengaturan dan riwayat obrolannya akan disimpan. Anda dapat mengaktifkannya kembali kapan saja."
 }

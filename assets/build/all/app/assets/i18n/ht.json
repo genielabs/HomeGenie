@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Kontwòl aparèy",
   "ai_chat_capability_automation": "Kreye ak mete ajou pwogram yo",
   "ai_chat_capability_widgets": "Kreye widgets",
-  "ai_chat_capabilities_hint": "Kapasite ki pèmèt yo detèmine ki aksyon AI a ka fè. Enfòmasyon pataje yo chwazi separeman nan Kontèks. Chanjman aplike pou demann nan lavni."
+  "ai_chat_capabilities_hint": "Kapasite ki pèmèt yo detèmine ki aksyon AI a ka fè. Enfòmasyon pataje yo chwazi separeman nan Kontèks. Chanjman aplike pou demann nan lavni.",
+  "notification_active": "Notifikasyon aktif",
+  "notification_archived": "Notifikasyon achive",
+  "notification_empty": "Pa gen notifikasyon",
+  "notification_list": "Lis notifikasyon",
+  "notification_archive": "Achive",
+  "notification_restore": "Retabli",
+  "notification_action_check": "Verifye rezilta aksyon an anvan ou reeseye.",
+  "notification_genie_upgrade": "Gemini Genie gen ladan kontwòl aparèy, pwogram otomatizasyon ak widje. Ansyen Genies yo ap rete disponib. Ou ka dezaktive yo lè ou pare; paramèt ak istwa chat yo ap konsève.",
+  "notification_disable_genies": "Dezaktive ansyen Genies yo",
+  "notification_disable_genies_confirm": "Èske ou vle dezaktive ansyen Genies ki nan lis la? Paramèt ak istwa chat yo ap konsève. Ou ka reaktive yo nenpòt lè."
 }

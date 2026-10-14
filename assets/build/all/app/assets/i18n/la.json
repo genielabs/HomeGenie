@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Fabrica imperium",
   "ai_chat_capability_automation": "Create and update programs",
   "ai_chat_capability_widgets": "Create content",
-  "ai_chat_capabilities_hint": "Facultates applicatae utrasque actiones AI efficere possint. Informationes communes seorsim in Contextu seliguntur. Mutationes ad futuras petitiones applicant."
+  "ai_chat_capabilities_hint": "Facultates applicatae utrasque actiones AI efficere possint. Informationes communes seorsim in Contextu seliguntur. Mutationes ad futuras petitiones applicant.",
+  "notification_active": "Notificationes activae",
+  "notification_archived": "Notificationes archivatae",
+  "notification_empty": "Nullae notificationes",
+  "notification_list": "Index notificationum",
+  "notification_archive": "In archivum redigere",
+  "notification_restore": "Restituere",
+  "notification_action_check": "Eventum actionis inspice antequam iterum coneris.",
+  "notification_genie_upgrade": "Gemini Genie moderationem instrumentorum, programmata automataria et instrumenta parva continet. Priora Genies adhuc praesto sunt. Ea deactivate potes cum paratus eris; optiones et colloquiorum historia conservabuntur.",
+  "notification_disable_genies": "Priora Genies deactivare",
+  "notification_disable_genies_confirm": "Priora Genies in indice deactivare? Optiones et colloquiorum historia conservabuntur. Ea quovis tempore iterum activare potes."
 }

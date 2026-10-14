@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Fanaraha-maso ny fitaovana\nSary",
   "ai_chat_capability_automation": "Mamorona sy manavao programa\nSary",
   "ai_chat_capability_widgets": "Mamorona widgets\nSary",
-  "ai_chat_capabilities_hint": "Ny fahaiza-manao azo ampiasaina dia mamaritra izay hetsika azon'ny AI atao. Ny fampahafantarana zaraina dia voafantina misaraka amin'ny Context. Mihatra amin'ny fangatahana ho avy ny fanovana."
+  "ai_chat_capabilities_hint": "Ny fahaiza-manao azo ampiasaina dia mamaritra izay hetsika azon'ny AI atao. Ny fampahafantarana zaraina dia voafantina misaraka amin'ny Context. Mihatra amin'ny fangatahana ho avy ny fanovana.",
+  "notification_active": "Fampahafantarana mavitrika",
+  "notification_archived": "Fampahafantarana voatahiry",
+  "notification_empty": "Tsy misy fampahafantarana",
+  "notification_list": "Lisitry ny fampahafantarana",
+  "notification_archive": "Tahirizo",
+  "notification_restore": "Avereno",
+  "notification_action_check": "Hamarino ny vokatry ny hetsika alohan'ny hanandramana indray.",
+  "notification_genie_upgrade": "Ahitana fifehezana fitaovana, fandaharan'asa mandeha hoazy, ary widget ny Gemini Genie. Mbola azo ampiasaina ireo Genie teo aloha. Azonao atao ny manafoana azy ireo rehefa vonona ianao; hotehirizina ny lamina sy ny tantaran'ny resaka.",
+  "notification_disable_genies": "Atsaharo ireo Genie teo aloha",
+  "notification_disable_genies_confirm": "Atsaharo ireo Genie teo aloha voatanisa? Hotehirizina ny fampidirana sy ny tantaran'ny resaka. Azonao atao ny mamerina mampandeha azy ireo amin'ny fotoana rehetra."
 }

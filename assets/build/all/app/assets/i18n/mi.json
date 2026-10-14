@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Te mana o te taputapu",
   "ai_chat_capability_automation": "Waihanga me te whakahou i nga kaupapa",
   "ai_chat_capability_widgets": "Waihanga widget",
-  "ai_chat_capabilities_hint": "Ko nga kaha kua whakahohea ka whakatau ko wai nga mahi ka taea e AI te mahi. Ko nga korero tiritahi ka tohua motuhake ki te Horopaki. Ka pa nga huringa ki nga tono a meake nei."
+  "ai_chat_capabilities_hint": "Ko nga kaha kua whakahohea ka whakatau ko wai nga mahi ka taea e AI te mahi. Ko nga korero tiritahi ka tohua motuhake ki te Horopaki. Ka pa nga huringa ki nga tono a meake nei.",
+  "notification_active": "Ngā whakamōhiotanga hohe",
+  "notification_archived": "Ngā whakamōhiotanga kua pūngolitia",
+  "notification_empty": "Kāore he whakamōhiotanga",
+  "notification_list": "Rārangi whakamōhiotanga",
+  "notification_archive": "Pūngolitanga",
+  "notification_restore": "Whakaora",
+  "notification_action_check": "Tirohia te hua o te mahi i mua i te whakamātau anō.",
+  "notification_genie_upgrade": "Kei roto i a Gemini Genie te mana whakahaere pūrere, ngā hōtaka aunoa me ngā wīketi. E wātea tonu ana ngā Genie o mua. Ka taea e koe te whakakore i te wā e rite ana koe; ka pupuritia ā rātou tautuhinga me ngā hītori kōrerorero.",
+  "notification_disable_genies": "Monokia ngā Genie o mua",
+  "notification_disable_genies_confirm": "Whakawetohia ngā Genie o mua kua whakarārangitia? Ka pupuritia ā rātou tautuhinga me ngā hītori kōrero. Ka taea e koe te whakahohe anō i ngā wā katoa."
 }

@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Controle de dispositivo",
   "ai_chat_capability_automation": "Criar e atualizar programas",
   "ai_chat_capability_widgets": "Crie widgets",
-  "ai_chat_capabilities_hint": "Os recursos habilitados determinam quais ações a IA pode executar. As informações compartilhadas são selecionadas separadamente em Contexto. As alterações se aplicam a solicitações futuras."
+  "ai_chat_capabilities_hint": "Os recursos habilitados determinam quais ações a IA pode executar. As informações compartilhadas são selecionadas separadamente em Contexto. As alterações se aplicam a solicitações futuras.",
+  "notification_active": "Notificações ativas",
+  "notification_archived": "Notificações arquivadas",
+  "notification_empty": "Sem notificações",
+  "notification_list": "Lista de notificações",
+  "notification_archive": "Arquivar",
+  "notification_restore": "Restaurar",
+  "notification_action_check": "Verifique o resultado da ação antes de tentar novamente.",
+  "notification_genie_upgrade": "O Gemini Genie inclui controle de dispositivos, programas de automação e widgets. Os Genies anteriores continuam disponíveis. Você pode desativá-los quando estiver pronto; suas configurações e históricos de conversa serão mantidos.",
+  "notification_disable_genies": "Desativar Genies anteriores",
+  "notification_disable_genies_confirm": "Desativar os Genies anteriores listados? As configurações e históricos de conversa serão mantidos. Você pode reativá-los a qualquer momento."
 }

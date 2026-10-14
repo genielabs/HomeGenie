@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Kontrola uređaja",
   "ai_chat_capability_automation": "Kreirajte i ažurirajte programe",
   "ai_chat_capability_widgets": "Kreirajte widgete",
-  "ai_chat_capabilities_hint": "Omogućene mogućnosti određuju koje radnje AI može izvršiti. Zajedničke informacije se biraju zasebno u Kontekstu. Promjene se odnose na buduće zahtjeve."
+  "ai_chat_capabilities_hint": "Omogućene mogućnosti određuju koje radnje AI može izvršiti. Zajedničke informacije se biraju zasebno u Kontekstu. Promjene se odnose na buduće zahtjeve.",
+  "notification_active": "Aktivna obavještenja",
+  "notification_archived": "Arhivirana obavještenja",
+  "notification_empty": "Nema obavještenja",
+  "notification_list": "Lista obavještenja",
+  "notification_archive": "Arhiviraj",
+  "notification_restore": "Vrati",
+  "notification_action_check": "Provjerite rezultat radnje prije ponovnog pokušaja.",
+  "notification_genie_upgrade": "Gemini Genie uključuje kontrolu uređaja, programe automatizacije i vidžete. Prethodni Genies ostaju dostupni. Možete ih onemogućiti kada budete spremni; njihove postavke i historija ćaskanja biće sačuvani.",
+  "notification_disable_genies": "Onemogući prethodne Genies",
+  "notification_disable_genies_confirm": "Onemogućiti navedene prethodne Genies? Njihove postavke i historija ćaskanja biće sačuvani. Možete ih ponovo omogućiti u bilo kojem trenutku."
 }

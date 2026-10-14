@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Taifead ar Aláram",
       "NVR.ContinuousRecording": "Taifeadadh Leanúnach."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Úsáid Google Gemini AI chun gléasanna a rialú, cláir uathoibrithe a chruthú, agus giuirléidí a thógáil i HomeGenie. Roghnaigh na cumais agus an comhthéacs córais le roinnt ón roghchlár comhrá.\nIontráil eochair API bhailí chun an ghné seo a chumasú. Faigh eochair API ag https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Eochair API Google Gemini AI",
+      "ConfigureOptions.ModelId": "Aitheantas Samhla",
+      "ConfigureOptions.EnableDeepKnowledge": "Rogha oidhreachta Deep Knowledge (chomhoiriúnacht amháin)",
+      "ConfigureOptions.SystemInstructions": "Treoracha córais"
+    },
+
     "932": {
       "Title": "Gemini Automan",
       "Description": "Do Bhainisteoir Uathoibrithe cliste. Tiontaigh teanga nádúrtha ina shreabhadh oibre gníomhaire: scríobhann, déanann sé tástáil ar, agus forghníomhaíonn sé cláir C# i bhfíor-am chun aon tasc ar leith a chur i gcrích. Chun an ghné seo a ghníomhachtú, cuir isteach eochair API bhailí. Lean na treoracha ag https://aistudio.google.com/app/apikey chun eochair API saor in aisce a fháil.",

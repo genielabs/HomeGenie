@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Ghi âm khi có báo động",
       "NVR.ContinuousRecording": "Ghi hình liên tục."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Sử dụng Google Gemini AI để điều khiển thiết bị, tạo chương trình tự động hóa và xây dựng tiện ích trong HomeGenie. Chọn các khả năng và ngữ cảnh hệ thống cần chia sẻ từ menu trò chuyện.\nNhập khóa API hợp lệ để bật tính năng này. Lấy khóa API tại https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Khóa API Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID mô hình",
+      "ConfigureOptions.EnableDeepKnowledge": "Tùy chọn Deep Knowledge cũ (chỉ để tương thích)",
+      "ConfigureOptions.SystemInstructions": "Hướng dẫn hệ thống"
+    },
+
     "932": {
       "Title": "Gemini Automan",
       "Description": "Trình quản lý tự động hóa thông minh của bạn. Chuyển ngôn ngữ tự nhiên thành quy trình làm việc tự động: nó viết, kiểm thử và thực thi các chương trình C# trong thời gian thực để hoàn thành bất kỳ tác vụ nào được giao. Để kích hoạt tính năng này, hãy nhập khóa API hợp lệ. Làm theo hướng dẫn tại https://aistudio.google.com/app/apikey để nhận khóa API miễn phí.",

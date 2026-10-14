@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Ovládanie zariadenia",
   "ai_chat_capability_automation": "Vytvárajte a aktualizujte programy",
   "ai_chat_capability_widgets": "Vytvorte miniaplikácie",
-  "ai_chat_capabilities_hint": "Povolené schopnosti určujú, aké akcie môže AI vykonávať. Zdieľané informácie sa vyberajú samostatne v Kontexte. Zmeny sa týkajú budúcich žiadostí."
+  "ai_chat_capabilities_hint": "Povolené schopnosti určujú, aké akcie môže AI vykonávať. Zdieľané informácie sa vyberajú samostatne v Kontexte. Zmeny sa týkajú budúcich žiadostí.",
+  "notification_active": "Aktívne oznámenia",
+  "notification_archived": "Archivované oznámenia",
+  "notification_empty": "Žiadne oznámenia",
+  "notification_list": "Zoznam oznámení",
+  "notification_archive": "Archivovať",
+  "notification_restore": "Obnoviť",
+  "notification_action_check": "Pred ďalším pokusom skontrolujte výsledok akcie.",
+  "notification_genie_upgrade": "Gemini Genie zahŕňa ovládanie zariadení, automatizačné programy a miniaplikácie. Predchádzajúce Genies zostávajú k dispozícii. Môžete ich vypnúť, keď budete pripravení; ich nastavenia a história konverzácií sa zachovajú.",
+  "notification_disable_genies": "Vypnúť predchádzajúce Genies",
+  "notification_disable_genies_confirm": "Vypnúť uvedené predchádzajúce Genies? Ich nastavenia a história konverzácií sa zachovajú. Kedykoľvek ich môžete znova zapnúť."
 }

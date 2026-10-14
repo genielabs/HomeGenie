@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Įrenginio valdymas",
   "ai_chat_capability_automation": "Kurti ir atnaujinti programas",
   "ai_chat_capability_widgets": "Kurti valdiklius",
-  "ai_chat_capabilities_hint": "Įgalintos galimybės nustato, kokius veiksmus AI gali atlikti. Bendrinama informacija pasirenkama atskirai kontekste. Pakeitimai taikomi būsimoms užklausoms."
+  "ai_chat_capabilities_hint": "Įgalintos galimybės nustato, kokius veiksmus AI gali atlikti. Bendrinama informacija pasirenkama atskirai kontekste. Pakeitimai taikomi būsimoms užklausoms.",
+  "notification_active": "Aktyvūs pranešimai",
+  "notification_archived": "Archyvuoti pranešimai",
+  "notification_empty": "Pranešimų nėra",
+  "notification_list": "Pranešimų sąrašas",
+  "notification_archive": "Archyvuoti",
+  "notification_restore": "Atkurti",
+  "notification_action_check": "Prieš bandydami dar kartą, patikrinkite veiksmo rezultatą.",
+  "notification_genie_upgrade": "„Gemini Genie“ apima įrenginių valdymą, automatizavimo programas ir valdiklius. Ankstesni „Genie“ lieka pasiekiami. Galite juos išjungti, kai būsite pasiruošę; jų nustatymai ir pokalbių istorija bus išsaugoti.",
+  "notification_disable_genies": "Išjungti ankstesnius „Genie“",
+  "notification_disable_genies_confirm": "Išjungti išvardytus ankstesnius „Genie“? Jų nustatymai ir pokalbių istorija bus išsaugoti. Galite bet kada juos vėl įjungti."
 }

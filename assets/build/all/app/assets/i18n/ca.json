@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Control del dispositiu",
   "ai_chat_capability_automation": "Crear i actualitzar programes",
   "ai_chat_capability_widgets": "Crea ginys",
-  "ai_chat_capabilities_hint": "Les capacitats habilitades determinen quines accions pot realitzar l'IA. La informació compartida es selecciona per separat a Context. Els canvis s'apliquen a les sol·licituds futures."
+  "ai_chat_capabilities_hint": "Les capacitats habilitades determinen quines accions pot realitzar l'IA. La informació compartida es selecciona per separat a Context. Els canvis s'apliquen a les sol·licituds futures.",
+  "notification_active": "Notificacions actives",
+  "notification_archived": "Notificacions arxivades",
+  "notification_empty": "Sense notificacions",
+  "notification_list": "Llista de notificacions",
+  "notification_archive": "Arxiva",
+  "notification_restore": "Restaura",
+  "notification_action_check": "Comproveu el resultat de l'acció abans de tornar-ho a provar.",
+  "notification_genie_upgrade": "Gemini Genie inclou control de dispositius, programes d'automatització i ginys. Els Genies anteriors continuen disponibles. Podeu desactivar-los quan estigueu a punt; se'n conservaran la configuració i l'historial de xat.",
+  "notification_disable_genies": "Desactiva els Genies anteriors",
+  "notification_disable_genies_confirm": "Voleu desactivar els Genies anteriors llistats? Se'n conservaran la configuració i l'historial de xat. Podeu tornar-los a activar en qualsevol moment."
 }

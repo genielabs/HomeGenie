@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Ierakstīt trauksmes brīdī",
       "NVR.ContinuousRecording": "Nepārtraukta ierakstīšana."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Izmantojiet Google Gemini AI, lai vadītu ierīces, izveidotu automatizācijas programmas un veidotu logrīkus programmā HomeGenie. Tērzēšanas izvēlnē izvēlieties iespējas un sistēmas kontekstu, ko kopīgot.\nIevadiet derīgu API atslēgu, lai iespējotu šo funkciju. Iegūstiet API atslēgu vietnē https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API atslēga",
+      "ConfigureOptions.ModelId": "Modeļa ID",
+      "ConfigureOptions.EnableDeepKnowledge": "Novecojusi opcija Deep Knowledge (tikai saderībai)",
+      "ConfigureOptions.SystemInstructions": "Sistēmas norādījumi"
+    },
+
     "932": {
       "Title": "Dvīņu Automan",
       "Description": "Jūsu viedais automatizācijas pārvaldnieks. Pārveidojiet dabisko valodu aģentūru darbplūsmās: tas raksta, testē un izpilda C# programmas reāllaikā, lai pabeigtu jebkuru uzdevumu. Lai aktivizētu šo funkciju, ievadiet derīgu API atslēgu. Izpildiet norādījumus vietnē https://aistudio.google.com/app/apikey, lai iegūtu bezmaksas API atslēgu.",

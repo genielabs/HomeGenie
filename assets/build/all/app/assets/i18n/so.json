@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Xakamaynta aaladda",
   "ai_chat_capability_automation": "Abuur oo cusboonaysii barnaamijyada",
   "ai_chat_capability_widgets": "Abuur widgets",
-  "ai_chat_capabilities_hint": "Awoodaha karti leh ayaa go'aamiya ficilada AI ay qaban karto. Macluumaadka la wadaago si gaar ah ayaa loo doortay gudaha Context. Isbeddellada ayaa khuseeya codsiyada mustaqbalka."
+  "ai_chat_capabilities_hint": "Awoodaha karti leh ayaa go'aamiya ficilada AI ay qaban karto. Macluumaadka la wadaago si gaar ah ayaa loo doortay gudaha Context. Isbeddellada ayaa khuseeya codsiyada mustaqbalka.",
+  "notification_active": "Ogeysiisyada firfircoon",
+  "notification_archived": "Ogeysiisyada la kaydiyay",
+  "notification_empty": "Ma jiraan ogeysiisyo",
+  "notification_list": "Liiska ogeysiisyada",
+  "notification_archive": "Kaydi",
+  "notification_restore": "Soo celi",
+  "notification_action_check": "Hubi natiijada falka ka hor inta aadan dib u tijaabin.",
+  "notification_genie_upgrade": "Gemini Genie waxa ku jira xakamaynta qalabka, barnaamijyada otomaatiga iyo aaladaha widget-ka. Genies-kii hore way sii shaqaynayaan. Waad damin kartaa marka aad diyaar u tahay; habayntooda iyo taariikhda wada sheekaysiga waa la xafidi doonaa.",
+  "notification_disable_genies": "Dami Genies-kii hore",
+  "notification_disable_genies_confirm": "Ma damisaa Genies-kii hore ee liiska ku jira? Habayntooda iyo taariikhda sheekaysiga waa la xafidi doonaa. Dib ayaad u shidi kartaa wakhti kasta."
 }

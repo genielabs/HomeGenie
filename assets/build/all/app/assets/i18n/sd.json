@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "ڊوائيس ڪنٽرول",
   "ai_chat_capability_automation": "پروگرام ٺاهيو ۽ تازه ڪاري ڪريو",
   "ai_chat_capability_widgets": "widgets ٺاهيو",
-  "ai_chat_capabilities_hint": "فعال ڪيل صلاحيتون طئي ڪن ٿيون ته ڪھڙا ڪارناما AI انجام ڏئي سگھن ٿا. شيئر ڪيل معلومات الڳ الڳ چونڊيل آهي Context ۾. تبديليون مستقبل جي درخواستن تي لاڳو ٿين ٿيون."
+  "ai_chat_capabilities_hint": "فعال ڪيل صلاحيتون طئي ڪن ٿيون ته ڪھڙا ڪارناما AI انجام ڏئي سگھن ٿا. شيئر ڪيل معلومات الڳ الڳ چونڊيل آهي Context ۾. تبديليون مستقبل جي درخواستن تي لاڳو ٿين ٿيون.",
+  "notification_active": "فعال اطلاع",
+  "notification_archived": "آرڪائيو ٿيل اطلاع",
+  "notification_empty": "ڪوبه اطلاع ناهي",
+  "notification_list": "اطلاعن جي لسٽ",
+  "notification_archive": "آرڪائيو ڪريو",
+  "notification_restore": "بحال ڪريو",
+  "notification_action_check": "ٻيهر ڪوشش ڪرڻ کان پهريان عمل جي نتيجي جي تصديق ڪريو.",
+  "notification_genie_upgrade": "Gemini Genie ۾ ڊوائيس ڪنٽرول، آٽوميشن پروگرام ۽ وجيٽس شامل آهن. پوئين Genies دستياب رهندا. جڏهن توهان تيار هجو ته انهن کي غير فعال ڪري سگهو ٿا؛ انهن جون سيٽنگون ۽ چيٽ هسٽري محفوظ رهندي.",
+  "notification_disable_genies": "پوئين Genies کي غير فعال ڪريو",
+  "notification_disable_genies_confirm": "ڇا لسٽ ڪيل پوئين Genies کي غير فعال ڪرڻ چاهيو ٿا؟ انهن جون سيٽنگون ۽ چيٽ هسٽري محفوظ رهندي. توهان انهن کي ڪنهن به وقت ٻيهر فعال ڪري سگهو ٿا."
 }

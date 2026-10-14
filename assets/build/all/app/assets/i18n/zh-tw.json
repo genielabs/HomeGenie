@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "設備控制",
   "ai_chat_capability_automation": "建立和更新程序",
   "ai_chat_capability_widgets": "建立小部件",
-  "ai_chat_capabilities_hint": "啟用的功能決定了人工智慧可以執行哪些操作。共享資訊是在Context中單獨選擇的。更改適用於未來的請求。"
+  "ai_chat_capabilities_hint": "啟用的功能決定了人工智慧可以執行哪些操作。共享資訊是在Context中單獨選擇的。更改適用於未來的請求。",
+  "notification_active": "作用中通知",
+  "notification_archived": "已封存通知",
+  "notification_empty": "沒有通知",
+  "notification_list": "通知清單",
+  "notification_archive": "封存",
+  "notification_restore": "還原",
+  "notification_action_check": "重試前請確認操作結果。",
+  "notification_genie_upgrade": "Gemini Genie 包含裝置控制、自動化程式與小工具。先前的 Genies 仍可繼續使用。準備好後即可將其停用；相關設定與對話紀錄將會保留。",
+  "notification_disable_genies": "停用先前的 Genies",
+  "notification_disable_genies_confirm": "確定要停用所列出的先前 Genies 嗎？其設定與對話紀錄將會保留。您可以隨時重新啟用。"
 }

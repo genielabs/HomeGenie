@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Tallenna hälytyksestä",
       "NVR.ContinuousRecording": "Jatkuva tallennus."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Käytä Google Gemini AI -tekoälyä laitteiden ohjaamiseen, automaatio-ohjelmien luomiseen ja pienoisohjelmien rakentamiseen HomeGeniessä. Valitse jaettavat ominaisuudet ja järjestelmäkonteksti chat-valikosta.\nOta tämä ominaisuus käyttöön antamalla kelvollinen API-avain. Hanki API-avain osoitteesta https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI -API-avain",
+      "ConfigureOptions.ModelId": "Mallin tunnus",
+      "ConfigureOptions.EnableDeepKnowledge": "Vanha Deep Knowledge -valinta (vain yhteensopivuutta varten)",
+      "ConfigureOptions.SystemInstructions": "Järjestelmäohjeet"
+    },
+
     "932": {
       "Title": "Kaksosten Automan",
       "Description": "Älykäs automaatiomenenhallintajärjestelmäsi. Muunna luonnollinen kieli agenttiseksi työnkuluksi: se kirjoittaa, testaa ja suorittaa C#-ohjelmia reaaliajassa minkä tahansa tehtävän suorittamiseksi. Aktivoi tämä ominaisuus antamalla kelvollinen API-avain. Saat ilmaisen API-avaimen noudattamalla ohjeita osoitteessa https://aistudio.google.com/app/apikey.",

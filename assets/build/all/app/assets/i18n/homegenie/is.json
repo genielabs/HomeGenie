@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Upptaka við viðvörun",
       "NVR.ContinuousRecording": "Stöðug upptaka."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Notaðu Google Gemini AI til að stjórna tækjum, búa til sjálfvirkniforrit og smíða græjur í HomeGenie. Veldu getu og kerfissamhengi til að deila úr spjallvalmyndinni.\nSláðu inn gildan API-lykil til að virkja þennan eiginleika. Fáðu API-lykil á https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API-lykill",
+      "ConfigureOptions.ModelId": "Auðkenni líkans",
+      "ConfigureOptions.EnableDeepKnowledge": "Eldri Deep Knowledge valkostur (aðeins vegna samhæfni)",
+      "ConfigureOptions.SystemInstructions": "Kerfisfyrirmæli"
+    },
+
     "932": {
       "Title": "Tvíbura-sjálfvirki",
       "Description": "Snjall sjálfvirknistjórinn þinn. Breyttu náttúrulegu tungumáli í verkflæði fyrir umboðsmenn: það skrifar, prófar og keyrir C# forrit í rauntíma til að klára hvaða verkefni sem er. Til að virkja þennan eiginleika skaltu slá inn gilt API-lykil. Fylgdu leiðbeiningunum á https://aistudio.google.com/app/apikey til að fá ókeypis API-lykil.",

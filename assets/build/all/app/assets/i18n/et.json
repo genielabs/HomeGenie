@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Seadme juhtimine",
   "ai_chat_capability_automation": "Programmide loomine ja värskendamine",
   "ai_chat_capability_widgets": "Loo vidinaid",
-  "ai_chat_capabilities_hint": "Lubatud võimalused määravad, milliseid toiminguid AI teha saab. Jagatud teave valitakse kontekstis eraldi. Muudatused kehtivad tulevastele taotlustele."
+  "ai_chat_capabilities_hint": "Lubatud võimalused määravad, milliseid toiminguid AI teha saab. Jagatud teave valitakse kontekstis eraldi. Muudatused kehtivad tulevastele taotlustele.",
+  "notification_active": "Aktiivsed teavitused",
+  "notification_archived": "Arhiveeritud teavitused",
+  "notification_empty": "Teavitusi pole",
+  "notification_list": "Teavituste loend",
+  "notification_archive": "Arhiveeri",
+  "notification_restore": "Taasta",
+  "notification_action_check": "Enne uuesti proovimist kontrollige toimingu tulemust.",
+  "notification_genie_upgrade": "Gemini Genie sisaldab seadmete juhtimist, automatiseerimisprogramme ja vidinaid. Eelmised Genied jäävad kättesaadavaks. Saate need keelata, kui olete valmis; nende seaded ja vestluste ajalugu säilitatakse.",
+  "notification_disable_genies": "Keela eelmised Genied",
+  "notification_disable_genies_confirm": "Kas keelata loetletud eelmised Genied? Nende seaded ja vestluste ajalugu säilitatakse. Saate need igal ajal uuesti lubada."
 }

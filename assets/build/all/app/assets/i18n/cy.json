@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Rheoli dyfais",
   "ai_chat_capability_automation": "Creu a diweddaru rhaglenni",
   "ai_chat_capability_widgets": "Creu teclynnau",
-  "ai_chat_capabilities_hint": "Mae galluoedd wedi'u galluogi yn pennu pa gamau y gall yr AI eu cyflawni. Dewisir gwybodaeth a rennir ar wahân yn y Cyd-destun. Mae newidiadau yn berthnasol i geisiadau yn y dyfodol."
+  "ai_chat_capabilities_hint": "Mae galluoedd wedi'u galluogi yn pennu pa gamau y gall yr AI eu cyflawni. Dewisir gwybodaeth a rennir ar wahân yn y Cyd-destun. Mae newidiadau yn berthnasol i geisiadau yn y dyfodol.",
+  "notification_active": "Hysbysiadau gweithredol",
+  "notification_archived": "Hysbysiadau wedi'u harchifo",
+  "notification_empty": "Dim hysbysiadau",
+  "notification_list": "Rhestr hysbysiadau",
+  "notification_archive": "Archifo",
+  "notification_restore": "Adfer",
+  "notification_action_check": "Gwiriwch ganlyniad y weithred cyn rhoi cynnig arall arni.",
+  "notification_genie_upgrade": "Mae Gemini Genie yn cynnwys rheoli dyfeisiau, rhaglenni awtomeiddio a theclynnau. Mae Genies blaenorol yn parhau i fod ar gael. Gallwch eu hanalluogi pan fyddwch yn barod; bydd eu gosodiadau a'u hanesion sgwrs yn cael eu cadw.",
+  "notification_disable_genies": "Analluogi Genies blaenorol",
+  "notification_disable_genies_confirm": "Analluogi'r Genies blaenorol a restrir? Bydd eu gosodiadau a'u hanesion sgwrs yn cael eu cadw. Gallwch eu galluogi eto ar unrhyw adeg."
 }

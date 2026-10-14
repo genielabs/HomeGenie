@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Rekam Saat Alarm Berbunyi",
       "NVR.ContinuousRecording": "Perekaman Berkelanjutan."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Gunakan Google Gemini AI untuk mengontrol perangkat, membuat program otomatisasi, dan membangun widget di HomeGenie. Pilih kemampuan dan konteks sistem yang ingin dibagikan dari menu obrolan.\nMasukkan kunci API yang valid untuk mengaktifkan fitur ini. Dapatkan kunci API di https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Kunci API Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID Model",
+      "ConfigureOptions.EnableDeepKnowledge": "Opsi Deep Knowledge lawas (hanya untuk kompatibilitas)",
+      "ConfigureOptions.SystemInstructions": "Instruksi sistem"
+    },
+
     "932": {
       "Title": "Gemini Automan",
       "Description": "Manajer Otomatisasi cerdas Anda. Ubah bahasa alami menjadi alur kerja agen: ia menulis, menguji, dan mengeksekusi program C# secara real-time untuk menyelesaikan tugas apa pun. Untuk mengaktifkan fitur ini, masukkan kunci API yang valid. Ikuti petunjuk di https://aistudio.google.com/app/apikey untuk mendapatkan kunci API gratis.",

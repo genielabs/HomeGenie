@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Enhedskontrol",
   "ai_chat_capability_automation": "Opret og opdater programmer",
   "ai_chat_capability_widgets": "Opret widgets",
-  "ai_chat_capabilities_hint": "Aktiverede funktioner bestemmer, hvilke handlinger AI kan udføre. Delt information vælges separat i kontekst. Ændringer gælder for fremtidige anmodninger."
+  "ai_chat_capabilities_hint": "Aktiverede funktioner bestemmer, hvilke handlinger AI kan udføre. Delt information vælges separat i kontekst. Ændringer gælder for fremtidige anmodninger.",
+  "notification_active": "Aktive notifikationer",
+  "notification_archived": "Arkiverede notifikationer",
+  "notification_empty": "Ingen notifikationer",
+  "notification_list": "Notifikationsliste",
+  "notification_archive": "Arkivér",
+  "notification_restore": "Gendan",
+  "notification_action_check": "Tjek handlingens resultat, før du prøver igen.",
+  "notification_genie_upgrade": "Gemini Genie inkluderer enhedsstyring, automatiseringsprogrammer og widgets. Tidligere Genies forbliver tilgængelige. Du kan deaktivere dem, når du er klar; deres indstillinger og chathistorik bevares.",
+  "notification_disable_genies": "Deaktivér tidligere Genies",
+  "notification_disable_genies_confirm": "Vil du deaktivere de anførte tidligere Genies? Deres indstillinger og chathistorik bevares. Du kan altid aktivere dem igen."
 }

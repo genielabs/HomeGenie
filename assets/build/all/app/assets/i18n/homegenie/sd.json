@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "الارم تي رڪارڊ ڪريو",
       "NVR.ContinuousRecording": "مسلسل رڪارڊنگ."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "HomeGenie ۾ ڊوائيسز کي ڪنٽرول ڪرڻ، آٽوميشن پروگرام ٺاهڻ ۽ وجيٽس تيار ڪرڻ لاءِ Google Gemini AI جو استعمال ڪريو. چيٽ مينيو مان شيئر ڪرڻ لاءِ صلاحيتون ۽ سسٽم سياق چونڊيو.\nهن فيچر کي فعال ڪرڻ لاءِ هڪ صحيح API چاٻي داخل ڪريو. https://aistudio.google.com/app/apikey تان API چاٻي حاصل ڪريو.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API چاٻي",
+      "ConfigureOptions.ModelId": "ماڊل ID",
+      "ConfigureOptions.EnableDeepKnowledge": "پراڻو Deep Knowledge آپشن (صرف مطابقت لاءِ)",
+      "ConfigureOptions.SystemInstructions": "سسٽم هدايتون"
+    },
+
     "932": {
       "Title": "جيمينائي آٽومين",
       "Description": "توهان جو سمارٽ آٽوميشن مئنيجر. قدرتي ٻولي کي ايجنٽڪ ورڪ فلو ۾ تبديل ڪريو: اهو ڪنهن به ڪم کي مڪمل ڪرڻ لاءِ حقيقي وقت ۾ C# پروگرام لکي ٿو، جانچ ڪري ٿو، ۽ عمل ڪري ٿو. هن خصوصيت کي چالو ڪرڻ لاءِ، هڪ صحيح API ڪي داخل ڪريو. مفت API ڪي حاصل ڪرڻ لاءِ https://aistudio.google.com/app/apikey تي ڏنل هدايتن تي عمل ڪريو.",

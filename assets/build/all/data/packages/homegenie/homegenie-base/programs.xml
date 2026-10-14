@@ -6157,7 +6157,7 @@ public static class GenieResponseContract
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.12</PackageVersion>
+      <PackageVersion>1.0.13</PackageVersion>
       <Id>ai-action-executor</Id>
       <Version>1.2.1</Version>
       <Required>true</Required>
@@ -6167,6 +6167,206 @@ public static class GenieResponseContract
     <Address>581</Address>
     <Name>AI Action Executor</Name>
     <Description>Shared service for extracting AI action proposals and explicitly executing HomeGenie API commands. Independent of cloud providers and local inference engines.</Description>
+    <Group>Utilities</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>false</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.Setup(() =&gt; {
+    Program.Implements("@Service:Notifications", "System.Utility/Notifications", new { version = 1 });
+    Program.AddOption("MaximumItems", "500", "Maximum archived notifications", "text");
+    Program.AddOption("RetentionDays", "90", "Notification retention (days)", "text");
+});
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>string path = Path.Combine(Data.GetFolder(), "notifications.json");
+int limit=500,days=90;if(!int.TryParse(Program.Option("MaximumItems").Value,out limit))limit=500;if(!int.TryParse(Program.Option("RetentionDays").Value,out days))days=90;limit=Math.Clamp(limit,10,5000);days=Math.Clamp(days,1,3650);
+JArray rows;var recovered=new List&lt;JObject&gt;();lock(NotificationArchive.Gate){rows=NotificationArchive.Load(path);foreach(JObject row in rows)if(NotificationArchive.Recover(row))recovered.Add((JObject)row.DeepClone());NotificationArchive.Save(path,rows);}
+Func&lt;object,JObject&gt; parse = input =&gt; {
+    var data=Api.Parse(input)?.Data;
+    return data is byte[] b ? JObject.Parse(Encoding.UTF8.GetString(b)) : data is string t &amp;&amp; !string.IsNullOrWhiteSpace(t)?JObject.Parse(t):data==null?new JObject():JObject.FromObject(data);
+};
+Action&lt;JObject&gt; announce = row =&gt; Program.Emit("Notification.ArchiveChanged",row.ToString(Formatting.None));
+foreach(var row in recovered)announce(row);
+Api.Handle("System.Utility/Notifications/List", input=&gt;{lock(NotificationArchive.Gate){int before=rows.Count;NotificationArchive.Prune(rows,DateTime.UtcNow,limit,days);if(rows.Count!=before)NotificationArchive.Save(path,rows);return rows.DeepClone();}});
+Api.Handle("System.Utility/Notifications/Get", input=&gt;{try{lock(NotificationArchive.Gate){return NotificationArchive.Find(rows,parse(input)).DeepClone();}}catch(Exception e){return new ResponseStatus(Status.Error,e.Message);}});
+foreach(var operation in new[]{"Read","Archive"}) {
+    string op=operation;
+    Api.Handle("System.Utility/Notifications/"+op,input=&gt;{
+        try{JObject copy;lock(NotificationArchive.Gate){var req=parse(input);var row=NotificationArchive.Find(rows,req);row[op=="Read"?"read":"archived"]=req["value"]?.Value&lt;bool&gt;()??true;row["sequence"]=(row["sequence"]?.Value&lt;long&gt;()??0)+1;NotificationArchive.Save(path,rows);copy=(JObject)row.DeepClone();}announce(copy);return copy;}
+        catch(Exception e){return new ResponseStatus(Status.Error,e.Message);}
+    });
+}
+Api.Handle("System.Utility/Notifications/Execute", input=&gt;{
+    JObject row=null,action=null,state=null,started=null;string id;
+    try {
+        lock(NotificationArchive.Gate){var req=parse(input);row=NotificationArchive.Find(rows,req);if(row["archived"]?.Value&lt;bool&gt;()==true)throw new InvalidOperationException("Notification is archived.");if(req["revision"]?.Value&lt;int&gt;()!=(int)row["revision"])throw new InvalidOperationException("Notification changed. Reload it before acting.");
+            id=(string)req["actionId"];action=((JArray)row["payload"]["Actions"]).OfType&lt;JObject&gt;().FirstOrDefault(a=&gt;(string)a["Id"]==id);if(action==null)throw new InvalidOperationException("Unknown notification action.");
+            var existingState=(JObject)row["actionStates"][id];if(existingState!=null){if((string)existingState["state"]=="completed")return row.DeepClone();if((string)existingState["state"]=="running"||action["Idempotent"]?.Value&lt;bool&gt;()!=true)throw new InvalidOperationException("Action outcome requires checking before retry.");}
+            if((string)row["domain"]=="HomeAutomation.HomeGenie.Automation") {
+                var sender=JToken.FromObject(Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Get/"+(string)row["address"])) as JObject;
+                if(sender?["Address"]?.ToString()!=(string)row["address"] || sender?["IsEnabled"]?.Value&lt;bool&gt;()!=true)throw new InvalidOperationException("The notification program is unavailable or disabled.");
+            }
+            state=NotificationArchive.Begin(row,id);row["sequence"]=(row["sequence"]?.Value&lt;long&gt;()??0)+1;NotificationArchive.Save(path,rows);started=(JObject)row.DeepClone();
+        }
+        announce(started);
+        object response=Api.Call((string)action["Endpoint"],action["Body"]?.Type==JTokenType.Object?action["Body"]:new JObject());if(response==null)throw new InvalidOperationException("Action returned no result. Check its effects before retrying.");var token=JToken.FromObject(response);
+        if(token.Type==JTokenType.String){try{token=JToken.Parse((string)token);}catch{}}
+        bool failed=string.Equals((string)(token as JObject)?["Status"],"Error",StringComparison.OrdinalIgnoreCase);
+        JObject copy;lock(NotificationArchive.Gate){state["state"]=failed?"failed":"completed";state["result"]=NotificationArchive.BoundedResult(token,failed);state["completedAt"]=DateTime.UtcNow.ToString("O");NotificationArchive.Sync(row,state);NotificationArchive.Save(path,rows);copy=(JObject)row.DeepClone();}announce(copy);return copy;
+    } catch(Exception e) {
+        // Dispatch exceptions may have happened after effects: do not blindly replay.
+        JObject failedCopy=null;lock(NotificationArchive.Gate){if(state!=null &amp;&amp; (string)state["state"]=="running"){state["state"]="unknown";state["error"]=e.Message;NotificationArchive.Sync(row,state);}NotificationArchive.Save(path,rows);if(row!=null)failedCopy=(JObject)row.DeepClone();}if(failedCopy!=null)announce(failedCopy);return new ResponseStatus(Status.Error,e.Message);
+    }
+});
+When.ModuleParameterChanged((module,parameter)=&gt;{
+    if(parameter.Name!="Program.Notification")return true;
+    try {var payload=NotificationArchive.Decode(parameter.Value);if(payload==null)return true;JObject copy;lock(NotificationArchive.Gate){var row=NotificationArchive.Upsert(rows,payload,module.Instance.Domain,module.Instance.Address,DateTime.UtcNow,limit,days);row["sequence"]=(row["sequence"]?.Value&lt;long&gt;()??0)+1;NotificationArchive.Save(path,rows);copy=(JObject)row.DeepClone();}announce(copy);}
+    catch(Exception e){Program.Log.Error("Persistent notification: "+e.Message);}return true;
+});
+// Recover the latest persistent notification of each module after service startup.
+foreach(var module in Modules.SelectedModules) {
+    var property=module.Properties.FirstOrDefault(p=&gt;p.Name=="Program.Notification");
+    if(property==null)continue;
+    try {
+        var payload=NotificationArchive.Decode(property.Value);var issued=property.UpdateTime.ToUniversalTime();
+        if(payload==null || issued&lt;DateTime.UtcNow.AddDays(-days))continue;
+        lock(NotificationArchive.Gate) {
+            var known=rows.OfType&lt;JObject&gt;().FirstOrDefault(r=&gt;(string)r["domain"]==module.Domain &amp;&amp; (string)r["address"]==module.Address &amp;&amp; (string)r["payload"]?["Id"]==(string)payload["Id"]);
+            if(known!=null &amp;&amp; issued&lt;=DateTime.Parse((string)known["updatedAt"]).ToUniversalTime())continue;
+            NotificationArchive.Upsert(rows,payload,module.Domain,module.Address,issued,limit,days);NotificationArchive.Save(path,rows);
+        }
+    }catch(Exception e){Program.Log.Error("Notification recovery: "+e.Message);}
+}
+Program.GoBackground();
+</ScriptSource>
+    <ScriptContext>#using System
+#using System.IO
+#using System.Text
+#using System.Linq
+#using System.Collections.Generic
+#using System.Security.Cryptography
+#using System.Text.RegularExpressions
+#using Newtonsoft.Json
+#using Newtonsoft.Json.Linq
+public static class NotificationArchive {
+    public static readonly object Gate = new object();
+    public static JObject Decode(string value) {
+        if(value==null||value.Length&gt;65536)throw new InvalidOperationException("Notification payload exceeds 64 KiB.");
+        var p = JsonConvert.DeserializeObject&lt;JObject&gt;(value,new JsonSerializerSettings{DateParseHandling=DateParseHandling.None});
+        if (p["Message"]?.Type == JTokenType.String) {
+            try { var inner=JsonConvert.DeserializeObject&lt;JObject&gt;((string)p["Message"],new JsonSerializerSettings{DateParseHandling=DateParseHandling.None}); if (inner["Version"]?.Value&lt;int&gt;()==1) { if(inner["Title"]==null)inner["Title"]=p["Title"]; p=inner; } } catch(JsonReaderException) { }
+        }
+        if (p["Version"]?.Value&lt;int&gt;()!=1 || p["Persistent"]?.Type!=JTokenType.Boolean || p["Persistent"]?.Value&lt;bool&gt;()!=true) return null;
+        var id=(string)p["Id"]; if(string.IsNullOrWhiteSpace(id)||id.Length&gt;128)throw new InvalidOperationException("Persistent notification requires an Id (max 128 characters).");
+        foreach(var key in new[]{"Title","Message"})if(p[key]?.Type!=JTokenType.String || ((string)p[key]).Length&gt;16384)throw new InvalidOperationException("Invalid notification "+key);
+        string severity=(string)p["Severity"]??"info";if(!new[]{"info","success","warning","error"}.Contains(severity))throw new InvalidOperationException("Invalid severity.");p["Severity"]=severity;
+        var actions=p["Actions"] as JArray ?? new JArray(); if(actions.Count&gt;4)throw new InvalidOperationException("Maximum four notification actions.");
+        var ids=new HashSet&lt;string&gt;();foreach(JObject action in actions) {
+            var aid=(string)action["Id"];if(string.IsNullOrWhiteSpace(aid)||aid.Length&gt;64||!ids.Add(aid))throw new InvalidOperationException("Invalid action Id.");
+            if(action["Label"]?.Type!=JTokenType.String || ((string)action["Label"]).Length&gt;256)throw new InvalidOperationException("Invalid action label.");
+            if((string)action["Type"]!="api" || (string)action["Method"]!="POST")throw new InvalidOperationException("Only local POST API actions are supported.");
+            var endpoint=(string)action["Endpoint"];
+            if(endpoint==null||endpoint.Length&gt;256||!Regex.IsMatch(endpoint,@"^[A-Za-z][A-Za-z0-9_.:-]*(/[A-Za-z0-9_.-]+){2,}$")||endpoint.Contains(".."))throw new InvalidOperationException("Invalid local action endpoint.");
+            if(action["Body"]!=null &amp;&amp; action["Body"].Type!=JTokenType.Null &amp;&amp; action["Body"].Type!=JTokenType.Object)throw new InvalidOperationException("Action Body must be an object.");
+            if(action["Idempotent"]!=null &amp;&amp; action["Idempotent"].Type!=JTokenType.Boolean)throw new InvalidOperationException("Idempotent must be boolean.");
+        }
+        p["Actions"]=actions;return p;
+    }
+    public static JArray Read(string path) {
+        return JsonConvert.DeserializeObject&lt;JArray&gt;(File.ReadAllText(path),new JsonSerializerSettings{DateParseHandling=DateParseHandling.None})
+            ?? throw new JsonSerializationException("Notification archive must contain an array.");
+    }
+    public static JArray Load(string path) {
+        if(!File.Exists(path))return File.Exists(path+".bak")?Read(path+".bak"):new JArray();
+        try{return Read(path);}catch {if(File.Exists(path+".bak"))return Read(path+".bak");throw;}
+    }
+    public static void Save(string path,JArray records) {
+        Directory.CreateDirectory(Path.GetDirectoryName(path));string temp=path+".tmp";
+        var bytes=Encoding.UTF8.GetBytes(records.ToString(Formatting.None));
+        using(var file=new FileStream(temp,FileMode.Create,FileAccess.Write,FileShare.None)){file.Write(bytes,0,bytes.Length);file.Flush(true);}
+        if(File.Exists(path)){bool valid=true;try{Read(path);}catch{valid=false;}if(valid)File.Copy(path,path+".bak",true);}
+        File.Move(temp,path,true);
+    }
+    public static JObject Upsert(JArray records,JObject payload,string domain,string address,DateTime now,int limit,int days) {
+        var identity=domain+"\n"+address+"\n"+(string)payload["Id"];
+        var key=Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(identity))).ToLowerInvariant();
+        var row=records.OfType&lt;JObject&gt;().FirstOrDefault(r=&gt;(string)r["key"]==key);bool fresh=row==null;
+        if(fresh){row=new JObject{["key"]=key,["domain"]=domain,["address"]=address,["createdAt"]=now.ToString("O"),["revision"]=0,["count"]=0,["read"]=false,["archived"]=false,["actionStates"]=new JObject(),["actionRuns"]=new JArray()};records.Add(row);}
+        if(fresh||!JToken.DeepEquals(row["payload"],payload)) {
+            bool sameActions=JToken.DeepEquals(row["payload"]?["Actions"],payload["Actions"]);
+            row["payload"]=payload.DeepClone();row["revision"]=(int)row["revision"]+1;row["read"]=false;row["archived"]=false;
+            if(!sameActions)row["actionStates"]=new JObject();
+        }
+        row["sequence"]=(row["sequence"]?.Value&lt;long&gt;()??0)+1;
+        row["updatedAt"]=now.ToString("O");row["count"]=(int)row["count"]+1;
+        Prune(records,now,limit,days,row);
+        return row;
+    }
+    public static void Prune(JArray records,DateTime now,int limit,int days,JObject keep=null) {
+        foreach(var old in records.OfType&lt;JObject&gt;().Where(r=&gt;r!=keep&amp;&amp;!Running(r)&amp;&amp;DateTime.Parse((string)r["updatedAt"]).ToUniversalTime()&lt;now.AddDays(-days)).ToList())records.Remove(old);
+        while(records.Count&gt;limit){var oldest=records.OfType&lt;JObject&gt;().Where(r=&gt;r!=keep&amp;&amp;!Running(r)).OrderByDescending(r=&gt;r["archived"]?.Value&lt;bool&gt;()==true).ThenBy(r=&gt;(string)r["updatedAt"]).FirstOrDefault();if(oldest==null)break;records.Remove(oldest);}
+    }
+    public static JObject Find(JArray rows,JObject request) {
+        var row=rows.OfType&lt;JObject&gt;().FirstOrDefault(r=&gt;(string)r["key"]==(string)request["key"]);if(row==null)throw new InvalidOperationException("Notification no longer available.");return row;
+    }
+    public static JArray Runs(JObject row) {
+        var runs=row["actionRuns"] as JArray;
+        if(runs!=null)return runs;
+        runs=new JArray();row["actionRuns"]=runs;
+        foreach(var existing in ((JObject)row["actionStates"]).Properties().ToList()) {
+            var state=(JObject)existing.Value.DeepClone();state["actionId"]=existing.Name;state["revision"]=row["revision"];
+            state["runId"]=state["runId"]??Guid.NewGuid().ToString("N");runs.Add(state);row["actionStates"][existing.Name]=state.DeepClone();
+        }
+        return runs;
+    }
+    public static JObject Begin(JObject row,string actionId) {
+        var runs=Runs(row);
+        if(runs.Any(r=&gt;(string)r["state"]=="running"))throw new InvalidOperationException("Another action is already running for this notification.");
+        var state=new JObject{["runId"]=Guid.NewGuid().ToString("N"),["actionId"]=actionId,["revision"]=row["revision"],
+            ["state"]="running",["startedAt"]=DateTime.UtcNow.ToString("O")};
+        runs.Add(state);row["actionStates"][actionId]=state.DeepClone();
+        while(runs.Count&gt;32){var oldest=runs.FirstOrDefault(r=&gt;(string)r["state"]!="running");if(oldest==null)break;runs.Remove(oldest);}
+        return state;
+    }
+    public static void Sync(JObject row,JObject state) {
+        string actionId=(string)state["actionId"];
+        if((string)row["actionStates"]?[actionId]?["runId"]==(string)state["runId"])row["actionStates"][actionId]=state.DeepClone();
+        row["sequence"]=(row["sequence"]?.Value&lt;long&gt;()??0)+1;
+        row["updatedAt"]=DateTime.UtcNow.ToString("O");
+    }
+    public static bool Recover(JObject row) {
+        bool changed=row["actionRuns"]==null;
+        foreach(JObject state in Runs(row))if((string)state["state"]=="running"){state["state"]="unknown";Sync(row,state);changed=true;}
+        return changed;
+    }
+    public static bool Running(JObject row) =&gt; (row["actionRuns"] as JArray)?.Any(r=&gt;(string)r["state"]=="running")==true;
+    public static JToken BoundedResult(JToken token,bool failed) {
+        if(token.ToString(Formatting.None).Length&lt;=16384)return token;
+        string message=token is JObject obj &amp;&amp; obj["Message"]?.Type==JTokenType.String?(string)obj["Message"]:"Action response retained without its large body.";
+        return new JObject{["Status"]=failed?"Error":"Ok",["Message"]=message.Substring(0,Math.Min(1000,message.Length)),["truncated"]=true};
+    }
+
+}
+</ScriptContext>
+    <ScriptErrors />
+    <Data></Data>
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-base</PackageId>
+      <PackageVersion>1.0.13</PackageVersion>
+      <Id>notification-archive</Id>
+      <Version>1.0.0</Version>
+      <Required>true</Required>
+      <Checksum>CFC9F9EB1309B9DF2D041850B94245DD</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>582</Address>
+    <Name>Persistent Notifications</Name>
+    <Description>Persistent notification archive and interactive actions.</Description>
     <Group>Utilities</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>

@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Kontrol ng device",
   "ai_chat_capability_automation": "Lumikha at mag-update ng mga programa",
   "ai_chat_capability_widgets": "Lumikha ng mga widget",
-  "ai_chat_capabilities_hint": "Tinutukoy ng mga naka-enable na kakayahan kung aling mga pagkilos ang magagawa ng AI. Ang nakabahaging impormasyon ay pinili nang hiwalay sa Konteksto. Nalalapat ang mga pagbabago sa mga kahilingan sa hinaharap."
+  "ai_chat_capabilities_hint": "Tinutukoy ng mga naka-enable na kakayahan kung aling mga pagkilos ang magagawa ng AI. Ang nakabahaging impormasyon ay pinili nang hiwalay sa Konteksto. Nalalapat ang mga pagbabago sa mga kahilingan sa hinaharap.",
+  "notification_active": "Mga aktibong notification",
+  "notification_archived": "Mga naka-archive na notification",
+  "notification_empty": "Walang mga notification",
+  "notification_list": "Listahan ng notification",
+  "notification_archive": "I-archive",
+  "notification_restore": "Ibalik",
+  "notification_action_check": "Suriin ang resulta ng aksyon bago sumubok muli.",
+  "notification_genie_upgrade": "Kasama sa Gemini Genie ang kontrol sa device, mga automation program, at widget. Mananatiling available ang mga nakaraang Genie. Maaari mo itong i-disable kapag handa ka na; pananatilihin ang mga setting at history ng chat ng mga ito.",
+  "notification_disable_genies": "I-disable ang mga nakaraang Genie",
+  "notification_disable_genies_confirm": "I-disable ang mga nakalistang nakaraang Genie? Pananatilihin ang mga setting at history ng chat ng mga ito. Maaari mo itong i-enable muli anumang oras."
 }

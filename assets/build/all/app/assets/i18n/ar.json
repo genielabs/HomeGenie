@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "التحكم في الجهاز",
   "ai_chat_capability_automation": "إنشاء وتحديث البرامج",
   "ai_chat_capability_widgets": "إنشاء الحاجيات",
-  "ai_chat_capabilities_hint": "تحدد القدرات الممكّنة الإجراءات التي يمكن للذكاء الاصطناعي تنفيذها. يتم تحديد المعلومات المشتركة بشكل منفصل في السياق. تنطبق التغييرات على الطلبات المستقبلية."
+  "ai_chat_capabilities_hint": "تحدد القدرات الممكّنة الإجراءات التي يمكن للذكاء الاصطناعي تنفيذها. يتم تحديد المعلومات المشتركة بشكل منفصل في السياق. تنطبق التغييرات على الطلبات المستقبلية.",
+  "notification_active": "الإشعارات النشطة",
+  "notification_archived": "الإشعارات المؤرشفة",
+  "notification_empty": "لا توجد إشعارات",
+  "notification_list": "قائمة الإشعارات",
+  "notification_archive": "أرشفة",
+  "notification_restore": "استعادة",
+  "notification_action_check": "تحقق من نتيجة الإجراء قبل إعادة المحاولة.",
+  "notification_genie_upgrade": "يتضمن Gemini Genie التحكم في الأجهزة وبرامج الأتمتة والویدجت. تظل إصدارات Genie السابقة متاحة. يمكنك تعطيلها عندما تكون مستعدًا؛ سيتم الاحتفاظ بإعداداتها وسجل الدردشة.",
+  "notification_disable_genies": "تعطيل إصدارات Genie السابقة",
+  "notification_disable_genies_confirm": "هل تريد تعطيل إصدارات Genie السابقة المحددة؟ سيتم الاحتفاظ بإعداداتها وسجل الدردشة الخاص بها. يمكنك إعادة تفعيلها في أي وقت."
 }

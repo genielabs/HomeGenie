@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Дабыл жазуы",
       "NVR.ContinuousRecording": "Үздіксіз жазу."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "HomeGenie ішінде құрылғыларды басқару, автоматтандыру бағдарламаларын жасау және виджеттер құрастыру үшін Google Gemini AI пайдаланыңыз. Чат мәзірінен бөлісетін мүмкіндіктер мен жүйе мәнмәтінін таңдаңыз.\nБұл мүмкіндікті қосу үшін жарамды API кілтін енгізіңіз. API кілтін https://aistudio.google.com/app/apikey сайтынан алыңыз.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API кілті",
+      "ConfigureOptions.ModelId": "Үлгі идентификаторы",
+      "ConfigureOptions.EnableDeepKnowledge": "Бұрынғы Deep Knowledge опциясы (тек үйлесімділік үшін)",
+      "ConfigureOptions.SystemInstructions": "Жүйелік нұсқаулар"
+    },
+
     "932": {
       "Title": "Егіздер Автоман",
       "Description": "Сіздің ақылды автоматтандыру менеджеріңіз. Табиғи тілді агенттік жұмыс процестеріне айналдырыңыз: ол кез келген тапсырманы орындау үшін C# бағдарламаларын нақты уақыт режимінде жазады, тексереді және орындайды. Бұл мүмкіндікті іске қосу үшін жарамды API кілтін енгізіңіз. Тегін API кілтін алу үшін https://aistudio.google.com/app/apikey сайтындағы нұсқауларды орындаңыз.",

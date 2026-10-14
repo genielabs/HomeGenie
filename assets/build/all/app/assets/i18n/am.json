@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "የመሣሪያ ቁጥጥር",
   "ai_chat_capability_automation": "ፕሮግራሞችን ይፍጠሩ እና ያዘምኑ",
   "ai_chat_capability_widgets": "መግብሮችን ይፍጠሩ",
-  "ai_chat_capabilities_hint": "የነቁ ችሎታዎች AI የትኞቹን እርምጃዎች ማከናወን እንደሚችል ይወስናሉ። የተጋራ መረጃ በአውድ ውስጥ በተናጠል ተመርጧል። ለውጦች ለወደፊት ጥያቄዎች ይተገበራሉ።"
+  "ai_chat_capabilities_hint": "የነቁ ችሎታዎች AI የትኞቹን እርምጃዎች ማከናወን እንደሚችል ይወስናሉ። የተጋራ መረጃ በአውድ ውስጥ በተናጠል ተመርጧል። ለውጦች ለወደፊት ጥያቄዎች ይተገበራሉ።",
+  "notification_active": "ንቁ ማሳወቂያዎች",
+  "notification_archived": "የተቀመጡ ማሳወቂያዎች",
+  "notification_empty": "ምንም ማሳወቂያዎች የሉም",
+  "notification_list": "የማሳወቂያ ዝርዝር",
+  "notification_archive": "በማህደር አስቀምጥ",
+  "notification_restore": "ወደነበረበት መልስ",
+  "notification_action_check": "እንደገና ከመሞከርዎ በፊት የእርምጃውን ውጤት ያረጋግጡ።",
+  "notification_genie_upgrade": "Gemini Genie የመሣሪያ ቁጥጥርን፣ የራስ-ሰር አሠራር ፕሮግራሞችን እና ዊጅቶችን ያካትታል። ቀዳሚ Genies እንደተገኙ ይቆያሉ። ዝግጁ ሲሆኑ ሊያሰናክሏቸው ይችላሉ፤ ቅንብሮቻቸው እና የውይይት ታሪካቸው ይቀመጣል።",
+  "notification_disable_genies": "ቀዳሚ Geniesን አሰናክል",
+  "notification_disable_genies_confirm": "የተዘረዘሩትን ቀዳሚ Genies ማሰናከል ይፈልጋሉ? ቅንብሮቻቸው እና የውይይት ታሪካቸው ይቀመጣል። በማንኛውም ጊዜ እንደገና ማንቃት ይችላሉ።"
 }

@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Opneem by alarm",
       "NVR.ContinuousRecording": "Deurlopende opname."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Gebruik Google Gemini AI om toestelle te beheer, outomatiseringsprogramme te skep en legstukke in HomeGenie te bou. Kies die vermoëns en stelselkonteks om te deel vanuit die kletskieslys.\nVoer 'n geldige API-sleutel in om hierdie funksie te aktiveer. Kry 'n API-sleutel by https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI-API-sleutel",
+      "ConfigureOptions.ModelId": "Model-ID",
+      "ConfigureOptions.EnableDeepKnowledge": "Verouderde Deep Knowledge-opsie (slegs vir versoenbaarheid)",
+      "ConfigureOptions.SystemInstructions": "Stelselinstruksies"
+    },
+
     "932": {
       "Title": "Tweeling-Automan",
       "Description": "Jou slim Outomatiseringsbestuurder. Verander natuurlike taal in agentiese werkvloeie: dit skryf, toets en voer C#-programme intyds uit om enige gegewe taak te voltooi. Om hierdie funksie te aktiveer, voer 'n geldige API-sleutel in. Volg die instruksies by https://aistudio.google.com/app/apikey om 'n gratis API-sleutel te kry.",

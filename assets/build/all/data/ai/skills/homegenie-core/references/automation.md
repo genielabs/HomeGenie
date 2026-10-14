@@ -11,6 +11,8 @@ The scheduler evaluates Setup repeatedly. Put one-time configuration (`Program.A
 - One-time automatic tasks: guard `Program.Run()` with a completion parameter, then publish completion in Main. Never use an unconditional trigger with a Main block that simply exits: the scheduler would repeatedly restart it.
 - Manual macros/scenes: put `Program.UseWidget("homegenie/generic/program")` inside the setup callback and omit automatic `Program.Run()`.
 
+To start another program explicitly, use `Program.Run(nameOrAddressString)`. `Program.WithName(name).Run()` only sets its Setup trigger flag. `Program.WaitFor(name)` has no timeout; orchestration that needs bounded waits must poll the helper's `IsRunning` with a deadline.
+
 Use `Pause(seconds)`, not `Thread.Sleep` or `time.sleep`, for interruptible delays. Loops must check `Program.IsRunning`. Clean up owned resources and report failures. Enabling or compiling a program does not prove that its data is ready.
 
 Main contains execution logic. Put C# helper classes, structs, helper methods and namespace imports in Context, not Main or Setup. Always provide complete, readable Setup/Main/Context fields required by the active response contract; never use placeholders or minified code.
@@ -27,7 +29,7 @@ For a namespace not included by default, such as `System.Xml`, use `#using Syste
 
 ## Data, configuration and communication
 
-Expose configurable preferences and secrets with `Program.AddOption` inside `Program.Setup`. Resolve program files with `Path.Combine(Data.GetFolder(), "file.ext")`, including paths in `editor:file:` options. `Data.GetFolder()` is isolated per program; use a named shared folder only when communication between programs is required and explicitly agreed in the solution.
+Expose configurable preferences and secrets with `Program.AddOption` inside `Program.Setup`. Resolve program files with `Path.Combine(Data.GetFolder(), "file.ext")`, including paths in `editor:file:<path>:markdown` options. The path belongs inside the FieldType, for example `Program.AddOption("ReportFile", "", "Report", $"editor:file:{reportPath}:markdown")`; `editor:file:text/markdown` is not a valid substitute. `Data.GetFolder()` is isolated per program; use a named shared folder only when communication between programs is required and explicitly agreed in the solution.
 
 Backend code calls `Api.Call`; widgets call `this.apiCall` and unwrap `data.response`. Do not confuse these APIs. To publish live values on the program module, use `Program.Emit(propertyName, value)`. Keep property names, addresses, types and units consistent with dependent widgets and emit initial values promptly.
 

@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Recordatio in Alarma",
       "NVR.ContinuousRecording": "Continua Registratio."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Utere Google Gemini AI ad instrumenta gubernanda, programmata automationis creanda, et vidgetas in HomeGenie aedificandas. Elige facultates et contextum systematis ad communicandum ex indice colloquii.\nInscribe clavem API validam ad hanc functionem excitandam. Clavem API impetra apud https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Clavis API Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID Exemplaris",
+      "ConfigureOptions.EnableDeepKnowledge": "Optio Deep Knowledge vetus (solum ad convenientiam)",
+      "ConfigureOptions.SystemInstructions": "Praecepta systematis"
+    },
+
     "932": {
       "Title": "Gemini Automan",
       "Description": "Administrator Automationis callidus tuus. Linguam naturalem in fluxus operandi agentes converte: programmata C# in tempore reali scribit, probat, et exsequitur ad quodvis negotium datum perficiendum. Ad hanc functionem activandam, clavem API validam inscribe. Instructiones apud https://aistudio.google.com/app/apikey sequere ut clavem API gratuitam accipias.",

@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "ບັນທຶກໃນເວລາປຸກ",
       "NVR.ContinuousRecording": "ການບັນທຶກຢ່າງຕໍ່ເນື່ອງ."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "ໃຊ້ Google Gemini AI ເພື່ອຄວບຄຸມອຸປະກອນ, ສ້າງໂປຣແກຣມອັດຕະໂນມັດ, ແລະ ສ້າງວິດເຈັດໃນ HomeGenie. ເລືອກຄວາມສາມາດ ແລະ ບໍລິບົດລະບົບທີ່ຈະແບ່ງປັນຈາກເມນູສົນທະນາ.\nປ້ອນລະຫັດ API ທີ່ຖືກຕ້ອງເພື່ອເປີດໃຊ້ຄຸນສົມບັດນີ້. ຮັບລະຫັດ API ໄດ້ທີ່ https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "ລະຫັດ API ຂອງ Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID ໂມເດວ",
+      "ConfigureOptions.EnableDeepKnowledge": "ຕົວເລືອກ Deep Knowledge ແບບເກົ່າ (ສຳລັບຄວາມເຂົ້າກັນໄດ້ເທົ່ານັ້ນ)",
+      "ConfigureOptions.SystemInstructions": "ຄຳແນະນຳລະບົບ"
+    },
+
     "932": {
       "Title": "ຈີມິໂນ ອໍໂຕແມນ",
       "Description": "ຜູ້ຈັດການອັດຕະໂນມັດອັດສະລິຍະຂອງທ່ານ. ປ່ຽນພາສາທຳມະຊາດໃຫ້ກາຍເປັນຂະບວນການເຮັດວຽກແບບຕົວແທນ: ມັນຂຽນ, ທົດສອບ ແລະ ປະຕິບັດໂປຣແກຣມ C# ໃນເວລາຈິງເພື່ອເຮັດສຳເລັດໜ້າວຽກໃດໜຶ່ງ. ເພື່ອເປີດໃຊ້ຄຸນສົມບັດນີ້, ໃຫ້ໃສ່ລະຫັດ API ທີ່ຖືກຕ້ອງ. ປະຕິບັດຕາມຄຳແນະນຳທີ່ https://aistudio.google.com/app/apikey ເພື່ອຮັບລະຫັດ API ຟຣີ.",

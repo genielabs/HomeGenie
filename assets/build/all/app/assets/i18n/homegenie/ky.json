@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Ойготкучту жаздыруу",
       "NVR.ContinuousRecording": "Үзгүлтүксүз жаздыруу."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "HomeGenie'де түзмөктөрдү башкаруу, автоматташтыруу программаларын жана виджеттерди түзүү үчүн Google Gemini AI колдонуңуз. Маек менюсунан бөлүшүлүүчү мүмкүнчүлүктөрдү жана тутумдук контекстти тандаңыз.\nБул функцияны иштетүү үчүн жарактуу API ачкычын киргизиңиз. API ачкычын https://aistudio.google.com/app/apikey сайтынан алыңыз.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API ачкычы",
+      "ConfigureOptions.ModelId": "Моделдин IDси",
+      "ConfigureOptions.EnableDeepKnowledge": "Deep Knowledge эски параметр (шайкештик үчүн гана)",
+      "ConfigureOptions.SystemInstructions": "Тутумдук нускамалар"
+    },
+
     "932": {
       "Title": "Gemini Automan",
       "Description": "Сиздин акылдуу автоматташтыруу менеджериңиз. Табигый тилди агенттик жумуш агымдарына айландырыңыз: ал каалаган тапшырманы аткаруу үчүн C# программаларын реалдуу убакыт режиминде жазат, текшерет жана аткарат. Бул функцияны иштетүү үчүн жарактуу API ачкычын киргизиңиз. Акысыз API ачкычын алуу үчүн https://aistudio.google.com/app/apikey дарегиндеги көрсөтмөлөрдү аткарыңыз.",

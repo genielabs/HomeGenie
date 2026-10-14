@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Opnam beim Alarm",
       "NVR.ContinuousRecording": "Kontinuéierlech Opnam."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Benotzt Google Gemini AI fir Apparater ze steieren, Automatiséierungsprogrammer ze kreéieren an Widgets an HomeGenie ze bauen. Wielt d'Fäegkeeten an de Systemkontext fir aus dem Chat-Menü ze deelen.\nGitt e gültegen API-Schlëssel an, fir dës Funktioun z'aktivéieren. Kritt en API-Schlëssel op https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API-Schlëssel",
+      "ConfigureOptions.ModelId": "Modell-ID",
+      "ConfigureOptions.EnableDeepKnowledge": "Legacy Deep Knowledge-Optioun (nëmme Kompatibilitéit)",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktiounen"
+    },
+
     "932": {
       "Title": "Gemini Automan",
       "Description": "Äre Smart Automation Manager. Maacht natierlech Sprooch an Agent-Workflows: et schreift, test an ausféiert C# Programmer a Echtzäit fir all Aufgab ofzeschléissen. Fir dës Funktioun z'aktivéieren, gitt e gültege API-Schlëssel an. Follegt den Instruktiounen op https://aistudio.google.com/app/apikey fir e gratis API-Schlëssel ze kréien.",

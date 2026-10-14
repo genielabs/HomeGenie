@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "デバイス制御",
   "ai_chat_capability_automation": "プログラムの作成と更新",
   "ai_chat_capability_widgets": "ウィジェットの作成",
-  "ai_chat_capabilities_hint": "有効な機能によって、AI が実行できるアクションが決まります。共有情報はコンテキストで個別に選択されます。変更は今後のリクエストに適用されます。"
+  "ai_chat_capabilities_hint": "有効な機能によって、AI が実行できるアクションが決まります。共有情報はコンテキストで個別に選択されます。変更は今後のリクエストに適用されます。",
+  "notification_active": "現在のアクティブな通知",
+  "notification_archived": "アーカイブされた通知",
+  "notification_empty": "通知はありません",
+  "notification_list": "通知一覧",
+  "notification_archive": "アーカイブ",
+  "notification_restore": "復元",
+  "notification_action_check": "再試行する前に処理結果をご確認ください。",
+  "notification_genie_upgrade": "Gemini Genieには、デバイス制御、自動化プログラム、ウィジェットが含まれます。以前のGenieも引き続き利用可能です。準備ができ次第無効にできます。設定やチャット履歴は保持されます。",
+  "notification_disable_genies": "以前のGenieを無効化",
+  "notification_disable_genies_confirm": "リストにある以前のGenieを無効にしますか？設定とチャット履歴は保持されます。いつでも再度有効にできます。"
 }

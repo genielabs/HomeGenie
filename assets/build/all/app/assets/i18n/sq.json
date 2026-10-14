@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Kontrolli i pajisjes",
   "ai_chat_capability_automation": "Krijoni dhe përditësoni programe",
   "ai_chat_capability_widgets": "Krijo miniaplikacione",
-  "ai_chat_capabilities_hint": "Aftësitë e aktivizuara përcaktojnë se cilat veprime mund të kryejë AI. Informacioni i përbashkët zgjidhet veçmas në Kontekst. Ndryshimet zbatohen për kërkesat e ardhshme."
+  "ai_chat_capabilities_hint": "Aftësitë e aktivizuara përcaktojnë se cilat veprime mund të kryejë AI. Informacioni i përbashkët zgjidhet veçmas në Kontekst. Ndryshimet zbatohen për kërkesat e ardhshme.",
+  "notification_active": "Njoftime aktive",
+  "notification_archived": "Njoftime të arkivuara",
+  "notification_empty": "Nuk ka njoftime",
+  "notification_list": "Lista e njoftimeve",
+  "notification_archive": "Arkivo",
+  "notification_restore": "Rikthe",
+  "notification_action_check": "Kontrolloni rezultatin e veprimit përpara se të provoni përsëri.",
+  "notification_genie_upgrade": "Gemini Genie përfshin kontrollin e pajisjeve, programet e automatizimit dhe miniaplikacionet. Genies e mëparshëm mbeten të disponueshëm. Mund t'i çaktivizoni kur të jeni gati; cilësimet dhe historiku i bisedave do të ruhen.",
+  "notification_disable_genies": "Çaktivizo Genies e mëparshëm",
+  "notification_disable_genies_confirm": "Të çaktivizohen Genies e mëparshëm të listuar? Cilësimet dhe historiku i bisedave të tyre do të ruhen. Mund t'i aktivizoni përsëri në çdo kohë."
 }

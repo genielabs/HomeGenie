@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Irrekordja fuq Allarm",
       "NVR.ContinuousRecording": "Reġistrazzjoni Kontinwa."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Uża Google Gemini AI biex tikkontrolla apparati, toħloq programmi ta' awtomazzjoni, u tibni widgets f'HomeGenie. Agħżel il-kapaċitajiet u l-kuntest tas-sistema x'taqsam mill-menu taċ-chat.\nDaħħal ċavetta API valida biex tattiva din il-karatteristika. Ikseb ċavetta API fuq https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Ċavetta API ta' Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID tal-Mudell",
+      "ConfigureOptions.EnableDeepKnowledge": "Għażla legata Deep Knowledge (għall-kompatibbiltà biss)",
+      "ConfigureOptions.SystemInstructions": "Struzzjonijiet tas-sistema"
+    },
+
     "932": {
       "Title": "Awtoman tal-Gemini",
       "Description": "Il-Maniġer tal-Awtomazzjoni intelliġenti tiegħek. Ibdel il-lingwa naturali f'flussi tax-xogħol aġentiċi: jikteb, jittestja, u jesegwixxi programmi C# f'ħin reali biex ilesti kwalunkwe kompitu partikolari. Biex tattiva din il-karatteristika, daħħal ċavetta API valida. Segwi l-istruzzjonijiet fuq https://aistudio.google.com/app/apikey biex tikseb ċavetta API b'xejn.",

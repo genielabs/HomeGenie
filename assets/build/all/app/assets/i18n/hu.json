@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Eszközvezérlés",
   "ai_chat_capability_automation": "Programok létrehozása és frissítése",
   "ai_chat_capability_widgets": "Hozzon létre widgeteket",
-  "ai_chat_capabilities_hint": "Az engedélyezett képességek határozzák meg, hogy az AI mely műveleteket hajthatja végre. A megosztott információkat a Kontextusban külön választja ki. A változások a jövőbeni kérésekre vonatkoznak."
+  "ai_chat_capabilities_hint": "Az engedélyezett képességek határozzák meg, hogy az AI mely műveleteket hajthatja végre. A megosztott információkat a Kontextusban külön választja ki. A változások a jövőbeni kérésekre vonatkoznak.",
+  "notification_active": "Aktív értesítések",
+  "notification_archived": "Archivált értesítések",
+  "notification_empty": "Nincsenek értesítések",
+  "notification_list": "Értesítési lista",
+  "notification_archive": "Archiválás",
+  "notification_restore": "Visszaállítás",
+  "notification_action_check": "Újrapróbálkozás előtt ellenőrizze a művelet eredményét.",
+  "notification_genie_upgrade": "A Gemini Genie tartalmazza az eszközvezérlést, az automatizálási programokat és a widgeteket. A korábbi Genie-k továbbra is elérhetők maradnak. Bármikor letilthatja őket; a beállításaik és csevegési előzményeik megmaradnak.",
+  "notification_disable_genies": "Korábbi Genie-k letiltása",
+  "notification_disable_genies_confirm": "Letiltja a listázott korábbi Genie-ket? A beállításaik és csevegési előzményeik megmaradnak. Bármikor újra engedélyezheti őket."
 }

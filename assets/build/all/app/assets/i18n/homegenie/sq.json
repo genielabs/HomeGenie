@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Regjistro në alarm",
       "NVR.ContinuousRecording": "Regjistrim i vazhdueshëm."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Përdorni Google Gemini AI për të kontrolluar pajisjet, për të krijuar programe automatizimi dhe për të ndërtuar miniaplikacione në HomeGenie. Zgjidhni aftësitë dhe kontekstin e sistemit për t'i ndarë nga menyja e bisedës.\nVendosni një çelës të vlefshëm API për të aktivizuar këtë veçori. Merrni një çelës API në https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Çelësi API i Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID-ja e modelit",
+      "ConfigureOptions.EnableDeepKnowledge": "Opsioni i trashëguar Deep Knowledge (vetëm për përputhshmëri)",
+      "ConfigureOptions.SystemInstructions": "Udhëzimet e sistemit"
+    },
+
     "932": {
       "Title": "Automani i Binjakëve",
       "Description": "Menaxheri juaj inteligjent i automatizimit. Shndërrojeni gjuhën natyrore në rrjedha pune agjentike: ajo shkruan, teston dhe ekzekuton programe C# në kohë reale për të përfunduar çdo detyrë të caktuar. Për të aktivizuar këtë funksion, futni një çelës API të vlefshëm. Ndiqni udhëzimet në https://aistudio.google.com/app/apikey për të marrë një çelës API falas.",

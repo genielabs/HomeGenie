@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Raketo an-tsoratra rehefa misy fanairana",
       "NVR.ContinuousRecording": "Fandraketana mitohy."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Mampiasà Google Gemini AI hifehezana fitaovana, hamoronana fandaharana automatique, ary hanamboarana widget ao amin'ny HomeGenie. Safidio avy amin'ny menio resaka ny fahaiza-manao sy ny toe-javatry ny rafitra hozaraina.\nMampidira fanalahidy API manan-kery mba hampiasana ity endri-javatra ity. Mahazoa fanalahidy API ao amin'ny https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Fanalahidy API Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID Modely",
+      "ConfigureOptions.EnableDeepKnowledge": "Safidy Deep Knowledge lany andro (ho an'ny fifanarahana ihany)",
+      "ConfigureOptions.SystemInstructions": "Torolalana amin'ny rafitra"
+    },
+
     "932": {
       "Title": "Gemini Automan",
       "Description": "Ny mpitantana ny automation marani-tsaina anao. Avadiho ho lasa workflows agentic ny fiteny voajanahary: manoratra, manandrana ary manatanteraka programa C# amin'ny fotoana tena izy izy io mba hamitana izay asa omena. Mba hampandehanana ity endri-javatra ity dia ampidiro ny lakile API manan-kery. Araho ny torolàlana ao amin'ny https://aistudio.google.com/app/apikey mba hahazoana lakile API maimaim-poana.",

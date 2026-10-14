@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "Gailuaren kontrola",
   "ai_chat_capability_automation": "Programak sortu eta eguneratu",
   "ai_chat_capability_widgets": "Sortu widget-ak",
-  "ai_chat_capabilities_hint": "Gaitutako gaitasunek AIak zein ekintza egin ditzakeen zehazten dute. Partekatutako informazioa bereizita hautatzen da Testuinguruan. Aldaketak etorkizuneko eskaerei aplikatzen zaizkie."
+  "ai_chat_capabilities_hint": "Gaitutako gaitasunek AIak zein ekintza egin ditzakeen zehazten dute. Partekatutako informazioa bereizita hautatzen da Testuinguruan. Aldaketak etorkizuneko eskaerei aplikatzen zaizkie.",
+  "notification_active": "Jakinarazpen aktiboak",
+  "notification_archived": "Artxibatutako jakinarazpenak",
+  "notification_empty": "Ez dago jakinarazpenik",
+  "notification_list": "Jakinarazpenen zerrenda",
+  "notification_archive": "Artxibatu",
+  "notification_restore": "Berreskuratu",
+  "notification_action_check": "Egiaztatu ekintzaren emaitza berriro saiatu aurretik.",
+  "notification_genie_upgrade": "Gemini Genie-k gailuen kontrola, automatizazio-programak eta widget-ak barne hartzen ditu. Aurreko Genies erabilgarri jarraitzen dute. Prest zaudenean desgaitu ditzakezu; haien ezarpenak eta txat-historia gorde egingo dira.",
+  "notification_disable_genies": "Desgaitu aurreko Genies",
+  "notification_disable_genies_confirm": "Zerrendatutako aurreko Genies desgaitu nahi dituzu? Haien ezarpenak eta txat-historia gorde egingo dira. Edozein unetan gaitu ditzakezu berriro."
 }

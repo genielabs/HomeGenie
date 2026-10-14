@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "הקלטה בעת אזעקה",
       "NVR.ContinuousRecording": "הקלטה רציפה."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "השתמש ב-Google Gemini AI כדי לשלוט במכשירים, ליצור תוכניות אוטומציה ולבנות ווידג'טים ב-HomeGenie. בחר את היכולות ואת הקשר המערכת לשיתוף מתוך תפריט הצ'אט.\nהזן מפתח API חוקי כדי להפעיל תכונה זו. קבל מפתח API בכתובת https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "מפתח API של Google Gemini AI",
+      "ConfigureOptions.ModelId": "מזהה מודל",
+      "ConfigureOptions.EnableDeepKnowledge": "אפשרות Deep Knowledge מדור קודם (לתאימות בלבד)",
+      "ConfigureOptions.SystemInstructions": "הוראות מערכת"
+    },
+
     "932": {
       "Title": "אוטומן ג'מיני",
       "Description": "מנהל האוטומציה החכם שלך. הפוך שפה טבעית לזרימות עבודה סוכניות: הוא כותב, בודק ומבצע תוכניות C# בזמן אמת כדי להשלים כל משימה נתונה. כדי להפעיל תכונה זו, הזן מפתח API תקף. פעל לפי ההוראות בכתובת https://aistudio.google.com/app/apikey כדי לקבל מפתח API בחינם.",

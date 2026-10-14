@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "警報錄音",
       "NVR.ContinuousRecording": "連續錄製。"
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "使用 Google Gemini AI 在 HomeGenie 中控制裝置、建立自動化程式並建構小工具。從聊天功能表中選取要共用的功能與系統上下文。\n輸入有效的 API 金鑰以啟用此功能。前往 https://aistudio.google.com/app/apikey 取得 API 金鑰。",
+      "ConfigureOptions.ApiKey": "Google Gemini AI API 金鑰",
+      "ConfigureOptions.ModelId": "模型 ID",
+      "ConfigureOptions.EnableDeepKnowledge": "舊版 Deep Knowledge 選項（僅供相容性使用）",
+      "ConfigureOptions.SystemInstructions": "系統指令"
+    },
+
     "932": {
       "Title": "雙子座自動人",
       "Description": "您的智慧自動化管理器。將自然語言轉換為智能體工作流程：它能即時編寫、測試和執行 C# 程序，完成任何給定任務。若要啟動此功能，請輸入有效的 API 金鑰。請造訪 https://aistudio.google.com/app/apikey 並依照指示取得免費 API 金鑰。",

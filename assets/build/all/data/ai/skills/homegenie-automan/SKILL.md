@@ -116,7 +116,7 @@ You have full awareness of the system and access to powerful orchestration APIs.
     // 3. Once the agent exists, run it and wait for completion
     if (scoutAgent != null && Program.IsRunning) {
         Program.Emit("Automan.Program.Message", $"Waiting for {scoutName} to complete its job...");
-        scoutAgent.Run(); // Trigger the sub-agent
+        Program.Run(scoutName); // Explicitly start the sub-agent; helper.Run() only sets its Setup flag
         Program.WaitFor(scoutName); // Block until the sub-agent finishes
     }
     ```

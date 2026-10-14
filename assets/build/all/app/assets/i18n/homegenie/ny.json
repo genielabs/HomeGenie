@@ -400,6 +400,15 @@
       "NVR.RecordOnAlarm": "Lembani pa Alamu",
       "NVR.ContinuousRecording": "Kujambula Kosalekeza."
     },
+    "933": {
+      "Title": "Gemini Genie",
+      "Description": "Gwiritsani ntchito Google Gemini AI poyang'anira zipangizo, kupanga mapulogalamu a zodziyimira zokha, ndi kupanga ma widget mu HomeGenie. Sankhani luso ndi nkhani ya dongosolo logawana kuchokera pa menyu ya macheza.\nLowetsani kiyi yovomerezeka ya API kuti mutsegule mbaliyi. Pezani kiyi ya API pa https://aistudio.google.com/app/apikey.",
+      "ConfigureOptions.ApiKey": "Kiyi ya API ya Google Gemini AI",
+      "ConfigureOptions.ModelId": "ID ya Model",
+      "ConfigureOptions.EnableDeepKnowledge": "Chosankha chachikale cha Deep Knowledge (chogwirizana chokha)",
+      "ConfigureOptions.SystemInstructions": "Malangizo a dongosolo"
+    },
+
     "932": {
       "Title": "Gemini Automan",
       "Description": "Woyang'anira wanu wanzeru wa Automation. Sinthani chilankhulo chachilengedwe kukhala ntchito zogwirira ntchito: chimalemba, kuyesa, ndikuyendetsa mapulogalamu a C# nthawi yeniyeni kuti amalize ntchito iliyonse. Kuti muyambitse izi, lowetsani kiyi yovomerezeka ya API. Tsatirani malangizo omwe ali pa https://aistudio.google.com/app/apikey kuti mupeze kiyi ya API yaulere.",

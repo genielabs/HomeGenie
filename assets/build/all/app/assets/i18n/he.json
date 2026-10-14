@@ -615,5 +615,15 @@
   "ai_chat_capability_device": "שליטה במכשיר",
   "ai_chat_capability_automation": "צור ועדכן תוכניות",
   "ai_chat_capability_widgets": "צור ווידג'טים",
-  "ai_chat_capabilities_hint": "היכולות המופעלות קובעות אילו פעולות ה-AI יכול לבצע. מידע משותף נבחר בנפרד בהקשר. השינויים חלים על בקשות עתידיות."
+  "ai_chat_capabilities_hint": "היכולות המופעלות קובעות אילו פעולות ה-AI יכול לבצע. מידע משותף נבחר בנפרד בהקשר. השינויים חלים על בקשות עתידיות.",
+  "notification_active": "הודעות פעילות",
+  "notification_archived": "הודעות בארכיון",
+  "notification_empty": "אין הודעות",
+  "notification_list": "רשימת הודעות",
+  "notification_archive": "העברה לארכיון",
+  "notification_restore": "שחזור",
+  "notification_action_check": "יש לבדוק את תוצאת הפעולה לפני שתנסה שוב.",
+  "notification_genie_upgrade": "‏Gemini Genie כולל בקרת מכשירים, תוכניות אוטומציה ווידג'טים. גרסאות Genie קודמות נשארות זמינות. תוכל להשבית אותן כשתהיה מוכן; ההגדרות והיסטוריית הצ'אט שלהן יישמרו.",
+  "notification_disable_genies": "השבתת גרסאות Genie קודמות",
+  "notification_disable_genies_confirm": "להשבית את גרסאות Genie הקודמות שברשימה? ההגדרות והיסטוריית הצ'אט שלהן יישמרו. תוכל להפעיל אותן מחדש בכל עת."
 }
