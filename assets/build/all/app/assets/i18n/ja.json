@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "読み上げ中",
   "service_restart_timeout": "サービスはまだ再起動していません。このウィンドウを閉じて、サーバーを確認してください。",
   "ai_chat_move_left": "チャットを左に移動",
-  "ai_chat_move_right": "チャットを右に移動"
+  "ai_chat_move_right": "チャットを右に移動",
+  "ai_chat_context": "コンテキスト",
+  "ai_chat_context_devices": "デバイス",
+  "ai_chat_context_widgets": "ウィジェット",
+  "ai_chat_context_programs": "自動化プログラム",
+  "ai_chat_context_dashboards": "ダッシュボード",
+  "ai_chat_context_deep": "技術リファレンス (深い知識)",
+  "ai_chat_context_hint": "今後のリクエストに適用されます。選択された情報はアクティブな AI と共有されます。情報を共有しても、アクションの権限は付与されません。各コンテキスト プロファイルには個別の AI 会話コンテキストがあります。目に見える履歴は保持されます。",
+  "ai_chat_capabilities": "能力",
+  "ai_chat_capability_device": "デバイス制御",
+  "ai_chat_capability_automation": "プログラムの作成と更新",
+  "ai_chat_capability_widgets": "ウィジェットの作成",
+  "ai_chat_capabilities_hint": "有効な機能によって、AI が実行できるアクションが決まります。共有情報はコンテキストで個別に選択されます。変更は今後のリクエストに適用されます。"
 }

@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Binabasa nang malakas",
   "service_restart_timeout": "Hindi pa nagre-restart ang serbisyo. Isara ang window na ito at suriin ang server.",
   "ai_chat_move_left": "Ilipat ang chat sa kaliwa",
-  "ai_chat_move_right": "Ilipat ang chat sa kanan"
+  "ai_chat_move_right": "Ilipat ang chat sa kanan",
+  "ai_chat_context": "Konteksto",
+  "ai_chat_context_devices": "Mga device",
+  "ai_chat_context_widgets": "Mga Widget",
+  "ai_chat_context_programs": "Mga programa sa automation",
+  "ai_chat_context_dashboards": "Mga dashboard",
+  "ai_chat_context_deep": "Mga teknikal na sanggunian (Deep Knowledge)",
+  "ai_chat_context_hint": "Nalalapat sa mga kahilingan sa hinaharap. Ang napiling impormasyon ay ibinabahagi sa aktibong AI. Ang pagbabahagi ng impormasyon ay hindi nagbibigay ng mga pahintulot sa pagkilos. Ang bawat profile sa konteksto ay may hiwalay na konteksto ng pag-uusap sa AI; ang nakikitang kasaysayan ay itinatago.",
+  "ai_chat_capabilities": "Mga kakayahan",
+  "ai_chat_capability_device": "Kontrol ng device",
+  "ai_chat_capability_automation": "Lumikha at mag-update ng mga programa",
+  "ai_chat_capability_widgets": "Lumikha ng mga widget",
+  "ai_chat_capabilities_hint": "Tinutukoy ng mga naka-enable na kakayahan kung aling mga pagkilos ang magagawa ng AI. Ang nakabahaging impormasyon ay pinili nang hiwalay sa Konteksto. Nalalapat ang mga pagbabago sa mga kahilingan sa hinaharap."
 }

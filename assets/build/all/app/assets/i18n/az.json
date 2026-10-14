@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Ucadan oxunur",
   "service_restart_timeout": "Xidmət hələ yenidən başlamayıb. Bu pəncərəni bağlayın və serveri yoxlayın.",
   "ai_chat_move_left": "Söhbəti sola köçürün",
-  "ai_chat_move_right": "Söhbəti sağa köçürün"
+  "ai_chat_move_right": "Söhbəti sağa köçürün",
+  "ai_chat_context": "Kontekst",
+  "ai_chat_context_devices": "Cihazlar",
+  "ai_chat_context_widgets": "Vidjetlər",
+  "ai_chat_context_programs": "Avtomatlaşdırma proqramları",
+  "ai_chat_context_dashboards": "İdarə panelləri",
+  "ai_chat_context_deep": "Texniki arayışlar (dərin bilik)",
+  "ai_chat_context_hint": "Gələcək sorğulara aiddir. Seçilmiş məlumat aktiv AI ilə paylaşılır. Məlumatın paylaşılması əməliyyat icazəsi vermir. Hər bir kontekst profilinin ayrıca AI söhbət konteksti var; görünən tarix saxlanılır.",
+  "ai_chat_capabilities": "Bacarıqlar",
+  "ai_chat_capability_device": "Cihaz nəzarəti",
+  "ai_chat_capability_automation": "Proqramlar yaradın və yeniləyin",
+  "ai_chat_capability_widgets": "Vidjetlər yaradın",
+  "ai_chat_capabilities_hint": "Aktivləşdirilmiş imkanlar AI-nin hansı hərəkətləri yerinə yetirə biləcəyini müəyyənləşdirir. Paylaşılan məlumat Kontekstdə ayrıca seçilir. Dəyişikliklər gələcək sorğulara şamil edilir."
 }

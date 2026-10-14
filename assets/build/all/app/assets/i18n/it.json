@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Lettura in corso",
   "service_restart_timeout": "Il servizio non risulta ancora riavviato. Chiudi questa finestra e controlla il backend.",
   "ai_chat_move_left": "Sposta la chat a sinistra",
-  "ai_chat_move_right": "Sposta la chat a destra"
+  "ai_chat_move_right": "Sposta la chat a destra",
+  "ai_chat_context": "Contesto",
+  "ai_chat_context_devices": "Dispositivi",
+  "ai_chat_context_widgets": "Widget",
+  "ai_chat_context_programs": "Programmi di automazione",
+  "ai_chat_context_dashboards": "Dashboard",
+  "ai_chat_context_deep": "Riferimenti tecnici (Deep Knowledge)",
+  "ai_chat_context_hint": "Si applica alle richieste successive. Le informazioni selezionate vengono condivise con la IA attiva. Condividere informazioni non autorizza azioni. Ogni profilo di contesto ha un contesto di conversazione separato per la IA; la cronologia visibile viene mantenuta.",
+  "ai_chat_capabilities": "Funzionalità",
+  "ai_chat_capability_device": "Controllo dei dispositivi",
+  "ai_chat_capability_automation": "Creazione e aggiornamento programmi",
+  "ai_chat_capability_widgets": "Creazione di widget",
+  "ai_chat_capabilities_hint": "Le funzionalità abilitate determinano quali azioni può svolgere la IA. Le informazioni condivise si selezionano separatamente nel menu Contesto. Le modifiche si applicano alle richieste successive."
 }

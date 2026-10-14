@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "กำลังอ่านออกเสียง",
   "service_restart_timeout": "บริการยังไม่เริ่มใหม่ ปิดหน้าต่างนี้แล้วตรวจสอบเซิร์ฟเวอร์",
   "ai_chat_move_left": "ย้ายแชทไปทางซ้าย",
-  "ai_chat_move_right": "ย้ายแชทไปทางขวา"
+  "ai_chat_move_right": "ย้ายแชทไปทางขวา",
+  "ai_chat_context": "บริบท",
+  "ai_chat_context_devices": "อุปกรณ์",
+  "ai_chat_context_widgets": "วิดเจ็ต",
+  "ai_chat_context_programs": "โปรแกรมอัตโนมัติ",
+  "ai_chat_context_dashboards": "แดชบอร์ด",
+  "ai_chat_context_deep": "ข้อมูลอ้างอิงทางเทคนิค (ความรู้เชิงลึก)",
+  "ai_chat_context_hint": "ใช้กับคำขอในอนาคต ข้อมูลที่เลือกจะถูกแชร์กับ AI ที่ใช้งานอยู่ การแชร์ข้อมูลไม่ได้ให้สิทธิ์ในการดำเนินการ แต่ละโปรไฟล์บริบทมีบริบทการสนทนา AI แยกกัน ประวัติศาสตร์ที่มองเห็นได้จะถูกเก็บไว้",
+  "ai_chat_capabilities": "ความสามารถ",
+  "ai_chat_capability_device": "การควบคุมอุปกรณ์",
+  "ai_chat_capability_automation": "สร้างและอัพเดตโปรแกรม",
+  "ai_chat_capability_widgets": "สร้างวิดเจ็ต",
+  "ai_chat_capabilities_hint": "ความสามารถที่เปิดใช้งานจะกำหนดว่า AI จะดำเนินการใดได้บ้าง ข้อมูลที่แชร์จะถูกเลือกแยกกันในบริบท การเปลี่ยนแปลงมีผลกับคำขอในอนาคต"
 }

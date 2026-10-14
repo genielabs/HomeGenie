@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Felolvasás folyamatban",
   "service_restart_timeout": "A szolgáltatás még nem indult újra. Zárja be ezt az ablakot, és ellenőrizze a szervert.",
   "ai_chat_move_left": "Mozgassa a csevegést balra",
-  "ai_chat_move_right": "Mozgassa a csevegést jobbra"
+  "ai_chat_move_right": "Mozgassa a csevegést jobbra",
+  "ai_chat_context": "Kontextus",
+  "ai_chat_context_devices": "Eszközök",
+  "ai_chat_context_widgets": "Widgetek",
+  "ai_chat_context_programs": "Automatizálási programok",
+  "ai_chat_context_dashboards": "Irányítópultok",
+  "ai_chat_context_deep": "Műszaki referenciák (mély tudás)",
+  "ai_chat_context_hint": "A jövőbeni kérésekre vonatkozik. A kiválasztott információkat megosztja az aktív MI-vel. Az információk megosztása nem ad műveleti engedélyt. Minden kontextusprofilnak külön AI beszélgetési kontextusa van; a látható történelmet megőrzik.",
+  "ai_chat_capabilities": "Képességek",
+  "ai_chat_capability_device": "Eszközvezérlés",
+  "ai_chat_capability_automation": "Programok létrehozása és frissítése",
+  "ai_chat_capability_widgets": "Hozzon létre widgeteket",
+  "ai_chat_capabilities_hint": "Az engedélyezett képességek határozzák meg, hogy az AI mely műveleteket hajthatja végre. A megosztott információkat a Kontextusban külön választja ki. A változások a jövőbeni kérésekre vonatkoznak."
 }

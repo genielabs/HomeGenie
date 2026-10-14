@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Čitanje naglas",
   "service_restart_timeout": "Usluga se još nije ponovno pokrenula. Zatvorite ovaj prozor i provjerite poslužitelj.",
   "ai_chat_move_left": "Pomakni chat ulijevo",
-  "ai_chat_move_right": "Pomakni chat udesno"
+  "ai_chat_move_right": "Pomakni chat udesno",
+  "ai_chat_context": "Kontekst",
+  "ai_chat_context_devices": "Uređaji",
+  "ai_chat_context_widgets": "Widgeti",
+  "ai_chat_context_programs": "Programi za automatizaciju",
+  "ai_chat_context_dashboards": "Nadzorne ploče",
+  "ai_chat_context_deep": "Tehničke reference (duboko znanje)",
+  "ai_chat_context_hint": "Primjenjuje se na buduće zahtjeve. Odabrane informacije dijele se s aktivnom umjetnom inteligencijom. Dijeljenje informacija ne daje dopuštenja za radnje. Svaki kontekstni profil ima zasebni kontekst AI razgovora; čuva se vidljiva povijest.",
+  "ai_chat_capabilities": "Sposobnosti",
+  "ai_chat_capability_device": "Kontrola uređaja",
+  "ai_chat_capability_automation": "Stvaranje i ažuriranje programa",
+  "ai_chat_capability_widgets": "Stvorite widgete",
+  "ai_chat_capabilities_hint": "Omogućene mogućnosti određuju koje radnje AI može izvesti. Dijeljene informacije odabiru se zasebno u Kontekstu. Promjene se odnose na buduće zahtjeve."
 }

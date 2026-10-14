@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Skaitoma balsu",
   "service_restart_timeout": "Paslauga dar nepasileido iš naujo. Uždarykite šį langą ir patikrinkite serverį.",
   "ai_chat_move_left": "Perkelkite pokalbį į kairę",
-  "ai_chat_move_right": "Perkelkite pokalbį į dešinę"
+  "ai_chat_move_right": "Perkelkite pokalbį į dešinę",
+  "ai_chat_context": "Kontekstas",
+  "ai_chat_context_devices": "Prietaisai",
+  "ai_chat_context_widgets": "Valdikliai",
+  "ai_chat_context_programs": "Automatizavimo programos",
+  "ai_chat_context_dashboards": "Prietaisų skydeliai",
+  "ai_chat_context_deep": "Techninės nuorodos (gilios žinios)",
+  "ai_chat_context_hint": "Taikoma būsimoms užklausoms. Pasirinkta informacija bendrinama su aktyviu AI. Dalijimasis informacija nesuteikia veiksmų leidimo. Kiekvienas konteksto profilis turi atskirą AI pokalbio kontekstą; saugoma matoma istorija.",
+  "ai_chat_capabilities": "Pajėgumai",
+  "ai_chat_capability_device": "Įrenginio valdymas",
+  "ai_chat_capability_automation": "Kurti ir atnaujinti programas",
+  "ai_chat_capability_widgets": "Kurti valdiklius",
+  "ai_chat_capabilities_hint": "Įgalintos galimybės nustato, kokius veiksmus AI gali atlikti. Bendrinama informacija pasirenkama atskirai kontekste. Pakeitimai taikomi būsimoms užklausoms."
 }

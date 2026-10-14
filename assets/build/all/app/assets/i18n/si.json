@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "හඬ නඟා කියවමින්",
   "service_restart_timeout": "සේවාව තවමත් නැවත ආරම්භ වී නැත. මෙම කවුළුව වසා සේවාදායකය පරීක්ෂා කරන්න.",
   "ai_chat_move_left": "කතාබස් වමට ගෙන යන්න",
-  "ai_chat_move_right": "කතාබස් දකුණට ගෙන යන්න"
+  "ai_chat_move_right": "කතාබස් දකුණට ගෙන යන්න",
+  "ai_chat_context": "සන්දර්භය",
+  "ai_chat_context_devices": "උපාංග",
+  "ai_chat_context_widgets": "විජට්",
+  "ai_chat_context_programs": "ස්වයංක්‍රීය වැඩසටහන්",
+  "ai_chat_context_dashboards": "උපකරණ පුවරු",
+  "ai_chat_context_deep": "තාක්ෂණික යොමු කිරීම් (ගැඹුරු දැනුම)",
+  "ai_chat_context_hint": "අනාගත ඉල්ලීම් සඳහා අදාළ වේ. තෝරාගත් තොරතුරු සක්‍රිය AI සමඟ බෙදා ගනී. තොරතුරු බෙදාගැනීම ක්‍රියා අවසර ලබා නොදේ. සෑම සන්දර්භය පැතිකඩකටම වෙනම AI සංවාද සන්දර්භයක් ඇත; දෘශ්‍ය ඉතිහාසය තබා ඇත.",
+  "ai_chat_capabilities": "හැකියාවන්",
+  "ai_chat_capability_device": "උපාංග පාලනය",
+  "ai_chat_capability_automation": "වැඩසටහන් සාදන්න සහ යාවත්කාලීන කරන්න",
+  "ai_chat_capability_widgets": "විජට් සාදන්න",
+  "ai_chat_capabilities_hint": "සක්‍රීය හැකියාවන් මගින් AI හට කළ හැකි ක්‍රියා තීරණය කරයි. බෙදාගත් තොරතුරු සන්දර්භය තුළ වෙන වෙනම තෝරා ඇත. අනාගත ඉල්ලීම් සඳහා වෙනස්කම් අදාළ වේ."
 }

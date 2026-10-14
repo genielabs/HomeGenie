@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "正在朗读",
   "service_restart_timeout": "服务尚未重新启动。请关闭此窗口并检查服务器。",
   "ai_chat_move_left": "将聊天内容移至左侧",
-  "ai_chat_move_right": "将聊天移至右侧"
+  "ai_chat_move_right": "将聊天移至右侧",
+  "ai_chat_context": "背景",
+  "ai_chat_context_devices": "设备",
+  "ai_chat_context_widgets": "小部件",
+  "ai_chat_context_programs": "自动化程序",
+  "ai_chat_context_dashboards": "仪表板",
+  "ai_chat_context_deep": "技术参考（深度知识）",
+  "ai_chat_context_hint": "适用于将来的请求。选定的信息与主动人工智能共享。共享信息并不授予操作权限。每个上下文配置文件都有一个单独的 AI 对话上下文；可见的历史被保留。",
+  "ai_chat_capabilities": "能力",
+  "ai_chat_capability_device": "设备控制",
+  "ai_chat_capability_automation": "创建和更新程序",
+  "ai_chat_capability_widgets": "创建小部件",
+  "ai_chat_capabilities_hint": "启用的功能决定了人工智能可以执行哪些操作。共享信息是在Context中单独选择的。更改适用于未来的请求。"
 }

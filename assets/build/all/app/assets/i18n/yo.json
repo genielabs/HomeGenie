@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Ń kà sókè",
   "service_restart_timeout": "Iṣẹ́ náà kò tíì tún bẹ̀rẹ̀. Pa fèrèsé yìí dé kí o sì ṣàyẹ̀wò olupin.",
   "ai_chat_move_left": "Gbe iwiregbe si osi",
-  "ai_chat_move_right": "Gbe iwiregbe si ọtun"
+  "ai_chat_move_right": "Gbe iwiregbe si ọtun",
+  "ai_chat_context": "Atokọ",
+  "ai_chat_context_devices": "Awọn ẹrọ",
+  "ai_chat_context_widgets": "Awọn ẹrọ ailorukọ",
+  "ai_chat_context_programs": "Awọn eto adaṣe",
+  "ai_chat_context_dashboards": "Dasibodu",
+  "ai_chat_context_deep": "Awọn itọkasi imọ-ẹrọ (Imọ ti o jinlẹ)",
+  "ai_chat_context_hint": "Kan si awọn ibeere iwaju. Alaye ti o yan jẹ pinpin pẹlu AI ti nṣiṣe lọwọ. Pipin alaye ko funni ni awọn igbanilaaye iṣe. Profaili ọrọ-ọrọ kọọkan ni ipo ibaraẹnisọrọ AI ọtọtọ; awọn han itan ti wa ni pa.",
+  "ai_chat_capabilities": "Awọn agbara",
+  "ai_chat_capability_device": "Iṣakoso ẹrọ",
+  "ai_chat_capability_automation": "Ṣẹda ati imudojuiwọn awọn eto",
+  "ai_chat_capability_widgets": "Ṣẹda ẹrọ ailorukọ",
+  "ai_chat_capabilities_hint": "Awọn agbara ti a mu ṣiṣẹ pinnu iru awọn iṣe ti AI le ṣe. Alaye ti o pin ni a yan lọtọ ni Atokọ. Awọn iyipada kan si awọn ibeere iwaju."
 }

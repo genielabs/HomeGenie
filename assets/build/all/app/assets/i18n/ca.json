@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Llegint en veu alta",
   "service_restart_timeout": "El servei encara no s'ha reiniciat. Tanqueu aquesta finestra i comproveu el servidor.",
   "ai_chat_move_left": "Mou el xat a l'esquerra",
-  "ai_chat_move_right": "Mou el xat a la dreta"
+  "ai_chat_move_right": "Mou el xat a la dreta",
+  "ai_chat_context": "Context",
+  "ai_chat_context_devices": "Dispositius",
+  "ai_chat_context_widgets": "Ginys",
+  "ai_chat_context_programs": "Programes d'automatització",
+  "ai_chat_context_dashboards": "Taulers de control",
+  "ai_chat_context_deep": "Referències tècniques (Deep Knowledge)",
+  "ai_chat_context_hint": "S'aplica a futures peticions. La informació seleccionada es comparteix amb l'IA activa. Compartir informació no atorga permisos d'acció. Cada perfil de context té un context de conversa d'IA independent; es manté la història visible.",
+  "ai_chat_capabilities": "Capacitats",
+  "ai_chat_capability_device": "Control del dispositiu",
+  "ai_chat_capability_automation": "Crear i actualitzar programes",
+  "ai_chat_capability_widgets": "Crea ginys",
+  "ai_chat_capabilities_hint": "Les capacitats habilitades determinen quines accions pot realitzar l'IA. La informació compartida es selecciona per separat a Context. Els canvis s'apliquen a les sol·licituds futures."
 }

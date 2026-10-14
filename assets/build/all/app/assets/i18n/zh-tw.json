@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "正在朗讀",
   "service_restart_timeout": "服務尚未重新啟動。請關閉此視窗並檢查伺服器。",
   "ai_chat_move_left": "將聊天內容移至左側",
-  "ai_chat_move_right": "將聊天移至右側"
+  "ai_chat_move_right": "將聊天移至右側",
+  "ai_chat_context": "背景",
+  "ai_chat_context_devices": "裝置",
+  "ai_chat_context_widgets": "小部件",
+  "ai_chat_context_programs": "自動化程式",
+  "ai_chat_context_dashboards": "儀表板",
+  "ai_chat_context_deep": "技術參考（深度知識）",
+  "ai_chat_context_hint": "適用於將來的請求。選定的資訊與主動人工智慧共享。共享資訊並不授予操作權限。每個上下文設定檔都有一個單獨的 AI 對話上下文；可見的歷史被保留。",
+  "ai_chat_capabilities": "能力",
+  "ai_chat_capability_device": "設備控制",
+  "ai_chat_capability_automation": "建立和更新程序",
+  "ai_chat_capability_widgets": "建立小部件",
+  "ai_chat_capabilities_hint": "啟用的功能決定了人工智慧可以執行哪些操作。共享資訊是在Context中單獨選擇的。更改適用於未來的請求。"
 }

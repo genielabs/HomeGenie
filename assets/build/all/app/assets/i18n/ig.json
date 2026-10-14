@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "A na-agụpụta n’olu",
   "service_restart_timeout": "Ọrụ ahụ amalitebeghị ọzọ. Mechie windo a ma lelee sava ahụ.",
   "ai_chat_move_left": "Bugharịa nkata gaa n'aka ekpe",
-  "ai_chat_move_right": "Bugharịa nkata gaa n'aka nri"
+  "ai_chat_move_right": "Bugharịa nkata gaa n'aka nri",
+  "ai_chat_context": "Okwu",
+  "ai_chat_context_devices": "Ngwaọrụ",
+  "ai_chat_context_widgets": "Ngwa wijetị",
+  "ai_chat_context_programs": "Mmemme akpaaka",
+  "ai_chat_context_dashboards": "Mpempe akwụkwọ",
+  "ai_chat_context_deep": "Ntụaka aka nka (Ọmụma miri emi)",
+  "ai_chat_context_hint": "Na-emetụta arịrịọ n'ọdịnihu. A na-ekekọrịta ozi ahọpụtara na AI nọ n'ọrụ. Ịkekọrịta ozi anaghị enye ikike ime ihe. Profaịlụ gburugburu ọ bụla nwere mkparịta ụka AI dị iche iche; a na-echekwa akụkọ ihe mere eme a na-ahụ anya.",
+  "ai_chat_capabilities": "Ike",
+  "ai_chat_capability_device": "Njikwa ngwaọrụ",
+  "ai_chat_capability_automation": "Mepụta ma kwalite mmemme",
+  "ai_chat_capability_widgets": "Mepụta wijetị",
+  "ai_chat_capabilities_hint": "Ike akwadoro na-ekpebi omume ndị AI nwere ike ime. A na-ahọpụta ozi ekekọrịtara iche na mpaghara. Mgbanwe na-emetụta arịrịọ n'ọdịnihu."
 }

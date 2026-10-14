@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "बोलकर पढ़ा जा रहा है",
   "service_restart_timeout": "सेवा अभी तक पुनः शुरू नहीं हुई है। यह विंडो बंद करें और सर्वर की जाँच करें।",
   "ai_chat_move_left": "चैट को बाईं ओर ले जाएं",
-  "ai_chat_move_right": "चैट को दाईं ओर ले जाएं"
+  "ai_chat_move_right": "चैट को दाईं ओर ले जाएं",
+  "ai_chat_context": "प्रसंग",
+  "ai_chat_context_devices": "उपकरण",
+  "ai_chat_context_widgets": "विजेट्स",
+  "ai_chat_context_programs": "स्वचालन कार्यक्रम",
+  "ai_chat_context_dashboards": "डैशबोर्ड",
+  "ai_chat_context_deep": "तकनीकी संदर्भ (गहरा ज्ञान)",
+  "ai_chat_context_hint": "भविष्य के अनुरोधों पर लागू होता है. चयनित जानकारी सक्रिय AI के साथ साझा की जाती है। जानकारी साझा करने से कार्रवाई की अनुमति नहीं मिलती. प्रत्येक संदर्भ प्रोफ़ाइल में एक अलग AI वार्तालाप संदर्भ होता है; दृश्यमान इतिहास रखा जाता है।",
+  "ai_chat_capabilities": "क्षमताएं",
+  "ai_chat_capability_device": "डिवाइस नियंत्रण",
+  "ai_chat_capability_automation": "प्रोग्राम बनाएं और अपडेट करें",
+  "ai_chat_capability_widgets": "विजेट बनाएं",
+  "ai_chat_capabilities_hint": "सक्षम क्षमताएं निर्धारित करती हैं कि एआई कौन से कार्य कर सकता है। साझा की गई जानकारी को संदर्भ में अलग से चुना गया है। परिवर्तन भविष्य के अनुरोधों पर लागू होते हैं।"
 }

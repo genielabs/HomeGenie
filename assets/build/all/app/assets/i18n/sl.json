@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Branje na glas",
   "service_restart_timeout": "Storitev se še ni znova zagnala. Zaprite to okno in preverite strežnik.",
   "ai_chat_move_left": "Premakni klepet na levo",
-  "ai_chat_move_right": "Premakni klepet na desno"
+  "ai_chat_move_right": "Premakni klepet na desno",
+  "ai_chat_context": "Kontekst",
+  "ai_chat_context_devices": "Naprave",
+  "ai_chat_context_widgets": "Pripomočki",
+  "ai_chat_context_programs": "Programi za avtomatizacijo",
+  "ai_chat_context_dashboards": "Nadzorne plošče",
+  "ai_chat_context_deep": "Tehnične reference (globoko znanje)",
+  "ai_chat_context_hint": "Velja za prihodnje zahteve. Izbrane informacije se delijo z aktivnim AI. Skupna raba informacij ne daje dovoljenj za dejanja. Vsak kontekstni profil ima ločen kontekst pogovora AI; vidna zgodovina se hrani.",
+  "ai_chat_capabilities": "Zmogljivosti",
+  "ai_chat_capability_device": "Nadzor naprave",
+  "ai_chat_capability_automation": "Ustvarite in posodobite programe",
+  "ai_chat_capability_widgets": "Ustvarite pripomočke",
+  "ai_chat_capabilities_hint": "Omogočene zmogljivosti določajo, katera dejanja lahko izvaja AI. Informacije v skupni rabi so ločeno izbrane v Kontekstu. Spremembe veljajo za prihodnje zahteve."
 }

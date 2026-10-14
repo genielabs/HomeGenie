@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Lekti awotvwa",
   "service_restart_timeout": "Sèvis la poko rekòmanse. Fèmen fenèt sa a epi verifye sèvè a.",
   "ai_chat_move_left": "Deplase chat sou bò gòch la",
-  "ai_chat_move_right": "Deplase chat sou bò dwat la"
+  "ai_chat_move_right": "Deplase chat sou bò dwat la",
+  "ai_chat_context": "Kontèks",
+  "ai_chat_context_devices": "Aparèy",
+  "ai_chat_context_widgets": "Widgets",
+  "ai_chat_context_programs": "Pwogram automatisation",
+  "ai_chat_context_dashboards": "Dachboards",
+  "ai_chat_context_deep": "Referans teknik (Konesans pwofon)",
+  "ai_chat_context_hint": "Aplike nan demann nan lavni. Enfòmasyon yo chwazi yo pataje ak AI aktif la. Pataje enfòmasyon pa bay otorizasyon aksyon. Chak pwofil kontèks gen yon kontèks konvèsasyon AI separe; se istwa vizib la kenbe.",
+  "ai_chat_capabilities": "Kapasite",
+  "ai_chat_capability_device": "Kontwòl aparèy",
+  "ai_chat_capability_automation": "Kreye ak mete ajou pwogram yo",
+  "ai_chat_capability_widgets": "Kreye widgets",
+  "ai_chat_capabilities_hint": "Kapasite ki pèmèt yo detèmine ki aksyon AI a ka fè. Enfòmasyon pataje yo chwazi separeman nan Kontèks. Chanjman aplike pou demann nan lavni."
 }

@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Inasoma kwa sauti",
   "service_restart_timeout": "Huduma bado haijaanza upya. Funga dirisha hili na ukague seva.",
   "ai_chat_move_left": "Sogeza gumzo upande wa kushoto",
-  "ai_chat_move_right": "Sogeza gumzo kulia"
+  "ai_chat_move_right": "Sogeza gumzo kulia",
+  "ai_chat_context": "Muktadha",
+  "ai_chat_context_devices": "Vifaa",
+  "ai_chat_context_widgets": "Wijeti",
+  "ai_chat_context_programs": "Programu za otomatiki",
+  "ai_chat_context_dashboards": "Dashibodi",
+  "ai_chat_context_deep": "Marejeleo ya kiufundi (Ujuzi wa Kina)",
+  "ai_chat_context_hint": "Inatumika kwa maombi ya baadaye. Taarifa iliyochaguliwa inashirikiwa na AI inayotumika. Kushiriki maelezo hakutoi vibali vya kuchukua hatua. Kila wasifu wa muktadha una muktadha tofauti wa mazungumzo ya AI; historia inayoonekana inahifadhiwa.",
+  "ai_chat_capabilities": "Uwezo",
+  "ai_chat_capability_device": "Udhibiti wa kifaa",
+  "ai_chat_capability_automation": "Unda na usasishe programu",
+  "ai_chat_capability_widgets": "Unda vilivyoandikwa",
+  "ai_chat_capabilities_hint": "Uwezo uliowashwa huamua ni hatua zipi AI inaweza kufanya. Taarifa zilizoshirikiwa huchaguliwa tofauti katika Muktadha. Mabadiliko yatatumika kwa maombi yajayo."
 }

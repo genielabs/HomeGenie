@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Ovoz chiqarib o‘qilmoqda",
   "service_restart_timeout": "Xizmat hali qayta ishga tushmadi. Ushbu oynani yoping va serverni tekshiring.",
   "ai_chat_move_left": "Chatni chapga suring",
-  "ai_chat_move_right": "Chatni o‘ngga suring"
+  "ai_chat_move_right": "Chatni o‘ngga suring",
+  "ai_chat_context": "Kontekst",
+  "ai_chat_context_devices": "Qurilmalar",
+  "ai_chat_context_widgets": "Vidjetlar",
+  "ai_chat_context_programs": "Avtomatlashtirish dasturlari",
+  "ai_chat_context_dashboards": "Boshqaruv panellari",
+  "ai_chat_context_deep": "Texnik ma'lumotnomalar (chuqur bilimlar)",
+  "ai_chat_context_hint": "Kelgusi so'rovlar uchun amal qiladi. Tanlangan maʼlumotlar faol AI bilan baham koʻriladi. Ma'lumot almashish harakatga ruxsat bermaydi. Har bir kontekst profilida alohida AI suhbat konteksti mavjud; ko'rinadigan tarix saqlanadi.",
+  "ai_chat_capabilities": "Imkoniyatlar",
+  "ai_chat_capability_device": "Qurilmani boshqarish",
+  "ai_chat_capability_automation": "Dasturlarni yaratish va yangilash",
+  "ai_chat_capability_widgets": "Vidjetlar yarating",
+  "ai_chat_capabilities_hint": "Yoqilgan imkoniyatlar AI qanday amallarni bajarishi mumkinligini aniqlaydi. Umumiy ma'lumotlar Kontekstda alohida tanlanadi. O'zgartirishlar kelajakdagi so'rovlarga tegishli."
 }

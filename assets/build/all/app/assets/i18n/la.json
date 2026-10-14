@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Lectio clara voce",
   "service_restart_timeout": "Ministerium nondum denuo inceptum est. Hanc fenestram claude et servitorem inspice.",
   "ai_chat_move_left": "Movere chat ad sinistram",
-  "ai_chat_move_right": "Movere chat ad dextram"
+  "ai_chat_move_right": "Movere chat ad dextram",
+  "ai_chat_context": "Context",
+  "ai_chat_context_devices": "Devices",
+  "ai_chat_context_widgets": "Widgets",
+  "ai_chat_context_programs": "Automation programmata",
+  "ai_chat_context_dashboards": "Dashboards",
+  "ai_chat_context_deep": "Technical references (Gloria)",
+  "ai_chat_context_hint": "Apponitur ad futuras petitiones. Informatio selecta communicatur cum AI activo. Socius informationes actionis non dat permissiones. Singula contexta profile contextum AI colloquii separatum habet; historia visibilis tenetur.",
+  "ai_chat_capabilities": "Facultates",
+  "ai_chat_capability_device": "Fabrica imperium",
+  "ai_chat_capability_automation": "Create and update programs",
+  "ai_chat_capability_widgets": "Create content",
+  "ai_chat_capabilities_hint": "Facultates applicatae utrasque actiones AI efficere possint. Informationes communes seorsim in Contextu seliguntur. Mutationes ad futuras petitiones applicant."
 }

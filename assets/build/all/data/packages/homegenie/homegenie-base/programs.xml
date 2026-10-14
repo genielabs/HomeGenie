@@ -27,14 +27,19 @@ Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
 
         case "GetContext":
             // Failed/cancelled/pending turns remain in history, not in model context.
-            var completedRequests = new HashSet&lt;string&gt;(currentHistory
+            string contextProfileKey = data["ContextProfileKey"]?.ToString();
+            var modelHistory = string.IsNullOrEmpty(contextProfileKey) ? currentHistory
+                : currentHistory.Where(m =&gt; m.Metadata?["contextProfileKey"]?.ToString() == contextProfileKey).ToList();
+            var completedRequests = new HashSet&lt;string&gt;(modelHistory
                 .Where(m =&gt; m.Role == "model" &amp;&amp; m.Metadata?["outcome"]?.ToString() == "completed")
                 .Select(m =&gt; m.Metadata?["requestId"]?.ToString()).Where(id =&gt; !string.IsNullOrEmpty(id)));
-            return currentHistory.Where(m =&gt; m.Metadata == null ||
+            var contextMessages = modelHistory.Where(m =&gt; m.Metadata == null ||
                 (m.Metadata["outcome"]?.ToString() == "completed") ||
                 (m.Role == "user" &amp;&amp; m.Metadata["outcome"]?.ToString() == "submitted" &amp;&amp;
                  completedRequests.Contains(m.Metadata["requestId"]?.ToString() ?? "")))
                 .Select(m =&gt; new { role = m.Role, parts = m.Parts }).ToList();
+            if (!string.IsNullOrEmpty(contextProfileKey)) return new { contextProfileKey, messages = contextMessages };
+            return contextMessages;
 
         case "Add":
 
@@ -170,11 +175,11 @@ public static class HistoryStore
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.11</PackageVersion>
       <Id>chat-history-service</Id>
-      <Version>1.0.4</Version>
+      <Version>1.0.5</Version>
       <Required>true</Required>
-      <Checksum>97412D1E8E6AB50F064310F83FDB0153</Checksum>
+      <Checksum>70A6BA97BD646448DE032256A3AD6736</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>577</Address>
@@ -5569,7 +5574,25 @@ public string[] GetDayLabels()
   <ProgramBlock>
     <ScriptSetup>Program.Run();
 </ScriptSetup>
-    <ScriptSource>// Shared action service; no model or inference engine is required.
+    <ScriptSource>// Normalize typed/legacy model outputs without executing actions.
+Api.Handle("System.Utility/ActionExecutor/Response.Normalize", input =&gt; {
+    try {
+        string text = ReadActionResponse(input);
+        JObject response;
+        if (text.TrimStart().StartsWith("{")) response = JObject.Parse(text);
+        else {
+            var segments = ExtractResponse(text);
+            var commands = CodeBlockExtractor.ExtractCommands(segments);
+            response = new JObject { ["version"] = 1, ["kind"] = commands.Count &gt; 0 ? "device" : "reply",
+                ["explanation"] = string.Join("\n", segments.Where(s =&gt; !s.TrimStart().StartsWith("```api-call"))).Trim() };
+            if (string.IsNullOrWhiteSpace((string)response["explanation"])) response["explanation"] = "Requested device actions.";
+            if (commands.Count &gt; 0) response["commands"] = new JArray(commands);
+        }
+        return (object)GenieResponseContract.Normalize(response);
+    } catch (Exception ex) { return new { Status = "Error", Message = ex.Message }; }
+});
+
+// Shared action service; no model or inference engine is required.
 Api.Handle("System.Utility/ActionExecutor/Extract", input =&gt; {
     return ExtractResponse(ReadActionResponse(input));
 }).Handle("System.Utility/ActionExecutor/Execute", input =&gt; {
@@ -5647,7 +5670,7 @@ public List&lt;ApiCommandExecution&gt; ExecuteActionRequest(object input)
             string domain = action["target"]?["domain"]?.ToString();
             string address = action["target"]?["address"]?.ToString();
             string command = action["command"]?.ToString();
-            if (!Regex.IsMatch(domain ?? "", @"\A[A-Za-z][A-Za-z0-9_.]*\z") ||
+            if (!Regex.IsMatch(domain ?? "", @"\A[A-Za-z][A-Za-z0-9_.:-]*\z") ||
                 !Regex.IsMatch(address ?? "", @"\A[^/\s]+\z") || !Regex.IsMatch(command ?? "", @"\A[^/\s]+\z"))
                 throw new InvalidOperationException("Invalid structured action target.");
             var arguments = action["arguments"] as JArray ?? new JArray();
@@ -5687,7 +5710,7 @@ public List&lt;ApiCommandExecution&gt; ExecuteApiCommands(dynamic api, IEnumerab
             var result = new ApiCommandExecution { Index = index++, Command = command, ActionId = actionId,
                 RequestId = requestId, State = "unknown", Error = "Execution may be in progress or interrupted; do not retry automatically." };
             results.Add(result);
-            if (!Regex.IsMatch(command, @"\A[A-Za-z][A-Za-z0-9_.]*/[^/\s]+/[^/\s]+(?:/[^\r\n]*)?\z") || command.StartsWith("System.Utility/ActionExecutor/")) {
+            if (!Regex.IsMatch(command, @"\A[A-Za-z][A-Za-z0-9_.:-]*/[^/\s]+/[^/\s]+(?:/[^\r\n]*)?\z") || command.StartsWith("System.Utility/ActionExecutor/")) {
                 result.State = "failed"; result.Error = "Invalid HomeGenie API command.";
                 result.CompletedAt = DateTimeOffset.UtcNow; records[actionId] = result; ActionLedger.Save(folder, records); continue;
             }
@@ -5981,17 +6004,164 @@ public ApiCommandExecution ExecuteProgramDeployment(object input, bool recover =
         return result;
     }
 }
+
+public static class GenieResponseContract
+{
+    static readonly string[] Kinds = { "reply", "device", "program", "widget", "composite", "context" };
+    static void Fields(JObject value, params string[] allowed) {
+        if (value.Properties().Any(p =&gt; !allowed.Contains(p.Name))) throw new InvalidOperationException("Unknown response field.");
+    }
+    static string Text(JObject value, string key, bool required = false) {
+        if (value[key] != null &amp;&amp; value[key].Type != JTokenType.String) throw new InvalidOperationException("Expected string: " + key);
+        string text = (string)value[key] ?? "";
+        if (required &amp;&amp; string.IsNullOrWhiteSpace(text)) throw new InvalidOperationException("Missing response field: " + key);
+        return text;
+    }
+    static bool EmptyArtifact(JToken value) {
+        if (value == null || value.Type == JTokenType.Null) return true;
+        if (value.Type == JTokenType.String) return string.IsNullOrWhiteSpace((string)value);
+        if (value is JObject obj) return obj.Properties().All(p =&gt; EmptyArtifact(p.Value));
+        if (value is JArray array) return array.All(EmptyArtifact);
+        return false;
+    }
+    public static string[] DeviceCommand(string command) {
+        string[] p = command.Split('/');
+        if (p.Length &lt; 3) throw new InvalidOperationException("Invalid device command.");
+        if (p[0] == "HomeAutomation.HomeGenie" &amp;&amp; p[1] == "Automation" &amp;&amp; new[]{"Programs.Run","Programs.Break"}.Contains(p[2])) {
+            if (p.Length != 4 || !System.Text.RegularExpressions.Regex.IsMatch(p[3],@"^[1-9][0-9]*$")) throw new InvalidOperationException("Invalid scene target.");
+            return new[]{"HomeAutomation.HomeGenie.Automation",p[3]};
+        }
+        string[] simple = {"Control.On","Control.Off","Control.Toggle","Control.ArmAway","Control.ArmHome","Control.Disarm"};
+        if (simple.Contains(p[2])) { if (p.Length != 3) throw new InvalidOperationException("Unexpected command arguments."); }
+        else if (p[2] == "Control.Level") {
+            if (p.Length != 4 || !double.TryParse(p[3],System.Globalization.NumberStyles.Float,System.Globalization.CultureInfo.InvariantCulture,out var level)
+                || !double.IsFinite(level) || level &lt; 0 || level &gt; 100) throw new InvalidOperationException("Invalid brightness.");
+        } else if (p[2] == "Control.ColorHsb") {
+            if (p.Length != 4) throw new InvalidOperationException("Invalid color.");
+            var values = p[3].Split(',');
+            if (values.Length &lt; 3 || values.Length &gt; 4) throw new InvalidOperationException("Invalid color.");
+            for (int i=0;i&lt;values.Length;i++)
+                if (!double.TryParse(values[i],System.Globalization.NumberStyles.Float,System.Globalization.CultureInfo.InvariantCulture,out var v)
+                    || !double.IsFinite(v) || v &lt; 0 || i &lt; 3 &amp;&amp; v &gt; 1) throw new InvalidOperationException("Invalid color value.");
+        } else if (p[2] == "Thermostat.ModeSet") {
+            if (p.Length != 4 || !new[]{"Off","Heat","HeatEconomy","Cool","CoolEconomy"}.Contains(p[3])) throw new InvalidOperationException("Invalid thermostat mode.");
+        } else if (p[2] == "Thermostat.SetPointSet") {
+            if (p.Length != 5 || !new[]{"Heating","Cooling"}.Contains(p[3]) || !double.TryParse(p[4],System.Globalization.NumberStyles.Float,System.Globalization.CultureInfo.InvariantCulture,out var t) || !double.IsFinite(t)) throw new InvalidOperationException("Invalid thermostat setpoint.");
+        } else throw new InvalidOperationException("Unsupported device command.");
+        return new[]{p[0],p[1]};
+    }
+    public static JObject Normalize(JObject input) {
+        if (input == null) throw new InvalidOperationException("A response object is required.");
+        var result = (JObject)input.DeepClone();
+        // Adapt legacy provider responses at the boundary; they remain independently usable.
+        if (result["kind"] == null &amp;&amp; result["solution_type"] != null) {
+            result["kind"] = result["solution_type"]; result.Remove("solution_type"); result["version"] = 1;
+            if (result["kind"]?.ToString() == "automation") {
+                result["kind"] = "program";
+                ((JObject)result["automation"])["action"] = "create";
+            }
+            if (result["kind"]?.ToString() == "composite") ((JObject)result["automation"])["action"] = "create";
+        } else if (result["kind"] == null &amp;&amp; result["action"] != null) {
+            string action = Text(result, "action", true);
+            result = new JObject { ["version"] = 1, ["kind"] = action == "reply" ? "reply" : "program",
+                ["explanation"] = Text(input, "explanation", true), ["language"] = Text(input, "language") };
+            if (action != "reply") result["automation"] = new JObject {
+                ["action"] = action, ["program_id"] = Text(input,"program_id"), ["name"] = Text(input,"name"),
+                ["setup"] = Text(input,"setup"), ["main"] = Text(input,"main"), ["context"] = Text(input,"context")
+            };
+        }
+        Fields(result,"version","kind","explanation","language","commands","automation","widget","binding","resources");
+        if (result["version"]?.Type != JTokenType.Integer || (int)result["version"] != 1) throw new InvalidOperationException("Unsupported response contract version.");
+        string kind = Text(result,"kind",true); Text(result,"explanation",true);
+        if (!Kinds.Contains(kind)) throw new InvalidOperationException("Unsupported response kind.");
+        var permitted = kind == "device" ? new[]{"commands"} : kind == "program" ? new[]{"automation"}
+            : kind == "widget" ? new[]{"widget"} : kind == "composite" ? new[]{"automation","widget","binding"}
+            : kind == "context" ? new[]{"resources"} : new string[0];
+        foreach (string key in new[]{"commands","automation","widget","binding","resources"}) {
+            if (result[key] == null || permitted.Contains(key)) continue;
+            if (EmptyArtifact(result[key])) result.Remove(key);
+            else throw new InvalidOperationException("Artifact is incompatible with response kind: " + key);
+        }
+        if (kind == "program" || kind == "composite") {
+            if (!(result["automation"] is JObject a)) throw new InvalidOperationException("Missing automation.");
+            Fields(a,"action","program_id","name","setup","main","context");
+            string action=Text(a,"action",true), id=Text(a,"program_id");
+            if (!new[]{"create","update"}.Contains(action) || kind == "composite" &amp;&amp; action != "create") throw new InvalidOperationException("Unsupported deployment action.");
+            if (action == "create" &amp;&amp; id.Length != 0 || action == "update" &amp;&amp; !System.Text.RegularExpressions.Regex.IsMatch(id,@"^[1-9][0-9]*$")) throw new InvalidOperationException("Invalid deployment target.");
+            Text(a,"name",true); Text(a,"main",true); Text(a,"context");
+            if (a["setup"] == null) throw new InvalidOperationException("Missing setup."); Text(a,"setup");
+            if (!new[]{"csharp","python","javascript"}.Contains(Text(result,"language",true))) throw new InvalidOperationException("Unsupported program language.");
+            a["program_id"]=id; a["context"]=Text(a,"context");
+        }
+        if (kind == "widget" || kind == "composite") {
+            if (!(result["widget"] is JObject w)) throw new InvalidOperationException("Missing widget.");
+            Fields(w,"html","css","javascript");Text(w,"html",true);Text(w,"javascript",true);w["css"]=Text(w,"css");
+        }
+        if (kind == "composite") {
+            if (!(result["binding"] is JObject binding)) throw new InvalidOperationException("Missing binding.");
+            Fields(binding,"domain","address","properties");Text(binding,"domain",true);Text(binding,"address",true);
+            if (!(binding["properties"] is JArray props) || props.Count==0 || props.Count&gt;32 || props.Any(p=&gt;p.Type!=JTokenType.String || string.IsNullOrWhiteSpace((string)p))) throw new InvalidOperationException("Invalid binding properties.");
+        }
+        if (kind == "device") {
+            if (!(result["commands"] is JArray commands) || commands.Count==0 || commands.Count&gt;32 || commands.Any(c=&gt;c.Type!=JTokenType.String || !System.Text.RegularExpressions.Regex.IsMatch((string)c,@"^[A-Za-z][A-Za-z0-9_.:-]*/[^/\s]+/[^/\s]+(?:/[^\r\n]*)?$"))) throw new InvalidOperationException("Invalid device commands.");
+            foreach (string command in commands.Values&lt;string&gt;()) DeviceCommand(command);
+        }
+        if (kind == "context") {
+            if (!(result["resources"] is JObject r)) throw new InvalidOperationException("Missing context resources.");
+            Fields(r,"programIds","widgetIds");int count=0;
+            foreach (var p in r.Properties()) {
+                if (!(p.Value is JArray ids) || ids.Count&gt;16 || ids.Any(i=&gt;i.Type!=JTokenType.String || string.IsNullOrWhiteSpace((string)i))) throw new InvalidOperationException("Invalid resource identifiers.");
+                count+=ids.Count;
+            }
+            if (count==0) throw new InvalidOperationException("Empty context lookup.");
+        }
+        if (Encoding.UTF8.GetByteCount(result.ToString(Formatting.None))&gt;512*1024) throw new InvalidOperationException("Response exceeds size limit.");
+        return result;
+    }
+    public static JObject LegacyArtifacts(JObject normalized) {
+        var result=(JObject)normalized.DeepClone();string kind=(string)result["kind"];
+        result.Remove("version");result.Remove("kind");result["solution_type"]=kind == "program" ? "automation" : kind;
+        if (result["automation"] is JObject a) { a.Remove("action");a.Remove("program_id"); }
+        return result;
+    }
+    public static JObject Schema() {
+        var prototype = JObject.Parse(@"{
+          'type':'object','properties':{
+            'version':{'type':'integer'},'kind':{'type':'string','enum':['reply','device','program','widget','composite','context']},
+            'explanation':{'type':'string'},'language':{'type':'string','enum':['csharp','python','javascript']},
+            'commands':{'type':'array','items':{'type':'string'}},
+            'automation':{'type':'object','properties':{'action':{'type':'string','enum':['create','update']},'program_id':{'type':'string'},'name':{'type':'string'},'setup':{'type':'string'},'main':{'type':'string'},'context':{'type':'string'}},'required':['action','name','setup','main']},
+            'widget':{'type':'object','properties':{'html':{'type':'string'},'css':{'type':'string'},'javascript':{'type':'string'}},'required':['html','css','javascript']},
+            'binding':{'type':'object','properties':{'domain':{'type':'string'},'address':{'type':'string'},'properties':{'type':'array','items':{'type':'string'}}},'required':['domain','address','properties']},
+            'resources':{'type':'object','properties':{'programIds':{'type':'array','items':{'type':'string'}},'widgetIds':{'type':'array','items':{'type':'string'}}}}
+          },'required':['version','kind','explanation']
+        }");
+        var variants = new JArray();
+        foreach (string kind in Kinds) {
+            var fields = new List&lt;string&gt; { "version", "kind", "explanation" };
+            if (kind == "device") fields.Add("commands");
+            if (kind == "program" || kind == "composite") { fields.Add("language"); fields.Add("automation"); }
+            if (kind == "widget" || kind == "composite") fields.Add("widget");
+            if (kind == "composite") fields.Add("binding");
+            if (kind == "context") fields.Add("resources");
+            var properties = new JObject(fields.Select(f =&gt; new JProperty(f, prototype["properties"][f].DeepClone())));
+            properties["kind"]["enum"] = new JArray(kind);
+            variants.Add(new JObject { ["type"]="object", ["properties"]=properties, ["required"]=new JArray(fields), ["additionalProperties"]=false });
+        }
+        return new JObject { ["anyOf"] = variants };
+    }
+}
 </ScriptContext>
     <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.10</PackageVersion>
+      <PackageVersion>1.0.12</PackageVersion>
       <Id>ai-action-executor</Id>
-      <Version>1.2.0</Version>
+      <Version>1.2.1</Version>
       <Required>true</Required>
-      <Checksum>E0369F89E08813E6E18E8A86DF0C4260</Checksum>
+      <Checksum>B7BCA8A3CB7E4244883A4974788710BB</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>581</Address>

@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Qari b’leħen għoli",
   "service_restart_timeout": "Is-servizz għadu ma reġax beda. Agħlaq din it-tieqa u ċċekkja s-server.",
   "ai_chat_move_left": "Mexxi ċ-chat lejn ix-xellug",
-  "ai_chat_move_right": "Mexxi ċ-chat lejn il-lemin"
+  "ai_chat_move_right": "Mexxi ċ-chat lejn il-lemin",
+  "ai_chat_context": "Kuntest",
+  "ai_chat_context_devices": "Apparati",
+  "ai_chat_context_widgets": "Widgets",
+  "ai_chat_context_programs": "Programmi ta' awtomazzjoni",
+  "ai_chat_context_dashboards": "Dashboards",
+  "ai_chat_context_deep": "Referenzi tekniċi (Għarfien Profond)",
+  "ai_chat_context_hint": "Japplika għal talbiet futuri. L-informazzjoni magħżula hija kondiviża mal-AI attiva. Il-qsim ta' informazzjoni ma jagħtix permessi ta' azzjoni. Kull profil tal-kuntest għandu kuntest ta' konversazzjoni AI separat; tinżamm l-istorja viżibbli.",
+  "ai_chat_capabilities": "Kapaċitajiet",
+  "ai_chat_capability_device": "Kontroll tal-apparat",
+  "ai_chat_capability_automation": "Oħloq u aġġorna programmi",
+  "ai_chat_capability_widgets": "Oħloq widgets",
+  "ai_chat_capabilities_hint": "Il-kapaċitajiet attivati jiddeterminaw liema azzjonijiet tista' twettaq l-AI. L-informazzjoni kondiviża tintgħażel separatament fil-Kuntest. Bidliet japplikaw għal talbiet futuri."
 }

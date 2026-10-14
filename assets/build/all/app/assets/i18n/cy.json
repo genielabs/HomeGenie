@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Darllen yn uchel",
   "service_restart_timeout": "Nid yw’r gwasanaeth wedi ailgychwyn eto. Caewch y ffenestr hon a gwiriwch y gweinydd.",
   "ai_chat_move_left": "Symud sgwrs i'r chwith",
-  "ai_chat_move_right": "Symud sgwrs i'r dde"
+  "ai_chat_move_right": "Symud sgwrs i'r dde",
+  "ai_chat_context": "Cyd-destun",
+  "ai_chat_context_devices": "Dyfeisiau",
+  "ai_chat_context_widgets": "Teclynnau",
+  "ai_chat_context_programs": "Rhaglenni awtomeiddio",
+  "ai_chat_context_dashboards": "Dangosfyrddau",
+  "ai_chat_context_deep": "Cyfeiriadau technegol (Gwybodaeth Ddwfn)",
+  "ai_chat_context_hint": "Yn berthnasol i geisiadau yn y dyfodol. Rhennir gwybodaeth ddethol gyda'r AI gweithredol. Nid yw rhannu gwybodaeth yn rhoi caniatâd gweithredu. Mae gan bob proffil cyd-destun gyd-destun sgwrs AI ar wahân; cedwir yr hanes gweledig.",
+  "ai_chat_capabilities": "Galluoedd",
+  "ai_chat_capability_device": "Rheoli dyfais",
+  "ai_chat_capability_automation": "Creu a diweddaru rhaglenni",
+  "ai_chat_capability_widgets": "Creu teclynnau",
+  "ai_chat_capabilities_hint": "Mae galluoedd wedi'u galluogi yn pennu pa gamau y gall yr AI eu cyflawni. Dewisir gwybodaeth a rennir ar wahân yn y Cyd-destun. Mae newidiadau yn berthnasol i geisiadau yn y dyfodol."
 }

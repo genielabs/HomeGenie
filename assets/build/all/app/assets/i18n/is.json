@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Lesið upphátt",
   "service_restart_timeout": "Þjónustan hefur ekki enn endurræst. Lokaðu þessum glugga og athugaðu netþjóninn.",
   "ai_chat_move_left": "Færðu spjallið til vinstri",
-  "ai_chat_move_right": "Færðu spjallið til hægri"
+  "ai_chat_move_right": "Færðu spjallið til hægri",
+  "ai_chat_context": "Samhengi",
+  "ai_chat_context_devices": "Tæki",
+  "ai_chat_context_widgets": "Græjur",
+  "ai_chat_context_programs": "Sjálfvirkni forrit",
+  "ai_chat_context_dashboards": "Mælaborð",
+  "ai_chat_context_deep": "Tæknilegar tilvísanir (djúp þekking)",
+  "ai_chat_context_hint": "Á við um framtíðarbeiðnir. Völdum upplýsingum er deilt með virku gervigreindinni. Að deila upplýsingum veitir ekki aðgerðarheimildir. Hvert samhengissnið hefur sérstakt gervigreind samtalssamhengi; sýnilegu sögunni er haldið.",
+  "ai_chat_capabilities": "Hæfni",
+  "ai_chat_capability_device": "Tækjastýring",
+  "ai_chat_capability_automation": "Búðu til og uppfærðu forrit",
+  "ai_chat_capability_widgets": "Búðu til græjur",
+  "ai_chat_capabilities_hint": "Virkir eiginleikar ákvarða hvaða aðgerðir gervigreind getur framkvæmt. Samnýttar upplýsingar eru valdar sérstaklega í samhengi. Breytingar eiga við um komandi beiðnir."
 }

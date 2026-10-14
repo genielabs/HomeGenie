@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Čítanie nahlas",
   "service_restart_timeout": "Služba sa ešte nereštartovala. Zatvorte toto okno a skontrolujte server.",
   "ai_chat_move_left": "Presuňte čet doľava",
-  "ai_chat_move_right": "Presuňte čet doprava"
+  "ai_chat_move_right": "Presuňte čet doprava",
+  "ai_chat_context": "Kontext",
+  "ai_chat_context_devices": "Zariadenia",
+  "ai_chat_context_widgets": "Widgety",
+  "ai_chat_context_programs": "Automatizačné programy",
+  "ai_chat_context_dashboards": "Dashboards",
+  "ai_chat_context_deep": "Technické referencie (Hlboké znalosti)",
+  "ai_chat_context_hint": "Platí pre budúce požiadavky. Vybrané informácie sa zdieľajú s aktívnou AI. Zdieľanie informácií neudeľuje povolenia na akciu. Každý kontextový profil má samostatný kontext konverzácie AI; viditeľná história sa uchováva.",
+  "ai_chat_capabilities": "Schopnosti",
+  "ai_chat_capability_device": "Ovládanie zariadenia",
+  "ai_chat_capability_automation": "Vytvárajte a aktualizujte programy",
+  "ai_chat_capability_widgets": "Vytvorte miniaplikácie",
+  "ai_chat_capabilities_hint": "Povolené schopnosti určujú, aké akcie môže AI vykonávať. Zdieľané informácie sa vyberajú samostatne v Kontexte. Zmeny sa týkajú budúcich žiadostí."
 }

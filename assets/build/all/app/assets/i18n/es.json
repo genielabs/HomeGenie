@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Lectura en voz alta",
   "service_restart_timeout": "El servicio aún no se ha reiniciado. Cierra esta ventana y comprueba el servidor.",
   "ai_chat_move_left": "Mover chat a la izquierda",
-  "ai_chat_move_right": "Mover el chat a la derecha"
+  "ai_chat_move_right": "Mover el chat a la derecha",
+  "ai_chat_context": "Contexto",
+  "ai_chat_context_devices": "Dispositivos",
+  "ai_chat_context_widgets": "widgets",
+  "ai_chat_context_programs": "Programas de automatización",
+  "ai_chat_context_dashboards": "Paneles de control",
+  "ai_chat_context_deep": "Referencias técnicas (Conocimiento profundo)",
+  "ai_chat_context_hint": "Aplica para futuras solicitudes. La información seleccionada se comparte con la IA activa. Compartir información no otorga permisos de acción. Cada perfil de contexto tiene un contexto de conversación de IA independiente; se mantiene la historia visible.",
+  "ai_chat_capabilities": "Capacidades",
+  "ai_chat_capability_device": "Control de dispositivos",
+  "ai_chat_capability_automation": "Crear y actualizar programas.",
+  "ai_chat_capability_widgets": "Crear widgets",
+  "ai_chat_capabilities_hint": "Las capacidades habilitadas determinan qué acciones puede realizar la IA. La información compartida se selecciona por separado en Contexto. Los cambios se aplican a solicitudes futuras."
 }

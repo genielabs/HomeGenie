@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Luetaan ääneen",
   "service_restart_timeout": "Palvelu ei ole vielä käynnistynyt uudelleen. Sulje tämä ikkuna ja tarkista palvelin.",
   "ai_chat_move_left": "Siirrä chat vasemmalle",
-  "ai_chat_move_right": "Siirrä chat oikealle"
+  "ai_chat_move_right": "Siirrä chat oikealle",
+  "ai_chat_context": "Konteksti",
+  "ai_chat_context_devices": "Laitteet",
+  "ai_chat_context_widgets": "Widgetit",
+  "ai_chat_context_programs": "Automaatio-ohjelmat",
+  "ai_chat_context_dashboards": "Kojelaudat",
+  "ai_chat_context_deep": "Tekniset referenssit (syvä tieto)",
+  "ai_chat_context_hint": "Koskee tulevia pyyntöjä. Valitut tiedot jaetaan aktiivisen tekoälyn kanssa. Tietojen jakaminen ei anna käyttöoikeuksia. Jokaisella kontekstiprofiililla on erillinen AI-keskustelukonteksti; näkyvä historia säilytetään.",
+  "ai_chat_capabilities": "Ominaisuudet",
+  "ai_chat_capability_device": "Laitteen ohjaus",
+  "ai_chat_capability_automation": "Luo ja päivitä ohjelmia",
+  "ai_chat_capability_widgets": "Luo widgetejä",
+  "ai_chat_capabilities_hint": "Käytössä olevat ominaisuudet määräävät, mitä toimia tekoäly voi suorittaa. Jaetut tiedot valitaan erikseen kontekstissa. Muutokset koskevat tulevia pyyntöjä."
 }

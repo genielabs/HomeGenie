@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Đang đọc thành tiếng",
   "service_restart_timeout": "Dịch vụ chưa khởi động lại. Hãy đóng cửa sổ này và kiểm tra máy chủ.",
   "ai_chat_move_left": "Di chuyển trò chuyện sang trái",
-  "ai_chat_move_right": "Di chuyển trò chuyện sang phải"
+  "ai_chat_move_right": "Di chuyển trò chuyện sang phải",
+  "ai_chat_context": "Bối cảnh",
+  "ai_chat_context_devices": "Thiết bị",
+  "ai_chat_context_widgets": "Widget",
+  "ai_chat_context_programs": "Chương trình tự động hóa",
+  "ai_chat_context_dashboards": "Trang tổng quan",
+  "ai_chat_context_deep": "Tài liệu tham khảo kỹ thuật (Kiến thức chuyên sâu)",
+  "ai_chat_context_hint": "Áp dụng cho các yêu cầu trong tương lai. Thông tin đã chọn được chia sẻ với AI đang hoạt động. Chia sẻ thông tin không cấp quyền hành động. Mỗi cấu hình ngữ cảnh có một ngữ cảnh hội thoại AI riêng biệt; lịch sử hiển thị được lưu giữ.",
+  "ai_chat_capabilities": "Khả năng",
+  "ai_chat_capability_device": "Kiểm soát thiết bị",
+  "ai_chat_capability_automation": "Tạo và cập nhật chương trình",
+  "ai_chat_capability_widgets": "Tạo tiện ích",
+  "ai_chat_capabilities_hint": "Các khả năng được kích hoạt sẽ xác định những hành động nào AI có thể thực hiện. Thông tin chia sẻ được chọn riêng trong Ngữ cảnh. Những thay đổi áp dụng cho các yêu cầu trong tương lai."
 }

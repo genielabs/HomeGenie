@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "ጮክ ብሎ በማንበብ ላይ",
   "service_restart_timeout": "አገልግሎቱ ገና እንደገና አልተጀመረም። ይህን መስኮት ይዝጉና አገልጋዩን ያረጋግጡ።",
   "ai_chat_move_left": "ውይይት ወደ ግራ ውሰድ",
-  "ai_chat_move_right": "ውይይት ወደ ቀኝ ውሰድ"
+  "ai_chat_move_right": "ውይይት ወደ ቀኝ ውሰድ",
+  "ai_chat_context": "አውድ",
+  "ai_chat_context_devices": "መሳሪያዎች",
+  "ai_chat_context_widgets": "መግብሮች",
+  "ai_chat_context_programs": "አውቶማቲክ ፕሮግራሞች",
+  "ai_chat_context_dashboards": "ዳሽቦርዶች",
+  "ai_chat_context_deep": "ቴክኒካዊ ማጣቀሻዎች (ጥልቅ እውቀት)",
+  "ai_chat_context_hint": "ለወደፊት ጥያቄዎች ይተገበራል። የተመረጠው መረጃ ከነቃው AI ጋር ይጋራል። መረጃን ማጋራት የድርጊት ፈቃዶችን አይሰጥም። እያንዳንዱ አውድ መገለጫ የተለየ AI የውይይት አውድ አለው; የሚታየው ታሪክ ተቀምጧል።",
+  "ai_chat_capabilities": "ችሎታዎች",
+  "ai_chat_capability_device": "የመሣሪያ ቁጥጥር",
+  "ai_chat_capability_automation": "ፕሮግራሞችን ይፍጠሩ እና ያዘምኑ",
+  "ai_chat_capability_widgets": "መግብሮችን ይፍጠሩ",
+  "ai_chat_capabilities_hint": "የነቁ ችሎታዎች AI የትኞቹን እርምጃዎች ማከናወን እንደሚችል ይወስናሉ። የተጋራ መረጃ በአውድ ውስጥ በተናጠል ተመርጧል። ለውጦች ለወደፊት ጥያቄዎች ይተገበራሉ።"
 }

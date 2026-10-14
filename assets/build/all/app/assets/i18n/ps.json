@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "په لوړ غږ لوستل کېږي",
   "service_restart_timeout": "خدمت لا تر اوسه بیا نه دی پیل شوی. دا کړکۍ وتړئ او سرور وګورئ.",
   "ai_chat_move_left": "چیټ کیڼ لور ته حرکت وکړئ",
-  "ai_chat_move_right": "چیټ ښي خوا ته حرکت وکړئ"
+  "ai_chat_move_right": "چیټ ښي خوا ته حرکت وکړئ",
+  "ai_chat_context": "متن",
+  "ai_chat_context_devices": "وسایل",
+  "ai_chat_context_widgets": "ویجټونه",
+  "ai_chat_context_programs": "د اتومات کولو پروګرامونه",
+  "ai_chat_context_dashboards": "ډشبورډونه",
+  "ai_chat_context_deep": "تخنیکي حوالې (ژوره پوهه)",
+  "ai_chat_context_hint": "د راتلونکو غوښتنو لپاره تطبیق کیږي. ټاکل شوي معلومات د فعال AI سره شریک شوي. د معلوماتو شریکول د عمل اجازه نه ورکوي. د هر متن پروفایل د AI د خبرو اترو جلا شرایط لري؛ ښکاره تاریخ ساتل کیږي.",
+  "ai_chat_capabilities": "وړتیاوې",
+  "ai_chat_capability_device": "د وسیلې کنټرول",
+  "ai_chat_capability_automation": "پروګرامونه جوړ او تازه کړئ",
+  "ai_chat_capability_widgets": "ویجټونه جوړ کړئ",
+  "ai_chat_capabilities_hint": "فعال شوي وړتیاوې مشخصوي چې کوم عملونه AI ترسره کولی شي. شریک شوي معلومات په جلا توګه په شرایطو کې غوره شوي. بدلونونه په راتلونکو غوښتنو کې پلي کیږي."
 }

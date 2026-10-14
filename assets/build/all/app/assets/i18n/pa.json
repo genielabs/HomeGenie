@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "ਉੱਚੀ ਆਵਾਜ਼ ਵਿੱਚ ਪੜ੍ਹਿਆ ਜਾ ਰਿਹਾ ਹੈ",
   "service_restart_timeout": "ਸੇਵਾ ਅਜੇ ਮੁੜ ਸ਼ੁਰੂ ਨਹੀਂ ਹੋਈ। ਇਹ ਵਿੰਡੋ ਬੰਦ ਕਰੋ ਅਤੇ ਸਰਵਰ ਦੀ ਜਾਂਚ ਕਰੋ।",
   "ai_chat_move_left": "ਚੈਟ ਨੂੰ ਖੱਬੇ ਪਾਸੇ ਲੈ ਜਾਓ",
-  "ai_chat_move_right": "ਚੈਟ ਨੂੰ ਸੱਜੇ ਪਾਸੇ ਲੈ ਜਾਓ"
+  "ai_chat_move_right": "ਚੈਟ ਨੂੰ ਸੱਜੇ ਪਾਸੇ ਲੈ ਜਾਓ",
+  "ai_chat_context": "ਸੰਦਰਭ",
+  "ai_chat_context_devices": "ਡਿਵਾਈਸਾਂ",
+  "ai_chat_context_widgets": "ਵਿਜੇਟਸ",
+  "ai_chat_context_programs": "ਆਟੋਮੇਸ਼ਨ ਪ੍ਰੋਗਰਾਮ",
+  "ai_chat_context_dashboards": "ਡੈਸ਼ਬੋਰਡ",
+  "ai_chat_context_deep": "ਤਕਨੀਕੀ ਹਵਾਲੇ (ਡੂੰਘੇ ਗਿਆਨ)",
+  "ai_chat_context_hint": "ਭਵਿੱਖ ਦੀਆਂ ਬੇਨਤੀਆਂ 'ਤੇ ਲਾਗੂ ਹੁੰਦਾ ਹੈ। ਚੁਣੀ ਗਈ ਜਾਣਕਾਰੀ ਨੂੰ ਸਰਗਰਮ AI ਨਾਲ ਸਾਂਝਾ ਕੀਤਾ ਜਾਂਦਾ ਹੈ। ਜਾਣਕਾਰੀ ਸਾਂਝੀ ਕਰਨ ਨਾਲ ਕਾਰਵਾਈ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਮਿਲਦੀ। ਹਰੇਕ ਸੰਦਰਭ ਪ੍ਰੋਫਾਈਲ ਦਾ ਇੱਕ ਵੱਖਰਾ AI ਗੱਲਬਾਤ ਸੰਦਰਭ ਹੁੰਦਾ ਹੈ; ਦਿਖਾਈ ਦੇਣ ਵਾਲਾ ਇਤਿਹਾਸ ਰੱਖਿਆ ਗਿਆ ਹੈ।",
+  "ai_chat_capabilities": "ਸਮਰੱਥਾਵਾਂ",
+  "ai_chat_capability_device": "ਡਿਵਾਈਸ ਕੰਟਰੋਲ",
+  "ai_chat_capability_automation": "ਪ੍ਰੋਗਰਾਮ ਬਣਾਓ ਅਤੇ ਅਪਡੇਟ ਕਰੋ",
+  "ai_chat_capability_widgets": "ਵਿਜੇਟਸ ਬਣਾਓ",
+  "ai_chat_capabilities_hint": "ਸਮਰਥਿਤ ਸਮਰੱਥਾਵਾਂ ਇਹ ਨਿਰਧਾਰਤ ਕਰਦੀਆਂ ਹਨ ਕਿ AI ਕਿਹੜੀਆਂ ਕਾਰਵਾਈਆਂ ਕਰ ਸਕਦਾ ਹੈ। ਸਾਂਝੀ ਜਾਣਕਾਰੀ ਨੂੰ ਸੰਦਰਭ ਵਿੱਚ ਵੱਖਰੇ ਤੌਰ 'ਤੇ ਚੁਣਿਆ ਗਿਆ ਹੈ। ਤਬਦੀਲੀਆਂ ਭਵਿੱਖ ਦੀਆਂ ਬੇਨਤੀਆਂ 'ਤੇ ਲਾਗੂ ਹੁੰਦੀਆਂ ਹਨ।"
 }

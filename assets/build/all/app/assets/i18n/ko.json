@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "소리 내어 읽는 중",
   "service_restart_timeout": "서비스가 아직 다시 시작되지 않았습니다. 이 창을 닫고 서버를 확인하세요.",
   "ai_chat_move_left": "채팅을 왼쪽으로 이동",
-  "ai_chat_move_right": "채팅을 오른쪽으로 이동"
+  "ai_chat_move_right": "채팅을 오른쪽으로 이동",
+  "ai_chat_context": "맥락",
+  "ai_chat_context_devices": "장치",
+  "ai_chat_context_widgets": "위젯",
+  "ai_chat_context_programs": "자동화 프로그램",
+  "ai_chat_context_dashboards": "대시보드",
+  "ai_chat_context_deep": "기술 참조(심층 지식)",
+  "ai_chat_context_hint": "향후 요청에 적용됩니다. 선택된 정보는 활성 AI와 공유됩니다. 정보를 공유해도 작업 권한이 부여되지 않습니다. 각 컨텍스트 프로필에는 별도의 AI 대화 컨텍스트가 있습니다. 눈에 보이는 이력이 유지됩니다.",
+  "ai_chat_capabilities": "기능",
+  "ai_chat_capability_device": "장치 제어",
+  "ai_chat_capability_automation": "프로그램 생성 및 업데이트",
+  "ai_chat_capability_widgets": "위젯 만들기",
+  "ai_chat_capabilities_hint": "활성화된 기능은 AI가 수행할 수 있는 작업을 결정합니다. 공유된 정보는 Context에서 별도로 선택됩니다. 변경사항은 향후 요청에 적용됩니다."
 }

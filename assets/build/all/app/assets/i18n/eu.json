@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Ozen irakurtzen",
   "service_restart_timeout": "Zerbitzua ez da oraindik berrabiarazi. Itxi leiho hau eta egiaztatu zerbitzaria.",
   "ai_chat_move_left": "Eraman txata ezkerrera",
-  "ai_chat_move_right": "Eraman txata eskuinera"
+  "ai_chat_move_right": "Eraman txata eskuinera",
+  "ai_chat_context": "Testuingurua",
+  "ai_chat_context_devices": "Gailuak",
+  "ai_chat_context_widgets": "Widget-ak",
+  "ai_chat_context_programs": "Automatizazio programak",
+  "ai_chat_context_dashboards": "Aginte-panelak",
+  "ai_chat_context_deep": "Erreferentzia teknikoak (Deep Knowledge)",
+  "ai_chat_context_hint": "Etorkizuneko eskaerei aplikatzen zaie. Hautatutako informazioa AI aktiboarekin partekatzen da. Informazioa partekatzeak ez du ekintza baimenik ematen. Testuinguru-profil bakoitzak AI elkarrizketa-testuinguru bereizia du; ikusgai dagoen historia gordetzen da.",
+  "ai_chat_capabilities": "Gaitasunak",
+  "ai_chat_capability_device": "Gailuaren kontrola",
+  "ai_chat_capability_automation": "Programak sortu eta eguneratu",
+  "ai_chat_capability_widgets": "Sortu widget-ak",
+  "ai_chat_capabilities_hint": "Gaitutako gaitasunek AIak zein ekintza egin ditzakeen zehazten dute. Partekatutako informazioa bereizita hautatzen da Testuinguruan. Aldaketak etorkizuneko eskaerei aplikatzen zaizkie."
 }

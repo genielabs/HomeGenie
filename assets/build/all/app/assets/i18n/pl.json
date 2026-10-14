@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Czytanie na głos",
   "service_restart_timeout": "Usługa jeszcze się nie uruchomiła ponownie. Zamknij to okno i sprawdź serwer.",
   "ai_chat_move_left": "Przesuń czat w lewo",
-  "ai_chat_move_right": "Przesuń czat w prawo"
+  "ai_chat_move_right": "Przesuń czat w prawo",
+  "ai_chat_context": "Kontekst",
+  "ai_chat_context_devices": "Urządzenia",
+  "ai_chat_context_widgets": "Widżety",
+  "ai_chat_context_programs": "Programy automatyzacji",
+  "ai_chat_context_dashboards": "Pulpity nawigacyjne",
+  "ai_chat_context_deep": "Referencje techniczne (głęboka wiedza)",
+  "ai_chat_context_hint": "Dotyczy przyszłych żądań. Wybrane informacje są udostępniane aktywnej AI. Udostępnianie informacji nie daje uprawnień do działania. Każdy profil kontekstowy ma oddzielny kontekst konwersacji AI; widoczna historia jest zachowywana.",
+  "ai_chat_capabilities": "Możliwości",
+  "ai_chat_capability_device": "Kontrola urządzenia",
+  "ai_chat_capability_automation": "Twórz i aktualizuj programy",
+  "ai_chat_capability_widgets": "Twórz widżety",
+  "ai_chat_capabilities_hint": "Włączone możliwości określają, jakie działania może wykonać sztuczna inteligencja. Udostępniane informacje są wybierane osobno w Kontekście. Zmiany dotyczą przyszłych żądań."
 }

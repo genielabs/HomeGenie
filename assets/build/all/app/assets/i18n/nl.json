@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Voorlezen",
   "service_restart_timeout": "De service is nog niet opnieuw gestart. Sluit dit venster en controleer de server.",
   "ai_chat_move_left": "Verplaats chat naar links",
-  "ai_chat_move_right": "Verplaats chat naar rechts"
+  "ai_chat_move_right": "Verplaats chat naar rechts",
+  "ai_chat_context": "Context",
+  "ai_chat_context_devices": "Apparaten",
+  "ai_chat_context_widgets": "Widgets",
+  "ai_chat_context_programs": "Automatiseringsprogramma's",
+  "ai_chat_context_dashboards": "Dashboards",
+  "ai_chat_context_deep": "Technische referenties (diepe kennis)",
+  "ai_chat_context_hint": "Geldt voor toekomstige verzoeken. Geselecteerde informatie wordt gedeeld met de actieve AI. Het delen van informatie verleent geen actierechten. Elk contextprofiel heeft een aparte AI-gesprekscontext; de zichtbare geschiedenis wordt bewaard.",
+  "ai_chat_capabilities": "Mogelijkheden",
+  "ai_chat_capability_device": "Apparaatcontrole",
+  "ai_chat_capability_automation": "Programma's maken en bijwerken",
+  "ai_chat_capability_widgets": "Maak widgets",
+  "ai_chat_capabilities_hint": "Ingeschakelde mogelijkheden bepalen welke acties de AI kan uitvoeren. Gedeelde informatie wordt afzonderlijk geselecteerd in Context. Wijzigingen gelden voor toekomstige aanvragen."
 }

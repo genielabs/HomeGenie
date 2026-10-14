@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Citire cu voce tare",
   "service_restart_timeout": "Serviciul nu a repornit încă. Închideți această fereastră și verificați serverul.",
   "ai_chat_move_left": "Mutați chatul la stânga",
-  "ai_chat_move_right": "Mutați chatul la dreapta"
+  "ai_chat_move_right": "Mutați chatul la dreapta",
+  "ai_chat_context": "Context",
+  "ai_chat_context_devices": "Dispozitive",
+  "ai_chat_context_widgets": "Widgeturi",
+  "ai_chat_context_programs": "Programe de automatizare",
+  "ai_chat_context_dashboards": "Tablouri de bord",
+  "ai_chat_context_deep": "Referințe tehnice (Deep Knowledge)",
+  "ai_chat_context_hint": "Se aplică cererilor viitoare. Informațiile selectate sunt partajate cu IA activă. Partajarea informațiilor nu acordă permisiuni de acțiune. Fiecare profil de context are un context de conversație AI separat; se păstrează istoria vizibilă.",
+  "ai_chat_capabilities": "Capabilități",
+  "ai_chat_capability_device": "Controlul dispozitivului",
+  "ai_chat_capability_automation": "Creați și actualizați programe",
+  "ai_chat_capability_widgets": "Creați widget-uri",
+  "ai_chat_capabilities_hint": "Capacitățile activate determină ce acțiuni poate efectua AI. Informațiile partajate sunt selectate separat în Context. Modificările se aplică solicitărilor viitoare."
 }

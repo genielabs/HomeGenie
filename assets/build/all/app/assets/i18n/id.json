@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Membaca dengan suara",
   "service_restart_timeout": "Layanan belum dimulai ulang. Tutup jendela ini dan periksa server.",
   "ai_chat_move_left": "Pindahkan obrolan ke kiri",
-  "ai_chat_move_right": "Pindahkan obrolan ke kanan"
+  "ai_chat_move_right": "Pindahkan obrolan ke kanan",
+  "ai_chat_context": "Konteks",
+  "ai_chat_context_devices": "Perangkat",
+  "ai_chat_context_widgets": "Widget",
+  "ai_chat_context_programs": "Program otomasi",
+  "ai_chat_context_dashboards": "Dasbor",
+  "ai_chat_context_deep": "Referensi teknis (Pengetahuan Mendalam)",
+  "ai_chat_context_hint": "Berlaku untuk permintaan di masa mendatang. Informasi yang dipilih dibagikan dengan AI aktif. Berbagi informasi tidak memberikan izin tindakan. Setiap profil konteks memiliki konteks percakapan AI yang terpisah; sejarah yang terlihat disimpan.",
+  "ai_chat_capabilities": "Kemampuan",
+  "ai_chat_capability_device": "Kontrol perangkat",
+  "ai_chat_capability_automation": "Membuat dan memperbarui program",
+  "ai_chat_capability_widgets": "Buat widget",
+  "ai_chat_capabilities_hint": "Kemampuan yang diaktifkan menentukan tindakan apa yang dapat dilakukan AI. Informasi yang dibagikan dipilih secara terpisah dalam Konteks. Perubahan berlaku untuk permintaan di masa mendatang."
 }

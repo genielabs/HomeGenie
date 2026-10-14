@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Kei te pānui ā-waha",
   "service_restart_timeout": "Kāore anō te ratonga kia tīmata anō. Katia tēnei matapihi, ka tirohia te tūmau.",
   "ai_chat_move_left": "Nuku kōrerorero ki te taha mauī",
-  "ai_chat_move_right": "Nuku kōrerorero ki te taha matau"
+  "ai_chat_move_right": "Nuku kōrerorero ki te taha matau",
+  "ai_chat_context": "Horopaki",
+  "ai_chat_context_devices": "Pūrere",
+  "ai_chat_context_widgets": "Ngā widget",
+  "ai_chat_context_programs": "Nga kaupapa aunoa",
+  "ai_chat_context_dashboards": "Papatohu",
+  "ai_chat_context_deep": "Tohutoro Hangarau (Matauranga Hohonu)",
+  "ai_chat_context_hint": "Ka pa ki nga tono a meake nei. Ko nga korero kua tohua ka tohatohahia ki te AI kaha. Ko te tiri korero kaore e tuku whakaaetanga mahi. Kei ia kōtaha horopaki he horopaki kōrero AI motuhake; ka mau te hitori kitea.",
+  "ai_chat_capabilities": "Nga kaha",
+  "ai_chat_capability_device": "Te mana o te taputapu",
+  "ai_chat_capability_automation": "Waihanga me te whakahou i nga kaupapa",
+  "ai_chat_capability_widgets": "Waihanga widget",
+  "ai_chat_capabilities_hint": "Ko nga kaha kua whakahohea ka whakatau ko wai nga mahi ka taea e AI te mahi. Ko nga korero tiritahi ka tohua motuhake ki te Horopaki. Ka pa nga huringa ki nga tono a meake nei."
 }

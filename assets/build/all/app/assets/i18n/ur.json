@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "بلند آواز میں پڑھا جا رہا ہے",
   "service_restart_timeout": "سروس ابھی تک دوبارہ شروع نہیں ہوئی۔ یہ ونڈو بند کریں اور سرور کو چیک کریں۔",
   "ai_chat_move_left": "چیٹ کو بائیں طرف منتقل کریں۔",
-  "ai_chat_move_right": "چیٹ کو دائیں طرف منتقل کریں۔"
+  "ai_chat_move_right": "چیٹ کو دائیں طرف منتقل کریں۔",
+  "ai_chat_context": "سیاق و سباق",
+  "ai_chat_context_devices": "آلات",
+  "ai_chat_context_widgets": "وجیٹس",
+  "ai_chat_context_programs": "آٹومیشن پروگرام",
+  "ai_chat_context_dashboards": "ڈیش بورڈز",
+  "ai_chat_context_deep": "تکنیکی حوالہ جات (گہرا علم)",
+  "ai_chat_context_hint": "مستقبل کی درخواستوں پر لاگو ہوتا ہے۔ منتخب کردہ معلومات کو فعال AI کے ساتھ شیئر کیا جاتا ہے۔ معلومات کا اشتراک عمل کی اجازت نہیں دیتا ہے۔ ہر سیاق و سباق کے پروفائل میں ایک الگ AI گفتگو کا سیاق و سباق ہوتا ہے۔ نظر آنے والی تاریخ محفوظ ہے۔",
+  "ai_chat_capabilities": "صلاحیتیں",
+  "ai_chat_capability_device": "ڈیوائس کنٹرول",
+  "ai_chat_capability_automation": "پروگرام بنائیں اور اپ ڈیٹ کریں۔",
+  "ai_chat_capability_widgets": "ویجٹ بنائیں",
+  "ai_chat_capabilities_hint": "فعال صلاحیتیں اس بات کا تعین کرتی ہیں کہ AI کون سے اعمال انجام دے سکتا ہے۔ مشترکہ معلومات کو سیاق و سباق میں الگ سے منتخب کیا گیا ہے۔ تبدیلیاں مستقبل کی درخواستوں پر لاگو ہوتی ہیں۔"
 }

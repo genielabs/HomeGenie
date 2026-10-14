@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Ag léamh os ard",
   "service_restart_timeout": "Níor atosaigh an tseirbhís fós. Dún an fhuinneog seo agus seiceáil an freastalaí.",
   "ai_chat_move_left": "Bog an comhrá ar chlé",
-  "ai_chat_move_right": "Bog an comhrá ar dheis"
+  "ai_chat_move_right": "Bog an comhrá ar dheis",
+  "ai_chat_context": "Comhthéacs",
+  "ai_chat_context_devices": "Gléasanna",
+  "ai_chat_context_widgets": "Giuirléidí",
+  "ai_chat_context_programs": "Cláir uathoibrithe",
+  "ai_chat_context_dashboards": "Deais",
+  "ai_chat_context_deep": "Tagairtí teicniúla (Eolas Doimhneach)",
+  "ai_chat_context_hint": "Baineann sé seo le hiarratais sa todhchaí. Roinntear faisnéis roghnaithe leis an AI gníomhach. Ní thugann roinnt faisnéise ceadanna gníomhaíochta. Tá comhthéacs comhrá AI ar leith ag gach próifíl comhthéacs; coinnítear an stair infheicthe.",
+  "ai_chat_capabilities": "Cumais",
+  "ai_chat_capability_device": "Rialú gléas",
+  "ai_chat_capability_automation": "Cláir a chruthú agus a nuashonrú",
+  "ai_chat_capability_widgets": "Cruthaigh giuirléidí",
+  "ai_chat_capabilities_hint": "Cinneann cumais chumasaithe na gníomhartha is féidir leis an AI a dhéanamh. Roghnaítear faisnéis chomhroinnte ar leithligh i gComhthéacs. Baineann athruithe le hiarratais amach anseo."
 }

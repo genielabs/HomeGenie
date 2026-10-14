@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "উচ্চস্বরে পড়া হচ্ছে",
   "service_restart_timeout": "পরিষেবাটি এখনও পুনরায় চালু হয়নি। এই উইন্ডোটি বন্ধ করুন এবং সার্ভার পরীক্ষা করুন।",
   "ai_chat_move_left": "বাম দিকে চ্যাট সরান",
-  "ai_chat_move_right": "চ্যাট ডানদিকে সরান"
+  "ai_chat_move_right": "চ্যাট ডানদিকে সরান",
+  "ai_chat_context": "প্রসঙ্গ",
+  "ai_chat_context_devices": "ডিভাইস",
+  "ai_chat_context_widgets": "উইজেট",
+  "ai_chat_context_programs": "অটোমেশন প্রোগ্রাম",
+  "ai_chat_context_dashboards": "ড্যাশবোর্ড",
+  "ai_chat_context_deep": "প্রযুক্তিগত তথ্যসূত্র (গভীর জ্ঞান)",
+  "ai_chat_context_hint": "ভবিষ্যতের অনুরোধে প্রযোজ্য। নির্বাচিত তথ্য সক্রিয় AI এর সাথে ভাগ করা হয়। তথ্য শেয়ার করা কর্মের অনুমতি দেয় না। প্রতিটি প্রসঙ্গ প্রোফাইলের একটি পৃথক এআই কথোপকথন প্রসঙ্গ রয়েছে; দৃশ্যমান ইতিহাস রাখা হয়.",
+  "ai_chat_capabilities": "ক্ষমতা",
+  "ai_chat_capability_device": "ডিভাইস নিয়ন্ত্রণ",
+  "ai_chat_capability_automation": "প্রোগ্রাম তৈরি করুন এবং আপডেট করুন",
+  "ai_chat_capability_widgets": "উইজেট তৈরি করুন",
+  "ai_chat_capabilities_hint": "সক্ষম করা ক্ষমতাগুলি নির্ধারণ করে যে AI কোন কাজগুলি সম্পাদন করতে পারে৷ শেয়ার করা তথ্য প্রসঙ্গে আলাদাভাবে নির্বাচন করা হয়। পরিবর্তন ভবিষ্যতে অনুরোধ প্রযোজ্য."
 }

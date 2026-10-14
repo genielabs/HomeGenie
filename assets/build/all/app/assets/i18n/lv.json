@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Lasīšana balsī",
   "service_restart_timeout": "Pakalpojums vēl nav restartēts. Aizveriet šo logu un pārbaudiet serveri.",
   "ai_chat_move_left": "Pārvietojiet tērzēšanu pa kreisi",
-  "ai_chat_move_right": "Pārvietojiet tērzēšanu pa labi"
+  "ai_chat_move_right": "Pārvietojiet tērzēšanu pa labi",
+  "ai_chat_context": "Konteksts",
+  "ai_chat_context_devices": "Ierīces",
+  "ai_chat_context_widgets": "Logrīki",
+  "ai_chat_context_programs": "Automatizācijas programmas",
+  "ai_chat_context_dashboards": "Informācijas paneļi",
+  "ai_chat_context_deep": "Tehniskās atsauces (dziļas zināšanas)",
+  "ai_chat_context_hint": "Attiecas uz turpmākiem pieprasījumiem. Atlasītā informācija tiek kopīgota ar aktīvo AI. Informācijas kopīgošana nepiešķir darbības atļaujas. Katram konteksta profilam ir atsevišķs AI sarunas konteksts; redzamā vēsture tiek saglabāta.",
+  "ai_chat_capabilities": "Iespējas",
+  "ai_chat_capability_device": "Ierīces vadība",
+  "ai_chat_capability_automation": "Programmu izveide un atjaunināšana",
+  "ai_chat_capability_widgets": "Izveidojiet logrīkus",
+  "ai_chat_capabilities_hint": "Iespējotās iespējas nosaka, kuras darbības AI var veikt. Kopīgotā informācija tiek atlasīta atsevišķi kontekstā. Izmaiņas attiecas uz turpmākajiem pieprasījumiem."
 }

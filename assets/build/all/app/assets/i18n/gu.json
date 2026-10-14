@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "મોટેથી વાંચી રહ્યું છે",
   "service_restart_timeout": "સેવા હજી ફરી શરૂ થઈ નથી. આ વિન્ડો બંધ કરો અને સર્વર તપાસો.",
   "ai_chat_move_left": "ચેટને ડાબી બાજુએ ખસેડો",
-  "ai_chat_move_right": "ચેટને જમણી બાજુએ ખસેડો"
+  "ai_chat_move_right": "ચેટને જમણી બાજુએ ખસેડો",
+  "ai_chat_context": "સંદર્ભ",
+  "ai_chat_context_devices": "ઉપકરણો",
+  "ai_chat_context_widgets": "વિજેટ્સ",
+  "ai_chat_context_programs": "ઓટોમેશન પ્રોગ્રામ્સ",
+  "ai_chat_context_dashboards": "ડેશબોર્ડ્સ",
+  "ai_chat_context_deep": "ટેકનિકલ સંદર્ભો (ઊંડું જ્ઞાન)",
+  "ai_chat_context_hint": "ભવિષ્યની વિનંતીઓ પર લાગુ થાય છે. પસંદ કરેલી માહિતી સક્રિય AI સાથે શેર કરવામાં આવે છે. માહિતી શેર કરવાથી ક્રિયાની પરવાનગી મળતી નથી. દરેક સંદર્ભ પ્રોફાઇલમાં એક અલગ AI વાર્તાલાપ સંદર્ભ હોય છે; દૃશ્યમાન ઇતિહાસ રાખવામાં આવે છે.",
+  "ai_chat_capabilities": "ક્ષમતાઓ",
+  "ai_chat_capability_device": "ઉપકરણ નિયંત્રણ",
+  "ai_chat_capability_automation": "પ્રોગ્રામ્સ બનાવો અને અપડેટ કરો",
+  "ai_chat_capability_widgets": "વિજેટ્સ બનાવો",
+  "ai_chat_capabilities_hint": "સક્ષમ ક્ષમતાઓ એ નક્કી કરે છે કે AI કઈ ક્રિયાઓ કરી શકે છે. શેર કરેલી માહિતી સંદર્ભમાં અલગથી પસંદ કરવામાં આવી છે. ફેરફારો ભવિષ્યની વિનંતીઓ પર લાગુ થાય છે."
 }

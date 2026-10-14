@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "وڏي آواز ۾ پڙهيو پيو وڃي",
   "service_restart_timeout": "سروس اڃا ٻيهر شروع نه ٿي آهي. هي ونڊو بند ڪريو ۽ سرور چيڪ ڪريو.",
   "ai_chat_move_left": "چيٽ کي کاٻي پاسي منتقل ڪريو",
-  "ai_chat_move_right": "چيٽ کي ساڄي طرف منتقل ڪريو"
+  "ai_chat_move_right": "چيٽ کي ساڄي طرف منتقل ڪريو",
+  "ai_chat_context": "حوالو",
+  "ai_chat_context_devices": "ڊوائيسز",
+  "ai_chat_context_widgets": "وجيٽس",
+  "ai_chat_context_programs": "خودڪار پروگرامن",
+  "ai_chat_context_dashboards": "ڊيش بورڊ",
+  "ai_chat_context_deep": "ٽيڪنيڪل حوالا (ڊيپ علم)",
+  "ai_chat_context_hint": "مستقبل جي درخواستن تي لاڳو ٿئي ٿو. منتخب ٿيل معلومات فعال AI سان حصيداري ڪئي وئي آهي. معلومات شيئرنگ عمل جي اجازت نه ڏئي ٿي. هر حوالي سان پروفائل ۾ هڪ الڳ AI گفتگو جو حوالو آهي؛ ڏيکاريل تاريخ رکيل آهي.",
+  "ai_chat_capabilities": "صلاحيتون",
+  "ai_chat_capability_device": "ڊوائيس ڪنٽرول",
+  "ai_chat_capability_automation": "پروگرام ٺاهيو ۽ تازه ڪاري ڪريو",
+  "ai_chat_capability_widgets": "widgets ٺاهيو",
+  "ai_chat_capabilities_hint": "فعال ڪيل صلاحيتون طئي ڪن ٿيون ته ڪھڙا ڪارناما AI انجام ڏئي سگھن ٿا. شيئر ڪيل معلومات الڳ الڳ چونڊيل آهي Context ۾. تبديليون مستقبل جي درخواستن تي لاڳو ٿين ٿيون."
 }

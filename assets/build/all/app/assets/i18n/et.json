@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Ettelugemine",
   "service_restart_timeout": "Teenus pole veel taaskäivitunud. Sulge see aken ja kontrolli serverit.",
   "ai_chat_move_left": "Liigutage vestlus vasakule",
-  "ai_chat_move_right": "Liigutage vestlus paremale"
+  "ai_chat_move_right": "Liigutage vestlus paremale",
+  "ai_chat_context": "Kontekst",
+  "ai_chat_context_devices": "Seadmed",
+  "ai_chat_context_widgets": "Vidinad",
+  "ai_chat_context_programs": "Automatiseerimisprogrammid",
+  "ai_chat_context_dashboards": "Armatuurlauad",
+  "ai_chat_context_deep": "Tehnilised viited (sügavad teadmised)",
+  "ai_chat_context_hint": "Kehtib tulevaste taotluste puhul. Valitud teavet jagatakse aktiivse tehisintellektiga. Teabe jagamine ei anna toiminguõigusi. Igal kontekstiprofiilil on eraldi AI vestluskontekst; nähtav ajalugu hoitakse alles.",
+  "ai_chat_capabilities": "Võimalused",
+  "ai_chat_capability_device": "Seadme juhtimine",
+  "ai_chat_capability_automation": "Programmide loomine ja värskendamine",
+  "ai_chat_capability_widgets": "Loo vidinaid",
+  "ai_chat_capabilities_hint": "Lubatud võimalused määravad, milliseid toiminguid AI teha saab. Jagatud teave valitakse kontekstis eraldi. Muudatused kehtivad tulevastele taotlustele."
 }

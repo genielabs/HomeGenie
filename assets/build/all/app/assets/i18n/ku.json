@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "Bi dengê bilind tê xwendin",
   "service_restart_timeout": "Xizmet hîn ji nû ve dest pê nekiriye. Vê paceyê bigire û serverê kontrol bike.",
   "ai_chat_move_left": "Sohbetê biçe çepê",
-  "ai_chat_move_right": "Sohbetê biguhezînin rastê"
+  "ai_chat_move_right": "Sohbetê biguhezînin rastê",
+  "ai_chat_context": "Context",
+  "ai_chat_context_devices": "Devices",
+  "ai_chat_context_widgets": "Widgets",
+  "ai_chat_context_programs": "bernameyên Automation",
+  "ai_chat_context_dashboards": "Dashboards",
+  "ai_chat_context_deep": "Referansên teknîkî (Zana Kûr)",
+  "ai_chat_context_hint": "Li ser daxwazên pêşerojê derbas dibe. Agahdariya hilbijartî bi AI-ya çalak re tê parve kirin. Parvekirina agahiyê destûrên çalakiyê nade. Her profîla kontekstê xwedan çarçoveyek danûstendina AI-yê ya cihê ye; dîroka xuya tê parastin.",
+  "ai_chat_capabilities": "Kapasîteyên",
+  "ai_chat_capability_device": "Kontrola cîhazê",
+  "ai_chat_capability_automation": "Bernameyan çêbikin û nûve bikin",
+  "ai_chat_capability_widgets": "Widgetan biafirînin",
+  "ai_chat_capabilities_hint": "Kapasîteyên çalak diyar dikin ku AI dikare kîjan çalakiyan bike. Agahdariya hevpar di Context de cuda tê hilbijartin. Guhertin ji bo daxwazên pêşerojê derbas dibin."
 }

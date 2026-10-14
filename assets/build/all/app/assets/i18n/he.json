@@ -603,5 +603,17 @@
   "ai_genie_playing_speech": "הקראה בקול",
   "service_restart_timeout": "השירות עדיין לא הופעל מחדש. סגור חלון זה ובדוק את השרת.",
   "ai_chat_move_left": "העבר את הצ'אט שמאלה",
-  "ai_chat_move_right": "הזז את הצ'אט ימינה"
+  "ai_chat_move_right": "הזז את הצ'אט ימינה",
+  "ai_chat_context": "הקשר",
+  "ai_chat_context_devices": "התקנים",
+  "ai_chat_context_widgets": "ווידג'טים",
+  "ai_chat_context_programs": "תוכניות אוטומציה",
+  "ai_chat_context_dashboards": "לוחות מחוונים",
+  "ai_chat_context_deep": "הפניות טכניות (ידע מעמיק)",
+  "ai_chat_context_hint": "חל על בקשות עתידיות. המידע הנבחר משותף עם הבינה המלאכותית הפעילה. שיתוף מידע אינו מעניק הרשאות פעולה. לכל פרופיל הקשר יש הקשר נפרד לשיחת AI; ההיסטוריה הגלויה נשמרת.",
+  "ai_chat_capabilities": "יכולות",
+  "ai_chat_capability_device": "שליטה במכשיר",
+  "ai_chat_capability_automation": "צור ועדכן תוכניות",
+  "ai_chat_capability_widgets": "צור ווידג'טים",
+  "ai_chat_capabilities_hint": "היכולות המופעלות קובעות אילו פעולות ה-AI יכול לבצע. מידע משותף נבחר בנפרד בהקשר. השינויים חלים על בקשות עתידיות."
 }
