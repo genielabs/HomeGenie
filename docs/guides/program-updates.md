@@ -82,7 +82,7 @@ On an orderly service shutdown the current installation finishes, and remaining 
 
 Each job has a separate persistent outcome notice, distinct from the availability notice. Progress uses a monotonic sequence so late asynchronous events cannot replace a newer result. Service 582 also polls `Packages.UpdateNotice`, recovering the latest result after restart or after the archive program updates itself. Completed job notices remain available for the user to read/archive; the separate availability notice resolves when a complete check finds no pending updates.
 
-Install the updated Persistent Notifications program from the base package to enable this recovery behavior. Automatic installation of new required programs as part of a system release update is still a separate future integration; Update All currently requires explicit user confirmation.
+Install the updated Persistent Notifications program from the base package to enable this recovery behavior. Update All requires explicit user confirmation. The post-release reconciliation described below automatically installs missing required programs only.
 
 ## Permanent updates view and backup retention
 
@@ -97,4 +97,14 @@ Additional API routes under `/api/HomeAutomation.HomeGenie/Config/`:
 - `GET Packages.UpdateHistory`: newest jobs, total count, backup/removable bytes, available paths, protected count, retention periods and diagnostics.
 - `POST Packages.UpdateClean`: remove eligible successful backups and return refreshed history/storage information. No arbitrary path or job deletion parameter is accepted.
 
-This does not automatically install anything during a system release upgrade.
+The retention API does not install programs; post-release installation uses the dedicated reconciliation below.
+
+## New required programs after a HomeGenie release update
+
+A successful release installation writes `data/program-updates/reconciliation/pending.txt` after all staged files have been copied and requires restart. The new process performs reconciliation only after the ordinary program/module inventory and interfaces are initialized. No new package programs are compiled against the previous runtime during release-file copying.
+
+At startup, a durable `reconciliation/state.json` tracks the observed release identity (version and release date), marker token, request UUID, report fingerprint and accepted job ID. The first release containing this feature also reconciles an existing installation without a marker from the old updater. Subsequent ordinary restarts do not repeat the operation. A fresh explicit update marker can trigger a new pass even for the same release identity. Missing release metadata without a marker does not trigger installation.
+
+Automatic jobs have `kind: required`. They select only missing required programs/dependencies from active packages and the unsatisfied external dependencies needed by those targets. Other available program updates remain manual. Existing disabled programs count as installed and are not re-enabled; edited or unknown-baseline dependency code is skipped and dependent targets are blocked. Inactive packages and uninstalled optional programs remain excluded. All changes use the program-only store: no package group/dashboard/scheduler import, with the same checksum validation, address collision checks, backup/rollback and persistent progress/outcome notices as Update All.
+
+The coordinator persists a request identity before submission and reuses it when recovering ambiguous acceptance. Accepted jobs, including failed/interrupted jobs, are never automatically retried at every boot. Incomplete catalogs or preflight failures preserve a failed reconciliation record and log an actionable error; the normal Programs update report/notice continues to expose unresolved findings for manual review and retry. A malformed coordinator record is preserved rather than overwritten and does not prevent HomeGenie itself from starting. This is not a transaction or rollback for the entire system release.

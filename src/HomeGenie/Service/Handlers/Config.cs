@@ -306,6 +306,8 @@ namespace HomeGenie.Service.Handlers
                 }
                 else if (migCommand.GetOption(0) == "UpdateManager.ManualUpdate")
                 {
+                    try {
+                    using var manualUpdate = homegenie.UpdateChecker.BeginManualUpdate();
                     homegenie.RaiseEvent(
                         Domains.HomeGenie_System,
                         Domains.HomeGenie_UpdateChecker,
@@ -394,20 +396,30 @@ namespace HomeGenie.Service.Handlers
                         );
                     }
                     request.ResponseData = new ResponseStatus(responseStatus, responseMessage);
+                    } catch (Exception e) { request.ResponseData = new ResponseStatus(Status.Error, e.Message); }
+                }
+                else if (migCommand.GetOption(0) == "UpdateManager.DownloadStatus")
+                {
+                    try { request.ResponseData = homegenie.UpdateChecker.DownloadStatus(); }
+                    catch (Exception e) { request.ResponseData = new ResponseStatus(Status.Error, e.Message); }
+                }
+                else if (migCommand.GetOption(0) == "UpdateManager.PauseDownload")
+                {
+                    try { request.ResponseData = homegenie.UpdateChecker.PauseDownload(); }
+                    catch (Exception e) { request.ResponseData = new ResponseStatus(Status.Error, e.Message); }
                 }
                 else if (migCommand.GetOption(0) == "UpdateManager.DownloadUpdate")
                 {
-                    var responseStatus = Status.Ok;
-                    bool success = homegenie.UpdateChecker.DownloadUpdateFiles();
-                    if (!success) responseStatus = Status.Error;
-                    request.ResponseData = new ResponseStatus(responseStatus);
+                    try { request.ResponseData = homegenie.UpdateChecker.DownloadUpdateFiles(!string.IsNullOrWhiteSpace(request.RequestText) && (bool?)JObject.Parse(request.RequestText)["restart"] == true); }
+                    catch (Exception e) { request.ResponseData = new ResponseStatus(Status.Error, e.Message); }
                 }
                 else if (migCommand.GetOption(0) == "UpdateManager.InstallUpdate")
                 {
                     var responseStatus = Status.Ok;
                     string responseMessage = "";
+                    try {
                     homegenie.SaveData();
-                    var installStatus = homegenie.UpdateChecker.InstallFiles();
+                    var installStatus = homegenie.UpdateChecker.InstallDownloadedUpdate();
                     if (installStatus == UpdateChecker.InstallStatus.Error)
                     {
                         responseStatus = Status.Error;
@@ -426,6 +438,7 @@ namespace HomeGenie.Service.Handlers
                         }
                     }
                     request.ResponseData = new ResponseStatus(responseStatus, responseMessage);
+                    } catch (Exception e) { request.ResponseData = new ResponseStatus(Status.Error, e.Message); }
                 }
                 else if (migCommand.GetOption(0) == "SystemLogging.DownloadCsv")
                 {

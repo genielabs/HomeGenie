@@ -18,7 +18,13 @@ public partial class PackageManager
     private ProgramUpdateJobs programUpdates;
     private volatile bool updatesStopping;
 
-    public void InitializeProgramUpdates() => Updates().History();
+    public void InitializeProgramUpdates()
+    {
+        Updates().History();
+        new ProgramUpdateReconciliation(Path.Combine(Utility.GetDataFolder(), "program-updates", "reconciliation"),
+            GetProgramUpdates, Updates().StartRequired, id => Updates().Status(id))
+            .Run(ProgramUpdateReconciliation.ReleaseIdentity(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "release_info.xml")));
+    }
     public object GetProgramUpdateHistory() => Updates().History();
     public object CleanProgramUpdateBackups() => Updates().CleanSuccessfulBackups();
     public ProgramUpdateJob GetProgramUpdateJob(string id = null) => Updates().Status(id);

@@ -36,6 +36,7 @@ public class ProgramUpdateJob
     public string RequestId { get; set; }
     public string Fingerprint { get; set; }
     public string RetryOf { get; set; }
+    public string Kind { get; set; } = "manual";
     public string State { get; set; } = "running";
     public string CreatedAt { get; set; }
     public string UpdatedAt { get; set; }
@@ -101,7 +102,9 @@ public sealed partial class ProgramUpdateJobs
     private static ProgramUpdateJob Copy(ProgramUpdateJob job) => job == null ? null :
         JsonConvert.DeserializeObject<ProgramUpdateJob>(JsonConvert.SerializeObject(job));
 
-    public ProgramUpdateJob Start(string fingerprint, string requestId, string retryOf = null)
+    public ProgramUpdateJob Start(string fingerprint, string requestId, string retryOf = null) => StartCore(fingerprint, requestId, retryOf, false);
+    public ProgramUpdateJob StartRequired(string fingerprint, string requestId) => StartCore(fingerprint, requestId, null, true);
+    private ProgramUpdateJob StartCore(string fingerprint, string requestId, string retryOf, bool requiredOnly)
     {
         lock (gate)
         {
@@ -113,12 +116,12 @@ public sealed partial class ProgramUpdateJobs
             if (File.Exists(requestFile)) {
                 var previousId = File.ReadAllText(requestFile);
                 var previousJob = Status(previousId);
-                if (previousJob.Fingerprint != fingerprint || previousJob.RetryOf != retryOf) throw new InvalidOperationException("Request UUID was already used with different inputs.");
+                if (previousJob.Fingerprint != fingerprint || previousJob.RetryOf != retryOf || previousJob.Kind != (requiredOnly ? "required" : "manual")) throw new InvalidOperationException("Request UUID was already used with different inputs.");
                 return previousJob;
             }
             if (current?.RequestId == requestId)
             {
-                if (current.Fingerprint != fingerprint || current.RetryOf != retryOf) throw new InvalidOperationException("Request UUID was already used with different inputs.");
+                if (current.Fingerprint != fingerprint || current.RetryOf != retryOf || current.Kind != (requiredOnly ? "required" : "manual")) throw new InvalidOperationException("Request UUID was already used with different inputs.");
                 return Copy(current);
             }
             if (current?.State == "running") throw new InvalidOperationException("A program update job is already running.");
@@ -126,7 +129,7 @@ public sealed partial class ProgramUpdateJobs
             var report = store.Inspect();
             if (!report.Complete || report.Fingerprint != fingerprint) throw new InvalidOperationException("The update report changed or is incomplete. Refresh and confirm again.");
             var catalog = store.Catalog();
-            var targets = Plan(report);
+            var targets = requiredOnly ? PlanRequired(report, catalog) : Plan(report);
             if (retryOf != null)
             {
                 var retryKeys = current.Items.Where(i => i.State is "failed" or "blocked" or "interrupted").Select(i => i.Key).ToHashSet();
@@ -137,7 +140,7 @@ public sealed partial class ProgramUpdateJobs
             targets = Order(targets, catalog);
             var previous = current;
             current = new ProgramUpdateJob { Id = Guid.NewGuid().ToString("N"), RequestId = requestId,
-                Fingerprint = fingerprint, RetryOf = retryOf, CreatedAt = DateTime.UtcNow.ToString("O"), Items = targets };
+                Fingerprint = fingerprint, RetryOf = retryOf, Kind = requiredOnly ? "required" : "manual", CreatedAt = DateTime.UtcNow.ToString("O"), Items = targets };
             try { Save(); AtomicWrite(requestFile, current.Id); } catch { current = previous; throw; }
             var accepted = current;
             worker = Task.Run(() => Run(accepted, catalog));
@@ -165,6 +168,27 @@ public sealed partial class ProgramUpdateJobs
             { var target = Target(); target.Name = item.Id; result.Add(target); }
         }
         return result;
+    }
+
+    // Select missing required roots and only their unsatisfied external dependencies.
+    // Existing disabled programs count as installed; unrelated available updates stay manual.
+    private List<ProgramUpdateTarget> PlanRequired(ProgramUpdateReport report, IReadOnlyList<PackageData> catalog)
+    {
+        var all = Plan(report);
+        var chosen = new Dictionary<string,ProgramUpdateTarget>();
+        void Include(ProgramUpdateTarget target)
+        {
+            if (!chosen.TryAdd(target.Key, target)) return;
+            foreach (var dependency in Requirements(target, catalog))
+            {
+                if (store.DependencySatisfied(dependency.Repository, dependency.PackageId, dependency.Id, dependency.Version)) continue;
+                var candidates = all.Where(t => t.Repository == dependency.Repository && t.PackageId == dependency.PackageId && t.Id == dependency.Id).ToList();
+                if (candidates.Count == 0) throw new InvalidOperationException("Required dependency has no safe update candidate: " + dependency.Id);
+                foreach (var candidate in candidates) Include(candidate);
+            }
+        }
+        foreach (var target in all.Where(t => t.PreviousVersion == null)) Include(target);
+        return chosen.Values.ToList();
     }
 
     private static IEnumerable<PackageDataItem> Requirements(ProgramUpdateTarget target, IReadOnlyList<PackageData> catalog) =>

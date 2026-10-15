@@ -54,6 +54,10 @@ namespace HomeGenie.Service
 
         public string Runtime { get; set; }
 
+        public long AssetId { get; set; }
+        public long AssetSize { get; set; }
+        public string AssetUpdatedAt { get; set; }
+        public string AssetDigest { get; set; }
         public string DownloadUrl;
         public bool RequireRestart;
         public bool UpdateBreak;
@@ -210,7 +214,7 @@ namespace HomeGenie.Service
 
         public void Stop()
         {
-            // noop
+            releaseDownload?.Stop();
         }
 
         public static ReleaseInfo GetReleaseFile(string file)
@@ -219,7 +223,7 @@ namespace HomeGenie.Service
             try
             {
                 var serializer = new XmlSerializer(typeof(ReleaseInfo));
-                var reader = new StreamReader(file);
+                using var reader = new StreamReader(file);
                 release = (ReleaseInfo)serializer.Deserialize(reader);
                 reader.Close();
             }
@@ -235,6 +239,23 @@ namespace HomeGenie.Service
         public List<ReleaseInfo> RemoteUpdates
         {
             get { return remoteUpdates; }
+        }
+
+        public static string AssetSuffix(string runtime, string configuration)
+        {
+            string flavor = string.Equals(configuration,"Vulkan",StringComparison.OrdinalIgnoreCase) ? "-vulkan" :
+                string.Equals(configuration,"Cuda12",StringComparison.OrdinalIgnoreCase) ? "-cuda12" : "";
+            return "_" + runtime + flavor + ".zip";
+        }
+        private static string BuildConfiguration()
+        {
+#if USE_VULKAN
+            return "Vulkan";
+#elif USE_CUDA12
+            return "Cuda12";
+#else
+            return System.Reflection.CustomAttributeExtensions.GetCustomAttribute<System.Reflection.AssemblyConfigurationAttribute>(typeof(UpdateChecker).Assembly)?.Configuration;
+#endif
         }
 
         public List<ReleaseInfo> GetGitHubUpdates()
@@ -262,7 +283,7 @@ namespace HomeGenie.Service
                         foreach (dynamic relFile in ((JArray)rel.assets))
                         {
                             string relFileName = relFile.browser_download_url.ToString();
-                            if (relFileName.IndexOf("/homegenie_", StringComparison.Ordinal) > 0 && relFileName.EndsWith($"_{currentRelease.Runtime}.zip"))
+                            if (relFileName.IndexOf("/homegenie_", StringComparison.Ordinal) > 0 && relFileName.EndsWith(AssetSuffix(currentRelease.Runtime, BuildConfiguration()), StringComparison.OrdinalIgnoreCase))
                             {
                                 DateTime releaseDate = DateTime.ParseExact(relFile.updated_at.ToString(), "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
                                 releaseDate = releaseDate.Round(DateTimeExtensions.RoundTo.Minute).ToUniversalTime();
@@ -276,6 +297,10 @@ namespace HomeGenie.Service
                                     r.RequireRestart = false; // this flag is now useless since "restart" flag is dynamically computed by update process
                                     r.UpdateBreak = true; // TODO: store this flag somewhere in the github entry
                                     r.DownloadUrl = relFile.browser_download_url.ToString();
+                                    r.AssetId = (long?)relFile.id ?? 0;
+                                    r.AssetSize = (long?)relFile.size ?? 0;
+                                    r.AssetUpdatedAt = (string)relFile.updated_at;
+                                    r.AssetDigest = (string)relFile.digest;
                                     r.ReleaseDate = releaseDate;
                                     r.Runtime = currentRelease.Runtime;
                                     remoteUpdates.Add(r);
@@ -334,92 +359,29 @@ namespace HomeGenie.Service
             get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_update", "files", "HomeGenie"); }
         }
 
-        public bool DownloadUpdateFiles()
+        private readonly object downloadGate = new();
+        private ReleaseDownloadManager releaseDownload;
+        private ReleaseDownloadManager Downloads { get { lock(downloadGate) return releaseDownload ??= new ReleaseDownloadManager(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "_update")); } }
+        public ReleaseDownloadState DownloadStatus() => Downloads.Status();
+        public ReleaseDownloadState PauseDownload() => Downloads.Pause();
+        public bool DownloadBusy => Downloads.Busy;
+        public IDisposable BeginManualUpdate() => Downloads.BeginExternalInstall();
+        public ReleaseDownloadState DownloadUpdateFiles(bool restart = false)
         {
-            bool success = true;
-            //
-            if (Directory.Exists(updateFolder))
-                Directory.Delete(updateFolder, true);
-            //
-            if (remoteUpdates != null)
-            {
-                foreach (var releaseInfo in remoteUpdates)
-                {
-                    if (currentRelease != null && currentRelease.ReleaseDate < releaseInfo.ReleaseDate)
-                    {
-                        var files = DownloadAndUncompress(releaseInfo);
-                        if (files == null) // || files.Count == 0)
-                        {
-                            success = false;
-                        }
-                    }
-                }
-            }
-            return success;
+            var release = remoteUpdates?.FirstOrDefault();
+            if (release == null) throw new InvalidOperationException("Check for an available release before downloading.");
+            EnsureReleaseIsNewer(GetCurrentRelease(), release);
+            return Downloads.Start(release, restart);
         }
-
-        public List<string> DownloadAndUncompress(ReleaseInfo releaseInfo)
+        public static void EnsureReleaseIsNewer(ReleaseInfo installed, ReleaseInfo target)
         {
-            if (ArchiveDownloadUpdate != null)
-                ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.DOWNLOADING));
-            //
-            string destinationFolder = Path.Combine(updateFolder, "files");
-            string archiveName = Path.Combine(updateFolder, "archives", "hg_update_" + releaseInfo.Version.Replace(" ", "_").Replace(".", "_") + ".zip");
-            if (!Directory.Exists(Path.GetDirectoryName(archiveName)))
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(archiveName));
-            }
-            using (var client = new WebClientPx())
-            {
-                client.Headers.Add("user-agent", "HomeGenieUpdater/1.0 (compatible; MSIE 7.0; Windows NT 6.0)");
-                try
-                {
-                    client.DownloadFile(releaseInfo.DownloadUrl, archiveName);
-                }
-                catch (Exception)
-                {
-                    if (ArchiveDownloadUpdate != null)
-                        ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.ERROR));
-                    return null;
-                    //                throw;
-                }
-                finally
-                {
-                    client.Dispose();
-                }
-            }
-
-            // un-archive (unzip)
-            if (ArchiveDownloadUpdate != null)
-                ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.DECOMPRESSING));
-
-            bool errorOccurred = false;
-            var files = archiveName.EndsWith(".tgz")
-                ? Utility.UncompressTgz(archiveName, destinationFolder)
-                : Utility.UncompressZip(archiveName, destinationFolder);
-            errorOccurred = (files.Count == 0);
-
-            if (ArchiveDownloadUpdate != null)
-            {
-                if (errorOccurred)
-                    ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.ERROR));
-                else
-                    ArchiveDownloadUpdate(this, new ArchiveDownloadEventArgs(releaseInfo, ArchiveDownloadStatus.COMPLETED));
-            }
-
-            // update release_info.xml file with last releaseInfo ReleaseDate field in order to reflect github release date
-            if (files.Contains(Path.Combine("homegenie", releaseFile)))
-            {
-                var ri = GetReleaseFile(Path.Combine(destinationFolder, "homegenie", releaseFile));
-                ri.ReleaseDate = releaseInfo.ReleaseDate.ToUniversalTime();
-                XmlSerializer serializer = new XmlSerializer(typeof(ReleaseInfo));
-                using (TextWriter writer = new StreamWriter(Path.Combine(destinationFolder, "homegenie", releaseFile)))
-                {
-                    serializer.Serialize(writer, ri);
-                }
-            }
-
-            return files;
+            if (target == null || installed != null && target.ReleaseDate <= installed.ReleaseDate)
+                throw new InvalidOperationException("The selected release is already installed or older than the installed release.");
+        }
+        public InstallStatus InstallDownloadedUpdate()
+        {
+            EnsureReleaseIsNewer(GetCurrentRelease(), Downloads.Status().Release);
+            return Downloads.Install(InstallFiles);
         }
 
         public enum InstallStatus
@@ -432,7 +394,6 @@ namespace HomeGenie.Service
         public InstallStatus InstallFiles()
         {
             var status = InstallStatus.Success;
-            bool restartRequired = false;
             bool angularUiCleanupDone = false;
             string oldFilesPath = Path.Combine("_update", "oldfiles");
             string newFilesPath = Path.Combine("_update", "files", "HomeGenie_update");
@@ -565,8 +526,6 @@ namespace HomeGenie.Service
                     if (doNotCopy) continue;
 
                     // Update the file
-                    if (destinationFile.EndsWith(".exe") || destinationFile.EndsWith(".dll") || destinationFile.EndsWith(".so") || destinationFile.EndsWith(".dylib"))
-                        restartRequired = true;
 
                     if (!String.IsNullOrWhiteSpace(destinationFolder) && !Directory.Exists(destinationFolder))
                     {
@@ -625,9 +584,16 @@ namespace HomeGenie.Service
                     // TODO: should revert!
                     LogMessage("! ERROR update aborted.");
                 }
-                else if (restartRequired)
+                else
                 {
-                    status = InstallStatus.RestartRequired;
+                    // Reconcile with the NEW runtime after restart, never while release files are still being copied.
+                    try {
+                        ProgramUpdateReconciliation.MarkPending(Path.Combine(Utility.GetDataFolder(), "program-updates", "reconciliation"));
+                        status = InstallStatus.RestartRequired;
+                    } catch (Exception error) {
+                        LogMessage("! Cannot schedule required program reconciliation: " + error.Message);
+                        status = InstallStatus.Error;
+                    }
                 }
 
             }
@@ -644,7 +610,7 @@ namespace HomeGenie.Service
             try
             {
                 var serializer = new XmlSerializer(typeof(List<Group>));
-                var reader = new StreamReader(file);
+                using var reader = new StreamReader(file);
                 var modulesGroups = (List<Group>)serializer.Deserialize(reader);
                 reader.Close();
                 //
@@ -685,7 +651,7 @@ namespace HomeGenie.Service
             try
             {
                 var serializer = new XmlSerializer(typeof(List<Group>));
-                var reader = new StreamReader(file);
+                using var reader = new StreamReader(file);
                 var automationGroups = (List<Group>)serializer.Deserialize(reader);
                 reader.Close();
                 //
@@ -726,7 +692,7 @@ namespace HomeGenie.Service
             try
             {
                 var serializer = new XmlSerializer(typeof(List<SchedulerItem>));
-                var reader = new StreamReader(file);
+                using var reader = new StreamReader(file);
                 var schedulerItems = (List<SchedulerItem>)serializer.Deserialize(reader);
                 reader.Close();
                 //
@@ -768,7 +734,7 @@ namespace HomeGenie.Service
             try
             {
                 var serializer = new XmlSerializer(typeof(SystemConfiguration));
-                var reader = new StreamReader(file);
+                using var reader = new StreamReader(file);
                 var config = (SystemConfiguration)serializer.Deserialize(reader);
                 //
                 bool configChanged = false;
@@ -805,7 +771,7 @@ namespace HomeGenie.Service
             try
             {
                 var serializer = new XmlSerializer(typeof(List<ProgramBlock>));
-                var reader = new StreamReader(file);
+                using var reader = new StreamReader(file);
                 var newProgramList = (List<ProgramBlock>)serializer.Deserialize(reader);
                 reader.Close();
                 //
@@ -959,23 +925,6 @@ namespace HomeGenie.Service
                 }
             }
             return result;
-        }
-        public new void DownloadFile(string address, string fileName)
-        {
-            try
-            {
-                base.DownloadFile(address, fileName);
-            }
-            catch
-            {
-                if (Environment.OSVersion.Platform == PlatformID.Unix && address.StartsWith("https://") && address.IndexOf("github.com/") > 0)
-                {
-                    using (var wc = new WebClient())
-                    {
-                        wc.DownloadFile(String.Format("http://zuix.it/gh/{0}", address.Substring(8)), fileName);
-                    }
-                }
-            }
         }
     }
 }

@@ -146,6 +146,33 @@ public class ProgramUpdateJobsTest
     [TestCase("../latest")] [TestCase("not-a-job")] public void StatusRejectsUntrustedPaths(string id) =>
         Assert.Throws<InvalidOperationException>(() => jobs.Status(id));
 
+    [Test] public void RequiredReconciliationInstallsMissingRootsButLeavesUnrelatedAndDisabledProgramsAlone()
+    {
+        store.Add("base","new-required",null,true);store.Add("other","optional-update",11,false);
+        jobs.StartRequired(store.Inspect().Fingerprint,Guid.NewGuid().ToString());var result=Done();
+        Assert.That(result.Kind,Is.EqualTo("required"));Assert.That(store.Applied.ToArray(),Is.EqualTo(new[]{"new-required"}));
+        Assert.That(store.Installed.Single(i=>i.Address==11).Version,Is.EqualTo("1.0.0"));
+        Assert.That(store.Installed.Single(i=>i.Address==11).Enabled,Is.False);
+        Assert.That(jobs.StartRequired(store.Inspect().Fingerprint,Guid.NewGuid().ToString()).Items,Is.Empty);
+        Done();
+    }
+    [TestCase(false)] [TestCase(true)] public void RequiredReconciliationSelectsOnlyNecessaryDependencyUpdatesAndProtectsEdits(bool modified)
+    {
+        store.Add("base","new-required",null,true);store.Add("dependency","service",12,false);store.Add("other","unrelated",13,true);
+        store.Packages.Single(p=>p.Id=="base").Programs.Add(new PackageDataItem {Repository="test",PackageId="dependency",Id="service",Version="2.0.0",Required=true});
+        if(modified)store.Installed.Single(i=>i.Address==12).ActualChecksum="BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB";
+        jobs.StartRequired(store.Inspect().Fingerprint,Guid.NewGuid().ToString());var result=Done();
+        Assert.That(result.Items.Any(i=>i.Id=="unrelated"),Is.False);
+        Assert.That(store.Installed.Single(i=>i.Address==12).Enabled,Is.False);
+        if(modified) {Assert.That(result.Items.Single(i=>i.Id=="new-required").State,Is.EqualTo("blocked"));Assert.That(store.Applied,Is.Empty);}
+        else Assert.That(store.Applied.ToArray(),Is.EqualTo(new[]{"service","new-required"}));
+    }
+    [Test] public void RequestIdentityCannotSwitchBetweenManualAndAutomaticModes()
+    {
+        store.Add("base","one",10,true);var id=Guid.NewGuid().ToString();var fingerprint=store.Inspect().Fingerprint;
+        Start(id);Done();Assert.Throws<InvalidOperationException>(()=>jobs.StartRequired(fingerprint,id));
+    }
+
     private sealed class Store : IProgramUpdateStore
     {
         public List<PackageData> Packages = new();

@@ -38,6 +38,7 @@ public class ProgramUpdateStoreTest
         database = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"programs.xml");
         previousDatabase = File.Exists(database) ? File.ReadAllBytes(database) : null;
         host = (HomeGenieService)RuntimeHelpers.GetUninitializedObject(typeof(HomeGenieService));
+        GC.SuppressFinalize(host); // This fixture never constructs or starts the real host.
         var manager = (ProgramManager)RuntimeHelpers.GetUninitializedObject(typeof(ProgramManager));
         var programs = new TsList<ProgramBlock>();
         Set(manager,"automationPrograms",programs); Set(manager,"hgService",host); Set(host,"masterControlProgram",manager);
