@@ -625,5 +625,6 @@
   "notification_action_check": "Yenidən cəhd etməzdən əvvəl əməliyyatın nəticəsini yoxlayın.",
   "notification_genie_upgrade": "Gemini Genie cihaz idarəetməsini, avtomatlaşdırma proqramlarını və vidcetləri ehtiva edir. Əvvəlki Genies əlçatan olaraq qalır. Hazır olduqda onları deaktiv edə bilərsiniz; parametrləri və söhbət tarixçələri saxlanılacaq.",
   "notification_disable_genies": "Əvvəlki Genies deaktiv edilsin",
-  "notification_disable_genies_confirm": "Sadalanan əvvəlki Genies deaktiv edilsin? Onların parametrləri və söhbət tarixçələri saxlanılacaq. İstənilən vaxt onları yenidən aktivləşdirə bilərsiniz."
+  "notification_disable_genies_confirm": "Sadalanan əvvəlki Genies deaktiv edilsin? Onların parametrləri və söhbət tarixçələri saxlanılacaq. İstənilən vaxt onları yenidən aktivləşdirə bilərsiniz.",
+  "upgrade_all": "Hamısını yenilə"
 }

@@ -625,5 +625,6 @@
   "notification_action_check": "重試前請確認操作結果。",
   "notification_genie_upgrade": "Gemini Genie 包含裝置控制、自動化程式與小工具。先前的 Genies 仍可繼續使用。準備好後即可將其停用；相關設定與對話紀錄將會保留。",
   "notification_disable_genies": "停用先前的 Genies",
-  "notification_disable_genies_confirm": "確定要停用所列出的先前 Genies 嗎？其設定與對話紀錄將會保留。您可以隨時重新啟用。"
+  "notification_disable_genies_confirm": "確定要停用所列出的先前 Genies 嗎？其設定與對話紀錄將會保留。您可以隨時重新啟用。",
+  "upgrade_all": "全部更新"
 }

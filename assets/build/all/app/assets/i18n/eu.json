@@ -625,5 +625,6 @@
   "notification_action_check": "Egiaztatu ekintzaren emaitza berriro saiatu aurretik.",
   "notification_genie_upgrade": "Gemini Genie-k gailuen kontrola, automatizazio-programak eta widget-ak barne hartzen ditu. Aurreko Genies erabilgarri jarraitzen dute. Prest zaudenean desgaitu ditzakezu; haien ezarpenak eta txat-historia gorde egingo dira.",
   "notification_disable_genies": "Desgaitu aurreko Genies",
-  "notification_disable_genies_confirm": "Zerrendatutako aurreko Genies desgaitu nahi dituzu? Haien ezarpenak eta txat-historia gorde egingo dira. Edozein unetan gaitu ditzakezu berriro."
+  "notification_disable_genies_confirm": "Zerrendatutako aurreko Genies desgaitu nahi dituzu? Haien ezarpenak eta txat-historia gorde egingo dira. Edozein unetan gaitu ditzakezu berriro.",
+  "upgrade_all": "Eguneratu dena"
 }

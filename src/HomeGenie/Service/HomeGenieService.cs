@@ -142,12 +142,16 @@ namespace HomeGenie.Service
 
             // it will check every 24 hours
             updateChecker.Start();
+            try { packageManager.InitializeProgramUpdates(); }
+            catch (Exception error) { LogError(error); } // A damaged update journal must not stop HomeGenie itself.
         }
 
         public bool RebuildPrograms { get; set; }
 
         public void Stop()
         {
+            // Do not dispose program engines while a program-only update is committing.
+            packageManager.StopProgramUpdates();
             RaiseEvent(Domains.HomeGenie_System, Domains.HomeGenie_System, SourceModule.Master, "HomeGenie System", Properties.HomeGenieStatus, "STOPPING");
             // Signal "SystemStopping" event to automation programs
             for (int p = 0; p < masterControlProgram.Programs.Count; p++)

@@ -625,5 +625,6 @@
   "notification_action_check": "Comprobe o resultado da acción antes de tentalo de novo.",
   "notification_genie_upgrade": "Gemini Genie inclúe o control de dispositivos, programas de automatización e widgets. Os Genies anteriores seguen dispoñibles. Pode desactivalos cando estea a punto; a súa configuración e o historial de conversas conservaranse.",
   "notification_disable_genies": "Desactivar os Genies anteriores",
-  "notification_disable_genies_confirm": "Desactivar os Genies anteriores listados? A súa configuración e o historial de conversas conservaranse. Pode activalos de novo en calquera momento."
+  "notification_disable_genies_confirm": "Desactivar os Genies anteriores listados? A súa configuración e o historial de conversas conservaranse. Pode activalos de novo en calquera momento.",
+  "upgrade_all": "Actualizar todo"
 }

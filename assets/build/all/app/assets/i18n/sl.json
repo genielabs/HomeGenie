@@ -625,5 +625,6 @@
   "notification_action_check": "Pred ponovnim poskusom preverite rezultat dejanja.",
   "notification_genie_upgrade": "Gemini Genie vključuje nadzor naprav, programe avtomatizacije in pripomočke. Prejšnji Genies ostajajo na voljo. Onemogočite jih lahko, ko boste pripravljeni; njihove nastavitve in zgodovina klepetov se bodo ohranili.",
   "notification_disable_genies": "Onemogoči prejšnje Genies",
-  "notification_disable_genies_confirm": "Želite onemogočiti navedene prejšnje Genies? Njihove nastavitve in zgodovina klepetov se bodo ohranili. Kadar koli jih lahko znova omogočite."
+  "notification_disable_genies_confirm": "Želite onemogočiti navedene prejšnje Genies? Njihove nastavitve in zgodovina klepetov se bodo ohranili. Kadar koli jih lahko znova omogočite.",
+  "upgrade_all": "Posodobi vse"
 }

@@ -625,5 +625,6 @@
   "notification_action_check": "Tirohia te hua o te mahi i mua i te whakamātau anō.",
   "notification_genie_upgrade": "Kei roto i a Gemini Genie te mana whakahaere pūrere, ngā hōtaka aunoa me ngā wīketi. E wātea tonu ana ngā Genie o mua. Ka taea e koe te whakakore i te wā e rite ana koe; ka pupuritia ā rātou tautuhinga me ngā hītori kōrerorero.",
   "notification_disable_genies": "Monokia ngā Genie o mua",
-  "notification_disable_genies_confirm": "Whakawetohia ngā Genie o mua kua whakarārangitia? Ka pupuritia ā rātou tautuhinga me ngā hītori kōrero. Ka taea e koe te whakahohe anō i ngā wā katoa."
+  "notification_disable_genies_confirm": "Whakawetohia ngā Genie o mua kua whakarārangitia? Ka pupuritia ā rātou tautuhinga me ngā hītori kōrero. Ka taea e koe te whakahohe anō i ngā wā katoa.",
+  "upgrade_all": "Whakahōu katoa"
 }

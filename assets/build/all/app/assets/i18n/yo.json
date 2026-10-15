@@ -625,5 +625,6 @@
   "notification_action_check": "Yẹ àbájáde ìgbése náà wò kí o tó tún gbìyànjú.",
   "notification_genie_upgrade": "Gemini Genie ní ìṣàkóso ẹ̀rọ, àwọn ètò iṣẹ́ aládàáṣe àti àwọn wídíjẹ́ẹ̀tì nínú. Àwọn Genie tẹ́lẹ̀ ṣì wà lárọ̀ọ́wọ́tó. O lè pa wọ́n tì nígbà tí o bá ṣe tán; a ó pa àwọn ètò àti ìtàn ìfọ̀rọ̀wérọ̀ wọn mọ́.",
   "notification_disable_genies": "Pa àwọn Genie tẹ́lẹ̀ tì",
-  "notification_disable_genies_confirm": "Ṣé kí a pa àwọn Genie tẹ́lẹ̀ tí a tò sílẹ̀ tì? A ó pa àwọn ètò àti ìtàn ìfọ̀rọ̀wérọ̀ wọn mọ́. O lè tún mú wọn ṣiṣẹ́ nígbàkúgbà."
+  "notification_disable_genies_confirm": "Ṣé kí a pa àwọn Genie tẹ́lẹ̀ tí a tò sílẹ̀ tì? A ó pa àwọn ètò àti ìtàn ìfọ̀rọ̀wérọ̀ wọn mọ́. O lè tún mú wọn ṣiṣẹ́ nígbàkúgbà.",
+  "upgrade_all": "Ṣe imudojuiwọn gbogbo rẹ"
 }

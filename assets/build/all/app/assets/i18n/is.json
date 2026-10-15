@@ -625,5 +625,6 @@
   "notification_action_check": "Athugaðu niðurstöðu aðgerðar áður en reynt er aftur.",
   "notification_genie_upgrade": "Gemini Genie inniheldur tækjastýringu, sjálfvirkniforrit og græjur. Fyrri Genies eru enn tiltækir. Þú getur slökkt á þeim þegar þú ert tilbúin(n); stillingar þeirra og spjallferill verða varðveitt.",
   "notification_disable_genies": "Gera fyrri Genies óvirka",
-  "notification_disable_genies_confirm": "Gera skráða fyrri Genies óvirka? Stillingar þeirra og spjallferill verða varðveitt. Þú getur virkjað þá aftur hvenær sem er."
+  "notification_disable_genies_confirm": "Gera skráða fyrri Genies óvirka? Stillingar þeirra og spjallferill verða varðveitt. Þú getur virkjað þá aftur hvenær sem er.",
+  "upgrade_all": "Uppfæra allt"
 }

@@ -625,5 +625,6 @@
   "notification_action_check": "Comproveu el resultat de l'acció abans de tornar-ho a provar.",
   "notification_genie_upgrade": "Gemini Genie inclou control de dispositius, programes d'automatització i ginys. Els Genies anteriors continuen disponibles. Podeu desactivar-los quan estigueu a punt; se'n conservaran la configuració i l'historial de xat.",
   "notification_disable_genies": "Desactiva els Genies anteriors",
-  "notification_disable_genies_confirm": "Voleu desactivar els Genies anteriors llistats? Se'n conservaran la configuració i l'historial de xat. Podeu tornar-los a activar en qualsevol moment."
+  "notification_disable_genies_confirm": "Voleu desactivar els Genies anteriors llistats? Se'n conservaran la configuració i l'historial de xat. Podeu tornar-los a activar en qualsevol moment.",
+  "upgrade_all": "Actualitza-ho tot"
 }

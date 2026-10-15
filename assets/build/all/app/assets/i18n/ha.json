@@ -625,5 +625,6 @@
   "notification_action_check": "Duba sakamakon aikin kafin sake gwadawa.",
   "notification_genie_upgrade": "Gemini Genie ya ƙunshi sarrafa na'ura, shirye-shiryen sarrafa kansa da widget. Tsoffin Genies za su ci gaba da kasancewa. Za ka iya kashe su a duk lokacin da ka shirya; za a adana saitunansu da tarihin taɗi.",
   "notification_disable_genies": "Kashe tsoffin Genies",
-  "notification_disable_genies_confirm": "A kashe tsoffin Genies da aka lissafa? Za a adana saitunansu da tarihin taɗi. Za ka iya sake kunna su a kowane lokaci."
+  "notification_disable_genies_confirm": "A kashe tsoffin Genies da aka lissafa? Za a adana saitunansu da tarihin taɗi. Za ka iya sake kunna su a kowane lokaci.",
+  "upgrade_all": "Sabunta duka"
 }

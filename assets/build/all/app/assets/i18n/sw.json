@@ -625,5 +625,6 @@
   "notification_action_check": "Kagua matokeo ya kitendo kabla ya kujaribu tena.",
   "notification_genie_upgrade": "Gemini Genie inajumuisha udhibiti wa kifaa, programu za kiotomatiki na vidhibiti vidogo. Genies zilizopita bado zinapatikana. Unaweza kuzizima ukiwa tayari; mipangilio yake na historia ya gumzo zitahifadhiwa.",
   "notification_disable_genies": "Zima Genies zilizopita",
-  "notification_disable_genies_confirm": "Je, unazima Genies zilizopita zilizoonyeshwa? Mipangilio yake na historia ya gumzo zitahifadhiwa. Unaweza kuziwezesha tena wakati wowote."
+  "notification_disable_genies_confirm": "Je, unazima Genies zilizopita zilizoonyeshwa? Mipangilio yake na historia ya gumzo zitahifadhiwa. Unaweza kuziwezesha tena wakati wowote.",
+  "upgrade_all": "Sasisha zote"
 }

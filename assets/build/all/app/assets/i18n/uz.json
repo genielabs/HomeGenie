@@ -625,5 +625,6 @@
   "notification_action_check": "Qayta urinishdan oldin amal natijasini tekshiring.",
   "notification_genie_upgrade": "Gemini Genie qurilmalarni boshqarish, avtomatlashtirish dasturlari va vidjetlarni o‘z ichiga oladi. Avvalgi Genie lar mavjud bo‘lib qoladi. Tayyor bo‘lganingizda ularni o‘chirib qo‘yishingiz mumkin; ularning sozlamalari va chatlar tarixi saqlanadi.",
   "notification_disable_genies": "Avvalgi Genie larni o‘chirish",
-  "notification_disable_genies_confirm": "Ro‘yxatdagi avvalgi Genie lar o‘chirilsinmi? Ularning sozlamalari va chatlar tarixi saqlanadi. Istalgan vaqtda ularni qayta yoqishingiz mumkin."
+  "notification_disable_genies_confirm": "Ro‘yxatdagi avvalgi Genie lar o‘chirilsinmi? Ularning sozlamalari va chatlar tarixi saqlanadi. Istalgan vaqtda ularni qayta yoqishingiz mumkin.",
+  "upgrade_all": "Barchasini yangilash"
 }

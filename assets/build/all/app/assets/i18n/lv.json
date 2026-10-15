@@ -625,5 +625,6 @@
   "notification_action_check": "Pirms mēģināt vēlreiz, pārbaudiet darbības rezultātu.",
   "notification_genie_upgrade": "Gemini Genie ietver ierīču vadību, automatizācijas programmas un logrīkus. Iepriekšējie Genie paliek pieejami. Varat tos atspējot, kad esat gatavs; to iestatījumi un tērzēšanas vēsture tiks saglabāta.",
   "notification_disable_genies": "Atspējot iepriekšējos Genie",
-  "notification_disable_genies_confirm": "Vai atspējot norādītos iepriekšējos Genie? To iestatījumi un tērzēšanas vēsture tiks saglabāta. Varat tos atkal iespējot jebkurā laikā."
+  "notification_disable_genies_confirm": "Vai atspējot norādītos iepriekšējos Genie? To iestatījumi un tērzēšanas vēsture tiks saglabāta. Varat tos atkal iespējot jebkurā laikā.",
+  "upgrade_all": "Atjaunināt visu"
 }

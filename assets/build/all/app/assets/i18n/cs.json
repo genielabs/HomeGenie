@@ -625,5 +625,6 @@
   "notification_action_check": "Před dalším pokusem zkontrolujte výsledek akce.",
   "notification_genie_upgrade": "Gemini Genie zahrnuje ovládání zařízení, automatizační programy a widgety. Předchozí Genies zůstávají k dispozici. Můžete je zakázat, až budete připraveni; jejich nastavení a historie chatu zůstanou zachovány.",
   "notification_disable_genies": "Zakázat předchozí Genies",
-  "notification_disable_genies_confirm": "Zakázat uvedené předchozí Genies? Jejich nastavení a historie chatu zůstanou zachovány. Kdykoli je můžete znovu povolit."
+  "notification_disable_genies_confirm": "Zakázat uvedené předchozí Genies? Jejich nastavení a historie chatu zůstanou zachovány. Kdykoli je můžete znovu povolit.",
+  "upgrade_all": "Aktualizovat vše"
 }

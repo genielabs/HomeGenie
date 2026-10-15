@@ -625,5 +625,6 @@
   "notification_action_check": "Hamarino ny vokatry ny hetsika alohan'ny hanandramana indray.",
   "notification_genie_upgrade": "Ahitana fifehezana fitaovana, fandaharan'asa mandeha hoazy, ary widget ny Gemini Genie. Mbola azo ampiasaina ireo Genie teo aloha. Azonao atao ny manafoana azy ireo rehefa vonona ianao; hotehirizina ny lamina sy ny tantaran'ny resaka.",
   "notification_disable_genies": "Atsaharo ireo Genie teo aloha",
-  "notification_disable_genies_confirm": "Atsaharo ireo Genie teo aloha voatanisa? Hotehirizina ny fampidirana sy ny tantaran'ny resaka. Azonao atao ny mamerina mampandeha azy ireo amin'ny fotoana rehetra."
+  "notification_disable_genies_confirm": "Atsaharo ireo Genie teo aloha voatanisa? Hotehirizina ny fampidirana sy ny tantaran'ny resaka. Azonao atao ny mamerina mampandeha azy ireo amin'ny fotoana rehetra.",
+  "upgrade_all": "Havaozy daholo"
 }

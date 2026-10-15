@@ -625,5 +625,6 @@
   "notification_action_check": "Tekrar denemeden önce işlem sonucunu kontrol edin.",
   "notification_genie_upgrade": "Gemini Genie; cihaz kontrolü, otomasyon programları ve widget'lar içerir. Önceki Genie'ler kullanılabilir durumda kalır. Hazır olduğunuzda bunları devre dışı bırakabilirsiniz; ayarları ve sohbet geçmişleri korunacaktır.",
   "notification_disable_genies": "Önceki Genie'leri devre dışı bırak",
-  "notification_disable_genies_confirm": "Listelenen önceki Genie'ler devre dışı bırakılsın mı? Ayarları ve sohbet geçmişleri korunacaktır. İstediğiniz zaman bunları tekrar etkinleştirebilirsiniz."
+  "notification_disable_genies_confirm": "Listelenen önceki Genie'ler devre dışı bırakılsın mı? Ayarları ve sohbet geçmişleri korunacaktır. İstediğiniz zaman bunları tekrar etkinleştirebilirsiniz.",
+  "upgrade_all": "Tümünü güncelle"
 }

@@ -625,5 +625,6 @@
   "notification_action_check": "Seiceáil toradh an ghnímh sula ndéanfaidh tú iarracht arís.",
   "notification_genie_upgrade": "Cuimsíonn Gemini Genie rialú gléasanna, cláir uathoibrithe agus giuirléidí. Tá na Genies roimhe seo ar fáil fós. Is féidir leat iad a dhíchumasú nuair a bheidh tú réidh; coimeádfar a socruithe agus a stair chomhrá.",
   "notification_disable_genies": "Díchumasaigh Genies roimhe seo",
-  "notification_disable_genies_confirm": "An bhfuil fonn ort na Genies roimhe seo atá liostaithe a dhíchumasú? Coimeádfar a socruithe agus a stair chomhrá. Is féidir leat iad a chumasú arís am ar bith."
+  "notification_disable_genies_confirm": "An bhfuil fonn ort na Genies roimhe seo atá liostaithe a dhíchumasú? Coimeádfar a socruithe agus a stair chomhrá. Is féidir leat iad a chumasú arís am ar bith.",
+  "upgrade_all": "Nuashonraigh uile"
 }

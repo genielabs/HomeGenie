@@ -625,5 +625,6 @@
   "notification_action_check": "Lelee nsonaazụ ihe omume ahụ tupu ị nwaa ọzọ.",
   "notification_genie_upgrade": "Gemini Genie na-agụnye njikwa ngwaọrụ, mmemme akpaaka na wijetị. Genies ndị gara aga ka dịkwa. Ị nwere ike gbanyụọ ha mgbe ị dị njikere; a ga-edobe ntọala na akụkọ mkparịta ụka ha.",
   "notification_disable_genies": "Gbanyụọ Genies ndị gara aga",
-  "notification_disable_genies_confirm": "Gbanyụọ Genies ndị gara aga edepụtara? A ga-edobe ntọala na akụkọ mkparịta ụka ha. Ị nwere ike ịgbalite ha ọzọ n'oge ọ bụla."
+  "notification_disable_genies_confirm": "Gbanyụọ Genies ndị gara aga edepụtara? A ga-edobe ntọala na akụkọ mkparịta ụka ha. Ị nwere ike ịgbalite ha ọzọ n'oge ọ bụla.",
+  "upgrade_all": "Melite ha niile"
 }

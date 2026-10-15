@@ -625,5 +625,6 @@
   "notification_action_check": "Verifye rezilta aksyon an anvan ou reeseye.",
   "notification_genie_upgrade": "Gemini Genie gen ladan kontwòl aparèy, pwogram otomatizasyon ak widje. Ansyen Genies yo ap rete disponib. Ou ka dezaktive yo lè ou pare; paramèt ak istwa chat yo ap konsève.",
   "notification_disable_genies": "Dezaktive ansyen Genies yo",
-  "notification_disable_genies_confirm": "Èske ou vle dezaktive ansyen Genies ki nan lis la? Paramèt ak istwa chat yo ap konsève. Ou ka reaktive yo nenpòt lè."
+  "notification_disable_genies_confirm": "Èske ou vle dezaktive ansyen Genies ki nan lis la? Paramèt ak istwa chat yo ap konsève. Ou ka reaktive yo nenpòt lè.",
+  "upgrade_all": "Mete tout ajou"
 }

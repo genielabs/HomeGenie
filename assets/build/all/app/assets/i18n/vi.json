@@ -625,5 +625,6 @@
   "notification_action_check": "Kiểm tra kết quả thao tác trước khi thử lại.",
   "notification_genie_upgrade": "Gemini Genie bao gồm tính năng điều khiển thiết bị, chương trình tự động hóa và tiện ích con. Các Genie trước đó vẫn khả dụng. Bạn có thể tắt chúng khi sẵn sàng; cài đặt và lịch sử trò chuyện của chúng sẽ được giữ lại.",
   "notification_disable_genies": "Tắt các Genie trước đây",
-  "notification_disable_genies_confirm": "Tắt các Genie trước đây trong danh sách? Cài đặt và lịch sử trò chuyện của chúng sẽ được giữ lại. Bạn có thể bật lại chúng bất cứ lúc nào."
+  "notification_disable_genies_confirm": "Tắt các Genie trước đây trong danh sách? Cài đặt và lịch sử trò chuyện của chúng sẽ được giữ lại. Bạn có thể bật lại chúng bất cứ lúc nào.",
+  "upgrade_all": "Cập nhật tất cả"
 }

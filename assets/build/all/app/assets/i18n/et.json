@@ -625,5 +625,6 @@
   "notification_action_check": "Enne uuesti proovimist kontrollige toimingu tulemust.",
   "notification_genie_upgrade": "Gemini Genie sisaldab seadmete juhtimist, automatiseerimisprogramme ja vidinaid. Eelmised Genied jäävad kättesaadavaks. Saate need keelata, kui olete valmis; nende seaded ja vestluste ajalugu säilitatakse.",
   "notification_disable_genies": "Keela eelmised Genied",
-  "notification_disable_genies_confirm": "Kas keelata loetletud eelmised Genied? Nende seaded ja vestluste ajalugu säilitatakse. Saate need igal ajal uuesti lubada."
+  "notification_disable_genies_confirm": "Kas keelata loetletud eelmised Genied? Nende seaded ja vestluste ajalugu säilitatakse. Saate need igal ajal uuesti lubada.",
+  "upgrade_all": "Uuenda kõiki"
 }

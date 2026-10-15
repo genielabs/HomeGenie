@@ -138,4 +138,18 @@ public class ProgramUpdateNotificationTest
         if (endpoint) payload["Actions"][0]["Endpoint"] = "System/Anything/Run";
         Assert.Throws<TargetInvocationException>(() => archive.GetMethod("Decode").Invoke(null, new object[] { payload.ToString() }));
     }
+    [Test]
+    public void OutOfOrderProducerEventsCannotRegressProgress()
+    {
+        var rows = new JArray();
+        var payload = new JObject { ["Version"]=1, ["Persistent"]=true, ["Id"]="job", ["Title"]="Updates", ["Message"]="Completed", ["Sequence"]=5 };
+        object[] Args(JObject value) => new object[] {rows,value,"automation","582",DateTime.UtcNow,500,90};
+        var row=(JObject)archive.GetMethod("Upsert").Invoke(null, Args(payload));
+        row["read"]=true;row["archived"]=true;
+        var before=rows.ToString();
+        payload["Sequence"]=3;payload["Message"]="Running";
+        archive.GetMethod("Upsert").Invoke(null,Args(payload));
+        Assert.That(rows.ToString(),Is.EqualTo(before));
+    }
+
 }

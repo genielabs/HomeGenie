@@ -625,5 +625,6 @@
   "notification_action_check": "Kontrolloni rezultatin e veprimit përpara se të provoni përsëri.",
   "notification_genie_upgrade": "Gemini Genie përfshin kontrollin e pajisjeve, programet e automatizimit dhe miniaplikacionet. Genies e mëparshëm mbeten të disponueshëm. Mund t'i çaktivizoni kur të jeni gati; cilësimet dhe historiku i bisedave do të ruhen.",
   "notification_disable_genies": "Çaktivizo Genies e mëparshëm",
-  "notification_disable_genies_confirm": "Të çaktivizohen Genies e mëparshëm të listuar? Cilësimet dhe historiku i bisedave të tyre do të ruhen. Mund t'i aktivizoni përsëri në çdo kohë."
+  "notification_disable_genies_confirm": "Të çaktivizohen Genies e mëparshëm të listuar? Cilësimet dhe historiku i bisedave të tyre do të ruhen. Mund t'i aktivizoni përsëri në çdo kohë.",
+  "upgrade_all": "Përditëso të gjitha"
 }

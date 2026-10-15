@@ -82,7 +82,7 @@ namespace HomeGenie.Service
         public bool Installed { get; set; }
     }
 
-    public class PackageManager
+    public partial class PackageManager
     {
         private HomeGenieService homegenie;
         private string widgetBasePath;
@@ -251,6 +251,15 @@ namespace HomeGenie.Service
 
 
         public bool InstallPackage(string repository, string package, List<string> installList = null)
+        {
+            lock (updateOperationGate)
+            {
+                if (programUpdates?.IsRunning == true) throw new InvalidOperationException("A program-only update job is running. Wait before installing a package.");
+                return InstallPackageCore(repository, package, installList);
+            }
+        }
+
+        private bool InstallPackageCore(string repository, string package, List<string> installList)
     {
             var packageFile = Path.Combine(Utility.GetDataFolder(), "packages", repository,
                 package, "package.json");
@@ -443,6 +452,16 @@ namespace HomeGenie.Service
         }
 
         public bool UninstallPackage(string repository, string package)
+        {
+            lock (updateOperationGate)
+            {
+                if (programUpdates?.IsRunning == true)
+                    throw new InvalidOperationException("A program update job is already running.");
+                return UninstallPackageCore(repository, package);
+            }
+        }
+
+        private bool UninstallPackageCore(string repository, string package)
         {
             var packageFile = Path.Combine(Utility.GetDataFolder(), "packages", repository,
                 package, "package.json");

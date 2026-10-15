@@ -625,5 +625,6 @@
   "notification_action_check": "Provjerite rezultat radnje prije ponovnog pokušaja.",
   "notification_genie_upgrade": "Gemini Genie uključuje kontrolu uređaja, programe automatizacije i vidžete. Prethodni Genies ostaju dostupni. Možete ih onemogućiti kada budete spremni; njihove postavke i historija ćaskanja biće sačuvani.",
   "notification_disable_genies": "Onemogući prethodne Genies",
-  "notification_disable_genies_confirm": "Onemogućiti navedene prethodne Genies? Njihove postavke i historija ćaskanja biće sačuvani. Možete ih ponovo omogućiti u bilo kojem trenutku."
+  "notification_disable_genies_confirm": "Onemogućiti navedene prethodne Genies? Njihove postavke i historija ćaskanja biće sačuvani. Možete ih ponovo omogućiti u bilo kojem trenutku.",
+  "upgrade_all": "Ažuriraj sve"
 }

@@ -625,5 +625,6 @@
   "notification_action_check": "Beriya ku careke din biceribînî, encama çalakiyê kontrol bike.",
   "notification_genie_upgrade": "Gemini Genie kontrola amûran, bernameyên otomasyonê û widgetan dihewîne. Genie-yên berê jî dimînin. Dema ku tu amade bûyî dikarî wan neçalak bikî; mîheng û dîroka sohbetên wan dê werin parastin.",
   "notification_disable_genies": "Genie-yên berê neçalak bike",
-  "notification_disable_genies_confirm": "Genie-yên berê yên lîstekirî bên neçalakkirin? Mîheng û dîroka sohbetên wan dê werin parastin. Tu dikarî wan di her kêliyê de dîsa çalak bikî."
+  "notification_disable_genies_confirm": "Genie-yên berê yên lîstekirî bên neçalakkirin? Mîheng û dîroka sohbetên wan dê werin parastin. Tu dikarî wan di her kêliyê de dîsa çalak bikî.",
+  "upgrade_all": "Hemûyan nû bike"
 }

@@ -625,5 +625,6 @@
   "notification_action_check": "再試行する前に処理結果をご確認ください。",
   "notification_genie_upgrade": "Gemini Genieには、デバイス制御、自動化プログラム、ウィジェットが含まれます。以前のGenieも引き続き利用可能です。準備ができ次第無効にできます。設定やチャット履歴は保持されます。",
   "notification_disable_genies": "以前のGenieを無効化",
-  "notification_disable_genies_confirm": "リストにある以前のGenieを無効にしますか？設定とチャット履歴は保持されます。いつでも再度有効にできます。"
+  "notification_disable_genies_confirm": "リストにある以前のGenieを無効にしますか？設定とチャット履歴は保持されます。いつでも再度有効にできます。",
+  "upgrade_all": "すべて更新"
 }

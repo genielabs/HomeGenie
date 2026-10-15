@@ -625,5 +625,6 @@
   "notification_action_check": "Sjekk handlingsresultatet før du prøver på nytt.",
   "notification_genie_upgrade": "Gemini Genie inkluderer enhetskontroll, automatiseringsprogrammer og widgeter. Tidligere Genies forblir tilgjengelige. Du kan deaktivere dem når du er klar; innstillingene og chatloggene beholdes.",
   "notification_disable_genies": "Deaktiver tidligere Genies",
-  "notification_disable_genies_confirm": "Deaktivere de oppførte tidligere Genies? Innstillingene og chatloggene beholdes. Du kan aktivere dem igjen når som helst."
+  "notification_disable_genies_confirm": "Deaktivere de oppførte tidligere Genies? Innstillingene og chatloggene beholdes. Du kan aktivere dem igjen når som helst.",
+  "upgrade_all": "Oppdater alle"
 }

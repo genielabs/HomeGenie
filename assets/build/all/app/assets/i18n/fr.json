@@ -625,5 +625,6 @@
   "notification_action_check": "Vérifiez le résultat de l'action avant de réessayer.",
   "notification_genie_upgrade": "Gemini Genie inclut le contrôle des appareils, les programmes d'automatisation et les widgets. Les anciens Genies restent disponibles. Vous pouvez les désactiver lorsque vous êtes prêt ; leurs paramètres et historiques de discussion seront conservés.",
   "notification_disable_genies": "Désactiver les anciens Genies",
-  "notification_disable_genies_confirm": "Désactiver les anciens Genies listés ? Leurs paramètres et historiques de discussion seront conservés. Vous pouvez les réactiver à tout moment."
+  "notification_disable_genies_confirm": "Désactiver les anciens Genies listés ? Leurs paramètres et historiques de discussion seront conservés. Vous pouvez les réactiver à tout moment.",
+  "upgrade_all": "Tout mettre à jour"
 }

@@ -625,5 +625,6 @@
   "notification_action_check": "Sprawdź wynik działania przed ponowieniem próby.",
   "notification_genie_upgrade": "Gemini Genie zawiera sterowanie urządzeniami, programy automatyzacji i widżety. Poprzednie Genies pozostają dostępne. Możesz je wyłączyć, gdy uznasz to za stosowne; ich ustawienia i historia czatu zostaną zachowane.",
   "notification_disable_genies": "Wyłącz poprzednie Genies",
-  "notification_disable_genies_confirm": "Wyłączyć wymienione poprzednie Genies? Ich ustawienia i historia czatu zostaną zachowane. Możesz je włączyć ponownie w dowolnym momencie."
+  "notification_disable_genies_confirm": "Wyłączyć wymienione poprzednie Genies? Ich ustawienia i historia czatu zostaną zachowane. Możesz je włączyć ponownie w dowolnym momencie.",
+  "upgrade_all": "Aktualizuj wszystkie"
 }

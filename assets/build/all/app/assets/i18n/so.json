@@ -625,5 +625,6 @@
   "notification_action_check": "Hubi natiijada falka ka hor inta aadan dib u tijaabin.",
   "notification_genie_upgrade": "Gemini Genie waxa ku jira xakamaynta qalabka, barnaamijyada otomaatiga iyo aaladaha widget-ka. Genies-kii hore way sii shaqaynayaan. Waad damin kartaa marka aad diyaar u tahay; habayntooda iyo taariikhda wada sheekaysiga waa la xafidi doonaa.",
   "notification_disable_genies": "Dami Genies-kii hore",
-  "notification_disable_genies_confirm": "Ma damisaa Genies-kii hore ee liiska ku jira? Habayntooda iyo taariikhda sheekaysiga waa la xafidi doonaa. Dib ayaad u shidi kartaa wakhti kasta."
+  "notification_disable_genies_confirm": "Ma damisaa Genies-kii hore ee liiska ku jira? Habayntooda iyo taariikhda sheekaysiga waa la xafidi doonaa. Dib ayaad u shidi kartaa wakhti kasta.",
+  "upgrade_all": "Dhammaan cusboonaysii"
 }

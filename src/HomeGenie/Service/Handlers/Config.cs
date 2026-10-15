@@ -1723,6 +1723,34 @@ namespace HomeGenie.Service.Handlers
 
             #region New PackageManager API
 
+            case "Packages.UpdateHistory":
+                try { request.ResponseData = homegenie.PackageManager.GetProgramUpdateHistory(); }
+                catch (Exception e) { request.ResponseData = new ResponseStatus(Status.Error, e.Message); }
+                break;
+
+            case "Packages.UpdateClean":
+                try { request.ResponseData = homegenie.PackageManager.CleanProgramUpdateBackups(); }
+                catch (Exception e) { request.ResponseData = new ResponseStatus(Status.Error, e.Message); }
+                break;
+
+            case "Packages.UpdateNotice":
+                try { request.ResponseData = homegenie.PackageManager.GetProgramUpdateNotice() ?? (object)new ResponseStatus(Status.Ok); }
+                catch (Exception e) { request.ResponseData = new ResponseStatus(Status.Error, e.Message); }
+                break;
+
+            case "Packages.UpdateStatus":
+                try { request.ResponseData = homegenie.PackageManager.GetProgramUpdateJob(string.IsNullOrEmpty(migCommand.GetOption(0)) ? null : migCommand.GetOption(0)) ?? (object)new ResponseStatus(Status.Ok); }
+                catch (Exception e) { request.ResponseData = new ResponseStatus(Status.Error, e.Message); }
+                break;
+
+            case "Packages.UpdatePrograms":
+                try {
+                    var updateRequest = JObject.Parse(request.RequestText);
+                    request.ResponseData = homegenie.PackageManager.StartProgramUpdateJob(
+                        (string)updateRequest["fingerprint"], (string)updateRequest["requestId"], (string)updateRequest["retryOf"]);
+                } catch (Exception e) { request.ResponseData = new ResponseStatus(Status.Error, e.Message); }
+                break;
+
             case "Packages.Updates":
                 request.ResponseData = homegenie.PackageManager.GetProgramUpdates();
                 break;

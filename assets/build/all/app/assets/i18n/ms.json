@@ -625,5 +625,6 @@
   "notification_action_check": "Semak hasil tindakan sebelum mencuba lagi.",
   "notification_genie_upgrade": "Gemini Genie merangkumi kawalan peranti, program automasi dan widget. Genie terdahulu kekal tersedia. Anda boleh menyahdayakannya apabila sudah bersedia; tetapan dan sejarah sembang akan dikekalkan.",
   "notification_disable_genies": "Nyahdayakan Genie terdahulu",
-  "notification_disable_genies_confirm": "Nyahdayakan Genie terdahulu yang disenaraikan? Tetapan dan sejarah sembang akan disimpan. Anda boleh mendayakannya semula pada bila-bila masa."
+  "notification_disable_genies_confirm": "Nyahdayakan Genie terdahulu yang disenaraikan? Tetapan dan sejarah sembang akan disimpan. Anda boleh mendayakannya semula pada bila-bila masa.",
+  "upgrade_all": "Kemas kini semua"
 }

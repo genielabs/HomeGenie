@@ -76,3 +76,7 @@ Disabling is optional and reversible. No program, prompt, credentials, module co
 A navigation action uses `Type: "navigate"`, `Destination: "program-updates"`, plus `Id`, `Label` and optional `LabelKey`. This is the only allowed destination; arbitrary routes, URLs, endpoints and bodies are rejected. YoT opens the originating connection’s Programs update view and closes the reader only after successful navigation. Navigation is repeatable, works from archived notices too, and does not enter the API execution ledger. The backend Execute endpoint explicitly rejects navigation actions.
 
 The archive service now maintains its own update notice by polling the shared read-only Packages.Updates report. See [program updates](program-updates.md) for timing, deduplication, failure and automatic resolution behavior. No program is installed, enabled or removed by this notice.
+
+## Program update job outcomes
+
+Update All produces a persistent notice per job, alongside the separate availability notice. Each progress envelope carries an increasing `Sequence`; the archive ignores an older or equal sequence for the same sender and notification ID, preserving the newer result and its read/archive state. The archive polls `Packages.UpdateNotice` independently of the availability check to recover missed results, including when the archive program itself was updated. Details and API semantics are documented in [program updates](program-updates.md).

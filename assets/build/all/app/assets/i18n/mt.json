@@ -625,5 +625,6 @@
   "notification_action_check": "Iċċekkja r-riżultat tal-azzjoni qabel ma terġa' tipprova.",
   "notification_genie_upgrade": "Gemini Genie jinkludi kontroll tat-tagħmir, programmi ta' awtomazzjoni u widgets. Il-Genies preċedenti jibqgħu disponibbli. Tista' tiddiżattivahom meta tkun lest; is-settings u l-istorja taċ-chat tagħhom se jinżammu.",
   "notification_disable_genies": "Iddiżattiva l-Genies preċedenti",
-  "notification_disable_genies_confirm": "Trid tiddiżattiva l-Genies preċedenti elenkati? Is-settings u l-istorja taċ-chat tagħhom se jinżammu. Tista' terġa' tattivahom fi kwalunkwe ħin."
+  "notification_disable_genies_confirm": "Trid tiddiżattiva l-Genies preċedenti elenkati? Is-settings u l-istorja taċ-chat tagħhom se jinżammu. Tista' terġa' tattivahom fi kwalunkwe ħin.",
+  "upgrade_all": "Aġġorna kollox"
 }

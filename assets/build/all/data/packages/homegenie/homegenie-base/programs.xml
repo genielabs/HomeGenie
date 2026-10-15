@@ -175,7 +175,7 @@ public static class HistoryStore
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>chat-history-service</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -248,7 +248,7 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>client-configs</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -619,7 +619,7 @@ void SaveConfig(string filePath, YamlConfig config)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>daily-energy-report</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -897,7 +897,7 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -1543,7 +1543,7 @@ public class DownloadManager : IDisposable
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>download-manager</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1586,7 +1586,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1914,7 +1914,7 @@ string GetDbName()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>energy-use-statistics</Id>
       <Version>1.0.9</Version>
       <Required>false</Required>
@@ -2089,7 +2089,7 @@ void InsertData(LiteDatabase db, LoggerEvent data) {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -2244,7 +2244,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>file-manager</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2446,7 +2446,7 @@ public static class HttpHelper {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>homegenie-panel-notifications</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2515,7 +2515,7 @@ public string[] GetHourLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>hourly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -2977,7 +2977,7 @@ class MqttCommand: MigInterfaceCommand {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>mqtt-network</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
@@ -3236,7 +3236,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>openweathermap</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -3328,7 +3328,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -3420,7 +3420,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -3492,7 +3492,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -4168,7 +4168,7 @@ public static class FfmpegHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>video-input</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -5473,7 +5473,7 @@ public class ThumbnailHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>video-recorder</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -5554,7 +5554,7 @@ public string[] GetDayLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>weekly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -6157,7 +6157,7 @@ public static class GenieResponseContract
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>ai-action-executor</Id>
       <Version>1.2.1</Version>
       <Required>true</Required>
@@ -6246,6 +6246,7 @@ foreach(var module in Modules.SelectedModules) {
 // The checker is read-only and local; the browser need not be open.
 Pause(10);
 string lastUpdateError = null;
+string lastJobNoticeError = null;
 while (Program.IsRunning) {
     try {
         object result = Api.Call("HomeAutomation.HomeGenie/Config/Packages.Updates");
@@ -6266,6 +6267,30 @@ while (Program.IsRunning) {
     catch (Exception e) {
         // Log an unchanged failure once, rather than once per poll.
         if (Program.IsRunning &amp;&amp; lastUpdateError != e.Message) { Program.Log.Error("Program update notification: " + e.Message); lastUpdateError = e.Message; }
+    }
+    // Recover the latest job even if this archive program was itself recompiled.
+    try {
+        object noticeResult = Api.Call("HomeAutomation.HomeGenie/Config/Packages.UpdateNotice");
+        var noticeToken = noticeResult == null ? null : JToken.FromObject(noticeResult);
+        if (noticeToken?.Type == JTokenType.String) noticeToken = JToken.Parse((string)noticeToken);
+        var payload = NotificationArchive.Decode(noticeToken?.ToString(Formatting.None));
+        JObject changed = null;
+        if (payload != null) lock (NotificationArchive.Gate) {
+            var known = rows.OfType&lt;JObject&gt;().FirstOrDefault(row =&gt; (string)row["domain"] == Program.Module.Domain &amp;&amp;
+                (string)row["address"] == Program.Module.Address &amp;&amp; (string)row["payload"]?["Id"] == (string)payload["Id"]);
+            bool newer = known == null || known["payload"]?["Sequence"]?.Type != JTokenType.Integer ||
+                payload["Sequence"]?.Type != JTokenType.Integer || payload["Sequence"].Value&lt;long&gt;() &gt; known["payload"]["Sequence"].Value&lt;long&gt;();
+            if (newer &amp;&amp; !JToken.DeepEquals(known?["payload"], payload)) {
+                var nextRows = (JArray)rows.DeepClone();
+                var row = NotificationArchive.Upsert(nextRows, payload, Program.Module.Domain, Program.Module.Address, DateTime.UtcNow, limit, days);
+                NotificationArchive.Save(path, nextRows); rows = nextRows; changed = (JObject)row.DeepClone();
+            }
+        }
+        if (changed != null) announce(changed);
+        lastJobNoticeError = null;
+    } catch (System.Threading.ThreadInterruptedException) { throw; }
+    catch (Exception e) {
+        if (Program.IsRunning &amp;&amp; lastJobNoticeError != e.Message) { Program.Log.Error("Program update job notification: " + e.Message); lastJobNoticeError = e.Message; }
     }
     Pause(60);
 }
@@ -6342,6 +6367,9 @@ public static class NotificationArchive {
         var identity=domain+"\n"+address+"\n"+(string)payload["Id"];
         var key=Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(identity))).ToLowerInvariant();
         var row=records.OfType&lt;JObject&gt;().FirstOrDefault(r=&gt;(string)r["key"]==key);bool fresh=row==null;
+        // Producers may provide a sequence so asynchronous event delivery cannot regress progress.
+        if (!fresh &amp;&amp; payload["Sequence"]?.Type == JTokenType.Integer &amp;&amp; row["payload"]?["Sequence"]?.Type == JTokenType.Integer &amp;&amp;
+            payload["Sequence"].Value&lt;long&gt;() &lt;= row["payload"]["Sequence"].Value&lt;long&gt;()) return row;
         if(fresh){row=new JObject{["key"]=key,["domain"]=domain,["address"]=address,["createdAt"]=now.ToString("O"),["revision"]=0,["count"]=0,["read"]=false,["archived"]=false,["actionStates"]=new JObject(),["actionRuns"]=new JArray()};records.Add(row);}
         if(fresh||!JToken.DeepEquals(row["payload"],payload)) {
             bool sameActions=JToken.DeepEquals(row["payload"]?["Actions"],payload["Actions"]);
@@ -6445,11 +6473,11 @@ public static class ProgramUpdateNotification {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.15</PackageVersion>
+      <PackageVersion>1.0.16</PackageVersion>
       <Id>notification-archive</Id>
-      <Version>1.1.0</Version>
+      <Version>1.1.1</Version>
       <Required>true</Required>
-      <Checksum>DE11D7705E3302C3126CEE1F55776B16</Checksum>
+      <Checksum>1E3C48017E66D938C719C7B8362518F4</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>582</Address>

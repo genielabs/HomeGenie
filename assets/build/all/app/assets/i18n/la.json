@@ -625,5 +625,6 @@
   "notification_action_check": "Eventum actionis inspice antequam iterum coneris.",
   "notification_genie_upgrade": "Gemini Genie moderationem instrumentorum, programmata automataria et instrumenta parva continet. Priora Genies adhuc praesto sunt. Ea deactivate potes cum paratus eris; optiones et colloquiorum historia conservabuntur.",
   "notification_disable_genies": "Priora Genies deactivare",
-  "notification_disable_genies_confirm": "Priora Genies in indice deactivare? Optiones et colloquiorum historia conservabuntur. Ea quovis tempore iterum activare potes."
+  "notification_disable_genies_confirm": "Priora Genies in indice deactivare? Optiones et colloquiorum historia conservabuntur. Ea quovis tempore iterum activare potes.",
+  "upgrade_all": "Omnia renova"
 }

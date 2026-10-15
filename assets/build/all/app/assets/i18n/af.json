@@ -625,5 +625,6 @@
   "notification_action_check": "Gaan die aksieresultaat na voordat jy weer probeer.",
   "notification_genie_upgrade": "Gemini Genie sluit toestelbeheer, outomatiseringsprogramme en legstukke in. Vorige Genies bly beskikbaar. Jy kan hulle deaktiveer wanneer jy gereed is; hul instellings en kletsgeskiedenis sal behou word.",
   "notification_disable_genies": "Deaktiveer vorige Genies",
-  "notification_disable_genies_confirm": "Deaktiveer die gelyste vorige Genies? Hul instellings en kletsgeskiedenis sal behou word. Jy kan hulle enige tyd weer aktiveer."
+  "notification_disable_genies_confirm": "Deaktiveer die gelyste vorige Genies? Hul instellings en kletsgeskiedenis sal behou word. Jy kan hulle enige tyd weer aktiveer.",
+  "upgrade_all": "Werk alles by"
 }

@@ -625,5 +625,6 @@
   "notification_action_check": "Gwiriwch ganlyniad y weithred cyn rhoi cynnig arall arni.",
   "notification_genie_upgrade": "Mae Gemini Genie yn cynnwys rheoli dyfeisiau, rhaglenni awtomeiddio a theclynnau. Mae Genies blaenorol yn parhau i fod ar gael. Gallwch eu hanalluogi pan fyddwch yn barod; bydd eu gosodiadau a'u hanesion sgwrs yn cael eu cadw.",
   "notification_disable_genies": "Analluogi Genies blaenorol",
-  "notification_disable_genies_confirm": "Analluogi'r Genies blaenorol a restrir? Bydd eu gosodiadau a'u hanesion sgwrs yn cael eu cadw. Gallwch eu galluogi eto ar unrhyw adeg."
+  "notification_disable_genies_confirm": "Analluogi'r Genies blaenorol a restrir? Bydd eu gosodiadau a'u hanesion sgwrs yn cael eu cadw. Gallwch eu galluogi eto ar unrhyw adeg.",
+  "upgrade_all": "Diweddaru popeth"
 }
