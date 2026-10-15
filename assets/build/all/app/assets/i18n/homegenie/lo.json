@@ -405,7 +405,6 @@
       "Description": "ໃຊ້ Google Gemini AI ເພື່ອຄວບຄຸມອຸປະກອນ, ສ້າງໂປຣແກຣມອັດຕະໂນມັດ, ແລະ ສ້າງວິດເຈັດໃນ HomeGenie. ເລືອກຄວາມສາມາດ ແລະ ບໍລິບົດລະບົບທີ່ຈະແບ່ງປັນຈາກເມນູສົນທະນາ.\nປ້ອນລະຫັດ API ທີ່ຖືກຕ້ອງເພື່ອເປີດໃຊ້ຄຸນສົມບັດນີ້. ຮັບລະຫັດ API ໄດ້ທີ່ https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "ລະຫັດ API ຂອງ Google Gemini AI",
       "ConfigureOptions.ModelId": "ID ໂມເດວ",
-      "ConfigureOptions.EnableDeepKnowledge": "ຕົວເລືອກ Deep Knowledge ແບບເກົ່າ (ສຳລັບຄວາມເຂົ້າກັນໄດ້ເທົ່ານັ້ນ)",
       "ConfigureOptions.SystemInstructions": "ຄຳແນະນຳລະບົບ"
     },
 

@@ -405,7 +405,6 @@
       "Description": "Kasutage rakenduses HomeGenie seadmete juhtimiseks, automaatikaprogrammide loomiseks ja vidinate ehitamiseks Google Gemini AI-d. Valige vestlusmenüüst funktsioonid ja süsteemikontekst, mida jagada.\nSelle funktsiooni lubamiseks sisestage kehtiv API-võti. Hankige API-võti aadressilt https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-võti",
       "ConfigureOptions.ModelId": "Mudeli ID",
-      "ConfigureOptions.EnableDeepKnowledge": "Aegunud Deep Knowledge'i valik (ainult ühilduvuse tagamiseks)",
       "ConfigureOptions.SystemInstructions": "Süsteemijuhised"
     },
 

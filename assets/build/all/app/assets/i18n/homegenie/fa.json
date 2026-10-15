@@ -405,7 +405,6 @@
       "Description": "از Google Gemini AI برای کنترل دستگاه‌ها، ایجاد برنامه‌های خودکارسازی و ساخت ویجت‌ها در HomeGenie استفاده کنید. قابلیت‌ها و زمینه سیستمی مورد نظر برای اشتراک‌گذاری را از منوی چت انتخاب کنید.\nبرای فعال کردن این قابلیت، یک کلید API معتبر وارد کنید. کلید API را از https://aistudio.google.com/app/apikey دریافت کنید.",
       "ConfigureOptions.ApiKey": "کلید API مربوط به Google Gemini AI",
       "ConfigureOptions.ModelId": "شناسه مدل",
-      "ConfigureOptions.EnableDeepKnowledge": "گزینه قدیمی Deep Knowledge (فقط جهت سازگاری)",
       "ConfigureOptions.SystemInstructions": "دستورالعمل‌های سیستم"
     },
 

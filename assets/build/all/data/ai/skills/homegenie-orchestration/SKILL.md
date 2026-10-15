@@ -1,21 +1,21 @@
 ---
 name: homegenie-orchestration
 description: Create a Director that schedules and runs cooperating automation programs through the unified Genie.
-compatibility: AI.Genie/Gemini orchestration APIs; automation capability required.
+compatibility: AI.Genies/Gemini orchestration APIs; automation capability required.
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
 ---
 # Unattended orchestration
 
 When the user explicitly requests a Director and cooperating agents, deploy the Director as kind=program in this response. One program per response does not require separate interactive user prompts: the Director can generate its helpers through the scheduling API below. Do not replace a requested multi-program design with one combined program or require another confirmation when the request is already clear.
 
-Generated programs use `AI.Genie/Gemini` endpoints, never the disabled legacy `AI.Automan/Gemini` provider.
+Generated programs use `AI.Genies/Gemini` endpoints, never the disabled legacy `AI.Automan/Gemini` provider.
 
 ## APIs
 
-- `Api.Call("AI.Genie/Gemini/Prompt.Schedule", prompt)` queues one create/update request. It returns an object with Status=Ok, taskId and state=queued, or Status=Error and Message. Validate the result before waiting. The worker uses the shared Action Executor and compilation repair. Jobs run serially; it does not accept widget/device tasks.
-- `Api.Call("AI.Genie/Gemini/Task.Status", taskId)` returns state=queued/running/completed/failed, with programId after successful deployment and message on failure. It can return Status=Error for an expired/unknown job. Stop waiting on any failure. Use a bounded wait (e.g. 10 minutes), Pause(2) between checks, and check Program.IsRunning. Never wait forever for a program that failed compilation.
-- `Api.Call("AI.Genie/Gemini/Prompt.Ask", text)` returns plain AI text, without deployment, chat history or system context. Use it for summarization/translation. On failure it returns Status=Error and Message: check the actual result type/status before writing a summary. Never use Prompt.Schedule to summarize data.
+- `Api.Call("AI.Genies/Gemini/Prompt.Schedule", prompt)` queues one create/update request. It returns an object with Status=Ok, taskId and state=queued, or Status=Error and Message. Validate the result before waiting. The worker uses the shared Action Executor and compilation repair. Jobs run serially; it does not accept widget/device tasks.
+- `Api.Call("AI.Genies/Gemini/Task.Status", taskId)` returns state=queued/running/completed/failed, with programId after successful deployment and message on failure. It can return Status=Error for an expired/unknown job. Stop waiting on any failure. Use a bounded wait (e.g. 10 minutes), Pause(2) between checks, and check Program.IsRunning. Never wait forever for a program that failed compilation.
+- `Api.Call("AI.Genies/Gemini/Prompt.Ask", text)` returns plain AI text, without deployment, chat history or system context. Use it for summarization/translation. On failure it returns Status=Error and Message: check the actual result type/status before writing a summary. Never use Prompt.Schedule to summarize data.
 
 Use `JObject.FromObject(result)` when a backend API returns an object; use `JObject.Parse(text)` only for a JSON string. Do not assume the frontend data.response wrapper exists in backend calls.
 

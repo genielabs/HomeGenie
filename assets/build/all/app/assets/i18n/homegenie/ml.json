@@ -405,7 +405,6 @@
       "Description": "ഡിവൈസുകൾ നിയന്ത്രിക്കാനും ഓട്ടോമേഷൻ പ്രോഗ്രാമുകൾ ഉണ്ടാക്കാനും HomeGenie-ൽ വിജറ്റുകൾ നിർമ്മിക്കാനും Google Gemini AI ഉപയോഗിക്കുക. ചാറ്റ് മെനുവിൽ നിന്ന് പങ്കിടേണ്ട സവിശേഷതകളും സിസ്റ്റം പശ്ചാത്തലവും തിരഞ്ഞെടുക്കുക.\nഈ ഫീച്ചർ പ്രവർത്തനക്ഷമമാക്കാൻ സാധുവായ ഒരു API കീ നൽകുക. https://aistudio.google.com/app/apikey എന്നതിൽ നിന്ന് ഒരു API കീ നേടുക.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API കീ",
       "ConfigureOptions.ModelId": "മോഡൽ ഐഡി",
-      "ConfigureOptions.EnableDeepKnowledge": "ലെഗസി Deep Knowledge ഓപ്ഷൻ (പൊരുത്തപ്പെടലിനായി മാത്രം)",
       "ConfigureOptions.SystemInstructions": "സിസ്റ്റം നിർദ്ദേശങ്ങൾ"
     },
 

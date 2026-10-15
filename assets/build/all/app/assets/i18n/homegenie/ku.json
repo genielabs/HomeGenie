@@ -405,7 +405,6 @@
       "Description": "Ji bo kontrolkirina cîhazan, çêkirina bernameyên otomasyonê û avakirina widgetan di HomeGenie de Google Gemini AI bikar bînin. Ji pêşeka sohbetê şiyan û naveroka pergalê ya ku were parvekirin hilbijêrin.\nJi bo çalakkirina vê taybetmendiyê mifteyeke API-yê ya derbasdar binivîsin. Mifteyek API-yê ji https://aistudio.google.com/app/apikey bistînin.",
       "ConfigureOptions.ApiKey": "Mifteya API-yê ya Google Gemini AI",
       "ConfigureOptions.ModelId": "Nasnameya Modelê",
-      "ConfigureOptions.EnableDeepKnowledge": "Vebijarka kevn a Deep Knowledge (tenê ji bo hevahengiyê)",
       "ConfigureOptions.SystemInstructions": "Talîmatên pergalê"
     },
 

@@ -405,7 +405,6 @@
       "Description": "Izmantojiet Google Gemini AI, lai vadītu ierīces, izveidotu automatizācijas programmas un veidotu logrīkus programmā HomeGenie. Tērzēšanas izvēlnē izvēlieties iespējas un sistēmas kontekstu, ko kopīgot.\nIevadiet derīgu API atslēgu, lai iespējotu šo funkciju. Iegūstiet API atslēgu vietnē https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API atslēga",
       "ConfigureOptions.ModelId": "Modeļa ID",
-      "ConfigureOptions.EnableDeepKnowledge": "Novecojusi opcija Deep Knowledge (tikai saderībai)",
       "ConfigureOptions.SystemInstructions": "Sistēmas norādījumi"
     },
 

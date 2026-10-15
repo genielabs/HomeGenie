@@ -1,3 +1,6 @@
+# Validate the bundled frontend before building any release runtime.
+dotnet test ./src/HomeGenie.Tests/HomeGenie.Tests.csproj --framework net10.0 -m:1 --filter FullyQualifiedName~FrontendBaseHrefTest || exit $?
+
 # net10.0
 
 rm -rf ./src/HomeGenie/bin/Release/out

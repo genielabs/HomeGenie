@@ -2851,13 +2851,14 @@ Api.Handle($"{Program.Module.Domain}/{Program.Module.Address}/Extract", (modelRe
 // --- 3. MODEL FILE VERIFICATION &amp; MONITORING LOOP ---
 
 if (!File.Exists(localModelFile)) {
-  // Model file missing: enter monitoring loop until download is finished.
-  while (!File.Exists(localModelFile))
+  // Wait for finalization, not just 100% of bytes received into the .part file.
+  while (Program.IsRunning)
   {
+    if (reconfigureRequired) return;
     dynamic response = Api.Call("System.Utility/DownloadManager/GetStatus", localModelFile);
     dynamic fileStatus = JsonConvert.DeserializeObject&lt;dynamic&gt;(response);
 
-    if ((bool)fileStatus?.Success)
+    if (fileStatus?.Success == true)
     {
       var task = fileStatus?.Data;
       if (task != null)
@@ -2867,10 +2868,13 @@ if (!File.Exists(localModelFile)) {
           .Emit(FIELD_DOWNLOAD, task.Status.ToString())
           .Emit(FIELD_DOWNLOAD_ID, task.Id.ToString())
           .Emit(FIELD_DOWNLOAD_TASK, task.DestinationFilePath.ToString())
-          .Emit(FIELD_DOWNLOAD_ERROR, task.ErrorMessage.ToString())
+          .Emit(FIELD_DOWNLOAD_ERROR, task.ErrorMessage?.ToString() ?? "")
           .Emit(FIELD_DOWNLOAD_PROGRESS, task.ProgressPercentage.ToString("F2", CultureInfo.InvariantCulture));
 
-        if (task.ProgressPercentage &gt;= 100) break;
+        // The downloader closes and moves the file before reporting Completed.
+        // Paused/Error tasks may also have 100% progress: keep them recoverable.
+        if (string.Equals(task.Status?.ToString(), "Completed", StringComparison.OrdinalIgnoreCase)
+            &amp;&amp; File.Exists(localModelFile)) break;
       }
       else if (Program.Parameter(FIELD_DOWNLOAD_TASK)?.Value != localModelFile)
       {
@@ -2895,12 +2899,14 @@ if (!File.Exists(localModelFile)) {
     Pause(2); // Poll status every 2 seconds
   }
 
+  if (!Program.IsRunning || reconfigureRequired) return;
+
   Program
     .Emit(FIELD_STATUS_ERROR, "")
     .Emit(FIELD_DOWNLOAD, "Complete")
     .Emit(FIELD_DOWNLOAD_PROGRESS, "100");
 
-  return; // Program will restart to initialize the engine with the new file
+  // Continue into engine initialization in this run; no Setup/Main restart.
 }
 else if (Program.Parameter(FIELD_DOWNLOAD_TASK)?.Value != localModelFile)
 {
@@ -3645,7 +3651,7 @@ public class ChatRequestMetrics
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.14</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.0.16</Version>
+      <Version>1.0.17</Version>
       <Required>true</Required>
       <Checksum>BF77FCB2B11D877219C96039A82FD3DD</Checksum>
     </PackageInfo>
@@ -4068,11 +4074,10 @@ Program.Setup(() =&gt; {
     // This method is used to register this program as a "AI intent handler"
     Program.Implements(
         "@AI:Genie",
-        "AI.Genie/Gemini", new { chat = new { requestVersion = 1, context = new [] { "devices", "widgets", "automationPrograms", "dashboards", "deepKnowledge" }, capabilities = new [] { "deviceControl", "automation", "widgets" } } }
+        "AI.Genies/Gemini", new { chat = new { requestVersion = 1, context = new [] { "devices", "widgets", "automationPrograms", "dashboards", "deepKnowledge" }, capabilities = new [] { "deviceControl", "automation", "widgets" } } }
     ).AddOption("ApiKey", "", "1. Google Gemini AI API key", "password")
      .AddOption("ModelId", "gemini-flash-latest", "2. Model ID", "text")
-     .AddOption("EnableDeepKnowledge", "Off", "3. Legacy deep context (unused by structured requests)", "checkbox")
-     .AddOption("SystemInstructions", "", "4. System Instructions", $"editor:file:{systemPromptFile}:markdown");
+     .AddOption("SystemInstructions", "", "3. System Instructions", $"editor:file:{systemPromptFile}:markdown");
 });
 
 Program.Run();
@@ -4081,10 +4086,12 @@ Program.Run();
 // GEMINI WIDGET GENIE - WITH DEEP KNOWLEDGE &amp; CACHING
 // ===================================================================
 
-string API_URL = "AI.Genie/Gemini";
+string API_URL = "AI.Genies/Gemini";
+
 string geminiApiKey = Program.Option("ApiKey").Value.Trim();
 string geminiModelId = Program.Option("ModelId").Value.Trim();
-bool useDeepKnowledge = Program.Option("EnableDeepKnowledge").Value == "On";
+// Structured requests obtain deep knowledge from the shared context service.
+bool useDeepKnowledge = false;
 
 if (geminiApiKey.Length != 39 || !geminiApiKey.StartsWith("AIzaSy") || string.IsNullOrEmpty(geminiModelId)) {
     Program.Emit("Status.Init", "NotConfigured");
@@ -4096,6 +4103,22 @@ bool reconfigureRequired = false;
 When.ModuleParameterChanged((module, parameter) =&gt; {
   if (module.Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
     reconfigureRequired = true;
+  }
+  // Completed reports a result; reusable helpers remain enabled.
+  // Quit explicitly requests disabling, never deleting, the emitting program.
+  if (module.Instance != null &amp;&amp; module.Instance != Program.Module &amp;&amp;
+      module.Instance.Domain == "HomeAutomation.HomeGenie.Automation" &amp;&amp;
+      parameter.Name == "Automan.Program.Request" &amp;&amp;
+      string.Equals(parameter.Value?.Trim(), "Quit", StringComparison.OrdinalIgnoreCase)) {
+    string childId = module.Instance.Address;
+    System.Threading.Tasks.Task.Run(() =&gt; {
+      try {
+        Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Disable/" + childId);
+        Program.Log.Info($"Child program {childId} disabled after Quit request.");
+      } catch (Exception ex) {
+        Program.Log.Error($"Error disabling child program {childId}: {ex.Message}");
+      }
+    });
   }
   return true;
 });
@@ -5201,11 +5224,11 @@ public static class GenieCapabilities
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.23</PackageVersion>
+      <PackageVersion>1.0.26</PackageVersion>
       <Id>gemini-genie</Id>
-      <Version>1.0.3</Version>
+      <Version>1.0.5</Version>
       <Required>true</Required>
-      <Checksum>666BAC01C8DEA990C5B457D1277B320F</Checksum>
+      <Checksum>F55B677D70A4BFFBDAC116AEBD2621EA</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>933</Address>

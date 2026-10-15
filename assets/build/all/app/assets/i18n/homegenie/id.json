@@ -405,7 +405,6 @@
       "Description": "Gunakan Google Gemini AI untuk mengontrol perangkat, membuat program otomatisasi, dan membangun widget di HomeGenie. Pilih kemampuan dan konteks sistem yang ingin dibagikan dari menu obrolan.\nMasukkan kunci API yang valid untuk mengaktifkan fitur ini. Dapatkan kunci API di https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Kunci API Google Gemini AI",
       "ConfigureOptions.ModelId": "ID Model",
-      "ConfigureOptions.EnableDeepKnowledge": "Opsi Deep Knowledge lawas (hanya untuk kompatibilitas)",
       "ConfigureOptions.SystemInstructions": "Instruksi sistem"
     },
 

@@ -31,3 +31,43 @@ Implemented persistent module preferences per Genie for device control, automati
 ### Persistent notifications and optional Genie transition
 
 Implemented base service 582 with explicit version-1 persistent messages, bounded disk archive, shared read/archive state and recoverable action results. YoT provides an active/archive list and clickable detail, with local stored API actions and optional confirmation. Gemini Genie offers reversible retirement of the previous specialized Genies; existing configuration and histories stay in place. This supersedes the earlier automatic migrator proposal for the current release. Further work: optional history import normalization, richer notification filters and per-user read state if HomeGenie gains user-scoped accounts.
+
+### Upgrade and package restore reliability (reported on Raspberry Pi)
+
+- Release frontend base-href guard implemented: NUnit checks the final bundled `assets/build/all/app/index.html` for exactly one `<base href="/app/">`, with missing, incorrect, duplicate, comment and script cases covered. Existing CI test steps and the explicit build-all.sh guard block release builds on failure; standalone frontend development remains unchanged. All 14 tests passed.
+
+- Package restore UI: investigate the loading spinner remaining active after restore finishes, especially on slower hosts. Correlate API completion, module/package refresh events and dialog state. Ensure success, failure and connection interruptions end the appropriate loading state; a timeout alone must not claim completion. Verify with a slow restore and reopening the package list.
+- Required programs on upgrade: inspect the updater/package reconciliation flow. After a service upgrade, newly introduced programs marked required must be installed with their dependencies. Preserve existing program configuration, data, history and enabled/disabled choices; do not automatically reinstall or enable optional retired Genies. Report failures and allow an idempotent retry. Regression-test an existing installation upgrading to a release that introduces required services and Gemini Genie.
+- Shutdown logging: investigate automation threads logging after LoggerFactory disposal. Coordinate thread termination and logging lifetime; retain the original runtime error and avoid an unhandled exception during shutdown.
+- AI chat CPU investigation: deferred. Profile the same dashboard with chat closed and an unconfigured/empty Genie open before further changes. Initial DOM-scan/message-view optimizations are implemented, but the cause of sustained extra CPU is not established.
+
+### Unified Genie orchestration progress
+
+Gemini Genie now provides Prompt.Schedule, Task.Status and text-only Prompt.Ask. Shared orchestration instructions cover explicit helper execution, bounded waits, valid editor options and checking fresh output files. The newsroom Director/Scout/Editor test completed successfully. Task queues/status remain bounded and memory-only; durable scheduling/recovery is a future extension. Broader mixed-artifact plans, user-selectable skills and project-scoped Magik remain future work.
+
+### Skills selection and imported history: scope clarification
+
+- The chat Capabilities menu selects execution permissions, and the backend already loads the corresponding fundamental skills/references automatically. Keep this behavior; do not introduce a duplicate Skills menu for the same choices. An explicit selector is future work for optional/domain-specific skills. Selecting a skill must never enable an execution capability by itself.
+- Legacy chat import normalization is deferred, not a prerequisite for the next release. Existing imports already work, including the older conversation reported by the user in the current UI. Preserve the working import/rendering path and do not rewrite histories solely to unify formats. Revisit normalization only for a reproduced unsupported format, lost metadata/artifacts, or a concrete new contract requirement. If revisited, normalize at import, retain the original, and never execute historical actions. Read-only regression coverage with legacy reply, api-call, program, widget and composite fixtures remains useful independently of conversion.
+
+This clarification supersedes earlier roadmap entries proposing immediate user-selectable fundamental skills or treating import normalization as the next required migration step.
+
+- Gemini Genie configuration cleanup implemented: program 933 no longer registers or reads EnableDeepKnowledge; obsolete 933 translation labels removed. Structured Context selections remain authoritative, and specialized legacy Genies retain their option. Explicit Quit handling restored: disable the emitting automation program asynchronously without deleting it; Completed alone leaves reusable helpers enabled. Compilation and lifecycle checks passed; verify after installing the updated package in the running test service.
+
+
+### Shared Genie engine and interchangeable providers
+
+Planned: extract the provider-independent orchestration currently embedded in Gemini Genie into a common Genie engine. Connect Gemini and Lailama through one provider contract, then add other providers such as OpenAI. This supersedes implementing a separate copy of the complete Genie logic for each provider.
+
+- Common engine: conversation/history, context profiles, skill composition, capability checks, response normalization, device/program/widget/composite actions, compilation repair, task queues, progress, cancellation coordination, errors and metrics. Reuse existing Context Engine, Chat History and Action Executor services.
+- Provider adapters: model invocation, prompt/message and response translation, streaming, cancellation and provider errors. Keep local model download/loading/disposal in the Lailama adapter. Describe technical abilities (structured output, function calling, context limits, streaming and cancellation) separately from user-enabled execution capabilities.
+- Preserve a mixed response strategy: use constrained JSON or native function calling where available, and supported text/marker formats where necessary. Normalize all outputs into the same internal action contract and backend checks. Do not require function calling from small local models.
+- Aim for the same application features across providers; model quality, speed and reliability will differ. Test local conversation and device control first, followed by automation, widgets, compilation repair and composite readiness. Do not advertise equal model performance or guaranteed complex code generation.
+- Retain @AI:Genie as the UI contract and derive API routes/features from Program.Implements. Gemini now uses AI.Genies/Gemini exclusively; no singular-prefix alias is retained. Consider AI.Genies/Lailama for the future unified adapter, while preserving the current 940 APIs during an explicitly designed migration. Keep credentials, preferences, custom prompts and history stores intact.
+- Phases: (1) audit 933/940 dependencies and define the provider contract; (2) extract the engine with Gemini as its first adapter and regression-test existing behavior; (3) connect Lailama and validate progressively with small local models; (4) consider OpenAI and further providers. No provider-engine extraction has been implemented yet.
+
+### Current consolidation status
+
+- Shared device/program executors, Gemini composite creation, inline widget previews and saving widgets to a selected dashboard are implemented. Broader mixed-action plans, composite updates and project-scoped autonomous Magik remain pending.
+- Lailama download finalization fix implemented in program 940: wait for Completed plus the final file, continue directly into model initialization, and retain polling during paused/error states. Seven shipped-script regression scenarios and full program compilation passed; verify a real download after updating the running test installation.
+- Before the next release, verify updated 933/940 packages end to end, review checksums and generated frontend artifacts, and complete the website documentation review. Historical roadmap entries describe earlier stages; completed work above is not a new migration requirement.

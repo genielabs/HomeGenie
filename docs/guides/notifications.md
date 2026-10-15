@@ -65,6 +65,6 @@ Actions have `running`, `completed`, `failed` or `unknown` state. Completed acti
 
 ## Gemini Genie transition
 
-When configured, Gemini Genie publishes one stable persistent notice if installed previous Gemini Genies remain enabled. Its button lists those programs and asks for confirmation. `AI.Genie/Gemini/Legacy.Status` reports their state; `Legacy.Disable` accepts only IDs 930, 931 and 932 whose package identities match the original Genies. It verifies results, reports partial failures and supports idempotent retry.
+When configured, Gemini Genie publishes one stable persistent notice if installed previous Gemini Genies remain enabled. Its button lists those programs and asks for confirmation. `AI.Genies/Gemini/Legacy.Status` reports their state; `Legacy.Disable` accepts only IDs 930, 931 and 932 whose package identities match the original Genies. It verifies results, reports partial failures and supports idempotent retry.
 
 Disabling is optional and reversible. No program, prompt, credentials, module configuration or chat history is deleted or imported. A report is emitted as `AI.Genie.LegacyMigration` on the new Genie module. Existing package installation already inherits a program's enabled state, so a later update does not intentionally re-enable retired programs. There is no removal endpoint in this version.

@@ -405,7 +405,6 @@
       "Description": "Bruk Google Gemini AI til å styre enheter, opprette automatiseringsprogrammer og bygge widgeter i HomeGenie. Velg funksjoner og systemkontekst som skal deles fra chat-menyen.\nOppgi en gyldig API-nøkkel for å aktivere denne funksjonen. Få en API-nøkkel på https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-nøkkel",
       "ConfigureOptions.ModelId": "Modell-ID",
-      "ConfigureOptions.EnableDeepKnowledge": "Foreldet Deep Knowledge-alternativ (kun for kompatibilitet)",
       "ConfigureOptions.SystemInstructions": "Systeminstruksjoner"
     },
 

@@ -405,7 +405,6 @@
       "Description": "U isticmaal Google Gemini AI si aad u xakameyso qalabka, u sameyso barnaamijyada otomaatiga, una dhistid widgets-ka HomeGenie. Ka dooro awoodaha iyo macnaha guud ee nidaamka si aad ula wadaagto liiska sheekaysiga.\nGeli furaha API ee saxda ah si aad u shaqaysiiso qaabkan. Ka hel furaha API https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Furaha API ee Google Gemini AI",
       "ConfigureOptions.ModelId": "Aqoonsiga Model-ka",
-      "ConfigureOptions.EnableDeepKnowledge": "Xulashada hore ee Deep Knowledge (waafaqid kaliya)",
       "ConfigureOptions.SystemInstructions": "Tilmaamaha nidaamka"
     },
 

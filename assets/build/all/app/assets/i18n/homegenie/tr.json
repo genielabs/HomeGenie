@@ -405,7 +405,6 @@
       "Description": "Cihazları kontrol etmek, otomasyon programları oluşturmak ve HomeGenie'de pencere öğeleri oluşturmak için Google Gemini AI'ı kullanın. Sohbet menüsünden paylaşılacak yetenekleri ve sistem bağlamını seçin.\nBu özelliği etkinleştirmek için geçerli bir API anahtarı girin. https://aistudio.google.com/app/apikey adresinden bir API anahtarı alın.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API anahtarı",
       "ConfigureOptions.ModelId": "Model Kimliği",
-      "ConfigureOptions.EnableDeepKnowledge": "Eski Deep Knowledge seçeneği (yalnızca uyumluluk için)",
       "ConfigureOptions.SystemInstructions": "Sistem talimatları"
     },
 

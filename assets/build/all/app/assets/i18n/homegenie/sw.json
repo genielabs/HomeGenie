@@ -405,7 +405,6 @@
       "Description": "Tumia Google Gemini AI kudhibiti vifaa, kuunda programu za kiotomatiki, na kuunda wijeti katika HomeGenie. Chagua uwezo na muktadha wa mfumo wa kushiriki kutoka kwenye menyu ya gumzo.\nWeka ufunguo halali wa API ili kuwezesha kipengele hiki. Pata ufunguo wa API kwenye https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Ufunguo wa API wa Google Gemini AI",
       "ConfigureOptions.ModelId": "Kitambulisho cha Muundo",
-      "ConfigureOptions.EnableDeepKnowledge": "Chaguo la awali la Deep Knowledge (utangamano tu)",
       "ConfigureOptions.SystemInstructions": "Maagizo ya mfumo"
     },
 

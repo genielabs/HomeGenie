@@ -405,7 +405,6 @@
       "Description": "HomeGenie دا ئۈسكۈنىلەرنى كونترول قىلىش، ئاپتوماتلاشتۇرۇش پروگراممىلىرىنى قۇرۇش ۋە كىچىك ئەپلەرنى ياساش ئۈچۈن Google Gemini AI نى ئىشلىتىڭ. سۆھبەت تىزىملىكىدىن ھەمبەھىرلىنىدىغان ئىقتىدارلار ۋە سىستېما مەزمۇنىنى تاللاڭ.\nبۇ ئىقتىدارنى قوزغىتىش ئۈچۈن ئىناۋەتلىك API ئاچقۇچى كىرگۈزۈڭ. API ئاچقۇچىنى https://aistudio.google.com/app/apikey دىن ئېلىڭ.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API ئاچقۇچى",
       "ConfigureOptions.ModelId": "مودېل كىملىكى (Model ID)",
-      "ConfigureOptions.EnableDeepKnowledge": "كونا Deep Knowledge تاللانمىسى (پەقەت ماسلىشىشچانلىق ئۈچۈن)",
       "ConfigureOptions.SystemInstructions": "سىستېما كۆرسەتمىلىرى"
     },
 

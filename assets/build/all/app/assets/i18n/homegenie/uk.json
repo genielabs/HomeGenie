@@ -405,7 +405,6 @@
       "Description": "Використовуйте Google Gemini AI для керування пристроями, створення програм автоматизації та розробки віджетів у HomeGenie. Виберіть можливості та системний контекст для надання спільного доступу в меню чату.\nВведіть дійсний ключ API, щоб увімкнути цю функцію. Отримайте ключ API на https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Ключ API Google Gemini AI",
       "ConfigureOptions.ModelId": "Ідентифікатор моделі",
-      "ConfigureOptions.EnableDeepKnowledge": "Застаріла опція Deep Knowledge (лише для сумісності)",
       "ConfigureOptions.SystemInstructions": "Системні інструкції"
     },
 

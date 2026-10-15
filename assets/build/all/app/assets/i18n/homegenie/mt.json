@@ -405,7 +405,6 @@
       "Description": "Uża Google Gemini AI biex tikkontrolla apparati, toħloq programmi ta' awtomazzjoni, u tibni widgets f'HomeGenie. Agħżel il-kapaċitajiet u l-kuntest tas-sistema x'taqsam mill-menu taċ-chat.\nDaħħal ċavetta API valida biex tattiva din il-karatteristika. Ikseb ċavetta API fuq https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Ċavetta API ta' Google Gemini AI",
       "ConfigureOptions.ModelId": "ID tal-Mudell",
-      "ConfigureOptions.EnableDeepKnowledge": "Għażla legata Deep Knowledge (għall-kompatibbiltà biss)",
       "ConfigureOptions.SystemInstructions": "Struzzjonijiet tas-sistema"
     },
 

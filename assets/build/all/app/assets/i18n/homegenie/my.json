@@ -405,7 +405,6 @@
       "Description": "HomeGenie တွင် စက်ပစ္စည်းများကို ထိန်းချုပ်ရန်၊ အလိုအလျောက်လုပ်ဆောင်ချက် ပရိုဂရမ်များ ဖန်တီးရန်နှင့် ဝစ်ဂျက်များ ပြုလုပ်ရန် Google Gemini AI ကို အသုံးပြုပါ။ မျှဝေလိုသော လုပ်ဆောင်နိုင်စွမ်းများနှင့် စနစ်အကြောင်းအရာများကို ချတ်မီနူးမှ ရွေးချယ်ပါ။\nဤလုပ်ဆောင်ချက်ကို အသုံးပြုနိုင်ရန် မှန်ကန်သော API key ကို ထည့်သွင်းပါ။ https://aistudio.google.com/app/apikey တွင် API key ရယူပါ။",
       "ConfigureOptions.ApiKey": "Google Gemini AI API key",
       "ConfigureOptions.ModelId": "မော်ဒယ် ID",
-      "ConfigureOptions.EnableDeepKnowledge": "ယခင်သုံး Deep Knowledge ရွေးချယ်စရာ (လိုက်ဖက်ညီမှုအတွက်သာ)",
       "ConfigureOptions.SystemInstructions": "စနစ်ဆိုင်ရာ ညွှန်ကြားချက်များ"
     },
 

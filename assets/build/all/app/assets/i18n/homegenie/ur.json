@@ -405,7 +405,6 @@
       "Description": "HomeGenie میں آلات کو کنٹرول کرنے، آٹومیشن پروگرامز بنانے اور وجیٹس تیار کرنے کے لیے Google Gemini AI استعمال کریں۔ چیٹ مینو سے شیئر کرنے کے لیے صلاحیتوں اور سسٹم کے سیاق و سباق کا انتخاب کریں۔\nاس فیچر کو فعال کرنے کے لیے ایک درست API کلید درج کریں۔ https://aistudio.google.com/app/apikey سے API کلید حاصل کریں۔",
       "ConfigureOptions.ApiKey": "Google Gemini AI API کلید",
       "ConfigureOptions.ModelId": "ماڈل ID",
-      "ConfigureOptions.EnableDeepKnowledge": "پرانا Deep Knowledge آپشن (صرف مطابقت کے لیے)",
       "ConfigureOptions.SystemInstructions": "سسٹم کی ہدایات"
     },
 

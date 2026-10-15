@@ -405,7 +405,6 @@
       "Description": "Sử dụng Google Gemini AI để điều khiển thiết bị, tạo chương trình tự động hóa và xây dựng tiện ích trong HomeGenie. Chọn các khả năng và ngữ cảnh hệ thống cần chia sẻ từ menu trò chuyện.\nNhập khóa API hợp lệ để bật tính năng này. Lấy khóa API tại https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Khóa API Google Gemini AI",
       "ConfigureOptions.ModelId": "ID mô hình",
-      "ConfigureOptions.EnableDeepKnowledge": "Tùy chọn Deep Knowledge cũ (chỉ để tương thích)",
       "ConfigureOptions.SystemInstructions": "Hướng dẫn hệ thống"
     },
 

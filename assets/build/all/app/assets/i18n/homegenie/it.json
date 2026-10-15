@@ -603,7 +603,6 @@
       "Description": "Usa l’IA Google Gemini per controllare i dispositivi, creare programmi di automazione e realizzare widget in HomeGenie. Dal menu della chat puoi scegliere le capacità e il contesto del sistema da condividere.\nPer abilitare questa funzione, inserisci una chiave API valida. Puoi ottenere una chiave API su https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Chiave API Google Gemini AI",
       "ConfigureOptions.ModelId": "ID modello",
-      "ConfigureOptions.EnableDeepKnowledge": "Opzione Deep Knowledge precedente (solo compatibilità)",
       "ConfigureOptions.SystemInstructions": "Istruzioni di sistema"
     },
 

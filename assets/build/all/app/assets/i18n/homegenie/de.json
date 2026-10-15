@@ -405,7 +405,6 @@
       "Description": "Nutzen Sie Google Gemini AI, um Geräte zu steuern, Automatisierungsprogramme zu erstellen und Widgets in HomeGenie zu bauen. Wählen Sie im Chat-Menü die Funktionen und den Systemkontext aus, die geteilt werden sollen.\nGeben Sie einen gültigen API-Schlüssel ein, um diese Funktion zu aktivieren. Einen API-Schlüssel erhalten Sie unter https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI-API-Schlüssel",
       "ConfigureOptions.ModelId": "Modell-ID",
-      "ConfigureOptions.EnableDeepKnowledge": "Veraltete Deep-Knowledge-Option (nur für Kompatibilität)",
       "ConfigureOptions.SystemInstructions": "Systemanweisungen"
     },
 

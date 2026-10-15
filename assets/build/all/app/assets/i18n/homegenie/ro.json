@@ -405,7 +405,6 @@
       "Description": "Utilizați Google Gemini AI pentru a controla dispozitive, a crea programe de automatizare și a construi widgeturi în HomeGenie. Alegeți capabilitățile și contextul de sistem de partajat din meniul de chat.\nIntroduceți o cheie API validă pentru a activa această funcție. Obțineți o cheie API la https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Cheie API Google Gemini AI",
       "ConfigureOptions.ModelId": "ID model",
-      "ConfigureOptions.EnableDeepKnowledge": "Opțiune moștenită Deep Knowledge (doar pentru compatibilitate)",
       "ConfigureOptions.SystemInstructions": "Instrucțiuni de sistem"
     },
 

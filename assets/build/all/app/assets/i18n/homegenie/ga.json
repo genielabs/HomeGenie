@@ -405,7 +405,6 @@
       "Description": "Úsáid Google Gemini AI chun gléasanna a rialú, cláir uathoibrithe a chruthú, agus giuirléidí a thógáil i HomeGenie. Roghnaigh na cumais agus an comhthéacs córais le roinnt ón roghchlár comhrá.\nIontráil eochair API bhailí chun an ghné seo a chumasú. Faigh eochair API ag https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Eochair API Google Gemini AI",
       "ConfigureOptions.ModelId": "Aitheantas Samhla",
-      "ConfigureOptions.EnableDeepKnowledge": "Rogha oidhreachta Deep Knowledge (chomhoiriúnacht amháin)",
       "ConfigureOptions.SystemInstructions": "Treoracha córais"
     },
 

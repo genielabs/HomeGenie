@@ -405,7 +405,6 @@
       "Description": "HomeGenie मा उपकरणहरू नियन्त्रण गर्न, स्वचालन कार्यक्रमहरू सिर्जना गर्न, र विजेटहरू निर्माण गर्न Google Gemini AI प्रयोग गर्नुहोस्। च्याट मेनुबाट सेयर गर्नका लागि क्षमताहरू र प्रणाली सन्दर्भ छनौट गर्नुहोस्।\nयो सुविधा सक्षम गर्न मान्य API कुञ्जी प्रविष्ट गर्नुहोस्। https://aistudio.google.com/app/apikey बाट API कुञ्जी प्राप्त गर्नुहोस्।",
       "ConfigureOptions.ApiKey": "Google Gemini AI API कुञ्जी",
       "ConfigureOptions.ModelId": "मोडेल ID",
-      "ConfigureOptions.EnableDeepKnowledge": "पुरानो Deep Knowledge विकल्प (अनुकूलताका लागि मात्र)",
       "ConfigureOptions.SystemInstructions": "प्रणाली निर्देशनहरू"
     },
 

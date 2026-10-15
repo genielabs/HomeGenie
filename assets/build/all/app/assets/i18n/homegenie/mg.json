@@ -405,7 +405,6 @@
       "Description": "Mampiasà Google Gemini AI hifehezana fitaovana, hamoronana fandaharana automatique, ary hanamboarana widget ao amin'ny HomeGenie. Safidio avy amin'ny menio resaka ny fahaiza-manao sy ny toe-javatry ny rafitra hozaraina.\nMampidira fanalahidy API manan-kery mba hampiasana ity endri-javatra ity. Mahazoa fanalahidy API ao amin'ny https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Fanalahidy API Google Gemini AI",
       "ConfigureOptions.ModelId": "ID Modely",
-      "ConfigureOptions.EnableDeepKnowledge": "Safidy Deep Knowledge lany andro (ho an'ny fifanarahana ihany)",
       "ConfigureOptions.SystemInstructions": "Torolalana amin'ny rafitra"
     },
 

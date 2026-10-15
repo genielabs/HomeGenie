@@ -405,7 +405,6 @@
       "Description": "Օգտագործեք Google Gemini AI-ը սարքերը կառավարելու, ավտոմատացման ծրագրեր ստեղծելու և HomeGenie-ում վիջեթներ կառուցելու համար: Զրույցի ընտրացանկից ընտրեք համօգտագործվող հնարավորությունները և համակարգի համատեքստը:\nԱյս գործառույթն ակտիվացնելու համար մուտքագրեք վավեր API բանալի: Ստացեք API բանալի https://aistudio.google.com/app/apikey հասցեով:",
       "ConfigureOptions.ApiKey": "Google Gemini AI-ի API բանալի",
       "ConfigureOptions.ModelId": "Մոդելի ID",
-      "ConfigureOptions.EnableDeepKnowledge": "Deep Knowledge-ի հին տարբերակ (միայն համատեղելիության համար)",
       "ConfigureOptions.SystemInstructions": "Համակարգի հրահանգներ"
     },
 

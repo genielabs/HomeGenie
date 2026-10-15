@@ -405,7 +405,6 @@
       "Description": "Jiri Google Gemini AI jikwaa ngwaọrụ, mepụta mmemme akpaaka, ma wuo wijetị na HomeGenie. Họrọ ikike na gburugburu sistemụ ị ga-ekere site na menu nkata.\nTinye igodo API dị irè iji mee ka njirimara a rụọ ọrụ. Nweta igodo API na https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Igodo API Google Gemini AI",
       "ConfigureOptions.ModelId": "ID Ụdị",
-      "ConfigureOptions.EnableDeepKnowledge": "Nhọrọ Deep Knowledge nke mbụ (maka ndakọrịta naanị)",
       "ConfigureOptions.SystemInstructions": "Ntuziaka sistemụ"
     },
 

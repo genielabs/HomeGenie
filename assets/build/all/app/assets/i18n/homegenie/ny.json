@@ -405,7 +405,6 @@
       "Description": "Gwiritsani ntchito Google Gemini AI poyang'anira zipangizo, kupanga mapulogalamu a zodziyimira zokha, ndi kupanga ma widget mu HomeGenie. Sankhani luso ndi nkhani ya dongosolo logawana kuchokera pa menyu ya macheza.\nLowetsani kiyi yovomerezeka ya API kuti mutsegule mbaliyi. Pezani kiyi ya API pa https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Kiyi ya API ya Google Gemini AI",
       "ConfigureOptions.ModelId": "ID ya Model",
-      "ConfigureOptions.EnableDeepKnowledge": "Chosankha chachikale cha Deep Knowledge (chogwirizana chokha)",
       "ConfigureOptions.SystemInstructions": "Malangizo a dongosolo"
     },
 

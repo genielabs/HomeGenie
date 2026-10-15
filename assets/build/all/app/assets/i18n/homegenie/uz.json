@@ -405,7 +405,6 @@
       "Description": "HomeGenie'da qurilmalarni boshqarish, avtomatlashtirish dasturlarini yaratish va vidjetlar yasash uchun Google Gemini AI'dan foydalaning. Chat menyusidan ulashish uchun imkoniyatlar va tizim kontekstini tanlang.\nUshbu funksiyani yoqish uchun yaroqli API kalitini kiriting. API kalitini https://aistudio.google.com/app/apikey manzilidan oling.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API kaliti",
       "ConfigureOptions.ModelId": "Model ID",
-      "ConfigureOptions.EnableDeepKnowledge": "Eski Deep Knowledge opsiyasi (faqat moslik uchun)",
       "ConfigureOptions.SystemInstructions": "Tizim ko‘rsatmalari"
     },
 

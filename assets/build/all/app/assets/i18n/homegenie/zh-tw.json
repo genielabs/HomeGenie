@@ -405,7 +405,6 @@
       "Description": "使用 Google Gemini AI 在 HomeGenie 中控制裝置、建立自動化程式並建構小工具。從聊天功能表中選取要共用的功能與系統上下文。\n輸入有效的 API 金鑰以啟用此功能。前往 https://aistudio.google.com/app/apikey 取得 API 金鑰。",
       "ConfigureOptions.ApiKey": "Google Gemini AI API 金鑰",
       "ConfigureOptions.ModelId": "模型 ID",
-      "ConfigureOptions.EnableDeepKnowledge": "舊版 Deep Knowledge 選項（僅供相容性使用）",
       "ConfigureOptions.SystemInstructions": "系統指令"
     },
 

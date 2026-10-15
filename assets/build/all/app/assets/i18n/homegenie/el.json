@@ -405,7 +405,6 @@
       "Description": "Χρησιμοποιήστε το Google Gemini AI για να ελέγχετε συσκευές, να δημιουργείτε προγράμματα αυτοματισμού και να φτιάχνετε widgets στο HomeGenie. Επιλέξτε τις δυνατότητες και το περιβάλλον συστήματος για κοινή χρήση από το μενού συνομιλίας.\nΕισαγάγετε ένα έγκυρο κλειδί API για να ενεργοποιήσετε αυτή τη λειτουργία. Αποκτήστε κλειδί API στο https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Κλειδί API Google Gemini AI",
       "ConfigureOptions.ModelId": "ID μοντέλου",
-      "ConfigureOptions.EnableDeepKnowledge": "Παλαιού τύπου επιλογή Deep Knowledge (μόνο για συμβατότητα)",
       "ConfigureOptions.SystemInstructions": "Οδηγίες συστήματος"
     },
 

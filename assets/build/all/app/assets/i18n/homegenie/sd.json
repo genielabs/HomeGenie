@@ -405,7 +405,6 @@
       "Description": "HomeGenie ۾ ڊوائيسز کي ڪنٽرول ڪرڻ، آٽوميشن پروگرام ٺاهڻ ۽ وجيٽس تيار ڪرڻ لاءِ Google Gemini AI جو استعمال ڪريو. چيٽ مينيو مان شيئر ڪرڻ لاءِ صلاحيتون ۽ سسٽم سياق چونڊيو.\nهن فيچر کي فعال ڪرڻ لاءِ هڪ صحيح API چاٻي داخل ڪريو. https://aistudio.google.com/app/apikey تان API چاٻي حاصل ڪريو.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API چاٻي",
       "ConfigureOptions.ModelId": "ماڊل ID",
-      "ConfigureOptions.EnableDeepKnowledge": "پراڻو Deep Knowledge آپشن (صرف مطابقت لاءِ)",
       "ConfigureOptions.SystemInstructions": "سسٽم هدايتون"
     },
 

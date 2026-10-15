@@ -405,7 +405,6 @@
       "Description": "Naudokite „Google Gemini AI“, kad valdytumėte įrenginius, kurtumėte automatizavimo programas ir valdiklius sistemoje „HomeGenie“. Pokalbių meniu pasirinkite funkcijas ir sistemos kontekstą, kuriais norite bendrinti.\nĮveskite galiojantį API raktą, kad įjungtumėte šią funkciją. Gaukite API raktą adresu https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "„Google Gemini AI“ API raktas",
       "ConfigureOptions.ModelId": "Modelio ID",
-      "ConfigureOptions.EnableDeepKnowledge": "Pasenusi „Deep Knowledge“ parinktis (tik suderinamumui)",
       "ConfigureOptions.SystemInstructions": "Sistemos instrukcijos"
     },
 

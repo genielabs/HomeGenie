@@ -405,7 +405,6 @@
       "Description": "Sèvi ak Google Gemini AI pou kontwole aparèy yo, kreye pwogram automatisation, epi bati widje nan HomeGenie. Chwazi kapasite ak kontèks sistèm pou pataje nan meni chat la.\nAntre yon kle API ki valab pou pèmèt fonksyon sa a. Jwenn yon kle API nan https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Kle API Google Gemini AI",
       "ConfigureOptions.ModelId": "ID Modèl",
-      "ConfigureOptions.EnableDeepKnowledge": "Opsyon Deep Knowledge eritye (pou konpatibilite sèlman)",
       "ConfigureOptions.SystemInstructions": "Enstriksyon sistèm"
     },
 

@@ -405,7 +405,6 @@
       "Description": "استخدم Google Gemini AI للتحكم في الأجهزة وإنشاء برامج التنفيذ الآلي وإنشاء عناصر واجهة المستخدم في HomeGenie. اختر الإمكانات وسياق النظام للمشاركة من قائمة الدردشة.\nأدخل مفتاح API صالحًا لتفعيل هذه الميزة. احصل على مفتاح API من https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "مفتاح API لـ Google Gemini AI",
       "ConfigureOptions.ModelId": "معرّف الطراز",
-      "ConfigureOptions.EnableDeepKnowledge": "خيار Deep Knowledge القديم (للتوافق فقط)",
       "ConfigureOptions.SystemInstructions": "تعليمات النظام"
     },
 

@@ -405,7 +405,6 @@
       "Description": "HomeGenie-ல் சாதனங்களைக் கட்டுப்படுத்தவும், தானியங்கு நிரல்களை உருவாக்கவும், விட்ஜெட்களை உருவாக்கவும் Google Gemini AI-ஐப் பயன்படுத்தவும். அரட்டை மெனுவிலிருந்து பகிர வேண்டிய திறன்கள் மற்றும் கணினி சூழலைத் தேர்வுசெய்யவும்.\nஇந்த அம்சத்தை இயக்க சரியான API விசையை உள்ளிடவும். API விசையைப் பெற https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API விசை",
       "ConfigureOptions.ModelId": "மாடல் ஐடி",
-      "ConfigureOptions.EnableDeepKnowledge": "பழைய Deep Knowledge விருப்பம் (பொருந்தக்கூடிய தன்மைக்கு மட்டுமே)",
       "ConfigureOptions.SystemInstructions": "கணினி வழிமுறைகள்"
     },
 

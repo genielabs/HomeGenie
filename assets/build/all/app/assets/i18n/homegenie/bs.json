@@ -405,7 +405,6 @@
       "Description": "Koristite Google Gemini AI za kontrolu uređaja, kreiranje programa automatizacije i izradu vidžeta u HomeGenie. Izaberite mogućnosti i sistemski kontekst za dijeljenje iz menija za ćaskanje.\nUnesite važeći API ključ da biste omogućili ovu funkciju. Nabavite API ključ na https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API ključ",
       "ConfigureOptions.ModelId": "ID modela",
-      "ConfigureOptions.EnableDeepKnowledge": "Naslijeđena Deep Knowledge opcija (samo za kompatibilnost)",
       "ConfigureOptions.SystemInstructions": "Sistemska uputstva"
     },
 

@@ -405,7 +405,6 @@
       "Description": "Lo Google Gemini AI láti darí àwọn ẹ̀rọ, ṣẹ̀dá àwọn ètò adaṣe, kí o sì kọ́ àwọn widget ní HomeGenie. Yan àwọn agbára àti àyíká ètò láti pín láti inú àtòjọ ìfọ̀rọ̀wérọ̀.\nTẹ kọ́kọ́rọ́ API tó wúlò láti mú ẹ̀yà yìí ṣiṣẹ́. Gba kọ́kọ́rọ́ API ní https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Kọ́kọ́rọ́ API Google Gemini AI",
       "ConfigureOptions.ModelId": "ID Àwòṣe",
-      "ConfigureOptions.EnableDeepKnowledge": "Àṣàyàn Deep Knowledge ti tẹ́lẹ̀ (fún ìbáramu nìkan)",
       "ConfigureOptions.SystemInstructions": "Àwọn ìtọ́ni ètò"
     },
 

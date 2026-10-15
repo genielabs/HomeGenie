@@ -405,7 +405,6 @@
       "Description": "በHomeGenie ውስጥ መሣሪያዎችን ለመቆጣጠር፣ የአውቶሜሽን ፕሮግራሞችን ለመፍጠር እና መግብሮችን ለመገንባት Google Gemini AIን ይጠቀሙ። ከውይይት ምናሌው ውስጥ የሚያጋሯቸውን ችሎታዎች እና የስርዓት አውድ ይምረጡ።\nይህን ባህሪ ለማንቃት ትክክለኛ የኤፒአይ ቁልፍ ያስገቡ። የኤፒአይ ቁልፍ በ https://aistudio.google.com/app/apikey ያግኙ።",
       "ConfigureOptions.ApiKey": "የGoogle Gemini AI ኤፒአይ ቁልፍ",
       "ConfigureOptions.ModelId": "የሞዴል መታወቂያ",
-      "ConfigureOptions.EnableDeepKnowledge": "የቆየ Deep Knowledge አማራጭ (ለተኳኋኝነት ብቻ)",
       "ConfigureOptions.SystemInstructions": "የስርዓት መመሪያዎች"
     },
 

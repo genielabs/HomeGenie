@@ -405,7 +405,6 @@
       "Description": "HomeGenie дотор төхөөрөмжүүдийг удирдах, автоматжуулалтын хөтөлбөр үүсгэх, виджет бүтээхэд Google Gemini AI-г ашиглана уу. Чат цэснээс хуваалцах боломжууд болон системийн контекстийг сонгоно уу.\nЭнэ функцийг идэвхжүүлэхийн тулд хүчинтэй API түлхүүр оруулна уу. API түлхүүрийг https://aistudio.google.com/app/apikey хаягаас авна уу.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API түлхүүр",
       "ConfigureOptions.ModelId": "Загварын ID",
-      "ConfigureOptions.EnableDeepKnowledge": "Хуучин Deep Knowledge сонголт (зөвхөн нийцтэй байдалд зориулагдсан)",
       "ConfigureOptions.SystemInstructions": "Системийн зааварчилгаа"
     },
 

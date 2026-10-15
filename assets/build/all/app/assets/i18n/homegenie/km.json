@@ -405,7 +405,6 @@
       "Description": "ប្រើ Google Gemini AI ដើម្បីបញ្ជាឧបករណ៍ បង្កើតកម្មវិធីស្វ័យប្រវត្តិកម្ម និងបង្កើតធាតុក្រាហ្វិកនៅក្នុង HomeGenie។ ជ្រើសរើសសមត្ថភាព និងបរិបទប្រព័ន្ធដើម្បីចែករំលែកពីម៉ឺនុយជជែក។\nបញ្ចូលសោ API ត្រឹមត្រូវដើម្បីបើកមុខងារនេះ។ ទទួលបានសោ API នៅ https://aistudio.google.com/app/apikey។",
       "ConfigureOptions.ApiKey": "សោ API របស់ Google Gemini AI",
       "ConfigureOptions.ModelId": "លេខសម្គាល់ម៉ូដែល",
-      "ConfigureOptions.EnableDeepKnowledge": "ជម្រើស Deep Knowledge ចាស់ (សម្រាប់តែភាពត្រូវគ្នាប៉ុណ្ណោះ)",
       "ConfigureOptions.SystemInstructions": "សេចក្តីណែនាំប្រព័ន្ធ"
     },
 

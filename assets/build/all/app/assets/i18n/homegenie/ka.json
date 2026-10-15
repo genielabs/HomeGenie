@@ -405,7 +405,6 @@
       "Description": "გამოიყენეთ Google Gemini AI მოწყობილობების სამართავად, ავტომატიზაციის პროგრამების შესაქმნელად და ვიჯეტების ასაგებად HomeGenie-ში. აირჩიეთ გასაზიარებელი შესაძლებლობები და სისტემური კონტექსტი ჩეთის მენიუდან.\nამ ფუნქციის გასააქტიურებლად შეიყვანეთ მოქმედი API გასაღები. მიიღეთ API გასაღები მისამართზე https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI-ს API გასაღები",
       "ConfigureOptions.ModelId": "მოდელის ID",
-      "ConfigureOptions.EnableDeepKnowledge": "მოძველებული Deep Knowledge პარამეტრი (მხოლოდ თავსებადობისთვის)",
       "ConfigureOptions.SystemInstructions": "სისტემური ინსტრუქციები"
     },
 

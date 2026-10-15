@@ -405,7 +405,6 @@
       "Description": "HomeGenie'де түзмөктөрдү башкаруу, автоматташтыруу программаларын жана виджеттерди түзүү үчүн Google Gemini AI колдонуңуз. Маек менюсунан бөлүшүлүүчү мүмкүнчүлүктөрдү жана тутумдук контекстти тандаңыз.\nБул функцияны иштетүү үчүн жарактуу API ачкычын киргизиңиз. API ачкычын https://aistudio.google.com/app/apikey сайтынан алыңыз.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API ачкычы",
       "ConfigureOptions.ModelId": "Моделдин IDси",
-      "ConfigureOptions.EnableDeepKnowledge": "Deep Knowledge эски параметр (шайкештик үчүн гана)",
       "ConfigureOptions.SystemInstructions": "Тутумдук нускамалар"
     },
 

@@ -405,7 +405,6 @@
       "Description": "Yi amfani da Google Gemini AI don sarrafa na'urori, ƙirƙirar shirye-shiryen atomatik, da gina widget a HomeGenie. Zaɓi damammaki da mahallin tsarin da za a raba daga menu na hira.\nShigar da ingantaccen maɓallin API don kunna wannan fasalin. Samu maɓallin API a https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Maɓallin API na Google Gemini AI",
       "ConfigureOptions.ModelId": "ID na Samfuri",
-      "ConfigureOptions.EnableDeepKnowledge": "Tsohon zaɓin Deep Knowledge (don dacewa kawai)",
       "ConfigureOptions.SystemInstructions": "Umarnin tsarin"
     },
 

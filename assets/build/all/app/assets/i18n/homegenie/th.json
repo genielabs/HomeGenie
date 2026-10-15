@@ -405,7 +405,6 @@
       "Description": "ใช้ Google Gemini AI เพื่อควบคุมอุปกรณ์ สร้างโปรแกรมอัตโนมัติ และสร้างวิดเจ็ตใน HomeGenie เลือกความสามารถและบริบทของระบบที่จะแชร์ได้จากเมนูแชท\nป้อนคีย์ API ที่ถูกต้องเพื่อเปิดใช้งานฟีเจอร์นี้ รับคีย์ API ได้ที่ https://aistudio.google.com/app/apikey",
       "ConfigureOptions.ApiKey": "คีย์ API ของ Google Gemini AI",
       "ConfigureOptions.ModelId": "รหัสโมเดล",
-      "ConfigureOptions.EnableDeepKnowledge": "ตัวเลือก Deep Knowledge แบบเดิม (เพื่อความเข้ากันได้เท่านั้น)",
       "ConfigureOptions.SystemInstructions": "คำแนะนำสำหรับระบบ"
     },
 

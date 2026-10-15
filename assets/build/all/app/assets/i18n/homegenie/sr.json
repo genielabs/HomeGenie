@@ -405,7 +405,6 @@
       "Description": "Користите Google Gemini AI за управљање уређајима, креирање програма аутоматизације и израду виџета у HomeGenie. Изаберите могућности и системски контекст за дељење из менија за ћаскање.\nУнесите важећи API кључ да бисте омогућили ову функцију. Преузмите API кључ на https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API кључ",
       "ConfigureOptions.ModelId": "ID модела",
-      "ConfigureOptions.EnableDeepKnowledge": "Застарела опција Deep Knowledge (само за компатибилност)",
       "ConfigureOptions.SystemInstructions": "Системска упутства"
     },
 

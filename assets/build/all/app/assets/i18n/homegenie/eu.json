@@ -405,7 +405,6 @@
       "Description": "Erabili Google Gemini AI gailuak kontrolatzeko, automatizazio-programak sortzeko eta widget-ak eraikitzeko HomeGenie-n. Aukeratu txat-menutik partekatzeko gaitasunak eta sistemaren testuingurua.\nSartu baliozko API gako bat funtzio hau gaitzeko. Lortu API gakoa hemen: https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI-ren API gakoa",
       "ConfigureOptions.ModelId": "Modeloarearen IDa",
-      "ConfigureOptions.EnableDeepKnowledge": "Deep Knowledge aukera zaharkitua (bateragarritasunerako soilik)",
       "ConfigureOptions.SystemInstructions": "Sistemaren argibideak"
     },
 
