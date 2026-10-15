@@ -537,7 +537,7 @@ public sealed class AiSkillCatalog
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.22</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>context-engine</Id>
       <Version>1.0.8</Version>
       <Required>true</Required>
@@ -1140,7 +1140,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>gemini-automan</Id>
       <Version>1.0.10</Version>
       <Required>false</Required>
@@ -1598,7 +1598,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>gemini-intent-handler</Id>
       <Version>1.0.22</Version>
       <Required>false</Required>
@@ -2321,7 +2321,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>gemini-widget-genie</Id>
       <Version>1.0.18</Version>
       <Required>false</Required>
@@ -2651,7 +2651,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.14</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -2942,16 +2942,36 @@ if (modelsList.ContainsKey(selectedModel)) {
 LLamaWeights model = null;
 LLamaContext context = null;
 ChatSession session = null;
-CancellationTokenSource generationCts = null;
+LLama.SessionState resetState = null;
+var nativeLifetime = new LailamaNativeLifetime();
+Action&lt;string&gt; lifecycleLog = message =&gt; { try { Program.Log.Info(message); } catch { } };
 
-// Cleanup action to release unmanaged resources (VRAM/RAM)
-var dispose = new Action(() =&gt; {
+// Release only after loading/inference has stopped. Native disposal itself runs in
+// a background task, so a stalled native backend cannot indefinitely block shutdown.
+var dispose = new Action(() =&gt; nativeLifetime.Stop(() =&gt; {
   session = null;
-  if (context != null) { context.Dispose(); context = null; }
-  if (model != null) { model.Dispose(); model = null; }
-  GC.Collect();
-  GC.WaitForPendingFinalizers();
-});
+  try {
+    if (resetState?.ContextState != null) {
+      lifecycleLog("Lailama shutdown: disposing saved context state.");
+      resetState.ContextState.Dispose(); resetState = null;
+      lifecycleLog("Lailama shutdown: saved context state disposed.");
+    }
+  } finally {
+  try {
+    if (context != null) {
+      lifecycleLog("Lailama shutdown: disposing context.");
+      context.Dispose(); context = null;
+      lifecycleLog("Lailama shutdown: context disposed.");
+    }
+  } finally {
+    if (model != null) {
+      lifecycleLog("Lailama shutdown: disposing model weights.");
+      model.Dispose(); model = null;
+      lifecycleLog("Lailama shutdown: model weights disposed.");
+    }
+  }
+  }
+}, lifecycleLog));
 
 // Basic path validation
 if (String.IsNullOrEmpty(modelPath))
@@ -2967,7 +2987,10 @@ else
   // Ensure cleanup on stop
   When.ProgramStopping(() =&gt; { dispose(); return true; });
 
+  CancellationTokenSource initializationCts;
+  if (!nativeLifetime.TryBegin(out initializationCts)) return;
   try {
+    initializationCts.Token.ThrowIfCancellationRequested();
     // Load Inference Parameters
     LailamaInferenceParams.MaxTokens = (int)Program.Option(OPTION_MAX_TOKENS).DecimalValue;
     uint contextSize = (uint)Program.Option(OPTION_CONTEXT_SIZE).DecimalValue;
@@ -2976,7 +2999,9 @@ else
 
     // Load Model Weights and Context
     model = LLamaWeights.LoadFromFile(parameters);
+    initializationCts.Token.ThrowIfCancellationRequested();
     context = model.CreateContext(parameters);
+    initializationCts.Token.ThrowIfCancellationRequested();
 
     var executor = new InteractiveExecutor(context);
     var chatHistory = new ChatHistory();
@@ -3021,7 +3046,7 @@ else
     // Final session starts with the System Prompt already in history
     session = new ChatSession(executor, chatHistory);
 
-    var resetState = session.GetSessionState();
+    resetState = session.GetSessionState();
     session.LoadSession(resetState);
 
     // --- 6. WARMUP PHASE ---
@@ -3029,10 +3054,21 @@ else
     Program.Emit(FIELD_STATUS_INIT, "WarmingUp");
     try {
         var warmupParams = new InferenceParams() { MaxTokens = 1 };
-        Task.Run(async () =&gt; {
-            await foreach (var token in session.ChatAsync(new ChatHistory.Message(AuthorRole.User, " "), warmupParams)) { }
-        }).GetAwaiter().GetResult();
-    } catch (Exception ex) {
+        var warmupCancellation = initializationCts;
+        var warmup = Task.Run(async () =&gt; {
+            await foreach (var token in session.ChatAsync(new ChatHistory.Message(AuthorRole.User, " "), warmupParams, cancellationToken: warmupCancellation.Token)) { }
+        });
+        try { warmup.GetAwaiter().GetResult(); }
+        catch (ThreadInterruptedException) {
+            // The host may interrupt Main while the native warmup is still unwinding.
+            // Transfer ownership to the worker: never release its context prematurely.
+            warmup.ContinueWith(_ =&gt; nativeLifetime.End(warmupCancellation), TaskScheduler.Default);
+            initializationCts = null;
+            throw;
+        }
+    } catch (ThreadInterruptedException) { throw; }
+    catch (OperationCanceledException) when (nativeLifetime.IsStopping) { throw; }
+    catch (Exception ex) {
         Program.Log.Warn($"Warmup warning: {ex.Message}");
     }
     // Ready is emitted after chat APIs are registered.
@@ -3050,10 +3086,7 @@ else
     var processInput = new Func&lt;string, bool, bool, bool, string&gt;((rawInput, synchronous, sendContextData, noHistory) =&gt; {
 
         var telemetry = new ChatRequestMetrics(Api, storeId, !noHistory);
-        telemetry.SaveUser(ChatMessage.Create("user", rawInput));
-        if (generationCts != null) generationCts.Dispose();
-        generationCts = new CancellationTokenSource();
-        var requestCts = generationCts;
+
 
         string fullInput = rawInput;
         if (sendContextData)
@@ -3066,8 +3099,15 @@ else
         // 3. TEMPLATING: Prepare input for the engine (but don't save this to history!)
         string templatedInput = BuildUserPrompt(templateType, fullInput);
 
+        CancellationTokenSource requestCts;
+        if (!nativeLifetime.TryBegin(out requestCts))
+            throw new InvalidOperationException("Local AI is busy or stopping. Wait for the current operation to finish.");
+        try { telemetry.SaveUser(ChatMessage.Create("user", rawInput)); }
+        catch { nativeLifetime.End(requestCts); throw; }
+
         var process = new Func&lt;bool, string&gt;((sync) =&gt; {
             try {
+            requestCts.Token.ThrowIfCancellationRequested();
             // Send the templated input to the engine
             var sessionChat = session.ChatAsync(
                 new ChatHistory.Message(AuthorRole.User, templatedInput),
@@ -3082,7 +3122,7 @@ else
             string[] visualArtifacts = { "/assistant/avatar", "/avatar", "![avatar]", "![image]" };
 
             ProcessAsync(sessionChat, (token) =&gt; {
-                if (string.IsNullOrEmpty(token)) return;
+                if (nativeLifetime.IsStopping || string.IsNullOrEmpty(token)) return;
                 telemetry.FirstToken();
                 streamBuffer += token;
                 fullReply += token;
@@ -3162,27 +3202,29 @@ else
 
             return fullReply;
             } catch (OperationCanceledException) {
-                telemetry.Error("[STOPPED]", "cancelled");
+                if (!nativeLifetime.IsStopping) telemetry.Error("[STOPPED]", "cancelled");
                 throw;
             } catch (Exception) {
-                telemetry.Error("**Error:** Local AI inference failed. Please check the logs.");
+                if (!nativeLifetime.IsStopping) telemetry.Error("**Error:** Local AI inference failed. Please check the logs.");
                 throw;
-            }
+            } finally { nativeLifetime.End(requestCts); }
         });
 
-        if (synchronous) return process(true);
+        // A synchronous API caller may be an automation thread interrupted by the host.
+        // The native worker, not that caller, owns and ends the operation lease.
+        if (synchronous) return Task.Run(() =&gt; process(true)).GetAwaiter().GetResult();
 
         Task.Run(() =&gt; {
             try { process(false); }
-            catch (OperationCanceledException) { Program.Log.Info("Inference stopped."); }
-            catch (Exception ex) { Program.Emit(FIELD_STATUS_ERROR, ex.Message); }
-            finally { requestCts.Dispose(); if (ReferenceEquals(generationCts, requestCts)) generationCts = null; }
+            catch (OperationCanceledException) { lifecycleLog("Lailama inference stopped."); }
+            catch (Exception ex) { if (!nativeLifetime.IsStopping) Program.Emit(FIELD_STATUS_ERROR, ex.Message); }
         });
 
         return "";
     });
 
 
+    initializationCts.Token.ThrowIfCancellationRequested();
     // --- 8. API ENDPOINTS: INFERENCE AND CHAT ---
 
     Api.Handle($"{API_URL}/{API_PROMPT_SUBMIT}", (userInput) =&gt; {
@@ -3208,10 +3250,7 @@ else
 
     }).Handle($"{API_URL}/{API_PROMPT_CANCEL}", (userCommand) =&gt; {
         // Abort current generation
-        if (generationCts != null) {
-            generationCts.Cancel();
-            Program.Emit(FIELD_TOKENS_STREAM, "\n\n[STOPPED]");
-        }
+        if (nativeLifetime.CancelCurrent()) Program.Emit(FIELD_TOKENS_STREAM, "\n\n[STOPPED]");
         return new ResponseStatus(Status.Ok);
 
     }).Handle($"{API_URL}/{API_HISTORY_GET}", (userCommand) =&gt; {
@@ -3222,6 +3261,9 @@ else
 
     }).Handle($"{API_URL}/{API_HISTORY_CLEAR}", (userCommand) =&gt; {
 
+      CancellationTokenSource clearCts;
+      if (!nativeLifetime.TryBegin(out clearCts)) return new ResponseStatus(Status.Error, "Local AI is busy or stopping.");
+      try {
       var storeId = Program.Module.Address;
       Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId });
       if (session != null &amp;&amp; resetState != null)
@@ -3238,6 +3280,7 @@ else
       }
       Program.Log.Info($"[Module {storeId}] Cleared: Engine and Service are now empty.");
       return new ResponseStatus(Status.Ok);
+      } finally { nativeLifetime.End(clearCts); }
 
     });
 
@@ -3245,15 +3288,19 @@ else
     Api.Handle($"{API_URL}/{API_HISTORY_EXPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Export", new { StoreId = storeId }));
     Api.Handle($"{API_URL}/{API_HISTORY_IMPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Import", new { StoreId = storeId, Data = (p as dynamic).Data }));
 
+    initializationCts.Token.ThrowIfCancellationRequested();
     Program.Emit(FIELD_STATUS_INIT, "Ready");
     Program.Emit(FIELD_STATUS_ERROR, "");
 
+  } catch (ThreadInterruptedException) { throw; }
+  catch (OperationCanceledException) when (nativeLifetime.IsStopping) {
+    lifecycleLog("Lailama initialization cancelled during shutdown.");
   } catch (Exception e) {
-
-    Program.Notify($"ERROR: {e.Message} [program_configure]").Emit(FIELD_STATUS_ERROR, e.Message);
-    Pause(5);
-
-  }
+    if (!nativeLifetime.IsStopping) {
+      Program.Notify($"ERROR: {e.Message} [program_configure]").Emit(FIELD_STATUS_ERROR, e.Message);
+      Pause(5);
+    } else lifecycleLog("Lailama initialization ended during shutdown: " + e.Message);
+  } finally { if (initializationCts != null) nativeLifetime.End(initializationCts); }
 }
 
 Program.Emit(FIELD_TOKENS_STREAM, "");
@@ -3265,6 +3312,8 @@ while (Program.IsRunning)
     if (reconfigureRequired)
     {
         dispose();
+        // Do not load another model while old native resources are still in use.
+        while (Program.IsRunning &amp;&amp; !nativeLifetime.CleanupCompleted) Pause(1);
         return; // Exiting this loop triggers HomeGenie to reload the program block
     }
     Pause(1);
@@ -3643,17 +3692,110 @@ public class ChatRequestMetrics
         return text;
     }
 }
+
+
+// Native resources are released only after the operation owning them has finished.
+// A background cleanup with a bounded stop wait also covers slow native Dispose calls.
+public sealed class LailamaNativeLifetime
+{
+    private readonly object gate = new object();
+    private bool stopping;
+    private CancellationTokenSource current;
+    private TaskCompletionSource&lt;bool&gt; idle;
+    private Task cleanup;
+
+    public bool IsStopping { get { lock (gate) return stopping; } }
+    public bool CleanupCompleted { get { lock (gate) return cleanup != null &amp;&amp; cleanup.IsCompleted; } }
+
+    public bool TryBegin(out CancellationTokenSource cancellation)
+    {
+        lock (gate)
+        {
+            cancellation = null;
+            if (stopping || current != null) return false;
+            cancellation = current = new CancellationTokenSource();
+            idle = new TaskCompletionSource&lt;bool&gt;(TaskCreationOptions.RunContinuationsAsynchronously);
+            return true;
+        }
+    }
+
+    public void End(CancellationTokenSource cancellation)
+    {
+        lock (gate)
+        {
+            if (!ReferenceEquals(current, cancellation)) return;
+            current = null;
+            idle.TrySetResult(true);
+        }
+        lock (cancellation) cancellation.Dispose();
+    }
+
+    public bool CancelCurrent()
+    {
+        CancellationTokenSource cancellation;
+        lock (gate) cancellation = current;
+        Cancel(cancellation);
+        return cancellation != null;
+    }
+
+    private static void Cancel(CancellationTokenSource cancellation)
+    {
+        if (cancellation == null) return;
+        try { lock (cancellation) cancellation.Cancel(); }
+        catch (ObjectDisposedException) { } // The owning operation completed concurrently.
+    }
+
+    private static void Log(Action&lt;string&gt; log, string message)
+    {
+        try { log?.Invoke(message); }
+        catch { } // The host logger may already be shutting down.
+    }
+
+    public bool Stop(Action release, Action&lt;string&gt; log, int timeoutMilliseconds = 5000)
+    {
+        Task pending;
+        lock (gate)
+        {
+            if (cleanup == null)
+            {
+                stopping = true;
+                var cancellation = current;
+                Task drained = current == null ? Task.CompletedTask : idle.Task;
+                cleanup = Task.Run(async () =&gt;
+                {
+                    var elapsed = System.Diagnostics.Stopwatch.StartNew();
+                    try
+                    {
+                        Log(log, "Lailama shutdown: cancellation requested; waiting for native operation.");
+                        try { Cancel(cancellation); }
+                        catch (Exception ex) { Log(log, "Lailama shutdown cancellation: " + ex.Message); }
+                        await drained.ConfigureAwait(false);
+                        Log(log, "Lailama shutdown: native operation finished; releasing resources.");
+                        release();
+                        Log(log, "Lailama shutdown: cleanup completed in " + elapsed.ElapsedMilliseconds + " ms.");
+                    }
+                    catch (Exception ex) { Log(log, "Lailama shutdown cleanup failed: " + ex.Message); }
+                });
+            }
+            pending = cleanup;
+        }
+        if (pending.Wait(timeoutMilliseconds)) return true;
+        Log(log, "Lailama shutdown: cleanup still pending after " + timeoutMilliseconds +
+            " ms; continuing host shutdown without disposing resources in use.");
+        return false;
+    }
+}
 </ScriptContext>
     <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.14</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.0.17</Version>
+      <Version>1.0.18</Version>
       <Required>true</Required>
-      <Checksum>BF77FCB2B11D877219C96039A82FD3DD</Checksum>
+      <Checksum>8280D1125A0DFF91F03C91F84D5F1426</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>
@@ -3855,7 +3997,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.14</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -4041,7 +4183,7 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.14</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -5224,7 +5366,7 @@ public static class GenieCapabilities
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>gemini-genie</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>

@@ -31,9 +31,11 @@ Program.Notify("Maintenance", JsonConvert.SerializeObject(new {
 
 The archive recognizes both the existing `{Title, Message}` wrapper with structured JSON in `Message`, and direct version-1 payloads emitted with `Program.Emit("Program.Notification", json)`. Only explicit `Persistent=true` messages are archived. `Id` is scoped to the event's actual sender domain/address; a producer cannot supply a different sender identity in the payload.
 
+Legacy plain-text notifications and non-object JSON values are ignored by the persistent decoder, including ordinary strings inside the Program.Notify wrapper. Explicit persistent envelopes still undergo schema validation; startup recovery diagnostics identify the sender domain/address. Archive-file validation and backup recovery remain strict.
+
 Supported metadata includes `TitleKey`, `MessageKey`, `Details`, and action `LabelKey`/`ConfirmationKey`. Translation keys use the frontend language catalog, with supplied text as fallback. Message text supports the existing sanitized Markdown rendering. Severity is `info`, `success`, `warning` or `error`.
 
-The initial contract supports at most four actions, each with a unique ID, a label, a local API endpoint, POST method and optional object body. Absolute URLs, traversal paths and executable UI code are not supported. The payload limit is 64K characters. Use `Idempotent=true` only when the target handler safely supports repeated requests.
+The initial contract supports at most four actions, each with a unique ID and a label. API actions use a local endpoint, POST method and optional object body. Absolute URLs, traversal paths and executable UI code are not supported. The payload limit is 64K characters. Use `Idempotent=true` only when the target handler safely supports repeated requests.
 
 ## Archive and UI behavior
 
@@ -68,3 +70,9 @@ Actions have `running`, `completed`, `failed` or `unknown` state. Completed acti
 When configured, Gemini Genie publishes one stable persistent notice if installed previous Gemini Genies remain enabled. Its button lists those programs and asks for confirmation. `AI.Genies/Gemini/Legacy.Status` reports their state; `Legacy.Disable` accepts only IDs 930, 931 and 932 whose package identities match the original Genies. It verifies results, reports partial failures and supports idempotent retry.
 
 Disabling is optional and reversible. No program, prompt, credentials, module configuration or chat history is deleted or imported. A report is emitted as `AI.Genie.LegacyMigration` on the new Genie module. Existing package installation already inherits a program's enabled state, so a later update does not intentionally re-enable retired programs. There is no removal endpoint in this version.
+
+## Navigation actions and program updates
+
+A navigation action uses `Type: "navigate"`, `Destination: "program-updates"`, plus `Id`, `Label` and optional `LabelKey`. This is the only allowed destination; arbitrary routes, URLs, endpoints and bodies are rejected. YoT opens the originating connection’s Programs update view and closes the reader only after successful navigation. Navigation is repeatable, works from archived notices too, and does not enter the API execution ledger. The backend Execute endpoint explicitly rejects navigation actions.
+
+The archive service now maintains its own update notice by polling the shared read-only Packages.Updates report. See [program updates](program-updates.md) for timing, deduplication, failure and automatic resolution behavior. No program is installed, enabled or removed by this notice.

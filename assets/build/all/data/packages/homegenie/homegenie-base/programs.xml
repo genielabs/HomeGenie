@@ -175,7 +175,7 @@ public static class HistoryStore
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.11</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>chat-history-service</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -248,7 +248,7 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>client-configs</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -619,7 +619,7 @@ void SaveConfig(string filePath, YamlConfig config)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>daily-energy-report</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -897,7 +897,7 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -1543,7 +1543,7 @@ public class DownloadManager : IDisposable
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>download-manager</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1586,7 +1586,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1914,7 +1914,7 @@ string GetDbName()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>energy-use-statistics</Id>
       <Version>1.0.9</Version>
       <Required>false</Required>
@@ -2089,7 +2089,7 @@ void InsertData(LiteDatabase db, LoggerEvent data) {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -2244,7 +2244,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>file-manager</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2446,7 +2446,7 @@ public static class HttpHelper {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>homegenie-panel-notifications</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2515,7 +2515,7 @@ public string[] GetHourLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>hourly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -2977,7 +2977,7 @@ class MqttCommand: MigInterfaceCommand {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>mqtt-network</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
@@ -3236,7 +3236,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>openweathermap</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -3328,7 +3328,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -3420,7 +3420,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -3492,7 +3492,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -4168,7 +4168,7 @@ public static class FfmpegHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>video-input</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -5473,7 +5473,7 @@ public class ThumbnailHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>video-recorder</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -5554,7 +5554,7 @@ public string[] GetDayLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.9</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>weekly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -6157,7 +6157,7 @@ public static class GenieResponseContract
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.13</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>ai-action-executor</Id>
       <Version>1.2.1</Version>
       <Required>true</Required>
@@ -6205,6 +6205,7 @@ Api.Handle("System.Utility/Notifications/Execute", input=&gt;{
     try {
         lock(NotificationArchive.Gate){var req=parse(input);row=NotificationArchive.Find(rows,req);if(row["archived"]?.Value&lt;bool&gt;()==true)throw new InvalidOperationException("Notification is archived.");if(req["revision"]?.Value&lt;int&gt;()!=(int)row["revision"])throw new InvalidOperationException("Notification changed. Reload it before acting.");
             id=(string)req["actionId"];action=((JArray)row["payload"]["Actions"]).OfType&lt;JObject&gt;().FirstOrDefault(a=&gt;(string)a["Id"]==id);if(action==null)throw new InvalidOperationException("Unknown notification action.");
+            if ((string)action["Type"] != "api") throw new InvalidOperationException("Navigation actions are handled by the client.");
             var existingState=(JObject)row["actionStates"][id];if(existingState!=null){if((string)existingState["state"]=="completed")return row.DeepClone();if((string)existingState["state"]=="running"||action["Idempotent"]?.Value&lt;bool&gt;()!=true)throw new InvalidOperationException("Action outcome requires checking before retry.");}
             if((string)row["domain"]=="HomeAutomation.HomeGenie.Automation") {
                 var sender=JToken.FromObject(Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Get/"+(string)row["address"])) as JObject;
@@ -6239,9 +6240,35 @@ foreach(var module in Modules.SelectedModules) {
             if(known!=null &amp;&amp; issued&lt;=DateTime.Parse((string)known["updatedAt"]).ToUniversalTime())continue;
             NotificationArchive.Upsert(rows,payload,module.Domain,module.Address,issued,limit,days);NotificationArchive.Save(path,rows);
         }
-    }catch(Exception e){Program.Log.Error("Notification recovery: "+e.Message);}
+    }catch(Exception e){Program.Log.Error("Notification recovery ["+module.Domain+":"+module.Address+"]: "+e.Message);}
 }
-Program.GoBackground();
+// The archive owns this bounded polling loop: no timer or detached task survives Stop.
+// The checker is read-only and local; the browser need not be open.
+Pause(10);
+string lastUpdateError = null;
+while (Program.IsRunning) {
+    try {
+        object result = Api.Call("HomeAutomation.HomeGenie/Config/Packages.Updates");
+        var token = result == null ? null : JToken.FromObject(result);
+        if (token?.Type == JTokenType.String) token = JToken.Parse((string)token);
+        var report = token as JObject;
+        if ((string)report?["Status"] != "Ok" || report?["complete"]?.Value&lt;bool&gt;() != true)
+            throw new InvalidOperationException("Program update check is incomplete; keeping the previous notification.");
+        JObject changed = null;
+        lock (NotificationArchive.Gate) {
+            var nextRows = (JArray)rows.DeepClone();
+            var row = ProgramUpdateNotification.Reconcile(nextRows, report, Program.Module.Domain, Program.Module.Address, DateTime.UtcNow, limit, days);
+            if (row != null) { NotificationArchive.Save(path, nextRows); rows = nextRows; changed = (JObject)row.DeepClone(); }
+        }
+        if (changed != null) announce(changed);
+        lastUpdateError = null;
+    } catch (System.Threading.ThreadInterruptedException) { throw; }
+    catch (Exception e) {
+        // Log an unchanged failure once, rather than once per poll.
+        if (Program.IsRunning &amp;&amp; lastUpdateError != e.Message) { Program.Log.Error("Program update notification: " + e.Message); lastUpdateError = e.Message; }
+    }
+    Pause(60);
+}
 </ScriptSource>
     <ScriptContext>#using System
 #using System.IO
@@ -6255,19 +6282,39 @@ Program.GoBackground();
 public static class NotificationArchive {
     public static readonly object Gate = new object();
     public static JObject Decode(string value) {
-        if(value==null||value.Length&gt;65536)throw new InvalidOperationException("Notification payload exceeds 64 KiB.");
-        var p = JsonConvert.DeserializeObject&lt;JObject&gt;(value,new JsonSerializerSettings{DateParseHandling=DateParseHandling.None});
-        if (p["Message"]?.Type == JTokenType.String) {
-            try { var inner=JsonConvert.DeserializeObject&lt;JObject&gt;((string)p["Message"],new JsonSerializerSettings{DateParseHandling=DateParseHandling.None}); if (inner["Version"]?.Value&lt;int&gt;()==1) { if(inner["Title"]==null)inner["Title"]=p["Title"]; p=inner; } } catch(JsonReaderException) { }
+        if (string.IsNullOrWhiteSpace(value)) return null;
+        if (value.Length &gt; 65536) throw new InvalidOperationException("Notification payload exceeds 64 KiB.");
+        var settings = new JsonSerializerSettings { DateParseHandling = DateParseHandling.None };
+        JToken token;
+        try { token = JsonConvert.DeserializeObject&lt;JToken&gt;(value, settings); }
+        catch (Newtonsoft.Json.JsonException) { return null; } // Legacy notifications may contain plain text.
+        var p = token as JObject;
+        if (p == null) return null; // Strings, numbers, arrays and null are not persistent envelopes.
+        if (p["Version"] == null &amp;&amp; p["Message"]?.Type == JTokenType.String) {
+            try {
+                var inner = JsonConvert.DeserializeObject&lt;JToken&gt;((string)p["Message"], settings) as JObject;
+                if (inner?["Version"]?.Type == JTokenType.Integer &amp;&amp; inner["Version"].ToString() == "1") {
+                    if (inner["Title"] == null) inner["Title"] = p["Title"];
+                    p = inner;
+                }
+            } catch (Newtonsoft.Json.JsonException) { } // An ordinary Message string is not an envelope.
         }
-        if (p["Version"]?.Value&lt;int&gt;()!=1 || p["Persistent"]?.Type!=JTokenType.Boolean || p["Persistent"]?.Value&lt;bool&gt;()!=true) return null;
+        if (p["Version"]?.Type != JTokenType.Integer || p["Version"].ToString() != "1" ||
+            p["Persistent"]?.Type != JTokenType.Boolean || p["Persistent"].Value&lt;bool&gt;() != true) return null;
         var id=(string)p["Id"]; if(string.IsNullOrWhiteSpace(id)||id.Length&gt;128)throw new InvalidOperationException("Persistent notification requires an Id (max 128 characters).");
         foreach(var key in new[]{"Title","Message"})if(p[key]?.Type!=JTokenType.String || ((string)p[key]).Length&gt;16384)throw new InvalidOperationException("Invalid notification "+key);
         string severity=(string)p["Severity"]??"info";if(!new[]{"info","success","warning","error"}.Contains(severity))throw new InvalidOperationException("Invalid severity.");p["Severity"]=severity;
+        if (p["Actions"] != null &amp;&amp; p["Actions"].Type != JTokenType.Null &amp;&amp; p["Actions"].Type != JTokenType.Array) throw new InvalidOperationException("Actions must be an array.");
         var actions=p["Actions"] as JArray ?? new JArray(); if(actions.Count&gt;4)throw new InvalidOperationException("Maximum four notification actions.");
-        var ids=new HashSet&lt;string&gt;();foreach(JObject action in actions) {
+        var ids=new HashSet&lt;string&gt;();foreach(var item in actions) {
+            var action = item as JObject; if (action == null) throw new InvalidOperationException("Each action must be an object.");
             var aid=(string)action["Id"];if(string.IsNullOrWhiteSpace(aid)||aid.Length&gt;64||!ids.Add(aid))throw new InvalidOperationException("Invalid action Id.");
             if(action["Label"]?.Type!=JTokenType.String || ((string)action["Label"]).Length&gt;256)throw new InvalidOperationException("Invalid action label.");
+            if ((string)action["Type"] == "navigate") {
+                if ((string)action["Destination"] != "program-updates" || action["Endpoint"] != null || action["Body"] != null)
+                    throw new InvalidOperationException("Invalid navigation destination.");
+                continue;
+            }
             if((string)action["Type"]!="api" || (string)action["Method"]!="POST")throw new InvalidOperationException("Only local POST API actions are supported.");
             var endpoint=(string)action["Endpoint"];
             if(endpoint==null||endpoint.Length&gt;256||!Regex.IsMatch(endpoint,@"^[A-Za-z][A-Za-z0-9_.:-]*(/[A-Za-z0-9_.-]+){2,}$")||endpoint.Contains(".."))throw new InvalidOperationException("Invalid local action endpoint.");
@@ -6351,17 +6398,58 @@ public static class NotificationArchive {
     }
 
 }
+
+public static class ProgramUpdateNotification {
+    public const string Id = "program-updates-available";
+
+    // Null means the check could not establish a complete, current result.
+    // Never resolve an existing notice using an incomplete report.
+    public static JObject Reconcile(JArray rows, JObject report, string domain, string address,
+        DateTime now, int limit, int days) {
+        if ((string)report?["Status"] != "Ok" || report?["complete"]?.Type != JTokenType.Boolean ||
+            report["complete"].Value&lt;bool&gt;() != true || report["items"] is not JArray items ||
+            report["fingerprint"]?.Type != JTokenType.String || string.IsNullOrWhiteSpace((string)report["fingerprint"])) return null;
+        var existing = rows.OfType&lt;JObject&gt;().FirstOrDefault(r =&gt; (string)r["domain"] == domain &amp;&amp;
+            (string)r["address"] == address &amp;&amp; (string)r["payload"]?["Id"] == Id);
+        if (items.Count == 0) {
+            if (existing == null || existing["resolved"]?.Value&lt;bool&gt;() == true) return null;
+            existing["archived"] = true;
+            existing["resolved"] = true;
+            existing["sequence"] = (existing["sequence"]?.Value&lt;long&gt;() ?? 0) + 1;
+            existing["updatedAt"] = now.ToString("O");
+            return existing;
+        }
+        var payload = new JObject {
+            ["Version"] = 1, ["Persistent"] = true, ["Id"] = Id,
+            ["Title"] = "Program updates available", ["TitleKey"] = "upgradable_programs",
+            ["Message"] = "Updates are available. Review the programs before installing them.",
+            ["MessageKey"] = "updates_available", ["Severity"] = "info",
+            ["UpdateFingerprint"] = (string)report["fingerprint"],
+            ["Actions"] = new JArray(new JObject {
+                ["Id"] = "show-updates", ["Type"] = "navigate", ["Destination"] = "program-updates",
+                ["Label"] = "Show upgradable programs", ["LabelKey"] = "show_upgradable_programs"
+            })
+        };
+        if (existing != null &amp;&amp; existing["resolved"]?.Value&lt;bool&gt;() != true &amp;&amp;
+            JToken.DeepEquals(existing["payload"], payload)) return null;
+        bool wasResolved = existing?["resolved"]?.Value&lt;bool&gt;() == true;
+        var row = NotificationArchive.Upsert(rows, NotificationArchive.Decode(payload.ToString()), domain, address, now, limit, days);
+        if (wasResolved) { row["archived"] = false; row["read"] = false; row["revision"] = (int)row["revision"] + 1; }
+        row["resolved"] = false;
+        return row;
+    }
+}
 </ScriptContext>
     <ScriptErrors />
     <Data></Data>
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.13</PackageVersion>
+      <PackageVersion>1.0.15</PackageVersion>
       <Id>notification-archive</Id>
-      <Version>1.0.0</Version>
+      <Version>1.1.0</Version>
       <Required>true</Required>
-      <Checksum>CFC9F9EB1309B9DF2D041850B94245DD</Checksum>
+      <Checksum>DE11D7705E3302C3126CEE1F55776B16</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>582</Address>

@@ -172,6 +172,84 @@ namespace HomeGenie.Service
             return packagesList;
         }
 
+        /// <summary>
+        /// Inspect local package manifests and installed programs without importing any assets.
+        /// The returned report is advisory; installation must recheck its targets before writing.
+        /// </summary>
+        public ProgramUpdateReport GetProgramUpdates()
+        {
+            var catalog = new List<PackageData>();
+            var issues = new List<ProgramUpdateIssue>();
+            var installedPackages = new List<InstalledPackageIdentity>();
+            void Issue(string code, string identity, string message) => issues.Add(
+                new ProgramUpdateIssue { Code = code, Identity = identity, Message = message });
+            string packagesFolder = Path.Combine(Utility.GetDataFolder(), "packages");
+            try
+            {
+                if (!Directory.Exists(packagesFolder))
+                    Issue("catalogUnavailable", "", "The local package catalog is unavailable.");
+                else
+                {
+                    foreach (var repository in Directory.GetDirectories(packagesFolder).OrderBy(p => p, StringComparer.Ordinal))
+                    foreach (var folder in Directory.GetDirectories(repository).OrderBy(p => p, StringComparer.Ordinal))
+                    {
+                        string identity = Path.GetFileName(repository) + "/" + Path.GetFileName(folder);
+                        try
+                        {
+                            var pkg = JsonConvert.DeserializeObject<PackageData>(File.ReadAllText(Path.Combine(folder, "package.json")));
+                            if (pkg == null || pkg.Repository != Path.GetFileName(repository) || pkg.Id != Path.GetFileName(folder))
+                                throw new InvalidDataException("Manifest identity does not match its catalog folder.");
+                            catalog.Add(pkg);
+                        }
+                        catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException || ex is InvalidDataException || ex is JsonException)
+                        { Issue("catalogReadFailed", identity, ex.Message); }
+                    }
+                }
+            }
+            catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException)
+            { Issue("catalogReadFailed", "", ex.Message); }
+
+            // Use the same registry path as InstallPackage. Older installations may have no registry;
+            // package identities from installed programs provide a second source of activation.
+            try
+            {
+                if (File.Exists(PACKAGE_LIST_FILE))
+                {
+                    var records = JArray.Parse(File.ReadAllText(PACKAGE_LIST_FILE));
+                    foreach (var record in records)
+                    {
+                        if (record is not JObject obj)
+                        { Issue("invalidInstalledPackage", "", "Installed package record must be an object."); continue; }
+                        string repository = obj["repository"]?.Type == JTokenType.String ? (string)obj["repository"] : null;
+                        string id = obj["package"]?.Type == JTokenType.String ? (string)obj["package"] : null;
+                        if (!string.IsNullOrWhiteSpace(repository) && !string.IsNullOrWhiteSpace(id))
+                            installedPackages.Add(new InstalledPackageIdentity { Repository = repository, Id = id });
+                        else if (obj["folder_url"] == null)
+                            Issue("invalidInstalledPackage", "", "Installed package identity is missing.");
+                    }
+                }
+            }
+            catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException || ex is InvalidDataException || ex is JsonException)
+            { Issue("installedRegistryReadFailed", "", ex.Message); }
+
+            var installed = homegenie.ProgramManager.Programs.FindAll(p => p != null).Select(p =>
+            {
+                var info = p.PackageInfo;
+                return new InstalledProgramSnapshot {
+                    Address = p.Address, Name = p.Name, Enabled = p.IsEnabled,
+                    Repository = info?.Repository, PackageId = info?.PackageId, Id = info?.Id,
+                    Version = info?.Version, BaselineChecksum = info?.Checksum,
+                    ActualChecksum = Utility.GetObjectChecksum(new {
+                        setup = p.ScriptSetup, source = p.ScriptSource, context = p.ScriptContext, data = p.Data
+                    })
+                };
+            }).ToList();
+            var report = ProgramUpdateChecker.Check(catalog, installed, installedPackages);
+            report.Issues.AddRange(issues);
+            return report;
+        }
+
+
         public bool InstallPackage(string repository, string package, List<string> installList = null)
     {
             var packageFile = Path.Combine(Utility.GetDataFolder(), "packages", repository,

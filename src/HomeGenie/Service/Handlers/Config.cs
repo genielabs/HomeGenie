@@ -1723,6 +1723,10 @@ namespace HomeGenie.Service.Handlers
 
             #region New PackageManager API
 
+            case "Packages.Updates":
+                request.ResponseData = homegenie.PackageManager.GetProgramUpdates();
+                break;
+
             case "Packages.List":
                 request.ResponseData = homegenie.PackageManager.GetPackagesList();
                 break;
