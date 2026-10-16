@@ -537,7 +537,7 @@ public sealed class AiSkillCatalog
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.31</PackageVersion>
+      <PackageVersion>1.0.34</PackageVersion>
       <Id>context-engine</Id>
       <Version>1.0.8</Version>
       <Required>true</Required>
@@ -1140,7 +1140,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.31</PackageVersion>
+      <PackageVersion>1.0.34</PackageVersion>
       <Id>gemini-automan</Id>
       <Version>1.0.10</Version>
       <Required>false</Required>
@@ -1598,7 +1598,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.31</PackageVersion>
+      <PackageVersion>1.0.34</PackageVersion>
       <Id>gemini-intent-handler</Id>
       <Version>1.0.22</Version>
       <Required>false</Required>
@@ -2321,7 +2321,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.31</PackageVersion>
+      <PackageVersion>1.0.34</PackageVersion>
       <Id>gemini-widget-genie</Id>
       <Version>1.0.18</Version>
       <Required>false</Required>
@@ -2651,7 +2651,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.31</PackageVersion>
+      <PackageVersion>1.0.34</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -2855,8 +2855,17 @@ if (!File.Exists(localModelFile)) {
   while (Program.IsRunning)
   {
     if (reconfigureRequired) return;
-    dynamic response = Api.Call("System.Utility/DownloadManager/GetStatus", localModelFile);
-    dynamic fileStatus = JsonConvert.DeserializeObject&lt;dynamic&gt;(response);
+    object response = Api.Call("System.Utility/DownloadManager/GetStatus", localModelFile);
+    // The service can be temporarily unregistered during startup or a package update.
+    // Keep the same polling loop alive; never restart the program or load a partial model.
+    dynamic fileStatus = null;
+    try {
+      if (response is string statusJson &amp;&amp; !string.IsNullOrWhiteSpace(statusJson))
+        fileStatus = JObject.Parse(statusJson);
+      else if (response is JObject statusObject) fileStatus = statusObject;
+    } catch (Newtonsoft.Json.JsonException) {
+      // An unavailable/incomplete status is transient. Pause below and try again.
+    }
 
     if (fileStatus?.Success == true)
     {
@@ -3791,11 +3800,11 @@ public sealed class LailamaNativeLifetime
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.31</PackageVersion>
+      <PackageVersion>1.0.34</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.0.18</Version>
+      <Version>1.0.19</Version>
       <Required>true</Required>
-      <Checksum>8280D1125A0DFF91F03C91F84D5F1426</Checksum>
+      <Checksum>6F26164D5D003099EE027E3C410266A6</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>
@@ -3997,7 +4006,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.31</PackageVersion>
+      <PackageVersion>1.0.34</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -4183,7 +4192,7 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.31</PackageVersion>
+      <PackageVersion>1.0.34</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -4393,18 +4402,24 @@ Func&lt;string, bool&gt; EnsureCache = (fullContext) =&gt; {
 Func&lt;object, JToken&gt; contextToken = value =&gt; value is string text ? JToken.Parse(text) : JToken.FromObject(value);
 Func&lt;JObject, JObject&gt; composeGeniePrompt = selected =&gt; {
     string template = File.ReadAllText(Path.Combine(Data.GetFolder(), "gemini_system_prompt.txt"));
-    if (template.Contains("#use-skill homegenie-genie")) {
-        if ((bool)selected["automation"]) template += "\n#use-kb homegenie-core/references/automation.md\n#use-skill homegenie-orchestration";
-        if ((bool)selected["widgets"]) template += "\n#use-kb homegenie-core/references/widgets.md";
-    }
-    var composed = contextToken(Api.Call("System.Utility/ContextEngine/Prompt.Compose", new { version=1, template }));
-    if ((string)composed["Status"] == "Error" || composed["prompt"]?.Type != JTokenType.String)
-        throw new InvalidOperationException((string)composed["Message"] ?? "Prompt composition unavailable.");
-    var result = (JObject)composed;
-    result["prompt"] = (string)result["prompt"] + GenieCapabilities.Instructions(selected);
-    result["fingerprint"] = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes((string)result["prompt"]))).ToLowerInvariant();
-    return result;
+    var result = contextToken(Api.Call("System.Utility/AiGenie/Prompt.Compose",
+        new JObject { ["version"] = 1, ["template"] = template, ["capabilities"] = selected }));
+    if (!(result is JObject composed) || (string)result["Status"] == "Error" || result["prompt"]?.Type != JTokenType.String)
+        throw new InvalidOperationException((string)result?["Message"] ?? "AI Genie prompt preparation unavailable.");
+    return composed;
 };
+Func&lt;JObject, JObject&gt; normalizeGenieResponse = response =&gt; {
+    var result = contextToken(Api.Call("System.Utility/AiGenie/Response.Normalize", response));
+    if (!(result is JObject canonical)) throw new Exception("AI Genie response normalizer unavailable.");
+    if ((string)canonical["Status"] == "Error") {
+        if ((string)canonical["errorKind"] == "contract") throw new InvalidOperationException((string)canonical["Message"]);
+        throw new Exception((string)canonical["Message"] ?? "AI Genie response normalizer unavailable.");
+    }
+    if (canonical["version"]?.Type != JTokenType.Integer || (int)canonical["version"] != 1 || canonical["kind"]?.Type != JTokenType.String)
+        throw new Exception("AI Genie response normalizer returned an incompatible result.");
+    return canonical;
+};
+
 Api.Handle(API_URL + "/Prompt.Preview", input =&gt; {
     try {
         var request = Api.Parse(input);
@@ -4542,6 +4557,44 @@ Api.Handle(API_URL + "/Context.Preview", input =&gt; {
 // ===================================================================
 // API HANDLER: Process a new user message
 // ===================================================================
+// Provider generation is separate from the chat entry point and never takes geniePromptGate.
+var providerLifetime = new CancellationTokenSource();
+When.ProgramStopping(() =&gt; { providerLifetime.Cancel(); return true; });
+Api.Handle(API_URL + "/Provider.Generate", input =&gt; GeminiGenerationProvider.Generate(Api.Parse(input).Data, (body, token) =&gt; {
+    using (var linked = CancellationTokenSource.CreateLinkedTokenSource(token, providerLifetime.Token))
+    using (var client = new System.Net.Http.HttpClient()) {
+        client.Timeout = TimeSpan.FromSeconds(180);
+        client.DefaultRequestHeaders.Add("x-goog-api-key", geminiApiKey);
+        string json = JsonConvert.SerializeObject(body, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+        string url = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent";
+        using (var content = new System.Net.Http.StringContent(json, Encoding.UTF8, "application/json"))
+        using (var response = client.PostAsync(url, content, linked.Token).GetAwaiter().GetResult()) {
+            if (!response.IsSuccessStatusCode) throw new System.Net.Http.HttpRequestException("Gemini HTTP error.", null, response.StatusCode);
+            return JObject.Parse(response.Content.ReadAsStringAsync(linked.Token).GetAwaiter().GetResult());
+        }
+    }
+}));
+Func&lt;object, string, object, string, string&gt; generateWithProvider = (messages, instructions, output, cache) =&gt; {
+    var request = new Dictionary&lt;string, object&gt; {
+        ["version"] = 1, ["requestId"] = Guid.NewGuid().ToString("N"), ["owner"] = Program.Module.Address,
+        ["provider"] = "Gemini", ["messages"] = messages, ["systemPrompt"] = instructions, ["output"] = output,
+        ["providerOptions"] = new Dictionary&lt;string, object&gt; { ["cachedContent"] = cache }
+    };
+    var result = Api.Call("System.Utility/AiGenie/Generate", request) as IDictionary&lt;string, object&gt;;
+    if (result == null) throw new InvalidOperationException("AI Genie service is unavailable. Install and enable program 583.");
+    if (!result.TryGetValue("version", out var version) || !(version is int) || (int)version != 1 ||
+        !result.TryGetValue("requestId", out var identity) || !Equals(identity, request["requestId"]))
+        throw new InvalidOperationException("AI Genie service returned an incompatible response.");
+    string state = result.TryGetValue("state", out var status) ? status as string : null;
+    if (state != "completed") {
+        string error = result.TryGetValue("error", out var detail) ? detail as string : null;
+        throw new InvalidOperationException(error ?? "AI generation ended with state: " + state);
+    }
+    string text = result.TryGetValue("text", out var completion) ? completion as string : null;
+    if (string.IsNullOrWhiteSpace(text)) throw new InvalidOperationException("AI Genie returned an empty completion.");
+    return text;
+};
+
 object geniePromptGate = new object();
 Func&lt;object, bool, object&gt; processGeniePrompt = (userCommand, scheduled) =&gt;
 {
@@ -4614,45 +4667,12 @@ Func&lt;object, bool, object&gt; processGeniePrompt = (userCommand, scheduled) =
       int deploymentAttempt = 1, contextReads = 0, contractRepairs = 0;
       string committedKind = null, committedMode = null, committedTarget = null;
       for (int round = 1; round &lt;= 12; round++) {
-    // Construct Payload dynamically based on cache status
-    object payload;
-    if (hasCache) {
-        payload = new {
-            contents = payloadContents,
-            cached_content = currentCacheName,
-            generationConfig = genConfig
-        };
-    } else {
-        payload = new {
-            contents = payloadContents,
-            system_instruction = new { parts = new[] { new { text = fullContext } } },
-            generationConfig = genConfig
-        };
-    }
-
-        string payloadJson = JsonConvert.SerializeObject(payload, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-        string requestUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent?key={geminiApiKey}";
-
-        dynamic data;
-        using (var client = new System.Net.Http.HttpClient()) {
-            client.Timeout = TimeSpan.FromSeconds(180);
-            using (var content = new System.Net.Http.StringContent(payloadJson, Encoding.UTF8, "application/json"))
-            using (var response = client.PostAsync(requestUrl, content).GetAwaiter().GetResult()) {
-                if (!response.IsSuccessStatusCode) throw new InvalidOperationException("Gemini returned HTTP " + (int)response.StatusCode + ".");
-                data = JObject.Parse(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
-            }
-        }
-        if (data != null &amp;&amp; data.candidates != null &amp;&amp; data.candidates.Count &gt; 0)
+        string rawResponse = generateWithProvider(payloadContents, hasCache ? null : fullContext, genConfig, hasCache ? currentCacheName : null);
         {
-            var candidate = (JToken)data.candidates[0];
-            string rawResponse = string.Concat(((JArray)candidate["content"]["parts"]).OfType&lt;JObject&gt;()
-                .Where(p =&gt; p["thought"]?.Value&lt;bool&gt;() != true &amp;&amp; p["text"]?.Type == JTokenType.String).Select(p =&gt; (string)p["text"]));
-            if ((string)candidate["finishReason"] != "STOP") throw new InvalidOperationException("Gemini response did not finish normally: " + (string)candidate["finishReason"]);
-
             if (!string.IsNullOrEmpty(rawResponse))
             {
                 JObject canonical;
-                try { canonical = GenieResponseContract.Normalize(JObject.Parse(rawResponse)); }
+                try { canonical = normalizeGenieResponse(JObject.Parse(rawResponse)); }
                 catch (Exception contractError) when (contractError is InvalidOperationException || contractError is Newtonsoft.Json.JsonException) {
                     if (++contractRepairs &gt; 2) throw;
                     payloadContents.Add(ChatMessage.Create("model",rawResponse));
@@ -4847,7 +4867,7 @@ Func&lt;object, bool, object&gt; processGeniePrompt = (userCommand, scheduled) =
     }
     catch (Exception ex)
     {
-        if (ex.Message.Contains("(429)")) {
+        if ((ex.Message.Contains("(429)") || ex.Message.Contains("HTTP 429"))) {
             isQuotaExceeded = true;
             rateLimitResetTime = DateTime.UtcNow.AddMinutes(2);
             return new ResponseText(telemetry.Error("**Errore 429:** Troppe richieste in corso. Ho messo in pausa le interrogazioni per un paio di minuti."));
@@ -4909,22 +4929,8 @@ Api.Handle(API_URL + "/Prompt.Ask", input =&gt; {
         string message = promptText(input);
         if (string.IsNullOrWhiteSpace(message) || Encoding.UTF8.GetByteCount(message) &gt; 262144) throw new InvalidOperationException("Text prompt is empty or too large.");
         lock (geniePromptGate) {
-            using (var client = new System.Net.Http.HttpClient()) {
-                client.Timeout = TimeSpan.FromSeconds(180);
-                client.DefaultRequestHeaders.Add("x-goog-api-key", geminiApiKey);
-                string url = $"https://generativelanguage.googleapis.com/v1beta/models/{geminiModelId}:generateContent";
-                string json = JsonConvert.SerializeObject(new { contents = new[] { new { role = "user", parts = new[] { new { text = message } } } } });
-                using (var content = new System.Net.Http.StringContent(json, Encoding.UTF8, "application/json"))
-                using (var response = client.PostAsync(url, content).GetAwaiter().GetResult()) {
-                    if (!response.IsSuccessStatusCode) throw new InvalidOperationException("Gemini returned HTTP " + (int)response.StatusCode + ".");
-                    var data = JObject.Parse(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
-                    var candidate = (data["candidates"] as JArray)?.FirstOrDefault() as JObject;
-                    var parts = (candidate?["content"] as JObject)?["parts"] as JArray;
-                    string text = parts == null ? "" : string.Concat(parts.OfType&lt;JObject&gt;().Where(p =&gt; p["thought"]?.Value&lt;bool&gt;() != true &amp;&amp; p["text"]?.Type == JTokenType.String).Select(p =&gt; (string)p["text"]));
-                    if ((string)candidate?["finishReason"] != "STOP" || string.IsNullOrWhiteSpace(text)) throw new InvalidOperationException("Text completion is empty or incomplete.");
-                    return (object)text;
-                }
-            }
+            var messages = new[] { new { role = "user", parts = new[] { new { text = message } } } };
+            return (object)generateWithProvider(messages, null, null, null);
         }
     } catch (Exception ex) { return new ResponseStatus(Status.Error, ex.Message); }
 });
@@ -5417,17 +5423,58 @@ public static class GenieCapabilities
         + "Source lookups depend on information-sharing selections, not on action permissions. Composite generation requires both automation and widgets.\n";
     public static object Describe() =&gt; new { version = 1, capabilities = Keys.Select(k=&gt;new { id=k, defaultEnabled=true }) };
 }
+
+// Provider-only transport mapping: no history, context lookup or action execution.
+public static class GeminiGenerationProvider {
+    public static object Generate(object payload, Func&lt;object, CancellationToken, JObject&gt; send) {
+        var request = payload as IDictionary&lt;string, object&gt;;
+        string id = request != null &amp;&amp; request.TryGetValue("requestId", out var identity) ? identity as string : null;
+        Func&lt;string, string, string, object&gt; result = (state, text, error) =&gt; new Dictionary&lt;string, object&gt; {
+            ["version"] = 1, ["requestId"] = id, ["state"] = state, ["text"] = text, ["error"] = error };
+        if (request == null || !request.TryGetValue("version", out var version) || !(version is int) || (int)version != 1 ||
+            string.IsNullOrWhiteSpace(id) || !request.TryGetValue("messages", out var messages) || messages == null ||
+            !request.TryGetValue("cancellationToken", out var token) || !(token is CancellationToken))
+            return result("failed", null, "Invalid Gemini provider request.");
+        var cancellation = (CancellationToken)token;
+        try {
+            cancellation.ThrowIfCancellationRequested();
+            var body = new Dictionary&lt;string, object&gt; { ["contents"] = messages };
+            if (request.TryGetValue("output", out var output) &amp;&amp; output != null) body["generationConfig"] = output;
+            var options = request.TryGetValue("providerOptions", out var supplied) ? supplied as IDictionary&lt;string, object&gt; : null;
+            string cache = options != null &amp;&amp; options.TryGetValue("cachedContent", out var cached) ? cached as string : null;
+            if (!string.IsNullOrWhiteSpace(cache)) body["cached_content"] = cache;
+            else if (request.TryGetValue("systemPrompt", out var prompt) &amp;&amp; prompt is string instructions)
+                body["system_instruction"] = new { parts = new[] { new { text = instructions } } };
+            JObject data = send(body, cancellation);
+            cancellation.ThrowIfCancellationRequested();
+            var candidate = (data?["candidates"] as JArray)?.FirstOrDefault() as JObject;
+            string finish = (string)candidate?["finishReason"];
+            if (finish == "MAX_TOKENS") return result("output_limit", null, "Gemini reached its output limit.");
+            if (finish != "STOP") return result("failed", null, "Gemini returned an empty, blocked or incomplete response.");
+            var parts = candidate?["content"]?["parts"] as JArray;
+            string text = parts == null ? "" : string.Concat(parts.OfType&lt;JObject&gt;()
+                .Where(p =&gt; p["thought"]?.Value&lt;bool&gt;() != true &amp;&amp; p["text"]?.Type == JTokenType.String)
+                .Select(p =&gt; (string)p["text"]));
+            if (string.IsNullOrWhiteSpace(text)) return result("failed", null, "Gemini returned an empty completion.");
+            return result("completed", text, null);
+        } catch (OperationCanceledException) {
+            return cancellation.IsCancellationRequested ? result("cancelled", null, null) : result("failed", null, "Gemini generation timed out.");
+        } catch (System.Net.Http.HttpRequestException ex) {
+            return result("failed", null, ex.StatusCode.HasValue ? "Gemini returned HTTP " + (int)ex.StatusCode.Value + "." : "Gemini transport failed.");
+        } catch (Exception) { return result("failed", null, "Gemini provider generation failed."); }
+    }
+}
 </ScriptContext>
     <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.31</PackageVersion>
+      <PackageVersion>1.0.34</PackageVersion>
       <Id>gemini-genie</Id>
-      <Version>1.0.9</Version>
+      <Version>1.0.11</Version>
       <Required>true</Required>
-      <Checksum>AE6FAF94ECAE4865AA063E86BB115FA6</Checksum>
+      <Checksum>EE9680B14D9A071452523FA18811A361</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>933</Address>

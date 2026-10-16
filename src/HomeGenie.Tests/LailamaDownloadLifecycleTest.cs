@@ -39,13 +39,19 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 public static class DownloadProbe {
  public static int[] Run(string scenario) {
   var frames=scenario.Split(','); int frameIndex=0, pauses=0, calls=0, initialized=0;
   Func<string[]> frame=()=>frames[frameIndex].Split(':');
   var File=new FakeFile(()=>bool.Parse(frame()[2]));
   var Program=new FakeProgram(()=>frame()[0]!="Stopped");
-  var Api=new FakeApi(()=>{calls++;return JsonConvert.SerializeObject(new {
+  var Api=new FakeApi(()=>{calls++;
+    if(frame()[0]=="Unavailable")return null;
+    if(frame()[0]=="Empty")return " ";
+    if(frame()[0]=="Malformed")return "{";
+    if(frame()[0]=="Scalar")return "null";
+    return JsonConvert.SerializeObject(new {
     Success=true, Data=frame()[0]=="Missing" ? null : new {
      Status=frame()[0],ProgressPercentage=double.Parse(frame()[1],CultureInfo.InvariantCulture),
      Id="task",DestinationFilePath="model.gguf",ErrorMessage=(string)null
@@ -78,6 +84,7 @@ public class Model {public string Repository="test";}
 public class FakeApi {readonly Func<string> status;public FakeApi(Func<string> f){status=f;}public string Call(string route,string path)=>status();}
 """;
             var paths = ((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")).Split(Path.PathSeparator)
+                .Where(p => Path.GetDirectoryName(p) == Path.GetDirectoryName(typeof(object).Assembly.Location))
                 .Append(typeof(JsonConvert).Assembly.Location).Distinct();
             var compilation = CSharpCompilation.Create("DownloadProbe" + Guid.NewGuid().ToString("N"),
                 new[] { CSharpSyntaxTree.ParseText(code) }, paths.Select(p => MetadataReference.CreateFromFile(p)),
@@ -94,6 +101,13 @@ public class FakeApi {readonly Func<string> status;public FakeApi(Func<string> f
         [TestCase("Missing:0:false,Completed:100:true", 1, 1, 2)]
         [TestCase("Downloading:40:false,Stopped:40:false", 0, 1, 1)]
         [TestCase("Downloading:40:false,Reconfigure:40:false", 0, 1, 1)]
+        [TestCase("Unavailable:0:false,Completed:100:true", 1, 1, 2)]
+        [TestCase("Unavailable:0:false,Unavailable:0:false,Completed:100:true", 1, 2, 3)]
+        [TestCase("Empty:0:false,Completed:100:true", 1, 1, 2)]
+        [TestCase("Malformed:0:false,Completed:100:true", 1, 1, 2)]
+        [TestCase("Scalar:0:false,Completed:100:true", 1, 1, 2)]
+        [TestCase("Unavailable:0:false,Stopped:0:false", 0, 1, 1)]
+        [TestCase("Unavailable:0:false,Reconfigure:0:false", 0, 1, 1)]
         [TestCase("Completed:100:true", 1, 0, 0)]
         public void WaitsForFinalizedModelWithoutRestart(string scenario, int initializations, int pauses, int polls)
         {

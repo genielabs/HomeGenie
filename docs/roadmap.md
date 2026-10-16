@@ -134,3 +134,29 @@ Module configuration correction: validation/readback now live in AI Action Execu
 Development constraint: discuss proposed HomeGenie core changes with the maintainer before implementing them. Reuse existing APIs and automation-program extension points where appropriate.
 
 API/schema migration implemented: Programs.List/Features, Programs.Get/{id}/Features[/{feature}], Modules.Get/{domain}/{address}/Schema and the exact /Context parameter view. Schema separates properties (empty FieldType) and features (nonempty FieldType), one row per key with owner programs. New experimental discovery names have no aliases. Package consumers and tests are updated. Live verification passed on Vulkan on 2026-10-16 after backend restart and updates of Executor 1.2.5 / Gemini 1.0.9: catalog and targeted feature reads, 14 properties / 20 features for Porch Light, unchanged ordinary Get responses, and a Gemini 60 -> 30 -> 60 batch with two completed/verified receipts and final readback of 60. Ordinary Get/List/ParameterGet behavior is preserved.
+
+### Common AI Genie utility: initial provider boundary
+
+Implemented optional, initially disabled program 583 (AI Genie, Utilities) with versioned in-memory Api.Call dictionary requests/results, distinct Provider.Generate dispatch, per-owner busy handling, cooperative cancellation/shutdown and incomplete-output rejection. This supersedes the initial core-assembly engine proposal; no core changes. Gemini/Lailama are not connected yet and keep existing endpoints, stores and behavior. Next: Gemini adapter and behavior-preserving transport extraction, shared coordinator slices, then compact Lailama integration. Do not enable/require the service or advertise parity until the adapter/dependency and acceptance gates are complete. See guides/shared-genie-engine.md.
+
+Initial boundary validation: 52 tests passed (13 AI Genie service/dispatch tests plus 39 discovery and configuration regressions). Full shipped scripts 581, 583 and 933 compile; package 583 checksum/manifest and LF checks pass. No live provider routing has changed.
+
+### Gemini transport connected to AI Genie
+
+Gemini Genie 1.0.10 now routes chat and isolated Prompt.Ask generation through AI Genie 583 (0.1.1), enabled/required with an AI-package dependency. Distinct provider handler, no callback chat-lock acquisition, unchanged prompt/schema/cache/history/action orchestration, cancellation-aware HTTP and provider shutdown, explicit sanitized failure/finish states, and no partial output execution. No core or YoT changes. Neutral message/schema mapping, shared context/action coordinator and Lailama adapter remain next steps. Deployment/live acceptance is pending; do not claim complete shared-engine parity yet.
+
+Gemini transport boundary validation: 65 tests passed (including actual in-memory MIG dispatch through the common service and adapter, payload/cache/thought filtering, partial outputs, HTTP errors, cancellation and existing discovery/configuration regressions). Full shipped scripts 581/583/933 compile; manifest/dependency checksums and diff checks pass. Live deployment remains pending.
+
+Gemini/common-service initial live acceptance passed on Vulkan on 2026-10-17 with 583 0.1.1 and 933 1.0.10 active: ordinary chat response, Porch Light Control.On completed successfully through Action Executor, and text-only Prompt.Ask returned TEXT_ONLY_OK without changing the chat history. Live cancellation/shutdown is not claimed; those paths have deterministic coverage. Next: extract shared context/response coordination, then connect Lailama.
+
+### AI Genie prompt/response preparation
+
+Implemented 583 0.2.0 / Gemini 1.0.11: shared skill/KB prompt composition via Context Engine, unchanged capability instruction fingerprints, and response normalization through the existing Action Executor parser without execution. Contract vs service failures remain distinct so infrastructure errors do not trigger model repair. Selected-data reads, capability checks, bounded recovery, history and artifacts remain in 933 for the next extraction. No core/YoT/Lailama changes. Deployment/live acceptance pending; update 583 before 933.
+
+Preparation-slice validation: 82 tests passed (17 prompt/normalization regressions plus 65 existing provider, service, discovery and configuration tests). Complete scripts 581/583/933 compile. Live acceptance remains pending.
+
+Lailama download-service availability fix (940 1.0.19): the 2026-10-17 00:01 log shows Download Manager 575 stopping/recompiling while Lailama was polling GetStatus; the null result reached DeserializeObject and disabled Lailama. Polling now tolerates null, empty and malformed status replies, waits the existing two seconds and resumes once the service returns. Stop/reconfigure checks and finalized-model requirements remain unchanged. No model download/load or runtime-program edit is performed by this fix.
+
+Lailama availability regression verification: 14 download/lifecycle tests passed, including null/empty/malformed status recovery and stop/reconfigure while unavailable. Full distributed program 940 compiles; checksum/manifest and LF checks pass. Runtime 940 remains untouched and must be updated to 1.0.19, then re-enabled if desired.
+
+Preparation-slice initial live acceptance passed on Vulkan on 2026-10-17 with 583 0.2.0 and 933 1.0.11: Prompt.Preview verified device-only and automation/widget profiles, expected skill/KB selection and allowed kinds; browser Control.On completed with a successful executor receipt and normal chat presentation. Lailama 1.0.19 was enabled/running without ScriptErrors before and after the check; temporary Download Manager outage recovery remains unit-tested, not live-induced here.

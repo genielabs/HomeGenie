@@ -175,7 +175,7 @@ public static class HistoryStore
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>chat-history-service</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -248,7 +248,7 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>client-configs</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -619,7 +619,7 @@ void SaveConfig(string filePath, YamlConfig config)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>daily-energy-report</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -897,7 +897,7 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -1543,7 +1543,7 @@ public class DownloadManager : IDisposable
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>download-manager</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1586,7 +1586,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1914,7 +1914,7 @@ string GetDbName()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>energy-use-statistics</Id>
       <Version>1.0.9</Version>
       <Required>false</Required>
@@ -2089,7 +2089,7 @@ void InsertData(LiteDatabase db, LoggerEvent data) {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -2244,7 +2244,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>file-manager</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2446,7 +2446,7 @@ public static class HttpHelper {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>homegenie-panel-notifications</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2515,7 +2515,7 @@ public string[] GetHourLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>hourly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -2977,7 +2977,7 @@ class MqttCommand: MigInterfaceCommand {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>mqtt-network</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
@@ -3236,7 +3236,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>openweathermap</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -3328,7 +3328,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -3420,7 +3420,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -3492,7 +3492,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -4168,7 +4168,7 @@ public static class FfmpegHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>video-input</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -5473,7 +5473,7 @@ public class ThumbnailHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>video-recorder</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -5554,7 +5554,7 @@ public string[] GetDayLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>weekly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -6233,7 +6233,7 @@ public static class ModuleSettingAction
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>ai-action-executor</Id>
       <Version>1.2.5</Version>
       <Required>true</Required>
@@ -6549,7 +6549,7 @@ public static class ProgramUpdateNotification {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.22</PackageVersion>
       <Id>notification-archive</Id>
       <Version>1.1.1</Version>
       <Required>true</Required>
@@ -6566,4 +6566,162 @@ public static class ProgramUpdateNotification {
     <Type>csharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
+  <ProgramBlock>
+  <ScriptSetup>Program.Implements("@Service:AiGenie", "System.Utility/AiGenie", new { version = 1 });
+Program.Run();
+</ScriptSetup>
+  <ScriptSource>var service = new AiGenieService();
+When.ProgramStopping(() =&gt; { service.Dispose(); return true; });
+Api.Handle("System.Utility/AiGenie/Describe", input =&gt; new { version = 1, stage = "prompt-and-response-boundary", streaming = false, cancellation = "cooperative", inProcessOnly = true });
+Api.Handle("System.Utility/AiGenie/Generate", input =&gt; service.Generate(Api.Parse(input).Data, (route, data) =&gt; Api.Call(route, data)));
+Api.Handle("System.Utility/AiGenie/Cancel", input =&gt; service.Cancel(Api.Parse(input).Data));
+Api.Handle("System.Utility/AiGenie/Prompt.Compose", input =&gt; {
+    try { return (object)AiGeniePreparation.Compose(Api.Parse(input).Data as JObject, (route, data) =&gt; Api.Call(route, data)); }
+    catch (Exception ex) { return new { Status = "Error", Message = ex.Message }; }
+});
+Api.Handle("System.Utility/AiGenie/Response.Normalize", input =&gt; {
+    try { return (object)AiGeniePreparation.Normalize(Api.Parse(input).Data as JObject, (route, data) =&gt; Api.Call(route, data)); }
+    catch (Exception ex) { return new { Status = "Error", errorKind = "unavailable", Message = ex.Message }; }
+});
+Program.GoBackground();
+</ScriptSource>
+  <ScriptContext>// In-process generation boundary. Providers must not re-enter chat orchestration.
+public sealed class AiGenieService : IDisposable {
+    readonly object gate = new object();
+    readonly Dictionary&lt;string, CancellationTokenSource&gt; active = new Dictionary&lt;string, CancellationTokenSource&gt;();
+    readonly HashSet&lt;string&gt; owners = new HashSet&lt;string&gt;();
+    bool stopped;
+
+    static string Text(IDictionary&lt;string, object&gt; data, string key) {
+        return data.TryGetValue(key, out var value) ? value as string : null;
+    }
+    static IDictionary&lt;string, object&gt; Result(string id, string state, string text = null, string error = null) {
+        return new Dictionary&lt;string, object&gt; { ["version"] = 1, ["requestId"] = id,
+            ["state"] = state, ["text"] = text, ["error"] = error };
+    }
+    public object Generate(object payload, Func&lt;string, object, object&gt; call) {
+        var request = payload as IDictionary&lt;string, object&gt;;
+        string id = request == null ? null : Text(request, "requestId");
+        if (request == null || !request.TryGetValue("version", out var version) || !(version is int) || (int)version != 1)
+            return Result(id, "failed", error: "Unsupported in-process request contract.");
+        string owner = Text(request, "owner"), provider = Text(request, "provider");
+        if (string.IsNullOrWhiteSpace(id) || id.Length &gt; 128 || string.IsNullOrWhiteSpace(owner) || owner.Length &gt; 128 ||
+            string.IsNullOrWhiteSpace(provider) || provider.Length &gt; 64 || provider.Any(c =&gt; !char.IsAsciiLetterOrDigit(c) &amp;&amp; c != '-' &amp;&amp; c != '_'))
+            return Result(id, "failed", error: "Invalid request, owner or provider identity.");
+        if (!request.TryGetValue("messages", out var messages) || messages == null)
+            return Result(id, "failed", error: "Missing provider messages.");
+        var cancellation = new CancellationTokenSource();
+        lock (gate) {
+            if (stopped) { cancellation.Dispose(); return Result(id, "unavailable"); }
+            if (active.ContainsKey(id) || owners.Contains(owner)) { cancellation.Dispose(); return Result(id, "busy"); }
+            active.Add(id, cancellation); owners.Add(owner);
+        }
+        try {
+            // Shallow copy preserves native message objects; never pass credentials or delegates.
+            var generation = new Dictionary&lt;string, object&gt; { ["version"] = 1, ["requestId"] = id,
+                ["owner"] = owner, ["messages"] = messages, ["cancellationToken"] = cancellation.Token };
+            foreach (string key in new[] { "systemPrompt", "purpose", "output", "budget", "providerOptions" })
+                if (request.TryGetValue(key, out var value)) generation[key] = value;
+            cancellation.Token.ThrowIfCancellationRequested();
+            var response = call("AI.Genies/" + provider + "/Provider.Generate", generation) as IDictionary&lt;string, object&gt;;
+            if (cancellation.IsCancellationRequested) return Result(id, "cancelled");
+            if (response == null || !response.TryGetValue("version", out var rv) || !(rv is int) || (int)rv != 1 || Text(response, "requestId") != id)
+                return Result(id, "failed", error: "Provider unavailable or incompatible response.");
+            string state = Text(response, "state");
+            if (state != "completed" &amp;&amp; state != "cancelled" &amp;&amp; state != "failed" &amp;&amp; state != "output_limit" &amp;&amp; state != "context_limit")
+                return Result(id, "failed", error: "Unknown provider finish state.");
+            if (state == "completed" &amp;&amp; string.IsNullOrWhiteSpace(Text(response, "text")))
+                return Result(id, "failed", error: "Provider returned an empty completion.");
+            // Partial/error output is never eligible for action processing.
+            return Result(id, state, state == "completed" ? Text(response, "text") : null, Text(response, "error"));
+        } catch (OperationCanceledException) { return Result(id, "cancelled"); }
+          catch (Exception) { return Result(id, "failed", error: "Provider generation failed."); }
+        finally {
+            lock (gate) { active.Remove(id); owners.Remove(owner); }
+            cancellation.Dispose();
+        }
+    }
+    public object Cancel(object payload) {
+        var request = payload as IDictionary&lt;string, object&gt;;
+        string id = request == null ? null : Text(request, "requestId");
+        CancellationTokenSource cancellation;
+        lock (gate) if (id == null || !active.TryGetValue(id, out cancellation)) return Result(id, "not_running");
+        try { cancellation.Cancel(); } catch (ObjectDisposedException) { return Result(id, "not_running"); }
+        return Result(id, "cancelling");
+    }
+    public void Dispose() {
+        CancellationTokenSource[] pending;
+        lock (gate) { stopped = true; pending = active.Values.ToArray(); }
+        foreach (var cancellation in pending) try { cancellation.Cancel(); } catch (ObjectDisposedException) { }
+    }
+}
+
+// Pure preparation/normalization boundary. These methods never execute actions.
+public static class AiGeniePreparation {
+    static JObject ObjectResult(object value, string unavailable) {
+        var result = value as JObject;
+        if (result == null &amp;&amp; value is string text) result = JToken.Parse(text) as JObject;
+        if (result == null &amp;&amp; value != null) result = JToken.FromObject(value) as JObject;
+        if (result == null) throw new InvalidOperationException(unavailable);
+        return result;
+    }
+    public static JObject Compose(JObject request, Func&lt;string, object, object&gt; call) {
+        if (request == null || request["version"]?.Type != JTokenType.Integer || (int)request["version"] != 1 ||
+            request["template"]?.Type != JTokenType.String || !(request["capabilities"] is JObject selected) ||
+            request.Properties().Any(p =&gt; !new[] { "version", "template", "capabilities" }.Contains(p.Name)) ||
+            selected.Properties().Any(p =&gt; !new[] { "deviceControl", "automation", "widgets" }.Contains(p.Name) || p.Value.Type != JTokenType.Boolean) ||
+            new[] { "deviceControl", "automation", "widgets" }.Any(k =&gt; selected[k]?.Type != JTokenType.Boolean))
+            throw new InvalidOperationException("Invalid prompt preparation request.");
+        string template = (string)request["template"];
+        if (Encoding.UTF8.GetByteCount(template) &gt; 262144) throw new InvalidOperationException("Prompt template exceeds size limit.");
+        if (template.Contains("#use-skill homegenie-genie")) {
+            if ((bool)selected["automation"]) template += "\n#use-kb homegenie-core/references/automation.md\n#use-skill homegenie-orchestration";
+            if ((bool)selected["widgets"]) template += "\n#use-kb homegenie-core/references/widgets.md";
+        }
+        var composed = ObjectResult(call("System.Utility/ContextEngine/Prompt.Compose", new { version = 1, template }), "Prompt composition unavailable.");
+        if ((string)composed["Status"] == "Error" || composed["prompt"]?.Type != JTokenType.String)
+            throw new InvalidOperationException((string)composed["Message"] ?? "Prompt composition unavailable.");
+        var result = (JObject)composed.DeepClone();
+        result["prompt"] = (string)result["prompt"] + "\nACTIVE CAPABILITIES (host-controlled): " + selected.ToString(Formatting.None)
+            + "\nInformation-sharing categories are independent of action capabilities. Answer questions with reply even when action capabilities are disabled. "
+            + "Do not request or emit disabled action kinds. If the user asks for one, explain which capability to enable and why; do not enable it yourself. "
+            + "Source lookups depend on information-sharing selections, not on action permissions. Composite generation requires both automation and widgets.\n";
+        result["fingerprint"] = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes((string)result["prompt"]))).ToLowerInvariant();
+        return result;
+    }
+    public static JObject Normalize(JObject response, Func&lt;string, object, object&gt; call) {
+        if (response == null || Encoding.UTF8.GetByteCount(response.ToString(Formatting.None)) &gt; 512 * 1024)
+            throw new InvalidOperationException("Response object is missing or exceeds size limit.");
+        // The existing executor owns the canonical contract; this endpoint only parses/validates.
+        var result = ObjectResult(call("System.Utility/ActionExecutor/Response.Normalize", response), "Response normalizer unavailable.");
+        if ((string)result["Status"] == "Error")
+            return new JObject { ["Status"] = "Error", ["errorKind"] = "contract", ["Message"] = (string)result["Message"] ?? "Invalid response contract." };
+        if (result["version"]?.Type != JTokenType.Integer || (int)result["version"] != 1 || result["kind"]?.Type != JTokenType.String)
+            throw new InvalidOperationException("Response normalizer returned an incompatible result.");
+        return (JObject)result.DeepClone();
+    }
+}
+</ScriptContext>
+  <ScriptErrors />
+  <Data />
+  <PackageInfo>
+    <Repository>homegenie</Repository>
+    <PackageId>homegenie-base</PackageId>
+    <PackageVersion>1.0.22</PackageVersion>
+    <Id>ai-genie-service</Id>
+    <Version>0.2.0</Version>
+    <Required>true</Required>
+    <Checksum>3F4AD92B663050114902FD1324A568E5</Checksum>
+  </PackageInfo>
+  <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+  <Address>583</Address>
+  <Name>AI Genie</Name>
+  <Description>Shared in-process AI Genie generation service.</Description>
+  <Group>Utilities</Group>
+  <Features />
+  <AutoRestartEnabled>false</AutoRestartEnabled>
+  <Cloneable>false</Cloneable>
+  <Type>csharp</Type>
+  <IsEnabled>true</IsEnabled>
+</ProgramBlock>
 </ArrayOfProgramBlock>

@@ -1,6 +1,6 @@
 # Shared Genie engine: implementation plan
 
-Status: source analysis and proposed architecture. No engine/provider refactoring has been implemented.
+Status: program 583 (AI Genie 0.1.1) is connected to Gemini Genie 1.0.10 for chat and text-only generation. Shared context/action/history orchestration extraction and the Lailama adapter remain pending. Initial live acceptance passed on Vulkan on 2026-10-17.
 
 ## Scope and evidence
 
@@ -11,7 +11,7 @@ The distributed package is the reference, not a running installation's custom sc
 - `src/HomeGenie/Automation/Engines/CSharpAppFactory.cs`: automation compilation and assembly references.
 - YoT `src/app/services/ai-chat.service.ts`: Implements-driven feature discovery, version-1 requests and module-backed preferences.
 
-Gemini 933 already owns selected-context assembly, skill composition, capability/schema filtering, source lookup, response validation, deployment/compilation repair, widget/composite presentation, scheduled tasks, metrics and history persistence. Gemini transport, rate limits and cached-content handling are intertwined with that coordinator. Its main request path is blocking generateContent with JSON Schema; it does not currently stream responses or expose Prompt.Cancel.
+Gemini 933 already owns selected-context assembly, skill composition, capability/schema filtering, source lookup, response validation, deployment/compilation repair, widget/composite presentation, scheduled tasks, metrics and history persistence. Gemini generation transport is now behind the provider boundary; rate-limit state and cached-content lifecycle remain in that coordinator for this first extraction. Its main request path is blocking generateContent with JSON Schema; it does not currently stream responses or expose Prompt.Cancel.
 
 Lailama 940 owns model selection/download/loading, warmup, LLamaSharp ChatSession/KV state, templates, inference, token streaming and native cancellation/cleanup. It restores provider session history from Chat History, injects optional system/device context, then extracts text/api-call markers and invokes the shared Action Executor. It does not yet implement Gemini's version-1 context/capability envelope, source-lookup/repair loop or full program/widget/composite coordinator. Its GetContext/Render path differs from Gemini's scoped-context/Prompt.Compose path.
 
@@ -19,9 +19,11 @@ There is reusable infrastructure already: Response.Normalize, Execute, Program.D
 
 ## Recommended code boundary
 
-Use a common C# engine instantiated by each Genie program, with a small provider adapter and host bridge. A possible location is `HomeGenie.Automation.AI` in the existing backend assembly. This is a proposal, not a new endpoint or implemented namespace. Automation programs already reference HomeGenie; no additional NuGet package or duplicated engine source is necessary.
+Use the **AI Genie utility automation program (583)** as the shared service. This supersedes the earlier proposal to place the engine in the core assembly. The provider-facing Genie receives chat requests and calls the utility with `Api.Call`; the utility calls a distinct provider generation handler. The provider handler must never re-enter Prompt.Submit or acquire a lock held by its caller.
 
-This keeps each program's identity, options, lifecycle, events and history store while allowing typed in-process provider calls, progress callbacks and CancellationToken propagation. It avoids a central automation program synchronously calling back into providers through string APIs, and the additional registration/stream-routing/lifecycle protocol that would require. The tradeoff is that engine updates ship with HomeGenie; package scripts must detect an unavailable/incompatible engine clearly, and release/package ordering must be documented. If independent package-only engine deployment becomes a requirement, reconsider a versioned automation service before implementation.
+`ApiHelper.Call` dispatches dynamic handlers synchronously through `InterfaceControl` and `ProgramDynamicApi`. The original `Data` object and handler return value remain in memory. Only unhandled system-domain calls use its HTTP fallback. No core changes or shared assembly identities are required: the initial contract uses BCL dictionaries, native message objects and a cooperative CancellationToken. Public request/history formats remain unchanged.
+
+The service is now enabled/required in the base package and included as a dependency of the AI package. Existing installations must install/enable 583 before using Gemini Genie 1.0.10. Missing/incompatible service responses produce a visible error; there is no silent fallback to the old transport. No runtime inventory is edited during development. This is transport extraction, not yet a shared complete chat coordinator.
 
 The engine should depend on an explicit host abstraction, not on static global HomeGenie state or an untyped copy of the entire automation script. Inject the host services for API calls, preferences, module lookup, events, time, persistence and logging. Provider adapters own their transport/session resources, never permission policy or execution decisions.
 
@@ -44,7 +46,7 @@ Define versioned neutral request/result types before extraction. Names are illus
 - Progress callback: request ID plus typed text/status events. Adapters filter provider thought/technical tokens. Action JSON is buffered rather than shown/spoken as ordinary answer text; partial or cancelled output must never execute.
 - Local session lifecycle: invalidate/reconcile cached inference state with the engine's context/history fingerprint; stop after active native work drains, reusing LailamaNativeLifetime's guarantees. Rebuild inference state when the selected context/history changes without reloading model weights unnecessarily.
 
-One engine instance owns one Genie identity and serializes its work. Busy/cancel/error outcomes must be explicit. Different Genies must not share permissions, history, task dictionaries or KV state accidentally. Queueing chat/Ask/scheduled work must be specified rather than hidden behind indefinite locks.
+The common service serializes active generation per Genie owner identity. The existing wrappers still own their chat/task serialization in this first extraction. Busy/cancel/error outcomes must be explicit. Different Genies must not share permissions, history, task dictionaries or KV state accidentally. Queueing chat/Ask/scheduled work must be specified rather than hidden behind indefinite locks.
 
 ## Response formats and small local models
 
@@ -70,7 +72,7 @@ Gemini's current bounds (12 total rounds, up to 3 lookups, 2 contract repairs, 5
 ## Implementation sequence and acceptance gates
 
 1. **Freeze current behavior with deterministic fixtures.** Cover Gemini reply/device/program/update/widget/composite/Context responses and error/repair outcomes; local text/markers/stream cancellation; history/event metadata and version-1 permissions. Use a fake host/provider and current distributed-script fixtures. Define provider/host interfaces and request/result types here.
-2. **Extract Gemini transport only.** Put generateContent and text-only Ask behind the provider boundary. Keep payload, normalized final response and orchestration behavior unchanged. Capture quota/status/finish errors structurally. Preserve current non-streaming behavior initially.
+2. **Extract Gemini transport only (implemented; initial live acceptance passed).** generateContent and text-only Ask now use the provider boundary. Keep payload, normalized final response and orchestration behavior unchanged. Capture quota/status/finish errors structurally. Preserve current non-streaming behavior initially.
 3. **Extract the shared coordinator in small slices.** Request/Context/history and capabilities first, then normalization/action/presentation, then bounded repairs/task coordination. Reuse existing base services. Keep Gemini 933 as the reference adapter and compare observable artifacts/events before/after each slice.
 4. **Connect Lailama with a compact device/report profile.** Preserve model loading/download/warmup/stop. Implement the structured request envelope and versioned descriptor, align context/history invalidation, and retain marker support. Live acceptance with 1.7B covers conversation, device status, on/off/level, permissions, cancel/retry and switching/reopening histories.
 5. **Enable advanced local workflows progressively.** Exercise common program/widget/composite logic mainly with deterministic recorded/fake outputs. Run a small optional 7B code-generation smoke test only when practical; slow/poor model output is distinct from a coordinator regression. Do not require intensive local generation as a release gate.
@@ -91,3 +93,41 @@ Use Gemini for a short representative live integration sequence. Use 1.7B locall
 ## Release consolidation notes
 
 The user reports successful v2.0.28 release installation and package restore on the production Raspberry Pi. Treat that reported spinner/restore concern as verified for this release, reopening only with a reproducible failure. The general LoggerFactory-disposal/thread-shutdown investigation remains low priority; Lailama's successful native shutdown fix does not prove every host logging race resolved. AI/UX polish and chat CPU profiling remain deferred.
+
+## Implemented first slice: program 583
+
+Route `System.Utility/AiGenie/Describe` reports contract version and stage. `Generate` and `Cancel` currently accept **in-process dictionaries only**, not HTTP JSON. This is an internal contract, not a replacement public chat API.
+
+Generate request: integer `version=1`, nonempty `requestId`, `owner` (Genie identity), simple `provider` identifier, native `messages`, and optional `systemPrompt`, `purpose`, `output`, `budget`, `providerOptions`. The service shallow-copies its envelope and forwards these fields to `AI.Genies/{provider}/Provider.Generate`, adding a cooperative `cancellationToken`. Provider credentials/resources stay inside the adapter. Messages must be treated as read-only by both caller and provider during the synchronous call.
+
+Provider result: dictionary with integer `version=1`, matching `requestId`, state (`completed`, `cancelled`, `failed`, `output_limit`, `context_limit`) and text. Only a nonempty completed response exposes text to the next stage. Exceptions, null/malformed results and incomplete outputs never become executable actions. The service itself does not normalize or execute actions yet. Provider-specific options (currently Gemini cached-content identity) remain opaque to the service. During this transport-only step, message/output objects retain the existing Gemini shape; neutral message/schema translation is a later extraction gate.
+
+One active generation per owner, with explicit busy instead of waiting indefinitely; other owners remain independent. Cancel identifies the active request ID, signals its token and suppresses output even if the provider returns completed afterward. Shutdown signals all active tokens and rejects new work. Cancellation is cooperative: a provider that ignores its token cannot be forcibly stopped; no detached native inference is started by this service. Request IDs correlate calls, but are not an execution ledger or automatic retry mechanism. Existing Action Executor remains responsible for action identity/replay.
+
+Gemini chat and Prompt.Ask now use this boundary. Next: perform live acceptance after deployment, then extract context/response coordination in separately tested slices. Lailama stays unchanged until its adapter is connected. Streaming/progress routing and per-provider budgets will be specified before their implementation.
+
+Initial boundary validation: 52 tests passed (13 AI Genie service/dispatch tests plus 39 discovery and configuration regressions). Full shipped scripts 581, 583 and 933 compile; package 583 checksum/manifest and LF checks pass. No live provider routing has changed.
+
+## Connected Gemini transport
+
+Gemini 933 registers a distinct `AI.Genies/Gemini/Provider.Generate` in-process handler before registering chat handlers. It never acquires the caller's chat gate, composes context, reads/writes history or executes actions. The existing chat loop prepares the same messages, instructions, schema, temperature and cache identity, then calls the common service. The adapter maps these into generateContent, keeps the key in the HTTP header, applies the existing 180-second timeout and uses cancellation-aware send/read operations. Shutdown cancels its active HTTP request through a linked provider-lifetime token.
+
+Only STOP with nonempty visible text completes; thought parts are omitted, MAX_TOKENS becomes output_limit, blocked/missing/malformed content fails, and no partial text is passed back for action processing. HTTP errors retain their numeric status without exposing the key, URL or response body. A request timeout is a failure, distinct from a caller cancellation. Provider shutdown may also surface as an interrupted transport failure; it never yields executable content.
+
+Prompt.Ask uses the same provider boundary with user text only: no selected context, system instructions, response schema, history writes or action processing. Existing public endpoints, prompt/skill composition, bounded lookups/repairs, deployment, history and result cards remain in 933 unchanged. Common-service cancellation is implemented internally; a new UI Prompt.Cancel contract is not advertised in this step.
+
+Deployment: rebuild/copy the package assets, install/enable AI Genie 583 (0.1.1) and update Gemini Genie 933 (1.0.10), then exercise one conversation, device command and text-only Ask. Lailama requires no update for this step. Live acceptance passed on Vulkan on 2026-10-17: chat greeting, Porch Light Control.On with a completed successful executor receipt, and Prompt.Ask returning TEXT_ONLY_OK with the chat history unchanged. Cancellation/error cases remain covered by deterministic tests; no live shutdown/cancellation test is claimed.
+
+Gemini transport boundary validation: 65 tests passed (including actual in-memory MIG dispatch through the common service and adapter, payload/cache/thought filtering, partial outputs, HTTP errors, cancellation and existing discovery/configuration regressions). Full shipped scripts 581/583/933 compile; manifest/dependency checksums and diff checks pass. Live deployment remains pending.
+
+## Prompt and response preparation slice
+
+AI Genie 583 0.2.0 adds Prompt.Compose and Response.Normalize. Gemini 933 1.0.11 forwards its local prompt template and normalized capability selection to the shared composer; skill/KB expansion reuses Context Engine. Capability instructions and the resulting fingerprint remain byte-for-byte equivalent across the eight profiles. Custom templates are preserved. Input and dependency result objects are not mutated.
+
+Response.Normalize delegates to the existing Action Executor Response.Normalize endpoint, never Execute. Contract failures retain a contract classification for Gemini's bounded repair loop; unavailable/incompatible services fail the request without asking the model to repair an infrastructure error. The provider still owns JSON generation/schema mapping, selected-data collection, capability enforcement, bounded lookup/deployment repair, history and presentation. Local contract/schema helpers remain for those existing paths; this is not yet the complete shared coordinator.
+
+Package versions: homegenie-base 1.0.22 and homegenie-ml-ai 1.0.33, with matching 583 dependency versions/checksums. Update 583 before 933. No core, YoT, public chat endpoint, history-format or Lailama changes. Live acceptance of this slice is pending deployment; previous transport acceptance remains valid for its tested versions.
+
+Preparation-slice validation: 82 tests passed (17 prompt/normalization regressions plus 65 existing provider, service, discovery and configuration tests). Complete scripts 581/583/933 compile. Live acceptance remains pending.
+
+Preparation-slice initial live acceptance passed on Vulkan on 2026-10-17 with 583 0.2.0 and 933 1.0.11: Prompt.Preview verified device-only and automation/widget profiles, expected skill/KB selection and allowed kinds; browser Control.On completed with a successful executor receipt and normal chat presentation. Lailama 1.0.19 was enabled/running without ScriptErrors before and after the check; temporary Download Manager outage recovery remains unit-tested, not live-induced here.
