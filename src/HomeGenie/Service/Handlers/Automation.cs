@@ -361,6 +361,13 @@ namespace HomeGenie.Service.Handlers
                     break;
 
                 case "Programs.List":
+                    if (migCommand.GetOption(0) == "Features") {
+                        try {
+                            if (!string.IsNullOrEmpty(migCommand.GetOption(1))) throw new ArgumentException("Unexpected feature catalog option.");
+                            request.ResponseData = ModuleDiscovery.ProgramFeatures(homegenie.ProgramManager.Programs.ToArray(), request.RequestText);
+                        } catch (Exception error) { request.ResponseData = new ResponseStatus(Status.Error, error.Message); }
+                        break;
+                    }
                     var programList = new List<ProgramBlock>(homegenie.ProgramManager.Programs);
                     programList.Sort(delegate(ProgramBlock p1, ProgramBlock p2)
                     {
@@ -375,6 +382,14 @@ namespace HomeGenie.Service.Handlers
                     try
                     {
                         var prg = homegenie.ProgramManager.Programs.Find(p => p.Address == int.Parse(migCommand.GetOption(0)));
+                        if (migCommand.GetOption(1) == "Features") {
+                            if (prg == null) throw new ArgumentException("Unknown program.");
+                            if (!string.IsNullOrEmpty(migCommand.GetOption(3))) throw new ArgumentException("Unexpected feature option.");
+                            string property = migCommand.GetOption(2);
+                            request.ResponseData = ModuleDiscovery.ProgramFeatures(homegenie.ProgramManager.Programs.ToArray(), request.RequestText,
+                                prg.Address, string.IsNullOrEmpty(property) ? null : property);
+                            break;
+                        }
                         var settings = new JsonSerializerSettings{ Formatting = Formatting.Indented };
                         request.ResponseData = JsonConvert.SerializeObject(prg, settings);
                     }

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
     <ScriptSetup>Program.Run();
@@ -537,7 +537,7 @@ public sealed class AiSkillCatalog
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.27</PackageVersion>
+      <PackageVersion>1.0.31</PackageVersion>
       <Id>context-engine</Id>
       <Version>1.0.8</Version>
       <Required>true</Required>
@@ -1140,7 +1140,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.27</PackageVersion>
+      <PackageVersion>1.0.31</PackageVersion>
       <Id>gemini-automan</Id>
       <Version>1.0.10</Version>
       <Required>false</Required>
@@ -1598,7 +1598,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.27</PackageVersion>
+      <PackageVersion>1.0.31</PackageVersion>
       <Id>gemini-intent-handler</Id>
       <Version>1.0.22</Version>
       <Required>false</Required>
@@ -2321,7 +2321,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.27</PackageVersion>
+      <PackageVersion>1.0.31</PackageVersion>
       <Id>gemini-widget-genie</Id>
       <Version>1.0.18</Version>
       <Required>false</Required>
@@ -2651,7 +2651,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.27</PackageVersion>
+      <PackageVersion>1.0.31</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -3791,7 +3791,7 @@ public sealed class LailamaNativeLifetime
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.27</PackageVersion>
+      <PackageVersion>1.0.31</PackageVersion>
       <Id>lailama</Id>
       <Version>1.0.18</Version>
       <Required>true</Required>
@@ -3997,7 +3997,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.27</PackageVersion>
+      <PackageVersion>1.0.31</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -4183,7 +4183,7 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.27</PackageVersion>
+      <PackageVersion>1.0.31</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -4449,6 +4449,38 @@ Func&lt;JObject, JObject&gt; prepareScopedContext = input =&gt; {
         if (!(directory is string)) throw new InvalidOperationException("Device context is unavailable.");
         data["devices"] = (string)directory;
     }
+    var moduleIds = resources["moduleIds"] as JArray ?? new JArray();
+    var parameterIds = resources["parameterIds"] as JArray ?? new JArray();
+    WidgetContextRequest.ValidateResourceAccess(resources, selected);
+    if (moduleIds.Count &gt; 0) {
+        var descriptions = new JArray();
+        foreach (string id in moduleIds.Values&lt;string&gt;().Distinct()) {
+            var parts = WidgetContextRequest.ModuleResource(id, 2);
+            var result = contextToken(Api.Call("HomeAutomation.HomeGenie/Config/Modules.Get/" + parts[0] + "/" + parts[1] + "/Schema"));
+            if (result["Status"]?.ToString() == "Error") throw new InvalidOperationException((string)result["Message"]);
+            if (result["version"]?.Type != JTokenType.Integer || (int)result["version"] != 1 || !(result["properties"] is JArray) || !(result["features"] is JArray)
+                || (string)result["module"]?["domain"] != parts[0] || (string)result["module"]?["address"] != parts[1])
+                throw new InvalidOperationException("Update HomeGenie before using module discovery.");
+            descriptions.Add(result);
+        }
+        data["moduleDescriptions"] = descriptions;
+    }
+    if (parameterIds.Count &gt; 0) {
+        var values = new JArray();
+        foreach (string id in parameterIds.Values&lt;string&gt;().Distinct()) {
+            var parts = WidgetContextRequest.ModuleResource(id, 3);
+            var result = contextToken(Api.Call("HomeAutomation.HomeGenie/Config/Modules.ParameterGet/" + string.Join("/", parts) + "/Context"));
+            if (result["Status"]?.ToString() == "Error") throw new InvalidOperationException((string)result["Message"]);
+            if (!(result is JObject value) || value["version"]?.Type != JTokenType.Integer || (int)value["version"] != 1
+                || (string)value["domain"] != parts[0] || (string)value["address"] != parts[1] || (string)value["key"] != parts[2]
+                || value["present"]?.Type != JTokenType.Boolean || value["value"] == null
+                || value.Properties().Any(p =&gt; !new[] { "version", "domain", "address", "key", "present", "value" }.Contains(p.Name)))
+                throw new InvalidOperationException("Update HomeGenie before using contextual parameter reads.");
+            values.Add(result);
+        }
+        data["moduleParameters"] = values;
+    }
+
     if ((bool)selected["automationPrograms"]) {
         var programs = contextToken(Api.Call("HomeAutomation.HomeGenie/Automation/Programs.List")) as JArray;
         if (programs == null) throw new InvalidOperationException("Program inventory is unavailable.");
@@ -4715,7 +4747,11 @@ Func&lt;object, bool, object&gt; processGeniePrompt = (userCommand, scheduled) =
                     }))) as JArray;
                     if (results == null || results.Count != commands.Count) throw new InvalidOperationException("Device execution outcome is unknown.");
                     telemetry.SetActionResults(results);
-                    string reply = (string)canonical["explanation"] + "\n\n```api-call\n" + string.Join("\n",commands.Values&lt;string&gt;()) + "\n```";
+                    bool configurationFailed = commands.Values&lt;string&gt;().Any(c =&gt; c.StartsWith("HomeAutomation.HomeGenie/Config/Modules.ParameterSet/"))
+                        &amp;&amp; !results.All(r =&gt; r["Success"]?.Value&lt;bool&gt;() == true);
+                    string explanation = configurationFailed ? "Configuration was not confirmed. Check the action results and read the current setting before retrying."
+                        : (string)canonical["explanation"];
+                    string reply = explanation + "\n\n```api-call\n" + string.Join("\n",commands.Values&lt;string&gt;()) + "\n```";
                     telemetry.SaveReply(ChatMessage.Create("model",reply), results.All(r=&gt;r["Success"]?.Value&lt;bool&gt;()==true) ? "completed" : "error");
                     return new ResponseText(reply);
                 }
@@ -5120,7 +5156,7 @@ public static class WidgetContextRequest
         if (input["resources"] != null &amp;&amp; !(input["resources"] is JObject))
             throw new InvalidOperationException("Resources must be an object.");
         if (input["resources"] is JObject resources) {
-            if (resources.Properties().Any(p =&gt; p.Name != "programIds" &amp;&amp; p.Name != "widgetIds"))
+            if (resources.Properties().Any(p =&gt; !new[] { "programIds", "widgetIds", "moduleIds", "parameterIds" }.Contains(p.Name)))
                 throw new InvalidOperationException("Unknown context resource field.");
             foreach (var p in resources.Properties())
                 if (!(p.Value is JArray ids) || ids.Count &gt; 16 || ids.Any(id =&gt; id.Type != JTokenType.String || string.IsNullOrWhiteSpace((string)id)))
@@ -5128,6 +5164,19 @@ public static class WidgetContextRequest
         }
         if (input["dashboards"] != null &amp;&amp; (!(input["dashboards"] is JArray dashboards) || dashboards.Count &gt; 100))
             throw new InvalidOperationException("Dashboards must be an array with at most 100 entries.");
+    }
+    public static string[] ModuleResource(string id, int segments) {
+        if (id == null || id.Length &gt; 1024) throw new InvalidOperationException("Invalid module resource ID.");
+        var parts = id.Split('/');
+        if (parts.Length != segments || parts.Any(p =&gt; string.IsNullOrWhiteSpace(p) || p.Any(c =&gt; char.IsControl(c) || c == '%' || c == '\\' || c == '?' || c == '#'))
+            || parts.Take(2).Any(p =&gt; p.Any(char.IsWhiteSpace)))
+            throw new InvalidOperationException("Use domain/address for module descriptions and domain/address/property for parameter reads.");
+        return parts;
+    }
+    public static void ValidateResourceAccess(JObject resources, JObject selected) {
+        if (((resources["moduleIds"] as JArray)?.Count &gt; 0 || (resources["parameterIds"] as JArray)?.Count &gt; 0)
+            &amp;&amp; selected["devices"]?.Value&lt;bool&gt;() != true)
+            throw new InvalidOperationException("Enable Devices context before reading module descriptions or parameters.");
     }
     public static JArray FilterHistory(JArray history, string profileKey)
     {
@@ -5206,6 +5255,14 @@ public static class GenieResponseContract
     }
     public static string[] DeviceCommand(string command) {
         string[] p = command.Split('/');
+        if (p.Length &gt;= 3 &amp;&amp; p[0] == "HomeAutomation.HomeGenie" &amp;&amp; p[1] == "Config" &amp;&amp; p[2] == "Modules.ParameterSet") {
+            if (p.Length != 7 || !System.Text.RegularExpressions.Regex.IsMatch(p[3], @"\A[A-Za-z][A-Za-z0-9_.:-]*\z")
+                || !System.Text.RegularExpressions.Regex.IsMatch(p[4], @"\A[A-Za-z0-9_.:-]+\z")
+                || !System.Text.RegularExpressions.Regex.IsMatch(p[5], @"\A[A-Za-z][A-Za-z0-9_.-]*\z")
+                || p.Skip(6).Any(v =&gt; !System.Text.RegularExpressions.Regex.IsMatch(v, @"\A(?:On|Off|-?[0-9]+(?:\.[0-9]+)?)\z") || v.Length &gt; 64))
+                throw new InvalidOperationException("Invalid module configuration command.");
+            return new[]{p[3],p[4]};
+        }
         if (p.Length &lt; 3) throw new InvalidOperationException("Invalid device command.");
         if (p[0] == "HomeAutomation.HomeGenie" &amp;&amp; p[1] == "Automation" &amp;&amp; new[]{"Programs.Run","Programs.Break"}.Contains(p[2])) {
             if (p.Length != 4 || !System.Text.RegularExpressions.Regex.IsMatch(p[3],@"^[1-9][0-9]*$")) throw new InvalidOperationException("Invalid scene target.");
@@ -5288,7 +5345,7 @@ public static class GenieResponseContract
         }
         if (kind == "context") {
             if (!(result["resources"] is JObject r)) throw new InvalidOperationException("Missing context resources.");
-            Fields(r,"programIds","widgetIds");int count=0;
+            Fields(r,"programIds","widgetIds","moduleIds","parameterIds");int count=0;
             foreach (var p in r.Properties()) {
                 if (!(p.Value is JArray ids) || ids.Count&gt;16 || ids.Any(i=&gt;i.Type!=JTokenType.String || string.IsNullOrWhiteSpace((string)i))) throw new InvalidOperationException("Invalid resource identifiers.");
                 count+=ids.Count;
@@ -5313,7 +5370,7 @@ public static class GenieResponseContract
             'automation':{'type':'object','properties':{'action':{'type':'string','enum':['create','update']},'program_id':{'type':'string'},'name':{'type':'string'},'setup':{'type':'string'},'main':{'type':'string'},'context':{'type':'string'}},'required':['action','name','setup','main']},
             'widget':{'type':'object','properties':{'html':{'type':'string'},'css':{'type':'string'},'javascript':{'type':'string'}},'required':['html','css','javascript']},
             'binding':{'type':'object','properties':{'domain':{'type':'string'},'address':{'type':'string'},'properties':{'type':'array','items':{'type':'string'}}},'required':['domain','address','properties']},
-            'resources':{'type':'object','properties':{'programIds':{'type':'array','items':{'type':'string'}},'widgetIds':{'type':'array','items':{'type':'string'}}}}
+            'resources':{'type':'object','properties':{'programIds':{'type':'array','items':{'type':'string'}},'widgetIds':{'type':'array','items':{'type':'string'}},'moduleIds':{'type':'array','items':{'type':'string'}},'parameterIds':{'type':'array','items':{'type':'string'}}}}
           },'required':['version','kind','explanation']
         }");
         var variants = new JArray();
@@ -5366,11 +5423,11 @@ public static class GenieCapabilities
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.27</PackageVersion>
+      <PackageVersion>1.0.31</PackageVersion>
       <Id>gemini-genie</Id>
-      <Version>1.0.5</Version>
+      <Version>1.0.9</Version>
       <Required>true</Required>
-      <Checksum>F55B677D70A4BFFBDAC116AEBD2621EA</Checksum>
+      <Checksum>AE6FAF94ECAE4865AA063E86BB115FA6</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>933</Address>

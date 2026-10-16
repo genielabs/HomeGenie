@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProgramBlock>
     <ScriptSetup>Program.Run();
@@ -175,7 +175,7 @@ public static class HistoryStore
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>chat-history-service</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -248,7 +248,7 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>client-configs</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -619,7 +619,7 @@ void SaveConfig(string filePath, YamlConfig config)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>daily-energy-report</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -897,7 +897,7 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -1543,7 +1543,7 @@ public class DownloadManager : IDisposable
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>download-manager</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1586,7 +1586,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1914,7 +1914,7 @@ string GetDbName()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>energy-use-statistics</Id>
       <Version>1.0.9</Version>
       <Required>false</Required>
@@ -2089,7 +2089,7 @@ void InsertData(LiteDatabase db, LoggerEvent data) {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -2244,7 +2244,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>file-manager</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2446,7 +2446,7 @@ public static class HttpHelper {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>homegenie-panel-notifications</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2515,7 +2515,7 @@ public string[] GetHourLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>hourly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -2977,7 +2977,7 @@ class MqttCommand: MigInterfaceCommand {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>mqtt-network</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
@@ -3236,7 +3236,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>openweathermap</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -3328,7 +3328,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -3420,7 +3420,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -3492,7 +3492,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -4168,7 +4168,7 @@ public static class FfmpegHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>video-input</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -5473,7 +5473,7 @@ public class ThumbnailHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>video-recorder</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -5554,7 +5554,7 @@ public string[] GetDayLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>weekly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -5718,14 +5718,24 @@ public List&lt;ApiCommandExecution&gt; ExecuteApiCommands(dynamic api, IEnumerab
             records[actionId] = result; ActionLedger.Save(folder, records);
             var timer = System.Diagnostics.Stopwatch.StartNew();
             try {
-                result.Response = api.Call(command);
+                bool configuring = command.StartsWith("HomeAutomation.HomeGenie/Config/Modules.ParameterSet/");
+                if (configuring) GenieResponseContract.DeviceCommand(command);
+                result.Response = configuring ? ModuleSettingAction.Execute(api, command) : api.Call(command);
                 JToken response = null;
                 if (result.Response != null) {
                     try { response = result.Response is string value ? JToken.Parse(value) : JToken.FromObject(result.Response); }
                     catch (Newtonsoft.Json.JsonException) { response = JValue.CreateString(result.Response.ToString()); }
                 }
                 string status = response is JObject obj ? (obj["Status"] ?? obj["response"]?["Status"])?.ToString() : null;
-                if (result.Response == null) { result.State = "unknown"; result.Error = "API returned no result; execution outcome is unknown."; }
+                if (configuring &amp;&amp; (!(response is JObject configuration) || configuration["version"]?.Value&lt;int&gt;() != 1
+                    || configuration["verified"]?.Value&lt;bool&gt;() != true || (string)configuration["value"] != command.Split('/')[6]
+                    || (string)configuration["domain"] != command.Split('/')[3] || (string)configuration["address"] != command.Split('/')[4]
+                    || (string)configuration["key"] != command.Split('/')[5]
+                    || (string)configuration["state"] != "completed")) {
+                    result.State = response is JObject rejected &amp;&amp; (string)rejected["Status"] == "Error" &amp;&amp; (string)rejected["state"] != "unknown" ? "failed" : "unknown";
+                    result.Error = response?["Message"]?.ToString() ?? "Configuration was not verified.";
+                }
+                else if (result.Response == null) { result.State = "unknown"; result.Error = "API returned no result; execution outcome is unknown."; }
                 else if ((string.Equals(status, "Error", StringComparison.OrdinalIgnoreCase) || status == "1")) {
                     result.State = "failed"; result.Error = (response["Message"] ?? response["response"]?["Message"])?.ToString() ?? "API command failed.";
                 } else { result.State = "completed"; result.Success = true; result.Error = null; }
@@ -6026,6 +6036,14 @@ public static class GenieResponseContract
     }
     public static string[] DeviceCommand(string command) {
         string[] p = command.Split('/');
+        if (p.Length &gt;= 3 &amp;&amp; p[0] == "HomeAutomation.HomeGenie" &amp;&amp; p[1] == "Config" &amp;&amp; p[2] == "Modules.ParameterSet") {
+            if (p.Length != 7 || !System.Text.RegularExpressions.Regex.IsMatch(p[3], @"\A[A-Za-z][A-Za-z0-9_.:-]*\z")
+                || !System.Text.RegularExpressions.Regex.IsMatch(p[4], @"\A[A-Za-z0-9_.:-]+\z")
+                || !System.Text.RegularExpressions.Regex.IsMatch(p[5], @"\A[A-Za-z][A-Za-z0-9_.-]*\z")
+                || p.Skip(6).Any(v =&gt; !System.Text.RegularExpressions.Regex.IsMatch(v, @"\A(?:On|Off|-?[0-9]+(?:\.[0-9]+)?)\z") || v.Length &gt; 64))
+                throw new InvalidOperationException("Invalid module configuration command.");
+            return new[]{p[3],p[4]};
+        }
         if (p.Length &lt; 3) throw new InvalidOperationException("Invalid device command.");
         if (p[0] == "HomeAutomation.HomeGenie" &amp;&amp; p[1] == "Automation" &amp;&amp; new[]{"Programs.Run","Programs.Break"}.Contains(p[2])) {
             if (p.Length != 4 || !System.Text.RegularExpressions.Regex.IsMatch(p[3],@"^[1-9][0-9]*$")) throw new InvalidOperationException("Invalid scene target.");
@@ -6108,7 +6126,7 @@ public static class GenieResponseContract
         }
         if (kind == "context") {
             if (!(result["resources"] is JObject r)) throw new InvalidOperationException("Missing context resources.");
-            Fields(r,"programIds","widgetIds");int count=0;
+            Fields(r,"programIds","widgetIds","moduleIds","parameterIds");int count=0;
             foreach (var p in r.Properties()) {
                 if (!(p.Value is JArray ids) || ids.Count&gt;16 || ids.Any(i=&gt;i.Type!=JTokenType.String || string.IsNullOrWhiteSpace((string)i))) throw new InvalidOperationException("Invalid resource identifiers.");
                 count+=ids.Count;
@@ -6133,7 +6151,7 @@ public static class GenieResponseContract
             'automation':{'type':'object','properties':{'action':{'type':'string','enum':['create','update']},'program_id':{'type':'string'},'name':{'type':'string'},'setup':{'type':'string'},'main':{'type':'string'},'context':{'type':'string'}},'required':['action','name','setup','main']},
             'widget':{'type':'object','properties':{'html':{'type':'string'},'css':{'type':'string'},'javascript':{'type':'string'}},'required':['html','css','javascript']},
             'binding':{'type':'object','properties':{'domain':{'type':'string'},'address':{'type':'string'},'properties':{'type':'array','items':{'type':'string'}}},'required':['domain','address','properties']},
-            'resources':{'type':'object','properties':{'programIds':{'type':'array','items':{'type':'string'}},'widgetIds':{'type':'array','items':{'type':'string'}}}}
+            'resources':{'type':'object','properties':{'programIds':{'type':'array','items':{'type':'string'}},'widgetIds':{'type':'array','items':{'type':'string'}},'moduleIds':{'type':'array','items':{'type':'string'}},'parameterIds':{'type':'array','items':{'type':'string'}}}}
           },'required':['version','kind','explanation']
         }");
         var variants = new JArray();
@@ -6151,17 +6169,75 @@ public static class GenieResponseContract
         return new JObject { ["anyOf"] = variants };
     }
 }
+
+public static class ModuleSettingAction
+{
+    static JObject Object(object value) =&gt; value is string text ? JObject.Parse(text) : JObject.FromObject(value);
+    static string Read(dynamic api, string domain, string address, string key) {
+        JObject result = Object(api.Call("HomeAutomation.HomeGenie/Config/Modules.ParameterGet/" + domain + "/" + address + "/" + key + "/Context"));
+        if ((int?)result["version"] != 1 || (string)result["domain"] != domain || (string)result["address"] != address
+            || (string)result["key"] != key || result["present"]?.Value&lt;bool&gt;() != true || result["value"]?.Type != JTokenType.String)
+            throw new InvalidOperationException("A current readable existing setting is required.");
+        return (string)result["value"];
+    }
+    public static void Validate(JObject description, string domain, string address, string key, string value) {
+        if ((int?)description["version"] != 1 || (string)description["module"]?["domain"] != domain || (string)description["module"]?["address"] != address)
+            throw new InvalidOperationException("Invalid module description.");
+        var fields = description["features"] as JArray;
+        var field = fields?.OfType&lt;JObject&gt;().SingleOrDefault(p =&gt; (string)p["key"] == key);
+        if (field == null || field["sensitive"]?.Value&lt;bool&gt;() != false || field["present"]?.Value&lt;bool&gt;() != true
+            || Regex.IsMatch(key, @"(?i)(password|passwd|secret|api[._-]?key|access[._-]?token|refresh[._-]?token|private[._-]?key|credential)"))
+            throw new InvalidOperationException("Setting is unavailable or sensitive.");
+        var programs = field["programs"] as JArray;
+        if (programs == null || programs.Count == 0 || programs.Any(p =&gt; p["enabled"]?.Value&lt;bool&gt;() != true))
+            throw new InvalidOperationException("An active applicable feature must declare the setting.");
+        foreach (var feature in programs) {
+            var type = ((string)feature["fieldType"] ?? "").Split(':');
+            if (type[0] == "checkbox") {
+                if (value != "On" &amp;&amp; value != "Off") throw new InvalidOperationException("Use On or Off.");
+            } else if (type[0] == "slider" &amp;&amp; type.Length &gt;= 4) {
+                decimal Number(string text) =&gt; decimal.Parse(text, System.Globalization.NumberStyles.AllowLeadingSign | System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture);
+                decimal min=Number(type[1]),max=Number(type[2]),step=Number(type[3]),number=Number(value);
+                if(step&lt;=0 || min&gt;max || number&lt;min || number&gt;max || (number-min)%step!=0) throw new InvalidOperationException("Setting is outside its declared range or step.");
+            } else throw new InvalidOperationException("Only checkbox and bounded slider settings are supported.");
+        }
+    }
+    public static JObject Execute(dynamic api, string command) {
+        bool writing=false;
+        var result=new JObject{["version"]=1,["verified"]=false,["state"]="failed",["Status"]="Error"};
+        try {
+            GenieResponseContract.DeviceCommand(command);
+            var p=command.Split('/'); string domain=p[3],address=p[4],key=p[5],value=p[6];
+            result["domain"]=domain;result["address"]=address;result["key"]=key;result["requestedValue"]=value;
+            JObject description=Object(api.Call("HomeAutomation.HomeGenie/Config/Modules.Get/"+domain+"/"+address+"/Schema"));
+            Validate(description,domain,address,key,value);
+            string previous=Read(api,domain,address,key);result["previousValue"]=previous;
+            if(Read(api,domain,address,key)!=previous) throw new InvalidOperationException("Setting changed during validation; read again before retrying.");
+            writing=true;
+            JObject saved=Object(api.Call(command));
+            string status=(string)saved["Status"];
+            if(status!="0" &amp;&amp; !string.Equals(status,"OK",StringComparison.OrdinalIgnoreCase)) throw new InvalidOperationException("ParameterSet did not confirm the write.");
+            string actual=Read(api,domain,address,key);result["value"]=actual;
+            if(actual!=value) throw new InvalidOperationException("Setting readback does not match.");
+            result["verified"]=true;result["state"]="completed";result["Status"]="OK";
+        } catch(Exception error) {
+            result["state"]=writing?"unknown":"failed";
+            result["Message"]=writing?"Configuration outcome is uncertain; read the setting before retrying.":error.Message;
+        }
+        return result;
+    }
+}
 </ScriptContext>
     <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>ai-action-executor</Id>
-      <Version>1.2.1</Version>
+      <Version>1.2.5</Version>
       <Required>true</Required>
-      <Checksum>B7BCA8A3CB7E4244883A4974788710BB</Checksum>
+      <Checksum>F71DFBF26901069DF6B9C381A7C6B9F9</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>581</Address>
@@ -6473,7 +6549,7 @@ public static class ProgramUpdateNotification {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.16</PackageVersion>
+      <PackageVersion>1.0.20</PackageVersion>
       <Id>notification-archive</Id>
       <Version>1.1.1</Version>
       <Required>true</Required>

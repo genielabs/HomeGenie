@@ -1,4 +1,4 @@
-﻿/*
+/*
    Copyright 2012-2025 G-Labs (https://github.com/genielabs)
 
    This program is free software: you can redistribute it and/or modify
@@ -701,7 +701,14 @@ namespace HomeGenie.Service.Handlers
                 try
                 {
                     var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
-                    request.ResponseData = module == null ? null : Utility.Module2Json(module, false);
+                    if (migCommand.GetOption(2) == "Schema") {
+                        var filter = string.IsNullOrWhiteSpace(request.RequestText) ? new JObject() : JObject.Parse(request.RequestText);
+                        if (filter.Properties().Any(p => p.Name != "offset" && p.Name != "limit") || !string.IsNullOrEmpty(migCommand.GetOption(3)))
+                            throw new ArgumentException("Schema supports only offset and limit filters.");
+                        request.ResponseData = ModuleDiscovery.Schema(module, homegenie.ProgramManager.Programs.ToArray(),
+                            module == null ? null : ModuleDiscovery.ImplementedFeatures(module, homegenie.VirtualModules),
+                            (int?)filter["offset"] ?? 0, (int?)filter["limit"] ?? 100);
+                    } else request.ResponseData = module == null ? null : Utility.Module2Json(module, false);
                 }
                 catch (Exception ex)
                 {
@@ -744,55 +751,7 @@ namespace HomeGenie.Service.Handlers
                             for (int i = 0; i < p.Features.Count; i++)
                             {
                                 var f = p.Features[i];
-                                bool matchFeature = false;
-                                // check if module declares implemented features explicitly
-                                // in this case only features declared by this module will be shown
-                                foreach (var implementedFeature in implementedFeatures)
-                                {
-                                    matchFeature = Utility.MatchValues(implementedFeature, f.Property);
-                                }
-                                if (implementedFeatures.Count > 0 && !matchFeature)
-                                {
-                                    continue;
-                                }
-                                // otherwise, check if module matches program's features filters (ForDomain, ForTypes/PropertyFilter)
-                                if (!matchFeature)
-                                {
-                                    matchFeature = Utility.MatchValues(f.ForDomains, module.Domain);
-                                    string forTypes = f.ForTypes;
-                                    string forProperties = null;
-                                    string compareProperties = null;
-                                    int propertyFilterIndex = forTypes.IndexOf(':');
-                                    int propertyCompareIndex = forTypes.IndexOf('=');
-                                    if (propertyCompareIndex > propertyFilterIndex)
-                                    {
-                                        compareProperties = forTypes.Substring(propertyCompareIndex + 1);
-                                        forTypes = forTypes.Substring(0, propertyCompareIndex);
-                                    }
-                                    if (propertyFilterIndex >= 0)
-                                    {
-                                        forProperties = forTypes.Substring(propertyFilterIndex + 1).Trim();
-                                        forTypes = forTypes.Substring(0, propertyFilterIndex).Trim();
-                                    }
-                                    matchFeature = matchFeature && Utility.MatchValues(forTypes, module.DeviceType.ToString());
-                                    if (forProperties != null)
-                                    {
-                                        bool matchProperty = false;
-                                        for (int idx = 0; idx < module.Properties.Count; idx++)
-                                        {
-                                            var mp = module.Properties[idx];
-                                            if (Utility.MatchValues(forProperties, mp.Name))
-                                            {
-                                                matchProperty = (compareProperties == null) || Utility.MatchValues(compareProperties, mp.Value);
-                                                break;
-                                            }
-                                        }
-
-                                        matchFeature = matchFeature && matchProperty;
-                                    }
-                                }
-
-                                if (!matchFeature) continue;
+                                if (!ModuleDiscovery.Applies(f, module, implementedFeatures)) continue;
                                 string[] type = f.FieldType.Split(':');
                                 string defaultFieldValue = "";
                                 if (type.Length > 1 && type[0] == "slider") // this is currently the only field with default value option
@@ -847,6 +806,10 @@ namespace HomeGenie.Service.Handlers
                 try
                 {
                     var module = homegenie.Modules.Find(m => m.Domain == migCommand.GetOption(0) && m.Address == migCommand.GetOption(1));
+                    if (migCommand.GetOption(3) == "Context") {
+                        request.ResponseData = ModuleDiscovery.ReadParameter(module, homegenie.ProgramManager.Programs.ToArray(), migCommand.GetOption(2));
+                        break;
+                    }
                     var parameter = Utility.ModuleParameterGet(module, migCommand.GetOption(2));
                     if (parameter != null)
                         request.ResponseData = JsonConvert.SerializeObject(parameter, Formatting.Indented);
