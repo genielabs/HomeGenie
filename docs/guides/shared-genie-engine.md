@@ -131,3 +131,43 @@ Package versions: homegenie-base 1.0.22 and homegenie-ml-ai 1.0.33, with matchin
 Preparation-slice validation: 82 tests passed (17 prompt/normalization regressions plus 65 existing provider, service, discovery and configuration tests). Complete scripts 581/583/933 compile. Live acceptance remains pending.
 
 Preparation-slice initial live acceptance passed on Vulkan on 2026-10-17 with 583 0.2.0 and 933 1.0.11: Prompt.Preview verified device-only and automation/widget profiles, expected skill/KB selection and allowed kinds; browser Control.On completed with a successful executor receipt and normal chat presentation. Lailama 1.0.19 was enabled/running without ScriptErrors before and after the check; temporary Download Manager outage recovery remains unit-tested, not live-induced here.
+
+## Shared context collection
+
+AI Genie 583 0.3.0 now exposes Context.Prepare and owns the former Gemini scoped-context collector and WidgetContextRequest helper. Gemini 933 1.0.12 reads its module-backed selections and its own custom prompt file, then forwards a version-1 envelope containing request and template. The service clones the request, normalizes capabilities, obtains Context Engine policy, collects only selected categories and explicitly requested sources, and composes the prompt through the existing shared composer. Per-provider prompt paths and preference stores remain in the wrapper; callers cannot supply a filesystem root. Widget source lookup uses the common installation's data/widgets directory, independent of the provider ID.
+
+The existing output profile key, included categories, discovery routes, current-time format, source limits (16 IDs per resource field, 128 KiB per widget file), path containment and 256 KiB collected-data budget are retained. Program summaries exclude source; only requested program IDs include setup/main/context. Dashboard data is summarized. No prompt request or cached context is shared between owners. Existing discovery tests now compile the block from its shared owner rather than the Gemini script.
+
+Provider response coordination, repair/deployment loops, action capability enforcement, history and result presentation remain in Gemini; Lailama is not connected to this path yet. No core or YoT changes. Deployment versions: base package 1.0.23, AI package 1.0.35; update 583 before 933. Live acceptance of this slice remains pending.
+
+Shared-collector validation: 108 tests passed, including 12 full context-collection cases, previous discovery guards at their new shared owner, prompt/provider/service/configuration regressions and Lailama download recovery. Distributed scripts 581/583/933/940 compile. Live acceptance is pending package deployment.
+
+## Shared device response dispatch
+
+AI Genie 583 0.4.0 adds Device.Execute; Gemini 933 1.0.13 delegates the device-response branch to it. The wrapper still saves history and records timings/results; the common service owns capability/context checks, canonical normalization through Action Executor, validation of all target modules before any effect, the existing Execute call, receipt correlation and device reply/card formatting. Program/composite deployment, compiler recovery and widget presentation remain in Gemini for a separate extraction.
+
+The request is a version-1 JObject containing requestId, response, capabilities and context. Device Control and Devices context must be explicitly enabled. Request identity is forwarded unchanged to the existing execution ledger; the common service creates no independent action ledger, automatic retry or rollback. Every result must match the request ID, command and index. Missing/mismatched receipts fail without dispatching again. Configuration failures retain the existing unconfirmed-setting explanation. The normal api-call card and result metadata remain unchanged.
+
+This is an internal automation-service API under System.Utility/AiGenie, using Api.Call objects and module lookup in the utility script; no core or frontend changes. Deploy base 1.0.24 / AI package 1.0.36, update 583 before 933. Lailama remains unchanged. Live acceptance of device dispatch is pending package deployment; the maintainer reported successful context-selection checks for the preceding slice, including a request to enable Devices when it was disabled.
+
+Shared-device dispatch validation: 120 tests passed (12 new dispatch cases plus 108 prior context/provider/service/discovery/configuration/Lailama regressions). Full distributed scripts 581/583/933/940 compile. Live acceptance remains pending; no browser was used.
+
+## Shared program deployment decisions
+
+AI Genie 583 0.5.0 adds Program.Execute; Gemini 933 1.0.14 delegates the program-response branch. The service validates automation capability, canonical response, attempt range 1..5 and committed kind/action/target. Updating requires Automation Programs context and the target among requested source IDs. It forwards the same request ID and attempt to Action Executor Program.Deploy, correlates the deployment receipt and returns either a bounded compiler-repair step or the existing automan_deploy result card.
+
+Compiler diagnostics request another complete response only when deployment State is failed and fewer than five attempts have been used. An unknown ledger result never authorizes retry, even if it contains a compile_failed diagnostic. At a terminal failed result, Program.Recover is called for the same request ID; unknown/mismatched receipts do not trigger recovery. The existing executor retains reservation, replay and restoration ownership. No new program allocation, ledger, rollback algorithm or automatic provider retry is introduced.
+
+The wrapper retains the model loop, committed identity guard, source lookup, history, scheduling and response publication. It validates the returned next-attempt step and records additional recovery action/failure counts, preserving program-attempt telemetry. Composite deployment and widget presentation remain for the next slice. No core, frontend or Lailama changes. Update 583 before 933 (base 1.0.25 / AI package 1.0.37); live acceptance is pending. The maintainer reported the previous device-dispatch live test successful with existing history.
+
+Shared-program dispatch validation: 136 tests passed (16 program-dispatch cases plus 120 existing regressions). Full automation scripts compile; package checksum/dependency and LF checks pass. Runtime programs were not changed; manual create/update acceptance remains pending. No browser used.
+
+## Shared composite deployment coordination
+
+AI Genie 583 0.6.0 adds Composite.Execute; Gemini 933 1.0.15 delegates its composite-response branch. CompositeSolutionContract moved to the utility. The service validates both capabilities and the full program/widget/binding contract before deployment, then reuses AiGenieProgramActions for ID correlation, attempt limits, compiler diagnostics and same-ID recovery. It does not duplicate program installation or rollback logic.
+
+Each repair returns the committed unresolved binding and requires it on subsequent attempts. Kind/action/target and binding must remain unchanged. Compiler feedback explicitly requests the complete composite response. Successful deployment requires a program ID, resolves the existing dollar-program binding placeholder and emits the unchanged ai_solution envelope with widget state waiting/dependsOn program. The existing frontend then observes the bound fields and renders the preview. Failed or unknown deployment emits a blocked widget; uncertain outcomes do not retry or recover automatically. Recovery errors and action counts are retained.
+
+History, provider inference loop and preview readiness remain in their existing owners. Standalone widget presentation is still in Gemini; Lailama is unchanged. No core or YoT changes. Update 583 before 933 using base package 1.0.26 / AI package 1.0.38; composite live acceptance is pending. The maintainer reported program create/update successful, retaining program ID 1000 and displaying Automan.Program.Message directly in its chat card.
+
+Shared-composite validation: 152 tests passed (16 composite cases plus 136 previous regressions). Full distributed scripts 581/583/933/940 compile; checksum/dependency/LF checks pass. Manual composite acceptance remains pending and runtime programs were not modified. No browser used.

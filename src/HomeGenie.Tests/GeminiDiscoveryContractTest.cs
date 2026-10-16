@@ -23,19 +23,20 @@ public class GeminiDiscoveryContractTest
         Assert.That(root,Is.Not.Null);
         XElement Program(string package,string id)=>XDocument.Load(Path.Combine(root.FullName,"assets/build/all/data/packages/homegenie",package,"programs.xml"))
             .Root.Elements("ProgramBlock").Single(n=>(string)n.Element("Address")==id);
-        var gemini=Program("homegenie-ml-ai","933");var executor=Program("homegenie-base","581");
+        var gemini=Program("homegenie-ml-ai","933");var executor=Program("homegenie-base","581");var shared=Program("homegenie-base","583");
         string Class(XElement p,string name)=>CSharpSyntaxTree.ParseText("class Holder {"+(string)p.Element("ScriptContext")+"}").GetRoot()
             .DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text==name).ToFullString();
-        string source=(string)gemini.Element("ScriptSource");
+        string source=(string)shared.Element("ScriptContext");
         int begin=source.IndexOf("    var moduleIds = resources[",StringComparison.Ordinal);
         int end=source.IndexOf("    if ((bool)selected[\"automationPrograms\"])",begin,StringComparison.Ordinal);
         string block=source.Substring(begin,end-begin);
         var code="using System;using System.IO;using System.Text;using System.Linq;using System.Collections.Generic;using Newtonsoft.Json;using Newtonsoft.Json.Linq;\n"+
-            Class(gemini,"WidgetContextRequest")+Class(gemini,"GenieResponseContract")+
+            Class(shared,"WidgetContextRequest")+Class(gemini,"GenieResponseContract")+
             "namespace Executor {"+Class(executor,"GenieResponseContract")+"}\n"+$$$"""
 public static class DiscoveryLookupProbe {
  public static JObject Run(JObject resources,bool allowed,bool error) {
     var selected=JObject.FromObject(new {devices=allowed});var data=new JObject();var Api=new DiscoveryApi(error);
+    Func<string,object,object> call=(route,payload)=>Api.Call(route);
     Func<object,JToken> contextToken=value=>value is string text?JToken.Parse(text):JToken.FromObject(value);
 {{{block}}}
     return new JObject { ["data"]=data,["calls"]=Api.Calls };

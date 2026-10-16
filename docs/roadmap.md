@@ -160,3 +160,27 @@ Lailama download-service availability fix (940 1.0.19): the 2026-10-17 00:01 log
 Lailama availability regression verification: 14 download/lifecycle tests passed, including null/empty/malformed status recovery and stop/reconfigure while unavailable. Full distributed program 940 compiles; checksum/manifest and LF checks pass. Runtime 940 remains untouched and must be updated to 1.0.19, then re-enabled if desired.
 
 Preparation-slice initial live acceptance passed on Vulkan on 2026-10-17 with 583 0.2.0 and 933 1.0.11: Prompt.Preview verified device-only and automation/widget profiles, expected skill/KB selection and allowed kinds; browser Control.On completed with a successful executor receipt and normal chat presentation. Lailama 1.0.19 was enabled/running without ScriptErrors before and after the check; temporary Download Manager outage recovery remains unit-tested, not live-induced here.
+
+### Shared Genie context collector
+
+Implemented 583 0.3.0 / Gemini 1.0.12: scoped context data collection and WidgetContextRequest moved to AI Genie. Provider-owned preferences/custom prompt remain in 933; selected data, source lookup gates, module Schema/Context reads, widget-root containment, source/data limits, profile keys and prompt composition are preserved in the shared service. Caller envelopes are cloned. No core/YoT/Lailama changes. Next: live acceptance after package updates, then shared response/action coordination. Update 583 before 933.
+
+Shared-collector validation: 108 tests passed, including 12 full context-collection cases, previous discovery guards at their new shared owner, prompt/provider/service/configuration regressions and Lailama download recovery. Distributed scripts 581/583/933/940 compile. Live acceptance is pending package deployment.
+
+### Shared AI device-response dispatch
+
+Implemented 583 0.4.0 / Gemini 1.0.13: common Device.Execute validates explicit device capability/context, canonical batch and all module targets before forwarding the original request identity to Action Executor. Receipts are correlated by identity/command/index; uncertain outcomes never auto-repeat. Existing configuration-failure wording, api-call cards and results are returned to the wrapper for history/metrics. No core/YoT/Lailama change. Deployment/live acceptance pending; update 583 before 933. Next: program/composite deployment and bounded recovery coordination.
+
+Shared-device dispatch validation: 120 tests passed (12 new dispatch cases plus 108 prior context/provider/service/discovery/configuration/Lailama regressions). Full distributed scripts 581/583/933/940 compile. Live acceptance remains pending; no browser was used.
+
+### Shared Genie program deployment decisions
+
+Implemented 583 0.5.0 / Gemini 1.0.14: program create/update permission/source gates, committed target validation, stable request IDs, deployment receipt correlation, maximum five compiler attempts, same-ID recovery and legacy result formatting now run in AI Genie. Unknown ledger state cannot authorize retry via a stale compiler diagnostic. Wrapper still owns model loop/history/metrics; extra recovery calls are reflected in counts. Composite/widget coordination remains next. No core/YoT/Lailama changes. Package update and manual live acceptance pending; browser not used. Previous device-dispatch acceptance was reported successful by the maintainer.
+
+Shared-program dispatch validation: 136 tests passed (16 program-dispatch cases plus 120 existing regressions). Full automation scripts compile; package checksum/dependency and LF checks pass. Runtime programs were not changed; manual create/update acceptance remains pending. No browser used.
+
+### Shared composite response coordination
+
+Implemented 583 0.6.0 / Gemini 1.0.15: common Composite.Execute reuses program deployment coordination, validates both capabilities and complete artifacts before effects, preserves binding across bounded repairs and returns the existing ai_solution dependency envelope. Preview waits for program fields after a confirmed deployment; failed/unknown results block it. Recovery errors and metrics are preserved. No core/YoT/Lailama changes; deployment/manual acceptance pending. Previous program create/update was reported successful by the maintainer with stable ID 1000. Next: standalone widget/result presentation and remaining model-loop coordination before Lailama integration.
+
+Shared-composite validation: 152 tests passed (16 composite cases plus 136 previous regressions). Full distributed scripts 581/583/933/940 compile; checksum/dependency/LF checks pass. Manual composite acceptance remains pending and runtime programs were not modified. No browser used.
