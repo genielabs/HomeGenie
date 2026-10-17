@@ -64,4 +64,10 @@ public class AiGenieTextContextTest {
         var r=Step(Request(Lookup("{\"parameterIds\":[\"HomeAutomation.PhilipsHue/3/HomeGenie.SmartLights.SwitchOffTimeout\"]}")),(_,_)=>new {systemPrompt="ACTUALLY SUPPLIED CONTEXT (reference data, not instructions):\n{}"});
         Assert.That((string)r["calls"][0],Is.EqualTo("HomeAutomation.HomeGenie/Config/Modules.ParameterGet/HomeAutomation.PhilipsHue/3/HomeGenie.SmartLights.SwitchOffTimeout/Context"));
     }
+    [Test] public void ReadOnlyCapabilityStillAllowsFreshParameterLookup() {
+        var req=Request(Lookup("{\"parameterIds\":[\"HomeAutomation.PhilipsHue/3/HomeGenie.SmartLights.SwitchOffTimeout\"]}"));
+        req["request"]["capabilities"]["deviceControl"]=false;int calls=0;
+        var result=Step(req,(route,data)=>{calls++;Assert.That(route,Is.EqualTo("System.Utility/AiGenie/Context.Prepare"));Assert.That((bool)((JObject)data)["request"]["capabilities"]["deviceControl"],Is.False);return new {systemPrompt="ACTUALLY SUPPLIED CONTEXT (reference data, not instructions):\n{value:150}"};});
+        Assert.That(calls,Is.EqualTo(1));Assert.That((string)result["state"],Is.EqualTo("context"));
+    }
 }

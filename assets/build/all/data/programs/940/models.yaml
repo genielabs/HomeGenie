@@ -1,105 +1,131 @@
-# ------------------
-# Gemma
-# ------------------
-
-"unsloth/gemma-4-E4B-it-Q5_K_M.gguf":
-  Name: unsloth/gemma-4-E4B-it-GGUF
-  Repository: https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF
-  Url: https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main/gemma-4-E4B-it-Q5_K_M.gguf?download=true
-  Template: chatml
-
-
-
-# ------------------
-# Qwen
-# ------------------
-
-"unsloth/Qwen3.5-4B-Q8_0.gguf":
-  Name: unsloth/Qwen3.5-4B-GGUF
-  Repository: https://huggingface.co/unsloth/Qwen3.5-4B-GGUF
-  Url: https://huggingface.co/unsloth/Qwen3.5-4B-GGUF/resolve/main/Qwen3.5-4B-Q8_0.gguf?download=true
-  Template: chatml
-
-"Jackrong/Qwen3.5-9B-DeepSeek-V4-Flash-Q5_K_M.gguf":
-  Name: Jackrong/Qwen3.5-9B-DeepSeek-V4-Flash-GGUF
-  Repository: https://huggingface.co/Jackrong/Qwen3.5-9B-DeepSeek-V4-Flash-GGUF
-  Url: https://huggingface.co/Jackrong/Qwen3.5-9B-DeepSeek-V4-Flash-GGUF/resolve/main/Qwen3.5-9B-DeepSeek-V4-Flash-Q5_K_M.gguf?download=true
-  Template: chatml
-
-"khazarai/Qwen3-4B-Thinking-2507.Q8_0.gguf":
-  Name: khazarai/Qwen3-4B-Qwen3.6-plus-Reasoning-Distilled-GGUF
-  Repository: https://huggingface.co/khazarai/Qwen3-4B-Qwen3.6-plus-Reasoning-Distilled-GGUF
-  Url: https://huggingface.co/khazarai/Qwen3-4B-Qwen3.6-plus-Reasoning-Distilled-GGUF/resolve/main/Qwen3-4B-Thinking-2507.Q8_0.gguf?download=true
-  Template: chatml
+# Ordered by HomeGenie test results; identifiers and download URLs are unchanged.
+# Status and notes refer to these GGUF files, not every model in a family.
+# Timings are observations on one CPU test PC, not performance guarantees.
+# Requirements are guidance, not measured minimum RAM or compatibility guarantees.
+# Memory includes model weights, context cache, native buffers and other applications.
 
 "unsloth/Qwen3-4B-Instruct-2507-UD-Q5_K_XL.gguf":
   Name: unsloth/Qwen3-4B-Instruct-2507-GGUF
   Repository: https://huggingface.co/unsloth/Qwen3-4B-Instruct-2507-GGUF
   Url: https://huggingface.co/unsloth/Qwen3-4B-Instruct-2507-GGUF/resolve/main/Qwen3-4B-Instruct-2507-UD-Q5_K_XL.gguf?download=true
   Template: chatml
+  Status: "Recommended"
+  Requirements: "CPU tested. Reserve RAM for the GGUF weights and context cache. GPU optional."
+  TestNotes: "Fresh parameter reads and device control passed. Reads took 46-48 s; control took 32 s on the test PC. A command emitted with device control disabled was blocked by the backend."
+
+"Jackrong/Qwen3.5-9B-DeepSeek-V4-Flash-Q5_K_M.gguf":
+  Name: Jackrong/Qwen3.5-9B-DeepSeek-V4-Flash-GGUF
+  Repository: https://huggingface.co/Jackrong/Qwen3.5-9B-DeepSeek-V4-Flash-GGUF
+  Url: https://huggingface.co/Jackrong/Qwen3.5-9B-DeepSeek-V4-Flash-GGUF/resolve/main/Qwen3.5-9B-DeepSeek-V4-Flash-Q5_K_M.gguf?download=true
+  Template: chatml
+  Status: "Tested"
+  Requirements: "Higher memory use. CPU tested; GPU acceleration can improve responsiveness."
+  TestNotes: "Fresh parameter reads passed. The model refused control while disabled and executed it after enabling. Responses took approximately 2-5 minutes on the test PC."
 
 "Qwen/Qwen3-1.7B-Q8_0.gguf":
   Name: Qwen/Qwen3-1.7B-GGUF
   Repository: https://huggingface.co/Qwen/Qwen3-1.7B-GGUF
   Url: https://huggingface.co/Qwen/Qwen3-1.7B-GGUF/resolve/main/Qwen3-1.7B-Q8_0.gguf?download=true
   Template: chatml
+  Status: "Limited"
+  Requirements: "Lightweight option for CPU use. RAM use still depends on context size."
+  TestNotes: "Simple device control and reports worked. Feature discovery and parameter follow-up requests were unreliable; verify results."
+
+"unsloth/gemma-4-E4B-it-Q5_K_M.gguf":
+  Name: unsloth/gemma-4-E4B-it-GGUF
+  Repository: https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF
+  Url: https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main/gemma-4-E4B-it-Q5_K_M.gguf?download=true
+  Template: chatml
+  Status: "Experimental"
+  Requirements: "Reserve RAM for weights and context; avoid memory pressure from other applications."
+  TestNotes: "Parameter identification and instruction following were unreliable in our tests. Results may depend on the GGUF and chat template."
+
+"unsloth/Qwen3.5-4B-Q8_0.gguf":
+  Name: unsloth/Qwen3.5-4B-GGUF
+  Repository: https://huggingface.co/unsloth/Qwen3.5-4B-GGUF
+  Url: https://huggingface.co/unsloth/Qwen3.5-4B-GGUF/resolve/main/Qwen3.5-4B-Q8_0.gguf?download=true
+  Template: chatml
+  Status: "Experimental"
+  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
+  TestNotes: "Not verified with the current HomeGenie test suite."
+
+"khazarai/Qwen3-4B-Thinking-2507.Q8_0.gguf":
+  Name: khazarai/Qwen3-4B-Qwen3.6-plus-Reasoning-Distilled-GGUF
+  Repository: https://huggingface.co/khazarai/Qwen3-4B-Qwen3.6-plus-Reasoning-Distilled-GGUF
+  Url: https://huggingface.co/khazarai/Qwen3-4B-Qwen3.6-plus-Reasoning-Distilled-GGUF/resolve/main/Qwen3-4B-Thinking-2507.Q8_0.gguf?download=true
+  Template: chatml
+  Status: "Experimental"
+  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
+  TestNotes: "Not verified with the current HomeGenie test suite."
 
 "Qwen/Qwen3-4B-Q5_K_M.gguf":
   Name: Qwen/Qwen3-4B-GGUF
   Repository: https://huggingface.co/Qwen/Qwen3-4B-GGUF
   Url: https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/main/Qwen3-4B-Q5_K_M.gguf?download=true
   Template: chatml
+  Status: "Experimental"
+  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
+  TestNotes: "Not verified with the current HomeGenie test suite."
 
 "Qwen/Qwen3-8B-Q8_0.gguf":
   Name: Qwen/Qwen3-8B-GGUF
   Repository: https://huggingface.co/Qwen/Qwen3-8B-GGUF
   Url: https://huggingface.co/Qwen/Qwen3-8B-GGUF/resolve/main/Qwen3-8B-Q8_0.gguf?download=true
   Template: chatml
+  Status: "Experimental"
+  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
+  TestNotes: "Not verified with the current HomeGenie test suite."
 
 "Qwen/qwen2.5-coder-7b-instruct-q5_k_m.gguf":
   Name: Qwen/Qwen2.5-Coder-7B-Instruct-GGUF
   Repository: https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct-GGUF
   Url: https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct-GGUF/resolve/main/qwen2.5-coder-7b-instruct-q5_k_m.gguf?download=true
   Template: chatml
-
-
-
-# ------------------
-# GPT-5.x
-# ------------------
+  Status: "Experimental"
+  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
+  TestNotes: "Not verified with the current HomeGenie test suite."
 
 "mradermacher/Qwen3-8B-GPT-5.2-High-Reasoning-Distill.i1-Q4_K_M.gguf":
   Name: mradermacher/Qwen3-8B-GPT-5.2-High-Reasoning-Distill-i1-GGUF
   Repository: https://huggingface.co/mradermacher/Qwen3-8B-GPT-5.2-High-Reasoning-Distill-i1-GGUF
   Url: https://huggingface.co/mradermacher/Qwen3-8B-GPT-5.2-High-Reasoning-Distill-i1-GGUF/resolve/main/Qwen3-8B-GPT-5.2-High-Reasoning-Distill.i1-Q4_K_M.gguf?download=true
   Template: chatml
+  Status: "Experimental"
+  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
+  TestNotes: "Not verified with the current HomeGenie test suite."
 
 "TeichAI/Qwen3-14B-GPT-5.2-Distill.q4_k_m.gguf":
   Name: TeichAI/Qwen3-14B-GPT-5.2-High-Reasoning-Distill-GGUF
   Repository: https://huggingface.co/TeichAI/Qwen3-14B-GPT-5.2-High-Reasoning-Distill-GGUF
   Url: https://huggingface.co/TeichAI/Qwen3-14B-GPT-5.2-High-Reasoning-Distill-GGUF/resolve/main/Qwen3-14B-GPT-5.2-Distill.q4_k_m.gguf?download=true
   Template: chatml
+  Status: "Experimental"
+  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
+  TestNotes: "Not verified with the current HomeGenie test suite."
 
 "Jackrong/GPT-5-Distill-Qwen3-4B-Instruct-Q6_K.gguf":
   Name: Jackrong/GPT-5-Distill-Qwen3-4B-Instruct-GGUF
   Repository: https://huggingface.co/Jackrong/GPT-5-Distill-Qwen3-4B-Instruct-GGUF
   Url: https://huggingface.co/Jackrong/GPT-5-Distill-Qwen3-4B-Instruct-GGUF/resolve/main/GPT-5-Distill-Qwen3-4B-Instruct-Q6_K.gguf?download=true
   Template: chatml
+  Status: "Experimental"
+  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
+  TestNotes: "Not verified with the current HomeGenie test suite."
 
 "TeichAI/Qwen3-4B-Instruct-Claude-Haiku-4.5-Distill.q5_k_m.gguf":
   Name: TeichAI/Qwen3-4B-Instruct-2507-Claude-Haiku-4.5-Distill-GGUF
   Repository: https://huggingface.co/TeichAI/Qwen3-4B-Instruct-2507-Claude-Haiku-4.5-Distill-GGUF
   Url: https://huggingface.co/TeichAI/Qwen3-4B-Instruct-2507-Claude-Haiku-4.5-Distill-GGUF/resolve/main/Qwen3-4B-Instruct-Claude-Haiku-4.5-Distill.q5_k_m.gguf?download=true
   Template: chatml
-
-
-
-# ------------------------
-# New LLMs (to be tested)
-# ------------------------
+  Status: "Experimental"
+  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
+  TestNotes: "Not verified with the current HomeGenie test suite."
 
 "MaziyarPanahi/Yi-Coder-9B-Chat.Q5_K_M.gguf":
   Name: MaziyarPanahi/Yi-Coder-9B-Chat-GGUF
   Repository: https://huggingface.co/MaziyarPanahi/Yi-Coder-9B-Chat-GGUF
   Url: https://huggingface.co/MaziyarPanahi/Yi-Coder-9B-Chat-GGUF/resolve/main/Yi-Coder-9B-Chat.Q5_K_M.gguf?download=true
   Template: chatml
+  Status: "Experimental"
+  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
+  TestNotes: "Not verified with the current HomeGenie test suite."

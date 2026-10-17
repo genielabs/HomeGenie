@@ -537,7 +537,7 @@ public sealed class AiSkillCatalog
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.47</PackageVersion>
+      <PackageVersion>1.0.51</PackageVersion>
       <Id>context-engine</Id>
       <Version>1.0.8</Version>
       <Required>true</Required>
@@ -1140,7 +1140,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.47</PackageVersion>
+      <PackageVersion>1.0.51</PackageVersion>
       <Id>gemini-automan</Id>
       <Version>1.0.10</Version>
       <Required>false</Required>
@@ -1598,7 +1598,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.47</PackageVersion>
+      <PackageVersion>1.0.51</PackageVersion>
       <Id>gemini-intent-handler</Id>
       <Version>1.0.22</Version>
       <Required>false</Required>
@@ -2321,7 +2321,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.47</PackageVersion>
+      <PackageVersion>1.0.51</PackageVersion>
       <Id>gemini-widget-genie</Id>
       <Version>1.0.18</Version>
       <Required>false</Required>
@@ -2651,7 +2651,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.47</PackageVersion>
+      <PackageVersion>1.0.51</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -2700,7 +2700,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
 
 // Load available GGUF models from models.yaml to populate the dropdown
 var modelsList = LoadModelList(Path.Combine(Data.GetFolder(), CONFIG_FILE_NAME));
-var models = string.Join(",", modelsList.Select(item =&gt; $"{item.Value.Name}={item.Key}"));
+var models = string.Join(",", modelsList.Select(item =&gt; $"{ModelSelectionLabel(item.Value)}={item.Key}"));
 
 // Path to the external markdown file for system instructions
 var systemPromptFile = Path.Combine(Data.GetFolder(), "system_prompt.txt");
@@ -2715,7 +2715,8 @@ Program.Setup(() =&gt; {
     // Implement the AI Intent Handler interface to allow system integration
     .Implements(
       "@AI:IntentHandler",
-      API_URL
+      API_URL,
+      new {chat=new {capabilities=new[]{"deviceControl"}}}
     )
 
     // UI Options Definition:
@@ -2766,6 +2767,9 @@ var modelsFile = Path.Combine(Data.GetFolder(), CONFIG_FILE_NAME);
 // Load model configurations and file paths
 var modelsList = LoadModelList(modelsFile);
 var selectedModel = Program.Option(OPTION_MODEL_FILE).Value;
+Program.Emit("LLM.ModelInfo", modelsList.ContainsKey(selectedModel)
+    ? JsonConvert.SerializeObject(new {modelsList[selectedModel].Name, modelsList[selectedModel].Status,
+        modelsList[selectedModel].Requirements, modelsList[selectedModel].TestNotes}) : "");
 string localModelFile = Path.Combine(Data.GetFolder(), selectedModel);
 
 
@@ -2777,7 +2781,7 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
     {
       // Update model list option in the UI
       modelsList = LoadModelList(modelsFile);
-      var models = string.Join(",", modelsList.Select(item =&gt; $"{item.Value.Name}={item.Key}"));
+      var models = string.Join(",", modelsList.Select(item =&gt; $"{ModelSelectionLabel(item.Value)}={item.Key}"));
       models = $"select:{ models }";
       // IMPORTANT: update only if changed to prevent loop Emit &lt;-&gt; ModuleParameterChanged
       if (parameter.Value != models)
@@ -2986,11 +2990,11 @@ var dispose = new Action(() =&gt; nativeLifetime.Stop(() =&gt; {
 // Basic path validation
 if (String.IsNullOrEmpty(modelPath))
 {
-  Program.Notify($"LLM model path not configured.[program_configure]").Emit(FIELD_STATUS_ERROR, "LLM model path not configured.");
+  Program.Notify($"LLM model path not configured.[program_configure]").Emit(FIELD_STATUS_ERROR, "LLM model path not configured.").Emit(FIELD_STATUS_INIT, "Error");
 }
 else if (!File.Exists(modelPath))
 {
-  Program.Notify($"File not found: {modelPath}.[program_configure]").Emit(FIELD_STATUS_ERROR, $"File not found: {modelPath}");
+  Program.Notify($"File not found: {modelPath}.[program_configure]").Emit(FIELD_STATUS_ERROR, $"File not found: {modelPath}").Emit(FIELD_STATUS_INIT, "Error");
 }
 else
 {
@@ -3120,7 +3124,7 @@ else
             // Local inference currently supports device context only; do not load code or deep knowledge.
             foreach(string key in new[]{"widgets","automationPrograms","dashboards","deepKnowledge"}) selected[key]=false;
             var scope = new JObject { ["version"]=1, ["message"]=rawInput, ["context"]=selected,
-                ["capabilities"]=new JObject{["deviceControl"]=(bool)selected["devices"],["automation"]=false,["widgets"]=false} };
+                ["capabilities"]=LailamaCapabilityPolicy.Normalize(storedSelection("AI.Chat.Capabilities"),(bool)selected["devices"]) };
             string localTemplate=File.ReadAllText(Path.Combine(Data.GetFolder(), "system_prompt.txt"));
             // Legacy placeholders are supplied by the scoped collector, not a second renderer.
             foreach(string placeholder in new[]{"%%AVAILABLE_DEVICES%%","%%SYSTEM_STATUS%%","%%CURRENT_TIME%%"})
@@ -3136,6 +3140,8 @@ else
             var strategy=textStep("",0);
             if(strategy["instructions"]?.Type!=JTokenType.String)throw new InvalidOperationException("Update AI Genie before using local discovery.");
             localTemplate += "\n"+(string)strategy["instructions"];
+            if(scope["capabilities"]["deviceControl"].Value&lt;bool&gt;()!=true)
+                localTemplate += "\nREAD-ONLY MODE: device and parameter lookups are allowed when context sharing is enabled. Never emit api-call controls or writes. Ask the user to enable deviceControl if an action is requested; do not enable it yourself.";
             var prepared=readObject(Api.Call("System.Utility/AiGenie/Context.Prepare",new JObject{
                 ["version"]=1,["template"]=localTemplate,["request"]=scope}));
             if(prepared==null || (string)prepared["Status"]=="Error" || prepared["systemPrompt"]?.Type!=JTokenType.String || prepared["profileKey"]?.Type!=JTokenType.String)
@@ -3172,6 +3178,7 @@ else
                 ["historyMessages"]=cleanHistory.Count,["nativeMessages"]=session.History.Messages.Count}.ToString(Formatting.None));
             string templatedInput=BuildUserPrompt(templateType,LailamaSessionCache.CurrentTurn((string)prepared["systemPrompt"],rawInput));
             string fullReply=null;
+            string priorThoughts="";
             int formatRepairs=0,contextReads=0;
             bool finalReplyReady=false;
             for(int lookupRound=0;lookupRound&lt;5;lookupRound++) {
@@ -3268,6 +3275,7 @@ else
             if((string)step["Status"]=="Error") {
                 string feedback=LailamaFormatRepair.Feedback(step,formatRepairs++);
                 trace.Event("reference.format-repair");
+                priorThoughts += string.Concat(Regex.Matches(fullReply??"",@"&lt;think&gt;[\s\S]*?&lt;/think&gt;",RegexOptions.IgnoreCase).Cast&lt;Match&gt;().Select(m=&gt;m.Value+"\n"));
                 Program.Emit("LLM.TokenStream.Reset","repair");
                 templatedInput=BuildUserPrompt(templateType,feedback);
                 continue;
@@ -3278,7 +3286,8 @@ else
             if((string)step["state"]!="context" || step["text"]?.Type!=JTokenType.String)
                 throw new InvalidOperationException("Invalid local context step.");
             // Discard only the provisional round; the request remains busy.
-            Program.Emit("LLM.TokenStream.Reset", "context");
+            priorThoughts += string.Concat(Regex.Matches(fullReply??"",@"&lt;think&gt;[\s\S]*?&lt;/think&gt;",RegexOptions.IgnoreCase).Cast&lt;Match&gt;().Select(m=&gt;m.Value+"\n"));
+                Program.Emit("LLM.TokenStream.Reset", "context");
             contextReads++;
             if(step["calls"] is JArray calls)foreach(string path in calls.Values&lt;string&gt;())telemetry.ContextCalls.Add(path);
             templatedInput=BuildUserPrompt(templateType,"FRESH API RESULT FOR THIS TURN:\n"+(string)step["text"]);
@@ -3289,7 +3298,7 @@ else
                 throw new InvalidOperationException("Enable Devices context before controlling devices.");
 
             // 4. COMMAND EXECUTION AND PERSISTENCE
-            var messageSegments = ExtractResponse(fullReply);
+            var messageSegments = ExtractResponse(priorThoughts+fullReply);
             telemetry.GenerationComplete();
             var actionTimer = System.Diagnostics.Stopwatch.StartNew();
             var actionResults = ExecuteResponse(fullReply, telemetry.RequestId);
@@ -3418,7 +3427,7 @@ else
     lifecycleLog("Lailama initialization cancelled during shutdown.");
   } catch (Exception e) {
     if (!nativeLifetime.IsStopping) {
-      Program.Notify($"ERROR: {e.Message} [program_configure]").Emit(FIELD_STATUS_ERROR, e.Message);
+      Program.Notify($"ERROR: {e.Message} [program_configure]").Emit(FIELD_STATUS_ERROR, e.Message).Emit(FIELD_STATUS_INIT, "Error");
       Pause(5);
     } else lifecycleLog("Lailama initialization ended during shutdown: " + e.Message);
   } finally { if (initializationCts != null) nativeLifetime.End(initializationCts); }
@@ -3485,12 +3494,20 @@ const string CONFIG_FILE_NAME = "models.yaml";
 // DATA MODELS AND CONFIGURATION LOADING
 // ===================================================================
 
+public static string ModelSelectionLabel(ModelInfo model) {
+    string label = string.IsNullOrWhiteSpace(model.Status) ? model.Name : $"[{model.Status}] {model.Name}";
+    return label.Replace(',', ';').Replace('=', '-');
+}
+
 public class ModelInfo {
   public string Url = "";
   public string Name = "";
   public string Repository = "";
   public string Description = "";
   public string Size = "";
+  public string Status = "";
+  public string Requirements = "";
+  public string TestNotes = "";
   public string Template = "";
 }
 
@@ -3697,7 +3714,8 @@ public List&lt;string&gt; ExtractResponse(string response)
 
 public List&lt;ApiCommandExecution&gt; ExecuteResponse(string response, string requestId = null)
 {
-    object result = Api.Call("System.Utility/ActionExecutor/Execute", requestId == null ? (object)response : new { requestId, response });
+    object result = LailamaCapabilityPolicy.Execute(response,ReadChatSetting("AI.Chat.Capabilities"),CurrentDeviceContextAllowed(),
+        () =&gt; Api.Call("System.Utility/ActionExecutor/Execute", requestId == null ? (object)response : new { requestId, response }));
     if (result == null) throw new InvalidOperationException("AI Action Executor is unavailable.");
     var actions = JToken.FromObject(result) as JArray;
     if (actions == null) throw new InvalidOperationException("Invalid AI Action Executor execution response.");
@@ -3706,7 +3724,8 @@ public List&lt;ApiCommandExecution&gt; ExecuteResponse(string response, string r
 
 public object ExtractAndExecute(string response)
 {
-    return Api.Call("System.Utility/ActionExecutor/ExtractAndExecute", response);
+    return LailamaCapabilityPolicy.Execute(response,ReadChatSetting("AI.Chat.Capabilities"),CurrentDeviceContextAllowed(),
+        () =&gt; Api.Call("System.Utility/ActionExecutor/ExtractAndExecute", response));
 }
 
 /**
@@ -4035,17 +4054,50 @@ public static class LailamaFormatRepair {
             +"\nNo API call or command was executed. Correct your request ONCE. Use a full domain/address/property for parameterIds, or domain/address for moduleIds. Use the exact target from the user's request/history; do not invent missing IDs. If ambiguous, ask for clarification. Emit one context-request block and stop; no commands or future-step examples.";
     }
 }
+
+public static class LailamaCapabilityPolicy {
+    public static JObject Normalize(JObject selected,bool devices) {
+        if(selected!=null &amp;&amp; selected.Properties().Any(p=&gt;!new[]{"deviceControl","automation","widgets"}.Contains(p.Name)||p.Value.Type!=JTokenType.Boolean))
+            throw new InvalidOperationException("Invalid local AI capability selection.");
+        return new JObject{["deviceControl"]=devices&amp;&amp;(selected?["deviceControl"]?.Value&lt;bool&gt;()??true),["automation"]=false,["widgets"]=false};
+    }
+    public static object Execute(string response,JObject selected,bool devices,Func&lt;object&gt; execute) {
+        bool command=System.Text.RegularExpressions.Regex.IsMatch(response??"",@"```\s*api-call",System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+        // The legacy Execute API also accepts a structured actions envelope.
+        // It must not bypass the read-only policy merely by omitting code fences.
+        if(!command &amp;&amp; (response??"").TrimStart().StartsWith("{")) {
+            try {command=JObject.Parse(response)["actions"]!=null;}
+            catch(Newtonsoft.Json.JsonException) {} // Invalid JSON is handled by the executor, never repaired here.
+        }
+        var capabilities=Normalize(selected,devices);
+        if(command &amp;&amp; capabilities["deviceControl"].Value&lt;bool&gt;()!=true)
+            throw new InvalidOperationException("Device control is disabled. Enable the deviceControl capability and Devices context before executing commands.");
+        return execute();
+    }
+}
+
+public JObject ReadChatSetting(string name) {
+    var property=Program.Module.Properties.FirstOrDefault(p=&gt;p.Name==name);
+    string value=property==null?null:Convert.ToString(property.Value);
+    return string.IsNullOrWhiteSpace(value)?null:JObject.Parse(value);
+}
+public bool CurrentDeviceContextAllowed() {
+    var context=ReadChatSetting("AI.Chat.Context");
+    if(context?["devices"]!=null &amp;&amp; context["devices"].Type!=JTokenType.Boolean)
+        throw new InvalidOperationException("Invalid local AI Devices context selection.");
+    return Program.Option(OPTION_SEND_CONTEXT_DATA).Value=="On"&amp;&amp;(context?["devices"]?.Value&lt;bool&gt;()??true);
+}
 </ScriptContext>
     <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.47</PackageVersion>
+      <PackageVersion>1.0.51</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.0.27</Version>
+      <Version>1.0.31</Version>
       <Required>true</Required>
-      <Checksum>E35C73AD30BF479B9E37D4DF5961FE67</Checksum>
+      <Checksum>1E0B5DCB9635B485E10002F6CEF701A3</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>
@@ -4247,7 +4299,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.47</PackageVersion>
+      <PackageVersion>1.0.51</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -4433,7 +4485,7 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.47</PackageVersion>
+      <PackageVersion>1.0.51</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -5347,7 +5399,7 @@ public static class GeminiGenerationProvider {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.47</PackageVersion>
+      <PackageVersion>1.0.51</PackageVersion>
       <Id>gemini-genie</Id>
       <Version>1.0.17</Version>
       <Required>true</Required>

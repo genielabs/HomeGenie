@@ -418,3 +418,42 @@ Clearing Lailama history resets the conversation/session and invalidates its cac
 it keeps the already-loaded weights and context allocation. WarmingUp belongs to
 initial model loading and is not required after clearing a conversation. The next
 request evaluates its prompt on the reset session; no model reload is necessary.
+
+
+### Independent read access and device control in Lailama
+
+Lailama 1.0.28 advertises chat.capabilities=[deviceControl] through its existing
+@AI:IntentHandler descriptor. It deliberately does not advertise requestVersion=1:
+the text request protocol remains unchanged. YoT's existing capability menu stores
+the choice in the program module's AI.Chat.Capabilities property. No new frontend
+production code or translation is required; the standalone UI regression is
+`node e2e/src/lailama-capabilities.cjs`.
+
+Devices information-sharing remains controlled by the existing SendContextData
+option and any persistent AI.Chat.Context.devices selection. With that context
+allowed and deviceControl=false, schema/parameter lookups remain available, while
+the prompt reports read-only mode. Automation/widget capabilities are not enabled.
+Missing deviceControl preserves the existing enabled default for compatibility;
+users explicitly turn it off for read-only operation.
+
+ExecuteResponse and ExtractAndExecute both re-read persistent capabilities and
+context at dispatch time, before calling ActionExecutor. Fenced commands and the
+legacy structured-actions envelope cannot bypass disabled control. This also
+covers direct legacy execution endpoints and a capability disabled while generation
+is still running. Extraction and context preparation remain read-only operations.
+Malformed settings fail closed. Capability changes alter the prepared profile/key,
+so subsequent native sessions do not retain an incompatible permission profile.
+
+Acceptance: update 940, reload/reselect Lailama, disable device control in the
+existing capability menu and leave device context enabled. A current timeout read
+must still work. An on/off request must explain disabled control (or be rejected
+if the model nevertheless emits a command); no control may be dispatched. Re-enable
+control to verify unchanged device commands. Persist the choice across a page reload.
+
+### Reasoning across local context lookups
+
+Lailama retains completed `<think>` blocks from intermediate lookup and format-repair rounds in the final saved reply. Provisional answers and context-request syntax are discarded. The chat preserves the same reasoning during streaming and combines multiple blocks into its existing Thoughts group; request completion and context-call receipts retain their existing behavior.
+
+### Local model initialization failures
+
+Lailama emits Status.Init = Error when model validation or loading fails, alongside Status.Error. The chat displays the persisted initialization error instead of an indefinite loading indicator, including when no generation is active. A new initialization clears the previous error; Ready restores the normal chat.

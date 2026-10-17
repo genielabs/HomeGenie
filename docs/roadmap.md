@@ -272,3 +272,11 @@ by the user before this checkpoint.
   temporary history files. Clearing a loaded Lailama conversation needs no warmup.
 - [ ] Manual deletion acceptance after updating history service and wrapper: remove
   a test message, reload the page and verify that it remains absent before AI tests.
+
+
+- [x] Separate Lailama information sharing from deviceControl (1.0.28), using the
+  existing module preference and capability selector without changing text payloads.
+- [x] Enforce current permissions at both execution entry points, including legacy
+  structured actions and permission changes during generation; keep reads available.
+- [ ] Manual read-only acceptance: current parameter read, blocked control, persistence
+  across reload and re-enabled control before connecting shared parameter writes.
