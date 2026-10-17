@@ -123,4 +123,33 @@ public class LailamaGenerationProviderTest {
     public void NoSecondRepairOrRetryForNonContractFailure(string kind,int count) {
         Assert.Throws<TargetInvocationException>(()=>repair.GetMethod("Feedback").Invoke(null,new object[]{new JObject{["Status"]="Error",["errorKind"]=kind,["Message"]="Stop"},count}));
     }
+    JObject CompletedTurn()=>new(){["outcome"]="completed",["generations"]=1,["results"]=new JArray(),["priorThoughts"]="",["reply"]="answer"};
+    void CommitTurn(object state,JArray history,JObject result)=>cache.GetMethod("CommitTurn").Invoke(state,new object[]{"key",history,result});
+    [Test] public void PlainCompletedTurnStillAllowsNativeReuse() {
+        var state=Cache();var h=(JArray)History()["messages"];CommitTurn(state,h,CompletedTurn());Assert.That(Reusable(state,"key",h),Is.True);
+    }
+    [TestCase("compiler")][TestCase("format")][TestCase("context")][TestCase("action")][TestCase("reasoning")][TestCase("error")][TestCase("tool")]
+    public void TechnicalTurnsCannotLeakTheirNativeSessionIntoTheNextRequest(string kind) {
+        var state=Cache();var h=(JArray)History()["messages"];Commit(state,"key",h);var r=CompletedTurn();
+        if(kind=="compiler" || kind=="format" || kind=="context")r["generations"]=2;
+        if(kind=="action")r["results"]=new JArray(new JObject{["State"]="completed"});
+        if(kind=="reasoning")r["reply"]="<think>rejected code</think>answer";
+        if(kind=="error")r["outcome"]="error";
+        if(kind=="tool")r["reply"]="```genie-action\n{}\n```";
+        CommitTurn(state,h,r);Assert.That(Reusable(state,"key",h),Is.False);
+    }
+    [Test] public void CleanProjectionRetainsFinalReceiptButRemovesReasoningAndIntermediateCode() {
+        var h=History();h["messages"][1]["parts"][0]["text"]="<think>compiler rejected this</think>\n```genie-action\n{bad code}\n```\n```context-request\n{}\n```\n{\"automan_deploy\":{\"status\":\"success\",\"program_id\":\"1003\"}}";
+        string before=h.ToString();var result=Rebuild(Prepared(),h);string answer=(string)result[2]["parts"][0]["text"];
+        Assert.That(answer,Does.Contain("automan_deploy").And.Contain("1003").And.Not.Contain("compiler rejected").And.Not.Contain("bad code").And.Not.Contain("context-request"));
+        Assert.That(h.ToString(),Is.EqualTo(before));
+    }
+    [Test] public void CleanProjectionPreservesUserCodeAndOrdinaryAssistantExamples() {
+        var h=History();h["messages"][0]["parts"][0]["text"]="```genie-action\nuser example\n```";
+        h["messages"][1]["parts"][0]["text"]="Example:\n```csharp\nProgram.GoBackground();\n```";
+        var result=Rebuild(Prepared(),h);
+        Assert.That((string)result[1]["parts"][0]["text"],Does.Contain("user example"));
+        Assert.That((string)result[2]["parts"][0]["text"],Does.Contain("Program.GoBackground"));
+    }
+
 }

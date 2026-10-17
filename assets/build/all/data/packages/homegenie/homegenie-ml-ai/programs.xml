@@ -3174,7 +3174,7 @@ else
                     ["StoreId"]=storeId,["ContextProfileKey"]=telemetry.ContextProfileKey}));
                 if(history==null || (string)history["contextProfileKey"]!=telemetry.ContextProfileKey || history["messages"] is not JArray entries)
                     throw new InvalidOperationException("Local AI history context is unavailable.");
-                cleanHistory=(JArray)entries.DeepClone();
+                cleanHistory=LailamaContextSession.Clean(entries);
             }
             string sessionKey=LailamaSessionCache.Key(telemetry.ContextProfileKey,localTemplate,templateType,maxMessages);
             bool reuseSession=!noHistory &amp;&amp; sessionCache.CanReuse(sessionKey,cleanHistory)
@@ -3359,7 +3359,7 @@ else
               var committedHistory=(JArray)cleanHistory.DeepClone();
               committedHistory.Add(JObject.FromObject(ChatMessage.Create("user",rawInput)));
               committedHistory.Add(JObject.FromObject(modelResponse));
-              sessionCache.Commit(sessionKey,committedHistory);
+              sessionCache.CommitTurn(sessionKey,committedHistory,coordinated);
               // The empty stream marker ends the whole request, after persistence.
               Program.Emit(FIELD_TOKENS_STREAM, "");
               Program.Emit("Widget.Refresh", "action_results");
@@ -4016,11 +4016,27 @@ public static class LailamaGenerationProvider {
 }
 
 public static class LailamaContextSession {
+    // Stored/UI messages remain untouched. Only the provider projection is cleaned.
+    public static JArray Clean(JArray messages) {
+        var result=(JArray)messages.DeepClone();
+        foreach(var message in result) {
+            if((string)message["role"]!="model" || message["parts"] is not JArray parts)continue;
+            foreach(var part in parts) {
+                if(part["text"]?.Type!=JTokenType.String)continue;
+                string text=(string)part["text"];
+                text=System.Text.RegularExpressions.Regex.Replace(text,@"&lt;think&gt;[\s\S]*?(?:&lt;/think&gt;|$)","",System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                text=System.Text.RegularExpressions.Regex.Replace(text,@"(?im)^\s*```(?:genie-action|context-request)[^\S\r\n]*\r?\n[\s\S]*?(?:^\s*```[^\S\r\n]*$|\z)","",System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                part["text"]=text.Trim();
+            }
+        }
+        return result;
+    }
+
     public static JArray Rebuild(JObject prepared,JObject history,int maxMessages) {
         if(prepared?["systemPrompt"]?.Type!=JTokenType.String || prepared["profileKey"]?.Type!=JTokenType.String ||
             history==null || (string)history["contextProfileKey"]!=(string)prepared["profileKey"] || history["messages"] is not JArray messages || maxMessages&lt;0)
             throw new InvalidOperationException("Local AI history context is unavailable.");
-        IEnumerable&lt;JToken&gt; prior=messages;
+        IEnumerable&lt;JToken&gt; prior=Clean(messages);
         if(maxMessages&gt;0)prior=prior.TakeLast(maxMessages);
         var result=new JArray(new JObject{["role"]="system",["parts"]=new JArray(new JObject{["text"]=prepared["systemPrompt"].DeepClone()})});
         foreach(var item in prior) {
@@ -4085,6 +4101,20 @@ public sealed class LailamaSessionCache {
     }
     public bool CanReuse(string selectedKey,JArray messages)=&gt;key!=null&amp;&amp;key==selectedKey&amp;&amp;history==Digest(messages);
     public void Commit(string selectedKey,JArray messages) {key=selectedKey;history=Digest(messages);}
+    // Intermediate tool/compiler rounds and reasoning exist only in the native session,
+    // not in its persisted final-message projection. Never claim they are equivalent.
+    public void CommitTurn(string selectedKey,JArray messages,JObject result) {
+        Invalidate();
+        if(result==null || (string)result["outcome"]!="completed" ||
+            result["generations"]?.Type!=JTokenType.Integer || (int)result["generations"]!=1 ||
+            result["results"] is not JArray actions || actions.Count!=0 ||
+            !string.IsNullOrWhiteSpace((string)result["priorThoughts"]) ||
+            result["reply"]?.Type!=JTokenType.String)return;
+        string reply=(string)result["reply"];
+        if(reply.IndexOf("&lt;think&gt;",StringComparison.OrdinalIgnoreCase)&gt;=0 ||
+            System.Text.RegularExpressions.Regex.IsMatch(reply,@"```\s*(genie-action|context-request)",System.Text.RegularExpressions.RegexOptions.IgnoreCase))return;
+        Commit(selectedKey,messages);
+    }
     public void Invalidate() {key=null;history=null;}
     public static string Key(string profile,string template,string format,int limit) {
         using(var hash=System.Security.Cryptography.SHA256.Create())
@@ -4200,9 +4230,9 @@ public JObject RecoverFailedProgram(string requestId) {
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.56</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.2.3</Version>
+      <Version>1.2.4</Version>
       <Required>true</Required>
-      <Checksum>4C60BD7D7C75030A605F970720376761</Checksum>
+      <Checksum>6E371468ACA2330ED454CFE6AE7E95A2</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>
@@ -4653,22 +4683,7 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
   if (module.Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
     reconfigureRequired = true;
   }
-  // Completed reports a result; reusable helpers remain enabled.
-  // Quit explicitly requests disabling, never deleting, the emitting program.
-  if (module.Instance != null &amp;&amp; module.Instance != Program.Module &amp;&amp;
-      module.Instance.Domain == "HomeAutomation.HomeGenie.Automation" &amp;&amp;
-      parameter.Name == "Automan.Program.Request" &amp;&amp;
-      string.Equals(parameter.Value?.Trim(), "Quit", StringComparison.OrdinalIgnoreCase)) {
-    string childId = module.Instance.Address;
-    System.Threading.Tasks.Task.Run(() =&gt; {
-      try {
-        Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Disable/" + childId);
-        Program.Log.Info($"Child program {childId} disabled after Quit request.");
-      } catch (Exception ex) {
-        Program.Log.Error($"Error disabling child program {childId}: {ex.Message}");
-      }
-    });
-  }
+  // Generated-program Quit requests are handled by the shared AI Genie service.
   return true;
 });
 
@@ -5506,9 +5521,9 @@ public static class GeminiGenerationProvider {
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.56</PackageVersion>
       <Id>gemini-genie</Id>
-      <Version>1.0.17</Version>
+      <Version>1.0.18</Version>
       <Required>true</Required>
-      <Checksum>797BD2D56B74897410546AC644B199C3</Checksum>
+      <Checksum>61EDA3B8593FCFE0F6C1AC0C0C3A0A1A</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>933</Address>

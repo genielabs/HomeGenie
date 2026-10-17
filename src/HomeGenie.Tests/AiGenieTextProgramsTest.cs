@@ -130,4 +130,18 @@ public class AiGenieTextProgramsTest {
         Assert.That((string)Dispatch(request)["state"],Is.EqualTo("not_program"));Assert.That(deployments,Is.Zero);
     }
 
+    [Test] public void DistributedPromptHasValidJsonAndCompilableCSharpExamples() {
+        string instructions=(string)dispatcher.GetField("Instructions").GetRawConstantValue();
+        Assert.That(instructions,Does.Not.Contain("Automan.Program.Status=Running"));
+        var block=System.Text.RegularExpressions.Regex.Match(instructions,@"```genie-action\s*\n([\s\S]*?)\n```");
+        Assert.That(block.Success,Is.True);var json=JObject.Parse(block.Groups[1].Value);
+        var normalized=(JObject)contract.GetMethod("Normalize").Invoke(null,new object[]{json});
+        Assert.That((string)normalized["automation"]["program_id"],Is.Empty);
+        string examples=string.Join("\n",System.Text.RegularExpressions.Regex.Matches(instructions,@"```csharp\s*\n([\s\S]*?)\n```").Cast<System.Text.RegularExpressions.Match>().Select(m=>m.Groups[1].Value));
+        string code="using System;class Program {public static void Emit(string key,string value){}public static void Setup(Action action){}public static void Run(){}public static void GoBackground(){}void Examples(){"+examples+"}void MainExample(){"+(string)normalized["automation"]["main"]+"}}";
+        var paths=((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")).Split(Path.PathSeparator).Where(p=>Path.GetDirectoryName(p)==Path.GetDirectoryName(typeof(object).Assembly.Location));
+        var compilation=CSharpCompilation.Create("PromptExamples",new[]{CSharpSyntaxTree.ParseText(code)},paths.Select(p=>MetadataReference.CreateFromFile(p)),new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+        Assert.That(compilation.GetDiagnostics().Where(d=>d.Severity==DiagnosticSeverity.Error),Is.Empty);
+    }
+
 }

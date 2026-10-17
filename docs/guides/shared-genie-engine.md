@@ -513,3 +513,19 @@ Observed 9B update: CS0103 resulted from treating Automan.Program.Message as a C
 ### Context request validation
 
 Local text context requests reject program API routes used as module/parameter IDs before any collector call. The existing single contract-repair budget explains programIds with an exact ID for source reads. Collector error responses produce a concise reference-data error rather than exposing internal stack traces; infrastructure and permission failures do not trigger format retries.
+
+### Shared generated-program lifecycle
+
+AI Genie utility 583 owns the generated-program lifecycle listener for both Gemini and Lailama. Gemini 933 no longer registers its own Quit listener. Automan.Program.Status=Completed reports completion and leaves the program enabled; returning from Main ends that execution. Only Automan.Program.Request=Quit, case-insensitive with surrounding whitespace ignored, requests Programs.Disable for the emitting automation module. It never deletes the program. Persistent helpers and programs with interactive/file options should stay enabled. Numeric automation addresses are required; the utility cannot disable itself through this listener. In-flight duplicate requests are ignored and queued callbacks are ignored after service stop. No provider inference is required to process the event. Legacy Automan remains unchanged.
+
+Upgrade the base package/AI Genie service before Gemini Genie, because lifecycle ownership now belongs to the utility. Runtime verification pending: Completed retains enabled state, then explicit Quit disables the same test helper while retaining its sources.
+
+### Local session cleanup between turns
+
+ChatHistory.GetContext already excludes failed, cancelled and pending turns. Lailama additionally cleans the provider-only projection of completed model messages: reasoning and internal genie-action/context-request fences are removed, while final deployment receipts and ordinary text/code remain. User messages and stored/UI/export history are unchanged.
+
+After a multi-generation turn, reference lookup, action, compiler/format repair, error or generated reasoning, the native session is not marked reusable. The next request restores the baseline and rebuilds from filtered completed history, without reloading model weights. Plain single-generation text exchanges can still reuse the session. This prevents native compiler feedback/rejected code from surviving a successful recovery even when the persisted reply contains only a success receipt. Failed/cancelled turns were already invalidated and remain excluded. Intermediate feedback stays available within its current bounded recovery loop.
+
+### Compact C# emission guidance
+
+Local program instructions separate executable C# examples from their JSON encoding and use only Program.Emit calls for field emission. The property=value shorthand has been removed from this coding guidance. A single complete genie-action example keeps program_id a string. Tests normalize the example and compile its C# statements. Confirmed C# compiler failures mentioning Automan receive a short literal-string emission hint in the shared program dispatcher, preserving the original compiler diagnostics and retry/identity limits. Other compiler errors and non-C# programs do not receive that hint. This changes guidance only; generated source is never rewritten automatically.

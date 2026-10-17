@@ -6575,7 +6575,23 @@ public static class ProgramUpdateNotification {
 Program.Run();
 </ScriptSetup>
   <ScriptSource>var service = new AiGenieService();
-When.ProgramStopping(() =&gt; { service.Dispose(); return true; });
+var lifecycle = new AiGenieProgramLifecycle();
+When.ProgramStopping(() =&gt; { lifecycle.Stop(); service.Dispose(); return true; });
+When.ModuleParameterChanged((module, parameter) =&gt; {
+    if(module.Instance==null)return true;
+    string domain=module.Instance.Domain, childId=module.Instance.Address;
+    string field=parameter.Name, value=parameter.Value, serviceId=Program.Module.Address;
+    if(AiGenieProgramLifecycle.IsQuit(domain,childId,field,value,serviceId))
+        System.Threading.Tasks.Task.Run(() =&gt; {
+            try {
+                lifecycle.Handle(domain,childId,field,value,serviceId,route=&gt; {
+                    Api.Call(route);
+                    Program.Log.Info($"Child program {childId} disabled after Quit request.");
+                });
+            } catch(Exception ex) {try {Program.Log.Error($"Error disabling child program {childId}: {ex.Message}");}catch {}}
+        });
+    return true;
+});
 Api.Handle("System.Utility/AiGenie/Describe", input =&gt; new { version = 1, stage = "structured-conversation-coordinator", streaming = false, cancellation = "cooperative", inProcessOnly = true });
 Api.Handle("System.Utility/AiGenie/Generate", input =&gt; service.Generate(Api.Parse(input).Data, (route, data) =&gt; Api.Call(route, data)));
 Api.Handle("System.Utility/AiGenie/Cancel", input =&gt; service.Cancel(Api.Parse(input).Data));
@@ -6978,6 +6994,15 @@ public static class AiGenieDeviceActions {
 // Program deployment decisions are shared; provider loops and history remain in their wrapper.
 // Program deployment decisions are shared; provider loops and history remain in their wrapper.
 public static class AiGenieProgramActions {
+    public static string CompilerHint(string language,JToken diagnostics) {
+        if(language!="csharp" || diagnostics==null || diagnostics.ToString().IndexOf("Automan",StringComparison.OrdinalIgnoreCase)&lt;0)return "";
+        return "\nC# field emission: the full dotted name is a literal string argument to Program.Emit.\n"
+            +"Program.Emit(\"Automan.Program.Message\", \"Ready\");\n"
+            +"Program.Emit(\"Automan.Program.Status\", \"Completed\");\n"
+            +"Program.Emit(\"Automan.Program.Request\", \"Quit\");\n"
+            +"Use only the field/value requested by the user. The compiler error refers to an identifier outside a string, not to the contents of these quoted keys.";
+    }
+
     static JObject Read(object raw) {
         var token = raw is string text ? JToken.Parse(text) : raw == null ? null : JToken.FromObject(raw);
         return token as JObject ?? throw new InvalidOperationException("Program execution outcome is unknown.");
@@ -7018,6 +7043,7 @@ public static class AiGenieProgramActions {
             return new JObject { ["version"] = 1, ["requestId"] = id, ["outcome"] = "repair", ["State"] = deployment["State"],
                 ["nextAttempt"] = attempt + 1, ["actionCalls"] = 1, ["additionalFailedActions"] = 0,
                 ["feedback"] = "COMPILATION FAILED:\n" + deployment["Response"]["compiler_errors"]
+                    + CompilerHint((string)canonical["language"], deployment["Response"]["compiler_errors"])
                     + "\nReturn the complete corrected version-1 response. Preserve kind, action and program_id. Do not create a replacement." };
         bool success = (string)deployment["State"] == "completed" &amp;&amp; deployment["Success"]?.Value&lt;bool&gt;() == true;
         int calls = 1, additionalFailures = 0;
@@ -7604,27 +7630,40 @@ public static class AiGenieTextCoordinator {
 
 public static class AiGenieTextPrograms {
     public const string Instructions=@"
-AUTOMATION PROGRAMS (only when automation capability is enabled):
-Questions do not request deployment. For an explicit create/update request, return exactly one genie-action fenced block
-containing one version-1 JSON object: version=1, kind=program, explanation, language=csharp/python/javascript,
-automation={action:create/update,program_id:empty for create or exact existing ID for update,name,setup,main,context}.
-Source fields contain complete code as JSON strings with escaped newlines. Never put program sources in api-call.
-Do not guess IDs or call installation APIs. Updates require Automation Programs context and a prior context-request
-with programIds:[exact ID] to obtain complete sources. Preserve existing behavior unless changes were requested.
-The executor supports updates of managed Automan programs only. Ask for clarification if the target is ambiguous.
-For C#: setup contains Program.Setup(()=&gt;{}); Program.Run(); and main contains complete executable statements.
-Automan is not a C# class or namespace. Never use Automan.Program.Message as a C# variable/property.
-Emit the quoted field names with Program.Emit: Automan.Program.Status=Running and Automan.Program.Message for chat feedback. Use Program.GoBackground()
-for persistent event-only programs. Polling loops must use Pause and Program.IsRunning. Completed reports one-time
-completion; it does not disable the program. Keep programs with interactive/file options enabled.
-Use string default values with Program.AddOption. Never embed another program's compiler/installation calls.
-The host deploys and compiles. If compiler feedback arrives, return the complete corrected genie-action block,
-preserving kind, action and program_id. Do not create a replacement or emit device commands during repair.
-Example shape (replace fictional content, IDs and sources):
-```genie-action
-{""version"":1,""kind"":""program"",""explanation"":""Create the requested helper."",""language"":""csharp"",""automation"":{""action"":""create"",""program_id"":"""",""name"":""Example helper"",""setup"":""Program.Setup(()=&gt;{}); Program.Run();"",""main"":""Program.Emit(\""Automan.Program.Status\"",\""Running\""); Program.Emit(\""Automan.Program.Message\"",\""Ready\""); Program.GoBackground();"",""context"":""""}}
+AUTOMATION PROGRAMS (requires automation capability):
+For a create/update request, return one genie-action block containing a version-1 JSON object.
+Use string fields: explanation, language (csharp/python/javascript), and automation with
+action (create/update), program_id ("""" for create, exact ID as a string for update), name, setup, main, context.
+Before updating, read complete sources with a context-request containing programIds:[""1003""]
+(replace with the actual ID). Automation Programs context must be enabled. Preserve unrelated code and the name.
+Only managed Automan programs can be updated. Ask when the target is ambiguous.
+
+C# reference (code before JSON encoding):
+Setup:
+```csharp
+Program.Setup(() =&gt; {});
+Program.Run();
 ```
-Never claim deployment succeeded before receiving its result. Widgets and composite artifacts are not supported here yet.
+Main uses executable statements. Publish HomeGenie fields with Program.Emit(string key, string value):
+```csharp
+Program.Emit(""Automan.Program.Message"", ""Ready"");
+Program.Emit(""Automan.Program.Status"", ""Completed"");
+Program.Emit(""Automan.Program.Request"", ""Quit"");
+```
+Each first argument above is a literal string key, including its full dotted name.
+Choose only the emissions needed for the task. Completed reports completion and leaves the program enabled.
+Quit requests disabling without deleting. Keep helpers with interactive/file options enabled.
+Use Program.GoBackground() for persistent event listeners. Polling loops use Pause and Program.IsRunning.
+Program.AddOption defaults are strings.
+
+Response format: encode complete sources as JSON strings; escape code quotes as \"" and newlines as \n.
+Example creating a background helper:
+```genie-action
+{""version"":1,""kind"":""program"",""explanation"":""Create the helper."",""language"":""csharp"",""automation"":{""action"":""create"",""program_id"":"""",""name"":""Example helper"",""setup"":""Program.Setup(()=&gt;{}); Program.Run();"",""main"":""Program.Emit(\""Automan.Program.Message\"",\""Ready\""); Program.GoBackground();"",""context"":""""}}
+```
+The host deploys and compiles the action. On compiler feedback, return one complete corrected
+genie-action for the same kind, action and program_id. Deployment success is confirmed by the host result.
+Ordinary questions need no deployment. Widgets and composite artifacts are not supported here yet.
 ";
     public static JObject Dispatch(JObject request,Func&lt;string,object,object&gt; call) {
         if(request==null || request["version"]?.Type!=JTokenType.Integer || (int)request["version"]!=1 ||
@@ -7676,6 +7715,25 @@ Never claim deployment succeeded before receiving its result. Widgets and compos
         return outcome;
     }
 }
+
+// Provider-independent interpretation of explicit lifecycle requests.
+public sealed class AiGenieProgramLifecycle {
+    readonly object gate=new object();
+    readonly HashSet&lt;string&gt; pending=new HashSet&lt;string&gt;();
+    bool stopped;
+    public static bool IsQuit(string domain,string address,string field,string value,string serviceId) {
+        return domain=="HomeAutomation.HomeGenie.Automation" &amp;&amp; address!=serviceId &amp;&amp;
+            address!=null &amp;&amp; System.Text.RegularExpressions.Regex.IsMatch(address,@"\A[1-9][0-9]*\z") &amp;&amp;
+            field=="Automan.Program.Request" &amp;&amp; string.Equals(value?.Trim(),"Quit",StringComparison.OrdinalIgnoreCase);
+    }
+    public void Stop() {lock(gate)stopped=true;}
+    public bool Handle(string domain,string address,string field,string value,string serviceId,Action&lt;string&gt; disable) {
+        if(!IsQuit(domain,address,field,value,serviceId))return false;
+        lock(gate) {if(stopped || !pending.Add(address))return false;}
+        try {disable("HomeAutomation.HomeGenie/Automation/Programs.Disable/"+address);return true;}
+        finally {lock(gate)pending.Remove(address);}
+    }
+}
 </ScriptContext>
   <ScriptErrors />
   <Data />
@@ -7684,9 +7742,9 @@ Never claim deployment succeeded before receiving its result. Widgets and compos
     <PackageId>homegenie-base</PackageId>
     <PackageVersion>1.0.36</PackageVersion>
     <Id>ai-genie-service</Id>
-    <Version>0.10.3</Version>
+    <Version>0.11.1</Version>
     <Required>true</Required>
-    <Checksum>E7DAEE748CC9DEC214841EFBE9808BC1</Checksum>
+    <Checksum>3419748D9CA63A82B2340B05DF48F81C</Checksum>
   </PackageInfo>
   <Domain>HomeAutomation.HomeGenie.Automation</Domain>
   <Address>583</Address>

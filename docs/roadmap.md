@@ -314,3 +314,9 @@ by the user before this checkpoint.
 - [ ] Retest program 1002 after the 9B CS0103 failure; original first-version background sources were restored through Program.Recover.
 
 - [ ] Investigate intermittent disappearance of reasoning during local multi-round streaming/tool calls. User still observes it after retention fixes; defer code changes. Reference: chat-history-1792268747142.json (Qwen3.5-9B). Its final successful update retains two think blocks, so distinguish transient rendering/reset loss from history persistence loss.
+
+- [x] Move Gemini generated-program Quit handling to AI Genie utility 583, shared with Lailama; Completed remains a result and Quit disables without deleting. Add lifecycle regression tests.
+- [x] Verify shared lifecycle in the running test environment: program 1003 stayed enabled after Completed; Qwen3.5-9B updated it successfully at the first deployment attempt, emitted Quit, and utility 583 disabled it with sources preserved (2026-10-18, chat-history-1792278506270.json).
+
+- [x] Invalidate Lailama native session after technical/multi-round turns, including successful compiler recovery; rebuild next turn from the cleaned completed-message projection while retaining full visible history.
+- [ ] Runtime check of post-recovery context cleanup with Lailama 1.2.4; no need to clear the stored conversation.

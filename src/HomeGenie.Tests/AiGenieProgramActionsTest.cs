@@ -90,4 +90,17 @@ public class AiGenieProgramActionsTest {
         var error=Assert.Throws<TargetInvocationException>(()=>Dispatch(request));Assert.That(error.InnerException.Message,Does.Contain("Read the target program sources"));Assert.That(deployments,Is.Zero);
     }
 
+    [TestCase("csharp","CS0103: Il nome 'Automan' non esiste nel contesto corrente",true)]
+    [TestCase("csharp","CS1002: ; expected",false)]
+    [TestCase("python","NameError: Automan",false)]
+    public void CompilerEmissionHintIsSpecificAndPreservesDiagnostic(string language,string diagnostic,bool hint) {
+        var request=Request();request["response"]["language"]=language;
+        var result=Dispatch(request,"failed",true,sent=>new JObject{["RequestId"]="stable-id",["Index"]=1,["State"]="failed",["Success"]=false,["Response"]=new JObject{["status"]="compile_failed",["program_id"]="1001",["compiler_errors"]=new JArray(diagnostic)}});
+        string feedback=(string)result["feedback"];
+        Assert.That(feedback,Does.Contain(diagnostic));
+        Assert.That(feedback.Contains("C# field emission:"),Is.EqualTo(hint));
+        if(hint)Assert.That(feedback,Does.Contain("Program.Emit(\"Automan.Program.Request\", \"Quit\");"));
+        Assert.That((string)result["outcome"],Is.EqualTo("repair"));Assert.That(recoveries,Is.Zero);
+    }
+
 }
