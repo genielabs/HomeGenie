@@ -18,8 +18,8 @@ public class LailamaCapabilityPolicyTest {
         var root=new DirectoryInfo(TestContext.CurrentContext.TestDirectory);while(root!=null&&!File.Exists(Path.Combine(root.FullName,"HomeGenie.sln")))root=root.Parent;
         var node=XDocument.Load(Path.Combine(root.FullName,"assets/build/all/data/packages/homegenie/homegenie-ml-ai/programs.xml")).Root.Elements().Single(n=>(string)n.Element("Address")=="940");
         var tree=CSharpSyntaxTree.ParseText("class Holder{"+(string)node.Element("ScriptContext")+"}").GetRoot();
-        var types=tree.DescendantNodes().OfType<ClassDeclarationSyntax>().Where(n=>new[]{"ApiCommandExecution","LailamaCapabilityPolicy"}.Contains(n.Identifier.Text));
-        var methods=tree.DescendantNodes().OfType<MethodDeclarationSyntax>().Where(n=>new[]{"ExecuteResponse","ExtractAndExecute","ReadChatSetting","CurrentDeviceContextAllowed"}.Contains(n.Identifier.Text));
+        var types=tree.DescendantNodes().OfType<ClassDeclarationSyntax>().Where(n=>new[]{"ApiCommandExecution","LailamaCapabilityPolicy","LailamaConfigurationActions"}.Contains(n.Identifier.Text));
+        var methods=tree.DescendantNodes().OfType<MethodDeclarationSyntax>().Where(n=>new[]{"ExecuteResponse","ExtractAndExecute","ExtractResponse","ReadChatSetting","CurrentDeviceContextAllowed"}.Contains(n.Identifier.Text));
         string code="using System;using System.Linq;using System.Collections.Generic;using Newtonsoft.Json;using Newtonsoft.Json.Linq;"+string.Join("\n",types)+@"
 public class FakeProperty {public string Name;public object Value;}
 public class FakeModule {public List<FakeProperty> Properties=new List<FakeProperty>();}
@@ -57,4 +57,10 @@ public class ExecutionProbe {
     [Test] public void UnsupportedCapabilitiesCannotBeEnabled(){var result=(JObject)policy.GetMethod("Normalize").Invoke(null,new object[]{JObject.Parse("{deviceControl:false,automation:true,widgets:true}"),true});Assert.That((bool)result["deviceControl"],Is.False);Assert.That((bool)result["automation"],Is.False);Assert.That((bool)result["widgets"],Is.False);}
     [TestCase("ExecuteResponse")] [TestCase("ExtractAndExecute")]
     public void LegacyStructuredActionsCannotBypassReadOnlyMode(string method){var p=Probe();string response="{\"actions\":[{\"type\":\"api-call\",\"target\":{\"domain\":\"HomeAutomation.PhilipsHue\",\"address\":\"3\"},\"command\":\"Control.Off\"}]}";Assert.Throws<TargetInvocationException>(()=>Execute(p,method,response));Assert.That(Calls(p),Is.Zero);}
+    [TestCase("ExecuteResponse")] [TestCase("ExtractAndExecute")]
+    public void ReadOnlyConfigurationCannotReachEitherExecutor(string method) {
+        var p=Probe();string response="```api-call\nHomeAutomation.HomeGenie/Config/Modules.ParameterSet/Test.Lights/1/Test.Timeout/60\n```";
+        Assert.Throws<TargetInvocationException>(()=>Execute(p,method,response));Assert.That(Calls(p),Is.Zero);
+    }
+
 }

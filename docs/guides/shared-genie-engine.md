@@ -457,3 +457,13 @@ Lailama retains completed `<think>` blocks from intermediate lookup and format-r
 ### Local model initialization failures
 
 Lailama emits Status.Init = Error when model validation or loading fails, alongside Status.Error. The chat displays the persisted initialization error instead of an indefinite loading indicator, including when no generation is active. A new initialization clears the previous error; Ready restores the normal chat.
+
+### Local configuration through the common device dispatcher
+
+Lailama adapts textual `api-call` batches containing `Modules.ParameterSet` to the canonical device response and calls `System.Utility/AiGenie/Device.Execute` in process. The common dispatcher normalizes the entire batch and resolves its targets before dispatching it to the existing action executor. Request IDs are preserved for execution-ledger replay protection. Ordinary device controls retain their existing local path.
+
+The existing executor accepts only existing non-sensitive numeric or checkbox features declared by active programs, validates range/step or On/Off values, checks the current value before writing, and reads the setting back after the standard `Modules.ParameterSet`. Uncertain or rejected writes are not retried automatically and replace provisional success text with a non-confirmation message in the saved reply. Both local execution endpoints enforce current device-control permissions.
+
+Shared text instructions teach schema discovery, parameter reads, units and configuration syntax without replacing customized provider prompts. No HomeGenie core API or provider route changes are needed.
+
+Manual acceptance: update AI Genie (583) and Lailama (940), enable context and device control, ask to set the porch-light automatic-off timeout to three minutes, then request a fresh API read. Expect 180 seconds, one verified parameter-write receipt and a fresh read receipt. Record the previous value first if it should be restored. Also verify that the same write is blocked with device control disabled. Slow local inference is expected; model compliance remains separate from executor validation.

@@ -280,3 +280,11 @@ by the user before this checkpoint.
   structured actions and permission changes during generation; keep reads available.
 - [ ] Manual read-only acceptance: current parameter read, blocked control, persistence
   across reload and re-enabled control before connecting shared parameter writes.
+
+### Lailama configurable features checkpoint
+
+- [x] Route local parameter-write batches through the common device dispatcher and existing feature validation/readback, preserving action identities and current permissions.
+- [x] Add shared instructions for feature discovery, units and standard Modules.ParameterSet writes.
+- [x] Avoid saving provisional configuration-success text when execution is rejected or unconfirmed.
+- [ ] User acceptance with Qwen3-4B-Instruct-2507: discover the porch-light timeout, set it to three minutes, freshly read 180 seconds, and verify read-only mode blocks the write.
+- [ ] Continue provider-independent coordination after this checkpoint; program/widget generation remains a later local-model test.

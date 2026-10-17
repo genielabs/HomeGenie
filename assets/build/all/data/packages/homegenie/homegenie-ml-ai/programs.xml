@@ -537,7 +537,7 @@ public sealed class AiSkillCatalog
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.51</PackageVersion>
+      <PackageVersion>1.0.52</PackageVersion>
       <Id>context-engine</Id>
       <Version>1.0.8</Version>
       <Required>true</Required>
@@ -1140,7 +1140,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.51</PackageVersion>
+      <PackageVersion>1.0.52</PackageVersion>
       <Id>gemini-automan</Id>
       <Version>1.0.10</Version>
       <Required>false</Required>
@@ -1598,7 +1598,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.51</PackageVersion>
+      <PackageVersion>1.0.52</PackageVersion>
       <Id>gemini-intent-handler</Id>
       <Version>1.0.22</Version>
       <Required>false</Required>
@@ -2321,7 +2321,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.51</PackageVersion>
+      <PackageVersion>1.0.52</PackageVersion>
       <Id>gemini-widget-genie</Id>
       <Version>1.0.18</Version>
       <Required>false</Required>
@@ -2651,7 +2651,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.51</PackageVersion>
+      <PackageVersion>1.0.52</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -3298,13 +3298,22 @@ else
                 throw new InvalidOperationException("Enable Devices context before controlling devices.");
 
             // 4. COMMAND EXECUTION AND PERSISTENCE
-            var messageSegments = ExtractResponse(priorThoughts+fullReply);
+
             telemetry.GenerationComplete();
             var actionTimer = System.Diagnostics.Stopwatch.StartNew();
             var actionResults = ExecuteResponse(fullReply, telemetry.RequestId);
             telemetry.SetActionResults(actionResults);
             telemetry.ActionsCompleted(actionTimer.ElapsedMilliseconds, actionResults.Count, actionResults.Count(r =&gt; !r.Success));
 
+            string verifiedReply=LailamaConfigurationActions.VerifiedReply(fullReply,JArray.FromObject(actionResults));
+            bool configurationFailed=verifiedReply!=fullReply;
+            if(configurationFailed) {
+                Program.Emit("LLM.TokenStream.Reset","verification");
+                // The UI has already retained this round's reasoning during reset.
+                Program.Emit(FIELD_TOKENS_STREAM,Regex.Replace(verifiedReply,@"&lt;think&gt;[\s\S]*?&lt;/think&gt;","",RegexOptions.IgnoreCase));
+                fullReply=verifiedReply;
+            }
+            var messageSegments = ExtractResponse(priorThoughts+fullReply);
             var modelResponse = new ChatMessage {
                 Role = "model",
                 Parts = messageSegments.Select(s =&gt; new MessagePart { Text = s }).ToList()
@@ -3312,7 +3321,7 @@ else
 
             if (!noHistory)
             {
-              telemetry.SaveReply(modelResponse);
+              telemetry.SaveReply(modelResponse,configurationFailed?"error":"completed");
               requestCts.Token.ThrowIfCancellationRequested();
               var committedHistory=(JArray)cleanHistory.DeepClone();
               committedHistory.Add(JObject.FromObject(ChatMessage.Create("user",rawInput)));
@@ -3715,7 +3724,7 @@ public List&lt;string&gt; ExtractResponse(string response)
 public List&lt;ApiCommandExecution&gt; ExecuteResponse(string response, string requestId = null)
 {
     object result = LailamaCapabilityPolicy.Execute(response,ReadChatSetting("AI.Chat.Capabilities"),CurrentDeviceContextAllowed(),
-        () =&gt; Api.Call("System.Utility/ActionExecutor/Execute", requestId == null ? (object)response : new { requestId, response }));
+        () =&gt; LailamaConfigurationActions.Execute(response,requestId,ReadChatSetting("AI.Chat.Capabilities"),CurrentDeviceContextAllowed(),(route,data)=&gt;Api.Call(route,data)));
     if (result == null) throw new InvalidOperationException("AI Action Executor is unavailable.");
     var actions = JToken.FromObject(result) as JArray;
     if (actions == null) throw new InvalidOperationException("Invalid AI Action Executor execution response.");
@@ -3724,8 +3733,13 @@ public List&lt;ApiCommandExecution&gt; ExecuteResponse(string response, string r
 
 public object ExtractAndExecute(string response)
 {
-    return LailamaCapabilityPolicy.Execute(response,ReadChatSetting("AI.Chat.Capabilities"),CurrentDeviceContextAllowed(),
-        () =&gt; Api.Call("System.Utility/ActionExecutor/ExtractAndExecute", response));
+    return LailamaCapabilityPolicy.Execute(response,ReadChatSetting("AI.Chat.Capabilities"),CurrentDeviceContextAllowed(), () =&gt; {
+        if((response??"").Contains("HomeAutomation.HomeGenie/Config/Modules.ParameterSet/")) {
+            ExecuteResponse(response);
+            return (object)ExtractResponse(response);
+        }
+        return Api.Call("System.Utility/ActionExecutor/ExtractAndExecute",response);
+    });
 }
 
 /**
@@ -4087,17 +4101,49 @@ public bool CurrentDeviceContextAllowed() {
         throw new InvalidOperationException("Invalid local AI Devices context selection.");
     return Program.Option(OPTION_SEND_CONTEXT_DATA).Value=="On"&amp;&amp;(context?["devices"]?.Value&lt;bool&gt;()??true);
 }
+
+public static class LailamaConfigurationActions {
+    public static object Execute(string response, string requestId, JObject capabilities, bool devices, Func&lt;string,object,object&gt; call) {
+        string visible=System.Text.RegularExpressions.Regex.Replace(response??"",@"&lt;think&gt;[\s\S]*?&lt;/think&gt;","",System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+        var blocks=System.Text.RegularExpressions.Regex.Matches(visible,@"(?im)^\s*```api-call[^\S\r\n]*\r?\n([\s\S]*?)^\s*```[^\S\r\n]*$");
+        var commands=new JArray();
+        foreach(System.Text.RegularExpressions.Match block in blocks)
+            foreach(string line in block.Groups[1].Value.Split('\n')) {
+                string command=line.Trim();if(command.StartsWith("/api/",StringComparison.Ordinal))command=command.Substring(5);
+                if(command.Length&gt;0)commands.Add(command);
+            }
+        bool configuration=commands.Values&lt;string&gt;().Any(c=&gt;c.StartsWith("HomeAutomation.HomeGenie/Config/Modules.ParameterSet/",StringComparison.Ordinal));
+        if(!configuration)return call("System.Utility/ActionExecutor/Execute",requestId==null?(object)response:new {requestId,response});
+        var raw=call("System.Utility/AiGenie/Device.Execute",new JObject {
+            ["version"]=1,["requestId"]=requestId??Guid.NewGuid().ToString("N"),
+            ["capabilities"]=LailamaCapabilityPolicy.Normalize(capabilities,devices),
+            ["context"]=new JObject{["devices"]=devices},
+            ["response"]=new JObject{["version"]=1,["kind"]="device",["explanation"]="Requested configuration change.",["commands"]=commands}
+        });
+        var result=raw is string text?JObject.Parse(text):raw==null?null:JObject.FromObject(raw);
+        if(result==null || (string)result["Status"]=="Error" || result["results"] is not JArray)
+            throw new InvalidOperationException((string)result?["Message"]??"Configuration execution outcome is unknown. Read the setting before retrying.");
+        return result["results"];
+    }
+    public static string VerifiedReply(string response,JArray results) {
+        bool failed=results.OfType&lt;JObject&gt;().Any(r=&gt;((string)r["Command"]??"").StartsWith("HomeAutomation.HomeGenie/Config/Modules.ParameterSet/",StringComparison.Ordinal) &amp;&amp; r["Success"]?.Value&lt;bool&gt;()!=true);
+        if(!failed)return response;
+        string thoughts=string.Concat(System.Text.RegularExpressions.Regex.Matches(response??"",@"&lt;think&gt;[\s\S]*?&lt;/think&gt;",System.Text.RegularExpressions.RegexOptions.IgnoreCase).Cast&lt;System.Text.RegularExpressions.Match&gt;().Select(m=&gt;m.Value+"\n"));
+        string commands=string.Join("\n",results.Values&lt;JObject&gt;().Select(r=&gt;(string)r["Command"]));
+        return thoughts+"Configuration was not confirmed. Check the action results and read the current setting before retrying.\n\n```api-call\n"+commands+"\n```";
+    }
+}
 </ScriptContext>
     <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.51</PackageVersion>
+      <PackageVersion>1.0.52</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.0.31</Version>
+      <Version>1.0.32</Version>
       <Required>true</Required>
-      <Checksum>1E0B5DCB9635B485E10002F6CEF701A3</Checksum>
+      <Checksum>1F3CB62886CBBEC067B947EBEEC2E650</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>
@@ -4299,7 +4345,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.51</PackageVersion>
+      <PackageVersion>1.0.52</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -4485,7 +4531,7 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.51</PackageVersion>
+      <PackageVersion>1.0.52</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -5399,7 +5445,7 @@ public static class GeminiGenerationProvider {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.51</PackageVersion>
+      <PackageVersion>1.0.52</PackageVersion>
       <Id>gemini-genie</Id>
       <Version>1.0.17</Version>
       <Required>true</Required>
