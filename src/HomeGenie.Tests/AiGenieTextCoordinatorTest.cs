@@ -94,4 +94,48 @@ public class AiGenieTextCoordinatorTest {
     [Test] public void DiagnosticObserverFailureDoesNotAlterTheConversation() {
         replies.Enqueue("final");var request=Request();request["observe"]=new Action<string,JObject>((phase,details)=>throw new Exception("logger unavailable"));Assert.That((string)Run(request)["reply"],Is.EqualTo("final"));Assert.That(executions,Is.EqualTo(1));
     }
+    [Test] public void ConfirmedCompilerFailuresPermitOnlyFourRepairsOfTheSameLogicalAction() {
+        for(int i=0;i<5;i++)replies.Enqueue("program sources");var request=Request();
+        request["execute"]=new Func<string,JObject>(reply=> {
+            executions++;if(executions<5)return new JObject{["outcome"]="repair",["nextAttempt"]=executions+1,["feedback"]="Correct the same program"};
+            return new JObject{["outcome"]="completed",["reply"]="Program created",["results"]=new JArray()};
+        });
+        var result=Run(request);Assert.That(executions,Is.EqualTo(5));Assert.That((int)result["compilerRepairs"],Is.EqualTo(4));Assert.That(resets,Is.All.EqualTo("compiler"));
+    }
+    [Test] public void InvalidCompilerAttemptCannotCauseAnotherExecution() {
+        replies.Enqueue("program sources");var request=Request();request["execute"]=new Func<string,JObject>(reply=>{executions++;return new JObject{["outcome"]="repair",["nextAttempt"]=4,["feedback"]="bad"};});
+        Assert.Throws<InvalidOperationException>(()=>Run(request));Assert.That(executions,Is.EqualTo(1));Assert.That(generations,Is.EqualTo(1));
+    }
+
+    [Test] public void MissingSourcesAreRetrievedBeforeRegenerationAndOneActualDeployment() {
+        replies.Enqueue("update proposed");replies.Enqueue("update with sources");var request=Request();int writes=0;
+        request["step"]=new Func<string,int,JObject>((text,round)=>text.StartsWith("```context-request")
+            ?new JObject{["state"]="context",["text"]="complete existing sources",["calls"]=new JArray("Programs.List")}
+            :new JObject{["version"]=1,["state"]="reply",["text"]=text});
+        request["execute"]=new Func<string,JObject>(text=> {
+            executions++;if(executions==1)return new JObject{["outcome"]="context",["resources"]=new JObject{["programIds"]=new JArray("1002")},["feedback"]="Keep the same update target"};
+            writes++;return new JObject{["outcome"]="completed",["reply"]="Updated 1002",["results"]=new JArray()};
+        });
+        var result=Run(request);Assert.That(generations,Is.EqualTo(2));Assert.That(writes,Is.EqualTo(1));Assert.That((int)result["contextReads"],Is.EqualTo(1));
+        Assert.That(inputs[1],Does.Contain("complete existing sources").And.Contain("Keep the same update target"));Assert.That(resets,Is.EqualTo(new[]{"context"}));Assert.That(receipts,Is.EqualTo(new[]{"Programs.List"}));
+    }
+    [Test] public void MissingSourceFetchFailureCannotReachDeployment() {
+        replies.Enqueue("update proposed");var request=Request();request["step"]=new Func<string,int,JObject>((text,round)=>text.StartsWith("```context-request")?new JObject{["Status"]="Error",["Message"]="Sources unavailable"}:new JObject{["version"]=1,["state"]="reply"});
+        request["execute"]=new Func<string,JObject>(text=>{executions++;return new JObject{["outcome"]="context",["resources"]=new JObject{["programIds"]=new JArray("1002")}};});
+        Assert.Throws<InvalidOperationException>(()=>Run(request));Assert.That(generations,Is.EqualTo(1));Assert.That(executions,Is.EqualTo(1));Assert.That(receipts,Is.Empty);
+    }
+
+    [Test] public void FailureRetainsPreviousAndCurrentReasoningIncludingAnUnclosedThinkBlock() {
+        replies.Enqueue("<think>first</think>lookup");replies.Enqueue("<think>last unfinished</thi");
+        var request=Request();request["execute"]=new Func<string,JObject>(text=>throw new InvalidOperationException("Bad program response"));
+        var error=Assert.Throws<InvalidOperationException>(()=>Run(request));
+        Assert.That((string)error.Data["AiGenie.Thoughts"],Is.EqualTo("<think>first</think>\n<think>last unfinished</think>\n"));
+    }
+    [Test] public void ProviderFailureAfterLookupDoesNotDuplicateEarlierReasoning() {
+        var request=Request();request["generate"]=new Func<string,int,IDictionary<string,object>>((input,round)=> {
+            if(round==0)return Generation("<think>first</think>lookup");throw new InvalidOperationException("Provider unavailable");
+        });
+        var error=Assert.Throws<InvalidOperationException>(()=>Run(request));Assert.That((string)error.Data["AiGenie.Thoughts"],Is.EqualTo("<think>first</think>\n"));
+    }
+
 }

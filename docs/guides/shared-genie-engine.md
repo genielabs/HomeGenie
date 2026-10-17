@@ -477,3 +477,39 @@ AI Genie now owns the local text strategy: generation-result validation, fresh-r
 Lailama keeps its model/context/session and native operation lease. Its callbacks still handle native token filtering, tracing and streaming, current-permission checks, the existing common device/configuration dispatch, telemetry, and correction of unconfirmed configuration presentation. Only after a valid coordinated result does the wrapper save the final history message, commit its native-session cache and emit stream completion. No extra model or history service is created.
 
 Gemini keeps the existing structured Conversation.Run strategy in the same utility. The two response protocols remain distinct, and this extraction does not register a new Lailama provider HTTP endpoint or modify Prompt.Ask behavior. Legacy local Execute/ExtractAndExecute endpoints are unchanged by this refactor.
+
+### Local automation programs
+
+Lailama advertises deviceControl and automation independently, plus devices and automationPrograms context. Newly exposed automation is seeded off in the persistent module preference when absent. Widgets remain unsupported. The existing SendContextData setting is still the master switch for context sharing; the chat context menu selects which supported categories are included.
+
+When automation is explicitly enabled, compact shared text instructions define one `genie-action` JSON fence using the same version-1 program contract as Gemini. AI Genie Text.Program.Execute parses and normalizes this envelope and uses the existing AiGenieProgramActions/ActionExecutor deployment path. Ordinary replies and device api-call syntax remain supported. A program envelope cannot mix device commands or reference requests, and compiler recovery cannot switch its action or target.
+
+Program updates require enabled Automation Programs context and complete sources read during the current turn via context-request/programIds. Successful source reads are accumulated in the turn scope; receipts show the Programs.List API actually used by the existing collector, not a fictional Programs.Get request. Device context is not needed for a program-only source read or for creating an independent helper.
+
+Only confirmed compile_failed results may request another generation, up to five deployment attempts with the same request/target. The text generation ceiling grows from five to at most nine only for these bounded compiler corrections; unknown outcomes do not cause a retry. On completion, the existing automan_deploy card is returned, with reasoning retained and deployment JSON excluded from speech. The wrapper still owns history/native session persistence.
+
+Manual acceptance with a CPU model: enable Automations; create a persistent helper that emits Automan.Program.Status=Running and Automan.Program.Message once, then Program.GoBackground. Enable Automation Programs context and update that exact assigned ID after reading its sources. Verify the card says updated and no second program is created. Also verify the automation permission blocks creation when disabled.
+
+This checkpoint does not expose widgets/composites locally. Migration of provider-specific child Quit handling into the common service remains pending before complete automation-lifecycle parity with Gemini; keep the first acceptance test persistent.
+
+### Required sources for local updates
+
+If a local model emits an update before requesting the target's sources, the text program adapter returns a required context step instead of deploying. The common coordinator retrieves that exact numeric program ID through the existing scoped collector, records the read receipt and resumes generation with the returned sources. The pending update action and target are committed across that continuation; a replacement creation is rejected. Disabled source context, lookup failures and exhausted read limits prevent deployment.
+
+Both the adapter and direct program dispatcher accept missing or JSON-null resources as absent source context rather than indexing a JValue. The direct dispatcher retains its explicit source-read validation; only the text coordinator performs the automatic prerequisite lookup.
+
+Acceptance status: the 9B model created managed program 1002 on its first compile attempt. Its installed code emits the requested first-version message and calls Program.GoBackground. The first update exposed the JSON-null resources bug before any recorded action; retest that same existing ID after updating the shared service and local wrapper.
+
+### Reasoning visibility and failed compiler recovery
+
+Retained reasoning remains visible during streaming resets even when the current round buffer is empty. Complete and unfinished think blocks are retained for display; unfinished blocks are closed in the retained copy so the next round cannot be swallowed into the previous reasoning. An unfinished reasoning channel is excluded from reference and program action parsing.
+
+The text coordinator attaches accumulated/current reasoning to a thrown error. Its handler returns that diagnostic to the local wrapper, which includes it in the saved error message. This preserves earlier reasoning when the final generation fails its response contract. A late native failure does not duplicate the previous round's thoughts.
+
+On failure/cancellation, Lailama checks the existing request ledger for the latest program deployment. Only a confirmed failed/compile_failed receipt without an existing recovery permits calling the existing Program.Recover. Completed, unknown, unrelated and already-recovered outcomes are left untouched; recovery exceptions or unconfirmed responses are not retried. The existing executor independently blocks unknown/completed rollback and restores the original sources and prior enabled state for a failed update.
+
+Observed 9B update: CS0103 resulted from treating Automan.Program.Message as a C# property rather than a quoted Program.Emit field. The following generation did not return the required action. Program 1002 was manually restored through the existing recovery API to its original first-version background code before retesting these fixes. Shared instructions now explicitly explain that Automan is not a C# class or namespace.
+
+### Context request validation
+
+Local text context requests reject program API routes used as module/parameter IDs before any collector call. The existing single contract-repair budget explains programIds with an exact ID for source reads. Collector error responses produce a concise reference-data error rather than exposing internal stack traces; infrastructure and permission failures do not trigger format retries.

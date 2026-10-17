@@ -35,7 +35,7 @@ public class ExecutionProbe {
         var paths=((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")).Split(Path.PathSeparator).Where(p=>Path.GetDirectoryName(p)==Path.GetDirectoryName(typeof(object).Assembly.Location)).Append(typeof(JsonConvert).Assembly.Location);
         var compilation=CSharpCompilation.Create("LocalCapabilities"+Guid.NewGuid().ToString("N"),new[]{CSharpSyntaxTree.ParseText(code)},paths.Select(p=>MetadataReference.CreateFromFile(p)),new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
         using var stream=new MemoryStream();var result=compilation.Emit(stream);Assert.That(result.Success,Is.True,string.Join("\n",result.Diagnostics));var assembly=Assembly.Load(stream.ToArray());host=assembly.GetType("ExecutionProbe");policy=assembly.GetType("LailamaCapabilityPolicy");
-        Assert.That((string)node.Element("ScriptSetup"),Does.Contain("capabilities=new[]{\"deviceControl\"}"));
+        Assert.That((string)node.Element("ScriptSetup"),Does.Contain("capabilities=new[]{\"deviceControl\",\"automation\"}"));
     }
     object Probe(string caps="{\"deviceControl\":false}",bool master=true,bool devices=true){var p=Activator.CreateInstance(host);Configure(p,caps,master,devices);return p;}
     void Configure(object p,string caps,bool master=true,bool devices=true)=>host.GetMethod("Configure").Invoke(p,new object[]{caps,master,devices});
@@ -54,13 +54,25 @@ public class ExecutionProbe {
     [TestCase("{\"deviceControl\":\"false\"}")] [TestCase("not json")]
     public void InvalidPersistentSettingFailsClosed(string caps){var p=Probe(caps);Assert.Throws<TargetInvocationException>(()=>Execute(p,"ExecuteResponse",On));Assert.That(Calls(p),Is.Zero);}
     [Test] public void MissingSettingKeepsExistingControlDefault(){var p=Probe(null);Execute(p,"ExecuteResponse",On);Assert.That(Calls(p),Is.EqualTo(1));}
-    [Test] public void UnsupportedCapabilitiesCannotBeEnabled(){var result=(JObject)policy.GetMethod("Normalize").Invoke(null,new object[]{JObject.Parse("{deviceControl:false,automation:true,widgets:true}"),true});Assert.That((bool)result["deviceControl"],Is.False);Assert.That((bool)result["automation"],Is.False);Assert.That((bool)result["widgets"],Is.False);}
+    [Test] public void WidgetsStayDisabledWhileAutomationRequiresExplicitOptIn(){var result=(JObject)policy.GetMethod("Normalize").Invoke(null,new object[]{JObject.Parse("{deviceControl:false,automation:true,widgets:true}"),true});Assert.That((bool)result["deviceControl"],Is.False);Assert.That((bool)result["automation"],Is.True);Assert.That((bool)result["widgets"],Is.False);}
     [TestCase("ExecuteResponse")] [TestCase("ExtractAndExecute")]
     public void LegacyStructuredActionsCannotBypassReadOnlyMode(string method){var p=Probe();string response="{\"actions\":[{\"type\":\"api-call\",\"target\":{\"domain\":\"HomeAutomation.PhilipsHue\",\"address\":\"3\"},\"command\":\"Control.Off\"}]}";Assert.Throws<TargetInvocationException>(()=>Execute(p,method,response));Assert.That(Calls(p),Is.Zero);}
     [TestCase("ExecuteResponse")] [TestCase("ExtractAndExecute")]
     public void ReadOnlyConfigurationCannotReachEitherExecutor(string method) {
         var p=Probe();string response="```api-call\nHomeAutomation.HomeGenie/Config/Modules.ParameterSet/Test.Lights/1/Test.Timeout/60\n```";
         Assert.Throws<TargetInvocationException>(()=>Execute(p,method,response));Assert.That(Calls(p),Is.Zero);
+    }
+
+    [Test] public void AutomationIsOffWithoutAnExplicitPreference() {
+        var result=(JObject)policy.GetMethod("Normalize").Invoke(null,new object[]{new JObject{["deviceControl"]=true},true});
+        Assert.That((bool)result["automation"],Is.False);
+    }
+
+    [Test] public void ParameterWriteInsideUnfinishedReasoningCannotReachSharedDeviceDispatch() {
+        var adapter=host.Assembly.GetType("LailamaConfigurationActions");string response="<think>planning\n```api-call\nHomeAutomation.HomeGenie/Config/Modules.ParameterSet/Test.Lights/1/Test.Timeout/60\n```";
+        int calls=0;Func<string,object,object> call=(route,data)=>{calls++;Assert.That(route,Is.EqualTo("System.Utility/ActionExecutor/Execute"));return new JArray();};
+        var result=adapter.GetMethod("Execute").Invoke(null,new object[]{response,"turn",new JObject{["deviceControl"]=true},true,call});
+        Assert.That(calls,Is.EqualTo(1));Assert.That((JArray)result,Is.Empty);
     }
 
 }

@@ -537,7 +537,7 @@ public sealed class AiSkillCatalog
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.53</PackageVersion>
+      <PackageVersion>1.0.56</PackageVersion>
       <Id>context-engine</Id>
       <Version>1.0.8</Version>
       <Required>true</Required>
@@ -1140,7 +1140,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.53</PackageVersion>
+      <PackageVersion>1.0.56</PackageVersion>
       <Id>gemini-automan</Id>
       <Version>1.0.10</Version>
       <Required>false</Required>
@@ -1598,7 +1598,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.53</PackageVersion>
+      <PackageVersion>1.0.56</PackageVersion>
       <Id>gemini-intent-handler</Id>
       <Version>1.0.22</Version>
       <Required>false</Required>
@@ -2321,7 +2321,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.53</PackageVersion>
+      <PackageVersion>1.0.56</PackageVersion>
       <Id>gemini-widget-genie</Id>
       <Version>1.0.18</Version>
       <Required>false</Required>
@@ -2651,7 +2651,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.53</PackageVersion>
+      <PackageVersion>1.0.56</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -2709,6 +2709,13 @@ var modelsFile = Path.Combine(Data.GetFolder(), CONFIG_FILE_NAME);
 
 // --- 2. PROGRAM SETUP DELEGATE ---
 
+// Newly exposed automation actions require an explicit user opt-in.
+var initialCapabilities=ReadChatSetting("AI.Chat.Capabilities")??new JObject{["deviceControl"]=true,["widgets"]=false};
+if(initialCapabilities["automation"]==null) {
+    initialCapabilities["automation"]=false;
+    Program.Parameter("AI.Chat.Capabilities").Value=initialCapabilities.ToString(Formatting.None);
+}
+
 Program.Setup(() =&gt; {
 
   Program
@@ -2716,7 +2723,7 @@ Program.Setup(() =&gt; {
     .Implements(
       "@AI:IntentHandler",
       API_URL,
-      new {chat=new {capabilities=new[]{"deviceControl"}}}
+      new {chat=new {context=new[]{"devices","automationPrograms"},capabilities=new[]{"deviceControl","automation"}}}
     )
 
     // UI Options Definition:
@@ -3107,8 +3114,11 @@ else
             throw new InvalidOperationException("Local AI is busy or stopping. Wait for the current operation to finish.");
 
         var process = new Func&lt;bool, string&gt;((sync) =&gt; {
+            string failureThoughts="";
             try {
             requestCts.Token.ThrowIfCancellationRequested();
+            // This accepted turn owns the operation lease; discard errors from prior turns.
+            Program.Emit(FIELD_STATUS_ERROR, "");
             Func&lt;object,JObject&gt; readObject = value =&gt; value is string text ? JObject.Parse(text) : value == null ? null : JObject.FromObject(value);
             Func&lt;string,JObject&gt; storedSelection = name =&gt; {
                 var property = Program.Module.Properties.FirstOrDefault(p =&gt; p.Name == name);
@@ -3121,8 +3131,8 @@ else
                     throw new InvalidOperationException("Invalid context selection: " + key);
                 selected[key] = sendContextData &amp;&amp; (selected[key]?.Value&lt;bool&gt;() ?? key == "devices");
             }
-            // Local inference currently supports device context only; do not load code or deep knowledge.
-            foreach(string key in new[]{"widgets","automationPrograms","dashboards","deepKnowledge"}) selected[key]=false;
+            // Only explicitly selected device/program context is supported by the local strategy.
+            foreach(string key in new[]{"widgets","dashboards","deepKnowledge"}) selected[key]=false;
             var scope = new JObject { ["version"]=1, ["message"]=rawInput, ["context"]=selected,
                 ["capabilities"]=LailamaCapabilityPolicy.Normalize(storedSelection("AI.Chat.Capabilities"),(bool)selected["devices"]) };
             string localTemplate=File.ReadAllText(Path.Combine(Data.GetFolder(), "system_prompt.txt"));
@@ -3135,13 +3145,22 @@ else
                 if(value!=null &amp;&amp; (string)value["Status"]=="Error" &amp;&amp; (string)value["errorKind"]=="contract")return value;
                 if(value==null || (string)value["Status"]=="Error" || value["version"]?.Value&lt;int&gt;()!=1)
                     throw new InvalidOperationException((string)value?["Message"]??"AI Genie text context service is unavailable.");
+                if((string)value["state"]=="context" &amp;&amp; value["resources"] is JObject readResources) {
+                    var accumulated=scope["resources"] as JObject??new JObject();
+                    foreach(var resource in readResources.Properties()) {
+                        var prior=accumulated[resource.Name] as JArray??new JArray();
+                        accumulated[resource.Name]=new JArray(prior.Values&lt;string&gt;().Concat(((JArray)resource.Value).Values&lt;string&gt;()).Distinct());
+                    }
+                    scope["resources"]=accumulated;
+                }
                 return value;
             };
             var strategy=textStep("",0);
             if(strategy["instructions"]?.Type!=JTokenType.String)throw new InvalidOperationException("Update AI Genie before using local discovery.");
             localTemplate += "\n"+(string)strategy["instructions"];
+            if(scope["capabilities"]["automation"].Value&lt;bool&gt;())localTemplate += "\n#use-skill homegenie-core\n"+(string)strategy["programInstructions"];
             if(scope["capabilities"]["deviceControl"].Value&lt;bool&gt;()!=true)
-                localTemplate += "\nREAD-ONLY MODE: device and parameter lookups are allowed when context sharing is enabled. Never emit api-call controls or writes. Ask the user to enable deviceControl if an action is requested; do not enable it yourself.";
+                localTemplate += "\nDEVICE CONTROL DISABLED: device/parameter lookups are allowed when context sharing is enabled. Never emit api-call controls or parameter writes. Automation follows its separate capability. Ask the user to enable deviceControl for device actions; do not enable it yourself.";
             var prepared=readObject(Api.Call("System.Utility/AiGenie/Context.Prepare",new JObject{
                 ["version"]=1,["template"]=localTemplate,["request"]=scope}));
             if(prepared==null || (string)prepared["Status"]=="Error" || prepared["systemPrompt"]?.Type!=JTokenType.String || prepared["profileKey"]?.Type!=JTokenType.String)
@@ -3177,6 +3196,7 @@ else
             lifecycleLog("Lailama.Session "+new JObject{["requestId"]=telemetry.RequestId,["reused"]=reuseSession,
                 ["historyMessages"]=cleanHistory.Count,["nativeMessages"]=session.History.Messages.Count}.ToString(Formatting.None));
             LailamaGenerationTrace trace=null;
+            JObject programState=new JObject();
             var coordinated=readObject(Api.Call("System.Utility/AiGenie/Conversation.Text.Run",new Dictionary&lt;string,object&gt; {
                 ["version"]=1,["requestId"]=telemetry.RequestId,
                 ["input"]=LailamaSessionCache.CurrentTurn((string)prepared["systemPrompt"],rawInput),
@@ -3273,6 +3293,29 @@ else
                 ["contextCall"]=new Action&lt;string&gt;(path=&gt;telemetry.ContextCalls.Add(path)),
                 ["observe"]=new Action&lt;string,JObject&gt;((phase,details)=&gt;trace?.Event(phase,()=&gt;details)),
                 ["execute"]=new Func&lt;string,JObject&gt;(reply=&gt; {
+                    var currentCapabilities=LailamaCapabilityPolicy.Normalize(ReadChatSetting("AI.Chat.Capabilities"),CurrentDeviceContextAllowed());
+                    var programContext=(JObject)scope["context"].DeepClone();
+                    programContext["automationPrograms"]=(bool)programContext["automationPrograms"] &amp;&amp; CurrentProgramContextAllowed();
+                    var programResult=readObject(Api.Call("System.Utility/AiGenie/Text.Program.Execute",new JObject {
+                        ["version"]=1,["requestId"]=telemetry.RequestId,["response"]=reply,["state"]=programState,
+                        ["capabilities"]=currentCapabilities,["context"]=programContext,["resources"]=(scope["resources"] as JObject)?.DeepClone()??new JObject()
+                    }));
+                    if(programResult==null || (string)programResult["Status"]=="Error")
+                        throw new InvalidOperationException((string)programResult?["Message"]??"Text program service is unavailable.");
+                    if(programResult["state"]?.Type!=JTokenType.String || (string)programResult["state"]!="not_program") {
+                        if(programResult["state"] is not JObject nextProgramState || (string)programResult["requestId"]!=telemetry.RequestId)
+                            throw new InvalidOperationException("Invalid program coordinator response.");
+                        programState=(JObject)nextProgramState.DeepClone();
+                        if((string)programResult["outcome"]=="context")return new JObject{["outcome"]="context",["resources"]=programResult["resources"].DeepClone(),["feedback"]=programResult["feedback"].DeepClone()};
+                        telemetry.GenerationComplete();
+                        telemetry.ActionsCompleted(0,(int)programResult["actionCalls"],(string)programResult["outcome"]=="completed"?0:1);
+                        if((string)programResult["outcome"]=="repair")return new JObject{["outcome"]="repair",["feedback"]=programResult["feedback"].DeepClone(),["nextAttempt"]=programResult["nextAttempt"].DeepClone()};
+                        string deploymentReply=(string)programResult["reply"];
+                        Program.Emit("LLM.TokenStream.Reset","deployment");
+                        Program.Emit(FIELD_TOKENS_STREAM,deploymentReply);
+                        string finalThoughts=string.Concat(Regex.Matches(reply,@"&lt;think&gt;[\s\S]*?&lt;/think&gt;",RegexOptions.IgnoreCase).Cast&lt;Match&gt;().Select(m=&gt;m.Value+"\n"));
+                        return new JObject{["reply"]=finalThoughts+deploymentReply,["outcome"]=programResult["outcome"].DeepClone(),["results"]=new JArray()};
+                    }
                     if(!(bool)scope["context"]["devices"] &amp;&amp; Regex.IsMatch(reply,@"```\s*api-call",RegexOptions.IgnoreCase))
                         throw new InvalidOperationException("Enable Devices context before controlling devices.");
             telemetry.GenerationComplete();
@@ -3292,6 +3335,7 @@ else
                     return new JObject{["reply"]=reply,["results"]=JArray.FromObject(actionResults),["outcome"]=configurationFailed?"error":"completed"};
                 })
             }));
+            failureThoughts=coordinated?["thoughts"]?.Type==JTokenType.String?(string)coordinated["thoughts"]:"";
             requestCts.Token.ThrowIfCancellationRequested();
             if(coordinated?["cancelled"]?.Value&lt;bool&gt;()==true)throw new OperationCanceledException(requestCts.Token);
             if(coordinated==null || (string)coordinated["Status"]=="Error")
@@ -3324,10 +3368,18 @@ else
             if (noHistory) Program.Emit(FIELD_TOKENS_STREAM, "");
             return fullReply;
             } catch (OperationCanceledException) {
-                if (!nativeLifetime.IsStopping) telemetry.Error("[STOPPED]", "cancelled");
+                if (!nativeLifetime.IsStopping) {
+                    var recovery=RecoverFailedProgram(telemetry.RequestId);
+                    if(recovery["attempted"]?.Value&lt;bool&gt;()==true)telemetry.ActionsCompleted(0,1,recovery["success"]?.Value&lt;bool&gt;()==true?0:1);
+                    telemetry.Error(failureThoughts+"[STOPPED]\n"+(string)recovery["message"],"cancelled");
+                }
                 throw;
             } catch (Exception ex) {
-                if (!nativeLifetime.IsStopping) telemetry.Error("**Error:** " + ex.Message);
+                if (!nativeLifetime.IsStopping) {
+                    var recovery=RecoverFailedProgram(telemetry.RequestId);
+                    if(recovery["attempted"]?.Value&lt;bool&gt;()==true)telemetry.ActionsCompleted(0,1,recovery["success"]?.Value&lt;bool&gt;()==true?0:1);
+                    telemetry.Error(failureThoughts+"**Error:** "+ex.Message+"\n"+(string)recovery["message"]);
+                }
                 throw;
             } finally { nativeLifetime.End(requestCts); }
         });
@@ -4054,7 +4106,7 @@ public static class LailamaCapabilityPolicy {
     public static JObject Normalize(JObject selected,bool devices) {
         if(selected!=null &amp;&amp; selected.Properties().Any(p=&gt;!new[]{"deviceControl","automation","widgets"}.Contains(p.Name)||p.Value.Type!=JTokenType.Boolean))
             throw new InvalidOperationException("Invalid local AI capability selection.");
-        return new JObject{["deviceControl"]=devices&amp;&amp;(selected?["deviceControl"]?.Value&lt;bool&gt;()??true),["automation"]=false,["widgets"]=false};
+        return new JObject{["deviceControl"]=devices&amp;&amp;(selected?["deviceControl"]?.Value&lt;bool&gt;()??true),["automation"]=selected?["automation"]?.Value&lt;bool&gt;()??false,["widgets"]=false};
     }
     public static object Execute(string response,JObject selected,bool devices,Func&lt;object&gt; execute) {
         bool command=System.Text.RegularExpressions.Regex.IsMatch(response??"",@"```\s*api-call",System.Text.RegularExpressions.RegexOptions.IgnoreCase);
@@ -4076,6 +4128,13 @@ public JObject ReadChatSetting(string name) {
     string value=property==null?null:Convert.ToString(property.Value);
     return string.IsNullOrWhiteSpace(value)?null:JObject.Parse(value);
 }
+public bool CurrentProgramContextAllowed() {
+    var context=ReadChatSetting("AI.Chat.Context");
+    if(context?["automationPrograms"]!=null &amp;&amp; context["automationPrograms"].Type!=JTokenType.Boolean)
+        throw new InvalidOperationException("Invalid Automation Programs context selection.");
+    return Program.Option(OPTION_SEND_CONTEXT_DATA).Value=="On" &amp;&amp; context?["automationPrograms"]?.Value&lt;bool&gt;()==true;
+}
+
 public bool CurrentDeviceContextAllowed() {
     var context=ReadChatSetting("AI.Chat.Context");
     if(context?["devices"]!=null &amp;&amp; context["devices"].Type!=JTokenType.Boolean)
@@ -4085,7 +4144,7 @@ public bool CurrentDeviceContextAllowed() {
 
 public static class LailamaConfigurationActions {
     public static object Execute(string response, string requestId, JObject capabilities, bool devices, Func&lt;string,object,object&gt; call) {
-        string visible=System.Text.RegularExpressions.Regex.Replace(response??"",@"&lt;think&gt;[\s\S]*?&lt;/think&gt;","",System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+        string visible=System.Text.RegularExpressions.Regex.Replace(response??"",@"&lt;think&gt;[\s\S]*?(?:&lt;/think&gt;|$)","",System.Text.RegularExpressions.RegexOptions.IgnoreCase);
         var blocks=System.Text.RegularExpressions.Regex.Matches(visible,@"(?im)^\s*```api-call[^\S\r\n]*\r?\n([\s\S]*?)^\s*```[^\S\r\n]*$");
         var commands=new JArray();
         foreach(System.Text.RegularExpressions.Match block in blocks)
@@ -4114,17 +4173,36 @@ public static class LailamaConfigurationActions {
         return thoughts+"Configuration was not confirmed. Check the action results and read the current setting before retrying.\n\n```api-call\n"+commands+"\n```";
     }
 }
+
+// Abort cleanup is permitted only after a receipt confirms the latest deployment failed compilation.
+public JObject RecoverFailedProgram(string requestId) {
+    bool attempted=false;
+    try {
+        object raw=Api.Call("System.Utility/ActionExecutor/Results",JsonConvert.SerializeObject(new {requestId}));
+        var rows=(raw is string text?JToken.Parse(text):raw==null?null:JToken.FromObject(raw)) as JArray;
+        if(rows==null)return new JObject();
+        var matching=rows.OfType&lt;JObject&gt;().Where(r=&gt;(string)r["RequestId"]==requestId).ToArray();
+        if(matching.Any(r=&gt;(string)r["ActionId"]==requestId+":recover"))return new JObject();
+        var latest=matching.Where(r=&gt;((string)r["ActionId"]??"").StartsWith(requestId+":deploy-",StringComparison.Ordinal)).OrderBy(r=&gt;(int?)r["Index"]??0).LastOrDefault();
+        if(latest==null || (string)latest["State"]!="failed" || (string)(latest["Response"] as JObject)?["status"]!="compile_failed")return new JObject();
+        attempted=true;
+        raw=Api.Call("System.Utility/ActionExecutor/Program.Recover",JsonConvert.SerializeObject(new {requestId}));
+        var result=raw is string value?JObject.Parse(value):raw==null?null:JObject.FromObject(raw);
+        bool success=(string)result?["RequestId"]==requestId &amp;&amp; result?["Success"]?.Value&lt;bool&gt;()==true;
+        return new JObject{["attempted"]=true,["success"]=success,["message"]=success?"The previous program state was recovered; no replacement was created.":"Program recovery was not confirmed. Check the existing program before retrying."};
+    } catch {return new JObject{["attempted"]=attempted,["success"]=false,["message"]=attempted?"Program recovery was not confirmed. Check the existing program before retrying.":""};}
+}
 </ScriptContext>
     <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.53</PackageVersion>
+      <PackageVersion>1.0.56</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.1.0</Version>
+      <Version>1.2.3</Version>
       <Required>true</Required>
-      <Checksum>C7B730873FA5C89A0B2179427599C105</Checksum>
+      <Checksum>4C60BD7D7C75030A605F970720376761</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>
@@ -4326,7 +4404,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.53</PackageVersion>
+      <PackageVersion>1.0.56</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -4512,7 +4590,7 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.53</PackageVersion>
+      <PackageVersion>1.0.56</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -5426,7 +5504,7 @@ public static class GeminiGenerationProvider {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.53</PackageVersion>
+      <PackageVersion>1.0.56</PackageVersion>
       <Id>gemini-genie</Id>
       <Version>1.0.17</Version>
       <Required>true</Required>

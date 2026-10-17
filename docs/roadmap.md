@@ -296,3 +296,21 @@ by the user before this checkpoint.
 - [x] Keep existing limits: three reference reads, one format repair and five generations; never repeat final actions after an uncertain result.
 - [x] Manual acceptance after updating AI Genie and Lailama: fresh read 60 seconds, one verified write from 60 to 90 seconds, and a new API read of 90 seconds. User confirmed the chat stays busy through API calls and the end of inference. Permission disable/re-enable was verified in the preceding checkpoint.
 - [ ] Continue convergence with the structured Gemini strategy after regression acceptance; local program/widget generation remains later.
+
+### Lailama program deployment checkpoint
+
+- [x] Add opt-in Automation capability and the existing chat context menu for Devices/Automation Programs, preserving text prompt payloads and provider APIs.
+- [x] Adapt one genie-action fence to the canonical program contract and the existing shared deployment/recovery executor.
+- [x] Require current permissions, explicit source context and a successful current-turn source read before updating a managed program.
+- [x] Allow bounded compilation corrections with stable action/target/request identity; never retry unknown deployment outcomes.
+- [x] Render deployment cards and speak their explanation even when reasoning precedes the receipt.
+- [x] Manual creation acceptance with the 9B model: program 1002 created on attempt one; installed sources and enabled state match the requested background helper.
+- [x] Handle JSON-null resources and automatically retrieve missing exact-target program sources before a local update, preserving pending action/target and read limits.
+- [ ] Retest updating program 1002 after the required-source correction, and check the disabled Automation capability.
+- [ ] Move provider-specific child Quit handling into the common service before complete lifecycle parity; then evaluate local widgets/composites.
+
+- [x] Keep prior reasoning visible during empty-buffer resets and persist reasoning in failed local responses, including unfinished think blocks.
+- [x] Exclude unfinished reasoning from context/program parsing and recover confirmed compile-failed programs on aborted correction, using the existing request ledger and recovery API.
+- [ ] Retest program 1002 after the 9B CS0103 failure; original first-version background sources were restored through Program.Recover.
+
+- [ ] Investigate intermittent disappearance of reasoning during local multi-round streaming/tool calls. User still observes it after retention fixes; defer code changes. Reference: chat-history-1792268747142.json (Qwen3.5-9B). Its final successful update retains two think blocks, so distinguish transient rendering/reset loss from history persistence loss.

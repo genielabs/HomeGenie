@@ -85,4 +85,9 @@ public class AiGenieProgramActionsTest {
     [Test] public void FailedDeploymentRecoversOnlyTheSameIdentityAndReportsRecoveryMetrics() {
         var result=Dispatch(Request(),"failed",recoveryState:"failed");Assert.That(recoveries,Is.EqualTo(1));Assert.That((int)result["additionalFailedActions"],Is.EqualTo(1));Assert.That((string)result["outcome"],Is.EqualTo("error"));
     }
+    [Test] public void JsonNullResourcesProducesAReadableValidationErrorBeforeDeployment() {
+        var request=Request("update","1002");request["resources"]=JValue.CreateNull();
+        var error=Assert.Throws<TargetInvocationException>(()=>Dispatch(request));Assert.That(error.InnerException.Message,Does.Contain("Read the target program sources"));Assert.That(deployments,Is.Zero);
+    }
+
 }
