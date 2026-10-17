@@ -175,7 +175,7 @@ public static class HistoryStore
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>chat-history-service</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -248,7 +248,7 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>client-configs</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -619,7 +619,7 @@ void SaveConfig(string filePath, YamlConfig config)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>daily-energy-report</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -897,7 +897,7 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -1543,7 +1543,7 @@ public class DownloadManager : IDisposable
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>download-manager</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1586,7 +1586,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1914,7 +1914,7 @@ string GetDbName()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>energy-use-statistics</Id>
       <Version>1.0.9</Version>
       <Required>false</Required>
@@ -2089,7 +2089,7 @@ void InsertData(LiteDatabase db, LoggerEvent data) {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -2244,7 +2244,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>file-manager</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2446,7 +2446,7 @@ public static class HttpHelper {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>homegenie-panel-notifications</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2515,7 +2515,7 @@ public string[] GetHourLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>hourly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -2977,7 +2977,7 @@ class MqttCommand: MigInterfaceCommand {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>mqtt-network</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
@@ -3236,7 +3236,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>openweathermap</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -3328,7 +3328,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -3420,7 +3420,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -3492,7 +3492,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -4168,7 +4168,7 @@ public static class FfmpegHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>video-input</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -5473,7 +5473,7 @@ public class ThumbnailHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>video-recorder</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -5554,7 +5554,7 @@ public string[] GetDayLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>weekly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -6233,7 +6233,7 @@ public static class ModuleSettingAction
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>ai-action-executor</Id>
       <Version>1.2.5</Version>
       <Required>true</Required>
@@ -6549,7 +6549,7 @@ public static class ProgramUpdateNotification {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.26</PackageVersion>
+      <PackageVersion>1.0.27</PackageVersion>
       <Id>notification-archive</Id>
       <Version>1.1.1</Version>
       <Required>true</Required>
@@ -6572,7 +6572,7 @@ Program.Run();
 </ScriptSetup>
   <ScriptSource>var service = new AiGenieService();
 When.ProgramStopping(() =&gt; { service.Dispose(); return true; });
-Api.Handle("System.Utility/AiGenie/Describe", input =&gt; new { version = 1, stage = "context-and-action-dispatch", streaming = false, cancellation = "cooperative", inProcessOnly = true });
+Api.Handle("System.Utility/AiGenie/Describe", input =&gt; new { version = 1, stage = "structured-conversation-coordinator", streaming = false, cancellation = "cooperative", inProcessOnly = true });
 Api.Handle("System.Utility/AiGenie/Generate", input =&gt; service.Generate(Api.Parse(input).Data, (route, data) =&gt; Api.Call(route, data)));
 Api.Handle("System.Utility/AiGenie/Cancel", input =&gt; service.Cancel(Api.Parse(input).Data));
 Api.Handle("System.Utility/AiGenie/Prompt.Compose", input =&gt; {
@@ -6608,6 +6608,13 @@ Api.Handle("System.Utility/AiGenie/Program.Execute", input =&gt; {
 Api.Handle("System.Utility/AiGenie/Composite.Execute", input =&gt; {
     try { return (object)AiGenieCompositeActions.Dispatch(Api.Parse(input).Data as JObject, (route, data) =&gt; Api.Call(route, data)); }
     catch (Exception ex) { return new { Status = "Error", Message = ex.Message }; }
+});
+Api.Handle("System.Utility/AiGenie/Conversation.Run", input =&gt; {
+    try {
+        string widgetsFolder=Path.GetFullPath(Path.Combine(Data.GetFolder(), "..", "..", "widgets"));
+        return (object)AiGenieCoordinator.Run(Api.Parse(input).Data as IDictionary&lt;string,object&gt;,
+            (route,data)=&gt;Api.Call(route,data),widgetsFolder,()=&gt;Program.IsRunning);
+    } catch(Exception ex) {return new { Status="Error",Message=ex.Message };}
 });
 Program.GoBackground();
 </ScriptSource>
@@ -7104,17 +7111,276 @@ public static class AiGenieCompositeActions {
         return outcome;
     }
 }
+
+public static class AiGeniePresentation {
+    public static string Format(JObject canonical) {
+        string kind = (string)canonical?["kind"];
+        if (kind != "reply" &amp;&amp; kind != "widget") throw new InvalidOperationException("Unsupported direct presentation kind.");
+        var formatted = new StringBuilder();formatted.AppendLine((string)canonical["explanation"]);
+        if (kind == "widget") {
+            var widget = canonical["widget"] as JObject ?? throw new InvalidOperationException("Missing widget.");
+            string html = (string)widget["html"] ?? "", css = (string)widget["css"] ?? "", js = (string)widget["javascript"] ?? "";
+            if (string.IsNullOrWhiteSpace(css)) css = "@import 'assets/styles/widget-ui.css';\n@import 'assets/styles/flex-layout-attribute.min.css';";
+            if (!string.IsNullOrWhiteSpace(html)) formatted.AppendLine($"\n```html\n{html}\n```");
+            formatted.AppendLine($"\n```css\n{css}\n```");
+            if (!string.IsNullOrWhiteSpace(js)) formatted.AppendLine($"\n```javascript\n{js}\n```");
+        }
+        return formatted.ToString();
+    }
+}
+
+// Collect a run's results; only the provider wrapper persists the final history message.
+public sealed class AiGenieRunMetrics {
+    readonly Func&lt;string, object, object&gt; call;
+    readonly System.Diagnostics.Stopwatch clock = System.Diagnostics.Stopwatch.StartNew();
+    readonly long offset;
+    string outcome = "completed";
+    public string RequestId { get; }
+    long actionsMs;int actionCount,failedActions;long? generationMs;JArray actionResults;
+    public AiGenieRunMetrics(string id, long elapsedBefore, Func&lt;string, object, object&gt; api) { RequestId=id;offset=elapsedBefore;call=api; }
+    public void GenerationComplete(){generationMs=offset+clock.ElapsedMilliseconds;}
+    public void ActionsCompleted(long elapsed,int count,int failed){actionsMs+=elapsed;actionCount+=count;failedActions+=failed;}
+    public void SetActionResults(JArray results){actionResults=(JArray)results.DeepClone();actionCount+=Math.Max(0,results.Count-1);failedActions+=results.Count(r=&gt;r["Success"]?.Value&lt;bool&gt;()!=true);}
+    public object CallAction(string route,object data) {
+        var timer=System.Diagnostics.Stopwatch.StartNew();bool failed=false;
+        try {
+            object result=call(route,data);
+            if(result==null)failed=true;
+            else {
+                var token=result is string text?JToken.Parse(text):JToken.FromObject(result);
+                failed=token.Type==JTokenType.Object &amp;&amp; ((string)token["Status"]=="Error"||(string)token["State"]=="failed"||(string)token["State"]=="unknown");
+            }
+            return result;
+        } catch {failed=true;throw;}
+        finally {ActionsCompleted(timer.ElapsedMilliseconds,1,failed?1:0);}
+    }
+    public void SaveReply(JObject message,string state="completed"){outcome=state;}
+    public string Error(string text){outcome="error";return text;}
+    public JObject Finish(string reply,string error=null)=&gt;new JObject {
+        ["version"]=1,["requestId"]=RequestId,["outcome"]=error==null?outcome:"error",["reply"]=reply,["error"]=error,
+        ["metrics"]=new JObject{["actionsMs"]=actionsMs,["actionCount"]=actionCount,["failedActions"]=failedActions,
+            ["generationMs"]=generationMs.HasValue?new JValue(generationMs.Value):JValue.CreateNull(),["actions"]=actionResults}
+    };
+}
+
+public static class AiGenieCoordinator {
+    public static JObject Message(string role,string text)=&gt;new JObject{["role"]=role,["parts"]=new JArray(new JObject{["text"]=text})};
+    static bool Allows(JObject selected,string kind)=&gt;kind=="reply"||kind=="context"
+        ||kind=="device"&amp;&amp;selected["deviceControl"]?.Value&lt;bool&gt;()==true
+        ||kind=="program"&amp;&amp;selected["automation"]?.Value&lt;bool&gt;()==true
+        ||kind=="widget"&amp;&amp;selected["widgets"]?.Value&lt;bool&gt;()==true
+        ||kind=="composite"&amp;&amp;selected["automation"]?.Value&lt;bool&gt;()==true&amp;&amp;selected["widgets"]?.Value&lt;bool&gt;()==true;
+    public static JObject Run(IDictionary&lt;string,object&gt; request,Func&lt;string,object,object&gt; call,string widgetsFolder,Func&lt;bool&gt; running) {
+        if(request==null||!request.TryGetValue("version",out var version)||version is not int v||v!=1||
+            !request.TryGetValue("requestId",out var identity)||identity is not string id||!System.Text.RegularExpressions.Regex.IsMatch(id,@"\A[A-Za-z0-9_-]{1,128}\z")||
+            !request.TryGetValue("messages",out var suppliedMessages)||suppliedMessages is not JArray messages||
+            !request.TryGetValue("preparedContext",out var suppliedPrepared)||suppliedPrepared is not JObject prepared||
+            !request.TryGetValue("request",out var suppliedScope)||suppliedScope is not JObject scope||
+            !request.TryGetValue("template",out var suppliedTemplate)||suppliedTemplate is not string template||
+            !request.TryGetValue("systemPrompt",out var suppliedPrompt)||suppliedPrompt is not string fullContext||
+            !request.TryGetValue("owner",out var suppliedOwner)||suppliedOwner is not string owner||
+            !request.TryGetValue("provider",out var suppliedProvider)||suppliedProvider is not string provider||
+            !request.TryGetValue("elapsedBefore",out var elapsed)||elapsed is not long elapsedBefore||elapsedBefore&lt;0)
+            throw new InvalidOperationException("Invalid in-process coordination request.");
+        var preparedContext=(JObject)prepared.DeepClone();var scopedRequest=(JObject)scope.DeepClone();var payloadContents=(JArray)messages.DeepClone();
+        if(preparedContext["capabilities"] is not JObject caps||new[]{"deviceControl","automation","widgets"}.Any(k=&gt;caps[k]?.Type!=JTokenType.Boolean))
+            throw new InvalidOperationException("Missing normalized capabilities.");
+        var telemetry=new AiGenieRunMetrics(id,elapsedBefore,call);
+        bool scheduled=request.TryGetValue("scheduled",out var scheduling)&amp;&amp;scheduling is bool selectedSchedule&amp;&amp;selectedSchedule;
+        object genConfig=request.TryGetValue("output",out var config)?config:null;
+        string currentCacheName=request.TryGetValue("cache",out var cache)?cache as string:null;bool hasCache=!string.IsNullOrEmpty(currentCacheName);
+        Func&lt;object,JToken&gt; contextToken=value=&gt;value is string text?JToken.Parse(text):JToken.FromObject(value);
+        Func&lt;JObject,JObject&gt; normalizeGenieResponse=response=&gt;{
+            JObject result;
+            try {result=AiGeniePreparation.Normalize(response,call);}
+            catch(Exception ex){throw new Exception("Response normalizer unavailable: "+ex.Message);}
+            if((string)result["Status"]=="Error")throw new InvalidOperationException((string)result["Message"]);
+            return result;
+        };
+        Func&lt;JObject,JObject&gt; prepareScopedContext=input=&gt;AiGenieContext.Prepare(input,template,widgetsFolder,call);
+        Func&lt;object,string,object,string,string&gt; generateWithProvider=(contents,instructions,output,cached)=&gt;{
+            string generationId=Guid.NewGuid().ToString("N");
+            var result=call("System.Utility/AiGenie/Generate",new Dictionary&lt;string,object&gt;{
+                ["version"]=1,["requestId"]=generationId,["owner"]=owner,["provider"]=provider,["messages"]=contents,
+                ["systemPrompt"]=instructions,["output"]=output,["providerOptions"]=new Dictionary&lt;string,object&gt;{["cachedContent"]=cached}
+            }) as IDictionary&lt;string,object&gt;;
+            if(result==null||!result.TryGetValue("version",out var rv)||rv is not int ri||ri!=1||
+                !result.TryGetValue("requestId",out var rid)||!Equals(rid,generationId))throw new InvalidOperationException("AI Genie provider boundary unavailable or incompatible.");
+            string state=result.TryGetValue("state",out var rs)?rs as string:null;
+            if(state!="completed")throw new InvalidOperationException(result.TryGetValue("error",out var error)&amp;&amp;error is string detail?detail:"AI generation ended with state: "+state);
+            string text=result.TryGetValue("text",out var content)?content as string:null;
+            if(string.IsNullOrWhiteSpace(text))throw new InvalidOperationException("AI provider returned an empty completion.");
+            return text;
+        };
+        try {
+      JObject committedBinding = null;
+      int deploymentAttempt = 1, contextReads = 0, contractRepairs = 0;
+      string committedKind = null, committedMode = null, committedTarget = null;
+      for (int round = 1; round &lt;= 12; round++) {
+        if (!running()) throw new OperationCanceledException("AI Genie is stopping.");
+        string rawResponse = generateWithProvider(payloadContents, hasCache ? null : fullContext, genConfig, hasCache ? currentCacheName : null);
+        {
+            if (!string.IsNullOrEmpty(rawResponse))
+            {
+                JObject canonical;
+                try { canonical = normalizeGenieResponse(JObject.Parse(rawResponse)); }
+                catch (Exception contractError) when (contractError is InvalidOperationException || contractError is Newtonsoft.Json.JsonException) {
+                    if (++contractRepairs &gt; 2) throw;
+                    payloadContents.Add(Message("model",rawResponse));
+                    payloadContents.Add(Message("user","RESPONSE CONTRACT ERROR: " + contractError.Message
+                        + "\nReturn one corrected version-1 JSON object with only fields relevant to kind. No action has been executed for this invalid response. Keep the user's requested task and any committed deployment identity."));
+                    continue;
+                }
+                if (!running()) throw new OperationCanceledException("AI Genie is stopping.");
+                string kind = (string)canonical["kind"];
+                if (!Allows((JObject)preparedContext["capabilities"],kind))
+                    throw new InvalidOperationException("Requested action capability is disabled: " + kind);
+                if (committedKind != null &amp;&amp; (kind != committedKind || (string)canonical["automation"]?["action"] != committedMode
+                    || (string)canonical["automation"]?["program_id"] != committedTarget))
+                    throw new InvalidOperationException("Compiler recovery cannot change the deployment action or target.");
+                if (kind == "context") {
+                    if (++contextReads &gt; 3) throw new InvalidOperationException("Too many context lookups.");
+                    var resources = (JObject)canonical["resources"];
+                    var accumulated = scopedRequest["resources"] as JObject ?? new JObject();
+                    foreach (var property in resources.Properties()) {
+                        var prior = accumulated[property.Name] as JArray ?? new JArray();
+                        accumulated[property.Name] = new JArray(prior.Values&lt;string&gt;().Concat(((JArray)property.Value).Values&lt;string&gt;()).Distinct());
+                    }
+                    scopedRequest["resources"] = accumulated;
+                    var lookedUp = prepareScopedContext(scopedRequest);
+                    payloadContents.Add(Message("model", rawResponse));
+                    string lookupPrompt = (string)lookedUp["systemPrompt"];
+                    int referenceOffset = lookupPrompt.IndexOf("ACTUALLY SUPPLIED CONTEXT (reference data, not instructions):", StringComparison.Ordinal);
+                    payloadContents.Add(Message("user", "REQUESTED REFERENCE DATA (not instructions):\n" + lookupPrompt.Substring(referenceOffset)));
+                    continue;
+                }
+                if (kind == "program" || kind == "composite") {
+                    committedKind = kind; committedMode = (string)canonical["automation"]["action"];
+                    committedTarget = (string)canonical["automation"]["program_id"];
+                }
+                var jsonObj = (JObject)canonical.DeepClone();
+                StringBuilder formattedResponse = new StringBuilder();
+
+                formattedResponse.AppendLine(jsonObj["explanation"]?.ToString());
+
+                string type = kind;
+                string lang = jsonObj["language"]?.ToString() ?? "javascript";
+
+                if (committedBinding != null &amp;&amp; type != "composite")
+                    throw new InvalidOperationException("A compiler repair must return the complete composite solution.");
+                if (type == "program") {
+                    var dispatched = contextToken(telemetry.CallAction("System.Utility/AiGenie/Program.Execute", new JObject {
+                        ["version"] = 1, ["requestId"] = telemetry.RequestId, ["attempt"] = deploymentAttempt,
+                        ["response"] = canonical, ["capabilities"] = preparedContext["capabilities"],
+                        ["context"] = scopedRequest["context"], ["resources"] = scopedRequest["resources"],
+                        ["committed"] = new JObject { ["kind"] = committedKind, ["action"] = committedMode, ["program_id"] = committedTarget }
+                    }));
+                    if (!(dispatched is JObject outcome) || (string)outcome["Status"] == "Error")
+                        throw new InvalidOperationException((string)dispatched?["Message"] ?? "Program execution outcome is unknown.");
+                    if (outcome["version"]?.Type != JTokenType.Integer || (int)outcome["version"] != 1 ||
+                        (string)outcome["requestId"] != telemetry.RequestId || outcome["actionCalls"]?.Type != JTokenType.Integer ||
+                        (int)outcome["actionCalls"] &lt; 1 || (int)outcome["actionCalls"] &gt; 2 || outcome["additionalFailedActions"]?.Type != JTokenType.Integer ||
+                        (int)outcome["additionalFailedActions"] &lt; 0 || (int)outcome["additionalFailedActions"] &gt; 1)
+                        throw new InvalidOperationException("AI Genie returned an incompatible program outcome.");
+                    telemetry.ActionsCompleted(0, (int)outcome["actionCalls"] - 1, (int)outcome["additionalFailedActions"]);
+                    if ((string)outcome["outcome"] == "repair") {
+                        if (outcome["nextAttempt"]?.Type != JTokenType.Integer || (int)outcome["nextAttempt"] != deploymentAttempt + 1 ||
+                            (int)outcome["nextAttempt"] &gt; 5 || outcome["feedback"]?.Type != JTokenType.String)
+                            throw new InvalidOperationException("AI Genie returned an invalid compiler repair step.");
+                        payloadContents.Add(Message("model", rawResponse));
+                        payloadContents.Add(Message("user", (string)outcome["feedback"]));
+                        deploymentAttempt = (int)outcome["nextAttempt"];
+                        continue;
+                    }
+                    if (!new[] { "completed", "error" }.Contains((string)outcome["outcome"]) || outcome["reply"]?.Type != JTokenType.String)
+                        throw new InvalidOperationException("AI Genie returned an invalid program result.");
+                    string reply = (string)outcome["reply"];
+                    telemetry.SaveReply(Message("model", reply), (string)outcome["outcome"]);
+                    return telemetry.Finish(reply);
+                }
+                if (scheduled &amp;&amp; type != "program" &amp;&amp; type != "context")
+                    throw new InvalidOperationException("A scheduled task must create or update an automation program.");
+                if (type == "device") {
+                    // The common service validates permissions and the complete batch before dispatch.
+                    var dispatched = contextToken(telemetry.CallAction("System.Utility/AiGenie/Device.Execute", new JObject {
+                        ["version"] = 1, ["requestId"] = telemetry.RequestId, ["response"] = canonical,
+                        ["capabilities"] = preparedContext["capabilities"], ["context"] = preparedContext["context"]
+                    }));
+                    if (!(dispatched is JObject outcome) || (string)outcome["Status"] == "Error")
+                        throw new InvalidOperationException((string)dispatched?["Message"] ?? "Device execution outcome is unknown.");
+                    if (outcome["version"]?.Type != JTokenType.Integer || (int)outcome["version"] != 1 ||
+                        (string)outcome["requestId"] != telemetry.RequestId || (string)outcome["kind"] != "device" ||
+                        !(outcome["results"] is JArray results) || outcome["reply"]?.Type != JTokenType.String ||
+                        !new[] { "completed", "error" }.Contains((string)outcome["outcome"]))
+                        throw new InvalidOperationException("AI Genie returned an incompatible device outcome.");
+                    telemetry.SetActionResults(results);
+                    string reply = (string)outcome["reply"];
+                    telemetry.SaveReply(Message("model", reply), (string)outcome["outcome"]);
+                    return telemetry.Finish(reply);
+                }
+                if (type == "composite") {
+                    telemetry.GenerationComplete();
+                    var dispatched = contextToken(telemetry.CallAction("System.Utility/AiGenie/Composite.Execute", new JObject {
+                        ["version"] = 1, ["requestId"] = telemetry.RequestId, ["attempt"] = deploymentAttempt,
+                        ["response"] = canonical, ["capabilities"] = preparedContext["capabilities"],
+                        ["committed"] = new JObject { ["kind"] = committedKind, ["action"] = committedMode, ["program_id"] = committedTarget },
+                        ["committedBinding"] = committedBinding
+                    }));
+                    if (!(dispatched is JObject outcome) || (string)outcome["Status"] == "Error")
+                        throw new InvalidOperationException((string)dispatched?["Message"] ?? "Composite execution outcome is unknown.");
+                    if (outcome["version"]?.Type != JTokenType.Integer || (int)outcome["version"] != 1 ||
+                        (string)outcome["requestId"] != telemetry.RequestId || (string)outcome["kind"] != "composite" ||
+                        !(outcome["binding"] is JObject binding) || outcome["actionCalls"]?.Type != JTokenType.Integer ||
+                        (int)outcome["actionCalls"] &lt; 1 || (int)outcome["actionCalls"] &gt; 2 || outcome["additionalFailedActions"]?.Type != JTokenType.Integer ||
+                        (int)outcome["additionalFailedActions"] &lt; 0 || (int)outcome["additionalFailedActions"] &gt; 1)
+                        throw new InvalidOperationException("AI Genie returned an incompatible composite outcome.");
+                    if (committedBinding != null &amp;&amp; !JToken.DeepEquals(committedBinding, binding))
+                        throw new InvalidOperationException("A compiler repair cannot change the widget data contract.");
+                    committedBinding = (JObject)binding.DeepClone();
+                    telemetry.ActionsCompleted(0, (int)outcome["actionCalls"] - 1, (int)outcome["additionalFailedActions"]);
+                    if ((string)outcome["outcome"] == "repair") {
+                        if (outcome["nextAttempt"]?.Type != JTokenType.Integer || (int)outcome["nextAttempt"] != deploymentAttempt + 1 ||
+                            (int)outcome["nextAttempt"] &gt; 5 || outcome["feedback"]?.Type != JTokenType.String)
+                            throw new InvalidOperationException("AI Genie returned an invalid composite repair step.");
+                        payloadContents.Add(Message("model", rawResponse));
+                        payloadContents.Add(Message("user", (string)outcome["feedback"]));
+                        deploymentAttempt = (int)outcome["nextAttempt"];
+                        continue;
+                    }
+                    if (!new[] { "completed", "error" }.Contains((string)outcome["outcome"]) || outcome["reply"]?.Type != JTokenType.String)
+                        throw new InvalidOperationException("AI Genie returned an invalid composite result.");
+                    string reply = (string)outcome["reply"];
+                    telemetry.SaveReply(Message("model", reply), (string)outcome["outcome"]);
+                    return telemetry.Finish(reply);
+                }
+                formattedResponse.Clear();
+                formattedResponse.Append(AiGeniePresentation.Format(canonical));
+                telemetry.GenerationComplete();
+                string finalReply = formattedResponse.ToString();
+
+                var modelResponse = Message("model", finalReply);
+                telemetry.SaveReply(modelResponse);
+
+                return telemetry.Finish(finalReply);
+            }
+        }
+        return telemetry.Finish(telemetry.Error("**Error:** The AI returned an empty response."));
+      }
+      return telemetry.Finish(telemetry.Error("**Error:** Program deployment did not complete."));
+        } catch(Exception ex) {return telemetry.Finish(null,ex.Message);}
+    }
+}
 </ScriptContext>
   <ScriptErrors />
   <Data />
   <PackageInfo>
     <Repository>homegenie</Repository>
     <PackageId>homegenie-base</PackageId>
-    <PackageVersion>1.0.26</PackageVersion>
+    <PackageVersion>1.0.27</PackageVersion>
     <Id>ai-genie-service</Id>
-    <Version>0.6.0</Version>
+    <Version>0.7.0</Version>
     <Required>true</Required>
-    <Checksum>19202B6587842AA595E9893C7F0AE890</Checksum>
+    <Checksum>D6FC9D516A01A578CACCEEDEA279E1F6</Checksum>
   </PackageInfo>
   <Domain>HomeAutomation.HomeGenie.Automation</Domain>
   <Address>583</Address>

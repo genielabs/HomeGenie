@@ -537,7 +537,7 @@ public sealed class AiSkillCatalog
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.38</PackageVersion>
+      <PackageVersion>1.0.39</PackageVersion>
       <Id>context-engine</Id>
       <Version>1.0.8</Version>
       <Required>true</Required>
@@ -1140,7 +1140,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.38</PackageVersion>
+      <PackageVersion>1.0.39</PackageVersion>
       <Id>gemini-automan</Id>
       <Version>1.0.10</Version>
       <Required>false</Required>
@@ -1598,7 +1598,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.38</PackageVersion>
+      <PackageVersion>1.0.39</PackageVersion>
       <Id>gemini-intent-handler</Id>
       <Version>1.0.22</Version>
       <Required>false</Required>
@@ -2321,7 +2321,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.38</PackageVersion>
+      <PackageVersion>1.0.39</PackageVersion>
       <Id>gemini-widget-genie</Id>
       <Version>1.0.18</Version>
       <Required>false</Required>
@@ -2651,7 +2651,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.38</PackageVersion>
+      <PackageVersion>1.0.39</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -3800,7 +3800,7 @@ public sealed class LailamaNativeLifetime
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.38</PackageVersion>
+      <PackageVersion>1.0.39</PackageVersion>
       <Id>lailama</Id>
       <Version>1.0.19</Version>
       <Required>true</Required>
@@ -4006,7 +4006,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.38</PackageVersion>
+      <PackageVersion>1.0.39</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -4192,7 +4192,7 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.38</PackageVersion>
+      <PackageVersion>1.0.39</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -4408,18 +4408,6 @@ Func&lt;JObject, JObject&gt; composeGeniePrompt = selected =&gt; {
         throw new InvalidOperationException((string)result?["Message"] ?? "AI Genie prompt preparation unavailable.");
     return composed;
 };
-Func&lt;JObject, JObject&gt; normalizeGenieResponse = response =&gt; {
-    var result = contextToken(Api.Call("System.Utility/AiGenie/Response.Normalize", response));
-    if (!(result is JObject canonical)) throw new Exception("AI Genie response normalizer unavailable.");
-    if ((string)canonical["Status"] == "Error") {
-        if ((string)canonical["errorKind"] == "contract") throw new InvalidOperationException((string)canonical["Message"]);
-        throw new Exception((string)canonical["Message"] ?? "AI Genie response normalizer unavailable.");
-    }
-    if (canonical["version"]?.Type != JTokenType.Integer || (int)canonical["version"] != 1 || canonical["kind"]?.Type != JTokenType.String)
-        throw new Exception("AI Genie response normalizer returned an incompatible result.");
-    return canonical;
-};
-
 Api.Handle(API_URL + "/Prompt.Preview", input =&gt; {
     try {
         var request = Api.Parse(input);
@@ -4577,189 +4565,24 @@ Func&lt;object, bool, object&gt; processGeniePrompt = (userCommand, scheduled) =
 
     var genConfig = new { temperature = 0.2, response_mime_type = "application/json", response_json_schema = GenieCapabilities.Schema((JObject)preparedContext["capabilities"]) };
 
-      JObject committedBinding = null;
-      int deploymentAttempt = 1, contextReads = 0, contractRepairs = 0;
-      string committedKind = null, committedMode = null, committedTarget = null;
-      for (int round = 1; round &lt;= 12; round++) {
-        string rawResponse = generateWithProvider(payloadContents, hasCache ? null : fullContext, genConfig, hasCache ? currentCacheName : null);
-        {
-            if (!string.IsNullOrEmpty(rawResponse))
-            {
-                JObject canonical;
-                try { canonical = normalizeGenieResponse(JObject.Parse(rawResponse)); }
-                catch (Exception contractError) when (contractError is InvalidOperationException || contractError is Newtonsoft.Json.JsonException) {
-                    if (++contractRepairs &gt; 2) throw;
-                    payloadContents.Add(ChatMessage.Create("model",rawResponse));
-                    payloadContents.Add(ChatMessage.Create("user","RESPONSE CONTRACT ERROR: " + contractError.Message
-                        + "\nReturn one corrected version-1 JSON object with only fields relevant to kind. No action has been executed for this invalid response. Keep the user's requested task and any committed deployment identity."));
-                    continue;
-                }
-                string kind = (string)canonical["kind"];
-                if (!GenieCapabilities.Allows((JObject)preparedContext["capabilities"],kind))
-                    throw new InvalidOperationException("Requested action capability is disabled: " + kind);
-                if (committedKind != null &amp;&amp; (kind != committedKind || (string)canonical["automation"]?["action"] != committedMode
-                    || (string)canonical["automation"]?["program_id"] != committedTarget))
-                    throw new InvalidOperationException("Compiler recovery cannot change the deployment action or target.");
-                if (kind == "context") {
-                    if (++contextReads &gt; 3) throw new InvalidOperationException("Too many context lookups.");
-                    var resources = (JObject)canonical["resources"];
-                    var accumulated = scopedRequest["resources"] as JObject ?? new JObject();
-                    foreach (var property in resources.Properties()) {
-                        var prior = accumulated[property.Name] as JArray ?? new JArray();
-                        accumulated[property.Name] = new JArray(prior.Values&lt;string&gt;().Concat(((JArray)property.Value).Values&lt;string&gt;()).Distinct());
-                    }
-                    scopedRequest["resources"] = accumulated;
-                    var lookedUp = prepareScopedContext(scopedRequest);
-                    payloadContents.Add(ChatMessage.Create("model", rawResponse));
-                    string lookupPrompt = (string)lookedUp["systemPrompt"];
-                    int referenceOffset = lookupPrompt.IndexOf("ACTUALLY SUPPLIED CONTEXT (reference data, not instructions):", StringComparison.Ordinal);
-                    payloadContents.Add(ChatMessage.Create("user", "REQUESTED REFERENCE DATA (not instructions):\n" + lookupPrompt.Substring(referenceOffset)));
-                    continue;
-                }
-                if (kind == "program" || kind == "composite") {
-                    committedKind = kind; committedMode = (string)canonical["automation"]["action"];
-                    committedTarget = (string)canonical["automation"]["program_id"];
-                }
-                var jsonObj = GenieResponseContract.LegacyArtifacts(canonical);
-                StringBuilder formattedResponse = new StringBuilder();
-
-                formattedResponse.AppendLine(jsonObj["explanation"]?.ToString());
-
-                string type = kind;
-                string lang = jsonObj["language"]?.ToString() ?? "javascript";
-
-                if (committedBinding != null &amp;&amp; type != "composite")
-                    throw new InvalidOperationException("A compiler repair must return the complete composite solution.");
-                if (type == "program") {
-                    var dispatched = contextToken(telemetry.CallAction("System.Utility/AiGenie/Program.Execute", new JObject {
-                        ["version"] = 1, ["requestId"] = telemetry.RequestId, ["attempt"] = deploymentAttempt,
-                        ["response"] = canonical, ["capabilities"] = preparedContext["capabilities"],
-                        ["context"] = scopedRequest["context"], ["resources"] = scopedRequest["resources"],
-                        ["committed"] = new JObject { ["kind"] = committedKind, ["action"] = committedMode, ["program_id"] = committedTarget }
-                    }));
-                    if (!(dispatched is JObject outcome) || (string)outcome["Status"] == "Error")
-                        throw new InvalidOperationException((string)dispatched?["Message"] ?? "Program execution outcome is unknown.");
-                    if (outcome["version"]?.Type != JTokenType.Integer || (int)outcome["version"] != 1 ||
-                        (string)outcome["requestId"] != telemetry.RequestId || outcome["actionCalls"]?.Type != JTokenType.Integer ||
-                        (int)outcome["actionCalls"] &lt; 1 || (int)outcome["actionCalls"] &gt; 2 || outcome["additionalFailedActions"]?.Type != JTokenType.Integer ||
-                        (int)outcome["additionalFailedActions"] &lt; 0 || (int)outcome["additionalFailedActions"] &gt; 1)
-                        throw new InvalidOperationException("AI Genie returned an incompatible program outcome.");
-                    telemetry.ActionsCompleted(0, (int)outcome["actionCalls"] - 1, (int)outcome["additionalFailedActions"]);
-                    if ((string)outcome["outcome"] == "repair") {
-                        if (outcome["nextAttempt"]?.Type != JTokenType.Integer || (int)outcome["nextAttempt"] != deploymentAttempt + 1 ||
-                            (int)outcome["nextAttempt"] &gt; 5 || outcome["feedback"]?.Type != JTokenType.String)
-                            throw new InvalidOperationException("AI Genie returned an invalid compiler repair step.");
-                        payloadContents.Add(ChatMessage.Create("model", rawResponse));
-                        payloadContents.Add(ChatMessage.Create("user", (string)outcome["feedback"]));
-                        deploymentAttempt = (int)outcome["nextAttempt"];
-                        continue;
-                    }
-                    if (!new[] { "completed", "error" }.Contains((string)outcome["outcome"]) || outcome["reply"]?.Type != JTokenType.String)
-                        throw new InvalidOperationException("AI Genie returned an invalid program result.");
-                    string reply = (string)outcome["reply"];
-                    telemetry.SaveReply(ChatMessage.Create("model", reply), (string)outcome["outcome"]);
-                    return new ResponseText(reply);
-                }
-                if (scheduled &amp;&amp; type != "program" &amp;&amp; type != "context")
-                    throw new InvalidOperationException("A scheduled task must create or update an automation program.");
-                if (type == "device") {
-                    // The common service validates permissions and the complete batch before dispatch.
-                    var dispatched = contextToken(telemetry.CallAction("System.Utility/AiGenie/Device.Execute", new JObject {
-                        ["version"] = 1, ["requestId"] = telemetry.RequestId, ["response"] = canonical,
-                        ["capabilities"] = preparedContext["capabilities"], ["context"] = preparedContext["context"]
-                    }));
-                    if (!(dispatched is JObject outcome) || (string)outcome["Status"] == "Error")
-                        throw new InvalidOperationException((string)dispatched?["Message"] ?? "Device execution outcome is unknown.");
-                    if (outcome["version"]?.Type != JTokenType.Integer || (int)outcome["version"] != 1 ||
-                        (string)outcome["requestId"] != telemetry.RequestId || (string)outcome["kind"] != "device" ||
-                        !(outcome["results"] is JArray results) || outcome["reply"]?.Type != JTokenType.String ||
-                        !new[] { "completed", "error" }.Contains((string)outcome["outcome"]))
-                        throw new InvalidOperationException("AI Genie returned an incompatible device outcome.");
-                    telemetry.SetActionResults(results);
-                    string reply = (string)outcome["reply"];
-                    telemetry.SaveReply(ChatMessage.Create("model", reply), (string)outcome["outcome"]);
-                    return new ResponseText(reply);
-                }
-                if (type == "composite") {
-                    telemetry.GenerationComplete();
-                    var dispatched = contextToken(telemetry.CallAction("System.Utility/AiGenie/Composite.Execute", new JObject {
-                        ["version"] = 1, ["requestId"] = telemetry.RequestId, ["attempt"] = deploymentAttempt,
-                        ["response"] = canonical, ["capabilities"] = preparedContext["capabilities"],
-                        ["committed"] = new JObject { ["kind"] = committedKind, ["action"] = committedMode, ["program_id"] = committedTarget },
-                        ["committedBinding"] = committedBinding
-                    }));
-                    if (!(dispatched is JObject outcome) || (string)outcome["Status"] == "Error")
-                        throw new InvalidOperationException((string)dispatched?["Message"] ?? "Composite execution outcome is unknown.");
-                    if (outcome["version"]?.Type != JTokenType.Integer || (int)outcome["version"] != 1 ||
-                        (string)outcome["requestId"] != telemetry.RequestId || (string)outcome["kind"] != "composite" ||
-                        !(outcome["binding"] is JObject binding) || outcome["actionCalls"]?.Type != JTokenType.Integer ||
-                        (int)outcome["actionCalls"] &lt; 1 || (int)outcome["actionCalls"] &gt; 2 || outcome["additionalFailedActions"]?.Type != JTokenType.Integer ||
-                        (int)outcome["additionalFailedActions"] &lt; 0 || (int)outcome["additionalFailedActions"] &gt; 1)
-                        throw new InvalidOperationException("AI Genie returned an incompatible composite outcome.");
-                    if (committedBinding != null &amp;&amp; !JToken.DeepEquals(committedBinding, binding))
-                        throw new InvalidOperationException("A compiler repair cannot change the widget data contract.");
-                    committedBinding = (JObject)binding.DeepClone();
-                    telemetry.ActionsCompleted(0, (int)outcome["actionCalls"] - 1, (int)outcome["additionalFailedActions"]);
-                    if ((string)outcome["outcome"] == "repair") {
-                        if (outcome["nextAttempt"]?.Type != JTokenType.Integer || (int)outcome["nextAttempt"] != deploymentAttempt + 1 ||
-                            (int)outcome["nextAttempt"] &gt; 5 || outcome["feedback"]?.Type != JTokenType.String)
-                            throw new InvalidOperationException("AI Genie returned an invalid composite repair step.");
-                        payloadContents.Add(ChatMessage.Create("model", rawResponse));
-                        payloadContents.Add(ChatMessage.Create("user", (string)outcome["feedback"]));
-                        deploymentAttempt = (int)outcome["nextAttempt"];
-                        continue;
-                    }
-                    if (!new[] { "completed", "error" }.Contains((string)outcome["outcome"]) || outcome["reply"]?.Type != JTokenType.String)
-                        throw new InvalidOperationException("AI Genie returned an invalid composite result.");
-                    string reply = (string)outcome["reply"];
-                    telemetry.SaveReply(ChatMessage.Create("model", reply), (string)outcome["outcome"]);
-                    return new ResponseText(reply);
-                }
-                if (type == "widget") {
-                    var w = jsonObj["widget"];
-                    if (w != null) {
-                        string html = w["html"]?.ToString() ?? "";
-                        string css = w["css"]?.ToString() ?? "";
-                        string js = w["javascript"]?.ToString() ?? "";
-
-                        // Fallback
-                        if (string.IsNullOrWhiteSpace(css)) {
-                            css = "@import 'assets/styles/widget-ui.css';\n@import 'assets/styles/flex-layout-attribute.min.css';";
-                        }
-
-                        if (!string.IsNullOrWhiteSpace(html)) formattedResponse.AppendLine($"\n```html\n{html}\n```");
-                        formattedResponse.AppendLine($"\n```css\n{css}\n```"); // Lo mettiamo sempre
-                        if (!string.IsNullOrWhiteSpace(js)) formattedResponse.AppendLine($"\n```javascript\n{js}\n```");
-                    }
-                } else if (type == "program") {
-                    var a = jsonObj["automation"];
-                    if (a != null) {
-                        // 1. Setup: UI Options and Initializations
-                        if (!string.IsNullOrWhiteSpace(a["setup"]?.ToString()))
-                            formattedResponse.AppendLine($"\n**Setup:**\n```{lang}\n{a["setup"]}\n```");
-
-                        // 2. Main: The core logic (Refactored from "source")
-                        if (!string.IsNullOrWhiteSpace(a["main"]?.ToString()))
-                            formattedResponse.AppendLine($"\n**Main:**\n```{lang}\n{a["main"]}\n```");
-
-                        // 3. Context: Optional, typically for C# classes/methods
-                        if (!string.IsNullOrWhiteSpace(a["context"]?.ToString()))
-                            formattedResponse.AppendLine($"\n**Context:**\n```{lang}\n{a["context"]}\n```");
-                    }
-                }
-
-                telemetry.GenerationComplete();
-                string finalReply = formattedResponse.ToString();
-
-                var modelResponse = ChatMessage.Create("model", finalReply);
-                telemetry.SaveReply(modelResponse);
-
-                return new ResponseText(finalReply);
-            }
-        }
-        return new ResponseText(telemetry.Error("**Error:** The AI returned an empty response."));
-      }
-      return new ResponseText(telemetry.Error("**Error:** Program deployment did not complete."));
+      var coordinated=contextToken(Api.Call("System.Utility/AiGenie/Conversation.Run",new Dictionary&lt;string,object&gt;{
+          ["version"]=1,["requestId"]=telemetry.RequestId,["owner"]=Program.Module.Address,["provider"]="Gemini",
+          ["messages"]=JArray.FromObject(payloadContents),["preparedContext"]=preparedContext,["request"]=scopedRequest,
+          ["template"]=File.ReadAllText(Path.Combine(Data.GetFolder(),"gemini_system_prompt.txt")),
+          ["systemPrompt"]=fullContext,["output"]=genConfig,["cache"]=hasCache?currentCacheName:null,
+          ["scheduled"]=scheduled,["elapsedBefore"]=telemetry.ElapsedMs
+      }));
+      if(coordinated is not JObject result|| (string)result["Status"]=="Error")
+          throw new InvalidOperationException((string)coordinated?["Message"]??"AI Genie coordinator unavailable.");
+      if(result["version"]?.Type!=JTokenType.Integer||(int)result["version"]!=1||(string)result["requestId"]!=telemetry.RequestId)
+          throw new InvalidOperationException("AI Genie returned an incompatible conversation result.");
+      telemetry.ImportRunMetrics(result["metrics"] as JObject);
+      if(result["error"]?.Type==JTokenType.String)throw new InvalidOperationException((string)result["error"]);
+      if(result["reply"]?.Type!=JTokenType.String||!new[]{"completed","error"}.Contains((string)result["outcome"]))
+          throw new InvalidOperationException("AI Genie returned an invalid final reply.");
+      string finalReply=(string)result["reply"];
+      telemetry.SaveReply(ChatMessage.Create("model",finalReply),(string)result["outcome"]);
+      return new ResponseText(finalReply);
     }
     catch (Exception ex)
     {
@@ -4950,6 +4773,17 @@ public class ChatRequestMetrics
     readonly bool persist;
     readonly System.Diagnostics.Stopwatch clock = System.Diagnostics.Stopwatch.StartNew();
     readonly DateTimeOffset startedAt = DateTimeOffset.UtcNow;
+    public long ElapsedMs =&gt; clock.ElapsedMilliseconds;
+    public void ImportRunMetrics(JObject metrics) {
+        if(metrics==null||new[]{"actionsMs","actionCount","failedActions"}.Any(k=&gt;metrics[k]?.Type!=JTokenType.Integer||(long)metrics[k]&lt;0)||
+            (long)metrics["actionCount"]&gt;int.MaxValue||(long)metrics["failedActions"]&gt;int.MaxValue||
+            metrics["generationMs"]!=null&amp;&amp;metrics["generationMs"].Type!=JTokenType.Null&amp;&amp;(metrics["generationMs"].Type!=JTokenType.Integer||(long)metrics["generationMs"]&lt;0)||
+            metrics["actions"]!=null&amp;&amp;metrics["actions"].Type!=JTokenType.Null&amp;&amp;metrics["actions"] is not JArray)
+            throw new InvalidOperationException("AI Genie returned invalid run metrics.");
+        ActionsMs+=(long)metrics["actionsMs"];ActionCount+=(int)metrics["actionCount"];FailedActions+=(int)metrics["failedActions"];
+        if(metrics["generationMs"]?.Type==JTokenType.Integer)GenerationMs=(long)metrics["generationMs"];
+        if(metrics["actions"] is JArray actions)ActionResults=actions.DeepClone();
+    }
     public string ContextProfileKey { get; set; }
     public object ActionResults { get; private set; }
     public void SetActionResults(JArray results) { ActionResults = results.DeepClone(); ActionCount += Math.Max(0,results.Count-1); FailedActions += results.Count(r=&gt;r["Success"]?.Value&lt;bool&gt;() != true); }
@@ -5267,11 +5101,11 @@ public static class GeminiGenerationProvider {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.38</PackageVersion>
+      <PackageVersion>1.0.39</PackageVersion>
       <Id>gemini-genie</Id>
-      <Version>1.0.15</Version>
+      <Version>1.0.16</Version>
       <Required>true</Required>
-      <Checksum>3899E0D0AD8EC1AB50FC06269594E9FB</Checksum>
+      <Checksum>90C90BAD0863517DED83DBFF279A64E9</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>933</Address>
