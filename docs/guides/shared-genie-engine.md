@@ -183,3 +183,238 @@ Limits remain 12 rounds, 3 context lookups, 2 contract repairs and 5 deployment 
 Deploy base 1.0.27 / AI package 1.0.39, updating 583 before 933. No core, frontend or Lailama changes; manual live acceptance remains pending. The maintainer reported the previous composite preview and subsequent Sensor.Counter read successful.
 
 Common structured coordinator validation: 171 tests passed (19 end-to-end coordinator/presentation/history-bridge cases plus 152 prior regressions). Full scripts 581/583/933/940 compile. Prompt.Ask remains outside the action loop; the history bridge test verifies one user write and one final reply even if SaveReply is invoked twice. Manual acceptance is pending package updates. No browser used.
+
+
+### Lailama generation boundary (first migration step)
+
+Lailama 1.0.20 routes its existing inference worker through
+`LailamaGenerationProvider`. The adapter uses the version-1 generation result
+(`requestId`, `state`, `text`, `error`), validates a single user continuation,
+and suppresses empty, failed or cancelled completions before action processing.
+The wrapper continues to own the native operation lease, streaming, session,
+history and action dispatch. No second model or native context is created.
+
+This is a session-continuation adapter, not yet the complete provider endpoint:
+it deliberately rejects supplied system prompts, output schemas and multi-message
+histories instead of silently ignoring them. It is not registered as
+`AI.Genies/Lailama/Provider.Generate` yet. The next step must define explicit
+session reconstruction/profile invalidation and the compact text/`api-call`
+strategy before routing chat through `Conversation.Run`. Existing Lailama public
+APIs and UI capabilities remain unchanged.
+
+Deterministic provider tests cover validation, message isolation, cancellation,
+empty output and error redaction without loading model weights. Live acceptance
+for this extraction is a normal reply, a device read/control command, followed
+by cancellation and shutdown with a loaded model.
+
+
+### Lailama compact context discovery
+
+AI Genie 0.8.0 adds `System.Utility/AiGenie/Text.Context.Step`; Lailama 1.0.21
+uses it before action extraction. The local model continues to produce ordinary
+text and `api-call` blocks. A fenced `context-request` containing `moduleIds` or
+`parameterIds` requests read-only reference data. The shared step calls the same
+`Context.Prepare` collector as Gemini, which uses module Schema and parameter
+Context APIs. It accepts no arbitrary API route. Mixed read/write blocks,
+unsupported resources, malformed markers and a fourth lookup fail before dispatch.
+Reference-data failures are errors, not model-generated values. Text inside a
+closed reasoning block is not interpreted as a context request.
+
+The existing SendContextData option is the master switch. If present, the module's
+AI.Chat.Context.devices selection is also respected; other context categories
+remain disabled for this local strategy. This step does not add the full Gemini
+capability selector or program/widget generation to Lailama.
+
+Lailama rebuilds native state from completed profile-matching history when the
+session is invalidated. See the persistent-session checkpoint below for the current
+reuse policy; the initial discovery implementation rebuilt on every turn. Pending, cancelled and failed turns are excluded by
+ChatHistory/GetContext. The wrapper records contextProfileKey on new messages.
+Previously stored messages remain visible/exportable; messages without a matching
+profile are not silently injected into the new session. The final answer is saved
+once; lookup requests and returned reference data are not persisted as chat turns.
+No extra model weights or native context are loaded. Re-evaluating clean history
+may increase latency compared with reusing the KV cache.
+
+The continuation adapter is still wrapper-owned, not a public Provider.Generate
+endpoint or the full structured Conversation.Run strategy. This checkpoint adds
+shared context discovery and session consistency; configuration-write acceptance
+and further provider unification remain subsequent steps.
+
+Manual acceptance: with context sharing enabled, ask for the Porch Light's exact
+auto-off feature and owning program, then for its current timeout without changing
+anything. Change that value manually in settings and ask again, to distinguish a
+fresh read from history. Turn context sharing off and repeat: no reference lookup
+or device command should be dispatched. Test a normal device command with sharing
+on, cancellation and shutdown as lifecycle regression checks. Use the existing
+1.7B model; a failed multi-step result is useful evidence, not a reason to force
+full JSON generation or install a larger model automatically.
+
+Validation for this checkpoint: 210 targeted tests passed; full distributed scripts
+581, 583, 933 and 940 compiled. Package checksums/dependency references and LF line
+endings were checked. No browser, live program catalog or runtime model was changed.
+
+
+### Local continuation diagnostics
+
+Lailama 1.0.22 emits `Lailama.Trace` JSON records through the existing logger.
+Correlate `requestId` and zero-based `round`: generation.start,
+generation.native.end, generation.result, reference.start and reference.end.
+Each round reports yielded text chunks (not native generated-token count), output
+characters, time to first nonempty chunk, elapsed time, cancellation/stopping flags
+and any observed configured textual anti-prompt. The stream does not expose an
+exact native finish reason; finishReasonReported=false deliberately avoids claiming
+EOS or an output limit without evidence.
+
+Generation start also records actual native context capacity, configured context
+option, message/input lengths, tokenized history-plus-input text estimate and
+estimated headroom. This text estimate omits chat-template overhead and is not an
+exact remaining-token allowance. Available executor-state scalars include past and
+consumed token counts, prompt-run state and input-buffer length. Generated text,
+prompts, reference values, model paths and full native state are not logged.
+Diagnostic probe/logger failures are suppressed without changing inference cleanup.
+
+The adapter and lookup behavior are unchanged. Update only program 940 after
+refreshing packages, repeat the same question with the same model/options, and
+inspect `log/homegenie.log` for matching records. A successful reference.end followed
+by a round-1 generation.result failed/empty can now be compared with stream chunks,
+executor counters and context estimates before considering a behavioral fix.
+
+
+### LLamaSharp continuation input/output accounting
+
+The 1.0.22 trace reproduced a successful schema read followed by zero yielded
+chunks: round 1 appended 2447 input tokens while MaxTokens was 2048. Only the next
+512-token batch was consumed before inference stopped. Native capacity was 32768,
+so this was not evidence of context exhaustion or a small model refusing the task.
+
+In LLamaSharp v0.27.0, InteractiveExecutor.PreprocessInputs subtracts continuation
+input length from RemainedTokens; PostProcess stops when that budget is nonpositive.
+Source: https://github.com/SciSharp/LLamaSharp/blob/v0.27.0/LLama/LLamaInteractExecutor.cs
+
+Lailama 1.0.23 uses a small LailamaInteractiveExecutor subclass to preserve the
+preprocessing output budget after the base method has tokenized/appended input.
+Input processing, native session, sampler, stop sequences, cancellation and the
+configured output limit are otherwise unchanged. There is no empty-response retry,
+unlimited generation workaround or model reload. This is an automation-program
+adapter change, not a HomeGenie-core or LLamaSharp-package modification.
+
+The regression harness compiles the shipped override against a deterministic
+model of the 0.27.0 continuation-accounting behavior. It reproduces the observed
+2447/2048 failure, checks full input consumption with a bounded output budget,
+initial prompts, unlimited sentinel and cancellation without model weights.
+Full-script compilation verifies the actual LLamaSharp 0.27.0 override signature.
+Live acceptance still requires repeating the same Porch Light request with the
+same 1.7B model/options and checking the retained Lailama.Trace round-1 records.
+
+
+### Multi-round streaming lifecycle
+
+Lailama 1.0.24 uses `LLM.TokenStream.Reset` between a provisional generation and
+its reference-data continuation. YoT discards the provisional streaming view but
+keeps the submitted request busy and the waiting indicator active. It neither
+adds that intermediate text to history nor sends it to speech synthesis.
+
+An empty `LLM.TokenStream` event now means the entire successful request has
+finished, not an individual native generation. It is emitted after SaveReply and
+before Widget.Refresh; the latter reloads the authoritative final history.
+Existing Status.Error/cancel handling remains terminal. No new polling or timer
+was added. Update both Lailama and the frontend for the reset-view behavior.
+
+The standalone frontend regression can be run with
+`node e2e/src/ai-genie-stream.cjs` from the YoT repository. It exercises the actual
+transpiled module-event subscription with multi-round resets, a long inter-round
+pause, one final history message and speech, duplicate/late events, cancellation
+and errors without opening a browser or running inference.
+
+
+### Compact-read instruction refinement
+
+AI Genie 0.8.1 removes the sequential wording that encouraged a local model to emit
+both schema and parameter requests in one answer. An exact known parameter ID is
+read directly; schema lookup is reserved for discovering unknown feature names or
+program ownership. The model is instructed to emit one context-request and stop
+immediately after the closing fence, without explaining later requests. The prompt
+contains one fenced example only. Parser validation, the three-lookup bound and
+permissions are unchanged; no malformed-output retry was added.
+
+Update program 583 only for this instruction revision. Lailama fetches the shared
+instructions at the start of each submitted turn, so its model and program do not
+need to be reloaded. Repeat the direct parameter-read request with the same model
+and options; multi-step feature/owner discovery remains a separate acceptance case.
+
+
+### Persistent native session and current-turn provenance
+
+Lailama 1.0.25 reuses ChatSession and the native KV cache across successful requests.
+The wrapper compares a fingerprint of completed persisted messages plus the context
+profile, prompt/strategy text, formatting template and history limit. It does not
+resend completed history to inference on a cache hit. Current scoped device data
+is appended as a clearly labelled CURRENT TURN DATA block with the new user request.
+Subsequent lookup results are labelled FRESH API RESULT FOR THIS TURN.
+
+Cache validity is cleared before a native turn and committed only after its final
+reply has been persisted. Interrupted/failed native work is therefore rebuilt on
+the next request. Changed/imported/deleted history, clear-history, prompt/profile
+changes and the native message-count limit also trigger reconstruction. Isolated
+no-history requests invalidate rather than pollute the reusable chat session.
+Reconstruction drops closed or unfinished think blocks from assistant messages;
+the saved/displayed history is unchanged. Reasoning already present in a valid KV
+cache is not retrospectively removed; doing that would require recomputation.
+
+Lailama.Session logs requestId, reused and message counts without chat contents.
+Check reused=true and nonzero initial PastTokensCount on the next ordinary turn.
+History is still read locally to detect changes, but not fed to the model again
+when native state can be reused. This does not guarantee that a small model will
+choose a fresh API lookup: current-read behavior remains a manual acceptance item.
+
+Acceptance: update 940, ask the direct parameter question, change the timeout
+manually and ask again without restarting or clearing the chat. Confirm the new
+value, the fresh ParameterGet call and session reuse in logs. Also check history
+clear/import, context changes and recovery after cancellation before broader use.
+
+
+### One local format repair and visible read receipts
+
+AI Genie 0.8.2 validates resource-ID shape before calling Context.Prepare and marks
+only model-format failures as contract errors. Disabled context, mixed executable
+commands, exhausted lookup limits and collector/API failures are not repairable.
+Lailama 1.0.26 permits one correction generation for a contract error. It returns
+format guidance to the same native session without guessing missing target IDs.
+A second format failure ends the request; the three successful-lookup limit remains
+independent. The combined generation bound is five, with no dispatch after exhaustion.
+The waiting/stream reset protocol applies during repair as during a lookup.
+
+Completed explicit schema/parameter reads return receipt paths. The wrapper stores
+those strings under metadata.contextCalls, including on a later failed final turn.
+YoT shows them in a collapsed API group using the existing thoughts-panel style.
+No returned values or reasoning are added to these receipts, and the receipt strings
+are never sent to ActionExecutor, rendered as api-call blocks or spoken. The feature
+covers completed local context reads; device commands retain their existing group.
+Failed attempts remain in diagnostics rather than being marked successful.
+
+Update programs 583 and 940 plus the frontend. Manual acceptance: repeat the prior
+follow-up that produced a bare property ID; if malformed output recurs, check one
+reference.format-repair event followed by either a valid read or a terminal error.
+Successful final messages should retain the collapsed read paths after history reload.
+Older chat messages without contextCalls remain unchanged.
+
+
+### History removal acknowledgement and clearing a loaded model
+
+The three-segment History.RemoveAt handler receives a MigInterfaceCommand whose
+OriginalRequest is the remaining index tail, not an integer itself. Gemini Genie
+1.0.17 and Lailama 1.0.27 parse/validate that tail and pass a numeric Index to the
+history service. Lailama also invalidates its session fingerprint. Chat History
+1.0.6 confirms Count only after a successful save; on save failure it restores the
+removed in-memory entry and returns an error. YoT requires a successful HTTP result
+and a nonnegative integer Count before removing the local message/showing success.
+
+The regression uses actual shipped switch/handler bodies and real MIG tail objects,
+with temporary files only. It checks disk reload, invalid indices, save-failure
+rollback and both provider wrappers. The standalone UI acknowledgement regression
+is `node e2e/src/ai-chat-delete.cjs` in YoT.
+
+Clearing Lailama history resets the conversation/session and invalidates its cache;
+it keeps the already-loaded weights and context allocation. WarmingUp belongs to
+initial model loading and is not required after clearing a conversation. The next
+request evaluates its prompt on the reset session; no model reload is necessary.

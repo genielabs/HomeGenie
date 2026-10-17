@@ -190,3 +190,85 @@ Shared-composite validation: 152 tests passed (16 composite cases plus 136 previ
 Implemented 583 0.7.0 / Gemini 1.0.16: generation/lookup/repair loop, committed identity checks, shared action dispatch and standalone widget/reply presentation now run in AI Genie. Provider wrapper retains configuration/transport/schema, identity-specific preferences/history, rate-limit state and task queue. Single final history write and imported action/generation metrics preserve existing formats. Same loop/lookup/repair/deployment limits; stop checks prevent new dispatch after stopping. No core/YoT/Lailama changes. Live acceptance pending package updates; browser not used. Next: Lailama provider adapter plus compact text/api-call response strategy, followed by compatibility checks. Previous composite execution and live counter read were reported successful by the maintainer.
 
 Common structured coordinator validation: 171 tests passed (19 end-to-end coordinator/presentation/history-bridge cases plus 152 prior regressions). Full scripts 581/583/933/940 compile. Prompt.Ask remains outside the action loop; the history bridge test verifies one user write and one final reply even if SaveReply is invoked twice. Manual acceptance is pending package updates. No browser used.
+
+
+#### Lailama provider migration checkpoint
+
+- [x] Extract the native generation result boundary while preserving the current
+  session, token streaming and native lifetime lease (Lailama 1.0.20).
+- [x] Add deterministic adapter validation/cancellation tests without loading a model.
+- [ ] Verify the extracted path with the existing 1.7B model: reply, device command,
+  cancellation and shutdown.
+- [ ] Add explicit full-message session mapping and context-profile invalidation;
+  then expose the provider endpoint and connect the compact text/`api-call`
+  strategy to the shared coordinator. Do not require structured JSON from small models.
+
+The shared Gemini coordinator's latest manual acceptance was reported successful
+by the user before this checkpoint.
+
+
+#### Lailama shared context discovery checkpoint
+
+- [x] User confirmed Lailama 1.0.20 replies, controls and cancellation; shutdown
+  remains a separate manual lifecycle check.
+- [x] Add compact read-only context-request handling through the shared collector
+  (AI Genie 0.8.0 / Lailama 1.0.21), bounded to three lookups.
+- [x] Rebuild the native session using fresh scoped context and completed history
+  for the current profile; retain stored history for display/export.
+- [x] Add deterministic lookup and session reconstruction tests.
+- [ ] Manual 1.7B acceptance: discover Porch Light features/owner, read timeout,
+  manually change it and verify a fresh read; repeat with context sharing disabled.
+- [ ] Complete configuration-write/readback acceptance and integrate further with
+  the common provider/coordinator strategy after the read-only checkpoint.
+
+
+- [x] Add content-free Lailama continuation diagnostics (1.0.22): generation and
+  reference phases, executor counters, context estimates and cancellation flags.
+- [ ] Repeat the observed Porch Light discovery with the same 1.7B model and
+  inspect round-1 empty completion before changing model, stop sequences or session behavior.
+
+
+- [x] Diagnose the empty Lailama continuation: LLamaSharp 0.27.0 subtracts the
+  reference-input token count from the response budget.
+- [x] Preserve output budget in the Lailama executor adapter (1.0.23), retaining
+  existing limits, cancellation and native lifecycle; add deterministic regression.
+- [ ] Repeat the same 1.7B discovery request to validate the native continuation
+  and subsequent fresh parameter read before moving to configuration changes.
+
+
+- [x] Separate Lailama intermediate stream reset from whole-request completion
+  (1.0.24 + YoT): keep waiting through lookups, discard provisional rounds and
+  speak/save only the final response.
+- [ ] Manual acceptance of the multi-round waiting/streaming UI with the existing
+  1.7B model; retain the simple parameter-read prompt as a functional reference.
+
+
+- [x] Simplify local read instructions (AI Genie 0.8.1): direct parameter lookup
+  when its ID is known; exactly one block and stop, with no future-step examples.
+- [ ] Recheck direct-read compliance with the existing 1.7B model; keep multi-step
+  feature/owner discovery as a separate model-capability test.
+
+
+- [x] Restore persistent Lailama ChatSession/KV reuse (1.0.25); reconstruct only
+  after incompatible history/profile/prompt, interrupted work or memory limit.
+- [x] Label fresh per-turn data and API results separately from historical values;
+  omit historical think blocks during reconstruction without altering stored chat.
+- [ ] Verify session reuse plus a fresh parameter reread after a manual value change,
+  without clearing history or restarting between requests; keep 1.7B compliance
+  separate from the correctness of cache invalidation and API dispatch.
+
+
+- [x] Add one bounded local context-request format correction; no retries for
+  permissions, mixed commands, collector outages or exhausted lookup limits.
+- [x] Persist completed context-read paths in message metadata and show them in
+  a collapsed API group, separate from executable device commands and TTS.
+- [ ] Manual repair/receipt acceptance with Gemma: incomplete ID, single correction,
+  fresh read and persistence of the read group after reloading history.
+
+
+- [x] Fix History.RemoveAt numeric-tail handling in Gemini/Lailama; confirm on-disk
+  save and reject HTTP-200 application errors in the UI instead of false success.
+- [x] Verify deletion/reload, invalid indices and save-failure rollback using only
+  temporary history files. Clearing a loaded Lailama conversation needs no warmup.
+- [ ] Manual deletion acceptance after updating history service and wrapper: remove
+  a test message, reload the page and verify that it remains absent before AI tests.
