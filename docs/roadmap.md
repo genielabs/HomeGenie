@@ -286,5 +286,13 @@ by the user before this checkpoint.
 - [x] Route local parameter-write batches through the common device dispatcher and existing feature validation/readback, preserving action identities and current permissions.
 - [x] Add shared instructions for feature discovery, units and standard Modules.ParameterSet writes.
 - [x] Avoid saving provisional configuration-success text when execution is rejected or unconfirmed.
-- [ ] User acceptance with Qwen3-4B-Instruct-2507: discover the porch-light timeout, set it to three minutes, freshly read 180 seconds, and verify read-only mode blocks the write.
+- [x] User acceptance with Qwen3-4B-Instruct-2507: fresh read 120 seconds, verified write to 180 seconds, fresh read 180 seconds; read-only request refused with zero actions; re-enabled write verified from 180 to 60 seconds.
 - [ ] Continue provider-independent coordination after this checkpoint; program/widget generation remains a later local-model test.
+
+### Common text conversation coordinator
+
+- [x] Extract local lookup/format-repair/final-dispatch sequencing into AI Genie Conversation.Text.Run using in-memory delegates and cancellation.
+- [x] Preserve local native session ownership, streaming, request IDs, intermediate thoughts, read receipts and single final persistence.
+- [x] Keep existing limits: three reference reads, one format repair and five generations; never repeat final actions after an uncertain result.
+- [x] Manual acceptance after updating AI Genie and Lailama: fresh read 60 seconds, one verified write from 60 to 90 seconds, and a new API read of 90 seconds. User confirmed the chat stays busy through API calls and the end of inference. Permission disable/re-enable was verified in the preceding checkpoint.
+- [ ] Continue convergence with the structured Gemini strategy after regression acceptance; local program/widget generation remains later.

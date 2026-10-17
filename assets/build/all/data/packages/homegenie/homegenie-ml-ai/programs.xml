@@ -537,7 +537,7 @@ public sealed class AiSkillCatalog
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.52</PackageVersion>
+      <PackageVersion>1.0.53</PackageVersion>
       <Id>context-engine</Id>
       <Version>1.0.8</Version>
       <Required>true</Required>
@@ -1140,7 +1140,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.52</PackageVersion>
+      <PackageVersion>1.0.53</PackageVersion>
       <Id>gemini-automan</Id>
       <Version>1.0.10</Version>
       <Required>false</Required>
@@ -1598,7 +1598,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.52</PackageVersion>
+      <PackageVersion>1.0.53</PackageVersion>
       <Id>gemini-intent-handler</Id>
       <Version>1.0.22</Version>
       <Required>false</Required>
@@ -2321,7 +2321,7 @@ public static class AiPromptTemplate
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.52</PackageVersion>
+      <PackageVersion>1.0.53</PackageVersion>
       <Id>gemini-widget-genie</Id>
       <Version>1.0.18</Version>
       <Required>false</Required>
@@ -2651,7 +2651,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.52</PackageVersion>
+      <PackageVersion>1.0.53</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -3176,14 +3176,14 @@ else
             }
             lifecycleLog("Lailama.Session "+new JObject{["requestId"]=telemetry.RequestId,["reused"]=reuseSession,
                 ["historyMessages"]=cleanHistory.Count,["nativeMessages"]=session.History.Messages.Count}.ToString(Formatting.None));
-            string templatedInput=BuildUserPrompt(templateType,LailamaSessionCache.CurrentTurn((string)prepared["systemPrompt"],rawInput));
-            string fullReply=null;
-            string priorThoughts="";
-            int formatRepairs=0,contextReads=0;
-            bool finalReplyReady=false;
-            for(int lookupRound=0;lookupRound&lt;5;lookupRound++) {
-            requestCts.Token.ThrowIfCancellationRequested();
-            var trace=new LailamaGenerationTrace(telemetry.RequestId,lookupRound,lifecycleLog);
+            LailamaGenerationTrace trace=null;
+            var coordinated=readObject(Api.Call("System.Utility/AiGenie/Conversation.Text.Run",new Dictionary&lt;string,object&gt; {
+                ["version"]=1,["requestId"]=telemetry.RequestId,
+                ["input"]=LailamaSessionCache.CurrentTurn((string)prepared["systemPrompt"],rawInput),
+                ["cancellationToken"]=requestCts.Token,
+                ["generate"]=new Func&lt;string,int,IDictionary&lt;string,object&gt;&gt;((roundInput,lookupRound)=&gt; {
+                    string templatedInput=BuildUserPrompt(templateType,roundInput);
+            trace=new LailamaGenerationTrace(telemetry.RequestId,lookupRound,lifecycleLog);
             trace.Event("generation.start",()=&gt; {
                 string historyText=string.Join("\n",session.History.Messages.Select(m=&gt;m.Content));
                 int estimatedTokens=context.Tokenize(historyText+"\n"+templatedInput,false,true).Length;
@@ -3266,53 +3266,42 @@ else
 
             return nativeReply;
             });
-            trace.Event("generation.result",()=&gt;new JObject{["state"]=(string)generation["state"]});
-            if ((string)generation["state"] == "cancelled") throw new OperationCanceledException(requestCts.Token);
-            if ((string)generation["state"] != "completed") throw new InvalidOperationException((string)generation["error"]);
-            fullReply = (string)generation["text"];
-            trace.Event("reference.start");
-            var step=textStep(fullReply,contextReads);
-            if((string)step["Status"]=="Error") {
-                string feedback=LailamaFormatRepair.Feedback(step,formatRepairs++);
-                trace.Event("reference.format-repair");
-                priorThoughts += string.Concat(Regex.Matches(fullReply??"",@"&lt;think&gt;[\s\S]*?&lt;/think&gt;",RegexOptions.IgnoreCase).Cast&lt;Match&gt;().Select(m=&gt;m.Value+"\n"));
-                Program.Emit("LLM.TokenStream.Reset","repair");
-                templatedInput=BuildUserPrompt(templateType,feedback);
-                continue;
-            }
-            trace.Event("reference.end",()=&gt;new JObject{
-                ["state"]=(string)step["state"],["referenceChars"]=(string)step["state"]=="context"?((string)step["text"]??"").Length:0});
-            if((string)step["state"]=="reply") {finalReplyReady=true;break;}
-            if((string)step["state"]!="context" || step["text"]?.Type!=JTokenType.String)
-                throw new InvalidOperationException("Invalid local context step.");
-            // Discard only the provisional round; the request remains busy.
-            priorThoughts += string.Concat(Regex.Matches(fullReply??"",@"&lt;think&gt;[\s\S]*?&lt;/think&gt;",RegexOptions.IgnoreCase).Cast&lt;Match&gt;().Select(m=&gt;m.Value+"\n"));
-                Program.Emit("LLM.TokenStream.Reset", "context");
-            contextReads++;
-            if(step["calls"] is JArray calls)foreach(string path in calls.Values&lt;string&gt;())telemetry.ContextCalls.Add(path);
-            templatedInput=BuildUserPrompt(templateType,"FRESH API RESULT FOR THIS TURN:\n"+(string)step["text"]);
-            }
-            if(!finalReplyReady)throw new InvalidOperationException("Local response did not complete within the lookup/repair limit.");
-            requestCts.Token.ThrowIfCancellationRequested();
-            if(!(bool)scope["context"]["devices"] &amp;&amp; Regex.IsMatch(fullReply,@"```\s*api-call",RegexOptions.IgnoreCase))
-                throw new InvalidOperationException("Enable Devices context before controlling devices.");
-
-            // 4. COMMAND EXECUTION AND PERSISTENCE
-
+                    return generation;
+                }),
+                ["step"]=textStep,
+                ["reset"]=new Action&lt;string&gt;(reason=&gt;Program.Emit("LLM.TokenStream.Reset",reason)),
+                ["contextCall"]=new Action&lt;string&gt;(path=&gt;telemetry.ContextCalls.Add(path)),
+                ["observe"]=new Action&lt;string,JObject&gt;((phase,details)=&gt;trace?.Event(phase,()=&gt;details)),
+                ["execute"]=new Func&lt;string,JObject&gt;(reply=&gt; {
+                    if(!(bool)scope["context"]["devices"] &amp;&amp; Regex.IsMatch(reply,@"```\s*api-call",RegexOptions.IgnoreCase))
+                        throw new InvalidOperationException("Enable Devices context before controlling devices.");
             telemetry.GenerationComplete();
             var actionTimer = System.Diagnostics.Stopwatch.StartNew();
-            var actionResults = ExecuteResponse(fullReply, telemetry.RequestId);
+            var actionResults = ExecuteResponse(reply, telemetry.RequestId);
             telemetry.SetActionResults(actionResults);
             telemetry.ActionsCompleted(actionTimer.ElapsedMilliseconds, actionResults.Count, actionResults.Count(r =&gt; !r.Success));
 
-            string verifiedReply=LailamaConfigurationActions.VerifiedReply(fullReply,JArray.FromObject(actionResults));
-            bool configurationFailed=verifiedReply!=fullReply;
+            string verifiedReply=LailamaConfigurationActions.VerifiedReply(reply,JArray.FromObject(actionResults));
+            bool configurationFailed=verifiedReply!=reply;
             if(configurationFailed) {
                 Program.Emit("LLM.TokenStream.Reset","verification");
                 // The UI has already retained this round's reasoning during reset.
                 Program.Emit(FIELD_TOKENS_STREAM,Regex.Replace(verifiedReply,@"&lt;think&gt;[\s\S]*?&lt;/think&gt;","",RegexOptions.IgnoreCase));
-                fullReply=verifiedReply;
+                reply=verifiedReply;
             }
+                    return new JObject{["reply"]=reply,["results"]=JArray.FromObject(actionResults),["outcome"]=configurationFailed?"error":"completed"};
+                })
+            }));
+            requestCts.Token.ThrowIfCancellationRequested();
+            if(coordinated?["cancelled"]?.Value&lt;bool&gt;()==true)throw new OperationCanceledException(requestCts.Token);
+            if(coordinated==null || (string)coordinated["Status"]=="Error")
+                throw new InvalidOperationException((string)coordinated?["Message"]??"Update AI Genie before using local conversation coordination.");
+            if(coordinated["version"]?.Type!=JTokenType.Integer || (int)coordinated["version"]!=1 ||
+                (string)coordinated["requestId"]!=telemetry.RequestId || coordinated["reply"]?.Type!=JTokenType.String ||
+                coordinated["priorThoughts"]?.Type!=JTokenType.String || !new[]{"completed","error"}.Contains((string)coordinated["outcome"]))
+                throw new InvalidOperationException("AI Genie returned an invalid text conversation result.");
+            string fullReply=(string)coordinated["reply"],priorThoughts=(string)coordinated["priorThoughts"];
+            bool configurationFailed=(string)coordinated["outcome"]=="error";
             var messageSegments = ExtractResponse(priorThoughts+fullReply);
             var modelResponse = new ChatMessage {
                 Role = "model",
@@ -4060,14 +4049,6 @@ public sealed class LailamaSessionCache {
     }
 }
 
-public static class LailamaFormatRepair {
-    public static string Feedback(JObject error,int repairs) {
-        if(error==null || (string)error["Status"]!="Error" || (string)error["errorKind"]!="contract" || repairs!=0)
-            throw new InvalidOperationException((string)error?["Message"]??"Reference request failed.");
-        return "REFERENCE REQUEST FORMAT ERROR: "+(string)error["Message"]
-            +"\nNo API call or command was executed. Correct your request ONCE. Use a full domain/address/property for parameterIds, or domain/address for moduleIds. Use the exact target from the user's request/history; do not invent missing IDs. If ambiguous, ask for clarification. Emit one context-request block and stop; no commands or future-step examples.";
-    }
-}
 
 public static class LailamaCapabilityPolicy {
     public static JObject Normalize(JObject selected,bool devices) {
@@ -4139,11 +4120,11 @@ public static class LailamaConfigurationActions {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.52</PackageVersion>
+      <PackageVersion>1.0.53</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.0.32</Version>
+      <Version>1.1.0</Version>
       <Required>true</Required>
-      <Checksum>1F3CB62886CBBEC067B947EBEEC2E650</Checksum>
+      <Checksum>C7B730873FA5C89A0B2179427599C105</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>
@@ -4345,7 +4326,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.52</PackageVersion>
+      <PackageVersion>1.0.53</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -4531,7 +4512,7 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.52</PackageVersion>
+      <PackageVersion>1.0.53</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -5445,7 +5426,7 @@ public static class GeminiGenerationProvider {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.52</PackageVersion>
+      <PackageVersion>1.0.53</PackageVersion>
       <Id>gemini-genie</Id>
       <Version>1.0.17</Version>
       <Required>true</Required>

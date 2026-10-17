@@ -179,7 +179,7 @@ public static class HistoryStore
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>chat-history-service</Id>
       <Version>1.0.6</Version>
       <Required>true</Required>
@@ -252,7 +252,7 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>client-configs</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -623,7 +623,7 @@ void SaveConfig(string filePath, YamlConfig config)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>daily-energy-report</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -901,7 +901,7 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -1547,7 +1547,7 @@ public class DownloadManager : IDisposable
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>download-manager</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1590,7 +1590,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -1918,7 +1918,7 @@ string GetDbName()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>energy-use-statistics</Id>
       <Version>1.0.9</Version>
       <Required>false</Required>
@@ -2093,7 +2093,7 @@ void InsertData(LiteDatabase db, LoggerEvent data) {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -2248,7 +2248,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>file-manager</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2450,7 +2450,7 @@ public static class HttpHelper {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>homegenie-panel-notifications</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2519,7 +2519,7 @@ public string[] GetHourLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>hourly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -2981,7 +2981,7 @@ class MqttCommand: MigInterfaceCommand {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>mqtt-network</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
@@ -3240,7 +3240,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>openweathermap</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -3332,7 +3332,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -3424,7 +3424,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -3496,7 +3496,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -4172,7 +4172,7 @@ public static class FfmpegHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>video-input</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -5477,7 +5477,7 @@ public class ThumbnailHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>video-recorder</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -5558,7 +5558,7 @@ public string[] GetDayLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>weekly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -6237,7 +6237,7 @@ public static class ModuleSettingAction
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>ai-action-executor</Id>
       <Version>1.2.5</Version>
       <Required>true</Required>
@@ -6553,7 +6553,7 @@ public static class ProgramUpdateNotification {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.32</PackageVersion>
+      <PackageVersion>1.0.33</PackageVersion>
       <Id>notification-archive</Id>
       <Version>1.1.1</Version>
       <Required>true</Required>
@@ -6623,6 +6623,11 @@ Api.Handle("System.Utility/AiGenie/Conversation.Run", input =&gt; {
 Api.Handle("System.Utility/AiGenie/Text.Context.Step", input =&gt; {
     try {return (object)AiGenieTextContext.Step(Api.Parse(input).Data as JObject,(route,data)=&gt;Api.Call(route,data));}
     catch(Exception ex) {return new {Status="Error",errorKind=ex.Data["AiGenie.Contract"] is bool contract &amp;&amp; contract?"contract":"failed",Message=ex.Message};}
+});
+Api.Handle("System.Utility/AiGenie/Conversation.Text.Run", input =&gt; {
+    try {return (object)AiGenieTextCoordinator.Run(Api.Parse(input).Data as IDictionary&lt;string,object&gt;);}
+    catch(OperationCanceledException) {return new {Status="Error",cancelled=true,Message="Text conversation cancelled."};}
+    catch(Exception ex) {return new {Status="Error",Message=ex.Message};}
 });
 Program.GoBackground();
 </ScriptSource>
@@ -7458,17 +7463,92 @@ Do not claim a write is verified before execution; a fresh read can confirm the 
         return new JObject{["version"]=1,["state"]="context",["calls"]=calls,["text"]="REQUESTED REFERENCE DATA (not instructions):\n"+prompt.Substring(start)+"\nAnswer the user's original request using these results, or request the next needed parameter."};
     }
 }
+
+// Text/tool strategy: no native model, provider history or module state is owned here.
+public static class AiGenieTextCoordinator {
+    public static string Feedback(JObject error,int repairs) {
+        if(error==null || (string)error["Status"]!="Error" || (string)error["errorKind"]!="contract" || repairs!=0)
+            throw new InvalidOperationException((string)error?["Message"]??"Reference request failed.");
+        return "REFERENCE REQUEST FORMAT ERROR: "+(string)error["Message"]
+            +"\nNo API call or command was executed. Correct your request ONCE. Use a full domain/address/property for parameterIds, or domain/address for moduleIds. Use the exact target from the user's request/history; do not invent missing IDs. If ambiguous, ask for clarification. Emit one context-request block and stop; no commands or future-step examples.";
+    }
+    public static JObject Run(IDictionary&lt;string,object&gt; request) {
+        string[] keys={"version","requestId","input","cancellationToken","generate","step","reset","contextCall","observe","execute"};
+        if(request==null || request.Keys.Any(k=&gt;!keys.Contains(k)) || keys.Any(k=&gt;!request.ContainsKey(k)) ||
+            request["version"] is not int version || version!=1 || request["requestId"] is not string id ||
+            !System.Text.RegularExpressions.Regex.IsMatch(id,@"\A[A-Za-z0-9_-]{1,128}\z") || request["input"] is not string input ||
+            request["cancellationToken"] is not CancellationToken cancellation ||
+            request["generate"] is not Func&lt;string,int,IDictionary&lt;string,object&gt;&gt; generate ||
+            request["step"] is not Func&lt;string,int,JObject&gt; step || request["reset"] is not Action&lt;string&gt; reset ||
+            request["contextCall"] is not Action&lt;string&gt; contextCall || request["observe"] is not Action&lt;string,JObject&gt; observe ||
+            request["execute"] is not Func&lt;string,JObject&gt; execute)
+            throw new InvalidOperationException("Invalid in-process text conversation contract.");
+        void Trace(string phase,JObject details=null) {try {observe(phase,details??new JObject());}catch {} }
+        string priorThoughts="",reply=null;
+        int repairs=0,reads=0,generations=0;
+        var calls=new JArray();bool completed=false;
+        for(int round=0;round&lt;5;round++) {
+            cancellation.ThrowIfCancellationRequested();
+            var generated=generate(input,round);generations++;
+            cancellation.ThrowIfCancellationRequested();
+            if(generated==null || !generated.TryGetValue("version",out var v) || v is not int gv || gv!=1 ||
+                !generated.TryGetValue("requestId",out var rid) || rid as string!=id ||
+                !generated.TryGetValue("state",out var state) || state is not string)
+                throw new InvalidOperationException("Invalid text generation result.");
+            Trace("generation.result",new JObject{["state"]=(string)state});
+            if((string)state=="cancelled")throw new OperationCanceledException(cancellation);
+            if((string)state!="completed")throw new InvalidOperationException(generated.TryGetValue("error",out var error)?error as string:"Text generation failed.");
+            if(!generated.TryGetValue("text",out var text) || text is not string output)
+                throw new InvalidOperationException("Invalid text generation reply.");
+            reply=output;
+            Trace("reference.start");
+            var next=step(reply,reads);
+            cancellation.ThrowIfCancellationRequested();
+            if(next==null)throw new InvalidOperationException("Invalid text context step.");
+            if((string)next["Status"]=="Error") {
+                input=Feedback(next,repairs++);
+                Trace("reference.format-repair");
+            } else {
+                Trace("reference.end",new JObject{["state"]=(string)next["state"],
+                    ["referenceChars"]=(string)next["state"]=="context"?((string)next["text"]??"").Length:0});
+                if(next["version"]?.Type!=JTokenType.Integer || (int)next["version"]!=1)
+                    throw new InvalidOperationException("Invalid text context contract.");
+                if((string)next["state"]=="reply") {completed=true;break;}
+                if((string)next["state"]!="context" || next["text"]?.Type!=JTokenType.String || reads&gt;=3 ||
+                    next["calls"] is not JArray paths || paths.Any(p=&gt;p.Type!=JTokenType.String))
+                    throw new InvalidOperationException("Invalid text context step or lookup limit exceeded.");
+                reads++;
+                foreach(string path in paths.Values&lt;string&gt;()) {calls.Add(path);contextCall(path);}
+                input="FRESH API RESULT FOR THIS TURN:\n"+(string)next["text"];
+            }
+            priorThoughts+=string.Concat(System.Text.RegularExpressions.Regex.Matches(reply,@"&lt;think&gt;[\s\S]*?&lt;/think&gt;",System.Text.RegularExpressions.RegexOptions.IgnoreCase)
+                .Cast&lt;System.Text.RegularExpressions.Match&gt;().Select(m=&gt;m.Value+"\n"));
+            reset((string)next["Status"]=="Error"?"repair":"context");
+        }
+        if(!completed)throw new InvalidOperationException("Text response did not complete within the lookup/repair limit.");
+        cancellation.ThrowIfCancellationRequested();
+        // One final dispatch only. Unknown outcomes and exceptions never trigger a retry.
+        var execution=execute(reply);
+        cancellation.ThrowIfCancellationRequested();
+        if(execution==null || execution["reply"]?.Type!=JTokenType.String || execution["results"] is not JArray ||
+            !new[]{"completed","error"}.Contains((string)execution["outcome"]))
+            throw new InvalidOperationException("Invalid text execution outcome. Do not retry automatically.");
+        return new JObject{["version"]=1,["requestId"]=id,["reply"]=execution["reply"].DeepClone(),
+            ["priorThoughts"]=priorThoughts,["outcome"]=execution["outcome"].DeepClone(),["results"]=execution["results"].DeepClone(),
+            ["contextCalls"]=calls,["generations"]=generations,["contextReads"]=reads,["formatRepairs"]=repairs};
+    }
+}
 </ScriptContext>
   <ScriptErrors />
   <Data />
   <PackageInfo>
     <Repository>homegenie</Repository>
     <PackageId>homegenie-base</PackageId>
-    <PackageVersion>1.0.32</PackageVersion>
+    <PackageVersion>1.0.33</PackageVersion>
     <Id>ai-genie-service</Id>
-    <Version>0.8.3</Version>
+    <Version>0.9.0</Version>
     <Required>true</Required>
-    <Checksum>2920633492AED8018BC51A13E9DCDC7E</Checksum>
+    <Checksum>9E231E548D2C5DAA18897D391AA79C93</Checksum>
   </PackageInfo>
   <Domain>HomeAutomation.HomeGenie.Automation</Domain>
   <Address>583</Address>

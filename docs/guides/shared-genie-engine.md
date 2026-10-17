@@ -467,3 +467,13 @@ The existing executor accepts only existing non-sensitive numeric or checkbox fe
 Shared text instructions teach schema discovery, parameter reads, units and configuration syntax without replacing customized provider prompts. No HomeGenie core API or provider route changes are needed.
 
 Manual acceptance: update AI Genie (583) and Lailama (940), enable context and device control, ask to set the porch-light automatic-off timeout to three minutes, then request a fresh API read. Expect 180 seconds, one verified parameter-write receipt and a fresh read receipt. Record the previous value first if it should be restored. Also verify that the same write is blocked with device control disabled. Slow local inference is expected; model compliance remains separate from executor validation.
+
+### Shared text conversation strategy
+
+`System.Utility/AiGenie/Conversation.Text.Run` accepts an in-process versioned dictionary containing a request ID, initial input, CancellationToken and strongly typed callbacks for generation, reference steps, round resets, read receipts, diagnostics and final execution. These delegates cross Api.Call in memory; they are not an HTTP/JSON tool contract.
+
+AI Genie now owns the local text strategy: generation-result validation, fresh-reference continuations, one format repair, three-read/five-generation limits, intermediate-reasoning retention and exactly one final dispatch. Cancellation is checked before and after generation, reference retrieval and final dispatch. Exceptions or uncertain execution never trigger automatic redispatch. Diagnostics are observational and cannot fail the turn.
+
+Lailama keeps its model/context/session and native operation lease. Its callbacks still handle native token filtering, tracing and streaming, current-permission checks, the existing common device/configuration dispatch, telemetry, and correction of unconfirmed configuration presentation. Only after a valid coordinated result does the wrapper save the final history message, commit its native-session cache and emit stream completion. No extra model or history service is created.
+
+Gemini keeps the existing structured Conversation.Run strategy in the same utility. The two response protocols remain distinct, and this extraction does not register a new Lailama provider HTTP endpoint or modify Prompt.Ask behavior. Legacy local Execute/ExtractAndExecute endpoints are unchanged by this refactor.
