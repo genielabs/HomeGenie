@@ -330,3 +330,12 @@ by the user before this checkpoint.
 - [x] Parse leading local reasoning before ai_solution without changing literal widget source content.
 - [x] Local standalone widget generation/presentation acceptance: Qwen3.5-9B returned HTML/CSS/JS and the user saw the widget (chat-history-1792312467517.json, 276 seconds). Generated interaction has code defects; functional preview and Save acceptance remain separate.
 - [x] Gemini composite acceptance: program 1004 emits Sensor.Counter=42; inline preview shows 42, widget saved as tests/test-composito-ai-1004 and added to Dashboard, retaining value/binding after page reload (2026-10-18). Local standalone counter generation had code defects; local composite acceptance remains separate.
+
+### Provider convergence audit after composite checkpoint
+
+- [x] Audit current 583/933/940 responsibilities after composite preview/Save/dashboard persistence acceptance.
+- [ ] Next bounded refactor: one canonical response schema and shared capability validation/allowed-kind policy; preserve provider-specific defaults and module preferences.
+- [ ] Unify turn metrics/final persistence and provider history projection without changing imported/visible history or local native-session ownership.
+- [ ] Share confirmed compile-failed abort recovery decisions; retain ledger protection for unknown/completed effects.
+- [ ] Define scheduled-task and pure-text Ask parity separately (Gemini background task/status/Ask differs from synchronous local Schedule).
+- [ ] Reassess release readiness after the contract/policy cleanup and brief provider regression tests; no requirement for intensive local code-generation tests.
