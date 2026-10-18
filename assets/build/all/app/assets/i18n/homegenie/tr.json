@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Alarmı Kaydet",
       "NVR.ContinuousRecording": "Sürekli Kayıt."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Paylaşılan hizmetler ve arka plan istekleri için varsayılan sağlayıcı seçimi.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Varsayılan)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Cihazları kontrol etmek, otomasyon programları oluşturmak ve HomeGenie'de pencere öğeleri oluşturmak için Google Gemini AI'ı kullanın. Sohbet menüsünden paylaşılacak yetenekleri ve sistem bağlamını seçin.\nBu özelliği etkinleştirmek için geçerli bir API anahtarı girin. https://aistudio.google.com/app/apikey adresinden bir API anahtarı alın.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Cin Komutu",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Varsayılan",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Kullanılamıyor)",
   "scheduler_preset_action_config_wish": "Doğal Dil Eylemi",
   "scheduler_preset_action_config_wish.placeholder": "Şunu deneyin: \"Isıyı 22 dereceye ayarlayın ve Gün Doğumu sahnesini başlatın\"",
   "scheduler_preset_action_command_video_record_start": "Video Kaydını Başlat",

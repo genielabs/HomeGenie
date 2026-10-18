@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Salvesta äratuse ajal",
       "NVR.ContinuousRecording": "Pidev salvestamine."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Jagatud teenused ja vaikimisi teenusepakkuja valimine taustapäringute jaoks.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Vaikimisi)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Kasutage rakenduses HomeGenie seadmete juhtimiseks, automaatikaprogrammide loomiseks ja vidinate ehitamiseks Google Gemini AI-d. Valige vestlusmenüüst funktsioonid ja süsteemikontekst, mida jagada.\nSelle funktsiooni lubamiseks sisestage kehtiv API-võti. Hankige API-võti aadressilt https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Džinni käsk",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Vaikimisi",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Pole saadaval)",
   "scheduler_preset_action_config_wish": "Loomuliku keele toiming",
   "scheduler_preset_action_config_wish.placeholder": "Proovi: „Seadista temperatuur 22°C peale ja käivita päikesetõusu stseen”",
   "scheduler_preset_action_command_video_record_start": "Alusta video salvestamist",

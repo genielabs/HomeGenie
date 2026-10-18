@@ -18,6 +18,8 @@ public class AiGenieCoordinatorTest {
     int generations,deployments,executions,recoveries,reads;
     bool running,stopAfterGeneration,normalizerUnavailable;
     int compileFailures;
+    bool unknownDeployment,failedRecovery;
+    readonly JArray ledger=new JArray();
     string folder;
     readonly List<JArray> observedMessages=new();
     readonly List<JObject> observedDeployments=new();
@@ -35,6 +37,7 @@ public class AiGenieCoordinatorTest {
     }
     [SetUp] public void Reset() {
         generations=deployments=executions=recoveries=reads=compileFailures=0;running=true;stopAfterGeneration=normalizerUnavailable=false;
+        unknownDeployment=failedRecovery=false;ledger.Clear();
         observedMessages.Clear();observedDeployments.Clear();outputs.Clear();folder=Path.Combine(Path.GetTempPath(),"hg-coordinator-"+Guid.NewGuid());Directory.CreateDirectory(folder);
     }
     [TearDown] public void Cleanup(){Directory.Delete(folder,true);}
@@ -77,9 +80,15 @@ public class AiGenieCoordinatorTest {
         }
         if(route=="System.Utility/ActionExecutor/Program.Deploy") {
             deployments++;var data=JObject.Parse((string)payload);observedDeployments.Add((JObject)data.DeepClone());bool failed=deployments<=compileFailures;
-            return new JObject{["RequestId"]=(string)data["requestId"],["Index"]=(int)data["attempt"],["State"]=failed?"failed":"completed",["Success"]=!failed,["Response"]=new JObject{["status"]=failed?"compile_failed":"success",["program_id"]="1001",["compiler_errors"]=new JArray("diagnostic")}};
+            var receipt=new JObject{["RequestId"]=(string)data["requestId"],["ActionId"]="run-id:deploy-"+(int)data["attempt"],["Index"]=(int)data["attempt"],["State"]=unknownDeployment?"unknown":failed?"failed":"completed",["Success"]=!failed&&!unknownDeployment,["Response"]=new JObject{["status"]=failed?"compile_failed":"success",["program_id"]="1001",["compiler_errors"]=new JArray("diagnostic")}};
+            ledger.Add(receipt.DeepClone());return receipt;
         }
-        if(route=="System.Utility/ActionExecutor/Program.Recover"){recoveries++;return new JObject{["RequestId"]="run-id",["State"]="completed",["Success"]=true};}
+        if(route=="System.Utility/ActionExecutor/Results")return ledger.DeepClone();
+        if(route=="System.Utility/ActionExecutor/Program.Recover"){
+            recoveries++;ledger.Add(new JObject{["RequestId"]="run-id",["ActionId"]="run-id:recover",["State"]=failedRecovery?"unknown":"completed"});
+            if(failedRecovery)throw new Exception("Recovery interrupted");
+            return new JObject{["RequestId"]="run-id",["State"]="completed",["Success"]=true};
+        }
         throw new Exception("Unexpected API (history must stay in the wrapper): "+route);
     }
     string Reply()=>"{'version':1,'kind':'reply','explanation':'hello'}".Replace('\'','"');
@@ -157,4 +166,19 @@ public class AiGenieCoordinatorTest {
         type.GetMethod("SaveReply").Invoke(instance,new object[]{reply,"completed"});type.GetMethod("SaveReply").Invoke(instance,new object[]{reply,"completed"});
         Assert.That(api.Writes.Count,Is.EqualTo(2));Assert.That((int)api.Writes[1]["Metadata"]["actionCount"],Is.EqualTo(1));Assert.That(api.Writes[1]["Metadata"]["actions"].Count(),Is.EqualTo(1));
     }
+    [Test] public void ProviderFailureDuringCompilerRepairRecoversConfirmedFailureOnce() {
+        compileFailures=1;outputs.Enqueue(Program());var result=Run();
+        Assert.That(deployments,Is.EqualTo(1));Assert.That(recoveries,Is.EqualTo(1));Assert.That((string)result["outcome"],Is.EqualTo("error"));
+        Assert.That((string)result["error"],Does.Contain("previous program state was recovered"));Assert.That((int)result["metrics"]["actionCount"],Is.EqualTo(2));
+    }
+    [Test] public void UnknownDeploymentDoesNotAuthorizeAbortRecovery() {
+        compileFailures=1;unknownDeployment=true;outputs.Enqueue(Program());var result=Run();
+        Assert.That(deployments,Is.EqualTo(1));Assert.That(recoveries,Is.Zero);Assert.That((string)result["outcome"],Is.EqualTo("error"));
+    }
+    [Test] public void FailedAbortRecoveryIsReportedWithoutRetryOrReplacement() {
+        compileFailures=1;failedRecovery=true;outputs.Enqueue(Program());var result=Run();
+        Assert.That(deployments,Is.EqualTo(1));Assert.That(recoveries,Is.EqualTo(1));
+        Assert.That((string)result["error"],Does.Contain("recovery was not confirmed"));Assert.That((int)result["metrics"]["failedActions"],Is.EqualTo(2));
+    }
+
 }

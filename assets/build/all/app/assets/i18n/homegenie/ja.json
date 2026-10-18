@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "アラーム時に録画",
       "NVR.ContinuousRecording": "連続録画。"
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "共有サービスと、バックグラウンドリクエストに使用するデフォルトプロバイダーの選択。",
+      "ConfigureOptions.DefaultProvider": "AI Genie (デフォルト)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Google Gemini AI を使用して、HomeGenie 内のデバイスの制御、自動化プログラムの作成、ウィジェットの構築を行います。チャットメニューから共有する機能とシステムコンテキストを選択してください。\nこの機能を有効にするには、有効な API キーを入力してください。API キーの取得先: https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "ジーニーコマンド",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "デフォルト",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (利用不可)",
   "scheduler_preset_action_config_wish": "自然言語アクション",
   "scheduler_preset_action_config_wish.placeholder": "試してみましょう: 「暖房を 22 度に設定して日の出シーンを開始してください」",
   "scheduler_preset_action_command_video_record_start": "ビデオ録画を開始",

@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Ойготкучту жаздыруу",
       "NVR.ContinuousRecording": "Үзгүлтүксүз жаздыруу."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Жалпы кызматтар жана фондо аткарылуучу сурамдар үчүн демейки камсыздоочуну тандоо.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Демейки)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "HomeGenie'де түзмөктөрдү башкаруу, автоматташтыруу программаларын жана виджеттерди түзүү үчүн Google Gemini AI колдонуңуз. Маек менюсунан бөлүшүлүүчү мүмкүнчүлүктөрдү жана тутумдук контекстти тандаңыз.\nБул функцияны иштетүү үчүн жарактуу API ачкычын киргизиңиз. API ачкычын https://aistudio.google.com/app/apikey сайтынан алыңыз.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Жиндер командасы",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Демейки",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Жеткиликсиз)",
   "scheduler_preset_action_config_wish": "Табигый тил аракети",
   "scheduler_preset_action_config_wish.placeholder": "Төмөнкүлөрдү колдонуп көрүңүз: \"Жылуулукту 22° кылып, күн чыгышын баштаңыз\"",
   "scheduler_preset_action_command_video_record_start": "Видео жаздырууну баштоо",

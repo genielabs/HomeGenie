@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Tomarkirina li ser alarmê",
       "NVR.ContinuousRecording": "Tomarkirina Berdewam."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Xizmetên hevpar û hilbijartina dabînkerê standard ji bo daxwazên paşxaneyê.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Wekî standard)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Ji bo kontrolkirina cîhazan, çêkirina bernameyên otomasyonê û avakirina widgetan di HomeGenie de Google Gemini AI bikar bînin. Ji pêşeka sohbetê şiyan û naveroka pergalê ya ku were parvekirin hilbijêrin.\nJi bo çalakkirina vê taybetmendiyê mifteyeke API-yê ya derbasdar binivîsin. Mifteyek API-yê ji https://aistudio.google.com/app/apikey bistînin.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Fermandariya Genie",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Wekî standard",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Ne berdest e)",
   "scheduler_preset_action_config_wish": "Çalakiya Zimanê Xwezayî",
   "scheduler_preset_action_config_wish.placeholder": "Biceribîne: \"Germiyê deyne ser 22° û dîmena Hilatina Rojê bide destpêkirin\"",
   "scheduler_preset_action_command_video_record_start": "Dest bi Tomarkirina Vîdyoyê Bike",

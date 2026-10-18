@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Mag-record sa Alarma",
       "NVR.ContinuousRecording": "Patuloy na Pagtatala."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Mga nakabahaging serbisyo at pagpili ng default na provider para sa mga kahilingan sa background.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Default)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Gamitin ang Google Gemini AI upang kontrolin ang mga device, gumawa ng mga automation program, at bumuo ng mga widget sa HomeGenie. Piliin ang mga kakayahan at konteksto ng system na ibabahagi mula sa menu ng chat.\nMaglagay ng valid na API key upang paganahin ang feature na ito. Kumuha ng API key sa https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Utos ng Genie",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Default",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Hindi available)",
   "scheduler_preset_action_config_wish": "Aksyon sa Likas na Wika",
   "scheduler_preset_action_config_wish.placeholder": "Subukan: \"Itakda ang init sa 22° at simulan ang eksena ng Pagsikat ng Araw\"",
   "scheduler_preset_action_command_video_record_start": "Simulan ang Pag-record ng Video",

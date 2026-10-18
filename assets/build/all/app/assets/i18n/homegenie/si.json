@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "අනතුරු ඇඟවීමේ පටිගත කරන්න",
       "NVR.ContinuousRecording": "අඛණ්ඩ පටිගත කිරීම."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "හවුල් සේවා සහ පසුබිම් ඉල්ලීම් සඳහා පෙරනිමි සැපයුම්කරු තේරීම.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (පෙරනිමි)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "HomeGenie තුළ උපාංග පාලනය කිරීමට, ස්වයංක්‍රීයකරණ වැඩසටහන් සෑදීමට සහ විජට් තැනීමට Google Gemini AI භාවිතා කරන්න. චැට් මෙනුවෙන් බෙදා ගැනීමට ඇති හැකියාවන් සහ පද්ධති සන්දර්භය තෝරන්න.\nමෙම විශේෂාංගය සක්‍රීය කිරීමට වලංගු API යතුරක් ඇතුළත් කරන්න. https://aistudio.google.com/app/apikey වෙතින් API යතුරක් ලබා ගන්න.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "ජෙනී විධානය",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "පෙරනිමි",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (ලබාගත නොහැක)",
   "scheduler_preset_action_config_wish": "ස්වභාවික භාෂා ක්‍රියාව",
   "scheduler_preset_action_config_wish.placeholder": "උත්සාහ කරන්න: \"තාපය 22° ට සකසා හිරු උදාව දර්ශනය ආරම්භ කරන්න\"",
   "scheduler_preset_action_command_video_record_start": "වීඩියෝ පටිගත කිරීම ආරම්භ කරන්න",

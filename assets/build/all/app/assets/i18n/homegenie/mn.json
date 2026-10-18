@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Сэрүүлэг дээр бичлэг хийх",
       "NVR.ContinuousRecording": "Тасралтгүй бичлэг."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Хуваалцсан үйлчилгээнүүд болон арын хүсэлтүүдийн өгөгдмөл үйлчилгээ үзүүлэгчийг сонгох.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Өгөгдмөл)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "HomeGenie дотор төхөөрөмжүүдийг удирдах, автоматжуулалтын хөтөлбөр үүсгэх, виджет бүтээхэд Google Gemini AI-г ашиглана уу. Чат цэснээс хуваалцах боломжууд болон системийн контекстийг сонгоно уу.\nЭнэ функцийг идэвхжүүлэхийн тулд хүчинтэй API түлхүүр оруулна уу. API түлхүүрийг https://aistudio.google.com/app/apikey хаягаас авна уу.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Жин команд",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Өгөгдмөл",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Боломжгүй)",
   "scheduler_preset_action_config_wish": "Байгалийн хэлний үйлдэл",
   "scheduler_preset_action_config_wish.placeholder": "Дараахыг туршаад үзээрэй: \"Дулааныг 22° болгож, нар мандах үзэгдлийг эхлүүлнэ үү\"",
   "scheduler_preset_action_command_video_record_start": "Видео бичлэг хийж эхлэх",

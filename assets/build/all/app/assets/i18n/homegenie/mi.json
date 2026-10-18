@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Tuhia i te Whakaoho",
       "NVR.ContinuousRecording": "Te Tuhi Tonu."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Ngā ratonga tiritahi me te kōwhiri i te kaiwhakarato taunoa mō ngā tono papamuri.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Taunoa)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Whakamahia a Google Gemini AI hei whakahaere pūrere, hei hanga hōtaka aunoatanga, ā, hei waihanga widget hoki ki HomeGenie. Kōwhiria ngā āheinga me te horopaki pūnaha hei tuari mai i te tahua kōrerorero.\nWhakaurua tētahi kī API whaimana hei whakahohe i tēnei āhuatanga. Tikina he kī API i https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Te Whakahau a te Ira Tangata",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Taunoa",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Kāore i te wātea)",
   "scheduler_preset_action_config_wish": "Mahi Reo Māori",
   "scheduler_preset_action_config_wish.placeholder": "Whakamātauria: \"Whakatakotoria te wera ki te 22° ka tīmata te tirohanga o te Rāwhiti\"",
   "scheduler_preset_action_command_video_record_start": "Tīmata te Tuhi Ataata",

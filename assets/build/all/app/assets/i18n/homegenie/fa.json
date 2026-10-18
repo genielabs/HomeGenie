@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "ضبط در حالت هشدار",
       "NVR.ContinuousRecording": "ضبط مداوم."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "خدمات مشترک و انتخاب ارائه‌دهنده پیش‌فرض برای درخواست‌های پس‌زمینه.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (پیش‌فرض)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "از Google Gemini AI برای کنترل دستگاه‌ها، ایجاد برنامه‌های خودکارسازی و ساخت ویجت‌ها در HomeGenie استفاده کنید. قابلیت‌ها و زمینه سیستمی مورد نظر برای اشتراک‌گذاری را از منوی چت انتخاب کنید.\nبرای فعال کردن این قابلیت، یک کلید API معتبر وارد کنید. کلید API را از https://aistudio.google.com/app/apikey دریافت کنید.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "فرماندهی جنی",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "پیش‌فرض",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (در دسترس نیست)",
   "scheduler_preset_action_config_wish": "اقدام زبان طبیعی",
   "scheduler_preset_action_config_wish.placeholder": "امتحان کنید: «گرما را روی ۲۲ درجه تنظیم کنید و صحنه طلوع آفتاب را شروع کنید»",
   "scheduler_preset_action_command_video_record_start": "شروع ضبط ویدیو",

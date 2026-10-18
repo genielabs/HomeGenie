@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Tallenna hälytyksestä",
       "NVR.ContinuousRecording": "Jatkuva tallennus."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Jaetut palvelut ja oletuspalveluntarjoajan valinta taustapyyntöjä varten.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Oletus)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Käytä Google Gemini AI -tekoälyä laitteiden ohjaamiseen, automaatio-ohjelmien luomiseen ja pienoisohjelmien rakentamiseen HomeGeniessä. Valitse jaettavat ominaisuudet ja järjestelmäkonteksti chat-valikosta.\nOta tämä ominaisuus käyttöön antamalla kelvollinen API-avain. Hanki API-avain osoitteesta https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Genie-komento",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Oletus",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Ei käytettävissä)",
   "scheduler_preset_action_config_wish": "Luonnollisen kielen toiminta",
   "scheduler_preset_action_config_wish.placeholder": "Kokeile: \"Aseta lämpötila 22°C:een ja käynnistä auringonnousukohtaus\"",
   "scheduler_preset_action_command_video_record_start": "Aloita videon tallennus",

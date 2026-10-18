@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "알람 녹음",
       "NVR.ContinuousRecording": "연속 녹화."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "공유 서비스 및 백그라운드 요청을 위한 기본 공급자 선택.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (기본값)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Google Gemini AI를 사용하여 HomeGenie에서 기기를 제어하고 자동화 프로그램을 생성하며 위젯을 빌드하세요. 채팅 메뉴에서 공유할 기능과 시스템 컨텍스트를 선택할 수 있습니다.\n이 기능을 활성화하려면 유효한 API 키를 입력하세요. API 키는 https://aistudio.google.com/app/apikey 에서 발급받을 수 있습니다.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "지니 커맨드",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "기본값",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (사용할 수 없음)",
   "scheduler_preset_action_config_wish": "자연어 동작",
   "scheduler_preset_action_config_wish.placeholder": "\"온도를 22도로 설정하고 일출 장면을 시작해 보세요.\"",
   "scheduler_preset_action_command_video_record_start": "동영상 녹화 시작",

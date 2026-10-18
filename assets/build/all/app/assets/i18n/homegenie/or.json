@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "ଆଲାର୍ମରେ ରେକର୍ଡ କରନ୍ତୁ",
       "NVR.ContinuousRecording": "ନିରନ୍ତର ରେକର୍ଡିଂ।"
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "ଅଂଶୀଦାର ସେବା ଏବଂ ପୃଷ୍ଠଭୂମି ଅନୁରୋଧ ପାଇଁ ଡିଫଲ୍ଟ ପ୍ରଦାନକାରୀ ଚୟନ।",
+      "ConfigureOptions.DefaultProvider": "AI Genie (ଡିଫଲ୍ଟ)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "HomeGenie ରେ ଡିଭାଇସ୍ ନିୟନ୍ତ୍ରଣ କରିବା, ଅଟୋମେସନ୍ ପ୍ରୋଗ୍ରାମ୍ ତିଆରି କରିବା ଏବଂ ୱିଜେଟ୍ ନିର୍ମାଣ କରିବା ପାଇଁ Google Gemini AI ବ୍ୟବହାର କରନ୍ତୁ। ଚାଟ୍ ମେନୁରୁ ସେୟାର କରିବାକୁ ଥିବା କ୍ଷମତା ଏବଂ ସିଷ୍ଟମ୍ ପ୍ରସଙ୍ଗ ବାଛନ୍ତୁ।\nଏହି ସୁବିଧା ସକ୍ଷମ କରିବାକୁ ଏକ ବୈଧ API କି ପ୍ରବେଶ କରନ୍ତୁ। https://aistudio.google.com/app/apikey ରେ ଏକ API କି ପ୍ରାପ୍ତ କରନ୍ତୁ।",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "ଜେନି କମାଣ୍ଡ",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "ଡିଫଲ୍ଟ",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (ଉପଲବ୍ଧ ନାହିଁ)",
   "scheduler_preset_action_config_wish": "ପ୍ରାକୃତିକ ଭାଷା କାର୍ଯ୍ୟ",
   "scheduler_preset_action_config_wish.placeholder": "ଚେଷ୍ଟା କରନ୍ତୁ: \"ତାପକୁ 22° ରେ ସେଟ୍ କରନ୍ତୁ ଏବଂ ସୂର୍ଯ୍ୟୋଦୟ ଦୃଶ୍ୟ ଆରମ୍ଭ କରନ୍ତୁ\"",
   "scheduler_preset_action_command_video_record_start": "ଭିଡିଓ ରେକର୍ଡିଂ ଆରମ୍ଭ କରନ୍ତୁ",

@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Nahrávání při alarmu",
       "NVR.ContinuousRecording": "Nepřetržité nahrávání."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Sdílené služby a výběr výchozího poskytovatele pro požadavky na pozadí.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Výchozí)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Použijte Google Gemini AI k ovládání zařízení, vytváření automatizačních programů a tvorbě widgetů v HomeGenie. V nabídce chatu vyberte funkce a systémový kontext ke sdílení.\nPro aktivaci této funkce zadejte platný klíč API. Získejte klíč API na adrese https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Džinův příkaz",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Výchozí",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Nedostupný)",
   "scheduler_preset_action_config_wish": "Akce v přirozeném jazyce",
   "scheduler_preset_action_config_wish.placeholder": "Zkuste: „Nastavte teplotu na 22 °C a spusťte scénu s východem slunce.“",
   "scheduler_preset_action_command_video_record_start": "Spustit nahrávání videa",

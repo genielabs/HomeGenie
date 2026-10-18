@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Irrekordja fuq Allarm",
       "NVR.ContinuousRecording": "Reġistrazzjoni Kontinwa."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Servizzi kondiviżi u għażla tal-fornitur predefinit għat-talbiet fl-isfond.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Predefinit)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Uża Google Gemini AI biex tikkontrolla apparati, toħloq programmi ta' awtomazzjoni, u tibni widgets f'HomeGenie. Agħżel il-kapaċitajiet u l-kuntest tas-sistema x'taqsam mill-menu taċ-chat.\nDaħħal ċavetta API valida biex tattiva din il-karatteristika. Ikseb ċavetta API fuq https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Kmand tal-Ġenji",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Predefinit",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Mhux disponibbli)",
   "scheduler_preset_action_config_wish": "Azzjoni tal-Lingwa Naturali",
   "scheduler_preset_action_config_wish.placeholder": "Ipprova: \"Issettja s-sħana għal 22° u ibda x-xena tax-Xemx li Jbex\"",
   "scheduler_preset_action_command_video_record_start": "Ibda r-Reġistrazzjoni tal-Vidjo",

@@ -590,3 +590,21 @@ Text projection uses the exact previous Lailama cleanup: remove complete/unfinis
 No history files are rewritten, no import migration is added, and cancelled responses still display the accepted [STOPPED] behavior. The existing ChatHistory service continues to exclude failed/cancelled/pending turns from provider context. Visible history, exports and per-provider stores are unaffected.
 
 Update AI Genie 583 to 0.15.0 before Gemini 933 1.0.21 and Lailama 940 1.3.3; Action Executor 581 remains unchanged. No core/frontend rebuild or history clearing is needed. Tests exercise the actual shipped ChatHistory filtering, scoped/unscoped legacy messages, unavailable/mismatched-profile responses, input immutability, exact structured-message preservation, local cleanup and native rebuild limits. Runtime acceptance pending: continue existing conversations with a short follow-up referring to a preceding request, including Gemini's natural-language Smart Device queries; no intensive local generation is required.
+
+
+### Common abort recovery decision
+
+AI Genie 583 Program.RecoverAborted accepts a version-1 requestId object. AiGenieAbortRecovery contains the former local abort decision: inspect ActionExecutor/Results for that exact request, ignore any already-recorded recover action, and select the latest deploy receipt by attempt index. Only State=failed plus Response.status=compile_failed authorizes one Program.Recover call. Missing/malformed journal data, unrelated requests, later completed/unknown attempts and any existing recovery receipt do not authorize recovery. A thrown or unconfirmed recovery is reported but never retried.
+
+Lailama 940 keeps its cancellation/error presentation and metrics; RecoverFailedProgram is now a thin call to the utility. Gemini's shared structured coordinator invokes the same decision only after an exception on a path that may have deployed a program/composite. It adds an attempted recovery to run metrics and includes its confirmed/unconfirmed result in the final error. Ordinary reply/device errors do not inspect the deployment journal through this hook.
+
+The existing terminal-failure recovery in AiGenieProgramActions and the actual rollback/session/journal logic in Action Executor 581 remain unchanged. Completed and unknown effects are still protected by the executor; this refactor adds no replay, replacement creation or native-session behavior. [STOPPED] persistence remains as accepted by the user.
+
+Update AI Genie 583 to 0.16.0 before Lailama 940 1.3.4. Gemini 933 remains at 1.0.21 because its coordinator already resides in the utility; no provider/core/frontend rebuild is needed. Automated tests simulate a model transport failure during compiler repair, later completed/unknown journal entries, non-compiler failures, existing recovery receipts and unconfirmed recovery. They verify action counts, one recovery attempt and no replacement deploy, without requiring slow local inference or modifying live programs.
+
+
+### Lailama public API prefix
+
+Lailama 940 1.3.5 registers AI.Genies/Lailama exclusively. Its API_URL constant is shared by the existing Program.Implements descriptor and public chat/history/Schedule/Cancel handlers, so YoT chat follows the new prefix without a provider-name special case. The @AI:IntentHandler interface and text request protocol remain unchanged; renaming the public prefix does not change UI history parsing or the local generation strategy. The internal Download/Extract/Execute routes under automation module 940 are unaffected.
+
+The YoT scheduler Genie preset and bundled frontend template now call AI.Genies/Lailama/Prompt.Schedule. No compatibility alias, duplicate registration or automatic rewrite of saved scheduler events is added. This migration does not implement Prompt.Generate or change Schedule semantics. Update the Lailama program and deploy the updated frontend assets/template; no core rebuild or history reset is required.

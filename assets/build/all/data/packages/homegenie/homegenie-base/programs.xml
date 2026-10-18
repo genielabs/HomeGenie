@@ -6572,16 +6572,40 @@ public static class ProgramUpdateNotification {
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>
   <ProgramBlock>
-  <ScriptSetup>Program.Implements("@Service:AiGenie", "System.Utility/AiGenie", new { version = 1 });
+  <ScriptSetup>Program.Implements("@Service:AiGenie", "System.Utility/AiGenie", new { version = 1 })
+    .AddOption("DefaultProvider", "940", "Default AI Genie", "select:");
 Program.Run();
 </ScriptSetup>
   <ScriptSource>var service = new AiGenieService();
+var requests = new AiGenieRequests();
 var lifecycle = new AiGenieProgramLifecycle();
-When.ProgramStopping(() =&gt; { lifecycle.Stop(); service.Dispose(); return true; });
+var providerOptionsGate=new object();
+int providerOptionsPending=0;
+Action refreshProviderOptions=()=&gt; {
+    lock(providerOptionsGate) {
+        try {
+            object raw=Api.Call("HomeAutomation.HomeGenie/Automation/Programs.Implements/^@AI:/regex");
+            var providers=raw as JArray ?? (raw is string text?JToken.Parse(text) as JArray:raw==null?null:JToken.FromObject(raw) as JArray);
+            if(providers==null)return;
+            string selected=Program.Option("DefaultProvider").Value;
+            string fieldType=AiGenieProviderOptions.Build(providers,selected);
+            Program.AddOption("DefaultProvider","940","Default AI Genie",fieldType);
+        } catch(Exception ex) {try {Program.Log.Warn("Could not refresh AI Genie provider options: "+ex.Message);}catch {}}
+    }
+};
+refreshProviderOptions();
+When.ProgramStopping(() =&gt; { lifecycle.Stop(); requests.Dispose(); service.Dispose(); return true; });
 When.ModuleParameterChanged((module, parameter) =&gt; {
     if(module.Instance==null)return true;
     string domain=module.Instance.Domain, childId=module.Instance.Address;
     string field=parameter.Name, value=parameter.Value, serviceId=Program.Module.Address;
+    // Provider registrations may complete after this utility starts. Refresh on lifecycle events, not a polling loop.
+    if(domain=="HomeAutomation.HomeGenie.Automation" &amp;&amp; field=="Program.Status" &amp;&amp;
+        System.Threading.Interlocked.CompareExchange(ref providerOptionsPending,1,0)==0)
+        System.Threading.Tasks.Task.Run(()=&gt; {
+            try {if(Program.IsRunning)refreshProviderOptions();}
+            finally {System.Threading.Interlocked.Exchange(ref providerOptionsPending,0);}
+        });
     if(AiGenieProgramLifecycle.IsQuit(domain,childId,field,value,serviceId))
         System.Threading.Tasks.Task.Run(() =&gt; {
             try {
@@ -6678,6 +6702,17 @@ Api.Handle("System.Utility/AiGenie/History.Project",input=&gt; {
     try {return (object)AiGenieHistory.Project(Api.Parse(input).Data as JObject);}
     catch(Exception ex) {return new {Status="Error",Message=ex.Message};}
 });
+Api.Handle("System.Utility/AiGenie/Program.RecoverAborted",input=&gt; {
+    var request=Api.Parse(input).Data as JObject;
+    if(request==null || request["version"]?.Type!=JTokenType.Integer || (int)request["version"]!=1 || request["requestId"]?.Type!=JTokenType.String ||
+        request.Properties().Any(p=&gt;!new[]{"version","requestId"}.Contains(p.Name)))return (object)new {Status="Error",Message="Invalid abort recovery request."};
+    return (object)AiGenieAbortRecovery.Run((string)request["requestId"],(route,data)=&gt;Api.Call(route,data));
+});
+Api.Handle("System.Utility/AiGenie/Request.Execute", input =&gt; requests.Execute(Api.Parse(input).Data, Program.Option("DefaultProvider").Value, (route,data)=&gt;Api.Call(route,data)));
+Api.Handle("System.Utility/AiGenie/Request.Run", input =&gt; AiGenieRequestExecution.Run(Api.Parse(input).Data as IDictionary&lt;string,object&gt;, (route,data)=&gt;Api.Call(route,data),Path.GetFullPath(Path.Combine(Data.GetFolder(),"..","..","widgets"))));
+Api.Handle("System.Utility/AiGenie/Request.Generate", input =&gt; requests.Generate(Api.Parse(input).Data, Program.Option("DefaultProvider").Value, (route,data)=&gt;Api.Call(route,data)));
+Api.Handle("System.Utility/AiGenie/Request.Status", input =&gt; requests.Status(Api.Parse(input).Data));
+Api.Handle("System.Utility/AiGenie/Request.Cancel", input =&gt; requests.Status(Api.Parse(input).Data,true));
 Program.GoBackground();
 </ScriptSource>
   <ScriptContext>// In-process generation boundary. Providers must not re-enter chat orchestration.
@@ -7268,6 +7303,7 @@ public static class AiGenieCoordinator {
             if(string.IsNullOrWhiteSpace(text))throw new InvalidOperationException("AI provider returned an empty completion.");
             return text;
         };
+        bool mayHaveDeployment=false;
         try {
       JObject committedBinding = null;
       int deploymentAttempt = 1, contextReads = 0, contractRepairs = 0;
@@ -7325,6 +7361,7 @@ public static class AiGenieCoordinator {
                 if (committedBinding != null &amp;&amp; type != "composite")
                     throw new InvalidOperationException("A compiler repair must return the complete composite solution.");
                 if (type == "program") {
+                    mayHaveDeployment=true;
                     var dispatched = contextToken(telemetry.CallAction("System.Utility/AiGenie/Program.Execute", new JObject {
                         ["version"] = 1, ["requestId"] = telemetry.RequestId, ["attempt"] = deploymentAttempt,
                         ["response"] = canonical, ["capabilities"] = preparedContext["capabilities"],
@@ -7376,6 +7413,7 @@ public static class AiGenieCoordinator {
                 }
                 if (type == "composite") {
                     telemetry.GenerationComplete();
+                    mayHaveDeployment=true;
                     var dispatched = contextToken(telemetry.CallAction("System.Utility/AiGenie/Composite.Execute", new JObject {
                         ["version"] = 1, ["requestId"] = telemetry.RequestId, ["attempt"] = deploymentAttempt,
                         ["response"] = canonical, ["capabilities"] = preparedContext["capabilities"],
@@ -7423,7 +7461,17 @@ public static class AiGenieCoordinator {
         return telemetry.Finish(telemetry.Error("**Error:** The AI returned an empty response."));
       }
       return telemetry.Finish(telemetry.Error("**Error:** Program deployment did not complete."));
-        } catch(Exception ex) {return telemetry.Finish(null,ex.Message);}
+        } catch(Exception ex) {
+            string error=ex.Message;
+            if(mayHaveDeployment) {
+                var recovery=AiGenieAbortRecovery.Run(id,call);
+                if(recovery["attempted"]?.Value&lt;bool&gt;()==true) {
+                    telemetry.ActionsCompleted(0,1,recovery["success"]?.Value&lt;bool&gt;()==true?0:1);
+                    error+="\n"+(string)recovery["message"];
+                }
+            }
+            return telemetry.Finish(null,error);
+        }
     }
 }
 
@@ -8026,6 +8074,397 @@ public static class AiGenieHistory {
     }
 
 }
+
+// Only confirmed latest compile failures can authorize abort recovery.
+public static class AiGenieAbortRecovery {
+public static JObject Run(string requestId,Func&lt;string,object,object&gt; call) {
+    bool attempted=false;
+    if(requestId==null || !System.Text.RegularExpressions.Regex.IsMatch(requestId,@"\A[A-Za-z0-9_-]{1,128}\z"))return new JObject();
+    try {
+        object raw=call("System.Utility/ActionExecutor/Results",JsonConvert.SerializeObject(new {requestId}));
+        var rows=(raw is string text?JToken.Parse(text):raw==null?null:JToken.FromObject(raw)) as JArray;
+        if(rows==null)return new JObject();
+        var matching=rows.OfType&lt;JObject&gt;().Where(r=&gt;(string)r["RequestId"]==requestId).ToArray();
+        if(matching.Any(r=&gt;(string)r["ActionId"]==requestId+":recover"))return new JObject();
+        var latest=matching.Where(r=&gt;((string)r["ActionId"]??"").StartsWith(requestId+":deploy-",StringComparison.Ordinal)).OrderBy(r=&gt;(int?)r["Index"]??0).LastOrDefault();
+        if(latest==null || (string)latest["State"]!="failed" || (string)(latest["Response"] as JObject)?["status"]!="compile_failed")return new JObject();
+        attempted=true;
+        raw=call("System.Utility/ActionExecutor/Program.Recover",JsonConvert.SerializeObject(new {requestId}));
+        var result=raw is string value?JObject.Parse(value):raw==null?null:JObject.FromObject(raw);
+        bool success=(string)result?["RequestId"]==requestId &amp;&amp; result?["Success"]?.Value&lt;bool&gt;()==true;
+        return new JObject{["attempted"]=true,["success"]=success,["message"]=success?"The previous program state was recovered; no replacement was created.":"Program recovery was not confirmed. Check the existing program before retrying."};
+    } catch {return new JObject{["attempted"]=attempted,["success"]=false,["message"]=attempted?"Program recovery was not confirmed. Check the existing program before retrying.":""};}
+}
+}
+
+
+public static class AiGenieProviderOptions {
+    public static string Build(JArray providers,string selected) {
+        if(providers==null)throw new InvalidOperationException("Provider descriptors are required.");
+        var entries=new Dictionary&lt;string,string&gt;();
+        foreach(var row in providers.OfType&lt;JObject&gt;()) {
+            var program=row["Program"] as JObject;var descriptor=row["ImplementedInterface"] as JObject;
+            string id=(string)program?["Address"],route=(string)descriptor?["ApiUrl"];
+            if(program?["IsEnabled"]?.Type!=JTokenType.Boolean || !(bool)program["IsEnabled"] ||
+                id==null || !System.Text.RegularExpressions.Regex.IsMatch(id,@"\A[0-9]+\z") ||
+                route==null || !route.StartsWith("AI.Genies/",StringComparison.Ordinal))continue;
+            string label=(string)program["Name"];
+            if(string.IsNullOrWhiteSpace(label))label="AI Genie "+id;
+            entries[id]=label.Replace(',', ' ').Replace('=', ' ').Replace(':', ' ').Replace('\r',' ').Replace('\n',' ').Trim();
+        }
+        // Preserve an unavailable stored selection; do not silently pick another provider.
+        if(!string.IsNullOrWhiteSpace(selected) &amp;&amp; !entries.ContainsKey(selected) &amp;&amp;
+            System.Text.RegularExpressions.Regex.IsMatch(selected,@"\A[0-9]+\z"))
+            entries[selected]="Unavailable AI Genie ("+selected+")";
+        return "select:"+string.Join(",",entries.OrderBy(p=&gt;p.Value,StringComparer.OrdinalIgnoreCase).ThenBy(p=&gt;p.Key,StringComparer.Ordinal)
+            .Select(p=&gt;p.Value+"="+p.Key));
+    }
+}
+
+// Independent background requests. Jobs and results are bounded and owned by this service lifetime.
+public sealed class AiGenieRequests : IDisposable {
+    sealed class Job {
+        public string Id, ProviderId, State="queued", Text, Error;
+        public bool Execute,Effects;public JObject Result;
+        public DateTime Created=DateTime.UtcNow;
+        public CancellationTokenSource Cancellation=new CancellationTokenSource();
+    }
+    readonly object gate=new object();
+    readonly Dictionary&lt;string,Job&gt; jobs=new Dictionary&lt;string,Job&gt;();
+    bool stopped;
+    static JObject Object(object value) =&gt; value as JObject ?? (value is string text?JObject.Parse(text):value==null?null:JObject.FromObject(value));
+    static JObject Input(object value) {
+        if(value is byte[] bytes)value=Encoding.UTF8.GetString(bytes);
+        var input=Object(value);
+        if(input==null || input["version"]?.Type!=JTokenType.Integer || (int)input["version"]!=1)
+            throw new InvalidOperationException("Expected a version 1 request object.");
+        return (JObject)input.DeepClone();
+    }
+    static JObject Failure(string message) =&gt; new JObject{["version"]=1,["state"]="failed",["error"]=message};
+    static JObject Snapshot(Job job) {
+        var result=new JObject{["version"]=1,["requestId"]=job.Id,["providerId"]=job.ProviderId,
+            ["state"]=job.State,["text"]=job.Text==null?JValue.CreateNull():new JValue(job.Text),["error"]=job.Error==null?JValue.CreateNull():new JValue(job.Error),["createdAt"]=job.Created.ToString("o")};
+        if(job.Execute){result["effectsMayHaveOccurred"]=job.Effects;result["result"]=job.Result?.DeepClone()??JValue.CreateNull();}
+        return result;
+    }
+    static bool Finished(Job job) =&gt; job.State=="completed" || job.State=="failed" || job.State=="cancelled" || job.State=="busy" || job.State=="output_limit" || job.State=="context_limit";
+    public JObject Generate(object payload,string defaultProvider,Func&lt;string,object,object&gt; call) =&gt; Start(payload,defaultProvider,call,false);
+    public JObject Execute(object payload,string defaultProvider,Func&lt;string,object,object&gt; call) {
+        try {
+            var input=Input(payload);
+            if(input["wait"]!=null &amp;&amp; input["wait"].Type!=JTokenType.Boolean ||
+                input["timeoutSeconds"]!=null &amp;&amp; (input["wait"]?.Value&lt;bool&gt;()!=true || input["timeoutSeconds"].Type!=JTokenType.Integer ||
+                (long)input["timeoutSeconds"]&lt;1 || (long)input["timeoutSeconds"]&gt;3600))
+                throw new InvalidOperationException("wait must be boolean; timeoutSeconds requires wait=true and a value from 1 to 3600.");
+            bool wait=input["wait"]?.Value&lt;bool&gt;()==true;int timeout=(int?)input["timeoutSeconds"]??600;
+            input.Remove("wait");input.Remove("timeoutSeconds");
+            var accepted=Start(input,defaultProvider,call,true);
+            if(!wait || accepted["requestId"]?.Type!=JTokenType.String)return accepted;
+            return Wait(accepted,timeout);
+        } catch(ThreadInterruptedException) {throw;}
+          catch(Exception ex) {return Failure(ex is InvalidOperationException?ex.Message:"Unable to execute the background request.");}
+    }
+    JObject Wait(JObject accepted,int timeoutSeconds) {
+        var query=new JObject{["version"]=1,["requestId"]=accepted["requestId"].DeepClone()};
+        var clock=System.Diagnostics.Stopwatch.StartNew();bool cancelOnExit=true;
+        try {
+            while(true) {
+                var status=Status(query);
+                if(!new[]{"queued","running","cancelling"}.Contains((string)status["state"])) {cancelOnExit=false;return status;}
+                if(clock.Elapsed.TotalSeconds&gt;=timeoutSeconds) {
+                    var pending=Status(query,true);cancelOnExit=false;
+                    if(new[]{"queued","running","cancelling"}.Contains((string)pending["state"]))
+                        pending["error"]="AI Genie request timed out; cancellation requested. Check action results before retrying.";
+                    return pending;
+                }
+                Thread.Sleep(250);
+            }
+        } finally {if(cancelOnExit)Status(query,true);}
+    }
+    JObject Start(object payload,string defaultProvider,Func&lt;string,object,object&gt; call,bool execute) {
+        try {
+            var request=Input(payload);
+            if(request.Properties().Any(p=&gt;!new[]{"version","prompt","providerId"}.Contains(p.Name)) ||
+                request["prompt"]?.Type!=JTokenType.String || string.IsNullOrWhiteSpace((string)request["prompt"]) ||
+                Encoding.UTF8.GetByteCount((string)request["prompt"])&gt;262144 ||
+                request["providerId"]!=null &amp;&amp; request["providerId"].Type!=JTokenType.String)
+                throw new InvalidOperationException("Expected prompt text and an optional providerId; context and permissions come from the provider settings.");
+            string providerId=(string)request["providerId"];
+            if(string.IsNullOrWhiteSpace(providerId))providerId=defaultProvider;
+            if(providerId==null || !System.Text.RegularExpressions.Regex.IsMatch(providerId,@"\A[0-9]+\z"))
+                throw new InvalidOperationException("Select a default AI Genie or specify its providerId.");
+            object raw=call("HomeAutomation.HomeGenie/Automation/Programs.Implements/^@AI:/regex",null);
+            var providers=raw as JArray ?? (raw is string text?JArray.Parse(text):raw==null?null:JArray.FromObject(raw));
+            var matches=providers?.OfType&lt;JObject&gt;().Where(p=&gt;(string)p["Program"]?["Address"]==providerId &amp;&amp;
+                p["Program"]?["IsEnabled"]?.Value&lt;bool&gt;()==true &amp;&amp; p["ImplementedInterface"]?["Options"]?["requests"]?[execute?"execute":"generate"]?.Value&lt;bool&gt;()==true).ToArray();
+            if(matches==null || matches.Length!=1)throw new InvalidOperationException("Selected AI Genie is unavailable or does not support the requested background operation. Update and enable the provider.");
+            string route=(string)matches[0]["ImplementedInterface"]?["ApiUrl"];
+            if(route==null || !System.Text.RegularExpressions.Regex.IsMatch(route,@"\AAI\.Genies/[A-Za-z0-9_-]+\z"))
+                throw new InvalidOperationException("Invalid AI Genie provider route.");
+            var job=new Job{Id=Guid.NewGuid().ToString("N"),ProviderId=providerId,Execute=execute};
+            lock(gate) {
+                if(stopped){job.Cancellation.Dispose();return Failure("AI Genie is stopping.");}
+                if(jobs.Values.Any(j=&gt;j.ProviderId==providerId &amp;&amp; !Finished(j))){job.Cancellation.Dispose();return new JObject{["version"]=1,["state"]="busy",["error"]="A background request is already active for this provider."};}
+                foreach(var old in jobs.Values.Where(Finished).OrderBy(j=&gt;j.Created).Take(Math.Max(0,jobs.Count-99)).ToArray())jobs.Remove(old.Id);
+                if(jobs.Count&gt;=100){job.Cancellation.Dispose();return Failure("Too many active background requests.");}
+                jobs.Add(job.Id,job);
+                var accepted=Snapshot(job);
+                System.Threading.Tasks.Task.Run(()=&gt;Run(job,(string)request["prompt"],route,call));
+                return accepted;
+            }
+        } catch(Exception ex) {return Failure(ex is InvalidOperationException?ex.Message:"Unable to prepare the background request.");}
+    }
+    static JObject Setting(JObject module,string name) {
+        if(module?["Properties"] is not JArray properties)throw new InvalidOperationException("Provider settings are unavailable.");
+        var property=properties.OfType&lt;JObject&gt;().FirstOrDefault(p=&gt;(string)p["Name"]==name);
+        if(property==null || property["Value"]==null || string.IsNullOrWhiteSpace((string)property["Value"]))return null;
+        return Object(property["Value"].Type==JTokenType.String?(object)(string)property["Value"]:property["Value"])
+            ?? throw new InvalidOperationException("Invalid provider settings.");
+    }
+    void Run(Job job,string prompt,string route,Func&lt;string,object,object&gt; call) {
+        try {
+            lock(gate){job.Cancellation.Token.ThrowIfCancellationRequested();job.State="running";}
+            if(job.Execute) {
+                // If the native boundary disappears, effects are uncertain until a correlated result arrives.
+                lock(gate)job.Effects=true;
+                var result=Object(call(route+"/Provider.Request.Execute",new Dictionary&lt;string,object&gt;{["version"]=1,["requestId"]=job.Id,
+                    ["providerId"]=job.ProviderId,["prompt"]=prompt,["cancellationToken"]=job.Cancellation.Token}));
+                if(result?["version"]?.Value&lt;int&gt;()!=1 || (string)result["requestId"]!=job.Id ||
+                    !new[]{"completed","failed","cancelled","busy","output_limit","context_limit"}.Contains((string)result["state"]) ||
+                    result["effectsMayHaveOccurred"]?.Type!=JTokenType.Boolean || result["result"] is not JObject)
+                    throw new InvalidOperationException("Provider returned an incompatible execution result. Check the target before retrying.");
+                lock(gate) {
+                    job.State=job.Cancellation.IsCancellationRequested?"cancelled":(string)result["state"];
+                    job.Text=job.State=="completed"?(string)result["text"]:null;job.Error=(string)result["error"];
+                    job.Effects=(bool)result["effectsMayHaveOccurred"];job.Result=(JObject)result["result"].DeepClone();
+                }
+                return;
+            }
+            // Read the provider's persisted context afresh. No chat history, writes, action processing or caller overrides.
+            var module=Object(call("HomeAutomation.HomeGenie/Config/Modules.Get/HomeAutomation.HomeGenie.Automation/"+job.ProviderId,null));
+            var selected=Setting(module,"AI.Chat.Context") ?? new JObject{["devices"]=true};
+            // Older local providers expose an additional master sharing option on their module.
+            var sharing=(module["Properties"] as JArray)?.OfType&lt;JObject&gt;().FirstOrDefault(p=&gt;(string)p["Name"]=="ConfigureOptions.SendContextData");
+            if(sharing!=null &amp;&amp; (string)sharing["Value"]!="On")
+                selected=new JObject{["devices"]=false,["widgets"]=false,["automationPrograms"]=false,["dashboards"]=false,["deepKnowledge"]=false};
+            var scope=new JObject{["version"]=1,["message"]=prompt,["context"]=selected,
+                ["capabilities"]=new JObject{["deviceControl"]=false,["automation"]=false,["widgets"]=false}};
+            var prepared=Object(call("System.Utility/AiGenie/Context.Prepare",new JObject{["version"]=1,["request"]=scope,
+                ["template"]="Generate the requested text. Return plain text or Markdown as requested. No tools or actions are available for this request."}));
+            if(prepared?["systemPrompt"]?.Type!=JTokenType.String || (string)prepared["Status"]=="Error")
+                throw new InvalidOperationException("Background request context is unavailable.");
+            job.Cancellation.Token.ThrowIfCancellationRequested();
+            var response=Object(call(route+"/Provider.Text.Generate",new Dictionary&lt;string,object&gt;{["version"]=1,["requestId"]=job.Id,
+                ["messages"]=new JArray(new JObject{["role"]="user",["parts"]=new JArray(new JObject{["text"]=prompt})}),
+                ["systemPrompt"]=(string)prepared["systemPrompt"],["cancellationToken"]=job.Cancellation.Token}));
+            if(response?["version"]?.Value&lt;int&gt;()!=1 || (string)response["requestId"]!=job.Id ||
+                !new[]{"completed","failed","cancelled","busy","output_limit","context_limit"}.Contains((string)response["state"]))
+                throw new InvalidOperationException("Provider returned an incompatible background result.");
+            string state=(string)response["state"],text=(string)response["text"];
+            if(state=="completed" &amp;&amp; (string.IsNullOrWhiteSpace(text) || Encoding.UTF8.GetByteCount(text)&gt;524288))
+                throw new InvalidOperationException("Provider returned empty or oversized text.");
+            lock(gate) {
+                job.State=job.Cancellation.IsCancellationRequested?"cancelled":state;
+                job.Text=job.State=="completed"?text:null;
+                job.Error=job.State=="cancelled"?null:(string)response["error"];
+            }
+        } catch(OperationCanceledException) {lock(gate){job.State="cancelled";job.Text=null;}}
+          catch(Exception ex) {lock(gate){job.State=job.Cancellation.IsCancellationRequested?"cancelled":"failed";job.Text=null;job.Error=ex is InvalidOperationException?ex.Message:"Background generation failed. Check the provider logs.";}}
+        finally {lock(gate){job.Cancellation.Dispose();}}
+    }
+    public JObject Status(object payload,bool cancel=false) {
+        try {
+            var request=Input(payload);
+            if(request.Properties().Any(p=&gt;!new[]{"version","requestId","providerId"}.Contains(p.Name)) || request["requestId"]?.Type!=JTokenType.String ||
+                request["providerId"]!=null &amp;&amp; request["providerId"].Type!=JTokenType.String)throw new InvalidOperationException("Expected requestId.");
+            lock(gate) {
+                if(!jobs.TryGetValue((string)request["requestId"],out var job) || request["providerId"]!=null &amp;&amp; (string)request["providerId"]!=job.ProviderId)
+                    return new JObject{["version"]=1,["requestId"]=request["requestId"],["state"]="not_found",["error"]="Request not found; results expire when the service restarts or older completed results are evicted."};
+                if(cancel &amp;&amp; !Finished(job)){job.State="cancelling";job.Cancellation.Cancel();}
+                return Snapshot(job);
+            }
+        } catch(Exception) {return Failure("Invalid request status query.");}
+    }
+    public void Dispose() {
+        lock(gate){stopped=true;foreach(var job in jobs.Values.Where(j=&gt;!Finished(j))) {job.State="cancelling";job.Cancellation.Cancel();}}
+    }
+}
+
+// Native-only bridge to the existing conversation strategies, without chat history or UI token events.
+public static class AiGenieRequestExecution {
+    static JObject Object(object value)=&gt;value as JObject ?? (value is string text?JObject.Parse(text):value==null?null:JObject.FromObject(value));
+    static JObject Setting(JObject module,string name) {
+        if(module?["Properties"] is not JArray properties)throw new InvalidOperationException("Provider settings unavailable.");
+        var raw=properties.OfType&lt;JObject&gt;().FirstOrDefault(p=&gt;(string)p["Name"]==name)?["Value"];
+        return raw==null || string.IsNullOrWhiteSpace((string)raw)?null:Object(raw.Type==JTokenType.String?(object)(string)raw:raw);
+    }
+    public static JObject Policy(string providerId,string protocol,Func&lt;string,object,object&gt; call) {
+        var module=Object(call("HomeAutomation.HomeGenie/Config/Modules.Get/HomeAutomation.HomeGenie.Automation/"+providerId,null));
+        var context=Setting(module,"AI.Chat.Context")??new JObject{["devices"]=true};
+        var sharing=((JArray)module["Properties"]).OfType&lt;JObject&gt;().FirstOrDefault(p=&gt;(string)p["Name"]=="ConfigureOptions.SendContextData");
+        if(sharing!=null &amp;&amp; (string)sharing["Value"]!="On")
+            context=new JObject{["devices"]=false,["widgets"]=false,["automationPrograms"]=false,["dashboards"]=false,["deepKnowledge"]=false};
+        if(protocol=="text"){context["dashboards"]=false;context["deepKnowledge"]=false;}
+        var caps=GenieCapabilities.WithDefaults(Setting(module,"AI.Chat.Capabilities"),protocol=="text"?
+            new JObject{["deviceControl"]=true,["automation"]=false,["widgets"]=false}:null);
+        return new JObject{["context"]=context,["capabilities"]=caps};
+    }
+    static JObject Intersect(JObject accepted,JObject current) {
+        var result=new JObject();
+        foreach(var property in accepted.Properties()) {
+            if(property.Value.Type!=JTokenType.Boolean || current[property.Name]!=null &amp;&amp; current[property.Name].Type!=JTokenType.Boolean)
+                throw new InvalidOperationException("Invalid current provider policy.");
+            result[property.Name]=(bool)property.Value &amp;&amp; current[property.Name]?.Value&lt;bool&gt;()==true;
+        }
+        return result;
+    }
+    public static JObject Run(IDictionary&lt;string,object&gt; request,Func&lt;string,object,object&gt; call,string widgetsFolder) {
+        if(request==null || !request.TryGetValue("version",out var version) || version is not int v || v!=1 ||
+            !request.TryGetValue("requestId",out var identity) || identity is not string id || !System.Text.RegularExpressions.Regex.IsMatch(id,@"\A[A-Za-z0-9_-]{1,128}\z") ||
+            !request.TryGetValue("providerId",out var provider) || provider is not string providerId || !System.Text.RegularExpressions.Regex.IsMatch(providerId,@"\A[0-9]+\z") ||
+            !request.TryGetValue("prompt",out var message) || message is not string prompt || string.IsNullOrWhiteSpace(prompt) || Encoding.UTF8.GetByteCount(prompt)&gt;262144 ||
+            !request.TryGetValue("protocol",out var format) || format is not string protocol || !new[]{"structured","text"}.Contains(protocol) ||
+            !request.TryGetValue("template",out var templateValue) || templateValue is not string template ||
+            !request.TryGetValue("cancellationToken",out var cancellationValue) || cancellationValue is not CancellationToken cancellation ||
+            !request.TryGetValue("generate",out var callback) || callback is not Func&lt;JArray,string,object,IDictionary&lt;string,object&gt;&gt; nativeGenerate)
+            throw new InvalidOperationException("Invalid native background execution contract.");
+        bool effects=false,mayDeploy=false;var receipts=new JArray();JObject coordinated=null;
+        string terminal=null;
+        JObject scope=null;
+        Func&lt;string,string,string,JObject&gt; finish=(state,text,error)=&gt; {
+            if(mayDeploy &amp;&amp; state!="completed") {
+                var recovery=AiGenieAbortRecovery.Run(id,call);
+                if(recovery["attempted"]?.Value&lt;bool&gt;()==true)receipts.Add(new JObject{["endpoint"]="System.Utility/AiGenie/Program.RecoverAborted",["response"]=recovery});
+            }
+            return new JObject{["version"]=1,["requestId"]=id,["state"]=state,
+                ["text"]=state=="completed"?new JValue(text):JValue.CreateNull(),["error"]=error==null?JValue.CreateNull():new JValue(error),
+                ["effectsMayHaveOccurred"]=effects,["result"]=new JObject{["reply"]=coordinated?["reply"]?.DeepClone()??JValue.CreateNull(),
+                    ["outcome"]=coordinated?["outcome"]?.DeepClone()??new JValue(state),["actions"]=receipts.DeepClone()}};
+        };
+        try {
+            cancellation.ThrowIfCancellationRequested();
+            var policy=Policy(providerId,protocol,call);
+            scope=new JObject{["version"]=1,["message"]=prompt,["context"]=policy["context"].DeepClone(),["capabilities"]=policy["capabilities"].DeepClone()};
+            // The policy is intersected before subsequent reads and actions; mid-request changes cannot expand access.
+            Action refresh=()=&gt; {
+                cancellation.ThrowIfCancellationRequested();
+                var current=Policy(providerId,protocol,call);
+                var normalized=Object(call("System.Utility/ContextEngine/Context.Policy",new JObject{["version"]=1,["context"]=current["context"].DeepClone()}));
+                if(normalized?["context"] is not JObject currentContext)throw new InvalidOperationException("Current context policy unavailable.");
+                scope["context"]=Intersect((JObject)scope["context"],currentContext);
+                scope["capabilities"]=Intersect((JObject)scope["capabilities"],(JObject)current["capabilities"]);
+            };
+            if(protocol=="text") {
+                foreach(string placeholder in new[]{"%%AVAILABLE_DEVICES%%","%%SYSTEM_STATUS%%","%%CURRENT_TIME%%"})template=template.Replace(placeholder,"See ACTUALLY SUPPLIED CONTEXT below.");
+                template+="\n"+AiGenieTextContext.Instructions;
+                if((bool)scope["capabilities"]["automation"])template+="\n#use-skill homegenie-core\n"+AiGenieTextPrograms.Instructions;
+                if((bool)scope["capabilities"]["widgets"])template+="\n"+AiGenieTextArtifacts.Instructions+((bool)scope["capabilities"]["automation"]?AiGenieTextArtifacts.CompositeInstructions:"");
+            }
+            var prepared=AiGenieContext.Prepare(scope,template,widgetsFolder,call);
+            scope["context"]=prepared["context"].DeepClone();scope["capabilities"]=prepared["capabilities"].DeepClone();
+            Func&lt;JArray,string,object,IDictionary&lt;string,object&gt;&gt; generate=(messages,instructions,output)=&gt; {
+                cancellation.ThrowIfCancellationRequested();
+                var response=nativeGenerate(messages,instructions,output);
+                cancellation.ThrowIfCancellationRequested();
+                if(response==null || !response.TryGetValue("state",out var rawState) || rawState is not string state || state!="completed") {
+                    terminal=response!=null &amp;&amp; response.TryGetValue("state",out var reason) &amp;&amp; reason is string value &amp;&amp; new[]{"busy","cancelled","output_limit","context_limit"}.Contains(value)?value:"failed";
+                    throw new InvalidOperationException(response!=null &amp;&amp; response.TryGetValue("error",out var error) &amp;&amp; error is string detail?detail:"Provider generation did not complete.");
+                }
+                return response;
+            };
+            Func&lt;string,object,object&gt; guarded=null;
+            guarded=(route,payload)=&gt; {
+                cancellation.ThrowIfCancellationRequested();
+                if(route=="System.Utility/AiGenie/Generate") {
+                    var data=payload as IDictionary&lt;string,object&gt;??throw new InvalidOperationException("Invalid generation bridge.");
+                    var response=generate(data["messages"] as JArray,data.TryGetValue("systemPrompt",out var sys)?sys as string:null,data.TryGetValue("output",out var output)?output:null);
+                    var result=new Dictionary&lt;string,object&gt;(response);result["requestId"]=data["requestId"];return result;
+                }
+                bool action=new[]{"System.Utility/AiGenie/Device.Execute","System.Utility/AiGenie/Program.Execute","System.Utility/AiGenie/Composite.Execute"}.Contains(route);
+                if(route=="System.Utility/AiGenie/Context.Prepare" || action) {
+                    refresh();var data=(JObject)Object(payload).DeepClone();
+                    if(action) {
+                        data["capabilities"]=scope["capabilities"].DeepClone();
+                        if(!route.EndsWith("Composite.Execute"))data["context"]=scope["context"].DeepClone();
+                        string kind=route.EndsWith("Device.Execute")?"device":route.EndsWith("Program.Execute")?"program":"composite";
+                        if(!GenieCapabilities.Allows((JObject)scope["capabilities"],kind))throw new InvalidOperationException("Requested action capability is disabled: "+kind);
+                    } else {
+                        var target=(JObject)data["request"];
+                        target["context"]=scope["context"].DeepClone();target["capabilities"]=scope["capabilities"].DeepClone();
+                    }
+                    payload=data;
+                }
+                // Call the same action classes with this guarded transport, retaining low-level receipts.
+                if(route=="System.Utility/AiGenie/Device.Execute")return AiGenieDeviceActions.Dispatch((JObject)payload,guarded,
+                    (domain,address)=&gt;Object(call("HomeAutomation.HomeGenie/Config/Modules.Get/"+domain+"/"+address,null))!=null);
+                if(route=="System.Utility/AiGenie/Program.Execute")return AiGenieProgramActions.Dispatch((JObject)payload,guarded);
+                if(route=="System.Utility/AiGenie/Composite.Execute")return AiGenieCompositeActions.Dispatch((JObject)payload,guarded);
+                bool effect=route=="System.Utility/ActionExecutor/Execute" || route=="System.Utility/ActionExecutor/Program.Deploy";
+                JObject receipt=null;
+                if(effect) {
+                    refresh();
+                    string kind=route.EndsWith("Program.Deploy")?"program":"device";
+                    if(!GenieCapabilities.Allows((JObject)scope["capabilities"],kind) || kind=="device" &amp;&amp; scope["context"]["devices"]?.Value&lt;bool&gt;()!=true)
+                        throw new InvalidOperationException("Requested action capability or context was disabled before execution.");
+                    cancellation.ThrowIfCancellationRequested();effects=true;mayDeploy|=kind=="program";
+                    receipt=new JObject{["endpoint"]=route,["state"]="unknown"};receipts.Add(receipt);
+                }
+                object raw;
+                try {raw=call(route,payload);}
+                catch {if(receipt!=null)receipt["error"]="Action outcome is unknown. Check the target before retrying.";throw;}
+                if(receipt!=null){receipt["state"]="returned";receipt["response"]=raw==null?JValue.CreateNull():JToken.FromObject(raw);}
+
+                return raw;
+            };
+            if(protocol=="structured") {
+                var output=new {temperature=0.2,response_mime_type="application/json",response_json_schema=GenieCapabilities.Schema((JObject)scope["capabilities"],guarded)};
+                coordinated=AiGenieCoordinator.Run(new Dictionary&lt;string,object&gt;{["version"]=1,["requestId"]=id,["owner"]="background-"+id,["provider"]="Background",
+                    ["messages"]=new JArray(AiGenieCoordinator.Message("user",prompt)),["preparedContext"]=prepared,["request"]=scope,
+                    ["template"]=template,["systemPrompt"]=(string)prepared["systemPrompt"],["output"]=output,["scheduled"]=false,["elapsedBefore"]=0L},guarded,widgetsFolder,()=&gt;!cancellation.IsCancellationRequested);
+            } else {
+                var programState=new JObject();
+                coordinated=AiGenieTextCoordinator.Run(new Dictionary&lt;string,object&gt;{["version"]=1,["requestId"]=id,["input"]=prompt,["cancellationToken"]=cancellation,
+                    ["generate"]=new Func&lt;string,int,IDictionary&lt;string,object&gt;&gt;((input,round)=&gt;generate(new JArray(AiGenieCoordinator.Message("user",input)),(string)prepared["systemPrompt"],null)),
+                    ["step"]=new Func&lt;string,int,JObject&gt;((reply,round)=&gt; {
+                        try {
+                            refresh();
+                            var value=AiGenieTextContext.Step(new JObject{["version"]=1,["response"]=reply,["round"]=round,["request"]=scope,["template"]=template},guarded);
+                            if(value["resources"] is JObject resources) {
+                                var accumulated=scope["resources"] as JObject??new JObject();
+                                foreach(var p in resources.Properties())accumulated[p.Name]=new JArray((accumulated[p.Name] as JArray??new JArray()).Values&lt;string&gt;().Concat(((JArray)p.Value).Values&lt;string&gt;()).Distinct());
+                                scope["resources"]=accumulated;
+                            }
+                            return value;
+                        } catch(Exception ex) when(ex.Data["AiGenie.Contract"] is bool contract &amp;&amp; contract) {return new JObject{["Status"]="Error",["errorKind"]="contract",["Message"]=ex.Message};}
+                    }),["reset"]=new Action&lt;string&gt;(reason=&gt;{}),["contextCall"]=new Action&lt;string&gt;(path=&gt;{}),["observe"]=new Action&lt;string,JObject&gt;((phase,data)=&gt;{}),
+                    ["execute"]=new Func&lt;string,JObject&gt;(reply=&gt; {
+                        refresh();
+                        var artifact=AiGenieTextArtifacts.Dispatch(new JObject{["version"]=1,["requestId"]=id,["response"]=reply,["state"]=programState,
+                            ["capabilities"]=scope["capabilities"].DeepClone(),["context"]=scope["context"].DeepClone(),["resources"]=(scope["resources"] as JObject)?.DeepClone()??new JObject()},guarded);
+                        if(artifact["state"]?.Type!=JTokenType.String || (string)artifact["state"]!="not_program") {
+                            programState=(JObject)artifact["state"].DeepClone();
+                            if(new[]{"context","repair"}.Contains((string)artifact["outcome"]))return artifact;
+                            return new JObject{["reply"]=artifact["reply"].DeepClone(),["outcome"]=artifact["outcome"].DeepClone(),["results"]=new JArray()};
+                        }
+                        string visible=System.Text.RegularExpressions.Regex.Replace(reply,@"&lt;think&gt;[\s\S]*?(?:&lt;/think&gt;|$)","",System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                        var blocks=System.Text.RegularExpressions.Regex.Matches(visible,@"(?im)^\s*```api-call[^\S\r\n]*\r?\n([\s\S]*?)^\s*```[^\S\r\n]*$");
+                        if(blocks.Count==0)return new JObject{["reply"]=visible.Trim(),["outcome"]="completed",["results"]=new JArray()};
+                        var commands=new JArray(blocks.Cast&lt;System.Text.RegularExpressions.Match&gt;().SelectMany(b=&gt;b.Groups[1].Value.Split('\n')).Select(l=&gt;l.Trim()).Where(l=&gt;l.Length&gt;0));
+                        var canonical=new JObject{["version"]=1,["kind"]="device",["explanation"]=System.Text.RegularExpressions.Regex.Replace(visible,@"(?im)^\s*```api-call[^\S\r\n]*\r?\n[\s\S]*?^\s*```[^\S\r\n]*$","").Trim(),["commands"]=commands};
+                        // An api-call block without prose is a valid local response; the canonical envelope still needs a label.
+                        if(string.IsNullOrWhiteSpace((string)canonical["explanation"]))canonical["explanation"]="Device command";
+                        return Object(guarded("System.Utility/AiGenie/Device.Execute",new JObject{["version"]=1,["requestId"]=id,["response"]=canonical}));
+                    })});
+            }
+            if(cancellation.IsCancellationRequested || terminal=="cancelled")return finish("cancelled",null,null);
+            if(terminal!=null)return finish(terminal,null,(string)coordinated?["error"]??"Generation did not complete.");
+            if((string)coordinated?["outcome"]!="completed" || coordinated?["reply"]?.Type!=JTokenType.String)
+                return finish("failed",null,(string)coordinated?["error"]??(string)coordinated?["reply"]??"Execution was not confirmed. Check action results before retrying.");
+            return finish("completed",(string)coordinated["reply"],null);
+        } catch(OperationCanceledException) {return finish("cancelled",null,null);}
+          catch(Exception ex) {return finish(cancellation.IsCancellationRequested?"cancelled":terminal??"failed",null,cancellation.IsCancellationRequested?null:ex.Message);}
+    }
+}
 </ScriptContext>
   <ScriptErrors />
   <Data />
@@ -8034,15 +8473,15 @@ public static class AiGenieHistory {
     <PackageId>homegenie-base</PackageId>
     <PackageVersion>1.0.36</PackageVersion>
     <Id>ai-genie-service</Id>
-    <Version>0.15.0</Version>
+    <Version>0.20.0</Version>
     <Required>true</Required>
-    <Checksum>4275E6B6E3736A079E0D56094923C909</Checksum>
+    <Checksum>391AAC5B0A126A825BE1A30B5A6FD8E3</Checksum>
   </PackageInfo>
   <Domain>HomeAutomation.HomeGenie.Automation</Domain>
   <Address>583</Address>
   <Name>AI Genie</Name>
   <Description>Shared in-process AI Genie generation service.</Description>
-  <Group>Utilities</Group>
+  <Group>AI - Machine Learning</Group>
   <Features />
   <AutoRestartEnabled>false</AutoRestartEnabled>
   <Cloneable>false</Cloneable>

@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "ჩაწერა სიგნალიზაციის დროს",
       "NVR.ContinuousRecording": "უწყვეტი ჩაწერა."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "საზიარო სერვისები და ფონური მოთხოვნებისთვის ნაგულისხმევი პროვაიდერის შერჩევა.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (ნაგულისხმევი)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "გამოიყენეთ Google Gemini AI მოწყობილობების სამართავად, ავტომატიზაციის პროგრამების შესაქმნელად და ვიჯეტების ასაგებად HomeGenie-ში. აირჩიეთ გასაზიარებელი შესაძლებლობები და სისტემური კონტექსტი ჩეთის მენიუდან.\nამ ფუნქციის გასააქტიურებლად შეიყვანეთ მოქმედი API გასაღები. მიიღეთ API გასაღები მისამართზე https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "ჯინის სარდლობა",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "ნაგულისხმევი",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (მიუწვდომელია)",
   "scheduler_preset_action_config_wish": "ბუნებრივი ენის მოქმედება",
   "scheduler_preset_action_config_wish.placeholder": "სცადეთ: „დააყენეთ ტემპერატურა 22°-ზე და დაიწყეთ მზის ამოსვლის სცენა“",
   "scheduler_preset_action_command_video_record_start": "ვიდეოს ჩაწერის დაწყება",

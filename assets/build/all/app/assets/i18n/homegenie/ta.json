@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "அலாரத்தில் பதிவு செய்",
       "NVR.ContinuousRecording": "தொடர்ச்சியான பதிவு."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "பகிரப்பட்ட சேவைகள் மற்றும் பின்னணி கோரிக்கைகளுக்கான இயல்புநிலை வழங்குநர் தேர்வு.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (இயல்புநிலை)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "HomeGenie-ல் சாதனங்களைக் கட்டுப்படுத்தவும், தானியங்கு நிரல்களை உருவாக்கவும், விட்ஜெட்களை உருவாக்கவும் Google Gemini AI-ஐப் பயன்படுத்தவும். அரட்டை மெனுவிலிருந்து பகிர வேண்டிய திறன்கள் மற்றும் கணினி சூழலைத் தேர்வுசெய்யவும்.\nஇந்த அம்சத்தை இயக்க சரியான API விசையை உள்ளிடவும். API விசையைப் பெற https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "ஜெனி கட்டளை",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "இயல்புநிலை",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (கிடைக்கவில்லை)",
   "scheduler_preset_action_config_wish": "இயற்கை மொழி செயல்",
   "scheduler_preset_action_config_wish.placeholder": "\"வெப்பத்தை 22° ஆக அமைத்து சூரிய உதயக் காட்சியைத் தொடங்கு\" என்பதை முயற்சிக்கவும்.",
   "scheduler_preset_action_command_video_record_start": "வீடியோவைப் பதிவுசெய்யத் தொடங்கு",

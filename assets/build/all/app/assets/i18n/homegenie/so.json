@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Ku duub Digniinta",
       "NVR.ContinuousRecording": "Duubista Joogtada ah."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Adeegyo la wadaago iyo doorashada bixiyaha caadiga ah ee codsiyada gadaal ka socda.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Caadiga ah)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "U isticmaal Google Gemini AI si aad u xakameyso qalabka, u sameyso barnaamijyada otomaatiga, una dhistid widgets-ka HomeGenie. Ka dooro awoodaha iyo macnaha guud ee nidaamka si aad ula wadaagto liiska sheekaysiga.\nGeli furaha API ee saxda ah si aad u shaqaysiiso qaabkan. Ka hel furaha API https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Taliska Genie",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Caadiga ah",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Lama heli karo)",
   "scheduler_preset_action_config_wish": "Ficilka Luqadda Dabiiciga ah",
   "scheduler_preset_action_config_wish.placeholder": "Isku day: \"Kuleylka dhig 22° oo bilow muuqaalka Qorrax-soo-baxa\"",
   "scheduler_preset_action_command_video_record_start": "Bilow Duubista Fiidiyowga",

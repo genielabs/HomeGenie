@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Siqnalizasiyada Qeyd",
       "NVR.ContinuousRecording": "Davamlı Qeyd."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Paylaşılan xidmətlər və arxa plan sorğuları üçün standart provayderin seçilməsi.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Standart)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "HomeGenie-də cihazları idarə etmək, avtomatlaşdırma proqramları yaratmaq və vidcetlər qurmaq üçün Google Gemini AI-dən istifadə edin. Çat menyusundan paylaşılacaq imkanları və sistem kontekstini seçin.\nBu funksiyanı aktivləşdirmək üçün etibarlı API açarı daxil edin. API açarını https://aistudio.google.com/app/apikey ünvanından əldə edin.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Cin Komandanlığı",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Standart",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Mövcud deyil)",
   "scheduler_preset_action_config_wish": "Təbii Dil Fəaliyyəti",
   "scheduler_preset_action_config_wish.placeholder": "Sınayın: \"İstiliyi 22°-yə qoyun və Günəşin doğuş səhnəsini başlayın\"",
   "scheduler_preset_action_command_video_record_start": "Video Yazmağa Başlayın",

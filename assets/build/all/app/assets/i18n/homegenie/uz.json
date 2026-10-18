@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Yozib olish signali",
       "NVR.ContinuousRecording": "Uzluksiz yozib olish."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Umumiy xizmatlar va fon so‘rovlari uchun standart provayderni tanlash.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Standart)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "HomeGenie'da qurilmalarni boshqarish, avtomatlashtirish dasturlarini yaratish va vidjetlar yasash uchun Google Gemini AI'dan foydalaning. Chat menyusidan ulashish uchun imkoniyatlar va tizim kontekstini tanlang.\nUshbu funksiyani yoqish uchun yaroqli API kalitini kiriting. API kalitini https://aistudio.google.com/app/apikey manzilidan oling.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Jin qo'mondonligi",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Standart",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Mavjud emas)",
   "scheduler_preset_action_config_wish": "Tabiiy til harakati",
   "scheduler_preset_action_config_wish.placeholder": "Sinab ko'ring: \"Haroratni 22° ga qo'ying va quyosh chiqishi sahnasini boshlang\".",
   "scheduler_preset_action_command_video_record_start": "Videoni yozib olishni boshlang",

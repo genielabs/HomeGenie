@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "ថតសំឡេងរោទិ៍",
       "NVR.ContinuousRecording": "ការថតជាបន្តបន្ទាប់។"
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "សេវាកម្មរួម និងការជ្រើសរើសអ្នកផ្តល់សេវាលំនាំដើមសម្រាប់សំណើនៅផ្ទៃខាងក្រោយ។",
+      "ConfigureOptions.DefaultProvider": "AI Genie (លំនាំដើម)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "ប្រើ Google Gemini AI ដើម្បីបញ្ជាឧបករណ៍ បង្កើតកម្មវិធីស្វ័យប្រវត្តិកម្ម និងបង្កើតធាតុក្រាហ្វិកនៅក្នុង HomeGenie។ ជ្រើសរើសសមត្ថភាព និងបរិបទប្រព័ន្ធដើម្បីចែករំលែកពីម៉ឺនុយជជែក។\nបញ្ចូលសោ API ត្រឹមត្រូវដើម្បីបើកមុខងារនេះ។ ទទួលបានសោ API នៅ https://aistudio.google.com/app/apikey។",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "ពាក្យបញ្ជា Genie",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "លំនាំដើម",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (មិនអាចប្រើបាន)",
   "scheduler_preset_action_config_wish": "សកម្មភាពភាសាធម្មជាតិ",
   "scheduler_preset_action_config_wish.placeholder": "សាកល្បង៖ \"កំណត់កំដៅទៅ 22° ហើយចាប់ផ្តើមឈុតឆាកព្រះអាទិត្យរះ\"",
   "scheduler_preset_action_command_video_record_start": "ចាប់ផ្តើមថតវីដេអូ",

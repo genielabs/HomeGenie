@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Opneem by alarm",
       "NVR.ContinuousRecording": "Deurlopende opname."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Gedeelde dienste en keuse van die verstekverskaffer vir agtergrondversoeke.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Verstek)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Gebruik Google Gemini AI om toestelle te beheer, outomatiseringsprogramme te skep en legstukke in HomeGenie te bou. Kies die vermoëns en stelselkonteks om te deel vanuit die kletskieslys.\nVoer 'n geldige API-sleutel in om hierdie funksie te aktiveer. Kry 'n API-sleutel by https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Genie-opdrag",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Verstek",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Nie beskikbaar nie)",
   "scheduler_preset_action_config_wish": "Natuurlike Taalaksie",
   "scheduler_preset_action_config_wish.placeholder": "Probeer: \"Stel die hitte op 22° en begin die Sonsopkoms-toneel\"",
   "scheduler_preset_action_command_video_record_start": "Begin video-opname",

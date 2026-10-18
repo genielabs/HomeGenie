@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Înregistrare la alarmă",
       "NVR.ContinuousRecording": "Înregistrare continuă."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Servicii comune și selectarea furnizorului implicit pentru cererile din fundal.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Implicit)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Utilizați Google Gemini AI pentru a controla dispozitive, a crea programe de automatizare și a construi widgeturi în HomeGenie. Alegeți capabilitățile și contextul de sistem de partajat din meniul de chat.\nIntroduceți o cheie API validă pentru a activa această funcție. Obțineți o cheie API la https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Comandamentul Geniilor",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Implicit",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Indisponibil)",
   "scheduler_preset_action_config_wish": "Acțiune în limbaj natural",
   "scheduler_preset_action_config_wish.placeholder": "Încearcă: „Setează temperatura la 22° și pornește scena Răsărit de soare”",
   "scheduler_preset_action_command_video_record_start": "Începeți înregistrarea videoclipului",

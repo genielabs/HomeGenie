@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "अलार्म पर रिकॉर्ड करें",
       "NVR.ContinuousRecording": "निरंतर रिकॉर्डिंग।"
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "साझा सेवाएँ और पृष्ठभूमि अनुरोधों के लिए डिफ़ॉल्ट प्रदाता का चयन।",
+      "ConfigureOptions.DefaultProvider": "AI Genie (डिफ़ॉल्ट)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "HomeGenie में डिवाइस नियंत्रित करने, ऑटोमेशन प्रोग्राम बनाने और विजेट बनाने के लिए Google Gemini AI का उपयोग करें। चैट मेनू से साझा करने के लिए क्षमताएं और सिस्टम संदर्भ चुनें।\nइस सुविधा को सक्षम करने के लिए एक मान्य API कुंजी दर्ज करें। https://aistudio.google.com/app/apikey पर API कुंजी प्राप्त करें।",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "जिनी कमांड",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "डिफ़ॉल्ट",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (अनुपलब्ध)",
   "scheduler_preset_action_config_wish": "प्राकृतिक भाषा क्रिया",
   "scheduler_preset_action_config_wish.placeholder": "यह आजमाएं: \"तापमान को 22° पर सेट करें और सूर्योदय का दृश्य शुरू करें\"",
   "scheduler_preset_action_command_video_record_start": "वीडियो रिकॉर्डिंग शुरू करें",

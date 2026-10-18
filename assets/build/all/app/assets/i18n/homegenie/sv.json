@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Inspelning vid larm",
       "NVR.ContinuousRecording": "Kontinuerlig inspelning."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Delade tjänster och val av standardleverantör för bakgrundsförfrågningar.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Standard)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Använd Google Gemini AI för att styra enheter, skapa automationsprogram och bygga widgetar i HomeGenie. Välj vilka funktioner och systemsammanhang som ska delas från chattmenyn.\nAnge en giltig API-nyckel för att aktivera denna funktion. Hämta en API-nyckel på https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Genie-kommandot",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Standard",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Inte tillgänglig)",
   "scheduler_preset_action_config_wish": "Naturligt språk",
   "scheduler_preset_action_config_wish.placeholder": "Försök: \"Ställ in värmen på 22° och starta soluppgångsscenen\"",
   "scheduler_preset_action_command_video_record_start": "Börja spela in video",

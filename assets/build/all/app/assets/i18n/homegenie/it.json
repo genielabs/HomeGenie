@@ -210,7 +210,10 @@
         "Parla",
   "scheduler_preset_action_genie_command":
         "Comando Genie",
-  "scheduler_preset_action_config_wish":
+  "scheduler_preset_action_config_provider": "AI Genie",
+    "scheduler_preset_action_config_provider_default": "Predefinito",
+    "scheduler_preset_action_config_provider_unavailable": "AI Genie non disponibile",
+    "scheduler_preset_action_config_wish":
         "Azione in linguaggio naturale",
   "scheduler_preset_action_config_wish.placeholder":
         "Prova: \"Imposta il riscaldamento a 22° e avvia lo scenario Alba\"",
@@ -597,6 +600,11 @@
         "Abilita conoscenza approfondita (leggi programmi e widget)",
       "ConfigureOptions.SystemInstructions":
         "Istruzioni di Sistema"
+    },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Servizi condivisi e selezione del provider predefinito per le richieste in background.",
+      "ConfigureOptions.DefaultProvider": "AI Genie predefinito"
     },
     "933": {
       "Title": "Gemini Genie",

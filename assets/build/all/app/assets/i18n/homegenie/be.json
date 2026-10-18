@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Запіс па трывозе",
       "NVR.ContinuousRecording": "Бесперапынны запіс."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Агульныя сэрвісы і выбар прадвызначанага пастаўшчыка для фонавых запытаў.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Прадвызначаны)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Выкарыстоўвайце Google Gemini AI для кіравання прыладамі, стварэння праграм аўтаматызацыі і распрацоўкі віджэтаў у HomeGenie. Выберыце магчымасці і сістэмны кантэкст для адкрыцця доступу з меню чата.\nУвядзіце сапраўдны ключ API, каб уключыць гэтую функцыю. Атрымайце ключ API на https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Каманда джына",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Прадвызначаны",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Недаступны)",
   "scheduler_preset_action_config_wish": "Дзеянне з натуральнай мовай",
   "scheduler_preset_action_config_wish.placeholder": "Паспрабуйце: «Усталюйце тэмпературу на 22° і ўключыце сцэну ўзыходу сонца».",
   "scheduler_preset_action_command_video_record_start": "Пачаць запіс відэа",

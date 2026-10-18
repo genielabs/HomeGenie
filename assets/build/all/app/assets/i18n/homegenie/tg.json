@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Сабт дар ҳолати ҳушдор",
       "NVR.ContinuousRecording": "Сабти пайваста."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Хидматҳои муштарак ва интихоби провайдери пешфарз барои дархостҳои пасзамина.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Пешфарз)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Google Gemini AI-ро барои идоракунии дастгоҳҳо, сохтани барномаҳои автоматикунонӣ ва виҷетҳо дар HomeGenie истифода баред. Имкониятҳо ва контексти системаро барои мубодила аз менюи чат интихоб кунед.\nБарои фаъол кардани ин хусусият калиди дурусти API-ро ворид кунед. Калиди API-ро дар https://aistudio.google.com/app/apikey дастрас кунед.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Фармондеҳии Ҷин",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Пешфарз",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Дастнорас)",
   "scheduler_preset_action_config_wish": "Амали забони табиӣ",
   "scheduler_preset_action_config_wish.placeholder": "Кӯшиш кунед: \"Ҳароратро ба 22° муқаррар кунед ва манзараи тулӯи офтобро оғоз кунед\"",
   "scheduler_preset_action_command_video_record_start": "Сабти видеоро оғоз кунед",

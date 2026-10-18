@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Nagrywanie w przypadku alarmu",
       "NVR.ContinuousRecording": "Nagrywanie ciągłe."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Wspólne usługi i wybór domyślnego dostawcy dla żądań w tle.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Domyślny)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Używaj Google Gemini AI do sterowania urządzeniami, tworzenia programów automatyzacji i budowania widżetów w HomeGenie. Wybierz możliwości i kontekst systemu do udostępnienia z menu czatu.\nWprowadź prawidłowy klucz API, aby włączyć tę funkcję. Uzyskaj klucz API pod adresem https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Dowództwo Dżina",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Domyślny",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Niedostępny)",
   "scheduler_preset_action_config_wish": "Akcja języka naturalnego",
   "scheduler_preset_action_config_wish.placeholder": "Spróbuj: „Ustaw temperaturę na 22° i uruchom scenę Wschodu słońca”",
   "scheduler_preset_action_command_video_record_start": "Rozpocznij nagrywanie wideo",

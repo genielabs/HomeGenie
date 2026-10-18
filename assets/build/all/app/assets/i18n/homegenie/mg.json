@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Raketo an-tsoratra rehefa misy fanairana",
       "NVR.ContinuousRecording": "Fandraketana mitohy."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Tolotra iombonana sy fisafidianana ny mpamatsy mahazatra ho an'ny fangatahana mandeha any ambadika.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Mahazatra)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Mampiasà Google Gemini AI hifehezana fitaovana, hamoronana fandaharana automatique, ary hanamboarana widget ao amin'ny HomeGenie. Safidio avy amin'ny menio resaka ny fahaiza-manao sy ny toe-javatry ny rafitra hozaraina.\nMampidira fanalahidy API manan-kery mba hampiasana ity endri-javatra ity. Mahazoa fanalahidy API ao amin'ny https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Didin'ny Génie",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Mahazatra",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Tsy misy)",
   "scheduler_preset_action_config_wish": "Hetsika amin'ny fiteny voajanahary",
   "scheduler_preset_action_config_wish.placeholder": "Andramo: \"Apetraho amin'ny 22° ny hafanana ary atombohy ny fiposahan'ny masoandro\"",
   "scheduler_preset_action_command_video_record_start": "Atombohy ny fandraketana horonan-tsary",

@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Opnam beim Alarm",
       "NVR.ContinuousRecording": "Kontinuéierlech Opnam."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Gemeinsam Servicer an Auswiel vum Standardubidder fir Hannergrondufroen.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Standard)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Benotzt Google Gemini AI fir Apparater ze steieren, Automatiséierungsprogrammer ze kreéieren an Widgets an HomeGenie ze bauen. Wielt d'Fäegkeeten an de Systemkontext fir aus dem Chat-Menü ze deelen.\nGitt e gültegen API-Schlëssel an, fir dës Funktioun z'aktivéieren. Kritt en API-Schlëssel op https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Genie Kommando",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Standard",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Net disponibel)",
   "scheduler_preset_action_config_wish": "Aktioun vun der natierlecher Sprooch",
   "scheduler_preset_action_config_wish.placeholder": "Probéier: \"Setzt d'Hëtzt op 22° a start d'Sonnenopgangsszene\"",
   "scheduler_preset_action_command_video_record_start": "Video ophuelen ufänken",

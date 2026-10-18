@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Rakam Semasa Penggera",
       "NVR.ContinuousRecording": "Rakaman Berterusan."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Perkhidmatan dikongsi dan pemilihan penyedia lalai untuk permintaan latar belakang.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Lalai)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Gunakan Google Gemini AI untuk mengawal peranti, mencipta program automasi dan membina widget dalam HomeGenie. Pilih keupayaan dan konteks sistem untuk dikongsi daripada menu sembang.\nMasukkan kunci API yang sah untuk mendayakan ciri ini. Dapatkan kunci API di https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Perintah Jin",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Lalai",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Tidak tersedia)",
   "scheduler_preset_action_config_wish": "Tindakan Bahasa Semula Jadi",
   "scheduler_preset_action_config_wish.placeholder": "Cuba: \"Tetapkan suhu kepada 22° dan mulakan pemandangan Matahari Terbit\"",
   "scheduler_preset_action_command_video_record_start": "Mula Merakam Video",

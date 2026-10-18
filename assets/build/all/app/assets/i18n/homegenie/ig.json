@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Dekọọ na Mkpu",
       "NVR.ContinuousRecording": "Ndekọ Na-aga n'ihu."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Ọrụ ndị a na-ekekọrịta na nhọrọ onye na-eweta ndabara maka arịrịọ na-agba n'azụ.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Nke ndabara)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Jiri Google Gemini AI jikwaa ngwaọrụ, mepụta mmemme akpaaka, ma wuo wijetị na HomeGenie. Họrọ ikike na gburugburu sistemụ ị ga-ekere site na menu nkata.\nTinye igodo API dị irè iji mee ka njirimara a rụọ ọrụ. Nweta igodo API na https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Iwu Genie",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Nke ndabara",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Adịghị)",
   "scheduler_preset_action_config_wish": "Omume Asụsụ Okike",
   "scheduler_preset_action_config_wish.placeholder": "Nwaa: \"Tọọ okpomọkụ ahụ ruo 22° wee malite ihe nkiri Ọwụwa Anyanwụ\"",
   "scheduler_preset_action_command_video_record_start": "Malite ịdekọ vidiyo",

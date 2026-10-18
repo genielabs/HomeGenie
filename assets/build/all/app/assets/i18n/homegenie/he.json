@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "הקלטה בעת אזעקה",
       "NVR.ContinuousRecording": "הקלטה רציפה."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "שירותים משותפים ובחירת ספק ברירת המחדל לבקשות ברקע.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (ברירת מחדל)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "השתמש ב-Google Gemini AI כדי לשלוט במכשירים, ליצור תוכניות אוטומציה ולבנות ווידג'טים ב-HomeGenie. בחר את היכולות ואת הקשר המערכת לשיתוף מתוך תפריט הצ'אט.\nהזן מפתח API חוקי כדי להפעיל תכונה זו. קבל מפתח API בכתובת https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "פיקוד ג'יני",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "ברירת מחדל",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (לא זמין)",
   "scheduler_preset_action_config_wish": "פעולת שפה טבעית",
   "scheduler_preset_action_config_wish.placeholder": "נסה: \"הגדר את החום ל-22° והתחל את סצנת הזריחה\"",
   "scheduler_preset_action_command_video_record_start": "התחל להקליט וידאו",

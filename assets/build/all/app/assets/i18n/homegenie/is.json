@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Upptaka við viðvörun",
       "NVR.ContinuousRecording": "Stöðug upptaka."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Sameiginleg þjónusta og val á sjálfgefnum þjónustuveitanda fyrir bakgrunnsbeiðnir.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Sjálfgefið)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Notaðu Google Gemini AI til að stjórna tækjum, búa til sjálfvirkniforrit og smíða græjur í HomeGenie. Veldu getu og kerfissamhengi til að deila úr spjallvalmyndinni.\nSláðu inn gildan API-lykil til að virkja þennan eiginleika. Fáðu API-lykil á https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Skipun Genie",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Sjálfgefið",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Ekki tiltækt)",
   "scheduler_preset_action_config_wish": "Náttúruleg tungumálaaðgerð",
   "scheduler_preset_action_config_wish.placeholder": "Prófaðu: „Stilltu hitann á 22° og byrjaðu sólarupprásarsenuna“",
   "scheduler_preset_action_command_video_record_start": "Byrja að taka upp myndband",

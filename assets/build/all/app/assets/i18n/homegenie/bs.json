@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Snimanje pri alarmu",
       "NVR.ContinuousRecording": "Neprekidno snimanje."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Zajedničke usluge i izbor zadanog pružaoca za zahtjeve u pozadini.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Zadano)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Koristite Google Gemini AI za kontrolu uređaja, kreiranje programa automatizacije i izradu vidžeta u HomeGenie. Izaberite mogućnosti i sistemski kontekst za dijeljenje iz menija za ćaskanje.\nUnesite važeći API ključ da biste omogućili ovu funkciju. Nabavite API ključ na https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Džinova komanda",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Zadano",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Nedostupno)",
   "scheduler_preset_action_config_wish": "Radnja prirodnog jezika",
   "scheduler_preset_action_config_wish.placeholder": "Pokušajte: \"Podesite temperaturu na 22° i pokrenite scenu izlaska sunca\"",
   "scheduler_preset_action_command_video_record_start": "Započni snimanje videa",

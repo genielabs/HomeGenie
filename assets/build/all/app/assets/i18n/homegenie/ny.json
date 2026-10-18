@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Lembani pa Alamu",
       "NVR.ContinuousRecording": "Kujambula Kosalekeza."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Ntchito zogawana ndi kusankha wopereka wokhazikika pa zopempha zakumbuyo.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Yokhazikika)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Gwiritsani ntchito Google Gemini AI poyang'anira zipangizo, kupanga mapulogalamu a zodziyimira zokha, ndi kupanga ma widget mu HomeGenie. Sankhani luso ndi nkhani ya dongosolo logawana kuchokera pa menyu ya macheza.\nLowetsani kiyi yovomerezeka ya API kuti mutsegule mbaliyi. Pezani kiyi ya API pa https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Lamulo la Genie",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Yokhazikika",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Sikupezeka)",
   "scheduler_preset_action_config_wish": "Zochita za Chilankhulo Chachilengedwe",
   "scheduler_preset_action_config_wish.placeholder": "Yesani: \"Ikani kutentha pa 22° ndipo yambani chiwonetsero cha Kutuluka kwa Dzuwa\"",
   "scheduler_preset_action_command_video_record_start": "Yambani Kujambula Kanema",

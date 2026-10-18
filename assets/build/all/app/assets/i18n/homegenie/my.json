@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "နှိုးစက်ဖြင့် မှတ်တမ်းတင်ခြင်း",
       "NVR.ContinuousRecording": "စဉ်ဆက်မပြတ် မှတ်တမ်းတင်ခြင်း။"
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "မျှဝေသုံးစွဲသော ဝန်ဆောင်မှုများနှင့် နောက်ခံတောင်းဆိုမှုများအတွက် မူရင်းဝန်ဆောင်မှုပေးသူ ရွေးချယ်ခြင်း။",
+      "ConfigureOptions.DefaultProvider": "AI Genie (မူရင်း)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "HomeGenie တွင် စက်ပစ္စည်းများကို ထိန်းချုပ်ရန်၊ အလိုအလျောက်လုပ်ဆောင်ချက် ပရိုဂရမ်များ ဖန်တီးရန်နှင့် ဝစ်ဂျက်များ ပြုလုပ်ရန် Google Gemini AI ကို အသုံးပြုပါ။ မျှဝေလိုသော လုပ်ဆောင်နိုင်စွမ်းများနှင့် စနစ်အကြောင်းအရာများကို ချတ်မီနူးမှ ရွေးချယ်ပါ။\nဤလုပ်ဆောင်ချက်ကို အသုံးပြုနိုင်ရန် မှန်ကန်သော API key ကို ထည့်သွင်းပါ။ https://aistudio.google.com/app/apikey တွင် API key ရယူပါ။",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "ဂျီနီ အမိန့်ပေးချက်",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "မူရင်း",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (မရနိုင်ပါ)",
   "scheduler_preset_action_config_wish": "သဘာဝဘာသာစကားလုပ်ဆောင်ချက်",
   "scheduler_preset_action_config_wish.placeholder": "စမ်းကြည့်ပါ- \"အပူချိန်ကို ၂၂° ထားပြီး နေထွက်မြင်ကွင်းကို စတင်ပါ\"",
   "scheduler_preset_action_command_video_record_start": "ဗီဒီယိုရိုက်ကူးခြင်း စတင်ပါ",

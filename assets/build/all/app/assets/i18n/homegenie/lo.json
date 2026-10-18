@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "ບັນທຶກໃນເວລາປຸກ",
       "NVR.ContinuousRecording": "ການບັນທຶກຢ່າງຕໍ່ເນື່ອງ."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "ບໍລິການຮ່ວມ ແລະການເລືອກຜູ້ໃຫ້ບໍລິການເລີ່ມຕົ້ນສຳລັບຄຳຮ້ອງຂໍເບື້ອງຫຼັງ.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (ຄ່າເລີ່ມຕົ້ນ)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "ໃຊ້ Google Gemini AI ເພື່ອຄວບຄຸມອຸປະກອນ, ສ້າງໂປຣແກຣມອັດຕະໂນມັດ, ແລະ ສ້າງວິດເຈັດໃນ HomeGenie. ເລືອກຄວາມສາມາດ ແລະ ບໍລິບົດລະບົບທີ່ຈະແບ່ງປັນຈາກເມນູສົນທະນາ.\nປ້ອນລະຫັດ API ທີ່ຖືກຕ້ອງເພື່ອເປີດໃຊ້ຄຸນສົມບັດນີ້. ຮັບລະຫັດ API ໄດ້ທີ່ https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "ຄຳສັ່ງຂອງ Genie",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "ຄ່າເລີ່ມຕົ້ນ",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (ບໍ່ພ້ອມໃຊ້ງານ)",
   "scheduler_preset_action_config_wish": "ການກະທຳທາງພາສາທຳມະຊາດ",
   "scheduler_preset_action_config_wish.placeholder": "ລອງ: \"ຕັ້ງຄວາມຮ້ອນໄວ້ທີ່ 22° ແລະ ເລີ່ມຕົ້ນສາກຕາເວັນຂຶ້ນ\"",
   "scheduler_preset_action_command_video_record_start": "ເລີ່ມການບັນທຶກວິດີໂອ",

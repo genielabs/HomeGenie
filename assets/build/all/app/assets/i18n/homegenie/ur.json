@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "الارم پر ریکارڈ کریں۔",
       "NVR.ContinuousRecording": "مسلسل ریکارڈنگ۔"
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "مشترکہ خدمات اور پس منظر کی درخواستوں کے لیے طے شدہ فراہم کنندہ کا انتخاب۔",
+      "ConfigureOptions.DefaultProvider": "AI Genie (طے شدہ)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "HomeGenie میں آلات کو کنٹرول کرنے، آٹومیشن پروگرامز بنانے اور وجیٹس تیار کرنے کے لیے Google Gemini AI استعمال کریں۔ چیٹ مینو سے شیئر کرنے کے لیے صلاحیتوں اور سسٹم کے سیاق و سباق کا انتخاب کریں۔\nاس فیچر کو فعال کرنے کے لیے ایک درست API کلید درج کریں۔ https://aistudio.google.com/app/apikey سے API کلید حاصل کریں۔",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "جنی کمانڈ",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "طے شدہ",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (دستیاب نہیں)",
   "scheduler_preset_action_config_wish": "قدرتی زبان کا عمل",
   "scheduler_preset_action_config_wish.placeholder": "کوشش کریں: \"گرمی کو 22° پر سیٹ کریں اور طلوع آفتاب کا منظر شروع کریں\"",
   "scheduler_preset_action_command_video_record_start": "ویڈیو ریکارڈنگ شروع کریں۔",

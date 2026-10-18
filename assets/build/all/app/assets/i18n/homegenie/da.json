@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Optag ved alarm",
       "NVR.ContinuousRecording": "Kontinuerlig optagelse."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Delte tjenester og valg af standardudbyder til baggrundsanmodninger.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Standard)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Brug Google Gemini AI til at styre enheder, oprette automatiseringsprogrammer og bygge widgets i HomeGenie. Vælg de funktioner og den systemkontekst, der skal deles, fra chatmenuen.\nIndtast en gyldig API-nøgle for at aktivere denne funktion. Få en API-nøgle på https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Genie-kommando",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Standard",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Ikke tilgængelig)",
   "scheduler_preset_action_config_wish": "Naturlig sproghandling",
   "scheduler_preset_action_config_wish.placeholder": "Prøv: \"Indstil varmen til 22° og start solopgangsscenen\"",
   "scheduler_preset_action_command_video_record_start": "Start optagelse af video",

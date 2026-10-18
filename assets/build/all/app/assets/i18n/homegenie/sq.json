@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Regjistro në alarm",
       "NVR.ContinuousRecording": "Regjistrim i vazhdueshëm."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Shërbime të përbashkëta dhe përzgjedhja e ofruesit të parazgjedhur për kërkesat në sfond.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Parazgjedhje)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Përdorni Google Gemini AI për të kontrolluar pajisjet, për të krijuar programe automatizimi dhe për të ndërtuar miniaplikacione në HomeGenie. Zgjidhni aftësitë dhe kontekstin e sistemit për t'i ndarë nga menyja e bisedës.\nVendosni një çelës të vlefshëm API për të aktivizuar këtë veçori. Merrni një çelës API në https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Komanda e Xhindëve",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Parazgjedhje",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Nuk disponohet)",
   "scheduler_preset_action_config_wish": "Veprimi i Gjuhës Natyrore",
   "scheduler_preset_action_config_wish.placeholder": "Provo: \"Vendos nxehtësinë në 22° dhe fillo skenën e Lindjes së Diellit\"",
   "scheduler_preset_action_command_video_record_start": "Filloni regjistrimin e videos",

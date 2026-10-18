@@ -147,8 +147,12 @@
   },
   {
     "id": "genie_command",
-    "script": "const prompt = '$wish$';\n  $$.api.call('AI.IntentHandlers/Lailama/Prompt.Schedule', prompt);\n",
+    "script": "(function () {\n  const request = $request$;\n  // Native waiting owns cancellation: Jint does not run JS finally for escaping CLR exceptions.\n  request.wait = true;\n  request.timeoutSeconds = 600;\n  const raw = $$.api.call('System.Utility/AiGenie/Request.Execute', JSON.stringify(request));\n  const result = typeof raw === 'string' ? JSON.parse(raw) : raw;\n  if (!result || result.version !== 1 || !result.requestId || result.state !== 'completed') {\n    throw new Error((result && result.error || 'AI Genie request did not complete.') + ' Check action results before retrying.');\n  }\n  return result;\n})();\n",
     "config": {
+      "provider": {
+        "type": "genie-select",
+        "value": ""
+      },
       "wish": {
         "type": "textarea",
         "options": {

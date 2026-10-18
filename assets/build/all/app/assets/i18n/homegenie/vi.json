@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Ghi âm khi có báo động",
       "NVR.ContinuousRecording": "Ghi hình liên tục."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Các dịch vụ dùng chung và lựa chọn nhà cung cấp mặc định cho các yêu cầu chạy nền.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Mặc định)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Sử dụng Google Gemini AI để điều khiển thiết bị, tạo chương trình tự động hóa và xây dựng tiện ích trong HomeGenie. Chọn các khả năng và ngữ cảnh hệ thống cần chia sẻ từ menu trò chuyện.\nNhập khóa API hợp lệ để bật tính năng này. Lấy khóa API tại https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Lệnh Genie",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Mặc định",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Không khả dụng)",
   "scheduler_preset_action_config_wish": "Hành động ngôn ngữ tự nhiên",
   "scheduler_preset_action_config_wish.placeholder": "Hãy thử: \"Đặt nhiệt độ ở mức 22° và bắt đầu cảnh bình minh\"",
   "scheduler_preset_action_command_video_record_start": "Bắt đầu quay video",

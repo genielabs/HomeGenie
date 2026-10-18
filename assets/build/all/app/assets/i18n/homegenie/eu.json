@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Alarma batean grabatu",
       "NVR.ContinuousRecording": "Grabaketa jarraitua."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Zerbitzu partekatuak eta atzeko planoko eskaeretarako hornitzaile lehenetsia hautatzea.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Lehenetsia)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Erabili Google Gemini AI gailuak kontrolatzeko, automatizazio-programak sortzeko eta widget-ak eraikitzeko HomeGenie-n. Aukeratu txat-menutik partekatzeko gaitasunak eta sistemaren testuingurua.\nSartu baliozko API gako bat funtzio hau gaitzeko. Lortu API gakoa hemen: https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Genio Komandoa",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Lehenetsia",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Ez dago erabilgarri)",
   "scheduler_preset_action_config_wish": "Hizkuntza Naturalaren Ekintza",
   "scheduler_preset_action_config_wish.placeholder": "Saiatu: \"Ezarri beroa 22°-tan eta hasi egunsentiaren eszena\"",
   "scheduler_preset_action_command_video_record_start": "Hasi bideoa grabatzen",

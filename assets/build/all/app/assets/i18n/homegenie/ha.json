@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Yi rikodi akan Ƙararrawa",
       "NVR.ContinuousRecording": "Rikodi Mai Ci Gaba."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Ayyukan gama gari da zaɓin mai ba da sabis na asali don buƙatun bayan fage.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Na asali)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Yi amfani da Google Gemini AI don sarrafa na'urori, ƙirƙirar shirye-shiryen atomatik, da gina widget a HomeGenie. Zaɓi damammaki da mahallin tsarin da za a raba daga menu na hira.\nShigar da ingantaccen maɓallin API don kunna wannan fasalin. Samu maɓallin API a https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Kwamandan Genie",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Na asali",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Babu shi)",
   "scheduler_preset_action_config_wish": "Ayyukan Harshe na Halitta",
   "scheduler_preset_action_config_wish.placeholder": "Gwada: \"Saita zafin zuwa 22° kuma fara yanayin fitowar rana\"",
   "scheduler_preset_action_command_video_record_start": "Fara Rikodin Bidiyo",

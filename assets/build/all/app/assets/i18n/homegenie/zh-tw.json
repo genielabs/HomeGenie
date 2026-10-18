@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "警報錄音",
       "NVR.ContinuousRecording": "連續錄製。"
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "共用服務及背景請求的預設提供者選擇。",
+      "ConfigureOptions.DefaultProvider": "AI Genie (預設)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "使用 Google Gemini AI 在 HomeGenie 中控制裝置、建立自動化程式並建構小工具。從聊天功能表中選取要共用的功能與系統上下文。\n輸入有效的 API 金鑰以啟用此功能。前往 https://aistudio.google.com/app/apikey 取得 API 金鑰。",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "精靈指令",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "預設",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (無法使用)",
   "scheduler_preset_action_config_wish": "自然語言行動",
   "scheduler_preset_action_config_wish.placeholder": "試試：“將溫度設定為 22°，然後開始日出場景”",
   "scheduler_preset_action_command_video_record_start": "開始錄製影片",

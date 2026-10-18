@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Taifead ar Aláram",
       "NVR.ContinuousRecording": "Taifeadadh Leanúnach."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Seirbhísí comhroinnte agus roghnú an tsoláthraí réamhshocraithe le haghaidh iarrataí cúlra.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Réamhshocrú)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Úsáid Google Gemini AI chun gléasanna a rialú, cláir uathoibrithe a chruthú, agus giuirléidí a thógáil i HomeGenie. Roghnaigh na cumais agus an comhthéacs córais le roinnt ón roghchlár comhrá.\nIontráil eochair API bhailí chun an ghné seo a chumasú. Faigh eochair API ag https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Ordú Genie",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Réamhshocrú",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Níl ar fáil)",
   "scheduler_preset_action_config_wish": "Gníomh Teanga Nádúrtha",
   "scheduler_preset_action_config_wish.placeholder": "Bain triail as: \"Socraigh an teas go 22° agus cuir tús leis an radharc Éirí Gréine\"",
   "scheduler_preset_action_command_video_record_start": "Tosaigh ag Taifeadadh Físeáin",

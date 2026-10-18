@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Εγγραφή σε συναγερμό",
       "NVR.ContinuousRecording": "Συνεχής καταγραφή."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Κοινόχρηστες υπηρεσίες και επιλογή προεπιλεγμένου παρόχου για αιτήματα στο παρασκήνιο.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Προεπιλογή)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Χρησιμοποιήστε το Google Gemini AI για να ελέγχετε συσκευές, να δημιουργείτε προγράμματα αυτοματισμού και να φτιάχνετε widgets στο HomeGenie. Επιλέξτε τις δυνατότητες και το περιβάλλον συστήματος για κοινή χρήση από το μενού συνομιλίας.\nΕισαγάγετε ένα έγκυρο κλειδί API για να ενεργοποιήσετε αυτή τη λειτουργία. Αποκτήστε κλειδί API στο https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Διοίκηση Τζίνι",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Προεπιλογή",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Μη διαθέσιμο)",
   "scheduler_preset_action_config_wish": "Δράση Φυσικής Γλώσσας",
   "scheduler_preset_action_config_wish.placeholder": "Δοκιμάστε: \"Ρυθμίστε τη θερμότητα στους 22° και ξεκινήστε τη σκηνή της ανατολής του ηλίου\"",
   "scheduler_preset_action_command_video_record_start": "Έναρξη εγγραφής βίντεο",

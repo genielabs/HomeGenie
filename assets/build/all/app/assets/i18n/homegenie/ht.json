@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Anrejistre sou alam",
       "NVR.ContinuousRecording": "Anrejistreman kontinyèl."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Sèvis pataje ak seleksyon founisè pa defo pou demann an aryèplan.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Pa defo)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Sèvi ak Google Gemini AI pou kontwole aparèy yo, kreye pwogram automatisation, epi bati widje nan HomeGenie. Chwazi kapasite ak kontèks sistèm pou pataje nan meni chat la.\nAntre yon kle API ki valab pou pèmèt fonksyon sa a. Jwenn yon kle API nan https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Kòmandman Jeni",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Pa defo",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Pa disponib)",
   "scheduler_preset_action_config_wish": "Aksyon Lang Natirèl",
   "scheduler_preset_action_config_wish.placeholder": "Eseye: \"Mete chalè a sou 22° epi kòmanse sèn Lever solèy la\"",
   "scheduler_preset_action_command_video_record_start": "Kòmanse Anrejistre Videyo",

@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Recordio Ar Larwm",
       "NVR.ContinuousRecording": "Recordio Parhaus."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Gwasanaethau a rennir a dewis y darparwr diofyn ar gyfer ceisiadau cefndir.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Diofyn)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Defnyddiwch Google Gemini AI i reoli dyfeisiau, creu rhaglenni awtomeiddio, ac adeiladu teclynnau yn HomeGenie. Dewiswch y galluoedd a'r cyd-destun system i'w rhannu o'r ddewislen sgwrsio.\nRhowch allwedd API ddilys i alluogi'r nodwedd hon. Mynnwch allwedd API yn https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Gorchymyn Genie",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Diofyn",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Ddim ar gael)",
   "scheduler_preset_action_config_wish": "Gweithred Iaith Naturiol",
   "scheduler_preset_action_config_wish.placeholder": "Rhowch gynnig ar: \"Gosodwch y gwres i 22° a dechreuwch olygfa'r Haul\"",
   "scheduler_preset_action_command_video_record_start": "Dechrau Recordio Fideo",

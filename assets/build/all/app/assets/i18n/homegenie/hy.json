@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Ձայնագրել զարթուցիչի վրա",
       "NVR.ContinuousRecording": "Շարունակական ձայնագրություն։"
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Համօգտագործվող ծառայություններ և ֆոնային հարցումների համար լռելյայն մատակարարի ընտրություն։",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Լռելյայն)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Օգտագործեք Google Gemini AI-ը սարքերը կառավարելու, ավտոմատացման ծրագրեր ստեղծելու և HomeGenie-ում վիջեթներ կառուցելու համար: Զրույցի ընտրացանկից ընտրեք համօգտագործվող հնարավորությունները և համակարգի համատեքստը:\nԱյս գործառույթն ակտիվացնելու համար մուտքագրեք վավեր API բանալի: Ստացեք API բանալի https://aistudio.google.com/app/apikey հասցեով:",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Ջինի հրամանատարություն",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Լռելյայն",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Հասանելի չէ)",
   "scheduler_preset_action_config_wish": "Բնական լեզվի գործողություն",
   "scheduler_preset_action_config_wish.placeholder": "Փորձեք. «Ջերմությունը սահմանեք 22°-ի և սկսեք Արևածագի տեսարանը»",
   "scheduler_preset_action_command_video_record_start": "Սկսել տեսանյութի ձայնագրումը",

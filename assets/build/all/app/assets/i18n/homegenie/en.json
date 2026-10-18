@@ -210,6 +210,9 @@
         "Say",
     "scheduler_preset_action_genie_command":
         "Genie Command",
+    "scheduler_preset_action_config_provider": "AI Genie",
+    "scheduler_preset_action_config_provider_default": "Default",
+    "scheduler_preset_action_config_provider_unavailable": "Unavailable AI Genie",
     "scheduler_preset_action_config_wish":
         "Natural Language Action",
     "scheduler_preset_action_config_wish.placeholder":
@@ -597,6 +600,11 @@
         "Enable Deep Knowledge (Read programs & widgets)",
       "ConfigureOptions.SystemInstructions":
         "System Instructions"
+    },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Shared services and default provider selection for background requests.",
+      "ConfigureOptions.DefaultProvider": "Default AI Genie"
     },
     "933": {
       "Title": "Gemini Genie",

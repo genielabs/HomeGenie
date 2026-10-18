@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Запись при срабатывании сигнализации",
       "NVR.ContinuousRecording": "Непрерывная запись."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Общие службы и выбор поставщика по умолчанию для фоновых запросов.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (По умолчанию)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Используйте Google Gemini AI для управления устройствами, создания сценариев автоматизации и виджетов в HomeGenie. Выберите возможности и системный контекст для передачи в меню чата.\nВведите действующий ключ API для включения этой функции. Получите ключ API на https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Командование Джиннов",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "По умолчанию",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Недоступен)",
   "scheduler_preset_action_config_wish": "Действия на естественном языке",
   "scheduler_preset_action_config_wish.placeholder": "Попробуйте: \"Установите температуру на 22° и запустите сцену \"Восход солнца\"\".",
   "scheduler_preset_action_command_video_record_start": "Начать запись видео",

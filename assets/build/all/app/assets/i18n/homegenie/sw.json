@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Rekodi Kwenye Kengele",
       "NVR.ContinuousRecording": "Kurekodi Kuendelea."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Huduma zinazoshirikiwa na uteuzi wa mtoa huduma chaguomsingi kwa maombi ya chinichini.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Chaguomsingi)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Tumia Google Gemini AI kudhibiti vifaa, kuunda programu za kiotomatiki, na kuunda wijeti katika HomeGenie. Chagua uwezo na muktadha wa mfumo wa kushiriki kutoka kwenye menyu ya gumzo.\nWeka ufunguo halali wa API ili kuwezesha kipengele hiki. Pata ufunguo wa API kwenye https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Amri ya Jini",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Chaguomsingi",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Haipatikani)",
   "scheduler_preset_action_config_wish": "Kitendo cha Lugha Asilia",
   "scheduler_preset_action_config_wish.placeholder": "Jaribu: \"Weka joto hadi 22° na uanze mandhari ya Jua\"",
   "scheduler_preset_action_command_video_record_start": "Anza Kurekodi Video",

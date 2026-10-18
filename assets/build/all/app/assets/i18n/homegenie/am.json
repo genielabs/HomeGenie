@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "ማንቂያ ላይ ቅዳ",
       "NVR.ContinuousRecording": "ቀጣይነት ያለው ቀረጻ።"
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "የጋራ አገልግሎቶች እና ለጀርባ ጥያቄዎች ነባሪ አቅራቢ ምርጫ።",
+      "ConfigureOptions.DefaultProvider": "AI Genie (ነባሪ)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "በHomeGenie ውስጥ መሣሪያዎችን ለመቆጣጠር፣ የአውቶሜሽን ፕሮግራሞችን ለመፍጠር እና መግብሮችን ለመገንባት Google Gemini AIን ይጠቀሙ። ከውይይት ምናሌው ውስጥ የሚያጋሯቸውን ችሎታዎች እና የስርዓት አውድ ይምረጡ።\nይህን ባህሪ ለማንቃት ትክክለኛ የኤፒአይ ቁልፍ ያስገቡ። የኤፒአይ ቁልፍ በ https://aistudio.google.com/app/apikey ያግኙ።",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "የጂኒ ኮማንድ",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "ነባሪ",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (አይገኝም)",
   "scheduler_preset_action_config_wish": "የተፈጥሮ ቋንቋ ተግባር",
   "scheduler_preset_action_config_wish.placeholder": "ይሞክሩ፦ \"ሙቀቱን ወደ 22° ያቀናብሩ እና የፀሐይ መውጣት ትዕይንትን ይጀምሩ\"",
   "scheduler_preset_action_command_video_record_start": "ቪዲዮ መቅዳት ይጀምሩ",

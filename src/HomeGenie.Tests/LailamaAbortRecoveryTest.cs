@@ -17,15 +17,20 @@ public class LailamaAbortRecoveryTest {
         var root=new DirectoryInfo(TestContext.CurrentContext.TestDirectory);while(root!=null&&!File.Exists(Path.Combine(root.FullName,"HomeGenie.sln")))root=root.Parent;
         var block=XDocument.Load(Path.Combine(root.FullName,"assets/build/all/data/packages/homegenie/homegenie-ml-ai/programs.xml")).Root.Elements().Single(n=>(string)n.Element("Address")=="940");
         var method=CSharpSyntaxTree.ParseText("class Holder{"+(string)block.Element("ScriptContext")+"}").GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(n=>n.Identifier.Text=="RecoverFailedProgram").ToFullString();
-        string code="using System;using System.Linq;using Newtonsoft.Json;using Newtonsoft.Json.Linq;"+"""
+        var shared=XDocument.Load(Path.Combine(root.FullName,"assets/build/all/data/packages/homegenie/homegenie-base/programs.xml")).Root.Elements().Single(n=>(string)n.Element("Address")=="583");
+        string recovery=CSharpSyntaxTree.ParseText("class Holder{"+(string)shared.Element("ScriptContext")+"}").GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text=="AiGenieAbortRecovery").ToFullString();
+        string code="using System;using System.Linq;using Newtonsoft.Json;using Newtonsoft.Json.Linq;"+recovery+"""
 public class FakeApi {
  public string Mode;public int Recoveries;
  public object Call(string route,object input) {
+  if(route=="System.Utility/AiGenie/Program.RecoverAborted")return AiGenieAbortRecovery.Run((string)((JObject)input)["requestId"],Call);
   if(route.EndsWith("/Results")) {
    if(Mode=="null")return null;
    if(Mode=="empty")return new JArray();
    var row=new JObject{["RequestId"]="turn",["ActionId"]="turn:deploy-1",["Index"]=1,["State"]=Mode=="completed"?"completed":Mode=="unknown"?"unknown":"failed",["Response"]=new JObject{["status"]="compile_failed"}};
    var rows=new JArray(row);
+   if(Mode=="newer-completed")rows.Add(new JObject{["RequestId"]="turn",["ActionId"]="turn:deploy-2",["Index"]=2,["State"]="completed"});
+   if(Mode=="non-compiler-failure")row["Response"]["status"]="failed";
    if(Mode=="newer-unknown")rows.Add(new JObject{["RequestId"]="turn",["ActionId"]="turn:deploy-2",["Index"]=2,["State"]="unknown"});
    if(Mode=="recovered")rows.Add(new JObject{["RequestId"]="turn",["ActionId"]="turn:recover",["State"]="completed"});
    if(Mode=="unrelated")row["RequestId"]="other";
@@ -44,7 +49,7 @@ public class RecoveryProbe {
         using var stream=new MemoryStream();var result=compilation.Emit(stream);Assert.That(result.Success,Is.True,string.Join("\n",result.Diagnostics.Where(d=>d.Severity==DiagnosticSeverity.Error)));probe=Assembly.Load(stream.ToArray()).GetType("RecoveryProbe");
     }
     (JObject,int) Run(string mode) {var host=Activator.CreateInstance(probe);probe.GetMethod("Configure").Invoke(host,new object[]{mode});var result=(JObject)probe.GetMethod("RecoverFailedProgram").Invoke(host,new object[]{"turn"});return (result,(int)probe.GetMethod("Calls").Invoke(host,null));}
-    [TestCase("null")] [TestCase("empty")] [TestCase("completed")] [TestCase("unknown")] [TestCase("newer-unknown")] [TestCase("recovered")] [TestCase("unrelated")]
+    [TestCase("null")] [TestCase("empty")] [TestCase("completed")] [TestCase("unknown")] [TestCase("newer-unknown")] [TestCase("recovered")] [TestCase("unrelated")] [TestCase("newer-completed")] [TestCase("non-compiler-failure")]
     public void OnlyTheLatestConfirmedCompilationFailureCanBeRecovered(string mode) {var (result,calls)=Run(mode);Assert.That(calls,Is.Zero);Assert.That(result.HasValues,Is.False);}
     [Test] public void FailedCompilationRecoversOnceAndReportsIt() {var (result,calls)=Run("failed");Assert.That(calls,Is.EqualTo(1));Assert.That((bool)result["success"],Is.True);}
     [TestCase("throw")] [TestCase("unconfirmed")]

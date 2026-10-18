@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "บันทึกเมื่อมีสัญญาณเตือน",
       "NVR.ContinuousRecording": "การบันทึกอย่างต่อเนื่อง"
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "บริการที่ใช้ร่วมกันและการเลือกผู้ให้บริการเริ่มต้นสำหรับคำขอเบื้องหลัง",
+      "ConfigureOptions.DefaultProvider": "AI Genie (ค่าเริ่มต้น)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "ใช้ Google Gemini AI เพื่อควบคุมอุปกรณ์ สร้างโปรแกรมอัตโนมัติ และสร้างวิดเจ็ตใน HomeGenie เลือกความสามารถและบริบทของระบบที่จะแชร์ได้จากเมนูแชท\nป้อนคีย์ API ที่ถูกต้องเพื่อเปิดใช้งานฟีเจอร์นี้ รับคีย์ API ได้ที่ https://aistudio.google.com/app/apikey",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "คำสั่งจินนี่",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "ค่าเริ่มต้น",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (ไม่พร้อมใช้งาน)",
   "scheduler_preset_action_config_wish": "การกระทำภาษาธรรมชาติ",
   "scheduler_preset_action_config_wish.placeholder": "ลองทำตามนี้: \"ตั้งค่าความร้อนเป็น 22° แล้วเริ่มฉากพระอาทิตย์ขึ้น\"",
   "scheduler_preset_action_command_video_record_start": "เริ่มบันทึกวิดีโอ",

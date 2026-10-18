@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Grabar en alarma",
       "NVR.ContinuousRecording": "Grabación continua."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Servicios compartidos y selección del proveedor predeterminado para las solicitudes en segundo plano.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Predeterminado)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Usa Google Gemini AI para controlar dispositivos, crear programas de automatización y crear widgets en HomeGenie. Elige las capacidades y el contexto del sistema para compartir desde el menú de chat.\nIngresa una clave de API válida para habilitar esta función. Obtén una clave de API en https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Comando Genie",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Predeterminado",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (No disponible)",
   "scheduler_preset_action_config_wish": "Acción del lenguaje natural",
   "scheduler_preset_action_config_wish.placeholder": "Prueba: \"Pon la calefacción a 22° y empieza la escena del Amanecer\"",
   "scheduler_preset_action_command_video_record_start": "Iniciar grabación de vídeo",

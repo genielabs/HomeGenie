@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Снимај на аларм",
       "NVR.ContinuousRecording": "Континуирано снимање."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Заеднички услуги и избор на стандарден давател за барања во заднина.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Стандардно)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Користете Google Gemini AI за контрола на уреди, креирање програми за автоматизација и градење виџети во HomeGenie. Изберете ги можностите и системскиот контекст за споделување од менито за разговор.\nВнесете валиден API клуч за да ја овозможите оваа функција. Земете API клуч на https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Џини Команда",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Стандардно",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Недостапно)",
   "scheduler_preset_action_config_wish": "Акција за природен јазик",
   "scheduler_preset_action_config_wish.placeholder": "Обидете се: „Поставете ја топлината на 22° и започнете ја сцената со изгрејсонце“",
   "scheduler_preset_action_command_video_record_start": "Започни со снимање видео",

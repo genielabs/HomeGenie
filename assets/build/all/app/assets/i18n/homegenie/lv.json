@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Ierakstīt trauksmes brīdī",
       "NVR.ContinuousRecording": "Nepārtraukta ierakstīšana."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Koplietojami pakalpojumi un noklusējuma nodrošinātāja izvēle fona pieprasījumiem.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Noklusējums)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Izmantojiet Google Gemini AI, lai vadītu ierīces, izveidotu automatizācijas programmas un veidotu logrīkus programmā HomeGenie. Tērzēšanas izvēlnē izvēlieties iespējas un sistēmas kontekstu, ko kopīgot.\nIevadiet derīgu API atslēgu, lai iespējotu šo funkciju. Iegūstiet API atslēgu vietnē https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Džinu pavēlniecība",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Noklusējums",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Nav pieejams)",
   "scheduler_preset_action_config_wish": "Dabiskās valodas darbība",
   "scheduler_preset_action_config_wish.placeholder": "Izmēģiniet: \"Iestatiet temperatūru uz 22° un sāciet saullēkta ainu\".",
   "scheduler_preset_action_command_video_record_start": "Sākt video ierakstīšanu",

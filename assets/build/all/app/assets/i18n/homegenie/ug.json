@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "سىگنالدا خاتىرىلەش",
       "NVR.ContinuousRecording": "ئۈزلۈكسىز خاتىرىلەش."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "ئورتاق مۇلازىمەتلەر ۋە ئارقا سۇپا تەلەپلىرى ئۈچۈن سۈكۈتتىكى تەمىنلىگۈچىنى تاللاش.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (سۈكۈتتىكى)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "HomeGenie دا ئۈسكۈنىلەرنى كونترول قىلىش، ئاپتوماتلاشتۇرۇش پروگراممىلىرىنى قۇرۇش ۋە كىچىك ئەپلەرنى ياساش ئۈچۈن Google Gemini AI نى ئىشلىتىڭ. سۆھبەت تىزىملىكىدىن ھەمبەھىرلىنىدىغان ئىقتىدارلار ۋە سىستېما مەزمۇنىنى تاللاڭ.\nبۇ ئىقتىدارنى قوزغىتىش ئۈچۈن ئىناۋەتلىك API ئاچقۇچى كىرگۈزۈڭ. API ئاچقۇچىنى https://aistudio.google.com/app/apikey دىن ئېلىڭ.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "جىن قوماندانلىقى",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "سۈكۈتتىكى",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (ئىشلەتكىلى بولمايدۇ)",
   "scheduler_preset_action_config_wish": "تەبىئىي تىل ھەرىكىتى",
   "scheduler_preset_action_config_wish.placeholder": "سىناپ بېقىڭ: «تېمپېراتۇرىنى 22° غا تەڭشەپ، قۇياش چىقىش كۆرۈنۈشىنى باشلاڭ».",
   "scheduler_preset_action_command_video_record_start": "ۋىدېئو خاتىرىلەشنى باشلاڭ",

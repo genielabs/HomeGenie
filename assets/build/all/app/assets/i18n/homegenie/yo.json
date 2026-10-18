@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Gba silẹ lori Itaniji",
       "NVR.ContinuousRecording": "Gbigbasilẹ ti nlọ lọwọ."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Àwọn iṣẹ́ àjọpín àti yíyan olùpèsè tí a ṣètò tẹ́lẹ̀ fún àwọn ìbéèrè abẹ́lẹ̀.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Ti a ṣètò tẹ́lẹ̀)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Lo Google Gemini AI láti darí àwọn ẹ̀rọ, ṣẹ̀dá àwọn ètò adaṣe, kí o sì kọ́ àwọn widget ní HomeGenie. Yan àwọn agbára àti àyíká ètò láti pín láti inú àtòjọ ìfọ̀rọ̀wérọ̀.\nTẹ kọ́kọ́rọ́ API tó wúlò láti mú ẹ̀yà yìí ṣiṣẹ́. Gba kọ́kọ́rọ́ API ní https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Àṣẹ Ẹ̀mí",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Ti a ṣètò tẹ́lẹ̀",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Kò sí)",
   "scheduler_preset_action_config_wish": "Ìṣe Èdè Àdánidá",
   "scheduler_preset_action_config_wish.placeholder": "Gbìyànjú: \"Ṣètò ooru sí 22° kí o sì bẹ̀rẹ̀ sí í rí ìrísí ìlà oòrùn\"",
   "scheduler_preset_action_command_video_record_start": "Bẹ̀rẹ̀ sí Gbígbà Fídíò sílẹ̀",

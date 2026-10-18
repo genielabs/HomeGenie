@@ -400,6 +400,11 @@
       "NVR.RecordOnAlarm": "Recordatio in Alarma",
       "NVR.ContinuousRecording": "Continua Registratio."
     },
+    "583": {
+      "Title": "AI Genie",
+      "Description": "Servitia communia et electio provisoris praedefiniti ad petitiones in recessu tractandas.",
+      "ConfigureOptions.DefaultProvider": "AI Genie (Praedefinitum)"
+    },
     "933": {
       "Title": "Gemini Genie",
       "Description": "Utere Google Gemini AI ad instrumenta gubernanda, programmata automationis creanda, et vidgetas in HomeGenie aedificandas. Elige facultates et contextum systematis ad communicandum ex indice colloquii.\nInscribe clavem API validam ad hanc functionem excitandam. Clavem API impetra apud https://aistudio.google.com/app/apikey.",
@@ -424,6 +429,9 @@
     }
   },
   "scheduler_preset_action_genie_command": "Mandatum Genii",
+  "scheduler_preset_action_config_provider": "AI Genie",
+  "scheduler_preset_action_config_provider_default": "Praedefinitum",
+  "scheduler_preset_action_config_provider_unavailable": "AI Genie (Non praesto)",
   "scheduler_preset_action_config_wish": "Actio Linguae Naturalis",
   "scheduler_preset_action_config_wish.placeholder": "Conare: \"Calorem ad 22° pone et scaenam Solis Ortus incipe.\"",
   "scheduler_preset_action_command_video_record_start": "Incipe Video Recordare",
