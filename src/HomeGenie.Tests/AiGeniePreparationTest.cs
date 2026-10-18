@@ -20,7 +20,7 @@ public class AiGeniePreparationTest {
         XElement Program(string package,string id)=>XDocument.Load(Path.Combine(root.FullName,"assets/build/all/data/packages/homegenie",package,"programs.xml")).Root.Elements().Single(n=>(string)n.Element("Address")==id);
         string Class(XElement p,string name)=>CSharpSyntaxTree.ParseText("class Holder {"+(string)p.Element("ScriptContext")+"}").GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text==name).ToFullString();
         string code="using System;using System.IO;using System.Linq;using System.Text;using System.Collections.Generic;using System.Security.Cryptography;using Newtonsoft.Json;using Newtonsoft.Json.Linq;"+
-            Class(Program("homegenie-base","583"),"AiGeniePreparation")+Class(Program("homegenie-base","581"),"GenieResponseContract")+Class(Program("homegenie-ml-ai","933"),"GenieCapabilities");
+            Class(Program("homegenie-base","583"),"AiGeniePreparation")+Class(Program("homegenie-base","581"),"GenieResponseContract")+Class(Program("homegenie-base","583"),"GenieCapabilities");
         var paths=((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")).Split(Path.PathSeparator).Where(p=>Path.GetDirectoryName(p)==Path.GetDirectoryName(typeof(object).Assembly.Location)).Append(typeof(JsonConvert).Assembly.Location);
         var compilation=CSharpCompilation.Create("AiPreparation"+Guid.NewGuid().ToString("N"),new[]{CSharpSyntaxTree.ParseText(code)},paths.Select(p=>MetadataReference.CreateFromFile(p)),new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
         using var stream=new MemoryStream();var result=compilation.Emit(stream);Assert.That(result.Success,Is.True,string.Join("\n",result.Diagnostics));

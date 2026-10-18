@@ -15,7 +15,7 @@ namespace HomeGenie.Tests;
 [TestFixture]
 public class GeminiDiscoveryContractTest
 {
-    private Type request, contract, executorContract, probe;
+    private Type request, contract, probe;
     [OneTimeSetUp] public void CompileDistributedContractsAndLookupBlock()
     {
         var root=new DirectoryInfo(TestContext.CurrentContext.TestDirectory);
@@ -31,8 +31,8 @@ public class GeminiDiscoveryContractTest
         int end=source.IndexOf("    if ((bool)selected[\"automationPrograms\"])",begin,StringComparison.Ordinal);
         string block=source.Substring(begin,end-begin);
         var code="using System;using System.IO;using System.Text;using System.Linq;using System.Collections.Generic;using Newtonsoft.Json;using Newtonsoft.Json.Linq;\n"+
-            Class(shared,"WidgetContextRequest")+Class(gemini,"GenieResponseContract")+
-            "namespace Executor {"+Class(executor,"GenieResponseContract")+"}\n"+$$$"""
+            Class(shared,"WidgetContextRequest")+Class(executor,"GenieResponseContract")+
+            $$$"""
 public static class DiscoveryLookupProbe {
  public static JObject Run(JObject resources,bool allowed,bool error) {
     var selected=JObject.FromObject(new {devices=allowed});var data=new JObject();var Api=new DiscoveryApi(error);
@@ -65,7 +65,7 @@ public class DiscoveryApi {
         using var stream=new MemoryStream();var result=compilation.Emit(stream);
         Assert.That(result.Success,Is.True,string.Join("\n",result.Diagnostics));
         var assembly=Assembly.Load(stream.ToArray());request=assembly.GetType("WidgetContextRequest");contract=assembly.GetType("GenieResponseContract");
-        executorContract=assembly.GetType("Executor.GenieResponseContract");probe=assembly.GetType("DiscoveryLookupProbe");
+        probe=assembly.GetType("DiscoveryLookupProbe");
     }
     private JObject Run(JObject resources,bool allowed=true,bool error=false)=>(JObject)probe.GetMethod("Run").Invoke(null,new object[]{resources,allowed,error});
     [Test] public void LookupsUseOnlyDescriptiveAndContextualReadApis()
@@ -92,9 +92,9 @@ public class DiscoveryApi {
     [TestCase("Test.Lights/1/extra")] [TestCase("Test.Lights/1%2Fextra")] [TestCase("Test.Lights/1?query")]
     public void MalformedModuleIdsCannotInjectApiPaths(string id)
     { Assert.Throws<TargetInvocationException>(()=>Run(new JObject{["moduleIds"]=new JArray(id)})); }
-    [Test] public void BothDistributedNormalizersAcceptDiscoveryAndRejectUnknownResources()
+    [Test] public void CanonicalNormalizerAcceptsDiscoveryAndRejectsUnknownResources()
     {
-        foreach(var type in new[]{contract,executorContract}) {
+        foreach(var type in new[]{contract}) {
             var value=JObject.Parse("{'version':1,'kind':'context','explanation':'Inspect','resources':{'moduleIds':['Test.Lights/1'],'parameterIds':['Test.Lights/1/Test.Feature']}} ");
             Assert.That(type.GetMethod("Normalize").Invoke(null,new object[]{value}),Is.Not.Null);
             value["resources"]["writeParameters"]=new JArray("forbidden");
@@ -111,7 +111,7 @@ public class DiscoveryApi {
         Assert.Throws<TargetInvocationException>(()=>request.GetMethod("Validate").Invoke(null,new object[]{input}));
     }
     [Test] public void ConfigurationCommandsRequireExactTargetsScalarValuesAndRejectExtraOptions() {
-        foreach(var type in new[]{contract,executorContract}) {
+        foreach(var type in new[]{contract}) {
             var method=type.GetMethod("DeviceCommand");
             string prefix="HomeAutomation.HomeGenie/Config/Modules.ParameterSet/Test.Lights/1/Test.Timeout/";
             Assert.That((string[])method.Invoke(null,new object[]{prefix+"60"}),Is.EqualTo(new[]{"Test.Lights","1"}));

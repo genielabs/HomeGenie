@@ -26,7 +26,7 @@ public class LailamaConfigurationActionsTest
             var parsed=CSharpSyntaxTree.ParseText("class Holder{"+(string)block.Element("ScriptContext")+"}").GetRoot();
             return string.Join("\n",parsed.DescendantNodes().OfType<ClassDeclarationSyntax>().Where(n=>names.Contains(n.Identifier.Text)));
         }
-        string extras=Extra("homegenie-base","583","AiGeniePreparation","AiGenieDeviceActions")+Extra("homegenie-ml-ai","940","LailamaCapabilityPolicy","LailamaConfigurationActions");
+        string extras=Extra("homegenie-base","583","GenieCapabilities","AiGeniePreparation","AiGenieDeviceActions")+Extra("homegenie-ml-ai","940","LailamaCapabilityPolicy","LailamaConfigurationActions");
         string code="using System;using System.IO;using System.Linq;using System.Text;using System.Collections.Generic;using System.Text.RegularExpressions;using System.Security.Cryptography;using Newtonsoft.Json;using Newtonsoft.Json.Linq;"+
             extras+Class("ApiCommandExecution")+Class("ActionLedger")+Class("GenieResponseContract")+Class("ModuleSettingAction")+"public class ExecutorProbe { public FakeData Data=new FakeData();"+method+"}"+"""
 public class FakeData {public string Folder;public string GetFolder()=>Folder;}
@@ -59,6 +59,7 @@ public static class ConfigurationProbe {
      return executor.ExecuteApiCommands(api,commands,(string)input["requestId"]);
    };
    Func<string,object,object> dispatch=(route,payload)=> {
+     if(route=="System.Utility/AiGenie/Capabilities.Normalize")return GenieCapabilities.Request((JObject)payload,"normalize",null);
      if(route!="System.Utility/AiGenie/Device.Execute")throw new Exception("Bypassed shared dispatcher");
      return AiGenieDeviceActions.Dispatch((JObject)payload,execute,(d,a)=>d=="Test.Lights"&&a=="1");
    };

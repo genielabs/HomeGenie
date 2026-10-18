@@ -3135,7 +3135,7 @@ else
             // Only explicitly selected device/program context is supported by the local strategy.
             foreach(string key in new[]{"dashboards","deepKnowledge"}) selected[key]=false;
             var scope = new JObject { ["version"]=1, ["message"]=rawInput, ["context"]=selected,
-                ["capabilities"]=LailamaCapabilityPolicy.Normalize(storedSelection("AI.Chat.Capabilities"),(bool)selected["devices"]) };
+                ["capabilities"]=LailamaCapabilityPolicy.Normalize(storedSelection("AI.Chat.Capabilities"),(bool)selected["devices"],(route,data)=&gt;Api.Call(route,data)) };
             string localTemplate=File.ReadAllText(Path.Combine(Data.GetFolder(), "system_prompt.txt"));
             // Legacy placeholders are supplied by the scoped collector, not a second renderer.
             foreach(string placeholder in new[]{"%%AVAILABLE_DEVICES%%","%%SYSTEM_STATUS%%","%%CURRENT_TIME%%"})
@@ -3177,11 +3177,11 @@ else
             telemetry.SaveUser(ChatMessage.Create("user",rawInput));
             var cleanHistory=new JArray();
             if(!noHistory) {
-                var history=readObject(Api.Call("System.Utility/ChatHistory/GetContext",new JObject{
-                    ["StoreId"]=storeId,["ContextProfileKey"]=telemetry.ContextProfileKey}));
+                var history=readObject(Api.Call("System.Utility/AiGenie/History.Read",new JObject{
+                    ["version"]=1,["storeId"]=storeId,["profileKey"]=telemetry.ContextProfileKey,["projection"]="text"}));
                 if(history==null || (string)history["contextProfileKey"]!=telemetry.ContextProfileKey || history["messages"] is not JArray entries)
                     throw new InvalidOperationException("Local AI history context is unavailable.");
-                cleanHistory=LailamaContextSession.Clean(entries);
+                cleanHistory=(JArray)entries.DeepClone();
             }
             string sessionKey=LailamaSessionCache.Key(telemetry.ContextProfileKey,localTemplate,templateType,maxMessages);
             bool reuseSession=!noHistory &amp;&amp; sessionCache.CanReuse(sessionKey,cleanHistory)
@@ -3192,7 +3192,7 @@ else
                 session.LoadSession(resetState);
                 session.History.Messages.Clear();
                 var contextHistory=LailamaContextSession.Rebuild(prepared,new JObject{
-                    ["contextProfileKey"]=telemetry.ContextProfileKey,["messages"]=cleanHistory},maxMessages);
+                    ["contextProfileKey"]=telemetry.ContextProfileKey,["messages"]=cleanHistory},maxMessages,(route,data)=&gt;Api.Call(route,data));
                 foreach(var item in contextHistory) {
                     string role=(string)item["role"];
                     string text=string.Join("\n",((JArray)item["parts"]).Select(p=&gt;(string)p["text"]));
@@ -3301,7 +3301,7 @@ else
                 ["contextCall"]=new Action&lt;string&gt;(path=&gt;telemetry.ContextCalls.Add(path)),
                 ["observe"]=new Action&lt;string,JObject&gt;((phase,details)=&gt;trace?.Event(phase,()=&gt;details)),
                 ["execute"]=new Func&lt;string,JObject&gt;(reply=&gt; {
-                    var currentCapabilities=LailamaCapabilityPolicy.Normalize(ReadChatSetting("AI.Chat.Capabilities"),CurrentDeviceContextAllowed());
+                    var currentCapabilities=LailamaCapabilityPolicy.Normalize(ReadChatSetting("AI.Chat.Capabilities"),CurrentDeviceContextAllowed(),(route,data)=&gt;Api.Call(route,data));
                     var programContext=(JObject)scope["context"].DeepClone();
                     programContext["automationPrograms"]=(bool)programContext["automationPrograms"] &amp;&amp; CurrentProgramContextAllowed();
                     var programResult=readObject(Api.Call("System.Utility/AiGenie/Text.Artifact.Execute",new JObject {
@@ -3775,7 +3775,7 @@ public List&lt;string&gt; ExtractResponse(string response)
 public List&lt;ApiCommandExecution&gt; ExecuteResponse(string response, string requestId = null)
 {
     object result = LailamaCapabilityPolicy.Execute(response,ReadChatSetting("AI.Chat.Capabilities"),CurrentDeviceContextAllowed(),
-        () =&gt; LailamaConfigurationActions.Execute(response,requestId,ReadChatSetting("AI.Chat.Capabilities"),CurrentDeviceContextAllowed(),(route,data)=&gt;Api.Call(route,data)));
+        () =&gt; LailamaConfigurationActions.Execute(response,requestId,ReadChatSetting("AI.Chat.Capabilities"),CurrentDeviceContextAllowed(),(route,data)=&gt;Api.Call(route,data)),(route,data)=&gt;Api.Call(route,data));
     if (result == null) throw new InvalidOperationException("AI Action Executor is unavailable.");
     var actions = JToken.FromObject(result) as JArray;
     if (actions == null) throw new InvalidOperationException("Invalid AI Action Executor execution response.");
@@ -3790,7 +3790,7 @@ public object ExtractAndExecute(string response)
             return (object)ExtractResponse(response);
         }
         return Api.Call("System.Utility/ActionExecutor/ExtractAndExecute",response);
-    });
+    },(route,data)=&gt;Api.Call(route,data));
 }
 
 /**
@@ -3853,53 +3853,33 @@ public ModelParams GetOptimizedParams(string modelPath)
 }
 
 // Diagnostics stay in the history envelope, never in provider message objects.
-public class ChatRequestMetrics
-{
-    readonly dynamic api;
-    readonly string storeId;
-    readonly bool persist;
-    readonly System.Diagnostics.Stopwatch clock = System.Diagnostics.Stopwatch.StartNew();
-    readonly DateTimeOffset startedAt = DateTimeOffset.UtcNow;
-    public string RequestId { get; } = Guid.NewGuid().ToString("N");
-    public string ContextProfileKey { get; set; }
-    public JArray ContextCalls { get; } = new JArray();
-    public object ActionResults { get; private set; }
-    public void SetActionResults(object results) { ActionResults = results; }
-    public long? FirstTokenMs { get; private set; }
-    public long? GenerationMs { get; private set; }
-    public long ActionsMs { get; private set; }
-    public int ActionCount { get; private set; }
-    public int FailedActions { get; private set; }
-    bool replySaved;
-
-    public ChatRequestMetrics(dynamic api, string storeId, bool persist = true)
-    { this.api = api; this.storeId = storeId; this.persist = persist; }
-
-    public void FirstToken() { if (!FirstTokenMs.HasValue) FirstTokenMs = clock.ElapsedMilliseconds; }
-    public void GenerationComplete() { GenerationMs = clock.ElapsedMilliseconds; }
-    public void ActionsCompleted(long elapsedMs, int count, int failed)
-    { ActionsMs += elapsedMs; ActionCount += count; FailedActions += failed; }
-    public object Snapshot(string outcome) =&gt; new {
-        contextProfileKey = ContextProfileKey, requestId = RequestId, startedAt = startedAt.ToString("O"), outcome,
-        durationMs = clock.ElapsedMilliseconds, firstTokenMs = FirstTokenMs,
-        generationMs = GenerationMs, actionsMs = ActionsMs,
-        actionCount = ActionCount, failedActions = FailedActions, actions = ActionResults, contextCalls = ContextCalls.DeepClone()
-    };
-    public void SaveUser(object message)
-    { if (persist) api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = message, Metadata = Snapshot("submitted") }); }
-    public void SaveReply(object message, string outcome = "completed")
-    {
-        if (replySaved) return;
-        if (persist) api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = message, Metadata = Snapshot(outcome) });
-        replySaved = true;
+// Thin in-process adapter; timing, metadata and persistence belong to AI Genie.
+public class ChatRequestMetrics {
+    readonly IDictionary&lt;string,object&gt; turn;
+    string profile;
+    public ChatRequestMetrics(dynamic api,string storeId,bool persist=true) {
+        object result=api.Call("System.Utility/AiGenie/Turn.Create",new Dictionary&lt;string,object&gt; {
+            ["version"]=1,["storeId"]=storeId,["persist"]=persist,["contextCalls"]=true
+        });
+        turn=result as IDictionary&lt;string,object&gt;;
+        if(turn==null || !turn.TryGetValue("version",out var version) || version is not int v || v!=1 ||
+            !turn.ContainsKey("saveReply") || turn["saveReply"] is not Action&lt;object,string&gt;)
+            throw new InvalidOperationException("Update AI Genie: shared turn service unavailable.");
     }
-    public string Error(string text, string outcome = "error")
-    {
-        SaveReply(new { role = "model", parts = new[] { new { text } } }, outcome);
-        return text;
-    }
+    public string RequestId=&gt;(string)turn["requestId"];
+    public long ElapsedMs=&gt;((Func&lt;long&gt;)turn["elapsed"])();
+    public string ContextProfileKey {get=&gt;profile;set {((Action&lt;string&gt;)turn["profile"])(value);profile=value;}}
+    public JArray ContextCalls=&gt;(JArray)turn["contextCalls"];
+    public void FirstToken()=&gt;((Action)turn["firstToken"])();
+    public void GenerationComplete()=&gt;((Action)turn["generationComplete"])();
+    public void ActionsCompleted(long elapsedMs,int count,int failed)=&gt;((Action&lt;long,int,int&gt;)turn["actionsCompleted"])(elapsedMs,count,failed);
+    public void SetActionResults(object results)=&gt;((Action&lt;object&gt;)turn["actionResults"])(results);
+    public void ImportRunMetrics(JObject metrics)=&gt;((Action&lt;JObject&gt;)turn["import"])(metrics);
+    public object Snapshot(string outcome)=&gt;((Func&lt;string,object&gt;)turn["snapshot"])(outcome);
+    public void SaveUser(object message)=&gt;((Action&lt;object&gt;)turn["saveUser"])(message);
+    public void SaveReply(object message,string outcome="completed")=&gt;((Action&lt;object,string&gt;)turn["saveReply"])(message,outcome);
+    public string Error(string text,string outcome="error")=&gt;((Func&lt;string,string,string&gt;)turn["error"])(text,outcome);
 }
-
 
 // Native resources are released only after the operation owning them has finished.
 // A background cleanup with a bounded stop wait also covers slow native Dispose calls.
@@ -4027,26 +4007,18 @@ public static class LailamaGenerationProvider {
 
 public static class LailamaContextSession {
     // Stored/UI messages remain untouched. Only the provider projection is cleaned.
-    public static JArray Clean(JArray messages) {
-        var result=(JArray)messages.DeepClone();
-        foreach(var message in result) {
-            if((string)message["role"]!="model" || message["parts"] is not JArray parts)continue;
-            foreach(var part in parts) {
-                if(part["text"]?.Type!=JTokenType.String)continue;
-                string text=(string)part["text"];
-                text=System.Text.RegularExpressions.Regex.Replace(text,@"&lt;think&gt;[\s\S]*?(?:&lt;/think&gt;|$)","",System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-                text=System.Text.RegularExpressions.Regex.Replace(text,@"(?im)^\s*```(?:genie-action|context-request)[^\S\r\n]*\r?\n[\s\S]*?(?:^\s*```[^\S\r\n]*$|\z)","",System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-                part["text"]=text.Trim();
-            }
-        }
-        return result;
+    public static JArray Clean(JArray messages,Func&lt;string,object,object&gt; call) {
+        object raw=call("System.Utility/AiGenie/History.Project",new JObject{["version"]=1,["projection"]="text",["messages"]=messages.DeepClone()});
+        var result=raw as JToken ?? (raw is string text?JToken.Parse(text):raw==null?null:JToken.FromObject(raw));
+        if(result is not JArray output)throw new InvalidOperationException("Update AI Genie: provider history projection is unavailable.");
+        return (JArray)output.DeepClone();
     }
 
-    public static JArray Rebuild(JObject prepared,JObject history,int maxMessages) {
+    public static JArray Rebuild(JObject prepared,JObject history,int maxMessages,Func&lt;string,object,object&gt; call) {
         if(prepared?["systemPrompt"]?.Type!=JTokenType.String || prepared["profileKey"]?.Type!=JTokenType.String ||
             history==null || (string)history["contextProfileKey"]!=(string)prepared["profileKey"] || history["messages"] is not JArray messages || maxMessages&lt;0)
             throw new InvalidOperationException("Local AI history context is unavailable.");
-        IEnumerable&lt;JToken&gt; prior=Clean(messages);
+        IEnumerable&lt;JToken&gt; prior=Clean(messages,call);
         if(maxMessages&gt;0)prior=prior.TakeLast(maxMessages);
         var result=new JArray(new JObject{["role"]="system",["parts"]=new JArray(new JObject{["text"]=prepared["systemPrompt"].DeepClone()})});
         foreach(var item in prior) {
@@ -4054,8 +4026,6 @@ public static class LailamaContextSession {
             if(role!="user" &amp;&amp; role!="model" || item["parts"] is not JArray parts || parts.Any(p=&gt;p["text"]?.Type!=JTokenType.String))
                 throw new InvalidOperationException("Invalid local AI history message.");
             var clean=(JObject)item.DeepClone();
-            if(role=="model") foreach(var part in (JArray)clean["parts"])
-                part["text"]=System.Text.RegularExpressions.Regex.Replace((string)part["text"],@"&lt;think&gt;[\s\S]*?(?:&lt;/think&gt;|$)","",System.Text.RegularExpressions.RegexOptions.IgnoreCase).Trim();
             result.Add(clean);
         }
         return result;
@@ -4143,12 +4113,18 @@ public sealed class LailamaSessionCache {
 
 
 public static class LailamaCapabilityPolicy {
-    public static JObject Normalize(JObject selected,bool devices) {
-        if(selected!=null &amp;&amp; selected.Properties().Any(p=&gt;!new[]{"deviceControl","automation","widgets"}.Contains(p.Name)||p.Value.Type!=JTokenType.Boolean))
-            throw new InvalidOperationException("Invalid local AI capability selection.");
-        return new JObject{["deviceControl"]=devices&amp;&amp;(selected?["deviceControl"]?.Value&lt;bool&gt;()??true),["automation"]=selected?["automation"]?.Value&lt;bool&gt;()??false,["widgets"]=selected?["widgets"]?.Value&lt;bool&gt;()??false};
+    public static JObject Normalize(JObject selected,bool devices,Func&lt;string,object,object&gt; call) {
+        var input=new JObject{["version"]=1,["defaults"]=new JObject{["deviceControl"]=true,["automation"]=false,["widgets"]=false}};
+        if(selected!=null)input["capabilities"]=selected.DeepClone();
+        object raw=call("System.Utility/AiGenie/Capabilities.Normalize",input);
+        var result=raw as JObject ?? (raw is string text?JToken.Parse(text) as JObject:raw==null?null:JToken.FromObject(raw) as JObject);
+        if(result==null || (string)result["Status"]=="Error" || new[]{"deviceControl","automation","widgets"}.Any(k=&gt;result[k]?.Type!=JTokenType.Boolean))
+            throw new InvalidOperationException((string)result?["Message"]??"Update AI Genie: capability service unavailable.");
+        result=(JObject)result.DeepClone();
+        result["deviceControl"]=devices&amp;&amp;(bool)result["deviceControl"];
+        return result;
     }
-    public static object Execute(string response,JObject selected,bool devices,Func&lt;object&gt; execute) {
+    public static object Execute(string response,JObject selected,bool devices,Func&lt;object&gt; execute,Func&lt;string,object,object&gt; call) {
         bool command=System.Text.RegularExpressions.Regex.IsMatch(response??"",@"```\s*api-call",System.Text.RegularExpressions.RegexOptions.IgnoreCase);
         // The legacy Execute API also accepts a structured actions envelope.
         // It must not bypass the read-only policy merely by omitting code fences.
@@ -4156,7 +4132,7 @@ public static class LailamaCapabilityPolicy {
             try {command=JObject.Parse(response)["actions"]!=null;}
             catch(Newtonsoft.Json.JsonException) {} // Invalid JSON is handled by the executor, never repaired here.
         }
-        var capabilities=Normalize(selected,devices);
+        var capabilities=Normalize(selected,devices,call);
         if(command &amp;&amp; capabilities["deviceControl"].Value&lt;bool&gt;()!=true)
             throw new InvalidOperationException("Device control is disabled. Enable the deviceControl capability and Devices context before executing commands.");
         return execute();
@@ -4202,7 +4178,7 @@ public static class LailamaConfigurationActions {
         if(!configuration)return call("System.Utility/ActionExecutor/Execute",requestId==null?(object)response:new {requestId,response});
         var raw=call("System.Utility/AiGenie/Device.Execute",new JObject {
             ["version"]=1,["requestId"]=requestId??Guid.NewGuid().ToString("N"),
-            ["capabilities"]=LailamaCapabilityPolicy.Normalize(capabilities,devices),
+            ["capabilities"]=LailamaCapabilityPolicy.Normalize(capabilities,devices,call),
             ["context"]=new JObject{["devices"]=devices},
             ["response"]=new JObject{["version"]=1,["kind"]="device",["explanation"]="Requested configuration change.",["commands"]=commands}
         });
@@ -4246,9 +4222,9 @@ public JObject RecoverFailedProgram(string requestId) {
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.56</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.3.0</Version>
+      <Version>1.3.3</Version>
       <Required>true</Required>
-      <Checksum>029E6B6F4A81830A849D13A37A35D050</Checksum>
+      <Checksum>CE79D0100BAB6BB263572A75E5ABEE9D</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>
@@ -4844,14 +4820,14 @@ Api.Handle(API_URL + "/Prompt.Preview", input =&gt; {
         if (body is byte[] bytes) body = Encoding.UTF8.GetString(bytes);
         var envelope = body == null || body is string empty &amp;&amp; string.IsNullOrWhiteSpace(empty) ? new JObject()
             : body is string text ? JObject.Parse(text) : JObject.FromObject(body);
-        var selected = GenieCapabilities.Normalize(envelope["capabilities"]);
+        var selected = SharedCapabilityRequest("Capabilities.Normalize",envelope["capabilities"]);
         var composed = composeGeniePrompt(selected);
         return (object)new { version=1, capabilities=selected, fingerprint=composed["fingerprint"], skills=composed["skills"], resources=composed["resources"],
-            allowedKinds=((JArray)GenieCapabilities.Schema(selected)["anyOf"]).Select(v=&gt;(string)v["properties"]["kind"]["enum"][0]),
+            allowedKinds=((JArray)SharedCapabilityRequest("Response.Schema",selected)["anyOf"]).Select(v=&gt;(string)v["properties"]["kind"]["enum"][0]),
             promptBytes=Encoding.UTF8.GetByteCount((string)composed["prompt"]) };
     } catch (Exception ex) { return new { Status="Error",Message=ex.Message }; }
 });
-Api.Handle(API_URL + "/Capabilities.Describe", input =&gt; GenieCapabilities.Describe());
+Api.Handle(API_URL + "/Capabilities.Describe", input =&gt; SharedCapabilityRequest("Capabilities.Describe"));
 
 Func&lt;string,JToken&gt; storedChatSetting = name =&gt; {
     var property = Program.Module.Properties.FirstOrDefault(p =&gt; p.Name == name);
@@ -4962,21 +4938,15 @@ Func&lt;object, bool, object&gt; processGeniePrompt = (userCommand, scheduled) =
     var userMessage = ChatMessage.Create("user", msg);
     telemetry.SaveUser(userMessage);
 
-    var historyRequest = new JObject { ["StoreId"] = storeId };
-    if (preparedContext != null) historyRequest["ContextProfileKey"] = preparedContext["profileKey"];
     List&lt;ChatMessage&gt; payloadContents;
     try {
-    object result = Api.Call("System.Utility/ChatHistory/GetContext", historyRequest);
-    JArray historyMessages;
-    if (preparedContext != null) {
-        JToken historyEnvelope = contextToken(result);
-        if (!(historyEnvelope is JObject) || (string)historyEnvelope["contextProfileKey"] != telemetry.ContextProfileKey || !(historyEnvelope["messages"] is JArray))
-            return new ResponseText(telemetry.Error("**Error:** Chat History must be updated before using context profiles."));
-        historyMessages = (JArray)historyEnvelope["messages"];
-    } else historyMessages = JArray.FromObject(result);
-    payloadContents = historyMessages.ToObject&lt;List&lt;ChatMessage&gt;&gt;();
-
-    } catch (Exception ex) { return new ResponseText(telemetry.Error("**Error:** Unable to load the requested conversation context: " + ex.Message)); }
+        var historyEnvelope=contextToken(Api.Call("System.Utility/AiGenie/History.Read",new JObject{
+            ["version"]=1,["storeId"]=storeId,["profileKey"]=telemetry.ContextProfileKey,["projection"]="structured"}));
+        if(historyEnvelope is not JObject || (string)historyEnvelope["Status"]=="Error" ||
+            (string)historyEnvelope["contextProfileKey"]!=telemetry.ContextProfileKey || historyEnvelope["messages"] is not JArray historyMessages)
+            throw new InvalidOperationException((string)historyEnvelope?["Message"]??"Provider history context is unavailable.");
+        payloadContents=historyMessages.ToObject&lt;List&lt;ChatMessage&gt;&gt;();
+    } catch(Exception ex) {return new ResponseText(telemetry.Error("**Error:** Unable to load the requested conversation context: "+ex.Message));}
     payloadContents.Add(userMessage);
 
     if (isQuotaExceeded &amp;&amp; DateTime.UtcNow &lt; rateLimitResetTime) {
@@ -4992,7 +4962,7 @@ Func&lt;object, bool, object&gt; processGeniePrompt = (userCommand, scheduled) =
         return new ResponseText(telemetry.Error("**Quota Error:** Could not load the context. Please try again in a few minutes."));
     }
 
-    var genConfig = new { temperature = 0.2, response_mime_type = "application/json", response_json_schema = GenieCapabilities.Schema((JObject)preparedContext["capabilities"]) };
+    var genConfig = new { temperature = 0.2, response_mime_type = "application/json", response_json_schema = SharedCapabilityRequest("Response.Schema",(JObject)preparedContext["capabilities"]) };
 
       var coordinated=contextToken(Api.Call("System.Utility/AiGenie/Conversation.Run",new Dictionary&lt;string,object&gt;{
           ["version"]=1,["requestId"]=telemetry.RequestId,["owner"]=Program.Module.Address,["provider"]="Gemini",
@@ -5047,7 +5017,7 @@ Api.Handle(API_URL + "/Prompt.Schedule", input =&gt; {
         if (string.IsNullOrWhiteSpace(message) || Encoding.UTF8.GetByteCount(message) &gt; 65536)
             throw new InvalidOperationException("Scheduled prompt is empty or too large.");
         if (reconfigureRequired || !Program.IsRunning) throw new InvalidOperationException("Genie is restarting.");
-        var capabilities = GenieCapabilities.Normalize(storedChatSetting("AI.Chat.Capabilities"));
+        var capabilities = SharedCapabilityRequest("Capabilities.Normalize",storedChatSetting("AI.Chat.Capabilities"));
         if (capabilities["automation"]?.Value&lt;bool&gt;() != true) throw new InvalidOperationException("Enable Automation capability first.");
         string id = Guid.NewGuid().ToString("N");
         lock (scheduledGate) {
@@ -5151,7 +5121,7 @@ while (Program.IsRunning &amp;&amp; !reconfigureRequired) {
         string id = (string)task["taskId"];
         Program.Emit("Genie.Task.Running", id);
         try {
-            if (GenieCapabilities.Normalize(storedChatSetting("AI.Chat.Capabilities"))["automation"]?.Value&lt;bool&gt;() != true)
+            if (SharedCapabilityRequest("Capabilities.Normalize",storedChatSetting("AI.Chat.Capabilities"))["automation"]?.Value&lt;bool&gt;() != true)
                 throw new InvalidOperationException("Automation capability was disabled before execution.");
             object result = processGeniePrompt(task["request"], true);
             var response = JObject.FromObject(result);
@@ -5200,80 +5170,32 @@ public class ChatMessage {
     }
 }
 // Diagnostics stay in the history envelope, never in provider message objects.
-public class ChatRequestMetrics
-{
-    readonly dynamic api;
-    readonly string storeId;
-    readonly bool persist;
-    readonly System.Diagnostics.Stopwatch clock = System.Diagnostics.Stopwatch.StartNew();
-    readonly DateTimeOffset startedAt = DateTimeOffset.UtcNow;
-    public long ElapsedMs =&gt; clock.ElapsedMilliseconds;
-    public void ImportRunMetrics(JObject metrics) {
-        if(metrics==null||new[]{"actionsMs","actionCount","failedActions"}.Any(k=&gt;metrics[k]?.Type!=JTokenType.Integer||(long)metrics[k]&lt;0)||
-            (long)metrics["actionCount"]&gt;int.MaxValue||(long)metrics["failedActions"]&gt;int.MaxValue||
-            metrics["generationMs"]!=null&amp;&amp;metrics["generationMs"].Type!=JTokenType.Null&amp;&amp;(metrics["generationMs"].Type!=JTokenType.Integer||(long)metrics["generationMs"]&lt;0)||
-            metrics["actions"]!=null&amp;&amp;metrics["actions"].Type!=JTokenType.Null&amp;&amp;metrics["actions"] is not JArray)
-            throw new InvalidOperationException("AI Genie returned invalid run metrics.");
-        ActionsMs+=(long)metrics["actionsMs"];ActionCount+=(int)metrics["actionCount"];FailedActions+=(int)metrics["failedActions"];
-        if(metrics["generationMs"]?.Type==JTokenType.Integer)GenerationMs=(long)metrics["generationMs"];
-        if(metrics["actions"] is JArray actions)ActionResults=actions.DeepClone();
+// Thin in-process adapter; timing, metadata and persistence belong to AI Genie.
+public class ChatRequestMetrics {
+    readonly IDictionary&lt;string,object&gt; turn;
+    string profile;
+    public ChatRequestMetrics(dynamic api,string storeId,bool persist=true) {
+        object result=api.Call("System.Utility/AiGenie/Turn.Create",new Dictionary&lt;string,object&gt; {
+            ["version"]=1,["storeId"]=storeId,["persist"]=persist,["contextCalls"]=false
+        });
+        turn=result as IDictionary&lt;string,object&gt;;
+        if(turn==null || !turn.TryGetValue("version",out var version) || version is not int v || v!=1 ||
+            !turn.ContainsKey("saveReply") || turn["saveReply"] is not Action&lt;object,string&gt;)
+            throw new InvalidOperationException("Update AI Genie: shared turn service unavailable.");
     }
-    public string ContextProfileKey { get; set; }
-    public object ActionResults { get; private set; }
-    public void SetActionResults(JArray results) { ActionResults = results.DeepClone(); ActionCount += Math.Max(0,results.Count-1); FailedActions += results.Count(r=&gt;r["Success"]?.Value&lt;bool&gt;() != true); }
-    public string RequestId { get; } = Guid.NewGuid().ToString("N");
-    public long? FirstTokenMs { get; private set; }
-    public long? GenerationMs { get; private set; }
-    public long ActionsMs { get; private set; }
-    public int ActionCount { get; private set; }
-    public int FailedActions { get; private set; }
-    bool replySaved;
-
-    public ChatRequestMetrics(dynamic api, string storeId, bool persist = true)
-    { this.api = api; this.storeId = storeId; this.persist = persist; }
-
-    public void FirstToken() { if (!FirstTokenMs.HasValue) FirstTokenMs = clock.ElapsedMilliseconds; }
-    public void GenerationComplete() { GenerationMs = clock.ElapsedMilliseconds; }
-    public void ActionsCompleted(long elapsedMs, int count, int failed)
-    { ActionsMs += elapsedMs; ActionCount += count; FailedActions += failed; }
-    public object Snapshot(string outcome) =&gt; new {
-        contextProfileKey = ContextProfileKey, requestId = RequestId, startedAt = startedAt.ToString("O"), outcome,
-        durationMs = clock.ElapsedMilliseconds, firstTokenMs = FirstTokenMs,
-        generationMs = GenerationMs, actionsMs = ActionsMs,
-        actionCount = ActionCount, failedActions = FailedActions, actions = ActionResults
-    };
-    public void SaveUser(object message)
-    { if (persist) api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = message, Metadata = Snapshot("submitted") }); }
-    public void SaveReply(object message, string outcome = "completed")
-    {
-        if (replySaved) return;
-        if (persist) api.Call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = message, Metadata = Snapshot(outcome) });
-        replySaved = true;
-    }
-    public dynamic CallAction(string command, object data = null)
-    {
-        var timer = System.Diagnostics.Stopwatch.StartNew();
-        bool failed = false;
-        try {
-            object result = api.Call(command, data);
-            if (result == null) failed = true;
-            else {
-                try {
-                    var token = result is string ? JToken.Parse((string)result) : JToken.FromObject(result);
-                    failed = token.Type == JTokenType.Object &amp;&amp; (token["Status"]?.ToString() == "Error"
-                        || token["State"]?.ToString() == "failed" || token["State"]?.ToString() == "unknown");
-                    if (command.EndsWith("Programs.Compile") &amp;&amp; token is JArray errors &amp;&amp; errors.Count &gt; 0) failed = true;
-                } catch (Newtonsoft.Json.JsonException) { }
-            }
-            return result;
-        } catch { failed = true; throw; }
-        finally { ActionsCompleted(timer.ElapsedMilliseconds, 1, failed ? 1 : 0); }
-    }
-    public string Error(string text, string outcome = "error")
-    {
-        SaveReply(new { role = "model", parts = new[] { new { text } } }, outcome);
-        return text;
-    }
+    public string RequestId=&gt;(string)turn["requestId"];
+    public long ElapsedMs=&gt;((Func&lt;long&gt;)turn["elapsed"])();
+    public string ContextProfileKey {get=&gt;profile;set {((Action&lt;string&gt;)turn["profile"])(value);profile=value;}}
+    public JArray ContextCalls=&gt;(JArray)turn["contextCalls"];
+    public void FirstToken()=&gt;((Action)turn["firstToken"])();
+    public void GenerationComplete()=&gt;((Action)turn["generationComplete"])();
+    public void ActionsCompleted(long elapsedMs,int count,int failed)=&gt;((Action&lt;long,int,int&gt;)turn["actionsCompleted"])(elapsedMs,count,failed);
+    public void SetActionResults(object results)=&gt;((Action&lt;object&gt;)turn["actionResults"])(results);
+    public void ImportRunMetrics(JObject metrics)=&gt;((Action&lt;JObject&gt;)turn["import"])(metrics);
+    public object Snapshot(string outcome)=&gt;((Func&lt;string,object&gt;)turn["snapshot"])(outcome);
+    public void SaveUser(object message)=&gt;((Action&lt;object&gt;)turn["saveUser"])(message);
+    public void SaveReply(object message,string outcome="completed")=&gt;((Action&lt;object,string&gt;)turn["saveReply"])(message,outcome);
+    public string Error(string text,string outcome="error")=&gt;((Func&lt;string,string,string&gt;)turn["error"])(text,outcome);
 }
 
 public static class AiPromptTemplate
@@ -5305,190 +5227,15 @@ public static class AiPromptTemplate
     };
 }
 
-public static class GenieResponseContract
-{
-    static readonly string[] Kinds = { "reply", "device", "program", "widget", "composite", "context" };
-    static void Fields(JObject value, params string[] allowed) {
-        if (value.Properties().Any(p =&gt; !allowed.Contains(p.Name))) throw new InvalidOperationException("Unknown response field.");
-    }
-    static string Text(JObject value, string key, bool required = false) {
-        if (value[key] != null &amp;&amp; value[key].Type != JTokenType.String) throw new InvalidOperationException("Expected string: " + key);
-        string text = (string)value[key] ?? "";
-        if (required &amp;&amp; string.IsNullOrWhiteSpace(text)) throw new InvalidOperationException("Missing response field: " + key);
-        return text;
-    }
-    static bool EmptyArtifact(JToken value) {
-        if (value == null || value.Type == JTokenType.Null) return true;
-        if (value.Type == JTokenType.String) return string.IsNullOrWhiteSpace((string)value);
-        if (value is JObject obj) return obj.Properties().All(p =&gt; EmptyArtifact(p.Value));
-        if (value is JArray array) return array.All(EmptyArtifact);
-        return false;
-    }
-    public static string[] DeviceCommand(string command) {
-        string[] p = command.Split('/');
-        if (p.Length &gt;= 3 &amp;&amp; p[0] == "HomeAutomation.HomeGenie" &amp;&amp; p[1] == "Config" &amp;&amp; p[2] == "Modules.ParameterSet") {
-            if (p.Length != 7 || !System.Text.RegularExpressions.Regex.IsMatch(p[3], @"\A[A-Za-z][A-Za-z0-9_.:-]*\z")
-                || !System.Text.RegularExpressions.Regex.IsMatch(p[4], @"\A[A-Za-z0-9_.:-]+\z")
-                || !System.Text.RegularExpressions.Regex.IsMatch(p[5], @"\A[A-Za-z][A-Za-z0-9_.-]*\z")
-                || p.Skip(6).Any(v =&gt; !System.Text.RegularExpressions.Regex.IsMatch(v, @"\A(?:On|Off|-?[0-9]+(?:\.[0-9]+)?)\z") || v.Length &gt; 64))
-                throw new InvalidOperationException("Invalid module configuration command.");
-            return new[]{p[3],p[4]};
-        }
-        if (p.Length &lt; 3) throw new InvalidOperationException("Invalid device command.");
-        if (p[0] == "HomeAutomation.HomeGenie" &amp;&amp; p[1] == "Automation" &amp;&amp; new[]{"Programs.Run","Programs.Break"}.Contains(p[2])) {
-            if (p.Length != 4 || !System.Text.RegularExpressions.Regex.IsMatch(p[3],@"^[1-9][0-9]*$")) throw new InvalidOperationException("Invalid scene target.");
-            return new[]{"HomeAutomation.HomeGenie.Automation",p[3]};
-        }
-        string[] simple = {"Control.On","Control.Off","Control.Toggle","Control.ArmAway","Control.ArmHome","Control.Disarm"};
-        if (simple.Contains(p[2])) { if (p.Length != 3) throw new InvalidOperationException("Unexpected command arguments."); }
-        else if (p[2] == "Control.Level") {
-            if (p.Length != 4 || !double.TryParse(p[3],System.Globalization.NumberStyles.Float,System.Globalization.CultureInfo.InvariantCulture,out var level)
-                || !double.IsFinite(level) || level &lt; 0 || level &gt; 100) throw new InvalidOperationException("Invalid brightness.");
-        } else if (p[2] == "Control.ColorHsb") {
-            if (p.Length != 4) throw new InvalidOperationException("Invalid color.");
-            var values = p[3].Split(',');
-            if (values.Length &lt; 3 || values.Length &gt; 4) throw new InvalidOperationException("Invalid color.");
-            for (int i=0;i&lt;values.Length;i++)
-                if (!double.TryParse(values[i],System.Globalization.NumberStyles.Float,System.Globalization.CultureInfo.InvariantCulture,out var v)
-                    || !double.IsFinite(v) || v &lt; 0 || i &lt; 3 &amp;&amp; v &gt; 1) throw new InvalidOperationException("Invalid color value.");
-        } else if (p[2] == "Thermostat.ModeSet") {
-            if (p.Length != 4 || !new[]{"Off","Heat","HeatEconomy","Cool","CoolEconomy"}.Contains(p[3])) throw new InvalidOperationException("Invalid thermostat mode.");
-        } else if (p[2] == "Thermostat.SetPointSet") {
-            if (p.Length != 5 || !new[]{"Heating","Cooling"}.Contains(p[3]) || !double.TryParse(p[4],System.Globalization.NumberStyles.Float,System.Globalization.CultureInfo.InvariantCulture,out var t) || !double.IsFinite(t)) throw new InvalidOperationException("Invalid thermostat setpoint.");
-        } else throw new InvalidOperationException("Unsupported device command.");
-        return new[]{p[0],p[1]};
-    }
-    public static JObject Normalize(JObject input) {
-        if (input == null) throw new InvalidOperationException("A response object is required.");
-        var result = (JObject)input.DeepClone();
-        // Adapt legacy provider responses at the boundary; they remain independently usable.
-        if (result["kind"] == null &amp;&amp; result["solution_type"] != null) {
-            result["kind"] = result["solution_type"]; result.Remove("solution_type"); result["version"] = 1;
-            if (result["kind"]?.ToString() == "automation") {
-                result["kind"] = "program";
-                ((JObject)result["automation"])["action"] = "create";
-            }
-            if (result["kind"]?.ToString() == "composite") ((JObject)result["automation"])["action"] = "create";
-        } else if (result["kind"] == null &amp;&amp; result["action"] != null) {
-            string action = Text(result, "action", true);
-            result = new JObject { ["version"] = 1, ["kind"] = action == "reply" ? "reply" : "program",
-                ["explanation"] = Text(input, "explanation", true), ["language"] = Text(input, "language") };
-            if (action != "reply") result["automation"] = new JObject {
-                ["action"] = action, ["program_id"] = Text(input,"program_id"), ["name"] = Text(input,"name"),
-                ["setup"] = Text(input,"setup"), ["main"] = Text(input,"main"), ["context"] = Text(input,"context")
-            };
-        }
-        Fields(result,"version","kind","explanation","language","commands","automation","widget","binding","resources");
-        if (result["version"]?.Type != JTokenType.Integer || (int)result["version"] != 1) throw new InvalidOperationException("Unsupported response contract version.");
-        string kind = Text(result,"kind",true); Text(result,"explanation",true);
-        if (!Kinds.Contains(kind)) throw new InvalidOperationException("Unsupported response kind.");
-        var permitted = kind == "device" ? new[]{"commands"} : kind == "program" ? new[]{"automation"}
-            : kind == "widget" ? new[]{"widget"} : kind == "composite" ? new[]{"automation","widget","binding"}
-            : kind == "context" ? new[]{"resources"} : new string[0];
-        foreach (string key in new[]{"commands","automation","widget","binding","resources"}) {
-            if (result[key] == null || permitted.Contains(key)) continue;
-            if (EmptyArtifact(result[key])) result.Remove(key);
-            else throw new InvalidOperationException("Artifact is incompatible with response kind: " + key);
-        }
-        if (kind == "program" || kind == "composite") {
-            if (!(result["automation"] is JObject a)) throw new InvalidOperationException("Missing automation.");
-            Fields(a,"action","program_id","name","setup","main","context");
-            string action=Text(a,"action",true), id=Text(a,"program_id");
-            if (!new[]{"create","update"}.Contains(action) || kind == "composite" &amp;&amp; action != "create") throw new InvalidOperationException("Unsupported deployment action.");
-            if (action == "create" &amp;&amp; id.Length != 0 || action == "update" &amp;&amp; !System.Text.RegularExpressions.Regex.IsMatch(id,@"^[1-9][0-9]*$")) throw new InvalidOperationException("Invalid deployment target.");
-            Text(a,"name",true); Text(a,"main",true); Text(a,"context");
-            if (a["setup"] == null) throw new InvalidOperationException("Missing setup."); Text(a,"setup");
-            if (!new[]{"csharp","python","javascript"}.Contains(Text(result,"language",true))) throw new InvalidOperationException("Unsupported program language.");
-            a["program_id"]=id; a["context"]=Text(a,"context");
-        }
-        if (kind == "widget" || kind == "composite") {
-            if (!(result["widget"] is JObject w)) throw new InvalidOperationException("Missing widget.");
-            Fields(w,"html","css","javascript");Text(w,"html",true);Text(w,"javascript",true);w["css"]=Text(w,"css");
-        }
-        if (kind == "composite") {
-            if (!(result["binding"] is JObject binding)) throw new InvalidOperationException("Missing binding.");
-            Fields(binding,"domain","address","properties");Text(binding,"domain",true);Text(binding,"address",true);
-            if (!(binding["properties"] is JArray props) || props.Count==0 || props.Count&gt;32 || props.Any(p=&gt;p.Type!=JTokenType.String || string.IsNullOrWhiteSpace((string)p))) throw new InvalidOperationException("Invalid binding properties.");
-        }
-        if (kind == "device") {
-            if (!(result["commands"] is JArray commands) || commands.Count==0 || commands.Count&gt;32 || commands.Any(c=&gt;c.Type!=JTokenType.String || !System.Text.RegularExpressions.Regex.IsMatch((string)c,@"^[A-Za-z][A-Za-z0-9_.:-]*/[^/\s]+/[^/\s]+(?:/[^\r\n]*)?$"))) throw new InvalidOperationException("Invalid device commands.");
-            foreach (string command in commands.Values&lt;string&gt;()) DeviceCommand(command);
-        }
-        if (kind == "context") {
-            if (!(result["resources"] is JObject r)) throw new InvalidOperationException("Missing context resources.");
-            Fields(r,"programIds","widgetIds","moduleIds","parameterIds");int count=0;
-            foreach (var p in r.Properties()) {
-                if (!(p.Value is JArray ids) || ids.Count&gt;16 || ids.Any(i=&gt;i.Type!=JTokenType.String || string.IsNullOrWhiteSpace((string)i))) throw new InvalidOperationException("Invalid resource identifiers.");
-                count+=ids.Count;
-            }
-            if (count==0) throw new InvalidOperationException("Empty context lookup.");
-        }
-        if (Encoding.UTF8.GetByteCount(result.ToString(Formatting.None))&gt;512*1024) throw new InvalidOperationException("Response exceeds size limit.");
-        return result;
-    }
-    public static JObject LegacyArtifacts(JObject normalized) {
-        var result=(JObject)normalized.DeepClone();string kind=(string)result["kind"];
-        result.Remove("version");result.Remove("kind");result["solution_type"]=kind == "program" ? "automation" : kind;
-        if (result["automation"] is JObject a) { a.Remove("action");a.Remove("program_id"); }
-        return result;
-    }
-    public static JObject Schema() {
-        var prototype = JObject.Parse(@"{
-          'type':'object','properties':{
-            'version':{'type':'integer'},'kind':{'type':'string','enum':['reply','device','program','widget','composite','context']},
-            'explanation':{'type':'string'},'language':{'type':'string','enum':['csharp','python','javascript']},
-            'commands':{'type':'array','items':{'type':'string'}},
-            'automation':{'type':'object','properties':{'action':{'type':'string','enum':['create','update']},'program_id':{'type':'string'},'name':{'type':'string'},'setup':{'type':'string'},'main':{'type':'string'},'context':{'type':'string'}},'required':['action','name','setup','main']},
-            'widget':{'type':'object','properties':{'html':{'type':'string'},'css':{'type':'string'},'javascript':{'type':'string'}},'required':['html','css','javascript']},
-            'binding':{'type':'object','properties':{'domain':{'type':'string'},'address':{'type':'string'},'properties':{'type':'array','items':{'type':'string'}}},'required':['domain','address','properties']},
-            'resources':{'type':'object','properties':{'programIds':{'type':'array','items':{'type':'string'}},'widgetIds':{'type':'array','items':{'type':'string'}},'moduleIds':{'type':'array','items':{'type':'string'}},'parameterIds':{'type':'array','items':{'type':'string'}}}}
-          },'required':['version','kind','explanation']
-        }");
-        var variants = new JArray();
-        foreach (string kind in Kinds) {
-            var fields = new List&lt;string&gt; { "version", "kind", "explanation" };
-            if (kind == "device") fields.Add("commands");
-            if (kind == "program" || kind == "composite") { fields.Add("language"); fields.Add("automation"); }
-            if (kind == "widget" || kind == "composite") fields.Add("widget");
-            if (kind == "composite") fields.Add("binding");
-            if (kind == "context") fields.Add("resources");
-            var properties = new JObject(fields.Select(f =&gt; new JProperty(f, prototype["properties"][f].DeepClone())));
-            properties["kind"]["enum"] = new JArray(kind);
-            variants.Add(new JObject { ["type"]="object", ["properties"]=properties, ["required"]=new JArray(fields), ["additionalProperties"]=false });
-        }
-        return new JObject { ["anyOf"] = variants };
-    }
+// Provider adapter: defaults and persisted selections remain owned by this Genie.
+public JObject SharedCapabilityRequest(string operation, JToken selected = null) {
+    var input=new JObject{["version"]=1};
+    if(selected!=null)input["capabilities"]=selected.DeepClone();
+    object raw=Api.Call("System.Utility/AiGenie/"+operation,input);
+    var result=raw as JObject ?? (raw is string text?JToken.Parse(text) as JObject:raw==null?null:JToken.FromObject(raw) as JObject);
+    if(result==null || (string)result["Status"]=="Error")throw new InvalidOperationException((string)result?["Message"]??"Update AI Genie: capability service unavailable.");
+    return result;
 }
-
-public static class GenieCapabilities
-{
-    public static readonly string[] Keys = { "deviceControl", "automation", "widgets" };
-    public static JObject Normalize(JToken input) {
-        if (input != null &amp;&amp; !(input is JObject)) throw new InvalidOperationException("Capabilities must be an object.");
-        var profile = input as JObject ?? new JObject();
-        if (profile.Properties().Any(p =&gt; !Keys.Contains(p.Name) || p.Value.Type != JTokenType.Boolean))
-            throw new InvalidOperationException("Unknown capability or non-boolean selection.");
-        return new JObject(Keys.Select(k =&gt; new JProperty(k, profile[k]?.Value&lt;bool&gt;() ?? true)));
-    }
-    public static string ProfileKey(JObject selected) =&gt; "cap-v1:" + string.Concat(Keys.Select(k =&gt; (bool)selected[k] ? "1" : "0"));
-    public static bool Allows(JObject selected, string kind) =&gt; kind == "reply" || kind == "context"
-        || kind == "device" &amp;&amp; (bool)selected["deviceControl"]
-        || kind == "program" &amp;&amp; (bool)selected["automation"]
-        || kind == "widget" &amp;&amp; (bool)selected["widgets"]
-        || kind == "composite" &amp;&amp; (bool)selected["automation"] &amp;&amp; (bool)selected["widgets"];
-    public static JObject Schema(JObject selected) {
-        var schema = GenieResponseContract.Schema();
-        schema["anyOf"] = new JArray(((JArray)schema["anyOf"]).Where(v =&gt; Allows(selected,(string)v["properties"]["kind"]["enum"][0])).Select(v=&gt;v.DeepClone()));
-        return schema;
-    }
-    public static string Instructions(JObject selected) =&gt;
-        "\nACTIVE CAPABILITIES (host-controlled): " + selected.ToString(Formatting.None)
-        + "\nInformation-sharing categories are independent of action capabilities. Answer questions with reply even when action capabilities are disabled. "
-        + "Do not request or emit disabled action kinds. If the user asks for one, explain which capability to enable and why; do not enable it yourself. "
-        + "Source lookups depend on information-sharing selections, not on action permissions. Composite generation requires both automation and widgets.\n";
-    public static object Describe() =&gt; new { version = 1, capabilities = Keys.Select(k=&gt;new { id=k, defaultEnabled=true }) };
-}
-
 // Provider-only transport mapping: no history, context lookup or action execution.
 public static class GeminiGenerationProvider {
     public static object Generate(object payload, Func&lt;object, CancellationToken, JObject&gt; send) {
@@ -5537,9 +5284,9 @@ public static class GeminiGenerationProvider {
       <PackageId>homegenie-ml-ai</PackageId>
       <PackageVersion>1.0.56</PackageVersion>
       <Id>gemini-genie</Id>
-      <Version>1.0.18</Version>
+      <Version>1.0.21</Version>
       <Required>true</Required>
-      <Checksum>61EDA3B8593FCFE0F6C1AC0C0C3A0A1A</Checksum>
+      <Checksum>675DFC4858632EC6B27C5B9C0497931C</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>933</Address>

@@ -147,10 +147,11 @@ public class AiGenieCoordinatorTest {
     }
     public class HistoryApi {
         public List<JObject> Writes=new();
-        public object Call(string route,object data=null){Assert.That(route,Is.EqualTo("System.Utility/ChatHistory/Add"));Writes.Add(JObject.FromObject(data));return null;}
+        public Func<object,object> Factory;
+        public object Call(string route,object data=null){if(route=="System.Utility/AiGenie/Turn.Create")return Factory(data);Assert.That(route,Is.EqualTo("System.Utility/ChatHistory/Add"));Writes.Add(JObject.FromObject(data));return null;}
     }
     [Test] public void WrapperImportsMetricsAndPersistsOnlyOneFinalReply() {
-        outputs.Enqueue(Device());var result=Run();var api=new HistoryApi();var type=compiled.GetType("ChatRequestMetrics");var instance=Activator.CreateInstance(type,new object[]{api,"933",true});
+        outputs.Enqueue(Device());var result=Run();var api=new HistoryApi();api.Factory=payload=>compiled.GetType("AiGenieTurn").GetMethod("Create").Invoke(null,new object[]{payload,new Func<string,object,object>((route,data)=>api.Call(route,data))});var type=compiled.GetType("ChatRequestMetrics");var instance=Activator.CreateInstance(type,new object[]{api,"933",true});
         type.GetMethod("SaveUser").Invoke(instance,new object[]{JObject.Parse("{'role':'user','parts':[{'text':'test'}]}")});
         type.GetMethod("ImportRunMetrics").Invoke(instance,new object[]{result["metrics"]});var reply=JObject.Parse("{'role':'model','parts':[{'text':'done'}]}");
         type.GetMethod("SaveReply").Invoke(instance,new object[]{reply,"completed"});type.GetMethod("SaveReply").Invoke(instance,new object[]{reply,"completed"});

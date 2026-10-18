@@ -19,13 +19,15 @@ public class LailamaCapabilityPolicyTest {
         var node=XDocument.Load(Path.Combine(root.FullName,"assets/build/all/data/packages/homegenie/homegenie-ml-ai/programs.xml")).Root.Elements().Single(n=>(string)n.Element("Address")=="940");
         var tree=CSharpSyntaxTree.ParseText("class Holder{"+(string)node.Element("ScriptContext")+"}").GetRoot();
         var types=tree.DescendantNodes().OfType<ClassDeclarationSyntax>().Where(n=>new[]{"ApiCommandExecution","LailamaCapabilityPolicy","LailamaConfigurationActions"}.Contains(n.Identifier.Text));
+        var shared=XDocument.Load(Path.Combine(root.FullName,"assets/build/all/data/packages/homegenie/homegenie-base/programs.xml")).Root.Elements().Single(n=>(string)n.Element("Address")=="583");
+        string capabilityClass=CSharpSyntaxTree.ParseText("class Holder{"+(string)shared.Element("ScriptContext")+"}").GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text=="GenieCapabilities").ToFullString();
         var methods=tree.DescendantNodes().OfType<MethodDeclarationSyntax>().Where(n=>new[]{"ExecuteResponse","ExtractAndExecute","ExtractResponse","ReadChatSetting","CurrentDeviceContextAllowed"}.Contains(n.Identifier.Text));
-        string code="using System;using System.Linq;using System.Collections.Generic;using Newtonsoft.Json;using Newtonsoft.Json.Linq;"+string.Join("\n",types)+@"
+        string code="using System;using System.Linq;using System.Collections.Generic;using Newtonsoft.Json;using Newtonsoft.Json.Linq;"+capabilityClass+string.Join("\n",types)+@"
 public class FakeProperty {public string Name;public object Value;}
 public class FakeModule {public List<FakeProperty> Properties=new List<FakeProperty>();}
 public class FakeOption {public string Value=""On"";}
 public class FakeProgram {public FakeModule Module=new FakeModule();public FakeOption Setting=new FakeOption();public FakeOption Option(string name)=>Setting;}
-public class FakeApi {public int Calls;public object Call(string route,object value){Calls++;return new JArray();}}
+public class FakeApi {public int Calls;public object Call(string route,object value){if(route==""System.Utility/AiGenie/Capabilities.Normalize"")return GenieCapabilities.Request((JObject)value,""normalize"",null);Calls++;return new JArray();}}
 public class ExecutionProbe {
  const string OPTION_SEND_CONTEXT_DATA=""SendContextData"";
  public FakeProgram Program=new FakeProgram();public FakeApi Api=new FakeApi();
@@ -37,6 +39,7 @@ public class ExecutionProbe {
         using var stream=new MemoryStream();var result=compilation.Emit(stream);Assert.That(result.Success,Is.True,string.Join("\n",result.Diagnostics));var assembly=Assembly.Load(stream.ToArray());host=assembly.GetType("ExecutionProbe");policy=assembly.GetType("LailamaCapabilityPolicy");
         Assert.That((string)node.Element("ScriptSetup"),Does.Contain("capabilities=new[]{\"deviceControl\",\"automation\",\"widgets\"}"));
     }
+    Func<string,object,object> CommonPolicy() => (route,payload)=>host.Assembly.GetType("GenieCapabilities").GetMethod("Request").Invoke(null,new object[]{payload,"normalize",null});
     object Probe(string caps="{\"deviceControl\":false}",bool master=true,bool devices=true){var p=Activator.CreateInstance(host);Configure(p,caps,master,devices);return p;}
     void Configure(object p,string caps,bool master=true,bool devices=true)=>host.GetMethod("Configure").Invoke(p,new object[]{caps,master,devices});
     int Calls(object p)=>(int)host.GetMethod("Calls").Invoke(p,null);
@@ -54,7 +57,7 @@ public class ExecutionProbe {
     [TestCase("{\"deviceControl\":\"false\"}")] [TestCase("not json")]
     public void InvalidPersistentSettingFailsClosed(string caps){var p=Probe(caps);Assert.Throws<TargetInvocationException>(()=>Execute(p,"ExecuteResponse",On));Assert.That(Calls(p),Is.Zero);}
     [Test] public void MissingSettingKeepsExistingControlDefault(){var p=Probe(null);Execute(p,"ExecuteResponse",On);Assert.That(Calls(p),Is.EqualTo(1));}
-    [Test] public void WidgetsAndAutomationCanBeEnabledIndependentlyOfDeviceControl(){var result=(JObject)policy.GetMethod("Normalize").Invoke(null,new object[]{JObject.Parse("{deviceControl:false,automation:true,widgets:true}"),true});Assert.That((bool)result["deviceControl"],Is.False);Assert.That((bool)result["automation"],Is.True);Assert.That((bool)result["widgets"],Is.True);}
+    [Test] public void WidgetsAndAutomationCanBeEnabledIndependentlyOfDeviceControl(){var result=(JObject)policy.GetMethod("Normalize").Invoke(null,new object[]{JObject.Parse("{deviceControl:false,automation:true,widgets:true}"),true,CommonPolicy()});Assert.That((bool)result["deviceControl"],Is.False);Assert.That((bool)result["automation"],Is.True);Assert.That((bool)result["widgets"],Is.True);}
     [TestCase("ExecuteResponse")] [TestCase("ExtractAndExecute")]
     public void LegacyStructuredActionsCannotBypassReadOnlyMode(string method){var p=Probe();string response="{\"actions\":[{\"type\":\"api-call\",\"target\":{\"domain\":\"HomeAutomation.PhilipsHue\",\"address\":\"3\"},\"command\":\"Control.Off\"}]}";Assert.Throws<TargetInvocationException>(()=>Execute(p,method,response));Assert.That(Calls(p),Is.Zero);}
     [TestCase("ExecuteResponse")] [TestCase("ExtractAndExecute")]
@@ -64,7 +67,7 @@ public class ExecutionProbe {
     }
 
     [Test] public void AutomationIsOffWithoutAnExplicitPreference() {
-        var result=(JObject)policy.GetMethod("Normalize").Invoke(null,new object[]{new JObject{["deviceControl"]=true},true});
+        var result=(JObject)policy.GetMethod("Normalize").Invoke(null,new object[]{new JObject{["deviceControl"]=true},true,CommonPolicy()});
         Assert.That((bool)result["automation"],Is.False);Assert.That((bool)result["widgets"],Is.False);
     }
 

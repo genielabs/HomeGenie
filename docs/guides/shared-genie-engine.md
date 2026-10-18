@@ -553,3 +553,40 @@ Remaining differences and recommended order:
 5. Keep native/provider responsibilities local: LLamaSharp loading/download/warmup, sampling, context size, KV state, streaming and cleanup in 940; Gemini credentials, HTTP request mapping, cached content/rate-limit behavior in 933. Their generation/finish capabilities differ (including unavailable native finish reasons); never invent usage or completion guarantees.
 
 Recommended next implementation is item 1, a bounded refactor with capability/schema tests and one brief Gemini regression. Reuse the existing tested local read/control flow rather than requiring another long coding inference. Release assessment follows this cleanup; unified streaming, transient reasoning visibility, CPU optimization and LoggerFactory shutdown remain deferred.
+
+
+### Canonical response schema and capability policy
+
+Action Executor 581 is the sole owner of GenieResponseContract. Its new Response.Schema endpoint exposes the same version-1 schema used by the existing normalizer. AI Genie 583 Response.Schema retrieves that schema through in-process Api.Call, clones it and filters its variants using the shared GenieCapabilities policy. Reply/context remain available; composites require both Automation and Widgets. No normalization/schema endpoint executes actions. Missing, incompatible or error schema replies fail before generation rather than falling back to a provider copy.
+
+Gemini 933 no longer embeds GenieResponseContract or GenieCapabilities. Its response_json_schema, preview, capability description and persistent capability validation use the utility. AI Genie context preparation, profile keys, capability guidance and structured coordinator allowed-kind checks use the same policy. The prompt text and profile-key encoding remain unchanged.
+
+Capabilities.Normalize and Capabilities.Describe accept version-1 objects with optional capabilities and complete provider defaults. Omitted defaults retain Gemini's existing all-enabled behavior. Lailama 940 explicitly supplies deviceControl=true, automation=false, widgets=false; its small adapter additionally gates device control on the current Devices context/master switch. It calls the service for initial preparation and final dispatch, including legacy Execute/ExtractAndExecute. Stored preferences are not rewritten, and context-sharing selections remain independent from action permissions.
+
+Update Action Executor 581 (1.2.6), then AI Genie 583 (0.13.0), before Gemini 933 (1.0.19) and Lailama 940 (1.3.1). This is an automation-package change; it does not require a core/frontend rebuild or clearing chat history. Structured Gemini JSON and local text/marker generation remain distinct strategies that converge on canonical normalization/execution.
+
+Regression coverage includes all eight capability combinations against the executor schema, unchanged prompt fingerprints, provider defaults, invalid selections, missing/incompatible executor responses, permission revocation and local read-only execution paths. A brief runtime read/control regression remains pending after installing the updated programs; local coding quality is outside this checkpoint.
+
+
+### Shared per-turn metrics and persistence
+
+AI Genie 583 Turn.Create accepts an in-process version-1 dictionary with storeId, persist and contextCalls (whether to retain that existing metadata field). It returns a BCL dictionary of typed delegates bound to one private AiGenieTurn instance, not a provider-script class or an HTTP-serializable service object. The utility owns request ID, start time/stopwatch, first-token/generation/action metrics, Gemini run-metric validation/import, snapshots, SaveUser/SaveReply and error/cancellation persistence. Calls to the existing ChatHistory/Add service retain the supplied store and message format. A successful final write is guarded against repetition; a thrown write does not falsely mark the reply saved. No global turn registry or inference queue is added.
+
+The two ChatRequestMetrics classes are thin delegate adapters. Gemini keeps its existing metadata shape without contextCalls; Lailama keeps its receipt array and persist=false behavior for requests without history. Final outcome strings, context profile keys, visible text, saved messages and imported chats remain unchanged. Local action counts continue to be recorded separately from their result receipts; Gemini imports the structured coordinator metrics. The factory performs no history write or action execution.
+
+Update AI Genie 583 to 0.14.0 before Gemini 933 1.0.20 and Lailama 940 1.3.2. Action Executor 581 remains at 1.2.6. No frontend or core rebuild and no history clearing are required. Native lifetime, streaming completion, session reuse/invalidation, provider message projection and recovery decisions remain in their existing owners at this checkpoint.
+
+Automated coverage checks per-turn isolation, one final save, error/cancellation text and outcome, retry after a thrown history write, nonpersistent requests, provider-specific metadata and defensive import of structured action receipts. Runtime acceptance remains pending after installing the updated programs: a brief read with each provider followed by refresh/reopen, plus a cancelled local turn without duplicate final messages. Intensive local code generation is unnecessary.
+
+
+### Shared provider history projection
+
+AI Genie 583 History.Read accepts a version-1 object with storeId, optional profileKey and projection (structured or text). It delegates outcome/profile filtering to the existing ChatHistory/GetContext, verifies the requested context profile and returns a cloned contextProfileKey/messages envelope. Absent/null profiles preserve the unscoped legacy service behavior; a mismatched profile or unavailable service fails instead of falling back to another conversation. History.Project applies the same projection to an already-read message array, without storage access.
+
+Structured projection is a deep copy with no message/text rewriting. Gemini 933 now obtains its provider-turn history through History.Read, retaining its user-message append, typed ChatMessage mapping and existing context/permission logic. This extraction does not simplify discovery instructions or replace natural-language requests with technical-coordinate requirements; the user's successful Smart Device read/enable interactions remain a runtime regression case.
+
+Text projection uses the exact previous Lailama cleanup: remove complete/unfinished think blocks and internal genie-action/context-request fences from model messages, preserve user examples, ordinary answer/code and deployment receipts. Lailama 940 now reads this projection through the shared service. Its LailamaContextSession helper delegates cleanup to History.Project and still owns fresh system-message assembly, role validation and native message limits. Native session initialization/warmup, cache keys/reuse/invalidation and LLamaSharp resources remain provider-specific. The startup warmup's existing history synchronization is not changed in this checkpoint.
+
+No history files are rewritten, no import migration is added, and cancelled responses still display the accepted [STOPPED] behavior. The existing ChatHistory service continues to exclude failed/cancelled/pending turns from provider context. Visible history, exports and per-provider stores are unaffected.
+
+Update AI Genie 583 to 0.15.0 before Gemini 933 1.0.21 and Lailama 940 1.3.3; Action Executor 581 remains unchanged. No core/frontend rebuild or history clearing is needed. Tests exercise the actual shipped ChatHistory filtering, scoped/unscoped legacy messages, unavailable/mismatched-profile responses, input immutability, exact structured-message preservation, local cleanup and native rebuild limits. Runtime acceptance pending: continue existing conversations with a short follow-up referring to a preceding request, including Gemini's natural-language Smart Device queries; no intensive local generation is required.
