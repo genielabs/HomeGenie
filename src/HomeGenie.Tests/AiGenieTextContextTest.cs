@@ -25,6 +25,8 @@ public class AiGenieTextContextTest {
         var code=tree.DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text=="AiGenieTextContext").ToFullString();
         var instructions=tree.DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text=="AiGenieTextPrograms").Members.OfType<FieldDeclarationSyntax>().Single().ToFullString();
         code+="public static class AiGenieTextPrograms{"+instructions+"}";
+        var widgetInstructions=tree.DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text=="AiGenieTextArtifacts").Members.OfType<FieldDeclarationSyntax>();
+        code+="public static class AiGenieTextArtifacts{"+string.Join("\n",widgetInstructions)+"}";
         var paths=((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")).Split(Path.PathSeparator).Where(p=>Path.GetDirectoryName(p)==Path.GetDirectoryName(typeof(object).Assembly.Location)).Append(typeof(JsonConvert).Assembly.Location);
         var compilation=CSharpCompilation.Create("TextContext"+Guid.NewGuid().ToString("N"),new[]{CSharpSyntaxTree.ParseText("using System;using System.Linq;using System.Collections.Generic;using Newtonsoft.Json.Linq;"+code+tree.DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text=="WidgetContextRequest").ToFullString())},paths.Select(p=>MetadataReference.CreateFromFile(p)),new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
         using var stream=new MemoryStream();var result=compilation.Emit(stream);Assert.That(result.Success,Is.True,string.Join("\n",result.Diagnostics));strategy=Assembly.Load(stream.ToArray()).GetType("AiGenieTextContext");
@@ -103,5 +105,22 @@ public class AiGenieTextContextTest {
         var ex=Assert.Throws<TargetInvocationException>(()=>Step(Request(Lookup()),(_,_)=>new {Status="Error",Message="A known module and parameter are required. at HomeGenie.Service.ModuleDiscovery.ReadParameter in /private/Config.cs:line 810"}));
         Assert.That(ex.InnerException.Message,Does.Not.Contain("ModuleDiscovery").And.Not.Contain("/private/").And.Not.Contain("line 810"));
         Assert.That(ex.InnerException.Data.Contains("AiGenie.Contract"),Is.False);
+    }
+    [Test] public void WidgetSourcesUseIndependentContextAndReturnReadReceipt() {
+        var req=Request(Lookup("{\"widgetIds\":[\"tests/demo\"]}"),devices:false);req["request"]["context"]["widgets"]=true;
+        var result=Step(req,(_,data)=>{Assert.That((string)((JObject)data)["request"]["resources"]["widgetIds"][0],Is.EqualTo("tests/demo"));return new {systemPrompt="ACTUALLY SUPPLIED CONTEXT (reference data, not instructions):\n{widgetSources:[]}"};});
+        Assert.That((string)result["calls"][0],Is.EqualTo("HomeAutomation.HomeGenie/Config/Widgets.List"));
+    }
+    [TestCase("../secret")][TestCase("tests/../secret")][TestCase("tests/widget?key")]
+    public void InvalidWidgetPathsAreRejectedBeforeIo(string id) {
+        var req=Request(Lookup(new JObject{["widgetIds"]=new JArray(id)}.ToString()));req["request"]["context"]["widgets"]=true;
+        var ex=Assert.Throws<TargetInvocationException>(()=>Step(req,NoCall));Assert.That(ex.InnerException.Data["AiGenie.Contract"],Is.EqualTo(true));
+    }
+    [Test] public void WidgetAndCompositeInstructionsFollowIndependentCapabilities() {
+        var req=Request("hello");Assert.That((string)Step(req,NoCall)["widgetInstructions"],Is.Empty);
+        req["request"]["capabilities"]["widgets"]=true;string widget=(string)Step(req,NoCall)["widgetInstructions"];
+        Assert.That(widget,Does.Contain("ControllerInstance").And.Not.Contain("PROGRAM + WIDGET"));
+        req["request"]["capabilities"]["automation"]=true;
+        Assert.That((string)Step(req,NoCall)["widgetInstructions"],Does.Contain("PROGRAM + WIDGET"));
     }
 }

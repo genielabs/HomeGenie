@@ -307,7 +307,7 @@ by the user before this checkpoint.
 - [x] Manual creation acceptance with the 9B model: program 1002 created on attempt one; installed sources and enabled state match the requested background helper.
 - [x] Handle JSON-null resources and automatically retrieve missing exact-target program sources before a local update, preserving pending action/target and read limits.
 - [ ] Retest updating program 1002 after the required-source correction, and check the disabled Automation capability.
-- [ ] Move provider-specific child Quit handling into the common service before complete lifecycle parity; then evaluate local widgets/composites.
+- [x] Move provider-specific child Quit handling into the common service before local widget/composite support (runtime acceptance recorded below).
 
 - [x] Keep prior reasoning visible during empty-buffer resets and persist reasoning in failed local responses, including unfinished think blocks.
 - [x] Exclude unfinished reasoning from context/program parsing and recover confirmed compile-failed programs on aborted correction, using the existing request ledger and recovery API.
@@ -320,3 +320,13 @@ by the user before this checkpoint.
 
 - [x] Invalidate Lailama native session after technical/multi-round turns, including successful compiler recovery; rebuild next turn from the cleaned completed-message projection while retaining full visible history.
 - [ ] Runtime check of post-recovery context cleanup with Lailama 1.2.4; no need to clear the stored conversation.
+
+### Lailama widget/composite checkpoint
+
+- [x] Opt-in Widgets capability and independent Widgets context through the existing descriptor/module preferences.
+- [x] Adapt local genie-action widgets/composites to existing shared presentation, deployment, recovery and dependency readiness contracts.
+- [x] Preserve committed composite binding during compiler repairs and block preview for failed/unknown deployment.
+- [x] Support bounded current-context widget source reads and invalidate native cache after artifact presentation.
+- [x] Parse leading local reasoning before ai_solution without changing literal widget source content.
+- [x] Local standalone widget generation/presentation acceptance: Qwen3.5-9B returned HTML/CSS/JS and the user saw the widget (chat-history-1792312467517.json, 276 seconds). Generated interaction has code defects; functional preview and Save acceptance remain separate.
+- [x] Gemini composite acceptance: program 1004 emits Sensor.Counter=42; inline preview shows 42, widget saved as tests/test-composito-ai-1004 and added to Dashboard, retaining value/binding after page reload (2026-10-18). Local standalone counter generation had code defects; local composite acceptance remains separate.

@@ -36,7 +36,8 @@ namespace HomeGenie.Tests
         public void Configure(string notifications, string lailama)
         {
             notifications = Regex.Replace(notifications, @"^#using[^\r\n]*", "", RegexOptions.Multiline);
-            lailama = lailama.Substring(lailama.IndexOf("public sealed class LailamaNativeLifetime", StringComparison.Ordinal));
+            lailama = CSharpSyntaxTree.ParseText("class Holder{" + lailama + "}").GetRoot().DescendantNodes()
+                .OfType<Microsoft.CodeAnalysis.CSharp.Syntax.ClassDeclarationSyntax>().Single(n => n.Identifier.Text == "LailamaNativeLifetime").ToFullString();
             var code = "using System;using System.IO;using System.Text;using System.Linq;using System.Collections.Generic;" +
                 "using System.Security.Cryptography;using System.Text.RegularExpressions;using System.Threading;" +
                 "using System.Threading.Tasks;using Newtonsoft.Json;using Newtonsoft.Json.Linq;\n" + notifications + "\n" + lailama;

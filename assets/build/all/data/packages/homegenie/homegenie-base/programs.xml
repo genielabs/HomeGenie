@@ -6649,6 +6649,10 @@ Api.Handle("System.Utility/AiGenie/Text.Program.Execute",input=&gt; {
     try {return (object)AiGenieTextPrograms.Dispatch(Api.Parse(input).Data as JObject,(route,data)=&gt;Api.Call(route,data));}
     catch(Exception ex) {return new {Status="Error",Message=ex.Message};}
 });
+Api.Handle("System.Utility/AiGenie/Text.Artifact.Execute",input=&gt; {
+    try {return (object)AiGenieTextArtifacts.Dispatch(Api.Parse(input).Data as JObject,(route,data)=&gt;Api.Call(route,data));}
+    catch(Exception ex) {return new {Status="Error",Message=ex.Message};}
+});
 Program.GoBackground();
 </ScriptSource>
   <ScriptContext>// In-process generation boundary. Providers must not re-enter chat orchestration.
@@ -7458,7 +7462,7 @@ Do not claim a write is verified before execution; a fresh read can confirm the 
         string visible=System.Text.RegularExpressions.Regex.Replace(response,@"&lt;think&gt;.*?(?:&lt;/think&gt;|$)","",System.Text.RegularExpressions.RegexOptions.Singleline|System.Text.RegularExpressions.RegexOptions.IgnoreCase);
         var blocks=System.Text.RegularExpressions.Regex.Matches(visible,@"(?m)^\s*```context-request\s*\r?\n([\s\S]*?)^\s*```\s*$");
         bool marker=visible.IndexOf("```context-request",StringComparison.OrdinalIgnoreCase)&gt;=0;
-        if(!marker)return new JObject{["version"]=1,["state"]="reply",["text"]=response,["instructions"]=Instructions,["programInstructions"]=request["capabilities"]?["automation"]?.Value&lt;bool&gt;()==true?AiGenieTextPrograms.Instructions:""};
+        if(!marker)return new JObject{["version"]=1,["state"]="reply",["text"]=response,["instructions"]=Instructions,["programInstructions"]=request["capabilities"]?["automation"]?.Value&lt;bool&gt;()==true?AiGenieTextPrograms.Instructions:"",["widgetInstructions"]=request["capabilities"]?["widgets"]?.Value&lt;bool&gt;()==true?AiGenieTextArtifacts.Instructions+(request["capabilities"]?["automation"]?.Value&lt;bool&gt;()==true?AiGenieTextArtifacts.CompositeInstructions:""):""};
         if((int)input["round"]&gt;=3)throw new InvalidOperationException("Too many context lookups.");
 
         if(System.Text.RegularExpressions.Regex.IsMatch(visible,@"```\s*api-call",System.Text.RegularExpressions.RegexOptions.IgnoreCase))
@@ -7467,12 +7471,16 @@ Do not claim a write is verified before execution; a fresh read can confirm the 
         try {
             if(blocks.Count!=1)throw new InvalidOperationException("Return exactly one context-request block and stop.");
             resources=JObject.Parse(blocks[0].Groups[1].Value);
-            if(!resources.Properties().Any() || resources.Properties().Any(p=&gt;!new[]{"moduleIds","parameterIds","programIds"}.Contains(p.Name) ||
+            if(!resources.Properties().Any() || resources.Properties().Any(p=&gt;!new[]{"moduleIds","parameterIds","programIds","widgetIds"}.Contains(p.Name) ||
                 p.Value is not JArray array || array.Count==0 || array.Count&gt;16 || array.Any(v=&gt;v.Type!=JTokenType.String)))
                 throw new InvalidOperationException("Unsupported text context resources.");
             foreach(var resource in resources.Properties())foreach(string id in ((JArray)resource.Value).Values&lt;string&gt;()) {
                 if(resource.Name=="programIds") {
                     if(!System.Text.RegularExpressions.Regex.IsMatch(id,@"\A[1-9][0-9]*\z"))throw new InvalidOperationException("Use an exact numeric program ID.");
+                } else if(resource.Name=="widgetIds") {
+                    if(id.Length&gt;256 || id.Split('/').Any(p=&gt;p=="." || p=="..") ||
+                        !System.Text.RegularExpressions.Regex.IsMatch(id,@"\A[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*\z"))
+                        throw new InvalidOperationException("Use an exact widget inventory ID, for example folder/widget.");
                 } else {
                     var parts=WidgetContextRequest.ModuleResource(id,resource.Name=="moduleIds"?2:3);
                     if(parts[1].StartsWith("Programs.",StringComparison.OrdinalIgnoreCase) ||
@@ -7491,6 +7499,8 @@ Do not claim a write is verified before execution; a fresh read can confirm the 
         }
         if(resources["programIds"]!=null &amp;&amp; (request["context"]?["automationPrograms"]?.Type!=JTokenType.Boolean || !request["context"]["automationPrograms"].Value&lt;bool&gt;()))
             throw new InvalidOperationException("Enable Automation Programs context before reading program sources.");
+        if(resources["widgetIds"]!=null &amp;&amp; (request["context"]?["widgets"]?.Type!=JTokenType.Boolean || !request["context"]["widgets"].Value&lt;bool&gt;()))
+            throw new InvalidOperationException("Enable Widgets context before reading widget sources.");
         var scope=(JObject)request.DeepClone();scope["resources"]=resources;
         object raw=call("System.Utility/AiGenie/Context.Prepare",new JObject{["version"]=1,["template"]=input["template"],["request"]=scope});
         var prepared=raw is string text?JObject.Parse(text):raw==null?null:JObject.FromObject(raw);
@@ -7502,7 +7512,7 @@ Do not claim a write is verified before execution; a fresh read can confirm the 
         var calls=new JArray();
         foreach(var resource in resources.Properties())foreach(string id in ((JArray)resource.Value).Values&lt;string&gt;()) {
             var parts=id.Split('/');
-            string path=resource.Name=="programIds"?"HomeAutomation.HomeGenie/Automation/Programs.List":resource.Name=="moduleIds"?"HomeAutomation.HomeGenie/Config/Modules.Get/"+id+"/Schema"
+            string path=resource.Name=="programIds"?"HomeAutomation.HomeGenie/Automation/Programs.List":resource.Name=="widgetIds"?"HomeAutomation.HomeGenie/Config/Widgets.List":resource.Name=="moduleIds"?"HomeAutomation.HomeGenie/Config/Modules.Get/"+id+"/Schema"
                 :"HomeAutomation.HomeGenie/Config/Modules.ParameterGet/"+id+"/Context";
             if(!calls.Values&lt;string&gt;().Contains(path))calls.Add(path);
         }
@@ -7663,7 +7673,7 @@ Example creating a background helper:
 ```
 The host deploys and compiles the action. On compiler feedback, return one complete corrected
 genie-action for the same kind, action and program_id. Deployment success is confirmed by the host result.
-Ordinary questions need no deployment. Widgets and composite artifacts are not supported here yet.
+Ordinary questions need no deployment. Widget and composite availability follows the separate widgets capability.
 ";
     public static JObject Dispatch(JObject request,Func&lt;string,object,object&gt; call) {
         if(request==null || request["version"]?.Type!=JTokenType.Integer || (int)request["version"]!=1 ||
@@ -7734,6 +7744,87 @@ public sealed class AiGenieProgramLifecycle {
         finally {lock(gate)pending.Remove(address);}
     }
 }
+
+// Text transport adapter only: shared canonical contracts/executors own artifacts.
+public static class AiGenieTextArtifacts {
+    public const string Instructions=@"
+WIDGETS (requires widgets capability):
+Return one genie-action block with version=1, kind=widget, explanation, language=javascript,
+widget={html,css,javascript}, each source a complete JSON string. The host shows an inline preview;
+the user can save it and choose a dashboard. Ordinary replies remain plain text.
+Widgets use a JavaScript class extending ControllerInstance. Include settings with defaultSize
+('small', 'medium', 'big', or '' for free sizing), sizeOptions, onCreate() and onDispose().
+HTML uses snake_case #field attributes; this.field('field').get().textContent writes plain text.
+Use this.declare({method:()=&gt;...}) for HTML handlers such as (click)=""method()"".
+CSS is scoped; use :host {display:block;} and reserve the top-right 48px of headers for host settings.
+Use this.model() for reactive state. Release timers, custom handlers and direct subscriptions in onDispose().
+Standalone widgets omit moduleSelect and work without boundModule. Bound widgets declare
+settings.moduleSelect={fieldFilter:'Sensor.Level',typeFilter:'Sensor,Program'} using actual fields/types.
+Render an unbound state with this.configure(); check this.boundModule and each field before reading/subscribing.
+Use this.boundModule.field('actual.property') and this.subscribe(field,callback); format values with utils.format.fieldValue(field).
+Use local assets. this.apiCall(route,payload) returns an Observable whose payload is data.response.
+To inspect an existing widget, request widgetIds:[""folder/widget""] using its inventory ID;
+this requires Widgets context, separately from the Widgets action capability.
+Example standalone interactive widget response:
+```genie-action
+{""version"":1,""kind"":""widget"",""explanation"":""A button increments the counter."",""language"":""javascript"",""widget"":{""html"":""&lt;div #counter&gt;0&lt;/div&gt;\n&lt;button (click)=\""increment()\""&gt;+1&lt;/button&gt;"",""css"":"":host {display:block;}"",""javascript"":""class CounterWidget extends ControllerInstance {\n  settings = {defaultSize:'small',sizeOptions:['small','medium']};\n  onCreate() {\n    let count = 0;\n    const render = () =&gt; {this.field('counter').get().textContent = String(count);};\n    this.declare({increment: () =&gt; {count++; render(); this.trigger('value-changed', {value:count});}});\n    render();\n  }\n  onDispose() {}\n}""}}
+```
+";
+    public const string CompositeInstructions=@"
+PROGRAM + WIDGET (requires automation AND widgets capabilities):
+Use kind=composite, explanation, language (backend language), automation (action=create,program_id="""",name,setup,main,context),
+widget={html,css,javascript}, binding={domain,address,properties:[exact emitted field names]}.
+For the new program module use domain=""HomeAutomation.HomeGenie.Automation"",address=""$program"".
+The host deploys the program first, resolves its ID and waits for required fields before previewing the widget.
+Use identical property names in Program.Emit, binding.properties and the widget. Compiler repairs return
+the complete composite response, preserving action/target and the module/property binding contract.
+Composite updates are not supported; update an existing program separately. Never guess the assigned ID.
+";
+    public static JObject Dispatch(JObject request,Func&lt;string,object,object&gt; call) {
+        if(request==null || request["version"]?.Type!=JTokenType.Integer || (int)request["version"]!=1 ||
+            request["requestId"]?.Type!=JTokenType.String || !System.Text.RegularExpressions.Regex.IsMatch((string)request["requestId"],@"\A[A-Za-z0-9_-]{1,128}\z") ||
+            request["response"]?.Type!=JTokenType.String || request["state"] is not JObject state)
+            throw new InvalidOperationException("Invalid text artifact request.");
+        string visible=System.Text.RegularExpressions.Regex.Replace((string)request["response"],@"&lt;think&gt;[\s\S]*?(?:&lt;/think&gt;|$)","",System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+        if(visible.IndexOf("```genie-action",StringComparison.OrdinalIgnoreCase)&lt;0)
+            return AiGenieTextPrograms.Dispatch(request,call);
+        var blocks=System.Text.RegularExpressions.Regex.Matches(visible,@"(?im)^\s*```genie-action[^\S\r\n]*\r?\n([\s\S]*?)^\s*```[^\S\r\n]*$");
+        if(blocks.Count!=1 || System.Text.RegularExpressions.Regex.IsMatch(visible,@"```\s*(api-call|context-request)",System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+            throw new InvalidOperationException("Return one artifact action without device commands or context requests.");
+        var raw=JObject.Parse(blocks[0].Groups[1].Value);
+        if((string)raw["kind"]=="program") {
+            if(state["committed"] is JObject prior &amp;&amp; (string)prior["kind"]!="program")throw new InvalidOperationException("Repair cannot change the artifact kind.");
+            return AiGenieTextPrograms.Dispatch(request,call);
+        }
+        var capabilities=request["capabilities"] as JObject;
+        if(capabilities?["widgets"]?.Type!=JTokenType.Boolean || !capabilities["widgets"].Value&lt;bool&gt;())
+            throw new InvalidOperationException("Enable the widgets capability before generating a widget.");
+        if((string)raw["kind"]!="widget" &amp;&amp; (string)raw["kind"]!="composite")throw new InvalidOperationException("Unsupported text artifact kind.");
+        if((string)raw["kind"]=="composite" &amp;&amp; (capabilities["automation"]?.Type!=JTokenType.Boolean || !capabilities["automation"].Value&lt;bool&gt;()))
+            throw new InvalidOperationException("Composite generation requires automation and widgets capabilities.");
+        var canonical=AiGeniePreparation.Normalize(raw,call);
+        if((string)canonical["Status"]=="Error")throw new InvalidOperationException((string)canonical["Message"]);
+        if((string)canonical["kind"]=="widget") {
+            if(state.HasValues)throw new InvalidOperationException("Repair cannot replace a committed program/composite with a widget.");
+            return new JObject{["version"]=1,["requestId"]=request["requestId"].DeepClone(),["state"]=new JObject(),
+                ["outcome"]="completed",["reply"]=AiGeniePresentation.Format(canonical),["actionCalls"]=0};
+        }
+        var automation=(JObject)canonical["automation"];
+        var identity=new JObject{["kind"]="composite",["action"]=automation["action"].DeepClone(),["program_id"]=automation["program_id"].DeepClone()};
+        if(state.HasValues &amp;&amp; !JToken.DeepEquals(state["committed"],identity))throw new InvalidOperationException("Repair cannot change the artifact kind, action or target.");
+        int attempt=state.HasValues?(int?)state["attempt"]??0:1;
+        var next=(JObject)state.DeepClone();
+        var outcome=AiGenieCompositeActions.Dispatch(new JObject{["version"]=1,["requestId"]=request["requestId"].DeepClone(),
+            ["attempt"]=attempt,["response"]=canonical,["capabilities"]=capabilities.DeepClone(),["committed"]=identity,
+            ["committedBinding"]=state["binding"]?.DeepClone()},call);
+        next["committed"]=identity.DeepClone();next["binding"]=outcome["binding"].DeepClone();next["attempt"]=attempt;
+        if((string)outcome["outcome"]=="repair") {
+            if((int?)outcome["nextAttempt"]!=attempt+1 || outcome["feedback"]?.Type!=JTokenType.String)throw new InvalidOperationException("Invalid composite repair step.");
+            next["attempt"]=attempt+1;outcome["feedback"]=(string)outcome["feedback"]+"\nReturn one complete genie-action block with kind=composite.";
+        }
+        outcome["state"]=next;return outcome;
+    }
+}
 </ScriptContext>
   <ScriptErrors />
   <Data />
@@ -7742,9 +7833,9 @@ public sealed class AiGenieProgramLifecycle {
     <PackageId>homegenie-base</PackageId>
     <PackageVersion>1.0.36</PackageVersion>
     <Id>ai-genie-service</Id>
-    <Version>0.11.1</Version>
+    <Version>0.12.1</Version>
     <Required>true</Required>
-    <Checksum>3419748D9CA63A82B2340B05DF48F81C</Checksum>
+    <Checksum>81FD12F140EF22DF383F888C773D56C7</Checksum>
   </PackageInfo>
   <Domain>HomeAutomation.HomeGenie.Automation</Domain>
   <Address>583</Address>
