@@ -1,5 +1,7 @@
 # Shared AI context profiles
 
+> Historical integration notes: the specialized Genie programs 930, 931 and 932 are no longer shipped in the AI package. Existing installations and their data are preserved. The migration stages and specialized-provider examples below describe that earlier implementation; for the current providers, see the [shared Genie engine](shared-genie-engine.md).
+
 The shared implementation establishes a provider-neutral context contract in Context Engine 578.
 Existing Render/GetStatus behavior is preserved. The new endpoints do not collect or transmit system
 information, change provider settings, or enable actions. Widget Genie 931 now consumes this contract through structured requests and the YoT Context menu.

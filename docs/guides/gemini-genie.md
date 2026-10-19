@@ -1,6 +1,6 @@
 # Gemini Genie pilot
 
-Gemini Genie (program 933, interface `@AI:Genie`, API `AI.Genies/Gemini`) combines device control, automation lifecycle and custom widget/composite generation. The existing Intent Handler, Automan and Widget Genie remain available. Each provider has a separate history store; switching to the new Genie does not move or delete old conversations.
+Gemini Genie (program 933, interface `@AI:Genie`, API `AI.Genies/Gemini`) combines device control, automation lifecycle and custom widget/composite generation. The specialized Intent Handler (930), Widget Genie (931) and Automan (932) are retired from the distributed packages. Previously installed copies remain on the user system and can be disabled explicitly. Each provider has a separate history store; switching to the new Genie does not move or delete old conversations.
 
 Default instructions use `#use-skill homegenie-genie`, composing common conversation, automation and widget references without concatenating conflicting legacy role prompts. Configure the Gemini API key and model in the program's options. The Context menu is available to the new interface and preserves choices separately per program/provider.
 

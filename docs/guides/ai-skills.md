@@ -1,5 +1,7 @@
 # Shared AI skills and prompt composition
 
+> Historical integration notes: the specialized Genie programs 930, 931 and 932 are no longer shipped in the AI package. Existing installations and their data are preserved. The migration stages and specialized-provider examples below describe that earlier implementation; for the current providers, see the [shared Genie engine](shared-genie-engine.md).
+
 HomeGenie uses the [Agent Skills format](https://agentskills.io/specification): a directory containing `SKILL.md` with YAML frontmatter and Markdown instructions. Shared skills live in `data/ai/skills/`. Optional reference documents belong in a skill's `references/` directory.
 
 The first two migration milestones are implemented. Intent Handler (930), Automan (932) and Widget Genie (931) load their default prompts through the shared composer. `homegenie-core` provides common conversation/correctness rules; its `references/automation.md` contains the shared programming rules used by Automan and Widget Genie. Each provider retains its own role, response schema, tools and execution path. Do not combine all three role skills as a unified Genie yet: action-contract unification is the next milestone.

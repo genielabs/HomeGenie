@@ -25,6 +25,30 @@ namespace HomeGenie.Tests
         private static InstalledPackageIdentity Active(string id = "base") =>
             new InstalledPackageIdentity { Repository = "test", Id = id };
 
+
+        [Test]
+        public void RetiredGeniesAndTheirClonesRemainUntouchedWhenRemovedFromCatalog()
+        {
+            var retired = new[] {
+                Installed("gemini-intent-handler", address: 930, enabled: true),
+                Installed("gemini-widget-genie", address: 931, enabled: false),
+                Installed("gemini-automan", address: 932, enabled: true),
+                Installed("gemini-automan", address: 1932, enabled: false)
+            };
+            retired[0].ActualChecksum = ChangedHash;
+            var installed = retired.Append(Installed("gemini-genie", address: 933)).ToArray();
+            var catalog = new[] { Package("base", Entry("gemini-genie")) };
+            var before = JsonConvert.SerializeObject(new { catalog, installed });
+
+            var report = ProgramUpdateChecker.Check(catalog, installed, new[] { Active() });
+
+            Assert.That(report.Complete, Is.True);
+            Assert.That(report.Items.Select(i => i.Id), Is.EqualTo(new[] { "gemini-genie" }));
+            Assert.That(report.Items.Single().UpdateAddresses, Is.EqualTo(new[] { 933 }));
+            Assert.That(report.MissingRequiredCount, Is.Zero);
+            Assert.That(JsonConvert.SerializeObject(new { catalog, installed }), Is.EqualTo(before));
+        }
+
         [Test]
         public void EmptyInstallationDoesNotInstallEveryAvailableRequiredProgram()
         {

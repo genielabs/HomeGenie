@@ -1,5 +1,7 @@
 # Gemini Automan
 
+> Historical integration notes: the specialized Genie programs 930, 931 and 932 are no longer shipped in the AI package. Existing installations and their data are preserved. The migration stages and specialized-provider examples below describe that earlier implementation; for the current providers, see the [shared Genie engine](guides/shared-genie-engine.md).
+
 Gemini Automan can answer questions, create automation programs, and update existing programs. Informational questions do not automatically deploy code. If the requested action or target program is ambiguous, Automan should ask for clarification.
 
 ## Response actions
