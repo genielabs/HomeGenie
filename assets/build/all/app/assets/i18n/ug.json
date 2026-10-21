@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie ئۈسكۈنە كونترول قىلىش، ئاپتوماتلاشتۇرۇش پروگراممىلىرى ۋە ۋىجېتلارنى ئۆز ئىچىگە ئالىدۇ. ئىلگىرىكى Genie لار داۋاملىق تەمىنلىنىدۇ. تەييار بولغاندا ئۇلارنى چەكلىسىڭىز بولىدۇ؛ تەڭشەكلىرى ۋە پاراڭ خاتىرىلىرى ساقلىنىدۇ.",
   "notification_disable_genies": "ئىلگىرىكى Genie لارنى چەكلەش",
   "notification_disable_genies_confirm": "تىزىملىكتىكى ئىلگىرىكى Genie لارنى چەكلەمسىز؟ تەڭشەكلىرى ۋە پاراڭ خاتىرىلىرى ساقلىنىدۇ. خالىغان ۋاقىتتا ئۇلارنى قايتا قوزغاتسىڭىز بولىدۇ.",
-  "upgrade_all": "ھەممىنى يېڭىلاش"
+  "upgrade_all": "ھەممىنى يېڭىلاش",
+  "open_program_updates": "يېڭىلانمىلارنى ئېچىش",
+  "program_updates": "پروگرامما يېڭىلانمىلىرى",
+  "programs_list": "پروگرامما تىزىملىكى",
+  "last_update": "ئاخىرقى يېڭىلانما",
+  "notification_manage": "باشقۇرۇش",
+  "notification_toggle_all": "ھەممىنى تاللاش ياكى تاللاشنى بىكار قىلىش",
+  "notification_delete_confirm": "تاللانغان ئۇقتۇرۇشلارنى ئۆچۈرۈڭ ({{count}})?",
+  "programs_updated": "پروگراممىلار يېڭىلاندى",
+  "system_not_up_to_date": "سىستېما يېڭىلانمىدى",
+  "new_programs_updates_available": "يېڭى پروگرامما يېڭىلانمىلىرى بار"
 }

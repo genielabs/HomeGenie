@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie ikuphatikizapo kuwongolera zida, mapulogalamu odziyimira pawokha ndi ma widget. Ma Genies am'mbuyomu akupitilira kupezeka. Mutha kuwaletsa mukakonzeka; zokonda zawo ndi mbiri ya macheza zidzasungidwa.",
   "notification_disable_genies": "Letsani ma Genies am'mbuyomu",
   "notification_disable_genies_confirm": "Kodi mukufuna kuletsa ma Genies am'mbuyomu omwe alembedwa? Zokonda zawo ndi mbiri ya macheza zidzasungidwa. Mutha kuwayatsanso nthawi iliyonse.",
-  "upgrade_all": "Sinthani zonse"
+  "upgrade_all": "Sinthani zonse",
+  "open_program_updates": "Tsegulani zosintha",
+  "program_updates": "Zosintha za mapulogalamu",
+  "programs_list": "Mndandanda wa mapulogalamu",
+  "last_update": "Kusintha komaliza",
+  "notification_manage": "Sinthani",
+  "notification_toggle_all": "Sankhani kapena chotsani zosankha zonse",
+  "notification_delete_confirm": "Chotsani zidziwitso zosankhidwa ({{count}})?",
+  "programs_updated": "Mapulogalamu asinthidwa",
+  "system_not_up_to_date": "Dongosolo silinakhalepo",
+  "new_programs_updates_available": "Zosintha zatsopano zilipo"
 }

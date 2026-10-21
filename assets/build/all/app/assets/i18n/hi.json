@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie में डिवाइस नियंत्रण, ऑटोमेशन प्रोग्राम और विजेट शामिल हैं। पिछले Genies उपलब्ध रहेंगे। जब आप तैयार हों, तब उन्हें अक्षम कर सकते हैं; उनकी सेटिंग्स और चैट इतिहास सुरक्षित रहेंगे।",
   "notification_disable_genies": "पिछले Genies अक्षम करें",
   "notification_disable_genies_confirm": "क्या सूचीबद्ध पिछले Genies को अक्षम करना चाहते हैं? उनकी सेटिंग्स और चैट इतिहास सुरक्षित रहेंगे। आप उन्हें किसी भी समय फिर से सक्षम कर सकते हैं।",
-  "upgrade_all": "सभी अपडेट करें"
+  "upgrade_all": "सभी अपडेट करें",
+  "open_program_updates": "अपडेट खोलें",
+  "program_updates": "प्रोग्राम अपडेट",
+  "programs_list": "प्रोग्राम सूची",
+  "last_update": "पिछला अपडेट",
+  "notification_manage": "प्रबंधित करें",
+  "notification_toggle_all": "सभी को चुनें या अचयनित करें",
+  "notification_delete_confirm": "चयनित सूचनाएं हटाएं ({{count}})?",
+  "programs_updated": "कार्यक्रम अद्यतन किये गये",
+  "system_not_up_to_date": "सिस्टम अपडेट नहीं है",
+  "new_programs_updates_available": "नए प्रोग्राम अपडेट उपलब्ध हैं"
 }

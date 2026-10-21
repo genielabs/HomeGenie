@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie ຮວມມີການຄວບຄຸມອຸປະກອນ, ໂປຣແກຣມອັດຕະໂນມັດ ແລະ ວິດເຈັດ. Genie ກ່ອນໜ້ານີ້ຍັງຄົງສາມາດໃຊ້ງານໄດ້. ທ່ານສາມາດປິດໃຊ້ງານພວກມັນໄດ້ເມື່ອພ້ອມ; ການຕັ້ງຄ່າ ແລະ ປະຫວັດການສົນທະນາຈະຖືກຮັກສາໄວ້.",
   "notification_disable_genies": "ປິດໃຊ້ງານ Genie ກ່ອນໜ້າ",
   "notification_disable_genies_confirm": "ປິດໃຊ້ງານ Genie ກ່ອນໜ້າທີ່ລະບຸໄວ້ຫຼືບໍ່? ການຕັ້ງຄ່າ ແລະ ປະຫວັດການສົນທະນາຈະຖືກຮັກສາໄວ້. ທ່ານສາມາດເປີດໃຊ້ງານພວກມັນຄືນໄດ້ທຸກເວລາ.",
-  "upgrade_all": "ອັບເດດທັງໝົດ"
+  "upgrade_all": "ອັບເດດທັງໝົດ",
+  "open_program_updates": "ເປີດການອັບເດດ",
+  "program_updates": "ການອັບເດດໂປຣແກຣມ",
+  "programs_list": "ລາຍການໂປຣແກຣມ",
+  "last_update": "ການອັບເດດຫຼ້າສຸດ",
+  "notification_manage": "ຈັດການ",
+  "notification_toggle_all": "ເລືອກ ຫຼື ເຊົາເລືອກທັງໝົດ",
+  "notification_delete_confirm": "ລຶບການແຈ້ງເຕືອນທີ່ເລືອກ ({{count}}) ບໍ?",
+  "programs_updated": "ອັບເດດໂປຣແກຣມແລ້ວ",
+  "system_not_up_to_date": "ລະບົບບໍ່ທັນສະໄໝ",
+  "new_programs_updates_available": "ມີອັບເດດໂປຣແກຣມໃໝ່"
 }

@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "‏Gemini Genie כולל בקרת מכשירים, תוכניות אוטומציה ווידג'טים. גרסאות Genie קודמות נשארות זמינות. תוכל להשבית אותן כשתהיה מוכן; ההגדרות והיסטוריית הצ'אט שלהן יישמרו.",
   "notification_disable_genies": "השבתת גרסאות Genie קודמות",
   "notification_disable_genies_confirm": "להשבית את גרסאות Genie הקודמות שברשימה? ההגדרות והיסטוריית הצ'אט שלהן יישמרו. תוכל להפעיל אותן מחדש בכל עת.",
-  "upgrade_all": "עדכון הכול"
+  "upgrade_all": "עדכון הכול",
+  "open_program_updates": "פתיחת עדכונים",
+  "program_updates": "עדכוני תוכניות",
+  "programs_list": "רשימת תוכניות",
+  "last_update": "העדכון האחרון",
+  "notification_manage": "נהל",
+  "notification_toggle_all": "בחר או בטל את הבחירה בכולם",
+  "notification_delete_confirm": "למחוק את ההתראות שנבחרו ({{count}})?",
+  "programs_updated": "תוכניות מעודכנות",
+  "system_not_up_to_date": "המערכת לא מעודכנת",
+  "new_programs_updates_available": "עדכוני תוכנית חדשים זמינים"
 }

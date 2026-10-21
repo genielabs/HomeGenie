@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie ní ìṣàkóso ẹ̀rọ, àwọn ètò iṣẹ́ aládàáṣe àti àwọn wídíjẹ́ẹ̀tì nínú. Àwọn Genie tẹ́lẹ̀ ṣì wà lárọ̀ọ́wọ́tó. O lè pa wọ́n tì nígbà tí o bá ṣe tán; a ó pa àwọn ètò àti ìtàn ìfọ̀rọ̀wérọ̀ wọn mọ́.",
   "notification_disable_genies": "Pa àwọn Genie tẹ́lẹ̀ tì",
   "notification_disable_genies_confirm": "Ṣé kí a pa àwọn Genie tẹ́lẹ̀ tí a tò sílẹ̀ tì? A ó pa àwọn ètò àti ìtàn ìfọ̀rọ̀wérọ̀ wọn mọ́. O lè tún mú wọn ṣiṣẹ́ nígbàkúgbà.",
-  "upgrade_all": "Ṣe imudojuiwọn gbogbo rẹ"
+  "upgrade_all": "Ṣe imudojuiwọn gbogbo rẹ",
+  "open_program_updates": "Ṣí àwọn ìmúdójúìwọ̀n",
+  "program_updates": "Àwọn ìmúdójúìwọ̀n ètò",
+  "programs_list": "Àtòjọ àwọn ètò",
+  "last_update": "Ìmúdójúìwọ̀n tó kẹ́yìn",
+  "notification_manage": "Ṣakoso awọn",
+  "notification_toggle_all": "Yan tabi yọ gbogbo rẹ kuro",
+  "notification_delete_confirm": "Pa awọn iwifunni ti o yan ({{count}}) rẹ bi?",
+  "programs_updated": "Awọn eto imudojuiwọn",
+  "system_not_up_to_date": "Eto kii ṣe imudojuiwọn",
+  "new_programs_updates_available": "Awọn imudojuiwọn eto titun wa"
 }

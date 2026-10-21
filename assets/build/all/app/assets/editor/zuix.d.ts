@@ -1156,6 +1156,13 @@ declare const zuix: Zuix;
  *              accessing user preferences, and notification/conversion capabilities.
  */
 declare const utils: {
+  /** Speech uses the chat engine/voice settings, independently of the chat view. */
+  speech: {
+    /** Explicit narration; replaces current speech. Prefer calling from a user action. */
+    say(sentence: string): Promise<'completed' | 'cancelled' | 'empty'>;
+    /** Stops the current shared chat/widget speech channel. */
+    stop(): void;
+  },
   /**
    * Namespace for utility functions related to formatting module field values and names.
    */

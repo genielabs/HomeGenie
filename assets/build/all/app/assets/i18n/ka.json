@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie მოიცავს მოწყობილობების მართვას, ავტომატიზაციის პროგრამებსა და ვიჯეტებს. წინა Genie-ები ხელმისაწვდომი რჩება. შეგიძლიათ გამორთოთ ისინი, როცა მზად იქნებით; მათი პარამეტრები და ჩატის ისტორია შენარჩუნდება.",
   "notification_disable_genies": "წინა Genie-ების გამორთვა",
   "notification_disable_genies_confirm": "გსურთ ჩამოთვლილი წინა Genie-ების გამორთვა? მათი პარამეტრები და ჩატის ისტორია შენარჩუნდება. მათი ხელახლა ჩართვა ნებისმიერ დროს შეგიძლიათ.",
-  "upgrade_all": "ყველას განახლება"
+  "upgrade_all": "ყველას განახლება",
+  "open_program_updates": "განახლებების გახსნა",
+  "program_updates": "პროგრამების განახლებები",
+  "programs_list": "პროგრამების სია",
+  "last_update": "ბოლო განახლება",
+  "notification_manage": "მართვა",
+  "notification_toggle_all": "აირჩიეთ ან გააუქმეთ ყველა",
+  "notification_delete_confirm": "წაშალოთ არჩეული შეტყობინებები ({{count}})?",
+  "programs_updated": "განახლებულია პროგრამები",
+  "system_not_up_to_date": "სისტემა არ არის განახლებული",
+  "new_programs_updates_available": "ხელმისაწვდომია ახალი პროგრამის განახლებები"
 }

@@ -1,0 +1,9 @@
+<!-- A neutral active directive enables zuix viewport lifecycle events. -->
+<div class="container" @set="void 0" @delay="500">
+  <header><h3>Colour waves</h3><p>Five shapes, one gentle rhythm · Anime.js</p></header>
+  <div class="stage waves" role="img" aria-label="Five coloured shapes floating in a wave">
+    <span class="orb"></span><span class="orb"></span><span class="orb"></span><span class="orb"></span><span class="orb"></span>
+  </div>
+  <footer><button type="button" (click)="toggleMotion()"><span #action></span></button></footer>
+  <span class="status" #status role="status"></span>
+</div>

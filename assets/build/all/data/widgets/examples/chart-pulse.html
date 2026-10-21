@@ -1,0 +1,7 @@
+<!-- A neutral active directive enables zuix viewport lifecycle events. -->
+<div class="container" @set="void 0" @delay="500">
+  <header><h3>Energy colours</h3><p>Sample data · <span #period></span></p></header>
+  <div class="stage" #chart_area><canvas #chart_canvas role="img" aria-label="Sample hourly energy consumption"></canvas></div>
+  <footer><button type="button" (click)="compare()"><span class="material-symbols-outlined" aria-hidden="true">compare_arrows</span>Compare</button></footer>
+  <span class="status" #status role="status"></span>
+</div>

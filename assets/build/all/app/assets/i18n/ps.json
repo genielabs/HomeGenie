@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie کې د وسیلې کنټرول، د اتومات کولو پروګرامونه او ویجټونه شامل دي. پخواني Genies به لا هم شتون ولري. تاسو کولی شئ کله چې چمتو یاست هغوی غیر فعال کړئ؛ د هغوی تنظیمات او د چټ تاریخچه به وساتل شي.",
   "notification_disable_genies": "پخواني Genies غیر فعال کړئ",
   "notification_disable_genies_confirm": "ایا لست شوي پخواني Genies غیر فعال شي؟ د هغوی تنظیمات او د چټ تاریخچه به وساتل شي. تاسو کولی شئ هر وخت هغوی بیا فعال کړئ.",
-  "upgrade_all": "ټول تازه کړئ"
+  "upgrade_all": "ټول تازه کړئ",
+  "open_program_updates": "تازه معلومات پرانیزئ",
+  "program_updates": "د پروګرامونو تازه معلومات",
+  "programs_list": "د پروګرامونو لېست",
+  "last_update": "وروستي تازه معلومات",
+  "notification_manage": "اداره کول",
+  "notification_toggle_all": "ټول وټاکئ یا غیر انتخاب کړئ",
+  "notification_delete_confirm": "ټاکل شوي خبرتیاوې حذف کړئ ({{count}})؟",
+  "programs_updated": "پروګرامونه تازه شول",
+  "system_not_up_to_date": "سیسټم تازه نه دی",
+  "new_programs_updates_available": "د نوي پروګرام تازه معلومات شتون لري"
 }

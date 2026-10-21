@@ -56,6 +56,21 @@ public class AiGenieTextArtifactsTest {
         Assert.That((string)r["reply"],Does.Contain("```html").And.Contain("```css").And.Contain("```javascript").And.Not.Contain("genie-action"));
         Assert.That((int)r["actionCalls"],Is.Zero);Assert.That(deployments+recoveries,Is.Zero);Assert.That(req.ToString(),Is.EqualTo(before));
     }
+    [Test] public void TextPresentationUsesVersionedEnvelopeWithoutDeployingAnything() {
+        var req=Request();var artifact=Artifact();artifact["widget"]["mode"]="presentation";
+        req["response"]="```genie-action\n"+artifact.ToString(Formatting.None)+"\n```";
+        var result=Dispatch(req);var presentation=JObject.Parse((string)result["reply"])["ai_widget"];
+        Assert.That((string)presentation["mode"],Is.EqualTo("presentation"));
+        Assert.That((string)presentation["html"],Is.EqualTo((string)artifact["widget"]["html"]));
+        Assert.That(deployments+recoveries,Is.Zero);Assert.That((int)result["actionCalls"],Is.Zero);
+    }
+    [Test] public void CompositePresentationRetainsModeAndResolvedBinding() {
+        var req=Request("composite");var artifact=Artifact("composite");artifact["widget"]["mode"]="presentation";
+        req["response"]="```genie-action\n"+artifact.ToString(Formatting.None)+"\n```";
+        var result=Dispatch(req);var solution=JObject.Parse((string)result["reply"])["ai_solution"];
+        Assert.That((string)solution["widget"]["mode"],Is.EqualTo("presentation"));
+        Assert.That((string)solution["widget"]["binding"]["address"],Is.EqualTo("1004"));Assert.That(deployments,Is.EqualTo(1));
+    }
     [TestCase("widgets")][TestCase("automation")]
     public void CompositeRequiresBothCapabilitiesBeforeAnyIo(string disabled) {
         var req=Request("composite");req["capabilities"][disabled]=false;
@@ -103,5 +118,28 @@ public class AiGenieTextArtifactsTest {
     [Test] public void UnfinishedReasoningCannotCreateAWidget() {
         var req=Request();req["response"]="<think>planning\n"+(string)req["response"];
         Assert.That((string)Dispatch(req)["state"],Is.EqualTo("not_program"));Assert.That(normalizations+deployments,Is.Zero);
+    }
+
+    JObject PromptExample() {
+        string instructions=(string)dispatcher.GetField("Instructions").GetRawConstantValue();
+        var blocks=System.Text.RegularExpressions.Regex.Matches(instructions,@"(?m)^```genie-action\s*\r?\n([\s\S]*?)^```\s*$");
+        Assert.That(blocks.Count,Is.EqualTo(1));
+        return JObject.Parse(blocks[0].Groups[1].Value);
+    }
+    [Test] public void PromptExampleParsesAndDispatchesAsPresentationWithoutDeployment() {
+        var example=PromptExample();var req=Request();req["response"]="```genie-action\n"+example.ToString(Formatting.None)+"\n```";
+        var result=Dispatch(req);var widget=JObject.Parse((string)result["reply"])["ai_widget"];
+        Assert.That((string)widget["mode"],Is.EqualTo("presentation"));
+        Assert.That((string)widget["html"],Is.EqualTo((string)example["widget"]["html"]));
+        Assert.That(deployments+recoveries,Is.Zero);
+    }
+    [Test] public void PromptExampleDeclaresEveryReferencedFieldAndConnectsItsButton() {
+        var widget=PromptExample()["widget"];string markup=(string)widget["html"],source=(string)widget["javascript"];
+        var names=System.Text.RegularExpressions.Regex.Matches(source,@"this\.field\('([a-z0-9_]+)'\)");
+        Assert.That(names.Count,Is.GreaterThan(0));
+        foreach(System.Text.RegularExpressions.Match field in names)
+            Assert.That(markup,Does.Match(@"#"+field.Groups[1].Value+@"(?:\s|>)"));
+        Assert.That(markup,Does.Contain("(click)=\"increment()\""));
+        Assert.That(source,Does.Contain("this.declare({increment:"));
     }
 }

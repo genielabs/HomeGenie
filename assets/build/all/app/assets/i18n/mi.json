@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Kei roto i a Gemini Genie te mana whakahaere pūrere, ngā hōtaka aunoa me ngā wīketi. E wātea tonu ana ngā Genie o mua. Ka taea e koe te whakakore i te wā e rite ana koe; ka pupuritia ā rātou tautuhinga me ngā hītori kōrerorero.",
   "notification_disable_genies": "Monokia ngā Genie o mua",
   "notification_disable_genies_confirm": "Whakawetohia ngā Genie o mua kua whakarārangitia? Ka pupuritia ā rātou tautuhinga me ngā hītori kōrero. Ka taea e koe te whakahohe anō i ngā wā katoa.",
-  "upgrade_all": "Whakahōu katoa"
+  "upgrade_all": "Whakahōu katoa",
+  "open_program_updates": "Whakatuwhera ngā whakahōutanga",
+  "program_updates": "Ngā whakahōutanga papatono",
+  "programs_list": "Rārangi papatono",
+  "last_update": "Whakahōutanga whakamutunga",
+  "notification_manage": "Whakahaere",
+  "notification_toggle_all": "Tīpakohia, whakakorehia ranei te katoa",
+  "notification_delete_confirm": "Mukua nga whakamohiotanga kua tohua ({{count}})?",
+  "programs_updated": "Kua whakahoutia nga kaupapa",
+  "system_not_up_to_date": "Ko te punaha kaore i te hou",
+  "new_programs_updates_available": "Kei te waatea nga whakahoutanga hotaka hou"
 }

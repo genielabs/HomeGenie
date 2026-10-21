@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie kontrola amûran, bernameyên otomasyonê û widgetan dihewîne. Genie-yên berê jî dimînin. Dema ku tu amade bûyî dikarî wan neçalak bikî; mîheng û dîroka sohbetên wan dê werin parastin.",
   "notification_disable_genies": "Genie-yên berê neçalak bike",
   "notification_disable_genies_confirm": "Genie-yên berê yên lîstekirî bên neçalakkirin? Mîheng û dîroka sohbetên wan dê werin parastin. Tu dikarî wan di her kêliyê de dîsa çalak bikî.",
-  "upgrade_all": "Hemûyan nû bike"
+  "upgrade_all": "Hemûyan nû bike",
+  "open_program_updates": "Nûkirinan veke",
+  "program_updates": "Nûkirinên bernameyan",
+  "programs_list": "Lîsteya bernameyan",
+  "last_update": "Nûkirina dawî",
+  "notification_manage": "Birêvebirin",
+  "notification_toggle_all": "Hemî hilbijêrin an jêbirin",
+  "notification_delete_confirm": "Agahiyên hilbijartî ({{count}}) jêbirin?",
+  "programs_updated": "Bername hatin nûkirin",
+  "system_not_up_to_date": "Pergal ne rojane ye",
+  "new_programs_updates_available": "Nûvekirinên bernameyê yên nû hene"
 }

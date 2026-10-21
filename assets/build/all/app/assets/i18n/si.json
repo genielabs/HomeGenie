@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie වෙත උපාංග පාලනය, ස්වයංක්‍රීයකරණ වැඩසටහන් සහ විජට් ඇතුළත් වේ. පෙර Genies තවදුරටත් භාවිත කළ හැකිය. ඔබට අවශ්‍ය විට ඒවා අක්‍රිය කළ හැක; ඒවායේ සැකසීම් සහ කතාබස් ඉතිහාසය සුරැකෙනු ඇත.",
   "notification_disable_genies": "පෙර Genies අක්‍රිය කරන්න",
   "notification_disable_genies_confirm": "ලැයිස්තුගත කර ඇති පෙර Genies අක්‍රිය කරන්නද? ඒවායේ සැකසීම් සහ කතාබස් ඉතිහාසය සුරැකෙනු ඇත. ඔබට ඕනෑම වේලාවක ඒවා නැවත සක්‍රිය කළ හැක.",
-  "upgrade_all": "සියල්ල යාවත්කාලීන කරන්න"
+  "upgrade_all": "සියල්ල යාවත්කාලීන කරන්න",
+  "open_program_updates": "යාවත්කාලීන විවෘත කරන්න",
+  "program_updates": "වැඩසටහන් යාවත්කාලීන",
+  "programs_list": "වැඩසටහන් ලැයිස්තුව",
+  "last_update": "අවසන් යාවත්කාලීනය",
+  "notification_manage": "කළමනාකරණය කරන්න",
+  "notification_toggle_all": "සියල්ල තෝරන්න හෝ තේරීම ඉවත් කරන්න",
+  "notification_delete_confirm": "තෝරාගත් දැනුම්දීම් මකන්න ({{count}})?",
+  "programs_updated": "වැඩසටහන් යාවත්කාලීන කරන ලදී",
+  "system_not_up_to_date": "පද්ධතිය යාවත්කාලීන නොවේ",
+  "new_programs_updates_available": "නව වැඩසටහන් යාවත්කාලීන තිබේ"
 }

@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie zahŕňa ovládanie zariadení, automatizačné programy a miniaplikácie. Predchádzajúce Genies zostávajú k dispozícii. Môžete ich vypnúť, keď budete pripravení; ich nastavenia a história konverzácií sa zachovajú.",
   "notification_disable_genies": "Vypnúť predchádzajúce Genies",
   "notification_disable_genies_confirm": "Vypnúť uvedené predchádzajúce Genies? Ich nastavenia a história konverzácií sa zachovajú. Kedykoľvek ich môžete znova zapnúť.",
-  "upgrade_all": "Aktualizovať všetko"
+  "upgrade_all": "Aktualizovať všetko",
+  "open_program_updates": "Otvoriť aktualizácie",
+  "program_updates": "Aktualizácie programov",
+  "programs_list": "Zoznam programov",
+  "last_update": "Posledná aktualizácia",
+  "notification_manage": "Spravovať",
+  "notification_toggle_all": "Vyberte alebo zrušte výber všetkých",
+  "notification_delete_confirm": "Odstrániť vybraté upozornenia ({{count}})?",
+  "programs_updated": "Aktualizované programy",
+  "system_not_up_to_date": "Systém nie je aktuálny",
+  "new_programs_updates_available": "K dispozícii sú nové aktualizácie programu"
 }

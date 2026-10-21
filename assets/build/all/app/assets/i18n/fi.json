@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie sisältää laiteohjauksen, automaatio-ohjelmat ja widgetit. Aiemmat Geniet pysyvät käytettävissä. Voit poistaa ne käytöstä, kun olet valmis; niiden asetukset ja keskusteluhistoria säilytetään.",
   "notification_disable_genies": "Poista aiemmat Geniet käytöstä",
   "notification_disable_genies_confirm": "Poistetaanko luetteloidut aiemmat Geniet käytöstä? Niiden asetukset ja keskusteluhistoria säilytetään. Voit ottaa ne uudelleen käyttöön milloin tahansa.",
-  "upgrade_all": "Päivitä kaikki"
+  "upgrade_all": "Päivitä kaikki",
+  "open_program_updates": "Avaa päivitykset",
+  "program_updates": "Ohjelmien päivitykset",
+  "programs_list": "Ohjelmaluettelo",
+  "last_update": "Viimeisin päivitys",
+  "notification_manage": "Hallitse",
+  "notification_toggle_all": "Valitse kaikki tai poista valinnat",
+  "notification_delete_confirm": "Poistetaanko valitut ilmoitukset ({{count}})?",
+  "programs_updated": "Ohjelmat päivitetty",
+  "system_not_up_to_date": "Järjestelmä ei ole ajan tasalla",
+  "new_programs_updates_available": "Uusia ohjelmapäivityksiä saatavilla"
 }

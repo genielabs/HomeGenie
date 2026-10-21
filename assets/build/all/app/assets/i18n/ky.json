@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie түзмөктөрдү башкарууну, автоматташтыруу программаларын жана виджеттерди камтыйт. Мурунку Genie'лер жеткиликтүү бойдон калат. Даяр болгондо аларды өчүрө аласыз; алардын жөндөөлөрү жана маек таржымалы сакталат.",
   "notification_disable_genies": "Мурунку Genie'лерди өчүрүү",
   "notification_disable_genies_confirm": "Тизмедеги мурунку Genie'лер өчүрүлсүнбү? Алардын жөндөөлөрү жана маек таржымалы сакталат. Аларды каалаган убакта кайра иштете аласыз.",
-  "upgrade_all": "Баарын жаңыртуу"
+  "upgrade_all": "Баарын жаңыртуу",
+  "open_program_updates": "Жаңыртууларды ачуу",
+  "program_updates": "Программа жаңыртуулары",
+  "programs_list": "Программалар тизмеси",
+  "last_update": "Акыркы жаңыртуу",
+  "notification_manage": "Башкаруу",
+  "notification_toggle_all": "Баарын тандаңыз же тандоодон чыгарыңыз",
+  "notification_delete_confirm": "Тандалган эскертмелер ({{count}}) жок кылынсынбы?",
+  "programs_updated": "Программалар жаңыртылган",
+  "system_not_up_to_date": "Система жаңыланган эмес",
+  "new_programs_updates_available": "Жаңы программа жаңыртуулары жеткиликтүү"
 }

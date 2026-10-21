@@ -152,4 +152,56 @@ public class ProgramUpdateNotificationTest
         Assert.That(rows.ToString(),Is.EqualTo(before));
     }
 
+
+    [Test]
+    public void DeletionSurvivesRecoveryButNewUpdateInformationCanReturn()
+    {
+        var rows = new JArray(); var row = Reconcile(rows, Report());
+        archive.GetMethod("Manage").Invoke(null, new object[] { rows, new JObject { ["keys"] = new JArray((string)row["key"]) }, "Delete", DateTime.UtcNow });
+        Assert.That(row["payload"]["Message"], Is.Null);
+        Assert.That((bool)row["deleted"], Is.True);
+        rows = JsonConvert.DeserializeObject<JArray>(rows.ToString(), new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+        Assert.That(Reconcile(rows, Report()), Is.Null, "Startup or repeated checks must not resurrect the deleted notice.");
+        var changed = Reconcile(rows, Report(true, "new-fingerprint"));
+        Assert.That(changed["deleted"], Is.Null);
+        Assert.That((bool)changed["archived"], Is.False);
+    }
+    [TestCase("Delete")]
+    [TestCase("Archive")]
+    public void BulkManagementRejectsRunningActionsWithoutChangingAnySelection(string operation)
+    {
+        var rows = new JArray(); var first = Reconcile(rows, Report()); var second = Reconcile(rows, Report(), "another");
+        archive.GetMethod("Begin").Invoke(null, new object[] { second, "test" });
+        var before = rows.ToString();
+        Assert.Throws<TargetInvocationException>(() => archive.GetMethod("Manage").Invoke(null, new object[] {
+            rows, new JObject { ["keys"] = new JArray((string)first["key"], (string)second["key"]) }, operation, DateTime.UtcNow }));
+        Assert.That(rows.ToString(), Is.EqualTo(before));
+    }
+    [Test]
+    public void BulkArchiveAndRestorePreserveTheNotificationContent()
+    {
+        var rows = new JArray(); var first = Reconcile(rows, Report()); var second = Reconcile(rows, Report(), "another");
+        var payload = first["payload"].DeepClone();
+        foreach (bool value in new[] { true, false }) {
+            archive.GetMethod("Manage").Invoke(null, new object[] { rows,
+                new JObject { ["keys"] = new JArray((string)first["key"], (string)second["key"]), ["value"] = value }, "Archive", DateTime.UtcNow });
+            Assert.That((bool)first["archived"], Is.EqualTo(value)); Assert.That((bool)second["archived"], Is.EqualTo(value));
+            Assert.That(JToken.DeepEquals(first["payload"], payload), Is.True);
+        }
+    }
+
+    [Test]
+    public void ManagementCommitKeepsRunningActionReferencesAttached()
+    {
+        var rows = new JArray(); var row = Reconcile(rows, Report());
+        var run = (JObject)archive.GetMethod("Begin").Invoke(null, new object[] { row, "test" });
+        var staged = (JArray)rows.DeepClone();
+        var changed = (JArray)archive.GetMethod("Manage").Invoke(null, new object[] { staged,
+            new JObject { ["key"] = (string)row["key"], ["value"] = true }, "Read", DateTime.UtcNow });
+        archive.GetMethod("CommitManagement").Invoke(null, new object[] { rows, changed, "Read" });
+        run["state"] = "completed";
+        archive.GetMethod("Sync").Invoke(null, new object[] { row, run });
+        Assert.That((string)rows[0]["actionRuns"][0]["state"], Is.EqualTo("completed"));
+        Assert.That((bool)rows[0]["read"], Is.True);
+    }
 }

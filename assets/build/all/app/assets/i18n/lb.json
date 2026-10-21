@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie ëmfaasst Apparatsteierung, Automatiséierungsprogrammer a Widgeten. Déi vireg Genies bleiwen disponibel. Dir kënnt se desaktivéieren, wann Dir bereet sidd; hir Astellungen a Chat-Verleef bleiwen erhalen.",
   "notification_disable_genies": "Vireg Genies desaktivéieren",
   "notification_disable_genies_confirm": "Déi opgelëschte vireg Genies desaktivéieren? Hir Astellungen a Chat-Verleef bleiwen erhalen. Dir kënnt se zu all Moment erëm aktivéieren.",
-  "upgrade_all": "Alles aktualiséieren"
+  "upgrade_all": "Alles aktualiséieren",
+  "open_program_updates": "Aktualiséierungen opmaachen",
+  "program_updates": "Programmaktualiséierungen",
+  "programs_list": "Programmlëscht",
+  "last_update": "Lescht Aktualiséierung",
+  "notification_manage": "Verwalten",
+  "notification_toggle_all": "Alles auswielen oder ofwielen",
+  "notification_delete_confirm": "Ausgewielten Notifikatiounen läschen ({{count}})?",
+  "programs_updated": "Programmer aktualiséiert",
+  "system_not_up_to_date": "System ass net aktuell",
+  "new_programs_updates_available": "Nei Programmupdates verfügbar"
 }

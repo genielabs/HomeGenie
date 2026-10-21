@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie include controlul dispozitivelor, programe de automatizare și widgeturi. Genies anteriori rămân disponibili. Îi poți dezactiva când ești gata; setările și istoricul conversațiilor vor fi păstrate.",
   "notification_disable_genies": "Dezactivează Genies anteriori",
   "notification_disable_genies_confirm": "Dezactivezi Genies anteriori listați? Setările și istoricul conversațiilor vor fi păstrate. Îi poți reactiva în orice moment.",
-  "upgrade_all": "Actualizează toate"
+  "upgrade_all": "Actualizează toate",
+  "open_program_updates": "Deschide actualizările",
+  "program_updates": "Actualizări de programe",
+  "programs_list": "Lista programelor",
+  "last_update": "Ultima actualizare",
+  "notification_manage": "Gestionează",
+  "notification_toggle_all": "Selectați sau deselectați toate",
+  "notification_delete_confirm": "Ștergeți notificările selectate ({{count}})?",
+  "programs_updated": "Programe actualizate",
+  "system_not_up_to_date": "Sistemul nu este actualizat",
+  "new_programs_updates_available": "Actualizări noi ale programului disponibile"
 }

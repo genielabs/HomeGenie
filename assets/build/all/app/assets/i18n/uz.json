@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie qurilmalarni boshqarish, avtomatlashtirish dasturlari va vidjetlarni o‘z ichiga oladi. Avvalgi Genie lar mavjud bo‘lib qoladi. Tayyor bo‘lganingizda ularni o‘chirib qo‘yishingiz mumkin; ularning sozlamalari va chatlar tarixi saqlanadi.",
   "notification_disable_genies": "Avvalgi Genie larni o‘chirish",
   "notification_disable_genies_confirm": "Ro‘yxatdagi avvalgi Genie lar o‘chirilsinmi? Ularning sozlamalari va chatlar tarixi saqlanadi. Istalgan vaqtda ularni qayta yoqishingiz mumkin.",
-  "upgrade_all": "Barchasini yangilash"
+  "upgrade_all": "Barchasini yangilash",
+  "open_program_updates": "Yangilanishlarni ochish",
+  "program_updates": "Dastur yangilanishlari",
+  "programs_list": "Dasturlar roʻyxati",
+  "last_update": "Oxirgi yangilanish",
+  "notification_manage": "Boshqarish",
+  "notification_toggle_all": "Hammasini tanlang yoki bekor qiling",
+  "notification_delete_confirm": "Tanlangan bildirishnomalar ({{count}}) oʻchirilsinmi?",
+  "programs_updated": "Dasturlar yangilandi",
+  "system_not_up_to_date": "Tizim yangilanmagan",
+  "new_programs_updates_available": "Yangi dastur yangilanishlari mavjud"
 }

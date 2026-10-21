@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "A Gemini Genie tartalmazza az eszközvezérlést, az automatizálási programokat és a widgeteket. A korábbi Genie-k továbbra is elérhetők maradnak. Bármikor letilthatja őket; a beállításaik és csevegési előzményeik megmaradnak.",
   "notification_disable_genies": "Korábbi Genie-k letiltása",
   "notification_disable_genies_confirm": "Letiltja a listázott korábbi Genie-ket? A beállításaik és csevegési előzményeik megmaradnak. Bármikor újra engedélyezheti őket.",
-  "upgrade_all": "Összes frissítése"
+  "upgrade_all": "Összes frissítése",
+  "open_program_updates": "Frissítések megnyitása",
+  "program_updates": "Programfrissítések",
+  "programs_list": "Programlista",
+  "last_update": "Legutóbbi frissítés",
+  "notification_manage": "Kezelése",
+  "notification_toggle_all": "Jelölje ki vagy törölje az összes kijelölését",
+  "notification_delete_confirm": "Törli a kiválasztott értesítéseket ({{count}})?",
+  "programs_updated": "Programok frissítve",
+  "system_not_up_to_date": "A rendszer nem naprakész",
+  "new_programs_updates_available": "Új programfrissítések érhetők el"
 }

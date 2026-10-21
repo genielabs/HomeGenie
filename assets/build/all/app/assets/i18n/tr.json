@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie; cihaz kontrolü, otomasyon programları ve widget'lar içerir. Önceki Genie'ler kullanılabilir durumda kalır. Hazır olduğunuzda bunları devre dışı bırakabilirsiniz; ayarları ve sohbet geçmişleri korunacaktır.",
   "notification_disable_genies": "Önceki Genie'leri devre dışı bırak",
   "notification_disable_genies_confirm": "Listelenen önceki Genie'ler devre dışı bırakılsın mı? Ayarları ve sohbet geçmişleri korunacaktır. İstediğiniz zaman bunları tekrar etkinleştirebilirsiniz.",
-  "upgrade_all": "Tümünü güncelle"
+  "upgrade_all": "Tümünü güncelle",
+  "open_program_updates": "Güncellemeleri aç",
+  "program_updates": "Program güncellemeleri",
+  "programs_list": "Program listesi",
+  "last_update": "Son güncelleme",
+  "notification_manage": "Yönet",
+  "notification_toggle_all": "Tümünü seç veya seçimi kaldır",
+  "notification_delete_confirm": "Seçilen bildirimler silinsin mi ({{count}})?",
+  "programs_updated": "Programlar güncellendi",
+  "system_not_up_to_date": "Sistem güncel değil",
+  "new_programs_updates_available": "Yeni program güncellemeleri mevcut"
 }

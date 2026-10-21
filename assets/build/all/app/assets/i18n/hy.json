@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie-ն ներառում է սարքերի կառավարում, ավտոմատացման ծրագրեր և վիջեթներ: Նախորդ Genies-ները մնում են հասանելի: Կարող եք անջատել դրանք, երբ պատրաստ լինեք. դրանց կարգավորումներն ու զրույցների պատմությունը կպահպանվեն:",
   "notification_disable_genies": "Անջատել նախորդ Genies-ները",
   "notification_disable_genies_confirm": "Անջատե՞լ նշված նախորդ Genies-ները: Դրանց կարգավորումներն ու զրույցների պատմությունը կպահպանվեն: Դուք ցանկացած պահի կարող եք նորից միացնել դրանք:",
-  "upgrade_all": "Թարմացնել բոլորը"
+  "upgrade_all": "Թարմացնել բոլորը",
+  "open_program_updates": "Բացել թարմացումները",
+  "program_updates": "Ծրագրերի թարմացումներ",
+  "programs_list": "Ծրագրերի ցանկ",
+  "last_update": "Վերջին թարմացում",
+  "notification_manage": "Կառավարել",
+  "notification_toggle_all": "Ընտրել կամ հեռացնել բոլորը",
+  "notification_delete_confirm": "Ջնջե՞լ ընտրված ծանուցումները ({{count}}):",
+  "programs_updated": "Ծրագրերը թարմացվել են",
+  "system_not_up_to_date": "Համակարգը թարմացված չէ",
+  "new_programs_updates_available": "Հասանելի են ծրագրի նոր թարմացումները"
 }

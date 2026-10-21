@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie përfshin kontrollin e pajisjeve, programet e automatizimit dhe miniaplikacionet. Genies e mëparshëm mbeten të disponueshëm. Mund t'i çaktivizoni kur të jeni gati; cilësimet dhe historiku i bisedave do të ruhen.",
   "notification_disable_genies": "Çaktivizo Genies e mëparshëm",
   "notification_disable_genies_confirm": "Të çaktivizohen Genies e mëparshëm të listuar? Cilësimet dhe historiku i bisedave të tyre do të ruhen. Mund t'i aktivizoni përsëri në çdo kohë.",
-  "upgrade_all": "Përditëso të gjitha"
+  "upgrade_all": "Përditëso të gjitha",
+  "open_program_updates": "Hap përditësimet",
+  "program_updates": "Përditësimet e programeve",
+  "programs_list": "Lista e programeve",
+  "last_update": "Përditësimi i fundit",
+  "notification_manage": "Menaxhoni",
+  "notification_toggle_all": "Zgjidh ose çzgjidh të gjitha",
+  "notification_delete_confirm": "Të fshihen njoftimet e zgjedhura ({{count}})?",
+  "programs_updated": "Programet u përditësuan",
+  "system_not_up_to_date": "Sistemi nuk është i përditësuar",
+  "new_programs_updates_available": "Ofrohen përditësime të reja të programit"
 }

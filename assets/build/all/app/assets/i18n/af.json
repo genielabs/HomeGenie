@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie sluit toestelbeheer, outomatiseringsprogramme en legstukke in. Vorige Genies bly beskikbaar. Jy kan hulle deaktiveer wanneer jy gereed is; hul instellings en kletsgeskiedenis sal behou word.",
   "notification_disable_genies": "Deaktiveer vorige Genies",
   "notification_disable_genies_confirm": "Deaktiveer die gelyste vorige Genies? Hul instellings en kletsgeskiedenis sal behou word. Jy kan hulle enige tyd weer aktiveer.",
-  "upgrade_all": "Werk alles by"
+  "upgrade_all": "Werk alles by",
+  "open_program_updates": "Maak opdaterings oop",
+  "program_updates": "Programopdaterings",
+  "programs_list": "Programlys",
+  "last_update": "Laaste opdatering",
+  "notification_manage": "Bestuur",
+  "notification_toggle_all": "Kies of ontkies alles",
+  "notification_delete_confirm": "Vee geselekteerde kennisgewings uit ({{count}})?",
+  "programs_updated": "Programme opgedateer",
+  "system_not_up_to_date": "Stelsel is nie op datum nie",
+  "new_programs_updates_available": "Nuwe programopdaterings beskikbaar"
 }

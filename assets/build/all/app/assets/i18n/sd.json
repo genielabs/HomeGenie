@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie ۾ ڊوائيس ڪنٽرول، آٽوميشن پروگرام ۽ وجيٽس شامل آهن. پوئين Genies دستياب رهندا. جڏهن توهان تيار هجو ته انهن کي غير فعال ڪري سگهو ٿا؛ انهن جون سيٽنگون ۽ چيٽ هسٽري محفوظ رهندي.",
   "notification_disable_genies": "پوئين Genies کي غير فعال ڪريو",
   "notification_disable_genies_confirm": "ڇا لسٽ ڪيل پوئين Genies کي غير فعال ڪرڻ چاهيو ٿا؟ انهن جون سيٽنگون ۽ چيٽ هسٽري محفوظ رهندي. توهان انهن کي ڪنهن به وقت ٻيهر فعال ڪري سگهو ٿا.",
-  "upgrade_all": "سڀ اپڊيٽ ڪريو"
+  "upgrade_all": "سڀ اپڊيٽ ڪريو",
+  "open_program_updates": "اپڊيٽ کوليو",
+  "program_updates": "پروگرامن جون اپڊيٽون",
+  "programs_list": "پروگرامن جي فهرست",
+  "last_update": "آخري اپڊيٽ",
+  "notification_manage": "انتظام ڪريو",
+  "notification_toggle_all": "سڀ چونڊيو يا ختم ڪريو",
+  "notification_delete_confirm": "منتخب ٿيل اطلاعن کي حذف ڪريو ({{count}})؟",
+  "programs_updated": "پروگرام اپڊيٽ ڪيا ويا",
+  "system_not_up_to_date": "سسٽم جديد نه آهي",
+  "new_programs_updates_available": "نئون پروگرام اپڊيٽ دستياب آهي"
 }

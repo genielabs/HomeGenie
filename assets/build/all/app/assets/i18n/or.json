@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie ରେ ଡିଭାଇସ୍ ନିୟନ୍ତ୍ରଣ, ସ୍ୱୟଂଚାଳନ ପ୍ରୋଗ୍ରାମ ଏବଂ ୱିଜେଟ୍ ଅନ୍ତର୍ଭୁକ୍ତ। ପୂର୍ବ Genies ଉପଲବ୍ଧ ରହିବ। ଆପଣ ପ୍ରସ୍ତୁତ ଥିବା ସମୟରେ ସେଗୁଡ଼ିକୁ ଅକ୍ଷମ କରିପାରିବେ; ସେଗୁଡ଼ିକର ସେଟିଂସମୂହ ଏବଂ ଚାଟ୍ ଇତିହାସ ସୁରକ୍ଷିତ ରହିବ।",
   "notification_disable_genies": "ପୂର୍ବ Genies ଅକ୍ଷମ କରନ୍ତୁ",
   "notification_disable_genies_confirm": "ତାଲିକାଭୁକ୍ତ ପୂର୍ବ Genies କୁ ଅକ୍ଷମ କରିବେ? ସେଗୁଡ଼ିକର ସେଟିଂସମୂହ ଏବଂ ଚାଟ୍ ଇତିହାସ ସୁରକ୍ଷିତ ରହିବ। ଆପଣ ଯେକୌଣସି ସମୟରେ ସେଗୁଡ଼ିକୁ ପୁଣି ସକ୍ଷମ କରିପାରିବେ।",
-  "upgrade_all": "ସବୁ ଅଦ୍ୟତନ କରନ୍ତୁ"
+  "upgrade_all": "ସବୁ ଅଦ୍ୟତନ କରନ୍ତୁ",
+  "open_program_updates": "ଅପଡେଟ୍ ଖୋଲନ୍ତୁ",
+  "program_updates": "ପ୍ରୋଗ୍ରାମ ଅପଡେଟ୍",
+  "programs_list": "ପ୍ରୋଗ୍ରାମ ତାଲିକା",
+  "last_update": "ଶେଷ ଅପଡେଟ୍",
+  "notification_manage": "ପରିଚାଳନା କରନ୍ତୁ",
+  "notification_toggle_all": "ସବୁ ବାଛନ୍ତୁ କିମ୍ବା ଚୟନ ହଟାନ୍ତୁ",
+  "notification_delete_confirm": "ମନୋନୀତ ବିଜ୍ଞପ୍ତିଗୁଡିକ ବିଲୋପ କରନ୍ତୁ ({{count}})?",
+  "programs_updated": "ପ୍ରୋଗ୍ରାମଗୁଡିକ ଅଦ୍ୟତନ ହୋଇଛି",
+  "system_not_up_to_date": "ସିଷ୍ଟମ୍ ଅପ୍ ଟୁ ଡେଟ୍ ନୁହେଁ",
+  "new_programs_updates_available": "ନୂତନ ପ୍ରୋଗ୍ରାମ ଅଦ୍ୟତନଗୁଡ଼ିକ ଉପଲବ୍ଧ"
 }

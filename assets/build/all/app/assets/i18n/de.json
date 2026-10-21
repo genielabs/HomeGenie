@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie umfasst Gerätesteuerung, Automatisierungsprogramme und Widgets. Vorherige Genies bleiben verfügbar. Sie können sie deaktivieren, sobald Sie bereit sind; Einstellungen und Chat-Verläufe bleiben erhalten.",
   "notification_disable_genies": "Vorherige Genies deaktivieren",
   "notification_disable_genies_confirm": "Aufgeführte vorherige Genies deaktivieren? Einstellungen und Chat-Verläufe bleiben erhalten. Sie können jederzeit wieder aktiviert werden.",
-  "upgrade_all": "Alle aktualisieren"
+  "upgrade_all": "Alle aktualisieren",
+  "open_program_updates": "Updates öffnen",
+  "program_updates": "Programmaktualisierungen",
+  "programs_list": "Programmliste",
+  "last_update": "Letzte Aktualisierung",
+  "notification_manage": "Verwalten",
+  "notification_toggle_all": "Alle auswählen oder abwählen",
+  "notification_delete_confirm": "Ausgewählte Benachrichtigungen löschen ({{count}})?",
+  "programs_updated": "Programme aktualisiert",
+  "system_not_up_to_date": "Das System ist nicht auf dem neuesten Stand",
+  "new_programs_updates_available": "Neue Programmaktualisierungen verfügbar"
 }

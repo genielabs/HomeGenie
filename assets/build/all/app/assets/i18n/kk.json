@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie құрылғыны басқару, автоматтандыру бағдарламалары мен виджеттерді қамтиды. Алдыңғы Genies қолжетімді болып қала береді. Дайын болғанда оларды өшіруге болады; олардың параметрлері мен чат тарихы сақталады.",
   "notification_disable_genies": "Алдыңғы Genies өшіру",
   "notification_disable_genies_confirm": "Тізімдегі алдыңғы Genies өшірілсін бе? Олардың параметрлері мен чат тарихы сақталады. Оларды кез келген уақытта қайта қосуға болады.",
-  "upgrade_all": "Барлығын жаңарту"
+  "upgrade_all": "Барлығын жаңарту",
+  "open_program_updates": "Жаңартуларды ашу",
+  "program_updates": "Бағдарлама жаңартулары",
+  "programs_list": "Бағдарламалар тізімі",
+  "last_update": "Соңғы жаңарту",
+  "notification_manage": "Басқару",
+  "notification_toggle_all": "Барлығын таңдау немесе таңдаудан бас тарту",
+  "notification_delete_confirm": "Таңдалған хабарландырулар ({{count}}) жойылсын ба?",
+  "programs_updated": "Бағдарламалар жаңартылды",
+  "system_not_up_to_date": "Жүйе жаңартылмаған",
+  "new_programs_updates_available": "Жаңа бағдарлама жаңартулары қолжетімді"
 }

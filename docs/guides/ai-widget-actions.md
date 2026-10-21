@@ -8,6 +8,33 @@ Chat previews are in-memory CustomWidget instances. Their module binding and siz
 
 Keep draft editing separate from backend installation. Installing a widget does not add it to a dashboard. A future dashboard action can use the preview binding and layout as defaults, with an explicit destination.
 
+## Conversational presentations
+
+The canonical widget response supports optional `widget.mode: "presentation"`. The same field can accompany a composite widget whose backing program was requested. Omitting mode preserves the existing preview/save/editor behavior.
+
+In presentation mode, the chat renders the optional explanation and the temporary widget, without Markdown sources, the Actions/Save panel, the standard widget menu or automatic updates to an open editor. Complete presentation sources are retained in a versioned `ai_widget` history envelope; composites retain their existing `ai_solution` envelope with the widget mode. Reopening or importing history restores the display mode. Only final messages instantiate presentations; partial control blocks and envelopes are not rendered as source text.
+
+The AI may choose a presentation for an illustrated answer, chart, narrative scene, animation or local choices. Standalone presentations require neither a module nor a deployed program. Responsive free sizing and the existing viewport/page pause/resume lifecycle apply. Reload reconstructs the controller; arbitrary in-memory state is not persisted by this mode.
+
+Presentation widgets can send a user choice back to their original AI conversation:
+
+```javascript
+// Call from a user gesture, never create/resume/refresh. Keep eventId stable for this logical choice.
+this.apiCall('System.Utility/AiGenie/Chat.Feedback', {
+  eventId: 'portal-choice-1', event: 'choice-selected',
+  data: {scene: 'portal', choice: 'roots', label: 'Follow the roots'}
+}).subscribe({next: res => {
+  const receipt = res.response;
+  // Disable this choice after Status === 'Ok'; the chat displays the assistant continuation.
+  // On busy, let the user try later. On unknown, inspect history before any retry.
+}, error: error => { /* Unconfirmed outcome: inspect the original conversation. */ }});
+```
+
+The host supplies adapter/provider/source-request correlation; do not supply or invent those IDs. Only completed presentation messages with request metadata in a feedback-capable provider support this route. `eventId` (1–128 characters) and `event` (1–80) use ASCII letters, digits, `_ . : -`; `data` is a JSON object and the complete request must fit within 16 KiB. The event is reference data representing a user selection, never a new policy or system instruction. Existing context/capability settings apply; a changed context profile requires a new presentation.
+
+This continues the original provider conversation and saves only the assistant reply, with the event in its metadata. No USER row is added. Future model context includes the selection. A completed event survives history reload and repeating the same eventId/data returns its saved result; reusing an ID with different data is rejected. After an unconfirmed result, never retry effects automatically. Recovery guards for unconfirmed outcomes are in memory and do not survive a provider/shared-service restart. Deleted presentations and cleared history cannot be continued. Local-only animations/counters need no feedback call. Dispose subscriptions and listeners with the normal widget lifecycle.
+
+
 ## Proposed action
 
 ```json

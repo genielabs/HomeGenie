@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "يتضمن Gemini Genie التحكم في الأجهزة وبرامج الأتمتة والویدجت. تظل إصدارات Genie السابقة متاحة. يمكنك تعطيلها عندما تكون مستعدًا؛ سيتم الاحتفاظ بإعداداتها وسجل الدردشة.",
   "notification_disable_genies": "تعطيل إصدارات Genie السابقة",
   "notification_disable_genies_confirm": "هل تريد تعطيل إصدارات Genie السابقة المحددة؟ سيتم الاحتفاظ بإعداداتها وسجل الدردشة الخاص بها. يمكنك إعادة تفعيلها في أي وقت.",
-  "upgrade_all": "تحديث الكل"
+  "upgrade_all": "تحديث الكل",
+  "open_program_updates": "فتح التحديثات",
+  "program_updates": "تحديثات البرامج",
+  "programs_list": "قائمة البرامج",
+  "last_update": "آخر تحديث",
+  "notification_manage": "إدارة",
+  "notification_toggle_all": "حدد أو قم بإلغاء تحديد الكل",
+  "notification_delete_confirm": "هل تريد حذف الإشعارات المحددة ({{count}})؟",
+  "programs_updated": "تم تحديث البرامج",
+  "system_not_up_to_date": "النظام ليس محدثا",
+  "new_programs_updates_available": "تتوفر تحديثات جديدة للبرنامج"
 }

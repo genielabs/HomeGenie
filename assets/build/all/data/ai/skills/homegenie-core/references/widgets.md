@@ -2,10 +2,29 @@
 
 Widgets are dynamically **loadable Web Components** running in Shadow DOM. They consist of **HTML (View)**, **CSS (Style)**, and **JavaScript (Controller)**.
 
+### Required CSS dependency check before returning a widget
+
+Inspect the FINAL HTML and CSS before emitting any ordinary, composite or presentation widget. Do not assume the host or another widget imports its styles: each widget is isolated in Shadow DOM.
+
+- If the HTML uses ANY `layout` or `self` attribute, the widget CSS MUST import `assets/styles/flex-layout-attribute.min.css`.
+- If the HTML uses `material-symbols-outlined` or `material-symbols`, the widget CSS MUST import `assets/styles/widget-ui.css`. This file supplies icon/control styling; it DOES NOT supply FLA layout rules. Importing it alone cannot implement `layout="column ..."`.
+- Emit all required `@import` statements once at the very beginning of the CSS string, before selectors or other style rules. Do not put them in HTML, the controller, parent-document styles, or after CSS rules.
+
+For a widget with BOTH layout attributes and Material Symbols, start CSS exactly with:
+
+```css
+@import 'assets/styles/flex-layout-attribute.min.css';
+@import 'assets/styles/widget-ui.css';
+```
+
+Use the documented FLA vocabulary: `layout="row center-left"`, `layout="row center-justify"`, `layout="row center-right"`, `layout="column top-stretch"` or `layout="column center-center"`. Do not invent `center-between`, `center-start` or `center-end`. Put self alignment/sizing in a SEPARATE attribute, e.g. `self="stretch size-x1"`; never put `self-stretch` inside `layout`.
+
+Final internal check: scan the HTML for layout/self attributes and icon classes, then verify their imports exist in the actual CSS output. If you intentionally avoid FLA, omit its attributes and implement all needed display/direction/alignment in explicit CSS instead. Keep fixed-size icons and compact controls from unintentionally inheriting full-row width. Shared `widget-ui.css` hides spans in disabled buttons; when navigation must keep its label/icon, override that behavior within the widget (e.g. `.nav-btn:disabled span { display: inline-block; opacity: 1; }`).
+
 ### 2.1 Critical Rules (VIOLATION = BROKEN WIDGET)
 1.  **ASSET MANAGEMENT:**
     * Prefer local assets for UI and styling: Do NOT use external CDNs for Fonts, Icons, or CSS. Assume these are hosted locally.
-    * EXCEPTION: You MAY use CDNs ONLY for complex third-party JavaScript libraries (e.g., Three.js, GSAP) if they are strictly necessary for the requested functionality.
+    * Chart.js, Anime.js and Three.js are available as local JavaScript assets; use the entry points below. Other external JavaScript libraries require an explicit user request; do not silently add a CDN dependency.
 2.  **ELEMENT ACCESS & STYLING:**
     *   **Access:** Use `this.field('my_el')` for elements declared with the `#` directive attribute. Use `this.view().find('valid_query_selector')` to get elements within the view. (Both return a ZxQuery Object).
     *   **Style:** Use `.css({ 'color': 'red' })`. **NEVER** use `.style` directly on `this.field()`. **DO NOT SET** the background color of a widget if you want it to inherit theme settings.
@@ -69,7 +88,7 @@ class MyWidget extends ControllerInstance {
     *   **Binding Check:** Initialize the view and its methods first. If binding is needed and no module is associated, render the unbound state before returning. Standalone widgets must not depend on a bound module.
     *   **Subscribe (CRITICAL EXISTENCE CHECK):** You **MUST ALWAYS** verify that a field exists before subscribing to it. Failing to do so causes a FATAL runtime crash.
         *   *Correct:* `const f = this.boundModule.field('Sensor.Name'); if (f) { this.subscribe(f, callback); }`
-*   **`onDispose()`**: **MANDATORY FOR MEMORY SAFETY**. You MUST always generate this method in the controller class. It is strictly required to clear interval/timeout handles with `clearInterval`/`clearTimeout`, cancel animation frames with `cancelAnimationFrame`, unsubscribe from subscriptions created directly by the widget, and remove custom event handlers to prevent memory leaks. Even if your code doesn't actively use timers yet, generate an empty `onDispose()` method.
+*   **`onDispose()`**: **MANDATORY FOR MEMORY SAFETY**. You MUST always generate this method in the controller class. It is strictly required to clear interval/timeout handles with `clearInterval`/`clearTimeout`, cancel animation frames with `cancelAnimationFrame`, unsubscribe from subscriptions created directly by the widget, and remove event handlers registered outside the managed view to prevent memory leaks. Handlers registered with `this.view().on(...)` are automatically unregistered by the framework. Even if your code doesn't actively use timers yet, generate an empty `onDispose()` method.
 *   **`this.apiCall('domain/address/method', payload)`**: *FRONTEND ONLY (UI/Widgets)*. Sends a request from the widget to a backend service. Returns an Observable.
     *   **🚨 CRITICAL PAYLOAD PARSING:** The subscription receives an object structured as `{ code: number, response: any }`. **You MUST use `data.response` to access the actual JSON/array returned by the backend API.** Do not assume the raw array/object is returned directly at the root.
     *   *Correct Usage:* `this.apiCall('Custom/MyApi').subscribe({ next: (data) => { const payload = data.response; /* process payload */ } });`
@@ -112,6 +131,89 @@ Directives operate on the context exposed by `this.declare()`.
     *   **STATE:** Check `Status.Level` for ON/OFF.
 *   **Icons:** Use standard *Google's Material Symbols & Icons* (e.g., `lightbulb`, `light_off`). No `_fill` suffix.
 
+
+### Material Symbols in widgets
+
+Material Symbols are available from local YoT assets. Apply these instructions to ordinary widgets, composite widgets and chat widgets with `widget.mode="presentation"`.
+
+When using icons, put this import at the beginning of the widget CSS, before style rules, even when the widget has its own nonempty CSS. Styles outside the widget Shadow DOM are not sufficient:
+
+```css
+@import 'assets/styles/widget-ui.css';
+```
+
+Use the icon name as the text content of a plain HTML span:
+
+```html
+<!-- Outlined -->
+<span class="material-symbols-outlined" aria-hidden="true">lightbulb</span>
+<!-- Filled -->
+<span class="material-symbols" aria-hidden="true">lightbulb</span>
+```
+
+The shared CSS sets `FILL` to 0 for `material-symbols-outlined` and 1 for `material-symbols`. Use standard names such as `lightbulb`, `light_off`, `check_small` or `close_small`; do not invent a `_fill` suffix. Custom widgets use zuix.js rather than Angular, so do not use `<mat-icon>`. Do not load icon fonts or styles from Google Fonts or another external CDN.
+
+For icons alongside text, use an inline-flex container with `align-items: center` and a suitable gap; set the icon's `line-height: 1`. Keep a visible label or accessible name on icon-only controls; `aria-hidden="true"` is appropriate for decorative icons when the control already has its own name.
+
+### Local graphics and animation libraries
+
+YoT copies these npm assets during build/serve. Load them on demand from the SAME frontend origin and base path, in ordinary, composite and presentation widgets. Do not replace them with a CDN, bare package imports, Angular components or another version.
+
+| Library | Local entry point | Browser API |
+| --- | --- | --- |
+| Chart.js 4.5.1 | `assets/js/chartjs/chart.module.js` | Native ESM bundle; use its default `Chart` export. Independent of Monaco/AMD. |
+| Anime.js 4.5.0 | `assets/js/animejs/anime.esm.min.js` | ESM named exports, e.g. `animate`, `stagger`, `createTimeline`. Use v4 APIs, not the v3 `anime(...)` API. |
+| Three.js 0.186.1 | `assets/js/three/three.module.js` | ESM namespace. Its sibling `three.core.js` is copied too. |
+
+Resolve paths against `document.baseURI`, not the controller's dynamic script URL or the backend adapter URL:
+
+```javascript
+// Inside an async controller method called from onCreate():
+const { animate } = await import(new URL('assets/js/animejs/anime.esm.min.js', document.baseURI).href);
+// Equivalent entries for Three.js and Chart.js:
+// const THREE = await import(new URL('assets/js/three/three.module.js', document.baseURI).href);
+// const { default: Chart } = await import(new URL('assets/js/chartjs/chart.module.js', document.baseURI).href);
+if (this.disposed) return; // Set your own per-instance flag in onDispose().
+```
+
+Do not use top-level static `import` in a widget controller. Start asynchronous loading after the view exists, catch loading/rendering errors in the widget, and check disposal after each await before allocating resources. Module imports are cached by the browser; do not add per-widget cache-busting URLs. Do not insert scripts or import maps into the shared document. Three.js addons (OrbitControls, GLTFLoader, etc.) are NOT bundled: do not invent local addon paths or mix versions.
+
+Prefer HTML/CSS/SVG for simple graphics; Chart.js for ordinary data charts; Anime.js for coordinated HTML/SVG animation; Three.js for useful 3D scenes. Avoid a library when native browser features are sufficient.
+
+- Use actual DOM elements from `this.field(...).get()` or instance-scoped queries as animation targets. Global string selectors do not reach widget Shadow DOM reliably. Never change global Chart defaults or the shared Anime engine to control a single widget.
+- Chart.js: give the canvas a dedicated positioned parent with a defined height. Use responsive mode or resize the instance to the measured container. Stop animation when inactive; destroy the chart in onDispose(). Static charts can use `animation: false`. Respect the UI locale in chart options.
+- Anime.js: construct with `autoplay: false`, resume/pause the owned animations through the normal viewport/page lifecycle, and call `revert()` on disposal. Do not confuse Anime's exported `utils` with the host's `utils`; alias it if needed.
+- Three.js: use the actual container size for renderer size and camera aspect; cap pixel ratio, e.g. at 2. Own one cancellable rendering chain. Rebase timestamps on resume. Dispose owned geometries, materials, textures, controls and renderer; release an owned WebGL context when permanently removing it. Show a useful fallback if WebGL is unavailable.
+- Respect `prefers-reduced-motion`: start decorative scenes static or paused, while allowing deliberate user activation. All recurring work must follow section 2.12; asynchronous loading must never restart a disposed widget.
+- zuix allocates its main active-refresh loop when the view contains an active `@` directive or a refresh script. If an otherwise static HTML view relies on `refresh:active`/`refresh:inactive`, add a neutral `@set="void 0"` directive (optionally `@delay="500"`) to its visible root container. `#` fields and `(click)` bindings alone do not enable that loop. Do not add `@active`, which would bypass normal visibility suspension.
+
+Compact source examples are available as `examples/chart-pulse`, `examples/anime-orbit`, and `examples/three-knot` under the widgets directory. They are unbound, use sample/procedural content only and do not send device commands.
+
+### Fluid width in chat previews
+
+For a free-size widget that should occupy the available width in the AI chat preview, declare `settings = { defaultSize: '', sizeOptions: [], fillWidth: true };` in its controller. The optional `fillWidth` flag makes the outer preview widget grow AND shrink with the chat; `width: 100%` inside Shadow DOM alone cannot expand a content-sized outer host.
+
+The flag takes effect only when the current widget has no small/medium/big size. Omit it (or set false) for widgets that should retain their intrinsic width. Inner content may still use its own max-width and centering; the flag fills the outer host, not every inner element. Keep chart wrappers responsive and give them a defined height. This option currently applies ONLY to chat previews, including ordinary previews and presentation mode; it does not change dashboard sizing or add dashboard resizing behavior.
+
+### Practical widget conventions
+
+- When using FLA `layout`/`self` attributes, also put `@import 'assets/styles/flex-layout-attribute.min.css';` at the beginning of the widget CSS, before rules. Imports outside Shadow DOM do not style its contents.
+- Render current field values immediately, then subscribe to changes. `this.subscribe(field, handler)` does not replay the current value:
+  ```javascript
+  const field = this.boundModule?.field('Sensor.Temperature');
+  if (field) {
+    const render = () => this.model().temperature = utils.format.fieldValue(field);
+    render();
+    this.subscribe(field, render);
+  }
+  ```
+- `Module.control(...)` dispatches immediately through WebSocket; its HTTP fallback returns a cold observable and needs a subscription to dispatch. Subscribe when observing responses/errors or managing pending UI, and retain directly owned subscriptions for cleanup. Do not subscribe twice to the same HTTP command observable. A successful API response is not proof of a physical device state change: display confirmed state from module fields. Do not automatically repeat commands on refresh/resume.
+- For continuous controls, update the local visual value immediately, throttle device requests, and flush the final selected value on release. Cancel any pending trailing send before that flush and on disposal; do not let it overwrite the final value. Clean up pointer listeners and distinguish intentional command-completion timers from visual polling.
+- Use a field's numeric `decimalValue` for calculations and `utils.format.fieldValue(field)` for presentation. Zero is valid; distinguish it from missing/invalid values. Clamp values and use the documented scale for each command/field: do not assume all levels use either 0..1 or 0..100.
+- Keep mutable state, timers, rendering objects and observers on the controller instance. Avoid shared globals and fixed DOM IDs; multiple copies must coexist.
+- Reuse existing registered custom elements when composing frontend widgets; use the documented module/options/ready contract of that component. Frontend composition is distinct from response `kind=composite`, which deploys a program and its dependent widget.
+- Use `utils.preferences.ui.language || navigator.language` for locale-aware dates/numbers. Respect the configured display units and distinguish locale from an explicitly selected timezone. Do not hardcode the browser's language when the UI language is available.
+
 ### 2.8 Strict Coding Constraints
 *   **NO HALLUCINATIONS:** Use **ONLY** the methods of the `utils` class explicitly mentioned in this prompt.
 *   **DOM Manipulation Strict Rules:**
@@ -150,5 +252,52 @@ When an element inside a flex column container (`layout="column ..."`) needs to 
 * Standalone interactive components, including small games, must work without a module or backend calls when those are unnecessary. Device/API commands must follow the user's requested behavior and must not be issued automatically merely because a preview was loaded.
 * The host may recreate or dispose a preview when the chat is closed or its source changes. Initialize state in `onCreate()` and release owned resources in `onDispose()`. Do not depend on the preview DOM remaining alive or on a hard-coded DOM ID outside the widget.
 
+### 2.12 VIEWPORT VISIBILITY & ACTIVE REFRESH (MANDATORY FOR TIMERS/CANVAS/3D)
+* Any widget with periodic updates or calculations, `setInterval`, repeating `setTimeout`, `requestAnimationFrame`, Canvas or Three.js rendering MUST implement pause/resume. Register the lifecycle handlers in `onCreate()` before starting recurring work.
+* `this.view().on('refresh:inactive', ...)`: mark the viewport inactive and stop owned animation loops and periodic timers. Cancel scheduled handles; do not keep a loop running merely to skip drawing.
+* `this.view().on('refresh:active', ...)`: mark the viewport active, synchronize current data and view dimensions, then resume only if the page is visible. Refresh the display immediately; do not wait for the next interval or replay user/device actions.
+* Track viewport activity separately from page visibility. Register `document.addEventListener('visibilitychange', handler)` to pause while `document.hidden` is true and resume only when BOTH the viewport is active and the page is visible. Reuse the same pause/resume routines; do not add a second viewport observer or use `@active` to bypass suspension.
+* Make resume and pause idempotent: at most one animation chain and one instance of each periodic timer. Rebase animation timestamps on resume to avoid a large first-frame delta. Async callbacks must not recreate loops after pause or disposal.
+* `onDispose()`: mark the controller disposed, permanently stop all owned animation/timer handles, remove the document visibility listener, unsubscribe directly owned subscriptions and dispose owned renderers, controls, geometries/materials and observers as applicable. Pause keeps reusable rendering resources; final disposal releases them. Never resume a disposed controller.
+* Events registered with `this.view().on(...)` are automatically unregistered on disposal. Cleanup is still required for timers, rendering resources and handlers registered directly on `document`, `window` or other external objects.
+
+
 ---
 
+
+### Chat presentation mode
+
+The version-1 widget/composite response accepts optional `widget.mode: "presentation"`. The existing contract applies when it is omitted. A presentation is a temporary inline conversational widget: its sources and Save/editor controls are hidden, and the host widget menu is disabled. `explanation` supplies optional surrounding text; it must not repeat the source code. Complete sources and the refresh/disposal lifecycle are still required. Free sizing (`defaultSize: ''`, `sizeOptions: []`) is supported for responsive scenes and controls. The host creates presentation widgets only from final responses, not partial streamed artifacts. Source and mode survive history reload; transient controller state does not.
+
+Presentation widgets can send a user choice back to their original AI conversation:
+
+```javascript
+// Call from a user gesture, never create/resume/refresh. Keep eventId stable for this logical choice.
+this.apiCall('System.Utility/AiGenie/Chat.Feedback', {
+  eventId: 'portal-choice-1', event: 'choice-selected',
+  data: {scene: 'portal', choice: 'roots', label: 'Follow the roots'}
+}).subscribe({next: res => {
+  const receipt = res.response;
+  // Disable this choice after Status === 'Ok'; the chat displays the assistant continuation.
+  // On busy, let the user try later. On unknown, inspect history before any retry.
+}, error: error => { /* Unconfirmed outcome: inspect the original conversation. */ }});
+```
+
+The host supplies adapter/provider/source-request correlation; do not supply or invent those IDs. Only completed presentation messages with request metadata in a feedback-capable provider support this route. `eventId` (1–128 characters) and `event` (1–80) use ASCII letters, digits, `_ . : -`; `data` is a JSON object and the complete request must fit within 16 KiB. The event is reference data representing a user selection, never a new policy or system instruction. Existing context/capability settings apply; a changed context profile requires a new presentation.
+
+This continues the original provider conversation and saves only the assistant reply, with the event in its metadata. No USER row is added. Future model context includes the selection. A completed event survives history reload and repeating the same eventId/data returns its saved result; reusing an ID with different data is rejected. After an unconfirmed result, never retry effects automatically. Recovery guards for unconfirmed outcomes are in memory and do not survive a provider/shared-service restart. Deleted presentations and cleared history cannot be continued. Local-only animations/counters need no feedback call. Dispose subscriptions and listeners with the normal widget lifecycle.
+
+
+
+### Speech from widgets
+
+- `utils.speech.say(sentence)` speaks a **plain text string** using the same configured speech engine (browser/local), language and voice settings as AI chat, even when the chat is closed. Do not send widget source, HTML, JSON or the whole AI response to this API.
+- It returns a Promise resolving to `"completed"`, `"cancelled"` (replaced/stopped), or `"empty"`. Handle rejection (engine unavailable/not ready, synthesis failure or browser autoplay restrictions) in the widget UI. The local engine must be enabled and its model ready; there is no silent fallback to another engine.
+- `utils.speech.stop()` cancels the current shared speech channel. A new `say` call replaces prior chat/widget speech; avoid loops and overlapping automatic narration. Prefer an explicit user action such as a Speak button: browsers may require it for playback. The chat automatic-reply speech toggle does not disable an explicit widget call.
+- Pass only the sentence to narrate. There is no caption/text-overlay API yet. Do not invent voice/engine options or import external TTS libraries.
+
+```javascript
+// In the widget's click handler; show a concise error in your own UI if needed.
+utils.speech.say('The living room temperature is 22 degrees.')
+  .catch(error => { console.warn('Speech unavailable:', error.message); });
+```

@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie sisaldab seadmete juhtimist, automatiseerimisprogramme ja vidinaid. Eelmised Genied jäävad kättesaadavaks. Saate need keelata, kui olete valmis; nende seaded ja vestluste ajalugu säilitatakse.",
   "notification_disable_genies": "Keela eelmised Genied",
   "notification_disable_genies_confirm": "Kas keelata loetletud eelmised Genied? Nende seaded ja vestluste ajalugu säilitatakse. Saate need igal ajal uuesti lubada.",
-  "upgrade_all": "Uuenda kõiki"
+  "upgrade_all": "Uuenda kõiki",
+  "open_program_updates": "Ava uuendused",
+  "program_updates": "Programmide uuendused",
+  "programs_list": "Programmide loend",
+  "last_update": "Viimane uuendus",
+  "notification_manage": "Halda",
+  "notification_toggle_all": "Valige kõik või tühistage valikud",
+  "notification_delete_confirm": "Kas kustutada valitud märguanded ({{count}})?",
+  "programs_updated": "Programmid uuendatud",
+  "system_not_up_to_date": "Süsteem ei ole ajakohane",
+  "new_programs_updates_available": "Saadaval on uued programmivärskendused"
 }

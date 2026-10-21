@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie gen ladan kontwòl aparèy, pwogram otomatizasyon ak widje. Ansyen Genies yo ap rete disponib. Ou ka dezaktive yo lè ou pare; paramèt ak istwa chat yo ap konsève.",
   "notification_disable_genies": "Dezaktive ansyen Genies yo",
   "notification_disable_genies_confirm": "Èske ou vle dezaktive ansyen Genies ki nan lis la? Paramèt ak istwa chat yo ap konsève. Ou ka reaktive yo nenpòt lè.",
-  "upgrade_all": "Mete tout ajou"
+  "upgrade_all": "Mete tout ajou",
+  "open_program_updates": "Louvri mizajou yo",
+  "program_updates": "Mizajou pwogram yo",
+  "programs_list": "Lis pwogram yo",
+  "last_update": "Dènye mizajou",
+  "notification_manage": "Jere",
+  "notification_toggle_all": "Chwazi oswa deseleksyone tout",
+  "notification_delete_confirm": "Efase notifikasyon chwazi yo ({{count}})?",
+  "programs_updated": "Pwogram yo mete ajou",
+  "system_not_up_to_date": "Sistèm pa ajou",
+  "new_programs_updates_available": "Nouvo mizajou pwogram ki disponib"
 }

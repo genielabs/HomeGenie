@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie bao gồm tính năng điều khiển thiết bị, chương trình tự động hóa và tiện ích con. Các Genie trước đó vẫn khả dụng. Bạn có thể tắt chúng khi sẵn sàng; cài đặt và lịch sử trò chuyện của chúng sẽ được giữ lại.",
   "notification_disable_genies": "Tắt các Genie trước đây",
   "notification_disable_genies_confirm": "Tắt các Genie trước đây trong danh sách? Cài đặt và lịch sử trò chuyện của chúng sẽ được giữ lại. Bạn có thể bật lại chúng bất cứ lúc nào.",
-  "upgrade_all": "Cập nhật tất cả"
+  "upgrade_all": "Cập nhật tất cả",
+  "open_program_updates": "Mở bản cập nhật",
+  "program_updates": "Cập nhật chương trình",
+  "programs_list": "Danh sách chương trình",
+  "last_update": "Lần cập nhật gần nhất",
+  "notification_manage": "Quản lý",
+  "notification_toggle_all": "Chọn hoặc bỏ chọn tất cả",
+  "notification_delete_confirm": "Xóa thông báo đã chọn ({{count}})?",
+  "programs_updated": "Chương trình được cập nhật",
+  "system_not_up_to_date": "Hệ thống chưa được cập nhật",
+  "new_programs_updates_available": "Cập nhật chương trình mới có sẵn"
 }

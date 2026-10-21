@@ -1,0 +1,17 @@
+@import 'assets/styles/widget-ui.css';
+:host { display: block; width: 100%; color: var(--text-color); }
+.container { box-sizing: border-box; padding: 16px; }
+header { padding-right: 48px; margin-bottom: 12px; }
+h3 { margin: 0 0 4px; font-size: 1.1rem; }
+p { margin: 0; color: var(--secondary-text-color); font-size: .85rem; }
+.stage { position: relative; height: 220px; border-radius: 18px; overflow: hidden;
+  background: radial-gradient(ellipse at center, #7186ff20, transparent 70%); }
+footer { display: flex; justify-content: center; margin-top: 12px; }
+button { display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px;
+  border: 1px solid var(--divider-color); border-radius: 20px; cursor: pointer;
+  font: inherit; color: var(--text-color); background: transparent; }
+button:hover { border-color: var(--accent-color); }
+button:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 3px; }
+.material-symbols-outlined { line-height: 1; }
+.status { display: block; color: var(--secondary-text-color); font-size: .8rem; }
+.stage canvas { display: block; }

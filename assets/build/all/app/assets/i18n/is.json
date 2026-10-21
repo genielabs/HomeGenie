@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie inniheldur tækjastýringu, sjálfvirkniforrit og græjur. Fyrri Genies eru enn tiltækir. Þú getur slökkt á þeim þegar þú ert tilbúin(n); stillingar þeirra og spjallferill verða varðveitt.",
   "notification_disable_genies": "Gera fyrri Genies óvirka",
   "notification_disable_genies_confirm": "Gera skráða fyrri Genies óvirka? Stillingar þeirra og spjallferill verða varðveitt. Þú getur virkjað þá aftur hvenær sem er.",
-  "upgrade_all": "Uppfæra allt"
+  "upgrade_all": "Uppfæra allt",
+  "open_program_updates": "Opna uppfærslur",
+  "program_updates": "Forritauppfærslur",
+  "programs_list": "Forritalisti",
+  "last_update": "Síðasta uppfærsla",
+  "notification_manage": "Stjórna",
+  "notification_toggle_all": "Velja eða afvelja allt",
+  "notification_delete_confirm": "Eyða völdum tilkynningum ({{count}})?",
+  "programs_updated": "Forrit uppfærð",
+  "system_not_up_to_date": "Kerfið er ekki uppfært",
+  "new_programs_updates_available": "Nýjar dagskráruppfærslur í boði"
 }

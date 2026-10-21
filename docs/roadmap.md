@@ -1,8 +1,21 @@
 # Roadmap
 
-Consolidated status: 2026-10-18, after the shared Genie engine and scheduler execution tests.
+Consolidated status: 2026-10-21, after notification/update UI refinements, conversational widgets and local widget guidance. See [Unreleased changes](../CHANGELOG.md).
 
 This is the active task list. Detailed stage-by-stage decisions, earlier API names, test counts and acceptance evidence are preserved in [implementation history](roadmap-history.md); they do not override this status. Completed work is not reopened merely because an earlier checkpoint still says pending.
+
+## Release consolidation (2026-10-21)
+
+- [x] Notification list/detail and program-update UI refinements implemented. Maintainer considers updateable-program rows and notification detail satisfactory. Notification management resets when switching Active/Archive; empty lists use a centered secondary message. Dates follow the UI language.
+- [x] Align six notification/update labels across all 91 languages and refresh the translation cache (46 to 47). Structural key/count-placeholder checks passed; this is not native-speaker review of every locale.
+- [x] Add local Chart.js, Anime.js and Three.js assets, lifecycle/import guidance and three compact examples. Chart.js uses a native ESM bundle to avoid the Monaco AMD-loader conflict; the maintainer confirmed chart-pulse works.
+- [x] Reset a custom widget's saved size when its component changes, preserving manual size when only the bound module changes. Chat previews support opt-in fillWidth for free-size widgets; the maintainer confirmed shrinking and growth work. The reverted dashboard-wide free-size layout change is excluded and remains deferred.
+- [x] Update shared widget instructions and the compact local text-provider instructions, including presentation selection, exact field/event bindings, required CSS imports, responsive sizing, local libraries, speech and feedback. Base package 1.0.54 / AI Genie 583 0.22.1 installed successfully on development. Latest focused verification: 63 backend cases, 19 speech/audio checks, four widget-size checks and Angular compilation passed at their respective checkpoints; these are not a fresh full release-suite run.
+- [x] Maintainer rebuilt the frontend on 2026-10-21. The shipped main bundle was replaced and contains preview-fill-width and speech settings. Final resource/hash checks and release CI remain separate.
+- [ ] Finish current live tests and final release verification: production frontend resources/cache manifest, package/version/checksum consistency, full backend suite and release build. Prepare commits without including accidental executable-mode changes or the obsolete free-size test left by reverted work. No tag/publication has been performed.
+- [ ] Maintain native Lailama acceptance separately: ordinary inference, failed startup and stop/model change during inference. The historical core-dump cause is unconfirmed without a native stack; do not describe it as definitively fixed.
+- [ ] Revisit dashboard free-size sizing separately, with an agreed design before implementation. Do not reapply the reverted broad sizing change as part of consolidation.
+- [ ] Review the personal Lailama prompt separately: basic language/device guidance is still useful, but legacy SYSTEM REPORT / SCHEDULED_TASK assumptions and success-before-result examples need review. Keep widget guidance in the shared capability instructions rather than duplicating it in the personal prompt.
 
 ## Next activities
 
@@ -57,9 +70,26 @@ Migration: reopen and save existing generated Genie schedules to regenerate thei
 - [x] Bundled frontend base-href guard and release-build enforcement. Custom-widget redraw correction consolidated in v2.0.29; do not introduce unrelated rendering optimizations.
 - [x] Persistent notifications and optional, consent-based retirement of old specialized Genies. Existing settings/prompts/histories remain; no automatic destructive migration.
 
+## Completed: audio module discovery (2026-10-21)
+
+- [x] Prepare MIG.Audio 1.0.1-preview.1 exposing only stable `0` and `service` modules in both VoiceSynthesizer and VoiceRecognizer. Arbitrary request addresses remain valid and their events retain domain/address/property payloads; HTTP response handling is unchanged. Remove the just-added dynamic channel registry, idle timer and expiry tests rather than shipping two competing policies.
+- [x] Update unit coverage and native HTTP smoke-test expectations for a stable module list. Native-free tests exercise request failures and arbitrary-address events for both interfaces. The HTTP self-test covers validation; actual native transcription/WAV generation remains separate live acceptance.
+- [x] Install MIG.Audio 1.0.1-preview.1 in the development Linux Vulkan runtime with a verified backup of the previous assembly. Maintainer confirmed chat speech synthesis and recognition, with synthesis exercised from two different PCs. A subsequent read-only Modules.List check showed exactly `0` and `service` for each audio domain, all typed Generic. Both domains are excluded from YoT Add widget > Modules; retain Generic for engine/service nodes rather than reclassifying them as switches/sensors.
+- [x] Maintainer published MIG.Audio 1.0.1, updated HomeGenie to that package, rebuilt and restarted the Linux Vulkan backend. Speech synthesis and recognition both continue to work with the rebuilt installation; the candidate was promoted rather than rolled back. Model-download lifecycle acceptance remains separate.
+- Compatibility: HG currently routes property updates/automations only for known modules. Unregistered request-address events are still emitted by MIG.Audio but no longer update HG modules or trigger module automations. `0` and `service` retain their module semantics. YoT speech/recognition use direct HTTP results.
+- The 30-minute expiry implementation and its 35-case checkpoint belong to the superseded experiment, not the released implementation. HomeGenie's garbage-retention review remains below; no garbage code changed.
+
 ## Deferred investigations and optional verification
 
 These are not newly declared release blockers. Keep the original evidence and discuss scope before changing behavior.
+
+- [ ] Reconcile native LLamaSharp files in the existing development Vulkan build after a prior attempted upgrade to 0.30.0. Startup on 2026-10-21 failed in LLamaContextParams.Default after weights loaded. Managed 0.27.0 expects 136 bytes; static inspection found an installed CPU avx2 function writing 160 bytes, and its llama/ggml files differ from official 0.27.0. The Vulkan function is consistent with 136 bytes. Maintainer reports fresh installations do not reproduce this issue; record the previous upgrade as a possible source of mixed binaries, not a proven source/version. Confirm loaded paths and clean/rebuild the affected native family before attributing the failure or historical core dumps to this mismatch. Do not generalize this existing-build finding into a fresh-installation regression.
+
+- [ ] Review `modulesGarbage` retention and add bounded/age-based cleanup if no suitable mechanism exists. HG already reconciles removals when InterfaceModulesChanged is emitted, but modules_RefreshInterface moves removed modules into this recovery collection. The current source has no periodic expiry; Clear occurs during module-database loading. Preserve deliberately configured module recovery and avoid losing user metadata. Explicitly leave garbage behavior unchanged for this audio-channel fix.
+
+- [ ] Investigate intermittent blank Lailama chat after inference failure and context-size restart (2026-10-21). A second context change recovered the original tab; normal restarts did not reproduce the issue. The template can render an empty covering overlay for Ready/Download + empty LLM.Id + completed download. Ready/Widget.Refresh also skip history reload while a failed prompt is retained; that guard alone does not hide the composer. Verify model/status synchronization across restart/reconnection, prevent empty overlays and preserve retry input. The WebSocket reconnect handler does not itself reload module state; event loss/CPU overload and the actual historical trigger remain unconfirmed. Explicitly deferred by the maintainer; no recovery behavior changed.
+- [ ] Improve Lailama context-capacity errors for ordinary chat: identify context overflow, tell the user to increase Context Window or reduce supplied context/history, and retain full exception diagnostics. Background paths already report context_limit, but the generation provider still returns the generic "Local AI inference failed. Please check the logs." Default Context Window is now 8192 (Lailama 1.3.11 / ML package 1.0.72); this is separate from implementing clearer errors.
+
 
 - [ ] Investigate intermittent loss of earlier reasoning during local multi-round streaming/tool calls. Distinguish transient rendering/reset loss from saved-history loss. Reference: chat-history-1792268747142.json; earlier retention fixes did not settle every observed case.
 - [ ] Optionally preserve partial local text after cancellation, marked interrupted and excluded from model context. The maintainer accepts the current saved [STOPPED] behavior; never execute partial commands.
@@ -70,6 +100,10 @@ These are not newly declared release blockers. Keep the original evidence and di
 - [ ] Evaluate shared dashboard preset refresh policy. Preserve browser-local configuration precedence for now; discuss explicit reload, conflicts and concurrent edits before adding synchronization or overwrite behavior.
 
 ## Future extensions
+
+- [ ] Optional text-caption overlay for widget speech; utils.speech.say/stop are already implemented.
+
+
 
 - [ ] Scheduler code caching per Genie action, not per whole schedule: explicit cacheable flag, original prompt, invalidation/regeneration and wizard round trip. Dynamic reads may live in reusable code. Do not replay partial/uncertain effects. Explicitly deferred; current execution remains unchanged.
 - [ ] Optional domain skills and on-demand resource loading/MCP. Fundamental skills already follow capabilities; do not add a duplicate menu for the same choices. A skill must not enable execution permissions.
@@ -82,3 +116,26 @@ These are not newly declared release blockers. Keep the original evidence and di
 - [ ] Complete documentation organization/cross-link review where still needed, without moving published URLs blindly.
 
 HomeGenie and YoT follow deliberate host conventions. Discuss core changes with the maintainer first; do not infer that an unfamiliar design is an optimization opportunity.
+
+
+
+## Conversational widget presentation (2026-10-20)
+
+- [x] Add optional widget.mode=presentation to the canonical schema/normalizer and shared structured/text output. Preserve existing widget behavior when omitted.
+- [x] Render final presentation widgets inline without sources, Save/editor actions or the host widget menu; preserve mode on history reload and retain the normal widget lifecycle. Automated verification and maintainer acceptance are recorded separately.
+- [x] Gemini presentation rendering, interaction and speech accepted by the maintainer; feedback choice retest confirmed working. Chat preview resizing in both directions was also confirmed.
+- [ ] Remaining presentation acceptance: refresh pause/resume, history reload/replay, an open widget editor, and Lailama interaction quality. Do not infer these passes from rendering or prompt-contract tests.
+
+Latest Qwen 4B test inspected from saved history on 2026-10-21: generation completed in about 167 seconds and selected presentation mode, free size, fillWidth and both CSS imports correctly. Sources still reference a missing counter_value field, update data-count without displaying the count, use a global button selector, retain fragile percentage/min-width card sizing and English labels for an Italian request. This confirms progress in mode/import selection, not a passed counter or responsive-layout execution test. No browser/runtime execution was performed for this review.
+
+- [x] Expose widget speech synthesis as utils.speech.say(sentence) (2026-10-21). Shared playback uses the configured chat engine/browser voice settings or enabled ready local synthesizer, works with chat closed, and has Promise completion/cancellation/error handling; utils.speech.stop() stops the common channel. Explicit widget speech is independent of the automatic chat-reply toggle. Updated editor declarations and AI widget/unified instructions. Automated verification is separate from live maintainer acceptance; browser/local live widget tests remain pending. Optional caption overlay remains a future extension.
+- [x] Implement correlated Chat.Feedback and provider continuation without a user history row. Retain interaction context in metadata, handle duplicate events and busy/cancel states, and keep routing attached to the original provider/conversation.
+
+Feedback continuation: implemented for Gemini and Lailama; automated verification is separate from maintainer acceptance. Gemini presentation and speech were accepted on 2026-10-20, and the maintainer subsequently confirmed feedback works after the profile-normalization fix. Remaining explicit live checks: history reload/replay, provider switch, busy/cancellation and local feedback continuation.
+
+
+### Feedback profile and local native lifetime fixes (2026-10-20)
+
+- Gemini feedback fills persistent context/capability selections before normalization, using the same preparation as a normal scoped prompt. A genuine profile change still rejects the old presentation. Maintainer's initial choice test exposed this normalization bug; after the fix the maintainer confirmed feedback works.
+- Lailama background text generation and request execution now run inference and session reset in an independent worker that owns its native lease. Interrupting the caller cannot release an active inference. Failed initialization ends/transfers its lease before requesting bounded cleanup; full exception and phase logs are retained. Context Window controls actual context capacity; RAM profiles tune batch/cache only.
+- Automated ownership/profile/parameter regressions are distinct from live native acceptance. These fixes address concrete defects; the historical core-dump cause remains unconfirmed without a native stack. Pending maintainer checks: failed startup, stop/change model during work, ordinary chat and background requests.

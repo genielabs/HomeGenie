@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie inkluderar enhetskontroll, automatiseringsprogram och widgetar. Tidigare Genies förblir tillgängliga. Du kan inaktivera dem när du är redo; deras inställningar och chatthistorik sparas.",
   "notification_disable_genies": "Inaktivera tidigare Genies",
   "notification_disable_genies_confirm": "Vill du inaktivera listade tidigare Genies? Deras inställningar och chatthistorik sparas. Du kan aktivera dem igen när som helst.",
-  "upgrade_all": "Uppdatera alla"
+  "upgrade_all": "Uppdatera alla",
+  "open_program_updates": "Öppna uppdateringar",
+  "program_updates": "Programuppdateringar",
+  "programs_list": "Programlista",
+  "last_update": "Senaste uppdatering",
+  "notification_manage": "Hantera",
+  "notification_toggle_all": "Markera eller avmarkera alla",
+  "notification_delete_confirm": "Ta bort valda meddelanden ({{count}})?",
+  "programs_updated": "Program uppdaterade",
+  "system_not_up_to_date": "Systemet är inte uppdaterat",
+  "new_programs_updates_available": "Nya programuppdateringar tillgängliga"
 }

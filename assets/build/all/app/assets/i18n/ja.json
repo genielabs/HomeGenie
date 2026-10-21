@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genieには、デバイス制御、自動化プログラム、ウィジェットが含まれます。以前のGenieも引き続き利用可能です。準備ができ次第無効にできます。設定やチャット履歴は保持されます。",
   "notification_disable_genies": "以前のGenieを無効化",
   "notification_disable_genies_confirm": "リストにある以前のGenieを無効にしますか？設定とチャット履歴は保持されます。いつでも再度有効にできます。",
-  "upgrade_all": "すべて更新"
+  "upgrade_all": "すべて更新",
+  "open_program_updates": "更新を開く",
+  "program_updates": "プログラムの更新",
+  "programs_list": "プログラム一覧",
+  "last_update": "前回の更新",
+  "notification_manage": "管理",
+  "notification_toggle_all": "すべて選択／選択解除",
+  "notification_delete_confirm": "選択した通知 ({{count}}) を削除しますか?",
+  "programs_updated": "プログラムを更新しました",
+  "system_not_up_to_date": "システムが最新ではありません",
+  "new_programs_updates_available": "新しいプログラムのアップデートが利用可能"
 }

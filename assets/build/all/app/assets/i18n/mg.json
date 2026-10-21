@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Ahitana fifehezana fitaovana, fandaharan'asa mandeha hoazy, ary widget ny Gemini Genie. Mbola azo ampiasaina ireo Genie teo aloha. Azonao atao ny manafoana azy ireo rehefa vonona ianao; hotehirizina ny lamina sy ny tantaran'ny resaka.",
   "notification_disable_genies": "Atsaharo ireo Genie teo aloha",
   "notification_disable_genies_confirm": "Atsaharo ireo Genie teo aloha voatanisa? Hotehirizina ny fampidirana sy ny tantaran'ny resaka. Azonao atao ny mamerina mampandeha azy ireo amin'ny fotoana rehetra.",
-  "upgrade_all": "Havaozy daholo"
+  "upgrade_all": "Havaozy daholo",
+  "open_program_updates": "Sokafy ny fanavaozana",
+  "program_updates": "Fanavaozana ny programa",
+  "programs_list": "Lisitry ny programa",
+  "last_update": "Fanavaozana farany",
+  "notification_manage": "Tantano",
+  "notification_toggle_all": "Safidio na esory daholo",
+  "notification_delete_confirm": "Fafao ny fampandrenesana voafantina ({{count}})?",
+  "programs_updated": "Nohavaozina ny programa",
+  "system_not_up_to_date": "Tsy manara-penitra ny rafitra",
+  "new_programs_updates_available": "Misy fanavaozana fandaharana vaovao"
 }

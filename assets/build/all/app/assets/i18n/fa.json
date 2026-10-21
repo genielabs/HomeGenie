@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie شامل کنترل دستگاه، برنامه‌های خودکارسازی و ویجت‌ها است. Genies قبلی همچنان در دسترس خواهند بود. هر زمان آماده بودید می‌توانید آن‌ها را غیرفعال کنید؛ تنظیمات و سابقه گفتگوی آن‌ها حفظ خواهد شد.",
   "notification_disable_genies": "غیرفعال کردن Genies قبلی",
   "notification_disable_genies_confirm": "Genies قبلی فهرست‌شده غیرفعال شوند؟ تنظیمات و سابقه گفتگوی آن‌ها حفظ خواهد شد. هر زمان بخواهید می‌توانید دوباره آن‌ها را فعال کنید.",
-  "upgrade_all": "به‌روزرسانی همه"
+  "upgrade_all": "به‌روزرسانی همه",
+  "open_program_updates": "باز کردن به‌روزرسانی‌ها",
+  "program_updates": "به‌روزرسانی برنامه‌ها",
+  "programs_list": "فهرست برنامه‌ها",
+  "last_update": "آخرین به‌روزرسانی",
+  "notification_manage": "مدیریت کنید",
+  "notification_toggle_all": "همه را انتخاب یا لغو انتخاب کنید",
+  "notification_delete_confirm": "اعلان‌های انتخابی ({{count}}) حذف شود؟",
+  "programs_updated": "برنامه ها به روز شد",
+  "system_not_up_to_date": "سیستم به روز نیست",
+  "new_programs_updates_available": "به روز رسانی های جدید برنامه در دسترس است"
 }

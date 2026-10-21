@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie ietver ierīču vadību, automatizācijas programmas un logrīkus. Iepriekšējie Genie paliek pieejami. Varat tos atspējot, kad esat gatavs; to iestatījumi un tērzēšanas vēsture tiks saglabāta.",
   "notification_disable_genies": "Atspējot iepriekšējos Genie",
   "notification_disable_genies_confirm": "Vai atspējot norādītos iepriekšējos Genie? To iestatījumi un tērzēšanas vēsture tiks saglabāta. Varat tos atkal iespējot jebkurā laikā.",
-  "upgrade_all": "Atjaunināt visu"
+  "upgrade_all": "Atjaunināt visu",
+  "open_program_updates": "Atvērt atjauninājumus",
+  "program_updates": "Programmu atjauninājumi",
+  "programs_list": "Programmu saraksts",
+  "last_update": "Pēdējais atjauninājums",
+  "notification_manage": "Pārvaldīt",
+  "notification_toggle_all": "Atlasiet visu vai noņemiet atlasi",
+  "notification_delete_confirm": "Vai dzēst atlasītos paziņojumus ({{count}})?",
+  "programs_updated": "Programmas atjauninātas",
+  "system_not_up_to_date": "Sistēma nav atjaunināta",
+  "new_programs_updates_available": "Ir pieejami jauni programmas atjauninājumi"
 }

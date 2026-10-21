@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie містить засоби керування пристроями, програми автоматизації та віджети. Попередні Genie залишаються доступними. Ви можете вимкнути їх, коли будете готові; їхні налаштування та історію чатів буде збережено.",
   "notification_disable_genies": "Вимкнути попередні Genie",
   "notification_disable_genies_confirm": "Вимкнути вказані попередні Genie? Їхні налаштування та історію чатів буде збережено. Ви можете будь-коли ввімкнути їх знову.",
-  "upgrade_all": "Оновити все"
+  "upgrade_all": "Оновити все",
+  "open_program_updates": "Відкрити оновлення",
+  "program_updates": "Оновлення програм",
+  "programs_list": "Список програм",
+  "last_update": "Останнє оновлення",
+  "notification_manage": "Керувати",
+  "notification_toggle_all": "Виберіть або скасуйте вибір усіх",
+  "notification_delete_confirm": "Видалити вибрані сповіщення ({{count}})?",
+  "programs_updated": "Програми оновлені",
+  "system_not_up_to_date": "Система не оновлена",
+  "new_programs_updates_available": "Доступні нові оновлення програми"
 }

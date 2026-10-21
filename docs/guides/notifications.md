@@ -39,7 +39,7 @@ The initial contract supports at most four actions, each with a unique ID and a 
 
 ## Archive and UI behavior
 
-Records are kept in `data/programs/582/notifications.json`, with flushed temporary-file writes, atomic replacement and a previous-file backup. Default limits are 500 records and 90 days; archived records are preferred when removing excess items. Retention is checked on incoming messages and list requests; records with running actions are protected, so the count limit may temporarily be exceeded while they complete. Startup recovery uses the module parameter timestamp and does not renew already collected messages merely because the service restarts, or resurrect expired ones. Change `MaximumItems` or `RetentionDays` in program options and restart the service to apply them.
+Records are kept in `data/programs/582/notifications.json`, with flushed temporary-file writes, atomic replacement and a previous-file backup. Default limits are 500 visible records and 90 days; archived records are preferred when removing excess items. Retention is checked on incoming messages and list requests; records with running actions are protected, so the count limit may temporarily be exceeded while they complete. Startup recovery uses the module parameter timestamp and does not renew already collected messages merely because the service restarts, or resurrect expired ones. Change `MaximumItems` or `RetentionDays` in program options and restart the service to apply them.
 
 - Repeating the same sender/ID and content preserves read and archive status.
 - Changed content reopens the record as unread and increments its content revision.
@@ -51,6 +51,14 @@ Records are kept in `data/programs/582/notifications.json`, with flushed tempora
 
 The service must be running to collect every event. At startup it also recovers each module's latest persistent `Program.Notification` value; this is recovery of the last value, not reconstruction of all notifications emitted before the archive was installed or while it was disabled.
 
+## Manage the list
+
+The reader header has Active and Archive icons, with counts and tooltips. Choose **Manage** to show a checkbox beside each notification. **Toggle All** selects or deselects the manageable notifications in the current category. The footer offers **Archive** for active notifications, **Restore** for archived ones, and **Delete** with confirmation. Notifications with running actions cannot be archived, restored or deleted.
+
+Deleting a notification does not delete its program, update job, update history or backup files. The message, details and action results are removed from the archive. A small identity and content-fingerprint marker is retained for the configured retention period so startup recovery and repeated checks do not restore the same message. New content from that producer can create a notification again. Deletion markers are excluded from List and the visible-record limit, and expire during the normal retention cleanup.
+
+Bulk requests are validated and saved together per backend. A failed batch leaves that backend's notifications unchanged; failures on one backend do not hide the outcome on another. Live deletion events remove the notification in other connected clients, with sequence checks protecting against older events.
+
 ## APIs
 
 | API | Request / result |
@@ -58,8 +66,11 @@ The service must be running to collect every event. At startup it also recovers 
 | `GET /api/System.Utility/Notifications/List` | All retained records, including archived ones |
 | `POST /api/System.Utility/Notifications/Get` | `{key}`; one record |
 | `POST /api/System.Utility/Notifications/Read` | `{key, value:true}`; updated record |
-| `POST /api/System.Utility/Notifications/Archive` | `{key, value:true}`; use false to restore |
+| `POST /api/System.Utility/Notifications/Archive` | `{key, value:true}`; use false to restore. Bulk: `{keys:[...], value:true/false}` |
+| `POST /api/System.Utility/Notifications/Delete` | `{key}` or `{keys:[...]}`; delete selected notifications |
 | `POST /api/System.Utility/Notifications/Execute` | `{key, revision, actionId}`; updated record or explicit error |
+
+Bulk Read, Archive and Delete requests accept between one and 500 distinct keys and return `{Status:"Ok", items:[...]}`. Single-key requests return the updated record; Delete returns its deletion marker.
 
 The UI sends only a stored record/action identity and revision. The backend loads the stored action and body; the client cannot substitute an endpoint. Execution requires a click, and optional confirmation is handled by the existing confirmation dialog. Archived records, stale revisions and unavailable/disabled sender programs are rejected.
 

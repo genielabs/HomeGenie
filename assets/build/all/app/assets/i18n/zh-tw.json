@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie 包含裝置控制、自動化程式與小工具。先前的 Genies 仍可繼續使用。準備好後即可將其停用；相關設定與對話紀錄將會保留。",
   "notification_disable_genies": "停用先前的 Genies",
   "notification_disable_genies_confirm": "確定要停用所列出的先前 Genies 嗎？其設定與對話紀錄將會保留。您可以隨時重新啟用。",
-  "upgrade_all": "全部更新"
+  "upgrade_all": "全部更新",
+  "open_program_updates": "開啟更新",
+  "program_updates": "程式更新",
+  "programs_list": "程式清單",
+  "last_update": "上次更新",
+  "notification_manage": "管理",
+  "notification_toggle_all": "全選或取消全選",
+  "notification_delete_confirm": "刪除選定的通知 ({{count}})？",
+  "programs_updated": "程式已更新",
+  "system_not_up_to_date": "系統尚未更新至最新版本",
+  "new_programs_updates_available": "有新的程式更新可用"
 }

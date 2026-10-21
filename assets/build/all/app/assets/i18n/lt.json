@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "„Gemini Genie“ apima įrenginių valdymą, automatizavimo programas ir valdiklius. Ankstesni „Genie“ lieka pasiekiami. Galite juos išjungti, kai būsite pasiruošę; jų nustatymai ir pokalbių istorija bus išsaugoti.",
   "notification_disable_genies": "Išjungti ankstesnius „Genie“",
   "notification_disable_genies_confirm": "Išjungti išvardytus ankstesnius „Genie“? Jų nustatymai ir pokalbių istorija bus išsaugoti. Galite bet kada juos vėl įjungti.",
-  "upgrade_all": "Atnaujinti viską"
+  "upgrade_all": "Atnaujinti viską",
+  "open_program_updates": "Atverti naujinimus",
+  "program_updates": "Programų naujinimai",
+  "programs_list": "Programų sąrašas",
+  "last_update": "Paskutinis naujinimas",
+  "notification_manage": "Tvarkyti",
+  "notification_toggle_all": "Pasirinkite arba panaikinkite visų pasirinkimą",
+  "notification_delete_confirm": "Ištrinti pasirinktus pranešimus ({{count}})?",
+  "programs_updated": "Programos atnaujintos",
+  "system_not_up_to_date": "Sistema neatnaujinta",
+  "new_programs_updates_available": "Galimi nauji programos atnaujinimai"
 }

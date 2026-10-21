@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie bevat apparaatbeheer, automatiseringsprogramma's en widgets. Eerdere Genies blijven beschikbaar. U kunt ze uitschakelen wanneer u er klaar voor bent; hun instellingen en chatgeschiedenis blijven bewaard.",
   "notification_disable_genies": "Eerdere Genies uitschakelen",
   "notification_disable_genies_confirm": "De vermelde eerdere Genies uitschakelen? Hun instellingen en chatgeschiedenis blijven bewaard. U kunt ze op elk gewenst moment weer inschakelen.",
-  "upgrade_all": "Alles bijwerken"
+  "upgrade_all": "Alles bijwerken",
+  "open_program_updates": "Updates openen",
+  "program_updates": "Programma-updates",
+  "programs_list": "Programmalijst",
+  "last_update": "Laatste update",
+  "notification_manage": "Beheer",
+  "notification_toggle_all": "Selecteer alles of deselecteer alles",
+  "notification_delete_confirm": "Geselecteerde meldingen verwijderen ({{count}})?",
+  "programs_updated": "Programma's bijgewerkt",
+  "system_not_up_to_date": "Systeem is niet up-to-date",
+  "new_programs_updates_available": "Nieuwe programma-updates beschikbaar"
 }

@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie merangkumi kawalan peranti, program automasi dan widget. Genie terdahulu kekal tersedia. Anda boleh menyahdayakannya apabila sudah bersedia; tetapan dan sejarah sembang akan dikekalkan.",
   "notification_disable_genies": "Nyahdayakan Genie terdahulu",
   "notification_disable_genies_confirm": "Nyahdayakan Genie terdahulu yang disenaraikan? Tetapan dan sejarah sembang akan disimpan. Anda boleh mendayakannya semula pada bila-bila masa.",
-  "upgrade_all": "Kemas kini semua"
+  "upgrade_all": "Kemas kini semua",
+  "open_program_updates": "Buka kemas kini",
+  "program_updates": "Kemas kini program",
+  "programs_list": "Senarai program",
+  "last_update": "Kemas kini terakhir",
+  "notification_manage": "Urus",
+  "notification_toggle_all": "Pilih atau nyahpilih semua",
+  "notification_delete_confirm": "Padamkan pemberitahuan yang dipilih ({{count}})?",
+  "programs_updated": "Program dikemas kini",
+  "system_not_up_to_date": "Sistem tidak terkini",
+  "new_programs_updates_available": "Kemas kini program baharu tersedia"
 }

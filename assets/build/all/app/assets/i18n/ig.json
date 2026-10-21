@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie na-agụnye njikwa ngwaọrụ, mmemme akpaaka na wijetị. Genies ndị gara aga ka dịkwa. Ị nwere ike gbanyụọ ha mgbe ị dị njikere; a ga-edobe ntọala na akụkọ mkparịta ụka ha.",
   "notification_disable_genies": "Gbanyụọ Genies ndị gara aga",
   "notification_disable_genies_confirm": "Gbanyụọ Genies ndị gara aga edepụtara? A ga-edobe ntọala na akụkọ mkparịta ụka ha. Ị nwere ike ịgbalite ha ọzọ n'oge ọ bụla.",
-  "upgrade_all": "Melite ha niile"
+  "upgrade_all": "Melite ha niile",
+  "open_program_updates": "Mepee mmelite",
+  "program_updates": "Mmelite mmemme",
+  "programs_list": "Ndepụta mmemme",
+  "last_update": "Mmelite ikpeazụ",
+  "notification_manage": "Jikwaa",
+  "notification_toggle_all": "Họrọ ma ọ bụ kagbuo nhọrọ niile",
+  "notification_delete_confirm": "Hichapụ ozi ahọpụtara ({{count}})?",
+  "programs_updated": "Emelitere mmemme",
+  "system_not_up_to_date": "Sistemụ anaghị emelite",
+  "new_programs_updates_available": "Mmelite mmemme ọhụrụ dị"
 }

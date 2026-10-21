@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie waxa ku jira xakamaynta qalabka, barnaamijyada otomaatiga iyo aaladaha widget-ka. Genies-kii hore way sii shaqaynayaan. Waad damin kartaa marka aad diyaar u tahay; habayntooda iyo taariikhda wada sheekaysiga waa la xafidi doonaa.",
   "notification_disable_genies": "Dami Genies-kii hore",
   "notification_disable_genies_confirm": "Ma damisaa Genies-kii hore ee liiska ku jira? Habayntooda iyo taariikhda sheekaysiga waa la xafidi doonaa. Dib ayaad u shidi kartaa wakhti kasta.",
-  "upgrade_all": "Dhammaan cusboonaysii"
+  "upgrade_all": "Dhammaan cusboonaysii",
+  "open_program_updates": "Fur cusboonaysiinta",
+  "program_updates": "Cusboonaysiinta barnaamijyada",
+  "programs_list": "Liiska barnaamijyada",
+  "last_update": "Cusboonaysiintii ugu dambaysay",
+  "notification_manage": "Maamul",
+  "notification_toggle_all": "Dooro ama ha dooran dhammaan",
+  "notification_delete_confirm": "Ma tirtirtaa ogeysiisyada la doortay ({{count}})?",
+  "programs_updated": "Barnaamijyada la cusbooneysiiyay",
+  "system_not_up_to_date": "Nidaamku ma cusba",
+  "new_programs_updates_available": "Cusbooneysii barnaamij cusub ayaa diyaar ah"
 }

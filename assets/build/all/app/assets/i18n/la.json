@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie moderationem instrumentorum, programmata automataria et instrumenta parva continet. Priora Genies adhuc praesto sunt. Ea deactivate potes cum paratus eris; optiones et colloquiorum historia conservabuntur.",
   "notification_disable_genies": "Priora Genies deactivare",
   "notification_disable_genies_confirm": "Priora Genies in indice deactivare? Optiones et colloquiorum historia conservabuntur. Ea quovis tempore iterum activare potes.",
-  "upgrade_all": "Omnia renova"
+  "upgrade_all": "Omnia renova",
+  "open_program_updates": "Aperire renovationes",
+  "program_updates": "Renovationes programmatum",
+  "programs_list": "Index programmatum",
+  "last_update": "Ultima renovatio",
+  "notification_manage": "Curo",
+  "notification_toggle_all": "Eligere vel deselect omnes",
+  "notification_delete_confirm": "Delere notificationes electus ({{count}})?",
+  "programs_updated": "Programmata renovata",
+  "system_not_up_to_date": "Ratio non est usque ad date",
+  "new_programs_updates_available": "Nova programma updates praesto"
 }

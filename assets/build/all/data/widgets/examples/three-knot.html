@@ -1,0 +1,7 @@
+<!-- A neutral active directive enables zuix viewport lifecycle events. -->
+<div class="container" @set="void 0" @delay="500">
+  <header><h3>Chromatic knot</h3><p>A tiny rotating sculpture · Three.js</p></header>
+  <div class="stage" #scene_area role="img" aria-label="A rotating multicoloured three-dimensional knot"></div>
+  <footer><button type="button" (click)="toggleSpin()"><span #action></span></button></footer>
+  <span class="status" #status role="status"></span>
+</div>

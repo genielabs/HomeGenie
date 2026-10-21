@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie የመሣሪያ ቁጥጥርን፣ የራስ-ሰር አሠራር ፕሮግራሞችን እና ዊጅቶችን ያካትታል። ቀዳሚ Genies እንደተገኙ ይቆያሉ። ዝግጁ ሲሆኑ ሊያሰናክሏቸው ይችላሉ፤ ቅንብሮቻቸው እና የውይይት ታሪካቸው ይቀመጣል።",
   "notification_disable_genies": "ቀዳሚ Geniesን አሰናክል",
   "notification_disable_genies_confirm": "የተዘረዘሩትን ቀዳሚ Genies ማሰናከል ይፈልጋሉ? ቅንብሮቻቸው እና የውይይት ታሪካቸው ይቀመጣል። በማንኛውም ጊዜ እንደገና ማንቃት ይችላሉ።",
-  "upgrade_all": "ሁሉንም አዘምን"
+  "upgrade_all": "ሁሉንም አዘምን",
+  "open_program_updates": "ዝማኔዎችን ክፈት",
+  "program_updates": "የፕሮግራም ዝማኔዎች",
+  "programs_list": "የፕሮግራሞች ዝርዝር",
+  "last_update": "የመጨረሻ ዝማኔ",
+  "notification_manage": "አስተዳድር",
+  "notification_toggle_all": "ሁሉንም ይምረጡ ወይም አይምረጡ",
+  "notification_delete_confirm": "የተመረጡ ማሳወቂያዎች ይሰረዙ ({{count}})?",
+  "programs_updated": "ፕሮግራሞች ተዘምነዋል",
+  "system_not_up_to_date": "ስርዓቱ የተዘመነ አይደለም።",
+  "new_programs_updates_available": "አዲስ የፕሮግራም ማሻሻያ አለ።"
 }

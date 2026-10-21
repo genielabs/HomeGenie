@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie menyertakan kontrol perangkat, program otomatisasi, dan widget. Genie sebelumnya tetap tersedia. Anda dapat menonaktifkannya kapan saja; pengaturan dan riwayat obrolannya akan tetap disimpan.",
   "notification_disable_genies": "Nonaktifkan Genie sebelumnya",
   "notification_disable_genies_confirm": "Nonaktifkan Genie sebelumnya yang tercantum? Pengaturan dan riwayat obrolannya akan disimpan. Anda dapat mengaktifkannya kembali kapan saja.",
-  "upgrade_all": "Perbarui semua"
+  "upgrade_all": "Perbarui semua",
+  "open_program_updates": "Buka pembaruan",
+  "program_updates": "Pembaruan program",
+  "programs_list": "Daftar program",
+  "last_update": "Pembaruan terakhir",
+  "notification_manage": "Kelola",
+  "notification_toggle_all": "Pilih/batalkan semua",
+  "notification_delete_confirm": "Hapus notifikasi yang dipilih ({{count}})?",
+  "programs_updated": "Program diperbarui",
+  "system_not_up_to_date": "Sistem belum diperbarui",
+  "new_programs_updates_available": "Pembaruan program baru tersedia"
 }

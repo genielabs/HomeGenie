@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie ya ƙunshi sarrafa na'ura, shirye-shiryen sarrafa kansa da widget. Tsoffin Genies za su ci gaba da kasancewa. Za ka iya kashe su a duk lokacin da ka shirya; za a adana saitunansu da tarihin taɗi.",
   "notification_disable_genies": "Kashe tsoffin Genies",
   "notification_disable_genies_confirm": "A kashe tsoffin Genies da aka lissafa? Za a adana saitunansu da tarihin taɗi. Za ka iya sake kunna su a kowane lokaci.",
-  "upgrade_all": "Sabunta duka"
+  "upgrade_all": "Sabunta duka",
+  "open_program_updates": "Buɗe sabuntawa",
+  "program_updates": "Sabunta shirye-shirye",
+  "programs_list": "Jerin shirye-shirye",
+  "last_update": "Sabuntawa na ƙarshe",
+  "notification_manage": "Sarrafa",
+  "notification_toggle_all": "Zaɓi ko cire zaɓin duka",
+  "notification_delete_confirm": "Share zaɓaɓɓun sanarwar ({{count}})?",
+  "programs_updated": "An sabunta shirye-shirye",
+  "system_not_up_to_date": "Tsarin bai sabunta ba",
+  "new_programs_updates_available": "Akwai sabbin sabuntawar shirin"
 }

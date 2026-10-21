@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie uključuje upravljanje uređajima, programe automatizacije i widgete. Prethodni Genies ostaju dostupni. Možete ih onemogućiti kada budete spremni; njihove postavke i povijest razgovora bit će sačuvani.",
   "notification_disable_genies": "Onemogući prethodne Genies",
   "notification_disable_genies_confirm": "Onemogućiti navedene prethodne Genies? Njihove postavke i povijest razgovora bit će sačuvani. Možete ih ponovno omogućiti u bilo kojem trenutku.",
-  "upgrade_all": "Ažuriraj sve"
+  "upgrade_all": "Ažuriraj sve",
+  "open_program_updates": "Otvori ažuriranja",
+  "program_updates": "Ažuriranja programa",
+  "programs_list": "Popis programa",
+  "last_update": "Posljednje ažuriranje",
+  "notification_manage": "Upravljaj",
+  "notification_toggle_all": "Odaberite ili poništite odabir svih",
+  "notification_delete_confirm": "Izbrisati odabrane obavijesti ({{count}})?",
+  "programs_updated": "Programi ažurirani",
+  "system_not_up_to_date": "Sustav nije ažuran",
+  "new_programs_updates_available": "Dostupna su nova ažuriranja programa"
 }

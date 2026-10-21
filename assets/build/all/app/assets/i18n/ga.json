@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Cuimsíonn Gemini Genie rialú gléasanna, cláir uathoibrithe agus giuirléidí. Tá na Genies roimhe seo ar fáil fós. Is féidir leat iad a dhíchumasú nuair a bheidh tú réidh; coimeádfar a socruithe agus a stair chomhrá.",
   "notification_disable_genies": "Díchumasaigh Genies roimhe seo",
   "notification_disable_genies_confirm": "An bhfuil fonn ort na Genies roimhe seo atá liostaithe a dhíchumasú? Coimeádfar a socruithe agus a stair chomhrá. Is féidir leat iad a chumasú arís am ar bith.",
-  "upgrade_all": "Nuashonraigh uile"
+  "upgrade_all": "Nuashonraigh uile",
+  "open_program_updates": "Oscail nuashonruithe",
+  "program_updates": "Nuashonruithe clár",
+  "programs_list": "Liosta clár",
+  "last_update": "Nuashonrú deireanach",
+  "notification_manage": "Bainistigh",
+  "notification_toggle_all": "Roghnaigh nó díroghnaigh go léir",
+  "notification_delete_confirm": "An bhfuil fonn ort na fógraí roghnaithe ({{count}}) a scriosadh?",
+  "programs_updated": "Cláir nuashonraithe",
+  "system_not_up_to_date": "Níl an córas cothrom le dáta",
+  "new_programs_updates_available": "Nuashonruithe cláir nua ar fáil"
 }

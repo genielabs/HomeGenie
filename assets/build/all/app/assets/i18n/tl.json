@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Kasama sa Gemini Genie ang kontrol sa device, mga automation program, at widget. Mananatiling available ang mga nakaraang Genie. Maaari mo itong i-disable kapag handa ka na; pananatilihin ang mga setting at history ng chat ng mga ito.",
   "notification_disable_genies": "I-disable ang mga nakaraang Genie",
   "notification_disable_genies_confirm": "I-disable ang mga nakalistang nakaraang Genie? Pananatilihin ang mga setting at history ng chat ng mga ito. Maaari mo itong i-enable muli anumang oras.",
-  "upgrade_all": "I-update lahat"
+  "upgrade_all": "I-update lahat",
+  "open_program_updates": "Buksan ang mga update",
+  "program_updates": "Mga update ng programa",
+  "programs_list": "Listahan ng mga programa",
+  "last_update": "Huling update",
+  "notification_manage": "Pamahalaan",
+  "notification_toggle_all": "Piliin o alisin sa pagkakapili ang lahat",
+  "notification_delete_confirm": "Tanggalin ang mga napiling notification ({{count}})?",
+  "programs_updated": "Na-update ang mga programa",
+  "system_not_up_to_date": "Hindi napapanahon ang system",
+  "new_programs_updates_available": "Available ang mga bagong update sa programa"
 }

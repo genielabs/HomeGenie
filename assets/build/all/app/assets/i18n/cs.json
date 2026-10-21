@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie zahrnuje ovládání zařízení, automatizační programy a widgety. Předchozí Genies zůstávají k dispozici. Můžete je zakázat, až budete připraveni; jejich nastavení a historie chatu zůstanou zachovány.",
   "notification_disable_genies": "Zakázat předchozí Genies",
   "notification_disable_genies_confirm": "Zakázat uvedené předchozí Genies? Jejich nastavení a historie chatu zůstanou zachovány. Kdykoli je můžete znovu povolit.",
-  "upgrade_all": "Aktualizovat vše"
+  "upgrade_all": "Aktualizovat vše",
+  "open_program_updates": "Otevřít aktualizace",
+  "program_updates": "Aktualizace programů",
+  "programs_list": "Seznam programů",
+  "last_update": "Poslední aktualizace",
+  "notification_manage": "Spravovat",
+  "notification_toggle_all": "Vyberte nebo zrušte výběr všech",
+  "notification_delete_confirm": "Smazat vybraná oznámení ({{count}})?",
+  "programs_updated": "Programy aktualizovány",
+  "system_not_up_to_date": "Systém není aktuální",
+  "new_programs_updates_available": "K dispozici jsou nové aktualizace programu"
 }

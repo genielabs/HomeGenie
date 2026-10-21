@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie inajumuisha udhibiti wa kifaa, programu za kiotomatiki na vidhibiti vidogo. Genies zilizopita bado zinapatikana. Unaweza kuzizima ukiwa tayari; mipangilio yake na historia ya gumzo zitahifadhiwa.",
   "notification_disable_genies": "Zima Genies zilizopita",
   "notification_disable_genies_confirm": "Je, unazima Genies zilizopita zilizoonyeshwa? Mipangilio yake na historia ya gumzo zitahifadhiwa. Unaweza kuziwezesha tena wakati wowote.",
-  "upgrade_all": "Sasisha zote"
+  "upgrade_all": "Sasisha zote",
+  "open_program_updates": "Fungua masasisho",
+  "program_updates": "Masasisho ya programu",
+  "programs_list": "Orodha ya programu",
+  "last_update": "Sasisho la mwisho",
+  "notification_manage": "Dhibiti",
+  "notification_toggle_all": "Chagua au ondoa zote",
+  "notification_delete_confirm": "Ungependa kufuta arifa zilizochaguliwa ({{count}})?",
+  "programs_updated": "Programu zimesasishwa",
+  "system_not_up_to_date": "Mfumo haujasasishwa",
+  "new_programs_updates_available": "Sasisho mpya za programu zinapatikana"
 }

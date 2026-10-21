@@ -626,5 +626,15 @@
   "notification_genie_upgrade": "Gemini Genie میں آلہ کنٹرول، آٹومیشن پروگرامز اور وجیٹس شامل ہیں۔ پچھلے Genies دستیاب رہیں گے۔ تیار ہونے پر آپ انہیں غیر فعال کر سکتے ہیں؛ ان کی ترتیبات اور چیٹ کی تاریخ محفوظ رہے گی۔",
   "notification_disable_genies": "پچھلے Genies غیر فعال کریں",
   "notification_disable_genies_confirm": "کیا درج کردہ پچھلے Genies کو غیر فعال کریں؟ ان کی ترتیبات اور چیٹ کی تاریخ محفوظ رہے گی۔ آپ انہیں کسی بھی وقت دوبارہ فعال کر سکتے ہیں۔",
-  "upgrade_all": "سب کو اپ ڈیٹ کریں"
+  "upgrade_all": "سب کو اپ ڈیٹ کریں",
+  "open_program_updates": "اپ ڈیٹس کھولیں",
+  "program_updates": "پروگرام اپ ڈیٹس",
+  "programs_list": "پروگراموں کی فہرست",
+  "last_update": "آخری اپ ڈیٹ",
+  "notification_manage": "انتظام کریں۔",
+  "notification_toggle_all": "سبھی کو منتخب یا غیر منتخب کریں۔",
+  "notification_delete_confirm": "منتخب کردہ اطلاعات کو حذف کریں ({{count}})؟",
+  "programs_updated": "پروگرام اپ ڈیٹ ہو گئے۔",
+  "system_not_up_to_date": "سسٹم اپ ٹو ڈیٹ نہیں ہے۔",
+  "new_programs_updates_available": "پروگرام کی نئی اپڈیٹس دستیاب ہیں۔"
 }
