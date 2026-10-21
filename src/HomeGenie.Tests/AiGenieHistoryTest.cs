@@ -22,7 +22,7 @@ public class AiGenieHistoryTest {
   var chat=Program("homegenie-base","577");string source=(string)chat.Element("ScriptSource");
   int begin=source.IndexOf("            string contextProfileKey =",StringComparison.Ordinal);int end=source.IndexOf("        case \"Add\":",begin,StringComparison.Ordinal);
   string getContext=source.Substring(begin,end-begin);
-  string code="using System;using System.Linq;using System.Collections.Generic;using Newtonsoft.Json;using Newtonsoft.Json.Linq;"+Class(shared,"AiGenieHistory")+Class(chat,"ChatMessage")+Class(chat,"MessagePart")+
+  string code="using System;using System.IO;using System.Linq;using System.Collections.Generic;using Newtonsoft.Json;using Newtonsoft.Json.Linq;"+Class(shared,"AiGenieHistory")+Class(chat,"ChatMessage")+Class(chat,"MessagePart")+Class(chat,"HistoryStore")+
    "public static class HistoryProbe {public static object GetContext(JArray input,string profile){var currentHistory=input.ToObject<List<ChatMessage>>();var data=new JObject{[\"ContextProfileKey\"]=profile};"+getContext+"}}";
   var paths=((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")).Split(Path.PathSeparator).Where(p=>Path.GetDirectoryName(p)==Path.GetDirectoryName(typeof(object).Assembly.Location)).Append(typeof(JsonConvert).Assembly.Location).Distinct();
   var compilation=CSharpCompilation.Create("CanonicalPolicy"+Guid.NewGuid().ToString("N"),new[]{CSharpSyntaxTree.ParseText(code)},paths.Select(p=>MetadataReference.CreateFromFile(p)),new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
