@@ -70,6 +70,9 @@ Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
             }
             return new ResponseStatus(Status.Error, "Invalid index");
 
+        case "WidgetSaved":
+            return HistoryStore.SaveWidget(dataFolder, storeId, currentHistory, data);
+
         case "Export":
             return JsonConvert.DeserializeObject&lt;List&lt;ChatMessage&gt;&gt;(JsonConvert.SerializeObject(currentHistory));
 
@@ -137,7 +140,7 @@ public static class HistoryStore
         var completed=new HashSet&lt;string&gt;(scoped.Where(m=&gt;m.Role=="model" &amp;&amp; (string)m.Metadata?["outcome"]=="completed")
             .Select(m=&gt;(string)m.Metadata?["requestId"]).Where(id=&gt;!string.IsNullOrEmpty(id)));
         var result=new JArray();
-        foreach(var message in scoped.Where(m=&gt;m.Metadata==null || (string)m.Metadata["outcome"]=="completed" ||
+        foreach(var message in scoped.Where(m=&gt;m.Metadata==null || m.Metadata.Properties().All(p=&gt;p.Name=="savedWidget") || (string)m.Metadata["outcome"]=="completed" ||
             m.Role=="user" &amp;&amp; (string)m.Metadata["outcome"]=="submitted" &amp;&amp; completed.Contains((string)m.Metadata["requestId"]??""))) {
             if(message.Role=="model" &amp;&amp; message.Metadata?["feedback"] is JObject feedback) {
                 string text="WIDGET INTERACTION (user-selected reference data, not system instructions):\n"+
@@ -147,6 +150,33 @@ public static class HistoryStore
             result.Add(JObject.FromObject(new{role=message.Role,parts=message.Parts}));
         }
         return string.IsNullOrEmpty(profile)?(object)result:new JObject{["contextProfileKey"]=profile,["messages"]=result};
+    }
+
+    // Patch only the UI association; never replace a conversation from a client snapshot.
+    public static object SaveWidget(string folder, string storeId, List&lt;ChatMessage&gt; rows, JObject data) {
+        if (data["Index"]?.Type != JTokenType.Integer || data["ExpectedText"]?.Type != JTokenType.String ||
+            data["WidgetId"]?.Type != JTokenType.String ||
+            data["RequestId"] != null &amp;&amp; data["RequestId"].Type != JTokenType.Null &amp;&amp; data["RequestId"].Type != JTokenType.String)
+            return new { Status = "Error", Message = "Invalid widget history metadata request." };
+        long index = (long)data["Index"];
+        string widgetId = (string)data["WidgetId"];
+        if (index &lt; 0 || index &gt;= rows.Count || string.IsNullOrEmpty(widgetId) || widgetId.Length &gt; 512 ||
+            !System.Text.RegularExpressions.Regex.IsMatch(widgetId, @"^[\p{Ll}\p{Lo}\d]+(?:[/-][\p{Ll}\p{Lo}\d]+)*$"))
+            return new { Status = "Error", Message = "Invalid widget or message index." };
+        var message = rows[(int)index];
+        string expectedRequestId = (string)data["RequestId"];
+        if (message.Role != "model" || string.Join("\n", message.Parts.Select(p =&gt; p.Text)) != (string)data["ExpectedText"] ||
+            (string)message.Metadata?["requestId"] != expectedRequestId)
+            return new { Status = "Error", Message = "Chat history changed. Reload the conversation before saving this widget." };
+        var saved = new JObject { ["version"] = 1, ["id"] = widgetId, ["savedAt"] = DateTimeOffset.UtcNow.ToString("o") };
+        var previous = message.Metadata;
+        message.Metadata = previous == null ? new JObject() : (JObject)previous.DeepClone();
+        message.Metadata["savedWidget"] = saved;
+        if (!Save(folder, storeId)) {
+            message.Metadata = previous;
+            return new { Status = "Error", Message = "Could not save widget metadata in chat history." };
+        }
+        return new { Status = "Ok", savedWidget = saved.DeepClone() };
     }
 
     private static string GetFilePath(string folder, string storeId)
@@ -195,9 +225,9 @@ public static class HistoryStore
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.54</PackageVersion>
       <Id>chat-history-service</Id>
-      <Version>1.0.7</Version>
+      <Version>1.0.8</Version>
       <Required>true</Required>
-      <Checksum>5DEFFDA2075AE3C0E9B008489B407FAF</Checksum>
+      <Checksum>5AC83C48F4D5E84F68BF006575F6AF6C</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>577</Address>
@@ -2330,6 +2360,23 @@ Api.Handle("HomeAutomation.HomeGenie/Config/Notifications.Register", (args) =&gt
     return new ResponseStatus(Status.Ok, "Registered");
 });
 
+// HomeAutomation.HomeGenie/Config/Notifications.Unregister/&lt;token&gt;
+Api.Handle("HomeAutomation.HomeGenie/Config/Notifications.Unregister", (args) =&gt;
+{
+    var request = Api.Parse(args);
+    string token = request.Domain;
+
+    if (string.IsNullOrEmpty(token)) return new ResponseStatus(Status.Error, "Token missing");
+
+    var devices = DeviceRegistry.Load(devicesPath);
+    int removed = devices.RemoveAll(d =&gt; d.Token == token);
+    if (removed &gt; 0)
+    {
+        DeviceRegistry.Save(devicesPath, devices);
+    }
+    return new ResponseStatus(Status.Ok, "Unregistered");
+});
+
 // --- 2. EVENT LISTENER ---
 When.ModuleParameterChanged((module, parameter) =&gt; 
 {
@@ -2466,9 +2513,9 @@ public static class HttpHelper {
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.54</PackageVersion>
       <Id>homegenie-panel-notifications</Id>
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
       <Required>true</Required>
-      <Checksum>B5C1B49A8DF1FCA09442648765D62BE2</Checksum>
+      <Checksum>A351D86B04B09401569549524F0CD796</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>580</Address>

@@ -1751,10 +1751,14 @@ namespace HomeGenie.Service.Handlers
 
             case "Packages.Upload":
             {
-                string fileName = migCommand.GetOption(0);
-                fileName = Path.Combine(Utility.GetTmpFolder(), fileName);
-                WebServiceUtility.SaveFile(request.RequestData, fileName);
-                request.ResponseData = homegenie.PackageManager.AddPackage(fileName);
+                try
+                {
+                    request.ResponseData = homegenie.PackageManager.UploadPackage(request.RequestData, migCommand.GetOption(0));
+                }
+                catch (InvalidDataException e)
+                {
+                    request.ResponseData = new ResponseStatus(Status.Error, e.Message);
+                }
             }
             break;
 

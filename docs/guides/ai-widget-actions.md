@@ -79,3 +79,11 @@ The executor returns the existing outcome fields: action ID, state, success, dur
 6. Verify that preview settings and editor draft updates never install widgets or save dashboards.
 
 Dashboard insertion, automation program creation and autonomous Magik execution remain separate later milestones.
+
+## Saved widgets in chat history
+
+Saving a generated widget also patches the originating assistant message with `metadata.savedWidget` (`version: 1`, widget `id`, UTC `savedAt`). The saved path and Edit/Update actions are restored from server history after a reload or in another browser. Export/import preserves the association. It is UI metadata and does not enter model context. No browser storage is used for this association.
+
+After the widget's HTML, CSS and JavaScript writes have all been confirmed, the frontend calls `System.Utility/ChatHistory/WidgetSaved` with `StoreId`, `Index`, `ExpectedText`, optional `RequestId`, and `WidgetId`. This endpoint updates only `savedWidget`; it preserves sources and existing telemetry. It validates the index, assistant role, original text, request ID and widget path under the history lock. Stale requests fail without replacing history. Failed persistence restores the previous in-memory metadata. Older messages without request telemetry are supported by index plus exact text matching. Optional dashboard insertion is separate from widget-file and history-metadata persistence.
+
+Deployment requires both the updated frontend and Chat History Service (577) 1.0.8. Existing widgets saved before this change need one save from their chat message to establish the association; no path is guessed from generated sources. The layout of these controls remains a separate UI task.

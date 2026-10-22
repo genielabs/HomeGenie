@@ -32,6 +32,7 @@ using HomeGenie.Data;
 using HomeGenie.Service.Constants;
 
 using MIG.Config;
+using MIG.Gateways;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -638,56 +639,75 @@ namespace HomeGenie.Service
             return bundleFile;
         }
 
+        public PackageData UploadPackage(byte[] requestData, string clientFileName)
+        {
+            PackagePathGuard.Segment(clientFileName);
+            string tempRoot = Path.GetFullPath(Utility.GetTmpFolder());
+            string workspace = PackagePathGuard.CreateWorkspace(tempRoot);
+            try
+            {
+                string archiveFile = PackagePathGuard.Contained(workspace, "package.zip");
+                WebServiceUtility.SaveFile(requestData, archiveFile);
+                return AddPackage(archiveFile);
+            }
+            finally { PackagePathGuard.RemoveWorkspace(tempRoot, workspace); }
+        }
+
         public PackageData AddPackage(string archiveFileName)
         {
-            // uncompress and verify package content
-            string tempFolder = Path.Combine(Utility.GetTmpFolder(), Path.GetFileNameWithoutExtension(archiveFileName));
-            Utility.FolderCleanUp(tempFolder);
-            Utility.UncompressZip(archiveFileName, tempFolder);
-            string packageJson = File.ReadAllText(Path.Combine(tempFolder, "package.json"));
-            var packageData = JsonConvert.DeserializeObject<PackageData>(packageJson);
-            // TODO: Data normalization and check
-            string programsDatabase = Path.Combine(tempFolder, "programs.xml");
-            var serializer1 = new XmlSerializer(typeof(List<ProgramBlock>));
-            using (var reader = new StreamReader(programsDatabase))
+            string tempRoot = Path.GetFullPath(Utility.GetTmpFolder());
+            string tempFolder = PackagePathGuard.CreateWorkspace(tempRoot);
+            try
             {
-                // verify if package data checksum matches the one in programs.xml file
-                var programs = (List<ProgramBlock>) serializer1.Deserialize(reader);
-                foreach (var prg in packageData.Programs)
+                Utility.UncompressZip(archiveFileName, tempFolder);
+                string packageJson = File.ReadAllText(Path.Combine(tempFolder, "package.json"));
+                var packageData = JsonConvert.DeserializeObject<PackageData>(packageJson);
+                if (packageData == null) throw new InvalidDataException("Invalid package manifest.");
+                PackagePathGuard.Segment(packageData.Repository);
+                PackagePathGuard.Segment(packageData.Id);
+                string packagesRoot = PackagePathGuard.Contained(Utility.GetDataFolder(), "packages");
+                string repositoryFolder = PackagePathGuard.Contained(packagesRoot, packageData.Repository);
+                string pkgFolder = PackagePathGuard.Contained(packagesRoot, Path.Combine(packageData.Repository, packageData.Id));
+                string programsDatabase = Path.Combine(tempFolder, "programs.xml");
+                var serializer1 = new XmlSerializer(typeof(List<ProgramBlock>));
+                using (var reader = new StreamReader(programsDatabase))
                 {
-                    // Get the program from programs.xml
-                    var p1 = programs.Find((p) => p.Address.ToString() == prg.Hid);
-                    if (p1 != null)
+                    // verify if package data checksum matches the one in programs.xml file
+                    var programs = (List<ProgramBlock>) serializer1.Deserialize(reader);
+                    foreach (var prg in packageData.Programs)
                     {
-                        p1.PackageInfo.Checksum = Utility.GetObjectChecksum(new
+                        // Get the program from programs.xml
+                        var p1 = programs.Find((p) => p.Address.ToString() == prg.Hid);
+                        if (p1 != null)
                         {
-                            setup = p1.ScriptSetup,
-                            source = p1.ScriptSource,
-                            context = p1.ScriptContext,
-                            data = p1.Data
-                        });
-                        if (p1.PackageInfo.Checksum != prg.Checksum)
-                        {
-                            //TODO: Integrity check failed, should abort package importing
-                            //Console.WriteLine(p1.PackageInfo.Checksum);
-                            //Console.WriteLine(prg.Checksum);
+                            p1.PackageInfo.Checksum = Utility.GetObjectChecksum(new
+                            {
+                                setup = p1.ScriptSetup,
+                                source = p1.ScriptSource,
+                                context = p1.ScriptContext,
+                                data = p1.Data
+                            });
+                            if (p1.PackageInfo.Checksum != prg.Checksum)
+                            {
+                                //TODO: Integrity check failed, should abort package importing
+                                //Console.WriteLine(p1.PackageInfo.Checksum);
+                                //Console.WriteLine(prg.Checksum);
+                            }
                         }
                     }
                 }
-            }
-            // copy the extracted package folder to the repository folder
-            string repositoryFolder = Path.Combine(Utility.GetDataFolder(), "packages", packageData.Repository);
-            if (!Directory.Exists(repositoryFolder))
-            {
+                // Validate again immediately before modifying the catalog. The data
+                // directory is trusted; repository/package descendants are not.
+                packagesRoot = PackagePathGuard.Contained(Utility.GetDataFolder(), "packages");
+                repositoryFolder = PackagePathGuard.Contained(packagesRoot, packageData.Repository);
+                pkgFolder = PackagePathGuard.Contained(packagesRoot, Path.Combine(packageData.Repository, packageData.Id));
+                PackagePathGuard.NoLinksInTree(pkgFolder);
                 Directory.CreateDirectory(repositoryFolder);
+                if (Directory.Exists(pkgFolder)) Directory.Delete(pkgFolder, true);
+                Directory.Move(tempFolder, pkgFolder);
+                return packageData;
             }
-            string pkgFolder = Path.Combine(repositoryFolder, packageData.Id);
-            if (Directory.Exists(pkgFolder))
-            {
-                Directory.Delete(pkgFolder, true);
-            }
-            Directory.Move(tempFolder, pkgFolder);
-            return packageData;
+            finally { PackagePathGuard.RemoveWorkspace(tempRoot, tempFolder); }
         }
 
 

@@ -1,8 +1,20 @@
 # Roadmap
 
-Consolidated status: 2026-10-21, after notification/update UI refinements, conversational widgets and local widget guidance. See [Unreleased changes](../CHANGELOG.md).
+Consolidated status: 2026-10-22, including saved-widget history, scripting references and confirmed Raspberry Pi update monitoring. See [Unreleased changes](../CHANGELOG.md).
 
 This is the active task list. Detailed stage-by-stage decisions, earlier API names, test counts and acceptance evidence are preserved in [implementation history](roadmap-history.md); they do not override this status. Completed work is not reopened merely because an earlier checkpoint still says pending.
+
+## Follow-up consolidation (2026-10-22)
+
+- [x] Add saved-widget status and Update / Save As / Edit actions in YoT, backed by server history metadata through Chat History Service 577 1.0.8. Sources and request telemetry are preserved; UI metadata stays out of model context. Implementation checkpoints passed 14 focused frontend cases and 32 backend history cases.
+- [ ] Complete live saved-widget acceptance after updating both frontend and program 577: save from an older chat, reload, open from a second browser, then exercise Edit, Update and Save As. No browser-local persistence is used; do not mark these checks passed based on unit tests.
+- [x] Generate optional scripting API references from Doxygen and improve essential automation guidance. Maintainer confirmed the Gemini light-counting example, including a repeat with program context disabled. Keep detailed topic loading explicit; automatic retrieval and a complete device-operation catalog are not implemented.
+- [x] Implement `Notifications.Unregister` in HomeGenie Panel notifications 580 1.0.1; document the endpoint separately from future notification registration UI and Mini delivery.
+- [ ] Implement explicit per-device notification registration in Android ("Receive notifications from this device") for HomeGenie Server and Mini. Mini JavaScript notification sending remains design work; no live acceptance is claimed for the new unregister endpoint.
+- [x] Implement explicit archive verification/extraction labels and responsive 360 px minimum width in YoT's release-update dialog. Live acceptance of these refinements remains pending; Raspberry Pi restart-monitoring acceptance is recorded separately below.
+- [x] Implement aligned address / program name / current version / target version columns in Update all. Keep broader styling and live acceptance in the existing future-extension item.
+- [ ] Complete final frontend resource/cache, package version/checksum, full-suite and release-build checks against the actual commit candidate. The maintainer is handling these checks; no new full-suite result or release is asserted here.
+- HomeGenie Mini compatibility and device acceptance are tracked in its own `CHANGELOG.md` and `ROADMAP.md`; a passing Mini hardware test does not validate a HomeGenie Server or YoT change.
 
 ## Release consolidation (2026-10-21)
 
@@ -61,6 +73,7 @@ Migration: reopen and save existing generated Genie schedules to regenerate thei
 
 ## Completed: release/program update reliability
 
+- [x] 2026-10-22: maintainer confirmed the published v2.0.31 -> v2.0.32 update on Raspberry Pi completed with restart/installation monitoring working and no false final failure. The preceding v2.0.30 -> v2.0.31 update still displayed the old false failure: v2.0.30 shipped the earlier frontend; the corrected bundle was first included in v2.0.31 (addd6651). The already-open update dialog continues running the starting version's frontend. This closes the live Raspberry Pi acceptance check for the bundled monitoring correction.
 - [x] 2026-10-19: release-update dialog now verifies the installed release, replacement process and existing System.GetBootProgress API before reporting success. It polls boot progress after observing the replacement process, tolerates transient disconnects/ready states, displays confirmed backend error details, and distinguishes an unconfirmed restart timeout from installation failure. Retry checks status only. Frontend regression coverage includes slow boots, missed events, fractional process timestamps and invalid/overflowing progress; no core changes.
 - [x] RPi false release-installation error: identified a startup race in the v2.0.28 HTTP poller (YoT 6fad56b0, 2026-10-16). HTTP is reachable inside Reload() before the HomeGenieService constructor assigns UpdateChecker. On production the first DownloadStatus poll ran at 16:40:17.003 and completed at 17.159, before Reload() logged service ready at 17.969. The Config handler converts the null-updater exception into HTTP 200 with Status: Error; the original poller immediately displayed installation failure and unsubscribed. The same sequence reproduces against the original component and recovers with the corrected component. WebSocket disconnection alone schedules automatic reconnection; HTTP transport failures alone remain pending until the deadline. The actual response body was not captured on the RPi; the startup ordering and matching frontend failure are established by log/source and deterministic reproduction. The initial unsuccessful Update All attempt remains a separate unexplained symptom; the later production retry updated all four programs.
 
@@ -100,6 +113,8 @@ These are not newly declared release blockers. Keep the original evidence and di
 - [ ] Evaluate shared dashboard preset refresh policy. Preserve browser-local configuration precedence for now; discuss explicit reload, conflicts and concurrent edits before adding synchronization or overwrite behavior.
 
 ## Future extensions
+
+- [ ] Refine the visual layout of the program-update "Update all" confirmation dialog (maintainer screenshot, 2026-10-22): improve spacing and hierarchy between the summary, program count and update list; prefer readable program names with repository/package identifiers secondary, align IDs and target versions, and handle long lists/narrow screens consistently. First layout refinement implemented in YoT on 2026-10-22 at the maintainer's request: aligned address, installed program name, current version and target version columns, preserving local-change warnings and retry selection. Broader visual polish and live acceptance remain pending; update execution behavior is unchanged.
 
 - [ ] Optional text-caption overlay for widget speech; utils.speech.say/stop are already implemented.
 

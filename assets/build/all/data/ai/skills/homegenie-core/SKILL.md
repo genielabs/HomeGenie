@@ -3,7 +3,7 @@ name: homegenie-core
 description: Shared conversation and correctness rules for HomeGenie AI assistants.
 compatibility: HomeGenie AI providers.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
 ---
 # Shared HomeGenie assistant rules
 

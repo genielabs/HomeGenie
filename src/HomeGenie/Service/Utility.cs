@@ -588,56 +588,34 @@ namespace HomeGenie.Service
 
         internal static List<string> UncompressZip(string archiveName, string destinationFolder)
         {
-            List<string> extractedFiles = new List<string>();
-            ZipFile zipFile = null;
-            try
+            var extractedFiles = new List<string>();
+            string root = Path.GetFullPath(destinationFolder);
+            PackagePathGuard.NotLink(root);
+            using var zipFile = new ZipFile(File.OpenRead(archiveName));
+            zipFile.StringCodec = StringCodec.FromCodePage(Encoding.UTF8.CodePage);
+            var entries = new List<KeyValuePair<ZipEntry, string>>();
+            // Reject unsafe entries before writing even the first valid file.
+            foreach (ZipEntry entry in zipFile)
             {
-                FileStream fs = File.OpenRead(archiveName);
-                zipFile = new ZipFile(fs);
-                zipFile.StringCodec = StringCodec.FromCodePage(Encoding.UTF8.CodePage);
-                //if (!String.IsNullOrEmpty(password)) {
-                //    zf.Password = password;  // AES encrypted entries are handled automatically
-                //}
-                foreach (ZipEntry zipEntry in zipFile)
-                {
-                    if (!zipEntry.IsFile)
-                    {
-                        continue; // Ignore directories
-                    }
-
-                    string filePath = zipEntry.Name;
-                    string target = Path.Combine(destinationFolder, filePath.TrimStart(new char[]{'/', '\\'}));
-                    if (!Directory.Exists(Path.GetDirectoryName(target)))
-                    {
-                        Directory.CreateDirectory(Path.GetDirectoryName(target));
-                    }
-
-                    if (File.Exists(target))
-                        File.Delete(target);
-
-                    byte[] buffer = new byte[4096];
-                    Stream zipStream = zipFile.GetInputStream(zipEntry);
-                    String fullZipToPath = Path.Combine(destinationFolder, filePath);
-                    using (FileStream streamWriter = File.Create(fullZipToPath))
-                    {
-                        StreamUtils.Copy(zipStream, streamWriter, buffer);
-                    }
-                    try { extractedFiles.Add(filePath); } catch { }
-                }
+                if (((entry.ExternalFileAttributes >> 16) & 0xf000) == 0xa000)
+                    throw new InvalidDataException("Archive contains a symbolic link.");
+                string name = entry.Name.Replace('\\', '/');
+                // A conventional root directory entry is harmless and ignored.
+                if (entry.IsDirectory && (name == "./" || name == ".")) continue;
+                PackagePathGuard.Contained(root, name);
+                if (entry.IsFile) entries.Add(new KeyValuePair<ZipEntry, string>(entry, name));
             }
-            catch (Exception e)
+            foreach (var item in entries)
             {
-                extractedFiles.Clear();
-                // TODO: something to do here?
-                Console.WriteLine("Unzip error: " + e.Message);
-            }
-            finally
-            {
-                if (zipFile != null)
-                {
-                    zipFile.IsStreamOwner = true;
-                    zipFile.Close();
-                }
+                string target = PackagePathGuard.Contained(root, item.Value);
+                Directory.CreateDirectory(Path.GetDirectoryName(target));
+                // Recheck after creating parents; never open an existing link.
+                target = PackagePathGuard.Contained(root, item.Value);
+                if (File.Exists(target)) File.Delete(target);
+                using var input = zipFile.GetInputStream(item.Key);
+                using var output = new FileStream(target, FileMode.CreateNew, FileAccess.Write, FileShare.None);
+                StreamUtils.Copy(input, output, new byte[4096]);
+                extractedFiles.Add(item.Value);
             }
             return extractedFiles;
         }

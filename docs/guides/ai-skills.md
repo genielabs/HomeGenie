@@ -76,3 +76,25 @@ For an existing installation, deploy `data/ai/skills` along with the provider up
 No chat conversion occurs in these prompt-migration milestones. Current import/export behavior and stored histories remain unchanged. Resource discovery, dynamic model-driven skill loading, executable bundled scripts and an MCP adapter are future work.
 
 Shared assets are included in fresh-install build data. Updating the Context Engine program alone does not install `data/ai/skills`: deployment of shared assets must accompany provider migration. User-edited prompts are not replaced automatically.
+
+## Scripting API references
+
+The shared `homegenie-core/references/automation.md` includes the essential lifecycle and type rules, including `Modules.Each` (`false` continues, `true` stops), `ModuleHelper.Instance`, optional parameters and real versus demonstration data. It is still loaded for automation requests by the shared Genie engine.
+
+Detailed API references are generated from Doxygen XML into `homegenie-core/references/api-*.md`, with an `api-index.md` catalog. They preserve public signatures, overloads, default arguments and inheritance for the selected scripting helpers and data types. Constructors and implementation-only classes are excluded. Source examples are reviewed separately rather than copied into the generated catalog. This is the automation programming API, not a complete device API inventory.
+
+Load only a relevant topic by adding a whole-line directive to a provider prompt, for example:
+
+```text
+#use-kb homegenie-core/references/api-modules.md
+```
+
+The catalog is not included in every conversation. Markdown links do not load files, and automatic model-driven retrieval remains future work. Device-specific operations still require discovery from the installation. Deploy the shared assets to make these changes available; the files do not update an already installed backend automatically.
+
+From the repository root, regenerate the API website and references with `assets/deploy/linux/doxygen.sh` (Doxygen and Python 3 required). To generate only references from existing XML:
+
+```sh
+python3 assets/deploy/linux/Doxy/generate-ai-api-reference.py --xml-dir assets/deploy/linux/Doxy/homegenie_api/xml --output-dir assets/build/all/data/ai/skills/homegenie-core/references
+```
+
+Add `--check` to validate that references match the XML without writing files. Refresh Doxygen first when changing signatures or documentation. Generator tests: `python3 assets/deploy/linux/Doxy/test_generate_ai_api_reference.py`.

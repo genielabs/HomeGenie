@@ -93,11 +93,12 @@ namespace HomeGenie.Automation.Scripting
         ///          "Keep level below the following value",
         ///          "slider:10:80");
         ///      Program.AddFeature(
+        ///          "",
         ///          "Dimmer",
         ///          "EnergyManagement.EnergySavingMode",
         ///          "Energy Saving Mode enabled light",
         ///          "checkbox");
-        ///  }, 0);
+        ///  });
         /// </code>
         /// </example>
         public void Setup(Action functionBlock)
