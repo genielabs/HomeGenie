@@ -138,20 +138,22 @@ new app window connected directly to your existing session.
 For a traditional server-only or headless experience, simply edit the startup script
 and remove the `--start-browser` flag from the execution command.
 
-### 🛡️ Securing Your Installation (Sandboxing)
+### 🛡️ Secure Your Installation
 
-Since HomeGenie features advanced AI automation engines (like *Gemini Automan*)
-capable of generating, compiling, and executing C# code on the fly, we highly
-recommend running the application in a restricted, sandboxed environment to
-ensure maximum system security when executing AI-generated code.
+**A fresh installation has no password configured.** Without password protection,
+any client able to reach the HTTP service can access administrative APIs, including
+program execution. Set a password under **Maintenance → HTTP → Password protected
+access** before allowing other clients to connect. The current username is `admin`.
 
-*   **Dedicated System User (Linux - Recommended):** Run the server using
-    a dedicated, non-root user (e.g., `homegenie`) with a `nologin` shell.
-    Grant this user read/write permissions **strictly** to the HomeGenie
-    installation folder, isolating it from the rest of your OS.
-*   **Containerization:** Alternatively, deploy HomeGenie using **Docker**,
-    utilizing read-only volume mounts for the host system and restricting
-    write access exclusively to the `data` directory.
+Run HomeGenie under a dedicated, unprivileged account. Automation programs execute
+with that account's permissions. Keep the service on a trusted network, restrict
+access with firewall rules, and prefer a VPN for remote access instead of forwarding
+the HomeGenie port directly to the Internet. HTTPS protects traffic but does not
+replace authentication.
+
+See [Securing HomeGenie](docs/guides/securing-homegenie.md) for setup verification,
+hardware permissions, containers, updates, and backups. To report a vulnerability,
+follow the [security policy](SECURITY.md).
 
 ### Running as a System Service
 

@@ -14,6 +14,9 @@ There are many ways to contribute to HomeGenie, and not all of them involve writ
 
 ### 🐛 Reporting Bugs
 
+For suspected security vulnerabilities, use the private reporting channel in
+[SECURITY.md](SECURITY.md) instead of opening a public issue.
+
 If you think you've found a bug, please ensure it hasn't already been reported by searching the existing [Issues](https://github.com/genielabs/HomeGenie/issues).
 
 If you can't find an existing issue, please [**open a new one**](https://github.com/genielabs/HomeGenie/issues/new/choose). When reporting a bug, please include:
