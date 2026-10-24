@@ -140,6 +140,14 @@
   "capture_pause_none": "Keiner",
   "capture_pause_asis": "Wie es ist",
   "$options": {
+    "6": {
+      "Title": "Gruppenbeleuchtung EINSCHALTEN",
+      "Description": "Schaltet alle Leuchten in der angegebenen Gruppe ein."
+    },
+    "7": {
+      "Title": "Gruppenbeleuchtung AUSSCHALTEN",
+      "Description": "Schaltet alle Leuchten in der angegebenen Gruppe aus."
+    },
     "16": {
       "Title": "Pegelspeicher",
       "Description": "Letzte Dimmerstufe speichern und abrufen.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Videoaufzeichnung aktivieren",
       "NVR.RecordOnAlarm": "Aufnahme bei Alarm",
       "NVR.ContinuousRecording": "Kontinuierliche Aufzeichnung."
+    },
+    "581": {
+      "Title": "KI-Aktionsausführung",
+      "Description": "Gemeinsamer Dienst zum Extrahieren von KI-Aktionsvorschlägen und zum Ausführen von HomeGenie-API-Befehlen auf ausdrückliche Anforderung. Unabhängig von Cloud-Anbietern und lokalen Inferenzsystemen."
+    },
+    "582": {
+      "Title": "Dauerhafte Benachrichtigungen",
+      "Description": "Dauerhaftes Benachrichtigungsarchiv und interaktive Aktionen.",
+      "ConfigureOptions.MaximumItems": "Maximale Anzahl archivierter Benachrichtigungen",
+      "ConfigureOptions.RetentionDays": "Aufbewahrungsdauer der Benachrichtigungen (Tage)"
     },
     "583": {
       "Title": "AI Genie",

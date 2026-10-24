@@ -140,6 +140,14 @@
   "capture_pause_none": "Nullus",
   "capture_pause_asis": "Ut est",
   "$options": {
+    "6": {
+      "Title": "Lumina gregis accende",
+      "Description": "Omnia lumina in grege indicato accende."
+    },
+    "7": {
+      "Title": "Lumina gregis exstingue",
+      "Description": "Omnia lumina in grege indicato exstingue."
+    },
     "16": {
       "Title": "Memoria Gradus",
       "Description": "Ultimum gradum obscurationis serva et revoca.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Activatio Registrationis Video",
       "NVR.RecordOnAlarm": "Recordatio in Alarma",
       "NVR.ContinuousRecording": "Continua Registratio."
+    },
+    "581": {
+      "Title": "Exsecutor actionum AI",
+      "Description": "Ministerium commune ad proposita actionum AI extrahenda et mandata API HomeGenie explicite exsequenda. A provisoribus nubis et machinis illationis localibus independens."
+    },
+    "582": {
+      "Title": "Notificationes permanentes",
+      "Description": "Archivum permanens notificationum et actiones interactivae.",
+      "ConfigureOptions.MaximumItems": "Numerus maximus notificationum archivatarum",
+      "ConfigureOptions.RetentionDays": "Retentio notificationum (dies)"
     },
     "583": {
       "Title": "AI Genie",

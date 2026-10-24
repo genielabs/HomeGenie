@@ -140,6 +140,14 @@
   "capture_pause_none": "Xejn",
   "capture_pause_asis": "Kif inhu",
   "$options": {
+    "6": {
+      "Title": "Ixgħel id-dwal tal-grupp",
+      "Description": "Ixgħel id-dwal kollha fil-grupp indikat."
+    },
+    "7": {
+      "Title": "Itfi d-dwal tal-grupp",
+      "Description": "Itfi d-dwal kollha fil-grupp indikat."
+    },
     "16": {
       "Title": "Memorja tal-Livell",
       "Description": "Aħżen u erġa' fittex l-aħħar livell tad-dimmer.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Ippermetti r-Reġistrazzjoni tal-Vidjo",
       "NVR.RecordOnAlarm": "Irrekordja fuq Allarm",
       "NVR.ContinuousRecording": "Reġistrazzjoni Kontinwa."
+    },
+    "581": {
+      "Title": "Eżekutur tal-azzjonijiet tal-AI",
+      "Description": "Servizz kondiviż biex jiġbed proposti ta’ azzjonijiet tal-AI u jeżegwixxi espliċitament kmandi tal-API ta’ HomeGenie. Indipendenti mill-fornituri tal-cloud u mill-magni tal-inferenza lokali."
+    },
+    "582": {
+      "Title": "Notifiki persistenti",
+      "Description": "Arkivju persistenti tan-notifiki u azzjonijiet interattivi.",
+      "ConfigureOptions.MaximumItems": "Numru massimu ta’ notifiki arkivjati",
+      "ConfigureOptions.RetentionDays": "Żamma tan-notifiki (jiem)"
     },
     "583": {
       "Title": "AI Genie",

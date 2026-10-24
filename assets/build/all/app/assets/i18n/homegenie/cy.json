@@ -140,6 +140,14 @@
   "capture_pause_none": "Dim",
   "capture_pause_asis": "Fel y mae",
   "$options": {
+    "6": {
+      "Title": "Troi goleuadau'r grŵp YMLAEN",
+      "Description": "Troi'r holl oleuadau yn y grŵp penodedig ymlaen."
+    },
+    "7": {
+      "Title": "Troi goleuadau'r grŵp I FFWRDD",
+      "Description": "Troi'r holl oleuadau yn y grŵp penodedig i ffwrdd."
+    },
     "16": {
       "Title": "Cof Lefel",
       "Description": "Storio ac adalw'r lefel pylu ddiwethaf.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Galluogi Recordio Fideo",
       "NVR.RecordOnAlarm": "Recordio Ar Larwm",
       "NVR.ContinuousRecording": "Recordio Parhaus."
+    },
+    "581": {
+      "Title": "Gweithredydd gweithredoedd AI",
+      "Description": "Gwasanaeth a rennir i echdynnu cynigion gweithredoedd AI a gweithredu gorchmynion API HomeGenie ar gais penodol. Yn annibynnol ar ddarparwyr cwmwl a pheiriannau casglu lleol."
+    },
+    "582": {
+      "Title": "Hysbysiadau parhaus",
+      "Description": "Archif barhaus o hysbysiadau a gweithredoedd rhyngweithiol.",
+      "ConfigureOptions.MaximumItems": "Uchafswm yr hysbysiadau wedi'u harchifo",
+      "ConfigureOptions.RetentionDays": "Cyfnod cadw hysbysiadau (dyddiau)"
     },
     "583": {
       "Title": "AI Genie",

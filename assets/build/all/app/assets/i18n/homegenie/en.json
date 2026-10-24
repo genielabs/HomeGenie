@@ -303,6 +303,14 @@
 " ": "------------------------------------------",
   "$options": {
 
+    "6": {
+      "Title": "Group Lights ON",
+      "Description": "Turn on all the lights in the given group."
+    },
+    "7": {
+      "Title": "Group Lights OFF",
+      "Description": "Turn off all the lights in the given group."
+    },
     "16": {
       "Title":
         "Level Memory",
@@ -600,6 +608,16 @@
         "Enable Deep Knowledge (Read programs & widgets)",
       "ConfigureOptions.SystemInstructions":
         "System Instructions"
+    },
+    "581": {
+      "Title": "AI Action Executor",
+      "Description": "Shared service for extracting AI action proposals and explicitly executing HomeGenie API commands. Independent of cloud providers and local inference engines."
+    },
+    "582": {
+      "Title": "Persistent Notifications",
+      "Description": "Persistent notification archive and interactive actions.",
+      "ConfigureOptions.MaximumItems": "Maximum archived notifications",
+      "ConfigureOptions.RetentionDays": "Notification retention (days)"
     },
     "583": {
       "Title": "AI Genie",

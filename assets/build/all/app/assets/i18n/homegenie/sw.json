@@ -140,6 +140,14 @@
   "capture_pause_none": "Hakuna",
   "capture_pause_asis": "Kama ilivyo",
   "$options": {
+    "6": {
+      "Title": "Washa taa za kikundi",
+      "Description": "Washa taa zote katika kikundi kilichobainishwa."
+    },
+    "7": {
+      "Title": "Zima taa za kikundi",
+      "Description": "Zima taa zote katika kikundi kilichobainishwa."
+    },
     "16": {
       "Title": "Kumbukumbu ya kiwango",
       "Description": "Hifadhi na kumbuka kiwango cha mwisho cha dimmer.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Washa Kurekodi Video",
       "NVR.RecordOnAlarm": "Rekodi Kwenye Kengele",
       "NVR.ContinuousRecording": "Kurekodi Kuendelea."
+    },
+    "581": {
+      "Title": "Mtekelezaji wa vitendo vya AI",
+      "Description": "Huduma ya pamoja ya kutoa mapendekezo ya vitendo vya AI na kutekeleza wazi amri za API ya HomeGenie. Haitegemei watoa huduma za wingu wala injini za uelekezaji wa hitimisho za ndani."
+    },
+    "582": {
+      "Title": "Arifa za kudumu",
+      "Description": "Hifadhi ya kudumu ya arifa na vitendo shirikishi.",
+      "ConfigureOptions.MaximumItems": "Idadi ya juu ya arifa zilizohifadhiwa",
+      "ConfigureOptions.RetentionDays": "Muda wa kuhifadhi arifa (siku)"
     },
     "583": {
       "Title": "AI Genie",

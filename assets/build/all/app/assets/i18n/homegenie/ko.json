@@ -140,6 +140,14 @@
   "capture_pause_none": "없음",
   "capture_pause_asis": "있는 그대로",
   "$options": {
+    "6": {
+      "Title": "그룹 조명 켜기",
+      "Description": "지정한 그룹의 모든 조명을 켭니다."
+    },
+    "7": {
+      "Title": "그룹 조명 끄기",
+      "Description": "지정한 그룹의 모든 조명을 끕니다."
+    },
     "16": {
       "Title": "레벨 메모리",
       "Description": "마지막 디머 레벨을 저장하고 불러옵니다.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "동영상 녹화 활성화",
       "NVR.RecordOnAlarm": "알람 녹음",
       "NVR.ContinuousRecording": "연속 녹화."
+    },
+    "581": {
+      "Title": "AI 작업 실행기",
+      "Description": "AI 작업 제안을 추출하고 HomeGenie API 명령을 명시적으로 실행하는 공유 서비스입니다. 클라우드 공급자 및 로컬 추론 엔진과 독립적으로 작동합니다."
+    },
+    "582": {
+      "Title": "영구 알림",
+      "Description": "영구 알림 보관 및 대화형 작업.",
+      "ConfigureOptions.MaximumItems": "보관할 최대 알림 수",
+      "ConfigureOptions.RetentionDays": "알림 보관 기간(일)"
     },
     "583": {
       "Title": "AI Genie",

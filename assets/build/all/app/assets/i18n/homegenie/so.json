@@ -140,6 +140,14 @@
   "capture_pause_none": "Midna",
   "capture_pause_asis": "Sida ay tahay",
   "$options": {
+    "6": {
+      "Title": "Shid nalalka kooxda",
+      "Description": "Shid dhammaan nalalka kooxda la cayimay."
+    },
+    "7": {
+      "Title": "Dami nalalka kooxda",
+      "Description": "Dami dhammaan nalalka kooxda la cayimay."
+    },
     "16": {
       "Title": "Heerka Xusuusta",
       "Description": "Kaydi oo dib u xasuuso heerkii u dambeeyay ee dimmer.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Daar duubista fiidiyowga",
       "NVR.RecordOnAlarm": "Ku duub Digniinta",
       "NVR.ContinuousRecording": "Duubista Joogtada ah."
+    },
+    "581": {
+      "Title": "Fuliyaha falalka AI",
+      "Description": "Adeeg wadaag ah oo soo saara soo-jeedimaha falalka AI si cadna u fuliya amarada HomeGenie API. Ka madax-bannaan bixiyeyaasha daruuraha iyo matoorada gunaanad-samaynta maxalliga ah."
+    },
+    "582": {
+      "Title": "Ogeysiisyo joogto ah",
+      "Description": "Kayd ogeysiisyo joogto ah iyo falal isdhexgal leh.",
+      "ConfigureOptions.MaximumItems": "Tirada ugu badan ee ogeysiisyada la kaydiyey",
+      "ConfigureOptions.RetentionDays": "Muddada kaydinta ogeysiisyada (maalmo)"
     },
     "583": {
       "Title": "AI Genie",

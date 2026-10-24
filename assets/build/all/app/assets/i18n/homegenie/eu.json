@@ -140,6 +140,14 @@
   "capture_pause_none": "Bat ere ez",
   "capture_pause_asis": "Dagoen bezala",
   "$options": {
+    "6": {
+      "Title": "PIZTU taldeko argiak",
+      "Description": "Piztu adierazitako taldeko argi guztiak."
+    },
+    "7": {
+      "Title": "ITZALI taldeko argiak",
+      "Description": "Itzali adierazitako taldeko argi guztiak."
+    },
     "16": {
       "Title": "Maila Memoria",
       "Description": "Gorde eta berreskuratu azken dimmer maila.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Bideo grabaketa gaitu",
       "NVR.RecordOnAlarm": "Alarma batean grabatu",
       "NVR.ContinuousRecording": "Grabaketa jarraitua."
+    },
+    "581": {
+      "Title": "AA ekintzen exekutatzailea",
+      "Description": "AA ekintza-proposamenak erauzteko eta HomeGenie APIko komandoak eskaera esplizitu baten bidez exekutatzeko zerbitzu partekatua. Hodeiko hornitzaileekiko eta tokiko inferentzia-motorrekiko independentea."
+    },
+    "582": {
+      "Title": "Jakinarazpen iraunkorrak",
+      "Description": "Jakinarazpenen artxibo iraunkorra eta ekintza interaktiboak.",
+      "ConfigureOptions.MaximumItems": "Artxibatutako jakinarazpenen gehieneko kopurua",
+      "ConfigureOptions.RetentionDays": "Jakinarazpenak gordetzeko epea (egunak)"
     },
     "583": {
       "Title": "AI Genie",

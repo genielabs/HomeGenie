@@ -140,6 +140,14 @@
   "capture_pause_none": "Puudub",
   "capture_pause_asis": "Nagu on",
   "$options": {
+    "6": {
+      "Title": "LÜLITA grupi tuled SISSE",
+      "Description": "Lülitab kõik määratud grupi tuled sisse."
+    },
+    "7": {
+      "Title": "LÜLITA grupi tuled VÄLJA",
+      "Description": "Lülitab kõik määratud grupi tuled välja."
+    },
     "16": {
       "Title": "Taseme mälu",
       "Description": "Salvesta ja taasta viimane dimmeri tase.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Luba video salvestamine",
       "NVR.RecordOnAlarm": "Salvesta äratuse ajal",
       "NVR.ContinuousRecording": "Pidev salvestamine."
+    },
+    "581": {
+      "Title": "Tehisintellekti toimingute käivitaja",
+      "Description": "Ühisteenus tehisintellekti toiminguettepanekute eraldamiseks ja HomeGenie API käskude täitmiseks selgesõnalise taotluse alusel. Ei sõltu pilveteenuse pakkujatest ega kohalikest järeldusmootoritest."
+    },
+    "582": {
+      "Title": "Püsivad teavitused",
+      "Description": "Püsiv teavituste arhiiv ja interaktiivsed toimingud.",
+      "ConfigureOptions.MaximumItems": "Arhiveeritud teavituste suurim arv",
+      "ConfigureOptions.RetentionDays": "Teavituste säilitamine (päevades)"
     },
     "583": {
       "Title": "AI Genie",

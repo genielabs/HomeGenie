@@ -140,6 +140,14 @@
   "capture_pause_none": "Dada",
   "capture_pause_asis": "Mar atá",
   "$options": {
+    "6": {
+      "Title": "Cuir soilse an ghrúpa ar siúl",
+      "Description": "Cuir na soilse go léir sa ghrúpa sonraithe ar siúl."
+    },
+    "7": {
+      "Title": "Múch soilse an ghrúpa",
+      "Description": "Múch na soilse go léir sa ghrúpa sonraithe."
+    },
     "16": {
       "Title": "Cuimhne Leibhéal",
       "Description": "Stóráil agus athghairm an leibhéal maolaithe deireanach.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Cumasaigh Taifeadadh Físe",
       "NVR.RecordOnAlarm": "Taifead ar Aláram",
       "NVR.ContinuousRecording": "Taifeadadh Leanúnach."
+    },
+    "581": {
+      "Title": "Feidhmitheoir gníomhartha IS",
+      "Description": "Seirbhís chomhroinnte chun moltaí gníomhartha IS a bhaint amach agus orduithe API HomeGenie a fheidhmiú go sainráite. Neamhspleách ar sholáthraithe néil agus innill tátail áitiúla."
+    },
+    "582": {
+      "Title": "Fógraí buana",
+      "Description": "Cartlann bhuan fógraí agus gníomhartha idirghníomhacha.",
+      "ConfigureOptions.MaximumItems": "Uaslíon fógraí cartlannaithe",
+      "ConfigureOptions.RetentionDays": "Tréimhse coinneála fógraí (laethanta)"
     },
     "583": {
       "Title": "AI Genie",

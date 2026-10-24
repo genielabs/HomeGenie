@@ -140,6 +140,14 @@
   "capture_pause_none": "Nenhum",
   "capture_pause_asis": "Como está",
   "$options": {
+    "6": {
+      "Title": "Ligar luzes do grupo",
+      "Description": "Ligar todas as luzes do grupo indicado."
+    },
+    "7": {
+      "Title": "Desligar luzes do grupo",
+      "Description": "Desligar todas as luzes do grupo indicado."
+    },
     "16": {
       "Title": "Memória de Nível",
       "Description": "Armazene e recupere o último nível do dimmer.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Ativar gravação de vídeo",
       "NVR.RecordOnAlarm": "Gravar alarme",
       "NVR.ContinuousRecording": "Gravação contínua."
+    },
+    "581": {
+      "Title": "Executor de ações de IA",
+      "Description": "Serviço partilhado para extrair propostas de ações de IA e executar explicitamente comandos da API HomeGenie. Independente dos fornecedores de nuvem e dos motores de inferência locais."
+    },
+    "582": {
+      "Title": "Notificações persistentes",
+      "Description": "Arquivo persistente de notificações e ações interativas.",
+      "ConfigureOptions.MaximumItems": "Número máximo de notificações arquivadas",
+      "ConfigureOptions.RetentionDays": "Retenção de notificações (dias)"
     },
     "583": {
       "Title": "AI Genie",

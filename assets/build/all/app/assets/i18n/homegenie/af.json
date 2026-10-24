@@ -140,6 +140,14 @@
   "capture_pause_none": "Geen",
   "capture_pause_asis": "Soos dit is",
   "$options": {
+    "6": {
+      "Title": "Skakel groepligte AAN",
+      "Description": "Skakel al die ligte in die gegewe groep aan."
+    },
+    "7": {
+      "Title": "Skakel groepligte AF",
+      "Description": "Skakel al die ligte in die gegewe groep af."
+    },
     "16": {
       "Title": "Vlakgeheue",
       "Description": "Stoor en herroep die laaste dimmervlak.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Aktiveer video-opname",
       "NVR.RecordOnAlarm": "Opneem by alarm",
       "NVR.ContinuousRecording": "Deurlopende opname."
+    },
+    "581": {
+      "Title": "KI-aksie-uitvoerder",
+      "Description": "Gedeelde diens om KI-aksievoorstelle te onttrek en HomeGenie-API-opdragte uitdruklik uit te voer. Onafhanklik van wolkverskaffers en plaaslike afleidingsenjins."
+    },
+    "582": {
+      "Title": "Blywende kennisgewings",
+      "Description": "Blywende kennisgewingsargief en interaktiewe aksies.",
+      "ConfigureOptions.MaximumItems": "Maksimum geargiveerde kennisgewings",
+      "ConfigureOptions.RetentionDays": "Bewaartermyn vir kennisgewings (dae)"
     },
     "583": {
       "Title": "AI Genie",

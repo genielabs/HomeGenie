@@ -140,6 +140,14 @@
   "capture_pause_none": "Ọ dịghị",
   "capture_pause_asis": "Dị ka ọ dị",
   "$options": {
+    "6": {
+      "Title": "Gbanwuo ọkụ otu",
+      "Description": "Gbanwuo ọkụ niile dị n’otu ahụ akọwapụtara."
+    },
+    "7": {
+      "Title": "Gbanyụọ ọkụ otu",
+      "Description": "Gbanyụọ ọkụ niile dị n’otu ahụ akọwapụtara."
+    },
     "16": {
       "Title": "Ebe nchekwa ọkwa",
       "Description": "Chekwaa ma cheta ọkwa dimmer ikpeazụ.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Mee ka ndekọ vidiyo rụọ ọrụ",
       "NVR.RecordOnAlarm": "Dekọọ na Mkpu",
       "NVR.ContinuousRecording": "Ndekọ Na-aga n'ihu."
+    },
+    "581": {
+      "Title": "Onye na-eme ihe omume AI",
+      "Description": "Ọrụ ekekọrịtara iji wepụta aro ihe omume AI ma mee iwu HomeGenie API n’ụzọ doro anya. Ọ dabereghị na ndị na-enye ọrụ igwe ojii ma ọ bụ injin echiche mpaghara."
+    },
+    "582": {
+      "Title": "Ọkwa na-adịgide adịgide",
+      "Description": "Ebe nchekwa ọkwa na-adịgide adịgide na ihe omume mmekọrịta.",
+      "ConfigureOptions.MaximumItems": "Ọnụọgụ ọkwa echekwara kachasị elu",
+      "ConfigureOptions.RetentionDays": "Oge idobe ọkwa (ụbọchị)"
     },
     "583": {
       "Title": "AI Genie",

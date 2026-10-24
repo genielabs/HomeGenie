@@ -140,6 +140,14 @@
   "capture_pause_none": "Ingen",
   "capture_pause_asis": "Som det er",
   "$options": {
+    "6": {
+      "Title": "Slå på gruppens lys",
+      "Description": "Slå på alle lysene i den angitte gruppen."
+    },
+    "7": {
+      "Title": "Slå av gruppens lys",
+      "Description": "Slå av alle lysene i den angitte gruppen."
+    },
     "16": {
       "Title": "Nivåminne",
       "Description": "Lagre og hent frem siste dimmernivå.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Aktiver videoopptak",
       "NVR.RecordOnAlarm": "Opptak ved alarm",
       "NVR.ContinuousRecording": "Kontinuerlig opptak."
+    },
+    "581": {
+      "Title": "Utfører for KI-handlinger",
+      "Description": "Delt tjeneste for å hente ut forslag til KI-handlinger og eksplisitt utføre HomeGenie API-kommandoer. Uavhengig av skyleverandører og lokale inferensmotorer."
+    },
+    "582": {
+      "Title": "Vedvarende varsler",
+      "Description": "Vedvarende varselarkiv og interaktive handlinger.",
+      "ConfigureOptions.MaximumItems": "Maksimalt antall arkiverte varsler",
+      "ConfigureOptions.RetentionDays": "Lagringstid for varsler (dager)"
     },
     "583": {
       "Title": "AI Genie",

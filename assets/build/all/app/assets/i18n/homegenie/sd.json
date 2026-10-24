@@ -140,6 +140,14 @@
   "capture_pause_none": "ڪو به نه",
   "capture_pause_asis": "جيئن آهي",
   "$options": {
+    "6": {
+      "Title": "گروپ جون بتيون ٻاريو",
+      "Description": "ڏنل گروپ جون سڀ بتيون ٻاريو."
+    },
+    "7": {
+      "Title": "گروپ جون بتيون وسايو",
+      "Description": "ڏنل گروپ جون سڀ بتيون وسايو."
+    },
     "16": {
       "Title": "ليول ميموري",
       "Description": "آخري ڊمر ليول کي ذخيرو ڪريو ۽ ياد ڪريو.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "وڊيو رڪارڊنگ کي فعال ڪريو",
       "NVR.RecordOnAlarm": "الارم تي رڪارڊ ڪريو",
       "NVR.ContinuousRecording": "مسلسل رڪارڊنگ."
+    },
+    "581": {
+      "Title": "AI عمل هلائيندڙ",
+      "Description": "AI عملن جون تجويزون ڪڍڻ ۽ HomeGenie API حڪمن کي واضح طور تي هلائڻ لاءِ گڏيل خدمت. ڪلائوڊ فراهم ڪندڙن ۽ مقامي استدلال انجڻن کان آزاد."
+    },
+    "582": {
+      "Title": "مستقل اطلاع",
+      "Description": "اطلاعن جو مستقل ذخيرو ۽ رابطي وارا عمل.",
+      "ConfigureOptions.MaximumItems": "ذخيرو ڪيل اطلاعن جو وڌ ۾ وڌ تعداد",
+      "ConfigureOptions.RetentionDays": "اطلاع رکڻ جو مدو (ڏينهن)"
     },
     "583": {
       "Title": "AI Genie",

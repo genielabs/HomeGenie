@@ -140,6 +140,14 @@
   "capture_pause_none": "Asnjë",
   "capture_pause_asis": "Siç është",
   "$options": {
+    "6": {
+      "Title": "Ndiz dritat e grupit",
+      "Description": "Ndiz të gjitha dritat në grupin e caktuar."
+    },
+    "7": {
+      "Title": "Fik dritat e grupit",
+      "Description": "Fik të gjitha dritat në grupin e caktuar."
+    },
     "16": {
       "Title": "Memoria e Nivelit",
       "Description": "Ruaj dhe kthe përsëri nivelin e fundit të errësuesit.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Aktivizo regjistrimin e videos",
       "NVR.RecordOnAlarm": "Regjistro në alarm",
       "NVR.ContinuousRecording": "Regjistrim i vazhdueshëm."
+    },
+    "581": {
+      "Title": "Ekzekutues i veprimeve të IA-së",
+      "Description": "Shërbim i përbashkët për nxjerrjen e propozimeve të veprimeve të IA-së dhe ekzekutimin e shprehur të komandave të API-së HomeGenie. I pavarur nga ofruesit e resë dhe motorët lokalë të inferencës."
+    },
+    "582": {
+      "Title": "Njoftime të përhershme",
+      "Description": "Arkiv i përhershëm njoftimesh dhe veprime ndërvepruese.",
+      "ConfigureOptions.MaximumItems": "Numri maksimal i njoftimeve të arkivuara",
+      "ConfigureOptions.RetentionDays": "Ruajtja e njoftimeve (ditë)"
     },
     "583": {
       "Title": "AI Genie",

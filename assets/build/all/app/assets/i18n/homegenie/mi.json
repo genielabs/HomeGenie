@@ -140,6 +140,14 @@
   "capture_pause_none": "Karekau",
   "capture_pause_asis": "He rite tonu",
   "$options": {
+    "6": {
+      "Title": "Whakakāngia ngā rama rōpū",
+      "Description": "Whakakāngia ngā rama katoa o te rōpū kua tohua."
+    },
+    "7": {
+      "Title": "Whakawetohia ngā rama rōpū",
+      "Description": "Whakawetohia ngā rama katoa o te rōpū kua tohua."
+    },
     "16": {
       "Title": "Mahara Taumata",
       "Description": "Rokiroki me te maumahara ki te taumata rewharewha whakamutunga.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Whakahohehia te Hopu Ataata",
       "NVR.RecordOnAlarm": "Tuhia i te Whakaoho",
       "NVR.ContinuousRecording": "Te Tuhi Tonu."
+    },
+    "581": {
+      "Title": "Kaiwhakahaere mahi AI",
+      "Description": "He ratonga tiritahi hei tango i ngā tono mahi AI me te whakahaere mārama i ngā whakahau API HomeGenie. He motuhake i ngā kaiwhakarato kapua me ngā pūkaha whakatau ā-rohe."
+    },
+    "582": {
+      "Title": "Ngā whakamōhiotanga pūmau",
+      "Description": "He pūranga whakamōhiotanga pūmau me ngā mahi pāhekoheko.",
+      "ConfigureOptions.MaximumItems": "Te mōrahi o ngā whakamōhiotanga kua pūrangatia",
+      "ConfigureOptions.RetentionDays": "Te wā pupuri whakamōhiotanga (rā)"
     },
     "583": {
       "Title": "AI Genie",

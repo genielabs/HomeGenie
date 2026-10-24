@@ -140,6 +140,14 @@
   "capture_pause_none": "Ei mitään",
   "capture_pause_asis": "Kuten on",
   "$options": {
+    "6": {
+      "Title": "SYTYTÄ ryhmän valot",
+      "Description": "Sytyttää kaikki määritetyn ryhmän valot."
+    },
+    "7": {
+      "Title": "SAMMUTA ryhmän valot",
+      "Description": "Sammuttaa kaikki määritetyn ryhmän valot."
+    },
     "16": {
       "Title": "Tasomuisti",
       "Description": "Tallenna ja hae viimeisin himmennintaso.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Ota videotallennus käyttöön",
       "NVR.RecordOnAlarm": "Tallenna hälytyksestä",
       "NVR.ContinuousRecording": "Jatkuva tallennus."
+    },
+    "581": {
+      "Title": "Tekoälytoimintojen suorittaja",
+      "Description": "Jaettu palvelu tekoälyn toimintaehdotusten poimimiseen ja HomeGenie API -komentojen suorittamiseen nimenomaisesta pyynnöstä. Riippumaton pilvipalveluntarjoajista ja paikallisista päättelymoottoreista."
+    },
+    "582": {
+      "Title": "Pysyvät ilmoitukset",
+      "Description": "Pysyvä ilmoitusarkisto ja vuorovaikutteiset toiminnot.",
+      "ConfigureOptions.MaximumItems": "Arkistoitujen ilmoitusten enimmäismäärä",
+      "ConfigureOptions.RetentionDays": "Ilmoitusten säilytysaika (päivää)"
     },
     "583": {
       "Title": "AI Genie",

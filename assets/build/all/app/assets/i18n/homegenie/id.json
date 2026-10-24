@@ -140,6 +140,14 @@
   "capture_pause_none": "Tidak ada",
   "capture_pause_asis": "Dengan adanya",
   "$options": {
+    "6": {
+      "Title": "Nyalakan lampu grup",
+      "Description": "Nyalakan semua lampu dalam grup yang ditentukan."
+    },
+    "7": {
+      "Title": "Matikan lampu grup",
+      "Description": "Matikan semua lampu dalam grup yang ditentukan."
+    },
     "16": {
       "Title": "Memori Tingkat",
       "Description": "Menyimpan dan memanggil kembali level peredup terakhir.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Aktifkan Perekaman Video",
       "NVR.RecordOnAlarm": "Rekam Saat Alarm Berbunyi",
       "NVR.ContinuousRecording": "Perekaman Berkelanjutan."
+    },
+    "581": {
+      "Title": "Pelaksana Tindakan AI",
+      "Description": "Layanan bersama untuk mengekstrak usulan tindakan AI dan menjalankan perintah API HomeGenie secara eksplisit. Tidak bergantung pada penyedia cloud dan mesin inferensi lokal."
+    },
+    "582": {
+      "Title": "Notifikasi Persisten",
+      "Description": "Arsip notifikasi persisten dan tindakan interaktif.",
+      "ConfigureOptions.MaximumItems": "Jumlah maksimum notifikasi yang diarsipkan",
+      "ConfigureOptions.RetentionDays": "Masa penyimpanan notifikasi (hari)"
     },
     "583": {
       "Title": "AI Genie",

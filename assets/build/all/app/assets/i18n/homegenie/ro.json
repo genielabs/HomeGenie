@@ -140,6 +140,14 @@
   "capture_pause_none": "Nici unul",
   "capture_pause_asis": "Așa cum este",
   "$options": {
+    "6": {
+      "Title": "Aprinde luminile grupului",
+      "Description": "Aprinde toate luminile din grupul indicat."
+    },
+    "7": {
+      "Title": "Stinge luminile grupului",
+      "Description": "Stinge toate luminile din grupul indicat."
+    },
     "16": {
       "Title": "Memorie de nivel",
       "Description": "Memorează și reapelează ultimul nivel de variator.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Activează înregistrarea video",
       "NVR.RecordOnAlarm": "Înregistrare la alarmă",
       "NVR.ContinuousRecording": "Înregistrare continuă."
+    },
+    "581": {
+      "Title": "Executor de acțiuni IA",
+      "Description": "Serviciu comun pentru extragerea propunerilor de acțiuni IA și executarea explicită a comenzilor API HomeGenie. Independent de furnizorii cloud și de motoarele locale de inferență."
+    },
+    "582": {
+      "Title": "Notificări persistente",
+      "Description": "Arhivă persistentă de notificări și acțiuni interactive.",
+      "ConfigureOptions.MaximumItems": "Număr maxim de notificări arhivate",
+      "ConfigureOptions.RetentionDays": "Păstrarea notificărilor (zile)"
     },
     "583": {
       "Title": "AI Genie",

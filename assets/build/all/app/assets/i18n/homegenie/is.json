@@ -140,6 +140,14 @@
   "capture_pause_none": "Enginn",
   "capture_pause_asis": "Eins og er",
   "$options": {
+    "6": {
+      "Title": "Kveikja á ljósum hóps",
+      "Description": "Kveikja á öllum ljósum í tilgreindum hópi."
+    },
+    "7": {
+      "Title": "Slökkva á ljósum hóps",
+      "Description": "Slökkva á öllum ljósum í tilgreindum hópi."
+    },
     "16": {
       "Title": "Stigminni",
       "Description": "Geymið og endurkallaið síðasta dimmarstig.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Virkja myndbandsupptöku",
       "NVR.RecordOnAlarm": "Upptaka við viðvörun",
       "NVR.ContinuousRecording": "Stöðug upptaka."
+    },
+    "581": {
+      "Title": "Framkvæmdaraðili AI-aðgerða",
+      "Description": "Sameiginleg þjónusta til að draga út tillögur að AI-aðgerðum og framkvæma HomeGenie API-skipanir með skýrum hætti. Óháð skýjaþjónustuaðilum og staðbundnum ályktunarvélum."
+    },
+    "582": {
+      "Title": "Varanlegar tilkynningar",
+      "Description": "Varanlegt tilkynningasafn og gagnvirkar aðgerðir.",
+      "ConfigureOptions.MaximumItems": "Hámarksfjöldi vistaðra tilkynninga",
+      "ConfigureOptions.RetentionDays": "Varðveislutími tilkynninga (dagar)"
     },
     "583": {
       "Title": "AI Genie",

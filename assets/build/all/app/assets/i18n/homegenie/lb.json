@@ -140,6 +140,14 @@
   "capture_pause_none": "Keen",
   "capture_pause_asis": "Wéi et ass",
   "$options": {
+    "6": {
+      "Title": "Gruppeluuchten aschalten",
+      "Description": "All Luuchten an der uginner Grupp aschalten."
+    },
+    "7": {
+      "Title": "Gruppeluuchten ausschalten",
+      "Description": "All Luuchten an der uginner Grupp ausschalten."
+    },
     "16": {
       "Title": "Niveau Erënnerung",
       "Description": "De leschten Dimmerniveau späicheren an opruffen.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Videoopnam aktivéieren",
       "NVR.RecordOnAlarm": "Opnam beim Alarm",
       "NVR.ContinuousRecording": "Kontinuéierlech Opnam."
+    },
+    "581": {
+      "Title": "KI-Aktiounsausféierer",
+      "Description": "Gemeinsame Service fir KI-Aktiounsvirschléi erauszeliesen an HomeGenie-API-Befeele ausdrécklech auszeféieren. Onofhängeg vu Cloud-Ubidder a lokalen Inferenzmotoren."
+    },
+    "582": {
+      "Title": "Persistent Notifikatiounen",
+      "Description": "Persistent Notifikatiounsarchiv an interaktiv Aktiounen.",
+      "ConfigureOptions.MaximumItems": "Maximal Unzuel vun archivéierten Notifikatiounen",
+      "ConfigureOptions.RetentionDays": "Späicherdauer vun Notifikatiounen (Deeg)"
     },
     "583": {
       "Title": "AI Genie",

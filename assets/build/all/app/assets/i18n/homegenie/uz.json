@@ -140,6 +140,14 @@
   "capture_pause_none": "Yo'q",
   "capture_pause_asis": "Xuddi shunday",
   "$options": {
+    "6": {
+      "Title": "Guruh chiroqlarini yoqish",
+      "Description": "Belgilangan guruhdagi barcha chiroqlarni yoqing."
+    },
+    "7": {
+      "Title": "Guruh chiroqlarini o‘chirish",
+      "Description": "Belgilangan guruhdagi barcha chiroqlarni o‘chiring."
+    },
     "16": {
       "Title": "Xotira darajasi",
       "Description": "Oxirgi dimmer darajasini saqlang va eslang.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Video yozib olishni yoqish",
       "NVR.RecordOnAlarm": "Yozib olish signali",
       "NVR.ContinuousRecording": "Uzluksiz yozib olish."
+    },
+    "581": {
+      "Title": "AI amallarini bajaruvchi",
+      "Description": "AI amal takliflarini ajratib olish va HomeGenie API buyruqlarini aniq bajarish uchun umumiy xizmat. Bulut provayderlari va mahalliy xulosa chiqarish mexanizmlaridan mustaqil."
+    },
+    "582": {
+      "Title": "Doimiy bildirishnomalar",
+      "Description": "Doimiy bildirishnomalar arxivi va interaktiv amallar.",
+      "ConfigureOptions.MaximumItems": "Arxivlangan bildirishnomalarning eng ko‘p soni",
+      "ConfigureOptions.RetentionDays": "Bildirishnomalarni saqlash muddati (kun)"
     },
     "583": {
       "Title": "AI Genie",

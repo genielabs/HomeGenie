@@ -140,6 +140,14 @@
   "capture_pause_none": "Žádný",
   "capture_pause_asis": "Tak jak je",
   "$options": {
+    "6": {
+      "Title": "ZAPNOUT světla ve skupině",
+      "Description": "Zapne všechna světla v zadané skupině."
+    },
+    "7": {
+      "Title": "VYPNOUT světla ve skupině",
+      "Description": "Vypne všechna světla v zadané skupině."
+    },
     "16": {
       "Title": "Paměť úrovní",
       "Description": "Uložení a vyvolání poslední úrovně stmívání.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Povolit nahrávání videa",
       "NVR.RecordOnAlarm": "Nahrávání při alarmu",
       "NVR.ContinuousRecording": "Nepřetržité nahrávání."
+    },
+    "581": {
+      "Title": "Vykonavatel akcí AI",
+      "Description": "Sdílená služba pro extrakci návrhů akcí AI a provádění příkazů API HomeGenie na výslovný požadavek. Nezávislá na cloudových poskytovatelích a místních inferenčních jádrech."
+    },
+    "582": {
+      "Title": "Trvalá oznámení",
+      "Description": "Trvalý archiv oznámení a interaktivní akce.",
+      "ConfigureOptions.MaximumItems": "Maximální počet archivovaných oznámení",
+      "ConfigureOptions.RetentionDays": "Doba uchování oznámení (dny)"
     },
     "583": {
       "Title": "AI Genie",

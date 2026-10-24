@@ -140,6 +140,14 @@
   "capture_pause_none": "Ingen",
   "capture_pause_asis": "Som den är",
   "$options": {
+    "6": {
+      "Title": "Tänd gruppens lampor",
+      "Description": "Tänd alla lampor i den angivna gruppen."
+    },
+    "7": {
+      "Title": "Släck gruppens lampor",
+      "Description": "Släck alla lampor i den angivna gruppen."
+    },
     "16": {
       "Title": "Nivåminne",
       "Description": "Lagra och hämta senaste dimmernivå.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Aktivera videoinspelning",
       "NVR.RecordOnAlarm": "Inspelning vid larm",
       "NVR.ContinuousRecording": "Kontinuerlig inspelning."
+    },
+    "581": {
+      "Title": "Utförare av AI-åtgärder",
+      "Description": "Delad tjänst för att extrahera AI-åtgärdsförslag och uttryckligen köra HomeGenie API-kommandon. Oberoende av molnleverantörer och lokala inferensmotorer."
+    },
+    "582": {
+      "Title": "Beständiga aviseringar",
+      "Description": "Beständigt aviseringsarkiv och interaktiva åtgärder.",
+      "ConfigureOptions.MaximumItems": "Maximalt antal arkiverade aviseringar",
+      "ConfigureOptions.RetentionDays": "Lagringstid för aviseringar (dagar)"
     },
     "583": {
       "Title": "AI Genie",

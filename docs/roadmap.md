@@ -1,18 +1,39 @@
 # Roadmap
 
-Consolidated status: 2026-10-22, including saved-widget history, scripting references and confirmed Raspberry Pi update monitoring. See [Unreleased changes](../CHANGELOG.md).
+Consolidated status: 2026-10-24, including maintainer-confirmed saved-widget and update-dialog acceptance, Mini release checks and website publication. See [Unreleased changes](../CHANGELOG.md).
 
 This is the active task list. Detailed stage-by-stage decisions, earlier API names, test counts and acceptance evidence are preserved in [implementation history](roadmap-history.md); they do not override this status. Completed work is not reopened merely because an earlier checkpoint still says pending.
+
+## Filesystem operation hardening (planned, 2026-10-24)
+
+Context: commit `1e0ed4f2` documents secure deployment and private vulnerability reporting; the preceding `4c08268c` introduces package path containment. Keep this follow-up separate from the package patch already confirmed by Yuan. The findings supplied for this plan come from static analysis: no attack was attempted against the backend, and these items do not establish an exploitable vulnerability or a completed fix. Follow [the security policy](../SECURITY.md) for suspected vulnerabilities.
+
+Use protections scoped to each operation, reusing the package containment guard where appropriate. Do not globally prohibit writes to `programs/`: prevent unrelated operations from reaching it while preserving authorized program editing and code installation. Implement the following blocks in order, as separate, reviewable changes.
+
+1. [ ] **Widget confinement.** Add, Save, Delete and Export currently construct paths from parameters without the package guard. Confine writes, deletion, export reads and final import copies to the widget directory. Validate before creating directories or changing files. Address `GetWidgetFolderPath` using `Path.PathSeparator` (a path-list separator, not a directory separator) explicitly, with nested-widget regression coverage; do not fold in an unverified functional change.
+2. [ ] **Arduino sketch files.** The address reaches `GetSketchFile`, while the filename is reduced with `Path.GetFileName`. Validate the PID, resolve the intended program and its sketch directory, and validate the complete destination before access. Preserve the editor's intended workflow.
+3. [ ] **Wallpaper uploads.** Multipart saving currently receives a destination directory. Validate the filename and resolve an explicit destination contained in the image directory before writing.
+4. [ ] **Isolated temporary workspaces.** Replace shared temporary names/directories in import flows with an operation-owned workspace; limit cleanup to that workspace and prevent concurrent-operation collisions or cross-cleanup. Backup restoration spans multiple requests: retain operation state between steps rather than creating a different directory indiscriminately for each request.
+5. [ ] **Final import and restore copies.** Audit copies into widgets, data and configuration independently of archive extraction. Enforce permitted final destinations, including symbolic-link checks: safe extraction alone does not establish that subsequent copies are safe.
+6. [ ] **Updates and interfaces.** Preserve their authorized ability to install code while checking staging containment and intended final destinations. Review backup/update extraction and copies separately. Inspect TGZ handling against the actual library in use; a different implementation from ZIP is not by itself evidence of a vulnerability.
+
+- [ ] **Acceptance for every block.** Use sentinel files outside the allowed directory to detect unintended reads, writes or deletion; cover absolute and relative paths, Windows/Linux separators, symbolic links and concurrent requests. Alongside rejected inputs, verify valid nested widgets, sketch editing, import, backup restoration and updates. Run security cases in an isolated test environment, not against the development backend. Record results per operation before marking its item complete.
+
+## Confirmed acceptance (2026-10-24)
+
+- [x] Complete the chat widget button/status layout; maintainer accepted the result.
+- [x] Confirm HomeGenie Mini 1.2.68 release CI and artifacts; details are tracked in its own roadmap and changelog.
+- [x] Confirm the published website distributes the updated configurator, presets and firmware. The classic ESP32-CAM manual IO0 requirement and reported host CPU usage remain separate observations.
 
 ## Follow-up consolidation (2026-10-22)
 
 - [x] Add saved-widget status and Update / Save As / Edit actions in YoT, backed by server history metadata through Chat History Service 577 1.0.8. Sources and request telemetry are preserved; UI metadata stays out of model context. Implementation checkpoints passed 14 focused frontend cases and 32 backend history cases.
-- [ ] Complete live saved-widget acceptance after updating both frontend and program 577: save from an older chat, reload, open from a second browser, then exercise Edit, Update and Save As. No browser-local persistence is used; do not mark these checks passed based on unit tests.
+- [x] Complete live saved-widget acceptance: the maintainer confirmed the saved state survives history reload and use from another browser, with Edit, Update and Save As tested (2026-10-24). Persistence remains in server-side history metadata.
 - [x] Generate optional scripting API references from Doxygen and improve essential automation guidance. Maintainer confirmed the Gemini light-counting example, including a repeat with program context disabled. Keep detailed topic loading explicit; automatic retrieval and a complete device-operation catalog are not implemented.
 - [x] Implement `Notifications.Unregister` in HomeGenie Panel notifications 580 1.0.1; document the endpoint separately from future notification registration UI and Mini delivery.
 - [ ] Implement explicit per-device notification registration in Android ("Receive notifications from this device") for HomeGenie Server and Mini. Mini JavaScript notification sending remains design work; no live acceptance is claimed for the new unregister endpoint.
-- [x] Implement explicit archive verification/extraction labels and responsive 360 px minimum width in YoT's release-update dialog. Live acceptance of these refinements remains pending; Raspberry Pi restart-monitoring acceptance is recorded separately below.
-- [x] Implement aligned address / program name / current version / target version columns in Update all. Keep broader styling and live acceptance in the existing future-extension item.
+- [x] Implement explicit archive verification/extraction labels and responsive 360 px minimum width in YoT's release-update dialog. The maintainer confirmed live acceptance on 2026-10-24; Raspberry Pi restart-monitoring acceptance is also recorded separately.
+- [x] Complete the Update all confirmation layout with aligned address / program name / current version / target version columns. The maintainer confirmed the visual refinements and live acceptance on 2026-10-24.
 - [ ] Complete final frontend resource/cache, package version/checksum, full-suite and release-build checks against the actual commit candidate. The maintainer is handling these checks; no new full-suite result or release is asserted here.
 - HomeGenie Mini compatibility and device acceptance are tracked in its own `CHANGELOG.md` and `ROADMAP.md`; a passing Mini hardware test does not validate a HomeGenie Server or YoT change.
 
@@ -114,7 +135,7 @@ These are not newly declared release blockers. Keep the original evidence and di
 
 ## Future extensions
 
-- [ ] Refine the visual layout of the program-update "Update all" confirmation dialog (maintainer screenshot, 2026-10-22): improve spacing and hierarchy between the summary, program count and update list; prefer readable program names with repository/package identifiers secondary, align IDs and target versions, and handle long lists/narrow screens consistently. First layout refinement implemented in YoT on 2026-10-22 at the maintainer's request: aligned address, installed program name, current version and target version columns, preserving local-change warnings and retry selection. Broader visual polish and live acceptance remain pending; update execution behavior is unchanged.
+- [x] Refine the visual layout of the program-update "Update all" confirmation dialog, including summary/list hierarchy and aligned address, installed program name, current version and target version. The maintainer confirmed completion and live acceptance on 2026-10-24. Local-change warnings, retry selection and update execution behavior are preserved.
 
 - [ ] Optional text-caption overlay for widget speech; utils.speech.say/stop are already implemented.
 
@@ -126,7 +147,7 @@ These are not newly declared release blockers. Keep the original evidence and di
 - [ ] Broader mixed-action plans, composite updates and project-scoped Magik workflows, including hardware guidance and dashboard integration. Keep existing preview/Save behavior; broader autonomy is not implied.
 - [ ] Durable background jobs/recovery and richer notification filters; per-user read state only if user-scoped accounts exist.
 - [ ] General interface capability to opt out of automatic control-group creation, preserving existing/manual groups and module/event routing.
-- [ ] RTL support and remaining AI/UX polish, including compact widget badges and clearer result-versus-compiler-detail presentation. These come last.
+- [ ] RTL support and remaining AI/UX polish, including clearer result-versus-compiler-detail presentation. The chat widget button/status layout was completed and accepted by the maintainer on 2026-10-24; do not reopen it as pending.
 - [ ] Revisit import normalization only for a reproduced unsupported format, lost metadata/artifact or concrete contract requirement. Normalize on import if needed, retain the original and never execute historical actions.
 - [ ] Complete documentation organization/cross-link review where still needed, without moving published URLs blindly.
 

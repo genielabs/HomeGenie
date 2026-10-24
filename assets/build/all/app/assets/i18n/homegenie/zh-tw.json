@@ -140,6 +140,14 @@
   "capture_pause_none": "沒有任何",
   "capture_pause_asis": "現狀",
   "$options": {
+    "6": {
+      "Title": "開啟群組燈光",
+      "Description": "開啟指定群組內的所有燈光。"
+    },
+    "7": {
+      "Title": "關閉群組燈光",
+      "Description": "關閉指定群組內的所有燈光。"
+    },
     "16": {
       "Title": "等級記憶",
       "Description": "儲存並調用最後的調光級別。",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "啟用視訊錄製",
       "NVR.RecordOnAlarm": "警報錄音",
       "NVR.ContinuousRecording": "連續錄製。"
+    },
+    "581": {
+      "Title": "AI 操作執行器",
+      "Description": "用於擷取 AI 操作建議並明確執行 HomeGenie API 命令的共用服務。獨立於雲端服務供應商和本機推論引擎。"
+    },
+    "582": {
+      "Title": "持久通知",
+      "Description": "持久通知封存和互動式操作。",
+      "ConfigureOptions.MaximumItems": "封存通知數量上限",
+      "ConfigureOptions.RetentionDays": "通知保留時間（天）"
     },
     "583": {
       "Title": "AI Genie",

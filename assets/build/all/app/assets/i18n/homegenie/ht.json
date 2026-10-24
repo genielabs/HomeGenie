@@ -140,6 +140,14 @@
   "capture_pause_none": "Okenn",
   "capture_pause_asis": "Jan li ye a",
   "$options": {
+    "6": {
+      "Title": "Limen limyè gwoup la",
+      "Description": "Limen tout limyè nan gwoup yo bay la."
+    },
+    "7": {
+      "Title": "Etenn limyè gwoup la",
+      "Description": "Etenn tout limyè nan gwoup yo bay la."
+    },
     "16": {
       "Title": "Memwa Nivo",
       "Description": "Sere epi sonje dènye nivo gradatè a.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Aktive Anrejistreman Videyo",
       "NVR.RecordOnAlarm": "Anrejistre sou alam",
       "NVR.ContinuousRecording": "Anrejistreman kontinyèl."
+    },
+    "581": {
+      "Title": "Egzekitè aksyon AI",
+      "Description": "Sèvis pataje pou ekstrè pwopozisyon aksyon AI epi egzekite kòmand API HomeGenie klèman. Endepandan de founisè nwaj ak motè enferans lokal."
+    },
+    "582": {
+      "Title": "Notifikasyon pèmanan",
+      "Description": "Achiv notifikasyon pèmanan ak aksyon entèaktif.",
+      "ConfigureOptions.MaximumItems": "Kantite maksimòm notifikasyon achive",
+      "ConfigureOptions.RetentionDays": "Dire konsèvasyon notifikasyon (jou)"
     },
     "583": {
       "Title": "AI Genie",

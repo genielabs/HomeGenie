@@ -140,6 +140,14 @@
   "capture_pause_none": "Neviens",
   "capture_pause_asis": "Kā ir",
   "$options": {
+    "6": {
+      "Title": "Ieslēgt grupas apgaismojumu",
+      "Description": "Ieslēgt visas norādītās grupas gaismas."
+    },
+    "7": {
+      "Title": "Izslēgt grupas apgaismojumu",
+      "Description": "Izslēgt visas norādītās grupas gaismas."
+    },
     "16": {
       "Title": "Līmeņa atmiņa",
       "Description": "Saglabāt un izsaukt pēdējo aptumšotāja līmeni.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Iespējot video ierakstīšanu",
       "NVR.RecordOnAlarm": "Ierakstīt trauksmes brīdī",
       "NVR.ContinuousRecording": "Nepārtraukta ierakstīšana."
+    },
+    "581": {
+      "Title": "MI darbību izpildītājs",
+      "Description": "Koplietots pakalpojums MI darbību priekšlikumu iegūšanai un HomeGenie API komandu nepārprotamai izpildei. Neatkarīgs no mākoņpakalpojumu sniedzējiem un vietējiem secināšanas dzinējiem."
+    },
+    "582": {
+      "Title": "Pastāvīgi paziņojumi",
+      "Description": "Pastāvīgs paziņojumu arhīvs un interaktīvas darbības.",
+      "ConfigureOptions.MaximumItems": "Maksimālais arhivēto paziņojumu skaits",
+      "ConfigureOptions.RetentionDays": "Paziņojumu glabāšana (dienas)"
     },
     "583": {
       "Title": "AI Genie",

@@ -140,6 +140,14 @@
   "capture_pause_none": "ምንም",
   "capture_pause_asis": "እንዳለ",
   "$options": {
+    "6": {
+      "Title": "የቡድኑን መብራቶች አብራ",
+      "Description": "በተጠቀሰው ቡድን ያሉትን መብራቶች ሁሉ አብራ።"
+    },
+    "7": {
+      "Title": "የቡድኑን መብራቶች አጥፋ",
+      "Description": "በተጠቀሰው ቡድን ያሉትን መብራቶች ሁሉ አጥፋ።"
+    },
     "16": {
       "Title": "ደረጃ ማህደረ ትውስታ",
       "Description": "የመጨረሻውን የዲመር ደረጃ ያከማቹ እና ያስታውሱ።",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "የቪዲዮ ቀረጻን ያንቁ",
       "NVR.RecordOnAlarm": "ማንቂያ ላይ ቅዳ",
       "NVR.ContinuousRecording": "ቀጣይነት ያለው ቀረጻ።"
+    },
+    "581": {
+      "Title": "የAI እርምጃ ፈጻሚ",
+      "Description": "የAI እርምጃ ሐሳቦችን ለማውጣት እና የHomeGenie API ትዕዛዞችን በግልጽ ትዕዛዝ ለመፈጸም የሚያገለግል የጋራ አገልግሎት። ከደመና አቅራቢዎች እና ከአካባቢያዊ የአመክንዮ ሞተሮች ገለልተኛ ነው።"
+    },
+    "582": {
+      "Title": "ቋሚ ማሳወቂያዎች",
+      "Description": "ቋሚ የማሳወቂያ ማህደር እና በይነተገናኝ እርምጃዎች።",
+      "ConfigureOptions.MaximumItems": "ከፍተኛው የተመዘገቡ ማሳወቂያዎች ብዛት",
+      "ConfigureOptions.RetentionDays": "ማሳወቂያዎችን የማቆያ ጊዜ (ቀናት)"
     },
     "583": {
       "Title": "AI Genie",

@@ -140,6 +140,14 @@
   "capture_pause_none": "Palibe",
   "capture_pause_asis": "Monga momwe zilili",
   "$options": {
+    "6": {
+      "Title": "Yatsani magetsi a gulu",
+      "Description": "Yatsani magetsi onse m’gulu lomwe lasankhidwa."
+    },
+    "7": {
+      "Title": "Zimitsani magetsi a gulu",
+      "Description": "Zimitsani magetsi onse m’gulu lomwe lasankhidwa."
+    },
     "16": {
       "Title": "Memory Level",
       "Description": "Sungani ndikukumbukira mulingo womaliza wa dimmer.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Yambitsani Kujambula Kanema",
       "NVR.RecordOnAlarm": "Lembani pa Alamu",
       "NVR.ContinuousRecording": "Kujambula Kosalekeza."
+    },
+    "581": {
+      "Title": "Woyendetsa zochita za AI",
+      "Description": "Ntchito yogawana yochotsa malingaliro a zochita za AI ndi kuyendetsa malamulo a HomeGenie API momveka bwino. Siidalira opereka ntchito za mtambo kapena injini za kulingalira za m’deralo."
+    },
+    "582": {
+      "Title": "Zidziwitso zokhalitsa",
+      "Description": "Malo osungira zidziwitso zokhalitsa ndi zochita zolumikizana.",
+      "ConfigureOptions.MaximumItems": "Chiwerengero chachikulu cha zidziwitso zosungidwa",
+      "ConfigureOptions.RetentionDays": "Nthawi yosunga zidziwitso (masiku)"
     },
     "583": {
       "Title": "AI Genie",

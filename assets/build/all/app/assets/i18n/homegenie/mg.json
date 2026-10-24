@@ -140,6 +140,14 @@
   "capture_pause_none": "tsy misy",
   "capture_pause_asis": "Toy ny misy",
   "$options": {
+    "6": {
+      "Title": "Alefaso ny jiron’ny vondrona",
+      "Description": "Alefaso ny jiro rehetra ao amin’ny vondrona voatondro."
+    },
+    "7": {
+      "Title": "Vonoy ny jiron’ny vondrona",
+      "Description": "Vonoy ny jiro rehetra ao amin’ny vondrona voatondro."
+    },
     "16": {
       "Title": "Level Memory",
       "Description": "Tehirizo ary tsarovy ny haavon'ny dimmer farany.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Alefaso ny fandraketana horonan-tsary",
       "NVR.RecordOnAlarm": "Raketo an-tsoratra rehefa misy fanairana",
       "NVR.ContinuousRecording": "Fandraketana mitohy."
+    },
+    "581": {
+      "Title": "Mpanatanteraka hetsika AI",
+      "Description": "Tolotra iombonana hakana soso-kevitra hetsika AI sy hanatanterahana mazava ny baiko API HomeGenie. Tsy miankina amin’ny mpamatsy rahona sy ny milina fanatsoahan-kevitra eo an-toerana."
+    },
+    "582": {
+      "Title": "Fampandrenesana maharitra",
+      "Description": "Tahiry maharitra ho an’ny fampandrenesana sy hetsika ifandraisana.",
+      "ConfigureOptions.MaximumItems": "Isan’ny fampandrenesana voatahiry ambony indrindra",
+      "ConfigureOptions.RetentionDays": "Faharetan’ny fitahirizana fampandrenesana (andro)"
     },
     "583": {
       "Title": "AI Genie",

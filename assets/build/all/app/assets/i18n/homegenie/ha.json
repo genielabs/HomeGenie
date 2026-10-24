@@ -140,6 +140,14 @@
   "capture_pause_none": "Babu",
   "capture_pause_asis": "Kamar yadda yake",
   "$options": {
+    "6": {
+      "Title": "Kunna fitilun rukuni",
+      "Description": "Kunna duk fitilun da ke cikin rukunin da aka bayar."
+    },
+    "7": {
+      "Title": "Kashe fitilun rukuni",
+      "Description": "Kashe duk fitilun da ke cikin rukunin da aka bayar."
+    },
     "16": {
       "Title": "Ƙwaƙwalwar Matsayi",
       "Description": "Ajiye kuma tuno matakin dimmer na ƙarshe.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Kunna Rikodin Bidiyo",
       "NVR.RecordOnAlarm": "Yi rikodi akan Ƙararrawa",
       "NVR.ContinuousRecording": "Rikodi Mai Ci Gaba."
+    },
+    "581": {
+      "Title": "Mai aiwatar da ayyukan AI",
+      "Description": "Sabis na haɗin gwiwa don fitar da shawarwarin ayyukan AI da aiwatar da umarnin HomeGenie API a sarari. Ba ya dogara da masu samar da girgije ko injinan tantancewa na gida."
+    },
+    "582": {
+      "Title": "Sanarwa masu ɗorewa",
+      "Description": "Rumbun sanarwa mai ɗorewa da ayyukan hulɗa.",
+      "ConfigureOptions.MaximumItems": "Mafi yawan sanarwar da aka adana",
+      "ConfigureOptions.RetentionDays": "Lokacin adana sanarwa (kwanaki)"
     },
     "583": {
       "Title": "AI Genie",

@@ -140,6 +140,14 @@
   "capture_pause_none": "Nėra",
   "capture_pause_asis": "Kaip yra",
   "$options": {
+    "6": {
+      "Title": "Įjungti grupės šviesas",
+      "Description": "Įjungti visas nurodytos grupės šviesas."
+    },
+    "7": {
+      "Title": "Išjungti grupės šviesas",
+      "Description": "Išjungti visas nurodytos grupės šviesas."
+    },
     "16": {
       "Title": "Lygio atmintis",
       "Description": "Išsaugokite ir iškvieskite paskutinį reguliatoriaus lygį.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Įjungti vaizdo įrašymą",
       "NVR.RecordOnAlarm": "Įrašyti įjungus žadintuvą",
       "NVR.ContinuousRecording": "Nuolatinis įrašymas."
+    },
+    "581": {
+      "Title": "DI veiksmų vykdyklė",
+      "Description": "Bendra paslauga DI veiksmų pasiūlymams išgauti ir HomeGenie API komandoms aiškiai vykdyti. Nepriklauso nuo debesijos paslaugų teikėjų ir vietinių išvadų variklių."
+    },
+    "582": {
+      "Title": "Išliekantys pranešimai",
+      "Description": "Išliekantis pranešimų archyvas ir interaktyvūs veiksmai.",
+      "ConfigureOptions.MaximumItems": "Didžiausias archyvuotų pranešimų skaičius",
+      "ConfigureOptions.RetentionDays": "Pranešimų saugojimas (dienomis)"
     },
     "583": {
       "Title": "AI Genie",

@@ -140,6 +140,14 @@
   "capture_pause_none": "Geen",
   "capture_pause_asis": "Zoals het is",
   "$options": {
+    "6": {
+      "Title": "Groepsverlichting inschakelen",
+      "Description": "Schakel alle lampen in de opgegeven groep in."
+    },
+    "7": {
+      "Title": "Groepsverlichting uitschakelen",
+      "Description": "Schakel alle lampen in de opgegeven groep uit."
+    },
     "16": {
       "Title": "Niveaugeheugen",
       "Description": "Opslaan en oproepen van het laatste dimmerniveau.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Video-opname inschakelen",
       "NVR.RecordOnAlarm": "Opname bij alarm",
       "NVR.ContinuousRecording": "Continue opname."
+    },
+    "581": {
+      "Title": "AI-actie-uitvoerder",
+      "Description": "Gedeelde service om AI-actievoorstellen te extraheren en HomeGenie-API-opdrachten expliciet uit te voeren. Onafhankelijk van cloudproviders en lokale inferentie-engines."
+    },
+    "582": {
+      "Title": "Blijvende meldingen",
+      "Description": "Blijvend meldingenarchief en interactieve acties.",
+      "ConfigureOptions.MaximumItems": "Maximumaantal gearchiveerde meldingen",
+      "ConfigureOptions.RetentionDays": "Bewaartermijn meldingen (dagen)"
     },
     "583": {
       "Title": "AI Genie",

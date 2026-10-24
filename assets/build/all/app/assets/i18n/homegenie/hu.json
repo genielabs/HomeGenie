@@ -140,6 +140,14 @@
   "capture_pause_none": "Egyik sem",
   "capture_pause_asis": "Ahogy van",
   "$options": {
+    "6": {
+      "Title": "Csoport lámpáinak bekapcsolása",
+      "Description": "A megadott csoport összes lámpájának bekapcsolása."
+    },
+    "7": {
+      "Title": "Csoport lámpáinak kikapcsolása",
+      "Description": "A megadott csoport összes lámpájának kikapcsolása."
+    },
     "16": {
       "Title": "Szint memória",
       "Description": "Az utolsó fényerőszabályzó szint tárolása és előhívása.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Videofelvétel engedélyezése",
       "NVR.RecordOnAlarm": "Felvétel riasztáskor",
       "NVR.ContinuousRecording": "Folyamatos felvétel."
+    },
+    "581": {
+      "Title": "AI-műveletvégrehajtó",
+      "Description": "Közös szolgáltatás az AI műveleti javaslatainak kinyeréséhez és a HomeGenie API parancsainak kifejezett végrehajtásához. Független a felhőszolgáltatóktól és a helyi következtetési motoroktól."
+    },
+    "582": {
+      "Title": "Tartós értesítések",
+      "Description": "Tartós értesítési archívum és interaktív műveletek.",
+      "ConfigureOptions.MaximumItems": "Archivált értesítések maximális száma",
+      "ConfigureOptions.RetentionDays": "Értesítések megőrzése (nap)"
     },
     "583": {
       "Title": "AI Genie",

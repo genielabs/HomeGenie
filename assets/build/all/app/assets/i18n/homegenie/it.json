@@ -303,6 +303,14 @@
 " ": "------------------------------------------",
     "$options": {
 
+    "6": {
+      "Title": "Accendi luci del gruppo",
+      "Description": "Accende tutte le luci del gruppo indicato."
+    },
+    "7": {
+      "Title": "Spegni luci del gruppo",
+      "Description": "Spegne tutte le luci del gruppo indicato."
+    },
     "16": {
       "Title":
       "Memoria livello",
@@ -600,6 +608,16 @@
         "Abilita conoscenza approfondita (leggi programmi e widget)",
       "ConfigureOptions.SystemInstructions":
         "Istruzioni di Sistema"
+    },
+    "581": {
+      "Title": "Esecutore azioni IA",
+      "Description": "Servizio condiviso per estrarre le proposte di azione dell’IA ed eseguire esplicitamente i comandi delle API HomeGenie. Indipendente dai provider cloud e dai motori di inferenza locali."
+    },
+    "582": {
+      "Title": "Notifiche persistenti",
+      "Description": "Archivio persistente delle notifiche e azioni interattive.",
+      "ConfigureOptions.MaximumItems": "Numero massimo di notifiche archiviate",
+      "ConfigureOptions.RetentionDays": "Conservazione delle notifiche (giorni)"
     },
     "583": {
       "Title": "AI Genie",

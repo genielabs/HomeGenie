@@ -140,6 +140,14 @@
   "capture_pause_none": "なし",
   "capture_pause_asis": "そのまま",
   "$options": {
+    "6": {
+      "Title": "グループの照明を点灯",
+      "Description": "指定したグループのすべての照明を点灯します。"
+    },
+    "7": {
+      "Title": "グループの照明を消灯",
+      "Description": "指定したグループのすべての照明を消灯します。"
+    },
     "16": {
       "Title": "レベルメモリ",
       "Description": "最後の調光レベルを保存して呼び出します。",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "ビデオ録画を有効にする",
       "NVR.RecordOnAlarm": "アラーム時に録画",
       "NVR.ContinuousRecording": "連続録画。"
+    },
+    "581": {
+      "Title": "AIアクション実行サービス",
+      "Description": "AIのアクション提案を抽出し、HomeGenie APIコマンドを明示的に実行する共有サービス。クラウドプロバイダーやローカル推論エンジンに依存しません。"
+    },
+    "582": {
+      "Title": "永続通知",
+      "Description": "通知の永続的な保存とインタラクティブなアクション。",
+      "ConfigureOptions.MaximumItems": "保存する通知の最大数",
+      "ConfigureOptions.RetentionDays": "通知の保存期間（日）"
     },
     "583": {
       "Title": "AI Genie",

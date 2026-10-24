@@ -140,6 +140,14 @@
   "capture_pause_none": "Netû",
   "capture_pause_asis": "Wek",
   "$options": {
+    "6": {
+      "Title": "Ronahiyên komê pê bixe",
+      "Description": "Hemû ronahiyên di koma diyarkirî de pê bixe."
+    },
+    "7": {
+      "Title": "Ronahiyên komê vemirîne",
+      "Description": "Hemû ronahiyên di koma diyarkirî de vemirîne."
+    },
     "16": {
       "Title": "Bîra Asta",
       "Description": "Asta ronîkirina dawî hilînin û bi bîr bînin.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Tomarkirina Vîdyoyê Çalak Bike",
       "NVR.RecordOnAlarm": "Tomarkirina li ser alarmê",
       "NVR.ContinuousRecording": "Tomarkirina Berdewam."
+    },
+    "581": {
+      "Title": "Pêkanerê çalakiyên AI",
+      "Description": "Xizmeta hevpar ji bo derxistina pêşniyarên çalakiyên AI û pêkanîna eşkere ya fermanên HomeGenie API. Ji dabînkerên ewrê û motorên encamgirtina herêmî serbixwe ye."
+    },
+    "582": {
+      "Title": "Agahdariyên mayînde",
+      "Description": "Arşîva agahdariyên mayînde û çalakiyên înteraktîf.",
+      "ConfigureOptions.MaximumItems": "Hejmara herî zêde ya agahdariyên arşîvkirî",
+      "ConfigureOptions.RetentionDays": "Demê parastina agahdariyan (roj)"
     },
     "583": {
       "Title": "AI Genie",

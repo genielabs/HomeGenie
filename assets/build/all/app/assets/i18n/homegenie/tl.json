@@ -140,6 +140,14 @@
   "capture_pause_none": "wala",
   "capture_pause_asis": "gaya ng",
   "$options": {
+    "6": {
+      "Title": "Buksan ang mga ilaw ng grupo",
+      "Description": "Buksan ang lahat ng ilaw sa tinukoy na grupo."
+    },
+    "7": {
+      "Title": "Patayin ang mga ilaw ng grupo",
+      "Description": "Patayin ang lahat ng ilaw sa tinukoy na grupo."
+    },
     "16": {
       "Title": "Antas ng Memorya",
       "Description": "I-store at i-recall ang huling dimmer level.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Paganahin ang Pagre-record ng Video",
       "NVR.RecordOnAlarm": "Mag-record sa Alarma",
       "NVR.ContinuousRecording": "Patuloy na Pagtatala."
+    },
+    "581": {
+      "Title": "Tagapagpatupad ng Aksyon ng AI",
+      "Description": "Pinagsasaluhang serbisyo para kunin ang mga mungkahing aksyon ng AI at tahasang patakbuhin ang mga utos ng HomeGenie API. Hindi nakadepende sa mga cloud provider at lokal na inference engine."
+    },
+    "582": {
+      "Title": "Mga Permanenteng Abiso",
+      "Description": "Permanenteng archive ng mga abiso at mga interaktibong aksyon.",
+      "ConfigureOptions.MaximumItems": "Pinakamataas na bilang ng naka-archive na abiso",
+      "ConfigureOptions.RetentionDays": "Tagal ng pag-iimbak ng mga abiso (araw)"
     },
     "583": {
       "Title": "AI Genie",

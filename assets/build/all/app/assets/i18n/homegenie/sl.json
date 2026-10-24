@@ -140,6 +140,14 @@
   "capture_pause_none": "Nobena",
   "capture_pause_asis": "Kot je",
   "$options": {
+    "6": {
+      "Title": "Vklopi luči skupine",
+      "Description": "Vklopi vse luči v navedeni skupini."
+    },
+    "7": {
+      "Title": "Izklopi luči skupine",
+      "Description": "Izklopi vse luči v navedeni skupini."
+    },
     "16": {
       "Title": "Spomin na ravni",
       "Description": "Shrani in prikliči zadnjo stopnjo zatemnitve.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Omogoči snemanje videa",
       "NVR.RecordOnAlarm": "Snemanje ob alarmu",
       "NVR.ContinuousRecording": "Neprekinjeno snemanje."
+    },
+    "581": {
+      "Title": "Izvajalnik dejanj UI",
+      "Description": "Skupna storitev za pridobivanje predlogov dejanj UI in izrecno izvajanje ukazov API HomeGenie. Neodvisna od ponudnikov oblaka in lokalnih pogonov za sklepanje."
+    },
+    "582": {
+      "Title": "Trajna obvestila",
+      "Description": "Trajni arhiv obvestil in interaktivna dejanja.",
+      "ConfigureOptions.MaximumItems": "Največje število arhiviranih obvestil",
+      "ConfigureOptions.RetentionDays": "Hramba obvestil (dnevi)"
     },
     "583": {
       "Title": "AI Genie",

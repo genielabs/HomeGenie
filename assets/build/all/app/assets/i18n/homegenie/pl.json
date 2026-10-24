@@ -140,6 +140,14 @@
   "capture_pause_none": "Nic",
   "capture_pause_asis": "Tak jak jest",
   "$options": {
+    "6": {
+      "Title": "Włącz światła grupy",
+      "Description": "Włącz wszystkie światła we wskazanej grupie."
+    },
+    "7": {
+      "Title": "Wyłącz światła grupy",
+      "Description": "Wyłącz wszystkie światła we wskazanej grupie."
+    },
     "16": {
       "Title": "Pamięć poziomu",
       "Description": "Zapamiętaj i przywołaj ostatni poziom ściemniacza.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Włącz nagrywanie wideo",
       "NVR.RecordOnAlarm": "Nagrywanie w przypadku alarmu",
       "NVR.ContinuousRecording": "Nagrywanie ciągłe."
+    },
+    "581": {
+      "Title": "Wykonawca działań AI",
+      "Description": "Wspólna usługa wyodrębniająca propozycje działań AI i jawnie wykonująca polecenia API HomeGenie. Niezależna od dostawców chmury i lokalnych silników wnioskowania."
+    },
+    "582": {
+      "Title": "Trwałe powiadomienia",
+      "Description": "Trwałe archiwum powiadomień i działania interaktywne.",
+      "ConfigureOptions.MaximumItems": "Maksymalna liczba zarchiwizowanych powiadomień",
+      "ConfigureOptions.RetentionDays": "Przechowywanie powiadomień (dni)"
     },
     "583": {
       "Title": "AI Genie",

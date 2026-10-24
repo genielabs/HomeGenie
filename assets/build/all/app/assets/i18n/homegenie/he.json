@@ -140,6 +140,14 @@
   "capture_pause_none": "אַף לֹא אֶחָד",
   "capture_pause_asis": "כפי שהוא",
   "$options": {
+    "6": {
+      "Title": "הדלקת אורות הקבוצה",
+      "Description": "הדלקת כל האורות בקבוצה שצוינה."
+    },
+    "7": {
+      "Title": "כיבוי אורות הקבוצה",
+      "Description": "כיבוי כל האורות בקבוצה שצוינה."
+    },
     "16": {
       "Title": "זיכרון רמות",
       "Description": "אחסון וקריאה של רמת העמעם האחרונה.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "הפעל הקלטת וידאו",
       "NVR.RecordOnAlarm": "הקלטה בעת אזעקה",
       "NVR.ContinuousRecording": "הקלטה רציפה."
+    },
+    "581": {
+      "Title": "מבצע פעולות AI",
+      "Description": "שירות משותף לחילוץ הצעות לפעולות AI ולביצוע מפורש של פקודות API של HomeGenie. בלתי תלוי בספקי ענן ובמנועי הסקה מקומיים."
+    },
+    "582": {
+      "Title": "התראות מתמשכות",
+      "Description": "ארכיון התראות מתמשך ופעולות אינטראקטיביות.",
+      "ConfigureOptions.MaximumItems": "מספר מרבי של התראות בארכיון",
+      "ConfigureOptions.RetentionDays": "שמירת התראות (ימים)"
     },
     "583": {
       "Title": "AI Genie",

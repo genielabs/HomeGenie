@@ -140,6 +140,14 @@
   "capture_pause_none": "Ingen",
   "capture_pause_asis": "Som det er",
   "$options": {
+    "6": {
+      "Title": "TÆND gruppens lys",
+      "Description": "Tænder alle lys i den angivne gruppe."
+    },
+    "7": {
+      "Title": "SLUK gruppens lys",
+      "Description": "Slukker alle lys i den angivne gruppe."
+    },
     "16": {
       "Title": "Niveauhukommelse",
       "Description": "Gem og genkald det sidste lysdæmperniveau.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Aktivér videooptagelse",
       "NVR.RecordOnAlarm": "Optag ved alarm",
       "NVR.ContinuousRecording": "Kontinuerlig optagelse."
+    },
+    "581": {
+      "Title": "AI-handlingsudfører",
+      "Description": "Fælles tjeneste til at udtrække AI-handlingsforslag og udføre HomeGenie API-kommandoer efter udtrykkelig anmodning. Uafhængig af cloududbydere og lokale inferensmotorer."
+    },
+    "582": {
+      "Title": "Vedvarende notifikationer",
+      "Description": "Vedvarende notifikationsarkiv og interaktive handlinger.",
+      "ConfigureOptions.MaximumItems": "Maksimalt antal arkiverede notifikationer",
+      "ConfigureOptions.RetentionDays": "Opbevaring af notifikationer (dage)"
     },
     "583": {
       "Title": "AI Genie",

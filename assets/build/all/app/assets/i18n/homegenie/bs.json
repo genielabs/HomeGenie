@@ -140,6 +140,14 @@
   "capture_pause_none": "Nijedan",
   "capture_pause_asis": "Kao što je",
   "$options": {
+    "6": {
+      "Title": "UKLJUČI svjetla grupe",
+      "Description": "Uključuje sva svjetla u zadanoj grupi."
+    },
+    "7": {
+      "Title": "ISKLJUČI svjetla grupe",
+      "Description": "Isključuje sva svjetla u zadanoj grupi."
+    },
     "16": {
       "Title": "Pamćenje nivoa",
       "Description": "Pohrani i pozovi posljednji nivo prigušivača.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Omogući snimanje videa",
       "NVR.RecordOnAlarm": "Snimanje pri alarmu",
       "NVR.ContinuousRecording": "Neprekidno snimanje."
+    },
+    "581": {
+      "Title": "Izvršilac AI radnji",
+      "Description": "Zajednička usluga za izdvajanje prijedloga AI radnji i izvršavanje HomeGenie API naredbi na izričit zahtjev. Nezavisna od pružalaca usluga u oblaku i lokalnih mehanizama zaključivanja."
+    },
+    "582": {
+      "Title": "Trajne obavijesti",
+      "Description": "Trajna arhiva obavijesti i interaktivne radnje.",
+      "ConfigureOptions.MaximumItems": "Maksimalan broj arhiviranih obavijesti",
+      "ConfigureOptions.RetentionDays": "Čuvanje obavijesti (dani)"
     },
     "583": {
       "Title": "AI Genie",

@@ -140,6 +140,14 @@
   "capture_pause_none": "Không có",
   "capture_pause_asis": "Như là",
   "$options": {
+    "6": {
+      "Title": "Bật đèn trong nhóm",
+      "Description": "Bật tất cả đèn trong nhóm được chỉ định."
+    },
+    "7": {
+      "Title": "Tắt đèn trong nhóm",
+      "Description": "Tắt tất cả đèn trong nhóm được chỉ định."
+    },
     "16": {
       "Title": "Bộ nhớ cấp độ",
       "Description": "Lưu trữ và gọi lại mức độ mờ gần nhất.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Bật chế độ quay video",
       "NVR.RecordOnAlarm": "Ghi âm khi có báo động",
       "NVR.ContinuousRecording": "Ghi hình liên tục."
+    },
+    "581": {
+      "Title": "Bộ thực thi hành động AI",
+      "Description": "Dịch vụ dùng chung để trích xuất đề xuất hành động AI và thực thi rõ ràng các lệnh API HomeGenie. Độc lập với nhà cung cấp đám mây và công cụ suy luận cục bộ."
+    },
+    "582": {
+      "Title": "Thông báo lâu dài",
+      "Description": "Lưu trữ thông báo lâu dài và các hành động tương tác.",
+      "ConfigureOptions.MaximumItems": "Số thông báo lưu trữ tối đa",
+      "ConfigureOptions.RetentionDays": "Thời gian lưu thông báo (ngày)"
     },
     "583": {
       "Title": "AI Genie",

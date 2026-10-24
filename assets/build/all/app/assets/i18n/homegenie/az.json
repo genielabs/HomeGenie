@@ -140,6 +140,14 @@
   "capture_pause_none": "Heç biri",
   "capture_pause_asis": "olduğu kimi",
   "$options": {
+    "6": {
+      "Title": "Qrupun işıqlarını YANDIR",
+      "Description": "Göstərilən qrupdakı bütün işıqları yandırın."
+    },
+    "7": {
+      "Title": "Qrupun işıqlarını SÖNDÜR",
+      "Description": "Göstərilən qrupdakı bütün işıqları söndürün."
+    },
     "16": {
       "Title": "Səviyyə Yaddaş",
       "Description": "Son dimmer səviyyəsini saxlayın və geri çağırın.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Video Yazını Aktivləşdirin",
       "NVR.RecordOnAlarm": "Siqnalizasiyada Qeyd",
       "NVR.ContinuousRecording": "Davamlı Qeyd."
+    },
+    "581": {
+      "Title": "Süni intellekt əməliyyat icraçısı",
+      "Description": "Süni intellektin əməliyyat təkliflərini çıxarmaq və HomeGenie API əmrlərini açıq sorğu ilə icra etmək üçün ortaq xidmət. Bulud provayderlərindən və yerli nəticəçıxarma mühərriklərindən asılı deyil."
+    },
+    "582": {
+      "Title": "Daimi bildirişlər",
+      "Description": "Daimi bildiriş arxivi və interaktiv əməliyyatlar.",
+      "ConfigureOptions.MaximumItems": "Arxivləşdirilən bildirişlərin maksimum sayı",
+      "ConfigureOptions.RetentionDays": "Bildirişlərin saxlanma müddəti (gün)"
     },
     "583": {
       "Title": "AI Genie",

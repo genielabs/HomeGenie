@@ -140,6 +140,14 @@
   "capture_pause_none": "Ko si",
   "capture_pause_asis": "Bi o ti ri",
   "$options": {
+    "6": {
+      "Title": "Tan àwọn iná ẹgbẹ́",
+      "Description": "Tan gbogbo àwọn iná nínú ẹgbẹ́ tí a yàn."
+    },
+    "7": {
+      "Title": "Pa àwọn iná ẹgbẹ́",
+      "Description": "Pa gbogbo àwọn iná nínú ẹgbẹ́ tí a yàn."
+    },
     "16": {
       "Title": "Iranti Ipele",
       "Description": "Tọju ati ranti ipele dimmer to kẹhin.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Mu Gbigbasilẹ Fidio ṣiṣẹ",
       "NVR.RecordOnAlarm": "Gba silẹ lori Itaniji",
       "NVR.ContinuousRecording": "Gbigbasilẹ ti nlọ lọwọ."
+    },
+    "581": {
+      "Title": "Olùṣiṣẹ́ ìgbésẹ̀ AI",
+      "Description": "Iṣẹ́ àjọpín fún yíyọ àwọn àbá ìgbésẹ̀ AI jáde àti ṣíṣiṣẹ́ àwọn àṣẹ HomeGenie API ní kedere. Ó dá dúró lọ́tọ̀ kúrò lọ́dọ̀ àwọn olùpèsè àwọsánmà àti àwọn ẹ̀rọ ìfọ̀rọ̀wérọ̀ agbègbè."
+    },
+    "582": {
+      "Title": "Àwọn ìfitónilétí pípẹ́",
+      "Description": "Ibi ìpamọ́ àwọn ìfitónilétí pípẹ́ àti àwọn ìgbésẹ̀ ìbáṣepọ̀.",
+      "ConfigureOptions.MaximumItems": "Iye tó pọ̀ jù ti àwọn ìfitónilétí tí a fipamọ́",
+      "ConfigureOptions.RetentionDays": "Àkókò ìpamọ́ ìfitónilétí (ọjọ́)"
     },
     "583": {
       "Title": "AI Genie",

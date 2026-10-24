@@ -140,6 +140,14 @@
   "capture_pause_none": "Hiçbiri",
   "capture_pause_asis": "Olduğu gibi",
   "$options": {
+    "6": {
+      "Title": "Grup ışıklarını aç",
+      "Description": "Belirtilen gruptaki tüm ışıkları aç."
+    },
+    "7": {
+      "Title": "Grup ışıklarını kapat",
+      "Description": "Belirtilen gruptaki tüm ışıkları kapat."
+    },
     "16": {
       "Title": "Seviye Belleği",
       "Description": "Son dimmer seviyesini saklayın ve geri çağırın.",
@@ -399,6 +407,16 @@
       "NVR.EnableRecording": "Video kaydını etkinleştirin",
       "NVR.RecordOnAlarm": "Alarmı Kaydet",
       "NVR.ContinuousRecording": "Sürekli Kayıt."
+    },
+    "581": {
+      "Title": "YZ Eylem Yürütücüsü",
+      "Description": "YZ eylem önerilerini çıkarmak ve HomeGenie API komutlarını açıkça yürütmek için paylaşılan hizmet. Bulut sağlayıcılarından ve yerel çıkarım motorlarından bağımsızdır."
+    },
+    "582": {
+      "Title": "Kalıcı Bildirimler",
+      "Description": "Kalıcı bildirim arşivi ve etkileşimli eylemler.",
+      "ConfigureOptions.MaximumItems": "En fazla arşivlenen bildirim sayısı",
+      "ConfigureOptions.RetentionDays": "Bildirim saklama süresi (gün)"
     },
     "583": {
       "Title": "AI Genie",
