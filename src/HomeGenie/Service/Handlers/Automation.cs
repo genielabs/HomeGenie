@@ -1,4 +1,4 @@
-﻿/*
+/*
    Copyright 2012-2025 G-Labs (https://github.com/genielabs)
 
    This program is free software: you can redistribute it and/or modify
@@ -57,6 +57,19 @@ namespace HomeGenie.Service.Handlers
         public void ProcessRequest(MigClientRequest request)
         {
             var migCommand = request.Command;
+
+            // Preserve the internal Arduino engine, but do not expose its legacy editor API.
+            if (migCommand.Command == "Programs.Arduino.FileLoad" ||
+                migCommand.Command == "Programs.Arduino.FileSave" ||
+                migCommand.Command == "Programs.Arduino.FileAdd" ||
+                migCommand.Command == "Programs.Arduino.FileDelete" ||
+                migCommand.Command == "Programs.Arduino.FileList")
+            {
+                request.ResponseData = new ResponseStatus(Status.Error,
+                    "Legacy Arduino editor endpoints are disabled until supported by YoT.");
+                return;
+            }
+
             string streamContent = "";
             ProgramBlock currentProgram;
             ProgramBlock newProgram;
@@ -548,28 +561,29 @@ namespace HomeGenie.Service.Handlers
                     break;
 
                 case "Programs.Arduino.FileLoad":
-                    sketchFolder = Path.GetDirectoryName(ArduinoAppFactory.GetSketchFile(migCommand.GetOption(0)));
-                    sketchFile = migCommand.GetOption(1);
-                    if (sketchFile == "main")
-                    {
-                        // "main" is a special keyword to indicate the main program sketch file
-                        sketchFile = ArduinoAppFactory.GetSketchFile(migCommand.GetOption(0));
-                    }
-                    sketchFile = Path.Combine(sketchFolder, Path.GetFileName(sketchFile));
-                    request.ResponseData = new ResponseText(File.ReadAllText(sketchFile));
+                    sketchFile = GetArduinoProjectFile(
+                        migCommand.GetOption(0),
+                        migCommand.GetOption(1),
+                        resolveMain: true);
+
+                    request.ResponseData = new ResponseText(
+                        File.ReadAllText(sketchFile));
                     break;
 
                 case "Programs.Arduino.FileSave":
-                    sketchFolder = Path.GetDirectoryName(ArduinoAppFactory.GetSketchFile(migCommand.GetOption(0)));
-                    sketchFile = Path.Combine(sketchFolder, Path.GetFileName(migCommand.GetOption(1)));
+                    sketchFile = GetArduinoProjectFile(
+                        migCommand.GetOption(0),
+                        migCommand.GetOption(1));
+
                     File.WriteAllText(sketchFile, streamContent);
                     break;
 
                 case "Programs.Arduino.FileAdd":
-                    sketchFolder = Path.GetDirectoryName(ArduinoAppFactory.GetSketchFile(migCommand.GetOption(0)));
-                    if (!Directory.Exists(sketchFolder))
-                        Directory.CreateDirectory(sketchFolder);
-                    sketchFile = Path.Combine(sketchFolder, Path.GetFileName(migCommand.GetOption(1)));
+                    sketchFile = GetArduinoProjectFile(
+                        migCommand.GetOption(0),
+                        migCommand.GetOption(1));
+
+                    sketchFolder = Path.GetDirectoryName(sketchFile);
                     if (File.Exists(sketchFile))
                     {
                         request.ResponseData = new ResponseText("EXISTS");
@@ -580,17 +594,24 @@ namespace HomeGenie.Service.Handlers
                     }
                     else
                     {
-                        StreamWriter sw = File.CreateText(sketchFile);
-                        sw.Close();
-                        sw.Dispose();
-                        sw = null;
+                        Directory.CreateDirectory(sketchFolder);
+
+                        sketchFile = GetArduinoProjectFile(
+                            migCommand.GetOption(0),
+                            migCommand.GetOption(1));
+
+                        using (File.CreateText(sketchFile))
+                        {
+                        }
+
                         request.ResponseData = new ResponseText("OK");
                     }
                     break;
 
                 case "Programs.Arduino.FileDelete":
-                    sketchFolder = Path.GetDirectoryName(ArduinoAppFactory.GetSketchFile(migCommand.GetOption(0)));
-                    sketchFile = Path.Combine(sketchFolder, Path.GetFileName(migCommand.GetOption(1)));
+                    sketchFile = GetArduinoProjectFile(
+                        migCommand.GetOption(0),
+                        migCommand.GetOption(1));
                     if (!File.Exists(sketchFile))
                     {
                         request.ResponseData = new ResponseText("NOT_FOUND");
@@ -603,10 +624,13 @@ namespace HomeGenie.Service.Handlers
                     break;
 
                 case "Programs.Arduino.FileList":
-                    sketchFolder = Path.GetDirectoryName(ArduinoAppFactory.GetSketchFile(migCommand.GetOption(0)));
+                    sketchFolder = Path.GetDirectoryName(GetArduinoSketchFile(migCommand.GetOption(0)));
                     List<string> files = new List<string>();
                     foreach (string f in Directory.GetFiles(sketchFolder))
                     {
+                        GetArduinoProjectFile(
+                            migCommand.GetOption(0),
+                            Path.GetFileName(f));
                         if (ArduinoAppFactory.IsValidProjectFile(f))
                         {
                             files.Add(Path.GetFileName(f));
@@ -796,6 +820,52 @@ namespace HomeGenie.Service.Handlers
                 homegenie.UpdateProgramsDatabase();
             }
             return program;
+        }
+
+        private string GetArduinoSketchFile(string address)
+        {
+            if (!int.TryParse(
+                    address,
+                    NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out int pid) ||
+                pid <= 0)
+            {
+                throw new InvalidDataException("Invalid Arduino program ID.");
+            }
+
+            var program = homegenie.ProgramManager.Programs.Find(
+                p => p.Address == pid);
+
+            if (program == null ||
+                !string.Equals(
+                    program.Type,
+                    "arduino",
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                throw new InvalidDataException("Arduino program not found.");
+            }
+
+            return ArduinoAppFactory.GetSketchFile(
+                program.Address.ToString(CultureInfo.InvariantCulture));
+        }
+
+        private string GetArduinoProjectFile(
+            string address,
+            string filename,
+            bool resolveMain = false)
+        {
+            string mainFile = GetArduinoSketchFile(address);
+
+            if (resolveMain && filename == "main")
+                return mainFile;
+
+            string name = Path.GetFileName(filename);
+            PackagePathGuard.Segment(name);
+
+            return PackagePathGuard.Contained(
+                Path.GetDirectoryName(mainFile),
+                name);
         }
     }
 }

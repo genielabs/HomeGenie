@@ -1055,25 +1055,51 @@ namespace HomeGenie.Service
 
         public bool WidgetImport(string archiveFile, string importPath)
         {
-            bool success = false;
-            string widgetInfoFile = "widget.info";
-            List<string> extractedFiles = Utility.UncompressZip(archiveFile, importPath);
-            if (File.Exists(Path.Combine(importPath, widgetInfoFile)))
+            const string widgetInfoFile = "widget.info";
+            List<string> extractedFiles = Utility.UncompressZip(
+                archiveFile, importPath);
+
+            string infoPath = PackagePathGuard.Contained(
+                importPath, widgetInfoFile);
+
+            if (!File.Exists(infoPath))
+                return false;
+
+            var filesToCopy = new List<string>();
+
+            foreach (string file in extractedFiles)
             {
-                foreach (string f in extractedFiles)
-                {
-                    // copy only files contained in sub-folders, avoid copying zip-root files
-                    if (Path.GetDirectoryName(f) != "" && f != widgetInfoFile)
-                    {
-                        string destFolder = Path.Combine(widgetBasePath, Path.GetDirectoryName(f));
-                        if (!Directory.Exists(destFolder))
-                            Directory.CreateDirectory(destFolder);
-                        File.Copy(Path.Combine(importPath, f), Path.Combine(widgetBasePath, f), true);
-                    }
-                }
-                success = true;
+                // Preserve the existing rule: skip archive-root files.
+                if (string.IsNullOrEmpty(Path.GetDirectoryName(file)) ||
+                    file == widgetInfoFile)
+                    continue;
+
+                // Validate every source and destination before the first copy.
+                PackagePathGuard.Contained(importPath, file);
+                PackagePathGuard.Contained(widgetBasePath, file);
+                filesToCopy.Add(file);
             }
-            return success;
+
+            foreach (string file in filesToCopy)
+            {
+                string sourcePath = PackagePathGuard.Contained(
+                    importPath, file);
+
+                string destinationPath = PackagePathGuard.Contained(
+                    widgetBasePath, file);
+
+                Directory.CreateDirectory(
+                    Path.GetDirectoryName(destinationPath));
+
+                // Recheck after creating destination directories.
+                sourcePath = PackagePathGuard.Contained(importPath, file);
+                destinationPath = PackagePathGuard.Contained(
+                    widgetBasePath, file);
+
+                File.Copy(sourcePath, destinationPath, true);
+            }
+
+            return true;
         }
 
         public ProgramBlock ProgramImport(int newPid, string archiveName, string groupName)

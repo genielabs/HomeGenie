@@ -66,7 +66,7 @@
     <PackageReference Include="MIG.HomeAutomation" Version="1.4.0" />
     <PackageReference Include="MIG.Protocols" Version="1.3.2" />
     <PackageReference Include="MIG.Audio" Version="1.0.1" />
-    <PackageReference Include="MIG" Version="1.3.11" />
+    <PackageReference Include="MIG" Version="1.3.12" />
     <PackageReference Include="YamlDotNet" Version="18.1.0" />
   </ItemGroup>
 

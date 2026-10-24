@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Filesystem containment and legacy endpoints — 2026-10-24
+
+- Confine widget operations and final import copies; fix nested paths, module-file deletion and export metadata preservation. Give widget import/export independent temporary workspaces and close ZIP handles on errors. Isolated Windows fixture passed 72 checks; maintainer confirmed valid export/import on Linux Vulkan.
+- Validate Arduino program IDs, types and sketch/project paths (114 isolated Windows checks). Explicitly disable the five legacy Arduino editor endpoints and direct Interface.Import/Interface.Install endpoints pending YoT integration, before any file access. Internal Arduino and interface-install functions remain available, including legacy backup restore; current interface configuration and HomeGenie release updates remain enabled. Interface-install hardening and other import/restore flows remain pending.
+- Validate wallpaper upload destinations and deletion paths. MIG 1.3.12 corrects Unicode multipart file offsets (68 isolated parser cases); maintainer confirmed Unicode wallpaper upload and display after updating and rebuilding Vulkan. Complete Linux containment and end-to-end gateway regression coverage is not claimed.
+
 ### Follow-up consolidation — 2026-10-22
 
 These additions describe the current working tree; they do not assign a new release or imply that all changes below shipped in v2.0.32. The 2026-10-21 consolidation remains below as earlier evidence.

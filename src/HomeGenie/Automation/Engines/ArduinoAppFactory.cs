@@ -23,7 +23,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using HomeGenie.Service;
 
 using HomeGenie.Automation.Scripting;
 
@@ -175,14 +177,25 @@ namespace HomeGenie.Automation.Engines
 
         public static string GetSketchFile(string address)
         {
-            string filename = Path.Combine(
+            if (!int.TryParse(
+                    address,
+                    NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out int pid) ||
+                pid <= 0)
+            {
+                throw new InvalidDataException("Invalid Arduino program ID.");
+            }
+
+            string programId = pid.ToString(CultureInfo.InvariantCulture);
+
+            return PackagePathGuard.Contained(
                 AppDomain.CurrentDomain.BaseDirectory,
-                "programs",
-                "arduino",
-                address,
-                "sketch_" + address + ".cpp"
-            );
-            return filename;
+                Path.Combine(
+                    "programs",
+                    "arduino",
+                    programId,
+                    "sketch_" + programId + ".cpp"));
         }
 
         public static bool IsValidProjectFile(string filename)

@@ -624,8 +624,10 @@ namespace HomeGenie.Service
         {
             if (!File.Exists(zipFilename))
             {
-                FileStream zfs = File.Create(zipFilename);
-                ZipOutputStream zipStream = new ZipOutputStream(zfs, StringCodec.FromCodePage(Encoding.UTF8.CodePage));
+                using FileStream zfs = File.Create(zipFilename);
+
+                using ZipOutputStream zipStream = new ZipOutputStream(
+                    zfs, StringCodec.FromCodePage(Encoding.UTF8.CodePage));
                 zipStream.SetLevel(3); //0-9, 9 being the highest level of compression
                 /*
                 // NOTE: commented code because this is raising an error "Extra data extended Zip64 information length is invalid"
@@ -639,7 +641,8 @@ namespace HomeGenie.Service
                 zipStream.IsStreamOwner = true; // Makes the Close also close the underlying stream
                 zipStream.Close();
             }
-            ZipFile zipFile = new ZipFile(zipFilename);
+            using ZipFile zipFile = new ZipFile(zipFilename);
+            zipFile.IsStreamOwner = true;
             zipFile.BeginUpdate();
             zipFile.Add(fileToAdd, (String.IsNullOrWhiteSpace(storeAsName) ? fileToAdd : storeAsName));
             zipFile.CommitUpdate();
