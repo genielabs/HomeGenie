@@ -1,10 +1,23 @@
 # Ordered by HomeGenie test results; identifiers and download URLs are unchanged.
 # Status and notes refer to these GGUF files, not every model in a family.
-# Timings are observations on one CPU test PC, not performance guarantees.
+# Timings are observations on the development host, not performance guarantees.
 # Requirements are guidance, not measured minimum RAM or compatibility guarantees.
 # Memory includes model weights, context cache, native buffers and other applications.
+# Sampling values below follow the official Qwen model cards for the selected mode.
+# DefaultTemperature is emitted to the UI only when switching to a different model.
+# Output/context remain user-selected: official 16K/32K+ output recommendations exceed HG's current 4096 limit.
+# DefaultMaxTokens (64..4096) and DefaultContextSize (1024..32768, step 1024) are optional local choices.
+# RepeatPenalty 1.0 disables HG's former extra 1.2 penalty; Qwen3 generation configs do not request that penalty.
 
 "unsloth/Qwen3-4B-Instruct-2507-UD-Q5_K_XL.gguf":
+  # Official settings: https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507
+  # Mode: non-thinking; native output guidance is documented, not applied as an oversized HG limit.
+  DefaultTemperature: 0.7
+  TopP: 0.8
+  TopK: 20
+  MinP: 0.0
+  RepeatPenalty: 1.0
+  PresencePenalty: 0
   Name: unsloth/Qwen3-4B-Instruct-2507-GGUF
   Repository: https://huggingface.co/unsloth/Qwen3-4B-Instruct-2507-GGUF
   Url: https://huggingface.co/unsloth/Qwen3-4B-Instruct-2507-GGUF/resolve/main/Qwen3-4B-Instruct-2507-UD-Q5_K_XL.gguf?download=true
@@ -13,16 +26,15 @@
   Requirements: "CPU tested. Reserve RAM for the GGUF weights and context cache. GPU optional."
   TestNotes: "Fresh parameter reads and device control passed. Reads took 46-48 s; control took 32 s on the test PC. A command emitted with device control disabled was blocked by the backend."
 
-"Jackrong/Qwen3.5-9B-DeepSeek-V4-Flash-Q5_K_M.gguf":
-  Name: Jackrong/Qwen3.5-9B-DeepSeek-V4-Flash-GGUF
-  Repository: https://huggingface.co/Jackrong/Qwen3.5-9B-DeepSeek-V4-Flash-GGUF
-  Url: https://huggingface.co/Jackrong/Qwen3.5-9B-DeepSeek-V4-Flash-GGUF/resolve/main/Qwen3.5-9B-DeepSeek-V4-Flash-Q5_K_M.gguf?download=true
-  Template: chatml
-  Status: "Tested"
-  Requirements: "Higher memory use. CPU tested; GPU acceleration can improve responsiveness."
-  TestNotes: "Fresh parameter reads passed. The model refused control while disabled and executed it after enabling. Responses took approximately 2-5 minutes on the test PC."
-
 "Qwen/Qwen3-1.7B-Q8_0.gguf":
+  # Official settings: https://huggingface.co/Qwen/Qwen3-1.7B
+  # Mode: thinking/default; native output guidance is documented, not applied as an oversized HG limit.
+  DefaultTemperature: 0.6
+  TopP: 0.95
+  TopK: 20
+  MinP: 0.0
+  RepeatPenalty: 1.0
+  PresencePenalty: 0
   Name: Qwen/Qwen3-1.7B-GGUF
   Repository: https://huggingface.co/Qwen/Qwen3-1.7B-GGUF
   Url: https://huggingface.co/Qwen/Qwen3-1.7B-GGUF/resolve/main/Qwen3-1.7B-Q8_0.gguf?download=true
@@ -31,110 +43,55 @@
   Requirements: "Lightweight option for CPU use. RAM use still depends on context size."
   TestNotes: "Simple device control and reports worked. Feature discovery and parameter follow-up requests were unreliable; verify results."
 
-"unsloth/Qwen3.5-9B-Q4_K_M.gguf":
-  Name: unsloth/Qwen3.5-9B-GGUF
-  Repository: https://huggingface.co/unsloth/Qwen3.5-9B-GGUF
-  Url: https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/resolve/main/Qwen3.5-9B-Q4_K_M.gguf?download=true
-  Template: chatml
-  Status: "Experimental"
-  Requirements: "GGUF file approximately 5.68 GB; additional RAM is needed for context and runtime buffers."
-  TestNotes: "Original Qwen3.5-9B weights in Q4_K_M. Not yet verified with HomeGenie or the installed LLamaSharp backend."
-
-"unsloth/gemma-4-E4B-it-Q5_K_M.gguf":
-  Name: unsloth/gemma-4-E4B-it-GGUF
-  Repository: https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF
-  Url: https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main/gemma-4-E4B-it-Q5_K_M.gguf?download=true
-  Template: chatml
-  Status: "Experimental"
-  Requirements: "Reserve RAM for weights and context; avoid memory pressure from other applications."
-  TestNotes: "Parameter identification and instruction following were unreliable in our tests. Results may depend on the GGUF and chat template."
-
-"unsloth/Qwen3.5-4B-Q8_0.gguf":
-  Name: unsloth/Qwen3.5-4B-GGUF
-  Repository: https://huggingface.co/unsloth/Qwen3.5-4B-GGUF
-  Url: https://huggingface.co/unsloth/Qwen3.5-4B-GGUF/resolve/main/Qwen3.5-4B-Q8_0.gguf?download=true
-  Template: chatml
-  Status: "Experimental"
-  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
-  TestNotes: "Not verified with the current HomeGenie test suite."
-
-"khazarai/Qwen3-4B-Thinking-2507.Q8_0.gguf":
-  Name: khazarai/Qwen3-4B-Qwen3.6-plus-Reasoning-Distilled-GGUF
-  Repository: https://huggingface.co/khazarai/Qwen3-4B-Qwen3.6-plus-Reasoning-Distilled-GGUF
-  Url: https://huggingface.co/khazarai/Qwen3-4B-Qwen3.6-plus-Reasoning-Distilled-GGUF/resolve/main/Qwen3-4B-Thinking-2507.Q8_0.gguf?download=true
-  Template: chatml
-  Status: "Experimental"
-  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
-  TestNotes: "Not verified with the current HomeGenie test suite."
-
 "Qwen/Qwen3-4B-Q5_K_M.gguf":
+  # Official settings: https://huggingface.co/Qwen/Qwen3-4B
+  # Mode: thinking/default; native output guidance is documented, not applied as an oversized HG limit.
+  DefaultTemperature: 0.6
+  TopP: 0.95
+  TopK: 20
+  MinP: 0.0
+  RepeatPenalty: 1.0
+  PresencePenalty: 0
   Name: Qwen/Qwen3-4B-GGUF
   Repository: https://huggingface.co/Qwen/Qwen3-4B-GGUF
   Url: https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/main/Qwen3-4B-Q5_K_M.gguf?download=true
   Template: chatml
   Status: "Experimental"
-  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
-  TestNotes: "Not verified with the current HomeGenie test suite."
+  Requirements: "Reserve RAM for GGUF weights, context and native buffers; GPU acceleration is optional."
+  TestNotes: "Local 1028 session: 17/30 strict passes, including 17/18 JSON-only cases. Explanation-format cases often omitted the requested explanation/code fence. Device integration requires separate acceptance."
 
-"Qwen/Qwen3-8B-Q8_0.gguf":
-  Name: Qwen/Qwen3-8B-GGUF
-  Repository: https://huggingface.co/Qwen/Qwen3-8B-GGUF
-  Url: https://huggingface.co/Qwen/Qwen3-8B-GGUF/resolve/main/Qwen3-8B-Q8_0.gguf?download=true
-  Template: chatml
+"unsloth/Qwen3-30B-A3B-Thinking-2507-UD-Q4_K_XL.gguf":
+  # Official settings: https://huggingface.co/Qwen/Qwen3-30B-A3B-Thinking-2507
+  # Mode: thinking/default; native output guidance is documented, not applied as an oversized HG limit.
+  DefaultTemperature: 0.6
+  TopP: 0.95
+  TopK: 20
+  MinP: 0.0
+  RepeatPenalty: 1.0
+  PresencePenalty: 0
+  Name: "unsloth/Qwen3-30B-A3B-Thinking-2507-GGUF (UD-Q4_K_XL)"
+  Repository: "https://huggingface.co/unsloth/Qwen3-30B-A3B-Thinking-2507-GGUF"
+  Url: "https://huggingface.co/unsloth/Qwen3-30B-A3B-Thinking-2507-GGUF/resolve/main/Qwen3-30B-A3B-Thinking-2507-UD-Q4_K_XL.gguf?download=true"
+  Template: "chatml"
   Status: "Experimental"
-  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
-  TestNotes: "Not verified with the current HomeGenie test suite."
+  Requirements: "GGUF 17.72 GB (17715663264 bytes); reserve additional RAM/VRAM for context and runtime buffers. Loaded and used for manual inference on LLamaSharp 0.30.0/Vulkan; practical memory use depends on context and host load."
+  TestNotes: "Complete original GGUF corresponding to the requested meshllm/Qwen3-30B-A3B-Thinking-2507-UD-Q4_K_XL-layers package. The Mesh LLM per-layer package cannot be loaded directly by Lailama. MoE: 30B total parameters with approximately 3B active; full model storage/memory still required. Extended reasoning may exhaust the benchmark token budget. Manual reasoning and home-context replies were useful; no comparable completed 30-case suite is available. Loading was slow on the development host."
 
-"Qwen/qwen2.5-coder-7b-instruct-q5_k_m.gguf":
-  Name: Qwen/Qwen2.5-Coder-7B-Instruct-GGUF
-  Repository: https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct-GGUF
-  Url: https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct-GGUF/resolve/main/qwen2.5-coder-7b-instruct-q5_k_m.gguf?download=true
-  Template: chatml
+"unsloth/Qwen3.8-27B-UD-Q4_K_M.gguf":
+  # Official settings: https://huggingface.co/Qwen/Qwen3.8-27B
+  # Mode: non-thinking; native output guidance is documented, not applied as an oversized HG limit.
+  DefaultTemperature: 0.7
+  TopP: 0.8
+  TopK: 20
+  MinP: 0.0
+  RepeatPenalty: 1.0
+  PresencePenalty: 1.5
+  BatchSize: 64
+  UBatchSize: 64
+  Name: "unsloth/Qwen3.8-27B-GGUF (UD-Q4_K_M)"
+  Repository: "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF"
+  Url: "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/resolve/main/Qwen3.8-27B-UD-Q4_K_M.gguf?download=true"
+  Template: "qwen35-no-think"
   Status: "Experimental"
-  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
-  TestNotes: "Not verified with the current HomeGenie test suite."
-
-"mradermacher/Qwen3-8B-GPT-5.2-High-Reasoning-Distill.i1-Q4_K_M.gguf":
-  Name: mradermacher/Qwen3-8B-GPT-5.2-High-Reasoning-Distill-i1-GGUF
-  Repository: https://huggingface.co/mradermacher/Qwen3-8B-GPT-5.2-High-Reasoning-Distill-i1-GGUF
-  Url: https://huggingface.co/mradermacher/Qwen3-8B-GPT-5.2-High-Reasoning-Distill-i1-GGUF/resolve/main/Qwen3-8B-GPT-5.2-High-Reasoning-Distill.i1-Q4_K_M.gguf?download=true
-  Template: chatml
-  Status: "Experimental"
-  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
-  TestNotes: "Not verified with the current HomeGenie test suite."
-
-"TeichAI/Qwen3-14B-GPT-5.2-Distill.q4_k_m.gguf":
-  Name: TeichAI/Qwen3-14B-GPT-5.2-High-Reasoning-Distill-GGUF
-  Repository: https://huggingface.co/TeichAI/Qwen3-14B-GPT-5.2-High-Reasoning-Distill-GGUF
-  Url: https://huggingface.co/TeichAI/Qwen3-14B-GPT-5.2-High-Reasoning-Distill-GGUF/resolve/main/Qwen3-14B-GPT-5.2-Distill.q4_k_m.gguf?download=true
-  Template: chatml
-  Status: "Experimental"
-  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
-  TestNotes: "Not verified with the current HomeGenie test suite."
-
-"Jackrong/GPT-5-Distill-Qwen3-4B-Instruct-Q6_K.gguf":
-  Name: Jackrong/GPT-5-Distill-Qwen3-4B-Instruct-GGUF
-  Repository: https://huggingface.co/Jackrong/GPT-5-Distill-Qwen3-4B-Instruct-GGUF
-  Url: https://huggingface.co/Jackrong/GPT-5-Distill-Qwen3-4B-Instruct-GGUF/resolve/main/GPT-5-Distill-Qwen3-4B-Instruct-Q6_K.gguf?download=true
-  Template: chatml
-  Status: "Experimental"
-  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
-  TestNotes: "Not verified with the current HomeGenie test suite."
-
-"TeichAI/Qwen3-4B-Instruct-Claude-Haiku-4.5-Distill.q5_k_m.gguf":
-  Name: TeichAI/Qwen3-4B-Instruct-2507-Claude-Haiku-4.5-Distill-GGUF
-  Repository: https://huggingface.co/TeichAI/Qwen3-4B-Instruct-2507-Claude-Haiku-4.5-Distill-GGUF
-  Url: https://huggingface.co/TeichAI/Qwen3-4B-Instruct-2507-Claude-Haiku-4.5-Distill-GGUF/resolve/main/Qwen3-4B-Instruct-Claude-Haiku-4.5-Distill.q5_k_m.gguf?download=true
-  Template: chatml
-  Status: "Experimental"
-  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
-  TestNotes: "Not verified with the current HomeGenie test suite."
-
-"MaziyarPanahi/Yi-Coder-9B-Chat.Q5_K_M.gguf":
-  Name: MaziyarPanahi/Yi-Coder-9B-Chat-GGUF
-  Repository: https://huggingface.co/MaziyarPanahi/Yi-Coder-9B-Chat-GGUF
-  Url: https://huggingface.co/MaziyarPanahi/Yi-Coder-9B-Chat-GGUF/resolve/main/Yi-Coder-9B-Chat.Q5_K_M.gguf?download=true
-  Template: chatml
-  Status: "Experimental"
-  Requirements: "Not benchmarked locally. RAM and GPU needs depend on GGUF size and context length."
-  TestNotes: "Not verified with the current HomeGenie test suite."
+  Requirements: "GGUF 16.46 GB (16464440224 bytes); additional RAM/VRAM required for context and runtime buffers. Dense 27B model. Loading/inference confirmed on LLamaSharp 0.30.0/Vulkan; slow and variable on the development host. Intel GPU hangs/native failures occurred during large-model trials."
+  TestNotes: "Provisional large-model option. GGUF metadata: general.architecture=qwen35, block_count=65, nextn_predict_layers=1. Earlier loading failures were observed with the older backend; 0.30.0 loaded this model. Full benchmark acceptance is pending. Publisher supports enable_thinking, reasoning_effort and preserve_thinking through its official template; these controls are not implemented by the existing generic ChatML template. The YAML sampling and batch overrides are applied; temperature remains owned by the Lailama UI option (non-thinking reference: 0.7)."

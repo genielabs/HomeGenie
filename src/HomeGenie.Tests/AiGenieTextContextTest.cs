@@ -35,6 +35,40 @@ public class AiGenieTextContextTest {
     JObject Request(string text,int round=0,bool devices=true)=>new(){["version"]=1,["response"]=text,["round"]=round,["template"]="custom prompt",["request"]=new JObject{["version"]=1,["message"]="read timeout",["context"]=new JObject{["devices"]=devices},["capabilities"]=new JObject{["deviceControl"]=true}}};
     JObject Step(JObject request,Func<string,object,object> call)=>(JObject)strategy.GetMethod("Step").Invoke(null,new object[]{request,call});
     object NoCall(string route,object data) {unexpectedCalls++;throw new AssertionException("Unexpected API call: "+route);}
+    [TestCase("moduleIds","HomeAutomation.PhilipsHue/2")]
+    [TestCase("parameterIds","HomeAutomation.PhilipsHue/2/HomeGenie.SmartLights.LightStatus")]
+    [TestCase("programIds","1002")]
+    [TestCase("widgetIds","custom/light")]
+    public void JsonLabelledReferenceRequestRequiresRepairWithoutAnyIo(string kind,string id) {
+        string text="```json\n"+new JObject{[kind]=new JArray(id)}.ToString()+"\n```";
+        var ex=Assert.Throws<TargetInvocationException>(()=>Step(Request(text),NoCall));
+        Assert.That(ex.InnerException.Data["AiGenie.Contract"],Is.EqualTo(true));
+        Assert.That(ex.InnerException.Message,Does.Contain("context-request").And.Contain("same JSON"));
+    }
+    [TestCase("```json\n{\"lightsOn\":2}\n```")]
+    [TestCase("Example:\n```json\n{\"parameterIds\":[\"Test/1/Value\"]}\n```")]
+    [TestCase("```json\n{\"parameterIds\":[\"Test/1/Value\"]}\n```\nThis is an example.")]
+    [TestCase("```json\n{\"parameterIds\":[\"Test/1/Value\"],\"command\":\"Control.On\"}\n```")]
+    [TestCase("```json\n{\"parameterIds\":\"Test/1/Value\"}\n```")]
+    [TestCase("```json\n{\"parameterIds\":[]}\n```")]
+    [TestCase("```json\n{broken}\n```")]
+    [TestCase("```json\n{\"parameterIds\":[\"Test/1/Value\"]}\n```\n```api-call\nTest/1/Control.On\n```")]
+    [TestCase("<think>```json\n{\"parameterIds\":[\"Test/1/Value\"]}\n```</think>\nhello")]
+    public void OrdinaryJsonExamplesAndMixedContentDoNotBecomeReferenceRequests(string text) {
+        var result=Step(Request(text),NoCall);
+        Assert.That((string)result["state"],Is.EqualTo("reply"));
+        Assert.That((string)result["text"],Is.EqualTo(text));
+    }
+    [Test] public void ApiCallsInReferenceBlockAreRejectedWithoutIoWithActionFeedback() {
+        var error=Assert.Throws<TargetInvocationException>(()=>Step(Request("```context-request\n{\"apiCalls\":[{\"domain\":\"HomeAutomation\",\"address\":\"PhilipsHue/2\",\"command\":\"Control.Off\"}]}\n```"),NoCall));
+        Assert.That(error.InnerException.Data["AiGenie.Contract"],Is.EqualTo(true));
+        Assert.That(error.InnerException.Message,Does.StartWith("apiCalls ").And.Contain("api-call"));
+    }
+    [Test] public void InstructionsProvideBalancedReadAndActionExamples() {
+        string text=(string)Step(Request("hello"),NoCall)["instructions"];
+        Assert.That(text,Does.Contain("```context-request").And.Contain("```api-call").And.Contain("not a command catalog"));
+        Assert.That(text.Length,Is.LessThan(2000));
+    }
     [Test] public void PlainReplyPreservesTextAndReturnsCompactInstructionsWithoutAnyIo() {var r=Step(Request("hello"),NoCall);Assert.That((string)r["state"],Is.EqualTo("reply"));Assert.That((string)r["text"],Is.EqualTo("hello"));Assert.That((string)r["instructions"],Does.Contain("parameterIds"));}
     [TestCase("moduleIds","HomeAutomation.PhilipsHue/3")] [TestCase("parameterIds","HomeAutomation.PhilipsHue/3/HomeGenie.SmartLights.SwitchOffTimeout")]
     public void LookupUsesOnlySharedContextCollectorAndDoesNotMutateCaller(string category,string id) {

@@ -119,7 +119,7 @@ public class LailamaGenerationProviderTest {
     }
     [Test] public void FirstContractErrorGetsTargetPreservingFeedback() {
         string text=(string)repair.GetMethod("Feedback").Invoke(null,new object[]{new JObject{["Status"]="Error",["errorKind"]="contract",["Message"]="Invalid ID"},0});
-        Assert.That(text,Does.Contain("domain/address/property").And.Contain("No API call or command was executed").And.Contain("do not invent"));
+        Assert.That(text,Does.Contain("domain/address/property").And.Contain("No API call or command was executed").And.Contain("Use exact supplied IDs"));
     }
     [TestCase("contract",1)] [TestCase("contract",2)] [TestCase("failed",0)] [TestCase("unavailable",0)]
     public void NoSecondRepairOrRetryForNonContractFailure(string kind,int count) {

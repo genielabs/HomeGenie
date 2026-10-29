@@ -72,10 +72,6 @@ namespace HomeGenie.Automation.Engines
             "LLama.Native",
             "LLama.Sampling",
             "LLama.Transformers",
-            "LLamaSharp.KernelMemory",
-            "LLamaSharp.SemanticKernel",
-            "LLamaSharp.SemanticKernel.TextCompletion",
-            "Microsoft.SemanticKernel",
             "Microsoft.Extensions.Options",
             "Microsoft.Extensions.Logging.Abstractions",
             "Newtonsoft.Json",
@@ -244,6 +240,8 @@ namespace HomeGenie.Automation.Scripting
             assemblyPaths.Add(typeof(object).Assembly.Location);
             assemblyPaths.Add(typeof(HomeGenieService).Assembly.Location);
             assemblyPaths.Add(typeof(Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo).Assembly.Location); // dynamic
+            assemblyPaths.Add(typeof(System.Linq.Expressions.Expression).Assembly.Location);
+            assemblyPaths.Add(typeof(System.Runtime.CompilerServices.DynamicAttribute).Assembly.Location);
 
             // Old libraries dotNetCoreDir
             assemblyPaths.Add(typeof(System.Net.Dns).Assembly.Location); // NameResolution
@@ -276,9 +274,6 @@ namespace HomeGenie.Automation.Scripting
 
             assemblyPaths.Add(Path.Combine(homeGenieDir, "YoloSharp.dll"));
             assemblyPaths.Add(Path.Combine(homeGenieDir, "LLamaSharp.dll"));
-            assemblyPaths.Add(Path.Combine(homeGenieDir, "LLamaSharp.KernelMemory.dll"));
-            assemblyPaths.Add(Path.Combine(homeGenieDir, "LLamaSharp.SemanticKernel.dll"));
-            assemblyPaths.Add(Path.Combine(homeGenieDir, "Microsoft.KernelMemory.Abstractions.dll"));
 
             // IO and Utility
             assemblyPaths.Add(Path.Combine(homeGenieDir, "MessagePack.dll"));
@@ -316,26 +311,44 @@ namespace HomeGenie.Automation.Scripting
                 .AddSyntaxTrees(CSharpSyntaxTree.ParseText(source));
 
             var assemblyPdbFile = outputDllFile + ".pdb";
-            using var assemblyStream = File.Open(outputDllFile, FileMode.Create, FileAccess.ReadWrite);
-            using var pdbStream = File.Open(assemblyPdbFile, FileMode.Create, FileAccess.ReadWrite);
-            var opts = new EmitOptions()
-                .WithPdbFilePath(assemblyPdbFile);
-            var pdbStreamHelper = pdbStream;
-
-            if (Environment.OSVersion.Platform == PlatformID.Unix)
-                opts = opts.WithDebugInformationFormat(DebugInformationFormat.PortablePdb);
-
-            var result = compilation.Emit(assemblyStream, pdbStreamHelper, options: opts);
-
-            if (result.Success)
+            bool assemblyCreated = false, pdbCreated = false, success = false;
+            try
             {
-                // TODO:
+                EmitResult result;
+                using (var assemblyStream = File.Open(outputDllFile, FileMode.Create, FileAccess.ReadWrite))
+                {
+                    assemblyCreated = true;
+                    using (var pdbStream = File.Open(assemblyPdbFile, FileMode.Create, FileAccess.ReadWrite))
+                    {
+                        pdbCreated = true;
+                        var opts = new EmitOptions().WithPdbFilePath(assemblyPdbFile);
+                        if (Environment.OSVersion.Platform == PlatformID.Unix)
+                            opts = opts.WithDebugInformationFormat(DebugInformationFormat.PortablePdb);
+                        result = compilation.Emit(assemblyStream, pdbStream, options: opts);
+                    }
+                }
+                success = result.Success;
+                return result;
             }
-            else
+            finally
             {
-                // TODO:
+                // Streams are disposed before cleanup, including failed Emit/open paths.
+                // Preserve the original diagnostics/exception if cleanup itself fails.
+                if (!success)
+                {
+                    if (assemblyCreated) RemoveFailedCompilationFile(outputDllFile);
+                    if (pdbCreated) RemoveFailedCompilationFile(assemblyPdbFile);
+                }
             }
-            return result;
+        }
+
+        private static void RemoveFailedCompilationFile(string path)
+        {
+            try { File.Delete(path); }
+            catch (Exception error) when (error is IOException or UnauthorizedAccessException)
+            {
+                System.Diagnostics.Trace.TraceWarning("Could not remove failed compilation output '{0}': {1}", path, error.Message);
+            }
         }
 
         public static ParseCodeResult ParseCode(string scriptSetup, string scriptSource, string scriptContext)

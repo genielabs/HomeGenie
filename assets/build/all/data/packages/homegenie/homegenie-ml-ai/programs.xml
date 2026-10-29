@@ -537,7 +537,7 @@ public sealed class AiSkillCatalog
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.72</PackageVersion>
+      <PackageVersion>1.0.73</PackageVersion>
       <Id>context-engine</Id>
       <Version>1.0.8</Version>
       <Required>true</Required>
@@ -865,7 +865,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.72</PackageVersion>
+      <PackageVersion>1.0.73</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -994,6 +994,7 @@ var modelsFile = Path.Combine(Data.GetFolder(), CONFIG_FILE_NAME);
 // Load model configurations and file paths
 var modelsList = LoadModelList(modelsFile);
 var selectedModel = Program.Option(OPTION_MODEL_FILE).Value;
+var lastDefaultsModel = selectedModel;
 Program.Emit("LLM.ModelInfo", modelsList.ContainsKey(selectedModel)
     ? JsonConvert.SerializeObject(new {modelsList[selectedModel].Name, modelsList[selectedModel].Status,
         modelsList[selectedModel].Requirements, modelsList[selectedModel].TestNotes}) : "");
@@ -1018,6 +1019,26 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
     }
     else
     {
+      if (parameter.Name == "ConfigureOptions." + OPTION_MODEL_FILE) {
+        var defaults = LailamaModelDefaults.ForSelection(lastDefaultsModel, parameter.Value, modelsList);
+        lastDefaultsModel = parameter.Value;
+        foreach (var setting in defaults) Program.Emit(setting.Key, setting.Value);
+        if (defaults.Count &gt; 0) {
+            var lines = new List&lt;string&gt;();
+            foreach (var setting in defaults) {
+                var label = setting.Key == "ConfigureOptions.ModelTemperature" ? "Temperature"
+                    : setting.Key == "ConfigureOptions.MaxTokens" ? "Maximum output tokens" : "Context size";
+                lines.Add(label + ": " + setting.Value);
+            }
+            Program.Notify("Lailama", JsonConvert.SerializeObject(new {
+                Version = 1, Persistent = true, Presentation = "toast",
+                Id = "model-defaults-" + Guid.NewGuid().ToString("N"),
+                Title = "Lailama", Severity = "info",
+                Message = "Model defaults applied for " + modelsList[parameter.Value].Name + ":\n"
+                    + string.Join("\n", lines) + "\nYou can review these values in the model settings."
+            }));
+        }
+      }
       reconfigureRequired = true;
     }
   }
@@ -1179,6 +1200,8 @@ if (modelsList.ContainsKey(selectedModel)) {
     .Emit(Program.Option(OPTION_MODEL_FILE).Name, "");
 }
 
+LailamaInferenceParams.AntiPrompts = LailamaStopPolicy.ForTemplate(templateType, LailamaInferenceParams.AntiPrompts);
+
 LLamaWeights model = null;
 LLamaContext context = null;
 ChatSession session = null;
@@ -1234,12 +1257,15 @@ else
   try {
     initializationCts.Token.ThrowIfCancellationRequested();
     // Load Inference Parameters
-    LailamaInferenceParams.MaxTokens = (int)Program.Option(OPTION_MAX_TOKENS).DecimalValue;
+    ApplyInferenceOptions(modelsList.ContainsKey(selectedModel) ? modelsList[selectedModel] : null);
     uint contextSize = (uint)Program.Option(OPTION_CONTEXT_SIZE).DecimalValue;
 
-    var parameters = GetOptimizedParams(modelPath, contextSize);
+    lifecycleLog("Lailama configuration: temperature=" +
+        ((DefaultSamplingPipeline)LailamaInferenceParams.SamplingPipeline).Temperature.ToString(System.Globalization.CultureInfo.InvariantCulture) +
+        "; max output tokens=" + LailamaInferenceParams.MaxTokens + "; context=" + contextSize + "; history messages=" + maxMessages + ".");
+    var parameters = GetOptimizedParams(modelPath, contextSize, modelsList.ContainsKey(selectedModel) ? modelsList[selectedModel] : null);
     lifecycleLog("Lailama initialization: loading weights; context=" + parameters.ContextSize +
-        "; batch=" + parameters.BatchSize + "; GPU layers=" + parameters.GpuLayerCount + ".");
+        "; batch=" + parameters.BatchSize + "; microbatch=" + parameters.UBatchSize + "; GPU layers=" + parameters.GpuLayerCount + ".");
 
     // Load Model Weights and Context
     model = LLamaWeights.LoadFromFile(parameters);
@@ -1887,6 +1913,17 @@ public static string ModelSelectionLabel(ModelInfo model) {
 }
 
 public class ModelInfo {
+  public double? DefaultTemperature;
+  public int? DefaultMaxTokens;
+  public uint? DefaultContextSize;
+  public uint? BatchSize;
+  public uint? UBatchSize;
+  public float? TopP;
+  public int? TopK;
+  public float? MinP;
+  public float? RepeatPenalty;
+  public float? PresencePenalty;
+  public bool Benchmark = false; // Explicit opt-in for benchmark program 1028 only.
   public string Url = "";
   public string Name = "";
   public string Repository = "";
@@ -1935,11 +1972,31 @@ public class ChatMessage {
 // INFERENCE PARAMETERS (Sampling &amp; Stop Sequences)
 // ===================================================================
 
+// Apply UI inference options to the shared sampler used by chat and background requests.
+void ApplyInferenceOptions(ModelInfo profile = null) {
+    double temperature = Program.Option(OPTION_MODEL_TEMPERATURE).DecimalValue;
+    int maxTokens = (int)Program.Option(OPTION_MAX_TOKENS).DecimalValue;
+    if (double.IsNaN(temperature) || double.IsInfinity(temperature) || temperature &lt; 0 || temperature &gt; 2)
+        throw new ArgumentOutOfRangeException("ModelTemperature", "Temperature must be between 0 and 2.");
+    if (maxTokens &lt; 64 || maxTokens &gt; 4096)
+        throw new ArgumentOutOfRangeException("MaxTokens", "Response length must be between 64 and 4096 tokens.");
+    var defaults = new DefaultSamplingPipeline { TopP = 0.95f, RepeatPenalty = 1.2f };
+    var sampler = new DefaultSamplingPipeline {
+        Temperature = (float)temperature,
+        TopP = profile?.TopP ?? defaults.TopP,
+        TopK = profile?.TopK ?? defaults.TopK,
+        MinP = profile?.MinP ?? defaults.MinP,
+        RepeatPenalty = profile?.RepeatPenalty ?? defaults.RepeatPenalty,
+        PresencePenalty = profile?.PresencePenalty ?? defaults.PresencePenalty
+    };
+    LailamaInferenceParams.SamplingPipeline = sampler;
+    LailamaInferenceParams.MaxTokens = maxTokens;
+}
+
 InferenceParams LailamaInferenceParams = new InferenceParams
 {
     SamplingPipeline = new DefaultSamplingPipeline
     {
-        Temperature = 0.4f, // Lower temperature for more deterministic/factual responses
         TopP = 0.95f,
         RepeatPenalty = 1.2f
     },
@@ -2017,6 +2074,7 @@ string GetSystemPrompt(string templateType, string prompt) {
     case "deepseek":
       return $"&lt;|begin_of_sentence|&gt;{prompt}\n\n";
 
+    case "qwen35-no-think":
     case "chatml":
     default:
       return $"&lt;|im_start|&gt;system\n{prompt}\n&lt;|im_end|&gt;\n";
@@ -2045,6 +2103,10 @@ string BuildUserPrompt(string templateType, string userInput) {
 
     case "deepseek":
       return $"User:{userInput}\n\nAssistant: ";
+
+    // Qwen3.5: an empty, closed reasoning block selects non-thinking output.
+    case "qwen35-no-think":
+      return $"&lt;|im_start|&gt;user\n{userInput}&lt;|im_end|&gt;\n&lt;|im_start|&gt;assistant\n&lt;think&gt;\n\n&lt;/think&gt;\n\n";
 
     case "chatml":
     default:
@@ -2138,7 +2200,7 @@ public static long GetTotalMemoryGB()
 /**
  * Returns optimized LLama model parameters based on the detected system RAM.
  */
-public ModelParams GetOptimizedParams(string modelPath, uint contextSize)
+public ModelParams GetOptimizedParams(string modelPath, uint contextSize, ModelInfo profile = null)
 {
     if (contextSize &lt; 1024 || contextSize &gt; 32768)
         throw new ArgumentOutOfRangeException(nameof(contextSize), "Context Window must be between 1024 and 32768 tokens.");
@@ -2148,7 +2210,7 @@ public ModelParams GetOptimizedParams(string modelPath, uint contextSize)
 
     // Common settings for all profiles
     p.FlashAttention = true;
-    p.UseMemorymap = true;
+    p.LoadMode = LLamaLoadMode.MemoryMap;
     p.GpuLayerCount = -1; // Attempt GPU offloading; falls back to CPU automatically if no GPU is detected
 
     if (totalRamGB &lt;= 8)
@@ -2174,6 +2236,15 @@ public ModelParams GetOptimizedParams(string modelPath, uint contextSize)
         p.TypeV = GGMLType.GGML_TYPE_Q8_0;
         p.BatchSize = 512;
         p.UBatchSize = 512;
+    }
+
+    // Optional per-model YAML overrides; omitted values retain the RAM profile.
+    if (profile != null) {
+        if (profile.BatchSize.HasValue) p.BatchSize = profile.BatchSize.Value;
+        p.UBatchSize = profile.UBatchSize ?? Math.Min(p.UBatchSize, p.BatchSize);
+        if (p.BatchSize &lt; 1 || p.BatchSize &gt; 4096 ||
+            p.UBatchSize &lt; 1 || p.UBatchSize &gt; p.BatchSize)
+            throw new ArgumentOutOfRangeException(nameof(profile), "Require 1 &lt;= UBatchSize &lt;= BatchSize &lt;= 4096.");
     }
 
     return p;
@@ -2559,17 +2630,59 @@ public object ForwardBackgroundRequest(object payload,string providerId,string o
 public class ChatFeedbackProfileChangedException : InvalidOperationException {
     public ChatFeedbackProfileChangedException() : base("Chat context or capabilities changed since this presentation. Generate a new presentation.") {}
 }
+
+
+// Structured chat templates use model end-of-generation tokens plus technical turn markers.
+// Plain-text role labels can occur in legitimate answers (e.g. Security Alarm System:).
+public static class LailamaStopPolicy {
+    public static string[] ForTemplate(string template, IEnumerable&lt;string&gt; legacy) {
+        switch(template) {
+            case "chatml":
+            case "qwen35-no-think":
+                return new[] { "&lt;|im_end|&gt;", "&lt;|im_start|&gt;", "&lt;|endoftext|&gt;" };
+            default:
+                // Preserve existing behavior for legacy/unknown templates until separately tested.
+                return legacy == null ? Array.Empty&lt;string&gt;() : legacy.ToArray();
+        }
+    }
+}
+
+
+// UI defaults are emitted only for a different selected model, never at startup/YAML refresh.
+public static class LailamaModelDefaults {
+    public static Dictionary&lt;string,string&gt; ForSelection(string previous, string selected, Dictionary&lt;string,ModelInfo&gt; models) {
+        var values = new Dictionary&lt;string,string&gt;();
+        if (String.Equals(previous, selected, StringComparison.Ordinal) || String.IsNullOrEmpty(selected) ||
+            models == null || !models.TryGetValue(selected, out var profile) || profile == null) return values;
+        if (profile.DefaultTemperature is double temperature) {
+            if (double.IsNaN(temperature) || double.IsInfinity(temperature) || temperature &lt; 0 || temperature &gt; 2)
+                throw new ArgumentOutOfRangeException("DefaultTemperature", "Require a finite temperature between 0 and 2.");
+            values.Add("ConfigureOptions.ModelTemperature", temperature.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        }
+        if (profile.DefaultMaxTokens is int tokens) {
+            if (tokens &lt; 64 || tokens &gt; 4096)
+                throw new ArgumentOutOfRangeException("DefaultMaxTokens", "Require 64 through 4096 output tokens.");
+            values.Add("ConfigureOptions.MaxTokens", tokens.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        }
+        if (profile.DefaultContextSize is uint context) {
+            if (context &lt; 1024 || context &gt; 32768 || context % 1024 != 0)
+                throw new ArgumentOutOfRangeException("DefaultContextSize", "Require 1024 through 32768 context tokens in steps of 1024.");
+            values.Add("ConfigureOptions.ContextSize", context.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        }
+        return values;
+    }
+}
 </ScriptContext>
     <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.72</PackageVersion>
+      <PackageVersion>1.0.73</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.3.11</Version>
+      <Version>1.3.12</Version>
       <Required>true</Required>
-      <Checksum>EB7F0027A7F2D984C1779C9529BF777E</Checksum>
+      <Checksum>EF5DED9C885721DFEF22745903F02282</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>
@@ -2771,7 +2884,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.72</PackageVersion>
+      <PackageVersion>1.0.73</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -2957,7 +3070,7 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.72</PackageVersion>
+      <PackageVersion>1.0.73</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -3600,7 +3713,7 @@ public object ForwardBackgroundRequest(object payload,string providerId,string o
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.72</PackageVersion>
+      <PackageVersion>1.0.73</PackageVersion>
       <Id>gemini-genie</Id>
       <Version>1.0.26</Version>
       <Required>true</Required>

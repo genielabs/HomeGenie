@@ -2,13 +2,28 @@
 
 ## Unreleased
 
-### Filesystem containment and legacy endpoints — 2026-10-24
+- Remove abandoned zero-byte GUID compiler temporaries from `programs/` through an independent post-update step. Preserve numbered assemblies, nonempty files, subdirectories and all `tmp/`/`_update/` contents. Prevent recurrence by removing DLL/PDB outputs after failed C# compilation, while retaining diagnostics and successful compilation behavior.
+
+- Add an early optional core post-update check before interfaces and automation initialization, with durable step revisions. Corrupt/unreadable state and housekeeping errors defer cleanup without blocking HG startup. LLamaSharp verification/legacy cleanup and its publish inventory are excluded from this release; native binaries and existing backups remain untouched. See [post-update checks](docs/guides/post-update-checks.md).
+
+- Notify users when selecting a Lailama model applies YAML option defaults, listing the model and applied values. Structured notifications can request immediate display in YoT using `Presentation: "toast"`; persistent notices remain in the notification archive.
+
+- Add optional YAML defaults for temperature, output budget and context, emitted through Program.Emit only when selecting a different model. Startup, YAML refresh and same-model events preserve user options. The five distributed profiles now record official Qwen sampling recommendations for their current modes; oversized official output recommendations remain documented rather than silently clamped to HG limits. Focused isolated validation: 48 tests passed. The running Vulkan program was not restarted or recompiled by this source change.
+
+### LLamaSharp 0.30.0 preparation â€” 2026-10-26
+
+- Align LLamaSharp, CPU, CUDA12 and Vulkan package references to 0.30.0. Remove discontinued SemanticKernel/KernelMemory adapters and their automatic scripting imports/references; distributed programs have no uses of those adapters.
+- Adapt Lailama's memory-mapping option to `LoadMode = LLamaLoadMode.MemoryMap` without changing its RAM profiles, inference settings or model selection. Explicitly reference the .NET expression/dynamic assemblies used by compiled scripts.
+- Add an end-to-end compilation regression test for the distributed Lailama script. Isolated Windows validation passed 827 tests, with six platform-dependent symbolic-link cases skipped. A clean framework-dependent linux-x64 Vulkan publish succeeded, and an isolated CPU native probe successfully read `LLamaContextParams.Default` (160-byte managed structure).
+- Follow-up 2026-10-27: clean framework-dependent Linux Vulkan binaries were deployed with matching managed/native 0.30.0 versions; previous binaries were isolated and configuration, models, chat history and user data preserved. Real loading/inference succeeded. This confirms deployment and basic inference, not general GPU stability: Intel i915 hangs/native device-lost termination and separate API/WebSocket stalls remain under investigation. Local benchmark observations and the dashboard/widget product priority are recorded in [the evaluation checkpoint](docs/local-llm-evaluation-20261027.md). Include the curated five-model YAML and optional per-model sampler/batch profiles, preserving UI temperature/output limits and existing defaults for omitted fields. Runners 1028/1029 remain development-only. Focused isolated validation passed 35 tests including checksum consistency.
+
+### Filesystem containment and legacy endpoints â€” 2026-10-24
 
 - Confine widget operations and final import copies; fix nested paths, module-file deletion and export metadata preservation. Give widget import/export independent temporary workspaces and close ZIP handles on errors. Isolated Windows fixture passed 72 checks; maintainer confirmed valid export/import on Linux Vulkan.
 - Validate Arduino program IDs, types and sketch/project paths (114 isolated Windows checks). Explicitly disable the five legacy Arduino editor endpoints and direct Interface.Import/Interface.Install endpoints pending YoT integration, before any file access. Internal Arduino and interface-install functions remain available, including legacy backup restore; current interface configuration and HomeGenie release updates remain enabled. Interface-install hardening and other import/restore flows remain pending.
 - Validate wallpaper upload destinations and deletion paths. MIG 1.3.12 corrects Unicode multipart file offsets (68 isolated parser cases); maintainer confirmed Unicode wallpaper upload and display after updating and rebuilding Vulkan. Complete Linux containment and end-to-end gateway regression coverage is not claimed.
 
-### Follow-up consolidation — 2026-10-22
+### Follow-up consolidation â€” 2026-10-22
 
 These additions describe the current working tree; they do not assign a new release or imply that all changes below shipped in v2.0.32. The 2026-10-21 consolidation remains below as earlier evidence.
 

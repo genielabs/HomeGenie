@@ -23,6 +23,7 @@ public class AiGenieProviderRecoveryTest {
   var ctx=Context("homegenie-ml-ai","940","ScriptContext");lailamaSource=Context("homegenie-ml-ai","940","ScriptSource");geminiSource=Context("homegenie-ml-ai","933","ScriptSource");
   var ctxTree=CSharpSyntaxTree.ParseText("class Holder{"+ctx+"}").GetRoot();
   var lifetimeClass=ctxTree.DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text=="LailamaNativeLifetime").ToFullString();
+  var modelInfoClass=ctxTree.DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text=="ModelInfo").ToFullString();
   var paramsMethod=ctxTree.DescendantNodes().OfType<MethodDeclarationSyntax>().Single(n=>n.Identifier.Text=="GetOptimizedParams").ToFullString();
   var gemTree=CSharpSyntaxTree.ParseText("class Holder{void Main(){"+geminiSource+"}}").GetRoot();
   var prepare=gemTree.DescendantNodes().OfType<VariableDeclaratorSyntax>().Single(n=>n.Identifier.Text=="prepareScopedContext").Parent.Parent.ToFullString();
@@ -63,10 +64,11 @@ PRELUDE
   return preparedContext;
  }
 }
+public enum LLamaLoadMode { MemoryMap }
 public enum GGMLType { GGML_TYPE_Q4_0,GGML_TYPE_Q8_0 }
 public class ModelParams {
  public ModelParams(string path){} public uint ContextSize,BatchSize,UBatchSize;public int GpuLayerCount;
- public bool FlashAttention,UseMemorymap;public GGMLType TypeK,TypeV;
+ public bool FlashAttention;public LLamaLoadMode LoadMode;public GGMLType TypeK,TypeV;
 }
 public class SettingsHarness {public long Ram;public long GetTotalMemoryGB()=>Ram;
 PARAMETERS
@@ -87,7 +89,7 @@ FINALLY
 }
 """;
   helpers=helpers.Replace("PREPARE",prepare).Replace("PRELUDE",prelude).Replace("PARAMETERS",paramsMethod).Replace("CATCHES",catches).Replace("FINALLY",init.Finally.ToFullString());
-  string code="using System;using System.IO;using System.Net;using System.Text;using System.Linq;using System.Collections.Generic;using System.Threading;using System.Threading.Tasks;using Newtonsoft.Json;using Newtonsoft.Json.Linq;"+lifetimeClass+policy+helpers;
+  string code="using System;using System.IO;using System.Net;using System.Text;using System.Linq;using System.Collections.Generic;using System.Threading;using System.Threading.Tasks;using Newtonsoft.Json;using Newtonsoft.Json.Linq;"+lifetimeClass+modelInfoClass+policy+helpers;
   var refs=((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")).Split(Path.PathSeparator).Where(p=>Path.GetDirectoryName(p)==Path.GetDirectoryName(typeof(object).Assembly.Location)).Append(typeof(JsonConvert).Assembly.Location).Select(p=>MetadataReference.CreateFromFile(p));
   using var stream=new MemoryStream();var result=CSharpCompilation.Create("Recovery"+Guid.NewGuid().ToString("N"),new[]{CSharpSyntaxTree.ParseText(code)},refs,new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)).Emit(stream);
   Assert.That(result.Success,Is.True,string.Join("\n",result.Diagnostics));var assembly=Assembly.Load(stream.ToArray());

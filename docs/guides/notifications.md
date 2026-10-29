@@ -93,3 +93,9 @@ The archive service now maintains its own update notice by polling the shared re
 ## Program update job outcomes
 
 Update All produces a persistent notice per job, alongside the separate availability notice. Each progress envelope carries an increasing `Sequence`; the archive ignores an older or equal sequence for the same sender and notification ID, preserving the newer result and its read/archive state. The archive polls `Packages.UpdateNotice` independently of the availability check to recover missed results, including when the archive program itself was updated. Details and API semantics are documented in [program updates](program-updates.md).
+
+### Immediate display in YoT
+
+Structured version-1 notifications may opt in to `Presentation: "toast"`. YoT displays a live notification immediately in a multiline snackbar, queued until the user closes it. Existing badge behavior is preserved. With `Persistent: true` and an `Id`, the notice is also archived by program 582. History reloads, read/archive operations and duplicate revisions do not replay the popup. Clients connected after the event can still find the unread notice in the archive. Omitted or unknown presentation values retain the usual badge behavior.
+
+Lailama uses this presentation after a different model applies YAML option defaults, listing the model and the emitted values. Startup, same-model saves and YAML refresh alone do not produce this notice.

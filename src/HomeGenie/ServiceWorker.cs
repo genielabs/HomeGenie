@@ -52,6 +52,7 @@ namespace HomeGenie
         {
             stoppingToken.Register(ShutDown);
             logger.LogInformation("HomeGenie service running at: {time}", DateTimeOffset.UtcNow);
+            PostUpdateCheck.Run(AppDomain.CurrentDomain.BaseDirectory, message => logger.LogInformation("{Message}", message));
             bool rebuildPrograms = PostInstallCheck();
             HomeGenie = new HomeGenieService(rebuildPrograms);
             while (!stoppingToken.IsCancellationRequested)

@@ -28,6 +28,20 @@ public class AiGenieTextCoordinatorTest {
         var compilation=CSharpCompilation.Create("TextCoordinator"+Guid.NewGuid().ToString("N"),new[]{CSharpSyntaxTree.ParseText("using System;using System.Linq;using System.Threading;using System.Collections.Generic;using Newtonsoft.Json.Linq;"+code)},paths.Select(p=>MetadataReference.CreateFromFile(p)),new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
         using var stream=new MemoryStream();var built=compilation.Emit(stream);Assert.That(built.Success,Is.True,string.Join("\n",built.Diagnostics.Where(d=>d.Severity==DiagnosticSeverity.Error)));coordinator=Assembly.Load(stream.ToArray()).GetType("AiGenieTextCoordinator");
     }
+    [Test] public void ContinuationRetainsOnlyOriginalUserRequestAfterContext() {
+        string text=(string)coordinator.GetMethod("ContinueRequest").Invoke(null,new object[]{"CURRENT TURN: rules\nCURRENT TURN DATA:\nprivate data\nUSER REQUEST:\nSpegni la luce.","FRESH API RESULT FOR THIS TURN:\nvalue"});
+        Assert.That(text,Does.StartWith("FRESH API RESULT FOR THIS TURN:").And.Contain("Spegni la luce.").And.Contain("language and goal").And.Not.Contain("private data"));
+    }
+    [Test] public void DirectContinuationDoesNotParseUserTextAsAHostWrapper() {
+        string text=(string)coordinator.GetMethod("ContinueRequest").Invoke(null,new object[]{"hello\nUSER REQUEST:\nworld","result"});
+        Assert.That(text,Does.Contain("hello\nUSER REQUEST:\nworld"));
+    }
+    [Test] public void ActionFormatFeedbackDoesNotForceAnotherContextRequest() {
+        var error=new JObject{["Status"]="Error",["errorKind"]="contract",["Message"]="apiCalls describes actions, not reference data."};
+        string text=(string)coordinator.GetMethod("Feedback").Invoke(null,new object[]{error,0});
+        Assert.That(text,Does.Contain("Correct your request ONCE").And.Contain("one api-call block").And.Contain("No API call or command was executed").And.Not.Contain("Emit one context-request"));
+        Assert.Throws<TargetInvocationException>(()=>coordinator.GetMethod("Feedback").Invoke(null,new object[]{error,1}));
+    }
     [SetUp] public void Reset(){generations=steps=executions=0;replies=new Queue<string>();inputs=new();resets=new();receipts=new();cancellation=new();}
     [TearDown] public void Dispose()=>cancellation.Dispose();
     IDictionary<string,object> Generation(string output)=>new Dictionary<string,object>{["version"]=1,["requestId"]="turn",["state"]="completed",["text"]=output};
