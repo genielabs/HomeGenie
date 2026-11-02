@@ -89,4 +89,17 @@ public class GeminiGenerationProviderTest {
             Assert.That(result["state"],Is.EqualTo("completed"));Assert.That(result["text"],Is.EqualTo("visible answer"));Assert.That(calls,Is.EqualTo(1));
         } finally {HomeGenie.ProgramDynamicApi.UnRegister(route);}
     }
+    [Test] public void ImagesBecomeInlineDataOnlyInTheGeminiCopy() {
+        var messages=new JArray(new JObject{["role"]="user",["parts"]=new JArray(new JObject{["text"]="Describe"},
+            new JObject{["attachment"]=new JObject{["kind"]="image",["mimeType"]="image/png",["data"]="AAAA"}})});
+        string before=messages.ToString();
+        var mapped=(JArray)type.GetMethod("ImageParts").Invoke(null,new object[]{messages});
+        Assert.That((string)mapped[0]["parts"][0]["text"],Is.EqualTo("Describe"));
+        Assert.That((string)mapped[0]["parts"][1]["inlineData"]["mimeType"],Is.EqualTo("image/png"));
+        Assert.That(mapped[0]["parts"][1]["attachment"],Is.Null);Assert.That(messages.ToString(),Is.EqualTo(before));
+    }
+    [Test] public void UnresolvedImagesFailRatherThanBecomingSilentTextOnlyRequests() {
+        var messages=new JArray(new JObject{["role"]="user",["parts"]=new JArray(new JObject{["attachment"]=new JObject{["kind"]="image",["id"]=Guid.NewGuid().ToString("N")}})});
+        Assert.That(Assert.Throws<TargetInvocationException>(()=>type.GetMethod("ImageParts").Invoke(null,new object[]{messages})).InnerException,Is.TypeOf<InvalidOperationException>());
+    }
 }

@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Refresh bundled YoT with image attachments, chart polling recovery and latest-period selection, restored chart animation behavior, notification management improvements, localized unavailable-provider labels and bounded HTTP interface toggles/module reload recovery. Gemini image description and follow-up were confirmed live; Lailama vision remains deferred.
+
+- Add provider-independent chat image attachments: GUID files under each provider, references in chat history, portable export/import and cleanup on history clear. Gemini accepts image/text turns; YoT adds file selection, clipboard paste, thumbnails and retry preservation. Text-only providers remain compatible; Lailama vision/model integration remains pending. See [chat attachments](docs/guides/chat-attachments.md).
+
+- Reduce redundant work in Lailama: keep stable instructions and capability policies in the system message, supply fresh context once per turn, and warm up the native engine without replaying chat history or collecting device context. Preserve canonical history, stale-data guards, session invalidation and model settings.
+
 - Remove abandoned zero-byte GUID compiler temporaries from `programs/` through an independent post-update step. Preserve numbered assemblies, nonempty files, subdirectories and all `tmp/`/`_update/` contents. Prevent recurrence by removing DLL/PDB outputs after failed C# compilation, while retaining diagnostics and successful compilation behavior.
 
 - Add an early optional core post-update check before interfaces and automation initialization, with durable step revisions. Corrupt/unreadable state and housekeeping errors defer cleanup without blocking HG startup. LLamaSharp verification/legacy cleanup and its publish inventory are excluded from this release; native binaries and existing backups remain untouched. See [post-update checks](docs/guides/post-update-checks.md).

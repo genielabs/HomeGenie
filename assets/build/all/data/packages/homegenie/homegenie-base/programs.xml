@@ -19,6 +19,10 @@ Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
     string storeId = data["StoreId"]?.ToString() ?? "default";
     lock (HistoryStore.SyncRoot) {
     var currentHistory = HistoryStore.GetStore(dataFolder, storeId);
+    if (request.Command.StartsWith("Files.", StringComparison.Ordinal)) {
+        try { return ChatFiles.Handle(dataFolder, storeId, request.Command.Substring(6), data, currentHistory); }
+        catch (Exception ex) { return new ResponseStatus(Status.Error, ex.Message); }
+    }
     switch(request.Command) {
 
         case "Get":
@@ -34,6 +38,13 @@ Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
 
             ChatMessage msg = JsonConvert.DeserializeObject&lt;ChatMessage&gt;(data["Message"].ToString());
             if (msg != null) {
+                var attachments = new JArray(msg.Parts.Where(p =&gt; p.Attachment != null).Select(p =&gt; p.Attachment));
+                if (attachments.Count &gt; 0) {
+                    if (msg.Role != "user") return new ResponseStatus(Status.Error,"Only user messages can contain attachments.");
+                    var checkedFiles = (JObject)ChatFiles.Handle(dataFolder,storeId,"Validate",new JObject{["attachments"]=attachments},currentHistory);
+                    var canonical = ((JArray)checkedFiles["attachments"]).OfType&lt;JObject&gt;().GetEnumerator();
+                    foreach (var part in msg.Parts.Where(p =&gt; p.Attachment != null)) { canonical.MoveNext(); part.Attachment=(JObject)canonical.Current.DeepClone(); }
+                }
                 if (!msg.CreatedAt.HasValue) msg.CreatedAt = DateTimeOffset.UtcNow;
                 if (data["Metadata"] is JObject metadata) msg.Metadata = (JObject)metadata.DeepClone();
                 if(msg.Metadata?["feedback"] is JObject feedback &amp;&amp; !currentHistory.Any(m=&gt;m.Role=="model" &amp;&amp;
@@ -41,7 +52,7 @@ Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
                     (string)m.Metadata?["contextProfileKey"]==(string)feedback["contextProfileKey"]))
                     return new ResponseStatus(Status.Error,"The feedback presentation was removed or the conversation was cleared.");
                 currentHistory.Add(msg);
-                if (!HistoryStore.Save(dataFolder, storeId) &amp;&amp; msg.Metadata?["feedback"] != null) {
+                if (!HistoryStore.Save(dataFolder, storeId)) {
                     currentHistory.Remove(msg);
                     return new ResponseStatus(Status.Error,"Could not save feedback history.");
                 }
@@ -74,20 +85,31 @@ Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
             return HistoryStore.SaveWidget(dataFolder, storeId, currentHistory, data);
 
         case "Export":
-            return JsonConvert.DeserializeObject&lt;List&lt;ChatMessage&gt;&gt;(JsonConvert.SerializeObject(currentHistory));
+            return ChatFiles.Export(dataFolder, storeId, currentHistory);
 
-        case "Import":
-            byte[] rawData = data.Value&lt;byte[]&gt;("Data");
-            var newHistory = Encoding.UTF8.GetString(rawData);
-            HistoryStore.Stores[storeId] = JsonConvert.DeserializeObject&lt;List&lt;ChatMessage&gt;&gt;(newHistory);
-            HistoryStore.Save(dataFolder, storeId);
-            return newHistory;
-
-        case "Clear":
-
-            currentHistory.Clear();
-            HistoryStore.Save(dataFolder, storeId);
+        case "Import": {
+            object raw = data["Data"];
+            string json = raw is JArray array ? array.ToString() : raw is JValue value &amp;&amp; value.Type==JTokenType.String
+                ? Encoding.UTF8.GetString(Convert.FromBase64String((string)value)) : Encoding.UTF8.GetString(data.Value&lt;byte[]&gt;("Data"));
+            var imported = ChatFiles.Import(dataFolder,storeId,json,out var created);
+            HistoryStore.Stores[storeId] = imported;
+            if (!HistoryStore.Save(dataFolder,storeId)) {
+                HistoryStore.Stores[storeId] = currentHistory;
+                foreach (string file in created) File.Delete(file);
+                return new ResponseStatus(Status.Error,"Could not save imported history.");
+            }
+            ChatFiles.Prune(dataFolder,storeId,imported);
+            return imported;
+        }
+        case "Clear": {
+            HistoryStore.Stores[storeId] = new List&lt;ChatMessage&gt;();
+            if (!HistoryStore.Save(dataFolder,storeId)) {
+                HistoryStore.Stores[storeId] = currentHistory;
+                return new ResponseStatus(Status.Error,"Could not clear chat history.");
+            }
+            ChatFiles.Clear(dataFolder,storeId);
             return new { Status = "Cleared" };
+        }
 
         default:
             return new ResponseStatus(Status.Error, $"Unknown command: {request.Command}");
@@ -102,8 +124,10 @@ Program.GoBackground();
 
 public class MessagePart
 {
-    [JsonProperty("text")]
+    [JsonProperty("text", NullValueHandling = NullValueHandling.Ignore)]
     public string Text { get; set; }
+    [JsonProperty("attachment", NullValueHandling = NullValueHandling.Ignore)]
+    public JObject Attachment { get; set; }
 }
 
 public class ChatMessage
@@ -217,17 +241,187 @@ public static class HistoryStore
         } catch { return false; }
     }
 }
+
+public static class ChatFiles {
+    public const int MaxBytes = 4 * 1024 * 1024;
+    public const int MaxImages = 3;
+    static string Folder(string historyFolder, string store) {
+        if (!System.Text.RegularExpressions.Regex.IsMatch(store ?? "", @"\A[0-9]{1,10}\z"))
+            throw new InvalidOperationException("Invalid attachment owner.");
+        string programs = Directory.GetParent(historyFolder.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)).FullName;
+        string owner = Path.Combine(programs, store);
+        string folder = Path.Combine(owner, "files");
+        foreach (string path in new[]{owner, folder})
+            if (Directory.Exists(path) &amp;&amp; (File.GetAttributes(path) &amp; FileAttributes.ReparsePoint) != 0)
+                throw new InvalidOperationException("Attachment directories cannot be links.");
+        return folder;
+    }
+    static string PathFor(string root, string id) {
+        if (!Guid.TryParseExact(id, "N", out _)) throw new InvalidOperationException("Invalid attachment ID.");
+        string path = Path.Combine(root, id);
+        if (File.Exists(path) &amp;&amp; (File.GetAttributes(path) &amp; FileAttributes.ReparsePoint) != 0)
+            throw new InvalidOperationException("Attachment files cannot be links.");
+        return path;
+    }
+    static JObject Describe(byte[] bytes, string id, string name) {
+        if (bytes == null || bytes.Length == 0 || bytes.Length &gt; MaxBytes) throw new InvalidOperationException("Images must be at most 4 MB.");
+        var format = SixLabors.ImageSharp.Image.DetectFormat(bytes);
+        string mime = format?.DefaultMimeType;
+        if (!new[]{"image/jpeg", "image/png", "image/webp"}.Contains(mime))
+            throw new InvalidOperationException("Use a JPEG, PNG or WebP image.");
+        var info = SixLabors.ImageSharp.Image.Identify(bytes);
+        if (info == null || info.Width &lt; 1 || info.Height &lt; 1 || (long)info.Width * info.Height &gt; 16000000)
+            throw new InvalidOperationException("Images must contain at most 16 million pixels.");
+        using (var decoded = SixLabors.ImageSharp.Image.Load(new SixLabors.ImageSharp.Formats.DecoderOptions { MaxFrames = 1 }, bytes)) { }
+        name = Path.GetFileName((name ?? "image").Replace('\\', '/'));
+        if (name.Length &gt; 160) name = name.Substring(0, 160);
+        return new JObject { ["version"]=1, ["kind"]="image", ["id"]=id, ["name"]=name, ["mimeType"]=mime,
+            ["size"]=bytes.Length, ["width"]=info.Width, ["height"]=info.Height };
+    }
+    static byte[] Decode(JToken token) {
+        if (token?.Type != JTokenType.String || ((string)token).Length &gt; ((MaxBytes + 2) / 3) * 4)
+            throw new InvalidOperationException("Invalid or oversized attachment.");
+        return Convert.FromBase64String((string)token);
+    }
+    public static object Handle(string folder, string store, string operation, JObject data, List&lt;ChatMessage&gt; history) {
+        string root = Folder(folder, store);
+        switch(operation) {
+            case "Upload": {
+                byte[] bytes = Decode(data["data"]);
+                string id = Guid.NewGuid().ToString("N");
+                var image = Describe(bytes, id, (string)data["name"]);
+                Prune(folder,store,history);
+                Directory.CreateDirectory(root);
+                File.WriteAllBytes(PathFor(root, id), bytes);
+                return new JObject { ["Status"]="Ok", ["attachment"]=image };
+            }
+            case "Get": {
+                string id = (string)data["id"];
+                byte[] bytes = Read(root, id);
+                var image = Describe(bytes, id, "image");
+                return new JObject { ["Status"]="Ok", ["mimeType"]=image["mimeType"], ["data"]=Convert.ToBase64String(bytes) };
+            }
+            case "Delete": {
+                string id = (string)data["id"];
+                if (history.Any(m =&gt; m.Parts.Any(p =&gt; (string)p.Attachment?["id"] == id)))
+                    throw new InvalidOperationException("This attachment is used by the conversation.");
+                File.Delete(PathFor(root, id));
+                return new { Status="Ok" };
+            }
+            case "Validate": {
+                if (data["attachments"] is not JArray list || list.Count &gt; MaxImages)
+                    throw new InvalidOperationException("Attach at most three images per message.");
+                var result = new JArray();
+                foreach (var item in list) {
+                    string id = (string)item["id"];
+                    result.Add(Describe(Read(root, id), id, (string)item["name"]));
+                }
+                return new JObject { ["Status"]="Ok", ["attachments"]=result };
+            }
+            case "Resolve": {
+                if (data["messages"] is not JArray messages) throw new InvalidOperationException("Invalid attachment messages.");
+                var result = (JArray)messages.DeepClone();
+                long total = 0;
+                foreach (var message in result) {
+                    if (message["parts"] is not JArray parts) throw new InvalidOperationException("Invalid message parts.");
+                    foreach (var part in parts.OfType&lt;JObject&gt;()) {
+                        if (part["attachment"] is not JObject image) continue;
+                        if ((string)message["role"] != "user") throw new InvalidOperationException("Only user messages can contain attachments.");
+                        byte[] bytes = Read(root, (string)image["id"]);
+                        total += bytes.Length;
+                        if (total &gt; 12 * 1024 * 1024) throw new InvalidOperationException("The conversation contains too many image bytes. Start a new conversation.");
+                        var valid = Describe(bytes, (string)image["id"], (string)image["name"]);
+                        valid["data"] = Convert.ToBase64String(bytes);
+                        part["attachment"] = valid;
+                    }
+                }
+                return new JObject { ["Status"]="Ok", ["messages"]=result };
+            }
+            default: throw new InvalidOperationException("Unknown attachment operation.");
+        }
+    }
+    static byte[] Read(string root, string id) {
+        string path = PathFor(root, id);
+        var file = new FileInfo(path);
+        if (!file.Exists || file.Length &gt; MaxBytes) throw new InvalidOperationException("Attachment missing or oversized. Attach the image again.");
+        return File.ReadAllBytes(path);
+    }
+    public static JArray Export(string folder, string store, List&lt;ChatMessage&gt; history) {
+        var result = JArray.FromObject(history);
+        if (!history.SelectMany(m =&gt; m.Parts).Any(p =&gt; p.Attachment != null)) return result;
+        string root = Folder(folder, store);
+        foreach (var image in result.SelectMany(m =&gt; (JArray)m["parts"]).Select(p =&gt; p["attachment"]).OfType&lt;JObject&gt;())
+            image["data"] = Convert.ToBase64String(Read(root, (string)image["id"]));
+        return result;
+    }
+    public static List&lt;ChatMessage&gt; Import(string folder, string store, string json, out List&lt;string&gt; created) {
+        var rows = JsonConvert.DeserializeObject&lt;List&lt;ChatMessage&gt;&gt;(json) ?? throw new InvalidOperationException("Invalid chat history.");
+        created = new List&lt;string&gt;();
+        if (rows.All(row =&gt; row.Parts != null &amp;&amp; row.Parts.All(p =&gt; p.Attachment == null))) return rows;
+        string root = Folder(folder, store);
+        var remap = new Dictionary&lt;string,JObject&gt;();
+        try {
+            foreach (var row in rows) {
+                if (row.Parts == null || row.Parts.Count(p =&gt; p.Attachment != null) &gt; MaxImages)
+                    throw new InvalidOperationException("Invalid attachment message.");
+                if (row.Parts.Any(p =&gt; p.Attachment != null &amp;&amp; p.Text != null))
+                    throw new InvalidOperationException("An attachment and text must be separate message parts.");
+                foreach (var part in row.Parts.Where(p =&gt; p.Attachment != null)) {
+                    if (row.Role != "user") throw new InvalidOperationException("Only user messages can contain attachments.");
+                    var image = part.Attachment;
+                    string old = (string)image["id"];
+                    if (!Guid.TryParseExact(old, "N", out _)) throw new InvalidOperationException("Invalid attachment ID.");
+                    if (!remap.TryGetValue(old, out var saved)) {
+                        byte[] bytes = Decode(image["data"]);
+                        string id = Guid.NewGuid().ToString("N");
+                        saved = Describe(bytes, id, (string)image["name"]);
+                        Directory.CreateDirectory(root);
+                        string path = PathFor(root, id);
+                        File.WriteAllBytes(path, bytes);
+                        created.Add(path); remap.Add(old, saved);
+                    }
+                    part.Attachment = (JObject)saved.DeepClone();
+                }
+            }
+            return rows;
+        } catch { foreach (var path in created) File.Delete(path); throw; }
+    }
+    public static void Prune(string folder, string store, List&lt;ChatMessage&gt; history) {
+        if (!System.Text.RegularExpressions.Regex.IsMatch(store ?? "", @"\A[0-9]{1,10}\z")) return;
+        string root = Folder(folder, store);
+        if (!Directory.Exists(root)) return;
+        var used = new HashSet&lt;string&gt;(history.SelectMany(m =&gt; m.Parts).Where(p =&gt; p.Attachment != null).Select(p =&gt; (string)p.Attachment["id"]));
+        // Keep recent drafts: another browser may still be composing a message.
+        foreach (string file in Directory.GetFiles(root)) {
+            string id = Path.GetFileName(file);
+            if (Guid.TryParseExact(id, "N", out _) &amp;&amp; !used.Contains(id) &amp;&amp; File.GetLastWriteTimeUtc(file) &lt; DateTime.UtcNow.AddDays(-1))
+                File.Delete(PathFor(root, id));
+        }
+    }
+    public static void Clear(string folder, string store) {
+        // Legacy text-only stores have no provider-owned attachment directory.
+        if (!System.Text.RegularExpressions.Regex.IsMatch(store ?? "", @"\A[0-9]{1,10}\z")) return;
+        string root = Folder(folder, store);
+        if (!Directory.Exists(root)) return;
+        // Delete only files owned by this service; never traverse directories or links.
+        foreach (string file in Directory.GetFiles(root)) {
+            string id = Path.GetFileName(file);
+            if (Guid.TryParseExact(id, "N", out _)) File.Delete(PathFor(root, id));
+        }
+        if (!Directory.EnumerateFileSystemEntries(root).Any()) Directory.Delete(root);
+    }
+}
 </ScriptContext>
     <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.55</PackageVersion>
       <Id>chat-history-service</Id>
-      <Version>1.0.8</Version>
+      <Version>1.0.9</Version>
       <Required>true</Required>
-      <Checksum>5AC83C48F4D5E84F68BF006575F6AF6C</Checksum>
+      <Checksum>CD4F318999376E8A70708DD2205C643B</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>577</Address>
@@ -6960,11 +7154,14 @@ public static class WidgetContextRequest
     public static readonly string[] ContextKeys = { "devices", "widgets", "automationPrograms", "dashboards", "deepKnowledge" };
     public static void Validate(JObject input)
     {
-        if (input.Properties().Any(p =&gt; !new[] { "version", "message", "context", "resources", "dashboards", "capabilities" }.Contains(p.Name)))
+        if (input.Properties().Any(p =&gt; !new[] { "version", "message", "context", "resources", "dashboards", "capabilities", "attachments" }.Contains(p.Name)))
             throw new InvalidOperationException("Unknown structured prompt field.");
         if (input["version"]?.Type != JTokenType.Integer || (int)input["version"] != 1
-            || input["message"]?.Type != JTokenType.String || string.IsNullOrWhiteSpace((string)input["message"]))
+            || input["message"]?.Type != JTokenType.String || string.IsNullOrWhiteSpace((string)input["message"]) &amp;&amp; !((input["attachments"] as JArray)?.Count &gt; 0))
             throw new InvalidOperationException("A structured prompt requires version 1 and a nonempty message.");
+        if (input["attachments"] != null &amp;&amp; (input["attachments"] is not JArray images || images.Count &gt; 3 ||
+            images.Any(image =&gt; image is not JObject || image["id"]?.Type != JTokenType.String || !Guid.TryParseExact((string)image["id"],"N",out _))))
+            throw new InvalidOperationException("Attach at most three valid image references.");
         if (input["resources"] != null &amp;&amp; !(input["resources"] is JObject))
             throw new InvalidOperationException("Resources must be an object.");
         if (input["resources"] is JObject resources) {
@@ -8191,7 +8388,14 @@ public sealed class AiGenieTurn
         return metadata;
     }
     public void SaveUser(object message)
-    { if (persist) call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = message, Metadata = Snapshot("submitted") }); }
+    {
+        if (!persist) return;
+        var written=call("System.Utility/ChatHistory/Add", new { StoreId = storeId, Message = message, Metadata = Snapshot("submitted") });
+        if (written!=null) {
+            var receipt=written as JObject ?? (written is string text?JObject.Parse(text):JObject.FromObject(written));
+            if((string)receipt["Status"]=="Error")throw new InvalidOperationException((string)receipt["Message"]??"Could not save chat message.");
+        }
+    }
     public void SaveReply(object message, string outcome = "completed")
     {
         if (replySaved) return;
@@ -8801,11 +9005,11 @@ public static class AiGenieChatFeedback {
   <PackageInfo>
     <Repository>homegenie</Repository>
     <PackageId>homegenie-base</PackageId>
-    <PackageVersion>1.0.54</PackageVersion>
+    <PackageVersion>1.0.55</PackageVersion>
     <Id>ai-genie-service</Id>
-    <Version>0.22.1</Version>
+    <Version>0.22.2</Version>
     <Required>true</Required>
-    <Checksum>955E42CFE7EB4B822224385B27E5D5BA</Checksum>
+    <Checksum>66878625768050C8498AEB4EE1621AC0</Checksum>
   </PackageInfo>
   <Domain>HomeAutomation.HomeGenie.Automation</Domain>
   <Address>583</Address>

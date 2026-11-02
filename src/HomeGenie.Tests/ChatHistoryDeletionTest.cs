@@ -45,7 +45,7 @@ public class FakeApi {
  public MIG.MigInterfaceCommand Parse(object i)=>i as MIG.MigInterfaceCommand ?? new MIG.MigInterfaceCommand(i.ToString());
  public object Call(string route,object data){LastRoute=route;LastData=data;return new{Count=1};}
 }";
-        var paths=((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")).Split(Path.PathSeparator).Where(p=>Path.GetDirectoryName(p)==Path.GetDirectoryName(typeof(object).Assembly.Location)).Append(typeof(JsonConvert).Assembly.Location).Append(typeof(MIG.MigInterfaceCommand).Assembly.Location);
+        var paths=((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")).Split(Path.PathSeparator).Where(p=>Path.GetDirectoryName(p)==Path.GetDirectoryName(typeof(object).Assembly.Location)).Append(typeof(SixLabors.ImageSharp.Image).Assembly.Location).Append(typeof(JsonConvert).Assembly.Location).Append(typeof(MIG.MigInterfaceCommand).Assembly.Location);
         var compilation=CSharpCompilation.Create("HistoryRemoval"+Guid.NewGuid().ToString("N"),new[]{CSharpSyntaxTree.ParseText(code)},paths.Select(p=>MetadataReference.CreateFromFile(p)),new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
         using var stream=new MemoryStream();var result=compilation.Emit(stream);Assert.That(result.Success,Is.True,string.Join("\n",result.Diagnostics));assembly=Assembly.Load(stream.ToArray());
     }

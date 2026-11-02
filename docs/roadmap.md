@@ -6,6 +6,11 @@ This is the active task list. Detailed stage-by-stage decisions, earlier API nam
 
 ## AI product direction and local inference checkpoint (2026-10-27)
 
+- [x] Implement shared image-attachment storage/history and capability discovery, Gemini transport and YoT composer/preview support. See [chat attachments](guides/chat-attachments.md).
+- [x] Confirm live Gemini image description and follow-up without reattaching the image (maintainer test, 2026-11-02). Attachment API retrieval also verified.
+- [ ] Complete second-browser history, portable image export/import and history-clear cleanup acceptance.
+- [ ] Deferred by maintainer (2026-11-02): integrate Lailama MTMD/projector lifecycle and validate image-capable models. Keep local attachments disabled while consolidating Gemini/shared attachments.
+
 - [x] Add targeted empty-GUID compiler-output cleanup and fix failed C# emission leaving empty DLL/PDB pairs. Preserve active numeric assemblies; leave `tmp/` Z-Wave cache and `_update/` downloads/recovery backups outside this intervention. Live startup acceptance remains pending.
 
 - [x] Implement early optional core post-update housekeeping before interfaces/automation, with durable step revisions and non-blocking state/filesystem error handling. Keep only empty-GUID compiler temporary cleanup in this release; LLamaSharp binary verification/cleanup and the publish inventory are explicitly excluded by maintainer decision (2026-10-29). See [post-update checks](guides/post-update-checks.md).

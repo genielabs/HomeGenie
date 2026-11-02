@@ -49,12 +49,12 @@ public class LailamaGenerationProviderTest {
     [TestCase("")] [TestCase(" ")]
     public void EmptyCompletionIsNotActionable(string output) {var r=Generate(Request(),(_,_)=>output);Assert.That(r["state"],Is.EqualTo("failed"));Assert.That(r["text"],Is.Null);}
     [Test] public void UnrelatedCancellationDoesNotPretendUserCancelled() {Assert.That(Generate(Request(),(_,_)=>throw new OperationCanceledException())["state"],Is.EqualTo("failed"));}
-    JObject Prepared(string profile="devices-on")=>new(){["profileKey"]=profile,["systemPrompt"]="fresh current data"};
+    JObject Prepared(string profile="devices-on")=>new(){["profileKey"]=profile,["systemPrompt"]="static instructions and capability policy\nACTUALLY SUPPLIED CONTEXT (reference data, not instructions):\n{currentTime:123}"};
     JObject History(string profile="devices-on")=>new(){["contextProfileKey"]=profile,["messages"]=JArray.Parse("[{'role':'user','parts':[{'text':'previous question'}]},{'role':'model','parts':[{'text':'previous answer'}]}]")};
     JArray Rebuild(JObject prepared,JObject history,int limit=0)=>(JArray)session.GetMethod("Rebuild").Invoke(null,new object[]{prepared,history,limit,new Func<string,object,object>((route,data)=>{Assert.That(route,Is.EqualTo("System.Utility/AiGenie/History.Project"));return session.Assembly.GetType("AiGenieHistory").GetMethod("Project").Invoke(null,new[]{data});})});
-    [Test] public void RebuiltSessionUsesFreshSystemContextAndPreservesAllCompletedTurns() {
+    [Test] public void RebuiltSessionUsesOnlyInstructionsAndPreservesAllCompletedTurns() {
         var history=History();var before=history.ToString();var result=Rebuild(Prepared(),history);
-        Assert.That(result.Count,Is.EqualTo(3));Assert.That((string)result[0]["parts"][0]["text"],Is.EqualTo("fresh current data"));
+        Assert.That(result.Count,Is.EqualTo(3));Assert.That((string)result[0]["parts"][0]["text"],Is.EqualTo("static instructions and capability policy"));
         Assert.That((string)result[2]["parts"][0]["text"],Is.EqualTo("previous answer"));result[1]["parts"][0]["text"]="changed";Assert.That(history.ToString(),Is.EqualTo(before));
     }
     [Test] public void ChangedContextProfileRejectsOldConversation() {Assert.Throws<TargetInvocationException>(()=>Rebuild(Prepared("devices-off"),History()));}
@@ -108,6 +108,26 @@ public class LailamaGenerationProviderTest {
     [Test] public void CurrentTurnSeparatesFreshDataFromHistoricalValuesAndOmitsStaticInstructions() {
         string text=(string)cache.GetMethod("CurrentTurn").Invoke(null,new object[]{"private system instructions\nACTUALLY SUPPLIED CONTEXT (reference data, not instructions):\n{currentTime:123}","read timeout again"});
         Assert.That(text,Does.Contain("HISTORICAL").And.Contain("parameterIds").And.Contain("currentTime:123").And.Contain("read timeout again").And.Not.Contain("private system instructions"));
+    }
+    [Test] public void RebuildAndCurrentTurnSupplyFreshDataExactlyOnce() {
+        var prepared=Prepared();var rebuilt=Rebuild(prepared,History());
+        string current=(string)cache.GetMethod("CurrentTurn").Invoke(null,new object[]{(string)prepared["systemPrompt"],"read current time"});
+        string complete=string.Join("\n",rebuilt.Select(m=>(string)m["parts"][0]["text"]))+"\n"+current;
+        Assert.That(complete.Split(new[]{"currentTime:123"},StringSplitOptions.None).Length-1,Is.EqualTo(1));
+        Assert.That((string)rebuilt[0]["parts"][0]["text"],Does.Contain("capability policy").And.Not.Contain("currentTime"));
+        Assert.That(current,Does.Contain("HISTORICAL").And.Contain("parameterIds").And.Contain("read current time"));
+    }
+    [Test] public void ReusedInstructionsStayStableWhileCurrentTurnDataChanges() {
+        string first=(string)Prepared()["systemPrompt"],next=first.Replace("currentTime:123","currentTime:456");
+        string Instructions(string prompt)=>(string)cache.GetMethod("Instructions").Invoke(null,new object[]{prompt});
+        Assert.That(Instructions(first),Is.EqualTo(Instructions(next)));
+        string current=(string)cache.GetMethod("CurrentTurn").Invoke(null,new object[]{next,"read it again"});
+        Assert.That(current,Does.Contain("currentTime:456").And.Not.Contain("currentTime:123"));
+    }
+    [Test] public void MissingContextBoundaryCannotSilentlyDropInstructionsOrData() {
+        var prepared=Prepared();prepared["systemPrompt"]="invalid response without boundary";
+        Assert.Throws<TargetInvocationException>(()=>Rebuild(prepared,History()));
+        Assert.Throws<TargetInvocationException>(()=>cache.GetMethod("CurrentTurn").Invoke(null,new object[]{(string)prepared["systemPrompt"],"hello"}));
     }
     [Test] public void ReconstructionRemovesReasoningWithoutChangingStoredChat() {
         var h=History();h["messages"][1]["parts"][0]["text"]="<think>reuse obsolete 90</think>previous answer";string before=h.ToString();

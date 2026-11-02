@@ -31,7 +31,7 @@ public class Probe {
     public object Context()=>HistoryStore.Context(HistoryStore.GetStore(dataFolder,storeId),null);
 }";
         var paths=((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")).Split(Path.PathSeparator)
-            .Where(p=>Path.GetDirectoryName(p)==Path.GetDirectoryName(typeof(object).Assembly.Location)).Append(typeof(JsonConvert).Assembly.Location).Distinct();
+            .Where(p=>Path.GetDirectoryName(p)==Path.GetDirectoryName(typeof(object).Assembly.Location)).Append(typeof(SixLabors.ImageSharp.Image).Assembly.Location).Append(typeof(JsonConvert).Assembly.Location).Distinct();
         var compilation=CSharpCompilation.Create("WidgetHistory"+Guid.NewGuid().ToString("N"),new[]{CSharpSyntaxTree.ParseText(code)},paths.Select(p=>MetadataReference.CreateFromFile(p)),new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
         using var stream=new MemoryStream();var result=compilation.Emit(stream);
         Assert.That(result.Success,Is.True,string.Join("\n",result.Diagnostics));assembly=Assembly.Load(stream.ToArray());
