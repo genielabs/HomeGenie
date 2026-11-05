@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Sprioc giuirléidí",
+  "ai_task_waiting": "Ag fanacht",
+  "ai_task_cancelled": "Cealaithe",
+  "ai_task_interrupted": "Curtha as",
+  "ai_task_stop_requested": "Iarradh stopadh",
   "always_show_latest_period": "Taispeáin an tréimhse is déanaí atá ar fáil i gcónaí",
   "home": "Baile",
   "setup": "Socrú",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "An bhfuil fonn ort na fógraí roghnaithe ({{count}}) a scriosadh?",
   "programs_updated": "Cláir nuashonraithe",
   "system_not_up_to_date": "Níl an córas cothrom le dáta",
-  "new_programs_updates_available": "Nuashonruithe cláir nua ar fáil"
+  "new_programs_updates_available": "Nuashonruithe cláir nua ar fáil",
+  "dashboard_layout": "Leagan amach",
+  "dashboard_standard": "Caighdeánach"
 }

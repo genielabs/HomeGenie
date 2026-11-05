@@ -1,8 +1,23 @@
 # Roadmap
 
-Consolidated status: 2026-10-24, including maintainer-confirmed saved-widget and update-dialog acceptance, Mini release checks and website publication. See [Unreleased changes](../CHANGELOG.md).
+Consolidated status: 2026-11-05, including maintainer-confirmed agentic objectives, custom dashboard persistence/scrolling/live revisions and embedded YoT widget context. Earlier accepted work remains complete. See [Unreleased changes](../CHANGELOG.md).
 
 This is the active task list. Detailed stage-by-stage decisions, earlier API names, test counts and acceptance evidence are preserved in [implementation history](roadmap-history.md); they do not override this status. Completed work is not reopened merely because an earlier checkpoint still says pending.
+
+## Agentic chat objectives (2026-11-02)
+
+- [x] First storage checkpoint: stable conversation/message IDs, persistent revisions, legacy-history migration and internal task create/read/update operations with concurrency checks, history-clear/import fencing and save rollback. See [agentic chat tasks](guides/chat-agentic-tasks.md).
+- [x] Add provider-scoped conversation/task routes, persisted change events and non-blocking conditional revision reconciliation for open YoT chats. Recover dropped events and preserve input, unchanged messages and scroll. Cross-browser updates/Stop and dashboard live revision were accepted by the maintainer.
+- [x] Add dedicated YoT task cards, stable expandable operation details and renderer selection via `Program.UiType` / `AI.Task.Id`. Implement cooperative cancellation requests and restart/import recovery; success, failure and cooperative Stop were accepted with the demonstration runner. Restart/import live checks remain separate.
+- [x] Prepare the local-only Vulkan demonstration (program 1031, Tests): public task APIs, simulated completion/error/long-run modes, cooperative cancellation and no automatic startup. Eight isolated worker tests and actual script compilation passed; installed idle, without inference/device operations.
+- [x] Deterministic runner accepted by the maintainer: success, simulated failure, Stop, refresh and synchronized updates/Stop in two browsers.
+- [x] Implement the first bounded Gemini widget objective loop: explicit composer action, one runner per goal, real source saves/readback, owned widget namespace, bounded repairs and persisted editor links.
+- [x] First live Gemini set/composition: saved clock, counter and parent Web Component; individual and composite rendering confirmed by maintainer screenshots.
+- [x] Implement explicit revision of existing objective results with stable widget paths, source context, separate progress cards and pre-save checks for concurrent/manual changes.
+- [x] Live in-place revision accepted by the maintainer: composite changed to horizontal layout using the same widgets. Add explicit same-URL Edit reload, preserving unsaved buffers through confirmation and reload failures.
+- [x] Add automation-program steps to objectives by reusing the existing deployment/compilation/recovery pipeline; persist program results and allow revisions of selected owned programs.
+- [x] Program/widget objective execution and revision accepted by the maintainer, preserving program IDs and widget paths; same-URL editor reload was exercised during iteration. Dashboard creation and live revision are now accepted separately below.
+- [ ] Explicit remaining live cases: objective speech after the fix, sleep/reconnect, history clear while an objective is active, and interrupted/imported task recovery. Do not infer these passes from ordinary completion or cross-browser Stop.
 
 ## AI product direction and local inference checkpoint (2026-10-27)
 
@@ -198,3 +213,15 @@ Feedback continuation: implemented for Gemini and Lailama; automated verificatio
 - Gemini feedback fills persistent context/capability selections before normalization, using the same preparation as a normal scoped prompt. A genuine profile change still rejects the old presentation. Maintainer's initial choice test exposed this normalization bug; after the fix the maintainer confirmed feedback works.
 - Lailama background text generation and request execution now run inference and session reset in an independent worker that owns its native lease. Interrupting the caller cannot release an active inference. Failed initialization ends/transfers its lease before requesting bounded cleanup; full exception and phase logs are retained. Context Window controls actual context capacity; RAM profiles tune batch/cache only.
 - Automated ownership/profile/parameter regressions are distinct from live native acceptance. These fixes address concrete defects; the historical core-dump cause remains unconfirmed without a native stack. Pending maintainer checks: failed startup, stop/change model during work, ordinary chat and background requests.
+
+## Custom widget dashboards (2026-11-04)
+
+- [x] Implement Layout / Standard or Custom Widget in YoT dashboard preferences, with persisted per-dashboard selection and retained standard widgets. Introduce the declarative dashboard widget size, a read-only static catalog and bounded previews.
+- [x] Maintainer accepted dashboard selection, persistence, small-screen vertical scrolling and in-place revision (20 to 24 cards) without manually reloading the dashboard.
+- [x] Embedded widget context accepted by the maintainer: generated custom elements reuse YoT APIs; module inheritance, explicit `:module`, explicit unbound children and `:adapter` are covered by runtime integration tests. Autonomous loading outside YoT is retained.
+- [ ] Separate live recovery checks: restore Standard while preserving its widget arrangement, missing/load-failed dashboard recovery, and viewport changes with the chat drawer open.
+- [ ] Add a documented controller module lookup for reactive multi-module widgets, then update AI guidance to use module/field events for confirmed feedback instead of polling. `this.getModule` is proposed, not implemented.
+- [ ] Refine the new task/dashboard UI and UX before release. Keep this polish separate from functional acceptance.
+- [ ] Add explicit AI operations to apply a generated container to a dashboard; the first phase creates/saves containers only and leaves selection to the user.
+- [ ] Review the scattered bundled example widgets and build a small set of coherent themed dashboards with their related widgets after the layout feature is accepted.
+- [ ] Organize the widget browser by folders instead of one flat list, retaining nested editor paths and useful previews.

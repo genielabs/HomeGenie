@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Vidjet yaratish maqsadi",
+  "ai_task_waiting": "Kutilmoqda",
+  "ai_task_cancelled": "Bekor qilindi",
+  "ai_task_interrupted": "Uzildi",
+  "ai_task_stop_requested": "To‘xtatish so‘raldi",
   "always_show_latest_period": "Har doim eng so‘nggi mavjud davrni ko‘rsatish",
   "home": "Uy",
   "setup": "Sozlash; o'rnatish",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Tanlangan bildirishnomalar ({{count}}) oʻchirilsinmi?",
   "programs_updated": "Dasturlar yangilandi",
   "system_not_up_to_date": "Tizim yangilanmagan",
-  "new_programs_updates_available": "Yangi dastur yangilanishlari mavjud"
+  "new_programs_updates_available": "Yangi dastur yangilanishlari mavjud",
+  "dashboard_layout": "Joylashuv",
+  "dashboard_standard": "Standart"
 }

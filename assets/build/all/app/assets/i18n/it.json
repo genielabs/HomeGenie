@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Obiettivo widget",
+  "ai_task_waiting": "In attesa",
+  "ai_task_cancelled": "Annullato",
+  "ai_task_interrupted": "Interrotto",
+  "ai_task_stop_requested": "Interruzione richiesta",
   "always_show_latest_period": "Mostra sempre l'ultimo periodo disponibile",
   "home": "Home",
   "setup": "Configurazione",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Eliminare le notifiche selezionate ({{count}})?",
   "programs_updated": "Programmi aggiornati",
   "system_not_up_to_date": "Il sistema non è aggiornato",
-  "new_programs_updates_available": "Nuovi aggiornamenti dei programmi disponibili"
+  "new_programs_updates_available": "Nuovi aggiornamenti dei programmi disponibili",
+  "dashboard_layout": "Layout",
+  "dashboard_standard": "Standard"
 }

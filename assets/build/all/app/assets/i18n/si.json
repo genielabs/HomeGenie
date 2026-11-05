@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "විජට් සෑදීමේ අරමුණ",
+  "ai_task_waiting": "රැඳී සිටී",
+  "ai_task_cancelled": "අවලංගු කරන ලදී",
+  "ai_task_interrupted": "බාධා විය",
+  "ai_task_stop_requested": "නැවැත්වීමට ඉල්ලා ඇත",
   "always_show_latest_period": "සෑම විටම ලබාගත හැකි නවතම කාල සීමාව පෙන්වන්න",
   "home": "මුල් පිටුව",
   "setup": "සැලසුම",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "තෝරාගත් දැනුම්දීම් මකන්න ({{count}})?",
   "programs_updated": "වැඩසටහන් යාවත්කාලීන කරන ලදී",
   "system_not_up_to_date": "පද්ධතිය යාවත්කාලීන නොවේ",
-  "new_programs_updates_available": "නව වැඩසටහන් යාවත්කාලීන තිබේ"
+  "new_programs_updates_available": "නව වැඩසටහන් යාවත්කාලීන තිබේ",
+  "dashboard_layout": "පිරිසැලසුම",
+  "dashboard_standard": "සම්මත"
 }

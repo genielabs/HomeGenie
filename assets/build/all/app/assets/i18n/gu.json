@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "વિજેટ બનાવવાનો હેતુ",
+  "ai_task_waiting": "રાહ જોઈ રહ્યું છે",
+  "ai_task_cancelled": "રદ કર્યું",
+  "ai_task_interrupted": "વિક્ષેપિત",
+  "ai_task_stop_requested": "રોકવાની વિનંતી કરી",
   "always_show_latest_period": "હંમેશા નવીનતમ ઉપલબ્ધ સમયગાળો બતાવો",
   "home": "ઘર",
   "setup": "સ્થાપના",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "પસંદ કરેલી સૂચનાઓ ({{count}}) કાઢી નાખીએ?",
   "programs_updated": "પ્રોગ્રામ અપડેટ કર્યા",
   "system_not_up_to_date": "સિસ્ટમ અદ્યતન નથી",
-  "new_programs_updates_available": "નવા પ્રોગ્રામ અપડેટ્સ ઉપલબ્ધ છે"
+  "new_programs_updates_available": "નવા પ્રોગ્રામ અપડેટ્સ ઉપલબ્ધ છે",
+  "dashboard_layout": "લેઆઉટ",
+  "dashboard_standard": "માનક"
 }

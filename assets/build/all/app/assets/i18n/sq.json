@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Objektiv për krijimin e widget-eve",
+  "ai_task_waiting": "Në pritje",
+  "ai_task_cancelled": "Anuluar",
+  "ai_task_interrupted": "Ndërprerë",
+  "ai_task_stop_requested": "U kërkua ndalimi",
   "always_show_latest_period": "Shfaq gjithmonë periudhën më të fundit të disponueshme",
   "home": "Shtëpi",
   "setup": "Konfigurimi",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Të fshihen njoftimet e zgjedhura ({{count}})?",
   "programs_updated": "Programet u përditësuan",
   "system_not_up_to_date": "Sistemi nuk është i përditësuar",
-  "new_programs_updates_available": "Ofrohen përditësime të reja të programit"
+  "new_programs_updates_available": "Ofrohen përditësime të reja të programit",
+  "dashboard_layout": "Paraqitja",
+  "dashboard_standard": "Standarde"
 }

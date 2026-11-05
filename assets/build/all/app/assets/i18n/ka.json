@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "ვიჯეტების შექმნის მიზანი",
+  "ai_task_waiting": "მოლოდინშია",
+  "ai_task_cancelled": "გაუქმებულია",
+  "ai_task_interrupted": "შეწყვეტილია",
+  "ai_task_stop_requested": "გაჩერება მოთხოვნილია",
   "always_show_latest_period": "ყოველთვის აჩვენე უახლესი ხელმისაწვდომი პერიოდი",
   "home": "მთავარი",
   "setup": "დაყენება",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "წაშალოთ არჩეული შეტყობინებები ({{count}})?",
   "programs_updated": "განახლებულია პროგრამები",
   "system_not_up_to_date": "სისტემა არ არის განახლებული",
-  "new_programs_updates_available": "ხელმისაწვდომია ახალი პროგრამის განახლებები"
+  "new_programs_updates_available": "ხელმისაწვდომია ახალი პროგრამის განახლებები",
+  "dashboard_layout": "განლაგება",
+  "dashboard_standard": "სტანდარტული"
 }

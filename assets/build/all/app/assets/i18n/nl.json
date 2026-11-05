@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Widgetopdracht",
+  "ai_task_waiting": "In afwachting",
+  "ai_task_cancelled": "Geannuleerd",
+  "ai_task_interrupted": "Onderbroken",
+  "ai_task_stop_requested": "Stop aangevraagd",
   "always_show_latest_period": "Altijd de nieuwste beschikbare periode tonen",
   "home": "Thuis",
   "setup": "Instellen",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Geselecteerde meldingen verwijderen ({{count}})?",
   "programs_updated": "Programma's bijgewerkt",
   "system_not_up_to_date": "Systeem is niet up-to-date",
-  "new_programs_updates_available": "Nieuwe programma-updates beschikbaar"
+  "new_programs_updates_available": "Nieuwe programma-updates beschikbaar",
+  "dashboard_layout": "Indeling",
+  "dashboard_standard": "Standaard"
 }

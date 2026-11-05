@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Lengo la kuunda wijeti",
+  "ai_task_waiting": "Inasubiri",
+  "ai_task_cancelled": "Imeghairiwa",
+  "ai_task_interrupted": "Imekatizwa",
+  "ai_task_stop_requested": "Ombi la kusimamisha limetumwa",
   "always_show_latest_period": "Onyesha kila wakati kipindi cha hivi karibuni kinachopatikana",
   "home": "Nyumbani",
   "setup": "Sanidi",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Ungependa kufuta arifa zilizochaguliwa ({{count}})?",
   "programs_updated": "Programu zimesasishwa",
   "system_not_up_to_date": "Mfumo haujasasishwa",
-  "new_programs_updates_available": "Sasisho mpya za programu zinapatikana"
+  "new_programs_updates_available": "Sasisho mpya za programu zinapatikana",
+  "dashboard_layout": "Mpangilio",
+  "dashboard_standard": "Kawaida"
 }

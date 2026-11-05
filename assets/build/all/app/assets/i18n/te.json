@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "విడ్జెట్ సృష్టించే లక్ష్యం",
+  "ai_task_waiting": "వేచి ఉంది",
+  "ai_task_cancelled": "రద్దు చేయబడింది",
+  "ai_task_interrupted": "అంతరాయం కలిగింది",
+  "ai_task_stop_requested": "ఆపమని అభ్యర్థించబడింది",
   "always_show_latest_period": "ఎల్లప్పుడూ అందుబాటులో ఉన్న తాజా కాలవ్యవధిని చూపించు",
   "home": "హొమ్ పేజ్",
   "setup": "సెటప్",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "ఎంచుకున్న నోటిఫికేషన్‌లను ({{count}}) తొలగించాలా?",
   "programs_updated": "ప్రోగ్రామ్‌లు నవీకరించబడ్డాయి",
   "system_not_up_to_date": "సిస్టమ్ తాజాగా లేదు",
-  "new_programs_updates_available": "కొత్త ప్రోగ్రామ్ అప్‌డేట్‌లు అందుబాటులో ఉన్నాయి"
+  "new_programs_updates_available": "కొత్త ప్రోగ్రామ్ అప్‌డేట్‌లు అందుబాటులో ఉన్నాయి",
+  "dashboard_layout": "అమరిక",
+  "dashboard_standard": "ప్రామాణికం"
 }

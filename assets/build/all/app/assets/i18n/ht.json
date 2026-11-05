@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Objektif pou kreye widget",
+  "ai_task_waiting": "Ap tann",
+  "ai_task_cancelled": "Anile",
+  "ai_task_interrupted": "Entèwonp",
+  "ai_task_stop_requested": "Yo mande pou sispann",
   "always_show_latest_period": "Toujou montre dènye peryòd ki disponib la",
   "home": "Lakay",
   "setup": "Enstalasyon",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Efase notifikasyon chwazi yo ({{count}})?",
   "programs_updated": "Pwogram yo mete ajou",
   "system_not_up_to_date": "Sistèm pa ajou",
-  "new_programs_updates_available": "Nouvo mizajou pwogram ki disponib"
+  "new_programs_updates_available": "Nouvo mizajou pwogram ki disponib",
+  "dashboard_layout": "Dispozisyon",
+  "dashboard_standard": "Estanda"
 }

@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Widgetmål",
+  "ai_task_waiting": "Venter",
+  "ai_task_cancelled": "Avbrutt",
+  "ai_task_interrupted": "Avbrutt uventet",
+  "ai_task_stop_requested": "Stopp forespurt",
   "always_show_latest_period": "Vis alltid den nyeste tilgjengelige perioden",
   "home": "Hjem",
   "setup": "Oppsett",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Vil du slette valgte varsler ({{count}})?",
   "programs_updated": "Programmer oppdatert",
   "system_not_up_to_date": "Systemet er ikke oppdatert",
-  "new_programs_updates_available": "Nye programoppdateringer tilgjengelig"
+  "new_programs_updates_available": "Nye programoppdateringer tilgjengelig",
+  "dashboard_layout": "Oppsett",
+  "dashboard_standard": "Standard"
 }

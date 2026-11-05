@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Цел за создавање виџети",
+  "ai_task_waiting": "На чекање",
+  "ai_task_cancelled": "Откажано",
+  "ai_task_interrupted": "Прекинато",
+  "ai_task_stop_requested": "Побарано запирање",
   "always_show_latest_period": "Секогаш прикажувај го најновиот достапен период",
   "home": "Дома",
   "setup": "Поставување",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Да се избришат избраните известувања ({{count}})?",
   "programs_updated": "Програмите се ажурирани",
   "system_not_up_to_date": "Системот не е ажуриран",
-  "new_programs_updates_available": "Достапни се нови ажурирања на програмата"
+  "new_programs_updates_available": "Достапни се нови ажурирања на програмата",
+  "dashboard_layout": "Распоред",
+  "dashboard_standard": "Стандарден"
 }

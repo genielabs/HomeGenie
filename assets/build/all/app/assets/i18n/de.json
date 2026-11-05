@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Widget-Auftrag",
+  "ai_task_waiting": "Wartend",
+  "ai_task_cancelled": "Abgebrochen",
+  "ai_task_interrupted": "Unterbrochen",
+  "ai_task_stop_requested": "Stopp angefordert",
   "always_show_latest_period": "Immer den neuesten verfügbaren Zeitraum anzeigen",
   "home": "Heim",
   "setup": "Aufstellen",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Ausgewählte Benachrichtigungen löschen ({{count}})?",
   "programs_updated": "Programme aktualisiert",
   "system_not_up_to_date": "Das System ist nicht auf dem neuesten Stand",
-  "new_programs_updates_available": "Neue Programmaktualisierungen verfügbar"
+  "new_programs_updates_available": "Neue Programmaktualisierungen verfügbar",
+  "dashboard_layout": "Layout",
+  "dashboard_standard": "Standard"
 }

@@ -38,7 +38,7 @@ Final internal check: scan the HTML for layout/self attributes and icon classes,
     *   **Interpolation:** Never use `{{ variable }}`. **NEVER use Mustache syntax.** Use the framework-specific data-binding via `#` attributes, or via `@` attributes (e.g. `@set="this.innerHTML = model.name"`).
     *   **Active Refresh (@):** Attributes starting with `@` (e.g., `@set`, `@if`, `@hide-if`) are evaluated **ONLY if the element is visible**. To force evaluation even when the element is not visible (e.g., `display: none` or off-screen), you **MUST** include the `@active` attribute on the same element.
     *   **Logic:** `@if` is a logic branch, not a display toggle. Manage visibility explicitly via CSS classes or `this.view().show()/hide()`.
-5.  **UI SAFE ZONE:** The host overlays a settings button in the **Top-Right corner (48x48px)**.
+5.  **UI SAFE ZONE (ordinary widgets only):** The host overlays a settings button in the **Top-Right corner (48x48px)**. Dashboard containers (`defaultSize: 'dashboard'`) have no overlaid settings menu: do not reserve this safe zone or add its 48px padding/margin. Embedded ordinary widgets retain their own safe zone.
     *   **Action:** Add `padding-right: 48px;` **ONLY** to your **Header** or **Top Row**.
 6.  **CONTEXT SEPARATION:**
     *   **`this.model()`**: Reactive Proxy for text/values.
@@ -301,3 +301,33 @@ This continues the original provider conversation and saves only the assistant r
 utils.speech.say('The living room temperature is 22 degrees.')
   .catch(error => { console.warn('Speech unavailable:', error.message); });
 ```
+
+### Dashboard container widgets
+
+Use `settings = {defaultSize: 'dashboard', sizeOptions: []};` for a widget intended to replace a dashboard's standard grid. Declare these settings as a literal class field on the controller. The dashboard settings offer Layout → Custom Widget and list these widgets. Selection is manual; saving a widget does not apply it to a dashboard.
+
+In this mode the host supplies the available dashboard width and height below YoT navigation, with scrolling for overflowing content. Dashboard containers have no overlaid settings button: omit the ordinary widget safe zone, including any reserved top-right padding or margin. Keep only spacing required by the dashboard design. Use responsive width:100%, min-height:100% and normal-flow content; avoid viewport units, fixed positioning over the application and an extra outer scrollbar. Compose previously saved child widgets through their actual Web Component tags/imports. `boundModule` and `moduleSelect` are optional: omit them for a self-contained panel and use confirmed API/module IDs where needed.
+
+In chat, the editor and the widget list, the same widget uses a bounded, scrollable preview. Do not implement a separate Dashboard button or request browser fullscreen. The Standard layout and its widgets are retained when the user switches layouts.
+
+
+### Embedded widgets and YoT context
+
+Import the saved widget's `.module.js` and use its registered custom tag. In YoT the generated loader delegates to `ZxWidget`, providing `apiCall`, `subscribe`, translation and the enclosing widget's context. Outside YoT it loads as an ordinary zUIx Web Component; autonomous widgets remain usable without HomeGenie.
+
+Use native zUIx option attributes (their values are JavaScript expressions evaluated in the parent component):
+
+```html
+<!-- No module option: inherit the enclosing widget's boundModule. -->
+<examples-sensor></examples-sensor>
+<!-- Explicit module, using the enclosing adapter by default. -->
+<examples-sensor :module="'HomeAutomation.Demo:1'"></examples-sensor>
+<!-- Select a different configured adapter when needed. -->
+<examples-sensor :module="'HomeAutomation.Demo:1'" :adapter="'adapter-id'"></examples-sensor>
+<!-- Explicitly unbound: do not inherit the parent module. -->
+<examples-clock :module="null"></examples-clock>
+```
+
+These are syntax examples: use actual saved component tags, confirmed module IDs and configured adapter IDs. `domain:address` identifies a bound module; API calls still use `domain/address/command`. Binding is available before `onCreate()`, including through nested components. An unknown explicit module stays unbound; it never silently uses the parent module. The controller accesses `this.boundModule` as usual. Check its presence and render unavailable readings as unavailable, not static values suggesting live data. A widget that controls several modules can stay unbound and use `this.apiCall`.
+
+The parent layout assigns each embedded widget its dimensions; `defaultSize` does not automatically size a raw custom tag. Use compact, responsive slots unless full-height cards are explicitly requested. Do not stretch every card across the remaining dashboard height by default. Child widgets that use height:100% need a slot with a defined height.

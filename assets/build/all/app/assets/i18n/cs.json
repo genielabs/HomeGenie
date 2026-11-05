@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Cíl tvorby widgetů",
+  "ai_task_waiting": "Čekání",
+  "ai_task_cancelled": "Zrušeno",
+  "ai_task_interrupted": "Přerušeno",
+  "ai_task_stop_requested": "Požadováno zastavení",
   "always_show_latest_period": "Vždy zobrazovat nejnovější dostupné období",
   "home": "Domov",
   "setup": "Nastavení",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Smazat vybraná oznámení ({{count}})?",
   "programs_updated": "Programy aktualizovány",
   "system_not_up_to_date": "Systém není aktuální",
-  "new_programs_updates_available": "K dispozici jsou nové aktualizace programu"
+  "new_programs_updates_available": "K dispozici jsou nové aktualizace programu",
+  "dashboard_layout": "Rozložení",
+  "dashboard_standard": "Standardní"
 }

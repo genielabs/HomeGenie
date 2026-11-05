@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Layunin sa paggawa ng widget",
+  "ai_task_waiting": "Naghihintay",
+  "ai_task_cancelled": "Kinansela",
+  "ai_task_interrupted": "Naantala",
+  "ai_task_stop_requested": "Hiniling na ihinto",
   "always_show_latest_period": "Palaging ipakita ang pinakabagong available na panahon",
   "home": "Bahay",
   "setup": "Setup",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Tanggalin ang mga napiling notification ({{count}})?",
   "programs_updated": "Na-update ang mga programa",
   "system_not_up_to_date": "Hindi napapanahon ang system",
-  "new_programs_updates_available": "Available ang mga bagong update sa programa"
+  "new_programs_updates_available": "Available ang mga bagong update sa programa",
+  "dashboard_layout": "Layout",
+  "dashboard_standard": "Karaniwan"
 }

@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Vidcet məqsədi",
+  "ai_task_waiting": "Gözlənilir",
+  "ai_task_cancelled": "Ləğv edildi",
+  "ai_task_interrupted": "Kəsildi",
+  "ai_task_stop_requested": "Dayandırma tələb edildi",
   "always_show_latest_period": "Həmişə ən son mövcud dövrü göstər",
   "home": "Ev",
   "setup": "Quraşdırma",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Seçilmiş bildirişlər ({{count}}) silinsin?",
   "programs_updated": "Proqramlar yeniləndi",
   "system_not_up_to_date": "Sistem yeni deyil",
-  "new_programs_updates_available": "Yeni proqram yeniləmələri mövcuddur"
+  "new_programs_updates_available": "Yeni proqram yeniləmələri mövcuddur",
+  "dashboard_layout": "Tərtibat",
+  "dashboard_standard": "Standart"
 }

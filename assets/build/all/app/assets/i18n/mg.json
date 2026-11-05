@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Tanjona hamorona widget",
+  "ai_task_waiting": "Miandry",
+  "ai_task_cancelled": "Nofoanana",
+  "ai_task_interrupted": "Tapaka",
+  "ai_task_stop_requested": "Nangatahana ny fampijanonana",
   "always_show_latest_period": "Asehoy foana ny vanim-potoana farany misy",
   "home": "an-trano",
   "setup": "Hametraka",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Fafao ny fampandrenesana voafantina ({{count}})?",
   "programs_updated": "Nohavaozina ny programa",
   "system_not_up_to_date": "Tsy manara-penitra ny rafitra",
-  "new_programs_updates_available": "Misy fanavaozana fandaharana vaovao"
+  "new_programs_updates_available": "Misy fanavaozana fandaharana vaovao",
+  "dashboard_layout": "Fandaminana",
+  "dashboard_standard": "Mahazatra"
 }

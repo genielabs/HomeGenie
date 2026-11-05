@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Widget oluşturma hedefi",
+  "ai_task_waiting": "Bekliyor",
+  "ai_task_cancelled": "İptal edildi",
+  "ai_task_interrupted": "Kesintiye uğradı",
+  "ai_task_stop_requested": "Durdurma istendi",
   "always_show_latest_period": "Her zaman mevcut en son dönemi göster",
   "home": "Ev",
   "setup": "Kurmak",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Seçilen bildirimler silinsin mi ({{count}})?",
   "programs_updated": "Programlar güncellendi",
   "system_not_up_to_date": "Sistem güncel değil",
-  "new_programs_updates_available": "Yeni program güncellemeleri mevcut"
+  "new_programs_updates_available": "Yeni program güncellemeleri mevcut",
+  "dashboard_layout": "Düzen",
+  "dashboard_standard": "Standart"
 }

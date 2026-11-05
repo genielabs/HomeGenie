@@ -17,12 +17,20 @@ Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
         : payload is string text ? JObject.Parse(text) : JObject.FromObject(payload ?? new { });
 
     string storeId = data["StoreId"]?.ToString() ?? "default";
+    object result;
+    string changed = null;
     lock (HistoryStore.SyncRoot) {
     var currentHistory = HistoryStore.GetStore(dataFolder, storeId);
+    var before = HistoryStore.State(storeId);
+    string beforeId = before.Id;
+    long beforeRevision = before.Revision;
+    Func&lt;object&gt; execute = () =&gt; {
     if (request.Command.StartsWith("Files.", StringComparison.Ordinal)) {
         try { return ChatFiles.Handle(dataFolder, storeId, request.Command.Substring(6), data, currentHistory); }
         catch (Exception ex) { return new ResponseStatus(Status.Error, ex.Message); }
     }
+    if (request.Command == "Conversation.Get" || request.Command.StartsWith("Task.", StringComparison.Ordinal))
+        return ConversationTasks.Handle(dataFolder, storeId, request.Command, data);
     switch(request.Command) {
 
         case "Get":
@@ -54,7 +62,7 @@ Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
                 currentHistory.Add(msg);
                 if (!HistoryStore.Save(dataFolder, storeId)) {
                     currentHistory.Remove(msg);
-                    return new ResponseStatus(Status.Error,"Could not save feedback history.");
+                    return new ResponseStatus(Status.Error,"Could not save chat history.");
                 }
             }
             return new { Count = currentHistory.Count };
@@ -62,8 +70,12 @@ Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
         case "PopLast":
 
             if (currentHistory.Count &gt; 0) {
+                var last = currentHistory[currentHistory.Count - 1];
                 currentHistory.RemoveAt(currentHistory.Count - 1);
-                HistoryStore.Save(dataFolder, storeId);
+                if (!HistoryStore.Save(dataFolder, storeId)) {
+                    currentHistory.Add(last);
+                    return new ResponseStatus(Status.Error,"Could not save chat history.");
+                }
             }
             return new { Count = currentHistory.Count };
 
@@ -92,9 +104,7 @@ Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
             string json = raw is JArray array ? array.ToString() : raw is JValue value &amp;&amp; value.Type==JTokenType.String
                 ? Encoding.UTF8.GetString(Convert.FromBase64String((string)value)) : Encoding.UTF8.GetString(data.Value&lt;byte[]&gt;("Data"));
             var imported = ChatFiles.Import(dataFolder,storeId,json,out var created);
-            HistoryStore.Stores[storeId] = imported;
-            if (!HistoryStore.Save(dataFolder,storeId)) {
-                HistoryStore.Stores[storeId] = currentHistory;
+            if (!HistoryStore.Replace(dataFolder,storeId,imported,true)) {
                 foreach (string file in created) File.Delete(file);
                 return new ResponseStatus(Status.Error,"Could not save imported history.");
             }
@@ -102,9 +112,7 @@ Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
             return imported;
         }
         case "Clear": {
-            HistoryStore.Stores[storeId] = new List&lt;ChatMessage&gt;();
-            if (!HistoryStore.Save(dataFolder,storeId)) {
-                HistoryStore.Stores[storeId] = currentHistory;
+            if (!HistoryStore.Replace(dataFolder,storeId,new List&lt;ChatMessage&gt;())) {
                 return new ResponseStatus(Status.Error,"Could not clear chat history.");
             }
             ChatFiles.Clear(dataFolder,storeId);
@@ -114,7 +122,18 @@ Api.Handle("System.Utility/ChatHistory", (args) =&gt; {
         default:
             return new ResponseStatus(Status.Error, $"Unknown command: {request.Command}");
     }
+    };
+    result = execute();
+    var after = HistoryStore.State(storeId);
+    if (after.Id != beforeId || after.Revision != beforeRevision)
+        changed = new JObject { ["version"]=1, ["conversationId"]=after.Id, ["revision"]=after.Revision }.ToString(Formatting.None);
     }
+    // Notify outside the history lock; consumers read the persisted authoritative revision.
+    if (changed != null &amp;&amp; System.Text.RegularExpressions.Regex.IsMatch(storeId, @"\A[0-9]{1,10}\z")) {
+        try { Modules.InDomain("HomeAutomation.HomeGenie.Automation").WithAddress(storeId).Get()?.Emit("Chat.Changed", changed); }
+        catch { /* A missed notification is recovered by revision reconciliation. */ }
+    }
+    return result;
 });
 
 Program.GoBackground();
@@ -132,6 +151,8 @@ public class MessagePart
 
 public class ChatMessage
 {
+    [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
+    public string Id { get; set; }
     [JsonProperty("createdAt", NullValueHandling = NullValueHandling.Ignore)]
     public DateTimeOffset? CreatedAt { get; set; }
     [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
@@ -154,8 +175,18 @@ public class ChatMessage
 
 public static class HistoryStore
 {
+    public sealed class ConversationState {
+        public string Id = Guid.NewGuid().ToString("N");
+        public long Revision;
+        public List&lt;ChatMessage&gt; Messages;
+    }
     public static readonly object SyncRoot = new object();
-    // Dizionario che tiene in memoria le diverse cronologie caricate
+    static readonly Dictionary&lt;string, ConversationState&gt; Conversations = new Dictionary&lt;string, ConversationState&gt;();
+    public static ConversationState State(string storeId) {
+        if (!Conversations.TryGetValue(storeId,out var state)) Conversations[storeId]=state=new ConversationState();
+        return state;
+    }
+    // Provider-scoped histories; all access is serialized with SyncRoot.
     public static Dictionary&lt;string, List&lt;ChatMessage&gt;&gt; Stores { get; set; } = new Dictionary&lt;string, List&lt;ChatMessage&gt;&gt;();
 
     // Only model context receives the interaction turn; visible/export history keeps just the assistant reply and metadata.
@@ -205,6 +236,8 @@ public static class HistoryStore
 
     private static string GetFilePath(string folder, string storeId)
     {
+        if (!System.Text.RegularExpressions.Regex.IsMatch(storeId ?? "", @"\A[a-zA-Z0-9_-]{1,80}\z"))
+            throw new InvalidOperationException("Invalid history store ID.");
         return Path.Combine(folder, $"history_{storeId}.json");
     }
 
@@ -219,28 +252,87 @@ public static class HistoryStore
 
     public static bool Load(string folder, string storeId)
     {
-        try {
-            string path = GetFilePath(folder, storeId);
-            if (File.Exists(path)) {
-                var list = JsonConvert.DeserializeObject&lt;List&lt;ChatMessage&gt;&gt;(File.ReadAllText(path));
-                Stores[storeId] = list ?? new List&lt;ChatMessage&gt;();
-                return true;
+        string path=GetFilePath(folder,storeId);
+        var state=new ConversationState();
+        var rows=new List&lt;ChatMessage&gt;();
+        if(File.Exists(path)) {
+            // Read both legacy arrays and the versioned conversation document.
+            // Invalid existing documents must not silently become an empty history.
+            var document=JsonConvert.DeserializeObject&lt;JToken&gt;(File.ReadAllText(path),new JsonSerializerSettings { DateParseHandling=DateParseHandling.None });
+            if(document is JArray legacy) rows=legacy.ToObject&lt;List&lt;ChatMessage&gt;&gt;();
+            else if(document is JObject envelope &amp;&amp; (int?)envelope["version"]==1 &amp;&amp;
+                Guid.TryParseExact((string)envelope["conversationId"],"N",out _) &amp;&amp;
+                envelope["revision"]?.Type==JTokenType.Integer &amp;&amp; (long)envelope["revision"]&gt;0 &amp;&amp; envelope["messages"] is JArray messages) {
+                state.Id=(string)envelope["conversationId"];state.Revision=(long)envelope["revision"];
+                rows=messages.ToObject&lt;List&lt;ChatMessage&gt;&gt;();
             }
-        } catch { }
-        Stores[storeId] = new List&lt;ChatMessage&gt;();
-        return false;
+            else throw new InvalidOperationException("Invalid chat history document.");
+            if(rows.Any(m=&gt;m==null || m.Parts==null)) throw new InvalidOperationException("Invalid chat history messages.");
+        }
+        state.Messages=rows;Conversations[storeId]=state;Stores[storeId]=rows;
+        // A service restart never resumes an unowned in-flight runner implicitly.
+        if(InterruptTasks(rows,false) &amp;&amp; !Save(folder,storeId)) {
+            Stores.Remove(storeId);Conversations.Remove(storeId);
+            throw new InvalidOperationException("Could not persist interrupted task recovery.");
+        }
+        return File.Exists(path);
+    }
+
+    public static bool Replace(string folder,string storeId,List&lt;ChatMessage&gt; rows,bool imported=false) {
+        var previous=GetStore(folder,storeId);var state=State(storeId);
+        if(imported) InterruptTasks(rows,true);
+        Stores[storeId]=rows;Conversations[storeId]=new ConversationState();
+        if(Save(folder,storeId)) return true;
+        Stores[storeId]=previous;Conversations[storeId]=state;return false;
+    }
+
+    static bool InterruptTasks(List&lt;ChatMessage&gt; rows,bool imported) {
+        bool changed=false;
+        foreach(var row in rows) {
+            if(row.Metadata?["agenticTask"] is not JObject task || task["version"]?.Type!=JTokenType.Integer || task["version"].ToString()!="1" ||
+                !long.TryParse(task["revision"]?.ToString(),out var revision) || revision&lt;1 || revision==long.MaxValue) continue;
+            bool active=new[]{"pending","running","waiting"}.Contains((string)task["state"]);
+            if(!active &amp;&amp; !imported) continue;
+            if(imported) task["readOnly"]=true;
+            if(active) {
+                task["state"]="interrupted";task["interruptionReason"]=imported?"history-import":"service-restart";
+                if(task["operations"] is JArray operations) foreach(var operation in operations.OfType&lt;JObject&gt;())
+                    if(new[]{"pending","running","waiting"}.Contains((string)operation["state"])) operation["state"]="interrupted";
+            }
+            task["revision"]=revision+1;
+            task["updatedAt"]=DateTimeOffset.UtcNow.ToString("o");changed=true;
+        }
+        return changed;
     }
 
     public static bool Save(string folder, string storeId)
     {
+        string temporary=null;
+        bool saved=false;
+        var assigned=new List&lt;ChatMessage&gt;();
         try {
             if (!Stores.ContainsKey(storeId)) return false;
-            string path = GetFilePath(folder, storeId);
-            File.WriteAllText(path, JsonConvert.SerializeObject(Stores[storeId], Formatting.Indented));
+            string path=GetFilePath(folder,storeId);
+            var state=State(storeId);var rows=Stores[storeId];
+            foreach(var message in rows) if(string.IsNullOrEmpty(message.Id)) {message.Id=Guid.NewGuid().ToString("N");assigned.Add(message);}
+            var document=new JObject { ["version"]=1,["conversationId"]=state.Id,
+                ["revision"]=checked(state.Revision+1),["messages"]=JArray.FromObject(rows) };
+            temporary=path+"."+Guid.NewGuid().ToString("N")+".tmp";
+            byte[] bytes=new System.Text.UTF8Encoding(false).GetBytes(document.ToString(Formatting.Indented));
+            using(var file=new FileStream(temporary,FileMode.CreateNew,FileAccess.Write,FileShare.None)) {
+                file.Write(bytes,0,bytes.Length);file.Flush(true);
+            }
+            File.Move(temporary,path,true);
+            state.Revision++;state.Messages=rows;saved=true;
             return true;
         } catch { return false; }
+        finally {
+            if(!saved) foreach(var message in assigned) message.Id=null;
+            if(temporary!=null &amp;&amp; File.Exists(temporary)) {try {File.Delete(temporary);}catch {}}
+        }
     }
 }
+
 
 public static class ChatFiles {
     public const int MaxBytes = 4 * 1024 * 1024;
@@ -355,7 +447,7 @@ public static class ChatFiles {
         return result;
     }
     public static List&lt;ChatMessage&gt; Import(string folder, string store, string json, out List&lt;string&gt; created) {
-        var rows = JsonConvert.DeserializeObject&lt;List&lt;ChatMessage&gt;&gt;(json) ?? throw new InvalidOperationException("Invalid chat history.");
+        var rows = JsonConvert.DeserializeObject&lt;List&lt;ChatMessage&gt;&gt;(json,new JsonSerializerSettings { DateParseHandling=DateParseHandling.None }) ?? throw new InvalidOperationException("Invalid chat history.");
         created = new List&lt;string&gt;();
         if (rows.All(row =&gt; row.Parts != null &amp;&amp; row.Parts.All(p =&gt; p.Attachment == null))) return rows;
         string root = Folder(folder, store);
@@ -411,17 +503,191 @@ public static class ChatFiles {
         if (!Directory.EnumerateFileSystemEntries(root).Any()) Directory.Delete(root);
     }
 }
+
+// Durable conversation identity and task records. Call only under HistoryStore.SyncRoot.
+
+public static class ConversationTasks {
+    static JObject Error(string message) =&gt; new JObject { ["Status"]="Error", ["Message"]=message };
+    static string Text(JObject input, string key, int max, bool optional=false) {
+        var token=input[key];
+        if (optional &amp;&amp; (token==null || token.Type==JTokenType.Null)) return null;
+        if (token?.Type!=JTokenType.String || string.IsNullOrWhiteSpace((string)token) || ((string)token).Length&gt;max)
+            throw new InvalidOperationException("Invalid "+key+".");
+        return (string)token;
+    }
+    static string Id(JObject input, string key) {
+        string value=Text(input,key,32);
+        if(!Guid.TryParseExact(value,"N",out _)) throw new InvalidOperationException("Invalid "+key+".");
+        return value;
+    }
+    static bool Terminal(string state) =&gt; new[]{"completed","failed","cancelled","interrupted"}.Contains(state);
+    static void Transition(string previous, string next) {
+        if(!new[]{"pending","running","waiting","completed","failed","cancelled","interrupted"}.Contains(next) ||
+            previous!=next &amp;&amp; (Terminal(previous) || previous=="pending" &amp;&amp; next=="completed"))
+            throw new InvalidOperationException("Invalid task state transition.");
+    }
+    public static object Handle(string folder,string store,string command,JObject input) {
+        lock(HistoryStore.SyncRoot) {
+            try { return Execute(folder,store,command,input); }
+            catch(InvalidOperationException ex) {return Error(ex.Message);}
+        }
+    }
+    static object Execute(string folder,string store,string command,JObject input) {
+        var rows=HistoryStore.GetStore(folder,store);
+        var state=HistoryStore.State(store);
+        if(command=="Conversation.Get") {
+            // Allocate and persist an identity even for an empty, previously unused history.
+            if(state.Revision==0 &amp;&amp; !HistoryStore.Save(folder,store)) return Error("Could not save conversation identity.");
+            var snapshot=new JObject { ["Status"]="Ok", ["version"]=1, ["conversationId"]=state.Id, ["revision"]=state.Revision };
+            bool unchanged=input["conversationId"]?.Type==JTokenType.String &amp;&amp; (string)input["conversationId"]==state.Id &amp;&amp;
+                input["revision"]?.Type==JTokenType.Integer &amp;&amp; long.TryParse(input["revision"].ToString(),out var known) &amp;&amp; known==state.Revision;
+            snapshot["unchanged"]=unchanged;
+            if(!unchanged) snapshot["messages"]=JArray.FromObject(rows);
+            return snapshot;
+        }
+        if(Id(input,"conversationId")!=state.Id) return Error("The conversation was cleared or replaced.");
+        string taskId=Id(input,"taskId");
+        var existing=rows.FirstOrDefault(m=&gt;(string)m.Metadata?["agenticTask"]?["id"]==taskId);
+        if(command=="Task.Get") return existing==null?Error("Task not found."):Receipt(state,existing);
+        if(command=="Task.Create") {
+            string title=Text(input,"title",240);
+            if(existing!=null) {
+                if((string)existing.Metadata["agenticTask"]["title"]!=title || (string)existing.Metadata["agenticTask"]["parentTaskId"]!=Text(input,"parentTaskId",32,true)) return Error("Task ID already exists with a different title.");
+                return Receipt(state,existing); // A lost HTTP reply must not create another task.
+            }
+            string goal=Text(input,"goalText",16000,true),profile=Text(input,"profileKey",240,true),user=Text(input,"userMessage",16000,true);
+            if((goal==null)!=(profile==null) || (goal==null)!=(user==null) || goal!=user) return Error("Invalid goal conversation metadata.");
+            JObject parent=null;string parentId=Text(input,"parentTaskId",32,true);
+            if(parentId!=null) {
+                Id(input,"parentTaskId");
+                parent=rows.FirstOrDefault(m=&gt;(string)m.Metadata?["agenticTask"]?["id"]==parentId)?.Metadata?["agenticTask"] as JObject;
+                if(goal==null || parent==null || parent["goalText"]==null || !Terminal((string)parent["state"]) ||
+                    (bool?)parent["readOnly"]==true || parent["artifacts"] is not JArray inherited || inherited.Count==0)
+                    return Error("Choose an ended widget objective in this conversation with saved editable results.");
+            }
+            var message=ChatMessage.Create("model",title);
+            message.Id=Guid.NewGuid().ToString("N"); message.CreatedAt=DateTimeOffset.UtcNow;
+            message.Metadata=new JObject { ["agenticTask"]=new JObject { ["version"]=1, ["id"]=taskId,
+                ["uiType"]="agentic-task", ["title"]=title, ["state"]="pending", ["revision"]=1,
+                ["updatedAt"]=DateTimeOffset.UtcNow.ToString("o"), ["operations"]=new JArray() } };
+            var changed=new List&lt;ChatMessage&gt;(rows);
+            if(goal!=null) {
+                string rootId=(string)parent?["rootTaskId"]??parentId??taskId;
+                if(!Guid.TryParseExact(rootId,"N",out _))return Error("Invalid parent widget namespace.");
+                message.Metadata["agenticTask"]["rootTaskId"]=rootId;
+                if(parent!=null) {
+                    message.Metadata["agenticTask"]["parentTaskId"]=parentId;
+                    message.Metadata["agenticTask"]["artifacts"]=parent["artifacts"].DeepClone();
+                }
+                message.Metadata["agenticTask"]["goalText"]=goal;
+                message.Metadata["agenticTask"]["profileKey"]=profile;
+                var request=ChatMessage.Create("user",user);request.Id=Guid.NewGuid().ToString("N");request.CreatedAt=DateTimeOffset.UtcNow;
+                request.Metadata=new JObject{["contextProfileKey"]=profile,["outcome"]="submitted",["requestId"]=taskId};changed.Add(request);
+            }
+            changed.Add(message);
+            return Commit(folder,store,rows,changed,message,state);
+        }
+        if(command!="Task.Update" &amp;&amp; command!="Task.Cancel") return Error("Unknown conversation command.");
+        if(existing==null) return Error("Task not found.");
+        var task=(JObject)existing.Metadata["agenticTask"];
+        if(command=="Task.Cancel") {
+            // Request cancellation, do not claim that the runner has stopped.
+            if(Terminal((string)task["state"]) || (bool?)task["readOnly"]==true || (bool?)task["cancelRequested"]==true)
+                return Receipt(state,existing);
+            var stopped=JsonConvert.DeserializeObject&lt;ChatMessage&gt;(JsonConvert.SerializeObject(existing),new JsonSerializerSettings { DateParseHandling=DateParseHandling.None });
+            var stopTask=(JObject)stopped.Metadata["agenticTask"];
+            stopTask["cancelRequested"]=true;stopTask["cancelRequestedAt"]=DateTimeOffset.UtcNow.ToString("o");
+            stopTask["revision"]=(long)stopTask["revision"]+1;stopTask["updatedAt"]=DateTimeOffset.UtcNow.ToString("o");
+            var changed=new List&lt;ChatMessage&gt;(rows);changed[rows.IndexOf(existing)]=stopped;
+            return Commit(folder,store,rows,changed,stopped,state);
+        }
+        if((bool?)task["readOnly"]==true) return Error("Imported tasks are read-only.");
+        if(input["expectedRevision"]?.Type!=JTokenType.Integer || !long.TryParse(input["expectedRevision"].ToString(),out var expected) || expected!=(long)task["revision"])
+            return Error("Task changed. Reload it before updating.");
+        if(Terminal((string)task["state"])) return Error("The task has already ended.");
+        var replacement=JsonConvert.DeserializeObject&lt;ChatMessage&gt;(JsonConvert.SerializeObject(existing),new JsonSerializerSettings { DateParseHandling=DateParseHandling.None });
+        task=(JObject)replacement.Metadata["agenticTask"];
+        string next=Text(input,"state",20,true)??(string)task["state"];
+        if((bool?)task["cancelRequested"]==true &amp;&amp; !new[]{"cancelled","failed","interrupted"}.Contains(next))
+            return Error("Cancellation requested. Acknowledge the stopped task before further work.");
+        Transition((string)task["state"],next);
+        task["state"]=next;
+        if(input["operation"]!=null) {
+            if(input["operation"] is not JObject supplied) return Error("Invalid operation.");
+            string operationId=Id(supplied,"id"), title=Text(supplied,"title",240), status=Text(supplied,"state",20);
+            var operations=(JArray)task["operations"];
+            var previous=operations.OfType&lt;JObject&gt;().FirstOrDefault(o=&gt;(string)o["id"]==operationId);
+            Transition((string)previous?["state"]??"pending",status);
+            string details=Text(supplied,"details",16000,true);
+            var operation=new JObject { ["id"]=operationId,["title"]=title,["state"]=status,["updatedAt"]=DateTimeOffset.UtcNow.ToString("o") };
+            if(details!=null) operation["details"]=details;
+            if(previous==null) {if(operations.Count&gt;=200) return Error("Too many task operations.");operations.Add(operation);}
+            else previous.Replace(operation);
+        }
+        if(next=="completed" &amp;&amp; ((JArray)task["operations"]).Any(o=&gt;(string)o["state"]!="completed"))
+            return Error("Complete all operations before completing the task.");
+        if(new[]{"cancelled","interrupted","failed"}.Contains(next)) foreach(var operation in ((JArray)task["operations"]).OfType&lt;JObject&gt;())
+            if(new[]{"pending","running","waiting"}.Contains((string)operation["state"])) operation["state"]=next;
+        if(input["runnerProgramId"]!=null) {
+            if(task["runnerProgramId"]!=null || input["runnerProgramId"]?.Type!=JTokenType.Integer || !int.TryParse(input["runnerProgramId"].ToString(),out var pid) || pid&lt;1)
+                return Error("Invalid runner binding.");
+            task["runnerProgramId"]=pid;
+        }
+        if(input["artifacts"]!=null) {
+            string prefix="goals/g"+((string)task["rootTaskId"]??taskId)+"/";
+            bool Valid(JToken value) {
+                if(value is not JObject item || item["id"]?.Type!=JTokenType.String)return false;
+                string id=(string)item["id"];
+                if((string)item["kind"]=="widget")return item.Properties().All(p=&gt;new[]{"kind","id"}.Contains(p.Name)) &amp;&amp;
+                    id.StartsWith(prefix,StringComparison.Ordinal) &amp;&amp; System.Text.RegularExpressions.Regex.IsMatch(id.Substring(prefix.Length),@"\A[a-z][a-z0-9-]{0,63}\z");
+                if((string)item["kind"]!="program" || item.Properties().Any(p=&gt;!new[]{"kind","id","key","name"}.Contains(p.Name)))return false;
+                return System.Text.RegularExpressions.Regex.IsMatch(id,@"\A[1-9][0-9]{0,9}\z") &amp;&amp; item["key"]?.Type==JTokenType.String &amp;&amp;
+                    System.Text.RegularExpressions.Regex.IsMatch((string)item["key"],@"\A[a-z][a-z0-9-]{0,63}\z") &amp;&amp; item["name"]?.Type==JTokenType.String &amp;&amp;
+                    !string.IsNullOrWhiteSpace((string)item["name"]) &amp;&amp; ((string)item["name"]).Length&lt;=240;
+            }
+            if(task["goalText"]==null || input["artifacts"] is not JArray files || files.Count&gt;8 || files.Any(a=&gt;!Valid(a)) ||
+                files.Select(a=&gt;(string)a["kind"]+":"+(string)a["id"]).Distinct().Count()!=files.Count ||
+                files.Where(a=&gt;(string)a["kind"]=="program").Select(a=&gt;(string)a["key"]).Distinct().Count()!=files.Count(a=&gt;(string)a["kind"]=="program"))return Error("Invalid goal artifacts.");
+            if(task["artifacts"] is JArray saved &amp;&amp; saved.Any(a=&gt;!files.Any(f=&gt;(string)f["kind"]==(string)a["kind"] &amp;&amp;
+                (string)f["id"]==(string)a["id"] &amp;&amp; ((string)a["kind"]!="program" || (string)f["key"]==(string)a["key"]))))return Error("Confirmed artifacts cannot be forgotten or rebound.");
+            task["artifacts"]=files.DeepClone();
+        }
+        string messageText=Text(input,"message",16000,true);
+        if(input["state"]==null &amp;&amp; input["operation"]==null &amp;&amp; messageText==null &amp;&amp; input["runnerProgramId"]==null &amp;&amp; input["artifacts"]==null) return Error("Empty task update.");
+        task["revision"]=(long)task["revision"]+1;
+        task["updatedAt"]=DateTimeOffset.UtcNow.ToString("o");
+        var updated=new List&lt;ChatMessage&gt;(rows);updated[rows.IndexOf(existing)]=replacement;
+        if(messageText!=null) {
+            var message=ChatMessage.Create("model",messageText);message.Id=Guid.NewGuid().ToString("N");message.CreatedAt=DateTimeOffset.UtcNow;
+            message.Metadata=new JObject { ["agenticTaskMessage"]=new JObject { ["taskId"]=taskId } };
+            if(task["profileKey"]!=null &amp;&amp; Terminal(next)) {
+                message.Metadata["contextProfileKey"]=task["profileKey"].DeepClone();
+                message.Metadata["requestId"]=taskId;message.Metadata["outcome"]="completed";
+            }
+            updated.Add(message);
+        }
+        return Commit(folder,store,rows,updated,replacement,state);
+    }
+    static object Commit(string folder,string store,List&lt;ChatMessage&gt; before,List&lt;ChatMessage&gt; after,ChatMessage message,HistoryStore.ConversationState state) {
+        HistoryStore.Stores[store]=after;
+        if(!HistoryStore.Save(folder,store)) {HistoryStore.Stores[store]=before;return Error("Could not save task update.");}
+        return Receipt(state,message);
+    }
+    static JObject Receipt(HistoryStore.ConversationState state,ChatMessage message) =&gt; new JObject {
+        ["Status"]="Ok", ["conversationId"]=state.Id, ["revision"]=state.Revision,
+        ["message"]=JObject.FromObject(message) };
+}
 </ScriptContext>
     <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.55</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>chat-history-service</Id>
-      <Version>1.0.9</Version>
+      <Version>1.0.13</Version>
       <Required>true</Required>
-      <Checksum>CD4F318999376E8A70708DD2205C643B</Checksum>
+      <Checksum>375FB01E422E6496B3F3141314C0D18E</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>577</Address>
@@ -490,7 +756,7 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>client-configs</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -861,7 +1127,7 @@ void SaveConfig(string filePath, YamlConfig config)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>daily-energy-report</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -1139,7 +1405,7 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -1785,7 +2051,7 @@ public class DownloadManager : IDisposable
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>download-manager</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -1828,7 +2094,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -2156,7 +2422,7 @@ string GetDbName()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>energy-use-statistics</Id>
       <Version>1.0.9</Version>
       <Required>false</Required>
@@ -2331,7 +2597,7 @@ void InsertData(LiteDatabase db, LoggerEvent data) {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -2486,7 +2752,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>file-manager</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -2705,7 +2971,7 @@ public static class HttpHelper {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>homegenie-panel-notifications</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -2774,7 +3040,7 @@ public string[] GetHourLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>hourly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -3236,7 +3502,7 @@ class MqttCommand: MigInterfaceCommand {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>mqtt-network</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
@@ -3495,7 +3761,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>openweathermap</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -3587,7 +3853,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -3679,7 +3945,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -3751,7 +4017,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -4427,7 +4693,7 @@ public static class FfmpegHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>video-input</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -5732,7 +5998,7 @@ public class ThumbnailHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>video-recorder</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -5813,7 +6079,7 @@ public string[] GetDayLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>weekly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -6495,7 +6761,7 @@ public static class ModuleSettingAction
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>ai-action-executor</Id>
       <Version>1.2.7</Version>
       <Required>true</Required>
@@ -6872,7 +7138,7 @@ public static class ProgramUpdateNotification {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.54</PackageVersion>
+      <PackageVersion>1.0.59</PackageVersion>
       <Id>notification-archive</Id>
       <Version>1.2.0</Version>
       <Required>true</Required>
@@ -6896,6 +7162,7 @@ Program.Run();
 </ScriptSetup>
   <ScriptSource>var service = new AiGenieService();
 var requests = new AiGenieRequests();
+var goals = new AiGenieGoals();
 var lifecycle = new AiGenieProgramLifecycle();
 var providerOptionsGate=new object();
 int providerOptionsPending=0;
@@ -6912,7 +7179,7 @@ Action refreshProviderOptions=()=&gt; {
     }
 };
 refreshProviderOptions();
-When.ProgramStopping(() =&gt; { lifecycle.Stop(); requests.Dispose(); service.Dispose(); return true; });
+When.ProgramStopping(() =&gt; { lifecycle.Stop(); goals.Dispose(); requests.Dispose(); service.Dispose(); return true; });
 When.ModuleParameterChanged((module, parameter) =&gt; {
     if(module.Instance==null)return true;
     string domain=module.Instance.Domain, childId=module.Instance.Address;
@@ -6936,6 +7203,10 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
     return true;
 });
 Api.Handle("System.Utility/AiGenie/Describe", input =&gt; new { version = 1, stage = "structured-conversation-coordinator", streaming = false, cancellation = "cooperative", inProcessOnly = true });
+// Goal control stays in-process: HTTP clients cannot provide worker delegates or execution identities.
+Api.Handle("System.Utility/AiGenie/Goal.Start", input =&gt; goals.Start(Api.Parse(input).Data as IDictionary&lt;string,object&gt;, (route,data)=&gt;Api.Call(route,data)));
+Api.Handle("System.Utility/AiGenie/Goal.Run", input =&gt; goals.Run(Api.Parse(input).Data as IDictionary&lt;string,object&gt;, (route,data)=&gt;Api.Call(route,data),
+    Path.GetFullPath(Path.Combine(Data.GetFolder(),"..","..","widgets"))));
 Api.Handle("System.Utility/AiGenie/Generate", input =&gt; service.Generate(Api.Parse(input).Data, (route, data) =&gt; Api.Call(route, data)));
 Api.Handle("System.Utility/AiGenie/Cancel", input =&gt; service.Cancel(Api.Parse(input).Data));
 Api.Handle("System.Utility/AiGenie/Prompt.Compose", input =&gt; {
@@ -8162,6 +8433,7 @@ MODE AND SIZE:
   {defaultSize:'',sizeOptions:[],fillWidth:true}, and the root CSS must be responsive (width:100%).
   fillWidth affects chat previews only, not the dashboard. Omit it for intrinsic-width widgets.
 - Standard dashboard sizes remain small/medium/big. Preserve intentional inner max-width limits.
+- For a dashboard container, declare a literal settings={defaultSize:'dashboard',sizeOptions:[]} class field. No settings menu overlays a dashboard container: omit the ordinary widget safe zone and its reserved top-right 48px padding/margin. Embedded ordinary widgets keep their own safe zone. YoT settings select it as Layout / Custom Widget; saving alone does not apply it. The host supplies dashboard width/height and overflow scrolling; use width:100%, min-height:100% and normal-flow responsive content, not viewport units or a browser-fullscreen call. Chat/editor/list show a bounded preview. Compose saved child Web Components using confirmed paths. boundModule/moduleSelect are optional; omit them for standalone panels.
   For responsive cards, prefer CSS grid with repeat(auto-fit,minmax(min(100%,180px),1fr)); include
   box-sizing:border-box. Avoid percentage widths plus padding/gaps that exceed the row.
 
@@ -8999,17 +9271,435 @@ public static class AiGenieChatFeedback {
         }finally{lock(gate)active.Remove(store);}
     }
 }
+
+// Bounded widget objectives. Every goal has one ordinary HG runner and durable chat identity.
+public sealed class AiGenieGoals : IDisposable {
+    readonly object startGate=new object();
+    readonly HashSet&lt;string&gt; executing=new HashSet&lt;string&gt;();
+    volatile bool stopping;
+    const string History="System.Utility/ChatHistory/", Programs="HomeAutomation.HomeGenie/Automation/", Widgets="HomeAutomation.HomeGenie/Config/Widgets.";
+    const string Marker="AI-GOAL-RUNNER:";
+    public const string Instructions=@"
+You execute ONE widget objective in bounded steps. Reply in the user's language.
+Return one JSON object: version=1, action, title, message.
+Actions:
+- save_widget: also name (lowercase ASCII slug), widget={html,css,javascript}, all complete strings.
+- read_context: also resources={widgetIds?,moduleIds?,parameterIds?}, arrays of exact supplied IDs.
+- complete: message summarizes actual saved results. Only after all requested widgets are saved.
+- fail: explain the limitation or missing information; do not claim success.
+Perform at most ONE action per response. The host executes it and supplies the actual result before your next step.
+Do not emit api-call/genie-action fences. Do not install dashboards or dispatch separate device commands.
+When automation capability is enabled, save_program is also allowed: name is a stable lowercase slug; program={name,language,setup,main,context} contains complete sources.
+The host chooses create/update and the real program ID. Never specify program_id or change the logical slug during compiler repair.
+Only programs listed as confirmed results of this objective can be updated. If the user requests an update to another existing program, ask them to select its owning objective; do not create a replacement copy.
+Save the program first, use the HOST-confirmed ID and module/property contract in dependent widgets, and preserve existing keys on revision.
+Automation program module: HomeAutomation.HomeGenie.Automation/&lt;PID&gt;. Start program API: HomeAutomation.HomeGenie/Automation/Programs.Run/&lt;PID&gt;.
+These paths are not interchangeable. A widget starts a program with this.apiCall('HomeAutomation.HomeGenie/Automation/Programs.Run/'+PID,undefined,{}).subscribe(...), including when PID comes from boundModule.address. Do not use Control.On or derive the API path from boundModule.domain.
+Inspect res.response.Status (Ok/0). An accepted start request does not prove successful execution: show 'Start requested'; report completion or notification delivery only from runtime feedback. Subscribe to actual emitted fields for runtime outcomes and dispose subscriptions.
+A standalone widget using a fallback PID has no boundModule event subscription. Read the target module via HomeAutomation.HomeGenie/Config/Modules.Get/HomeAutomation.HomeGenie.Automation/&lt;PID&gt; and inspect its Properties; use bounded readback and compare UpdateTime against a pre-start baseline so old Completed/Runtime.Error fields cannot confirm the new run. Treat an unrecognized/error start receipt as an error, never Completed.
+For a manual program use Program.Run(false) in Setup; Program.Setup alone does not disable automatic execution.
+Use Program.UseWidget with the known widget path when that program should display its associated widget. A normal bound widget uses moduleSelect and boundModule, renders an unbound state and offers configure().
+A compiler error requires a corrected save_program for the SAME logical name before any other step. Never create a replacement program.
+Program deployment uses normal HomeGenie Setup/Main behavior. Respect the requested lifecycle, use Program.IsRunning/Pause for loops, and do not claim runtime success merely because compilation succeeded.
+Save smaller widgets before their parent. Use only actual supplied module/property IDs, never invent them.
+For each save, name is a leaf slug; the host returns the full widget ID. Keep names stable when correcting your own widget.
+To embed saved widget x/y, import('/widgets/x/y.module.js') in its parent controller and use &lt;x-y&gt;&lt;/x-y&gt; in HTML.
+Examples: examples/composite-clock imports /widgets/demo/analog-clock.module.js and uses &lt;demo-analog-clock&gt;.
+Use only already saved dependencies. No fake paths or invented presets: current sizes are '',small,medium,big,dashboard.
+A dashboard container uses settings={defaultSize:'dashboard',sizeOptions:[]} as a literal class field. No settings menu overlays a dashboard container: omit the ordinary widget safe zone and its reserved top-right 48px padding/margin. Embedded ordinary widgets keep their own safe zone. It fills the dashboard area only when the user selects it in dashboard settings; do not claim automatic application. boundModule is optional for standalone panels.
+Each widget has its own Shadow DOM. Follow the included widget guide and required CSS imports.
+Do not repeat a save already confirmed unless correcting it. Use host results, not your prior claims, to decide whether you are finished.
+";
+    static JObject Object(object value)=&gt;value as JObject ?? (value is string text?JObject.Parse(text):JObject.FromObject(value??new{}));
+    static JObject Ok(object value) {var result=Object(value);if(!new[]{"ok","0"}.Contains(result["Status"]?.ToString().ToLowerInvariant()))throw new InvalidOperationException((string)result["Message"]??"Operation was not confirmed.");return result;}
+    static string GuidId(JObject data,string key) {if(data[key]?.Type!=JTokenType.String || !Guid.TryParseExact((string)data[key],"N",out _))throw new InvalidOperationException("Invalid "+key+".");return (string)data[key];}
+    static JObject TaskOf(JObject receipt)=&gt;(JObject)receipt["message"]?["metadata"]?["agenticTask"]??throw new InvalidOperationException("Missing task receipt.");
+    static bool Ended(string state)=&gt;new[]{"completed","failed","cancelled","interrupted"}.Contains(state);
+    static string Title(string text)=&gt;text.Length&lt;=120?text:text.Substring(0,117)+"...";
+    public void Dispose(){stopping=true;}
+
+    public object Start(IDictionary&lt;string,object&gt; native,Func&lt;string,object,object&gt; call) {
+        if(native==null || !native.TryGetValue("providerId",out var owner) || owner is not string provider || provider!="933" ||
+            !native.TryGetValue("input",out var raw) || raw is not JObject input || !native.TryGetValue("prepared",out var normalized) || normalized is not JObject prepared)
+            throw new InvalidOperationException("A native Gemini goal request is required.");
+        string id=GuidId(input,"goalId"),conversation=GuidId(input,"conversationId");
+        if(input.Properties().Any(p=&gt;!new[]{"goalId","conversationId","parentTaskId","request"}.Contains(p.Name)) || input["request"] is not JObject scope)
+            throw new InvalidOperationException("Invalid goal envelope.");
+        WidgetContextRequest.Validate(scope);
+        string parentId=input["parentTaskId"]==null?null:GuidId(input,"parentTaskId");
+        string text=(string)scope["message"];
+        if(string.IsNullOrWhiteSpace(text) || text.Length&gt;16000 || (scope["attachments"] as JArray)?.Count&gt;0 || prepared["capabilities"]?["widgets"]?.Value&lt;bool&gt;()!=true)
+            throw new InvalidOperationException("Enable widget creation and submit a text objective of at most 16000 characters.");
+        scope=(JObject)scope.DeepClone();scope["context"]=prepared["context"].DeepClone();scope["capabilities"]=prepared["capabilities"].DeepClone();
+        var identity=new JObject{["StoreId"]=provider,["conversationId"]=conversation,["taskId"]=id};
+        lock(startGate) {
+            if(stopping)throw new InvalidOperationException("AI Genie service is stopping.");
+            var snapshot=Ok(call(History+"Conversation.Get",new JObject{["StoreId"]=provider}));
+            if((string)snapshot["conversationId"]!=conversation)throw new InvalidOperationException("The conversation changed before the goal started.");
+            var rows=(JArray)snapshot["messages"];
+            var prior=rows.FirstOrDefault(m=&gt;(string)m["metadata"]?["agenticTask"]?["id"]==id);
+            if(prior!=null) {
+                if((string)prior["metadata"]?["agenticTask"]?["goalText"]!=text || (string)prior["metadata"]?["agenticTask"]?["parentTaskId"]!=parentId)throw new InvalidOperationException("This goal ID belongs to another request.");
+                return Ok(call(History+"Task.Get",identity)); // Lost start reply must never run/create again.
+            }
+            if(rows.Any(m=&gt;m["metadata"]?["agenticTask"] is JObject task &amp;&amp; task["goalText"]!=null &amp;&amp; !Ended((string)task["state"])))
+                throw new InvalidOperationException("Another widget objective is still active. Stop it before starting another.");
+            var create=(JObject)identity.DeepClone();
+            if(parentId!=null)create["parentTaskId"]=parentId;create["title"]=Title(text);create["userMessage"]=text;create["profileKey"]=prepared["profileKey"];create["goalText"]=text;
+            var receipt=Ok(call(History+"Task.Create",create));
+            int? pid=null;
+            try {
+                var job=new JObject{["version"]=1,["providerId"]=provider,["conversationId"]=conversation,["taskId"]=id,["profileKey"]=prepared["profileKey"],["template"]=Convert.ToString(native["template"]),["request"]=scope};
+                string literal=JsonConvert.SerializeObject(job.ToString(Formatting.None));
+                string source="Api.Call(\"System.Utility/AiGenie/Goal.Run\",new Dictionary&lt;string,object&gt;{[\"job\"]=JObject.Parse("+literal+"),[\"running\"]=new Func&lt;bool&gt;(()=&gt;Program.IsRunning &amp;&amp; Program.IsEnabled)});";
+                var program=new JObject{["Domain"]="HomeAutomation.HomeGenie.Automation",["Name"]="AI goal - "+Title(text),["Description"]=Marker+id,
+                    ["Group"]="AI Tasks",["Type"]="csharp",["IsEnabled"]=false,["AutoRestartEnabled"]=false,["Cloneable"]=false,
+                    ["ScriptSetup"]="Program.Setup(()=&gt;{Program.Emit(\"Program.UiType\",\"agentic-task\").Emit(\"AI.Task.Id\",\""+id+"\");}); Program.Run(false);",
+                    ["ScriptSource"]=source,["ScriptContext"]="",["Data"]=""};
+                var added=Object(call(Programs+"Programs.Add",program));
+                if(!int.TryParse((string)added["ResponseValue"],out var number) || number&lt;1)throw new InvalidOperationException("Runner creation was not confirmed; inspect programs before retrying.");
+                pid=number;
+                var saved=Object(call(Programs+"Programs.Get/"+pid,null));
+                if((string)saved["Description"]!=Marker+id || !new[]{"","[]"}.Contains((string)saved["ScriptErrors"]??""))throw new InvalidOperationException("The goal runner did not compile.");
+                var binding=(JObject)identity.DeepClone();binding["expectedRevision"]=TaskOf(receipt)["revision"];binding["runnerProgramId"]=pid;receipt=Ok(call(History+"Task.Update",binding));
+                call(Programs+"Programs.Run/"+pid,null);
+                return receipt;
+            } catch(Exception ex) {
+                if(pid.HasValue)try {call(Programs+"Programs.Disable/"+pid,null);}catch{}
+                var current=Ok(call(History+"Task.Get",identity));var fail=(JObject)identity.DeepClone();fail["expectedRevision"]=TaskOf(current)["revision"];
+                fail["state"]=(bool?)TaskOf(current)["cancelRequested"]==true?"cancelled":"failed";fail["message"]="Unable to start the objective: "+ex.Message;
+                call(History+"Task.Update",fail);throw;
+            }
+        }
+    }
+
+    public object Run(IDictionary&lt;string,object&gt; native,Func&lt;string,object,object&gt; call,string widgetsFolder) {
+        if(native==null || !native.TryGetValue("job",out var supplied) || supplied is not JObject job ||
+            !native.TryGetValue("running",out var worker) || worker is not Func&lt;bool&gt; running || (string)job["providerId"]!="933")
+            throw new InvalidOperationException("A native goal runner is required.");
+        string id=GuidId(job,"taskId"),conversation=GuidId(job,"conversationId");
+        lock(executing)if(!executing.Add(id))return new JObject{["Status"]="Error",["Message"]="This goal is already running."};
+        var identity=new JObject{["StoreId"]="933",["conversationId"]=conversation,["taskId"]=id};
+        var artifacts=new JArray();var signatures=new Dictionary&lt;string,string&gt;();var programSignatures=new Dictionary&lt;string,string&gt;();
+        var written=new HashSet&lt;string&gt;();JObject operation=null;ProgramStep pendingProgram=null;
+        var clock=System.Diagnostics.Stopwatch.StartNew();
+        Func&lt;JObject&gt; read=()=&gt;TaskOf(Ok(call(History+"Task.Get",identity)));
+        Action check=()=&gt; {
+            var task=read();
+            if(stopping || !running() || Ended((string)task["state"]) || (bool?)task["cancelRequested"]==true)throw new OperationCanceledException();
+            if(clock.Elapsed&gt;TimeSpan.FromMinutes(15))throw new InvalidOperationException("The objective reached its 15-minute limit.");
+        };
+        // Retry only the receipt update when cancellation races a revision; never retry an effect here.
+        Func&lt;string,JObject,string,JObject&gt; update=(state,op,message)=&gt; {
+            for(int attempt=0;attempt&lt;2;attempt++) {
+                var task=read();if(Ended((string)task["state"]))return new JObject{["Status"]="Ok",["message"]=new JObject{["metadata"]=new JObject{["agenticTask"]=task}}};
+                bool cancelled=(bool?)task["cancelRequested"]==true;
+                var input=(JObject)identity.DeepClone();input["expectedRevision"]=task["revision"];
+                input["state"]=cancelled?"cancelled":state;
+                if(op!=null)input["operation"]=op.DeepClone();
+                if(message!=null)input["message"]=message;
+                input["artifacts"]=artifacts.DeepClone();
+                var result=Object(call(History+"Task.Update",input));
+                if((string)result["Status"]=="Ok")return result;
+                if(attempt==1)Ok(result);
+            }
+            throw new InvalidOperationException("Task update was not confirmed.");
+        };
+        try {
+            check();var scope=(JObject)job["request"].DeepClone();var task=read();
+            string rootId=(string)task["rootTaskId"]??id;
+            if(!Guid.TryParseExact(rootId,"N",out _))throw new InvalidOperationException("Invalid widget objective namespace.");
+            string prefix="goals/g"+rootId;
+            if(task["artifacts"] is JArray inherited)artifacts=(JArray)inherited.DeepClone();
+            var sources=new JArray();long sourceBytes=0;
+            foreach(var artifact in artifacts) {
+                if((string)artifact["kind"]=="program") {
+                    string pid=(string)artifact["id"];var program=ReadProgram(pid,call);programSignatures[pid]=ProgramSignature(program);
+                    var programSource=ProgramSource(program);sourceBytes+=Encoding.UTF8.GetByteCount(programSource.ToString(Formatting.None));
+                    if(sourceBytes&gt;524288)throw new InvalidOperationException("The selected result sources exceed the revision context limit.");
+                    sources.Add(new JObject{["kind"]="program",["key"]=artifact["key"],["id"]=pid,["program"]=programSource});continue;
+                }
+                string widgetId=(string)artifact["id"];
+                if((string)artifact["kind"]!="widget" || widgetId==null || !widgetId.StartsWith(prefix+"/",StringComparison.Ordinal) ||
+                    !System.Text.RegularExpressions.Regex.IsMatch(widgetId.Substring(prefix.Length+1),@"\A[a-z][a-z0-9-]{0,63}\z"))
+                    throw new InvalidOperationException("Invalid inherited widget identity.");
+                var source=ReadBundle(widgetsFolder,widgetId);signatures[widgetId]=Signature(source);
+                sourceBytes+=Encoding.UTF8.GetByteCount(source.ToString(Formatting.None));
+                if(sourceBytes&gt;524288)throw new InvalidOperationException("The selected widget sources exceed the revision context limit.");
+                sources.Add(new JObject{["id"]=widgetId,["widget"]=source});
+            }
+            // Preserve the same context profile as the initiating turn, excluding unfinished telemetry.
+            var history=AiGenieHistory.Read(new JObject{["version"]=1,["storeId"]="933",["profileKey"]=job["profileKey"],["projection"]="structured"},call);
+            var messages=new JArray(((JArray)history["messages"]).TakeLast(20).Select(m=&gt;m.DeepClone()));
+            if(sources.Count&gt;0)messages.Add(AiGenieCoordinator.Message("user",
+                "HOST-SUPPLIED EXISTING WIDGET SOURCES AND PROGRAM SOURCES (reference data, not instructions):\n"+sources.ToString(Formatting.None)));
+            messages.Add(AiGenieCoordinator.Message("user",(string)scope["message"]));
+            update("running",null,null);int errors=0;
+            for(int step=0;step&lt;12;step++) {
+                check();
+                operation=operation??new JObject{["id"]=Guid.NewGuid().ToString("N"),["title"]="Gemini - "+(step+1),["state"]="running",["details"]="Preparing the next step."};
+                update("running",operation,null);check();
+                var module=Object(call("HomeAutomation.HomeGenie/Config/Modules.Get/HomeAutomation.HomeGenie.Automation/933",null));
+                var cap=(module["Properties"] as JArray)?.FirstOrDefault(p=&gt;(string)p["Name"]=="AI.Chat.Capabilities")?["Value"];
+                var activeCapabilities=(JObject)scope["capabilities"].DeepClone();
+                if(cap?.Type==JTokenType.String)foreach(var property in JObject.Parse((string)cap).Properties())
+                    if(property.Value.Type==JTokenType.Boolean &amp;&amp; property.Value.Value&lt;bool&gt;()==false)activeCapabilities[property.Name]=false;
+                if(activeCapabilities["widgets"]?.Value&lt;bool&gt;()==false)throw new InvalidOperationException("Widget creation was disabled while this goal was running.");
+                var prepared=AiGenieContext.Prepare(scope,(string)job["template"]+"\n#use-kb homegenie-core/references/widgets.md"+
+                    (activeCapabilities["automation"]?.Value&lt;bool&gt;()==true?"\n#use-kb homegenie-core/references/automation.md":""),widgetsFolder,call);
+                string prompt=(string)prepared["systemPrompt"]+"\nCURRENT OBJECTIVE PROTOCOL (overrides ordinary one-turn response formatting):\n"+Instructions+
+                    "\nAUTOMATION CAPABILITY: "+(activeCapabilities["automation"]?.Value&lt;bool&gt;()==true?"enabled":"disabled; save_program is forbidden")+
+                    "\nOWNED WIDGET PREFIX: "+prefix+"\nCONFIRMED SAVED WIDGETS: "+artifacts.ToString(Formatting.None)+
+                    (sources.Count&gt;0?"\nThis is a revision of the existing set above. Read its sources. Save changes using the SAME leaf names and exact IDs/tags. Preserve unchanged widgets and their imports. Do not recreate or rename the set. At least one requested change must be saved before completion.":"");
+                string generation=Guid.NewGuid().ToString("N");
+                using(var timer=new System.Threading.Timer(_=&gt; {
+                    try {check();}catch {try{call("System.Utility/AiGenie/Cancel",new Dictionary&lt;string,object&gt;{["requestId"]=generation});}catch{}}
+                },null,0,500)) {
+                    var generated=Object(call("System.Utility/AiGenie/Generate",new Dictionary&lt;string,object&gt;{["version"]=1,["requestId"]=generation,["owner"]="933",["provider"]="Gemini",
+                        ["messages"]=messages,["systemPrompt"]=prompt,["output"]=new{temperature=.2,maxOutputTokens=16384,response_mime_type="application/json"}}));
+                    check();
+                    if((string)generated["state"]!="completed")throw new InvalidOperationException((string)generated["error"]??"Gemini did not complete this step: "+generated["state"]);
+                    string text=(string)generated["text"];if(text==null || text.Length&gt;512*1024)throw new InvalidOperationException("Missing or oversized goal response.");
+                    messages.Add(AiGenieCoordinator.Message("model",text));
+                    try {
+                        var action=JObject.Parse(text);Validate(action);string kind=(string)action["action"];
+                        if(pendingProgram!=null &amp;&amp; (kind!="save_program" || (string)action["name"]!=pendingProgram.Key))
+                            throw new InvalidOperationException("Correct the pending program with the same logical name before continuing.");
+                        operation["title"]=action["title"];operation["details"]=action["message"];
+                        if(kind=="complete") {
+                            if(written.Count==0)throw new InvalidOperationException("No result change has been saved in this objective; completion is not confirmed.");
+                            operation["state"]="completed";return update("completed",operation,(string)action["message"]);
+                        }
+                        if(kind=="fail") {operation["state"]="failed";return update("failed",operation,(string)action["message"]);}
+                        if(kind=="save_program") {
+                            if(activeCapabilities["automation"]?.Value&lt;bool&gt;()!=true)throw new InvalidOperationException("Program creation/modification capability is disabled.");
+                            string key=(string)action["name"];var source=(JObject)action["program"];
+                            var existing=artifacts.FirstOrDefault(a=&gt;(string)a["kind"]=="program" &amp;&amp; (string)a["key"]==key);
+                            if(existing==null &amp;&amp; (artifacts.Count&gt;=8 || artifacts.Count(a=&gt;(string)a["kind"]=="program")&gt;=4))
+                                throw new InvalidOperationException("At most eight results and four programs per objective.");
+                            string target=(string)existing?["id"]??"",mode=existing==null?"create":"update";
+                            var canonical=AiGeniePreparation.Normalize(new JObject{["version"]=1,["kind"]="program",["explanation"]=action["message"],
+                                ["language"]=source["language"],["automation"]=new JObject{["action"]=mode,["program_id"]=target,
+                                    ["name"]=source["name"],["setup"]=source["setup"],["main"]=source["main"],["context"]=source["context"]}},call);
+                            if((string)canonical["Status"]=="Error")throw new InvalidOperationException((string)canonical["Message"]);
+                            check();
+                            if(pendingProgram==null) {
+                                if(existing!=null &amp;&amp; (!programSignatures.TryGetValue(target,out var expectedProgram) || ProgramSignature(ReadProgram(target,call))!=expectedProgram))
+                                    throw new GoalProgramException("Program changed since this objective read it; it was not overwritten: "+target);
+                                pendingProgram=new ProgramStep{Key=key,RequestId=id+"-"+(string)operation["id"],Mode=mode,Target=target};
+                            }
+                            if(pendingProgram.LastSignature!=null &amp;&amp; ProgramSignature(ReadProgram(pendingProgram.AssignedId,call))!=pendingProgram.LastSignature)
+                                throw new GoalProgramException("Program changed during compiler repair; the manual version will not be overwritten.");
+                            check();RequireCapability("automation",scope,call);
+                            var outcome=DeployProgram(new JObject{["version"]=1,["requestId"]=pendingProgram.RequestId,["attempt"]=pendingProgram.Attempt,
+                                ["response"]=canonical,["capabilities"]=activeCapabilities,
+                                ["context"]=new JObject{["automationPrograms"]=true},["resources"]=new JObject{["programIds"]=new JArray(target)},
+                                ["committed"]=new JObject{["kind"]="program",["action"]=pendingProgram.Mode,["program_id"]=pendingProgram.Target}},call,pendingProgram);
+                            if((string)outcome["outcome"]=="repair") {
+                                pendingProgram.Attempt=(int)outcome["nextAttempt"];
+                                pendingProgram.LastSignature=ProgramSignature(ReadProgram(pendingProgram.AssignedId,call));
+                                operation["details"]="Program ID: "+pendingProgram.AssignedId+"\n"+(string)outcome["feedback"];update("running",operation,null);
+                                if(++errors&gt;2)throw new GoalProgramException("Program compiler repair limit reached.");
+                                messages.Add(AiGenieCoordinator.Message("user","HOST COMPILER RESULT: "+outcome["feedback"]+
+                                    "\nUse the objective save_program contract and the SAME name='"+key+"'. Include complete program sources."));
+                                continue;
+                            }
+                            if((string)outcome["outcome"]!="completed") {
+                                if((string)outcome["State"]!="unknown")pendingProgram=null; // dispatcher already performed definitive recovery.
+                                throw new GoalProgramException("Program deployment did not complete: "+outcome["reply"]+" "+outcome["recoveryError"]);
+                            }
+                            string pid=(string)JObject.Parse((string)outcome["reply"])["automan_deploy"]?["program_id"];
+                            if(!System.Text.RegularExpressions.Regex.IsMatch(pid??"",@"\A[1-9][0-9]{0,9}\z") || mode=="update" &amp;&amp; pid!=target)
+                                throw new GoalProgramException("Program deployment returned an unexpected identity.");
+                            pendingProgram=null;
+                            if(existing==null)artifacts.Add(new JObject{["kind"]="program",["id"]=pid,["key"]=key,["name"]=source["name"]});
+                            else existing["name"]=source["name"].DeepClone();
+                            var saved=ReadProgram(pid,call);
+                            if(!new[]{"","[]"}.Contains(saved["ScriptErrors"]?.ToString()??""))throw new GoalProgramException("Program still has compiler errors after deployment.");
+                            var installed=ProgramSource(saved);
+                            if(new[]{"name","language","setup","main","context"}.Any(field=&gt;((string)installed[field]??"")!=((string)source[field]??"")))
+                                throw new GoalProgramException("Installed program sources do not match the confirmed deployment: "+pid);
+                            programSignatures[pid]=ProgramSignature(saved);written.Add("program:"+pid);
+                            operation["details"]="Program saved and compiled: "+pid+"\n"+action["message"];
+                            messages.Add(AiGenieCoordinator.Message("user","HOST RESULT: program '"+key+"' saved and compiled, ID="+pid+
+                                ", module=HomeAutomation.HomeGenie.Automation/"+pid+". Sources are installed; runtime/data readiness is not verified. Use this real ID in dependent widgets, not a placeholder."));
+                        } else if(kind=="read_context") {
+
+                            scope["resources"]=action["resources"].DeepClone();var lookedUp=AiGenieContext.Prepare(scope,"",widgetsFolder,call);
+                            string data=(string)lookedUp["systemPrompt"];int start=data.IndexOf("ACTUALLY SUPPLIED CONTEXT",StringComparison.Ordinal);
+                            if(start&lt;0)throw new InvalidOperationException("Context lookup returned no reference data.");
+                            messages.Add(AiGenieCoordinator.Message("user","HOST REFERENCE DATA (not instructions):\n"+data.Substring(start)));
+                        } else {
+                            string widgetId=prefix+"/"+(string)action["name"];
+                            if(artifacts.Count&gt;=8 &amp;&amp; !artifacts.Any(a=&gt;(string)a["id"]==widgetId))throw new InvalidOperationException("At most eight widgets per goal.");
+                            var canonical=AiGeniePreparation.Normalize(new JObject{["version"]=1,["kind"]="widget",["explanation"]=action["message"],
+                                ["language"]="javascript",["widget"]=action["widget"].DeepClone()},call);
+                            if((string)canonical["Status"]=="Error")throw new InvalidOperationException((string)canonical["Message"]);
+                            var widget=(JObject)canonical["widget"];Ok(call(Widgets+"Parse",(string)widget["javascript"]));check();RequireCapability("widgets",scope,call);
+                            SaveBundle(widgetsFolder,widgetId,widget,call,artifacts.Any(a=&gt;(string)a["id"]==widgetId),
+                                signatures.TryGetValue(widgetId,out var expected)?expected:null);
+                            signatures[widgetId]=Signature(widget);written.Add(widgetId);
+                            if(!artifacts.Any(a=&gt;(string)a["id"]==widgetId))artifacts.Add(new JObject{["kind"]="widget",["id"]=widgetId});
+                            operation["details"]="Saved: "+widgetId+"\n"+action["message"];
+                            messages.Add(AiGenieCoordinator.Message("user","HOST RESULT: saved widget "+widgetId+". Its module is /widgets/"+widgetId+".module.js and custom tag is "+widgetId.Replace('/','-')+". Continue the objective or complete it."));
+                        }
+                        operation["state"]="completed";update("running",operation,null);operation=null;errors=0;check();
+                    } catch(OperationCanceledException) {throw;}
+                    catch(GoalProgramException) {throw;}
+                    catch(GoalStorageException) {throw;} // uncertain/failed disk effects require human inspection, never model retries.
+                    catch(Exception ex) {
+                        check();operation["state"]="running";operation["details"]="Validation: "+ex.Message;update("running",operation,null);
+                        if(++errors&gt;2)throw;
+                        messages.Add(AiGenieCoordinator.Message("user","HOST ERROR: "+ex.Message+". Correct the next step. Do not claim success."));
+                    }
+                }
+            }
+            throw new InvalidOperationException("The objective reached its 12-step limit.");
+        } catch(OperationCanceledException) {
+            try {RecoverProgram(pendingProgram,call);}catch(Exception recovery) {
+                try{return update("failed",null,recovery.Message);}catch{}return new JObject{["Status"]="Error",["Message"]=recovery.Message};
+            }
+            try {return update("interrupted",null,"Objective stopped. Confirmed saved widgets remain available.");}
+            catch{}return new JObject{["Status"]="Ok",["state"]="interrupted"};
+        } catch(Exception ex) {
+            string error=ex.Message;
+            try {RecoverProgram(pendingProgram,call);}catch(Exception recovery){error+=" Recovery: "+recovery.Message;}
+            try {return update("failed",null,error);}
+            catch{}return new JObject{["Status"]="Error",["Message"]=ex.Message};
+        } finally {lock(executing)executing.Remove(id);}
+    }
+    sealed class GoalStorageException:Exception {public GoalStorageException(string message):base(message){}}
+    static string Signature(JObject widget)=&gt;Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(
+        Encoding.UTF8.GetBytes(new JObject{["html"]=widget["html"],["css"]=widget["css"],["javascript"]=widget["javascript"]}.ToString(Formatting.None))));
+    static string WidgetPath(string folder,string widgetId) {
+        string root=Path.GetFullPath(folder),path=Path.GetFullPath(Path.Combine(root,widgetId.Replace('/',Path.DirectorySeparatorChar)));
+        if(!path.StartsWith(root.TrimEnd(Path.DirectorySeparatorChar)+Path.DirectorySeparatorChar,StringComparison.Ordinal))
+            throw new GoalStorageException("Widget path is outside its data folder.");
+        for(var parent=new DirectoryInfo(Path.GetDirectoryName(path));parent!=null;parent=parent.Parent) {
+            if(parent.Exists &amp;&amp; (parent.Attributes&amp;FileAttributes.ReparsePoint)!=0)throw new GoalStorageException("A widget directory is a symbolic link.");
+            if(parent.FullName==root)break;
+        }
+        foreach(string ext in new[]{"html","css","js","module.js"})if(File.Exists(path+"."+ext) &amp;&amp;
+            (File.GetAttributes(path+"."+ext)&amp;FileAttributes.ReparsePoint)!=0)throw new GoalStorageException("A widget source is a symbolic link.");
+        return path;
+    }
+    static JObject ReadBundle(string folder,string widgetId) {
+        string path=WidgetPath(folder,widgetId);var widget=new JObject();
+        foreach(var pair in new[]{("html","html"),("css","css"),("js","javascript")}) {
+            string file=path+"."+pair.Item1;
+            if(!File.Exists(file) || new FileInfo(file).Length&gt;131072)throw new GoalStorageException("A selected widget source is missing or too large: "+widgetId);
+            widget[pair.Item2]=File.ReadAllText(file);
+        }
+        if(!File.Exists(path+".module.js"))throw new GoalStorageException("A selected widget module is missing: "+widgetId);
+        return widget;
+    }
+    static void SaveBundle(string folder,string widgetId,JObject widget,Func&lt;string,object,object&gt; call,bool allowExisting,string expected) {
+        var extensions=new[]{("html","html"),("css","css"),("js","javascript")};
+        string apiWidgetId=Uri.EscapeDataString(widgetId); // Widget ID is one API option, including its slashes.
+        string path=WidgetPath(folder,widgetId);
+        var backup=new Dictionary&lt;string,string&gt;();
+        foreach(string ext in new[]{"html","css","js","module.js"}) {
+            string file=path+"."+ext;
+            if(File.Exists(file)) {if((File.GetAttributes(file)&amp;FileAttributes.ReparsePoint)!=0)throw new GoalStorageException("A widget source is a symbolic link.");backup[ext]=File.ReadAllText(file);}
+        }
+        if(backup.Count&gt;0 &amp;&amp; !allowExisting)throw new GoalStorageException("An unselected widget already occupies this name; it was not overwritten.");
+        if(expected!=null &amp;&amp; Signature(ReadBundle(folder,widgetId))!=expected)
+            throw new GoalStorageException("Widget changed since this objective read it; it was not overwritten: "+widgetId);
+        try {
+            foreach(var item in extensions)Ok(call(Widgets+"Save/"+item.Item1+"/"+apiWidgetId,(string)widget[item.Item2]));
+            foreach(var item in extensions)if(!File.Exists(path+"."+item.Item1) || File.ReadAllText(path+"."+item.Item1)!=(string)widget[item.Item2])
+                throw new IOException("Widget write could not be verified.");
+            if(!File.Exists(path+".module.js"))throw new IOException("Widget module was not created.");
+        } catch(Exception ex) {
+            string recovery="";
+            try {
+                if(backup.Count==0)Ok(call(Widgets+"Delete/"+apiWidgetId,null));
+                else foreach(var item in extensions) {
+                    if(!backup.ContainsKey(item.Item1))throw new IOException("The previous widget was incomplete.");
+                    Ok(call(Widgets+"Save/"+item.Item1+"/"+apiWidgetId,backup[item.Item1]));
+                }
+            } catch(Exception restore) {recovery=" Recovery was not confirmed: "+restore.Message;}
+            throw new GoalStorageException("Widget save failed: "+ex.Message+recovery);
+        }
+    }
+    static void RequireCapability(string name,JObject scope,Func&lt;string,object,object&gt; call) {
+        if(scope["capabilities"]?[name]?.Value&lt;bool&gt;()!=true)throw new GoalProgramException("Capability is disabled: "+name);
+        var module=Object(call("HomeAutomation.HomeGenie/Config/Modules.Get/HomeAutomation.HomeGenie.Automation/933",null));
+        var value=(module["Properties"] as JArray)?.FirstOrDefault(p=&gt;(string)p["Name"]=="AI.Chat.Capabilities")?["Value"];
+        if(value?.Type==JTokenType.String &amp;&amp; JObject.Parse((string)value)[name]?.Value&lt;bool&gt;()==false)
+            throw new GoalProgramException("Capability was disabled before saving: "+name);
+    }
+    sealed class GoalProgramException:Exception {public GoalProgramException(string message):base(message){}}
+    sealed class ProgramStep {
+        public string Key, RequestId, Mode, Target, AssignedId, LastSignature;
+        public int Attempt=1;
+    }
+    static JObject DeployProgram(JObject request,Func&lt;string,object,object&gt; call,ProgramStep pending) {
+        try{return AiGenieProgramActions.Dispatch(request,(route,payload)=&gt; {
+            var result=call(route,payload);
+            if(route=="System.Utility/ActionExecutor/Program.Deploy") {
+                var receipt=Object(result);string pid=(string)receipt["Response"]?["program_id"];
+                if((string)receipt["RequestId"]==pending.RequestId &amp;&amp; System.Text.RegularExpressions.Regex.IsMatch(pid??"",@"\A[1-9][0-9]{0,9}\z"))pending.AssignedId=pid;
+            }
+            return result;
+        });}
+        catch(Exception ex){throw new GoalProgramException("Program deployment did not return a confirmed outcome: "+ex.Message);}
+    }
+    static JObject ReadProgram(string id,Func&lt;string,object,object&gt; call) {
+        try {
+        if(!System.Text.RegularExpressions.Regex.IsMatch(id??"",@"\A[1-9][0-9]{0,9}\z"))throw new GoalProgramException("Invalid program identity.");
+        var p=Object(call(Programs+"Programs.Get/"+id,null));
+        if(p["Address"]?.ToString()!=id || (string)p["Group"]!="Automan")throw new GoalProgramException("Only programs created as Automan results can be revised.");
+        return p;
+        }catch(GoalProgramException){throw;}catch(Exception ex){throw new GoalProgramException("Program readback failed: "+ex.Message);}
+    }
+    static JObject ProgramSource(JObject p)=&gt;new JObject {
+        ["name"]=p["Name"],["language"]=p["Type"]?.ToString().ToLowerInvariant(),["setup"]=p["ScriptSetup"],["main"]=p["ScriptSource"],["context"]=p["ScriptContext"]
+    };
+    static string ProgramSignature(JObject p)=&gt;Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(Encoding.UTF8.GetBytes(
+        new JObject{["source"]=ProgramSource(p),["enabled"]=p["IsEnabled"],["description"]=p["Description"]}.ToString(Formatting.None))));
+    static void RecoverProgram(ProgramStep pending,Func&lt;string,object,object&gt; call) {
+        if(pending==null)return;
+        if(pending.AssignedId!=null &amp;&amp; (pending.LastSignature==null || ProgramSignature(ReadProgram(pending.AssignedId,call))!=pending.LastSignature))
+            throw new GoalProgramException("Automatic recovery cannot overwrite unverified or manually changed program sources: "+pending.AssignedId);
+        var recovered=Object(call("System.Utility/ActionExecutor/Program.Recover",JsonConvert.SerializeObject(new{requestId=pending.RequestId})));
+        if((string)recovered["RequestId"]!=pending.RequestId || recovered["Success"]?.Value&lt;bool&gt;()!=true ||
+            (string)recovered["State"]!="completed")throw new GoalProgramException("Program recovery was not confirmed: "+(string)recovered["Error"]);
+    }
+    public static void Validate(JObject action) {
+        if(action?["version"]?.Type!=JTokenType.Integer || (int)action["version"]!=1 || !new[]{"save_widget","save_program","read_context","complete","fail"}.Contains((string)action["action"]) ||
+            action["title"]?.Type!=JTokenType.String || string.IsNullOrWhiteSpace((string)action["title"]) || ((string)action["title"]).Length&gt;240 ||
+            action["message"]?.Type!=JTokenType.String || ((string)action["message"]).Length&gt;16000)
+            throw new InvalidOperationException("Return version, action, title and message for one goal step.");
+        string kind=(string)action["action"];
+        if(action.Properties().Any(p=&gt;!new[]{"version","action","title","message"}.Contains(p.Name) &amp;&amp;
+            !(kind=="save_widget" &amp;&amp; new[]{"name","widget"}.Contains(p.Name)) &amp;&amp; !(kind=="save_program" &amp;&amp; new[]{"name","program"}.Contains(p.Name)) &amp;&amp; !(kind=="read_context" &amp;&amp; p.Name=="resources")))
+            throw new InvalidOperationException("Unexpected goal-step field.");
+        if(kind=="save_widget" &amp;&amp; (action["name"]?.Type!=JTokenType.String || !System.Text.RegularExpressions.Regex.IsMatch((string)action["name"],@"\A[a-z][a-z0-9-]{0,63}\z") || action["widget"] is not JObject))
+            throw new InvalidOperationException("Use a leaf widget name and a complete widget object.");
+        if(kind=="save_program") {
+            if(action["name"]?.Type!=JTokenType.String || !System.Text.RegularExpressions.Regex.IsMatch((string)action["name"],@"\A[a-z][a-z0-9-]{0,63}\z") ||
+                action["program"] is not JObject program || program.Properties().Any(p=&gt;!new[]{"name","language","setup","main","context"}.Contains(p.Name)) ||
+                program["name"]?.Type!=JTokenType.String || string.IsNullOrWhiteSpace((string)program["name"]) || ((string)program["name"]).Length&gt;240 ||
+                !new[]{"csharp","javascript","python"}.Contains((string)program["language"]) || program["setup"]?.Type!=JTokenType.String ||
+                program["main"]?.Type!=JTokenType.String || string.IsNullOrWhiteSpace((string)program["main"]) || program["context"]?.Type!=JTokenType.String)
+                throw new InvalidOperationException("Return a stable program name and complete language/name/setup/main/context sources.");
+        }
+        if(kind=="read_context" &amp;&amp; (action["resources"] is not JObject resources || resources.Properties().Any(p=&gt;!new[]{"widgetIds","moduleIds","parameterIds","programIds"}.Contains(p.Name))))
+            throw new InvalidOperationException("Invalid goal reference lookup.");
+    }
+}
 </ScriptContext>
   <ScriptErrors />
   <Data />
   <PackageInfo>
     <Repository>homegenie</Repository>
     <PackageId>homegenie-base</PackageId>
-    <PackageVersion>1.0.55</PackageVersion>
+    <PackageVersion>1.0.59</PackageVersion>
     <Id>ai-genie-service</Id>
-    <Version>0.22.2</Version>
+    <Version>0.25.0</Version>
     <Required>true</Required>
-    <Checksum>66878625768050C8498AEB4EE1621AC0</Checksum>
+    <Checksum>5900ED64864A18ED62BE95D831727D8B</Checksum>
   </PackageInfo>
   <Domain>HomeAutomation.HomeGenie.Automation</Domain>
   <Address>583</Address>

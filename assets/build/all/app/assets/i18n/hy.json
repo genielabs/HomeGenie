@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Վիջեթների ստեղծման նպատակ",
+  "ai_task_waiting": "Սպասում է",
+  "ai_task_cancelled": "Չեղարկված է",
+  "ai_task_interrupted": "Ընդհատված է",
+  "ai_task_stop_requested": "Կանգնեցման հարցումն ուղարկված է",
   "always_show_latest_period": "Միշտ ցուցադրել վերջին հասանելի ժամանակահատվածը",
   "home": "Տուն",
   "setup": "Կարգավորում",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Ջնջե՞լ ընտրված ծանուցումները ({{count}}):",
   "programs_updated": "Ծրագրերը թարմացվել են",
   "system_not_up_to_date": "Համակարգը թարմացված չէ",
-  "new_programs_updates_available": "Հասանելի են ծրագրի նոր թարմացումները"
+  "new_programs_updates_available": "Հասանելի են ծրագրի նոր թարմացումները",
+  "dashboard_layout": "Դասավորություն",
+  "dashboard_standard": "Ստանդարտ"
 }

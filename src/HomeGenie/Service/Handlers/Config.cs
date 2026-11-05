@@ -1499,6 +1499,10 @@ namespace HomeGenie.Service.Handlers
                 }
                 break;
 
+            case "Widgets.DashboardList":
+                request.ResponseData = WidgetCatalog.ListDashboardWidgets(widgetBasePath);
+                break;
+
             case "Widgets.List":
                 List<string> widgetsList = new List<string>();
                 var directoryFiles = Directory.EnumerateFiles(widgetBasePath, "*", SearchOption.AllDirectories);

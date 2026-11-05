@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "יעד ליצירת ווידג'טים",
+  "ai_task_waiting": "בהמתנה",
+  "ai_task_cancelled": "בוטל",
+  "ai_task_interrupted": "הופסק",
+  "ai_task_stop_requested": "התבקשה עצירה",
   "always_show_latest_period": "הצג תמיד את התקופה האחרונה הזמינה",
   "home": "בַּיִת",
   "setup": "התקנה",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "למחוק את ההתראות שנבחרו ({{count}})?",
   "programs_updated": "תוכניות מעודכנות",
   "system_not_up_to_date": "המערכת לא מעודכנת",
-  "new_programs_updates_available": "עדכוני תוכנית חדשים זמינים"
+  "new_programs_updates_available": "עדכוני תוכנית חדשים זמינים",
+  "dashboard_layout": "פריסה",
+  "dashboard_standard": "רגילה"
 }

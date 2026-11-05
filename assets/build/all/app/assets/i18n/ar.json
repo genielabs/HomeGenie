@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "هدف إنشاء عناصر واجهة",
+  "ai_task_waiting": "قيد الانتظار",
+  "ai_task_cancelled": "تم الإلغاء",
+  "ai_task_interrupted": "تمت المقاطعة",
+  "ai_task_stop_requested": "تم طلب الإيقاف",
   "always_show_latest_period": "إظهار أحدث فترة متاحة دائمًا",
   "home": "بيت",
   "setup": "يثبت",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "هل تريد حذف الإشعارات المحددة ({{count}})؟",
   "programs_updated": "تم تحديث البرامج",
   "system_not_up_to_date": "النظام ليس محدثا",
-  "new_programs_updates_available": "تتوفر تحديثات جديدة للبرنامج"
+  "new_programs_updates_available": "تتوفر تحديثات جديدة للبرنامج",
+  "dashboard_layout": "التخطيط",
+  "dashboard_standard": "قياسي"
 }

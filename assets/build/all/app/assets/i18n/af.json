@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Widget-doelwit",
+  "ai_task_waiting": "Wag",
+  "ai_task_cancelled": "Gekanselleer",
+  "ai_task_interrupted": "Onderbreek",
+  "ai_task_stop_requested": "Stop versoek",
   "always_show_latest_period": "Wys altyd die nuutste beskikbare tydperk",
   "home": "Tuis",
   "setup": "Opstelling",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Vee geselekteerde kennisgewings uit ({{count}})?",
   "programs_updated": "Programme opgedateer",
   "system_not_up_to_date": "Stelsel is nie op datum nie",
-  "new_programs_updates_available": "Nuwe programopdaterings beskikbaar"
+  "new_programs_updates_available": "Nuwe programopdaterings beskikbaar",
+  "dashboard_layout": "Uitleg",
+  "dashboard_standard": "Standaard"
 }

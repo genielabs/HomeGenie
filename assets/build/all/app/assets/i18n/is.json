@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Markmið fyrir græjur",
+  "ai_task_waiting": "Bíður",
+  "ai_task_cancelled": "Hætt við",
+  "ai_task_interrupted": "Rofið",
+  "ai_task_stop_requested": "Beðið um stöðvun",
   "always_show_latest_period": "Sýna alltaf nýjasta tiltæka tímabilið",
   "home": "Heim",
   "setup": "Uppsetning",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Eyða völdum tilkynningum ({{count}})?",
   "programs_updated": "Forrit uppfærð",
   "system_not_up_to_date": "Kerfið er ekki uppfært",
-  "new_programs_updates_available": "Nýjar dagskráruppfærslur í boði"
+  "new_programs_updates_available": "Nýjar dagskráruppfærslur í boði",
+  "dashboard_layout": "Skipulag",
+  "dashboard_standard": "Hefðbundið"
 }

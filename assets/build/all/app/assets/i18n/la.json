@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Propositum creandi widget",
+  "ai_task_waiting": "In exspectatione",
+  "ai_task_cancelled": "Revocatum",
+  "ai_task_interrupted": "Interruptum",
+  "ai_task_stop_requested": "Petitio sistendi",
   "always_show_latest_period": "Semper novissimum tempus disponibile ostende",
   "home": "Domus",
   "setup": "Configuratio",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Delere notificationes electus ({{count}})?",
   "programs_updated": "Programmata renovata",
   "system_not_up_to_date": "Ratio non est usque ad date",
-  "new_programs_updates_available": "Nova programma updates praesto"
+  "new_programs_updates_available": "Nova programma updates praesto",
+  "dashboard_layout": "Dispositio",
+  "dashboard_standard": "Ordinaria"
 }

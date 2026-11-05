@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Завдання створення віджетів",
+  "ai_task_waiting": "Очікування",
+  "ai_task_cancelled": "Скасовано",
+  "ai_task_interrupted": "Перервано",
+  "ai_task_stop_requested": "Надіслано запит на зупинку",
   "always_show_latest_period": "Завжди показувати останній доступний період",
   "home": "Дім",
   "setup": "Налаштування",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Видалити вибрані сповіщення ({{count}})?",
   "programs_updated": "Програми оновлені",
   "system_not_up_to_date": "Система не оновлена",
-  "new_programs_updates_available": "Доступні нові оновлення програми"
+  "new_programs_updates_available": "Доступні нові оновлення програми",
+  "dashboard_layout": "Макет",
+  "dashboard_standard": "Стандартний"
 }

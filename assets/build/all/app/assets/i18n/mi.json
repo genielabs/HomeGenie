@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Whāinga waihanga widget",
+  "ai_task_waiting": "E tatari ana",
+  "ai_task_cancelled": "Kua whakakorea",
+  "ai_task_interrupted": "Kua haukotia",
+  "ai_task_stop_requested": "Kua tonoa kia mutu",
   "always_show_latest_period": "Whakaaturia tonutia te wā hōu rawa e wātea ana",
   "home": "Kainga",
   "setup": "Tatūnga",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Mukua nga whakamohiotanga kua tohua ({{count}})?",
   "programs_updated": "Kua whakahoutia nga kaupapa",
   "system_not_up_to_date": "Ko te punaha kaore i te hou",
-  "new_programs_updates_available": "Kei te waatea nga whakahoutanga hotaka hou"
+  "new_programs_updates_available": "Kei te waatea nga whakahoutanga hotaka hou",
+  "dashboard_layout": "Tahora",
+  "dashboard_standard": "Paerewa"
 }

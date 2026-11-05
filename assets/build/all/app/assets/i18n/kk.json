@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Виджет жасау мақсаты",
+  "ai_task_waiting": "Күтуде",
+  "ai_task_cancelled": "Бас тартылды",
+  "ai_task_interrupted": "Үзілді",
+  "ai_task_stop_requested": "Тоқтату сұралды",
   "always_show_latest_period": "Әрқашан ең соңғы қолжетімді кезеңді көрсету",
   "home": "Үй",
   "setup": "Орнату",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Таңдалған хабарландырулар ({{count}}) жойылсын ба?",
   "programs_updated": "Бағдарламалар жаңартылды",
   "system_not_up_to_date": "Жүйе жаңартылмаған",
-  "new_programs_updates_available": "Жаңа бағдарлама жаңартулары қолжетімді"
+  "new_programs_updates_available": "Жаңа бағдарлама жаңартулары қолжетімді",
+  "dashboard_layout": "Орналасу",
+  "dashboard_standard": "Стандартты"
 }

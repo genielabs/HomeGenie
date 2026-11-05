@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "เป้าหมายการสร้างวิดเจ็ต",
+  "ai_task_waiting": "กำลังรอ",
+  "ai_task_cancelled": "ยกเลิกแล้ว",
+  "ai_task_interrupted": "ถูกขัดจังหวะ",
+  "ai_task_stop_requested": "ส่งคำขอหยุดแล้ว",
   "always_show_latest_period": "แสดงช่วงเวลาล่าสุดที่มีอยู่เสมอ",
   "home": "บ้าน",
   "setup": "การตั้งค่า",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "ลบการแจ้งเตือนที่เลือก ({{count}}) หรือไม่",
   "programs_updated": "อัพเดตโปรแกรมแล้ว",
   "system_not_up_to_date": "ระบบไม่ทันสมัย",
-  "new_programs_updates_available": "มีอัพเดตโปรแกรมใหม่ให้ใช้งาน"
+  "new_programs_updates_available": "มีอัพเดตโปรแกรมใหม่ให้ใช้งาน",
+  "dashboard_layout": "เค้าโครง",
+  "dashboard_standard": "มาตรฐาน"
 }

@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Għan għall-ħolqien ta’ widgets",
+  "ai_task_waiting": "Qed jistenna",
+  "ai_task_cancelled": "Ikkanċellat",
+  "ai_task_interrupted": "Interrott",
+  "ai_task_stop_requested": "Intalab waqfien",
   "always_show_latest_period": "Dejjem uri l-aħħar perjodu disponibbli",
   "home": "Dar",
   "setup": "Setup",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Ħassar notifiki magħżula ({{count}})?",
   "programs_updated": "Programmi aġġornati",
   "system_not_up_to_date": "Is-sistema mhix aġġornata",
-  "new_programs_updates_available": "Aġġornamenti ġodda tal-programm disponibbli"
+  "new_programs_updates_available": "Aġġornamenti ġodda tal-programm disponibbli",
+  "dashboard_layout": "Tqassim",
+  "dashboard_standard": "Standard"
 }

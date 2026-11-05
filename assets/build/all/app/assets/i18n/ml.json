@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "വിജറ്റ് സൃഷ്ടിക്കാനുള്ള ലക്ഷ്യം",
+  "ai_task_waiting": "കാത്തിരിക്കുന്നു",
+  "ai_task_cancelled": "റദ്ദാക്കി",
+  "ai_task_interrupted": "തടസ്സപ്പെട്ടു",
+  "ai_task_stop_requested": "നിർത്താൻ അഭ്യർത്ഥിച്ചു",
   "always_show_latest_period": "എപ്പോഴും ലഭ്യമായ ഏറ്റവും പുതിയ കാലയളവ് കാണിക്കുക",
   "home": "വീട്",
   "setup": "സജ്ജമാക്കുക",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "തിരഞ്ഞെടുത്ത അറിയിപ്പുകൾ ({{count}}) ഇല്ലാതാക്കണോ?",
   "programs_updated": "പ്രോഗ്രാമുകൾ അപ്ഡേറ്റ് ചെയ്തു",
   "system_not_up_to_date": "സിസ്റ്റം കാലികമല്ല",
-  "new_programs_updates_available": "പുതിയ പ്രോഗ്രാം അപ്ഡേറ്റുകൾ ലഭ്യമാണ്"
+  "new_programs_updates_available": "പുതിയ പ്രോഗ്രാം അപ്ഡേറ്റുകൾ ലഭ്യമാണ്",
+  "dashboard_layout": "വിന്യാസം",
+  "dashboard_standard": "സാധാരണ"
 }

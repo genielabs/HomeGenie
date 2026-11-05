@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Matlamat penciptaan widget",
+  "ai_task_waiting": "Menunggu",
+  "ai_task_cancelled": "Dibatalkan",
+  "ai_task_interrupted": "Terganggu",
+  "ai_task_stop_requested": "Permintaan berhenti dihantar",
   "always_show_latest_period": "Sentiasa paparkan tempoh terkini yang tersedia",
   "home": "Rumah",
   "setup": "Persediaan",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Padamkan pemberitahuan yang dipilih ({{count}})?",
   "programs_updated": "Program dikemas kini",
   "system_not_up_to_date": "Sistem tidak terkini",
-  "new_programs_updates_available": "Kemas kini program baharu tersedia"
+  "new_programs_updates_available": "Kemas kini program baharu tersedia",
+  "dashboard_layout": "Susun atur",
+  "dashboard_standard": "Standard"
 }

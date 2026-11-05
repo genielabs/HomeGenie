@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Виджет үүсгэх зорилго",
+  "ai_task_waiting": "Хүлээж байна",
+  "ai_task_cancelled": "Цуцлагдсан",
+  "ai_task_interrupted": "Тасалдсан",
+  "ai_task_stop_requested": "Зогсоох хүсэлт илгээгдсэн",
   "always_show_latest_period": "Хамгийн сүүлийн боломжтой хугацааг үргэлж харуулах",
   "home": "Гэр",
   "setup": "Тохиргоо",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Сонгосон мэдэгдлүүдийг ({{count}}) устгах уу?",
   "programs_updated": "Програмууд шинэчлэгдсэн",
   "system_not_up_to_date": "Систем шинэчлэгдээгүй байна",
-  "new_programs_updates_available": "Хөтөлбөрийн шинэ шинэчлэлтүүд боломжтой"
+  "new_programs_updates_available": "Хөтөлбөрийн шинэ шинэчлэлтүүд боломжтой",
+  "dashboard_layout": "Байрлал",
+  "dashboard_standard": "Стандарт"
 }

@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "ਵਿਜੇਟ ਬਣਾਉਣ ਦਾ ਟੀਚਾ",
+  "ai_task_waiting": "ਉਡੀਕ ਵਿੱਚ",
+  "ai_task_cancelled": "ਰੱਦ ਕੀਤਾ ਗਿਆ",
+  "ai_task_interrupted": "ਵਿਘਨ ਪਿਆ",
+  "ai_task_stop_requested": "ਰੋਕਣ ਦੀ ਬੇਨਤੀ ਕੀਤੀ ਗਈ",
   "always_show_latest_period": "ਹਮੇਸ਼ਾ ਨਵੀਨਤਮ ਉਪਲਬਧ ਸਮਾਂ ਮਿਆਦ ਦਿਖਾਓ",
   "home": "ਮੁੱਖ ਪੇਜ",
   "setup": "ਸਥਾਪਨਾ ਕਰਨਾ",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "ਕੀ ਚੁਣੀਆਂ ਗਈਆਂ ਸੂਚਨਾਵਾਂ ({{count}}) ਨੂੰ ਮਿਟਾਉਣਾ ਹੈ?",
   "programs_updated": "ਪ੍ਰੋਗਰਾਮ ਅੱਪਡੇਟ ਕੀਤੇ ਗਏ",
   "system_not_up_to_date": "ਸਿਸਟਮ ਅੱਪ ਟੂ ਡੇਟ ਨਹੀਂ ਹੈ",
-  "new_programs_updates_available": "ਨਵੇਂ ਪ੍ਰੋਗਰਾਮ ਅੱਪਡੇਟ ਉਪਲਬਧ ਹਨ"
+  "new_programs_updates_available": "ਨਵੇਂ ਪ੍ਰੋਗਰਾਮ ਅੱਪਡੇਟ ਉਪਲਬਧ ਹਨ",
+  "dashboard_layout": "ਖਾਕਾ",
+  "dashboard_standard": "ਮਿਆਰੀ"
 }

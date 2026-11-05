@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Cieľ tvorby widgetov",
+  "ai_task_waiting": "Čakanie",
+  "ai_task_cancelled": "Zrušené",
+  "ai_task_interrupted": "Prerušené",
+  "ai_task_stop_requested": "Požadované zastavenie",
   "always_show_latest_period": "Vždy zobrazovať najnovšie dostupné obdobie",
   "home": "Domov",
   "setup": "Nastavenie",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Odstrániť vybraté upozornenia ({{count}})?",
   "programs_updated": "Aktualizované programy",
   "system_not_up_to_date": "Systém nie je aktuálny",
-  "new_programs_updates_available": "K dispozícii sú nové aktualizácie programu"
+  "new_programs_updates_available": "K dispozícii sú nové aktualizácie programu",
+  "dashboard_layout": "Rozloženie",
+  "dashboard_standard": "Štandardné"
 }

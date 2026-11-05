@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "ವಿಜೆಟ್ ರಚಿಸುವ ಗುರಿ",
+  "ai_task_waiting": "ಕಾಯಲಾಗುತ್ತಿದೆ",
+  "ai_task_cancelled": "ರದ್ದುಗೊಳಿಸಲಾಗಿದೆ",
+  "ai_task_interrupted": "ಅಡಚಣೆಯಾಗಿದೆ",
+  "ai_task_stop_requested": "ನಿಲ್ಲಿಸಲು ವಿನಂತಿಸಲಾಗಿದೆ",
   "always_show_latest_period": "ಯಾವಾಗಲೂ ಇತ್ತೀಚಿನ ಲಭ್ಯವಿರುವ ಅವಧಿಯನ್ನು ತೋರಿಸಿ",
   "home": "ಮರಳಿ ಪ್ರಥಮ ಪುಟಕ್ಕೆ",
   "setup": "ಸೆಟಪ್",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "ಆಯ್ಕೆಮಾಡಿದ ಅಧಿಸೂಚನೆಗಳನ್ನು ({{count}}) ಅಳಿಸುವುದೇ?",
   "programs_updated": "ಪ್ರೋಗ್ರಾಂಗಳನ್ನು ನವೀಕರಿಸಲಾಗಿದೆ",
   "system_not_up_to_date": "ಸಿಸ್ಟಮ್ ನವೀಕೃತವಾಗಿಲ್ಲ",
-  "new_programs_updates_available": "ಹೊಸ ಪ್ರೋಗ್ರಾಂ ನವೀಕರಣಗಳು ಲಭ್ಯವಿದೆ"
+  "new_programs_updates_available": "ಹೊಸ ಪ್ರೋಗ್ರಾಂ ನವೀಕರಣಗಳು ಲಭ್ಯವಿದೆ",
+  "dashboard_layout": "ವಿನ್ಯಾಸ",
+  "dashboard_standard": "ಪ್ರಮಾಣಿತ"
 }

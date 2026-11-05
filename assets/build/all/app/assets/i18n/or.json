@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "ୱିଜେଟ୍ ତିଆରି ଲକ୍ଷ୍ୟ",
+  "ai_task_waiting": "ଅପେକ୍ଷାରେ",
+  "ai_task_cancelled": "ବାତିଲ ହୋଇଛି",
+  "ai_task_interrupted": "ବାଧାପ୍ରାପ୍ତ",
+  "ai_task_stop_requested": "ବନ୍ଦ କରିବାକୁ ଅନୁରୋଧ କରାଯାଇଛି",
   "always_show_latest_period": "ସର୍ବଦା ସର୍ବଶେଷ ଉପଲବ୍ଧ ସମୟ ଅବଧି ଦେଖାନ୍ତୁ",
   "home": "ଘର",
   "setup": "ସେଟଅପ୍ କରନ୍ତୁ",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "ମନୋନୀତ ବିଜ୍ଞପ୍ତିଗୁଡିକ ବିଲୋପ କରନ୍ତୁ ({{count}})?",
   "programs_updated": "ପ୍ରୋଗ୍ରାମଗୁଡିକ ଅଦ୍ୟତନ ହୋଇଛି",
   "system_not_up_to_date": "ସିଷ୍ଟମ୍ ଅପ୍ ଟୁ ଡେଟ୍ ନୁହେଁ",
-  "new_programs_updates_available": "ନୂତନ ପ୍ରୋଗ୍ରାମ ଅଦ୍ୟତନଗୁଡ଼ିକ ଉପଲବ୍ଧ"
+  "new_programs_updates_available": "ନୂତନ ପ୍ରୋଗ୍ରାମ ଅଦ୍ୟତନଗୁଡ଼ିକ ଉପଲବ୍ଧ",
+  "dashboard_layout": "ବିନ୍ୟାସ",
+  "dashboard_standard": "ମାନକ"
 }

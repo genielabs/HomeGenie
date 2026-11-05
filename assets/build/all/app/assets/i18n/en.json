@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Widget objective",
+  "ai_task_waiting": "Waiting",
+  "ai_task_cancelled": "Cancelled",
+  "ai_task_interrupted": "Interrupted",
+  "ai_task_stop_requested": "Stop requested",
   "always_show_latest_period": "Always show the latest available period",
   "home": "Home",
   "setup": "Setup",
@@ -649,5 +654,7 @@
   "notification_toggle_all": "Toggle All",
   "notification_delete_confirm": "Delete selected notifications ({{count}})?",
   "programs_updated": "Programs updated",
-  "system_not_up_to_date": "System is not up to date"
+  "system_not_up_to_date": "System is not up to date",
+  "dashboard_layout": "Layout",
+  "dashboard_standard": "Standard"
 }

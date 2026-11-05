@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "ویجٹ بنانے کا ہدف",
+  "ai_task_waiting": "انتظار میں",
+  "ai_task_cancelled": "منسوخ کر دیا گیا",
+  "ai_task_interrupted": "خلل پڑا",
+  "ai_task_stop_requested": "روکنے کی درخواست کی گئی",
   "always_show_latest_period": "ہمیشہ تازہ ترین دستیاب مدت دکھائیں",
   "home": "گھر",
   "setup": "سیٹ اپ",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "منتخب کردہ اطلاعات کو حذف کریں ({{count}})؟",
   "programs_updated": "پروگرام اپ ڈیٹ ہو گئے۔",
   "system_not_up_to_date": "سسٹم اپ ٹو ڈیٹ نہیں ہے۔",
-  "new_programs_updates_available": "پروگرام کی نئی اپڈیٹس دستیاب ہیں۔"
+  "new_programs_updates_available": "پروگرام کی نئی اپڈیٹس دستیاب ہیں۔",
+  "dashboard_layout": "ترتیب",
+  "dashboard_standard": "معیاری"
 }

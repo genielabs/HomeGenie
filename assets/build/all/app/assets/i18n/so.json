@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Hadafka samaynta widget",
+  "ai_task_waiting": "Waa la sugayaa",
+  "ai_task_cancelled": "La joojiyay",
+  "ai_task_interrupted": "Hakaday",
+  "ai_task_stop_requested": "Joojin ayaa la codsaday",
   "always_show_latest_period": "Mar walba muuji muddada ugu dambeysay ee la heli karo",
   "home": "Guriga",
   "setup": "Dejinta",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Ma tirtirtaa ogeysiisyada la doortay ({{count}})?",
   "programs_updated": "Barnaamijyada la cusbooneysiiyay",
   "system_not_up_to_date": "Nidaamku ma cusba",
-  "new_programs_updates_available": "Cusbooneysii barnaamij cusub ayaa diyaar ah"
+  "new_programs_updates_available": "Cusbooneysii barnaamij cusub ayaa diyaar ah",
+  "dashboard_layout": "Qaabka",
+  "dashboard_standard": "Caadiga ah"
 }

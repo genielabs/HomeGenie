@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "د ویجټ جوړولو موخه",
+  "ai_task_waiting": "په تمه",
+  "ai_task_cancelled": "لغوه شو",
+  "ai_task_interrupted": "ودرول شو",
+  "ai_task_stop_requested": "د درولو غوښتنه وشوه",
   "always_show_latest_period": "تل وروستۍ شته موده وښایئ",
   "home": "کور",
   "setup": "چمتو کول",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "ټاکل شوي خبرتیاوې حذف کړئ ({{count}})؟",
   "programs_updated": "پروګرامونه تازه شول",
   "system_not_up_to_date": "سیسټم تازه نه دی",
-  "new_programs_updates_available": "د نوي پروګرام تازه معلومات شتون لري"
+  "new_programs_updates_available": "د نوي پروګرام تازه معلومات شتون لري",
+  "dashboard_layout": "ترتیب",
+  "dashboard_standard": "معیاري"
 }

@@ -2,6 +2,26 @@
 
 ## Unreleased
 
+- Let embedded widget Web Components reuse YoT APIs and inherit the parent bound module. Support explicit zUIx `:module` / `:adapter` options, explicit unbound children, and standalone loading outside YoT; dispose embedded controllers on removal.
+
+- Add selectable Custom Widget dashboard layouts in YoT, preserving the Standard grid. Discover declarative dashboard widgets without executing controllers, provide bounded previews and load-error recovery, and document container composition for AI generation. Recover small-screen vertical scrolling and refresh active dashboard widgets after confirmed runner saves, including conversation resynchronization.
+
+- Add automation programs to bounded Gemini objectives using the existing deployment ledger, compilation and recovery flow. Preserve PIDs during repair/revision, feed compiler diagnostics back to the model, protect manual edits, and list confirmed program results beside saved widgets.
+
+- Reload saved widget sources and preview when a chat Edit link targets the editor already open at the same URL. Preserve unsaved edits on declined confirmation or reload failure; keep ordinary widget navigation unchanged.
+
+- Revise saved widget objectives through an explicit Edit action. Reuse existing widget paths and actual source context, track revisions separately, reject stale/manual source changes and unselected name collisions, and require a confirmed save before completion.
+
+- Narrate live objective replies and completed-step titles using the selected chat speech engine, with queued playback, cancellation and no replay of initial/imported history. Confirm the first live Gemini widget set/composition renders; fix nested widget-ID encoding in runner saves and rollback.
+
+- Add explicit Gemini widget objectives with one automation runner per goal, bounded model continuation/repairs, verified widget saves and editor links in the task card. Preserve completed results and cooperative Stop across browsers; keep ordinary chat behavior unchanged. Real Gemini creation, composition and revision were accepted by the maintainer.
+
+- Add dedicated chat objective cards with expandable operation details and cooperative Stop requests. Preserve Automan for ordinary programs and use informational fallback for unknown renderers. Persist abandoned work as interrupted after history-service restart and keep imported tasks read-only; never resume them implicitly.
+
+- Connect Gemini/Lailama conversation and task routes to persisted `Chat.Changed` notifications. YoT reconciles changed history by stable message ID without clearing drafts or interrupting local streams, and checks revisions after resume and periodically while open to recover missed events.
+
+- Add the first agentic-chat storage checkpoint in Chat History Service 577: persistent conversation/message identity, revisions and task records with concurrent-update checks and clear/import invalidation. Preserve existing history API formats and migrate legacy arrays on successful writes. Provider events and non-blocking YoT revision reconciliation are implemented; task UI and cancellation/recovery are implemented; the deterministic demonstration has been accepted live.
+
 - Refresh bundled YoT with image attachments, chart polling recovery and latest-period selection, restored chart animation behavior, notification management improvements, localized unavailable-provider labels and bounded HTTP interface toggles/module reload recovery. Gemini image description and follow-up were confirmed live; Lailama vision remains deferred.
 
 - Add provider-independent chat image attachments: GUID files under each provider, references in chat history, portable export/import and cleanup on history clear. Gemini accepts image/text turns; YoT adds file selection, clipboard paste, thumbnails and retry preservation. Text-only providers remain compatible; Lailama vision/model integration remains pending. See [chat attachments](docs/guides/chat-attachments.md).

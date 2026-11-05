@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "ເປົ້າໝາຍສ້າງວິດເຈັດ",
+  "ai_task_waiting": "ກຳລັງລໍຖ້າ",
+  "ai_task_cancelled": "ຍົກເລີກແລ້ວ",
+  "ai_task_interrupted": "ຖືກຂັດຈັງຫວະ",
+  "ai_task_stop_requested": "ຮ້ອງຂໍໃຫ້ຢຸດແລ້ວ",
   "always_show_latest_period": "ສະແດງໄລຍະເວລາລ່າສຸດທີ່ມີຢູ່ສະເໝີ",
   "home": "ບ້ານ",
   "setup": "ຕັ້ງຄ່າ",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "ລຶບການແຈ້ງເຕືອນທີ່ເລືອກ ({{count}}) ບໍ?",
   "programs_updated": "ອັບເດດໂປຣແກຣມແລ້ວ",
   "system_not_up_to_date": "ລະບົບບໍ່ທັນສະໄໝ",
-  "new_programs_updates_available": "ມີອັບເດດໂປຣແກຣມໃໝ່"
+  "new_programs_updates_available": "ມີອັບເດດໂປຣແກຣມໃໝ່",
+  "dashboard_layout": "ຮູບແບບ",
+  "dashboard_standard": "ມາດຕະຖານ"
 }

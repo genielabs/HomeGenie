@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "ဝစ်ဂျက် ဖန်တီးရန် ရည်မှန်းချက်",
+  "ai_task_waiting": "စောင့်ဆိုင်းနေသည်",
+  "ai_task_cancelled": "ပယ်ဖျက်ပြီး",
+  "ai_task_interrupted": "ရပ်တန့်သွားသည်",
+  "ai_task_stop_requested": "ရပ်တန့်ရန် တောင်းဆိုပြီး",
   "always_show_latest_period": "ရရှိနိုင်သော နောက်ဆုံးကာလကို အမြဲပြပါ",
   "home": "အိမ်",
   "setup": "တည်ဆောက်သည်",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "ရွေးချယ်ထားသော အသိပေးချက်များ ({{count}}) ကို ဖျက်မလား။",
   "programs_updated": "ပရိုဂရမ်များကို အပ်ဒိတ်လုပ်ထားသည်။",
   "system_not_up_to_date": "စနစ်က ခေတ်မမီပါဘူး။",
-  "new_programs_updates_available": "ပရိုဂရမ် အပ်ဒိတ်အသစ်များ ရနိုင်ပါသည်။"
+  "new_programs_updates_available": "ပရိုဂရမ် အပ်ဒိတ်အသစ်များ ရနိုင်ပါသည်။",
+  "dashboard_layout": "အပြင်အဆင်",
+  "dashboard_standard": "စံ"
 }

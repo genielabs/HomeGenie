@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Nod teclynnau",
+  "ai_task_waiting": "Yn aros",
+  "ai_task_cancelled": "Wedi'i ganslo",
+  "ai_task_interrupted": "Wedi torri ar draws",
+  "ai_task_stop_requested": "Gofynnwyd am stopio",
   "always_show_latest_period": "Dangos y cyfnod diweddaraf sydd ar gael bob amser",
   "home": "Cartref",
   "setup": "Gosod",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Dileu hysbysiadau a ddewiswyd ({{count}})?",
   "programs_updated": "Rhaglenni wedi'u diweddaru",
   "system_not_up_to_date": "Nid yw'r system yn gyfredol",
-  "new_programs_updates_available": "Diweddariadau rhaglen newydd ar gael"
+  "new_programs_updates_available": "Diweddariadau rhaglen newydd ar gael",
+  "dashboard_layout": "Cynllun",
+  "dashboard_standard": "Safonol"
 }

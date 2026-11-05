@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Mục tiêu tạo tiện ích",
+  "ai_task_waiting": "Đang chờ",
+  "ai_task_cancelled": "Đã hủy",
+  "ai_task_interrupted": "Bị gián đoạn",
+  "ai_task_stop_requested": "Đã yêu cầu dừng",
   "always_show_latest_period": "Luôn hiển thị khoảng thời gian mới nhất có sẵn",
   "home": "Trang chủ",
   "setup": "Cài đặt",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Xóa thông báo đã chọn ({{count}})?",
   "programs_updated": "Chương trình được cập nhật",
   "system_not_up_to_date": "Hệ thống chưa được cập nhật",
-  "new_programs_updates_available": "Cập nhật chương trình mới có sẵn"
+  "new_programs_updates_available": "Cập nhật chương trình mới có sẵn",
+  "dashboard_layout": "Bố cục",
+  "dashboard_standard": "Tiêu chuẩn"
 }

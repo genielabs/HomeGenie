@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "விட்ஜெட் உருவாக்கும் இலக்கு",
+  "ai_task_waiting": "காத்திருக்கிறது",
+  "ai_task_cancelled": "ரத்துசெய்யப்பட்டது",
+  "ai_task_interrupted": "இடைநிறுத்தப்பட்டது",
+  "ai_task_stop_requested": "நிறுத்தக் கோரப்பட்டது",
   "always_show_latest_period": "எப்போதும் கிடைக்கக்கூடிய சமீபத்திய காலப்பகுதியைக் காட்டு",
   "home": "முகப்புப் பக்கம்",
   "setup": "அமைப்பு",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "தேர்ந்தெடுக்கப்பட்ட அறிவிப்புகளை ({{count}}) நீக்கவா?",
   "programs_updated": "நிரல்கள் புதுப்பிக்கப்பட்டன",
   "system_not_up_to_date": "சிஸ்டம் புதுப்பித்த நிலையில் இல்லை",
-  "new_programs_updates_available": "புதிய நிரல் புதுப்பிப்புகள் உள்ளன"
+  "new_programs_updates_available": "புதிய நிரல் புதுப்பிப்புகள் உள்ளன",
+  "dashboard_layout": "தளவமைப்பு",
+  "dashboard_standard": "நிலையானது"
 }

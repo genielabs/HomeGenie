@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "विजेट तयार करण्याचे उद्दिष्ट",
+  "ai_task_waiting": "प्रतीक्षेत",
+  "ai_task_cancelled": "रद्द केले",
+  "ai_task_interrupted": "व्यत्यय आला",
+  "ai_task_stop_requested": "थांबवण्याची विनंती केली",
   "always_show_latest_period": "नेहमी नवीनतम उपलब्ध कालावधी दाखवा",
   "home": "मुखपृष्ठ",
   "setup": "सेटअप",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "निवडलेल्या सूचना हटवायच्या ({{count}})?",
   "programs_updated": "कार्यक्रम अद्यतनित केले",
   "system_not_up_to_date": "प्रणाली अद्ययावत नाही",
-  "new_programs_updates_available": "नवीन प्रोग्राम अद्यतने उपलब्ध आहेत"
+  "new_programs_updates_available": "नवीन प्रोग्राम अद्यतने उपलब्ध आहेत",
+  "dashboard_layout": "मांडणी",
+  "dashboard_standard": "मानक"
 }

@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Widgeten helburua",
+  "ai_task_waiting": "Zain",
+  "ai_task_cancelled": "Bertan behera utzita",
+  "ai_task_interrupted": "Etenda",
+  "ai_task_stop_requested": "Gelditzeko eskaera eginda",
   "always_show_latest_period": "Erakutsi beti eskuragarri dagoen azken aldia",
   "home": "Etxea",
   "setup": "Konfigurazioa",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Hautatutako jakinarazpenak ({{count}}) ezabatu?",
   "programs_updated": "Programak eguneratuta",
   "system_not_up_to_date": "Sistema ez dago eguneratuta",
-  "new_programs_updates_available": "Programaren eguneratze berriak eskuragarri"
+  "new_programs_updates_available": "Programaren eguneratze berriak eskuragarri",
+  "dashboard_layout": "Diseinua",
+  "dashboard_standard": "Estandarra"
 }

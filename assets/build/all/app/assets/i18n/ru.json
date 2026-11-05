@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Задача создания виджетов",
+  "ai_task_waiting": "Ожидание",
+  "ai_task_cancelled": "Отменено",
+  "ai_task_interrupted": "Прервано",
+  "ai_task_stop_requested": "Запрошена остановка",
   "always_show_latest_period": "Всегда показывать последний доступный период",
   "home": "Дом",
   "setup": "Настраивать",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Удалить выбранные уведомления ({{count}})?",
   "programs_updated": "Программы обновлены",
   "system_not_up_to_date": "Система не обновлена",
-  "new_programs_updates_available": "Доступны новые обновления программы"
+  "new_programs_updates_available": "Доступны новые обновления программы",
+  "dashboard_layout": "Макет",
+  "dashboard_standard": "Стандартный"
 }

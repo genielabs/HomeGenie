@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "위젯 생성 목표",
+  "ai_task_waiting": "대기 중",
+  "ai_task_cancelled": "취소됨",
+  "ai_task_interrupted": "중단됨",
+  "ai_task_stop_requested": "중지 요청됨",
   "always_show_latest_period": "항상 사용 가능한 최신 기간 표시",
   "home": "집",
   "setup": "설정",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "선택한 알림({{count}})을 삭제하시겠습니까?",
   "programs_updated": "프로그램 업데이트 완료",
   "system_not_up_to_date": "시스템이 최신 상태가 아닙니다.",
-  "new_programs_updates_available": "새로운 프로그램 업데이트 가능"
+  "new_programs_updates_available": "새로운 프로그램 업데이트 가능",
+  "dashboard_layout": "레이아웃",
+  "dashboard_standard": "표준"
 }

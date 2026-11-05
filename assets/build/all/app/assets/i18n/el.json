@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Στόχος δημιουργίας γραφικών στοιχείων",
+  "ai_task_waiting": "Σε αναμονή",
+  "ai_task_cancelled": "Ακυρώθηκε",
+  "ai_task_interrupted": "Διακόπηκε",
+  "ai_task_stop_requested": "Ζητήθηκε διακοπή",
   "always_show_latest_period": "Να εμφανίζεται πάντα η πιο πρόσφατη διαθέσιμη περίοδος",
   "home": "Σπίτι",
   "setup": "Ρύθμιση",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Διαγραφή επιλεγμένων ειδοποιήσεων ({{count}});",
   "programs_updated": "Τα προγράμματα ενημερώθηκαν",
   "system_not_up_to_date": "Το σύστημα δεν είναι ενημερωμένο",
-  "new_programs_updates_available": "Διαθέσιμες νέες ενημερώσεις προγράμματος"
+  "new_programs_updates_available": "Διαθέσιμες νέες ενημερώσεις προγράμματος",
+  "dashboard_layout": "Διάταξη",
+  "dashboard_standard": "Τυπική"
 }

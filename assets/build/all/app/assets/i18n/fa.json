@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "هدف ساخت ابزارک",
+  "ai_task_waiting": "در انتظار",
+  "ai_task_cancelled": "لغو شد",
+  "ai_task_interrupted": "متوقف شد",
+  "ai_task_stop_requested": "درخواست توقف ثبت شد",
   "always_show_latest_period": "همیشه جدیدترین دورهٔ موجود را نمایش بده",
   "home": "خانه",
   "setup": "راه‌اندازی",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "اعلان‌های انتخابی ({{count}}) حذف شود؟",
   "programs_updated": "برنامه ها به روز شد",
   "system_not_up_to_date": "سیستم به روز نیست",
-  "new_programs_updates_available": "به روز رسانی های جدید برنامه در دسترس است"
+  "new_programs_updates_available": "به روز رسانی های جدید برنامه در دسترس است",
+  "dashboard_layout": "چیدمان",
+  "dashboard_standard": "استاندارد"
 }

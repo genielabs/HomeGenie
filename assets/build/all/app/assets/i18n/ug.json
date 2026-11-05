@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "ۋىجېت قۇرۇش نىشانى",
+  "ai_task_waiting": "ساقلاۋاتىدۇ",
+  "ai_task_cancelled": "بىكار قىلىندى",
+  "ai_task_interrupted": "ئۈزۈلدى",
+  "ai_task_stop_requested": "توختىتىش تەلەپ قىلىندى",
   "always_show_latest_period": "ھەر دائىم بار بولغان ئەڭ يېڭى مەزگىلنى كۆرسەت",
   "home": "ئۆي",
   "setup": "تەڭشەش",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "تاللانغان ئۇقتۇرۇشلارنى ئۆچۈرۈڭ ({{count}})?",
   "programs_updated": "پروگراممىلار يېڭىلاندى",
   "system_not_up_to_date": "سىستېما يېڭىلانمىدى",
-  "new_programs_updates_available": "يېڭى پروگرامما يېڭىلانمىلىرى بار"
+  "new_programs_updates_available": "يېڭى پروگرامما يېڭىلانمىلىرى بار",
+  "dashboard_layout": "ئورۇنلاشتۇرۇش",
+  "dashboard_standard": "ئۆلچەملىك"
 }

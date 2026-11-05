@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Cilj za widgete",
+  "ai_task_waiting": "Na čekanju",
+  "ai_task_cancelled": "Otkazano",
+  "ai_task_interrupted": "Prekinuto",
+  "ai_task_stop_requested": "Zatraženo zaustavljanje",
   "always_show_latest_period": "Uvijek prikaži najnovije dostupno razdoblje",
   "home": "Dom",
   "setup": "Postavljanje",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Izbrisati odabrane obavijesti ({{count}})?",
   "programs_updated": "Programi ažurirani",
   "system_not_up_to_date": "Sustav nije ažuran",
-  "new_programs_updates_available": "Dostupna su nova ažuriranja programa"
+  "new_programs_updates_available": "Dostupna su nova ažuriranja programa",
+  "dashboard_layout": "Raspored",
+  "dashboard_standard": "Standardni"
 }

@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "የዊጄት ግብ",
+  "ai_task_waiting": "በመጠባበቅ ላይ",
+  "ai_task_cancelled": "ተሰርዟል",
+  "ai_task_interrupted": "ተቋርጧል",
+  "ai_task_stop_requested": "ለማቆም ተጠይቋል",
   "always_show_latest_period": "ሁልጊዜ የሚገኘውን የቅርብ ጊዜ ወቅት አሳይ",
   "home": "ቤት",
   "setup": "ማዋቀር",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "የተመረጡ ማሳወቂያዎች ይሰረዙ ({{count}})?",
   "programs_updated": "ፕሮግራሞች ተዘምነዋል",
   "system_not_up_to_date": "ስርዓቱ የተዘመነ አይደለም።",
-  "new_programs_updates_available": "አዲስ የፕሮግራም ማሻሻያ አለ።"
+  "new_programs_updates_available": "አዲስ የፕሮግራም ማሻሻያ አለ።",
+  "dashboard_layout": "አቀማመጥ",
+  "dashboard_standard": "መደበኛ"
 }

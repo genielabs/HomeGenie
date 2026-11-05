@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Ebumnuche imepụta widget",
+  "ai_task_waiting": "Na-eche",
+  "ai_task_cancelled": "Akagbuola",
+  "ai_task_interrupted": "Akwụsịla nwa oge",
+  "ai_task_stop_requested": "Arịọrọ ka a kwụsị",
   "always_show_latest_period": "Gosi oge kachasị ọhụrụ dị mgbe niile",
   "home": "Ụlọ",
   "setup": "Melite",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Hichapụ ozi ahọpụtara ({{count}})?",
   "programs_updated": "Emelitere mmemme",
   "system_not_up_to_date": "Sistemụ anaghị emelite",
-  "new_programs_updates_available": "Mmelite mmemme ọhụrụ dị"
+  "new_programs_updates_available": "Mmelite mmemme ọhụrụ dị",
+  "dashboard_layout": "Nhazi",
+  "dashboard_standard": "Ọkọlọtọ"
 }

@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "គោលដៅបង្កើតធាតុក្រាហ្វិក",
+  "ai_task_waiting": "កំពុងរង់ចាំ",
+  "ai_task_cancelled": "បានបោះបង់",
+  "ai_task_interrupted": "បានផ្អាក",
+  "ai_task_stop_requested": "បានស្នើសុំឱ្យបញ្ឈប់",
   "always_show_latest_period": "បង្ហាញរយៈពេលចុងក្រោយបំផុតដែលមានជានិច្ច",
   "home": "ផ្ទះ",
   "setup": "រៀបចំ",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "លុបការជូនដំណឹងដែលបានជ្រើសរើស ({{count}})?",
   "programs_updated": "បានធ្វើបច្ចុប្បន្នភាពកម្មវិធី",
   "system_not_up_to_date": "ប្រព័ន្ធមិនទាន់សម័យទេ។",
-  "new_programs_updates_available": "ការអាប់ដេតកម្មវិធីថ្មីអាចរកបាន"
+  "new_programs_updates_available": "ការអាប់ដេតកម្មវិធីថ្មីអាចរកបាន",
+  "dashboard_layout": "ប្លង់",
+  "dashboard_standard": "ស្តង់ដារ"
 }

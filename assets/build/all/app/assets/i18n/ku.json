@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Armanca widgetan",
+  "ai_task_waiting": "Li bendê ye",
+  "ai_task_cancelled": "Hat betalkirin",
+  "ai_task_interrupted": "Hat qutkirin",
+  "ai_task_stop_requested": "Rawestandin hat xwestin",
   "always_show_latest_period": "Her dem heyama herî dawî ya berdest nîşan bide",
   "home": "Xane",
   "setup": "Damezirandin",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Agahiyên hilbijartî ({{count}}) jêbirin?",
   "programs_updated": "Bername hatin nûkirin",
   "system_not_up_to_date": "Pergal ne rojane ye",
-  "new_programs_updates_available": "Nûvekirinên bernameyê yên nû hene"
+  "new_programs_updates_available": "Nûvekirinên bernameyê yên nû hene",
+  "dashboard_layout": "Rêzkirin",
+  "dashboard_standard": "Standard"
 }

@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "ويجيٽ ٺاهڻ جو مقصد",
+  "ai_task_waiting": "انتظار ۾",
+  "ai_task_cancelled": "رد ڪيو ويو",
+  "ai_task_interrupted": "رڪاوٽ پئي",
+  "ai_task_stop_requested": "روڪڻ جي درخواست ڪئي وئي",
   "always_show_latest_period": "هميشه تازو موجود مدو ڏيکاريو",
   "home": "گھر",
   "setup": "سيٽ اپ ڪريو",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "منتخب ٿيل اطلاعن کي حذف ڪريو ({{count}})؟",
   "programs_updated": "پروگرام اپڊيٽ ڪيا ويا",
   "system_not_up_to_date": "سسٽم جديد نه آهي",
-  "new_programs_updates_available": "نئون پروگرام اپڊيٽ دستياب آهي"
+  "new_programs_updates_available": "نئون پروگرام اپڊيٽ دستياب آهي",
+  "dashboard_layout": "ترتيب",
+  "dashboard_standard": "معياري"
 }

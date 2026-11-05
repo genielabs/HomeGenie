@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Cholinga chopanga widget",
+  "ai_task_waiting": "Ikudikira",
+  "ai_task_cancelled": "Yathetsedwa",
+  "ai_task_interrupted": "Yasokonezedwa",
+  "ai_task_stop_requested": "Kupempha kuyimitsa kwatumizidwa",
   "always_show_latest_period": "Onetsani nthawi yaposachedwa yomwe ilipo nthawi zonse",
   "home": "Kunyumba",
   "setup": "Khazikitsa",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Chotsani zidziwitso zosankhidwa ({{count}})?",
   "programs_updated": "Mapulogalamu asinthidwa",
   "system_not_up_to_date": "Dongosolo silinakhalepo",
-  "new_programs_updates_available": "Zosintha zatsopano zilipo"
+  "new_programs_updates_available": "Zosintha zatsopano zilipo",
+  "dashboard_layout": "Kapangidwe",
+  "dashboard_standard": "Wamba"
 }

@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Vidinate loomise eesmärk",
+  "ai_task_waiting": "Ootel",
+  "ai_task_cancelled": "Tühistatud",
+  "ai_task_interrupted": "Katkestatud",
+  "ai_task_stop_requested": "Peatamine taotletud",
   "always_show_latest_period": "Kuva alati uusim saadaolev periood",
   "home": "Avaleht",
   "setup": "Seadistamine",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Kas kustutada valitud märguanded ({{count}})?",
   "programs_updated": "Programmid uuendatud",
   "system_not_up_to_date": "Süsteem ei ole ajakohane",
-  "new_programs_updates_available": "Saadaval on uued programmivärskendused"
+  "new_programs_updates_available": "Saadaval on uued programmivärskendused",
+  "dashboard_layout": "Paigutus",
+  "dashboard_standard": "Standardne"
 }

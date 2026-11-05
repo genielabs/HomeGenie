@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "উইজেট তৈরির লক্ষ্য",
+  "ai_task_waiting": "অপেক্ষায়",
+  "ai_task_cancelled": "বাতিল করা হয়েছে",
+  "ai_task_interrupted": "বাধাপ্রাপ্ত",
+  "ai_task_stop_requested": "থামানোর অনুরোধ করা হয়েছে",
   "always_show_latest_period": "সর্বদা সর্বশেষ উপলব্ধ সময়কাল দেখান",
   "home": "হোম",
   "setup": "সেটআপ",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "নির্বাচিত বিজ্ঞপ্তি ({{count}}) মুছবেন?",
   "programs_updated": "প্রোগ্রাম আপডেট করা হয়েছে",
   "system_not_up_to_date": "সিস্টেম আপ টু ডেট নয়",
-  "new_programs_updates_available": "নতুন প্রোগ্রাম আপডেট উপলব্ধ"
+  "new_programs_updates_available": "নতুন প্রোগ্রাম আপডেট উপলব্ধ",
+  "dashboard_layout": "বিন্যাস",
+  "dashboard_standard": "সাধারণ"
 }

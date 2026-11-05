@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Cilj ustvarjanja gradnikov",
+  "ai_task_waiting": "Čakanje",
+  "ai_task_cancelled": "Preklicano",
+  "ai_task_interrupted": "Prekinjeno",
+  "ai_task_stop_requested": "Zahtevana ustavitev",
   "always_show_latest_period": "Vedno prikaži najnovejše razpoložljivo obdobje",
   "home": "Domov",
   "setup": "Nastavitev",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Želite izbrisati izbrana obvestila ({{count}})?",
   "programs_updated": "Programi posodobljeni",
   "system_not_up_to_date": "Sistem ni posodobljen",
-  "new_programs_updates_available": "Na voljo so nove posodobitve programa"
+  "new_programs_updates_available": "Na voljo so nove posodobitve programa",
+  "dashboard_layout": "Postavitev",
+  "dashboard_standard": "Standardna"
 }

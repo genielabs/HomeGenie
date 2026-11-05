@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Objetivo de widgets",
+  "ai_task_waiting": "A aguardar",
+  "ai_task_cancelled": "Cancelado",
+  "ai_task_interrupted": "Interrompido",
+  "ai_task_stop_requested": "Paragem solicitada",
   "always_show_latest_period": "Mostrar sempre o período mais recente disponível",
   "home": "Lar",
   "setup": "Configurar",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Excluir notificações selecionadas ({{count}})?",
   "programs_updated": "Programas atualizados",
   "system_not_up_to_date": "O sistema não está atualizado",
-  "new_programs_updates_available": "Novas atualizações do programa disponíveis"
+  "new_programs_updates_available": "Novas atualizações do programa disponíveis",
+  "dashboard_layout": "Disposição",
+  "dashboard_standard": "Padrão"
 }

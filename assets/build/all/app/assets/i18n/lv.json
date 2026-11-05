@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Logrīku izveides mērķis",
+  "ai_task_waiting": "Gaida",
+  "ai_task_cancelled": "Atcelts",
+  "ai_task_interrupted": "Pārtraukts",
+  "ai_task_stop_requested": "Pieprasīta apturēšana",
   "always_show_latest_period": "Vienmēr rādīt jaunāko pieejamo periodu",
   "home": "Sākums",
   "setup": "Iestatīšana",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Vai dzēst atlasītos paziņojumus ({{count}})?",
   "programs_updated": "Programmas atjauninātas",
   "system_not_up_to_date": "Sistēma nav atjaunināta",
-  "new_programs_updates_available": "Ir pieejami jauni programmas atjauninājumi"
+  "new_programs_updates_available": "Ir pieejami jauni programmas atjauninājumi",
+  "dashboard_layout": "Izkārtojums",
+  "dashboard_standard": "Standarta"
 }

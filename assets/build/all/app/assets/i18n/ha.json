@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Manufar ƙirƙirar widget",
+  "ai_task_waiting": "Ana jira",
+  "ai_task_cancelled": "An soke",
+  "ai_task_interrupted": "An katse",
+  "ai_task_stop_requested": "An nemi a dakatar",
   "always_show_latest_period": "Koyaushe nuna sabon lokacin da yake samuwa",
   "home": "Gida",
   "setup": "Saita",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Share zaɓaɓɓun sanarwar ({{count}})?",
   "programs_updated": "An sabunta shirye-shirye",
   "system_not_up_to_date": "Tsarin bai sabunta ba",
-  "new_programs_updates_available": "Akwai sabbin sabuntawar shirin"
+  "new_programs_updates_available": "Akwai sabbin sabuntawar shirin",
+  "dashboard_layout": "Tsari",
+  "dashboard_standard": "Na yau da kullum"
 }

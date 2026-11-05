@@ -2,28 +2,38 @@
     const cid = 'demo-big-button';
     const moduleUrl = new URL(import.meta.url);
     const baseUrl = moduleUrl.href.substring(0, moduleUrl.href.lastIndexOf('/') + 1);
-
-    // Extract 'mode' from URL search parameters, default to 'closed'
-    const shadowMode = moduleUrl.searchParams.get('mode') || 'closed';
-
-    // Gather all URL parameters as options
+    const shadowMode = moduleUrl.searchParams.get('mode') === 'open' ? 'open' : 'closed';
     const params = Object.fromEntries(moduleUrl.searchParams.entries());
 
     const register = () => {
-        if (!customElements.get(cid)) {
-            customElements.define(cid, class extends HTMLElement {
-                connectedCallback() {
-                    zuix.loadComponent(this,
-                        baseUrl + 'big-button',
-                        undefined,
-                        {
-                            ...params,
-                            container: this.attachShadow({ mode: shadowMode })
-                        }
-                    );
+        if (customElements.get(cid)) return;
+        customElements.define(cid, class extends HTMLElement {
+            connectedCallback() {
+                // Moving an existing element must not recreate its controller or ShadowRoot.
+                if (this.widgetMounted) return;
+                this.widgetMounted = true;
+                this.widgetOptions = this.widgetOptions || Array.from(this.attributes)
+                    .filter(a => a.name.startsWith(':')).map(a => [a.name, a.value]);
+                this.widgetOptions.forEach(([name, value]) => this.setAttribute(name, value));
+                this.widgetRoot = this.widgetRoot || this.attachShadow({mode: shadowMode});
+                const loader = customElements.get('zx-widget');
+                this.widgetBridge = loader?.mount?.(this, baseUrl + 'big-button', {...params}, this.widgetRoot);
+                if (!this.widgetBridge) {
+                    zuix.loadComponent(this, baseUrl + 'big-button', undefined,
+                        {...params, container: this.widgetRoot});
                 }
-            });
-        }
+            }
+            disconnectedCallback() {
+                queueMicrotask(() => {
+                    if (this.isConnected || !this.widgetMounted) return;
+                    this.widgetMounted = false;
+                    this.widgetBridge?.dispose();
+                    this.widgetBridge = undefined;
+                    zuix.unload(this);
+                    this.widgetRoot.replaceChildren();
+                });
+            }
+        });
     };
 
     if (typeof self.zuix === 'undefined') {

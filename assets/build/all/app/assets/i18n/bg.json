@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Цел за създаване на джаджи",
+  "ai_task_waiting": "Изчакване",
+  "ai_task_cancelled": "Отменено",
+  "ai_task_interrupted": "Прекъснато",
+  "ai_task_stop_requested": "Поискано спиране",
   "always_show_latest_period": "Винаги показвай последния наличен период",
   "home": "Дом",
   "setup": "Настройка",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Изтриване на избраните известия ({{count}})?",
   "programs_updated": "Програмите са актуализирани",
   "system_not_up_to_date": "Системата не е актуална",
-  "new_programs_updates_available": "Налични са нови актуализации на програмата"
+  "new_programs_updates_available": "Налични са нови актуализации на програмата",
+  "dashboard_layout": "Оформление",
+  "dashboard_standard": "Стандартно"
 }

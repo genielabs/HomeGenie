@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Widgetkészítési cél",
+  "ai_task_waiting": "Várakozás",
+  "ai_task_cancelled": "Megszakítva",
+  "ai_task_interrupted": "Félbeszakadt",
+  "ai_task_stop_requested": "Leállítás kérve",
   "always_show_latest_period": "Mindig a legújabb elérhető időszak megjelenítése",
   "home": "Otthon",
   "setup": "Beállítás",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Törli a kiválasztott értesítéseket ({{count}})?",
   "programs_updated": "Programok frissítve",
   "system_not_up_to_date": "A rendszer nem naprakész",
-  "new_programs_updates_available": "Új programfrissítések érhetők el"
+  "new_programs_updates_available": "Új programfrissítések érhetők el",
+  "dashboard_layout": "Elrendezés",
+  "dashboard_standard": "Szabványos"
 }

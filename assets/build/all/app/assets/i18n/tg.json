@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Ҳадафи сохтани виҷет",
+  "ai_task_waiting": "Дар интизорӣ",
+  "ai_task_cancelled": "Бекор карда шуд",
+  "ai_task_interrupted": "Қатъ шуд",
+  "ai_task_stop_requested": "Дархости боздоштан фиристода шуд",
   "always_show_latest_period": "Ҳамеша давраи охирини дастрасро нишон диҳед",
   "home": "Хона",
   "setup": "Ташкил кардан",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Огоҳиҳои интихобшударо нест кунед ({{count}})?",
   "programs_updated": "Барномаҳо нав карда шуданд",
   "system_not_up_to_date": "Система то ба имрӯз нест",
-  "new_programs_updates_available": "Навсозиҳои нави барнома дастрасанд"
+  "new_programs_updates_available": "Навсозиҳои нави барнома дастрасанд",
+  "dashboard_layout": "Тарҳ",
+  "dashboard_standard": "Стандартӣ"
 }

@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Ète ṣíṣe widget",
+  "ai_task_waiting": "Ń dúró",
+  "ai_task_cancelled": "Ti fagilé",
+  "ai_task_interrupted": "Ti dá dúró",
+  "ai_task_stop_requested": "A ti béèrè pé kí ó dá dúró",
   "always_show_latest_period": "Fi àkókò tuntun jù lọ tí ó wà hàn nígbà gbogbo",
   "home": "Ile",
   "setup": "Ṣeto",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Pa awọn iwifunni ti o yan ({{count}}) rẹ bi?",
   "programs_updated": "Awọn eto imudojuiwọn",
   "system_not_up_to_date": "Eto kii ṣe imudojuiwọn",
-  "new_programs_updates_available": "Awọn imudojuiwọn eto titun wa"
+  "new_programs_updates_available": "Awọn imudojuiwọn eto titun wa",
+  "dashboard_layout": "Ìṣètò",
+  "dashboard_standard": "Ìwọ̀n àfọwọ́ṣe"
 }

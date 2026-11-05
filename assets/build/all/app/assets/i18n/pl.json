@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "Cel tworzenia widżetów",
+  "ai_task_waiting": "Oczekiwanie",
+  "ai_task_cancelled": "Anulowano",
+  "ai_task_interrupted": "Przerwano",
+  "ai_task_stop_requested": "Zażądano zatrzymania",
   "always_show_latest_period": "Zawsze pokazuj najnowszy dostępny okres",
   "home": "Dom",
   "setup": "Organizować coś",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "Usunąć wybrane powiadomienia ({{count}})?",
   "programs_updated": "Programy zaktualizowane",
   "system_not_up_to_date": "System nie jest aktualny",
-  "new_programs_updates_available": "Dostępne są nowe aktualizacje programu"
+  "new_programs_updates_available": "Dostępne są nowe aktualizacje programu",
+  "dashboard_layout": "Układ",
+  "dashboard_standard": "Standardowy"
 }

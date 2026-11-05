@@ -1,4 +1,9 @@
 {
+  "ai_widget_objective": "元件建立目標",
+  "ai_task_waiting": "等待中",
+  "ai_task_cancelled": "已取消",
+  "ai_task_interrupted": "已中斷",
+  "ai_task_stop_requested": "已要求停止",
   "always_show_latest_period": "一律顯示最新可用時段",
   "home": "家",
   "setup": "設定",
@@ -650,5 +655,7 @@
   "notification_delete_confirm": "刪除選定的通知 ({{count}})？",
   "programs_updated": "程式已更新",
   "system_not_up_to_date": "系統尚未更新至最新版本",
-  "new_programs_updates_available": "有新的程式更新可用"
+  "new_programs_updates_available": "有新的程式更新可用",
+  "dashboard_layout": "版面配置",
+  "dashboard_standard": "標準"
 }
