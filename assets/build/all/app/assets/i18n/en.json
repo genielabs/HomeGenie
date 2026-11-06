@@ -656,5 +656,7 @@
   "programs_updated": "Programs updated",
   "system_not_up_to_date": "System is not up to date",
   "dashboard_layout": "Layout",
-  "dashboard_standard": "Standard"
+  "dashboard_standard": "Standard",
+  "preset_conflict": "This preset changed on the server. Your changes are still available in this browser.",
+  "preset_conflict_recovery": "Update to load the server copy and replace local changes, or save your changes as a new preset."
 }

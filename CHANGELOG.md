@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Skip server writes for unchanged applied/confirmed client presets. Ignore live sensor samples and automatic widget-model/responsive-layout adaptation when determining local changes; preserve serialized reversions and conflict protection for real edits.
+
+- Prepare client preset synchronization by capturing immutable preset/server/preference snapshots, serializing local and server saves and coalescing pending writes. Wait for save confirmation before switching/deleting presets or reloading after a language change; prevent loaded-preset save echoes and report failed saves. Add server revisions and atomic conditional writes in the ScriptContext of Client configuration (111), without a new core dependency, retaining local edits on conflicts with Update or Save As recovery in Preferences. Lazily migrate existing presets, ignore runtime field samples for no-op comparison and preserve deletion generations. New clients refuse unprotected writes to older backends. Proactive preset events/badges, reconnect reconciliation and recoverable history remain future steps.
+
 - Add per-instance named widget bindings through `settings.boundModules`, `this.getBoundModule(name)` and the `bm(name)` template alias. Support inherited roles and `:module="bm('role')"` composition, explicit unbound selections and complete MQTT IDs while retaining the existing primary binding.
 
 - Configure named roles centrally for ordinary widgets and custom Dashboard containers. Share module selectors with classic controls, including device icons, names and single-line IDs with leading ellipsis; retain missing/offline selections and hide an empty redundant primary selector without hiding existing associations.

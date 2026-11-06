@@ -4,13 +4,16 @@ Consolidated status: 2026-11-06, including maintainer-confirmed named widget bin
 
 This is the active task list. Detailed stage-by-stage decisions, earlier API names, test counts and acceptance evidence are preserved in [implementation history](roadmap-history.md); they do not override this status. Completed work is not reopened merely because an earlier checkpoint still says pending.
 
-## Client preset synchronization — next task (2026-11-06)
+## Client preset synchronization (2026-11-06)
 
-- [ ] Emit a system change event after successful preset save/delete, carrying preset name, current revision and originating client/request identity. Show a Preferences (client) badge only when the selected preset changed elsewhere; offer explicit Update rather than replacing an open session automatically.
-- [ ] Compare actual configuration/preferences content before creating a revision; inspect and reduce redundant saves. Serialize/coalesce client saves and wait for server completion before switching presets. Applying a remote preset must not echo it back as another save.
-- [ ] Reject stale writes against the server revision while retaining local edits, with Update or Save as a new preset as recovery. Check revisions after reconnect/resume to recover missed events; handle selected-preset deletion explicitly.
-- [ ] Keep the current revision monotonically increasing and retain at most ten previous recoverable versions per preset. Restoring an older snapshot creates a new revision. History is separate from conflict detection; use atomic, coordinated persistence for both.
-- Next separate task after the accepted named-binding checkpoint below. No preset synchronization/history/conflict-detection code is included in this intervention; browser sessions still require explicit preset reload.
+- [x] Step 1: capture immutable preset/server/preferences snapshots, serialize local writes and coalesce/serialize server requests per preset. Drain saves before switching/deleting/reloading; suppress application-induced save echoes and report failures.
+- [x] Step 2: program 111 owns a coordinated atomic store in its ScriptContext, with no new core class with monotonic revisions, read-only legacy migration and normalized no-op comparison. Runtime module-field samples do not create revisions; widget/binding configuration and preferences do. Delete retains a hidden generation tombstone.
+- [x] Step 3: reject stale writes without automatic rebasing, retain the latest local edits and offer explicit Update or Save As recovery in Preferences. Preserve recovery after fetch errors/name collisions and after edits during a recovery save. Require the new preset protocol before sending writes to the server.
+- [x] Skip unchanged applied/confirmed preset writes at queue dispatch, ignoring live field samples and key order. Capture the applied model/responsive layout as the clean baseline; preserve pending/in-flight reversions and stale-write protection for subsequent real edits.
+- Verification: Angular compilation and **322 focused frontend tests** pass, plus **15 isolated server tests** (including concurrency and failed publication). Tests compile distributed 111 directly; XML/manifest checksums and lock sharing across script recompilations pass. Vulkan was not modified/restarted for this checkpoint; update Client configuration (111) to **1.0.3** and reload YoT (no core rebuild is needed) and run the documented two-browser acceptance tests on a temporary preset.
+- [ ] Step 4: emit preset change events after confirmed writes/deletion, carrying name, revision and originating client/request identity. Show a Preferences badge only for changes made elsewhere; offer explicit Update rather than replacing an open session automatically.
+- [ ] Step 5: reconcile revisions after reconnect/resume to recover missed events and handle remote deletion of the selected preset explicitly. Current stale-write recovery does not proactively refresh idle clients.
+- [ ] Step 6: retain at most ten previous recoverable versions plus current. Restoring an older snapshot creates a new revision. History remains distinct from conditional-write conflict detection and deletion tombstones.
 
 ## Named widget bound modules (2026-11-06)
 

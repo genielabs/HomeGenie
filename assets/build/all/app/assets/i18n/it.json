@@ -657,5 +657,7 @@
   "system_not_up_to_date": "Il sistema non è aggiornato",
   "new_programs_updates_available": "Nuovi aggiornamenti dei programmi disponibili",
   "dashboard_layout": "Layout",
-  "dashboard_standard": "Standard"
+  "dashboard_standard": "Standard",
+  "preset_conflict": "Questo preset è cambiato sul server. Le tue modifiche sono ancora disponibili in questo browser.",
+  "preset_conflict_recovery": "Aggiorna per caricare la copia del server e sostituire le modifiche locali, oppure salva le tue modifiche come nuovo preset."
 }

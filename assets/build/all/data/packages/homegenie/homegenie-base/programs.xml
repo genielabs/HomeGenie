@@ -716,51 +716,259 @@ public static class ConversationTasks {
 Data.AddToSystemBackup(dataFolder);
 Program.Run();
 </ScriptSetup>
-    <ScriptSource>var dataFolder = Data.GetFolder(PresetsFolder);
+    <ScriptSource>var presets = new ClientPresetStore(Data.GetFolder(PresetsFolder));
 
-Api.Handle($"{apiBaseUrl}List", (args) =&gt; {
-    var files = Directory.GetFiles(dataFolder);
-    return files.Select(f =&gt; Path.GetFileNameWithoutExtension(f));
-});
-Api.Handle($"{apiBaseUrl}Add/", (args) =&gt; {
+Api.Handle($"{apiBaseUrl}Protocol", args =&gt; new { version = 2 });
+Api.Handle($"{apiBaseUrl}List", args =&gt; PresetRequest(() =&gt; presets.List()));
+Api.Handle($"{apiBaseUrl}Get/", args =&gt; PresetRequest(() =&gt; {
     var command = Api.Parse(args);
-    if (command.Data != null) {
-        var configuration = System.Text.Encoding.Default.GetString(command.Data as byte[]);
-        var presetName = command.GetOption(0);
-        if (String.IsNullOrEmpty(presetName)) {
-            presetName = "default";
-        }
-        var dataFile = Path.Combine(dataFolder, presetName + ".json");
-        File.WriteAllText(dataFile, configuration);
-    }
-    return new ResponseStatus(Status.Ok);
-});
-Api.Handle($"{apiBaseUrl}Get/", (args) =&gt; {
+    return presets.Get(command.GetOption(0)).ToString();
+}));
+Api.Handle($"{apiBaseUrl}Add/", args =&gt; PresetRequest(() =&gt; {
     var command = Api.Parse(args);
-    var presetName = command.GetOption(0);
-    if (String.IsNullOrEmpty(presetName)) {
-        presetName = "default";
-    }
-    var dataFile = Path.Combine(dataFolder, presetName + ".json");
-    var config = "{config: null, preferences: null}";
-    if (File.Exists(dataFile)) config = File.ReadAllText(dataFile);
-    return config;
-});
-Api.Handle($"{apiBaseUrl}Delete/", (args) =&gt; {
+    return presets.Save(command.GetOption(0), PresetBody(command.Data));
+}));
+Api.Handle($"{apiBaseUrl}Delete/", args =&gt; PresetRequest(() =&gt; {
     var command = Api.Parse(args);
-    var presetName = command.GetOption(0);
-    if (String.IsNullOrEmpty(presetName)) {
-        return new ResponseStatus(Status.Error);
-    }
-    var dataFile = Path.Combine(dataFolder, presetName + ".json");
-    File.Delete(dataFile);
-    return new ResponseStatus(Status.Ok);
-});
+    return presets.Delete(command.GetOption(0), PresetBody(command.Data));
+}));
 
 Program.GoBackground();
 </ScriptSource>
     <ScriptContext>const string PresetsFolder = "client-presets";
 const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
+
+static Newtonsoft.Json.Linq.JObject PresetBody(object data) {
+    var bytes = data as byte[];
+    return bytes == null || bytes.Length == 0 ? new Newtonsoft.Json.Linq.JObject()
+        : Newtonsoft.Json.Linq.JObject.Parse(System.Text.Encoding.UTF8.GetString(bytes));
+}
+static object PresetRequest(Func&lt;object&gt; operation) {
+    try { return operation(); }
+    catch (Exception error) {
+        return new { Status = "Error", Code = "PresetStorageError", Message = error.Message };
+    }
+}
+
+/// &lt;summary&gt;Single-process, atomic compare-and-swap persistence for program 111's presets.&lt;/summary&gt;
+public class ClientPresetStore
+{
+    // AppDomain data survives script recompilation; the shared dictionary uses only BCL types.
+    // Keep old and newly compiled handlers on the same lock while requests finish.
+    private static object GateForFolder(string folder)
+    {
+        var domain = AppDomain.CurrentDomain;
+        lock (domain)
+        {
+            const string key = "HomeGenie.ClientPresets.FolderLocks.v1";
+            var gates = domain.GetData(key) as System.Collections.Concurrent.ConcurrentDictionary&lt;string, object&gt;;
+            if (gates == null)
+            {
+                gates = new System.Collections.Concurrent.ConcurrentDictionary&lt;string, object&gt;(
+                    OperatingSystem.IsWindows() ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal);
+                domain.SetData(key, gates);
+            }
+            return gates.GetOrAdd(folder, _ =&gt; new object());
+        }
+    }
+    private readonly string root;
+    private readonly object gate;
+    private const long MaxRevision = 9007199254740991; // Exact in JavaScript too.
+
+    public ClientPresetStore(string folder)
+    {
+        root = Path.TrimEndingDirectorySeparator(Path.GetFullPath(folder));
+        gate = GateForFolder(root);
+    }
+
+    public string[] List()
+    {
+        lock (gate)
+            return Directory.Exists(root) ? Directory.GetFiles(root, "*.json")
+                .Where(path =&gt; Read(Path.GetFileNameWithoutExtension(path))["deleted"]?.Value&lt;bool&gt;() != true)
+                .Select(Path.GetFileNameWithoutExtension).OrderBy(name =&gt; name, StringComparer.Ordinal).ToArray() : Array.Empty&lt;string&gt;();
+    }
+
+    public JObject Get(string name)
+    {
+        lock (gate) return Read(DefaultName(name));
+    }
+
+    public JObject Save(string name, JObject request)
+    {
+        lock (gate)
+        {
+            name = DefaultName(name);
+            if (request?["config"] is not JObject || request["preferences"] is not JObject)
+                return Error("InvalidPreset", "A preset requires configuration and preferences.");
+            var current = Read(name);
+            long revision = Revision(current);
+            bool exists = current["config"] is JObject &amp;&amp; current["deleted"]?.Value&lt;bool&gt;() != true;
+            if (request["createOnly"]?.Value&lt;bool&gt;() == true &amp;&amp; exists)
+                return Conflict(current);
+            if (exists &amp;&amp; SameContent(current, request)) return Receipt(revision, false);
+            if (!Matches(current, request)) return Conflict(current);
+            var next = Content(request);
+            next["revision"] = NextRevision(revision);
+            next["updatedUtc"] = DateTimeOffset.UtcNow.ToString("O");
+            Write(name, next);
+            return Receipt(Revision(next), true);
+        }
+    }
+
+    public JObject Delete(string name, JObject request)
+    {
+        lock (gate)
+        {
+            if (string.IsNullOrEmpty(name) || name == "default")
+                return Error("InvalidPreset", "The default preset cannot be deleted.");
+            var current = Read(name);
+            if (current["config"] is not JObject || current["deleted"]?.Value&lt;bool&gt;() == true)
+                return Receipt(Revision(current), false);
+            if (!Matches(current, request)) return Conflict(current);
+            // Retain the generation across delete/recreate so an older client cannot recreate stale data.
+            var next = new JObject { ["config"] = null, ["preferences"] = null,
+                ["deleted"] = true, ["revision"] = NextRevision(Revision(current)),
+                ["updatedUtc"] = DateTimeOffset.UtcNow.ToString("O") };
+            Write(name, next);
+            return Receipt(Revision(next), true);
+        }
+    }
+
+    private static bool Matches(JObject current, JObject request)
+    {
+        if (request?["expectedRevision"] is JValue expected &amp;&amp; expected.Type == JTokenType.Integer)
+            return expected.Value&lt;long&gt;() == Revision(current);
+        // First save after browser reload: prove which actual content was loaded before editing.
+        if (Revision(current) == 0) return true;
+        if (request?["baseContent"] is JObject baseline)
+            return current["config"] is JObject &amp;&amp; SameContent(current, baseline);
+        return Revision(current) == 0;
+    }
+
+    private static long Revision(JObject preset) =&gt; preset["revision"]?.Value&lt;long&gt;() ?? 0;
+    private static long NextRevision(long revision) =&gt; revision &lt; MaxRevision ? checked(revision + 1)
+        : throw new InvalidDataException("Preset revision limit reached.");
+    private static string DefaultName(string name) =&gt; string.IsNullOrEmpty(name) ? "default" : name;
+    private string FilePath(string name) =&gt; PresetPath.Contained(root, PresetPath.Segment(name) + ".json");
+
+    private JObject Read(string name)
+    {
+        string path = FilePath(name);
+        if (!File.Exists(path)) return new JObject { ["config"] = null, ["preferences"] = null, ["revision"] = 0 };
+        // Invalid files fail closed; never treat damaged data as an absent preset.
+        var preset = JObject.Parse(File.ReadAllText(path, Encoding.UTF8));
+        if (preset["revision"] == null) preset["revision"] = 1; // Lazy, read-only legacy migration.
+        if (Revision(preset) &lt; 1 || Revision(preset) &gt; MaxRevision)
+            throw new InvalidDataException("Invalid preset revision.");
+        return preset;
+    }
+
+    private void Write(string name, JObject value)
+    {
+        string path = FilePath(name);
+        Directory.CreateDirectory(root);
+        string temporary = Path.Combine(root, ".preset-" + Guid.NewGuid().ToString("N") + ".tmp");
+        try
+        {
+            using (var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+            {
+                byte[] data = Encoding.UTF8.GetBytes(value.ToString(Formatting.None));
+                stream.Write(data);
+                stream.Flush(true);
+            }
+            PublishFile(temporary, path);
+        }
+        finally { if (File.Exists(temporary)) File.Delete(temporary); }
+    }
+
+    // Override only in isolated tests to verify failed publication leaves the previous file intact.
+    protected virtual void PublishFile(string temporary, string destination) =&gt; File.Move(temporary, destination, true);
+
+    private static JObject Content(JObject value) =&gt; new() {
+        ["config"] = value["config"]?.DeepClone(), ["preferences"] = value["preferences"]?.DeepClone() };
+    private static bool SameContent(JObject a, JObject b) =&gt; JToken.DeepEquals(Normalized(a), Normalized(b));
+    private static JToken Normalized(JObject value)
+    {
+        var content = Content(value);
+        // Module fields are live value/timestamp samples, not widget/dashboard configuration.
+        if (content["config"]?["modules"] is JArray modules)
+            foreach (var module in modules.OfType&lt;JObject&gt;()) module.Remove("fields");
+        return Canonical(content);
+    }
+    private static JToken Canonical(JToken value) =&gt; value switch {
+        JObject obj =&gt; new JObject(obj.Properties().OrderBy(p =&gt; p.Name, StringComparer.Ordinal)
+            .Select(p =&gt; new JProperty(p.Name, Canonical(p.Value)))),
+        JArray array =&gt; new JArray(array.Select(Canonical)),
+        _ =&gt; value.DeepClone()
+    };
+    private static JObject Receipt(long revision, bool changed) =&gt; new() {
+        ["Status"] = "Ok", ["revision"] = revision, ["changed"] = changed };
+    private static JObject Conflict(JObject current) =&gt; new() {
+        ["Status"] = "Error", ["Code"] = "PresetConflict", ["revision"] = Revision(current),
+        ["deleted"] = current["deleted"]?.Value&lt;bool&gt;() == true,
+        ["Message"] = "This preset changed on the server. Open Preferences to update it or save your changes as a new preset." };
+    private static JObject Error(string code, string message) =&gt; new() {
+        ["Status"] = "Error", ["Code"] = code, ["Message"] = message };
+    // These checks belong to this program too; no internal core helper is required.
+    private static class PresetPath
+    {
+        internal static string Segment(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value) || value is "." or ".." ||
+                value.EndsWith('.') || value.EndsWith(' ') ||
+                value.IndexOfAny(new[] {'/', '\\', '\0', ':', '&lt;', '&gt;', '"', '|', '?', '*'}) &gt;= 0 ||
+                value.IndexOfAny(Path.GetInvalidFileNameChars()) &gt;= 0)
+                throw new InvalidDataException("Invalid preset path component.");
+            // Windows device names are not ordinary files, even with an extension.
+            string stem = value.Split('.')[0].ToUpperInvariant();
+            if (stem is "CON" or "PRN" or "AUX" or "NUL" ||
+                stem.Length == 4 &amp;&amp; (stem.StartsWith("COM", StringComparison.Ordinal) ||
+                                     stem.StartsWith("LPT", StringComparison.Ordinal)) &amp;&amp; stem[3] is &gt;= '1' and &lt;= '9')
+                throw new InvalidDataException("Invalid preset path component.");
+            return value;
+        }
+
+        internal static string Contained(string root, string relative)
+        {
+            if (string.IsNullOrEmpty(relative) || Path.IsPathRooted(relative) ||
+                relative[0] is '/' or '\\' || relative.Contains(':') || relative.Contains('\0'))
+                throw new InvalidDataException("Invalid preset relative path.");
+            string[] parts = relative.Replace('\\', '/').Split('/');
+            foreach (string part in parts)
+            {
+                if (part == "..") throw new InvalidDataException("Preset path escapes its directory.");
+                if (part.Length != 0 &amp;&amp; part != ".") Segment(part);
+            }
+            string fullRoot = Path.TrimEndingDirectorySeparator(Path.GetFullPath(root));
+            string path = Path.GetFullPath(Path.Combine(fullRoot, relative.Replace('\\', Path.DirectorySeparatorChar)));
+            string prefix = Path.EndsInDirectorySeparator(fullRoot) ? fullRoot : fullRoot + Path.DirectorySeparatorChar;
+            var comparison = OperatingSystem.IsWindows() ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+            if (!path.StartsWith(prefix, comparison))
+                throw new InvalidDataException("Preset path escapes its directory.");
+            // The supplied root is trusted (and may be a configured data-directory
+            // link); preset-controlled descendants must not redirect it.
+            string current = fullRoot;
+            foreach (string part in Path.GetRelativePath(fullRoot, path).Split(Path.DirectorySeparatorChar))
+            {
+                current = Path.Combine(current, part);
+                NotLink(current);
+            }
+            return path;
+        }
+
+        internal static void NotLink(string path)
+        {
+            try
+            {
+                if ((File.GetAttributes(path) &amp; FileAttributes.ReparsePoint) != 0)
+                    throw new InvalidDataException("Preset path contains a symbolic link.");
+            }
+            catch (FileNotFoundException) { }
+            catch (DirectoryNotFoundException) { }
+        }
+    }
+}
 </ScriptContext>
     <ScriptErrors />
     <Data />
@@ -769,9 +977,9 @@ const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.61</PackageVersion>
       <Id>client-configs</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>0BE01D06C8342351AC31E74439BA6022</Checksum>
+      <Checksum>20CF5F9C11816CACBDE931406FF57231</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>111</Address>
