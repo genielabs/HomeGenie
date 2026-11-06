@@ -331,3 +331,29 @@ Use native zUIx option attributes (their values are JavaScript expressions evalu
 These are syntax examples: use actual saved component tags, confirmed module IDs and configured adapter IDs. `domain:address` identifies a bound module; API calls still use `domain/address/command`. Binding is available before `onCreate()`, including through nested components. An unknown explicit module stays unbound; it never silently uses the parent module. The controller accesses `this.boundModule` as usual. Check its presence and render unavailable readings as unavailable, not static values suggesting live data. A widget that controls several modules can stay unbound and use `this.apiCall`.
 
 The parent layout assigns each embedded widget its dimensions; `defaultSize` does not automatically size a raw custom tag. Use compact, responsive slots unless full-height cards are explicitly requested. Do not stretch every card across the remaining dashboard height by default. Child widgets that use height:100% need a slot with a defined height.
+
+
+### Reactive multi-module state and command feedback
+
+Inside YoT, `this.getModule('domain:address', adapterId?)` returns the current frontend `Module` reference without an HTTP request. It is available before `onCreate()` in ordinary and embedded widgets, even when the widget has no bound module. The default adapter is the widget's context (bound module / enclosing widget); an explicit adapter ID selects another configured adapter. Unknown IDs return `undefined`; never silently select the same module ID on a different adapter. Do not invent `utils.getModule`, `utils.yot`, or `this.utils` lookup APIs.
+
+Render current values immediately, then use `this.subscribe(field, handler)` for one field or `this.subscribe(module, handler)` for all property events, including fields that appear later. Both return an unsubscribable subscription and are automatically released when this widget instance unloads. They do not replay an initial value. These are event subscriptions, not HTTP polling.
+
+```javascript
+// In onCreate(). Use a confirmed module ID.
+const light = this.getModule('HomeAutomation.PhilipsHue:2');
+const render = () => {
+  const level = light?.field('Status.Level')?.decimalValue;
+  this.model().available = Number.isFinite(level);
+  this.model().level = Number.isFinite(level) ? level : null;
+  this.model().isOn = Number.isFinite(level) && level > 0;
+};
+render();
+if (light) {
+  this.subscribe(light, field => {
+    if (field.key === 'Status.Level') render();
+  });
+}
+```
+
+For a multi-light panel, resolve each confirmed module and keep independent state and subscriptions for each. Commands can use `module.control(command).subscribe(...)` or `this.apiCall` with the documented API path. Track directly owned `control` subscriptions and timers in `onDispose()`. Show sending/accepted/error feedback for the command receipt, but derive ON/OFF/level indicators from authoritative module fields; updates must also appear when another widget/app controls the device. A positive receipt alone is not confirmation of the target state. Use a bounded timeout for absent confirmation if necessary; do not retry the command automatically or fabricate success. Display unavailable/unknown for missing modules or fields. Prefer existing module/field events over recurring `Modules.Get`/`setInterval` polling.

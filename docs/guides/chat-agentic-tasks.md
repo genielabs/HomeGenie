@@ -158,3 +158,29 @@ The parent layout assigns each embedded widget its dimensions; `defaultSize` doe
 The maintainer confirmed deterministic success/error/Stop across two browsers, real Gemini widget composition and revision, program/widget objectives with retained identities, custom dashboard persistence and small-screen scrolling, live dashboard revision, and embedded YoT widget context. The current focused dashboard/conversation/embedding suite passed 35 tests with the real zUIx runtime; the generic loader fallback and reconnect behavior also passed targeted template checks. Final consolidation passed 204 frontend regression tests, 69 isolated backend tests against the shipped chat/runner/catalog sources, and Angular application template/type compilation. Package XML/catalog checksums and shared dependency references, all 11 generated source wrappers, and 7 new translation keys across 91 locales were checked; translation cache version is 53. These automated checks do not replace the outstanding live cases below.
 
 Outstanding live recovery cases remain explicit in the roadmap, including Standard restoration, missing-widget recovery, objective speech after its fix, sleep/reconnect and history clearing during work. No claim is made that those paths passed. Multi-module reactive lookup (`this.getModule`) remains a next implementation step; it is not part of the current widget API. UI/UX polish is planned before release.
+
+
+### Reactive multi-module state and command feedback
+
+Inside YoT, `this.getModule('domain:address', adapterId?)` returns the current frontend `Module` reference without an HTTP request. It is available before `onCreate()` in ordinary and embedded widgets, even when the widget has no bound module. The default adapter is the widget's context (bound module / enclosing widget); an explicit adapter ID selects another configured adapter. Unknown IDs return `undefined`; never silently select the same module ID on a different adapter. Do not invent `utils.getModule`, `utils.yot`, or `this.utils` lookup APIs.
+
+Render current values immediately, then use `this.subscribe(field, handler)` for one field or `this.subscribe(module, handler)` for all property events, including fields that appear later. Both return an unsubscribable subscription and are automatically released when this widget instance unloads. They do not replay an initial value. These are event subscriptions, not HTTP polling.
+
+```javascript
+// In onCreate(). Use a confirmed module ID.
+const light = this.getModule('HomeAutomation.PhilipsHue:2');
+const render = () => {
+  const level = light?.field('Status.Level')?.decimalValue;
+  this.model().available = Number.isFinite(level);
+  this.model().level = Number.isFinite(level) ? level : null;
+  this.model().isOn = Number.isFinite(level) && level > 0;
+};
+render();
+if (light) {
+  this.subscribe(light, field => {
+    if (field.key === 'Status.Level') render();
+  });
+}
+```
+
+For a multi-light panel, resolve each confirmed module and keep independent state and subscriptions for each. Commands can use `module.control(command).subscribe(...)` or `this.apiCall` with the documented API path. Track directly owned `control` subscriptions and timers in `onDispose()`. Show sending/accepted/error feedback for the command receipt, but derive ON/OFF/level indicators from authoritative module fields; updates must also appear when another widget/app controls the device. A positive receipt alone is not confirmation of the target state. Use a bounded timeout for absent confirmation if necessary; do not retry the command automatically or fabricate success. Display unavailable/unknown for missing modules or fields. Prefer existing module/field events over recurring `Modules.Get`/`setInterval` polling.

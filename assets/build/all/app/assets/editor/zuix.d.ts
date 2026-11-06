@@ -380,12 +380,19 @@ declare class ControllerInstance extends ContextController {
    */
   boundModule: Module;
   /**
-   * Subscribes a callback to the events of a ModuleField, receiving notifications on value changes.
-   * @param field The ModuleField to subscribe to.
+   * Resolves a current YoT module by domain:address, without a network request.
+   * Uses this widget's adapter unless adapterId is explicitly supplied.
+   * Returns undefined if unavailable; never falls back to a different adapter.
+   */
+  getModule(moduleId: string, adapterId?: string): Module | undefined;
+  /**
+   * Subscribes to one field or all property events of a module. Does not replay current values.
+   * Read/render current fields first; subscriptions are released when the widget is unloaded.
+   * @param source The ModuleField or Module to subscribe to.
    * @param callback The function to call when the field's value changes.
    * @returns The subscription object for unsubscribing.
    */
-  subscribe(field: ModuleField, callback: (f: ModuleField) => void): any;
+  subscribe(source: ModuleField | Module, callback: (f: ModuleField) => void): {unsubscribe(): void};
   /**
    * Executes an API request to a HomeGenie service or program from the widget.
    * @param methodEndPoint The API endpoint path including the method (e.g., 'domain/address/method').

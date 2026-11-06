@@ -220,7 +220,8 @@ Feedback continuation: implemented for Gemini and Lailama; automated verificatio
 - [x] Maintainer accepted dashboard selection, persistence, small-screen vertical scrolling and in-place revision (20 to 24 cards) without manually reloading the dashboard.
 - [x] Embedded widget context accepted by the maintainer: generated custom elements reuse YoT APIs; module inheritance, explicit `:module`, explicit unbound children and `:adapter` are covered by runtime integration tests. Autonomous loading outside YoT is retained.
 - [ ] Separate live recovery checks: restore Standard while preserving its widget arrangement, missing/load-failed dashboard recovery, and viewport changes with the chat drawer open.
-- [ ] Add a documented controller module lookup for reactive multi-module widgets, then update AI guidance to use module/field events for confirmed feedback instead of polling. `this.getModule` is proposed, not implemented.
+- [x] Add `this.getModule(id, adapterId?)` to ordinary/embedded controllers, editor declarations and AI guidance; document immediate state rendering and managed module/field event subscriptions instead of polling.
+- [ ] Accept a Gemini-generated reactive light panel live: initial state, external control updates, independent pending/error feedback and disposal without duplicate listeners.
 - [ ] Refine the new task/dashboard UI and UX before release. Keep this polish separate from functional acceptance.
 - [ ] Add explicit AI operations to apply a generated container to a dashboard; the first phase creates/saves containers only and leaves selection to the user.
 - [ ] Review the scattered bundled example widgets and build a small set of coherent themed dashboards with their related widgets after the layout feature is accepted.

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Expose adapter-scoped `this.getModule` in YoT widget controllers and editor declarations. Document managed field/module subscriptions and confirmed reactive command feedback for AI-generated multi-device panels.
+
 - Let embedded widget Web Components reuse YoT APIs and inherit the parent bound module. Support explicit zUIx `:module` / `:adapter` options, explicit unbound children, and standalone loading outside YoT; dispose embedded controllers on removal.
 
 - Add selectable Custom Widget dashboard layouts in YoT, preserving the Standard grid. Discover declarative dashboard widgets without executing controllers, provide bounded previews and load-error recovery, and document container composition for AI generation. Recover small-screen vertical scrolling and refresh active dashboard widgets after confirmed runner saves, including conversation resynchronization.
