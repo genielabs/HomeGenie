@@ -540,3 +540,8 @@ if (light) {
 ```
 
 For a multi-light panel, resolve each confirmed module and keep independent state and subscriptions for each. Commands can use `module.control(command).subscribe(...)` or `this.apiCall` with the documented API path. Track directly owned `control` subscriptions and timers in `onDispose()`. Show sending/accepted/error feedback for the command receipt, but derive ON/OFF/level indicators from authoritative module fields; updates must also appear when another widget/app controls the device. A positive receipt alone is not confirmation of the target state. Use a bounded timeout for absent confirmation if necessary; do not retry the command automatically or fabricate success. Display unavailable/unknown for missing modules or fields. Prefer existing module/field events over recurring `Modules.Get`/`setInterval` polling.
+
+
+### Flex alignment for embedded widgets
+
+With flex-layout attributes, row alignment is cross-axis then main-axis; column alignment is main-axis then cross-axis. To stretch embedded widget slots vertically in a horizontal panel, use `layout="row stretch-center"`, not `row center-stretch`. Changing only row/column can collapse slots containing absolutely positioned widget content. Preserve nonzero slot dimensions when revising a composite layout.

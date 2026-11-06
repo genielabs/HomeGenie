@@ -537,7 +537,7 @@ public sealed class AiSkillCatalog
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.78</PackageVersion>
+      <PackageVersion>1.0.79</PackageVersion>
       <Id>context-engine</Id>
       <Version>1.0.8</Version>
       <Required>true</Required>
@@ -865,7 +865,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.78</PackageVersion>
+      <PackageVersion>1.0.79</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -2682,7 +2682,7 @@ public static class LailamaModelDefaults {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.78</PackageVersion>
+      <PackageVersion>1.0.79</PackageVersion>
       <Id>lailama</Id>
       <Version>1.3.15</Version>
       <Required>true</Required>
@@ -2888,7 +2888,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.78</PackageVersion>
+      <PackageVersion>1.0.79</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -3074,7 +3074,7 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.78</PackageVersion>
+      <PackageVersion>1.0.79</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -3107,7 +3107,7 @@ Program.Setup(() =&gt; {
     // This method is used to register this program as a "AI intent handler"
     Program.Implements(
         "@AI:Genie",
-        "AI.Genies/Gemini", new { requests = new { version = 1, generate = true, execute = true }, chat = new { requestVersion = 1, feedback = true, context = new [] { "devices", "widgets", "automationPrograms", "dashboards", "deepKnowledge" }, capabilities = new [] { "deviceControl", "automation", "widgets" } } }
+        "AI.Genies/Gemini", new { requests = new { version = 1, generate = true, execute = true }, chat = new { requestVersion = 1, cancelVersion = 1, feedback = true, context = new [] { "devices", "widgets", "automationPrograms", "dashboards", "deepKnowledge" }, capabilities = new [] { "deviceControl", "automation", "widgets" } } }
     ).AddOption("ApiKey", "", "1. Google Gemini AI API key", "password")
      .AddOption("ModelId", "gemini-flash-latest", "2. Model ID", "text")
      .AddOption("SystemInstructions", "", "3. System Instructions", $"editor:file:{systemPromptFile}:markdown");
@@ -3155,6 +3155,9 @@ Api.Handle("AI.Genies/Gemini/Request.Cancel", input =&gt; ForwardBackgroundReque
 // ===================================================================
 
 string API_URL = "AI.Genies/Gemini";
+var promptLifetime=new GeminiPromptLifetime();
+When.ProgramStopping(()=&gt;{promptLifetime.Dispose();return true;});
+
 
 string geminiApiKey = Program.Option("ApiKey").Value.Trim();
 string geminiModelId = Program.Option("ModelId").Value.Trim();
@@ -3354,6 +3357,9 @@ Func&lt;JObject, JObject&gt; prepareScopedContext = input =&gt; {
 
 Api.Handle(API_URL + "/Goals.Describe", _ =&gt; new {version=1, widgets=true, automation=true});
 Api.Handle(API_URL + "/Goal.Start", input =&gt; {
+    if(!promptLifetime.TryBegin(Guid.NewGuid().ToString("N"),out var startLease,out _))
+        return (object)new {Status="Error",state="busy",Message="Gemini is still processing a request. Wait for it to finish stopping."};
+    using(startLease) {
     try {
         object raw=Api.Parse(input).Data;
         if(raw is byte[] bytes)raw=Encoding.UTF8.GetString(bytes);
@@ -3364,6 +3370,7 @@ Api.Handle(API_URL + "/Goal.Start", input =&gt; {
             ["providerId"]="933",["input"]=envelope,["prepared"]=prepared,
             ["template"]=File.ReadAllText(Path.Combine(Data.GetFolder(),"gemini_system_prompt.txt"))});
     }catch(Exception ex){return (object)new ResponseStatus(Status.Error,ex.Message);}
+    }
 });
 
 Api.Handle(API_URL + "/Context.Preview", input =&gt; {
@@ -3453,13 +3460,32 @@ Func&lt;object, string, object, string, string&gt; generateWithProvider = (messa
 object geniePromptGate = new object();
 Func&lt;object, JObject, object&gt; processGeniePrompt = (userCommand, feedback) =&gt;
 {
-    lock (geniePromptGate) {
+    object initial=Api.Parse(userCommand)?.Data??userCommand;
+    if(initial is byte[] initialBytes)initial=Encoding.UTF8.GetString(initialBytes);
+    if(initial is string initialText &amp;&amp; initialText.TrimStart().StartsWith("{"))initial=JObject.Parse(initialText);
+    string promptId=feedback!=null?"feedback:"+(string)feedback["sourceRequestId"]+":"+(string)feedback["eventId"]:Guid.NewGuid().ToString("N");
+    if(initial is JObject envelope &amp;&amp; envelope["prompt"]!=null) {
+        promptId=(string)envelope["requestId"];
+        if(envelope.Properties().Any(p=&gt;!new[]{"requestId","prompt"}.Contains(p.Name)) || !Guid.TryParseExact(promptId,"N",out _))
+            return new JObject{["Status"]="Error",["Message"]="Invalid prompt envelope."};
+        initial=envelope["prompt"];
+    }
+    if(!promptLifetime.TryBegin(promptId,out var promptLease,out var promptState))
+        return new JObject{["Status"]=promptState=="cancelled"?"Ok":"Error",["state"]=promptState,["requestId"]=promptId,["Message"]="Gemini is busy or this request has already ended."};
+    using(var lease=promptLease) {
+    Func&lt;bool&gt; activeGoal=()=&gt; {
+        var snapshot=contextToken(Api.Call("System.Utility/ChatHistory/Conversation.Get",new JObject{["StoreId"]=storeId}));
+        if((string)snapshot?["Status"]!="Ok" || snapshot?["messages"] is not JArray rows)throw new InvalidOperationException("Cannot verify active chat objectives.");
+        return rows.Any(m=&gt;m["metadata"]?["agenticTask"] is JObject task &amp;&amp; (bool?)task["readOnly"]!=true &amp;&amp;
+            new[]{"pending","running","waiting"}.Contains((string)task["state"]));
+    };
+    if(activeGoal())return new JObject{["Status"]="Error",["state"]="busy",["Message"]="An objective is still active. Wait for it to finish or stop it first."};
     JObject scopedRequest = null;
     JObject preparedContext = null;
     string msg;
     try {
-        var request = Api.Parse(userCommand);
-        object body = request?.Data ?? userCommand;
+        lease.Token.ThrowIfCancellationRequested();
+        object body = initial;
         if (body is byte[] bytes) body = Encoding.UTF8.GetString(bytes);
         if (body is string text) {
             if (text.TrimStart().StartsWith("{")) {
@@ -3487,7 +3513,8 @@ Func&lt;object, JObject, object&gt; processGeniePrompt = (userCommand, feedback)
             // Old caches may include categories excluded by this profile. Never use them here.
             currentCacheName = ""; cacheExpiration = DateTime.MinValue;
         }
-    } catch (Exception ex) { return new ResponseText("**Error:** " + ex.Message); }
+    } catch(OperationCanceledException) {return new JObject{["Status"]="Ok",["state"]="cancelled",["requestId"]=promptId};}
+      catch (Exception ex) { return new ResponseText("**Error:** " + ex.Message); }
     var telemetry = new ChatRequestMetrics(Api, Program.Module.Address);
     telemetry.ContextProfileKey = (string)preparedContext?["profileKey"];
     var userMessage = ChatMessage.Create("user", msg);
@@ -3527,8 +3554,9 @@ Func&lt;object, JObject, object&gt; processGeniePrompt = (userCommand, feedback)
           ["messages"]=JArray.FromObject(payloadContents),["preparedContext"]=preparedContext,["request"]=scopedRequest,
           ["template"]=File.ReadAllText(Path.Combine(Data.GetFolder(),"gemini_system_prompt.txt")),
           ["systemPrompt"]=fullContext,["output"]=genConfig,["cache"]=hasCache?currentCacheName:null,
-          ["scheduled"]=false,["elapsedBefore"]=telemetry.ElapsedMs
+          ["scheduled"]=false,["elapsedBefore"]=telemetry.ElapsedMs,["cancellationToken"]=lease.Token
       }));
+      lease.Token.ThrowIfCancellationRequested();
       if(coordinated is not JObject result|| (string)result["Status"]=="Error")
           throw new InvalidOperationException((string)coordinated?["Message"]??"AI Genie coordinator unavailable.");
       if(result["version"]?.Type!=JTokenType.Integer||(int)result["version"]!=1||(string)result["requestId"]!=telemetry.RequestId)
@@ -3538,8 +3566,14 @@ Func&lt;object, JObject, object&gt; processGeniePrompt = (userCommand, feedback)
       if(result["reply"]?.Type!=JTokenType.String||!new[]{"completed","error"}.Contains((string)result["outcome"]))
           throw new InvalidOperationException("AI Genie returned an invalid final reply.");
       string finalReply=(string)result["reply"];
-      telemetry.SaveReply(ChatMessage.Create("model",finalReply),(string)result["outcome"]);
-      return new ResponseText(finalReply);
+      return lease.Commit&lt;object&gt;(()=&gt; {
+          telemetry.SaveReply(ChatMessage.Create("model",finalReply),(string)result["outcome"]);
+          return new ResponseText(finalReply);
+      });
+    }
+    catch(OperationCanceledException) {
+        telemetry.SaveReply(ChatMessage.Create("model",""),"cancelled");
+        return new JObject{["Status"]="Ok",["state"]="cancelled",["requestId"]=promptId};
     }
     catch (Exception ex)
     {
@@ -3554,6 +3588,18 @@ Func&lt;object, JObject, object&gt; processGeniePrompt = (userCommand, feedback)
     }
 };
 Api.Handle(API_URL + "/Prompt.Submit", input =&gt; processGeniePrompt(input,null));
+foreach(string operation in new[]{"Cancel","Status"}) {
+    bool cancel=operation=="Cancel";
+    Api.Handle(API_URL+"/Prompt."+operation,input=&gt; {
+        try {
+            object raw=Api.Parse(input).Data;
+            if(raw is byte[] bytes)raw=Encoding.UTF8.GetString(bytes);
+            var data=contextToken(raw) as JObject;
+            if(data==null || data.Properties().Any(p=&gt;p.Name!="requestId"))throw new InvalidOperationException("Expected a prompt request UUID.");
+            return promptLifetime.Status((string)data["requestId"],cancel);
+        }catch(Exception ex){return (object)new ResponseStatus(Status.Error,ex.Message);}
+    });
+}
 Api.Handle(API_URL+"/Chat.Feedback", input=&gt;Api.Call("System.Utility/AiGenie/Chat.Feedback.Run",new Dictionary&lt;string,object&gt;{
     ["providerId"]=Program.Module.Address,["storeId"]=storeId,["request"]=Api.Parse(input).Data,
     ["process"]=new Func&lt;JObject,JObject,object&gt;((request,feedback)=&gt;{
@@ -3790,17 +3836,80 @@ public object ForwardBackgroundRequest(object payload,string providerId,string o
         return call("System.Utility/AiGenie/Request."+operation,request);
     } catch(Exception) {return new JObject{["version"]=1,["state"]="failed",["error"]="Invalid request or AI Genie service unavailable."};}
 }
+
+// Correlated prompt ownership lasts until the whole turn has unwound, including after cancellation.
+public sealed class GeminiPromptLifetime : IDisposable {
+    readonly object gate=new object();
+    readonly Dictionary&lt;string,string&gt; ended=new Dictionary&lt;string,string&gt;();
+    readonly Queue&lt;string&gt; endedOrder=new Queue&lt;string&gt;();
+    readonly HashSet&lt;string&gt; earlyStops=new HashSet&lt;string&gt;();
+    Lease current;bool stopping;
+    public sealed class Lease : IDisposable {
+        internal readonly GeminiPromptLifetime Owner;
+        internal readonly CancellationTokenSource Cancellation=new CancellationTokenSource();
+        internal bool Cancelled,Finalized;
+        public readonly string Id;
+        internal Lease(GeminiPromptLifetime owner,string id){Owner=owner;Id=id;}
+        public CancellationToken Token=&gt;Cancellation.Token;
+        public T Commit&lt;T&gt;(Func&lt;T&gt; save) {
+            lock(Owner.gate) {
+                if(Cancelled || Owner.stopping)throw new OperationCanceledException(Token);
+                var result=save();Finalized=true;return result;
+            }
+        }
+        public void Dispose(){Owner.End(this);}
+    }
+    public bool TryBegin(string id,out Lease lease,out string state) {
+        if(string.IsNullOrEmpty(id) || id.Length&gt;320 || id.Any(c=&gt;!char.IsAsciiLetterOrDigit(c) &amp;&amp; c!='-' &amp;&amp; c!='_' &amp;&amp; c!='.' &amp;&amp; c!=':'))throw new InvalidOperationException("Invalid prompt request identity.");
+        lock(gate) {
+            lease=null;
+            if(stopping){state="unavailable";return false;}
+            if(earlyStops.Contains(id)){state="cancelled";return false;}
+            if(ended.TryGetValue(id,out state))return false; // A late/replayed submit never starts again.
+            if(current!=null){state="busy";return false;}
+            current=lease=new Lease(this,id);state="running";return true;
+        }
+    }
+    void Remember(string id,string state) {
+        if(!ended.ContainsKey(id))endedOrder.Enqueue(id);
+        ended[id]=state;while(endedOrder.Count&gt;128)ended.Remove(endedOrder.Dequeue());
+    }
+    void End(Lease lease) {
+        lock(gate) {
+            if(!ReferenceEquals(current,lease))return;
+            Remember(lease.Id,lease.Cancelled?"cancelled":"completed");current=null;lease.Cancellation.Dispose();
+        }
+    }
+    public object Status(string id,bool cancel=false) {
+        if(string.IsNullOrEmpty(id) || id.Length&gt;320 || id.Any(c=&gt;!char.IsAsciiLetterOrDigit(c) &amp;&amp; c!='-' &amp;&amp; c!='_' &amp;&amp; c!='.' &amp;&amp; c!=':'))throw new InvalidOperationException("Invalid prompt request identity.");
+        lock(gate) {
+            string state;
+            if(current?.Id==id) {
+                if(cancel &amp;&amp; !current.Finalized){current.Cancelled=true;current.Cancellation.Cancel();}
+                state=current.Finalized?"completed":current.Cancelled?"cancelling":"running";
+            } else if(!ended.TryGetValue(id,out state)) {
+                if(earlyStops.Contains(id))state="cancelled";
+                else if(cancel) {
+                    if(earlyStops.Count&gt;=4096)throw new InvalidOperationException("Prompt cancellation records are full; restart the Genie before retrying.");
+                    earlyStops.Add(id);state="cancelled";
+                } else state="not_running";
+            }
+            return new {Status="Ok",requestId=id,state};
+        }
+    }
+    public void Dispose(){lock(gate){stopping=true;if(current!=null){current.Cancelled=true;current.Cancellation.Cancel();}}}
+}
 </ScriptContext>
     <ScriptErrors>[]</ScriptErrors>
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.78</PackageVersion>
+      <PackageVersion>1.0.79</PackageVersion>
       <Id>gemini-genie</Id>
-      <Version>1.0.30</Version>
+      <Version>1.0.31</Version>
       <Required>true</Required>
-      <Checksum>AE0240DA7FC2017A4D6D6CF22F71389F</Checksum>
+      <Checksum>E4F0452AC65228516DA0C45F8C15B27C</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>933</Address>

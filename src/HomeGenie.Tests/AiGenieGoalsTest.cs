@@ -39,6 +39,7 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
     object Invoke(string type,string method,params object[] args)=>assembly.GetType(type).GetMethod(method).Invoke(type=="AiGenieGoals"?goals:null,args);
     JObject HistoryCall(string command,JObject input)=>JObject.FromObject(Invoke("ConversationTasks","Handle",folder,"933",command,input));
     JObject TaskRecord()=> (JObject)HistoryCall("Task.Get",Identity())["message"]["metadata"]["agenticTask"];
+    string Prefix()=>(string)TaskRecord()["widgetPrefix"]??"goals/g"+((string)TaskRecord()["rootTaskId"]??taskId);
     JObject Identity()=>new JObject{["conversationId"]=conversation,["taskId"]=taskId};
     [SetUp] public void Setup(){
         folder=Path.Combine(Path.GetTempPath(),"hg-goals-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(folder);
@@ -92,13 +93,13 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
         if(route.Contains("Widgets.Save/")){
             saves++;if(failSave && saves==failSaveAt)return new{Status="Error",Message="Disk full"};
             var command=new MIG.MigInterfaceCommand(route);string type=command.GetOption(0);string widgetId=Uri.UnescapeDataString(command.GetOption(1));
-            Assert.That(widgetId,Does.StartWith("goals/g"+((string)TaskRecord()["rootTaskId"]??taskId)+"/"),"The whole widget ID must be one API option.");
+            Assert.That(widgetId,Does.StartWith(Prefix()+"/"),"The whole widget ID must be one API option.");
             string path=Path.Combine(folder,widgetId);Directory.CreateDirectory(Path.GetDirectoryName(path));File.WriteAllText(path+"."+type,(string)value);
             if(type=="js")File.WriteAllText(path+".module.js","module");return new{Status=0};
         }
         if(route.Contains("Widgets.Delete/")){
             var command=new MIG.MigInterfaceCommand(route);string widgetId=Uri.UnescapeDataString(command.GetOption(0));
-            Assert.That(widgetId,Does.StartWith("goals/g"+((string)TaskRecord()["rootTaskId"]??taskId)+"/"));string path=Path.Combine(folder,widgetId);foreach(var ext in new[]{"html","css","js","module.js"})File.Delete(path+"."+ext);return new{Status=0};
+            Assert.That(widgetId,Does.StartWith(Prefix()+"/"));string path=Path.Combine(folder,widgetId);foreach(var ext in new[]{"html","css","js","module.js"})File.Delete(path+"."+ext);return new{Status=0};
         }
         throw new InvalidOperationException("Unexpected route: "+route);
     }
@@ -107,8 +108,12 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
     JObject Start(string parent=null){var input=StartRequest();if(parent!=null)((JObject)input["input"])["parentTaskId"]=parent;return JObject.FromObject(Invoke("AiGenieGoals","Start",input,new Func<string,object,object>(Call)));}
     string MakeParent(){Start();replies.Enqueue(Action("save_widget"));replies.Enqueue(Complete);Run();Assert.That((string)TaskRecord()["state"],Is.EqualTo("completed"));string parent=taskId;taskId=Guid.NewGuid().ToString("N");return parent;}
     JObject Run()=>JObject.FromObject(Invoke("AiGenieGoals","Run",new Dictionary<string,object>{["job"]=job,["running"]=new Func<bool>(()=>true)},new Func<string,object,object>(Call),folder));
-    string Action(string action,string name="counter")=>new JObject{["version"]=1,["action"]=action,["title"]="Counter",["message"]="Counter prepared",
-        ["name"]=name,["widget"]=new JObject{["html"]="<div>Counter</div>",["css"]="div{}",["javascript"]="class Counter {}"}}.ToString();
+    string Action(string action,string name="counter") {
+        var value=new JObject{["version"]=1,["action"]=action,["title"]="Counter",["message"]="Counter prepared",
+            ["name"]=name,["widget"]=new JObject{["html"]="<div>Counter</div>",["css"]="div{}",["javascript"]="class Counter {}"}};
+        if(TaskRecord()["widgetPrefix"]==null && !(TaskRecord()["artifacts"] as JArray ?? new JArray()).Any(a=>(string)a["kind"]=="widget"))value["folder"]="counter-widgets";
+        return value.ToString();
+    }
     string Complete=>"{\"version\":1,\"action\":\"complete\",\"title\":\"Done\",\"message\":\"Saved the counter\"}";
     [Test] public void LostStartReceiptNeverCreatesOrRunsASecondProgram(){Start();Start();Assert.That(creates,Is.EqualTo(1));Assert.That(runs,Is.EqualTo(1));Assert.That((int)TaskRecord()["runnerProgramId"],Is.EqualTo(1032));}
     [Test] public void DisabledWidgetCapabilityCreatesNothing(){Assert.Throws<TargetInvocationException>(()=>Invoke("AiGenieGoals","Start",StartRequest(false),new Func<string,object,object>(Call)));Assert.That(creates,Is.Zero);}
@@ -123,8 +128,8 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
     [Test] public void RevisionReadsAndUpdatesTheOriginalWidgetInsteadOfCreatingACopy(){
         string parent=MakeParent();Start(parent);replies.Enqueue(Action("save_widget").Replace("<div>Counter</div>","<div>Revised</div>"));replies.Enqueue(Complete);Run();
         Assert.That((string)TaskRecord()["state"],Is.EqualTo("completed"));Assert.That((string)TaskRecord()["parentTaskId"],Is.EqualTo(parent));
-        Assert.That((string)TaskRecord()["artifacts"][0]["id"],Is.EqualTo("goals/g"+parent+"/counter"));
-        Assert.That(File.ReadAllText(Path.Combine(folder,"goals/g"+parent+"/counter.html")),Is.EqualTo("<div>Revised</div>"));
+        Assert.That((string)TaskRecord()["artifacts"][0]["id"],Is.EqualTo(Prefix()+"/counter"));
+        Assert.That(File.ReadAllText(Path.Combine(folder,Prefix()+"/counter.html")),Is.EqualTo("<div>Revised</div>"));
         Assert.That(Directory.GetFiles(folder,"counter.html",SearchOption.AllDirectories).Length,Is.EqualTo(1));
         Assert.That(lastMessages.ToString(),Does.Contain("HOST-SUPPLIED EXISTING WIDGET SOURCES").And.Contain("<div>Counter</div>"));
     }
@@ -138,18 +143,18 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
         Assert.Throws<TargetInvocationException>(()=>Start(active));Assert.That(creates,Is.EqualTo(1));
     }
     [Test] public void ConcurrentManualEditIsPreserved(){
-        string parent=MakeParent();Start(parent);string file=Path.Combine(folder,"goals/g"+parent+"/counter.html");
+        string parent=MakeParent();Start(parent);string file=Path.Combine(folder,Prefix()+"/counter.html");
         changeOnGenerate=()=>File.WriteAllText(file,"Manual edit");replies.Enqueue(Action("save_widget"));Run();
         Assert.That((string)TaskRecord()["state"],Is.EqualTo("failed"));Assert.That(File.ReadAllText(file),Is.EqualTo("Manual edit"));Assert.That(saves,Is.EqualTo(3));
     }
     [Test] public void FailureDuringRevisionRestoresPreviousSources(){
         string parent=MakeParent();Start(parent);failSave=true;failSaveAt=saves+2;
         replies.Enqueue(Action("save_widget").Replace("<div>Counter</div>","<div>New</div>"));Run();
-        Assert.That((string)TaskRecord()["state"],Is.EqualTo("failed"));Assert.That(File.ReadAllText(Path.Combine(folder,"goals/g"+parent+"/counter.html")),Is.EqualTo("<div>Counter</div>"));
+        Assert.That((string)TaskRecord()["state"],Is.EqualTo("failed"));Assert.That(File.ReadAllText(Path.Combine(folder,Prefix()+"/counter.html")),Is.EqualTo("<div>Counter</div>"));
     }
     [Test] public void RevisionCannotOverwriteAnUnselectedSiblingWidget(){
-        string parent=MakeParent();string file=Path.Combine(folder,"goals/g"+parent+"/unselected.html");File.WriteAllText(file,"Keep this");
-        Start(parent);replies.Enqueue(Action("save_widget","unselected"));Run();Assert.That((string)TaskRecord()["state"],Is.EqualTo("failed"));
+        string parent=MakeParent();Start(parent);string file=Path.Combine(folder,Prefix()+"/unselected.html");File.WriteAllText(file,"Keep this");
+        replies.Enqueue(Action("save_widget","unselected"));Run();Assert.That((string)TaskRecord()["state"],Is.EqualTo("failed"));
         Assert.That(File.ReadAllText(file),Is.EqualTo("Keep this"));Assert.That(saves,Is.EqualTo(3));
     }
     [Test] public void RevisionsCanBeChainedWithoutChangingTheWidgetNamespace(){
@@ -206,4 +211,71 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
         Assert.That((string)TaskRecord()["state"],Is.EqualTo("failed"));Assert.That((string)installedPrograms["2000"]["ScriptSource"],Is.EqualTo("Manual repaired code"));
         Assert.That(deployments,Is.EqualTo(1));Assert.That(recoveries,Is.Zero);
     }
+    [Test] public void FirstSaveUsesReadableFolderAndPersistsItBeforeSourceWrites() {
+        Start();replies.Enqueue(Action("save_widget"));replies.Enqueue(Complete);Run();
+        Assert.That(Prefix(),Is.EqualTo("counter-widgets"));
+        Assert.That((string)TaskRecord()["artifacts"][0]["id"],Is.EqualTo("counter-widgets/counter"));
+        Assert.That(File.ReadAllText(Path.Combine(folder,"counter-widgets/.ai-goal")),Is.EqualTo(taskId));
+        Assert.That(lastMessages.ToString(),Does.Contain("/widgets/counter-widgets/counter.module.js").And.Contain("counter-widgets-counter"));
+    }
+    [TestCase("directory")][TestCase("file")][TestCase("case")]
+    public void ExistingNamesReceiveASuffixWithoutAdoptingExistingContent(string kind) {
+        if(kind=="directory")Directory.CreateDirectory(Path.Combine(folder,"counter-widgets"));
+        else File.WriteAllText(Path.Combine(folder,kind=="case"?"Counter-Widgets.js":"counter-widgets.html"),"Keep this");
+        Start();replies.Enqueue(Action("save_widget"));replies.Enqueue(Complete);Run();
+        Assert.That(Prefix(),Is.EqualTo("counter-widgets-2"));Assert.That((string)TaskRecord()["state"],Is.EqualTo("completed"));
+    }
+    [Test] public void NewObjectiveAfterHistoryClearDoesNotReuseAnExistingFolder() {
+        MakeParent();Invoke("HistoryStore","Replace",folder,"933",Activator.CreateInstance(typeof(List<>).MakeGenericType(assembly.GetType("ChatMessage"))),false);
+        conversation=(string)HistoryCall("Conversation.Get",new JObject())["conversationId"];
+        Start();replies.Enqueue(Action("save_widget"));replies.Enqueue(Complete);Run();
+        Assert.That(Prefix(),Is.EqualTo("counter-widgets-2"));
+    }
+    [Test] public void AllWidgetsUseTheAssignedSuffixAndContinuationReceivesExactPaths() {
+        Directory.CreateDirectory(Path.Combine(folder,"counter-widgets"));Start();
+        replies.Enqueue(Action("save_widget"));var parent=JObject.Parse(Action("save_widget","dashboard"));parent.Remove("folder");replies.Enqueue(parent.ToString());replies.Enqueue(Complete);Run();
+        Assert.That((string)TaskRecord()["state"],Is.EqualTo("completed"));
+        Assert.That(((JArray)TaskRecord()["artifacts"]).Select(a=>(string)a["id"]),Is.EqualTo(new[]{"counter-widgets-2/counter","counter-widgets-2/dashboard"}));
+        Assert.That(lastMessages.ToString(),Does.Contain("/widgets/counter-widgets-2/counter.module.js").And.Contain("counter-widgets-2-counter"));
+    }
+    [Test] public void MissingFolderCanBeRepairedBeforeAnyWidgetIsSaved() {
+        Start();var first=JObject.Parse(Action("save_widget"));first.Remove("folder");replies.Enqueue(first.ToString());
+        replies.Enqueue(Action("save_widget"));replies.Enqueue(Complete);Run();
+        Assert.That((string)TaskRecord()["state"],Is.EqualTo("completed"));Assert.That(saves,Is.EqualTo(3));Assert.That(generations,Is.EqualTo(3));
+    }
+    [TestCase("../outside")][TestCase("other/name")][TestCase("/absolute")][TestCase("CON")][TestCase("con")]
+    public void InvalidFolderIsRejectedBeforeCreatingFiles(string name) {
+        Start();for(int i=0;i<3;i++){var action=JObject.Parse(Action("save_widget"));action["folder"]=name;replies.Enqueue(action.ToString());}Run();
+        Assert.That(saves,Is.Zero);Assert.That(Directory.GetDirectories(folder),Is.Empty);
+    }
+    [Test] public void LaterSaveCannotChangeTheAssignedFolder() {
+        Start();replies.Enqueue(Action("save_widget"));var wrong=JObject.Parse(Action("save_widget","other"));wrong["folder"]="different";
+        for(int i=0;i<3;i++)replies.Enqueue(wrong.ToString());Run();
+        Assert.That(Prefix(),Is.EqualTo("counter-widgets"));Assert.That(saves,Is.EqualTo(3));Assert.That((string)TaskRecord()["state"],Is.EqualTo("failed"));
+    }
+    [Test] public void LegacyWidgetRevisionPreservesGuidPathAndImports() {
+        Start();string prefix="goals/g"+taskId;
+        string path=Path.Combine(folder,prefix,"counter");Directory.CreateDirectory(Path.GetDirectoryName(path));
+        foreach(string ext in new[]{"html","css","js","module.js"})File.WriteAllText(path+"."+ext,"legacy");
+        var update=Identity();update["expectedRevision"]=TaskRecord()["revision"];update["state"]="running";
+        Assert.That((string)HistoryCall("Task.Update",update)["Status"],Is.EqualTo("Ok"));
+        update["expectedRevision"]=TaskRecord()["revision"];update["state"]="completed";
+        update["artifacts"]=new JArray(new JObject{["kind"]="widget",["id"]=prefix+"/counter"});
+        Assert.That((string)HistoryCall("Task.Update",update)["Status"],Is.EqualTo("Ok"));
+        string parent=taskId;taskId=Guid.NewGuid().ToString("N");Start(parent);replies.Enqueue(Action("save_widget"));replies.Enqueue(Complete);Run();
+        Assert.That((string)TaskRecord()["state"],Is.EqualTo("completed"));Assert.That((string)TaskRecord()["artifacts"][0]["id"],Is.EqualTo(prefix+"/counter"));
+        Assert.That(TaskRecord()["widgetPrefix"],Is.Null);
+    }
+    [Test] public void UnverifiedFolderOwnerStopsRevisionBeforeGenerationOrWrites() {
+        string parent=MakeParent();File.WriteAllText(Path.Combine(folder,"counter-widgets/.ai-goal"),Guid.NewGuid().ToString("N"));
+        int before=generations;Start(parent);Run();
+        Assert.That((string)TaskRecord()["state"],Is.EqualTo("failed"));Assert.That(generations,Is.EqualTo(before));Assert.That(saves,Is.EqualTo(3));
+    }
+    [Test] public void ConcurrentReservationsAssignDifferentFolders() {
+        var method=assembly.GetType("AiGenieGoals").GetMethod("ReserveWidgetFolder",BindingFlags.NonPublic|BindingFlags.Static);
+        var results=new System.Collections.Concurrent.ConcurrentBag<string>();
+        Parallel.For(0,8,_=>results.Add((string)method.Invoke(null,new object[]{folder,"panel",Guid.NewGuid().ToString("N")})));
+        Assert.That(results.Distinct().Count(),Is.EqualTo(8));Assert.That(results,Does.Contain("panel").And.Contain("panel-8"));
+    }
+
 }

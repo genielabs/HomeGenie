@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Resume chat scroll following when explicitly submitting a widget objective. Clarify flex-axis alignment for generated composites so horizontal child widget slots retain their height.
+
+- Cancel ordinary Gemini chat requests by correlated identity, propagate cancellation through generation and action coordination, fence late replies and acknowledge completion before accepting another turn. Block chat submissions while an objective remains active, retaining editable drafts and cross-browser task synchronization.
+
+- Give new AI widget sets readable folders proposed by the Genie, with host-assigned collision suffixes and persisted ownership. Keep paths stable through revisions and preserve existing GUID-based widget sets.
+
 - Expose adapter-scoped `this.getModule` in YoT widget controllers and editor declarations. Document managed field/module subscriptions and confirmed reactive command feedback for AI-generated multi-device panels.
 
 - Let embedded widget Web Components reuse YoT APIs and inherit the parent bound module. Support explicit zUIx `:module` / `:adapter` options, explicit unbound children, and standalone loading outside YoT; dispose embedded controllers on removal.

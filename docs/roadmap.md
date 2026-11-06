@@ -226,3 +226,14 @@ Feedback continuation: implemented for Gemini and Lailama; automated verificatio
 - [ ] Add explicit AI operations to apply a generated container to a dashboard; the first phase creates/saves containers only and leaves selection to the user.
 - [ ] Review the scattered bundled example widgets and build a small set of coherent themed dashboards with their related widgets after the layout feature is accepted.
 - [ ] Organize the widget browser by folders instead of one flat list, retaining nested editor paths and useful previews.
+
+## Readable AI widget paths
+
+- [x] Replace GUID-based folders for new widget objectives with descriptive Genie proposals, host-assigned collision suffixes and persisted folder ownership. Preserve revision paths and legacy sets.
+- [x] Accept first readable-path creation live on Vulkan: the clock/counter/composite set was saved under `prova-pannello`.
+- [ ] Accept in-place revision and an independent objective proposing the same folder; repeat the revision after fixing ordinary-prompt Stop. Existing GUID sets must remain editable.
+
+## Chat cancellation and request ownership
+
+- [x] Add correlated ordinary Gemini prompt cancellation/status, native cancellation propagation, late-result fences and goal-aware composer/backend exclusion while retaining editable drafts.
+- [ ] Accept Stop/retry and goal-time draft/send behavior live on Vulkan, including another open browser.

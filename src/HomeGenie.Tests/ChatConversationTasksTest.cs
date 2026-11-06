@@ -217,4 +217,37 @@ public class Probe {
         var saved=Call(p,"Task.Update",update);Assert.That((string)saved["Status"],Is.EqualTo("Ok"));
         update=UpdateRequest(saved);update["artifacts"]=new JArray();Assert.That((string)Call(p,"Task.Update",update)["Status"],Is.EqualTo("Error"));
     }
+    JObject CreateGoal(object p,string parent=null) {
+        var input=new JObject{["conversationId"]=Snapshot(p)["conversationId"],["taskId"]=Guid.NewGuid().ToString("N"),["title"]="Widget set",
+            ["goalText"]="Build widgets",["userMessage"]="Build widgets",["profileKey"]="profile"};
+        if(parent!=null)input["parentTaskId"]=parent;return Call(p,"Task.Create",input);
+    }
+    [Test] public void ReadableWidgetFolderIsPersistedInheritedAndImmutable() {
+        var p=Probe();var created=CreateGoal(p);var request=UpdateRequest(created);request["widgetPrefix"]="cyberpunk";
+        var assigned=Call(p,"Task.Update",request);Assert.That((string)assigned["Status"],Is.EqualTo("Ok"));
+        request=UpdateRequest(assigned);request["widgetPrefix"]="renamed";
+        var before=Snapshot(p);Assert.That((string)Call(p,"Task.Update",request)["Status"],Is.EqualTo("Error"));Assert.That(JToken.DeepEquals(before,Snapshot(p)),Is.True);
+        request=UpdateRequest(assigned);request["state"]="completed";request["artifacts"]=new JArray(new JObject{["kind"]="widget",["id"]="cyberpunk/clock"});
+        var completed=Call(p,"Task.Update",request);Assert.That((string)completed["Status"],Is.EqualTo("Ok"));
+        var child=CreateGoal(p,(string)request["taskId"]);Assert.That((string)child["message"]["metadata"]["agenticTask"]["widgetPrefix"],Is.EqualTo("cyberpunk"));
+        Invoke(p,"Reload");Assert.That((string)Snapshot(p)["messages"].Last["metadata"]["agenticTask"]["widgetPrefix"],Is.EqualTo("cyberpunk"));
+    }
+    [Test] public void DifferentObjectivesCannotClaimTheSameWidgetFolder() {
+        var p=Probe();var first=CreateGoal(p);var request=UpdateRequest(first);request["widgetPrefix"]="cyberpunk";
+        var assigned=Call(p,"Task.Update",request);request=UpdateRequest(assigned);request["state"]="failed";Call(p,"Task.Update",request);
+        var other=CreateGoal(p);request=UpdateRequest(other);request["widgetPrefix"]="cyberpunk";
+        Assert.That((string)Call(p,"Task.Update",request)["Status"],Is.EqualTo("Error"));
+    }
+    [TestCase("../escape")][TestCase("/absolute")][TestCase("other/folder")]
+    public void FolderMetadataRejectsPathsWithoutChangingHistory(string prefix) {
+        var p=Probe();var created=CreateGoal(p);var before=Snapshot(p);var request=UpdateRequest(created);request["widgetPrefix"]=prefix;
+        Assert.That((string)Call(p,"Task.Update",request)["Status"],Is.EqualTo("Error"));Assert.That(JToken.DeepEquals(before,Snapshot(p)),Is.True);
+    }
+    [Test] public void ExistingLegacyArtifactsCannotBeReboundToANewFolder() {
+        var p=Probe();var created=CreateGoal(p);var request=UpdateRequest(created);
+        request["artifacts"]=new JArray(new JObject{["kind"]="widget",["id"]="goals/g"+request["taskId"]+"/clock"});
+        var saved=Call(p,"Task.Update",request);request=UpdateRequest(saved);request["widgetPrefix"]="cyberpunk";
+        Assert.That((string)Call(p,"Task.Update",request)["Status"],Is.EqualTo("Error"));
+    }
+
 }
