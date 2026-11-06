@@ -350,6 +350,22 @@ declare class ContextController {
   for(componentId: String): ContextController;
 }
 
+/** Named role declarations are shared by every instance; device choices belong to configuration.boundModules. */
+interface WidgetBoundModuleDefinition {
+  label: string;
+  typeFilter?: string;
+  fieldFilter?: string;
+}
+interface WidgetBoundModuleSettings {
+  boundModules?: Record<string, WidgetBoundModuleDefinition>;
+}
+interface CustomWidgetConfiguration {
+  componentId: string;
+  module?: string;
+  size?: string;
+  boundModules?: Record<string, string | null>;
+}
+
 /**
  * @description Base class for controllers defined using the ES6 class syntax (ControllerInstance extends ContextController).
  */
@@ -379,6 +395,14 @@ declare class ControllerInstance extends ContextController {
    * @description Represents the currently bound HomeGenie module, providing module metadata, field accessors, and control functions.
    */
   boundModule: Module;
+  /**
+   * Resolves a named role from this instance's options().configuration.boundModules, then its parent widget.
+   * Available before onCreate; returns undefined for unset/missing modules and after unload.
+   * An explicit local selection (including null/empty/missing devices) prevents parent fallback.
+   * Module IDs are complete domain:address strings, including MQTT prefixes.
+   * The template alias bm(name) is declared automatically unless the widget already declares bm.
+   */
+  getBoundModule(name: string): Module | undefined;
   /**
    * Resolves a current YoT module by domain:address, without a network request.
    * Uses this widget's adapter unless adapterId is explicitly supplied.

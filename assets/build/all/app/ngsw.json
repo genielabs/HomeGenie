@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1793970988747,
+  "timestamp": 1793996904648,
   "index": "/app/index.html",
   "assetGroups": [
     {
@@ -16,7 +16,7 @@
         "/app/859.0f150be9c99a6b5a.js",
         "/app/favicon.svg",
         "/app/index.html",
-        "/app/main.a71c0e99fc57adcf.js",
+        "/app/main.be20348d962e93b3.js",
         "/app/manifest.webmanifest",
         "/app/polyfills.a360d6e45b80c065.js",
         "/app/runtime.b92e2ca178ebbf4a.js",
@@ -1537,7 +1537,7 @@
     "/app/assets/editor/blockly/msg/zh-hant.js": "96955c2ebdb22d4100d328e156b442ecf727d5bd",
     "/app/assets/editor/homegenie-js-api.js": "d34951bd2a84d9d1bfe1cb69d6a7e3090742566e",
     "/app/assets/editor/homegenie-js-app-api.js": "fc16a52dba1f3ecc1656f55640aaa0341c7da043",
-    "/app/assets/editor/zuix.d.ts": "f206c822c66342cf8588f6719a2fad285854f0f1",
+    "/app/assets/editor/zuix.d.ts": "604580d8878eca9fb6fabee8a89a080f752e9097",
     "/app/assets/fonts/MaterialIcons-Outlined.woff": "2d3e2ff38fc47e25ae6bc7999e7945e533dc092b",
     "/app/assets/fonts/MaterialIcons-Regular.ttf": "3fcaaa4b849d364d67d4f4a07934d0aafd879a99",
     "/app/assets/fonts/MaterialIcons-Regular.woff": "fcd81da17657dc11c6761f24ac093f5d9a955c63",
@@ -2716,8 +2716,8 @@
     "/app/assets/widgets/weather/images_alt/weather.svg": "c719c09048977fd40688272316b35ddf1bdf89e8",
     "/app/assets/workers/typings-worker.js": "8df10d867c12d36cdebfb7e16caacd0020db301f",
     "/app/favicon.svg": "cb2fda1cf9d5a63c77a053ea2e8e691a6d6d6599",
-    "/app/index.html": "a2b89990ae2c689b6ab501794703e265f723c1c4",
-    "/app/main.a71c0e99fc57adcf.js": "6146bd1547709f5259b0c1137176ecfd2a807d46",
+    "/app/index.html": "3d9d9d12c4acaa8f94812e241fd4b97327d76aa0",
+    "/app/main.be20348d962e93b3.js": "b2aba28c97a9f1dc388198f2175a1ef6e559eb88",
     "/app/manifest.webmanifest": "519d8ee6b3b82c1add66c43f8ca2cf632326f342",
     "/app/material-symbols-outlined.f0999ac98285ec5d.woff2": "5e09a294eee959c4c036596eac4474acad069ae5",
     "/app/material-symbols-rounded.5ad4d570450b797e.woff2": "676252fdfc8dce42d98f435b7c4b9c1cfdee97bb",

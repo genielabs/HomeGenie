@@ -1,8 +1,28 @@
 # Roadmap
 
-Consolidated status: 2026-11-05, including maintainer-confirmed agentic objectives, custom dashboard persistence/scrolling/live revisions and embedded YoT widget context. Earlier accepted work remains complete. See [Unreleased changes](../CHANGELOG.md).
+Consolidated status: 2026-11-06, including maintainer-confirmed named widget bindings, configurable composite revision, editor refresh and centralized host configuration menus. Earlier accepted work remains complete. See [Unreleased changes](../CHANGELOG.md).
 
 This is the active task list. Detailed stage-by-stage decisions, earlier API names, test counts and acceptance evidence are preserved in [implementation history](roadmap-history.md); they do not override this status. Completed work is not reopened merely because an earlier checkpoint still says pending.
+
+## Client preset synchronization — next task (2026-11-06)
+
+- [ ] Emit a system change event after successful preset save/delete, carrying preset name, current revision and originating client/request identity. Show a Preferences (client) badge only when the selected preset changed elsewhere; offer explicit Update rather than replacing an open session automatically.
+- [ ] Compare actual configuration/preferences content before creating a revision; inspect and reduce redundant saves. Serialize/coalesce client saves and wait for server completion before switching presets. Applying a remote preset must not echo it back as another save.
+- [ ] Reject stale writes against the server revision while retaining local edits, with Update or Save as a new preset as recovery. Check revisions after reconnect/resume to recover missed events; handle selected-preset deletion explicitly.
+- [ ] Keep the current revision monotonically increasing and retain at most ten previous recoverable versions per preset. Restoring an older snapshot creates a new revision. History is separate from conflict detection; use atomic, coordinated persistence for both.
+- Next separate task after the accepted named-binding checkpoint below. No preset synchronization/history/conflict-detection code is included in this intervention; browser sessions still require explicit preset reload.
+
+## Named widget bound modules (2026-11-06)
+
+- [x] Add per-instance named bindings, parent inheritance, explicit-unset behavior, controller/template resolvers and configuration selectors for ordinary and custom Dashboard widgets. Preserve primary binding and complete MQTT IDs.
+- [x] Share module selector presentation with classic options: device icons, name and single-line ID with leading ellipsis; retain caller filters, reset and persistence behavior. The final focused frontend regression suite passes 290 checks, including primary-selector visibility, editor menu contents and embedded header spacing.
+- [x] Verify read-only dashboard instance on Vulkan: initial association and reload persistence; maintainer also confirmed functionality. Cross-browser preset refresh is a separate task above.
+- [x] Document named roles and reactive composition in shared/Genie widget guidance and synchronize those prompt files to Vulkan.
+- [x] Maintainer accepted the generated `smart-room` light/climate composite after correcting an AI-generated override of the built-in `bm` resolver; clarified the prompt to use the Module object directly and preserve complete IDs. The subsequent objective added a second configurable light under the same widget paths, refreshed the already open editor and retained the existing roles.
+- [x] Confirm centralized configuration via the host menu without a primary module: three named selectors, shared icon/name/ID selection style and hidden empty primary selector when appropriate. Keep saved primary selections editable and preserve the classic filter contract.
+- [x] Restore the host menu in the editor without requiring a primary module; verify Configure and Size, hiding Remove/Start New Row there. Put the toolbar Settings action on the right before Chat Sync. Keep Custom Dashboard layout Preferences unchanged.
+- [x] Add adaptive `--widget-menu-space` header spacing: reserve space only for visible host menus and reset it after zUIx loads embedded children. Update AI guidance to avoid duplicate settings/association buttons in embedded widgets; show informational missing-binding states and configure roles at the container.
+- [x] Maintainer accepted the current composite/menu/configuration UI on 2026-11-06. The local `smart-room` examples remain Vulkan test artifacts; they are not bundled product widgets. Preset cross-browser synchronization remains open in the separate next-task section.
 
 ## Agentic chat objectives (2026-11-02)
 

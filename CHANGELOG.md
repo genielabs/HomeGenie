@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Add per-instance named widget bindings through `settings.boundModules`, `this.getBoundModule(name)` and the `bm(name)` template alias. Support inherited roles and `:module="bm('role')"` composition, explicit unbound selections and complete MQTT IDs while retaining the existing primary binding.
+
+- Configure named roles centrally for ordinary widgets and custom Dashboard containers. Share module selectors with classic controls, including device icons, names and single-line IDs with leading ellipsis; retain missing/offline selections and hide an empty redundant primary selector without hiding existing associations.
+
+- Restore the editor host configuration menu without requiring a primary module. Use adaptive header spacing for ordinary/embedded widgets, put Settings before Chat Sync on the toolbar, and clarify AI guidance to avoid duplicated settings/association buttons in embedded children. Use a static execution icon on objective titles while retaining spinners for running operations.
+
+- Document named-role generation, reactive state and composition for the Genie. Maintainer confirmed the corrected light/climate composite and its revision adding a second configurable light, including automatic refresh of the already open editor. Preset revision history and cross-browser configuration synchronization remain planned separately.
+
 - Resume chat scroll following when explicitly submitting a widget objective. Clarify flex-axis alignment for generated composites so horizontal child widget slots retain their height.
 
 - Cancel ordinary Gemini chat requests by correlated identity, propagate cancellation through generation and action coordination, fence late replies and acknowledge completion before accepting another turn. Block chat submissions while an objective remains active, retaining editable drafts and cross-browser task synchronization.

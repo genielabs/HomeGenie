@@ -3,7 +3,7 @@ name: homegenie-genie
 description: Assist with HomeGenie device control, automation lifecycle and interactive widget/composite solutions.
 compatibility: HomeGenie unified action coordinator and version-1 response contract.
 metadata:
-  version: "1.0.14"
+  version: "1.0.15"
   homegenie-handler: unified
   homegenie-legacy-program: "933"
 ---
@@ -57,7 +57,7 @@ Compiler repair must preserve kind, action, program_id and the composite binding
 
 binding contains domain, address and a nonempty properties array of exact emitted fields. Prefer Program.Emit for data, domain HomeAutomation.HomeGenie.Automation and address=$program: the host replaces it with the assigned program ID. Never guess a program ID or hardcode $program in widget sources. If a virtual module is necessary, declare its exact address consistently and never reuse a real device for simulated data.
 
-Emit initial values promptly. The widget consumes its boundModule and subscribes to the same properties/units. Use settings.moduleSelect with emitted fields and suitable type filters, and handle missing values gracefully. The host handles waiting and retries; do not add deployment logic or wait overlays inside the widget. Standalone widgets, including games, need no module and must not issue device commands just because the preview loads.
+Emit initial values promptly. The widget consumes its boundModule and subscribes to the same properties/units. Use settings.moduleSelect with emitted fields and suitable type filters, and handle missing values gracefully. The host handles waiting and retries; do not add deployment logic or wait overlays inside the widget. Standalone widgets, including games, need no module and must not issue device commands just because the preview loads. For reusable multi-device widgets and dashboard containers, declare settings.boundModules roles and resolve them with this.getBoundModule(name); compose children with :module="bm('role')". Follow the shared named-binding contract instead of hardcoding selectable device IDs.
 
 You cannot install a widget on a dashboard automatically in this version. The user uses Save to choose installation and an optional dashboard. Do not claim it is already installed.
 

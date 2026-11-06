@@ -38,8 +38,7 @@ Final internal check: scan the HTML for layout/self attributes and icon classes,
     *   **Interpolation:** Never use `{{ variable }}`. **NEVER use Mustache syntax.** Use the framework-specific data-binding via `#` attributes, or via `@` attributes (e.g. `@set="this.innerHTML = model.name"`).
     *   **Active Refresh (@):** Attributes starting with `@` (e.g., `@set`, `@if`, `@hide-if`) are evaluated **ONLY if the element is visible**. To force evaluation even when the element is not visible (e.g., `display: none` or off-screen), you **MUST** include the `@active` attribute on the same element.
     *   **Logic:** `@if` is a logic branch, not a display toggle. Manage visibility explicitly via CSS classes or `this.view().show()/hide()`.
-5.  **UI SAFE ZONE (ordinary widgets only):** The host overlays a settings button in the **Top-Right corner (48x48px)**. Dashboard containers (`defaultSize: 'dashboard'`) have no overlaid settings menu: do not reserve this safe zone or add its 48px padding/margin. Embedded ordinary widgets retain their own safe zone.
-    *   **Action:** Add `padding-right: 48px;` **ONLY** to your **Header** or **Top Row**.
+5.  **HOST MENU:** YoT provides the top-right widget menu with Configure and applicable sizing/actions. Do not duplicate it with a header settings button. For a reusable ordinary widget, reserve header space with `padding-right: var(--widget-menu-space, 0px);`: YoT supplies 48px when its menu is visible, 0px when hidden or embedded. Dashboard containers have no overlaid menu and must not reserve a fixed safe zone. Embedded children use their container's configuration: do not generate Associate/Configure buttons, including in unconfigured states. Show a compact informational placeholder when no module is assigned; the user configures all roles through the container's host menu (or Dashboard Preferences). An explicit `this.configure()` action may be useful for a standalone widget, but must not be repeated in embedded children.
 6.  **CONTEXT SEPARATION:**
     *   **`this.model()`**: Reactive Proxy for text/values.
     *   **`this.declare()`**: View Context for Methods/Logic.
@@ -77,7 +76,7 @@ class MyWidget extends ControllerInstance {
 * For a general level display, use `fieldFilter: 'Status.Level'` and omit `typeFilter` unless the widget requires specific device types. A lighting widget must include `Color` when it supports color lights.
 * An omitted, empty, or `any` filter imposes no restriction for that group. At least one active filter is required to populate the module selector; leaving both groups unrestricted currently produces an empty list.
 * `moduleSelect` is OPTIONAL. Omit it for standalone widgets such as games, calculators, clocks, or interactive explanations. Such widgets must work without `boundModule`.
-* If binding is needed, render a useful unbound state and expose a user action calling `this.configure()`. Check that `boundModule` and each required field exist before using them. A field list does not guarantee that every listed field exists.
+* If binding is needed, render a useful unbound state. For embedded children, keep it informational and leave association to the container; only standalone widgets may offer an action calling `this.configure()`. Check that `boundModule` and each required field exist before using them. A field list does not guarantee that every listed field exists.
 * Current CustomWidget CSS declares `small` as 302x168px, `medium` as 302x316px, and `big` as 492x316px, with padding and card constraints applied separately. These are host layout declarations, not guaranteed inner canvas dimensions. Use the actual view size for canvas/chart sizing and adapt on resize.
 * Include `defaultSize` in `sizeOptions` when manual resizing is enabled. Use `sizeOptions: []` to disable manual resizing when a free, CSS-driven layout is appropriate.
 
@@ -332,6 +331,31 @@ These are syntax examples: use actual saved component tags, confirmed module IDs
 
 The parent layout assigns each embedded widget its dimensions; `defaultSize` does not automatically size a raw custom tag. Use compact, responsive slots unless full-height cards are explicitly requested. Do not stretch every card across the remaining dashboard height by default. Child widgets that use height:100% need a slot with a defined height.
 
+
+### Configurable named module bindings
+
+For reusable multi-device widgets or dashboards, declare stable roles instead of hardcoding device IDs:
+
+```javascript
+settings = {
+  defaultSize: 'medium',
+  boundModules: {
+    light: {label: 'Light', typeFilter: 'Light,Dimmer,Color'},
+    climate: {label: 'Room sensor', fieldFilter: 'Sensor.Temperature,Sensor.Humidity'}
+  }
+};
+// In onCreate(): render current values first, then listen for changes.
+const sensor = this.getBoundModule('climate');
+const render = () => { this.model().temperature = sensor?.field('Sensor.Temperature')?.value ?? '—'; };
+render();
+if (sensor) this.subscribe(sensor, render);
+```
+
+Role labels should use the user's language; role keys remain stable during revisions. YoT provides one selector per role and persists selections per dashboard/widget instance; editor/preview selections are temporary. A selection change reloads the instance and disposes its managed subscriptions. Do not save bindings with API calls or browser storage, and do not select or command devices automatically during initialization. An unselected role returns `undefined`: show an informational unconfigured state. Configure roles centrally through the container menu; do not repeat association buttons inside child widgets.
+
+A container passes a role to a saved child's primary binding with `:module="bm('light')"`; use the child's actual registered tag and import. `bm` is supplied by YoT and returns the Module object directly: do not redefine or declare `bm`, or reconstruct a reference from `.domain`/`.address` (these are not YoT Module properties). When a string ID is required, use the complete `module.id`. The child continues using `this.boundModule`. Children can also call `this.getBoundModule('light')` to inherit named roles. Local explicit selections override ancestors; explicit null/empty/unavailable selections stop inheritance. `:module="null"` disables only the primary binding. Never substitute another device for a missing role.
+
+Keep `settings.moduleSelect` / `this.boundModule` for ordinary single-device widgets; both contracts may coexist. Named roles use the same type/field filter rules, but with no filters they offer all online modules. Preserve complete IDs, including `MQTT:device-id.domain:address`; do not split IDs on colons or introduce `adapterId@...`. Use named bindings for configurable devices; `this.getModule(id)` remains available for intentionally fixed, confirmed targets.
 
 ### Reactive multi-module state and command feedback
 
