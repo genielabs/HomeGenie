@@ -7,13 +7,13 @@ This is the active task list. Detailed stage-by-stage decisions, earlier API nam
 ## Client preset synchronization (2026-11-06)
 
 - [x] Step 1: capture immutable preset/server/preferences snapshots, serialize local writes and coalesce/serialize server requests per preset. Drain saves before switching/deleting/reloading; suppress application-induced save echoes and report failures.
-- [x] Step 2: program 111 owns a coordinated atomic store in its ScriptContext, with no new core class with monotonic revisions, read-only legacy migration and normalized no-op comparison. Runtime module-field samples do not create revisions; widget/binding configuration and preferences do. Delete retains a hidden generation tombstone.
+- [x] Step 2: program 111 owns a coordinated atomic store in its ScriptContext, with no new core dependency, monotonic revisions, read-only legacy migration and normalized no-op comparison. Runtime module-field samples do not create revisions; widget/binding configuration and preferences do. Delete retains a hidden generation tombstone.
 - [x] Step 3: reject stale writes without automatic rebasing, retain the latest local edits and offer explicit Update or Save As recovery in Preferences. Preserve recovery after fetch errors/name collisions and after edits during a recovery save. Require the new preset protocol before sending writes to the server.
 - [x] Skip unchanged applied/confirmed preset writes at queue dispatch, ignoring live field samples and key order. Capture the applied model/responsive layout as the clean baseline; preserve pending/in-flight reversions and stale-write protection for subsequent real edits.
-- Verification: Angular compilation and **322 focused frontend tests** pass, plus **15 isolated server tests** (including concurrency and failed publication). Tests compile distributed 111 directly; XML/manifest checksums and lock sharing across script recompilations pass. Vulkan was not modified/restarted for this checkpoint; update Client configuration (111) to **1.0.3** and reload YoT (no core rebuild is needed) and run the documented two-browser acceptance tests on a temporary preset.
-- [ ] Step 4: emit preset change events after confirmed writes/deletion, carrying name, revision and originating client/request identity. Show a Preferences badge only for changes made elsewhere; offer explicit Update rather than replacing an open session automatically.
-- [ ] Step 5: reconcile revisions after reconnect/resume to recover missed events and handle remote deletion of the selected preset explicitly. Current stale-write recovery does not proactively refresh idle clients.
-- [ ] Step 6: retain at most ten previous recoverable versions plus current. Restoring an older snapshot creates a new revision. History remains distinct from conditional-write conflict detection and deletion tombstones.
+- Verification: Angular compilation and **337 focused frontend tests** pass, plus **22 isolated server tests** (including concurrency and failed publication). Tests compile distributed 111 directly; XML/manifest checksums and lock sharing across script recompilations pass. Vulkan was not modified/restarted for this checkpoint; update Client configuration (111) to **1.0.4** and reload YoT (no core rebuild is needed) and run the documented two-browser acceptance tests on a temporary preset.
+- [x] Step 4: program 111 (1.0.4) emits post-commit change events with preset/revision/operation and client/request identity. YoT filters own/duplicate/older events and shows Preferences/main-menu badges only for the selected server/preset. Offer explicit Update or Save As, preserve local data and refresh an open preset list. Remote deletion is announced without automatic fallback. Live two-browser badge acceptance remains pending; no runtime programs or presets were changed by this implementation.
+- [ ] Deferred by maintainer (2026-11-07), Step 5: reconcile revisions after reconnect/resume to recover missed events and handle remote deletion of the selected preset explicitly. Connected clients now receive notices, but missed-event recovery and automatic deletion fallback remain separate.
+- [ ] Deferred by maintainer (2026-11-07), Step 6: retain at most ten previous recoverable versions plus current. Restoring an older snapshot creates a new revision. History remains distinct from conditional-write conflict detection and deletion tombstones.
 
 ## Named widget bound modules (2026-11-06)
 
@@ -246,7 +246,8 @@ Feedback continuation: implemented for Gemini and Lailama; automated verificatio
 - [x] Add `this.getModule(id, adapterId?)` to ordinary/embedded controllers, editor declarations and AI guidance; document immediate state rendering and managed module/field event subscriptions instead of polling.
 - [ ] Accept a Gemini-generated reactive light panel live: initial state, external control updates, independent pending/error feedback and disposal without duplicate listeners.
 - [ ] Refine the new task/dashboard UI and UX before release. Keep this polish separate from functional acceptance.
-- [ ] Add explicit AI operations to apply a generated container to a dashboard; the first phase creates/saves containers only and leaves selection to the user.
+- [x] Add the bounded objective action `apply_dashboard`: save the container first, then create a named dashboard or update an explicitly named existing one through program 111's preset CAS. Persist a separate dashboard artifact and Open dashboard action. Preserve Standard widgets and same-container bindings. Only the originating unchanged page adopts the exact confirmed revision; other clients retain Preferences notices. Automated verification is distinct from live Gemini acceptance.
+- [ ] Accept AI dashboard creation/application and in-place revision on Vulkan, then verify the other browser keeps its current layout until explicit Update. Use a disposable preset; test stale-preset conflict without regenerating the saved widgets.
 - [ ] Review the scattered bundled example widgets and build a small set of coherent themed dashboards with their related widgets after the layout feature is accepted.
 - [ ] Organize the widget browser by folders instead of one flat list, retaining nested editor paths and useful previews.
 
@@ -260,3 +261,12 @@ Feedback continuation: implemented for Gemini and Lailama; automated verificatio
 
 - [x] Add correlated ordinary Gemini prompt cancellation/status, native cancellation propagation, late-result fences and goal-aware composer/backend exclusion while retaining editable drafts.
 - [ ] Accept Stop/retry and goal-time draft/send behavior live on Vulkan, including another open browser.
+
+
+## Next UI delivery checkpoints (2026-11-07)
+
+1. Complete live acceptance of applying a dashboard from an AI objective, including named updates, persisted selection and preserved bindings.
+2. Curate a small coherent set of themed dashboard containers and reusable light/climate/energy widgets. Keep unbound/empty states readable; avoid duplicating configuration controls in embedded widgets.
+3. Finish focused responsive/accessibility and task/widget UI polish before release. Preset missed-event recovery and ten-version history remain deferred; they do not block this work.
+
+- Dashboard-application acceptance follow-up (2026-11-07): first live run saved all three widgets but exposed program 111 discarding the native Api.Call JObject. Reproduced with the shipped handler and fixed in 111 1.0.6, retaining HTTP-byte compatibility. Reuse the failed objective's saved widgets for the next application test; live acceptance remains pending.

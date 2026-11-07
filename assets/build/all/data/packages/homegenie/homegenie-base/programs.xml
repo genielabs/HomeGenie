@@ -651,16 +651,25 @@ public static class ConversationTasks {
                 string id=(string)item["id"];
                 if((string)item["kind"]=="widget")return item.Properties().All(p=&gt;new[]{"kind","id"}.Contains(p.Name)) &amp;&amp;
                     id.StartsWith(prefix,StringComparison.Ordinal) &amp;&amp; System.Text.RegularExpressions.Regex.IsMatch(id.Substring(prefix.Length),@"\A[a-z][a-z0-9-]{0,63}\z");
+                if((string)item["kind"]=="dashboard")return item.Properties().All(p=&gt;new[]{"kind","id","preset","widgetId","revision","clientId","requestId"}.Contains(p.Name)) &amp;&amp;
+                    !string.IsNullOrWhiteSpace(id) &amp;&amp; id.Length&lt;=120 &amp;&amp; !id.Any(char.IsControl) &amp;&amp; id.IndexOfAny(new[]{'/','\\'})&lt;0 &amp;&amp;
+                    item["preset"]?.Type==JTokenType.String &amp;&amp; !string.IsNullOrWhiteSpace((string)item["preset"]) &amp;&amp; ((string)item["preset"]).Length&lt;=255 &amp;&amp;
+                    item["widgetId"]?.Type==JTokenType.String &amp;&amp; ((string)item["widgetId"]).StartsWith(prefix,StringComparison.Ordinal) &amp;&amp;
+                    System.Text.RegularExpressions.Regex.IsMatch(((string)item["widgetId"]).Substring(prefix.Length),@"\A[a-z][a-z0-9-]{0,63}\z") &amp;&amp;
+                    item["revision"]?.Type==JTokenType.Integer &amp;&amp; (long)item["revision"]&gt;0 &amp;&amp; (long)item["revision"]&lt;=9007199254740991 &amp;&amp;
+                    System.Text.RegularExpressions.Regex.IsMatch((string)item["clientId"]??"",@"\A[a-f0-9]{32}\z") &amp;&amp;
+                    System.Text.RegularExpressions.Regex.IsMatch((string)item["requestId"]??"",@"\A[a-f0-9]{32}\z");
                 if((string)item["kind"]!="program" || item.Properties().Any(p=&gt;!new[]{"kind","id","key","name"}.Contains(p.Name)))return false;
                 return System.Text.RegularExpressions.Regex.IsMatch(id,@"\A[1-9][0-9]{0,9}\z") &amp;&amp; item["key"]?.Type==JTokenType.String &amp;&amp;
                     System.Text.RegularExpressions.Regex.IsMatch((string)item["key"],@"\A[a-z][a-z0-9-]{0,63}\z") &amp;&amp; item["name"]?.Type==JTokenType.String &amp;&amp;
                     !string.IsNullOrWhiteSpace((string)item["name"]) &amp;&amp; ((string)item["name"]).Length&lt;=240;
             }
-            if(task["goalText"]==null || input["artifacts"] is not JArray files || files.Count&gt;8 || files.Any(a=&gt;!Valid(a)) ||
+            if(task["goalText"]==null || input["artifacts"] is not JArray files || files.Count&gt;8 || files.Any(a=&gt;!Valid(a)) || files.Count(a=&gt;(string)a["kind"]=="dashboard")&gt;1 ||
                 files.Select(a=&gt;(string)a["kind"]+":"+(string)a["id"]).Distinct().Count()!=files.Count ||
                 files.Where(a=&gt;(string)a["kind"]=="program").Select(a=&gt;(string)a["key"]).Distinct().Count()!=files.Count(a=&gt;(string)a["kind"]=="program"))return Error("Invalid goal artifacts.");
             if(task["artifacts"] is JArray saved &amp;&amp; saved.Any(a=&gt;!files.Any(f=&gt;(string)f["kind"]==(string)a["kind"] &amp;&amp;
-                (string)f["id"]==(string)a["id"] &amp;&amp; ((string)a["kind"]!="program" || (string)f["key"]==(string)a["key"]))))return Error("Confirmed artifacts cannot be forgotten or rebound.");
+                (string)f["id"]==(string)a["id"] &amp;&amp; ((string)a["kind"]!="program" || (string)f["key"]==(string)a["key"]) &amp;&amp; ((string)a["kind"]!="dashboard" ||
+                    (string)f["preset"]==(string)a["preset"] &amp;&amp; (string)f["widgetId"]==(string)a["widgetId"]))))return Error("Confirmed artifacts cannot be forgotten or rebound.");
             task["artifacts"]=files.DeepClone();
         }
         string messageText=Text(input,"message",16000,true);
@@ -696,9 +705,9 @@ public static class ConversationTasks {
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.61</PackageVersion>
       <Id>chat-history-service</Id>
-      <Version>1.0.14</Version>
+      <Version>1.0.15</Version>
       <Required>true</Required>
-      <Checksum>E7A331AFC88EA92E920B22FDAC3E161F</Checksum>
+      <Checksum>93935A053B607E8A8C29803CD1DD37D8</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>577</Address>
@@ -716,9 +725,10 @@ public static class ConversationTasks {
 Data.AddToSystemBackup(dataFolder);
 Program.Run();
 </ScriptSetup>
-    <ScriptSource>var presets = new ClientPresetStore(Data.GetFolder(PresetsFolder));
+    <ScriptSource>var presets = new ClientPresetStore(Data.GetFolder(PresetsFolder), change =&gt;
+    Program.Emit("Client.PresetsChanged", change.ToString(Formatting.None)));
 
-Api.Handle($"{apiBaseUrl}Protocol", args =&gt; new { version = 2 });
+Api.Handle($"{apiBaseUrl}Protocol", args =&gt; new { version = 2, events = 1, dashboards = 1 });
 Api.Handle($"{apiBaseUrl}List", args =&gt; PresetRequest(() =&gt; presets.List()));
 Api.Handle($"{apiBaseUrl}Get/", args =&gt; PresetRequest(() =&gt; {
     var command = Api.Parse(args);
@@ -733,16 +743,29 @@ Api.Handle($"{apiBaseUrl}Delete/", args =&gt; PresetRequest(() =&gt; {
     return presets.Delete(command.GetOption(0), PresetBody(command.Data));
 }));
 
+Api.Handle($"{apiBaseUrl}ApplyDashboard/", args =&gt; PresetRequest(() =&gt; {
+    var command = Api.Parse(args);
+    var catalog = JArray.FromObject(Api.Call("HomeAutomation.HomeGenie/Config/Widgets.DashboardList"));
+    return presets.ApplyDashboard(command.GetOption(0), PresetBody(command.Data), catalog.Values&lt;string&gt;().ToArray());
+}));
+
 Program.GoBackground();
 </ScriptSource>
     <ScriptContext>const string PresetsFolder = "client-presets";
 const string apiBaseUrl = "HomeAutomation.HomeGenie/Config/Client.Presets";
 
 static Newtonsoft.Json.Linq.JObject PresetBody(object data) {
-    var bytes = data as byte[];
-    return bytes == null || bytes.Length == 0 ? new Newtonsoft.Json.Linq.JObject()
-        : Newtonsoft.Json.Linq.JObject.Parse(System.Text.Encoding.UTF8.GetString(bytes));
+    // HTTP handlers receive bytes; native Api.Call preserves the supplied object.
+    // Keep both paths equivalent instead of silently discarding native request fields.
+    if (data == null) return new JObject();
+    if (data is JObject json) return (JObject)json.DeepClone();
+    if (data is byte[] bytes)
+        return bytes.Length == 0 ? new JObject() : JObject.Parse(Encoding.UTF8.GetString(bytes));
+    if (data is string text)
+        return string.IsNullOrWhiteSpace(text) ? new JObject() : JObject.Parse(text);
+    return JObject.FromObject(data);
 }
+
 static object PresetRequest(Func&lt;object&gt; operation) {
     try { return operation(); }
     catch (Exception error) {
@@ -773,10 +796,14 @@ public class ClientPresetStore
     }
     private readonly string root;
     private readonly object gate;
+    private readonly Action&lt;JObject&gt; publish;
     private const long MaxRevision = 9007199254740991; // Exact in JavaScript too.
 
-    public ClientPresetStore(string folder)
+    public ClientPresetStore(string folder) : this(folder, null) { }
+
+    public ClientPresetStore(string folder, Action&lt;JObject&gt; publish)
     {
+        this.publish = publish;
         root = Path.TrimEndingDirectorySeparator(Path.GetFullPath(folder));
         gate = GateForFolder(root);
     }
@@ -812,7 +839,64 @@ public class ClientPresetStore
             next["revision"] = NextRevision(revision);
             next["updatedUtc"] = DateTimeOffset.UtcNow.ToString("O");
             Write(name, next);
+            Announce(name, Revision(next), "save", request);
             return Receipt(Revision(next), true);
+        }
+    }
+
+    /// &lt;summary&gt;Change only one dashboard layout, under the same preset CAS lock as ordinary saves.&lt;/summary&gt;
+    public JObject ApplyDashboard(string name, JObject request, string[] catalog)
+    {
+        lock (gate)
+        {
+            name = DefaultName(name);
+            string dashboardName = (string)request?["dashboardName"], widgetId = (string)request?["widgetId"];
+            string mode = (string)request?["mode"];
+            if (string.IsNullOrWhiteSpace(dashboardName) || dashboardName.Length &gt; 120 ||
+                dashboardName.Any(char.IsControl) || dashboardName.Contains('/') || dashboardName.Contains('\\') ||
+                !new[] { "create", "update" }.Contains(mode) || string.IsNullOrEmpty(widgetId) ||
+                catalog == null || !catalog.Contains(widgetId, StringComparer.Ordinal) ||
+                request?["expectedRevision"]?.Type != JTokenType.Integer)
+                return Error("InvalidDashboard", "Choose a dashboard name and a saved dashboard container.");
+            var current = Read(name);
+            if (current["config"] is not JObject config || current["preferences"] is not JObject || current["deleted"]?.Value&lt;bool&gt;() == true)
+                return Error("InvalidPreset", "The target preset no longer exists.");
+            if (config["dashboards"] is not JArray dashboards)
+                return Error("InvalidPreset", "The preset has no dashboard collection.");
+            var matches = dashboards.OfType&lt;JObject&gt;().Where(d =&gt; (string)d["name"] == dashboardName).ToArray();
+            if (matches.Length &gt; 1) return Error("InvalidDashboard", "The dashboard name is ambiguous.");
+            var dashboard = matches.SingleOrDefault();
+            if (mode == "create" &amp;&amp; dashboard != null) return Error("DashboardExists", "A dashboard with this name already exists; use update explicitly.");
+            if (mode == "update" &amp;&amp; dashboard == null) return Error("DashboardNotFound", "The dashboard to update no longer exists.");
+            // A stale request must not be rebased onto a newer preset, even if the layout looks identical.
+            if (!Matches(current, request)) return Conflict(current);
+            var next = Content(current);
+            var targetDashboards = (JArray)next["config"]["dashboards"];
+            var target = targetDashboards.OfType&lt;JObject&gt;().SingleOrDefault(d =&gt; (string)d["name"] == dashboardName);
+            if (target == null)
+            {
+                // Reuse the preset's dashboard theme without copying programs or widget instances.
+                var theme = dashboards.OfType&lt;JObject&gt;().FirstOrDefault()?["config"]?["theme"]?.DeepClone() ?? new JObject();
+                target = new JObject { ["name"] = dashboardName, ["description"] = "",
+                    ["config"] = new JObject { ["theme"] = theme }, ["widgets"] = new JArray() };
+                targetDashboards.Add(target);
+            }
+            if (target["config"] is not JObject) target["config"] = new JObject();
+            var settings = (JObject)target["config"];
+            var previous = settings["layout"]?["widget"];
+            // Updating the same container preserves its bound module, role bindings and other options.
+            var widget = (string)previous?["configuration"]?["componentId"] == widgetId ? previous.DeepClone()
+                : new JObject { ["type"] = "custom-widget", ["module"] = null,
+                    ["configuration"] = new JObject { ["componentId"] = widgetId, ["size"] = "dashboard" } };
+            settings["layout"] = new JObject { ["mode"] = "widget", ["widget"] = widget };
+            next["expectedRevision"] = request["expectedRevision"].DeepClone();
+            next["clientId"] = request["clientId"]?.DeepClone();next["requestId"] = request["requestId"]?.DeepClone();
+            var receipt = Save(name, next);
+            if ((string)receipt["Status"] == "Ok")
+            {
+                receipt["dashboardName"] = dashboardName;receipt["widgetId"] = widgetId;receipt["preset"] = name;
+            }
+            return receipt;
         }
     }
 
@@ -831,8 +915,21 @@ public class ClientPresetStore
                 ["deleted"] = true, ["revision"] = NextRevision(Revision(current)),
                 ["updatedUtc"] = DateTimeOffset.UtcNow.ToString("O") };
             Write(name, next);
+            Announce(name, Revision(next), "delete", request);
             return Receipt(Revision(next), true);
         }
+    }
+
+    private static string Origin(JToken value) =&gt; value?.Type == JTokenType.String &amp;&amp; ((string)value).Length &lt;= 128
+        ? (string)value : "";
+    private void Announce(string name, long revision, string operation, JObject request)
+    {
+        var change = new JObject { ["version"] = 1, ["name"] = name, ["revision"] = revision,
+            ["operation"] = operation, ["clientId"] = Origin(request?["clientId"]),
+            ["requestId"] = Origin(request?["requestId"]) };
+        // Commit has succeeded. Best-effort event delivery must not turn it into a failed-write receipt.
+        // Emit while the folder lock is held to preserve normal commit/event ordering.
+        try { publish?.Invoke(change); } catch { }
     }
 
     private static bool Matches(JObject current, JObject request)
@@ -842,8 +939,19 @@ public class ClientPresetStore
         // First save after browser reload: prove which actual content was loaded before editing.
         if (Revision(current) == 0) return true;
         if (request?["baseContent"] is JObject baseline)
-            return current["config"] is JObject &amp;&amp; SameContent(current, baseline);
+            return current["config"] is JObject &amp;&amp; SameLoadedPreset(current, baseline);
         return Revision(current) == 0;
+    }
+
+    private static bool SameLoadedPreset(JObject current, JObject baseline)
+    {
+        // Dashboard navigation is saved locally independently of preset configuration.
+        // Ignore only that view position when proving the first save after reload.
+        // Known-revision checks and the ordinary no-op comparison remain unchanged.
+        var a = Content(current);var b = Content(baseline);
+        (a["preferences"]?["ui"] as JObject)?.Remove("dashboard");
+        (b["preferences"]?["ui"] as JObject)?.Remove("dashboard");
+        return SameContent(a, b);
     }
 
     private static long Revision(JObject preset) =&gt; preset["revision"]?.Value&lt;long&gt;() ?? 0;
@@ -977,9 +1085,9 @@ public class ClientPresetStore
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.61</PackageVersion>
       <Id>client-configs</Id>
-      <Version>1.0.3</Version>
+      <Version>1.0.7</Version>
       <Required>true</Required>
-      <Checksum>20CF5F9C11816CACBDE931406FF57231</Checksum>
+      <Checksum>C47EBFCEF851C7D9B259C7BA36EE1312</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>111</Address>
@@ -7699,7 +7807,7 @@ public static class WidgetContextRequest
         foreach (var token in input) {
             if (!(token is JObject dashboard) || dashboard["name"]?.Type != JTokenType.String || !(dashboard["widgets"] is JArray widgets) || widgets.Count &gt; 1000)
                 throw new InvalidOperationException("Invalid dashboard context.");
-            output.Add(new JObject { ["name"] = dashboard["name"], ["widgets"] = JArray.FromObject(widgets.OfType&lt;JObject&gt;().Select(w =&gt; new {
+            output.Add(new JObject { ["name"] = dashboard["name"], ["layout"] = dashboard["layout"]?.Type == JTokenType.String ? dashboard["layout"] : null, ["container"] = dashboard["container"]?.Type == JTokenType.String ? dashboard["container"] : null, ["widgets"] = JArray.FromObject(widgets.OfType&lt;JObject&gt;().Select(w =&gt; new {
                 componentId = w["componentId"], moduleId = (w["module"] as JObject)?["moduleId"], adapterId = (w["module"] as JObject)?["adapterId"]
             })) });
         }
@@ -9514,7 +9622,7 @@ Actions:
 - complete: message summarizes actual saved results. Only after all requested widgets are saved.
 - fail: explain the limitation or missing information; do not claim success.
 Perform at most ONE action per response. The host executes it and supplies the actual result before your next step.
-Do not emit api-call/genie-action fences. Do not install dashboards or dispatch separate device commands.
+Do not emit api-call/genie-action fences. Do not dispatch separate device commands. Apply a dashboard only when the user explicitly requests it, using apply_dashboard after saving its container.
 When automation capability is enabled, save_program is also allowed: name is a stable lowercase slug; program={name,language,setup,main,context} contains complete sources.
 The host chooses create/update and the real program ID. Never specify program_id or change the logical slug during compiler repair.
 Only programs listed as confirmed results of this objective can be updated. If the user requests an update to another existing program, ask them to select its owning objective; do not create a replacement copy.
@@ -9532,7 +9640,7 @@ For each save, name is a leaf slug; the host returns the full widget ID. Keep na
 To embed saved widget x/y, import('/widgets/x/y.module.js') in its parent controller and use &lt;x-y&gt;&lt;/x-y&gt; in HTML.
 Examples: examples/composite-clock imports /widgets/demo/analog-clock.module.js and uses &lt;demo-analog-clock&gt;.
 Use only already saved dependencies. No fake paths or invented presets: current sizes are '',small,medium,big,dashboard.
-A dashboard container uses settings={defaultSize:'dashboard',sizeOptions:[]} as a literal class field. No settings menu overlays a dashboard container: omit the ordinary widget safe zone and its reserved top-right 48px padding/margin. Embedded ordinary widgets keep their own safe zone. It fills the dashboard area only when the user selects it in dashboard settings; do not claim automatic application. boundModule is optional for standalone panels.
+A dashboard container uses settings={defaultSize:'dashboard',sizeOptions:[]} as a literal class field. No settings menu overlays a dashboard container: omit the ordinary widget safe zone and its reserved top-right 48px padding/margin. Embedded ordinary widgets keep their own safe zone. Saving alone does not apply a dashboard. To create/apply it use apply_dashboard; claim application only after HOST RESULT confirms it. boundModule is optional for standalone panels.
 Each widget has its own Shadow DOM. Follow the included widget guide and required CSS imports.
 Do not repeat a save already confirmed unless correcting it. Use host results, not your prior claims, to decide whether you are finished.
 ";
@@ -9549,8 +9657,10 @@ Do not repeat a save already confirmed unless correcting it. Use host results, n
             !native.TryGetValue("input",out var raw) || raw is not JObject input || !native.TryGetValue("prepared",out var normalized) || normalized is not JObject prepared)
             throw new InvalidOperationException("A native Gemini goal request is required.");
         string id=GuidId(input,"goalId"),conversation=GuidId(input,"conversationId");
-        if(input.Properties().Any(p=&gt;!new[]{"goalId","conversationId","parentTaskId","request"}.Contains(p.Name)) || input["request"] is not JObject scope)
+        if(input.Properties().Any(p=&gt;!new[]{"goalId","conversationId","parentTaskId","request","dashboardTarget"}.Contains(p.Name)) || input["request"] is not JObject scope)
             throw new InvalidOperationException("Invalid goal envelope.");
+        var dashboardTarget=input["dashboardTarget"] as JObject;
+        if(input["dashboardTarget"]!=null)ValidateDashboardTarget(dashboardTarget);
         WidgetContextRequest.Validate(scope);
         string parentId=input["parentTaskId"]==null?null:GuidId(input,"parentTaskId");
         string text=(string)scope["message"];
@@ -9575,7 +9685,7 @@ Do not repeat a save already confirmed unless correcting it. Use host results, n
             var receipt=Ok(call(History+"Task.Create",create));
             int? pid=null;
             try {
-                var job=new JObject{["version"]=1,["providerId"]=provider,["conversationId"]=conversation,["taskId"]=id,["profileKey"]=prepared["profileKey"],["template"]=Convert.ToString(native["template"]),["request"]=scope};
+                var job=new JObject{["version"]=1,["providerId"]=provider,["conversationId"]=conversation,["taskId"]=id,["profileKey"]=prepared["profileKey"],["template"]=Convert.ToString(native["template"]),["request"]=scope,["dashboardTarget"]=dashboardTarget?.DeepClone()};
                 string literal=JsonConvert.SerializeObject(job.ToString(Formatting.None));
                 string source="Api.Call(\"System.Utility/AiGenie/Goal.Run\",new Dictionary&lt;string,object&gt;{[\"job\"]=JObject.Parse("+literal+"),[\"running\"]=new Func&lt;bool&gt;(()=&gt;Program.IsRunning &amp;&amp; Program.IsEnabled)});";
                 var program=new JObject{["Domain"]="HomeAutomation.HomeGenie.Automation",["Name"]="AI goal - "+Title(text),["Description"]=Marker+id,
@@ -9642,8 +9752,15 @@ Do not repeat a save already confirmed unless correcting it. Use host results, n
                 if(!System.Text.RegularExpressions.Regex.IsMatch(prefix,@"\A[a-z][a-z0-9-]{0,63}\z"))throw new GoalStorageException("Invalid widget folder.");
                 CheckWidgetFolder(widgetsFolder,prefix,rootId);
             } else if(artifacts.Any(a=&gt;(string)a["kind"]=="widget"))prefix="goals/g"+rootId; // Keep pre-existing IDs/imports unchanged.
+            var dashboardTarget=job["dashboardTarget"] as JObject;
+            if(dashboardTarget!=null)ValidateDashboardTarget(dashboardTarget);
             var sources=new JArray();long sourceBytes=0;
             foreach(var artifact in artifacts) {
+                if((string)artifact["kind"]=="dashboard") {
+                    if(dashboardTarget!=null &amp;&amp; (string)artifact["preset"]!=(string)dashboardTarget["preset"])
+                        throw new InvalidOperationException("Select the original preset before revising this dashboard objective.");
+                    continue;
+                }
                 if((string)artifact["kind"]=="program") {
                     string pid=(string)artifact["id"];var program=ReadProgram(pid,call);programSignatures[pid]=ProgramSignature(program);
                     var programSource=ProgramSource(program);sourceBytes+=Encoding.UTF8.GetByteCount(programSource.ToString(Formatting.None));
@@ -9680,7 +9797,9 @@ Do not repeat a save already confirmed unless correcting it. Use host results, n
                     (activeCapabilities["automation"]?.Value&lt;bool&gt;()==true?"\n#use-kb homegenie-core/references/automation.md":""),widgetsFolder,call);
                 string prompt=(string)prepared["systemPrompt"]+"\nCURRENT OBJECTIVE PROTOCOL (overrides ordinary one-turn response formatting):\n"+Instructions+
                     "\nAUTOMATION CAPABILITY: "+(activeCapabilities["automation"]?.Value&lt;bool&gt;()==true?"enabled":"disabled; save_program is forbidden")+
-                    "\nOWNED WIDGET PREFIX: "+(prefix??"not assigned; propose folder on the first save_widget")+"\nCONFIRMED SAVED WIDGETS: "+artifacts.ToString(Formatting.None)+
+                    "\nDASHBOARD APPLICATION: "+(dashboardTarget==null?"unavailable; do not apply dashboards":
+                        "available for the initiating client preset. apply_dashboard requires dashboardName (human name), mode (create or update), and name (owned widget leaf). Use create for a new dashboard, update only for an explicitly requested existing dashboard. Keep the dashboard name/preset/widget from inherited dashboard artifacts on revisions. Apply at most one dashboard per goal, after saving all widgets. This changes only the container layout, preserving Standard widgets and same-container bindings. Do not include preset credentials or configuration in model output.")+
+                    "\nOWNED WIDGET PREFIX: "+(prefix??"not assigned; propose folder on the first save_widget")+"\nCONFIRMED SAVED WIDGETS: "+PromptArtifacts(artifacts).ToString(Formatting.None)+
                     (sources.Count&gt;0?"\nThis is a revision of the existing set above. Read its sources. Save changes using the SAME leaf names and exact IDs/tags. Preserve unchanged widgets and their imports. Do not recreate or rename the set. At least one requested change must be saved before completion.":"");
                 string generation=Guid.NewGuid().ToString("N");
                 using(var timer=new System.Threading.Timer(_=&gt; {
@@ -9754,6 +9873,32 @@ Do not repeat a save already confirmed unless correcting it. Use host results, n
                             operation["details"]="Program saved and compiled: "+pid+"\n"+action["message"];
                             messages.Add(AiGenieCoordinator.Message("user","HOST RESULT: program '"+key+"' saved and compiled, ID="+pid+
                                 ", module=HomeAutomation.HomeGenie.Automation/"+pid+". Sources are installed; runtime/data readiness is not verified. Use this real ID in dependent widgets, not a placeholder."));
+                        } else if(kind=="apply_dashboard") {
+                            if(dashboardTarget==null)throw new InvalidOperationException("Dashboard application is unavailable in this client.");
+                            string widgetId=prefix+"/"+(string)action["name"], dashboardName=(string)action["dashboardName"];
+                            if(!artifacts.Any(a=&gt;(string)a["kind"]=="widget" &amp;&amp; (string)a["id"]==widgetId))
+                                throw new InvalidOperationException("Save the owned dashboard container before applying it.");
+                            var existing=artifacts.FirstOrDefault(a=&gt;(string)a["kind"]=="dashboard");
+                            if(existing!=null &amp;&amp; ((string)existing["id"]!=dashboardName || (string)existing["preset"]!=(string)dashboardTarget["preset"] || (string)existing["widgetId"]!=widgetId))
+                                throw new InvalidOperationException("A revision must preserve its dashboard identity and container.");
+                            if(existing==null &amp;&amp; artifacts.Count&gt;=8)throw new InvalidOperationException("At most eight results per objective.");
+                            if(existing!=null &amp;&amp; (string)existing["requestId"]==id)throw new InvalidOperationException("The dashboard was already applied in this objective; complete it.");
+                            check();RequireCapability("widgets",scope,call);
+                            var request=(JObject)dashboardTarget.DeepClone();string preset=(string)request["preset"];request.Remove("preset");
+                            request["dashboardName"]=dashboardName;request["widgetId"]=widgetId;request["mode"]=existing==null?action["mode"]:"update";
+                            // Announce as an external change even to the originating page until its guarded refresh succeeds.
+                            request["clientId"]="ai:"+(string)dashboardTarget["clientId"];request["requestId"]=id;
+                            JObject applied;
+                            try {applied=Object(call("HomeAutomation.HomeGenie/Config/Client.PresetsApplyDashboard/"+preset,request));}
+                            catch(Exception error) {throw new GoalStorageException("Dashboard application was not confirmed; inspect the preset before retrying: "+error.Message);}
+                            if((string)applied["Status"]!="Ok")throw new GoalStorageException("Dashboard not applied. Saved widgets remain available. "+(string)applied["Message"]);
+                            if((string)applied["dashboardName"]!=dashboardName || (string)applied["widgetId"]!=widgetId || (string)applied["preset"]!=preset || applied["revision"]?.Type!=JTokenType.Integer)
+                                throw new GoalStorageException("Unexpected dashboard application receipt; inspect the preset before retrying.");
+                            var artifact=new JObject{["kind"]="dashboard",["id"]=dashboardName,["preset"]=preset,["widgetId"]=widgetId,
+                                ["revision"]=applied["revision"],["clientId"]=dashboardTarget["clientId"],["requestId"]=id};
+                            if(existing==null)artifacts.Add(artifact);else artifacts[artifacts.IndexOf(existing)]=artifact;
+                            written.Add("dashboard:"+dashboardName);operation["details"]="Dashboard applied: "+dashboardName+"\n"+action["message"];
+                            messages.Add(AiGenieCoordinator.Message("user","HOST RESULT: dashboard '"+dashboardName+"' applied successfully with container "+widgetId+". Complete the objective; do not apply it again."));
                         } else if(kind=="read_context") {
 
                             scope["resources"]=action["resources"].DeepClone();var lookedUp=AiGenieContext.Prepare(scope,"",widgetsFolder,call);
@@ -9932,14 +10077,24 @@ Do not repeat a save already confirmed unless correcting it. Use host results, n
         if((string)recovered["RequestId"]!=pending.RequestId || recovered["Success"]?.Value&lt;bool&gt;()!=true ||
             (string)recovered["State"]!="completed")throw new GoalProgramException("Program recovery was not confirmed: "+(string)recovered["Error"]);
     }
+    static JArray PromptArtifacts(JArray artifacts) =&gt; new JArray(artifacts.OfType&lt;JObject&gt;().Select(item =&gt;
+        new JObject(item.Properties().Where(p=&gt;p.Name!="clientId" &amp;&amp; p.Name!="requestId")
+            .Select(p=&gt;new JProperty(p.Name,p.Value.DeepClone())))));
+    static void ValidateDashboardTarget(JObject target) {
+        if(target==null || target.Properties().Any(p=&gt;!new[]{"preset","expectedRevision","clientId"}.Contains(p.Name)) ||
+            target["preset"]?.Type!=JTokenType.String || string.IsNullOrWhiteSpace((string)target["preset"]) || ((string)target["preset"]).Length&gt;255 ||
+            target["expectedRevision"]?.Type!=JTokenType.Integer || (long)target["expectedRevision"]&lt;1 || (long)target["expectedRevision"]&gt;9007199254740991 ||
+            target["clientId"]?.Type!=JTokenType.String || !System.Text.RegularExpressions.Regex.IsMatch((string)target["clientId"],@"\A[a-f0-9]{32}\z"))
+            throw new InvalidOperationException("Invalid dashboard preset target. Refresh the client preset before starting.");
+    }
     public static void Validate(JObject action) {
-        if(action?["version"]?.Type!=JTokenType.Integer || (int)action["version"]!=1 || !new[]{"save_widget","save_program","read_context","complete","fail"}.Contains((string)action["action"]) ||
+        if(action?["version"]?.Type!=JTokenType.Integer || (int)action["version"]!=1 || !new[]{"save_widget","save_program","read_context","apply_dashboard","complete","fail"}.Contains((string)action["action"]) ||
             action["title"]?.Type!=JTokenType.String || string.IsNullOrWhiteSpace((string)action["title"]) || ((string)action["title"]).Length&gt;240 ||
             action["message"]?.Type!=JTokenType.String || ((string)action["message"]).Length&gt;16000)
             throw new InvalidOperationException("Return version, action, title and message for one goal step.");
         string kind=(string)action["action"];
         if(action.Properties().Any(p=&gt;!new[]{"version","action","title","message"}.Contains(p.Name) &amp;&amp;
-            !(kind=="save_widget" &amp;&amp; new[]{"name","widget","folder"}.Contains(p.Name)) &amp;&amp; !(kind=="save_program" &amp;&amp; new[]{"name","program"}.Contains(p.Name)) &amp;&amp; !(kind=="read_context" &amp;&amp; p.Name=="resources")))
+            !(kind=="save_widget" &amp;&amp; new[]{"name","widget","folder"}.Contains(p.Name)) &amp;&amp; !(kind=="save_program" &amp;&amp; new[]{"name","program"}.Contains(p.Name)) &amp;&amp; !(kind=="read_context" &amp;&amp; p.Name=="resources") &amp;&amp; !(kind=="apply_dashboard" &amp;&amp; new[]{"name","dashboardName","mode"}.Contains(p.Name))))
             throw new InvalidOperationException("Unexpected goal-step field.");
         if(kind=="save_widget" &amp;&amp; (action["name"]?.Type!=JTokenType.String || !System.Text.RegularExpressions.Regex.IsMatch((string)action["name"],@"\A[a-z][a-z0-9-]{0,63}\z") || action["widget"] is not JObject))
             throw new InvalidOperationException("Use a leaf widget name and a complete widget object.");
@@ -9947,6 +10102,10 @@ Do not repeat a save already confirmed unless correcting it. Use host results, n
             !System.Text.RegularExpressions.Regex.IsMatch((string)action["folder"],@"\A[a-z][a-z0-9-]{0,47}\z") ||
             System.Text.RegularExpressions.Regex.IsMatch((string)action["folder"],@"\A(con|prn|aux|nul|com[0-9]|lpt[0-9])\z")))
             throw new InvalidOperationException("Use a short descriptive folder slug, without paths or reserved names.");
+        if(kind=="apply_dashboard" &amp;&amp; (action["name"]?.Type!=JTokenType.String || !System.Text.RegularExpressions.Regex.IsMatch((string)action["name"],@"\A[a-z][a-z0-9-]{0,63}\z") ||
+            action["dashboardName"]?.Type!=JTokenType.String || string.IsNullOrWhiteSpace((string)action["dashboardName"]) || ((string)action["dashboardName"]).Length&gt;120 ||
+            ((string)action["dashboardName"]).Any(char.IsControl) || ((string)action["dashboardName"]).IndexOfAny(new[]{'/','\\'})&gt;=0 || !new[]{"create","update"}.Contains((string)action["mode"])))
+            throw new InvalidOperationException("Use a human dashboardName, mode=create/update and the saved container's leaf name.");
         if(kind=="save_program") {
             if(action["name"]?.Type!=JTokenType.String || !System.Text.RegularExpressions.Regex.IsMatch((string)action["name"],@"\A[a-z][a-z0-9-]{0,63}\z") ||
                 action["program"] is not JObject program || program.Properties().Any(p=&gt;!new[]{"name","language","setup","main","context"}.Contains(p.Name)) ||
@@ -9967,9 +10126,9 @@ Do not repeat a save already confirmed unless correcting it. Use host results, n
     <PackageId>homegenie-base</PackageId>
     <PackageVersion>1.0.61</PackageVersion>
     <Id>ai-genie-service</Id>
-    <Version>0.26.1</Version>
+    <Version>0.27.0</Version>
     <Required>true</Required>
-    <Checksum>5055ADB41A9D2289597E13ED23DF176D</Checksum>
+    <Checksum>279CF672799FA1882CF5F419C748201F</Checksum>
   </PackageInfo>
   <Domain>HomeAutomation.HomeGenie.Automation</Domain>
   <Address>583</Address>

@@ -386,3 +386,8 @@ For a multi-light panel, resolve each confirmed module and keep independent stat
 ### Flex alignment for embedded widgets
 
 With flex-layout attributes, row alignment is cross-axis then main-axis; column alignment is main-axis then cross-axis. To stretch embedded widget slots vertically in a horizontal panel, use `layout="row stretch-center"`, not `row center-stretch`. Changing only row/column can collapse slots containing absolutely positioned widget content. Preserve nonzero slot dimensions when revising a composite layout.
+
+
+### Applying a dashboard from an objective
+
+Saving a container alone does not change the dashboard. In a widget objective, when the user explicitly asks to create or apply a dashboard, first save every widget, then use the host action `apply_dashboard` with `name` (the owned container leaf), `dashboardName` (a short human name) and `mode` (`create` or `update`). The host targets the initiating client preset and checks its revision. Do not dispatch generic preset writes or include client configuration in model output. Claim application only after a successful host receipt. A conflict leaves the saved widgets intact. Revisions preserve the dashboard name, preset and container ID; same-container bindings and Standard widgets are retained. The host provides an Open dashboard action in the chat.

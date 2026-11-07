@@ -34,15 +34,18 @@ public class ClientPresetStoreTest
         var manifest = JObject.Parse(File.ReadAllText(Path.Combine(folder, "package.json")))["programs"].Single(p => (string)p["hid"] == "111");
         Assert.That(checksum, Is.EqualTo((string)program.Element("PackageInfo").Element("Checksum")));
         Assert.That(checksum, Is.EqualTo((string)manifest["checksum"]));
+        Assert.That((string)manifest["version"], Is.EqualTo((string)program.Element("PackageInfo").Element("Version")), "Program version must match the XML source.");
+        Assert.That((string)manifest["packageVersion"], Is.EqualTo((string)JObject.Parse(File.ReadAllText(Path.Combine(folder, "package.json")))["version"]), "Program packageVersion must match its catalog package.");
         string code = "using System;using System.IO;using System.Linq;using System.Text;using Newtonsoft.Json;using Newtonsoft.Json.Linq;" + """
             public class PresetCommand { public object Data; public string GetOption(int index) => "room"; }
-            public class PresetApi { public PresetCommand Parse(object args) => new(); public void Handle(string path, Func<object, object> handler) {} }
-            public class PresetData { public string GetFolder(string name) => "folder"; public void AddToSystemBackup(string folder) {} }
-            public class PresetProgram { public void Run() {} public void GoBackground() {} }
+            public class PresetApi { public object Call(string route) => new string[] { "room/panel" }; public System.Collections.Generic.Dictionary<string, Func<object, object>> Handlers = new(); public PresetCommand Parse(object args) => args as PresetCommand ?? new(); public void Handle(string path, Func<object, object> handler) { Handlers[path] = handler; } }
+            public class PresetData { public string Root; public string GetFolder(string name) => Root ?? "folder"; public void AddToSystemBackup(string folder) {} }
+            public class PresetProgram { public void Run() {} public void GoBackground() {} public System.Collections.Generic.List<Tuple<string, object>> Events = new(); public void Emit(string field, object value) { Events.Add(Tuple.Create(field, value)); } }
             public class Distributed111 { PresetApi Api = new(); PresetData Data = new(); PresetProgram Program = new();
             """ + "void Setup() {" + setup + "} void Run() {" + source + "}" + context + "}" + """
             public class FailingStore : Distributed111.ClientPresetStore {
                 public FailingStore(string root) : base(root) {}
+                public FailingStore(string root, Action<JObject> publish) : base(root, publish) {}
                 protected override void PublishFile(string temporary, string destination) => throw new IOException("simulated publication failure");
             }
             """;
@@ -71,6 +74,7 @@ public class ClientPresetStoreTest
             catch (TargetInvocationException error) { ExceptionDispatchInfo.Capture(error.InnerException).Throw(); throw; }
         }
         public JObject Save(string name, JObject payload) => (JObject)Invoke("Save", name, payload);
+        public JObject ApplyDashboard(string name, JObject payload, string[] catalog) => (JObject)Invoke("ApplyDashboard", name, payload, catalog);
         public JObject Get(string name) => (JObject)Invoke("Get", name);
         public JObject Delete(string name, JObject payload) => (JObject)Invoke("Delete", name, payload);
         public string[] List() => (string[])Invoke("List");
@@ -87,6 +91,78 @@ public class ClientPresetStoreTest
         Assert.That(receipt["Status"]!.Value<string>(), Is.EqualTo("Ok"));Assert.That(receipt["revision"]!.Value<long>(), Is.EqualTo(revision));Assert.That(receipt["changed"]!.Value<bool>(), Is.EqualTo(changed));
     }
     private static void Conflict(JObject receipt) {Assert.That(receipt["Code"]!.Value<string>(), Is.EqualTo("PresetConflict"));}
+
+    static JObject DashboardRequest(string mode = "create", string name = "My room", long revision = 1) => new() {
+        ["mode"] = mode, ["dashboardName"] = name, ["widgetId"] = "room/panel", ["expectedRevision"] = revision,
+        ["clientId"] = "ai:origin", ["requestId"] = "goal" };
+    [Test] public void DashboardCreationPreservesOtherSettingsAndStandardWidgets() {
+        var before=Payload();store.Save("room",before);
+        var reply=store.ApplyDashboard("room",DashboardRequest(),new[]{"room/panel"});Ok(reply,2);
+        var after=store.Get("room");
+        Assert.That(JToken.DeepEquals(after["config"]["dashboards"][0],before["config"]["dashboards"][0]),Is.True);
+        Assert.That(JToken.DeepEquals(after["config"]["modules"],before["config"]["modules"]),Is.True);
+        Assert.That(JToken.DeepEquals(after["preferences"],before["preferences"]),Is.True);
+        Assert.That((string)after["config"]["dashboards"][1]["config"]["layout"]["widget"]["configuration"]["componentId"],Is.EqualTo("room/panel"));
+        Assert.That((string)reply["dashboardName"],Is.EqualTo("My room"));
+    }
+    [Test] public void DashboardUpdatePreservesSameContainerBindingsAndIsNoOpWhenUnchanged() {
+        var before=Payload();var dashboard=before["config"]["dashboards"][0];
+        dashboard["config"]=JObject.Parse("{theme:{color:'red'},layout:{mode:'standard',widget:{type:'custom-widget',module:{moduleId:'Demo:1'},configuration:{componentId:'room/panel',size:'dashboard',boundModules:{light:'Demo:2'}}}}}");
+        store.Save("room",before);Ok(store.ApplyDashboard("room",DashboardRequest("update","local"),new[]{"room/panel"}),2);
+        var after=store.Get("room");Assert.That(JToken.DeepEquals(after["config"]["dashboards"][0]["widgets"],dashboard["widgets"]),Is.True);
+        Assert.That(JToken.DeepEquals(after["config"]["dashboards"][0]["config"]["layout"]["widget"],dashboard["config"]["layout"]["widget"]),Is.True);
+        Ok(store.ApplyDashboard("room",DashboardRequest("update","local",2),new[]{"room/panel"}),2,false);
+    }
+    [Test] public void StaleDashboardApplicationDoesNotOverwriteOrRebase() {
+        store.Save("room",Payload());store.Save("room",Payload("other edit",1));
+        Conflict(store.ApplyDashboard("room",DashboardRequest(),new[]{"room/panel"}));
+        Assert.That(((JArray)store.Get("room")["config"]["dashboards"]).Count,Is.EqualTo(1));
+    }
+    [Test] public void DashboardApplicationRequiresCatalogMembershipAndExplicitCreateOrUpdate() {
+        store.Save("room",Payload());
+        Assert.That((string)store.ApplyDashboard("room",DashboardRequest(),Array.Empty<string>())["Code"],Is.EqualTo("InvalidDashboard"));
+        Assert.That((string)store.ApplyDashboard("room",DashboardRequest("create","local"),new[]{"room/panel"})["Code"],Is.EqualTo("DashboardExists"));
+        Assert.That((string)store.ApplyDashboard("room",DashboardRequest("update","absent"),new[]{"room/panel"})["Code"],Is.EqualTo("DashboardNotFound"));
+        Assert.That((long)store.Get("room")["revision"],Is.EqualTo(1));
+    }
+    [Test] public void ConcurrentDashboardCreatesOnlyOneConditionalWinner() {
+        store.Save("room",Payload());var other=NewStore();
+        var results=new JObject[2];Parallel.Invoke(()=>results[0]=store.ApplyDashboard("room",DashboardRequest(name:"One"),new[]{"room/panel"}),
+            ()=>results[1]=other.ApplyDashboard("room",DashboardRequest(name:"Two"),new[]{"room/panel"}));
+        Assert.That(results.Count(r=>(string)r["Status"]=="Ok"),Is.EqualTo(1));
+        Assert.That(((JArray)store.Get("room")["config"]["dashboards"]).Count,Is.EqualTo(2));
+    }
+    [Test] public void FailedDashboardPublicationLeavesPresetUnchanged() {
+        store.Save("room",Payload());string before=File.ReadAllText(Path.Combine(root,"room.json"));
+        Assert.Throws<IOException>(()=>NewStore(true).ApplyDashboard("room",DashboardRequest(),new[]{"room/panel"}));
+        Assert.That(File.ReadAllText(Path.Combine(root,"room.json")),Is.EqualTo(before));
+    }
+
+    [Test] public void FirstSaveAfterReloadAllowsLocalDashboardNavigationOnlyInItsBaseProof() {
+        var original=Payload();original["preferences"]["ui"]=new JObject{["dashboard"]="Dashboard",["language"]="it"};store.Save("room",original);
+        var loaded=(JObject)original.DeepClone();loaded["preferences"]["ui"]["dashboard"]="Prova AI";
+        var request=(JObject)loaded.DeepClone();request["baseContent"]=loaded.DeepClone();
+        ((JArray)request["config"]["modules"]).Add(new JObject{["id"]="HomeAutomation.HomeGenie.Automation:1051"});
+        Ok(store.Save("room",request),2);
+        Assert.That((string)store.Get("room")["preferences"]["ui"]["dashboard"],Is.EqualTo("Prova AI"));
+    }
+    [TestCase("layout")][TestCase("language")][TestCase("binding")]
+    public void ReloadNavigationExceptionNeverRebasesRealRemoteConfigurationChanges(string changed) {
+        var original=Payload();original["preferences"]["ui"]=new JObject{["dashboard"]="Dashboard",["language"]="it"};store.Save("room",original);
+        var remote=(JObject)original.DeepClone();remote["expectedRevision"]=1;
+        if(changed=="layout")remote["config"]["dashboards"][0]["name"]="Other browser";
+        if(changed=="language")remote["preferences"]["ui"]["language"]="en";
+        if(changed=="binding")remote["config"]["dashboards"][0]["widgets"][0]["configuration"]["boundModules"]["events"]="Demo:3";
+        store.Save("room",remote);
+        var local=(JObject)original.DeepClone();local["preferences"]["ui"]["dashboard"]="Prova AI";local["baseContent"]=local.DeepClone();
+        Conflict(store.Save("room",local));Assert.That((long)store.Get("room")["revision"],Is.EqualTo(2));
+    }
+    [Test] public void KnownRevisionConflictIsNotBypassedByNavigationException() {
+        var original=Payload();original["preferences"]["ui"]=new JObject{["dashboard"]="Dashboard"};store.Save("room",original);
+        var newer=(JObject)original.DeepClone();newer["preferences"]["ui"]["dashboard"]="Other";newer["expectedRevision"]=1;store.Save("room",newer);
+        var old=(JObject)original.DeepClone();old["baseContent"]=original.DeepClone();old["expectedRevision"]=1;
+        Conflict(store.Save("room",old));
+    }
 
     [Test] public void NewPresetAndConditionalSaveIncrementRevision() {
         Ok(store.Save("room", Payload()), 1);Ok(store.Save("room", Payload("edited",1)),2);
@@ -158,4 +234,91 @@ public class ClientPresetStoreTest
     [Test] public void UnicodeNamesRoundTripAndTemporaryFilesAreNotPresets() {
         Ok(store.Save("città-தமிழ்",Payload()),1);File.WriteAllText(Path.Combine(root,"foreign.tmp"),"temporary");Assert.That(store.List(),Is.EqualTo(new[]{"città-தமிழ்"}));
     }
+    private StoreProxy AnnouncingStore(Action<JObject> publish, bool failing = false) =>
+        new(Activator.CreateInstance(failing ? failingStoreType : storeType, root, publish));
+    [Test] public void EmitsOnlyAfterSaveCommitWithBoundedOriginAndWithoutUserConfiguration() {
+        JObject received=null;
+        var announcing=AnnouncingStore(change=>{
+            Assert.That(JObject.Parse(File.ReadAllText(Path.Combine(root,"room.json")))["revision"]!.Value<long>(),Is.EqualTo(1));
+            received=(JObject)change.DeepClone();
+        });
+        var request=Payload();request["clientId"]="browser-a";request["requestId"]="write-1";
+        Ok(announcing.Save("room",request),1);
+        Assert.That(received,Is.Not.Null);Assert.That((int)received["version"],Is.EqualTo(1));
+        Assert.That((string)received["name"],Is.EqualTo("room"));Assert.That((string)received["operation"],Is.EqualTo("save"));
+        Assert.That((string)received["clientId"],Is.EqualTo("browser-a"));Assert.That((string)received["requestId"],Is.EqualTo("write-1"));
+        Assert.That(received["config"],Is.Null);Assert.That(announcing.Get("room")["clientId"],Is.Null);
+    }
+    [Test] public void NoOpConflictAndInvalidInputDoNotEmit() {
+        var changes=new System.Collections.Generic.List<JObject>();var announcing=AnnouncingStore(change=>changes.Add(change));
+        announcing.Save("room",Payload());changes.Clear();
+        Ok(announcing.Save("room",Payload()),1,false);Conflict(announcing.Save("room",Payload("stale",0)));
+        announcing.Save("room",new JObject());Assert.That(changes,Is.Empty);
+    }
+    [Test] public void DeleteEmitsCommittedTombstoneAndRepeatedDeleteDoesNotEmit() {
+        JObject received=null;var announcing=AnnouncingStore(change=>received=change);
+        announcing.Save("room",Payload());received=null;
+        Ok(announcing.Delete("room",new JObject{["expectedRevision"]=1,["clientId"]="browser-b",["requestId"]="delete-1"}),2);
+        Assert.That((string)received["operation"],Is.EqualTo("delete"));Assert.That((long)received["revision"],Is.EqualTo(2));
+        Assert.That((string)received["requestId"],Is.EqualTo("delete-1"));Assert.That((bool)announcing.Get("room")["deleted"],Is.True);
+        received=null;Ok(announcing.Delete("room",new JObject{["expectedRevision"]=2}),2,false);Assert.That(received,Is.Null);
+    }
+    [Test] public void FailedPublicationDoesNotEmitOrAdvanceRevision() {
+        store.Save("room",Payload());int events=0;var failing=AnnouncingStore(_=>events++,true);
+        Assert.Throws<IOException>(()=>failing.Save("room",Payload("edited",1)));
+        Assert.That(events,Is.Zero);Assert.That((long)store.Get("room")["revision"],Is.EqualTo(1));
+    }
+    [Test] public void FailedEventDeliveryDoesNotTurnACommittedSaveIntoAnError() {
+        var announcing=AnnouncingStore(_=>throw new InvalidOperationException("event transport failed"));
+        Ok(announcing.Save("room",Payload()),1);Assert.That((long)announcing.Get("room")["revision"],Is.EqualTo(1));
+    }
+    [Test] public void EventsKeepCommitOrderAndInvalidOriginMetadataIsNotBroadcast() {
+        var changes=new System.Collections.Generic.List<JObject>();var announcing=AnnouncingStore(change=>changes.Add(change));
+        var request=Payload();request["clientId"]=new string('x',129);request["requestId"]=new JObject();announcing.Save("room",request);
+        announcing.Save("room",Payload("edited",1));Assert.That(changes.Select(c=>(long)c["revision"]),Is.EqualTo(new long[]{1,2}));
+        foreach(var change in changes) {Assert.That((string)change["clientId"],Is.Empty);Assert.That((string)change["requestId"],Is.Empty);}
+    }
+
+    [TestCase("object")][TestCase("bytes")][TestCase("text")][TestCase("dictionary")]
+    public void DashboardApiHandlerAcceptsNativeAndHttpPayloads(string transport) {
+        store.Save("room",Payload());
+        var type=storeType.DeclaringType;var instance=Activator.CreateInstance(type);
+        var data=type.GetField("Data",BindingFlags.NonPublic|BindingFlags.Instance).GetValue(instance);
+        data.GetType().GetField("Root").SetValue(data,root);
+        type.GetMethod("Run",BindingFlags.NonPublic|BindingFlags.Instance).Invoke(instance,null);
+        var api=type.GetField("Api",BindingFlags.NonPublic|BindingFlags.Instance).GetValue(instance);
+        var handlers=(System.Collections.Generic.Dictionary<string,Func<object,object>>)api.GetType().GetField("Handlers").GetValue(api);
+        var command=Activator.CreateInstance(type.Assembly.GetType("PresetCommand"));
+        var payload=DashboardRequest();
+        object body=transport switch {
+            "object"=>payload,
+            "bytes"=>System.Text.Encoding.UTF8.GetBytes(payload.ToString()),
+            "text"=>payload.ToString(),
+            _=>payload.ToObject<System.Collections.Generic.Dictionary<string,object>>()
+        };
+        command.GetType().GetField("Data").SetValue(command,body);
+        var reply=(JObject)handlers["HomeAutomation.HomeGenie/Config/Client.PresetsApplyDashboard/"](command);
+        Ok(reply,2);Assert.That((string)reply["dashboardName"],Is.EqualTo("My room"));
+        Assert.That((string)store.Get("room")["config"]["dashboards"][1]["config"]["layout"]["widget"]["configuration"]["componentId"],Is.EqualTo("room/panel"));
+    }
+
+    [Test] public void DistributedApiHandlerEmitsTheDeclaredPropertyOnlyForCommittedChanges() {
+        var type=storeType.DeclaringType;var instance=Activator.CreateInstance(type);
+        var data=type.GetField("Data",BindingFlags.NonPublic|BindingFlags.Instance).GetValue(instance);
+        data.GetType().GetField("Root").SetValue(data,root);
+        type.GetMethod("Run",BindingFlags.NonPublic|BindingFlags.Instance).Invoke(instance,null);
+        var api=type.GetField("Api",BindingFlags.NonPublic|BindingFlags.Instance).GetValue(instance);
+        var handlers=(System.Collections.Generic.Dictionary<string,Func<object,object>>)api.GetType().GetField("Handlers").GetValue(api);
+        var command=Activator.CreateInstance(type.Assembly.GetType("PresetCommand"));
+        var payload=Payload();payload["clientId"]="browser-api";payload["requestId"]="api-save";
+        command.GetType().GetField("Data").SetValue(command,System.Text.Encoding.UTF8.GetBytes(payload.ToString()));
+        var save=handlers["HomeAutomation.HomeGenie/Config/Client.PresetsAdd/"];
+        Ok((JObject)save(command),1);Ok((JObject)save(command),1,false);
+        var program=type.GetField("Program",BindingFlags.NonPublic|BindingFlags.Instance).GetValue(instance);
+        var events=(System.Collections.Generic.List<Tuple<string,object>>)program.GetType().GetField("Events").GetValue(program);
+        Assert.That(events.Count,Is.EqualTo(1));Assert.That(events[0].Item1,Is.EqualTo("Client.PresetsChanged"));
+        var notice=JObject.Parse((string)events[0].Item2);Assert.That((string)notice["clientId"],Is.EqualTo("browser-api"));
+        Assert.That((string)notice["requestId"],Is.EqualTo("api-save"));
+    }
+
 }

@@ -1,4 +1,7 @@
 {
+  "ai_dashboard_open": "Open dashboard",
+  "ai_dashboard_select_preset": "Select the original preset and update it in Preferences before opening this dashboard.",
+
   "ai_widget_objective": "Widget objective",
   "ai_task_waiting": "Waiting",
   "ai_task_cancelled": "Cancelled",
@@ -658,5 +661,7 @@
   "dashboard_layout": "Layout",
   "dashboard_standard": "Standard",
   "preset_conflict": "This preset changed on the server. Your changes are still available in this browser.",
-  "preset_conflict_recovery": "Update to load the server copy and replace local changes, or save your changes as a new preset."
+  "preset_conflict_recovery": "Update to load the server copy and replace local changes, or save your changes as a new preset.",
+  "preset_updated_elsewhere": "This preset was changed in another session.",
+  "preset_deleted_elsewhere": "This preset was deleted in another session. You can save your local copy as a new preset."
 }

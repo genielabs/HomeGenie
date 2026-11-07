@@ -112,3 +112,8 @@ Widget speech: use `utils.speech.say(sentence)` for plain-text narration using t
 
 
 For free-size widgets requested to fill the chat width, use controller settings `{ defaultSize: '', sizeOptions: [], fillWidth: true }`. This explicit opt-in lets the chat preview grow as well as shrink. Omit fillWidth for intrinsic-width widgets; fixed small/medium/big sizes retain their sizing. The flag affects chat previews only, not the dashboard; inner max-width rules still apply. Follow the shared widget reference for details.
+
+
+### Applying a dashboard from an objective
+
+Saving a container alone does not change the dashboard. In a widget objective, when the user explicitly asks to create or apply a dashboard, first save every widget, then use the host action `apply_dashboard` with `name` (the owned container leaf), `dashboardName` (a short human name) and `mode` (`create` or `update`). The host targets the initiating client preset and checks its revision. Do not dispatch generic preset writes or include client configuration in model output. Claim application only after a successful host receipt. A conflict leaves the saved widgets intact. Revisions preserve the dashboard name, preset and container ID; same-container bindings and Standard widgets are retained. The host provides an Open dashboard action in the chat.

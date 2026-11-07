@@ -2,9 +2,19 @@
 
 ## Unreleased
 
+- Avoid false preset conflicts on the first save after a page reload when only the locally remembered dashboard view differs from the server copy. Limit the navigation exception to the initial content proof; retain complete ordinary save comparisons and exact known-revision checks, including real layout, binding and preference conflicts.
+
+- Do not treat server-discovered modules (including the objective runner itself) as local preset edits when adopting an applied AI dashboard. Keep the ordinary save/revision comparison unchanged and continue protecting actual layout, named bindings, preferences and local connection changes.
+
+- Preserve native JSON/object payloads in Client configuration (111), alongside HTTP byte bodies. This fixes dashboard application from an AI runner discarding its request fields and incorrectly rejecting a valid saved container. Cover the distributed handler with object, dictionary, JSON text and HTTP-byte regressions.
+
+- Let widget objectives create a named dashboard or apply a saved container to an existing dashboard in the initiating client preset. Reuse program 111's atomic revision checks; preserve Standard widgets, theme and same-container bindings. Persist dashboard results separately in task history, offer Open dashboard, and adopt the result only in the originating unchanged page. Conflicts and uncertain application receipts stop the runner while retaining saved widgets. Other clients retain the explicit Preferences update flow.
+
+- Emit revisioned preset-change events from Client configuration (111) after committed saves/deletions. Mark remotely changed selected presets with a Preferences badge and explicit Update/Save As recovery; ignore own, duplicate and older events without automatically replacing local configuration. Preserve notices across fetch failures and newer changes during loading.
+
 - Skip server writes for unchanged applied/confirmed client presets. Ignore live sensor samples and automatic widget-model/responsive-layout adaptation when determining local changes; preserve serialized reversions and conflict protection for real edits.
 
-- Prepare client preset synchronization by capturing immutable preset/server/preference snapshots, serializing local and server saves and coalescing pending writes. Wait for save confirmation before switching/deleting presets or reloading after a language change; prevent loaded-preset save echoes and report failed saves. Add server revisions and atomic conditional writes in the ScriptContext of Client configuration (111), without a new core dependency, retaining local edits on conflicts with Update or Save As recovery in Preferences. Lazily migrate existing presets, ignore runtime field samples for no-op comparison and preserve deletion generations. New clients refuse unprotected writes to older backends. Proactive preset events/badges, reconnect reconciliation and recoverable history remain future steps.
+- Prepare client preset synchronization by capturing immutable preset/server/preference snapshots, serializing local and server saves and coalescing pending writes. Wait for save confirmation before switching/deleting presets or reloading after a language change; prevent loaded-preset save echoes and report failed saves. Add server revisions and atomic conditional writes in the ScriptContext of Client configuration (111), without a new core dependency, retaining local edits on conflicts with Update or Save As recovery in Preferences. Lazily migrate existing presets, ignore runtime field samples for no-op comparison and preserve deletion generations. New clients refuse unprotected writes to older backends. Preset events/badges are implemented; reconnect reconciliation and recoverable history are deferred.
 
 - Add per-instance named widget bindings through `settings.boundModules`, `this.getBoundModule(name)` and the `bm(name)` template alias. Support inherited roles and `:module="bm('role')"` composition, explicit unbound selections and complete MQTT IDs while retaining the existing primary binding.
 
