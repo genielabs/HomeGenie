@@ -522,6 +522,7 @@
   "Scenarios": "Xeni",
   "Security": "Sigurtà",
   "Weather and Environment": "Temp u Ambjent",
+  "Themes": "Temi",
   "Utilities": "Utilitajiet",
   "Scenes": "Xeni",
   "Virtual Modules": "Moduli Virtwali",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Is-sistema mhix aġġornata",
   "new_programs_updates_available": "Aġġornamenti ġodda tal-programm disponibbli",
   "dashboard_layout": "Tqassim",
-  "dashboard_standard": "Standard"
+  "dashboard_standard": "Standard",
+  "ai_dashboard_open": "Iftaħ dashboard",
+  "ai_dashboard_select_preset": "Agħżel issettjat minn qabel oriġinali. Iftaħ “Preferenzi” u aġġorna l-issettjar minn qabel qabel tiftaħ dan id-dashboard.",
+  "preset_conflict": "Dan issettjat minn qabel inbidel fuq is-server. Il-bidliet tiegħek għadhom disponibbli f'dan il-browser.",
+  "preset_conflict_recovery": "Biex tgħabbi l-kopja mis-server u tissostitwixxi l-bidliet lokali tiegħek, agħżel “Aġġornament”. Biex iżżomm il-bidliet tiegħek, issalvahom bħala presett ġdid.",
+  "preset_updated_elsewhere": "Dan il-preset inbidel f'sessjoni oħra.",
+  "preset_deleted_elsewhere": "Dan issettjat minn qabel tħassar f'sessjoni oħra. Tista 'tiffranka l-kopja lokali tiegħek bħala ssettjar minn qabel ġdid."
 }

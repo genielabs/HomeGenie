@@ -139,7 +139,28 @@
   "capture_commands_pause": "حڪمن جي وچ ۾ وقفو",
   "capture_pause_none": "ڪو به نه",
   "capture_pause_asis": "جيئن آهي",
+  "neon_district_road_speed_very_slow": "تمام آهستي",
+  "neon_district_road_speed_slow": "آهستي",
+  "neon_district_road_speed_normal": "عام",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District ڊيش بورڊ لاءِ اختياري سيٽنگون.",
+      "ConfigureOptions.Title": "ڊيش بورڊ جو عنوان",
+      "ConfigureOptions.Subtitle": "ڊيش بورڊ جو ذيلي عنوان",
+      "ConfigureOptions.RoadSpeed": "رستي جي اينيميشن جي رفتار",
+      "ConfigureOptions.Message": "علائقي جو پيغام",
+      "ConfigureOptions.DisableAnimations": "اينيميشنون بند ڪريو"
+    },
+    "652": {
+      "Title": "آئسوميٽرڪ ڪمرو",
+      "Description": "آئسوميٽرڪ ڪمرو ڊيش بورڊ لاءِ اختياري سيٽنگون.",
+      "ConfigureOptions.Eyebrow": "عنوان جي مٿان متن",
+      "ConfigureOptions.Title": "ڊيش بورڊ جو عنوان",
+      "ConfigureOptions.Subtitle": "ڊيش بورڊ جو ذيلي عنوان",
+      "ConfigureOptions.DisableAnimations": "اينيميشنون بند ڪريو"
+    },
+
     "6": {
       "Title": "گروپ جون بتيون ٻاريو",
       "Description": "ڏنل گروپ جون سڀ بتيون ٻاريو."

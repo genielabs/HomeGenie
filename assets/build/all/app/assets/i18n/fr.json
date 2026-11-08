@@ -522,6 +522,7 @@
   "Scenarios": "Scènes",
   "Security": "Sécurité",
   "Weather and Environment": "Météo et environnement",
+  "Themes": "Thèmes",
   "Utilities": "Services publics",
   "Scenes": "Scènes",
   "Virtual Modules": "Modules virtuels",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Le système n'est pas à jour",
   "new_programs_updates_available": "Nouvelles mises à jour du programme disponibles",
   "dashboard_layout": "Disposition",
-  "dashboard_standard": "Standard"
+  "dashboard_standard": "Standard",
+  "ai_dashboard_open": "Ouvrir le tableau de bord",
+  "ai_dashboard_select_preset": "Sélectionnez le préréglage d'origine. Ouvrez “Préférences” et mettez à jour le préréglage avant d'ouvrir ce tableau de bord.",
+  "preset_conflict": "Ce préréglage a changé sur le serveur. Vos modifications sont toujours disponibles dans ce navigateur.",
+  "preset_conflict_recovery": "Pour charger la copie depuis le serveur et remplacer vos modifications locales, sélectionnez “Mise à jour”. Pour conserver vos modifications, enregistrez-les en tant que nouveau préréglage.",
+  "preset_updated_elsewhere": "Ce préréglage a été modifié lors d'une autre session.",
+  "preset_deleted_elsewhere": "Ce préréglage a été supprimé dans une autre session. Vous pouvez enregistrer votre copie locale en tant que nouveau préréglage."
 }

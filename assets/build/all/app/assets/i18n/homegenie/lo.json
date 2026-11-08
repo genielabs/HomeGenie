@@ -139,7 +139,28 @@
   "capture_commands_pause": "ຢຸດຊົ່ວຄາວລະຫວ່າງຄໍາສັ່ງ",
   "capture_pause_none": "ບໍ່ມີ",
   "capture_pause_asis": "ດັ່ງທີ່",
+  "neon_district_road_speed_very_slow": "ຊ້າຫຼາຍ",
+  "neon_district_road_speed_slow": "ຊ້າ",
+  "neon_district_road_speed_normal": "ປົກກະຕິ",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "ການຕັ້ງຄ່າເສີມສຳລັບແຜງຄວບຄຸມ Neon District.",
+      "ConfigureOptions.Title": "ຊື່ແຜງຄວບຄຸມ",
+      "ConfigureOptions.Subtitle": "ຊື່ຮອງຂອງແຜງຄວບຄຸມ",
+      "ConfigureOptions.RoadSpeed": "ຄວາມໄວຂອງພາບເຄື່ອນໄຫວຖະໜົນ",
+      "ConfigureOptions.Message": "ຂໍ້ຄວາມປະຈຳເຂດ",
+      "ConfigureOptions.DisableAnimations": "ປິດພາບເຄື່ອນໄຫວ"
+    },
+    "652": {
+      "Title": "ຫ້ອງໄອໂຊເມຕຣິກ",
+      "Description": "ການຕັ້ງຄ່າເສີມສຳລັບແຜງຄວບຄຸມ ຫ້ອງໄອໂຊເມຕຣິກ.",
+      "ConfigureOptions.Eyebrow": "ຂໍ້ຄວາມຢູ່ເທິງຫົວຂໍ້",
+      "ConfigureOptions.Title": "ຊື່ແຜງຄວບຄຸມ",
+      "ConfigureOptions.Subtitle": "ຊື່ຮອງຂອງແຜງຄວບຄຸມ",
+      "ConfigureOptions.DisableAnimations": "ປິດພາບເຄື່ອນໄຫວ"
+    },
+
     "6": {
       "Title": "ເປີດໄຟໃນກຸ່ມ",
       "Description": "ເປີດໄຟທັງໝົດໃນກຸ່ມທີ່ກຳນົດ."

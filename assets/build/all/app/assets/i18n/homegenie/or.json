@@ -139,7 +139,28 @@
   "capture_commands_pause": "କମାଣ୍ଡଗୁଡ଼ିକ ମଧ୍ୟରେ ବିରତ କରନ୍ତୁ",
   "capture_pause_none": "କିଛି ନୁହେଁ",
   "capture_pause_asis": "ଯେପରି ଅଛି",
+  "neon_district_road_speed_very_slow": "ବହୁତ ଧୀର",
+  "neon_district_road_speed_slow": "ଧୀର",
+  "neon_district_road_speed_normal": "ସାଧାରଣ",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District ଡ୍ୟାସବୋର୍ଡ ପାଇଁ ଇଚ୍ଛାଧୀନ ସେଟିଂସ୍।",
+      "ConfigureOptions.Title": "ଡ୍ୟାସବୋର୍ଡର ଶୀର୍ଷକ",
+      "ConfigureOptions.Subtitle": "ଡ୍ୟାସବୋର୍ଡର ଉପଶୀର୍ଷକ",
+      "ConfigureOptions.RoadSpeed": "ରାସ୍ତା ଆନିମେସନ୍‌ର ଗତି",
+      "ConfigureOptions.Message": "ଅଞ୍ଚଳର ବାର୍ତ୍ତା",
+      "ConfigureOptions.DisableAnimations": "ଆନିମେସନ୍ ବନ୍ଦ କରନ୍ତୁ"
+    },
+    "652": {
+      "Title": "ଆଇସୋମେଟ୍ରିକ କୋଠରୀ",
+      "Description": "ଆଇସୋମେଟ୍ରିକ କୋଠରୀ ଡ୍ୟାସବୋର୍ଡ ପାଇଁ ଇଚ୍ଛାଧୀନ ସେଟିଂସ୍।",
+      "ConfigureOptions.Eyebrow": "ଶୀର୍ଷକ ଉପରେ ଥିବା ପାଠ୍ୟ",
+      "ConfigureOptions.Title": "ଡ୍ୟାସବୋର୍ଡର ଶୀର୍ଷକ",
+      "ConfigureOptions.Subtitle": "ଡ୍ୟାସବୋର୍ଡର ଉପଶୀର୍ଷକ",
+      "ConfigureOptions.DisableAnimations": "ଆନିମେସନ୍ ବନ୍ଦ କରନ୍ତୁ"
+    },
+
     "6": {
       "Title": "ଗୋଷ୍ଠୀର ଲାଇଟ୍ ଚାଲୁ କରନ୍ତୁ",
       "Description": "ନିର୍ଦ୍ଦିଷ୍ଟ ଗୋଷ୍ଠୀର ସମସ୍ତ ଲାଇଟ୍ ଚାଲୁ କରନ୍ତୁ।"

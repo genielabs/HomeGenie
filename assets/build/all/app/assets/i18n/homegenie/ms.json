@@ -139,7 +139,28 @@
   "capture_commands_pause": "Jeda antara arahan",
   "capture_pause_none": "tiada",
   "capture_pause_asis": "Seperti yang ada",
+  "neon_district_road_speed_very_slow": "Sangat perlahan",
+  "neon_district_road_speed_slow": "Perlahan",
+  "neon_district_road_speed_normal": "Biasa",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Tetapan pilihan untuk papan pemuka Neon District.",
+      "ConfigureOptions.Title": "Tajuk papan pemuka",
+      "ConfigureOptions.Subtitle": "Sari kata papan pemuka",
+      "ConfigureOptions.RoadSpeed": "Kelajuan animasi jalan",
+      "ConfigureOptions.Message": "Mesej daerah",
+      "ConfigureOptions.DisableAnimations": "Nyahaktifkan animasi"
+    },
+    "652": {
+      "Title": "Bilik Isometrik",
+      "Description": "Tetapan pilihan untuk papan pemuka Bilik Isometrik.",
+      "ConfigureOptions.Eyebrow": "Teks di atas tajuk",
+      "ConfigureOptions.Title": "Tajuk papan pemuka",
+      "ConfigureOptions.Subtitle": "Sari kata papan pemuka",
+      "ConfigureOptions.DisableAnimations": "Nyahaktifkan animasi"
+    },
+
     "6": {
       "Title": "Hidupkan lampu kumpulan",
       "Description": "Hidupkan semua lampu dalam kumpulan yang ditentukan."

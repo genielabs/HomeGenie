@@ -139,7 +139,28 @@
   "capture_commands_pause": "Pawża bejn il-kmandi",
   "capture_pause_none": "Xejn",
   "capture_pause_asis": "Kif inhu",
+  "neon_district_road_speed_very_slow": "Bil-mod ħafna",
+  "neon_district_road_speed_slow": "Bil-mod",
+  "neon_district_road_speed_normal": "Normali",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Settings fakultattivi għad-dashboard Neon District.",
+      "ConfigureOptions.Title": "Titlu tad-dashboard",
+      "ConfigureOptions.Subtitle": "Sottotitlu tad-dashboard",
+      "ConfigureOptions.RoadSpeed": "Veloċità tal-animazzjoni tat-triq",
+      "ConfigureOptions.Message": "Messaġġ tad-distrett",
+      "ConfigureOptions.DisableAnimations": "Iddiżattiva l-animazzjonijiet"
+    },
+    "652": {
+      "Title": "Kamra isometrika",
+      "Description": "Settings fakultattivi għad-dashboard Kamra isometrika.",
+      "ConfigureOptions.Eyebrow": "Test fuq it-titlu",
+      "ConfigureOptions.Title": "Titlu tad-dashboard",
+      "ConfigureOptions.Subtitle": "Sottotitlu tad-dashboard",
+      "ConfigureOptions.DisableAnimations": "Iddiżattiva l-animazzjonijiet"
+    },
+
     "6": {
       "Title": "Ixgħel id-dwal tal-grupp",
       "Description": "Ixgħel id-dwal kollha fil-grupp indikat."

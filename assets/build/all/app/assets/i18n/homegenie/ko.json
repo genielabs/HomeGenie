@@ -139,7 +139,28 @@
   "capture_commands_pause": "명령 간 일시 정지",
   "capture_pause_none": "없음",
   "capture_pause_asis": "있는 그대로",
+  "neon_district_road_speed_very_slow": "매우 느림",
+  "neon_district_road_speed_slow": "느림",
+  "neon_district_road_speed_normal": "보통",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District 대시보드의 선택 설정입니다.",
+      "ConfigureOptions.Title": "대시보드 제목",
+      "ConfigureOptions.Subtitle": "대시보드 부제목",
+      "ConfigureOptions.RoadSpeed": "도로 애니메이션 속도",
+      "ConfigureOptions.Message": "구역 메시지",
+      "ConfigureOptions.DisableAnimations": "애니메이션 끄기"
+    },
+    "652": {
+      "Title": "아이소메트릭 방",
+      "Description": "아이소메트릭 방 대시보드의 선택 설정입니다.",
+      "ConfigureOptions.Eyebrow": "제목 위에 표시할 텍스트",
+      "ConfigureOptions.Title": "대시보드 제목",
+      "ConfigureOptions.Subtitle": "대시보드 부제목",
+      "ConfigureOptions.DisableAnimations": "애니메이션 끄기"
+    },
+
     "6": {
       "Title": "그룹 조명 켜기",
       "Description": "지정한 그룹의 모든 조명을 켭니다."

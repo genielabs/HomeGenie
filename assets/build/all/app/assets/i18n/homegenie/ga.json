@@ -139,7 +139,28 @@
   "capture_commands_pause": "Sos idir orduithe",
   "capture_pause_none": "Dada",
   "capture_pause_asis": "Mar atá",
+  "neon_district_road_speed_very_slow": "An-mhall",
+  "neon_district_road_speed_slow": "Mall",
+  "neon_district_road_speed_normal": "Gnáth",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Socruithe roghnacha do dheais Neon District.",
+      "ConfigureOptions.Title": "Teideal na deaise",
+      "ConfigureOptions.Subtitle": "Fotheideal na deaise",
+      "ConfigureOptions.RoadSpeed": "Luas bheochan an bhóthair",
+      "ConfigureOptions.Message": "Teachtaireacht an cheantair",
+      "ConfigureOptions.DisableAnimations": "Díchumasaigh beochana"
+    },
+    "652": {
+      "Title": "Seomra isiméadrach",
+      "Description": "Socruithe roghnacha do dheais Seomra isiméadrach.",
+      "ConfigureOptions.Eyebrow": "Téacs os cionn an teidil",
+      "ConfigureOptions.Title": "Teideal na deaise",
+      "ConfigureOptions.Subtitle": "Fotheideal na deaise",
+      "ConfigureOptions.DisableAnimations": "Díchumasaigh beochana"
+    },
+
     "6": {
       "Title": "Cuir soilse an ghrúpa ar siúl",
       "Description": "Cuir na soilse go léir sa ghrúpa sonraithe ar siúl."

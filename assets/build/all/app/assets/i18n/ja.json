@@ -522,6 +522,7 @@
   "Scenarios": "シーン",
   "Security": "安全",
   "Weather and Environment": "天気と環境",
+  "Themes": "テーマ",
   "Utilities": "公共事業",
   "Scenes": "シーン",
   "Virtual Modules": "仮想モジュール",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "システムが最新ではありません",
   "new_programs_updates_available": "新しいプログラムのアップデートが利用可能",
   "dashboard_layout": "レイアウト",
-  "dashboard_standard": "標準"
+  "dashboard_standard": "標準",
+  "ai_dashboard_open": "ダッシュボードを開く",
+  "ai_dashboard_select_preset": "オリジナルのプリセットを選択します。このダッシュボードを開く前に、“設定” を開いてプリセットを更新します。",
+  "preset_conflict": "このプリセットはサーバー上で変更されました。変更内容は引き続きこのブラウザで利用できます。",
+  "preset_conflict_recovery": "サーバーからコピーをロードしてローカルの変更を置き換えるには、“アップデート” を選択します。変更を保持するには、新しいプリセットとして保存します。",
+  "preset_updated_elsewhere": "このプリセットは別のセッションで変更されました。",
+  "preset_deleted_elsewhere": "このプリセットは別のセッションで削除されました。ローカル コピーを新しいプリセットとして保存できます。"
 }

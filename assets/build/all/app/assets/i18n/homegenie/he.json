@@ -139,7 +139,28 @@
   "capture_commands_pause": "הפסקה בין פקודות",
   "capture_pause_none": "אַף לֹא אֶחָד",
   "capture_pause_asis": "כפי שהוא",
+  "neon_district_road_speed_very_slow": "איטית מאוד",
+  "neon_district_road_speed_slow": "איטית",
+  "neon_district_road_speed_normal": "רגילה",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "הגדרות אופציונליות ללוח הבקרה ״Neon District״.",
+      "ConfigureOptions.Title": "כותרת לוח הבקרה",
+      "ConfigureOptions.Subtitle": "כותרת המשנה של לוח הבקרה",
+      "ConfigureOptions.RoadSpeed": "מהירות הנפשת הכביש",
+      "ConfigureOptions.Message": "הודעת הרובע",
+      "ConfigureOptions.DisableAnimations": "השבתת הנפשות"
+    },
+    "652": {
+      "Title": "חדר איזומטרי",
+      "Description": "הגדרות אופציונליות ללוח הבקרה ״חדר איזומטרי״.",
+      "ConfigureOptions.Eyebrow": "טקסט מעל הכותרת",
+      "ConfigureOptions.Title": "כותרת לוח הבקרה",
+      "ConfigureOptions.Subtitle": "כותרת המשנה של לוח הבקרה",
+      "ConfigureOptions.DisableAnimations": "השבתת הנפשות"
+    },
+
     "6": {
       "Title": "הדלקת אורות הקבוצה",
       "Description": "הדלקת כל האורות בקבוצה שצוינה."

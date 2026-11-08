@@ -139,7 +139,28 @@
   "capture_commands_pause": "د امرونو ترمنځ وقفه",
   "capture_pause_none": "هیڅ نه",
   "capture_pause_asis": "لکه څنګه چې دی",
+  "neon_district_road_speed_very_slow": "ډېر ورو",
+  "neon_district_road_speed_slow": "ورو",
+  "neon_district_road_speed_normal": "عادي",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "د «Neon District» ډشبورډ اختیاري امستنې.",
+      "ConfigureOptions.Title": "د ډشبورډ سرلیک",
+      "ConfigureOptions.Subtitle": "د ډشبورډ فرعي سرلیک",
+      "ConfigureOptions.RoadSpeed": "د سړک د انیمېشن چټکتیا",
+      "ConfigureOptions.Message": "د سیمې پیغام",
+      "ConfigureOptions.DisableAnimations": "انیمېشنونه بند کړئ"
+    },
+    "652": {
+      "Title": "ایزومېټریک خونه",
+      "Description": "د «ایزومېټریک خونه» ډشبورډ اختیاري امستنې.",
+      "ConfigureOptions.Eyebrow": "د سرلیک پورته متن",
+      "ConfigureOptions.Title": "د ډشبورډ سرلیک",
+      "ConfigureOptions.Subtitle": "د ډشبورډ فرعي سرلیک",
+      "ConfigureOptions.DisableAnimations": "انیمېشنونه بند کړئ"
+    },
+
     "6": {
       "Title": "د ډلې څراغونه بل کړئ",
       "Description": "په ټاکل شوې ډله کې ټول څراغونه بل کړئ."

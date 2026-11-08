@@ -522,6 +522,7 @@
   "Scenarios": "Kohtaukset",
   "Security": "Turvallisuus",
   "Weather and Environment": "Sää ja ympäristö",
+  "Themes": "Teemat",
   "Utilities": "Apuohjelmat",
   "Scenes": "Kohtaukset",
   "Virtual Modules": "Virtuaalimoduulit",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Järjestelmä ei ole ajan tasalla",
   "new_programs_updates_available": "Uusia ohjelmapäivityksiä saatavilla",
   "dashboard_layout": "Asettelu",
-  "dashboard_standard": "Vakio"
+  "dashboard_standard": "Vakio",
+  "ai_dashboard_open": "Avaa kojelauta",
+  "ai_dashboard_select_preset": "Valitse alkuperäinen esiasetus. Avaa “Asetukset” ja päivitä esiasetus ennen tämän kojelaudan avaamista.",
+  "preset_conflict": "Tämä esiasetus muuttui palvelimella. Muutokset ovat edelleen käytettävissä tässä selaimessa.",
+  "preset_conflict_recovery": "Jos haluat ladata kopion palvelimelta ja korvata paikalliset muutokset, valitse “Päivittää”. Jos haluat säilyttää muutokset, tallenna ne uutena esiasetuksena.",
+  "preset_updated_elsewhere": "Tätä esiasetusta muutettiin toisessa istunnossa.",
+  "preset_deleted_elsewhere": "Tämä esiasetus poistettiin toisessa istunnossa. Voit tallentaa paikallisen kopion uutena esiasetuksena."
 }

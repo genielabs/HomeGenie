@@ -139,7 +139,28 @@
   "capture_commands_pause": "Pausa entre ordres",
   "capture_pause_none": "Cap",
   "capture_pause_asis": "Tal com està",
+  "neon_district_road_speed_very_slow": "Molt lenta",
+  "neon_district_road_speed_slow": "Lenta",
+  "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Configuració opcional del tauler «Neon District».",
+      "ConfigureOptions.Title": "Títol del tauler",
+      "ConfigureOptions.Subtitle": "Subtítol del tauler",
+      "ConfigureOptions.RoadSpeed": "Velocitat de l’animació de la carretera",
+      "ConfigureOptions.Message": "Missatge del districte",
+      "ConfigureOptions.DisableAnimations": "Desactiva les animacions"
+    },
+    "652": {
+      "Title": "Habitació isomètrica",
+      "Description": "Configuració opcional del tauler «Habitació isomètrica».",
+      "ConfigureOptions.Eyebrow": "Text sobre el títol",
+      "ConfigureOptions.Title": "Títol del tauler",
+      "ConfigureOptions.Subtitle": "Subtítol del tauler",
+      "ConfigureOptions.DisableAnimations": "Desactiva les animacions"
+    },
+
     "6": {
       "Title": "ENCÉN els llums del grup",
       "Description": "Encén tots els llums del grup indicat."

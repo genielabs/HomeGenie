@@ -139,7 +139,28 @@
   "capture_commands_pause": "આદેશો વચ્ચે થોભો",
   "capture_pause_none": "કોઈ નહીં",
   "capture_pause_asis": "જેમ છે તેમ",
+  "neon_district_road_speed_very_slow": "ખૂબ ધીમી",
+  "neon_district_road_speed_slow": "ધીમી",
+  "neon_district_road_speed_normal": "સામાન્ય",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District ડેશબોર્ડ માટે વૈકલ્પિક સેટિંગ્સ.",
+      "ConfigureOptions.Title": "ડેશબોર્ડનું શીર્ષક",
+      "ConfigureOptions.Subtitle": "ડેશબોર્ડનું ઉપશીર્ષક",
+      "ConfigureOptions.RoadSpeed": "રસ્તાના એનિમેશનની ઝડપ",
+      "ConfigureOptions.Message": "વિસ્તારનો સંદેશ",
+      "ConfigureOptions.DisableAnimations": "એનિમેશન બંધ કરો"
+    },
+    "652": {
+      "Title": "આઇસોમેટ્રિક રૂમ",
+      "Description": "આઇસોમેટ્રિક રૂમ ડેશબોર્ડ માટે વૈકલ્પિક સેટિંગ્સ.",
+      "ConfigureOptions.Eyebrow": "શીર્ષકની ઉપરનું લખાણ",
+      "ConfigureOptions.Title": "ડેશબોર્ડનું શીર્ષક",
+      "ConfigureOptions.Subtitle": "ડેશબોર્ડનું ઉપશીર્ષક",
+      "ConfigureOptions.DisableAnimations": "એનિમેશન બંધ કરો"
+    },
+
     "6": {
       "Title": "જૂથની લાઇટો ચાલુ કરો",
       "Description": "આપેલા જૂથની બધી લાઇટો ચાલુ કરો."

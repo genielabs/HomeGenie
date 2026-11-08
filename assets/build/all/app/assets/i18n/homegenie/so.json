@@ -139,7 +139,28 @@
   "capture_commands_pause": "Haki inta u dhaxaysa amarada",
   "capture_pause_none": "Midna",
   "capture_pause_asis": "Sida ay tahay",
+  "neon_district_road_speed_very_slow": "Aad u gaabis ah",
+  "neon_district_road_speed_slow": "Gaabis ah",
+  "neon_district_road_speed_normal": "Caadi",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Dejimaha ikhtiyaariga ah ee guddiga Neon District.",
+      "ConfigureOptions.Title": "Cinwaanka guddiga",
+      "ConfigureOptions.Subtitle": "Cinwaan-hoosaadka guddiga",
+      "ConfigureOptions.RoadSpeed": "Xawaaraha dhaqdhaqaaqa waddada",
+      "ConfigureOptions.Message": "Farriinta xaafadda",
+      "ConfigureOptions.DisableAnimations": "Dami sawirrada dhaqaaqa"
+    },
+    "652": {
+      "Title": "Qol isoometri ah",
+      "Description": "Dejimaha ikhtiyaariga ah ee guddiga Qol isoometri ah.",
+      "ConfigureOptions.Eyebrow": "Qoraalka ka sarreeya cinwaanka",
+      "ConfigureOptions.Title": "Cinwaanka guddiga",
+      "ConfigureOptions.Subtitle": "Cinwaan-hoosaadka guddiga",
+      "ConfigureOptions.DisableAnimations": "Dami sawirrada dhaqaaqa"
+    },
+
     "6": {
       "Title": "Shid nalalka kooxda",
       "Description": "Shid dhammaan nalalka kooxda la cayimay."

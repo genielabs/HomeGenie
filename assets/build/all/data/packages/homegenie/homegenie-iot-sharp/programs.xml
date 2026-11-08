@@ -639,7 +639,7 @@ updateLeds();
       <Id>grove-chainable-rgb-led</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
-      <Checksum>3BEF6E4F5199163AD625115E33A6E29B</Checksum>
+      <Checksum>CBFCF7D0BFEDD253ACFF85AC0780A974</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>603</Address>

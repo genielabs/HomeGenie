@@ -522,6 +522,7 @@
   "Scenarios": "Eszenak",
   "Security": "Segurtasuna",
   "Weather and Environment": "Eguraldia eta Ingurumena",
+  "Themes": "Gaiak",
   "Utilities": "Zerbitzuak",
   "Scenes": "Eszenak",
   "Virtual Modules": "Modulu Birtualak",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Sistema ez dago eguneratuta",
   "new_programs_updates_available": "Programaren eguneratze berriak eskuragarri",
   "dashboard_layout": "Diseinua",
-  "dashboard_standard": "Estandarra"
+  "dashboard_standard": "Estandarra",
+  "ai_dashboard_open": "Ireki panela",
+  "ai_dashboard_select_preset": "Hautatu jatorrizko aurrezarpena. Ireki “Hobespenak” eta eguneratu aurrezarpena panel hau ireki aurretik.",
+  "preset_conflict": "Aurrez ezarri da zerbitzarian. Zure aldaketak eskuragarri daude arakatzaile honetan.",
+  "preset_conflict_recovery": "Zerbitzaritik kopia kargatzeko eta tokiko aldaketak ordezkatzeko, hautatu “Eguneratu”. Aldaketak mantentzeko, gorde itzazu aurrezarpen berri gisa.",
+  "preset_updated_elsewhere": "Aurrez aurreko ezarpena beste saio batean aldatu zen.",
+  "preset_deleted_elsewhere": "Aurrez ezarritako hau beste saio batean ezabatu da. Tokiko kopia aurrez ezarpen berri gisa gorde dezakezu."
 }

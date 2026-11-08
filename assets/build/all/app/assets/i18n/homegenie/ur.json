@@ -139,7 +139,28 @@
   "capture_commands_pause": "حکموں کے درمیان وقفہ کریں۔",
   "capture_pause_none": "کوئی نہیں۔",
   "capture_pause_asis": "جیسا کہ ہے۔",
+  "neon_district_road_speed_very_slow": "بہت سست",
+  "neon_district_road_speed_slow": "سست",
+  "neon_district_road_speed_normal": "معمول کی رفتار",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District ڈیش بورڈ کے لیے اختیاری ترتیبات۔",
+      "ConfigureOptions.Title": "ڈیش بورڈ کا عنوان",
+      "ConfigureOptions.Subtitle": "ڈیش بورڈ کا ذیلی عنوان",
+      "ConfigureOptions.RoadSpeed": "سڑک کی حرکت پذیری کی رفتار",
+      "ConfigureOptions.Message": "علاقے کا پیغام",
+      "ConfigureOptions.DisableAnimations": "حرکت پذیری بند کریں"
+    },
+    "652": {
+      "Title": "آئسومیٹرک کمرہ",
+      "Description": "آئسومیٹرک کمرہ ڈیش بورڈ کے لیے اختیاری ترتیبات۔",
+      "ConfigureOptions.Eyebrow": "عنوان کے اوپر کا متن",
+      "ConfigureOptions.Title": "ڈیش بورڈ کا عنوان",
+      "ConfigureOptions.Subtitle": "ڈیش بورڈ کا ذیلی عنوان",
+      "ConfigureOptions.DisableAnimations": "حرکت پذیری بند کریں"
+    },
+
     "6": {
       "Title": "گروپ کی بتیاں روشن کریں",
       "Description": "دیے گئے گروپ کی تمام بتیاں روشن کریں۔"

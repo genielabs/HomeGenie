@@ -301,7 +301,28 @@
   "capture_pause_asis":
     "As is",
 " ": "------------------------------------------",
+  "neon_district_road_speed_very_slow": "Very slow",
+  "neon_district_road_speed_slow": "Slow",
+  "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Optional settings for the Neon District dashboard.",
+      "ConfigureOptions.Title": "Dashboard title",
+      "ConfigureOptions.Subtitle": "Dashboard subtitle",
+      "ConfigureOptions.RoadSpeed": "Road speed",
+      "ConfigureOptions.Message": "District message",
+      "ConfigureOptions.DisableAnimations": "Disable animations"
+    },
+    "652": {
+      "Title": "Isometric Room",
+      "Description": "Optional settings for the Isometric Room dashboard.",
+      "ConfigureOptions.Eyebrow": "Text above the title",
+      "ConfigureOptions.Title": "Dashboard title",
+      "ConfigureOptions.Subtitle": "Dashboard subtitle",
+      "ConfigureOptions.DisableAnimations": "Disable animations"
+    },
+
 
     "6": {
       "Title": "Group Lights ON",

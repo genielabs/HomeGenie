@@ -139,7 +139,28 @@
   "capture_commands_pause": "التوقف بين الأوامر",
   "capture_pause_none": "لا أحد",
   "capture_pause_asis": "كما هو",
+  "neon_district_road_speed_very_slow": "بطيئة جدًا",
+  "neon_district_road_speed_slow": "بطيئة",
+  "neon_district_road_speed_normal": "عادية",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "إعدادات اختيارية للوحة معلومات Neon District.",
+      "ConfigureOptions.Title": "عنوان لوحة المعلومات",
+      "ConfigureOptions.Subtitle": "العنوان الفرعي للوحة المعلومات",
+      "ConfigureOptions.RoadSpeed": "سرعة حركة الطريق",
+      "ConfigureOptions.Message": "رسالة الحي",
+      "ConfigureOptions.DisableAnimations": "تعطيل الرسوم المتحركة"
+    },
+    "652": {
+      "Title": "الغرفة متساوية القياس",
+      "Description": "إعدادات اختيارية للوحة معلومات الغرفة متساوية القياس.",
+      "ConfigureOptions.Eyebrow": "النص فوق العنوان",
+      "ConfigureOptions.Title": "عنوان لوحة المعلومات",
+      "ConfigureOptions.Subtitle": "العنوان الفرعي للوحة المعلومات",
+      "ConfigureOptions.DisableAnimations": "تعطيل الرسوم المتحركة"
+    },
+
     "6": {
       "Title": "تشغيل أضواء المجموعة",
       "Description": "تشغيل جميع الأضواء في المجموعة المحددة."

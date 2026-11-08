@@ -522,6 +522,7 @@
   "Scenarios": "Scény",
   "Security": "Zabezpečení",
   "Weather and Environment": "Počasí a životní prostředí",
+  "Themes": "Motivy",
   "Utilities": "Utility",
   "Scenes": "Scény",
   "Virtual Modules": "Virtuální moduly",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Systém není aktuální",
   "new_programs_updates_available": "K dispozici jsou nové aktualizace programu",
   "dashboard_layout": "Rozložení",
-  "dashboard_standard": "Standardní"
+  "dashboard_standard": "Standardní",
+  "ai_dashboard_open": "Otevřete palubní desku",
+  "ai_dashboard_select_preset": "Vyberte původní předvolbu. Před otevřením tohoto řídicího panelu otevřete “Předvolby” a aktualizujte předvolbu.",
+  "preset_conflict": "Tato předvolba se na serveru změnila. Vaše změny jsou v tomto prohlížeči stále dostupné.",
+  "preset_conflict_recovery": "Chcete-li načíst kopii ze serveru a nahradit své místní změny, vyberte “Aktualizovat”. Chcete-li změny zachovat, uložte je jako nové přednastavení.",
+  "preset_updated_elsewhere": "Tato předvolba byla změněna v jiné relaci.",
+  "preset_deleted_elsewhere": "Tato předvolba byla odstraněna v jiné relaci. Místní kopii můžete uložit jako novou předvolbu."
 }

@@ -522,6 +522,7 @@
   "Scenarios": "Skena",
   "Security": "Siguria",
   "Weather and Environment": "Moti dhe Mjedisi",
+  "Themes": "Tema",
   "Utilities": "Shërbimet",
   "Scenes": "Skena",
   "Virtual Modules": "Modulet Virtuale",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Sistemi nuk është i përditësuar",
   "new_programs_updates_available": "Ofrohen përditësime të reja të programit",
   "dashboard_layout": "Paraqitja",
-  "dashboard_standard": "Standarde"
+  "dashboard_standard": "Standarde",
+  "ai_dashboard_open": "Hap panelin e kontrollit",
+  "ai_dashboard_select_preset": "Zgjidhni paracaktimin origjinal. Hapni “Preferencat” dhe përditësoni paracaktimin përpara se të hapni këtë panel.",
+  "preset_conflict": "Ky paracaktim ndryshoi në server. Ndryshimet tuaja janë ende të disponueshme në këtë shfletues.",
+  "preset_conflict_recovery": "Për të ngarkuar kopjen nga serveri dhe për të zëvendësuar ndryshimet tuaja lokale, zgjidhni “Përditëso”. Për të mbajtur ndryshimet tuaja, ruajini ato si një paravendosje të re.",
+  "preset_updated_elsewhere": "Ky paracaktim u ndryshua në një sesion tjetër.",
+  "preset_deleted_elsewhere": "Ky paracaktim u fshi në një sesion tjetër. Mund ta ruani kopjen tuaj lokale si një paravendosje të re."
 }

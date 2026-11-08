@@ -1,0 +1,7 @@
+<section @set="void 0" class="control-card light-card" #light_card>
+  <div class="card-heading"><span class="material-symbols-outlined light-symbol" aria-hidden="true">lightbulb</span><span #light_heading></span></div>
+  <h2 #light_name></h2>
+  <div class="light-summary"><span class="light-state" #light_state></span><span class="small-label" #light_detail></span></div>
+  <button class="light-button" #light_toggle type="button" disabled (click)="toggleLight()"><span class="material-symbols-outlined" aria-hidden="true">power_settings_new</span><span #light_action></span></button>
+  <p class="feedback" #command_feedback role="status" aria-live="polite"></p>
+</section>

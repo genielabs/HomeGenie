@@ -522,6 +522,7 @@
   "Scenarios": "Scaenae",
   "Security": "Securitas",
   "Weather and Environment": "Tempestas et Ambitus",
+  "Themes": "Themata",
   "Utilities": "Utilitates",
   "Scenes": "Scaenae",
   "Virtual Modules": "Moduli Virtuales",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Ratio non est usque ad date",
   "new_programs_updates_available": "Nova programma updates praesto",
   "dashboard_layout": "Dispositio",
-  "dashboard_standard": "Ordinaria"
+  "dashboard_standard": "Ordinaria",
+  "ai_dashboard_open": "Aperi tabulam moderatricem",
+  "ai_dashboard_select_preset": "Praeordinationem pristinam elige. Eam in “Praeferentiae” renova antequam hanc tabulam aperias.",
+  "preset_conflict": "Haec praeordinatio in servo mutata est. Mutationes tuae adhuc in hoc navigatro praesto sunt.",
+  "preset_conflict_recovery": "Elige “Renovatio” ut exemplar e servo recipias et mutationes locales substituas. Si mutationes tuas retinere vis, eas ut novam praeordinationem serva.",
+  "preset_updated_elsewhere": "Haec praeordinatio in alia sessione mutata est.",
+  "preset_deleted_elsewhere": "Haec praeordinatio in alia sessione deleta est. Exemplar locale ut novam praeordinationem servare potes."
 }

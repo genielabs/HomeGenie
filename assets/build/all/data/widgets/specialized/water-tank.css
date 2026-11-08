@@ -1,0 +1,105 @@
+@import 'assets/styles/widget-ui.css';
+
+:host { display: block; width: 100%; height: 100%; }
+.tank-card, .tank-card * { box-sizing: border-box; }
+.tank-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  padding: clamp(9px, 1.3vw, 16px);
+  overflow: hidden;
+  color: #eaf6fc;
+  background: radial-gradient(ellipse at 50% 90%, #15334a, #0b1422 76%);
+}
+.tank-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding-inline-end: var(--widget-menu-space, 32px);
+}
+.tank-header .material-symbols-outlined { color: #72d9ff; font-size: 19px; }
+.tank-header h2 {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  line-height: 1.3;
+}
+.tank-body {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  position: relative;
+  min-height: 0;
+  margin-top: 5px;
+  container-type: size;
+}
+.tank {
+  --water-level-pct: 0%;
+  position: relative;
+  width: min(68cqw, 72cqh, 208px);
+  height: min(97cqh, 290px);
+  min-width: 0;
+  overflow: hidden;
+  border: 2px solid #43627b;
+  border-radius: 11px 11px 20px 20px;
+  background: linear-gradient(105deg, #14263a, #0c1828 76%);
+  box-shadow: inset 4px 0 10px #8edaff15, 0 8px 22px #060d18a8;
+}
+.tank-marks {
+  position: absolute;
+  inset: 0 4px 0 auto;
+  width: 8px;
+  background: repeating-linear-gradient(to top, #c0ecfa60 0 1px, transparent 1px 25%);
+}
+.water {
+  position: absolute;
+  inset: auto 0 0;
+  height: var(--water-level-pct);
+  background: linear-gradient(180deg, #087caf, #045070);
+  transition: height .55s ease;
+}
+.wave {
+  position: absolute;
+  bottom: calc(100% - 4px);
+  left: 0;
+  width: 200%;
+  height: clamp(12px, 11cqh, 28px);
+  background-repeat: repeat-x;
+  background-size: 50% 100%;
+  visibility: hidden;
+}
+.tank.has-surface .wave { visibility: visible; }
+.wave-front {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 24" preserveAspectRatio="none" fill="%23087caf"><path d="M0 12Q15 3 30 12T60 12T90 12T120 12V24H0Z"/></svg>');
+  animation: water-wave 4s linear infinite paused;
+}
+.wave-back {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 24" preserveAspectRatio="none" fill="%2354c5e9"><path d="M0 12Q15 21 30 12T60 12T90 12T120 12V24H0Z"/></svg>');
+  animation: water-wave 6s linear infinite reverse paused;
+  opacity: .6;
+  bottom: calc(100% - 2px);
+}
+.tank.motion-active .wave { animation-play-state: running; }
+@keyframes water-wave { to { transform: translateX(-50%); } }
+.tank-reading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 4px;
+  text-align: center;
+  text-shadow: 0 2px 6px #04111e;
+}
+.tank-reading strong { font: 750 clamp(20px, 20cqh, 52px)/1 system-ui, sans-serif; font-variant-numeric: tabular-nums; }
+.tank-reading span { color: #d9f2fd; font: 600 clamp(10px, 7cqh, 13px)/1.2 system-ui, sans-serif; }
+.tank-reading span:empty { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .tank .wave { animation: none; }
+  .water { transition: none; }
+}

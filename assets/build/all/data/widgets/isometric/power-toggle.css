@@ -1,0 +1,20 @@
+.light-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  min-height: 44px;
+  flex-shrink: 0;
+  margin-top: auto;
+  padding: 7px 8px;
+  border: 0;
+  border-radius: 10px;
+  color: #14352d;
+  background: var(--mint, #9be5cf);
+  font-size: 12px;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+.light-button .material-symbols-outlined { font-size: 18px; flex-shrink: 0; }
+.light-button:disabled span { display: inline-block; }

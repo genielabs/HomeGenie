@@ -139,7 +139,28 @@
   "capture_commands_pause": "கட்டளைகளுக்கு இடையில் இடைநிறுத்து",
   "capture_pause_none": "யாரும் இல்லை",
   "capture_pause_asis": "அப்படியே",
+  "neon_district_road_speed_very_slow": "மிக மெதுவாக",
+  "neon_district_road_speed_slow": "மெதுவாக",
+  "neon_district_road_speed_normal": "இயல்பு",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District கட்டுப்பாட்டுப் பலகைக்கான விருப்ப அமைப்புகள்.",
+      "ConfigureOptions.Title": "கட்டுப்பாட்டுப் பலகையின் தலைப்பு",
+      "ConfigureOptions.Subtitle": "கட்டுப்பாட்டுப் பலகையின் துணைத்தலைப்பு",
+      "ConfigureOptions.RoadSpeed": "சாலை அசைவூட்டத்தின் வேகம்",
+      "ConfigureOptions.Message": "பகுதியின் செய்தி",
+      "ConfigureOptions.DisableAnimations": "அசைவூட்டங்களை முடக்கு"
+    },
+    "652": {
+      "Title": "ஐசோமெட்ரிக் அறை",
+      "Description": "ஐசோமெட்ரிக் அறை கட்டுப்பாட்டுப் பலகைக்கான விருப்ப அமைப்புகள்.",
+      "ConfigureOptions.Eyebrow": "தலைப்புக்கு மேலுள்ள உரை",
+      "ConfigureOptions.Title": "கட்டுப்பாட்டுப் பலகையின் தலைப்பு",
+      "ConfigureOptions.Subtitle": "கட்டுப்பாட்டுப் பலகையின் துணைத்தலைப்பு",
+      "ConfigureOptions.DisableAnimations": "அசைவூட்டங்களை முடக்கு"
+    },
+
     "6": {
       "Title": "குழுவின் விளக்குகளை இயக்கு",
       "Description": "குறிப்பிட்ட குழுவில் உள்ள அனைத்து விளக்குகளையும் இயக்கவும்."

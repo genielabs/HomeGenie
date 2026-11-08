@@ -522,6 +522,7 @@
   "Scenarios": "Scener",
   "Security": "Säkerhet",
   "Weather and Environment": "Väder och miljö",
+  "Themes": "Teman",
   "Utilities": "Verksamhetsnyttiga tjänster",
   "Scenes": "Scener",
   "Virtual Modules": "Virtuella moduler",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Systemet är inte uppdaterat",
   "new_programs_updates_available": "Nya programuppdateringar tillgängliga",
   "dashboard_layout": "Layout",
-  "dashboard_standard": "Standard"
+  "dashboard_standard": "Standard",
+  "ai_dashboard_open": "Öppna instrumentpanelen",
+  "ai_dashboard_select_preset": "Välj den ursprungliga förinställningen. Öppna “Inställningar” och uppdatera förinställningen innan du öppnar den här instrumentpanelen.",
+  "preset_conflict": "Denna förinställning ändrades på servern. Dina ändringar är fortfarande tillgängliga i den här webbläsaren.",
+  "preset_conflict_recovery": "För att ladda kopian från servern och ersätta dina lokala ändringar, välj “Uppdatera”. För att behålla dina ändringar, spara dem som en ny förinställning.",
+  "preset_updated_elsewhere": "Denna förinställning ändrades i en annan session.",
+  "preset_deleted_elsewhere": "Denna förinställning raderades i en annan session. Du kan spara din lokala kopia som en ny förinställning."
 }

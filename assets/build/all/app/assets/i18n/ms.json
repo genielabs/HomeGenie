@@ -522,6 +522,7 @@
   "Scenarios": "Adegan",
   "Security": "Keselamatan",
   "Weather and Environment": "Cuaca & Alam Sekitar",
+  "Themes": "Tema",
   "Utilities": "Utiliti",
   "Scenes": "Adegan",
   "Virtual Modules": "Modul Maya",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Sistem tidak terkini",
   "new_programs_updates_available": "Kemas kini program baharu tersedia",
   "dashboard_layout": "Susun atur",
-  "dashboard_standard": "Standard"
+  "dashboard_standard": "Standard",
+  "ai_dashboard_open": "Buka papan pemuka",
+  "ai_dashboard_select_preset": "Pilih pratetap asal. Buka “Keutamaan” dan kemas kini pratetap sebelum membuka papan pemuka ini.",
+  "preset_conflict": "Pratetap ini ditukar pada pelayan. Perubahan anda masih tersedia dalam penyemak imbas ini.",
+  "preset_conflict_recovery": "Untuk memuatkan salinan daripada pelayan dan menggantikan perubahan setempat anda, pilih “Kemas kini”. Untuk menyimpan perubahan anda, simpannya sebagai pratetap baharu.",
+  "preset_updated_elsewhere": "Pratetap ini telah ditukar dalam sesi lain.",
+  "preset_deleted_elsewhere": "Pratetap ini telah dipadamkan dalam sesi lain. Anda boleh menyimpan salinan tempatan anda sebagai pratetap baharu."
 }

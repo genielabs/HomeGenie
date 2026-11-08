@@ -139,7 +139,28 @@
   "capture_commands_pause": "Pauzė tarp komandų",
   "capture_pause_none": "Nėra",
   "capture_pause_asis": "Kaip yra",
+  "neon_district_road_speed_very_slow": "Labai lėtas",
+  "neon_district_road_speed_slow": "Lėtas",
+  "neon_district_road_speed_normal": "Įprastas",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Pasirinktiniai valdymo skydelio „Neon District“ nustatymai.",
+      "ConfigureOptions.Title": "Valdymo skydelio antraštė",
+      "ConfigureOptions.Subtitle": "Valdymo skydelio paantraštė",
+      "ConfigureOptions.RoadSpeed": "Kelio animacijos greitis",
+      "ConfigureOptions.Message": "Rajono žinutė",
+      "ConfigureOptions.DisableAnimations": "Išjungti animacijas"
+    },
+    "652": {
+      "Title": "Izometrinis kambarys",
+      "Description": "Pasirinktiniai valdymo skydelio „Izometrinis kambarys“ nustatymai.",
+      "ConfigureOptions.Eyebrow": "Tekstas virš pavadinimo",
+      "ConfigureOptions.Title": "Valdymo skydelio antraštė",
+      "ConfigureOptions.Subtitle": "Valdymo skydelio paantraštė",
+      "ConfigureOptions.DisableAnimations": "Išjungti animacijas"
+    },
+
     "6": {
       "Title": "Įjungti grupės šviesas",
       "Description": "Įjungti visas nurodytos grupės šviesas."

@@ -139,7 +139,28 @@
   "capture_commands_pause": "Pauza mezi příkazy",
   "capture_pause_none": "Žádný",
   "capture_pause_asis": "Tak jak je",
+  "neon_district_road_speed_very_slow": "Velmi pomalá",
+  "neon_district_road_speed_slow": "Pomalá",
+  "neon_district_road_speed_normal": "Normální",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Volitelná nastavení pro řídicí panel „Neon District“.",
+      "ConfigureOptions.Title": "Název řídicího panelu",
+      "ConfigureOptions.Subtitle": "Podtitul řídicího panelu",
+      "ConfigureOptions.RoadSpeed": "Rychlost animace silnice",
+      "ConfigureOptions.Message": "Zpráva čtvrti",
+      "ConfigureOptions.DisableAnimations": "Vypnout animace"
+    },
+    "652": {
+      "Title": "Izometrický pokoj",
+      "Description": "Volitelná nastavení pro řídicí panel „Izometrický pokoj“.",
+      "ConfigureOptions.Eyebrow": "Text nad titulkem",
+      "ConfigureOptions.Title": "Název řídicího panelu",
+      "ConfigureOptions.Subtitle": "Podtitul řídicího panelu",
+      "ConfigureOptions.DisableAnimations": "Vypnout animace"
+    },
+
     "6": {
       "Title": "ZAPNOUT světla ve skupině",
       "Description": "Zapne všechna světla v zadané skupině."

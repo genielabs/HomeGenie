@@ -16,6 +16,13 @@ https://www.gnu.org/licenses/agpl-3.0.html
 2.  Third-Party and G-Labs Library Components
 ================================================================================
 
+The offline city catalog uses GeoNames data (https://www.geonames.org/),
+licensed under Creative Commons Attribution 4.0
+(https://creativecommons.org/licenses/by/4.0/). HomeGenie extracts selected
+fields from cities500, admin1CodesASCII and alternateNamesV2, and sorts the
+cities by population.
+Source data: https://download.geonames.org/export/dump/
+
 This product includes software developed by G-Labs and other third parties.
 The following is a list of these components and their respective licenses.
 

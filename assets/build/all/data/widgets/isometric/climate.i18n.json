@@ -1,0 +1,23 @@
+{
+  "en": {
+    "climate_heading": "Climate",
+    "no_sensor": "No sensor selected",
+    "temperature_label": "Temperature",
+    "humidity_label": "Humidity",
+    "bind_climate": "Climate"
+  },
+  "it": {
+    "climate_heading": "Clima",
+    "no_sensor": "Nessun sensore associato",
+    "temperature_label": "Temperatura",
+    "humidity_label": "Umidità",
+    "bind_climate": "Clima"
+  },
+  "fr": {
+    "climate_heading": "Climat",
+    "no_sensor": "Aucun capteur associé",
+    "temperature_label": "Température",
+    "humidity_label": "Humidité",
+    "bind_climate": "Climat"
+  }
+}

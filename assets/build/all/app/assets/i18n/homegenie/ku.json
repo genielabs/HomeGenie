@@ -139,7 +139,28 @@
   "capture_commands_pause": "Di navbera fermanan de raweste",
   "capture_pause_none": "Netû",
   "capture_pause_asis": "Wek",
+  "neon_district_road_speed_very_slow": "Pir hêdî",
+  "neon_district_road_speed_slow": "Hêdî",
+  "neon_district_road_speed_normal": "Asayî",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Mîhengên vebijarkî ji bo panela Neon District.",
+      "ConfigureOptions.Title": "Sernavê panelê",
+      "ConfigureOptions.Subtitle": "Binnavê panelê",
+      "ConfigureOptions.RoadSpeed": "Leza anîmasyona rê",
+      "ConfigureOptions.Message": "Peyama taxê",
+      "ConfigureOptions.DisableAnimations": "Anîmasyonan neçalak bike"
+    },
+    "652": {
+      "Title": "Odeya îzometrîk",
+      "Description": "Mîhengên vebijarkî ji bo panela Odeya îzometrîk.",
+      "ConfigureOptions.Eyebrow": "Nivîsa li ser sernavê",
+      "ConfigureOptions.Title": "Sernavê panelê",
+      "ConfigureOptions.Subtitle": "Binnavê panelê",
+      "ConfigureOptions.DisableAnimations": "Anîmasyonan neçalak bike"
+    },
+
     "6": {
       "Title": "Ronahiyên komê pê bixe",
       "Description": "Hemû ronahiyên di koma diyarkirî de pê bixe."

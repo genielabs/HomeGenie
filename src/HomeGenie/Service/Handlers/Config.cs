@@ -29,6 +29,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -54,7 +55,6 @@ namespace HomeGenie.Service.Handlers
         private readonly string widgetBasePath;
         private readonly string tempFolderPath;
         private readonly string groupWallpapersPath;
-        private readonly NetHelper netHelper;
 
         public Config(HomeGenieService hg)
         {
@@ -62,7 +62,6 @@ namespace HomeGenie.Service.Handlers
             tempFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Utility.GetTmpFolder());
             widgetBasePath = Path.Combine(Utility.GetDataFolder(), "widgets");
             groupWallpapersPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "html", "images", "wallpapers");
-            netHelper = new NetHelper(homegenie);
         }
 
         public void ProcessRequest(MigClientRequest request)
@@ -265,38 +264,42 @@ namespace HomeGenie.Service.Handlers
                 }
                 else if (migCommand.GetOption(0) == "Location.Search")
                 {
-                    string query = migCommand.GetOption(1);
-                    var apiKey = homegenie.SystemConfiguration.HomeGenie.Settings
-                        .Find((cfg) => cfg.Is("Location.Service.Key"));
-                    string googleApiUrl = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + query + "&types=(cities)&key=" + apiKey.Value;
-                    var result = netHelper.WebService(googleApiUrl).GetData();
-                    var matches = new List<dynamic>();
-                    foreach (var match in result.predictions) {
-                        matches.Add(match);
-                    }
-                    request.ResponseData = matches;
+                    request.ResponseData = CityCatalog.Search(migCommand.GetOption(1)).Select(city => new
+                    {
+                        description = city.Description,
+                        weatherQuery = city.WeatherQuery,
+                        latitude = city.Latitude,
+                        longitude = city.Longitude
+                    }).ToArray();
                 }
                 else if (migCommand.GetOption(0) == "Location.Lookup")
                 {
-                    string query = migCommand.GetOption(1);
-                    var apiKey = homegenie.SystemConfiguration.HomeGenie.Settings
-                        .Find((cfg) => cfg.Is("Location.Service.Key"));
-                    string googleApiUrl = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + query + "&types=(cities)&sensor=true&key=" + apiKey.Value;
-                    var result = netHelper.WebService(googleApiUrl).GetData();
-                    request.ResponseData = result;
+                    var coordinates = migCommand.GetOption(1)?.Split(',');
+                    if (coordinates?.Length != 2 ||
+                        !double.TryParse(coordinates[0], NumberStyles.Float, CultureInfo.InvariantCulture, out double latitude) ||
+                        !double.TryParse(coordinates[1], NumberStyles.Float, CultureInfo.InvariantCulture, out double longitude) ||
+                        !(latitude is >= -90 and <= 90 && longitude is >= -180 and <= 180))
+                    {
+                        request.ResponseData = new { status = "INVALID_REQUEST", plus_code = new { } };
+                        return;
+                    }
+
+                    var city = CityCatalog.FindNearby(latitude, longitude);
+                    request.ResponseData = new
+                    {
+                        status = city == null ? "ZERO_RESULTS" : "OK",
+                        name = city?.Description,
+                        // Older YoT clients expect this object even when no Plus Code is available.
+                        plus_code = new { }
+                    };
                 }
                 else if (migCommand.GetOption(0) == "Location.GeoCode")
                 {
-                    string query = migCommand.GetOption(1);
-                    var apiKey = homegenie.SystemConfiguration.HomeGenie.Settings
-                        .Find((cfg) => cfg.Is("Location.Service.Key"));
-                    string googleApiUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + query + "&key=" + apiKey.Value;
-                    var result = netHelper.WebService(googleApiUrl).GetData();
-                    var matches = new List<dynamic>();
-                    foreach (var match in result.results) {
-                        matches.Add(match);
-                    }
-                    request.ResponseData = matches;
+                    request.ResponseData = CityCatalog.Geocode(migCommand.GetOption(1)).Select(city => new
+                    {
+                        formatted_address = city.Description,
+                        geometry = new { location = new { lat = city.Latitude, lng = city.Longitude } }
+                    }).ToArray();
                 }
                 else if (migCommand.GetOption(0) == "Service.Restart")
                 {
@@ -1624,8 +1627,14 @@ namespace HomeGenie.Service.Handlers
                         }
                         status = Status.Ok;
                         break;
-                    // locale file
-                    case "json":
+                    case "i18n.json":
+                        string catalogPath = GetWidgetFilePath(widgetPath, fileType);
+                        string catalog = WidgetCatalog.EscapeTranslationCatalogMarkup(widgetData);
+                        if (!WidgetCatalog.IsTranslationCatalog(catalog))
+                            break;
+                        Directory.CreateDirectory(Path.GetDirectoryName(catalogPath));
+                        File.WriteAllText(GetWidgetFilePath(widgetPath, fileType), catalog);
+                        status = Status.Ok;
                         break;
                     // image file
                     case "jpg":
@@ -1641,7 +1650,7 @@ namespace HomeGenie.Service.Handlers
                 {
                     var status = Status.Error;
                     string widgetId = migCommand.GetOption(0);
-                    string[] extensions = { "html", "css", "js", "module.js" };
+                    string[] extensions = { "html", "css", "js", "module.js", "i18n.json" };
 
                     // Validate every destination before deleting the first file.
                     foreach (string extension in extensions)
@@ -1665,7 +1674,7 @@ namespace HomeGenie.Service.Handlers
             case "Widgets.Export":
                 {
                     string widgetId = migCommand.GetOption(0);
-                    string[] extensions = { "html", "css", "js", "module.js" };
+                    string[] extensions = { "html", "css", "js", "module.js", "i18n.json" };
 
                     // Validate all sources before creating temporary files.
                     foreach (string extension in extensions)
@@ -1683,8 +1692,7 @@ namespace HomeGenie.Service.Handlers
                         {
                             string sourcePath = GetWidgetFilePath(widgetId, extension);
 
-                            // The generated module remains optional.
-                            if (extension == "module.js" && !File.Exists(sourcePath))
+                            if ((extension is "module.js" or "i18n.json") && !File.Exists(sourcePath))
                                 continue;
 
                             // ZIP entry names use logical "/" separators.
@@ -1935,7 +1943,8 @@ namespace HomeGenie.Service.Handlers
             if (extension != "html" &&
                 extension != "css" &&
                 extension != "js" &&
-                extension != "module.js")
+                extension != "module.js" &&
+                extension != "i18n.json")
                 throw new InvalidDataException("Invalid widget file extension.");
 
             return PackagePathGuard.Contained(

@@ -1,0 +1,16 @@
+<section class="energy-card" @set="void 0" @delay="500">
+  <header>
+    <h3 #title>Energy today</h3>
+    <span #meter_name></span>
+  </header>
+  <div class="metrics">
+    <div class="daily"><span #today>Today</span><strong><span #energy>—</span> <small>kWh</small></strong><small #estimate></small></div>
+    <div><span #now>Now</span><strong><span #power>—</span> <small>W</small></strong></div>
+    <div><span #peak>24 h peak</span><strong><span #maximum>—</span> <small>W</small></strong></div>
+  </div>
+  <div class="chart-area" #chart_area>
+    <canvas #chart_canvas role="img" aria-label="Power over the last 24 hours"></canvas>
+    <p #status role="status"></p>
+  </div>
+  <footer #history>Power over the last 24 hours</footer>
+</section>

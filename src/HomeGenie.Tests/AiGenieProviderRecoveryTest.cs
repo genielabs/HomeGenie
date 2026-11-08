@@ -28,8 +28,12 @@ public class AiGenieProviderRecoveryTest {
   var gemTree=CSharpSyntaxTree.ParseText("class Holder{void Main(){"+geminiSource+"}}").GetRoot();
   var prepare=gemTree.DescendantNodes().OfType<VariableDeclaratorSyntax>().Single(n=>n.Identifier.Text=="prepareScopedContext").Parent.Parent.ToFullString();
   var process=gemTree.DescendantNodes().OfType<VariableDeclaratorSyntax>().Single(n=>n.Identifier.Text=="processGeniePrompt");
-  var body=(BlockSyntax)process.DescendantNodes().OfType<LockStatementSyntax>().First().Statement;
-  var prelude=string.Concat(body.Statements.TakeWhile(n=>!n.DescendantNodesAndSelf().OfType<VariableDeclaratorSyntax>().Any(v=>v.Identifier.Text=="telemetry")).Select(n=>n.ToFullString()));
+  var request = process.DescendantNodes().OfType<LocalDeclarationStatementSyntax>()
+      .Single(n => n.Declaration.Variables.Any(v => v.Identifier.ValueText == "scopedRequest"));
+  var body = (BlockSyntax)request.Parent;
+  var prelude = string.Concat(body.Statements.SkipWhile(n => n != request)
+      .TakeWhile(n => !n.DescendantNodesAndSelf().OfType<VariableDeclaratorSyntax>().Any(v => v.Identifier.ValueText == "telemetry"))
+      .Select(n => n.ToFullString()));
   var policyTree=CSharpSyntaxTree.ParseText("class Holder{"+Context("homegenie-ml-ai","578","ScriptContext")+"}").GetRoot();
   var policy=policyTree.DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text=="ChatContextPolicy").ToFullString();
   var initTree=CSharpSyntaxTree.ParseText("class Holder{void Main(){"+lailamaSource+"}}").GetRoot();
@@ -57,6 +61,9 @@ public class ProfileHarness {
  public JObject StoredContext,StoredCapabilities;public DataFolder Data=new DataFolder();public ProfileApi Api=new ProfileApi();
  string currentCacheName;DateTime cacheExpiration;
  public object Process(object userCommand,JObject feedback) {
+  object initial = Api.Parse(userCommand).Data;
+  const string storeId = "test", promptId = "test";
+  using var lease = new CancellationTokenSource();
   Func<object,JToken> contextToken=value=>value is string text?JToken.Parse(text):JToken.FromObject(value);
   Func<string,JToken> storedChatSetting=name=>name=="AI.Chat.Context"?StoredContext:StoredCapabilities;
 PREPARE

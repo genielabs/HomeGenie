@@ -1,0 +1,17 @@
+<section @set="void 0" class="control-card energy-card">
+  <div class="card-heading"><span class="material-symbols-outlined" aria-hidden="true">bolt</span><span #energy_heading></span></div>
+  <div class="energy-content">
+    <div class="energy-reading">
+      <h2 #energy_name></h2>
+      <div class="measurement power-measurement"><strong class="power-value" #power></strong><span class="unit" #power_unit></span></div>
+      <p class="small-label" #power_label></p>
+    </div>
+    <div class="trace">
+      <svg viewBox="0 0 180 42" preserveAspectRatio="none" role="img" #trace_area hidden>
+        <path d="M0 8h180M0 21h180M0 34h180" class="trace-grid" fill="none"/>
+        <polyline #trace class="trace-line" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke" fill="none"/>
+      </svg>
+      <span class="small-label" #trace_label></span>
+    </div>
+  </div>
+</section>

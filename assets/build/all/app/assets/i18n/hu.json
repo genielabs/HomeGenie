@@ -522,6 +522,7 @@
   "Scenarios": "Jelenetek",
   "Security": "Biztonság",
   "Weather and Environment": "Időjárás és környezet",
+  "Themes": "Témák",
   "Utilities": "Közművek",
   "Scenes": "Jelenetek",
   "Virtual Modules": "Virtuális modulok",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "A rendszer nem naprakész",
   "new_programs_updates_available": "Új programfrissítések érhetők el",
   "dashboard_layout": "Elrendezés",
-  "dashboard_standard": "Szabványos"
+  "dashboard_standard": "Szabványos",
+  "ai_dashboard_open": "Nyissa meg az irányítópultot",
+  "ai_dashboard_select_preset": "Válassza ki az eredeti beállítást. Nyissa meg a “Beállítások”-et, és frissítse az előre beállított értéket az irányítópult megnyitása előtt.",
+  "preset_conflict": "Ez az előbeállítás megváltozott a szerveren. A módosítások továbbra is elérhetők ebben a böngészőben.",
+  "preset_conflict_recovery": "A másolat kiszolgálóról történő betöltéséhez és a helyi módosítások cseréjéhez válassza a “Frissítés” lehetőséget. A módosítások megtartásához mentse el őket új előre beállított értékként.",
+  "preset_updated_elsewhere": "Ez az előbeállítás egy másik munkamenetben módosult.",
+  "preset_deleted_elsewhere": "Ezt az előbeállítást egy másik munkamenetben törölték. A helyi másolatot új előre beállított értékként mentheti."
 }

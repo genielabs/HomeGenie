@@ -139,7 +139,28 @@
   "capture_commands_pause": "आदेशहरू बीच पज गर्नुहोस्",
   "capture_pause_none": "कुनै पनि होइन",
   "capture_pause_asis": "जस्तो छ",
+  "neon_district_road_speed_very_slow": "धेरै ढिलो",
+  "neon_district_road_speed_slow": "ढिलो",
+  "neon_district_road_speed_normal": "सामान्य",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District ड्यासबोर्डका वैकल्पिक सेटिङहरू।",
+      "ConfigureOptions.Title": "ड्यासबोर्डको शीर्षक",
+      "ConfigureOptions.Subtitle": "ड्यासबोर्डको उपशीर्षक",
+      "ConfigureOptions.RoadSpeed": "सडकको एनिमेसनको गति",
+      "ConfigureOptions.Message": "क्षेत्रको सन्देश",
+      "ConfigureOptions.DisableAnimations": "एनिमेसन बन्द गर्नुहोस्"
+    },
+    "652": {
+      "Title": "आइसोमेट्रिक कोठा",
+      "Description": "आइसोमेट्रिक कोठा ड्यासबोर्डका वैकल्पिक सेटिङहरू।",
+      "ConfigureOptions.Eyebrow": "शीर्षकमाथिको पाठ",
+      "ConfigureOptions.Title": "ड्यासबोर्डको शीर्षक",
+      "ConfigureOptions.Subtitle": "ड्यासबोर्डको उपशीर्षक",
+      "ConfigureOptions.DisableAnimations": "एनिमेसन बन्द गर्नुहोस्"
+    },
+
     "6": {
       "Title": "समूहका बत्तीहरू बाल्नुहोस्",
       "Description": "दिइएको समूहका सबै बत्तीहरू बाल्नुहोस्।"

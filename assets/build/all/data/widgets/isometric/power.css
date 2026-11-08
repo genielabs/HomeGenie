@@ -1,0 +1,29 @@
+@import 'assets/styles/widget-ui.css';
+
+:host { display: block; width: 100%; height: 100%; min-width: 0; color: #edf5f3; container-type: inline-size; }
+* { box-sizing: border-box; }
+button { font: inherit; cursor: pointer; }
+button:disabled { cursor: default; opacity: .5; }
+button:focus-visible { outline: 2px solid var(--mint); outline-offset: 4px; }
+.control-card { --mint: #9be5cf; --muted: #99afba; --line: #ffffff12; height: 100%; overflow: auto; --card-unit: min(1cqw, .65dvh); display: flex; flex-direction: column; justify-content: center; padding: clamp(16px, calc(4 * var(--card-unit)), 32px); border: 1px solid var(--line); border-radius: 18px; background: #182b38; min-width: 0; }
+.card-heading { display: flex; align-items: center; gap: 9px; color: var(--mint); text-transform: uppercase; letter-spacing: .12em; font-size: clamp(11px, calc(2.7 * var(--card-unit)), 17px); font-weight: 600; }
+.card-heading .material-symbols-outlined { font-size: clamp(20px, calc(5 * var(--card-unit)), 30px); }
+.control-card h2 { margin: 10px 0 0; font-size: clamp(15px, calc(4 * var(--card-unit)), 26px); line-height: 1.5; font-weight: 500; overflow-wrap: anywhere; color: #dce8e9; }
+.control-card .small-label, .control-card .feedback { font-size: clamp(12px, calc(3 * var(--card-unit)), 18px); }
+.control-card .unit { font-size: clamp(14px, calc(4 * var(--card-unit)), 24px); }
+.energy-card { position: relative; display: flex; flex-direction: column; justify-content: center; }
+.energy-card .card-heading { color: #c8d3f5; }
+.power-value { display: block; font-size: clamp(32px, calc(10 * var(--card-unit)), 72px); line-height: 1.1; font-weight: 500; letter-spacing: -.035em; margin: 18px 0 4px; }
+.small-label { color: var(--muted); font-size: 11px; line-height: 1.5; margin: 0; }
+.measurement { display: flex; align-items: baseline; gap: 6px; }
+.unit { color: var(--muted); font-size: 13px; white-space: nowrap; }
+.energy-content { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); align-items: center; gap: clamp(10px, 4cqw, 24px); }
+.energy-reading { min-width: 0; }
+.trace { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.trace svg { display: block; width: 100%; height: clamp(32px, 16cqw, 84px); }
+.trace svg[hidden] { display: none; }
+.trace-grid { stroke: var(--line); }
+.trace-line { stroke: var(--mint); }
+@container (max-width: 250px) {
+  .energy-content { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+}

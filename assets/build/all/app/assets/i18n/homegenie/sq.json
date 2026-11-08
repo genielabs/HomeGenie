@@ -139,7 +139,28 @@
   "capture_commands_pause": "Pauzë midis komandave",
   "capture_pause_none": "Asnjë",
   "capture_pause_asis": "Siç është",
+  "neon_district_road_speed_very_slow": "Shumë e ngadaltë",
+  "neon_district_road_speed_slow": "E ngadaltë",
+  "neon_district_road_speed_normal": "Normale",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Cilësime opsionale për panelin e kontrollit «Neon District».",
+      "ConfigureOptions.Title": "Titulli i panelit",
+      "ConfigureOptions.Subtitle": "Nëntitulli i panelit",
+      "ConfigureOptions.RoadSpeed": "Shpejtësia e animacionit të rrugës",
+      "ConfigureOptions.Message": "Mesazhi i lagjes",
+      "ConfigureOptions.DisableAnimations": "Çaktivizo animacionet"
+    },
+    "652": {
+      "Title": "Dhomë izometrike",
+      "Description": "Cilësime opsionale për panelin e kontrollit «Dhomë izometrike».",
+      "ConfigureOptions.Eyebrow": "Teksti mbi titull",
+      "ConfigureOptions.Title": "Titulli i panelit",
+      "ConfigureOptions.Subtitle": "Nëntitulli i panelit",
+      "ConfigureOptions.DisableAnimations": "Çaktivizo animacionet"
+    },
+
     "6": {
       "Title": "Ndiz dritat e grupit",
       "Description": "Ndiz të gjitha dritat në grupin e caktuar."

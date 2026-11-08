@@ -170,6 +170,10 @@
              CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="Service/Resources/cities.tsv.gz" LogicalName="HomeGenie.CityCatalog.tsv.gz" />
+  </ItemGroup>
+
   <!-- Copy assets to target folder -->
   <ItemGroup>
     <None Include="$(ProjectDir)../../assets/build/all/**"

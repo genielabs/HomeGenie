@@ -522,6 +522,7 @@
   "Scenarios": "منظر",
   "Security": "سيڪيورٽي",
   "Weather and Environment": "موسم ۽ ماحول",
+  "Themes": "ٿيمون",
   "Utilities": "عام واھپي جون شيون",
   "Scenes": "منظر",
   "Virtual Modules": "ورچوئل ماڊيولز",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "سسٽم جديد نه آهي",
   "new_programs_updates_available": "نئون پروگرام اپڊيٽ دستياب آهي",
   "dashboard_layout": "ترتيب",
-  "dashboard_standard": "معياري"
+  "dashboard_standard": "معياري",
+  "ai_dashboard_open": "اوپن ڊيش بورڊ",
+  "ai_dashboard_select_preset": "اصل اڳواٽ چونڊيو. “ترجيحات” کوليو ۽ ھن ڊيش بورڊ کي کولڻ کان پھريان اڳيئي کي اپڊيٽ ڪريو.",
+  "preset_conflict": "هي اڳوڻو سرور تي تبديل ڪيو ويو آهي. توھان جون تبديليون اڃا تائين ھن برائوزر ۾ موجود آھن.",
+  "preset_conflict_recovery": "سرور مان ڪاپي لوڊ ڪرڻ ۽ مقامي تبديلين کي مٽائڻ لاءِ، “تازه ڪاري” چونڊيو. پنھنجيون تبديليون رکڻ لاءِ، انھن کي نئين پريزٽ طور محفوظ ڪريو.",
+  "preset_updated_elsewhere": "هي اڳوڻو هڪ ٻئي سيشن ۾ تبديل ڪيو ويو.",
+  "preset_deleted_elsewhere": "هي اڳواٽ ڪنهن ٻئي سيشن ۾ ڊهي ويو. توھان پنھنجي مقامي ڪاپي کي نئين پيش ڪيل طور محفوظ ڪري سگھو ٿا."
 }

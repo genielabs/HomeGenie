@@ -1,0 +1,41 @@
+<section class="room-dashboard" @set="void 0" @delay="500">
+  <header class="room-header">
+    <div>
+      <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span><span #eyebrow></span></p>
+      <h1 #heading></h1>
+      <p class="subtitle" #subtitle></p>
+    </div>
+    <button class="motion-button" type="button" #motion_toggle (click)="toggleMotion()">
+      <span class="material-symbols-outlined" #motion_icon aria-hidden="true">pause</span>
+      <span #motion_label></span>
+    </button>
+  </header>
+
+  <div class="room-layout">
+    <div class="scene-card">
+      <div class="scene-heading">
+        <span class="scene-tag" #scene_tag></span>
+        <span class="scene-state"><span class="state-dot" #scene_dot aria-hidden="true"></span><span #scene_state></span></span>
+      </div>
+      <div class="scene" #scene_area role="group" aria-label="Isometric room">
+        <div class="scene-fallback" #scene_fallback><span class="material-symbols-outlined" aria-hidden="true">view_in_ar</span><span #scene_message></span></div>
+        <div class="scene-genie" #scene_genie hidden>
+          <zx-widget load="assistants/genie"></zx-widget>
+        </div>
+      </div>
+      <div class="scene-footer"><span class="material-symbols-outlined" aria-hidden="true">touch_app</span><span #scene_hint></span></div>
+    </div>
+
+    <aside class="controls" #controls_area>
+      <div class="light-pair">
+        <zx-widget load="isometric/light" #light_widget></zx-widget>
+        <div class="matrix-slot" #matrix_slot><zx-widget load="isometric/led-panel"></zx-widget></div>
+      </div>
+      <div class="reading-pair">
+        <zx-widget load="isometric/climate"></zx-widget>
+        <zx-widget load="isometric/power"></zx-widget>
+      </div>
+    </aside>
+  </div>
+  <footer class="dashboard-footer"><span class="footer-mark" aria-hidden="true">HG</span><span #footer_note></span></footer>
+</section>

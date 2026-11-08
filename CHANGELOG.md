@@ -2,6 +2,22 @@
 
 ## Unreleased
 
+- Add Radio Casa, a vintage receiver dashboard with an analog power meter, a live one-hour trace, climate dials and three configurable light presets.
+
+- Add Serra, an illustrated botanical dashboard with configurable climate and light modules. Live illuminance shapes the sky, and the greenhouse lamp follows confirmed light events.
+
+- Add the Neon District and Isometric Room dashboard themes, with configuration programs (651 and 652) installed by the setup wizard from `homegenie-themes`, compatible demo defaults, and live animation settings. Include localized program options and seed both power charts with the previous 24 hours of Energy Monitor statistics before appending live readings.
+
+- Organize bundled widgets by use and theme. Preserve widget translation catalogs when saving, importing or exporting a widget, and include the catalogs when deleting the widget.
+
+- Make the room dashboard animation visibly recognizable with a larger floating/rotating marker above the sideboard, gentle plant sway and window-light variation. Verify Pause/Resume through the declared handler and retain hidden-page pause, reduced-motion behavior and the single capped render loop.
+
+- Update Sensor Simulator (410) to 1.0.6: calculate bounded temperature, humidity and daylight values from local date/time in its ScriptContext, replacing accumulated random drift. Preserve per-module feature/frequency settings and regular zero-power samples; derive power from level and configured maximum without random jitter. Add seven distributed-script regression scenarios and a profile guide.
+
+- Fit the Three.js room dashboard to the host area below the HomeGenie toolbar, sizing the scene from the remaining space and removing outer rounded corners. Preserve scrolling for stacked layouts and small screens. Scale control-card typography, icons, measurements and buttons to the available width/height, and balance the three card rows rather than leaving spare height only in the energy card.
+
+- Add the first Three.js room dashboard prototype, `isometric/isometric-room`, with named light/climate/power bindings, reactive device state, interactive lamp and HTML controls. Reuse local frontend assets, pause hidden/offscreen animation and release owned resources. Include focused controller tests and a setup guide; final device interaction/performance acceptance remains pending.
+
 - Avoid false preset conflicts on the first save after a page reload when only the locally remembered dashboard view differs from the server copy. Limit the navigation exception to the initial content proof; retain complete ordinary save comparisons and exact known-revision checks, including real layout, binding and preference conflicts.
 
 - Do not treat server-discovered modules (including the objective runner itself) as local preset edits when adopting an applied AI dashboard. Keep the ordinary save/revision comparison unchanged and continue protecting actual layout, named bindings, preferences and local connection changes.

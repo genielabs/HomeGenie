@@ -139,7 +139,28 @@
   "capture_commands_pause": "Kwụsị n'etiti iwu",
   "capture_pause_none": "Ọ dịghị",
   "capture_pause_asis": "Dị ka ọ dị",
+  "neon_district_road_speed_very_slow": "Nwayọọ nke ukwuu",
+  "neon_district_road_speed_slow": "Nwayọọ",
+  "neon_district_road_speed_normal": "Nkịtị",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Ntọala nhọrọ maka ogwe njikwa Neon District.",
+      "ConfigureOptions.Title": "Aha ogwe njikwa",
+      "ConfigureOptions.Subtitle": "Aha nta ogwe njikwa",
+      "ConfigureOptions.RoadSpeed": "Ọsọ mmegharị okporo ụzọ",
+      "ConfigureOptions.Message": "Ozi mpaghara",
+      "ConfigureOptions.DisableAnimations": "Gbanyụọ ihe ngosi na-agagharị agagharị"
+    },
+    "652": {
+      "Title": "Ime ụlọ isometric",
+      "Description": "Ntọala nhọrọ maka ogwe njikwa Ime ụlọ isometric.",
+      "ConfigureOptions.Eyebrow": "Ederede dị n’elu isiokwu",
+      "ConfigureOptions.Title": "Aha ogwe njikwa",
+      "ConfigureOptions.Subtitle": "Aha nta ogwe njikwa",
+      "ConfigureOptions.DisableAnimations": "Gbanyụọ ihe ngosi na-agagharị agagharị"
+    },
+
     "6": {
       "Title": "Gbanwuo ọkụ otu",
       "Description": "Gbanwuo ọkụ niile dị n’otu ahụ akọwapụtara."

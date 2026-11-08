@@ -1066,17 +1066,38 @@ namespace HomeGenie.Service
                 return false;
 
             var filesToCopy = new List<string>();
+            var archiveFiles = new HashSet<string>(extractedFiles, StringComparer.Ordinal);
 
             foreach (string file in extractedFiles)
             {
-                // Preserve the existing rule: skip archive-root files.
-                if (string.IsNullOrEmpty(Path.GetDirectoryName(file)) ||
-                    file == widgetInfoFile)
-                    continue;
+                if (string.IsNullOrEmpty(Path.GetDirectoryName(file)))
+                {
+                    // Root-level exports contain the widget beside widget.info.
+                    // Only copy recognized files belonging to a complete widget.
+                    string extension = new[] { ".i18n.json", ".module.js", ".html", ".css", ".js" }
+                        .FirstOrDefault(ext => file.EndsWith(ext, StringComparison.Ordinal));
+                    if (extension == null || file.StartsWith('.'))
+                        continue;
+                    string widget = file[..^extension.Length];
+                    if (!archiveFiles.Contains(widget + ".html") || !archiveFiles.Contains(widget + ".css") ||
+                        !archiveFiles.Contains(widget + ".js"))
+                        continue;
+                }
 
                 // Validate every source and destination before the first copy.
-                PackagePathGuard.Contained(importPath, file);
+                string source = PackagePathGuard.Contained(importPath, file);
                 PackagePathGuard.Contained(widgetBasePath, file);
+                if (file.EndsWith(".i18n.json", StringComparison.Ordinal))
+                {
+                    if (new FileInfo(source).Length > WidgetCatalog.TranslationCatalogMaxBytes)
+                        return false;
+                    string rawCatalog = File.ReadAllText(source);
+                    string catalog = WidgetCatalog.EscapeTranslationCatalogMarkup(rawCatalog);
+                    if (!WidgetCatalog.IsTranslationCatalog(catalog))
+                        return false;
+                    if (catalog != rawCatalog)
+                        File.WriteAllText(source, catalog);
+                }
                 filesToCopy.Add(file);
             }
 

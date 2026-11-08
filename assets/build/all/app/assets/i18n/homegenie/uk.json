@@ -139,7 +139,28 @@
   "capture_commands_pause": "Пауза між командами",
   "capture_pause_none": "Жоден",
   "capture_pause_asis": "Як є",
+  "neon_district_road_speed_very_slow": "Дуже повільно",
+  "neon_district_road_speed_slow": "Повільно",
+  "neon_district_road_speed_normal": "Звичайно",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Додаткові налаштування панелі керування «Neon District».",
+      "ConfigureOptions.Title": "Заголовок панелі керування",
+      "ConfigureOptions.Subtitle": "Підзаголовок панелі керування",
+      "ConfigureOptions.RoadSpeed": "Швидкість анімації дороги",
+      "ConfigureOptions.Message": "Повідомлення району",
+      "ConfigureOptions.DisableAnimations": "Вимкнути анімації"
+    },
+    "652": {
+      "Title": "Ізометрична кімната",
+      "Description": "Додаткові налаштування панелі керування «Ізометрична кімната».",
+      "ConfigureOptions.Eyebrow": "Текст над заголовком",
+      "ConfigureOptions.Title": "Заголовок панелі керування",
+      "ConfigureOptions.Subtitle": "Підзаголовок панелі керування",
+      "ConfigureOptions.DisableAnimations": "Вимкнути анімації"
+    },
+
     "6": {
       "Title": "Увімкнути освітлення групи",
       "Description": "Увімкнути всі світильники у вказаній групі."

@@ -139,7 +139,28 @@
   "capture_commands_pause": "Tạm dừng giữa các lệnh",
   "capture_pause_none": "Không có",
   "capture_pause_asis": "Như là",
+  "neon_district_road_speed_very_slow": "Rất chậm",
+  "neon_district_road_speed_slow": "Chậm",
+  "neon_district_road_speed_normal": "Bình thường",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Cài đặt tùy chọn cho bảng điều khiển Neon District.",
+      "ConfigureOptions.Title": "Tiêu đề bảng điều khiển",
+      "ConfigureOptions.Subtitle": "Tiêu đề phụ của bảng điều khiển",
+      "ConfigureOptions.RoadSpeed": "Tốc độ hiệu ứng chuyển động của đường",
+      "ConfigureOptions.Message": "Thông điệp của khu phố",
+      "ConfigureOptions.DisableAnimations": "Tắt hiệu ứng động"
+    },
+    "652": {
+      "Title": "Phòng đẳng cự",
+      "Description": "Cài đặt tùy chọn cho bảng điều khiển Phòng đẳng cự.",
+      "ConfigureOptions.Eyebrow": "Văn bản phía trên tiêu đề",
+      "ConfigureOptions.Title": "Tiêu đề bảng điều khiển",
+      "ConfigureOptions.Subtitle": "Tiêu đề phụ của bảng điều khiển",
+      "ConfigureOptions.DisableAnimations": "Tắt hiệu ứng động"
+    },
+
     "6": {
       "Title": "Bật đèn trong nhóm",
       "Description": "Bật tất cả đèn trong nhóm được chỉ định."

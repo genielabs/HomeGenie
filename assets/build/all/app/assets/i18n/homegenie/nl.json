@@ -139,7 +139,28 @@
   "capture_commands_pause": "Pauze tussen opdrachten",
   "capture_pause_none": "Geen",
   "capture_pause_asis": "Zoals het is",
+  "neon_district_road_speed_very_slow": "Zeer langzaam",
+  "neon_district_road_speed_slow": "Langzaam",
+  "neon_district_road_speed_normal": "Normaal",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Optionele instellingen voor het dashboard ‘Neon District’.",
+      "ConfigureOptions.Title": "Titel van het dashboard",
+      "ConfigureOptions.Subtitle": "Ondertitel van het dashboard",
+      "ConfigureOptions.RoadSpeed": "Snelheid van de weganimatie",
+      "ConfigureOptions.Message": "Wijkbericht",
+      "ConfigureOptions.DisableAnimations": "Animaties uitschakelen"
+    },
+    "652": {
+      "Title": "Isometrische kamer",
+      "Description": "Optionele instellingen voor het dashboard ‘Isometrische kamer’.",
+      "ConfigureOptions.Eyebrow": "Tekst boven de titel",
+      "ConfigureOptions.Title": "Titel van het dashboard",
+      "ConfigureOptions.Subtitle": "Ondertitel van het dashboard",
+      "ConfigureOptions.DisableAnimations": "Animaties uitschakelen"
+    },
+
     "6": {
       "Title": "Groepsverlichting inschakelen",
       "Description": "Schakel alle lampen in de opgegeven groep in."

@@ -864,6 +864,22 @@ The default user to connect to the bridge is "newdeveloper" and it should be alr
         <UpdateTime>2022-12-28T17:10:38.6002141Z</UpdateTime>
       </ModuleParameter>
       <ModuleParameter>
+        <Name>EnergyManagement.MonitorStatus</Name>
+        <Value>On</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.5723327Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
+        <Name>EnergyManagement.MonitorWatts</Name>
+        <Value>On</Value>
+        <Description />
+        <FieldType />
+        <ParentId>0</ParentId>
+        <UpdateTime>2022-12-28T17:10:38.5724423Z</UpdateTime>
+      </ModuleParameter>
+      <ModuleParameter>
         <Name>Simulator.Meter.Watts</Name>
         <Value>On</Value>
         <Description>Watts meter</Description>

@@ -1,0 +1,50 @@
+{
+  "en": {
+    "title": "Lighting",
+    "subtitle": "Three configurable circuits",
+    "circuit": "Circuit {number}",
+    "unassigned": "Not linked",
+    "unavailable": "Status unavailable",
+    "on": "On",
+    "off": "Off",
+    "pending": "Waiting for device…",
+    "failed": "Command failed",
+    "timeout": "No confirmation",
+    "toggle": "Switch {name}",
+    "bind_light1": "Light 1",
+    "bind_light2": "Light 2",
+    "bind_light3": "Light 3"
+  },
+  "it": {
+    "title": "Illuminazione",
+    "subtitle": "Tre circuiti configurabili",
+    "circuit": "Circuito {number}",
+    "unassigned": "Non associato",
+    "unavailable": "Stato non disponibile",
+    "on": "Accesa",
+    "off": "Spenta",
+    "pending": "In attesa del dispositivo…",
+    "failed": "Comando non riuscito",
+    "timeout": "Nessuna conferma",
+    "toggle": "Commuta {name}",
+    "bind_light1": "Luce 1",
+    "bind_light2": "Luce 2",
+    "bind_light3": "Luce 3"
+  },
+  "fr": {
+    "title": "Éclairage",
+    "subtitle": "Trois circuits configurables",
+    "circuit": "Circuit {number}",
+    "unassigned": "Non associé",
+    "unavailable": "État indisponible",
+    "on": "Allumée",
+    "off": "Éteinte",
+    "pending": "En attente de l’appareil…",
+    "failed": "Échec de la commande",
+    "timeout": "Aucune confirmation",
+    "toggle": "Basculer {name}",
+    "bind_light1": "Lumière 1",
+    "bind_light2": "Lumière 2",
+    "bind_light3": "Lumière 3"
+  }
+}

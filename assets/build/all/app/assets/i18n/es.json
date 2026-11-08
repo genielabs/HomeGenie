@@ -522,6 +522,7 @@
   "Scenarios": "Escenas",
   "Security": "Seguridad",
   "Weather and Environment": "Clima y medio ambiente",
+  "Themes": "Temas",
   "Utilities": "Servicios públicos",
   "Scenes": "Escenas",
   "Virtual Modules": "Módulos virtuales",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "El sistema no está actualizado.",
   "new_programs_updates_available": "Nuevas actualizaciones del programa disponibles",
   "dashboard_layout": "Diseño",
-  "dashboard_standard": "Estándar"
+  "dashboard_standard": "Estándar",
+  "ai_dashboard_open": "Abrir panel",
+  "ai_dashboard_select_preset": "Seleccione el ajuste preestablecido original. Abra “Preferencias” y actualice el ajuste preestablecido antes de abrir este panel.",
+  "preset_conflict": "Este ajuste preestablecido cambió en el servidor. Sus cambios todavía están disponibles en este navegador.",
+  "preset_conflict_recovery": "Para cargar la copia desde el servidor y reemplazar sus cambios locales, seleccione “Actualizar”. Para conservar sus cambios, guárdelos como un nuevo ajuste preestablecido.",
+  "preset_updated_elsewhere": "Este ajuste preestablecido se modificó en otra sesión.",
+  "preset_deleted_elsewhere": "Este ajuste preestablecido fue eliminado en otra sesión. Puede guardar su copia local como un nuevo ajuste preestablecido."
 }

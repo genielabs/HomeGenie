@@ -301,7 +301,28 @@
   "capture_pause_asis":
     "Così com'è",
 " ": "------------------------------------------",
+    "neon_district_road_speed_very_slow": "Molto lenta",
+    "neon_district_road_speed_slow": "Lenta",
+    "neon_district_road_speed_normal": "Normale",
     "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Impostazioni facoltative della dashboard «Neon District».",
+      "ConfigureOptions.Title": "Titolo della dashboard",
+      "ConfigureOptions.Subtitle": "Sottotitolo della dashboard",
+      "ConfigureOptions.RoadSpeed": "Velocità di scorrimento della strada",
+      "ConfigureOptions.Message": "Messaggio del quartiere",
+      "ConfigureOptions.DisableAnimations": "Disattiva animazioni"
+    },
+    "652": {
+      "Title": "Stanza isometrica",
+      "Description": "Impostazioni facoltative della dashboard «Stanza isometrica».",
+      "ConfigureOptions.Eyebrow": "Testo sopra il titolo",
+      "ConfigureOptions.Title": "Titolo della dashboard",
+      "ConfigureOptions.Subtitle": "Sottotitolo della dashboard",
+      "ConfigureOptions.DisableAnimations": "Disattiva animazioni"
+    },
+
 
     "6": {
       "Title": "Accendi luci del gruppo",

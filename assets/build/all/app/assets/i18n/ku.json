@@ -522,6 +522,7 @@
   "Scenarios": "Dîmen",
   "Security": "Ewlekarî",
   "Weather and Environment": "Hewa û Jîngeh",
+  "Themes": "Temayên",
   "Utilities": "Xizmetguzarî",
   "Scenes": "Dîmen",
   "Virtual Modules": "Modulên Virtual",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Pergal ne rojane ye",
   "new_programs_updates_available": "Nûvekirinên bernameyê yên nû hene",
   "dashboard_layout": "Rêzkirin",
-  "dashboard_standard": "Standard"
+  "dashboard_standard": "Standard",
+  "ai_dashboard_open": "dashboardê veke",
+  "ai_dashboard_select_preset": "Pêşkêşiya orîjînal hilbijêrin. Berî vekirina vê dashboardê “Tercîh” vekin û pêşdibistanê nûve bikin.",
+  "preset_conflict": "Ev pêşdibistanê li ser serverê hate guhertin. Guhertinên we hîn di vê gerokê de berdest in.",
+  "preset_conflict_recovery": "Ji bo barkirina kopiyê ji serverê û li şûna guhertinên xwe yên herêmî, “Nûvekirin” hilbijêrin.",
+  "preset_updated_elsewhere": "Ev pêşdibistanê di danişîneke din de hate guherandin.",
+  "preset_deleted_elsewhere": "Ev pêşdibistanê di danişîneke din de hat jêbirin. Hûn dikarin kopiyek xweya herêmî wekî pêşekek nû hilînin."
 }

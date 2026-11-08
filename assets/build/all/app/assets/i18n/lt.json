@@ -522,6 +522,7 @@
   "Scenarios": "Scenos",
   "Security": "Saugumas",
   "Weather and Environment": "Orai ir aplinka",
+  "Themes": "Temos",
   "Utilities": "Komunalinės paslaugos",
   "Scenes": "Scenos",
   "Virtual Modules": "Virtualūs moduliai",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Sistema neatnaujinta",
   "new_programs_updates_available": "Galimi nauji programos atnaujinimai",
   "dashboard_layout": "Išdėstymas",
-  "dashboard_standard": "Standartinis"
+  "dashboard_standard": "Standartinis",
+  "ai_dashboard_open": "Atidaryti prietaisų skydelį",
+  "ai_dashboard_select_preset": "Pasirinkite pradinį išankstinį nustatymą. Atidarykite “Nuostatos” ir atnaujinkite išankstinį nustatymą prieš atidarydami šią informacijos suvestinę.",
+  "preset_conflict": "Šis išankstinis nustatymas serveryje pasikeitė. Jūsų pakeitimai vis dar pasiekiami šioje naršyklėje.",
+  "preset_conflict_recovery": "Norėdami įkelti kopiją iš serverio ir pakeisti vietinius pakeitimus, pasirinkite “Atnaujinimas”. Jei norite išsaugoti pakeitimus, išsaugokite juos kaip naują išankstinį nustatymą.",
+  "preset_updated_elsewhere": "Šis išankstinis nustatymas buvo pakeistas kitoje sesijoje.",
+  "preset_deleted_elsewhere": "Šis išankstinis nustatymas buvo ištrintas kitoje sesijoje. Galite išsaugoti vietinę kopiją kaip naują išankstinį nustatymą."
 }

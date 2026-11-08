@@ -1,0 +1,47 @@
+{
+  "en": {
+    "meter": "Power meter",
+    "title": "Energy today",
+    "today": "Since midnight",
+    "now": "Now",
+    "peak": "24 h peak",
+    "history": "Power over the last 24 hours",
+    "estimated": "Estimated",
+    "partial": "Partial estimate",
+    "no_meter": "Choose a power meter in the widget settings.",
+    "offline": "Power meter offline",
+    "no_history": "No power readings in the last 24 hours.",
+    "unavailable": "Power history is unavailable.",
+    "loading": "Loading power history…"
+  },
+  "it": {
+    "meter": "Misuratore di potenza",
+    "title": "Energia oggi",
+    "today": "Da mezzanotte",
+    "now": "Adesso",
+    "peak": "Picco 24 h",
+    "history": "Potenza nelle ultime 24 ore",
+    "estimated": "Stima",
+    "partial": "Stima parziale",
+    "no_meter": "Scegli un misuratore di potenza nelle impostazioni del widget.",
+    "offline": "Misuratore non connesso",
+    "no_history": "Nessuna lettura di potenza nelle ultime 24 ore.",
+    "unavailable": "Storico della potenza non disponibile.",
+    "loading": "Caricamento dello storico della potenza…"
+  },
+  "fr": {
+    "meter": "Wattmètre",
+    "title": "Énergie aujourd’hui",
+    "today": "Depuis minuit",
+    "now": "Maintenant",
+    "peak": "Pic sur 24 h",
+    "history": "Puissance des 24 dernières heures",
+    "estimated": "Estimation",
+    "partial": "Estimation partielle",
+    "no_meter": "Choisissez un wattmètre dans les paramètres du widget.",
+    "offline": "Wattmètre hors ligne",
+    "no_history": "Aucun relevé de puissance au cours des 24 dernières heures.",
+    "unavailable": "Historique de puissance indisponible.",
+    "loading": "Chargement de l’historique de puissance…"
+  }
+}

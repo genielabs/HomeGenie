@@ -522,6 +522,7 @@
   "Scenarios": "Səhnələr",
   "Security": "Təhlükəsizlik",
   "Weather and Environment": "Hava və Ətraf Mühit",
+  "Themes": "Mövzular",
   "Utilities": "Kommunal xidmətlər",
   "Scenes": "Səhnələr",
   "Virtual Modules": "Virtual Modullar",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Sistem yeni deyil",
   "new_programs_updates_available": "Yeni proqram yeniləmələri mövcuddur",
   "dashboard_layout": "Tərtibat",
-  "dashboard_standard": "Standart"
+  "dashboard_standard": "Standart",
+  "ai_dashboard_open": "İdarə panelini açın",
+  "ai_dashboard_select_preset": "Orijinal əvvəlcədən təyini seçin. Bu tablosunu açmadan əvvəl “Üstünlüklər”-i açın və ilkin parametrləri yeniləyin.",
+  "preset_conflict": "Bu əvvəlcədən təyin edilmiş serverdə dəyişdirildi. Dəyişiklikləriniz hələ də bu brauzerdə əlçatandır.",
+  "preset_conflict_recovery": "Surəti serverdən yükləmək və yerli dəyişiklikləri əvəz etmək üçün “Yeniləmə” seçin. Dəyişikliklərinizi saxlamaq üçün onları yeni əvvəlcədən təyin edilmiş kimi yadda saxlayın.",
+  "preset_updated_elsewhere": "Bu əvvəlcədən təyin başqa sessiyada dəyişdirildi.",
+  "preset_deleted_elsewhere": "Bu əvvəlcədən təyin başqa sessiyada silindi. Siz yerli nüsxənizi yeni əvvəlcədən təyin edilmiş kimi saxlaya bilərsiniz."
 }

@@ -139,7 +139,28 @@
   "capture_commands_pause": "အမိန့်များကြားတွင် ခေတ္တရပ်ပါ။",
   "capture_pause_none": "တစ်ခုမှ",
   "capture_pause_asis": "ရှိသကဲ့သို့",
+  "neon_district_road_speed_very_slow": "အလွန်နှေး",
+  "neon_district_road_speed_slow": "နှေး",
+  "neon_district_road_speed_normal": "ပုံမှန်",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District ဒက်ရှ်ဘုတ်အတွက် စိတ်ကြိုက် ဆက်တင်များ။",
+      "ConfigureOptions.Title": "ဒက်ရှ်ဘုတ် ခေါင်းစဉ်",
+      "ConfigureOptions.Subtitle": "ဒက်ရှ်ဘုတ် ခေါင်းစဉ်ခွဲ",
+      "ConfigureOptions.RoadSpeed": "လမ်းပုံရိပ် လှုပ်ရှားမှုအမြန်နှုန်း",
+      "ConfigureOptions.Message": "ရပ်ကွက်စာတို",
+      "ConfigureOptions.DisableAnimations": "လှုပ်ရှားသက်ဝင်မှုများ ပိတ်ရန်"
+    },
+    "652": {
+      "Title": "အိုင်ဆိုမက်ထရစ် အခန်း",
+      "Description": "အိုင်ဆိုမက်ထရစ် အခန်း ဒက်ရှ်ဘုတ်အတွက် စိတ်ကြိုက် ဆက်တင်များ။",
+      "ConfigureOptions.Eyebrow": "ခေါင်းစဉ်အပေါ်ရှိ စာသား",
+      "ConfigureOptions.Title": "ဒက်ရှ်ဘုတ် ခေါင်းစဉ်",
+      "ConfigureOptions.Subtitle": "ဒက်ရှ်ဘုတ် ခေါင်းစဉ်ခွဲ",
+      "ConfigureOptions.DisableAnimations": "လှုပ်ရှားသက်ဝင်မှုများ ပိတ်ရန်"
+    },
+
     "6": {
       "Title": "အုပ်စုရှိ မီးများကို ဖွင့်ပါ",
       "Description": "သတ်မှတ်ထားသော အုပ်စုရှိ မီးအားလုံးကို ဖွင့်ပါ။"

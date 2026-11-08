@@ -522,6 +522,7 @@
   "Scenarios": "Sahnalar",
   "Security": "Xavfsizlik",
   "Weather and Environment": "Ob-havo va atrof-muhit",
+  "Themes": "Mavzular",
   "Utilities": "Kommunal xizmatlar",
   "Scenes": "Sahnalar",
   "Virtual Modules": "Virtual modullar",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Tizim yangilanmagan",
   "new_programs_updates_available": "Yangi dastur yangilanishlari mavjud",
   "dashboard_layout": "Joylashuv",
-  "dashboard_standard": "Standart"
+  "dashboard_standard": "Standart",
+  "ai_dashboard_open": "Boshqaruv panelini oching",
+  "ai_dashboard_select_preset": "Dastlabki sozlamalarni tanlang. Ushbu asboblar panelini ochishdan oldin “Afzalliklar” ni oching va oldindan sozlashni yangilang.",
+  "preset_conflict": "Bu oldindan sozlash serverda o'zgartirildi. Sizning o'zgarishlaringiz hali ham ushbu brauzerda mavjud.",
+  "preset_conflict_recovery": "Nusxani serverdan yuklash va mahalliy oʻzgarishlarni almashtirish uchun “Yangilash” ni tanlang. Oʻzgarishlarni saqlab qolish uchun ularni yangi oldindan oʻrnatish sifatida saqlang.",
+  "preset_updated_elsewhere": "Bu oldindan sozlama boshqa seansda o'zgartirildi.",
+  "preset_deleted_elsewhere": "Bu oldindan sozlama boshqa seansda oʻchirildi. Mahalliy nusxangizni yangi oldindan sozlash sifatida saqlashingiz mumkin."
 }

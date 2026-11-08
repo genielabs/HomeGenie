@@ -522,6 +522,7 @@
   "Scenarios": "Adegan",
   "Security": "Keamanan",
   "Weather and Environment": "Cuaca & Lingkungan",
+  "Themes": "Tema",
   "Utilities": "Utilitas",
   "Scenes": "Adegan",
   "Virtual Modules": "Modul Virtual",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Sistem belum diperbarui",
   "new_programs_updates_available": "Pembaruan program baru tersedia",
   "dashboard_layout": "Tata letak",
-  "dashboard_standard": "Standar"
+  "dashboard_standard": "Standar",
+  "ai_dashboard_open": "Buka dasbor",
+  "ai_dashboard_select_preset": "Pilih preset asli. Buka “Preferensi” dan perbarui preset sebelum membuka dasbor ini.",
+  "preset_conflict": "Preset ini diubah di server. Perubahan Anda masih tersedia di browser ini.",
+  "preset_conflict_recovery": "Untuk memuat salinan dari server dan mengganti perubahan lokal Anda, pilih “Memperbarui”. Untuk menyimpan perubahan Anda, simpan sebagai preset baru.",
+  "preset_updated_elsewhere": "Preset ini diubah di sesi lain.",
+  "preset_deleted_elsewhere": "Preset ini telah dihapus di sesi lain. Anda dapat menyimpan salinan lokal Anda sebagai preset baru."
 }

@@ -1,0 +1,38 @@
+{
+  "en": {
+    "title": "Telemetry",
+    "subtitle": "Indoor climate and electrical load",
+    "temperature_label": "Temperature",
+    "humidity_label": "Humidity",
+    "power_label": "Live power",
+    "trace_label": "Recent readings",
+    "trace_empty": "Waiting for readings",
+    "no_power": "No power meter linked",
+    "bind_climate": "Climate sensor",
+    "bind_energy": "Power meter"
+  },
+  "it": {
+    "title": "Telemetria",
+    "subtitle": "Clima interno e carico elettrico",
+    "temperature_label": "Temperatura",
+    "humidity_label": "Umidità",
+    "power_label": "Potenza attuale",
+    "trace_label": "Letture recenti",
+    "trace_empty": "In attesa di letture",
+    "no_power": "Nessun misuratore associato",
+    "bind_climate": "Sensore clima",
+    "bind_energy": "Misuratore di potenza"
+  },
+  "fr": {
+    "title": "Télémétrie",
+    "subtitle": "Climat intérieur et charge électrique",
+    "temperature_label": "Température",
+    "humidity_label": "Humidité",
+    "power_label": "Puissance instantanée",
+    "trace_label": "Relevés récents",
+    "trace_empty": "En attente de relevés",
+    "no_power": "Aucun compteur associé",
+    "bind_climate": "Capteur de climat",
+    "bind_energy": "Compteur de puissance"
+  }
+}

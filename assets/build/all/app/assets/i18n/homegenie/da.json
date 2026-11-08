@@ -139,7 +139,28 @@
   "capture_commands_pause": "Pause mellem kommandoer",
   "capture_pause_none": "Ingen",
   "capture_pause_asis": "Som det er",
+  "neon_district_road_speed_very_slow": "Meget langsom",
+  "neon_district_road_speed_slow": "Langsom",
+  "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Valgfrie indstillinger for kontrolpanelet Neon District.",
+      "ConfigureOptions.Title": "Kontrolpanelets titel",
+      "ConfigureOptions.Subtitle": "Kontrolpanelets undertitel",
+      "ConfigureOptions.RoadSpeed": "Vejanimationens hastighed",
+      "ConfigureOptions.Message": "Bydelsbesked",
+      "ConfigureOptions.DisableAnimations": "Deaktiver animationer"
+    },
+    "652": {
+      "Title": "Isometrisk rum",
+      "Description": "Valgfrie indstillinger for kontrolpanelet Isometrisk rum.",
+      "ConfigureOptions.Eyebrow": "Tekst over titlen",
+      "ConfigureOptions.Title": "Kontrolpanelets titel",
+      "ConfigureOptions.Subtitle": "Kontrolpanelets undertitel",
+      "ConfigureOptions.DisableAnimations": "Deaktiver animationer"
+    },
+
     "6": {
       "Title": "TÆND gruppens lys",
       "Description": "Tænder alle lys i den angivne gruppe."

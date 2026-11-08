@@ -537,7 +537,7 @@ public sealed class AiSkillCatalog
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.79</PackageVersion>
+      <PackageVersion>1.0.80</PackageVersion>
       <Id>context-engine</Id>
       <Version>1.0.8</Version>
       <Required>true</Required>
@@ -865,7 +865,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.79</PackageVersion>
+      <PackageVersion>1.0.80</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -955,7 +955,7 @@ Program.Setup(() =&gt; {
     .AddOption(OPTION_MODEL_LIST, "", "7. AI Model List", $"editor:file:{modelsFile}:yaml")
 
     // Assign the custom UI widget for the chat interface
-    .UseWidget("custom/examples/local-ai-chat")
+    .UseWidget("homegenie/generic/program")
     .Emit("@AI:IntentHandler", API_URL); // notify widgets
 
 });
@@ -2682,11 +2682,11 @@ public static class LailamaModelDefaults {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.79</PackageVersion>
+      <PackageVersion>1.0.80</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.3.15</Version>
+      <Version>1.3.16</Version>
       <Required>true</Required>
-      <Checksum>2EF7B8026A9C0D2BD595AE87AB492AC5</Checksum>
+      <Checksum>5FC1757801FB6466070619951E98BAD0</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>
@@ -2888,7 +2888,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.79</PackageVersion>
+      <PackageVersion>1.0.80</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -3074,7 +3074,7 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.79</PackageVersion>
+      <PackageVersion>1.0.80</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -3905,7 +3905,7 @@ public sealed class GeminiPromptLifetime : IDisposable {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.79</PackageVersion>
+      <PackageVersion>1.0.80</PackageVersion>
       <Id>gemini-genie</Id>
       <Version>1.0.31</Version>
       <Required>true</Required>

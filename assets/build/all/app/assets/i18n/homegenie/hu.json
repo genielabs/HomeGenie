@@ -139,7 +139,28 @@
   "capture_commands_pause": "Szünet a parancsok között",
   "capture_pause_none": "Egyik sem",
   "capture_pause_asis": "Ahogy van",
+  "neon_district_road_speed_very_slow": "Nagyon lassú",
+  "neon_district_road_speed_slow": "Lassú",
+  "neon_district_road_speed_normal": "Normál",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "A(z) „Neon District” irányítópult választható beállításai.",
+      "ConfigureOptions.Title": "Irányítópult címe",
+      "ConfigureOptions.Subtitle": "Irányítópult alcíme",
+      "ConfigureOptions.RoadSpeed": "Az útanimáció sebessége",
+      "ConfigureOptions.Message": "A városnegyed üzenete",
+      "ConfigureOptions.DisableAnimations": "Animációk kikapcsolása"
+    },
+    "652": {
+      "Title": "Izometrikus szoba",
+      "Description": "A(z) „Izometrikus szoba” irányítópult választható beállításai.",
+      "ConfigureOptions.Eyebrow": "A cím fölötti szöveg",
+      "ConfigureOptions.Title": "Irányítópult címe",
+      "ConfigureOptions.Subtitle": "Irányítópult alcíme",
+      "ConfigureOptions.DisableAnimations": "Animációk kikapcsolása"
+    },
+
     "6": {
       "Title": "Csoport lámpáinak bekapcsolása",
       "Description": "A megadott csoport összes lámpájának bekapcsolása."

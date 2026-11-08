@@ -522,6 +522,7 @@
   "Scenarios": "Tonele",
   "Security": "Sekuriteit",
   "Weather and Environment": "Weer en Omgewing",
+  "Themes": "Temas",
   "Utilities": "Nutsdienste",
   "Scenes": "Tonele",
   "Virtual Modules": "Virtuele modules",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Stelsel is nie op datum nie",
   "new_programs_updates_available": "Nuwe programopdaterings beskikbaar",
   "dashboard_layout": "Uitleg",
-  "dashboard_standard": "Standaard"
+  "dashboard_standard": "Standaard",
+  "ai_dashboard_open": "Maak dashboard oop",
+  "ai_dashboard_select_preset": "Kies die oorspronklike voorafinstelling. Maak “Voorkeure” oop en werk die voorafinstelling op voordat hierdie kontroleskerm oopgemaak word.",
+  "preset_conflict": "Hierdie voorafinstelling het op die bediener verander. Jou veranderinge is steeds beskikbaar in hierdie blaaier.",
+  "preset_conflict_recovery": "Om die kopie van die bediener af te laai en jou plaaslike veranderinge te vervang, kies “Opdatering”. Om jou veranderinge te behou, stoor dit as 'n nuwe voorafinstelling.",
+  "preset_updated_elsewhere": "Hierdie voorafinstelling is in 'n ander sessie verander.",
+  "preset_deleted_elsewhere": "Hierdie voorafinstelling is in 'n ander sessie uitgevee. Jy kan jou plaaslike kopie as 'n nuwe voorafinstelling stoor."
 }

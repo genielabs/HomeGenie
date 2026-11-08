@@ -522,6 +522,7 @@
   "Scenarios": "Scener",
   "Security": "Sikkerhet",
   "Weather and Environment": "Vær og miljø",
+  "Themes": "Temaer",
   "Utilities": "Forsyningstjenester",
   "Scenes": "Scener",
   "Virtual Modules": "Virtuelle moduler",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Systemet er ikke oppdatert",
   "new_programs_updates_available": "Nye programoppdateringer tilgjengelig",
   "dashboard_layout": "Oppsett",
-  "dashboard_standard": "Standard"
+  "dashboard_standard": "Standard",
+  "ai_dashboard_open": "Åpne dashbordet",
+  "ai_dashboard_select_preset": "Velg den originale forhåndsinnstillingen. Åpne “Innstillinger” og oppdater forhåndsinnstillingen før du åpner dette dashbordet.",
+  "preset_conflict": "Denne forhåndsinnstillingen endret på serveren. Endringene dine er fortsatt tilgjengelige i denne nettleseren.",
+  "preset_conflict_recovery": "For å laste inn kopien fra serveren og erstatte de lokale endringene, velg “Oppdatering”. For å beholde endringene, lagre dem som en ny forhåndsinnstilling.",
+  "preset_updated_elsewhere": "Denne forhåndsinnstillingen ble endret i en annen økt.",
+  "preset_deleted_elsewhere": "Denne forhåndsinnstillingen ble slettet i en annen økt. Du kan lagre din lokale kopi som en ny forhåndsinnstilling."
 }

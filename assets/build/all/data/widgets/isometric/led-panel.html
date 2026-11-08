@@ -1,0 +1,17 @@
+<section class="matrix-card" #card @set="void 0">
+  <h2><span class="material-symbols-outlined light-symbol" aria-hidden="true">grid_on</span><span #heading></span></h2>
+  <p class="matrix-source"><span #source></span><span class="light-state" #status></span></p>
+  <div class="matrix-controls">
+    <label><span #color_label></span><input type="color" #color value="#51ded1" disabled></label>
+    <label class="matrix-effect-field" #effect_field hidden><span #effect_label></span>
+      <select #effect>
+        <option value="waves" #waves></option>
+        <option value="solid" #solid></option>
+        <option value="ghost" #ghost></option>
+        <option value="heart" #heart></option>
+      </select>
+    </label>
+  </div>
+  <button class="light-button" type="button" #toggle disabled><span class="material-symbols-outlined" aria-hidden="true">power_settings_new</span><span #action></span></button>
+  <p class="matrix-feedback" role="status" #feedback></p>
+</section>

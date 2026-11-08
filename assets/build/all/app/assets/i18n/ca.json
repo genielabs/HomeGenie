@@ -522,6 +522,7 @@
   "Scenarios": "Escenes",
   "Security": "Seguretat",
   "Weather and Environment": "Temps i medi ambient",
+  "Themes": "Temes",
   "Utilities": "Serveis públics",
   "Scenes": "Escenes",
   "Virtual Modules": "Mòduls virtuals",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "El sistema no està actualitzat",
   "new_programs_updates_available": "Noves actualitzacions del programa disponibles",
   "dashboard_layout": "Disposició",
-  "dashboard_standard": "Estàndard"
+  "dashboard_standard": "Estàndard",
+  "ai_dashboard_open": "Obre el tauler de control",
+  "ai_dashboard_select_preset": "Seleccioneu el valor predefinit original. Obriu “Preferències” i actualitzeu el valor predefinit abans d'obrir aquest tauler.",
+  "preset_conflict": "Aquest valor predefinit ha canviat al servidor. Els vostres canvis encara estan disponibles en aquest navegador.",
+  "preset_conflict_recovery": "Per carregar la còpia des del servidor i substituir els canvis locals, seleccioneu “Actualització”. Per conservar els canvis, deseu-los com a preajust nou.",
+  "preset_updated_elsewhere": "Aquest valor predefinit s'ha canviat en una altra sessió.",
+  "preset_deleted_elsewhere": "Aquest valor predefinit s'ha suprimit en una altra sessió. Podeu desar la vostra còpia local com a preajust nou."
 }

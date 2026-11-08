@@ -139,7 +139,28 @@
   "capture_commands_pause": "কমান্ডের মধ্যে বিরতি দিন",
   "capture_pause_none": "কোনটিই নয়",
   "capture_pause_asis": "যেমন আছে",
+  "neon_district_road_speed_very_slow": "খুব ধীর",
+  "neon_district_road_speed_slow": "ধীর",
+  "neon_district_road_speed_normal": "স্বাভাবিক",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District ড্যাশবোর্ডের ঐচ্ছিক সেটিংস।",
+      "ConfigureOptions.Title": "ড্যাশবোর্ডের শিরোনাম",
+      "ConfigureOptions.Subtitle": "ড্যাশবোর্ডের উপশিরোনাম",
+      "ConfigureOptions.RoadSpeed": "রাস্তার অ্যানিমেশনের গতি",
+      "ConfigureOptions.Message": "এলাকার বার্তা",
+      "ConfigureOptions.DisableAnimations": "অ্যানিমেশন বন্ধ করুন"
+    },
+    "652": {
+      "Title": "আইসোমেট্রিক ঘর",
+      "Description": "আইসোমেট্রিক ঘর ড্যাশবোর্ডের ঐচ্ছিক সেটিংস।",
+      "ConfigureOptions.Eyebrow": "শিরোনামের ওপরের লেখা",
+      "ConfigureOptions.Title": "ড্যাশবোর্ডের শিরোনাম",
+      "ConfigureOptions.Subtitle": "ড্যাশবোর্ডের উপশিরোনাম",
+      "ConfigureOptions.DisableAnimations": "অ্যানিমেশন বন্ধ করুন"
+    },
+
     "6": {
       "Title": "গ্রুপের আলো চালু করুন",
       "Description": "নির্দিষ্ট গ্রুপের সব আলো চালু করুন।"

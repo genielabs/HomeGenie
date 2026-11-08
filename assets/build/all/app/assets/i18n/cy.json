@@ -522,6 +522,7 @@
   "Scenarios": "Golygfeydd",
   "Security": "Diogelwch",
   "Weather and Environment": "Tywydd ac Amgylchedd",
+  "Themes": "Themâu",
   "Utilities": "Cyfleustodau",
   "Scenes": "Golygfeydd",
   "Virtual Modules": "Modiwlau Rhithwir",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Nid yw'r system yn gyfredol",
   "new_programs_updates_available": "Diweddariadau rhaglen newydd ar gael",
   "dashboard_layout": "Cynllun",
-  "dashboard_standard": "Safonol"
+  "dashboard_standard": "Safonol",
+  "ai_dashboard_open": "Agor dangosfwrdd",
+  "ai_dashboard_select_preset": "Dewiswch y rhagosodiad gwreiddiol. Agorwch “Dewisiadau” a diweddarwch y rhagosodiad cyn agor y dangosfwrdd hwn.",
+  "preset_conflict": "Newidiodd y rhagosodiad hwn ar y gweinydd. Mae eich newidiadau dal ar gael yn y porwr hwn.",
+  "preset_conflict_recovery": "I lwytho'r copi o'r gweinydd ac amnewid eich newidiadau lleol, dewiswch “Diweddariad”. I gadw'ch newidiadau, cadwch nhw fel rhagosodiad newydd.",
+  "preset_updated_elsewhere": "Newidiwyd y rhagosodiad hwn mewn sesiwn arall.",
+  "preset_deleted_elsewhere": "Cafodd y rhagosodiad hwn ei ddileu mewn sesiwn arall. Gallwch arbed eich copi lleol fel rhagosodiad newydd."
 }

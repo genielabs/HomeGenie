@@ -1,0 +1,68 @@
+.genie {
+  display: grid;
+  place-items: center;
+  min-block-size: 100%;
+  --genie-glow: #81d9c4;
+}
+.genie-button {
+  display: block;
+  width: var(--genie-size, 132px);
+  max-width: 100%;
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 50%;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.genie-button:disabled { cursor: default; }
+.genie-button:focus-visible {
+  outline: 2px solid var(--genie-glow);
+  outline-offset: 2px;
+}
+.genie-figure {
+  display: grid;
+  place-items: center;
+  position: relative;
+  isolation: isolate;
+  animation: genie-float 4.8s ease-in-out infinite;
+}
+.genie-figure img { display: block; width: 100%; pointer-events: none; }
+.genie-halo {
+  position: absolute;
+  z-index: -1;
+  inset: 10%;
+  border-radius: 50%;
+  border: 1px solid var(--genie-glow);
+  box-shadow: 0 0 24px -7px var(--genie-glow), inset 0 0 22px -10px var(--genie-glow);
+  opacity: .36;
+  transition: border-color .2s, box-shadow .2s;
+}
+.genie[data-state='listening'] { --genie-glow: #7de8e5; }
+.genie[data-state='thinking'] { --genie-glow: #d3b4ff; }
+.genie[data-state='speaking'] { --genie-glow: #ffce8f; }
+.genie[data-state='thinking'] .genie-halo {
+  border-style: dashed;
+  opacity: .92;
+  animation: genie-orbit 9s linear infinite;
+}
+.genie[data-state='listening'] .genie-halo { animation: genie-breathe 1.7s ease-in-out infinite; }
+.genie[data-state='speaking'] .genie-halo { animation: genie-breathe .8s ease-in-out infinite; }
+.genie .genie-figure, .genie[data-state] .genie-halo {
+  animation-play-state: var(--genie-motion, running);
+}
+.genie-button:hover:not(:disabled) img { filter: brightness(1.14); }
+@keyframes genie-float {
+  50% { transform: translateY(-6px); }
+}
+@keyframes genie-breathe {
+  50% { transform: scale(1.13); opacity: .98; }
+}
+@keyframes genie-orbit {
+  to { transform: rotate(1turn); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .genie .genie-figure, .genie[data-state] .genie-halo { animation: none; }
+  .genie:not([data-state='idle']) .genie-halo { opacity: .85; }
+}

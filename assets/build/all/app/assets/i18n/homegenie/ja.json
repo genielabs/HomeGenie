@@ -139,7 +139,28 @@
   "capture_commands_pause": "コマンド間の一時停止",
   "capture_pause_none": "なし",
   "capture_pause_asis": "そのまま",
+  "neon_district_road_speed_very_slow": "とても遅い",
+  "neon_district_road_speed_slow": "遅い",
+  "neon_district_road_speed_normal": "標準",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "「Neon District」ダッシュボードのオプション設定。",
+      "ConfigureOptions.Title": "ダッシュボードのタイトル",
+      "ConfigureOptions.Subtitle": "ダッシュボードのサブタイトル",
+      "ConfigureOptions.RoadSpeed": "道路アニメーションの速度",
+      "ConfigureOptions.Message": "地区のメッセージ",
+      "ConfigureOptions.DisableAnimations": "アニメーションを無効にする"
+    },
+    "652": {
+      "Title": "アイソメトリックルーム",
+      "Description": "「アイソメトリックルーム」ダッシュボードのオプション設定。",
+      "ConfigureOptions.Eyebrow": "タイトルの上に表示するテキスト",
+      "ConfigureOptions.Title": "ダッシュボードのタイトル",
+      "ConfigureOptions.Subtitle": "ダッシュボードのサブタイトル",
+      "ConfigureOptions.DisableAnimations": "アニメーションを無効にする"
+    },
+
     "6": {
       "Title": "グループの照明を点灯",
       "Description": "指定したグループのすべての照明を点灯します。"

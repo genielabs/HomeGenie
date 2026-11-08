@@ -139,7 +139,28 @@
   "capture_commands_pause": "命令之间暂停",
   "capture_pause_none": "没有任何",
   "capture_pause_asis": "现状",
+  "neon_district_road_speed_very_slow": "很慢",
+  "neon_district_road_speed_slow": "慢",
+  "neon_district_road_speed_normal": "正常",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "“Neon District”仪表板的可选设置。",
+      "ConfigureOptions.Title": "仪表板标题",
+      "ConfigureOptions.Subtitle": "仪表板副标题",
+      "ConfigureOptions.RoadSpeed": "道路动画速度",
+      "ConfigureOptions.Message": "街区消息",
+      "ConfigureOptions.DisableAnimations": "禁用动画"
+    },
+    "652": {
+      "Title": "等距房间",
+      "Description": "“等距房间”仪表板的可选设置。",
+      "ConfigureOptions.Eyebrow": "标题上方的文字",
+      "ConfigureOptions.Title": "仪表板标题",
+      "ConfigureOptions.Subtitle": "仪表板副标题",
+      "ConfigureOptions.DisableAnimations": "禁用动画"
+    },
+
     "6": {
       "Title": "开启组内灯光",
       "Description": "开启指定组内的所有灯光。"

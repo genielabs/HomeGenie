@@ -139,7 +139,28 @@
   "capture_commands_pause": "Imani kaye pakati pa malamulo",
   "capture_pause_none": "Palibe",
   "capture_pause_asis": "Monga momwe zilili",
+  "neon_district_road_speed_very_slow": "Mochedwa kwambiri",
+  "neon_district_road_speed_slow": "Mochedwa",
+  "neon_district_road_speed_normal": "Mwachibadwa",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Zokonda zosankha za bolodi lowongolera la Neon District.",
+      "ConfigureOptions.Title": "Mutu wa bolodi lowongolera",
+      "ConfigureOptions.Subtitle": "Mutu wachiwiri wa bolodi lowongolera",
+      "ConfigureOptions.RoadSpeed": "Liwiro la kayendedwe ka chithunzi cha msewu",
+      "ConfigureOptions.Message": "Uthenga wa chigawo",
+      "ConfigureOptions.DisableAnimations": "Zimitsani zithunzi zoyenda"
+    },
+    "652": {
+      "Title": "Chipinda cha izometriki",
+      "Description": "Zokonda zosankha za bolodi lowongolera la Chipinda cha izometriki.",
+      "ConfigureOptions.Eyebrow": "Mawu pamwamba pa mutu",
+      "ConfigureOptions.Title": "Mutu wa bolodi lowongolera",
+      "ConfigureOptions.Subtitle": "Mutu wachiwiri wa bolodi lowongolera",
+      "ConfigureOptions.DisableAnimations": "Zimitsani zithunzi zoyenda"
+    },
+
     "6": {
       "Title": "Yatsani magetsi a gulu",
       "Description": "Yatsani magetsi onse m’gulu lomwe lasankhidwa."

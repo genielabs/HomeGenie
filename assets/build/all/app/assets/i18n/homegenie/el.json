@@ -139,7 +139,28 @@
   "capture_commands_pause": "Παύση μεταξύ εντολών",
   "capture_pause_none": "Κανένας",
   "capture_pause_asis": "Οπως είναι",
+  "neon_district_road_speed_very_slow": "Πολύ αργή",
+  "neon_district_road_speed_slow": "Αργή",
+  "neon_district_road_speed_normal": "Κανονική",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Προαιρετικές ρυθμίσεις για τον πίνακα ελέγχου «Neon District».",
+      "ConfigureOptions.Title": "Τίτλος πίνακα ελέγχου",
+      "ConfigureOptions.Subtitle": "Υπότιτλος πίνακα ελέγχου",
+      "ConfigureOptions.RoadSpeed": "Ταχύτητα κίνησης του δρόμου",
+      "ConfigureOptions.Message": "Μήνυμα συνοικίας",
+      "ConfigureOptions.DisableAnimations": "Απενεργοποίηση κινούμενων εφέ"
+    },
+    "652": {
+      "Title": "Ισομετρικό δωμάτιο",
+      "Description": "Προαιρετικές ρυθμίσεις για τον πίνακα ελέγχου «Ισομετρικό δωμάτιο».",
+      "ConfigureOptions.Eyebrow": "Κείμενο πάνω από τον τίτλο",
+      "ConfigureOptions.Title": "Τίτλος πίνακα ελέγχου",
+      "ConfigureOptions.Subtitle": "Υπότιτλος πίνακα ελέγχου",
+      "ConfigureOptions.DisableAnimations": "Απενεργοποίηση κινούμενων εφέ"
+    },
+
     "6": {
       "Title": "ΕΝΕΡΓΟΠΟΙΗΣΗ φώτων ομάδας",
       "Description": "Ενεργοποιεί όλα τα φώτα της καθορισμένης ομάδας."

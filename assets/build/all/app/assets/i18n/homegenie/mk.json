@@ -139,7 +139,28 @@
   "capture_commands_pause": "Пауза помеѓу командите",
   "capture_pause_none": "Ништо",
   "capture_pause_asis": "Како што е",
+  "neon_district_road_speed_very_slow": "Многу бавно",
+  "neon_district_road_speed_slow": "Бавно",
+  "neon_district_road_speed_normal": "Нормално",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Изборни поставки за контролната табла „Neon District“.",
+      "ConfigureOptions.Title": "Наслов на контролната табла",
+      "ConfigureOptions.Subtitle": "Поднаслов на контролната табла",
+      "ConfigureOptions.RoadSpeed": "Брзина на анимацијата на патот",
+      "ConfigureOptions.Message": "Порака од населбата",
+      "ConfigureOptions.DisableAnimations": "Исклучи анимации"
+    },
+    "652": {
+      "Title": "Изометриска соба",
+      "Description": "Изборни поставки за контролната табла „Изометриска соба“.",
+      "ConfigureOptions.Eyebrow": "Текст над насловот",
+      "ConfigureOptions.Title": "Наслов на контролната табла",
+      "ConfigureOptions.Subtitle": "Поднаслов на контролната табла",
+      "ConfigureOptions.DisableAnimations": "Исклучи анимации"
+    },
+
     "6": {
       "Title": "Вклучи ги светлата во групата",
       "Description": "Вклучи ги сите светла во наведената група."

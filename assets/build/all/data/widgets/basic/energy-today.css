@@ -1,0 +1,17 @@
+:host {display:block; height:100%; min-width:0; color:var(--text-color, inherit);}
+.energy-card {box-sizing:border-box; height:100%; display:flex; flex-direction:column; gap:12px; padding:14px 16px;}
+header {min-width:0; padding-right:var(--widget-menu-space, 32px);}
+header h3 {margin:0 0 2px; font-size:1rem; font-weight:600;}
+header > span {display:block; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+header > span, .metrics div > span, small, footer, .chart-area p {color:var(--secondary-text-color, #8794a6); font-size:.75rem;}
+.metrics {display:flex; gap:8px 20px; flex-wrap:wrap;}
+.metrics > div {display:flex; flex-direction:column; gap:3px;}
+.metrics strong {font-weight:600; font-size:1.08rem; font-variant-numeric:tabular-nums; white-space:nowrap;}
+.metrics .daily {margin-right:auto;}
+.metrics .daily strong {font-size:1.55rem;}
+.metrics .daily > small:empty {display:none;}
+.chart-area {position:relative; flex:1 1 90px; min-height:58px; min-width:0;}
+.chart-area canvas {position:absolute; inset:0; display:block;}
+.chart-area p {position:absolute; inset:0; display:grid; place-items:center; text-align:center; margin:0;}
+.chart-area p:empty {display:none;}
+footer {line-height:1.15;}

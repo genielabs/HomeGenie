@@ -4,6 +4,22 @@ Consolidated status: 2026-11-06, including maintainer-confirmed named widget bin
 
 This is the active task list. Detailed stage-by-stage decisions, earlier API names, test counts and acceptance evidence are preserved in [implementation history](roadmap-history.md); they do not override this status. Completed work is not reopened merely because an earlier checkpoint still says pending.
 
+## Demo sensor profile (2026-11-07)
+
+- [x] Sensor Simulator 410 1.0.6 uses a ScriptContext date/time/type helper for bounded seasonal/daytime temperature, humidity and luminance, with stable per-module variation and no cumulative drift. Keep feature/frequency configuration and level-based power with regular off samples. Seven isolated distributed-script scenarios passed; Vulkan updated only 410 through the backed-up program-update flow, with compilation, running state and plausible live night readings confirmed. See [sensor profile](guides/sensor-simulator.md).
+
+## Three.js room dashboard trial (2026-11-07)
+
+- [x] Add `isometric/isometric-room`: procedural isometric room, live light/climate/power cards and named bindings, with optional demo defaults and editable device bindings. Reuse the standard dashboard settings and existing local Three.js distribution.
+- [x] Add bounded rendering, visibility/reduced-motion pause, cleanup and 11 focused controller regressions. Verify the scene, bindings, reactive simulated light changes, reload and narrow layout on Vulkan; prepare the isolated `three-room-demo` preset without replacing existing presets.
+- [ ] Maintainer acceptance: light button and lamp picking, Pause/Play, scrolling, hidden-tab resume and practical GPU usage. This first prototype does not complete the broader themed-widget catalog.
+
+## Dashboard theme packages
+
+- [x] Bundle Neon District and Isometric Room dashboards with theme programs (651 and 652) installed by the setup wizard from `homegenie-themes`, compatible default module bindings, localized settings and event-driven power charts seeded from Energy Monitor statistics.
+
+- [ ] Distribute widgets and their assets directly in packages. Track installed files and ownership so uninstall can remove the package's unused files while preserving shared assets and user changes.
+
 ## Client preset synchronization (2026-11-06)
 
 - [x] Step 1: capture immutable preset/server/preferences snapshots, serialize local writes and coalesce/serialize server requests per preset. Drain saves before switching/deleting/reloading; suppress application-induced save echoes and report failures.
@@ -262,6 +278,11 @@ Feedback continuation: implemented for Gemini and Lailama; automated verificatio
 - [x] Add correlated ordinary Gemini prompt cancellation/status, native cancellation propagation, late-result fences and goal-aware composer/backend exclusion while retaining editable drafts.
 - [ ] Accept Stop/retry and goal-time draft/send behavior live on Vulkan, including another open browser.
 
+
+## Animated Genie assistant
+
+- [x] Remove the bundled `local-ai-chat` widget and use the standard program widget for Lailama.
+- [ ] Add an animated Genie avatar acting as a digital assistant, with microphone interaction and a floating chat panel. Reuse the existing provider/chat APIs and configured speech facilities; define interaction, lifecycle and accessibility before implementation.
 
 ## Next UI delivery checkpoints (2026-11-07)
 

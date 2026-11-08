@@ -139,7 +139,28 @@
   "capture_commands_pause": "مکث بین دستورات",
   "capture_pause_none": "هیچکدام",
   "capture_pause_asis": "همانطور که هست",
+  "neon_district_road_speed_very_slow": "خیلی کند",
+  "neon_district_road_speed_slow": "کند",
+  "neon_district_road_speed_normal": "عادی",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "تنظیمات اختیاری برای داشبورد «Neon District».",
+      "ConfigureOptions.Title": "عنوان داشبورد",
+      "ConfigureOptions.Subtitle": "زیرعنوان داشبورد",
+      "ConfigureOptions.RoadSpeed": "سرعت پویانمایی جاده",
+      "ConfigureOptions.Message": "پیام محله",
+      "ConfigureOptions.DisableAnimations": "غیرفعال کردن پویانمایی‌ها"
+    },
+    "652": {
+      "Title": "اتاق ایزومتریک",
+      "Description": "تنظیمات اختیاری برای داشبورد «اتاق ایزومتریک».",
+      "ConfigureOptions.Eyebrow": "متن بالای عنوان",
+      "ConfigureOptions.Title": "عنوان داشبورد",
+      "ConfigureOptions.Subtitle": "زیرعنوان داشبورد",
+      "ConfigureOptions.DisableAnimations": "غیرفعال کردن پویانمایی‌ها"
+    },
+
     "6": {
       "Title": "روشن کردن چراغ‌های گروه",
       "Description": "همهٔ چراغ‌های گروه مشخص‌شده را روشن می‌کند."

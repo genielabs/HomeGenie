@@ -522,6 +522,7 @@
   "Scenarios": "Mandhari",
   "Security": "Usalama",
   "Weather and Environment": "Hali ya Hewa na Mazingira",
+  "Themes": "Mandhari",
   "Utilities": "Huduma za umma",
   "Scenes": "Mandhari",
   "Virtual Modules": "Moduli Pepe",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Mfumo haujasasishwa",
   "new_programs_updates_available": "Sasisho mpya za programu zinapatikana",
   "dashboard_layout": "Mpangilio",
-  "dashboard_standard": "Kawaida"
+  "dashboard_standard": "Kawaida",
+  "ai_dashboard_open": "Fungua dashibodi",
+  "ai_dashboard_select_preset": "Chagua uwekaji awali awali. Fungua “Mapendeleo” na usasishe uwekaji awali kabla ya kufungua dashibodi hii.",
+  "preset_conflict": "Mpangilio huu wa awali ulibadilika kwenye seva. Mabadiliko yako bado yanapatikana katika kivinjari hiki.",
+  "preset_conflict_recovery": "Ili kupakia nakala kutoka kwa seva na kubadilisha mabadiliko yako ya ndani, chagua “Sasisho”. Ili kuhifadhi mabadiliko yako, yahifadhi kama uwekaji upya mapema.",
+  "preset_updated_elsewhere": "Uwekaji mapema huu ulibadilishwa katika kipindi kingine.",
+  "preset_deleted_elsewhere": "Uwekaji mapema huu ulifutwa katika kipindi kingine. Unaweza kuhifadhi nakala yako ya ndani kama uwekaji upya mapema."
 }

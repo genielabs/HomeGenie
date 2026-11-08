@@ -522,6 +522,7 @@
   "Scenarios": "Scener",
   "Security": "Sikkerhed",
   "Weather and Environment": "Vejr og miljø",
+  "Themes": "Temaer",
   "Utilities": "Forsyningsvirksomheder",
   "Scenes": "Scener",
   "Virtual Modules": "Virtuelle moduler",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Systemet er ikke opdateret",
   "new_programs_updates_available": "Nye programopdateringer tilgængelige",
   "dashboard_layout": "Layout",
-  "dashboard_standard": "Standard"
+  "dashboard_standard": "Standard",
+  "ai_dashboard_open": "Åbn dashboard",
+  "ai_dashboard_select_preset": "Vælg den originale forudindstilling. Åbn “Præferencer” og opdater forudindstillingen, før du åbner dette dashboard.",
+  "preset_conflict": "Denne forudindstilling blev ændret på serveren. Dine ændringer er stadig tilgængelige i denne browser.",
+  "preset_conflict_recovery": "For at indlæse kopien fra serveren og erstatte dine lokale ændringer skal du vælge “Opdatering”. Gem dem som en ny forudindstilling for at beholde dine ændringer.",
+  "preset_updated_elsewhere": "Denne forudindstilling blev ændret i en anden session.",
+  "preset_deleted_elsewhere": "Denne forudindstilling blev slettet i en anden session. Du kan gemme din lokale kopi som en ny forudindstilling."
 }

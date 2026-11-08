@@ -139,7 +139,28 @@
   "capture_commands_pause": "Pouse tussen bevele",
   "capture_pause_none": "Geen",
   "capture_pause_asis": "Soos dit is",
+  "neon_district_road_speed_very_slow": "Baie stadig",
+  "neon_district_road_speed_slow": "Stadig",
+  "neon_district_road_speed_normal": "Normaal",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Opsionele instellings vir die Neon District-kontroleskerm.",
+      "ConfigureOptions.Title": "Titel van die kontroleskerm",
+      "ConfigureOptions.Subtitle": "Subtitel van die kontroleskerm",
+      "ConfigureOptions.RoadSpeed": "Spoed van die padanimasie",
+      "ConfigureOptions.Message": "Boodskap vir die buurt",
+      "ConfigureOptions.DisableAnimations": "Deaktiveer animasies"
+    },
+    "652": {
+      "Title": "Isometriese kamer",
+      "Description": "Opsionele instellings vir die Isometriese kamer-kontroleskerm.",
+      "ConfigureOptions.Eyebrow": "Teks bo die titel",
+      "ConfigureOptions.Title": "Titel van die kontroleskerm",
+      "ConfigureOptions.Subtitle": "Subtitel van die kontroleskerm",
+      "ConfigureOptions.DisableAnimations": "Deaktiveer animasies"
+    },
+
     "6": {
       "Title": "Skakel groepligte AAN",
       "Description": "Skakel al die ligte in die gegewe groep aan."

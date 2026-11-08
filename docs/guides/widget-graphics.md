@@ -4,17 +4,19 @@ YoT serves Chart.js 4.5.1, Anime.js 4.5.0 and Three.js 0.186.1 below `assets/js/
 
 ## Examples
 
-The following three HTML/CSS/controller triplets live in `assets/build/all/data/widgets/examples/` and appear alongside the other example widgets:
+The source examples in [docs/examples/widgets](../examples/widgets/) illustrate local graphics libraries. Copy the files for an example to your installation’s widget directory to try it in the widget editor.
 
 | Widget | Library | Interaction |
 | --- | --- | --- |
-| `examples/chart-pulse` | Chart.js | A pastel bar chart with a Compare button switching between two sample datasets. |
-| `examples/anime-orbit` | Anime.js v4 | Five gently floating shapes with a Play/Pause control. |
-| `examples/three-knot` | Three.js | A procedural multicoloured 3D knot with a Play/Pause control. |
+| `chart-pulse` | Chart.js | A pastel bar chart with a Compare button switching between two sample datasets. |
+| `anime-orbit` | Anime.js v4 | Five gently floating shapes with a Play/Pause control. |
+| `three-knot` | Three.js | A procedural multicoloured 3D knot with a Play/Pause control. |
 
 All work without a bound module and without backend/device calls. They use free sizing, scoped elements, local styles, reduced-motion preferences, viewport/page pause and final disposal. The chart disables animation and resizes explicitly. The 3D scene caps pixel ratio at 2 and reports WebGL errors in its own status area. Labels/sample datasets are illustrative English text, not new application translation keys.
 
-Open an example in the widget editor to preview it, or ask the Genie to use the example as reference for a `widget.mode="presentation"` response. Normal examples remain reusable widgets: presentation mode belongs to the AI response envelope, not to controller settings.
+After copying an example, open it in the widget editor to preview it. Normal examples remain reusable widgets: presentation mode belongs to the AI response envelope, not to controller settings.
+
+`composite-clock` also shows how to embed the bundled analog and digital clocks. Copy all four of its files under `widgets/examples/` to use its original component name.
 
 ## Import contract
 
@@ -33,3 +35,7 @@ After awaiting imports, check a per-instance disposal flag before touching the v
 Stop owned work on `refresh:inactive` and page hiding, resume only while both visible and active, and never restart a disposed widget. Disconnect observers and document listeners; destroy charts, revert animations, and dispose geometries/materials/textures/renderers as appropriate. Do not stop a shared library engine or change global defaults to manage one widget.
 
 The shared AI widget reference and the legacy/unified widget prompts document these paths and practical widget conventions together. Local library additions do not change backend or device-control contracts.
+
+## Interactive room dashboard
+
+`isometric/isometric-room` adds a procedural Three.js room with configurable light, climate and power modules. Unlike the three unbound graphics demonstrations above, it is a dashboard container using real module events and explicit user commands. See [setup and verification](three-room-dashboard.md).

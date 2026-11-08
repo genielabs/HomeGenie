@@ -139,7 +139,28 @@
   "capture_commands_pause": "ਕਮਾਂਡਾਂ ਵਿਚਕਾਰ ਵਿਰਾਮ",
   "capture_pause_none": "ਕੋਈ ਨਹੀਂ",
   "capture_pause_asis": "ਜਿਵੇਂ ਹੈ",
+  "neon_district_road_speed_very_slow": "ਬਹੁਤ ਹੌਲੀ",
+  "neon_district_road_speed_slow": "ਹੌਲੀ",
+  "neon_district_road_speed_normal": "ਆਮ",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District ਡੈਸ਼ਬੋਰਡ ਲਈ ਵਿਕਲਪਿਕ ਸੈਟਿੰਗਾਂ।",
+      "ConfigureOptions.Title": "ਡੈਸ਼ਬੋਰਡ ਦਾ ਸਿਰਲੇਖ",
+      "ConfigureOptions.Subtitle": "ਡੈਸ਼ਬੋਰਡ ਦਾ ਉਪਸਿਰਲੇਖ",
+      "ConfigureOptions.RoadSpeed": "ਸੜਕ ਦੀ ਐਨੀਮੇਸ਼ਨ ਦੀ ਰਫ਼ਤਾਰ",
+      "ConfigureOptions.Message": "ਇਲਾਕੇ ਦਾ ਸੁਨੇਹਾ",
+      "ConfigureOptions.DisableAnimations": "ਐਨੀਮੇਸ਼ਨਾਂ ਬੰਦ ਕਰੋ"
+    },
+    "652": {
+      "Title": "ਆਇਸੋਮੈਟ੍ਰਿਕ ਕਮਰਾ",
+      "Description": "ਆਇਸੋਮੈਟ੍ਰਿਕ ਕਮਰਾ ਡੈਸ਼ਬੋਰਡ ਲਈ ਵਿਕਲਪਿਕ ਸੈਟਿੰਗਾਂ।",
+      "ConfigureOptions.Eyebrow": "ਸਿਰਲੇਖ ਦੇ ਉੱਪਰਲਾ ਟੈਕਸਟ",
+      "ConfigureOptions.Title": "ਡੈਸ਼ਬੋਰਡ ਦਾ ਸਿਰਲੇਖ",
+      "ConfigureOptions.Subtitle": "ਡੈਸ਼ਬੋਰਡ ਦਾ ਉਪਸਿਰਲੇਖ",
+      "ConfigureOptions.DisableAnimations": "ਐਨੀਮੇਸ਼ਨਾਂ ਬੰਦ ਕਰੋ"
+    },
+
     "6": {
       "Title": "ਗਰੁੱਪ ਦੀਆਂ ਬੱਤੀਆਂ ਚਾਲੂ ਕਰੋ",
       "Description": "ਦਿੱਤੇ ਗਰੁੱਪ ਦੀਆਂ ਸਾਰੀਆਂ ਬੱਤੀਆਂ ਚਾਲੂ ਕਰੋ।"

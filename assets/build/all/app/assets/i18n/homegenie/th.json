@@ -139,7 +139,28 @@
   "capture_commands_pause": "หยุดชั่วคราวระหว่างคำสั่ง",
   "capture_pause_none": "ไม่มี",
   "capture_pause_asis": "ตามที่เป็นอยู่",
+  "neon_district_road_speed_very_slow": "ช้ามาก",
+  "neon_district_road_speed_slow": "ช้า",
+  "neon_district_road_speed_normal": "ปกติ",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "การตั้งค่าเสริมสำหรับแดชบอร์ด Neon District",
+      "ConfigureOptions.Title": "ชื่อแดชบอร์ด",
+      "ConfigureOptions.Subtitle": "ชื่อรองของแดชบอร์ด",
+      "ConfigureOptions.RoadSpeed": "ความเร็วของภาพเคลื่อนไหวบนถนน",
+      "ConfigureOptions.Message": "ข้อความประจำย่าน",
+      "ConfigureOptions.DisableAnimations": "ปิดภาพเคลื่อนไหว"
+    },
+    "652": {
+      "Title": "ห้องไอโซเมตริก",
+      "Description": "การตั้งค่าเสริมสำหรับแดชบอร์ด ห้องไอโซเมตริก",
+      "ConfigureOptions.Eyebrow": "ข้อความเหนือชื่อเรื่อง",
+      "ConfigureOptions.Title": "ชื่อแดชบอร์ด",
+      "ConfigureOptions.Subtitle": "ชื่อรองของแดชบอร์ด",
+      "ConfigureOptions.DisableAnimations": "ปิดภาพเคลื่อนไหว"
+    },
+
     "6": {
       "Title": "เปิดไฟในกลุ่ม",
       "Description": "เปิดไฟทุกดวงในกลุ่มที่ระบุ"

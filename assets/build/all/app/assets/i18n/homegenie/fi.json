@@ -139,7 +139,28 @@
   "capture_commands_pause": "Tauko komentojen välillä",
   "capture_pause_none": "Ei mitään",
   "capture_pause_asis": "Kuten on",
+  "neon_district_road_speed_very_slow": "Hyvin hidas",
+  "neon_district_road_speed_slow": "Hidas",
+  "neon_district_road_speed_normal": "Normaali",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Ohjauspaneelin ”Neon District” valinnaiset asetukset.",
+      "ConfigureOptions.Title": "Ohjauspaneelin otsikko",
+      "ConfigureOptions.Subtitle": "Ohjauspaneelin alaotsikko",
+      "ConfigureOptions.RoadSpeed": "Tieanimaation nopeus",
+      "ConfigureOptions.Message": "Kaupunginosan viesti",
+      "ConfigureOptions.DisableAnimations": "Poista animaatiot käytöstä"
+    },
+    "652": {
+      "Title": "Isometrinen huone",
+      "Description": "Ohjauspaneelin ”Isometrinen huone” valinnaiset asetukset.",
+      "ConfigureOptions.Eyebrow": "Teksti otsikon yläpuolella",
+      "ConfigureOptions.Title": "Ohjauspaneelin otsikko",
+      "ConfigureOptions.Subtitle": "Ohjauspaneelin alaotsikko",
+      "ConfigureOptions.DisableAnimations": "Poista animaatiot käytöstä"
+    },
+
     "6": {
       "Title": "SYTYTÄ ryhmän valot",
       "Description": "Sytyttää kaikki määritetyn ryhmän valot."

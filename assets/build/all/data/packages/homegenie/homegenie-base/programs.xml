@@ -703,7 +703,7 @@ public static class ConversationTasks {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>chat-history-service</Id>
       <Version>1.0.15</Version>
       <Required>true</Required>
@@ -1083,7 +1083,7 @@ public class ClientPresetStore
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>client-configs</Id>
       <Version>1.0.7</Version>
       <Required>true</Required>
@@ -1454,7 +1454,7 @@ void SaveConfig(string filePath, YamlConfig config)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>daily-energy-report</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -1732,7 +1732,7 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -2378,7 +2378,7 @@ public class DownloadManager : IDisposable
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>download-manager</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -2421,7 +2421,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -2749,7 +2749,7 @@ string GetDbName()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>energy-use-statistics</Id>
       <Version>1.0.9</Version>
       <Required>false</Required>
@@ -2924,7 +2924,7 @@ void InsertData(LiteDatabase db, LoggerEvent data) {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -3079,7 +3079,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>file-manager</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -3298,7 +3298,7 @@ public static class HttpHelper {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>homegenie-panel-notifications</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -3367,7 +3367,7 @@ public string[] GetHourLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>hourly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -3829,7 +3829,7 @@ class MqttCommand: MigInterfaceCommand {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>mqtt-network</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
@@ -3851,9 +3851,9 @@ class MqttCommand: MigInterfaceCommand {
 Program.UseWidget( "homegenie/environment/weather" )
   // set input fields parameters
   // &lt;field_name&gt;, &lt;default_value&gt;, &lt;description&gt;
-  .AddOption("Location", "London, UK", "City name", "wunderground.city")
+  .AddOption("Location", "London, GB", "City name", "wunderground.city")
   .AddOption("Language", "EN", "Language", "text")
-  .AddOption("ApiKey", "?", "OpenWeatherMap API key (APPID)", "text")
+  .AddOption("ApiKey", "?", "OpenWeatherMap API key (APPID)", "password")
   .AddOption("UpdateInterval", "30", "Update interval (minutes)", "slider:15:1440:15:15");
 
 // initialize widget program parameters
@@ -3994,7 +3994,7 @@ Func&lt;dynamic, dynamic&gt; CollectWeatherData = (weatherData) =&gt; {
       snow_3h_mm = weatherData.snow["3h"].ToString();
   }
   data.snow_1h_mm = snow_1h_mm;
-  data.wind_speed = weatherData.wind.speed.ToString();
+  data.wind_speed = ((double)weatherData.wind.speed * 3.6).ToString();
   data.wind_direction = "";
   if (weatherData.wind.deg != null)
   	data.wind_direction = weatherData.wind.deg.ToString();
@@ -4088,11 +4088,11 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>openweathermap</Id>
-      <Version>1.0.3</Version>
+      <Version>1.0.6</Version>
       <Required>true</Required>
-      <Checksum>44F31757B7D56F8ABBA651989A14CFFB</Checksum>
+      <Checksum>A985BF302E32E9C95F0CBCD5FAADC1CC</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>34</Address>
@@ -4180,7 +4180,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -4272,7 +4272,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -4344,7 +4344,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -5020,7 +5020,7 @@ public static class FfmpegHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>video-input</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -6325,7 +6325,7 @@ public class ThumbnailHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>video-recorder</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -6406,7 +6406,7 @@ public string[] GetDayLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>weekly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -7088,7 +7088,7 @@ public static class ModuleSettingAction
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>ai-action-executor</Id>
       <Version>1.2.7</Version>
       <Required>true</Required>
@@ -7465,7 +7465,7 @@ public static class ProgramUpdateNotification {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.61</PackageVersion>
+      <PackageVersion>1.0.62</PackageVersion>
       <Id>notification-archive</Id>
       <Version>1.2.0</Version>
       <Required>true</Required>
@@ -9638,7 +9638,7 @@ Program deployment uses normal HomeGenie Setup/Main behavior. Respect the reques
 Save smaller widgets before their parent. Use only actual supplied module/property IDs, never invent them.
 For each save, name is a leaf slug; the host returns the full widget ID. Keep names stable when correcting your own widget.
 To embed saved widget x/y, import('/widgets/x/y.module.js') in its parent controller and use &lt;x-y&gt;&lt;/x-y&gt; in HTML.
-Examples: examples/composite-clock imports /widgets/demo/analog-clock.module.js and uses &lt;demo-analog-clock&gt;.
+For example, import /widgets/demo/analog-clock.module.js and use &lt;demo-analog-clock&gt;.
 Use only already saved dependencies. No fake paths or invented presets: current sizes are '',small,medium,big,dashboard.
 A dashboard container uses settings={defaultSize:'dashboard',sizeOptions:[]} as a literal class field. No settings menu overlays a dashboard container: omit the ordinary widget safe zone and its reserved top-right 48px padding/margin. Embedded ordinary widgets keep their own safe zone. Saving alone does not apply a dashboard. To create/apply it use apply_dashboard; claim application only after HOST RESULT confirms it. boundModule is optional for standalone panels.
 Each widget has its own Shadow DOM. Follow the included widget guide and required CSS imports.
@@ -10124,11 +10124,11 @@ Do not repeat a save already confirmed unless correcting it. Use host results, n
   <PackageInfo>
     <Repository>homegenie</Repository>
     <PackageId>homegenie-base</PackageId>
-    <PackageVersion>1.0.61</PackageVersion>
+    <PackageVersion>1.0.62</PackageVersion>
     <Id>ai-genie-service</Id>
-    <Version>0.27.0</Version>
+    <Version>0.27.1</Version>
     <Required>true</Required>
-    <Checksum>279CF672799FA1882CF5F419C748201F</Checksum>
+    <Checksum>FDB606CFC9CD54A8041BA5DFC1CD8D14</Checksum>
   </PackageInfo>
   <Domain>HomeAutomation.HomeGenie.Automation</Domain>
   <Address>583</Address>

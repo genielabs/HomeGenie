@@ -522,6 +522,7 @@
   "Scenarios": "Zochitika",
   "Security": "Chitetezo",
   "Weather and Environment": "Nyengo ndi Zachilengedwe",
+  "Themes": "Mitu",
   "Utilities": "Zipangizo zapakhomo",
   "Scenes": "Zochitika",
   "Virtual Modules": "Ma module Opanda Malire",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Dongosolo silinakhalepo",
   "new_programs_updates_available": "Zosintha zatsopano zilipo",
   "dashboard_layout": "Kapangidwe",
-  "dashboard_standard": "Wamba"
+  "dashboard_standard": "Wamba",
+  "ai_dashboard_open": "Tsegulani dashboard",
+  "ai_dashboard_select_preset": "Sankhani choyambirira chokonzeratu. Tsegulani “Zokonda” ndikusintha zokonzera musanatsegule dashboard iyi.",
+  "preset_conflict": "Izi zasintha pa seva. Zosintha zanu zikadalipo mumsakatuliwu.",
+  "preset_conflict_recovery": "Kuti mukweze kopi kuchokera pa seva ndikusintha kusintha kwanu komweko, sankhani “Zosintha”. Kuti musunge zosintha zanu, zisungeni ngati zokonzedweratu zatsopano.",
+  "preset_updated_elsewhere": "Zokonzeratu izi zidasinthidwa gawo lina.",
+  "preset_deleted_elsewhere": "Zokonzeratu izi zidachotsedwa gawo lina. Mutha kusunga kopi yanu yakumaloko ngati chosinthira chatsopano."
 }

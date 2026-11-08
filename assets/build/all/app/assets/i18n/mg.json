@@ -522,6 +522,7 @@
   "Scenarios": "sary",
   "Security": "ARO",
   "Weather and Environment": "Toetrandro & Tontolo Iainana",
+  "Themes": "Lohahevitra",
   "Utilities": "Asa vaventy",
   "Scenes": "sary",
   "Virtual Modules": "Môdioly Virtoaly",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Tsy manara-penitra ny rafitra",
   "new_programs_updates_available": "Misy fanavaozana fandaharana vaovao",
   "dashboard_layout": "Fandaminana",
-  "dashboard_standard": "Mahazatra"
+  "dashboard_standard": "Mahazatra",
+  "ai_dashboard_open": "Sokafy ny dashboard",
+  "ai_dashboard_select_preset": "Safidio ny preset tany am-boalohany. Sokafy ny “safidinao” ary havaozy ny preset alohan'ny hanokafana ity dashboard ity.",
+  "preset_conflict": "Niova io preset io tao amin'ny server. Mbola misy amin'ity mpitety tranonkala ity ny fanovana nataonao.",
+  "preset_conflict_recovery": "Raha te hampiditra ny kopia avy amin'ny mpizara ary hanolo ny fanovana eo an-toerana, safidio ny “vaovao farany”. Mba hitazonana ny fanovanao dia tehirizo ho preset vaovao.",
+  "preset_updated_elsewhere": "Ity preset ity dia novana tamin'ny fivoriana hafa.",
+  "preset_deleted_elsewhere": "Voafafa tao anatin'ny session hafa ity preset ity. Azonao atao ny mitahiry ny kopia eo an-toerana ho preset vaovao."
 }

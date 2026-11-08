@@ -522,6 +522,7 @@
   "Scenarios": "장면들",
   "Security": "보안",
   "Weather and Environment": "날씨 및 환경",
+  "Themes": "테마",
   "Utilities": "유용",
   "Scenes": "장면들",
   "Virtual Modules": "가상 모듈",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "시스템이 최신 상태가 아닙니다.",
   "new_programs_updates_available": "새로운 프로그램 업데이트 가능",
   "dashboard_layout": "레이아웃",
-  "dashboard_standard": "표준"
+  "dashboard_standard": "표준",
+  "ai_dashboard_open": "대시보드 열기",
+  "ai_dashboard_select_preset": "원본 사전 설정을 선택합니다. 이 대시보드를 열기 전에 “환경 설정”을 열고 사전 설정을 업데이트하세요.",
+  "preset_conflict": "이 사전 설정은 서버에서 변경되었습니다. 변경사항은 이 브라우저에서 계속 사용할 수 있습니다.",
+  "preset_conflict_recovery": "서버에서 복사본을 로드하고 로컬 변경 사항을 바꾸려면 “업데이트”를 선택합니다. 변경 사항을 유지하려면 새 사전 설정으로 저장합니다.",
+  "preset_updated_elsewhere": "이 사전 설정은 다른 세션에서 변경되었습니다.",
+  "preset_deleted_elsewhere": "이 사전 설정은 다른 세션에서 삭제되었습니다. 로컬 복사본을 새 사전 설정으로 저장할 수 있습니다."
 }

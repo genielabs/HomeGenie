@@ -1,0 +1,27 @@
+@import 'assets/styles/widget-ui.css';
+@import '/widgets/isometric/power-toggle.css';
+
+:host { display: block; width: 100%; height: 100%; min-width: 0; }
+* { box-sizing: border-box; }
+button { font: inherit; cursor: pointer; }
+button:disabled { cursor: default; opacity: .5; }
+button:focus-visible { outline: 2px solid var(--mint); outline-offset: 4px; }
+
+.matrix-card { container: led-card / inline-size; display: flex; flex-direction: column; height: 100%; padding: var(--light-card-padding, 14px); border: 1px solid var(--line, #ffffff12); border-radius: 18px; background: linear-gradient(135deg, #223a43, #182832); min-width: 0; color-scheme: dark; }
+.matrix-card.is-on { background: linear-gradient(145deg, #d6ad4520, #ffffff04); border-color: #e1bb533d; }
+.matrix-card.is-on .light-symbol, .matrix-card.is-on .light-state { color: #f3d382; }
+.matrix-card h2 { display: flex; gap: 8px; align-items: center; margin: 0; color: var(--mint, #9be5cf); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+.matrix-card h2 .material-symbols-outlined { font-size: 18px; }
+.matrix-card h2 > span:last-child { overflow-wrap: anywhere; }
+.matrix-source { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; margin: 9px 0; font-size: 12px; color: #c8dcdf; overflow-wrap: anywhere; }
+.matrix-source span:last-child { color: var(--mint, #9be5cf); }
+.matrix-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; margin-bottom: 10px; }
+.matrix-controls label { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; min-width: 0; font-size: 11px; color: var(--muted, #99afba); }
+.matrix-controls label[hidden] { display: none; }
+.matrix-controls select, .matrix-controls input { height: 36px; border: 1px solid #ffffff25; border-radius: 8px; background: #131f28; color: #edf5f3; }
+.matrix-controls select { max-width: 100%; padding-inline: 6px; }
+.matrix-controls input { width: 40px; padding: 3px; cursor: pointer; }
+.matrix-feedback { height: var(--light-feedback-height, 30px); flex-shrink: 0; overflow: auto; margin: var(--light-feedback-gap, 6px) 0 0; color: #ffd9a6; font-size: 11px; line-height: 1.4; }
+@container led-card (max-width: 170px) {
+  .matrix-effect-field { width: 100%; }
+}

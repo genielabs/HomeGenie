@@ -139,7 +139,28 @@
   "capture_commands_pause": "Pran yon poz ant kòmand yo",
   "capture_pause_none": "Okenn",
   "capture_pause_asis": "Jan li ye a",
+  "neon_district_road_speed_very_slow": "Trè dousman",
+  "neon_district_road_speed_slow": "Dousman",
+  "neon_district_road_speed_normal": "Nòmal",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Paramèt opsyonèl pou tablodbò Neon District.",
+      "ConfigureOptions.Title": "Tit tablodbò a",
+      "ConfigureOptions.Subtitle": "Soutit tablodbò a",
+      "ConfigureOptions.RoadSpeed": "Vitès animasyon wout la",
+      "ConfigureOptions.Message": "Mesaj katye a",
+      "ConfigureOptions.DisableAnimations": "Dezaktive animasyon yo"
+    },
+    "652": {
+      "Title": "Chanm izometrik",
+      "Description": "Paramèt opsyonèl pou tablodbò Chanm izometrik.",
+      "ConfigureOptions.Eyebrow": "Tèks anlè tit la",
+      "ConfigureOptions.Title": "Tit tablodbò a",
+      "ConfigureOptions.Subtitle": "Soutit tablodbò a",
+      "ConfigureOptions.DisableAnimations": "Dezaktive animasyon yo"
+    },
+
     "6": {
       "Title": "Limen limyè gwoup la",
       "Description": "Limen tout limyè nan gwoup yo bay la."

@@ -139,7 +139,28 @@
   "capture_commands_pause": "Jeda antar perintah",
   "capture_pause_none": "Tidak ada",
   "capture_pause_asis": "Dengan adanya",
+  "neon_district_road_speed_very_slow": "Sangat lambat",
+  "neon_district_road_speed_slow": "Lambat",
+  "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Pengaturan opsional untuk dasbor Neon District.",
+      "ConfigureOptions.Title": "Judul dasbor",
+      "ConfigureOptions.Subtitle": "Subjudul dasbor",
+      "ConfigureOptions.RoadSpeed": "Kecepatan animasi jalan",
+      "ConfigureOptions.Message": "Pesan distrik",
+      "ConfigureOptions.DisableAnimations": "Nonaktifkan animasi"
+    },
+    "652": {
+      "Title": "Ruang Isometrik",
+      "Description": "Pengaturan opsional untuk dasbor Ruang Isometrik.",
+      "ConfigureOptions.Eyebrow": "Teks di atas judul",
+      "ConfigureOptions.Title": "Judul dasbor",
+      "ConfigureOptions.Subtitle": "Subjudul dasbor",
+      "ConfigureOptions.DisableAnimations": "Nonaktifkan animasi"
+    },
+
     "6": {
       "Title": "Nyalakan lampu grup",
       "Description": "Nyalakan semua lampu dalam grup yang ditentukan."

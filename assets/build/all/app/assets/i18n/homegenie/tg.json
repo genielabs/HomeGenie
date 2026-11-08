@@ -139,7 +139,28 @@
   "capture_commands_pause": "Таваққуф байни фармонҳо",
   "capture_pause_none": "Ҳеҷ",
   "capture_pause_asis": "Чунон ки ҳаст",
+  "neon_district_road_speed_very_slow": "Хеле суст",
+  "neon_district_road_speed_slow": "Суст",
+  "neon_district_road_speed_normal": "Муқаррарӣ",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Танзимоти ихтиёрии лавҳаи идоракунии «Neon District».",
+      "ConfigureOptions.Title": "Унвони лавҳаи идоракунӣ",
+      "ConfigureOptions.Subtitle": "Зерунвони лавҳаи идоракунӣ",
+      "ConfigureOptions.RoadSpeed": "Суръати аниматсияи роҳ",
+      "ConfigureOptions.Message": "Паёми ноҳия",
+      "ConfigureOptions.DisableAnimations": "Аниматсияҳоро хомӯш кунед"
+    },
+    "652": {
+      "Title": "Ҳуҷраи изометрӣ",
+      "Description": "Танзимоти ихтиёрии лавҳаи идоракунии «Ҳуҷраи изометрӣ».",
+      "ConfigureOptions.Eyebrow": "Матн дар болои сарлавҳа",
+      "ConfigureOptions.Title": "Унвони лавҳаи идоракунӣ",
+      "ConfigureOptions.Subtitle": "Зерунвони лавҳаи идоракунӣ",
+      "ConfigureOptions.DisableAnimations": "Аниматсияҳоро хомӯш кунед"
+    },
+
     "6": {
       "Title": "Фурӯзон кардани чароғҳои гурӯҳ",
       "Description": "Ҳамаи чароғҳои гурӯҳи муайяншударо фурӯзон кунед."

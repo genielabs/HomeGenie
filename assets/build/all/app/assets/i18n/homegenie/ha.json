@@ -139,7 +139,28 @@
   "capture_commands_pause": "Dakata tsakanin umarni",
   "capture_pause_none": "Babu",
   "capture_pause_asis": "Kamar yadda yake",
+  "neon_district_road_speed_very_slow": "A hankali sosai",
+  "neon_district_road_speed_slow": "A hankali",
+  "neon_district_road_speed_normal": "Na al’ada",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Saitunan zaɓi don allon sarrafa Neon District.",
+      "ConfigureOptions.Title": "Taken allon sarrafawa",
+      "ConfigureOptions.Subtitle": "Ƙaramin taken allon sarrafawa",
+      "ConfigureOptions.RoadSpeed": "Saurin motsin hanyar",
+      "ConfigureOptions.Message": "Saƙon unguwa",
+      "ConfigureOptions.DisableAnimations": "Kashe motsin hotuna"
+    },
+    "652": {
+      "Title": "Ɗaki mai hangen isometric",
+      "Description": "Saitunan zaɓi don allon sarrafa Ɗaki mai hangen isometric.",
+      "ConfigureOptions.Eyebrow": "Rubutu a saman taken",
+      "ConfigureOptions.Title": "Taken allon sarrafawa",
+      "ConfigureOptions.Subtitle": "Ƙaramin taken allon sarrafawa",
+      "ConfigureOptions.DisableAnimations": "Kashe motsin hotuna"
+    },
+
     "6": {
       "Title": "Kunna fitilun rukuni",
       "Description": "Kunna duk fitilun da ke cikin rukunin da aka bayar."

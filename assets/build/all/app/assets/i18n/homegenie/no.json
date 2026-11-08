@@ -139,7 +139,28 @@
   "capture_commands_pause": "Pause mellom kommandoer",
   "capture_pause_none": "Ingen",
   "capture_pause_asis": "Som det er",
+  "neon_district_road_speed_very_slow": "Svært sakte",
+  "neon_district_road_speed_slow": "Sakte",
+  "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Valgfrie innstillinger for dashbordet «Neon District».",
+      "ConfigureOptions.Title": "Dashbordtittel",
+      "ConfigureOptions.Subtitle": "Undertittel på dashbordet",
+      "ConfigureOptions.RoadSpeed": "Hastighet på veianimasjonen",
+      "ConfigureOptions.Message": "Melding for bydelen",
+      "ConfigureOptions.DisableAnimations": "Deaktiver animasjoner"
+    },
+    "652": {
+      "Title": "Isometrisk rom",
+      "Description": "Valgfrie innstillinger for dashbordet «Isometrisk rom».",
+      "ConfigureOptions.Eyebrow": "Tekst over tittelen",
+      "ConfigureOptions.Title": "Dashbordtittel",
+      "ConfigureOptions.Subtitle": "Undertittel på dashbordet",
+      "ConfigureOptions.DisableAnimations": "Deaktiver animasjoner"
+    },
+
     "6": {
       "Title": "Slå på gruppens lys",
       "Description": "Slå på alle lysene i den angitte gruppen."

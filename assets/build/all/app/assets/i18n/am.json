@@ -522,6 +522,7 @@
   "Scenarios": "ትዕይንቶች",
   "Security": "ደህንነት",
   "Weather and Environment": "የአየር ሁኔታ እና አካባቢ",
+  "Themes": "ገጽታዎች",
   "Utilities": "መገልገያዎች",
   "Scenes": "ትዕይንቶች",
   "Virtual Modules": "ምናባዊ ሞጁሎች",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "ስርዓቱ የተዘመነ አይደለም።",
   "new_programs_updates_available": "አዲስ የፕሮግራም ማሻሻያ አለ።",
   "dashboard_layout": "አቀማመጥ",
-  "dashboard_standard": "መደበኛ"
+  "dashboard_standard": "መደበኛ",
+  "ai_dashboard_open": "ዳሽቦርድን ክፈት",
+  "ai_dashboard_select_preset": "የመጀመሪያውን ቅድመ ዝግጅት ይምረጡ። ይህንን ዳሽቦርድ ከመክፈትዎ በፊት “ምርጫዎች” ይክፈቱ እና ቅድመ-ቅምጡን ያዘምኑ።",
+  "preset_conflict": "ይህ ቅድመ ዝግጅት በአገልጋዩ ላይ ተቀይሯል። የእርስዎ ለውጦች አሁንም በዚህ አሳሽ ውስጥ ይገኛሉ።",
+  "preset_conflict_recovery": "ቅጂውን ከአገልጋዩ ላይ ለመጫን እና የአካባቢ ለውጦችን ለመተካት “አዘምን” የሚለውን ይምረጡ። ለውጦችዎን ለማቆየት እንደ አዲስ ቅድመ-ቅምጥ ያስቀምጡ።",
+  "preset_updated_elsewhere": "ይህ ቅድመ ዝግጅት በሌላ ክፍለ ጊዜ ውስጥ ተቀይሯል።",
+  "preset_deleted_elsewhere": "ይህ ቅድመ ዝግጅት በሌላ ክፍለ ጊዜ ተሰርዟል። የአካባቢዎን ቅጂ እንደ አዲስ ቅድመ ዝግጅት አድርገው ማስቀመጥ ይችላሉ።"
 }

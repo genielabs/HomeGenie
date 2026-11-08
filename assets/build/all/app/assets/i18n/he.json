@@ -522,6 +522,7 @@
   "Scenarios": "סצנות",
   "Security": "בִּטָחוֹן",
   "Weather and Environment": "מזג אוויר וסביבה",
+  "Themes": "ערכות נושא",
   "Utilities": "שירותים",
   "Scenes": "סצנות",
   "Virtual Modules": "מודולים וירטואליים",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "המערכת לא מעודכנת",
   "new_programs_updates_available": "עדכוני תוכנית חדשים זמינים",
   "dashboard_layout": "פריסה",
-  "dashboard_standard": "רגילה"
+  "dashboard_standard": "רגילה",
+  "ai_dashboard_open": "פתח את לוח המחוונים",
+  "ai_dashboard_select_preset": "בחר את הקביעה המקורית מראש. פתח את “העדפות” ועדכן את ההגדרה מראש לפני פתיחת לוח המחוונים הזה.",
+  "preset_conflict": "הגדרה מראש זו השתנתה בשרת. השינויים שלך עדיין זמינים בדפדפן זה.",
+  "preset_conflict_recovery": "כדי לטעון את העותק מהשרת ולהחליף את השינויים המקומיים שלך, בחר “לְעַדְכֵּן”. כדי לשמור את השינויים שלך, שמור אותם כהגדרה חדשה מראש.",
+  "preset_updated_elsewhere": "הגדרה מראש זו שונתה בהפעלה אחרת.",
+  "preset_deleted_elsewhere": "הגדרה מראש זו נמחקה בהפעלה אחרת. אתה יכול לשמור את העותק המקומי שלך כהגדרה חדשה מראש."
 }

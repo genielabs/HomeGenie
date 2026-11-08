@@ -139,7 +139,28 @@
   "capture_commands_pause": "Aginduen artean pausatu",
   "capture_pause_none": "Bat ere ez",
   "capture_pause_asis": "Dagoen bezala",
+  "neon_district_road_speed_very_slow": "Oso motela",
+  "neon_district_road_speed_slow": "Motela",
+  "neon_district_road_speed_normal": "Normala",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "«Neon District» aginte-panelaren aukerako ezarpenak.",
+      "ConfigureOptions.Title": "Aginte-panelaren izenburua",
+      "ConfigureOptions.Subtitle": "Aginte-panelaren azpititulua",
+      "ConfigureOptions.RoadSpeed": "Errepideko animazioaren abiadura",
+      "ConfigureOptions.Message": "Auzoko mezua",
+      "ConfigureOptions.DisableAnimations": "Desgaitu animazioak"
+    },
+    "652": {
+      "Title": "Gela isometrikoa",
+      "Description": "«Gela isometrikoa» aginte-panelaren aukerako ezarpenak.",
+      "ConfigureOptions.Eyebrow": "Izenburuaren gaineko testua",
+      "ConfigureOptions.Title": "Aginte-panelaren izenburua",
+      "ConfigureOptions.Subtitle": "Aginte-panelaren azpititulua",
+      "ConfigureOptions.DisableAnimations": "Desgaitu animazioak"
+    },
+
     "6": {
       "Title": "PIZTU taldeko argiak",
       "Description": "Piztu adierazitako taldeko argi guztiak."

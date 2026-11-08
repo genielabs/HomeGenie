@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.Json;
 using Esprima;
 using Esprima.Ast;
 
@@ -10,6 +12,28 @@ namespace HomeGenie.Service;
 /// <summary>Reads declarative widget capabilities without executing controller code.</summary>
 public static class WidgetCatalog
 {
+    internal const int TranslationCatalogMaxBytes = 512 * 1024;
+
+    // MIG currently serves JSON files as HTML. Preserve literal text while preventing
+    // a directly opened catalog from being interpreted as HTML markup.
+    internal static string EscapeTranslationCatalogMarkup(string source) => source?.Replace("<", "\\u003c");
+
+    internal static bool IsTranslationCatalog(string source)
+    {
+        if (string.IsNullOrWhiteSpace(source) || Encoding.UTF8.GetByteCount(source) > TranslationCatalogMaxBytes)
+            return false;
+        try
+        {
+            using var document = JsonDocument.Parse(source);
+            return document.RootElement.ValueKind == JsonValueKind.Object &&
+                document.RootElement.EnumerateObject().All(locale =>
+                    !string.IsNullOrWhiteSpace(locale.Name) && locale.Value.ValueKind == JsonValueKind.Object &&
+                    locale.Value.EnumerateObject().All(message =>
+                        !string.IsNullOrWhiteSpace(message.Name) && message.Value.ValueKind == JsonValueKind.String));
+        }
+        catch (JsonException) { return false; }
+    }
+
     public static bool IsDashboard(string source)
     {
         try

@@ -139,7 +139,28 @@
   "capture_commands_pause": "Командуудын хооронд түр зогсоох",
   "capture_pause_none": "Байхгүй",
   "capture_pause_asis": "Байгаагаараа",
+  "neon_district_road_speed_very_slow": "Маш удаан",
+  "neon_district_road_speed_slow": "Удаан",
+  "neon_district_road_speed_normal": "Хэвийн",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "«Neon District» хяналтын самбарын нэмэлт тохиргоо.",
+      "ConfigureOptions.Title": "Хяналтын самбарын гарчиг",
+      "ConfigureOptions.Subtitle": "Хяналтын самбарын дэд гарчиг",
+      "ConfigureOptions.RoadSpeed": "Замын хөдөлгөөнт дүрсний хурд",
+      "ConfigureOptions.Message": "Дүүргийн зурвас",
+      "ConfigureOptions.DisableAnimations": "Хөдөлгөөнт дүрсийг унтраах"
+    },
+    "652": {
+      "Title": "Изометр өрөө",
+      "Description": "«Изометр өрөө» хяналтын самбарын нэмэлт тохиргоо.",
+      "ConfigureOptions.Eyebrow": "Гарчгийн дээрх бичвэр",
+      "ConfigureOptions.Title": "Хяналтын самбарын гарчиг",
+      "ConfigureOptions.Subtitle": "Хяналтын самбарын дэд гарчиг",
+      "ConfigureOptions.DisableAnimations": "Хөдөлгөөнт дүрсийг унтраах"
+    },
+
     "6": {
       "Title": "Бүлгийн гэрлүүдийг асаах",
       "Description": "Заасан бүлгийн бүх гэрлийг асаана."

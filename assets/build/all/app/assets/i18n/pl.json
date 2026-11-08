@@ -522,6 +522,7 @@
   "Scenarios": "Sceny",
   "Security": "Bezpieczeństwo",
   "Weather and Environment": "Pogoda i środowisko",
+  "Themes": "Motywy",
   "Utilities": "Usługi komunalne",
   "Scenes": "Sceny",
   "Virtual Modules": "Moduły wirtualne",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "System nie jest aktualny",
   "new_programs_updates_available": "Dostępne są nowe aktualizacje programu",
   "dashboard_layout": "Układ",
-  "dashboard_standard": "Standardowy"
+  "dashboard_standard": "Standardowy",
+  "ai_dashboard_open": "Otwórz pulpit nawigacyjny",
+  "ai_dashboard_select_preset": "Wybierz oryginalne ustawienie wstępne. Otwórz “Preferencje” i zaktualizuj ustawienie wstępne przed otwarciem tego pulpitu nawigacyjnego.",
+  "preset_conflict": "To ustawienie wstępne zostało zmienione na serwerze. Twoje zmiany są nadal dostępne w tej przeglądarce.",
+  "preset_conflict_recovery": "Aby załadować kopię z serwera i zastąpić lokalne zmiany, wybierz “Aktualizacja”. Aby zachować zmiany, zapisz je jako nowe ustawienie wstępne.",
+  "preset_updated_elsewhere": "To ustawienie wstępne zostało zmienione w innej sesji.",
+  "preset_deleted_elsewhere": "To ustawienie wstępne zostało usunięte w innej sesji. Możesz zapisać swoją lokalną kopię jako nowe ustawienie wstępne."
 }

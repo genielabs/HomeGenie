@@ -139,7 +139,28 @@
   "capture_commands_pause": "Pausa entre comandos",
   "capture_pause_none": "Ningún",
   "capture_pause_asis": "Tal como está",
+  "neon_district_road_speed_very_slow": "Moi lenta",
+  "neon_district_road_speed_slow": "Lenta",
+  "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Configuración opcional do panel «Neon District».",
+      "ConfigureOptions.Title": "Título do panel",
+      "ConfigureOptions.Subtitle": "Subtítulo do panel",
+      "ConfigureOptions.RoadSpeed": "Velocidade da animación da estrada",
+      "ConfigureOptions.Message": "Mensaxe do distrito",
+      "ConfigureOptions.DisableAnimations": "Desactivar as animacións"
+    },
+    "652": {
+      "Title": "Cuarto isométrico",
+      "Description": "Configuración opcional do panel «Cuarto isométrico».",
+      "ConfigureOptions.Eyebrow": "Texto enriba do título",
+      "ConfigureOptions.Title": "Título do panel",
+      "ConfigureOptions.Subtitle": "Subtítulo do panel",
+      "ConfigureOptions.DisableAnimations": "Desactivar as animacións"
+    },
+
     "6": {
       "Title": "Acender as luces do grupo",
       "Description": "Acender todas as luces do grupo indicado."

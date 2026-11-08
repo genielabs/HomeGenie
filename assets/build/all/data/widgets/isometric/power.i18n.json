@@ -1,0 +1,26 @@
+{
+  "en": {
+    "energy_heading": "Energy",
+    "no_meter": "No meter selected",
+    "power_label": "Instantaneous power",
+    "trace_label": "Recent readings",
+    "trace_empty": "Waiting for readings",
+    "bind_power": "Power"
+  },
+  "it": {
+    "energy_heading": "Energia",
+    "no_meter": "Nessun misuratore associato",
+    "power_label": "Potenza istantanea",
+    "trace_label": "Letture recenti",
+    "trace_empty": "In attesa di letture",
+    "bind_power": "Potenza"
+  },
+  "fr": {
+    "energy_heading": "Énergie",
+    "no_meter": "Aucun compteur associé",
+    "power_label": "Puissance instantanée",
+    "trace_label": "Relevés récents",
+    "trace_empty": "En attente de relevés",
+    "bind_power": "Puissance"
+  }
+}

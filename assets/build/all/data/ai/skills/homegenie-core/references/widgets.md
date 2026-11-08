@@ -92,7 +92,7 @@ class MyWidget extends ControllerInstance {
     *   **🚨 CRITICAL PAYLOAD PARSING:** The subscription receives an object structured as `{ code: number, response: any }`. **You MUST use `data.response` to access the actual JSON/array returned by the backend API.** Do not assume the raw array/object is returned directly at the root.
     *   *Correct Usage:* `this.apiCall('Custom/MyApi').subscribe({ next: (data) => { const payload = data.response; /* process payload */ } });`
 *   **`this.configure()`**: *FRONTEND ONLY*. Programmatically opens the custom widget configuration dialog (Bound Module Selection).
-*   **`this.showSettings()`**: *FRONTEND ONLY*. Programmatically opens the module settings dialog.
+*   **`this.showSettings(moduleId?)`** opens the module settings dialog in YoT. Pass a resolved module ID to open that module's options.
 *   **`this.translate(key)`**: Returns an Observable from `translate.get('WIDGETS.' + key)`. Subscribe to receive the translated string; do not assign the Observable to a text field. Track and unsubscribe any subscription created directly by your controller in `onDispose()`.
 *   **`this.init, this.create, this.dispose, this.update, this.log`**: Are RESERVED methods NEVER OVERWRITE them.
 
@@ -127,7 +127,8 @@ Directives operate on the context exposed by `this.declare()`.
 *   **Field Values:** These can vary in type. You **must** always use `utils.format.fieldValue(f)` to obtain a formatted string that respects the user's unit settings and display preferences.
 *   **Colors (HSB):** `Status.ColorHsb` format is `H,S,B,[Duration]`.
     *   **H, S, B** are floats `0.0 - 1.0`. Check `parts.length >= 3`.
-    *   **STATE:** Check `Status.Level` for ON/OFF.
+    *   **LIGHT STATE (widget JavaScript):** `this.boundModule`, `this.getBoundModule(name)` and `this.getModule(id)` resolve YoT `Module` objects. Read `module?.field('Status.Level')?.decimalValue`: zero is off, a finite positive level is on, and a missing or invalid level is unknown. Render the initial reading and subscribe to `Status.Level` changes.
+    *   **API boundary:** `IsOn` and `IsOff` are C# automation helpers. In widget JavaScript, use `isOn` or `isOff` only as state derived by your view; the YoT module exposes the field through `module.field(...)`.
 *   **Icons:** Use standard *Google's Material Symbols & Icons* (e.g., `lightbulb`, `light_off`). No `_fill` suffix.
 
 
@@ -186,7 +187,7 @@ Prefer HTML/CSS/SVG for simple graphics; Chart.js for ordinary data charts; Anim
 - Respect `prefers-reduced-motion`: start decorative scenes static or paused, while allowing deliberate user activation. All recurring work must follow section 2.12; asynchronous loading must never restart a disposed widget.
 - zuix allocates its main active-refresh loop when the view contains an active `@` directive or a refresh script. If an otherwise static HTML view relies on `refresh:active`/`refresh:inactive`, add a neutral `@set="void 0"` directive (optionally `@delay="500"`) to its visible root container. `#` fields and `(click)` bindings alone do not enable that loop. Do not add `@active`, which would bypass normal visibility suspension.
 
-Compact source examples are available as `examples/chart-pulse`, `examples/anime-orbit`, and `examples/three-knot` under the widgets directory. They are unbound, use sample/procedural content only and do not send device commands.
+The bundled `basic/energy-today` and `isometric/isometric-room` widgets show local Chart.js and Three.js imports.
 
 ### Fluid width in chat previews
 
@@ -332,6 +333,36 @@ These are syntax examples: use actual saved component tags, confirmed module IDs
 The parent layout assigns each embedded widget its dimensions; `defaultSize` does not automatically size a raw custom tag. Use compact, responsive slots unless full-height cards are explicitly requested. Do not stretch every card across the remaining dashboard height by default. Child widgets that use height:100% need a slot with a defined height.
 
 
+### Optional dashboard automation
+
+Use a HomeGenie automation program when the requested dashboard needs background work, shared options, or periodic data such as news from an external service. Keep fetches in the program with bounded timeouts and a sensible refresh interval. Declare editable options with `Program.AddOption` inside `Program.Setup`. Read them in the program and publish only display-safe values and status through `Program.Emit`, including initial values and later changes. Keep credentials in the program. The widget renders current fields and subscribes to module events, showing loading, stale or unavailable data when appropriate.
+
+For a reusable dashboard, declare a named `dashboardProgram` role so the user can select a compatible program with the Bound Modules button in the dashboard toolbar. In the program's Setup, create a stable marker property for that dashboard's data contract. For example, put this line inside `Program.Setup(() => { ... });`:
+
+```csharp
+Program.Parameter("Dashboard.Theme.Cyberpunk").Value = "";
+```
+
+In the dashboard controller, filter on the same property name:
+
+```javascript
+settings = {
+  defaultSize: 'dashboard',
+  sizeOptions: [],
+  boundModules: {
+    dashboardProgram: {
+      label: 'Dashboard program',
+      typeFilter: 'program',
+      fieldFilter: 'Dashboard.Theme.Cyberpunk'
+    }
+  }
+};
+```
+
+`fieldFilter` checks for the field name. An empty value is sufficient, and expressions such as `Dashboard.Theme=cyberpunk` are unsupported. Use the same marker in Setup and in the selector, and use distinct markers for dashboards with incompatible data contracts. Resolve the selection with `this.getBoundModule('dashboardProgram')`. The toolbar opens options for the program resolved through this role. To suggest a program, set defaultModule on the role to a confirmed module ID. The default must be online and match the role filters. Set defaultField to require an extra field on the default only. The manual selector still uses the normal role filters. For example, bundled themes require Simulator.Meter.Watts before automatically binding a Hue address used by the demo. The bundled theme programs expose Disable animations through Dashboard.AnimationsDisabled. Read its initial value, subscribe to changes, and honor reduced motion and visibility. A saved selection or explicit disconnection takes precedence. Show a useful state while the role is unbound.
+
+For a dashboard dedicated to a program created by an objective, save the program first and use `this.getModule('HomeAutomation.HomeGenie.Automation:<PID>')` with the real PID from the host receipt. Keep the same association during revisions. When the resolved program has options, a labelled gear button in the dashboard can call `this.showSettings(program.id)` on user click. Omit or disable the button when the program is unavailable. This opens the program's options, which are shared by every dashboard that uses that program. Use a dashboard-local gear for fixed modules that have no dashboardProgram role.
+
 ### Configurable named module bindings
 
 For reusable multi-device widgets or dashboards, declare stable roles instead of hardcoding device IDs:
@@ -368,9 +399,10 @@ Render current values immediately, then use `this.subscribe(field, handler)` for
 const light = this.getModule('HomeAutomation.PhilipsHue:2');
 const render = () => {
   const level = light?.field('Status.Level')?.decimalValue;
-  this.model().available = Number.isFinite(level);
-  this.model().level = Number.isFinite(level) ? level : null;
-  this.model().isOn = Number.isFinite(level) && level > 0;
+  const available = Number.isFinite(level) && level >= 0;
+  this.model().available = available;
+  this.model().level = available ? level : null;
+  this.model().isOn = available && level > 0;
 };
 render();
 if (light) {

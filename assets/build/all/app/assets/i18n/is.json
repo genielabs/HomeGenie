@@ -522,6 +522,7 @@
   "Scenarios": "Senur",
   "Security": "Öryggi",
   "Weather and Environment": "Veður og umhverfi",
+  "Themes": "Þemu",
   "Utilities": "Veitur",
   "Scenes": "Senur",
   "Virtual Modules": "Sýndareiningar",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Kerfið er ekki uppfært",
   "new_programs_updates_available": "Nýjar dagskráruppfærslur í boði",
   "dashboard_layout": "Skipulag",
-  "dashboard_standard": "Hefðbundið"
+  "dashboard_standard": "Hefðbundið",
+  "ai_dashboard_open": "Opna mælaborð",
+  "ai_dashboard_select_preset": "Veldu upprunalegu forstillinguna. Opnaðu “Kjörstillingar” og uppfærðu forstillinguna áður en þú opnar þetta mælaborð.",
+  "preset_conflict": "Þessari forstillingu breyttist á þjóninum. Breytingarnar þínar eru enn tiltækar í þessum vafra.",
+  "preset_conflict_recovery": "Til að hlaða afritinu af þjóninum og skipta um staðbundnar breytingar þínar skaltu velja “Uppfæra”. Til að halda breytingunum þínum skaltu vista þær sem nýja forstillingu.",
+  "preset_updated_elsewhere": "Þessari forstillingu var breytt í annarri lotu.",
+  "preset_deleted_elsewhere": "Þessari forstillingu var eytt í annarri lotu. Þú getur vistað staðbundið afrit sem nýja forstillingu."
 }

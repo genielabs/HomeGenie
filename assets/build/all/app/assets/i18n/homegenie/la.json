@@ -139,7 +139,28 @@
   "capture_commands_pause": "Inter mandata pausa",
   "capture_pause_none": "Nullus",
   "capture_pause_asis": "Ut est",
+  "neon_district_road_speed_very_slow": "Valde lenta",
+  "neon_district_road_speed_slow": "Lenta",
+  "neon_district_road_speed_normal": "Usitata",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Optiones tabulae moderatoriae «Neon District».",
+      "ConfigureOptions.Title": "Titulus tabulae moderatoriae",
+      "ConfigureOptions.Subtitle": "Subtitulus tabulae moderatoriae",
+      "ConfigureOptions.RoadSpeed": "Celeritas motus viae",
+      "ConfigureOptions.Message": "Nuntius regionis",
+      "ConfigureOptions.DisableAnimations": "Motus imaginum inhibe"
+    },
+    "652": {
+      "Title": "Cubiculum isometricum",
+      "Description": "Optiones tabulae moderatoriae «Cubiculum isometricum».",
+      "ConfigureOptions.Eyebrow": "Textus supra titulum",
+      "ConfigureOptions.Title": "Titulus tabulae moderatoriae",
+      "ConfigureOptions.Subtitle": "Subtitulus tabulae moderatoriae",
+      "ConfigureOptions.DisableAnimations": "Motus imaginum inhibe"
+    },
+
     "6": {
       "Title": "Lumina gregis accende",
       "Description": "Omnia lumina in grege indicato accende."

@@ -139,7 +139,28 @@
   "capture_commands_pause": "Паўза паміж камандамі",
   "capture_pause_none": "Няма",
   "capture_pause_asis": "Як ёсць",
+  "neon_district_road_speed_very_slow": "Вельмі павольна",
+  "neon_district_road_speed_slow": "Павольна",
+  "neon_district_road_speed_normal": "Звычайна",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Дадатковыя налады панэлі кіравання «Neon District».",
+      "ConfigureOptions.Title": "Загаловак панэлі кіравання",
+      "ConfigureOptions.Subtitle": "Падзагаловак панэлі кіравання",
+      "ConfigureOptions.RoadSpeed": "Хуткасць анімацыі дарогі",
+      "ConfigureOptions.Message": "Паведамленне раёна",
+      "ConfigureOptions.DisableAnimations": "Адключыць анімацыю"
+    },
+    "652": {
+      "Title": "Ізаметрычны пакой",
+      "Description": "Дадатковыя налады панэлі кіравання «Ізаметрычны пакой».",
+      "ConfigureOptions.Eyebrow": "Тэкст над загалоўкам",
+      "ConfigureOptions.Title": "Загаловак панэлі кіравання",
+      "ConfigureOptions.Subtitle": "Падзагаловак панэлі кіравання",
+      "ConfigureOptions.DisableAnimations": "Адключыць анімацыю"
+    },
+
     "6": {
       "Title": "УКЛЮЧЫЦЬ святло ў групе",
       "Description": "Уключыць усе свяцільні ў зададзенай групе."

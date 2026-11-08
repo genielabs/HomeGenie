@@ -139,7 +139,28 @@
   "capture_commands_pause": "Pauze starp komandām",
   "capture_pause_none": "Neviens",
   "capture_pause_asis": "Kā ir",
+  "neon_district_road_speed_very_slow": "Ļoti lēns",
+  "neon_district_road_speed_slow": "Lēns",
+  "neon_district_road_speed_normal": "Parasts",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Informācijas paneļa “Neon District” papildu iestatījumi.",
+      "ConfigureOptions.Title": "Informācijas paneļa virsraksts",
+      "ConfigureOptions.Subtitle": "Informācijas paneļa apakšvirsraksts",
+      "ConfigureOptions.RoadSpeed": "Ceļa animācijas ātrums",
+      "ConfigureOptions.Message": "Rajona ziņojums",
+      "ConfigureOptions.DisableAnimations": "Atspējot animācijas"
+    },
+    "652": {
+      "Title": "Izometriskā istaba",
+      "Description": "Informācijas paneļa “Izometriskā istaba” papildu iestatījumi.",
+      "ConfigureOptions.Eyebrow": "Teksts virs virsraksta",
+      "ConfigureOptions.Title": "Informācijas paneļa virsraksts",
+      "ConfigureOptions.Subtitle": "Informācijas paneļa apakšvirsraksts",
+      "ConfigureOptions.DisableAnimations": "Atspējot animācijas"
+    },
+
     "6": {
       "Title": "Ieslēgt grupas apgaismojumu",
       "Description": "Ieslēgt visas norādītās grupas gaismas."

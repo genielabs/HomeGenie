@@ -139,7 +139,28 @@
   "capture_commands_pause": "ಆಜ್ಞೆಗಳ ನಡುವೆ ವಿರಾಮಗೊಳಿಸಿ",
   "capture_pause_none": "ಯಾವುದೂ ಇಲ್ಲ",
   "capture_pause_asis": "ಇದ್ದ ಹಾಗೆ",
+  "neon_district_road_speed_very_slow": "ಅತಿ ನಿಧಾನ",
+  "neon_district_road_speed_slow": "ನಿಧಾನ",
+  "neon_district_road_speed_normal": "ಸಾಮಾನ್ಯ",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ಗಾಗಿ ಐಚ್ಛಿಕ ಸೆಟ್ಟಿಂಗ್‌ಗಳು.",
+      "ConfigureOptions.Title": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ನ ಶೀರ್ಷಿಕೆ",
+      "ConfigureOptions.Subtitle": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ನ ಉಪಶೀರ್ಷಿಕೆ",
+      "ConfigureOptions.RoadSpeed": "ರಸ್ತೆಯ ಅನಿಮೇಶನ್ ವೇಗ",
+      "ConfigureOptions.Message": "ಪ್ರದೇಶದ ಸಂದೇಶ",
+      "ConfigureOptions.DisableAnimations": "ಅನಿಮೇಶನ್‌ಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ"
+    },
+    "652": {
+      "Title": "ಐಸೊಮೆಟ್ರಿಕ್ ಕೊಠಡಿ",
+      "Description": "ಐಸೊಮೆಟ್ರಿಕ್ ಕೊಠಡಿ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ಗಾಗಿ ಐಚ್ಛಿಕ ಸೆಟ್ಟಿಂಗ್‌ಗಳು.",
+      "ConfigureOptions.Eyebrow": "ಶೀರ್ಷಿಕೆಯ ಮೇಲಿನ ಪಠ್ಯ",
+      "ConfigureOptions.Title": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ನ ಶೀರ್ಷಿಕೆ",
+      "ConfigureOptions.Subtitle": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ನ ಉಪಶೀರ್ಷಿಕೆ",
+      "ConfigureOptions.DisableAnimations": "ಅನಿಮೇಶನ್‌ಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ"
+    },
+
     "6": {
       "Title": "ಗುಂಪಿನ ದೀಪಗಳನ್ನು ಆನ್ ಮಾಡಿ",
       "Description": "ನೀಡಿದ ಗುಂಪಿನ ಎಲ್ಲಾ ದೀಪಗಳನ್ನು ಆನ್ ಮಾಡಿ."

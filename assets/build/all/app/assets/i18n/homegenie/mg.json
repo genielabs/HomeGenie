@@ -139,7 +139,28 @@
   "capture_commands_pause": "Miato eo anelanelan'ny baiko",
   "capture_pause_none": "tsy misy",
   "capture_pause_asis": "Toy ny misy",
+  "neon_district_road_speed_very_slow": "Tena miadana",
+  "neon_district_road_speed_slow": "Miadana",
+  "neon_district_road_speed_normal": "Mahazatra",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Fikirana azo isafidianana ho an’ny tabilao Neon District.",
+      "ConfigureOptions.Title": "Lohatenin’ny tabilao",
+      "ConfigureOptions.Subtitle": "Zana-dohatenin’ny tabilao",
+      "ConfigureOptions.RoadSpeed": "Hafainganam-pandehan’ny fihetsiky ny lalana",
+      "ConfigureOptions.Message": "Hafatra ho an’ny faritra",
+      "ConfigureOptions.DisableAnimations": "Atsaharo ny sary mihetsika"
+    },
+    "652": {
+      "Title": "Efitra izometrika",
+      "Description": "Fikirana azo isafidianana ho an’ny tabilao Efitra izometrika.",
+      "ConfigureOptions.Eyebrow": "Lahatsoratra eo ambonin’ny lohateny",
+      "ConfigureOptions.Title": "Lohatenin’ny tabilao",
+      "ConfigureOptions.Subtitle": "Zana-dohatenin’ny tabilao",
+      "ConfigureOptions.DisableAnimations": "Atsaharo ny sary mihetsika"
+    },
+
     "6": {
       "Title": "Alefaso ny jiron’ny vondrona",
       "Description": "Alefaso ny jiro rehetra ao amin’ny vondrona voatondro."

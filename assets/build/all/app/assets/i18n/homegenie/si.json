@@ -139,7 +139,28 @@
   "capture_commands_pause": "විධාන අතර විරාමයක් තබන්න",
   "capture_pause_none": "කිසිවක් නැත",
   "capture_pause_asis": "පවතින ආකාරයටම",
+  "neon_district_road_speed_very_slow": "ඉතා සෙමින්",
+  "neon_district_road_speed_slow": "සෙමින්",
+  "neon_district_road_speed_normal": "සාමාන්‍ය",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District උපකරණ පුවරුව සඳහා විකල්ප සැකසුම්.",
+      "ConfigureOptions.Title": "උපකරණ පුවරුවේ මාතෘකාව",
+      "ConfigureOptions.Subtitle": "උපකරණ පුවරුවේ උපමාතෘකාව",
+      "ConfigureOptions.RoadSpeed": "මාර්ග සජීවීකරණයේ වේගය",
+      "ConfigureOptions.Message": "ප්‍රදේශයේ පණිවිඩය",
+      "ConfigureOptions.DisableAnimations": "සජීවීකරණ අක්‍රිය කරන්න"
+    },
+    "652": {
+      "Title": "සමමිතික කාමරය",
+      "Description": "සමමිතික කාමරය උපකරණ පුවරුව සඳහා විකල්ප සැකසුම්.",
+      "ConfigureOptions.Eyebrow": "මාතෘකාවට ඉහළින් ඇති පෙළ",
+      "ConfigureOptions.Title": "උපකරණ පුවරුවේ මාතෘකාව",
+      "ConfigureOptions.Subtitle": "උපකරණ පුවරුවේ උපමාතෘකාව",
+      "ConfigureOptions.DisableAnimations": "සජීවීකරණ අක්‍රිය කරන්න"
+    },
+
     "6": {
       "Title": "කණ්ඩායමේ විදුලි පහන් දල්වන්න",
       "Description": "දක්වා ඇති කණ්ඩායමේ සියලු විදුලි පහන් දල්වන්න."

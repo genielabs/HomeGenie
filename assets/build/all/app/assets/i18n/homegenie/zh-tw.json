@@ -139,7 +139,28 @@
   "capture_commands_pause": "命令之間暫停",
   "capture_pause_none": "沒有任何",
   "capture_pause_asis": "現狀",
+  "neon_district_road_speed_very_slow": "很慢",
+  "neon_district_road_speed_slow": "慢",
+  "neon_district_road_speed_normal": "正常",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "「Neon District」儀表板的選用設定。",
+      "ConfigureOptions.Title": "儀表板標題",
+      "ConfigureOptions.Subtitle": "儀表板副標題",
+      "ConfigureOptions.RoadSpeed": "道路動畫速度",
+      "ConfigureOptions.Message": "街區訊息",
+      "ConfigureOptions.DisableAnimations": "停用動畫"
+    },
+    "652": {
+      "Title": "等角房間",
+      "Description": "「等角房間」儀表板的選用設定。",
+      "ConfigureOptions.Eyebrow": "標題上方的文字",
+      "ConfigureOptions.Title": "儀表板標題",
+      "ConfigureOptions.Subtitle": "儀表板副標題",
+      "ConfigureOptions.DisableAnimations": "停用動畫"
+    },
+
     "6": {
       "Title": "開啟群組燈光",
       "Description": "開啟指定群組內的所有燈光。"

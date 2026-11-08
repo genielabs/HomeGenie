@@ -139,7 +139,28 @@
   "capture_commands_pause": "Пауза между командите",
   "capture_pause_none": "Няма",
   "capture_pause_asis": "Както е",
+  "neon_district_road_speed_very_slow": "Много бавно",
+  "neon_district_road_speed_slow": "Бавно",
+  "neon_district_road_speed_normal": "Нормално",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Незадължителни настройки за таблото „Neon District“.",
+      "ConfigureOptions.Title": "Заглавие на таблото",
+      "ConfigureOptions.Subtitle": "Подзаглавие на таблото",
+      "ConfigureOptions.RoadSpeed": "Скорост на анимацията на пътя",
+      "ConfigureOptions.Message": "Съобщение на квартала",
+      "ConfigureOptions.DisableAnimations": "Изключване на анимациите"
+    },
+    "652": {
+      "Title": "Изометрична стая",
+      "Description": "Незадължителни настройки за таблото „Изометрична стая“.",
+      "ConfigureOptions.Eyebrow": "Текст над заглавието",
+      "ConfigureOptions.Title": "Заглавие на таблото",
+      "ConfigureOptions.Subtitle": "Подзаглавие на таблото",
+      "ConfigureOptions.DisableAnimations": "Изключване на анимациите"
+    },
+
     "6": {
       "Title": "ВКЛЮЧВАНЕ на осветлението в групата",
       "Description": "Включва всички лампи в указаната група."

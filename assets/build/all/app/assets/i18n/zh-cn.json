@@ -522,6 +522,7 @@
   "Scenarios": "场景",
   "Security": "安全",
   "Weather and Environment": "天气与环境",
+  "Themes": "主题",
   "Utilities": "公用事业",
   "Scenes": "场景",
   "Virtual Modules": "虚拟模块",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "系统尚未更新到最新版本",
   "new_programs_updates_available": "有新的程序更新可用",
   "dashboard_layout": "布局",
-  "dashboard_standard": "标准"
+  "dashboard_standard": "标准",
+  "ai_dashboard_open": "打开仪表板",
+  "ai_dashboard_select_preset": "选择原来的预设。在“偏好设置”中更新该预设，然后打开此仪表板。",
+  "preset_conflict": "此预设已在服务器上更改。你的更改仍保留在此浏览器中。",
+  "preset_conflict_recovery": "选择“更新”可加载服务器上的副本并覆盖本地更改。如果要保留更改，请将其另存为新预设。",
+  "preset_updated_elsewhere": "此预设已在另一个会话中更改。",
+  "preset_deleted_elsewhere": "此预设已在另一个会话中删除。你可以将本地副本另存为新预设。"
 }

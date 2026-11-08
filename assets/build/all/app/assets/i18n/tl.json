@@ -522,6 +522,7 @@
   "Scenarios": "Mga Eksena",
   "Security": "Seguridad",
   "Weather and Environment": "Panahon at Kapaligiran",
+  "Themes": "Mga tema",
   "Utilities": "Mga Utility",
   "Scenes": "Mga Eksena",
   "Virtual Modules": "Mga Virtual na Module",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Hindi napapanahon ang system",
   "new_programs_updates_available": "Available ang mga bagong update sa programa",
   "dashboard_layout": "Layout",
-  "dashboard_standard": "Karaniwan"
+  "dashboard_standard": "Karaniwan",
+  "ai_dashboard_open": "Buksan ang dashboard",
+  "ai_dashboard_select_preset": "Piliin ang orihinal na preset. Buksan ang “Mga Kagustuhan” at i-update ang preset bago buksan ang dashboard na ito.",
+  "preset_conflict": "Binago ang preset na ito sa server. Available pa rin ang iyong mga pagbabago sa browser na ito.",
+  "preset_conflict_recovery": "Upang i-load ang kopya mula sa server at palitan ang iyong mga lokal na pagbabago, piliin ang “I-update”. Upang panatilihin ang iyong mga pagbabago, i-save ang mga ito bilang isang bagong preset.",
+  "preset_updated_elsewhere": "Ang preset na ito ay binago sa isa pang session.",
+  "preset_deleted_elsewhere": "Ang preset na ito ay tinanggal sa isa pang session. Maaari mong i-save ang iyong lokal na kopya bilang isang bagong preset."
 }

@@ -139,7 +139,28 @@
   "capture_commands_pause": "Buyruqlar orasida pauza",
   "capture_pause_none": "Yo'q",
   "capture_pause_asis": "Xuddi shunday",
+  "neon_district_road_speed_very_slow": "Juda sekin",
+  "neon_district_road_speed_slow": "Sekin",
+  "neon_district_road_speed_normal": "Odatiy",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District boshqaruv paneli uchun ixtiyoriy sozlamalar.",
+      "ConfigureOptions.Title": "Boshqaruv paneli sarlavhasi",
+      "ConfigureOptions.Subtitle": "Boshqaruv paneli kichik sarlavhasi",
+      "ConfigureOptions.RoadSpeed": "Yo‘l animatsiyasi tezligi",
+      "ConfigureOptions.Message": "Mahalla xabari",
+      "ConfigureOptions.DisableAnimations": "Animatsiyalarni o‘chirish"
+    },
+    "652": {
+      "Title": "Izometrik xona",
+      "Description": "Izometrik xona boshqaruv paneli uchun ixtiyoriy sozlamalar.",
+      "ConfigureOptions.Eyebrow": "Sarlavha ustidagi matn",
+      "ConfigureOptions.Title": "Boshqaruv paneli sarlavhasi",
+      "ConfigureOptions.Subtitle": "Boshqaruv paneli kichik sarlavhasi",
+      "ConfigureOptions.DisableAnimations": "Animatsiyalarni o‘chirish"
+    },
+
     "6": {
       "Title": "Guruh chiroqlarini yoqish",
       "Description": "Belgilangan guruhdagi barcha chiroqlarni yoqing."

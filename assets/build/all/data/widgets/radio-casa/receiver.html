@@ -1,0 +1,93 @@
+<section class="radio" @set="void 0">
+  <div class="cabinet">
+    <div class="wood" aria-hidden="true"></div>
+    <div class="face" #face>
+      <header class="nameplate">
+        <div>
+          <p class="eyebrow" #eyebrow></p>
+          <h1>Radio Casa</h1>
+        </div>
+        <div class="badge" aria-hidden="true"><span>HG</span><span>RC<span class="badge-dash">–</span>01</span></div>
+      </header>
+      <div class="main-deck">
+        <section class="power-deck">
+          <div class="engraved heading-line">
+            <h2 #power_heading></h2><span #power_name></span>
+          </div>
+          <div class="meter">
+            <svg class="meter-face" viewBox="0 0 480 184" aria-hidden="true">
+              <path class="meter-arc" d="M111 100a149 149 0 0 1 258 0" fill="none"/>
+              <path class="meter-redline" d="M341 66a149 149 0 0 1 28 34" fill="none"/>
+              <path class="meter-ticks" d="M111 100l12 7 M130 74l7 6 M152 54l6 8 M177 38l6 13 M208 28l2 9 M240 25v14 M272 28l-2 9 M303 38l-6 13 M328 54l-6 8 M350 74l-7 6 M369 100l-12 7" fill="none"/>
+              <g class="scale-numbers" text-anchor="middle">
+                <text x="143" y="120">0</text><text x="185" y="76" #scale_quarter></text>
+                <text x="240" y="63" #scale_half></text><text x="295" y="76" #scale_three_quarters></text>
+                <text x="337" y="120" #scale_max></text>
+              </g>
+              <text class="watt-mark" x="240" y="112" text-anchor="middle">W</text>
+              <g class="needle" #needle><path d="M240 174V35"/><circle cx="240" cy="174" r="7"/></g>
+            </svg>
+            <div class="meter-display" aria-live="off"><span #watts></span><small>W</small></div>
+          </div>
+          <div class="trace-console">
+            <div class="engraved heading-line"><h3 #trace_heading></h3><span #trace_status></span></div>
+            <svg viewBox="0 0 180 42" preserveAspectRatio="none" #trace_area role="img">
+              <path class="trace-grid" d="M0 8h180M0 21h180M0 34h180M30 0v42M60 0v42M90 0v42M120 0v42M150 0v42" fill="none"/>
+              <polyline #trace stroke-width="2" vector-effect="non-scaling-stroke" fill="none"/>
+            </svg>
+            <div class="trace-times" aria-hidden="true"><span>−60 min</span><span>−30 min</span><span>0</span></div>
+          </div>
+        </section>
+        <section class="climate-deck">
+          <div class="engraved heading-line"><h2 #climate_heading></h2><span #climate_name></span></div>
+          <div class="dials">
+            <div class="dial">
+              <div class="dial-gauge" aria-hidden="true">
+                <svg viewBox="0 0 100 66">
+                  <path class="dial-arc" d="M13 52A37 37 0 1 1 87 52" fill="none"/>
+                  <path class="dial-ticks" d="M12 52h6m3-23 5 4m24-18v7m29 7-5 4m14 19h-6" fill="none"/>
+                  <g class="dial-needle" #temp_needle><path d="M50 52V23"/><circle cx="50" cy="52" r="4"/></g>
+                </svg>
+              </div>
+              <span class="reading"><strong #temperature></strong><small #temp_unit></small></span>
+              <span class="dial-label" #temp_label></span>
+            </div>
+            <div class="dial">
+              <div class="dial-gauge" aria-hidden="true">
+                <svg viewBox="0 0 100 66">
+                  <path class="dial-arc" d="M13 52A37 37 0 1 1 87 52" fill="none"/>
+                  <path class="dial-ticks" d="M12 52h6m3-23 5 4m24-18v7m29 7-5 4m14 19h-6" fill="none"/>
+                  <g class="dial-needle" #humidity_needle><path d="M50 52V23"/><circle cx="50" cy="52" r="4"/></g>
+                </svg>
+              </div>
+              <span class="reading"><strong #humidity></strong><small>%</small></span>
+              <span class="dial-label" #humidity_label></span>
+            </div>
+          </div>
+        </section>
+      </div>
+      <section class="presets">
+        <div class="engraved heading-line"><h2 #preset_heading></h2><span #preset_hint></span></div>
+        <div class="preset-bank">
+          <button class="preset" type="button" #preset_0 (click)="togglePreset(0)">
+            <span class="pilot" aria-hidden="true"></span><span class="preset-number" aria-hidden="true">01</span>
+            <span class="preset-text"><strong #name_0></strong><small #state_0></small></span>
+          </button>
+          <button class="preset" type="button" #preset_1 (click)="togglePreset(1)">
+            <span class="pilot" aria-hidden="true"></span><span class="preset-number" aria-hidden="true">02</span>
+            <span class="preset-text"><strong #name_1></strong><small #state_1></small></span>
+          </button>
+          <button class="preset" type="button" #preset_2 (click)="togglePreset(2)">
+            <span class="pilot" aria-hidden="true"></span><span class="preset-number" aria-hidden="true">03</span>
+            <span class="preset-text"><strong #name_2></strong><small #state_2></small></span>
+          </button>
+        </div>
+        <p class="command-feedback" role="status" #feedback></p>
+      </section>
+      <footer class="engraved footer">
+        <span #footer_note></span><span class="serial" aria-hidden="true">HOMEGENIE // RC–01</span>
+      </footer>
+    </div>
+    <div class="wood wood-right" aria-hidden="true"></div>
+  </div>
+</section>

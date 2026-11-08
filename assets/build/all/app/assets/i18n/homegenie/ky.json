@@ -139,7 +139,28 @@
   "capture_commands_pause": "Буйруктардын ортосунда тыныгуу",
   "capture_pause_none": "Жок",
   "capture_pause_asis": "кандай болсо",
+  "neon_district_road_speed_very_slow": "Абдан жай",
+  "neon_district_road_speed_slow": "Жай",
+  "neon_district_road_speed_normal": "Кадимки",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "«Neon District» башкаруу тактасынын кошумча жөндөөлөрү.",
+      "ConfigureOptions.Title": "Башкаруу тактасынын аталышы",
+      "ConfigureOptions.Subtitle": "Башкаруу тактасынын кошумча аталышы",
+      "ConfigureOptions.RoadSpeed": "Жол анимациясынын ылдамдыгы",
+      "ConfigureOptions.Message": "Райондун билдирүүсү",
+      "ConfigureOptions.DisableAnimations": "Анимацияларды өчүрүү"
+    },
+    "652": {
+      "Title": "Изометриялык бөлмө",
+      "Description": "«Изометриялык бөлмө» башкаруу тактасынын кошумча жөндөөлөрү.",
+      "ConfigureOptions.Eyebrow": "Аталыштын үстүндөгү текст",
+      "ConfigureOptions.Title": "Башкаруу тактасынын аталышы",
+      "ConfigureOptions.Subtitle": "Башкаруу тактасынын кошумча аталышы",
+      "ConfigureOptions.DisableAnimations": "Анимацияларды өчүрүү"
+    },
+
     "6": {
       "Title": "Топтун жарыктарын күйгүзүү",
       "Description": "Көрсөтүлгөн топтогу бардык жарыктарды күйгүзүү."

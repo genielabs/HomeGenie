@@ -522,6 +522,7 @@
   "Scenarios": "Sèn yo",
   "Security": "Sekirite",
   "Weather and Environment": "Tan ak Anviwònman",
+  "Themes": "Tèm",
   "Utilities": "Sèvis piblik yo",
   "Scenes": "Sèn yo",
   "Virtual Modules": "Modil Vityèl",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Sistèm pa ajou",
   "new_programs_updates_available": "Nouvo mizajou pwogram ki disponib",
   "dashboard_layout": "Dispozisyon",
-  "dashboard_standard": "Estanda"
+  "dashboard_standard": "Estanda",
+  "ai_dashboard_open": "Louvri tablodbò",
+  "ai_dashboard_select_preset": "Chwazi prereglaj orijinal la. Louvri “Preferans” epi mete ajou prereglaj la anvan ou ouvri tablodbò sa a.",
+  "preset_conflict": "Prereglaj sa a chanje sou sèvè a. Chanjman ou yo toujou disponib nan navigatè sa a.",
+  "preset_conflict_recovery": "Pou chaje kopi a nan sèvè a epi ranplase chanjman lokal ou yo, chwazi “Mizajou”. Pou kenbe chanjman ou yo, sove yo kòm yon nouvo prereglaj.",
+  "preset_updated_elsewhere": "Prereglaj sa a te chanje nan yon lòt sesyon.",
+  "preset_deleted_elsewhere": "Prereglaj sa a te efase nan yon lòt sesyon. Ou ka sove kopi lokal ou a kòm yon nouvo prereglaj."
 }

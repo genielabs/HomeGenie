@@ -522,6 +522,7 @@
   "Scenarios": "Szenen",
   "Security": "Sicherheit",
   "Weather and Environment": "Wetter und Umwelt",
+  "Themes": "Designs",
   "Utilities": "Versorgungsunternehmen",
   "Scenes": "Szenen",
   "Virtual Modules": "Virtuelle Module",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Das System ist nicht auf dem neuesten Stand",
   "new_programs_updates_available": "Neue Programmaktualisierungen verfügbar",
   "dashboard_layout": "Layout",
-  "dashboard_standard": "Standard"
+  "dashboard_standard": "Standard",
+  "ai_dashboard_open": "Dashboard öffnen",
+  "ai_dashboard_select_preset": "Wählen Sie die Originalvoreinstellung aus. Öffnen Sie “Einstellungen” und aktualisieren Sie die Voreinstellung, bevor Sie dieses Dashboard öffnen.",
+  "preset_conflict": "Diese Voreinstellung wurde auf dem Server geändert. Ihre Änderungen sind in diesem Browser weiterhin verfügbar.",
+  "preset_conflict_recovery": "Um die Kopie vom Server zu laden und Ihre lokalen Änderungen zu ersetzen, wählen Sie “Aktualisieren”. Um Ihre Änderungen beizubehalten, speichern Sie sie als neue Voreinstellung.",
+  "preset_updated_elsewhere": "Diese Voreinstellung wurde in einer anderen Sitzung geändert.",
+  "preset_deleted_elsewhere": "Diese Voreinstellung wurde in einer anderen Sitzung gelöscht. Sie können Ihre lokale Kopie als neue Voreinstellung speichern."
 }

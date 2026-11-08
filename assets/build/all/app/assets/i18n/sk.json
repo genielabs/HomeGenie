@@ -522,6 +522,7 @@
   "Scenarios": "Scény",
   "Security": "Bezpečnosť",
   "Weather and Environment": "Počasie a životné prostredie",
+  "Themes": "Motívy",
   "Utilities": "Verejné služby",
   "Scenes": "Scény",
   "Virtual Modules": "Virtuálne moduly",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Systém nie je aktuálny",
   "new_programs_updates_available": "K dispozícii sú nové aktualizácie programu",
   "dashboard_layout": "Rozloženie",
-  "dashboard_standard": "Štandardné"
+  "dashboard_standard": "Štandardné",
+  "ai_dashboard_open": "Otvorte palubnú dosku",
+  "ai_dashboard_select_preset": "Vyberte pôvodnú predvoľbu. Pred otvorením tohto ovládacieho panela otvorte “Predvoľby” a aktualizujte predvoľbu.",
+  "preset_conflict": "Táto predvoľba sa na serveri zmenila. Vaše zmeny sú stále dostupné v tomto prehliadači.",
+  "preset_conflict_recovery": "Ak chcete načítať kópiu zo servera a nahradiť lokálne zmeny, vyberte “Aktualizácia”. Ak chcete svoje zmeny zachovať, uložte ich ako novú predvoľbu.",
+  "preset_updated_elsewhere": "Táto predvoľba bola zmenená v inej relácii.",
+  "preset_deleted_elsewhere": "Táto predvoľba bola vymazaná v inej relácii. Lokálnu kópiu si môžete uložiť ako novú predvoľbu."
 }

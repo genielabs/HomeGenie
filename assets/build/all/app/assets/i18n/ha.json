@@ -522,6 +522,7 @@
   "Scenarios": "Wuraren da suka faru",
   "Security": "Tsaro",
   "Weather and Environment": "Yanayi & Muhalli",
+  "Themes": "Jigogi",
   "Utilities": "Kayan aiki masu amfani",
   "Scenes": "Wuraren da suka faru",
   "Virtual Modules": "Na'urori na Zamani",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Tsarin bai sabunta ba",
   "new_programs_updates_available": "Akwai sabbin sabuntawar shirin",
   "dashboard_layout": "Tsari",
-  "dashboard_standard": "Na yau da kullum"
+  "dashboard_standard": "Na yau da kullum",
+  "ai_dashboard_open": "Buɗe dashboard",
+  "ai_dashboard_select_preset": "Zaɓi saitin asali. Buɗe “Abubuwan da ake so” ka sabunta saitin kafin ka buɗe wannan dashboard.",
+  "preset_conflict": "Wannan saiti ya canza akan sabar. Canje-canjenku har yanzu suna nan a cikin wannan mazuruf.",
+  "preset_conflict_recovery": "Zaɓi Sabuntawa don loda kwafin daga uwar garken kuma maye gurbin canje-canje na gida, ko adana canje-canjenku azaman sabon saiti.",
+  "preset_updated_elsewhere": "An canza wannan saiti a wani zama.",
+  "preset_deleted_elsewhere": "An share wannan saiti a wani zama. Kuna iya ajiye kwafin gida azaman sabon saiti."
 }

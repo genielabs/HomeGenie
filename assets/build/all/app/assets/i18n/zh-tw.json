@@ -522,6 +522,7 @@
   "Scenarios": "場景",
   "Security": "安全",
   "Weather and Environment": "天氣與環境",
+  "Themes": "佈景主題",
   "Utilities": "公用事業",
   "Scenes": "場景",
   "Virtual Modules": "虛擬模組",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "系統尚未更新至最新版本",
   "new_programs_updates_available": "有新的程式更新可用",
   "dashboard_layout": "版面配置",
-  "dashboard_standard": "標準"
+  "dashboard_standard": "標準",
+  "ai_dashboard_open": "開啟儀表板",
+  "ai_dashboard_select_preset": "選取原先的預設。在「偏好設定」中更新該預設，再開啟這個儀表板。",
+  "preset_conflict": "這個預設已在伺服器上變更。你的變更仍保留在此瀏覽器中。",
+  "preset_conflict_recovery": "選取「更新」可載入伺服器上的副本並取代本機變更。如果要保留變更，請另存為新的預設。",
+  "preset_updated_elsewhere": "這個預設已在另一個工作階段中變更。",
+  "preset_deleted_elsewhere": "這個預設已在另一個工作階段中刪除。你可以將本機副本另存為新的預設。"
 }

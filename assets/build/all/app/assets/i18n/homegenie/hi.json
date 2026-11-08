@@ -139,7 +139,28 @@
   "capture_commands_pause": "आदेशों के बीच विराम",
   "capture_pause_none": "कोई नहीं",
   "capture_pause_asis": "जैसा है",
+  "neon_district_road_speed_very_slow": "बहुत धीमी",
+  "neon_district_road_speed_slow": "धीमी",
+  "neon_district_road_speed_normal": "सामान्य",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District डैशबोर्ड के लिए वैकल्पिक सेटिंग्स।",
+      "ConfigureOptions.Title": "डैशबोर्ड का शीर्षक",
+      "ConfigureOptions.Subtitle": "डैशबोर्ड का उपशीर्षक",
+      "ConfigureOptions.RoadSpeed": "सड़क के ऐनिमेशन की गति",
+      "ConfigureOptions.Message": "इलाके का संदेश",
+      "ConfigureOptions.DisableAnimations": "ऐनिमेशन बंद करें"
+    },
+    "652": {
+      "Title": "आइसोमेट्रिक कमरा",
+      "Description": "आइसोमेट्रिक कमरा डैशबोर्ड के लिए वैकल्पिक सेटिंग्स।",
+      "ConfigureOptions.Eyebrow": "शीर्षक के ऊपर का पाठ",
+      "ConfigureOptions.Title": "डैशबोर्ड का शीर्षक",
+      "ConfigureOptions.Subtitle": "डैशबोर्ड का उपशीर्षक",
+      "ConfigureOptions.DisableAnimations": "ऐनिमेशन बंद करें"
+    },
+
     "6": {
       "Title": "समूह की लाइटें चालू करें",
       "Description": "दिए गए समूह की सभी लाइटें चालू करें।"

@@ -522,6 +522,7 @@
   "Scenarios": "Escenas",
   "Security": "Seguridade",
   "Weather and Environment": "Tempo e medio ambiente",
+  "Themes": "Temas",
   "Utilities": "Servizos públicos",
   "Scenes": "Escenas",
   "Virtual Modules": "Módulos virtuais",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "O sistema non está actualizado",
   "new_programs_updates_available": "Novas actualizacións do programa dispoñibles",
   "dashboard_layout": "Disposición",
-  "dashboard_standard": "Estándar"
+  "dashboard_standard": "Estándar",
+  "ai_dashboard_open": "Abrir panel de control",
+  "ai_dashboard_select_preset": "Seleccione o preselección orixinal. Abre “Preferencias” e actualiza a configuración predeterminada antes de abrir este panel.",
+  "preset_conflict": "Esta configuración predeterminada cambiou no servidor. Os teus cambios aínda están dispoñibles neste navegador.",
+  "preset_conflict_recovery": "Para cargar a copia desde o servidor e substituír os cambios locais, selecciona “Actualizar”. Para conservar os cambios, gárdaos como un novo predefinido.",
+  "preset_updated_elsewhere": "Esta configuración predeterminada cambiouse noutra sesión.",
+  "preset_deleted_elsewhere": "Este axuste predeterminado eliminouse noutra sesión. Podes gardar a túa copia local como unha nova configuración predeterminada."
 }

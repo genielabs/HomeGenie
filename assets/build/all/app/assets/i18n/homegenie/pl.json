@@ -139,7 +139,28 @@
   "capture_commands_pause": "Pauza między poleceniami",
   "capture_pause_none": "Nic",
   "capture_pause_asis": "Tak jak jest",
+  "neon_district_road_speed_very_slow": "Bardzo wolna",
+  "neon_district_road_speed_slow": "Wolna",
+  "neon_district_road_speed_normal": "Normalna",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Opcjonalne ustawienia panelu „Neon District”.",
+      "ConfigureOptions.Title": "Tytuł panelu",
+      "ConfigureOptions.Subtitle": "Podtytuł panelu",
+      "ConfigureOptions.RoadSpeed": "Szybkość animacji drogi",
+      "ConfigureOptions.Message": "Wiadomość dzielnicy",
+      "ConfigureOptions.DisableAnimations": "Wyłącz animacje"
+    },
+    "652": {
+      "Title": "Pokój izometryczny",
+      "Description": "Opcjonalne ustawienia panelu „Pokój izometryczny”.",
+      "ConfigureOptions.Eyebrow": "Tekst nad tytułem",
+      "ConfigureOptions.Title": "Tytuł panelu",
+      "ConfigureOptions.Subtitle": "Podtytuł panelu",
+      "ConfigureOptions.DisableAnimations": "Wyłącz animacje"
+    },
+
     "6": {
       "Title": "Włącz światła grupy",
       "Description": "Włącz wszystkie światła we wskazanej grupie."

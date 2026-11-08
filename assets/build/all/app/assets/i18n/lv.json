@@ -522,6 +522,7 @@
   "Scenarios": "Ainas",
   "Security": "Drošība",
   "Weather and Environment": "Laikapstākļi un vide",
+  "Themes": "Motīvi",
   "Utilities": "Komunālie pakalpojumi",
   "Scenes": "Ainas",
   "Virtual Modules": "Virtuālie moduļi",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Sistēma nav atjaunināta",
   "new_programs_updates_available": "Ir pieejami jauni programmas atjauninājumi",
   "dashboard_layout": "Izkārtojums",
-  "dashboard_standard": "Standarta"
+  "dashboard_standard": "Standarta",
+  "ai_dashboard_open": "Atveriet informācijas paneli",
+  "ai_dashboard_select_preset": "Izvēlieties sākotnējo sākotnējo iestatījumu. Pirms šī informācijas paneļa atvēršanas atveriet “Preferences” un atjauniniet sākotnējo iestatījumu.",
+  "preset_conflict": "Šis iepriekšējais iestatījums ir mainīts serverī. Jūsu izmaiņas joprojām ir pieejamas šajā pārlūkprogrammā.",
+  "preset_conflict_recovery": "Lai ielādētu kopiju no servera un aizstātu vietējās izmaiņas, atlasiet “Atjauninājums”. Lai saglabātu izmaiņas, saglabājiet tās kā jaunu sākotnējo iestatījumu.",
+  "preset_updated_elsewhere": "Šis iepriekšējais iestatījums tika mainīts citā sesijā.",
+  "preset_deleted_elsewhere": "Šis iepriekšējais iestatījums tika izdzēsts citā sesijā. Varat saglabāt savu lokālo kopiju kā jaunu sākotnējo iestatījumu."
 }

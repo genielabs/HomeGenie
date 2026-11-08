@@ -292,7 +292,7 @@ Follow instructions at https://openweathermap.org/appid to get a free API key.
         <Name>ConfigureOptions.ApiKey</Name>
         <Value>?</Value>
         <Description>OpenWeatherMap API key (APPID)</Description>
-        <FieldType>text</FieldType>
+        <FieldType>password</FieldType>
         <ParentId>0</ParentId>
         <UpdateTime>2022-12-28T17:03:34.1406635Z</UpdateTime>
       </ModuleParameter>
@@ -306,7 +306,7 @@ Follow instructions at https://openweathermap.org/appid to get a free API key.
       </ModuleParameter>
       <ModuleParameter>
         <Name>ConfigureOptions.Location</Name>
-        <Value>London, UK</Value>
+        <Value>London, GB</Value>
         <Description>City name</Description>
         <FieldType>wunderground.city</FieldType>
         <ParentId>0</ParentId>

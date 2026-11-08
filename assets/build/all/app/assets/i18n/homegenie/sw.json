@@ -139,7 +139,28 @@
   "capture_commands_pause": "Sitisha kati ya amri",
   "capture_pause_none": "Hakuna",
   "capture_pause_asis": "Kama ilivyo",
+  "neon_district_road_speed_very_slow": "Polepole sana",
+  "neon_district_road_speed_slow": "Polepole",
+  "neon_district_road_speed_normal": "Kawaida",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Mipangilio ya hiari ya dashibodi ya Neon District.",
+      "ConfigureOptions.Title": "Kichwa cha dashibodi",
+      "ConfigureOptions.Subtitle": "Kichwa kidogo cha dashibodi",
+      "ConfigureOptions.RoadSpeed": "Kasi ya uhuishaji wa barabara",
+      "ConfigureOptions.Message": "Ujumbe wa eneo",
+      "ConfigureOptions.DisableAnimations": "Zima uhuishaji"
+    },
+    "652": {
+      "Title": "Chumba cha kiisometriki",
+      "Description": "Mipangilio ya hiari ya dashibodi ya Chumba cha kiisometriki.",
+      "ConfigureOptions.Eyebrow": "Maandishi juu ya kichwa",
+      "ConfigureOptions.Title": "Kichwa cha dashibodi",
+      "ConfigureOptions.Subtitle": "Kichwa kidogo cha dashibodi",
+      "ConfigureOptions.DisableAnimations": "Zima uhuishaji"
+    },
+
     "6": {
       "Title": "Washa taa za kikundi",
       "Description": "Washa taa zote katika kikundi kilichobainishwa."

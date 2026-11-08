@@ -522,6 +522,7 @@
   "Scenarios": "Cenas",
   "Security": "Segurança",
   "Weather and Environment": "Tempo e Meio Ambiente",
+  "Themes": "Temas",
   "Utilities": "Serviços públicos",
   "Scenes": "Cenas",
   "Virtual Modules": "Módulos Virtuais",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "O sistema não está atualizado",
   "new_programs_updates_available": "Novas atualizações do programa disponíveis",
   "dashboard_layout": "Disposição",
-  "dashboard_standard": "Padrão"
+  "dashboard_standard": "Padrão",
+  "ai_dashboard_open": "Abrir painel",
+  "ai_dashboard_select_preset": "Selecione a predefinição original. Abra “Preferências” e atualize a predefinição antes de abrir este painel.",
+  "preset_conflict": "Esta predefinição foi alterada no servidor. Suas alterações ainda estão disponíveis neste navegador.",
+  "preset_conflict_recovery": "Para carregar a cópia do servidor e substituir as alterações locais, selecione “Atualizar”. Para manter as alterações, salve-as como uma nova predefinição.",
+  "preset_updated_elsewhere": "Esta predefinição foi alterada em outra sessão.",
+  "preset_deleted_elsewhere": "Esta predefinição foi excluída em outra sessão. Você pode salvar sua cópia local como uma nova predefinição."
 }

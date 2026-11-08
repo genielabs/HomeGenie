@@ -139,7 +139,28 @@
   "capture_commands_pause": "Դադար հրամանների միջև",
   "capture_pause_none": "Ոչ մեկը",
   "capture_pause_asis": "Ինչպես կա",
+  "neon_district_road_speed_very_slow": "Շատ դանդաղ",
+  "neon_district_road_speed_slow": "Դանդաղ",
+  "neon_district_road_speed_normal": "Սովորական",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "«Neon District» կառավարման վահանակի կամընտիր կարգավորումներ։",
+      "ConfigureOptions.Title": "Կառավարման վահանակի վերնագիր",
+      "ConfigureOptions.Subtitle": "Կառավարման վահանակի ենթավերնագիր",
+      "ConfigureOptions.RoadSpeed": "Ճանապարհի անիմացիայի արագություն",
+      "ConfigureOptions.Message": "Թաղամասի հաղորդագրություն",
+      "ConfigureOptions.DisableAnimations": "Անջատել անիմացիաները"
+    },
+    "652": {
+      "Title": "Իզոմետրիկ սենյակ",
+      "Description": "«Իզոմետրիկ սենյակ» կառավարման վահանակի կամընտիր կարգավորումներ։",
+      "ConfigureOptions.Eyebrow": "Վերնագրից վերևի տեքստը",
+      "ConfigureOptions.Title": "Կառավարման վահանակի վերնագիր",
+      "ConfigureOptions.Subtitle": "Կառավարման վահանակի ենթավերնագիր",
+      "ConfigureOptions.DisableAnimations": "Անջատել անիմացիաները"
+    },
+
     "6": {
       "Title": "Միացնել խմբի լույսերը",
       "Description": "Միացնել նշված խմբի բոլոր լույսերը։"

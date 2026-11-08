@@ -139,7 +139,28 @@
   "capture_commands_pause": "ఆదేశాల మధ్య పాజ్ చేయండి",
   "capture_pause_none": "ఏదీ లేదు",
   "capture_pause_asis": "ఉన్నది ఉన్నట్లుగా",
+  "neon_district_road_speed_very_slow": "చాలా నెమ్మదిగా",
+  "neon_district_road_speed_slow": "నెమ్మదిగా",
+  "neon_district_road_speed_normal": "సాధారణం",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District డాష్‌బోర్డ్ కోసం ఐచ్ఛిక సెట్టింగ్‌లు.",
+      "ConfigureOptions.Title": "డాష్‌బోర్డ్ శీర్షిక",
+      "ConfigureOptions.Subtitle": "డాష్‌బోర్డ్ ఉపశీర్షిక",
+      "ConfigureOptions.RoadSpeed": "రోడ్డు యానిమేషన్ వేగం",
+      "ConfigureOptions.Message": "ప్రాంత సందేశం",
+      "ConfigureOptions.DisableAnimations": "యానిమేషన్‌లను నిలిపివేయండి"
+    },
+    "652": {
+      "Title": "ఐసోమెట్రిక్ గది",
+      "Description": "ఐసోమెట్రిక్ గది డాష్‌బోర్డ్ కోసం ఐచ్ఛిక సెట్టింగ్‌లు.",
+      "ConfigureOptions.Eyebrow": "శీర్షికకు పైన ఉన్న వచనం",
+      "ConfigureOptions.Title": "డాష్‌బోర్డ్ శీర్షిక",
+      "ConfigureOptions.Subtitle": "డాష్‌బోర్డ్ ఉపశీర్షిక",
+      "ConfigureOptions.DisableAnimations": "యానిమేషన్‌లను నిలిపివేయండి"
+    },
+
     "6": {
       "Title": "సమూహంలోని లైట్లను ఆన్ చేయండి",
       "Description": "ఇచ్చిన సమూహంలోని అన్ని లైట్లను ఆన్ చేయండి."

@@ -139,7 +139,28 @@
   "capture_commands_pause": "በትእዛዞች መካከል ለአፍታ አቁም",
   "capture_pause_none": "ምንም",
   "capture_pause_asis": "እንዳለ",
+  "neon_district_road_speed_very_slow": "በጣም ዝግ",
+  "neon_district_road_speed_slow": "ዝግ",
+  "neon_district_road_speed_normal": "መደበኛ",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "ለNeon District ዳሽቦርድ አማራጭ ቅንብሮች።",
+      "ConfigureOptions.Title": "የዳሽቦርድ ርዕስ",
+      "ConfigureOptions.Subtitle": "የዳሽቦርድ ንዑስ ርዕስ",
+      "ConfigureOptions.RoadSpeed": "የመንገድ እንቅስቃሴ ፍጥነት",
+      "ConfigureOptions.Message": "የሰፈር መልዕክት",
+      "ConfigureOptions.DisableAnimations": "እነማዎችን አሰናክል"
+    },
+    "652": {
+      "Title": "አይሶሜትሪክ ክፍል",
+      "Description": "ለአይሶሜትሪክ ክፍል ዳሽቦርድ አማራጭ ቅንብሮች።",
+      "ConfigureOptions.Eyebrow": "ከርዕሱ በላይ ያለው ጽሑፍ",
+      "ConfigureOptions.Title": "የዳሽቦርድ ርዕስ",
+      "ConfigureOptions.Subtitle": "የዳሽቦርድ ንዑስ ርዕስ",
+      "ConfigureOptions.DisableAnimations": "እነማዎችን አሰናክል"
+    },
+
     "6": {
       "Title": "የቡድኑን መብራቶች አብራ",
       "Description": "በተጠቀሰው ቡድን ያሉትን መብራቶች ሁሉ አብራ።"

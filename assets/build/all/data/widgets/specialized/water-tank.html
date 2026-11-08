@@ -1,0 +1,19 @@
+<section class="tank-card" @set="void 0">
+  <header class="tank-header">
+    <span class="material-symbols-outlined" aria-hidden="true">water_drop</span>
+    <h2 #title></h2>
+  </header>
+  <div class="tank-body">
+    <div class="tank" #tank_graphic aria-hidden="true">
+      <div class="water">
+        <div class="wave wave-back"></div>
+        <div class="wave wave-front"></div>
+      </div>
+      <div class="tank-marks"></div>
+    </div>
+    <div class="tank-reading">
+      <strong #level_text></strong>
+      <span #status_text></span>
+    </div>
+  </div>
+</section>

@@ -139,7 +139,28 @@
   "capture_commands_pause": "Pause entre les commandes",
   "capture_pause_none": "Aucun",
   "capture_pause_asis": "Tel quel",
+  "neon_district_road_speed_very_slow": "Très lente",
+  "neon_district_road_speed_slow": "Lente",
+  "neon_district_road_speed_normal": "Normale",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Paramètres facultatifs du tableau de bord « Neon District ».",
+      "ConfigureOptions.Title": "Titre du tableau de bord",
+      "ConfigureOptions.Subtitle": "Sous-titre du tableau de bord",
+      "ConfigureOptions.RoadSpeed": "Vitesse de l’animation de la route",
+      "ConfigureOptions.Message": "Message du quartier",
+      "ConfigureOptions.DisableAnimations": "Désactiver les animations"
+    },
+    "652": {
+      "Title": "Pièce isométrique",
+      "Description": "Paramètres facultatifs du tableau de bord « Pièce isométrique ».",
+      "ConfigureOptions.Eyebrow": "Texte au-dessus du titre",
+      "ConfigureOptions.Title": "Titre du tableau de bord",
+      "ConfigureOptions.Subtitle": "Sous-titre du tableau de bord",
+      "ConfigureOptions.DisableAnimations": "Désactiver les animations"
+    },
+
     "6": {
       "Title": "Allumer les lumières du groupe",
       "Description": "Allumer toutes les lumières du groupe indiqué."

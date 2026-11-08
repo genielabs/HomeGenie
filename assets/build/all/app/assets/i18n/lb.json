@@ -522,6 +522,7 @@
   "Scenarios": "Szenen",
   "Security": "Sécherheet",
   "Weather and Environment": "Wieder & Ëmwelt",
+  "Themes": "Themen",
   "Utilities": "Versuergungsbetriber",
   "Scenes": "Szenen",
   "Virtual Modules": "Virtuell Moduler",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "System ass net aktuell",
   "new_programs_updates_available": "Nei Programmupdates verfügbar",
   "dashboard_layout": "Layout",
-  "dashboard_standard": "Standard"
+  "dashboard_standard": "Standard",
+  "ai_dashboard_open": "Dashboard opmaachen",
+  "ai_dashboard_select_preset": "Wielt d'Original Preset. Öffnen “Präferenzen” an update de Preset ier Dir dësen Dashboard opmaacht.",
+  "preset_conflict": "Dëse Preset huet um Server geännert. Är Ännerungen sinn nach ëmmer an dësem Browser verfügbar.",
+  "preset_conflict_recovery": "Fir d'Kopie vum Server ze lueden an Är lokal Ännerungen ze ersetzen, wielt “Aktualiséierung”. Fir Är Ännerungen ze halen, späichert se als neie Viraussetzung.",
+  "preset_updated_elsewhere": "Dëse Preset gouf an enger anerer Sessioun geännert.",
+  "preset_deleted_elsewhere": "Dëse Preset gouf an enger anerer Sessioun geläscht. Dir kënnt Är lokal Kopie als neie Preset späicheren."
 }

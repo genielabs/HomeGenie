@@ -522,6 +522,7 @@
   "Scenarios": "مشاهد",
   "Security": "حماية",
   "Weather and Environment": "الطقس والبيئة",
+  "Themes": "السمات",
   "Utilities": "المرافق",
   "Scenes": "مشاهد",
   "Virtual Modules": "الوحدات الافتراضية",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "النظام ليس محدثا",
   "new_programs_updates_available": "تتوفر تحديثات جديدة للبرنامج",
   "dashboard_layout": "التخطيط",
-  "dashboard_standard": "قياسي"
+  "dashboard_standard": "قياسي",
+  "ai_dashboard_open": "فتح لوحة المعلومات",
+  "ai_dashboard_select_preset": "حدد الإعداد المسبق الأصلي. افتح “التفضيلات” وقم بتحديث الإعداد المسبق قبل فتح لوحة المعلومات هذه.",
+  "preset_conflict": "تم تغيير هذا الإعداد المسبق على الخادم. لا تزال تغييراتك متاحة في هذا المتصفح.",
+  "preset_conflict_recovery": "لتحميل النسخة من الخادم واستبدال التغييرات المحلية، حدد “تحديث”. للاحتفاظ بالتغييرات، احفظها كإعداد مسبق جديد.",
+  "preset_updated_elsewhere": "تم تغيير هذا الإعداد المسبق في جلسة أخرى.",
+  "preset_deleted_elsewhere": "تم حذف هذا الإعداد المسبق في جلسة أخرى. يمكنك حفظ نسختك المحلية كإعداد مسبق جديد."
 }

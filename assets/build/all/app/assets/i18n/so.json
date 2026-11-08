@@ -522,6 +522,7 @@
   "Scenarios": "Muuqaallo",
   "Security": "Amniga",
   "Weather and Environment": "Cimilada & Deegaanka",
+  "Themes": "Mawduucyo",
   "Utilities": "Adeegyada",
   "Scenes": "Muuqaallo",
   "Virtual Modules": "Modules-ka Dalwaddeed",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Nidaamku ma cusba",
   "new_programs_updates_available": "Cusbooneysii barnaamij cusub ayaa diyaar ah",
   "dashboard_layout": "Qaabka",
-  "dashboard_standard": "Caadiga ah"
+  "dashboard_standard": "Caadiga ah",
+  "ai_dashboard_open": "Fur dashboard",
+  "ai_dashboard_select_preset": "Dooro horudhacii asalka ahaa Fur “Dookhyada” oo cusboonaysii presetka ka hor inta aanad furin dashboard-kan.",
+  "preset_conflict": "Qalabkan horudhaca ah ayaa isku beddelay serfarka Isbeddeladaada wali waa laga heli karaa browserkan.",
+  "preset_conflict_recovery": "Si aad nuqulka uga soo dejiso server-ka oo aad u bedesho isbeddellada degaankaaga, dooro “Cusbooneysii”. Si aad u ilaaliso isbeddelladaada, u kaydso sidii hore oo cusub.",
+  "preset_updated_elsewhere": "Qaabka hore waxa lagu bedelay fadhi kale.",
+  "preset_deleted_elsewhere": "Qaabka hore loo diyaariyey ayaa lagu tirtiray fadhi kale. Waxaad u kaydin kartaa nuqulka deegaankaaga sidii hore oo cusub."
 }

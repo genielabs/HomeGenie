@@ -139,7 +139,28 @@
   "capture_commands_pause": "Пәрмендер арасында үзіліс",
   "capture_pause_none": "Жоқ",
   "capture_pause_asis": "Сол сияқты",
+  "neon_district_road_speed_very_slow": "Өте баяу",
+  "neon_district_road_speed_slow": "Баяу",
+  "neon_district_road_speed_normal": "Қалыпты",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "«Neon District» басқару тақтасының қосымша баптаулары.",
+      "ConfigureOptions.Title": "Басқару тақтасының тақырыбы",
+      "ConfigureOptions.Subtitle": "Басқару тақтасының қосалқы тақырыбы",
+      "ConfigureOptions.RoadSpeed": "Жол анимациясының жылдамдығы",
+      "ConfigureOptions.Message": "Аудан хабарламасы",
+      "ConfigureOptions.DisableAnimations": "Анимацияларды өшіру"
+    },
+    "652": {
+      "Title": "Изометриялық бөлме",
+      "Description": "«Изометриялық бөлме» басқару тақтасының қосымша баптаулары.",
+      "ConfigureOptions.Eyebrow": "Тақырыптың үстіндегі мәтін",
+      "ConfigureOptions.Title": "Басқару тақтасының тақырыбы",
+      "ConfigureOptions.Subtitle": "Басқару тақтасының қосалқы тақырыбы",
+      "ConfigureOptions.DisableAnimations": "Анимацияларды өшіру"
+    },
+
     "6": {
       "Title": "Топ шамдарын қосу",
       "Description": "Көрсетілген топтағы барлық шамдарды қосу."

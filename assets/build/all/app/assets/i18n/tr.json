@@ -522,6 +522,7 @@
   "Scenarios": "Sahneler",
   "Security": "Güvenlik",
   "Weather and Environment": "Hava Durumu ve Çevre",
+  "Themes": "Temalar",
   "Utilities": "Kamu Hizmetleri",
   "Scenes": "Sahneler",
   "Virtual Modules": "Sanal Modüller",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Sistem güncel değil",
   "new_programs_updates_available": "Yeni program güncellemeleri mevcut",
   "dashboard_layout": "Düzen",
-  "dashboard_standard": "Standart"
+  "dashboard_standard": "Standart",
+  "ai_dashboard_open": "Kontrol panelini aç",
+  "ai_dashboard_select_preset": "Orijinal ön ayarı seçin. Bu kontrol panelini açmadan önce “Tercihler”'i açın ve ön ayarı güncelleyin.",
+  "preset_conflict": "Bu ön ayar sunucuda değişti. Değişiklikleriniz hâlâ bu tarayıcıda mevcut.",
+  "preset_conflict_recovery": "Kopyayı sunucudan yüklemek ve yerel değişikliklerinizi değiştirmek için “Güncelleme”'yi seçin. Değişikliklerinizi saklamak için bunları yeni bir ön ayar olarak kaydedin.",
+  "preset_updated_elsewhere": "Bu ön ayar başka bir oturumda değiştirildi.",
+  "preset_deleted_elsewhere": "Bu ön ayar başka bir oturumda silindi. Yerel kopyanızı yeni bir ön ayar olarak kaydedebilirsiniz."
 }

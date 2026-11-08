@@ -522,6 +522,7 @@
   "Scenarios": "Radharcanna",
   "Security": "Slándáil",
   "Weather and Environment": "Aimsir & Timpeallacht",
+  "Themes": "Téamaí",
   "Utilities": "Fóntais",
   "Scenes": "Radharcanna",
   "Virtual Modules": "Modúil Fhíorúla",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Níl an córas cothrom le dáta",
   "new_programs_updates_available": "Nuashonruithe cláir nua ar fáil",
   "dashboard_layout": "Leagan amach",
-  "dashboard_standard": "Caighdeánach"
+  "dashboard_standard": "Caighdeánach",
+  "ai_dashboard_open": "Oscail painéal",
+  "ai_dashboard_select_preset": "Roghnaigh an réamhshocrú bunaidh. Oscail “Sainroghanna” agus nuashonraigh an réamhshocrú sula n-osclaíonn tú an painéal seo.",
+  "preset_conflict": "D'athraigh an réamhshocrú seo ar an bhfreastalaí. Tá d'athruithe fós ar fáil sa bhrabhsálaí seo.",
+  "preset_conflict_recovery": "Roghnaigh Nuashonrú chun an chóip a luchtú ón bhfreastalaí agus d'athruithe áitiúla a athsholáthar, nó sábháil do chuid athruithe mar réamhshocrú nua.",
+  "preset_updated_elsewhere": "Athraíodh an réamhshocrú seo i seisiún eile.",
+  "preset_deleted_elsewhere": "Scriosadh an réamhshocrú seo i seisiún eile. Is féidir leat do chóip áitiúil a shábháil mar réamhshocrú nua."
 }

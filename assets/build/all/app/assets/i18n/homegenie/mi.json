@@ -139,7 +139,28 @@
   "capture_commands_pause": "Tatari i waenganui i nga whakahau",
   "capture_pause_none": "Karekau",
   "capture_pause_asis": "He rite tonu",
+  "neon_district_road_speed_very_slow": "Tino pōturi",
+  "neon_district_road_speed_slow": "Pōturi",
+  "neon_district_road_speed_normal": "Noa",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Ngā tautuhinga kōwhiringa mō te papatohu Neon District.",
+      "ConfigureOptions.Title": "Taitara papatohu",
+      "ConfigureOptions.Subtitle": "Taitara tuarua o te papatohu",
+      "ConfigureOptions.RoadSpeed": "Tere o te hākoritanga o te ara",
+      "ConfigureOptions.Message": "Karere ā-rohe",
+      "ConfigureOptions.DisableAnimations": "Monokia ngā hākoritanga"
+    },
+    "652": {
+      "Title": "Rūma inerite",
+      "Description": "Ngā tautuhinga kōwhiringa mō te papatohu Rūma inerite.",
+      "ConfigureOptions.Eyebrow": "Kupu kei runga ake i te taitara",
+      "ConfigureOptions.Title": "Taitara papatohu",
+      "ConfigureOptions.Subtitle": "Taitara tuarua o te papatohu",
+      "ConfigureOptions.DisableAnimations": "Monokia ngā hākoritanga"
+    },
+
     "6": {
       "Title": "Whakakāngia ngā rama rōpū",
       "Description": "Whakakāngia ngā rama katoa o te rōpū kua tohua."

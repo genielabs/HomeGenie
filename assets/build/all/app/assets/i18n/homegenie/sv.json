@@ -139,7 +139,28 @@
   "capture_commands_pause": "Pausa mellan kommandon",
   "capture_pause_none": "Ingen",
   "capture_pause_asis": "Som den är",
+  "neon_district_road_speed_very_slow": "Mycket långsam",
+  "neon_district_road_speed_slow": "Långsam",
+  "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Valfria inställningar för kontrollpanelen ”Neon District”.",
+      "ConfigureOptions.Title": "Kontrollpanelens titel",
+      "ConfigureOptions.Subtitle": "Kontrollpanelens undertitel",
+      "ConfigureOptions.RoadSpeed": "Väganimationens hastighet",
+      "ConfigureOptions.Message": "Meddelande för stadsdelen",
+      "ConfigureOptions.DisableAnimations": "Inaktivera animationer"
+    },
+    "652": {
+      "Title": "Isometriskt rum",
+      "Description": "Valfria inställningar för kontrollpanelen ”Isometriskt rum”.",
+      "ConfigureOptions.Eyebrow": "Text ovanför titeln",
+      "ConfigureOptions.Title": "Kontrollpanelens titel",
+      "ConfigureOptions.Subtitle": "Kontrollpanelens undertitel",
+      "ConfigureOptions.DisableAnimations": "Inaktivera animationer"
+    },
+
     "6": {
       "Title": "Tänd gruppens lampor",
       "Description": "Tänd alla lampor i den angivna gruppen."

@@ -139,7 +139,28 @@
   "capture_commands_pause": "കമാൻഡുകൾക്കിടയിൽ താൽക്കാലികമായി നിർത്തുക",
   "capture_pause_none": "ഒന്നുമില്ല",
   "capture_pause_asis": "ഉള്ളതുപോലെ",
+  "neon_district_road_speed_very_slow": "വളരെ പതുക്കെ",
+  "neon_district_road_speed_slow": "പതുക്കെ",
+  "neon_district_road_speed_normal": "സാധാരണം",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District ഡാഷ്‌ബോർഡിനുള്ള ഐച്ഛിക ക്രമീകരണങ്ങൾ.",
+      "ConfigureOptions.Title": "ഡാഷ്‌ബോർഡിന്റെ തലക്കെട്ട്",
+      "ConfigureOptions.Subtitle": "ഡാഷ്‌ബോർഡിന്റെ ഉപതലക്കെട്ട്",
+      "ConfigureOptions.RoadSpeed": "റോഡ് ആനിമേഷന്റെ വേഗം",
+      "ConfigureOptions.Message": "മേഖലാ സന്ദേശം",
+      "ConfigureOptions.DisableAnimations": "ആനിമേഷനുകൾ പ്രവർത്തനരഹിതമാക്കുക"
+    },
+    "652": {
+      "Title": "ഐസോമെട്രിക് മുറി",
+      "Description": "ഐസോമെട്രിക് മുറി ഡാഷ്‌ബോർഡിനുള്ള ഐച്ഛിക ക്രമീകരണങ്ങൾ.",
+      "ConfigureOptions.Eyebrow": "തലക്കെട്ടിന് മുകളിലുള്ള വാചകം",
+      "ConfigureOptions.Title": "ഡാഷ്‌ബോർഡിന്റെ തലക്കെട്ട്",
+      "ConfigureOptions.Subtitle": "ഡാഷ്‌ബോർഡിന്റെ ഉപതലക്കെട്ട്",
+      "ConfigureOptions.DisableAnimations": "ആനിമേഷനുകൾ പ്രവർത്തനരഹിതമാക്കുക"
+    },
+
     "6": {
       "Title": "ഗ്രൂപ്പിലെ വിളക്കുകൾ ഓണാക്കുക",
       "Description": "നൽകിയ ഗ്രൂപ്പിലെ എല്ലാ വിളക്കുകളും ഓണാക്കുക."

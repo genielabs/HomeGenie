@@ -139,7 +139,28 @@
   "capture_commands_pause": "आदेशांदरम्यान विराम द्या",
   "capture_pause_none": "काहीही नाही",
   "capture_pause_asis": "जसे आहे तसे",
+  "neon_district_road_speed_very_slow": "खूप मंद",
+  "neon_district_road_speed_slow": "मंद",
+  "neon_district_road_speed_normal": "सामान्य",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District डॅशबोर्डसाठी ऐच्छिक सेटिंग्ज.",
+      "ConfigureOptions.Title": "डॅशबोर्डचे शीर्षक",
+      "ConfigureOptions.Subtitle": "डॅशबोर्डचे उपशीर्षक",
+      "ConfigureOptions.RoadSpeed": "रस्त्याच्या अ‍ॅनिमेशनचा वेग",
+      "ConfigureOptions.Message": "परिसराचा संदेश",
+      "ConfigureOptions.DisableAnimations": "अ‍ॅनिमेशन बंद करा"
+    },
+    "652": {
+      "Title": "आयसोमेट्रिक खोली",
+      "Description": "आयसोमेट्रिक खोली डॅशबोर्डसाठी ऐच्छिक सेटिंग्ज.",
+      "ConfigureOptions.Eyebrow": "शीर्षकाच्या वरचा मजकूर",
+      "ConfigureOptions.Title": "डॅशबोर्डचे शीर्षक",
+      "ConfigureOptions.Subtitle": "डॅशबोर्डचे उपशीर्षक",
+      "ConfigureOptions.DisableAnimations": "अ‍ॅनिमेशन बंद करा"
+    },
+
     "6": {
       "Title": "गटातील दिवे चालू करा",
       "Description": "दिलेल्या गटातील सर्व दिवे चालू करा."

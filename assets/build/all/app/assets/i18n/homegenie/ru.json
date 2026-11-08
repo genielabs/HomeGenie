@@ -139,7 +139,28 @@
   "capture_commands_pause": "Пауза между командами",
   "capture_pause_none": "Никто",
   "capture_pause_asis": "Как есть",
+  "neon_district_road_speed_very_slow": "Очень медленно",
+  "neon_district_road_speed_slow": "Медленно",
+  "neon_district_road_speed_normal": "Обычно",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Дополнительные настройки панели управления «Neon District».",
+      "ConfigureOptions.Title": "Заголовок панели управления",
+      "ConfigureOptions.Subtitle": "Подзаголовок панели управления",
+      "ConfigureOptions.RoadSpeed": "Скорость анимации дороги",
+      "ConfigureOptions.Message": "Сообщение района",
+      "ConfigureOptions.DisableAnimations": "Отключить анимацию"
+    },
+    "652": {
+      "Title": "Изометрическая комната",
+      "Description": "Дополнительные настройки панели управления «Изометрическая комната».",
+      "ConfigureOptions.Eyebrow": "Текст над заголовком",
+      "ConfigureOptions.Title": "Заголовок панели управления",
+      "ConfigureOptions.Subtitle": "Подзаголовок панели управления",
+      "ConfigureOptions.DisableAnimations": "Отключить анимацию"
+    },
+
     "6": {
       "Title": "Включить освещение группы",
       "Description": "Включить все светильники в указанной группе."

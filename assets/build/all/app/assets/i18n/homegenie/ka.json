@@ -139,7 +139,28 @@
   "capture_commands_pause": "პაუზა ბრძანებებს შორის",
   "capture_pause_none": "არცერთი",
   "capture_pause_asis": "როგორც არის",
+  "neon_district_road_speed_very_slow": "ძალიან ნელი",
+  "neon_district_road_speed_slow": "ნელი",
+  "neon_district_road_speed_normal": "ჩვეულებრივი",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "„Neon District“ მართვის პანელის დამატებითი პარამეტრები.",
+      "ConfigureOptions.Title": "მართვის პანელის სათაური",
+      "ConfigureOptions.Subtitle": "მართვის პანელის ქვესათაური",
+      "ConfigureOptions.RoadSpeed": "გზის ანიმაციის სიჩქარე",
+      "ConfigureOptions.Message": "უბნის შეტყობინება",
+      "ConfigureOptions.DisableAnimations": "ანიმაციების გამორთვა"
+    },
+    "652": {
+      "Title": "იზომეტრიული ოთახი",
+      "Description": "„იზომეტრიული ოთახი“ მართვის პანელის დამატებითი პარამეტრები.",
+      "ConfigureOptions.Eyebrow": "ტექსტი სათაურის ზემოთ",
+      "ConfigureOptions.Title": "მართვის პანელის სათაური",
+      "ConfigureOptions.Subtitle": "მართვის პანელის ქვესათაური",
+      "ConfigureOptions.DisableAnimations": "ანიმაციების გამორთვა"
+    },
+
     "6": {
       "Title": "ჯგუფის განათების ჩართვა",
       "Description": "მითითებულ ჯგუფში ყველა სანათის ჩართვა."

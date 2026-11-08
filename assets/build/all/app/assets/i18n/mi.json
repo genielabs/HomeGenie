@@ -522,6 +522,7 @@
   "Scenarios": "Ngā Wāhanga",
   "Security": "Haumarutanga",
   "Weather and Environment": "Te Huarere me te Taiao",
+  "Themes": "Kaupapa",
   "Utilities": "Ngā Ratonga",
   "Scenes": "Ngā Wāhanga",
   "Virtual Modules": "Ngā Kōwae Mariko",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Ko te punaha kaore i te hou",
   "new_programs_updates_available": "Kei te waatea nga whakahoutanga hotaka hou",
   "dashboard_layout": "Tahora",
-  "dashboard_standard": "Paerewa"
+  "dashboard_standard": "Paerewa",
+  "ai_dashboard_open": "Tuwhera te papatohu",
+  "ai_dashboard_select_preset": "Tīpakohia te tatūkē taketake. Whakatuwheratia te “Manakohanga” ka whakahou i te tatūkē i mua i te whakatuwheratanga o tenei papatohu.",
+  "preset_conflict": "I huri tenei tatūkē i runga i te tūmau. Kei te waatea tonu o huringa ki tenei tirotiro.",
+  "preset_conflict_recovery": "Hei uta i te kape mai i te tūmau me te whakakapi i ō huringa paetata, tīpakohia “Whakahōu”. Hei pupuri i ō huringa, tiakina hei tatūkē hōu.",
+  "preset_updated_elsewhere": "I hurihia tenei tatūkē i tētahi atu wātū.",
+  "preset_deleted_elsewhere": "I mukua tenei tatūkē i tētahi atu wātū. Ka taea e koe te tiaki i to kape rohe hei tatūkē hou."
 }

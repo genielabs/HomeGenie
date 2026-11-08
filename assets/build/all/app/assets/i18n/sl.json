@@ -522,6 +522,7 @@
   "Scenarios": "Prizori",
   "Security": "Varnost",
   "Weather and Environment": "Vreme in okolje",
+  "Themes": "Teme",
   "Utilities": "Komunalne storitve",
   "Scenes": "Prizori",
   "Virtual Modules": "Virtualni moduli",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Sistem ni posodobljen",
   "new_programs_updates_available": "Na voljo so nove posodobitve programa",
   "dashboard_layout": "Postavitev",
-  "dashboard_standard": "Standardna"
+  "dashboard_standard": "Standardna",
+  "ai_dashboard_open": "Odpri nadzorno ploščo",
+  "ai_dashboard_select_preset": "Izberite izvirno prednastavitev. Odprite “Nastavitve” in posodobite prednastavitev, preden odprete to nadzorno ploščo.",
+  "preset_conflict": "Ta prednastavitev se je spremenila na strežniku. Vaše spremembe so še vedno na voljo v tem brskalniku.",
+  "preset_conflict_recovery": "Če želite naložiti kopijo s strežnika in zamenjati svoje lokalne spremembe, izberite “Posodobitev”. Če želite ohraniti svoje spremembe, jih shranite kot novo prednastavitev.",
+  "preset_updated_elsewhere": "Ta prednastavitev je bila spremenjena v drugi seji.",
+  "preset_deleted_elsewhere": "Ta prednastavitev je bila izbrisana v drugi seji. Lokalno kopijo lahko shranite kot novo prednastavitev."
 }

@@ -139,7 +139,28 @@
   "capture_commands_pause": "I-pause sa pagitan ng mga utos",
   "capture_pause_none": "wala",
   "capture_pause_asis": "gaya ng",
+  "neon_district_road_speed_very_slow": "Napakabagal",
+  "neon_district_road_speed_slow": "Mabagal",
+  "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Mga opsyonal na setting para sa dashboard na Neon District.",
+      "ConfigureOptions.Title": "Pamagat ng dashboard",
+      "ConfigureOptions.Subtitle": "Pangalawang pamagat ng dashboard",
+      "ConfigureOptions.RoadSpeed": "Bilis ng animasyon ng kalsada",
+      "ConfigureOptions.Message": "Mensahe ng distrito",
+      "ConfigureOptions.DisableAnimations": "I-off ang mga animasyon"
+    },
+    "652": {
+      "Title": "Isometrikong Silid",
+      "Description": "Mga opsyonal na setting para sa dashboard na Isometrikong Silid.",
+      "ConfigureOptions.Eyebrow": "Teksto sa itaas ng pamagat",
+      "ConfigureOptions.Title": "Pamagat ng dashboard",
+      "ConfigureOptions.Subtitle": "Pangalawang pamagat ng dashboard",
+      "ConfigureOptions.DisableAnimations": "I-off ang mga animasyon"
+    },
+
     "6": {
       "Title": "Buksan ang mga ilaw ng grupo",
       "Description": "Buksan ang lahat ng ilaw sa tinukoy na grupo."

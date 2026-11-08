@@ -522,6 +522,7 @@
   "Scenarios": "Scene",
   "Security": "Sigurnost",
   "Weather and Environment": "Vrijeme i okoliš",
+  "Themes": "Teme",
   "Utilities": "Komunalne usluge",
   "Scenes": "Scene",
   "Virtual Modules": "Virtualni moduli",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Sustav nije ažuran",
   "new_programs_updates_available": "Dostupna su nova ažuriranja programa",
   "dashboard_layout": "Raspored",
-  "dashboard_standard": "Standardni"
+  "dashboard_standard": "Standardni",
+  "ai_dashboard_open": "Otvori nadzornu ploču",
+  "ai_dashboard_select_preset": "Odaberite izvornu postavku. Otvorite “Postavke” i ažurirajte unaprijed postavljenu postavku prije otvaranja ove nadzorne ploče.",
+  "preset_conflict": "Ova predpostavka je promijenjena na poslužitelju. Vaše su promjene još uvijek dostupne u ovom pregledniku.",
+  "preset_conflict_recovery": "Da biste učitali kopiju s poslužitelja i zamijenili svoje lokalne promjene, odaberite “Ažurirati”. Da biste zadržali svoje promjene, spremite ih kao novu unaprijed postavljenu postavku.",
+  "preset_updated_elsewhere": "Ova je unaprijed postavka promijenjena u drugoj sesiji.",
+  "preset_deleted_elsewhere": "Ova je unaprijed postavka izbrisana u drugoj sesiji. Lokalnu kopiju možete spremiti kao novu unaprijed postavljenu postavku."
 }

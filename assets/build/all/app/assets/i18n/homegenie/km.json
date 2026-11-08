@@ -139,7 +139,28 @@
   "capture_commands_pause": "ផ្អាករវាងពាក្យបញ្ជា",
   "capture_pause_none": "គ្មាន",
   "capture_pause_asis": "ដូច",
+  "neon_district_road_speed_very_slow": "យឺតខ្លាំង",
+  "neon_district_road_speed_slow": "យឺត",
+  "neon_district_road_speed_normal": "ធម្មតា",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "ការកំណត់ស្រេចចិត្តសម្រាប់ផ្ទាំងគ្រប់គ្រង Neon District។",
+      "ConfigureOptions.Title": "ចំណងជើងផ្ទាំងគ្រប់គ្រង",
+      "ConfigureOptions.Subtitle": "ចំណងជើងរងផ្ទាំងគ្រប់គ្រង",
+      "ConfigureOptions.RoadSpeed": "ល្បឿនចលនាផ្លូវ",
+      "ConfigureOptions.Message": "សារប្រចាំតំបន់",
+      "ConfigureOptions.DisableAnimations": "បិទចលនា"
+    },
+    "652": {
+      "Title": "បន្ទប់អ៊ីសូម៉ែត្រ",
+      "Description": "ការកំណត់ស្រេចចិត្តសម្រាប់ផ្ទាំងគ្រប់គ្រង បន្ទប់អ៊ីសូម៉ែត្រ។",
+      "ConfigureOptions.Eyebrow": "អត្ថបទនៅលើចំណងជើង",
+      "ConfigureOptions.Title": "ចំណងជើងផ្ទាំងគ្រប់គ្រង",
+      "ConfigureOptions.Subtitle": "ចំណងជើងរងផ្ទាំងគ្រប់គ្រង",
+      "ConfigureOptions.DisableAnimations": "បិទចលនា"
+    },
+
     "6": {
       "Title": "បើកភ្លើងក្នុងក្រុម",
       "Description": "បើកភ្លើងទាំងអស់ក្នុងក្រុមដែលបានកំណត់។"

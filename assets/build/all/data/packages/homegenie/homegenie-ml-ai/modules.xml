@@ -100,7 +100,7 @@
       </ModuleParameter>
       <ModuleParameter>
         <Name>Widget.DisplayModule</Name>
-        <Value>custom/examples/local-ai-chat</Value>
+        <Value>homegenie/generic/program</Value>
         <Description />
         <FieldType />
         <ParentId>0</ParentId>

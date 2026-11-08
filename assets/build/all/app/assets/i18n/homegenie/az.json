@@ -139,7 +139,28 @@
   "capture_commands_pause": "Əmrlər arasında fasilə",
   "capture_pause_none": "Heç biri",
   "capture_pause_asis": "olduğu kimi",
+  "neon_district_road_speed_very_slow": "Çox yavaş",
+  "neon_district_road_speed_slow": "Yavaş",
+  "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District idarəetmə paneli üçün əlavə ayarlar.",
+      "ConfigureOptions.Title": "İdarəetmə panelinin başlığı",
+      "ConfigureOptions.Subtitle": "İdarəetmə panelinin alt başlığı",
+      "ConfigureOptions.RoadSpeed": "Yol animasiyasının sürəti",
+      "ConfigureOptions.Message": "Məhəllə mesajı",
+      "ConfigureOptions.DisableAnimations": "Animasiyaları söndür"
+    },
+    "652": {
+      "Title": "İzometrik otaq",
+      "Description": "İzometrik otaq idarəetmə paneli üçün əlavə ayarlar.",
+      "ConfigureOptions.Eyebrow": "Başlığın üstündəki mətn",
+      "ConfigureOptions.Title": "İdarəetmə panelinin başlığı",
+      "ConfigureOptions.Subtitle": "İdarəetmə panelinin alt başlığı",
+      "ConfigureOptions.DisableAnimations": "Animasiyaları söndür"
+    },
+
     "6": {
       "Title": "Qrupun işıqlarını YANDIR",
       "Description": "Göstərilən qrupdakı bütün işıqları yandırın."

@@ -139,7 +139,28 @@
   "capture_commands_pause": "Premor med ukazi",
   "capture_pause_none": "Nobena",
   "capture_pause_asis": "Kot je",
+  "neon_district_road_speed_very_slow": "Zelo počasi",
+  "neon_district_road_speed_slow": "Počasi",
+  "neon_district_road_speed_normal": "Običajno",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Izbirne nastavitve za nadzorno ploščo »Neon District«.",
+      "ConfigureOptions.Title": "Naslov nadzorne plošče",
+      "ConfigureOptions.Subtitle": "Podnaslov nadzorne plošče",
+      "ConfigureOptions.RoadSpeed": "Hitrost animacije ceste",
+      "ConfigureOptions.Message": "Sporočilo četrti",
+      "ConfigureOptions.DisableAnimations": "Izklopi animacije"
+    },
+    "652": {
+      "Title": "Izometrična soba",
+      "Description": "Izbirne nastavitve za nadzorno ploščo »Izometrična soba«.",
+      "ConfigureOptions.Eyebrow": "Besedilo nad naslovom",
+      "ConfigureOptions.Title": "Naslov nadzorne plošče",
+      "ConfigureOptions.Subtitle": "Podnaslov nadzorne plošče",
+      "ConfigureOptions.DisableAnimations": "Izklopi animacije"
+    },
+
     "6": {
       "Title": "Vklopi luči skupine",
       "Description": "Vklopi vse luči v navedeni skupini."

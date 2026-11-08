@@ -522,6 +522,7 @@
   "Scenarios": "Stseenid",
   "Security": "Turvalisus",
   "Weather and Environment": "Ilm ja keskkond",
+  "Themes": "Teemad",
   "Utilities": "Kommunaalteenused",
   "Scenes": "Stseenid",
   "Virtual Modules": "Virtuaalsed moodulid",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Süsteem ei ole ajakohane",
   "new_programs_updates_available": "Saadaval on uued programmivärskendused",
   "dashboard_layout": "Paigutus",
-  "dashboard_standard": "Standardne"
+  "dashboard_standard": "Standardne",
+  "ai_dashboard_open": "Ava armatuurlaud",
+  "ai_dashboard_select_preset": "Valige algne eelseadistus. Avage “Eelistused” ja värskendage eelseadistust enne selle armatuurlaua avamist.",
+  "preset_conflict": "Seda eelseadistust serveris muudeti. Teie muudatused on selles brauseris endiselt saadaval.",
+  "preset_conflict_recovery": "Koopia laadimiseks serverist ja kohalike muudatuste asendamiseks valige “Värskendus”. Muudatuste säilitamiseks salvestage need uue eelseadena.",
+  "preset_updated_elsewhere": "Seda eelseadistust muudeti teises seansis.",
+  "preset_deleted_elsewhere": "See eelseade kustutati teises seansis. Saate oma kohaliku koopia salvestada uue eelseadena."
 }

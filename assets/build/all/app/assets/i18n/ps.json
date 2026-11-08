@@ -522,6 +522,7 @@
   "Scenarios": "صحنې",
   "Security": "امنیت",
   "Weather and Environment": "هوا او چاپیریال",
+  "Themes": "بڼې",
   "Utilities": "اسانتیاوې",
   "Scenes": "صحنې",
   "Virtual Modules": "مجازی ماډلونه",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "سیسټم تازه نه دی",
   "new_programs_updates_available": "د نوي پروګرام تازه معلومات شتون لري",
   "dashboard_layout": "ترتیب",
-  "dashboard_standard": "معیاري"
+  "dashboard_standard": "معیاري",
+  "ai_dashboard_open": "ډشبورډ خلاص کړئ",
+  "ai_dashboard_select_preset": "اصلي پریزیټ غوره کړئ. “غوره توبونه” خلاص کړئ او د دې ډشبورډ خلاصولو دمخه پری سیټ تازه کړئ.",
+  "preset_conflict": "دا پریزیټ په سرور کې بدل شوی. ستاسو بدلونونه لاهم په دې براوزر کې شتون لري.",
+  "preset_conflict_recovery": "د سرور څخه کاپي پورته کولو او خپل محلي بدلونونو بدلولو لپاره، “تازه کول” غوره کړئ. د خپلو بدلونونو ساتلو لپاره، دوی د نوي پریزټ په توګه خوندي کړئ.",
+  "preset_updated_elsewhere": "دا پیشنهاد په بله غونډه کې بدل شو.",
+  "preset_deleted_elsewhere": "دا پیشنهاد په بله ناسته کې حذف شو. تاسو کولی شئ خپل محلي کاپي د نوي پریزټ په توګه خوندي کړئ."
 }

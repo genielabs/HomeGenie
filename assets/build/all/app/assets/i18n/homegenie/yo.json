@@ -139,7 +139,28 @@
   "capture_commands_pause": "Sinmi laarin awọn aṣẹ",
   "capture_pause_none": "Ko si",
   "capture_pause_asis": "Bi o ti ri",
+  "neon_district_road_speed_very_slow": "Lọ́ra gan-an",
+  "neon_district_road_speed_slow": "Lọ́ra",
+  "neon_district_road_speed_normal": "Bí ó ṣe yẹ",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Àwọn ètò àṣàyàn fún pátákó ìṣàkóso Neon District.",
+      "ConfigureOptions.Title": "Àkọlé pátákó ìṣàkóso",
+      "ConfigureOptions.Subtitle": "Àkọlé kékeré pátákó ìṣàkóso",
+      "ConfigureOptions.RoadSpeed": "Ìyára ìṣípòpadà ojú ọ̀nà",
+      "ConfigureOptions.Message": "Ìránṣẹ́ àdúgbò",
+      "ConfigureOptions.DisableAnimations": "Pa àwọn àwòrán oníṣípòpadà"
+    },
+    "652": {
+      "Title": "Yàrá oníwòye isometric",
+      "Description": "Àwọn ètò àṣàyàn fún pátákó ìṣàkóso Yàrá oníwòye isometric.",
+      "ConfigureOptions.Eyebrow": "Ọ̀rọ̀ lókè àkọlé",
+      "ConfigureOptions.Title": "Àkọlé pátákó ìṣàkóso",
+      "ConfigureOptions.Subtitle": "Àkọlé kékeré pátákó ìṣàkóso",
+      "ConfigureOptions.DisableAnimations": "Pa àwọn àwòrán oníṣípòpadà"
+    },
+
     "6": {
       "Title": "Tan àwọn iná ẹgbẹ́",
       "Description": "Tan gbogbo àwọn iná nínú ẹgbẹ́ tí a yàn."

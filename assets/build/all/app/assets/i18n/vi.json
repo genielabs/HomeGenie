@@ -522,6 +522,7 @@
   "Scenarios": "Cảnh",
   "Security": "Bảo vệ",
   "Weather and Environment": "Thời tiết & Môi trường",
+  "Themes": "Chủ đề",
   "Utilities": "Tiện ích",
   "Scenes": "Cảnh",
   "Virtual Modules": "Mô-đun ảo",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Hệ thống chưa được cập nhật",
   "new_programs_updates_available": "Cập nhật chương trình mới có sẵn",
   "dashboard_layout": "Bố cục",
-  "dashboard_standard": "Tiêu chuẩn"
+  "dashboard_standard": "Tiêu chuẩn",
+  "ai_dashboard_open": "Mở trang tổng quan",
+  "ai_dashboard_select_preset": "Chọn cài đặt trước ban đầu. Mở “Sở thích” và cập nhật cài đặt trước trước khi mở bảng điều khiển này.",
+  "preset_conflict": "Giá trị đặt trước này đã thay đổi trên máy chủ. Những thay đổi của bạn vẫn có sẵn trong trình duyệt này.",
+  "preset_conflict_recovery": "Để tải bản sao từ máy chủ và thay thế các thay đổi cục bộ của bạn, hãy chọn “Cập nhật”. Để giữ các thay đổi của bạn, hãy lưu chúng làm giá trị đặt trước mới.",
+  "preset_updated_elsewhere": "Giá trị đặt trước này đã được thay đổi trong một phiên khác.",
+  "preset_deleted_elsewhere": "Giá trị đặt trước này đã bị xóa trong một phiên khác. Bạn có thể lưu bản sao cục bộ của mình làm cài đặt trước mới."
 }

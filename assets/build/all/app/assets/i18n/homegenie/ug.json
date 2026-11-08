@@ -139,7 +139,28 @@
   "capture_commands_pause": "بۇيرۇقلار ئارىسىدا توختاپ قېلىش",
   "capture_pause_none": "ياق",
   "capture_pause_asis": "دېگەندەك",
+  "neon_district_road_speed_very_slow": "بەك ئاستا",
+  "neon_district_road_speed_slow": "ئاستا",
+  "neon_district_road_speed_normal": "نورمال",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District باشقۇرۇش تاختىسىنىڭ ئىختىيارىي تەڭشەكلىرى.",
+      "ConfigureOptions.Title": "باشقۇرۇش تاختىسىنىڭ ماۋزۇسى",
+      "ConfigureOptions.Subtitle": "باشقۇرۇش تاختىسىنىڭ تارماق ماۋزۇسى",
+      "ConfigureOptions.RoadSpeed": "يول ھەرىكىتىنىڭ سۈرئىتى",
+      "ConfigureOptions.Message": "رايون ئۇچۇرى",
+      "ConfigureOptions.DisableAnimations": "ھەرىكەتلىك كۆرۈنۈشلەرنى چەكلەش"
+    },
+    "652": {
+      "Title": "ئىزومېتىرىك ئۆي",
+      "Description": "ئىزومېتىرىك ئۆي باشقۇرۇش تاختىسىنىڭ ئىختىيارىي تەڭشەكلىرى.",
+      "ConfigureOptions.Eyebrow": "ماۋزۇنىڭ ئۈستىدىكى تېكىست",
+      "ConfigureOptions.Title": "باشقۇرۇش تاختىسىنىڭ ماۋزۇسى",
+      "ConfigureOptions.Subtitle": "باشقۇرۇش تاختىسىنىڭ تارماق ماۋزۇسى",
+      "ConfigureOptions.DisableAnimations": "ھەرىكەتلىك كۆرۈنۈشلەرنى چەكلەش"
+    },
+
     "6": {
       "Title": "گۇرۇپپا چىراغلىرىنى ياندۇرۇش",
       "Description": "بەلگىلەنگەن گۇرۇپپىدىكى بارلىق چىراغلارنى ياندۇرۇڭ."

@@ -353,8 +353,12 @@ declare class ContextController {
 /** Named role declarations are shared by every instance; device choices belong to configuration.boundModules. */
 interface WidgetBoundModuleDefinition {
   label: string;
+  /** Key in the optional widget .i18n.json file. The literal label is the fallback. */
+  labelKey?: string;
   typeFilter?: string;
   fieldFilter?: string;
+  /** Comma-separated domains included in addition to modules matching the type and field filters. */
+  includeDomains?: string;
 }
 interface WidgetBoundModuleSettings {
   boundModules?: Record<string, WidgetBoundModuleDefinition>;
@@ -438,6 +442,8 @@ declare class ControllerInstance extends ContextController {
    * @returns An observable Subject that emits the localized value.
    */
   translate(key: String): any;
+  /** Read from this widget's optional .i18n.json using the current UI language. */
+  translate(key: string, options: {scope: 'widget'; fallback?: string}): {subscribe(callback: (text: string) => void): {unsubscribe(): void}};
 }
 
 /**

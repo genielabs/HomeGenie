@@ -522,6 +522,7 @@
   "Scenarios": "Ihe nkiri",
   "Security": "Nchekwa",
   "Weather and Environment": "Ihu Igwe na Gburugburu Ebe Obibi",
+  "Themes": "Isiokwu",
   "Utilities": "Ngwa ọrụ",
   "Scenes": "Ihe nkiri",
   "Virtual Modules": "Modulu mebere emebere",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Sistemụ anaghị emelite",
   "new_programs_updates_available": "Mmelite mmemme ọhụrụ dị",
   "dashboard_layout": "Nhazi",
-  "dashboard_standard": "Ọkọlọtọ"
+  "dashboard_standard": "Ọkọlọtọ",
+  "ai_dashboard_open": "Mepee dashboard",
+  "ai_dashboard_select_preset": "Họrọ atọrọ mbụ. Mepee “Mmasị” wee kwalite ntọala tupu imepe dashboard a.",
+  "preset_conflict": "Ihe atọrọ atọ a gbanwere na sava ahụ. Mgbanwe gị ka dị na ihe nchọgharị a.",
+  "preset_conflict_recovery": "Ka ibuo oyiri site na ihe nkesa wee dochie mgbanwe mpaghara gị, họrọ “Mmelite”. Ka idobe mgbanwe gị, chekwaa ha dị ka ihe atọrọ ọhụrụ.",
+  "preset_updated_elsewhere": "Agbanwere ntọala a na nnọkọ ọzọ.",
+  "preset_deleted_elsewhere": "E ehichapụrụ atọrọ atọ a na nnọkọ ọzọ. Ị nwere ike ichekwa nnomi mpaghara gị dị ka ihe atọrọ ọhụrụ."
 }

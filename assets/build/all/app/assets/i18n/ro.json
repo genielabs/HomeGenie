@@ -522,6 +522,7 @@
   "Scenarios": "Scene",
   "Security": "Securitate",
   "Weather and Environment": "Vremea și mediul înconjurător",
+  "Themes": "Teme",
   "Utilities": "Utilități",
   "Scenes": "Scene",
   "Virtual Modules": "Module virtuale",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Sistemul nu este actualizat",
   "new_programs_updates_available": "Actualizări noi ale programului disponibile",
   "dashboard_layout": "Aspect",
-  "dashboard_standard": "Standard"
+  "dashboard_standard": "Standard",
+  "ai_dashboard_open": "Deschideți tabloul de bord",
+  "ai_dashboard_select_preset": "Selectați presetarea originală. Deschideți “Preferințe” și actualizați presetarea înainte de a deschide acest tablou de bord.",
+  "preset_conflict": "Această presetare s-a schimbat pe server. Modificările dvs. sunt încă disponibile în acest browser.",
+  "preset_conflict_recovery": "Pentru a încărca copia de pe server și a înlocui modificările locale, selectați “Actualizare”. Pentru a păstra modificările, salvați-le ca o nouă presetare.",
+  "preset_updated_elsewhere": "Această presetare a fost schimbată într-o altă sesiune.",
+  "preset_deleted_elsewhere": "Această presetare a fost ștearsă într-o altă sesiune. Puteți salva copia locală ca o nouă presetare."
 }

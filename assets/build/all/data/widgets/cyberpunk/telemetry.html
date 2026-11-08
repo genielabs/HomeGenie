@@ -1,0 +1,21 @@
+<section class="panel telemetry" @set="void 0">
+  <header class="panel-heading">
+    <span class="panel-code" aria-hidden="true">02</span>
+    <div><h2 #title></h2><p #subtitle></p></div>
+    <span class="material-symbols-outlined" aria-hidden="true">sensors</span>
+  </header>
+  <div class="metrics">
+    <div class="metric"><span #temperature_label></span><strong><span #temperature></span><small #temperature_unit></small></strong></div>
+    <div class="metric"><span #humidity_label></span><strong><span #humidity></span><small>%</small></strong></div>
+  </div>
+  <div class="power">
+    <div class="metric"><span #power_label></span><strong><span #watts></span><small #power_unit></small></strong></div>
+    <div class="trace">
+      <svg viewBox="0 0 180 42" preserveAspectRatio="none" role="img" #trace_area hidden>
+        <path d="M0 8h180M0 21h180M0 34h180" stroke="#394060" fill="none"/>
+        <polyline #trace stroke="#ffa5d5" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke" fill="none"/>
+      </svg>
+      <span #trace_label></span>
+    </div>
+  </div>
+</section>

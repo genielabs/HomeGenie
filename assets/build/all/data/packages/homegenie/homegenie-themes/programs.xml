@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProgramBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProgramBlock>
+    <ScriptSetup>Program.Setup(() =&gt; {
+  Program
+    .AddOption(&quot;Title&quot;, &quot;&quot;, &quot;1. Dashboard title&quot;, &quot;text&quot;)
+    .AddOption(&quot;Subtitle&quot;, &quot;&quot;, &quot;2. Dashboard subtitle&quot;, &quot;text&quot;)
+    .AddOption(&quot;RoadSpeed&quot;, &quot;very-slow&quot;, &quot;3. Road speed&quot;, &quot;select:HOMEGENIE.neon_district_road_speed_very_slow=very-slow,HOMEGENIE.neon_district_road_speed_slow=slow,HOMEGENIE.neon_district_road_speed_normal=normal&quot;)
+    .AddOption(&quot;Message&quot;, &quot;&quot;, &quot;4. District message&quot;, &quot;text&quot;)
+    .AddOption(&quot;DisableAnimations&quot;, &quot;false&quot;, &quot;5. Disable animations&quot;, &quot;checkbox&quot;);
+  Program.Parameter(&quot;Dashboard.Theme.Cyberpunk&quot;).Value = &quot;&quot;;
+});
+Program.Run();</ScriptSetup>
+    <ScriptSource>var optionNames = new[] { &quot;Title&quot;, &quot;Subtitle&quot;, &quot;RoadSpeed&quot;, &quot;Message&quot; };
+const string optionPrefix = &quot;ConfigureOptions.&quot;;
+const string fieldPrefix = &quot;Dashboard.NeonDistrict.&quot;;
+
+When.ModuleParameterChanged((module, property) =&gt; {
+  if (module.Instance == Program.Module &amp;&amp; property.Name.StartsWith(optionPrefix, StringComparison.Ordinal))
+  {
+    var name = property.Name.Substring(optionPrefix.Length);
+    if (name == &quot;DisableAnimations&quot;)
+      Program.Emit(&quot;Dashboard.AnimationsDisabled&quot;, property.Value);
+    else if (Array.IndexOf(optionNames, name) &gt;= 0)
+      Program.Emit(fieldPrefix + name, property.Value);
+  }
+  return true;
+});
+
+Program.Emit(&quot;Dashboard.Theme.Cyberpunk&quot;, &quot;&quot;);
+foreach (var name in optionNames)
+  Program.Emit(fieldPrefix + name, Program.Option(name).Value);
+
+Program.Emit(&quot;Dashboard.AnimationsDisabled&quot;, Program.Option(&quot;DisableAnimations&quot;).Value);
+Program.GoBackground();</ScriptSource>
+    <ScriptContext />
+    <ScriptErrors />
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-themes</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>neon-district</Id>
+      <Version>1.0.1</Version>
+      <Required>false</Required>
+      <Checksum>A93556C1EA38DDCB35CC8F016228AA39</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>651</Address>
+    <Name>Neon District</Name>
+    <Description>Optional settings for the Neon District dashboard.</Description>
+    <Group>Themes</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>true</Cloneable>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>Program.Setup(() =&gt; {
+  Program
+    .AddOption(&quot;Eyebrow&quot;, &quot;&quot;, &quot;1. Text above the title&quot;, &quot;text&quot;)
+    .AddOption(&quot;Title&quot;, &quot;&quot;, &quot;2. Dashboard title&quot;, &quot;text&quot;)
+    .AddOption(&quot;Subtitle&quot;, &quot;&quot;, &quot;3. Dashboard subtitle&quot;, &quot;text&quot;)
+    .AddOption(&quot;DisableAnimations&quot;, &quot;false&quot;, &quot;4. Disable animations&quot;, &quot;checkbox&quot;);
+  Program.Parameter(&quot;Dashboard.Theme.Isometric&quot;).Value = &quot;&quot;;
+});
+Program.Run();</ScriptSetup>
+    <ScriptSource>var headings = new[] { &quot;Eyebrow&quot;, &quot;Title&quot;, &quot;Subtitle&quot; };
+const string optionPrefix = &quot;ConfigureOptions.&quot;;
+const string headingPrefix = &quot;Dashboard.Isometric.&quot;;
+
+When.ModuleParameterChanged((module, property) =&gt; {
+  if (module.Instance == Program.Module &amp;&amp; property.Name.StartsWith(optionPrefix, StringComparison.Ordinal))
+  {
+    var name = property.Name.Substring(optionPrefix.Length);
+    if (name == &quot;DisableAnimations&quot;)
+      Program.Emit(&quot;Dashboard.AnimationsDisabled&quot;, property.Value);
+    else if (Array.IndexOf(headings, name) &gt;= 0)
+      Program.Emit(headingPrefix + name, property.Value);
+  }
+  return true;
+});
+
+Program.Emit(&quot;Dashboard.Theme.Isometric&quot;, &quot;&quot;);
+foreach (var name in headings)
+  Program.Emit(headingPrefix + name, Program.Option(name).Value);
+Program.Emit(&quot;Dashboard.AnimationsDisabled&quot;, Program.Option(&quot;DisableAnimations&quot;).Value);
+Program.GoBackground();</ScriptSource>
+    <ScriptContext />
+    <ScriptErrors />
+    <Data />
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-themes</PackageId>
+      <PackageVersion>1.0.0</PackageVersion>
+      <Id>isometric-room</Id>
+      <Version>1.0.1</Version>
+      <Required>false</Required>
+      <Checksum>6D5CB3BAA644DDB4A07F17166BDEFFDD</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>652</Address>
+    <Name>Isometric Room</Name>
+    <Description>Optional settings for the Isometric Room dashboard.</Description>
+    <Group>Themes</Group>
+    <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>true</Cloneable>
+    <Type>CSharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+</ArrayOfProgramBlock>

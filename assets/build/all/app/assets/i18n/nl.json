@@ -522,6 +522,7 @@
   "Scenarios": "Scènes",
   "Security": "Beveiliging",
   "Weather and Environment": "Weer en milieu",
+  "Themes": "Thema’s",
   "Utilities": "Nutsvoorzieningen",
   "Scenes": "Scènes",
   "Virtual Modules": "Virtuele modules",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Systeem is niet up-to-date",
   "new_programs_updates_available": "Nieuwe programma-updates beschikbaar",
   "dashboard_layout": "Indeling",
-  "dashboard_standard": "Standaard"
+  "dashboard_standard": "Standaard",
+  "ai_dashboard_open": "Dashboard openen",
+  "ai_dashboard_select_preset": "Selecteer de originele voorinstelling. Open “Voorkeuren” en update de voorinstelling voordat u dit dashboard opent.",
+  "preset_conflict": "Deze voorinstelling is gewijzigd op de server. Uw wijzigingen zijn nog steeds beschikbaar in deze browser.",
+  "preset_conflict_recovery": "Om de kopie van de server te laden en uw lokale wijzigingen te vervangen, selecteert u “Update”. Om uw wijzigingen te behouden, slaat u ze op als een nieuwe voorinstelling.",
+  "preset_updated_elsewhere": "Deze voorinstelling is in een andere sessie gewijzigd.",
+  "preset_deleted_elsewhere": "Deze voorinstelling is in een andere sessie verwijderd. U kunt uw lokale kopie opslaan als een nieuwe voorinstelling."
 }

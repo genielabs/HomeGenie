@@ -139,7 +139,28 @@
   "capture_commands_pause": "Hlé á milli skipana",
   "capture_pause_none": "Enginn",
   "capture_pause_asis": "Eins og er",
+  "neon_district_road_speed_very_slow": "Mjög hæg",
+  "neon_district_road_speed_slow": "Hæg",
+  "neon_district_road_speed_normal": "Venjuleg",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Valfrjálsar stillingar fyrir stjórnborðið Neon District.",
+      "ConfigureOptions.Title": "Titill stjórnborðs",
+      "ConfigureOptions.Subtitle": "Undirtitill stjórnborðs",
+      "ConfigureOptions.RoadSpeed": "Hraði hreyfimyndar vegarins",
+      "ConfigureOptions.Message": "Skilaboð hverfisins",
+      "ConfigureOptions.DisableAnimations": "Slökkva á hreyfimyndum"
+    },
+    "652": {
+      "Title": "Jafnmælt herbergi",
+      "Description": "Valfrjálsar stillingar fyrir stjórnborðið Jafnmælt herbergi.",
+      "ConfigureOptions.Eyebrow": "Texti fyrir ofan titil",
+      "ConfigureOptions.Title": "Titill stjórnborðs",
+      "ConfigureOptions.Subtitle": "Undirtitill stjórnborðs",
+      "ConfigureOptions.DisableAnimations": "Slökkva á hreyfimyndum"
+    },
+
     "6": {
       "Title": "Kveikja á ljósum hóps",
       "Description": "Kveikja á öllum ljósum í tilgreindum hópi."

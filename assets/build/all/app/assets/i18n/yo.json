@@ -522,6 +522,7 @@
   "Scenarios": "Àwọn ìṣẹ̀lẹ̀",
   "Security": "Ààbò",
   "Weather and Environment": "Oju-ọjọ ati Ayika",
+  "Themes": "Àwọn àkòrí",
   "Utilities": "Àwọn Ohun Èlò Iṣẹ́",
   "Scenes": "Àwọn ìṣẹ̀lẹ̀",
   "Virtual Modules": "Awọn modulu foju",
@@ -657,5 +658,11 @@
   "system_not_up_to_date": "Eto kii ṣe imudojuiwọn",
   "new_programs_updates_available": "Awọn imudojuiwọn eto titun wa",
   "dashboard_layout": "Ìṣètò",
-  "dashboard_standard": "Ìwọ̀n àfọwọ́ṣe"
+  "dashboard_standard": "Ìwọ̀n àfọwọ́ṣe",
+  "ai_dashboard_open": "Ṣii dasibodu",
+  "ai_dashboard_select_preset": "Yan tito atilẹba. Ṣii “Awọn ayanfẹ” ki o ṣe imudojuiwọn tito tẹlẹ ṣaaju ṣiṣi dasibodu yii.",
+  "preset_conflict": "Tito tẹlẹ yii yipada lori olupin naa. Awọn ayipada rẹ tun wa ni ẹrọ aṣawakiri yii.",
+  "preset_conflict_recovery": "Lati gbe ẹda lati ọdọ olupin naa ki o rọpo awọn ayipada agbegbe, yan “Imudojuiwọn”. Lati tọju awọn ayipada rẹ, fi wọn pamọ bi tito tẹlẹ.",
+  "preset_updated_elsewhere": "A ti yipada tito tẹlẹ ni igba miiran.",
+  "preset_deleted_elsewhere": "Tito tẹlẹ yii ti paarẹ ni igba miiran. O le fi ẹda agbegbe rẹ pamọ bi tito tẹlẹ."
 }

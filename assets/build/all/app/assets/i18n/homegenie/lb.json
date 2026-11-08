@@ -139,7 +139,28 @@
   "capture_commands_pause": "Paus tëscht Kommandoen",
   "capture_pause_none": "Keen",
   "capture_pause_asis": "Wéi et ass",
+  "neon_district_road_speed_very_slow": "Ganz lues",
+  "neon_district_road_speed_slow": "Lues",
+  "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Optional Astellunge fir den Dashboard „Neon District“.",
+      "ConfigureOptions.Title": "Titel vum Dashboard",
+      "ConfigureOptions.Subtitle": "Ënnertitel vum Dashboard",
+      "ConfigureOptions.RoadSpeed": "Vitesse vun der Stroossenanimatioun",
+      "ConfigureOptions.Message": "Noriicht aus dem Quartier",
+      "ConfigureOptions.DisableAnimations": "Animatiounen deaktivéieren"
+    },
+    "652": {
+      "Title": "Isometresche Raum",
+      "Description": "Optional Astellunge fir den Dashboard „Isometresche Raum“.",
+      "ConfigureOptions.Eyebrow": "Text iwwer dem Titel",
+      "ConfigureOptions.Title": "Titel vum Dashboard",
+      "ConfigureOptions.Subtitle": "Ënnertitel vum Dashboard",
+      "ConfigureOptions.DisableAnimations": "Animatiounen deaktivéieren"
+    },
+
     "6": {
       "Title": "Gruppeluuchten aschalten",
       "Description": "All Luuchten an der uginner Grupp aschalten."

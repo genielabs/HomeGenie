@@ -139,7 +139,28 @@
   "capture_commands_pause": "Komutlar arasında duraklama",
   "capture_pause_none": "Hiçbiri",
   "capture_pause_asis": "Olduğu gibi",
+  "neon_district_road_speed_very_slow": "Çok yavaş",
+  "neon_district_road_speed_slow": "Yavaş",
+  "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "651": {
+      "Title": "Neon District",
+      "Description": "Neon District panosu için isteğe bağlı ayarlar.",
+      "ConfigureOptions.Title": "Pano başlığı",
+      "ConfigureOptions.Subtitle": "Pano alt başlığı",
+      "ConfigureOptions.RoadSpeed": "Yol animasyonu hızı",
+      "ConfigureOptions.Message": "Semt mesajı",
+      "ConfigureOptions.DisableAnimations": "Animasyonları devre dışı bırak"
+    },
+    "652": {
+      "Title": "İzometrik Oda",
+      "Description": "İzometrik Oda panosu için isteğe bağlı ayarlar.",
+      "ConfigureOptions.Eyebrow": "Başlığın üstündeki metin",
+      "ConfigureOptions.Title": "Pano başlığı",
+      "ConfigureOptions.Subtitle": "Pano alt başlığı",
+      "ConfigureOptions.DisableAnimations": "Animasyonları devre dışı bırak"
+    },
+
     "6": {
       "Title": "Grup ışıklarını aç",
       "Description": "Belirtilen gruptaki tüm ışıkları aç."
