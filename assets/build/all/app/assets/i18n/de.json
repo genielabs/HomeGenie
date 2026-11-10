@@ -1,5 +1,5 @@
 {
-  "ai_widget_objective": "Widget-Auftrag",
+  "ai_goals": "Ziele",
   "ai_task_waiting": "Wartend",
   "ai_task_cancelled": "Abgebrochen",
   "ai_task_interrupted": "Unterbrochen",

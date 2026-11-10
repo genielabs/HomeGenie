@@ -148,7 +148,7 @@ class RadioCasa extends ControllerInstance {
 
   async loadHistory() {
     try {
-      const {PowerHistory} = await import('/widgets/_shared/power-history.js?v=2');
+      const {PowerHistory} = await import(new URL('assets/js/widgets/power-history.js', document.baseURI).href);
       if (this.disposed) return;
       this.history = new PowerHistory(() => this.renderTrace(), 60 * 60 * 1000);
       this.renderPower();

@@ -129,7 +129,7 @@
 .weather-panel [hidden], .weather-panel[hidden] { display: none; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .modules { display: grid; grid-template-rows: minmax(270px, 1.16fr) minmax(218px, 1fr); gap: 16px; min-width: 0; }
-.modules > zx-widget { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); min-width: 0; }
+.modules > :is(cyberpunk-lighting, cyberpunk-telemetry) { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); min-width: 0; }
 .district-footer { flex: 0 0 auto; justify-content: flex-start; font-size: 11px; color: var(--muted); line-height: 1.4; }
 .district-footer > span:first-child { flex-shrink: 0; color: var(--cyan); }
 

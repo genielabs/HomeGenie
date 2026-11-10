@@ -537,7 +537,7 @@ public sealed class AiSkillCatalog
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.80</PackageVersion>
+      <PackageVersion>1.0.90</PackageVersion>
       <Id>context-engine</Id>
       <Version>1.0.8</Version>
       <Required>true</Required>
@@ -865,7 +865,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.80</PackageVersion>
+      <PackageVersion>1.0.90</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -953,6 +953,7 @@ Program.Setup(() =&gt; {
     .AddOption(OPTION_MAX_TURNS, "10", "5. Chat Memory (Max Turns) (0 = no limit)", "slider:0:20:1")
     .AddOption(OPTION_SYSTEM_INSTRUCTIONS, "", "6. System Prompt (Instructions)", $"editor:file:{systemPromptFile}:markdown")
     .AddOption(OPTION_MODEL_LIST, "", "7. AI Model List", $"editor:file:{modelsFile}:yaml")
+    .AddOption("GoalDiagnostics", "Off", "8. Show objective diagnostics in chat", "checkbox")
 
     // Assign the custom UI widget for the chat interface
     .UseWidget("homegenie/generic/program")
@@ -980,6 +981,8 @@ foreach (string op in new[]{"Conversation.Get","Task.Create","Task.Get","Task.Up
     });
 }
 
+Api.Handle($"{API_URL}/{API_HISTORY_GET}", _ =&gt; Api.Call("System.Utility/ChatHistory/Get", new { StoreId = Program.Module.Address }));
+
 // Provider-scoped attachment routes; caller-supplied owner/path is never forwarded.
 Api.Handle("AI.Genies/Lailama/Attachments.Describe", _ =&gt; new { version=1, kinds=new string[]{},
     mimeTypes=new[]{"image/jpeg","image/png","image/webp"}, maxFiles=3, maxBytes=4194304 });
@@ -1000,6 +1003,7 @@ Api.Handle("AI.Genies/Lailama/Request.Execute", input =&gt; ForwardBackgroundReq
 Api.Handle("AI.Genies/Lailama/Request.Generate", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, "940", "Generate", (route,data)=&gt;Api.Call(route,data)));
 Api.Handle("AI.Genies/Lailama/Request.Status", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, "940", "Status", (route,data)=&gt;Api.Call(route,data)));
 Api.Handle("AI.Genies/Lailama/Request.Cancel", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, "940", "Cancel", (route,data)=&gt;Api.Call(route,data)));
+Program.Emit("AI.Genie.Registered", API_URL);
 
 // ===================================================================
 // LOCAL LLM AUTOMATION PROGRAM (LLamaSharp Edition)
@@ -1091,7 +1095,7 @@ Api.Handle($"{Program.Module.Domain}/{Program.Module.Address}/DownloadStart", (p
      var model = modelsList[selectedModel];
      Program.Emit(FIELD_STATUS_INIT, "Download").Emit(FIELD_DOWNLOAD, "Requested");
      var item = JsonConvert.SerializeObject(new {
-         Name = model.Name,
+         Name = selectedModel,
          Url = model.Url,
          Path = Data.GetFolder()
      });
@@ -1243,8 +1247,10 @@ Action&lt;string&gt; lifecycleLog = message =&gt; { try { Program.Log.Info(messa
 // Release only after loading/inference has stopped. Native disposal itself runs in
 // a background task, so a stalled native backend cannot indefinitely block shutdown.
 var dispose = new Action(() =&gt; nativeLifetime.Stop(() =&gt; {
+  var prefixExecutor = session?.Executor as LailamaInteractiveExecutor;
   session = null;
   try {
+    prefixExecutor?.ClearPromptPrefix();
     if (resetState?.ContextState != null) {
       lifecycleLog("Lailama shutdown: disposing saved context state.");
       resetState.ContextState.Dispose(); resetState = null;
@@ -1345,12 +1351,20 @@ else
     Api.Handle(API_URL+"/Provider.Text.Generate", input =&gt; {
         var data=Api.Parse(input).Data as IDictionary&lt;string,object&gt;;
         string id=data!=null &amp;&amp; data.TryGetValue("requestId",out var identity)?identity as string:null;
-        Func&lt;string,string,string,object&gt; outcome=(state,text,error)=&gt;new Dictionary&lt;string,object&gt;{["version"]=1,["requestId"]=id,["state"]=state,["text"]=text,["error"]=error};
+        var diagnostics=Program.Option("GoalDiagnostics")?.Value=="On" ? new JObject() : null;
+        object outcome(string state,string text,string error) {
+            var result=new Dictionary&lt;string,object&gt;{["version"]=1,["requestId"]=id,["state"]=state,["text"]=text,["error"]=error};
+            if(diagnostics?.HasValues==true)result["diagnostics"]=diagnostics;
+            return result;
+        }
         if(data==null || !data.TryGetValue("version",out var version) || version is not int v || v!=1 || string.IsNullOrWhiteSpace(id) ||
             !data.TryGetValue("cancellationToken",out var token) || token is not CancellationToken cancellation ||
             !data.TryGetValue("systemPrompt",out var suppliedPrompt) || suppliedPrompt is not string instructions ||
-            !data.TryGetValue("messages",out var suppliedMessages) || suppliedMessages is not JArray messages || messages.Count!=1 ||
-            (string)messages[0]?["role"]!="user" || messages[0]?["parts"] is not JArray parts || parts.Count!=1 || parts[0]?["text"]?.Type!=JTokenType.String)
+            !data.TryGetValue("messages",out var suppliedMessages) || suppliedMessages is not JArray messages || messages.Count==0 ||
+            messages.Any(message=&gt;message is not JObject || (string)message["role"] is not ("user" or "model") ||
+                message["parts"] is not JArray parts || parts.Count==0 ||
+                parts.Any(part=&gt;part is not JObject || part["text"]?.Type!=JTokenType.String)) ||
+            (string)messages.Last["role"]!="user")
             return outcome("failed",null,"Invalid text generation request.");
         CancellationTokenSource lease;
         if(!nativeLifetime.TryBegin(out lease))return outcome("busy",null,"Local AI is busy or stopping.");
@@ -1363,16 +1377,38 @@ else
                 session.LoadSession(resetState);
                 session.History.Messages.Clear();
                 session.History.Messages.Add(new ChatHistory.Message(AuthorRole.System,instructions));
-                string prompt=BuildUserPrompt(templateType,(string)parts[0]["text"]);
-                if(context.Tokenize(instructions+"\n"+prompt,false,true).Length+LailamaInferenceParams.MaxTokens&gt;=context.ContextSize)
-                    return outcome("context_limit",null,"Background prompt and context exceed the local model context budget.");
+                string MessageText(JToken message)=&gt;string.Join("\n",message["parts"].Select(part=&gt;(string)part["text"]));
+                foreach(var prior in messages.Take(messages.Count-1)) {
+                    var role=(string)prior["role"]=="user"?AuthorRole.User:AuthorRole.Assistant;
+                    session.History.Messages.Add(new ChatHistory.Message(role,MessageText(prior)));
+                }
+                string prompt=BuildUserPrompt(templateType,MessageText(messages.Last));
+                var turn=new ChatHistory.Message(AuthorRole.User,prompt);
+                if(diagnostics!=null) {
+                    var budget=new ChatHistory();
+                    foreach(var message in session.History.Messages)budget.Messages.Add(message);
+                    budget.Messages.Add(turn);
+                    string input=messages.Count==1?instructions+"\n"+prompt:session.HistoryTransform.HistoryToText(budget);
+                    diagnostics["inputTokens"]=context.Tokenize(input,false,true).Length;
+                    diagnostics["reservedOutputTokens"]=LailamaInferenceParams.MaxTokens;
+                    diagnostics["contextSize"]=context.ContextSize;
+                }
                 string reply="";
-                ProcessAsync(session.ChatAsync(new ChatHistory.Message(AuthorRole.User,prompt),LailamaInferenceParams,cancellationToken:linked.Token),chunk=&gt;reply+=chunk).GetAwaiter().GetResult();
+                ProcessAsync(session.ChatAsync(turn,LailamaInferenceParams,cancellationToken:linked.Token),chunk=&gt;reply+=chunk).GetAwaiter().GetResult();
                 linked.Token.ThrowIfCancellationRequested();
                 if(string.IsNullOrWhiteSpace(reply))return outcome("failed",null,"Local AI returned empty text.");
                 // Conservative limit check: this backend does not expose a finish reason here.
-                if(context.Tokenize(reply,false,true).Length&gt;=LailamaInferenceParams.MaxTokens)
+                int generatedTokens=context.Tokenize(reply,false,true).Length;
+                if(diagnostics!=null)diagnostics["generatedTokens"]=generatedTokens;
+                if(generatedTokens&gt;=LailamaInferenceParams.MaxTokens) {
+                    if(diagnostics!=null) {
+                        int endOfThinking=reply.LastIndexOf("&lt;/think&gt;",StringComparison.OrdinalIgnoreCase);
+                        string finalText=(endOfThinking&gt;=0?reply.Substring(endOfThinking+8):reply).TrimStart();
+                        if(finalText.StartsWith("{") || finalText.StartsWith("```json",StringComparison.OrdinalIgnoreCase))
+                            diagnostics["partialText"]=finalText.Substring(0,Math.Min(finalText.Length,3401));
+                    }
                     return outcome("output_limit",null,"Local AI reached its response budget.");
+                }
                 reply=System.Text.RegularExpressions.Regex.Replace(reply,@"&lt;think&gt;[\s\S]*?(?:&lt;/think&gt;|$)","",System.Text.RegularExpressions.RegexOptions.IgnoreCase).Trim();
                 foreach(var marker in LailamaInferenceParams.AntiPrompts.Where(p=&gt;p.StartsWith("&lt;")))reply=reply.Replace(marker,"");
                 if(string.IsNullOrWhiteSpace(reply))return outcome("failed",null,"Local AI returned no final text.");
@@ -1552,11 +1588,17 @@ else
                 ["cancellationToken"]=requestCts.Token,
                 ["generate"]=new Func&lt;string,int,IDictionary&lt;string,object&gt;&gt;((roundInput,lookupRound)=&gt; {
                     string templatedInput=BuildUserPrompt(templateType,roundInput);
+            bool preparePrefix=trace==null &amp;&amp; !reuseSession &amp;&amp; !noHistory;
             trace=new LailamaGenerationTrace(telemetry.RequestId,lookupRound,lifecycleLog);
+            (bool Reused, int Tokens) prefix=preparePrefix
+                ? executor.PreparePromptPrefixAsync(session,sessionKey,new ChatHistory.Message(AuthorRole.User,templatedInput),requestCts.Token).GetAwaiter().GetResult()
+                : default;
             trace.Event("generation.start",()=&gt; {
                 string historyText=string.Join("\n",session.History.Messages.Select(m=&gt;m.Content));
                 int estimatedTokens=context.Tokenize(historyText+"\n"+templatedInput,false,true).Length;
                 var values=LailamaGenerationTrace.State(executor.GetStateData());
+                values["prefixReused"]=prefix.Reused;
+                values["prefixTokens"]=prefix.Tokens;
                 values["configuredContextSize"]=contextSize;
                 values["nativeContextSize"]=context.ContextSize;
                 values["historyMessages"]=session.History.Messages.Count;
@@ -1786,12 +1828,6 @@ else
         if (nativeLifetime.CancelCurrent()) Program.Emit(FIELD_TOKENS_STREAM, "\n\n[STOPPED]");
         return new ResponseStatus(Status.Ok);
 
-    }).Handle($"{API_URL}/{API_HISTORY_GET}", (userCommand) =&gt; {
-
-      return Api.Call("System.Utility/ChatHistory/Get", new {
-          StoreId = Program.Module.Address
-      });
-
     }).Handle($"{API_URL}/{API_HISTORY_CLEAR}", (userCommand) =&gt; {
 
       CancellationTokenSource clearCts;
@@ -1824,6 +1860,32 @@ else
     Api.Handle($"{API_URL}/{API_HISTORY_IMPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Import", new { StoreId = storeId, Data = (p as dynamic).Data }));
 
     initializationCts.Token.ThrowIfCancellationRequested();
+    Api.Handle(API_URL+"/Goals.Describe", _ =&gt; new {version=1, widgets=true, automation=false, dashboard=false});
+    Api.Handle(API_URL+"/Goal.Start", input =&gt; {
+        if (nativeLifetime.IsBusy)
+            return (object)new {Status="Error",state="busy",Message="Lailama is still processing a request."};
+        try {
+            object raw=Api.Parse(input).Data;
+            if(raw is byte[] bytes)raw=Encoding.UTF8.GetString(bytes);
+            var envelope=raw is JObject value?(JObject)value.DeepClone():raw is string text?JObject.Parse(text):JObject.FromObject(raw??new{});
+            if(envelope["request"] is not JObject request)throw new InvalidOperationException("Missing objective request.");
+            if(request["capabilities"]?["widgets"]?.Value&lt;bool&gt;()!=true)
+                throw new InvalidOperationException("Enable widget creation before starting an objective.");
+            var stored=Program.Parameter("AI.Chat.Capabilities")?.Value;
+            if(!string.IsNullOrWhiteSpace(stored) &amp;&amp; JObject.Parse(stored)["widgets"]?.Value&lt;bool&gt;()==false)
+                throw new InvalidOperationException("Widget creation is disabled for Lailama.");
+            var context=new JObject{["devices"]=false,["widgets"]=false,["automationPrograms"]=false,["dashboards"]=false,["deepKnowledge"]=false};
+            var capabilities=new JObject{["widgets"]=true,["automation"]=false,["deviceControl"]=false};
+            request["context"]=context;request["capabilities"]=capabilities;
+            request.Remove("resources");request.Remove("dashboards");
+            var prepared=new JObject{["context"]=context.DeepClone(),["capabilities"]=capabilities.DeepClone(),
+                ["profileKey"]="lailama-widget-goal-v1"};
+            return Api.Call("System.Utility/AiGenie/Goal.Start",new Dictionary&lt;string,object&gt;{
+                ["providerId"]=Program.Module.Address,["input"]=envelope,["prepared"]=prepared,["template"]="",
+                ["modelId"]=selectedModel});
+        }catch(Exception ex){return (object)new ResponseStatus(Status.Error,ex.Message);}
+    });
+
     Program.Emit(FIELD_STATUS_INIT, "Ready");
     Program.Emit(FIELD_STATUS_ERROR, "");
 
@@ -2288,6 +2350,7 @@ public sealed class LailamaNativeLifetime
     private Task cleanup;
 
     public bool IsStopping { get { lock (gate) return stopping; } }
+    public bool IsBusy { get { lock (gate) return stopping || current != null; } }
     public bool CleanupCompleted { get { lock (gate) return cleanup != null &amp;&amp; cleanup.IsCompleted; } }
 
     public bool TryBegin(out CancellationTokenSource cancellation)
@@ -2474,6 +2537,90 @@ public sealed class LailamaGenerationTrace {
 // No native model/session state, sampling policy or stop sequence is changed.
 public sealed class LailamaInteractiveExecutor : InteractiveExecutor {
     public LailamaInteractiveExecutor(LLamaContext context) : base(context) {}
+
+    // A single in-memory checkpoint holds only the stable system instructions.
+    const int MaxPromptPrefixBytes = 128 * 1024 * 1024;
+    LLama.SessionState promptPrefixState;
+    string promptPrefixKey;
+    string promptPrefixText;
+
+    public void ClearPromptPrefix() {
+        promptPrefixState?.ContextState?.Dispose();
+        promptPrefixState = null;
+        promptPrefixKey = null;
+        promptPrefixText = null;
+    }
+
+    public async Task&lt;(bool Reused, int Tokens)&gt; PreparePromptPrefixAsync(
+        ChatSession session, string key, ChatHistory.Message turn, CancellationToken cancellationToken) {
+        if (session.InputTransformPipeline.Count != 0 ||
+            session.History.Messages.FirstOrDefault() is not ChatHistory.Message system ||
+            system.AuthorRole != AuthorRole.System)
+            return default;
+
+        var priorHistory = new ChatHistory();
+        foreach (var message in session.History.Messages.Skip(1))
+            priorHistory.Messages.Add(message);
+
+        var prefixHistory = new ChatHistory();
+        prefixHistory.Messages.Add(system);
+        var fullHistory = new ChatHistory(session.History.Messages.ToArray());
+        fullHistory.Messages.Add(turn);
+        var transform = session.HistoryTransform;
+        string prefix = transform.HistoryToText(prefixHistory);
+        string prior = transform.HistoryToText(priorHistory);
+        string continuation = transform.HistoryToText(transform.TextToHistory(AuthorRole.User, turn.Content));
+
+        // The executor adds a newline to continuations. Match its actual tokenization,
+        // including boundaries where the tokenizer might merge adjacent text.
+        if (prior.Length &gt; 0 &amp;&amp; !prior.EndsWith("\n", StringComparison.Ordinal))
+            prior += "\n";
+        if (!continuation.EndsWith("\n", StringComparison.Ordinal))
+            continuation += "\n";
+        var prefixTokens = Context.Tokenize(prefix, true, true);
+        var fullTokens = Context.Tokenize(transform.HistoryToText(fullHistory), true, true);
+        if (fullTokens.Length &gt;= Context.ContextSize ||
+            !fullTokens.SequenceEqual(prefixTokens
+                .Concat(prior.Length &gt; 0 ? Context.Tokenize(prior, false, true) : Array.Empty&lt;LLamaToken&gt;())
+                .Concat(Context.Tokenize(continuation, false, true))))
+            return default;
+
+        bool reused = promptPrefixState != null &amp;&amp; promptPrefixKey == key &amp;&amp; promptPrefixText == prefix;
+        if (reused) {
+            session.LoadSession(promptPrefixState);
+        } else {
+            ClearPromptPrefix();
+            await PrefillAllAsync(prefix, cancellationToken).ConfigureAwait(false);
+            session.History.Messages.Clear();
+            session.History.Messages.Add(system);
+            if (Context.NativeHandle.GetStateSize() &lt;= MaxPromptPrefixBytes) {
+                var state = session.GetSessionState();
+                if (state.ContextState != null) {
+                    promptPrefixState = state;
+                    promptPrefixKey = key;
+                    promptPrefixText = prefix;
+                    // Separate the checkpoint history from the working history.
+                    session.LoadSession(state);
+                }
+            }
+        }
+        foreach (var message in priorHistory.Messages)
+            session.History.Messages.Add(message);
+        if (prior.Length &gt; 0)
+            await PrefillAllAsync(prior, cancellationToken).ConfigureAwait(false);
+        return (reused, prefixTokens.Length);
+    }
+
+    async Task PrefillAllAsync(string prompt, CancellationToken cancellationToken) {
+        await PrefillPromptAsync(prompt, cancellationToken).ConfigureAwait(false);
+        // LLamaSharp 0.30 prefill runs two iterations, leaving long prompts pending.
+        var parameters = new InferenceParams { MaxTokens = 0 };
+        var args = new InferStateArgs { Antiprompts = new List&lt;string&gt;(), WaitForInput = true };
+        while (_embeds.Count &gt; 0) {
+            cancellationToken.ThrowIfCancellationRequested();
+            await InferInternal(parameters, args, cancellationToken).ConfigureAwait(false);
+        }
+    }
     protected override async Task PreprocessInputs(string text, InferStateArgs args, CancellationToken cancellationToken) {
         int outputBudget=args.RemainedTokens;
         await base.PreprocessInputs(text,args,cancellationToken).ConfigureAwait(false);
@@ -2682,11 +2829,11 @@ public static class LailamaModelDefaults {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.80</PackageVersion>
+      <PackageVersion>1.0.90</PackageVersion>
       <Id>lailama</Id>
-      <Version>1.3.16</Version>
+      <Version>1.3.23</Version>
       <Required>true</Required>
-      <Checksum>5FC1757801FB6466070619951E98BAD0</Checksum>
+      <Checksum>F996AE33B6327480BDB8A8A6E3897A65</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>940</Address>
@@ -2888,7 +3035,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.80</PackageVersion>
+      <PackageVersion>1.0.90</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -3074,7 +3221,7 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.80</PackageVersion>
+      <PackageVersion>1.0.90</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -3102,59 +3249,65 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
   <ProgramBlock>
     <ScriptSetup>// Path to the external markdown file for system instructions
 var systemPromptFile = Path.Combine(Data.GetFolder(), "gemini_system_prompt.txt");
+if (Program.Module.Address != "933" &amp;&amp; !File.Exists(systemPromptFile)) {
+    var originalPrompt = Path.Combine(Data.GetFolder("933"), "gemini_system_prompt.txt");
+    if (File.Exists(originalPrompt)) File.Copy(originalPrompt, systemPromptFile);
+}
 
 Program.Setup(() =&gt; {
     // This method is used to register this program as a "AI intent handler"
     Program.Implements(
         "@AI:Genie",
-        "AI.Genies/Gemini", new { requests = new { version = 1, generate = true, execute = true }, chat = new { requestVersion = 1, cancelVersion = 1, feedback = true, context = new [] { "devices", "widgets", "automationPrograms", "dashboards", "deepKnowledge" }, capabilities = new [] { "deviceControl", "automation", "widgets" } } }
+        GetGeniePrefix(), new { requests = new { version = 1, generate = true, execute = true }, chat = new { requestVersion = 1, cancelVersion = 1, feedback = true, context = new [] { "devices", "widgets", "automationPrograms", "dashboards", "deepKnowledge" }, capabilities = new [] { "deviceControl", "automation", "widgets" } } }
     ).AddOption("ApiKey", "", "1. Google Gemini AI API key", "password")
      .AddOption("ModelId", "gemini-flash-latest", "2. Model ID", "text")
-     .AddOption("SystemInstructions", "", "3. System Instructions", $"editor:file:{systemPromptFile}:markdown");
+     .AddOption("SystemInstructions", "", "3. System Instructions", $"editor:file:{systemPromptFile}:markdown")
+     .AddOption("GoalDiagnostics", "Off", "4. Show objective diagnostics in chat", "checkbox");
 });
 
 Program.Run();
 </ScriptSetup>
-    <ScriptSource>// Conversation/task transport stays available independently of native model initialization.
+    <ScriptSource>string storeId = Program.Module.Address;
+string API_URL = GetGeniePrefix();
+// Conversation/task transport stays available before checking the API key.
 foreach (string op in new[]{"Conversation.Get","Task.Create","Task.Get","Task.Update","Task.Cancel"}) {
     string operation=op;
-    Api.Handle("AI.Genies/Gemini/"+operation, input =&gt; {
+    Api.Handle(API_URL+"/"+operation, input =&gt; {
         try {
             object raw=Api.Parse(input).Data;
             if(raw is byte[] bytes) raw=Encoding.UTF8.GetString(bytes);
             var data=raw is JObject value ? (JObject)value.DeepClone() : raw is string text ? (string.IsNullOrWhiteSpace(text) ? new JObject() : JObject.Parse(text)) : JObject.FromObject(raw??new{});
-            data["StoreId"]="933";
+            data["StoreId"]=storeId;
             return Api.Call("System.Utility/ChatHistory/"+operation,data);
         } catch(Exception ex) { return (object)new ResponseStatus(Status.Error,ex.Message); }
     });
 }
 
 // Provider-scoped attachment routes; caller-supplied owner/path is never forwarded.
-Api.Handle("AI.Genies/Gemini/Attachments.Describe", _ =&gt; new { version=1, kinds=new string[]{"image"},
+Api.Handle(API_URL+"/Attachments.Describe", _ =&gt; new { version=1, kinds=new string[]{"image"},
     mimeTypes=new[]{"image/jpeg","image/png","image/webp"}, maxFiles=3, maxBytes=4194304 });
 foreach (string op in new[]{"Upload","Get","Delete"}) {
     string operation=op;
-    Api.Handle("AI.Genies/Gemini/Attachments."+operation, input =&gt; {
+    Api.Handle(API_URL+"/Attachments."+operation, input =&gt; {
         try {
             if (operation=="Upload" &amp;&amp; false) throw new InvalidOperationException("The selected model does not support image input.");
             object raw=Api.Parse(input).Data;
             if(raw is byte[] bytes)raw=Encoding.UTF8.GetString(bytes);
             var data=raw as JObject ?? (raw is string text?JObject.Parse(text):JObject.FromObject(raw??new{}));
-            data["StoreId"]="933";
+            data["StoreId"]=storeId;
             return Api.Call("System.Utility/ChatHistory/Files."+operation,data);
         } catch(Exception ex) { return (object)new ResponseStatus(Status.Error,ex.Message); }
     });
 }
-Api.Handle("AI.Genies/Gemini/Request.Execute", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, "933", "Execute", (route,data)=&gt;Api.Call(route,data)));
-Api.Handle("AI.Genies/Gemini/Request.Generate", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, "933", "Generate", (route,data)=&gt;Api.Call(route,data)));
-Api.Handle("AI.Genies/Gemini/Request.Status", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, "933", "Status", (route,data)=&gt;Api.Call(route,data)));
-Api.Handle("AI.Genies/Gemini/Request.Cancel", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, "933", "Cancel", (route,data)=&gt;Api.Call(route,data)));
+Api.Handle(API_URL+"/Request.Execute", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Execute", (route,data)=&gt;Api.Call(route,data)));
+Api.Handle(API_URL+"/Request.Generate", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Generate", (route,data)=&gt;Api.Call(route,data)));
+Api.Handle(API_URL+"/Request.Status", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Status", (route,data)=&gt;Api.Call(route,data)));
+Api.Handle(API_URL+"/Request.Cancel", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Cancel", (route,data)=&gt;Api.Call(route,data)));
 
 // ===================================================================
 // GEMINI WIDGET GENIE - WITH DEEP KNOWLEDGE &amp; CACHING
 // ===================================================================
 
-string API_URL = "AI.Genies/Gemini";
 var promptLifetime=new GeminiPromptLifetime();
 When.ProgramStopping(()=&gt;{promptLifetime.Dispose();return true;});
 
@@ -3178,8 +3331,6 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
   // Generated-program Quit requests are handled by the shared AI Genie service.
   return true;
 });
-
-string storeId = Program.Module.Address;
 
 // Cache Management Variables
 string currentCacheName = "";
@@ -3355,7 +3506,7 @@ Func&lt;JObject, JObject&gt; prepareScopedContext = input =&gt; {
 };
 
 
-Api.Handle(API_URL + "/Goals.Describe", _ =&gt; new {version=1, widgets=true, automation=true});
+Api.Handle(API_URL + "/Goals.Describe", _ =&gt; new {version=1, widgets=true, automation=true, dashboard=true, goalTypes=true});
 Api.Handle(API_URL + "/Goal.Start", input =&gt; {
     if(!promptLifetime.TryBegin(Guid.NewGuid().ToString("N"),out var startLease,out _))
         return (object)new {Status="Error",state="busy",Message="Gemini is still processing a request. Wait for it to finish stopping."};
@@ -3367,7 +3518,7 @@ Api.Handle(API_URL + "/Goal.Start", input =&gt; {
         if(envelope["request"] is not JObject request)throw new InvalidOperationException("Missing objective request.");
         var prepared=prepareScopedContext(request);
         return Api.Call("System.Utility/AiGenie/Goal.Start",new Dictionary&lt;string,object&gt;{
-            ["providerId"]="933",["input"]=envelope,["prepared"]=prepared,
+            ["providerId"]=storeId,["input"]=envelope,["prepared"]=prepared,
             ["template"]=File.ReadAllText(Path.Combine(Data.GetFolder(),"gemini_system_prompt.txt"))});
     }catch(Exception ex){return (object)new ResponseStatus(Status.Error,ex.Message);}
     }
@@ -3411,7 +3562,7 @@ Api.Handle(API_URL + "/Provider.Generate", input =&gt; GeminiGenerationProvider.
             return JObject.Parse(response.Content.ReadAsStringAsync(linked.Token).GetAwaiter().GetResult());
         }
     }
-}));
+}, Program.Option("GoalDiagnostics")?.Value == "On" ? geminiModelId : null));
 Api.Handle(API_URL+"/Provider.Text.Generate", input =&gt; {
     var request=Api.Parse(input).Data;
     // Reuse the transport adapter. It performs no chat/history/action processing.
@@ -3439,7 +3590,7 @@ Api.Handle(API_URL+"/Provider.Request.Execute", input =&gt; {
 Func&lt;object, string, object, string, string&gt; generateWithProvider = (messages, instructions, output, cache) =&gt; {
     var request = new Dictionary&lt;string, object&gt; {
         ["version"] = 1, ["requestId"] = Guid.NewGuid().ToString("N"), ["owner"] = Program.Module.Address,
-        ["provider"] = "Gemini", ["messages"] = messages, ["systemPrompt"] = instructions, ["output"] = output,
+        ["provider"] = API_URL.Substring("AI.Genies/".Length), ["messages"] = messages, ["systemPrompt"] = instructions, ["output"] = output,
         ["providerOptions"] = new Dictionary&lt;string, object&gt; { ["cachedContent"] = cache }
     };
     var result = Api.Call("System.Utility/AiGenie/Generate", request) as IDictionary&lt;string, object&gt;;
@@ -3550,7 +3701,7 @@ Func&lt;object, JObject, object&gt; processGeniePrompt = (userCommand, feedback)
     var genConfig = new { temperature = 0.2, response_mime_type = "application/json", response_json_schema = SharedCapabilityRequest("Response.Schema",(JObject)preparedContext["capabilities"]) };
 
       var coordinated=contextToken(Api.Call("System.Utility/AiGenie/Conversation.Run",new Dictionary&lt;string,object&gt;{
-          ["version"]=1,["requestId"]=telemetry.RequestId,["owner"]=Program.Module.Address,["provider"]="Gemini",
+          ["version"]=1,["requestId"]=telemetry.RequestId,["owner"]=storeId,["provider"]=API_URL.Substring("AI.Genies/".Length),
           ["messages"]=JArray.FromObject(payloadContents),["preparedContext"]=preparedContext,["request"]=scopedRequest,
           ["template"]=File.ReadAllText(Path.Combine(Data.GetFolder(),"gemini_system_prompt.txt")),
           ["systemPrompt"]=fullContext,["output"]=genConfig,["cache"]=hasCache?currentCacheName:null,
@@ -3626,7 +3777,8 @@ Api.Handle($"{API_URL}/{API_HISTORY_REMOVE_AT}", (i) =&gt; {
 Api.Handle($"{API_URL}/{API_HISTORY_EXPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Export", new { StoreId = storeId }));
 Api.Handle($"{API_URL}/{API_HISTORY_IMPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Import", new { StoreId = storeId, Data = (p as dynamic).Data }));
 
-// Previous Genies remain available; retirement is an explicit user action.
+// Only the built-in provider owns the migration of the previous Genies.
+if (storeId == "933") {
 var legacyGenieIds = new Dictionary&lt;int,string&gt;{{930,"gemini-intent-handler"},{931,"gemini-widget-genie"},{932,"gemini-automan"}};
 Func&lt;JArray&gt; legacyGenies = () =&gt; {
     var all=JArray.FromObject(Api.Call("HomeAutomation.HomeGenie/Automation/Programs.List"));
@@ -3670,12 +3822,20 @@ Api.Handle(API_URL+"/Legacy.Disable", input=&gt;{
     }catch(Exception e){return new ResponseStatus(Status.Error,e.Message);}
 });
 try{publishLegacyNotice();}catch(Exception e){Program.Log.Error("Gemini upgrade notification: "+e.Message);}
+}
+
+Program.Emit("AI.Genie.Registered", API_URL);
 
 while (Program.IsRunning &amp;&amp; !reconfigureRequired) {
     Pause(1);
 }
 </ScriptSource>
-    <ScriptContext>const string API_HISTORY_GET = "History.Get";
+    <ScriptContext>private string GetGeniePrefix() {
+    string pid = Program.Module.Address;
+    return pid == "933" ? "AI.Genies/Gemini" : "AI.Genies/Gemini-" + pid;
+}
+
+const string API_HISTORY_GET = "History.Get";
 const string API_HISTORY_CLEAR = "History.Clear";
 const string API_HISTORY_REMOVE_AT = "History.RemoveAt";
 const string API_HISTORY_EXPORT = "History.Export";
@@ -3787,20 +3947,35 @@ public static class GeminiGenerationProvider {
         }
         return result;
     }
-    public static object Generate(object payload, Func&lt;object, CancellationToken, JObject&gt; send) {
+    public static object Generate(object payload, Func&lt;object, CancellationToken, JObject&gt; send, string diagnosticModel) {
         var request = payload as IDictionary&lt;string, object&gt;;
         string id = request != null &amp;&amp; request.TryGetValue("requestId", out var identity) ? identity as string : null;
-        Func&lt;string, string, string, object&gt; result = (state, text, error) =&gt; new Dictionary&lt;string, object&gt; {
-            ["version"] = 1, ["requestId"] = id, ["state"] = state, ["text"] = text, ["error"] = error };
+        bool report = diagnosticModel != null &amp;&amp; request != null &amp;&amp;
+            request.TryGetValue("purpose", out var purpose) &amp;&amp; purpose as string == "widget-goal";
+        var elapsed = report ? System.Diagnostics.Stopwatch.StartNew() : null;
+        var diagnostics = report ? new JObject { ["provider"] = "Gemini", ["model"] = diagnosticModel } : null;
+        object Result(string state, string text, string error) {
+            var response = new Dictionary&lt;string, object&gt; {
+                ["version"] = 1, ["requestId"] = id, ["state"] = state, ["text"] = text, ["error"] = error };
+            if (diagnostics != null &amp;&amp; state != "cancelled") {
+                diagnostics["elapsedMs"] = elapsed.ElapsedMilliseconds;
+                response["diagnostics"] = diagnostics;
+            }
+            return response;
+        }
         if (request == null || !request.TryGetValue("version", out var version) || !(version is int) || (int)version != 1 ||
             string.IsNullOrWhiteSpace(id) || !request.TryGetValue("messages", out var messages) || messages == null ||
             !request.TryGetValue("cancellationToken", out var token) || !(token is CancellationToken))
-            return result("failed", null, "Invalid Gemini provider request.");
+            return Result("failed", null, "Invalid Gemini provider request.");
         var cancellation = (CancellationToken)token;
         try {
             cancellation.ThrowIfCancellationRequested();
             var body = new Dictionary&lt;string, object&gt; { ["contents"] = messages };
-            if (request.TryGetValue("output", out var output) &amp;&amp; output != null) body["generationConfig"] = output;
+            if (request.TryGetValue("output", out var output) &amp;&amp; output != null) {
+                body["generationConfig"] = output;
+                if (report &amp;&amp; JToken.FromObject(output) is JObject settings &amp;&amp; settings["maxOutputTokens"]?.Type == JTokenType.Integer)
+                    diagnostics["maxOutputTokens"] = settings["maxOutputTokens"];
+            }
             var options = request.TryGetValue("providerOptions", out var supplied) ? supplied as IDictionary&lt;string, object&gt; : null;
             string cache = options != null &amp;&amp; options.TryGetValue("cachedContent", out var cached) ? cached as string : null;
             if (!string.IsNullOrWhiteSpace(cache)) body["cached_content"] = cache;
@@ -3810,19 +3985,35 @@ public static class GeminiGenerationProvider {
             cancellation.ThrowIfCancellationRequested();
             var candidate = (data?["candidates"] as JArray)?.FirstOrDefault() as JObject;
             string finish = (string)candidate?["finishReason"];
-            if (finish == "MAX_TOKENS") return result("output_limit", null, "Gemini reached its output limit.");
-            if (finish != "STOP") return result("failed", null, "Gemini returned an empty, blocked or incomplete response.");
-            var parts = candidate?["content"]?["parts"] as JArray;
-            string text = parts == null ? "" : string.Concat(parts.OfType&lt;JObject&gt;()
+            if (report) {
+                if (data?["modelVersion"]?.Type == JTokenType.String &amp;&amp;
+                    (string)data["modelVersion"] is string model &amp;&amp; model.Length &gt; 0 &amp;&amp; model.Length &lt;= 128)
+                    diagnostics["model"] = model;
+                if (!string.IsNullOrEmpty(finish)) diagnostics["finishReason"] = finish;
+                var usage = data?["usageMetadata"] as JObject;
+                foreach (string key in new[] { "promptTokenCount", "candidatesTokenCount", "thoughtsTokenCount" })
+                    if (usage?[key]?.Type == JTokenType.Integer) diagnostics[key] = usage[key];
+            }
+            var parts = (candidate?["content"] as JObject)?["parts"] as JArray;
+            string text = parts == null || (!report &amp;&amp; finish != "STOP") ? "" : string.Concat(parts.OfType&lt;JObject&gt;()
                 .Where(p =&gt; p["thought"]?.Value&lt;bool&gt;() != true &amp;&amp; p["text"]?.Type == JTokenType.String)
                 .Select(p =&gt; (string)p["text"]));
-            if (string.IsNullOrWhiteSpace(text)) return result("failed", null, "Gemini returned an empty completion.");
-            return result("completed", text, null);
+            if (report &amp;&amp; finish != "STOP" &amp;&amp; !string.IsNullOrWhiteSpace(text)) {
+                const int limit = 1200;
+                bool truncated = text.Length &gt; limit;
+                diagnostics["partialText"] = truncated
+                    ? text.Substring(0, char.IsHighSurrogate(text[limit - 1]) ? limit - 1 : limit) : text;
+                diagnostics["partialTextTruncated"] = truncated;
+            }
+            if (finish == "MAX_TOKENS") return Result("output_limit", null, "Gemini reached its output limit.");
+            if (finish != "STOP") return Result("failed", null, "Gemini returned an empty, blocked or incomplete response.");
+            if (string.IsNullOrWhiteSpace(text)) return Result("failed", null, "Gemini returned an empty completion.");
+            return Result("completed", text, null);
         } catch (OperationCanceledException) {
-            return cancellation.IsCancellationRequested ? result("cancelled", null, null) : result("failed", null, "Gemini generation timed out.");
+            return cancellation.IsCancellationRequested ? Result("cancelled", null, null) : Result("failed", null, "Gemini generation timed out.");
         } catch (System.Net.Http.HttpRequestException ex) {
-            return result("failed", null, ex.StatusCode.HasValue ? "Gemini returned HTTP " + (int)ex.StatusCode.Value + "." : "Gemini transport failed.");
-        } catch (Exception) { return result("failed", null, "Gemini provider generation failed."); }
+            return Result("failed", null, ex.StatusCode.HasValue ? "Gemini returned HTTP " + (int)ex.StatusCode.Value + "." : "Gemini transport failed.");
+        } catch (Exception) { return Result("failed", null, "Gemini provider generation failed."); }
     }
 }
 
@@ -3905,11 +4096,11 @@ public sealed class GeminiPromptLifetime : IDisposable {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.80</PackageVersion>
+      <PackageVersion>1.0.90</PackageVersion>
       <Id>gemini-genie</Id>
-      <Version>1.0.31</Version>
+      <Version>1.0.35</Version>
       <Required>true</Required>
-      <Checksum>E4F0452AC65228516DA0C45F8C15B27C</Checksum>
+      <Checksum>801EB600BC9F274CBB702F0BE7820635</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>933</Address>
@@ -3918,7 +4109,7 @@ public sealed class GeminiPromptLifetime : IDisposable {
     <Group>AI - Machine Learning</Group>
     <Features />
     <AutoRestartEnabled>false</AutoRestartEnabled>
-    <Cloneable>false</Cloneable>
+    <Cloneable>true</Cloneable>
     <Type>csharp</Type>
     <IsEnabled>true</IsEnabled>
   </ProgramBlock>

@@ -1,5 +1,5 @@
 {
-  "ai_widget_objective": "ເປົ້າໝາຍສ້າງວິດເຈັດ",
+  "ai_goals": "ເປົ້າໝາຍ",
   "ai_task_waiting": "ກຳລັງລໍຖ້າ",
   "ai_task_cancelled": "ຍົກເລີກແລ້ວ",
   "ai_task_interrupted": "ຖືກຂັດຈັງຫວະ",

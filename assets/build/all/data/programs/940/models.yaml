@@ -26,6 +26,19 @@
   Requirements: "CPU tested. Reserve RAM for the GGUF weights and context cache. GPU optional."
   TestNotes: "Fresh parameter reads and device control passed. Reads took 46-48 s; control took 32 s on the test PC. A command emitted with device control disabled was blocked by the backend."
 
+"openbmb/MiniCPM5-2B-Q4_K_M.gguf":
+  DefaultTemperature: 1.0
+  TopP: 0.95
+  MinP: 0.0
+  RepeatPenalty: 1.0
+  Name: "OpenBMB/MiniCPM5-2B (Q4_K_M)"
+  Repository: "https://huggingface.co/openbmb/MiniCPM5-2B-GGUF"
+  Url: "https://huggingface.co/openbmb/MiniCPM5-2B-GGUF/resolve/main/MiniCPM5-2B-Q4_K_M.gguf?download=true"
+  Template: "chatml"
+  Status: "Recommended"
+  Requirements: "GGUF 1.56 GB; additional RAM/VRAM required for context and runtime buffers."
+  TestNotes: "Recommended lightweight model for device control. Device commands were verified with Lailama on the Vulkan test system."
+
 "Qwen/Qwen3-1.7B-Q8_0.gguf":
   # Official settings: https://huggingface.co/Qwen/Qwen3-1.7B
   # Mode: thinking/default; native output guidance is documented, not applied as an oversized HG limit.

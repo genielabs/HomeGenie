@@ -119,7 +119,7 @@ public partial class PackageManager
         private static void CopyCode(ProgramBlock to, ProgramBlock from)
         {
             to.Description = from.Description; to.ScriptSetup = from.ScriptSetup; to.ScriptSource = from.ScriptSource;
-            to.ScriptContext = from.ScriptContext; to.Data = from.Data;
+            to.ScriptContext = from.ScriptContext; to.Data = from.Data; to.Cloneable = from.Cloneable;
             to.PackageInfo = JsonConvert.DeserializeObject<ProgramPackageInfo>(JsonConvert.SerializeObject(from.PackageInfo));
         }
         private void Compile(ProgramBlock program)

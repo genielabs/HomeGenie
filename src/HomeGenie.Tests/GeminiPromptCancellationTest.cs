@@ -22,8 +22,9 @@ namespace HomeGenie.Tests;
         var gemini=Node("homegenie-ml-ai","933");var service=Node("homegenie-base","583");
         var syntax=CSharpSyntaxTree.ParseText("class P{void Run(){"+(string)gemini.Element("ScriptSource")+"}}");
         Assert.That(syntax.GetDiagnostics().Where(d=>d.Severity==DiagnosticSeverity.Error),Is.Empty);
-        string code="using System;using System.Linq;using System.Threading;using System.Collections.Generic;"+Class(gemini,"GeminiPromptLifetime")+Class(service,"AiGenieService");
-        var paths=((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")).Split(Path.PathSeparator).Where(p=>Path.GetDirectoryName(p)==Path.GetDirectoryName(typeof(object).Assembly.Location));
+        string code="using System;using System.Linq;using System.Threading;using System.Collections.Generic;using Newtonsoft.Json.Linq;"+Class(gemini,"GeminiPromptLifetime")+Class(service,"AiGenieService");
+        var paths=((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")).Split(Path.PathSeparator).Where(p=>Path.GetDirectoryName(p)==Path.GetDirectoryName(typeof(object).Assembly.Location))
+            .Append(typeof(JObject).Assembly.Location).Distinct();
         var c=CSharpCompilation.Create("PromptLifetime"+Id(),new[]{CSharpSyntaxTree.ParseText(code)},paths.Select(p=>MetadataReference.CreateFromFile(p)),new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
         using var output=new MemoryStream();var result=c.Emit(output);Assert.That(result.Success,Is.True,string.Join("\n",result.Diagnostics));assembly=Assembly.Load(output.ToArray());
     }

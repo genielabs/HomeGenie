@@ -80,6 +80,13 @@ class IsometricRoom extends ControllerInstance {
     this.energy = this.getBoundModule('energy');
     this.rgbLight = this.getBoundModule('rgbLight');
     this.bindMatrixControls();
+    Promise.all([
+      import('/widgets/assistants/genie.module.js'),
+      import('/widgets/isometric/light.module.js'),
+      import('/widgets/isometric/led-panel.module.js'),
+      import('/widgets/isometric/climate.module.js'),
+      import('/widgets/isometric/power.module.js')
+    ]).catch(error => console.error('Could not load dashboard widgets', error));
     this.renderData();
     for (const module of new Set([this.light, this.energy].filter(Boolean)))
       this.subscribe(module, () => { if (!this.disposed) this.renderData(); });

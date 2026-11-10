@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
@@ -33,7 +34,7 @@ public class FakeApi {
     public FakeRequest Parse(object input)=>input as FakeRequest;
     public object Call(string route,object data){LastRoute=route;LastData=data;return new{Status=""Ok""};}
 }
-public class FakeProgram {public void GoBackground(){}}
+public class FakeProgram {public string Address;public FakeProgram Module=>this;public void GoBackground(){}}
 public class FakeData {public string Folder;public string GetFolder()=>Folder;}
 public class FakeModules {
     public string Domain,Address,Folder;public List<JObject> Events=new List<JObject>();
@@ -54,11 +55,20 @@ public class HistoryRuntime {
     public object Call(string command,JObject data){data[""StoreId""]=""933"";return Api.Routes[""System.Utility/ChatHistory""](new FakeRequest{Command=command,Data=data});}
     public JArray Events()=>JArray.FromObject(Modules.Events);
 }";
-        foreach(var item in new[]{("933","Gemini"),("940","Lailama")}) {
-            string source=(string)Program("homegenie-ml-ai",item.Item1).Element("ScriptSource");
+        foreach(string id in new[]{"933","940"}) {
+            var provider=Program("homegenie-ml-ai",id);
+            string source=(string)provider.Element("ScriptSource");
             int end=source.IndexOf("// Provider-scoped attachment routes",StringComparison.Ordinal);
             Assert.That(end,Is.GreaterThan(0));
-            code+="public class Wrapper"+item.Item1+" {public FakeApi Api=new FakeApi();public Wrapper"+item.Item1+"(){"+source.Substring(0,end)+"}}";
+            var context=CSharpSyntaxTree.ParseText("class Holder{"+(string)provider.Element("ScriptContext")+"}").GetRoot();
+            string helpers=id=="933"
+                ? context.DescendantNodes().OfType<MethodDeclarationSyntax>()
+                    .Single(method=>method.Identifier.Text=="GetGeniePrefix").ToFullString()
+                : string.Concat(context.DescendantNodes().OfType<FieldDeclarationSyntax>()
+                    .Where(field=>field.Declaration.Variables.Any(variable=>variable.Identifier.Text is "API_URL" or "API_HISTORY_GET"))
+                    .Select(field=>field.ToFullString()));
+            code+="public class Wrapper"+id+" {public FakeApi Api=new FakeApi();public FakeProgram Program=new FakeProgram();"+
+                "public Wrapper"+id+"(string address){Program.Address=address;"+source.Substring(0,end)+"}"+helpers+"}";
         }
         var paths=((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")).Split(Path.PathSeparator)
             .Where(p=>Path.GetDirectoryName(p)==Path.GetDirectoryName(typeof(object).Assembly.Location))
@@ -66,7 +76,7 @@ public class HistoryRuntime {
         var compilation=CSharpCompilation.Create("ChatEvents"+Guid.NewGuid().ToString("N"),new[]{CSharpSyntaxTree.ParseText(code)},
             paths.Select(p=>MetadataReference.CreateFromFile(p)),new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
         using var output=new MemoryStream();var result=compilation.Emit(output);
-        Assert.That(result.Success,Is.True,string.Join("\n",result.Diagnostics));assembly=Assembly.Load(output.ToArray());
+        Assert.That(result.Success,Is.True,string.Join("\n",result.Diagnostics.Where(d=>d.Severity==DiagnosticSeverity.Error)));assembly=Assembly.Load(output.ToArray());
     }
     [SetUp] public void Setup(){folder=Path.Combine(Path.GetTempPath(),"hg-chat-events-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(folder);}
     [TearDown] public void Cleanup(){Directory.Delete(folder,true);}
@@ -107,9 +117,9 @@ public class HistoryRuntime {
         var failed=Call(runtime,"Task.Create",new JObject{["conversationId"]=session["conversationId"],["taskId"]=Guid.NewGuid().ToString("N"),["title"]="cannot save"});
         Assert.That((string)failed["Status"],Is.EqualTo("Error"));Assert.That(Events(runtime).Count,Is.EqualTo(1));
     }
-    [TestCase("933","Gemini")] [TestCase("940","Lailama")]
-    public void ProviderWrappersFixOwnerAndAreRegisteredWithoutInitializingAModel(string id,string name) {
-        var wrapper=Activator.CreateInstance(assembly.GetType("Wrapper"+id));
+    [TestCase("933","Gemini","933")] [TestCase("940","Lailama","940")] [TestCase("1045","Gemini-1045","933")]
+    public void ProviderWrappersFixOwnerAndAreRegisteredWithoutInitializingAModel(string id,string name,string wrapperId) {
+        var wrapper=Activator.CreateInstance(assembly.GetType("Wrapper"+wrapperId),id);
         var api=wrapper.GetType().GetField("Api").GetValue(wrapper);
         var routes=(System.Collections.IDictionary)api.GetType().GetField("Routes").GetValue(api);
         foreach(string operation in new[]{"Conversation.Get","Task.Create","Task.Get","Task.Update","Task.Cancel"}) {

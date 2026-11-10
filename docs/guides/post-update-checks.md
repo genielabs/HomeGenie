@@ -1,12 +1,16 @@
 # Early post-update checks
 
-`PostUpdateCheck.Run` is called by `ServiceWorker.ExecuteAsync` before `PostInstallCheck` and before constructing `HomeGenieService`. Interfaces and the automation engine have not been initialized. This release contains only optional housekeeping of abandoned empty compiler outputs.
+`PostUpdateCheck.Run` is called by `ServiceWorker.ExecuteAsync` before `PostInstallCheck` and before constructing `HomeGenieService`. Interfaces and the automation engine have not been initialized.
 
 ## Empty compiler temporary files
 
 The step `empty-compiler-temporaries-v1` removes only zero-byte, top-level files named `<GUID>.dll`, `<GUID>.dll.pdb` or `<GUID>.dll.mdb` from `programs/`. It preserves numeric program assemblies (even empty ones), nonempty GUID files, unknown names and subdirectories such as Arduino projects. Symbolic-link redirections are rejected rather than followed.
 
 The cause is also fixed: `CSharpAppFactory.CompileScript` previously opened DLL/PDB outputs before Roslyn emission and kept them when emission failed. It now closes streams and removes outputs created by that failed attempt, preserving the original diagnostics/exception. Successful DLL/PDB outputs remain available for `CSharpEngine`'s normal move/load flow.
+
+## Shared widget power history
+
+The step `legacy-widget-power-history-v1` removes the old `data/widgets/_shared/power-history.js` after the new YoT asset is installed and the bundled themes have stopped importing the old path. It removes `_shared` when empty and preserves any other files in that directory. If either the app or the themes still need updating, the step remains pending for the next startup.
 
 ## Completion and errors
 

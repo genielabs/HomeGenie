@@ -73,15 +73,16 @@ public class LailamaModelDefaultsTest {
         var ex=Assert.Throws<TargetInvocationException>(()=>Select(Model(temperature,tokens,context)));
         Assert.That(ex.InnerException,Is.InstanceOf<ArgumentOutOfRangeException>());
     }
-    [Test] public void DistributedYamlDeserializesAllFiveProfilesWithNoOversizedDefaults() {
+    [Test] public void DistributedYamlDeserializesProfilesWithNoOversizedDefaults() {
         string yaml=File.ReadAllText(Path.Combine(repository,"assets/build/all/data/programs/940/models.yaml"));
         var type=typeof(Dictionary<,>).MakeGenericType(typeof(string),profile);
         var models=(IDictionary)new DeserializerBuilder().Build().Deserialize(yaml,type);
-        Assert.That(models.Count,Is.EqualTo(5));
+        Assert.That(models.Count,Is.EqualTo(6));
         foreach(DictionaryEntry entry in models) {
             var values=(Dictionary<string,string>)policy.GetMethod("ForSelection").Invoke(null,new object[]{"different",(string)entry.Key,models});
             Assert.That(values.Keys,Is.EquivalentTo(new[]{"ConfigureOptions.ModelTemperature"}));
-            Assert.That(profile.GetField("TopK").GetValue(entry.Value),Is.EqualTo(20));
+            bool miniCpm=(string)entry.Key=="openbmb/MiniCPM5-2B-Q4_K_M.gguf";
+            Assert.That(profile.GetField("TopK").GetValue(entry.Value),Is.EqualTo(miniCpm ? (int?)null : 20));
             Assert.That(profile.GetField("MinP").GetValue(entry.Value),Is.EqualTo(0f));
         }
     }

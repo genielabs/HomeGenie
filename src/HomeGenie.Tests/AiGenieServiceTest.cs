@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 namespace HomeGenie.Tests;
 [TestFixture]
@@ -18,8 +19,9 @@ public class AiGenieServiceTest {
         while(root!=null&&!File.Exists(Path.Combine(root.FullName,"HomeGenie.sln")))root=root.Parent;
         var node=XDocument.Load(Path.Combine(root.FullName,"assets/build/all/data/packages/homegenie/homegenie-base/programs.xml")).Root.Elements().Single(n=>(string)n.Element("Address")=="583");
         string service=CSharpSyntaxTree.ParseText("class Holder {"+(string)node.Element("ScriptContext")+"}").GetRoot().DescendantNodes().OfType<Microsoft.CodeAnalysis.CSharp.Syntax.ClassDeclarationSyntax>().Single(n=>n.Identifier.Text=="AiGenieService").ToFullString();
-        string code="using System;using System.Collections.Generic;using System.Linq;using System.Threading;"+service;
-        var paths=((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")).Split(Path.PathSeparator).Where(p=>Path.GetDirectoryName(p)==Path.GetDirectoryName(typeof(object).Assembly.Location));
+        string code="using System;using System.Collections.Generic;using System.Linq;using System.Threading;using Newtonsoft.Json.Linq;"+service;
+        var paths=((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")).Split(Path.PathSeparator).Where(p=>Path.GetDirectoryName(p)==Path.GetDirectoryName(typeof(object).Assembly.Location))
+            .Append(typeof(JObject).Assembly.Location).Distinct();
         var compilation=CSharpCompilation.Create("AiGenieProbe"+Guid.NewGuid().ToString("N"),new[]{CSharpSyntaxTree.ParseText(code)},paths.Select(p=>MetadataReference.CreateFromFile(p)),new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
         using var stream=new MemoryStream();var result=compilation.Emit(stream);
         Assert.That(result.Success,Is.True,string.Join("\n",result.Diagnostics));

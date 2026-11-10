@@ -1,6 +1,6 @@
 # Roadmap
 
-Consolidated status: 2026-11-06, including maintainer-confirmed named widget bindings, configurable composite revision, editor refresh and centralized host configuration menus. Earlier accepted work remains complete. See [Unreleased changes](../CHANGELOG.md).
+Consolidated status: 2026-11-09. HomeGenie 2.0.36 includes the dashboard, widget, and preset work described below. The maintainer verified a clean Vulkan installation, an update on Vulkan, and the update on the production Raspberry Pi. See the [changelog](../CHANGELOG.md).
 
 This is the active task list. Detailed stage-by-stage decisions, earlier API names, test counts and acceptance evidence are preserved in [implementation history](roadmap-history.md); they do not override this status. Completed work is not reopened merely because an earlier checkpoint still says pending.
 
@@ -8,15 +8,16 @@ This is the active task list. Detailed stage-by-stage decisions, earlier API nam
 
 - [x] Sensor Simulator 410 1.0.6 uses a ScriptContext date/time/type helper for bounded seasonal/daytime temperature, humidity and luminance, with stable per-module variation and no cumulative drift. Keep feature/frequency configuration and level-based power with regular off samples. Seven isolated distributed-script scenarios passed; Vulkan updated only 410 through the backed-up program-update flow, with compilation, running state and plausible live night readings confirmed. See [sensor profile](guides/sensor-simulator.md).
 
-## Three.js room dashboard trial (2026-11-07)
+## Isometric Room dashboard
 
 - [x] Add `isometric/isometric-room`: procedural isometric room, live light/climate/power cards and named bindings, with optional demo defaults and editable device bindings. Reuse the standard dashboard settings and existing local Three.js distribution.
 - [x] Add bounded rendering, visibility/reduced-motion pause, cleanup and 11 focused controller regressions. Verify the scene, bindings, reactive simulated light changes, reload and narrow layout on Vulkan; prepare the isolated `three-room-demo` preset without replacing existing presets.
-- [ ] Maintainer acceptance: light button and lamp picking, Pause/Play, scrolling, hidden-tab resume and practical GPU usage. This first prototype does not complete the broader themed-widget catalog.
+- [x] Maintainer exercised the room dashboard, its light controls and visible animation on Vulkan.
+- [ ] Check hidden-tab resume and GPU usage in a longer session.
 
 ## Dashboard theme packages
 
-- [x] Bundle Neon District and Isometric Room dashboards with theme programs (651 and 652) installed by the setup wizard from `homegenie-themes`, compatible default module bindings, localized settings and event-driven power charts seeded from Energy Monitor statistics.
+- [x] Ship Isometric Room, Neon District, Serra, and Radio Casa with related reusable widgets. A clean Vulkan install confirmed the theme selection workflow and Cyberpunk weather configuration. On the upgraded Raspberry Pi, the maintainer installed `homegenie-themes` manually and confirmed its programs work. The setup wizard installs this package on new installations for the Neon District and Isometric Room theme programs (651 and 652).
 
 - [ ] Distribute widgets and their assets directly in packages. Track installed files and ownership so uninstall can remove the package's unused files while preserving shared assets and user changes.
 
@@ -26,8 +27,9 @@ This is the active task list. Detailed stage-by-stage decisions, earlier API nam
 - [x] Step 2: program 111 owns a coordinated atomic store in its ScriptContext, with no new core dependency, monotonic revisions, read-only legacy migration and normalized no-op comparison. Runtime module-field samples do not create revisions; widget/binding configuration and preferences do. Delete retains a hidden generation tombstone.
 - [x] Step 3: reject stale writes without automatic rebasing, retain the latest local edits and offer explicit Update or Save As recovery in Preferences. Preserve recovery after fetch errors/name collisions and after edits during a recovery save. Require the new preset protocol before sending writes to the server.
 - [x] Skip unchanged applied/confirmed preset writes at queue dispatch, ignoring live field samples and key order. Capture the applied model/responsive layout as the clean baseline; preserve pending/in-flight reversions and stale-write protection for subsequent real edits.
-- Verification: Angular compilation and **337 focused frontend tests** pass, plus **22 isolated server tests** (including concurrency and failed publication). Tests compile distributed 111 directly; XML/manifest checksums and lock sharing across script recompilations pass. Vulkan was not modified/restarted for this checkpoint; update Client configuration (111) to **1.0.4** and reload YoT (no core rebuild is needed) and run the documented two-browser acceptance tests on a temporary preset.
-- [x] Step 4: program 111 (1.0.4) emits post-commit change events with preset/revision/operation and client/request identity. YoT filters own/duplicate/older events and shows Preferences/main-menu badges only for the selected server/preset. Offer explicit Update or Save As, preserve local data and refresh an open preset list. Remote deletion is announced without automatic fallback. Live two-browser badge acceptance remains pending; no runtime programs or presets were changed by this implementation.
+- Verification at the implementation checkpoint: Angular compilation, **337 focused frontend tests** and **22 isolated server tests** passed, including concurrency, failed publication, and lock sharing across script recompilations.
+- [x] Step 4: program 111 (1.0.4) emits post-commit change events with preset/revision/operation and client/request identity. YoT filters own/duplicate/older events and shows Preferences/main-menu badges only for the selected server/preset. Offer explicit Update or Save As, preserve local data and refresh an open preset list. Remote deletion is announced without automatic fallback.
+- [x] Maintainer confirmed the two-browser flow after applying an AI dashboard: the originating browser opened the dashboard, the selection persisted after reload, and the other browser used the explicit Preferences update flow.
 - [ ] Deferred by maintainer (2026-11-07), Step 5: reconcile revisions after reconnect/resume to recover missed events and handle remote deletion of the selected preset explicitly. Connected clients now receive notices, but missed-event recovery and automatic deletion fallback remain separate.
 - [ ] Deferred by maintainer (2026-11-07), Step 6: retain at most ten previous recoverable versions plus current. Restoring an older snapshot creates a new revision. History remains distinct from conditional-write conflict detection and deletion tombstones.
 
@@ -41,7 +43,7 @@ This is the active task list. Detailed stage-by-stage decisions, earlier API nam
 - [x] Confirm centralized configuration via the host menu without a primary module: three named selectors, shared icon/name/ID selection style and hidden empty primary selector when appropriate. Keep saved primary selections editable and preserve the classic filter contract.
 - [x] Restore the host menu in the editor without requiring a primary module; verify Configure and Size, hiding Remove/Start New Row there. Put the toolbar Settings action on the right before Chat Sync. Keep Custom Dashboard layout Preferences unchanged.
 - [x] Add adaptive `--widget-menu-space` header spacing: reserve space only for visible host menus and reset it after zUIx loads embedded children. Update AI guidance to avoid duplicate settings/association buttons in embedded widgets; show informational missing-binding states and configure roles at the container.
-- [x] Maintainer accepted the current composite/menu/configuration UI on 2026-11-06. The local `smart-room` examples remain Vulkan test artifacts; they are not bundled product widgets. Preset cross-browser synchronization remains open in the separate next-task section.
+- [x] Maintainer accepted the current composite/menu/configuration UI on 2026-11-06. The local `smart-room` examples remain Vulkan test artifacts; they are not bundled product widgets. Preset synchronization is tracked separately above.
 
 ## Agentic chat objectives (2026-11-02)
 
@@ -56,6 +58,11 @@ This is the active task list. Detailed stage-by-stage decisions, earlier API nam
 - [x] Live in-place revision accepted by the maintainer: composite changed to horizontal layout using the same widgets. Add explicit same-URL Edit reload, preserving unsaved buffers through confirmation and reload failures.
 - [x] Add automation-program steps to objectives by reusing the existing deployment/compilation/recovery pipeline; persist program results and allow revisions of selected owned programs.
 - [x] Program/widget objective execution and revision accepted by the maintainer, preserving program IDs and widget paths; same-URL editor reload was exercised during iteration. Dashboard creation and live revision are now accepted separately below.
+- [x] Add the Automation goal to the shared objective flow. Gemini creation, compilation and execution, in-place revision of a selected user program, and refresh of the open editor were confirmed on Vulkan. Reuse the Automan program row for live state, messages, progress and controls.
+- [x] Enable Gemini cloning with a unique route and history per PID. On Vulkan, the maintainer verified independent chat, image input and an automation objective on clone 1045. The generated RSS program reported 15 articles and completed at 100%.
+- [x] Refresh the provider selector from registration and disable/remove events. The maintainer confirmed disable and re-enable on Vulkan. Gemini and the clone emit registration, and Lailama 940 was aligned to the packaged version and verified Ready with the same model and history.
+- [ ] Retest live Stop with objectives running on two Gemini instances, and verify a newly cloned provider appears in the open selector while a draft stays on the selected chat.
+- [ ] Let users keep several named conversations for one provider and switch between them in chat. Evaluate a provider-specific `chats/` subfolder for storing conversations and their attachments, preserving the existing conversation and import/export flow.
 - [ ] Explicit remaining live cases: objective speech after the fix, sleep/reconnect, history clear while an objective is active, and interrupted/imported task recovery. Do not infer these passes from ordinary completion or cross-browser Stop.
 
 ## AI product direction and local inference checkpoint (2026-10-27)
@@ -71,7 +78,7 @@ This is the active task list. Detailed stage-by-stage decisions, earlier API nam
 - [ ] Confirm the first real Linux startup removes only eligible empty compiler temporaries, preserves active programs and user data, and skips the completed step on a subsequent restart. Confirm cleanup/state errors do not block startup; symbolic-link acceptance remains pending on Linux.
 
 - [x] Record local model evaluations and the clean LLamaSharp 0.30.0 Vulkan deployment with real loading/inference evidence. See [evaluation checkpoint](local-llm-evaluation-20261027.md). Keep GPU/native stability, API/WebSocket stalls and final release validation open; successful inference does not close those issues.
-- [ ] Prioritize provider-independent AI dashboard creation and widget placement/configuration. Inspect current dashboard APIs, persistence and layout semantics before proposing changes; preserve existing design intentions and explicit action outcomes. Gemini remains the maintainer-confirmed working baseline.
+- [ ] Extend dashboard creation and widget placement/configuration to other providers when their capability and tool support can be verified. Gemini is the confirmed baseline.
 - [ ] Validate basic generated automation programs through compilation and execution, separately from general reasoning benchmarks.
 - Maintainer decision: pause broad local-model selection work after recording results. Ship the five-model catalog with optional sampling/batch profiles; keep runners 1028/1029 development-only and revisit comparisons only for a concrete integration need; do not block dashboard/widget work on finding a perfect small LLM.
 
@@ -204,11 +211,12 @@ These are not newly declared release blockers. Keep the original evidence and di
 
 - [ ] Investigate intermittent loss of earlier reasoning during local multi-round streaming/tool calls. Distinguish transient rendering/reset loss from saved-history loss. Reference: chat-history-1792268747142.json; earlier retention fixes did not settle every observed case.
 - [ ] Optionally preserve partial local text after cancellation, marked interrupted and excluded from model context. The maintainer accepts the current saved [STOPPED] behavior; never execute partial commands.
+- [x] Close the Vulkan Gemma 4 experiment. Remove the local catalog entry and restore program 940 to the packaged implementation. Gemma 4 is outside the bundled model catalog.
 - [ ] Reassess local model-specific discovery/coding quality only when useful. Earlier exact 1.7B/Gemma test cases and post-compiler-recovery context-cleanup acceptance remain historical unconfirmed checks, not inferred passes from later Qwen/Gemini tests. Local composite preview/Save functional acceptance is also separate. Prefer deterministic recorded/fake outputs and brief live tests; intensive local coding is optional. Vulkan GPU use was confirmed, so CPU fan noise alone is not evidence of GPU failure.
 - [ ] A real model-download regression and automatic service relaunch through start.sh were not established by the manual test-service restarts. Revisit when those exact paths need verification; do not claim they passed.
 - [ ] LoggerFactory disposal versus automation-thread shutdown race: explicitly low priority. Lailama cleanup now works, but does not close this separate host logging-lifetime issue.
 - [ ] Profile chat CPU with the same dashboard, chat closed versus empty/unconfigured chat open. Cause of sustained extra CPU remains unestablished; investigate before optimizing.
-- [ ] Evaluate shared dashboard preset refresh policy. Preserve browser-local configuration precedence for now; discuss explicit reload, conflicts and concurrent edits before adding synchronization or overwrite behavior.
+- [x] Adopt explicit Preferences updates for remote preset changes, with revision checks and local edit preservation. Deferred follow-ups are listed under client preset synchronization.
 
 ## Future extensions
 
@@ -260,18 +268,19 @@ Feedback continuation: implemented for Gemini and Lailama; automated verificatio
 - [x] Embedded widget context accepted by the maintainer: generated custom elements reuse YoT APIs; module inheritance, explicit `:module`, explicit unbound children and `:adapter` are covered by runtime integration tests. Autonomous loading outside YoT is retained.
 - [ ] Separate live recovery checks: restore Standard while preserving its widget arrangement, missing/load-failed dashboard recovery, and viewport changes with the chat drawer open.
 - [x] Add `this.getModule(id, adapterId?)` to ordinary/embedded controllers, editor declarations and AI guidance; document immediate state rendering and managed module/field event subscriptions instead of polling.
-- [ ] Accept a Gemini-generated reactive light panel live: initial state, external control updates, independent pending/error feedback and disposal without duplicate listeners.
-- [ ] Refine the new task/dashboard UI and UX before release. Keep this polish separate from functional acceptance.
+- [x] Maintainer confirmed a Gemini-generated light panel with working controls and reactive light state on Vulkan.
+- [ ] Verify pending/error feedback and listener disposal separately.
+- [x] Ship the objective card and dashboard UI refinements in 2.0.36, including per-step activity indicators, Markdown details, and a dedicated goal edit action.
 - [x] Add the bounded objective action `apply_dashboard`: save the container first, then create a named dashboard or update an explicitly named existing one through program 111's preset CAS. Persist a separate dashboard artifact and Open dashboard action. Preserve Standard widgets and same-container bindings. Only the originating unchanged page adopts the exact confirmed revision; other clients retain Preferences notices. Automated verification is distinct from live Gemini acceptance.
-- [ ] Accept AI dashboard creation/application and in-place revision on Vulkan, then verify the other browser keeps its current layout until explicit Update. Use a disposable preset; test stale-preset conflict without regenerating the saved widgets.
-- [ ] Review the scattered bundled example widgets and build a small set of coherent themed dashboards with their related widgets after the layout feature is accepted.
-- [ ] Organize the widget browser by folders instead of one flat list, retaining nested editor paths and useful previews.
+- [x] Maintainer confirmed Gemini dashboard creation, automatic opening, persistence after reload, and in-place refresh on Vulkan. The second browser updates through Preferences. A stale-preset application displayed the conflict and kept the saved widgets available.
+- [x] Organize bundled widgets by use and theme. The widget browser supports folders, breadcrumbs, nested editor paths and preview dialogs.
 
 ## Readable AI widget paths
 
 - [x] Replace GUID-based folders for new widget objectives with descriptive Genie proposals, host-assigned collision suffixes and persisted folder ownership. Preserve revision paths and legacy sets.
 - [x] Accept first readable-path creation live on Vulkan: the clock/counter/composite set was saved under `prova-pannello`.
-- [ ] Accept in-place revision and an independent objective proposing the same folder; repeat the revision after fixing ordinary-prompt Stop. Existing GUID sets must remain editable.
+- [x] Maintainer confirmed in-place revisions that retained the widget paths and refreshed the open editor.
+- [ ] Verify an independent goal proposing an existing folder name and editing a legacy GUID-based set.
 
 ## Chat cancellation and request ownership
 
@@ -282,12 +291,11 @@ Feedback continuation: implemented for Gemini and Lailama; automated verificatio
 ## Animated Genie assistant
 
 - [x] Remove the bundled `local-ai-chat` widget and use the standard program widget for Lailama.
-- [ ] Add an animated Genie avatar acting as a digital assistant, with microphone interaction and a floating chat panel. Reuse the existing provider/chat APIs and configured speech facilities; define interaction, lifecycle and accessibility before implementation.
+- [x] Use a transparent floating Genie lantern in Isometric Room. Its animations follow chat activity, and interaction stays in the standard AI chat.
 
-## Next UI delivery checkpoints (2026-11-07)
+## Post-2.0.36 follow-up
 
-1. Complete live acceptance of applying a dashboard from an AI objective, including named updates, persisted selection and preserved bindings.
-2. Curate a small coherent set of themed dashboard containers and reusable light/climate/energy widgets. Keep unbound/empty states readable; avoid duplicating configuration controls in embedded widgets.
-3. Finish focused responsive/accessibility and task/widget UI polish before release. Preset missed-event recovery and ten-version history remain deferred; they do not block this work.
-
-- Dashboard-application acceptance follow-up (2026-11-07): first live run saved all three widgets but exposed program 111 discarding the native Api.Call JObject. Reproduced with the shipped handler and fixed in 111 1.0.6, retaining HTTP-byte compatibility. Reuse the failed objective's saved widgets for the next application test; live acceptance remains pending.
+- [x] Verify bundled dashboard widgets on a clean Vulkan installation with the shared power-history helper served from YoT assets and no `data/widgets/_shared` directory.
+- [ ] Verify the one-time power-history migration on an upgraded 2.0.36 installation. Check that existing themes still render history, other files in `_shared` are preserved, and a subsequent startup skips the completed step.
+- [ ] Verify the YoT package manager fix on Vulkan after the Raspberry Pi report. Cover a successful package change and error/timeout completion so the loading indicator clears in each case.
+- [x] Update the website Dashboards page with the bundled themes and the Home Metrics example created with Gemini Genie. The local site served the updated example gallery.

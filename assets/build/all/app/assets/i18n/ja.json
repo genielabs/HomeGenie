@@ -1,5 +1,5 @@
 {
-  "ai_widget_objective": "ウィジェット作成の目標",
+  "ai_goals": "目標",
   "ai_task_waiting": "待機中",
   "ai_task_cancelled": "キャンセル済み",
   "ai_task_interrupted": "中断",

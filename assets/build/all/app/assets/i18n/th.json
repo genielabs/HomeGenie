@@ -1,5 +1,5 @@
 {
-  "ai_widget_objective": "เป้าหมายการสร้างวิดเจ็ต",
+  "ai_goals": "เป้าหมาย",
   "ai_task_waiting": "กำลังรอ",
   "ai_task_cancelled": "ยกเลิกแล้ว",
   "ai_task_interrupted": "ถูกขัดจังหวะ",

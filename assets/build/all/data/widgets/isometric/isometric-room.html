@@ -20,7 +20,7 @@
       <div class="scene" #scene_area role="group" aria-label="Isometric room">
         <div class="scene-fallback" #scene_fallback><span class="material-symbols-outlined" aria-hidden="true">view_in_ar</span><span #scene_message></span></div>
         <div class="scene-genie" #scene_genie hidden>
-          <zx-widget load="assistants/genie"></zx-widget>
+          <assistants-genie></assistants-genie>
         </div>
       </div>
       <div class="scene-footer"><span class="material-symbols-outlined" aria-hidden="true">touch_app</span><span #scene_hint></span></div>
@@ -28,12 +28,12 @@
 
     <aside class="controls" #controls_area>
       <div class="light-pair">
-        <zx-widget load="isometric/light" #light_widget></zx-widget>
-        <div class="matrix-slot" #matrix_slot><zx-widget load="isometric/led-panel"></zx-widget></div>
+        <isometric-light #light_widget></isometric-light>
+        <div class="matrix-slot" #matrix_slot><isometric-led-panel></isometric-led-panel></div>
       </div>
       <div class="reading-pair">
-        <zx-widget load="isometric/climate"></zx-widget>
-        <zx-widget load="isometric/power"></zx-widget>
+        <isometric-climate></isometric-climate>
+        <isometric-power></isometric-power>
       </div>
     </aside>
   </div>

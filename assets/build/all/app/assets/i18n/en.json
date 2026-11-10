@@ -2,7 +2,7 @@
   "ai_dashboard_open": "Open dashboard",
   "ai_dashboard_select_preset": "Select the original preset and update it in Preferences before opening this dashboard.",
 
-  "ai_widget_objective": "Widget objective",
+  "ai_goals": "Goals",
   "ai_task_waiting": "Waiting",
   "ai_task_cancelled": "Cancelled",
   "ai_task_interrupted": "Interrupted",

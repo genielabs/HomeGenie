@@ -29,7 +29,7 @@ class IsometricPower extends ControllerInstance {
   }
 
   loadHistory() {
-    import('/widgets/_shared/power-history.js').then(({PowerHistory}) => {
+    import(new URL('assets/js/widgets/power-history.js', document.baseURI).href).then(({PowerHistory}) => {
       if (this.disposed) return;
       this.history = new PowerHistory(() => this.renderTrace());
       this.renderData();

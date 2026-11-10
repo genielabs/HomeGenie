@@ -1,5 +1,5 @@
 {
-  "ai_widget_objective": "위젯 생성 목표",
+  "ai_goals": "목표",
   "ai_task_waiting": "대기 중",
   "ai_task_cancelled": "취소됨",
   "ai_task_interrupted": "중단됨",

@@ -1,5 +1,5 @@
 {
-  "ai_widget_objective": "Widgetuppdrag",
+  "ai_goals": "Mål",
   "ai_task_waiting": "Väntar",
   "ai_task_cancelled": "Avbruten",
   "ai_task_interrupted": "Avbruten oväntat",

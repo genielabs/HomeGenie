@@ -18,7 +18,10 @@ public class LailamaContinuationBudgetTest {
         while(root!=null&&!File.Exists(Path.Combine(root.FullName,"HomeGenie.sln")))root=root.Parent;
         var node=XDocument.Load(Path.Combine(root.FullName,"assets/build/all/data/packages/homegenie/homegenie-ml-ai/programs.xml")).Root.Elements().Single(n=>(string)n.Element("Address")=="940");
         var tree=CSharpSyntaxTree.ParseText("class Holder {"+(string)node.Element("ScriptContext")+"}").GetRoot();
-        var adapter=tree.DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text=="LailamaInteractiveExecutor").ToFullString();
+        var executor=tree.DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text=="LailamaInteractiveExecutor");
+        var constructor=executor.Members.OfType<ConstructorDeclarationSyntax>().Single();
+        var preprocess=executor.Members.OfType<MethodDeclarationSyntax>().Single(n=>n.Identifier.Text=="PreprocessInputs");
+        var adapter=executor.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(new MemberDeclarationSyntax[]{constructor,preprocess})).ToFullString();
         // Deterministic harness for the 0.27.0 continuation accounting, not native inference.
         // Source: LLama/LLamaInteractExecutor.cs PreprocessInputs and PostProcess, v0.27.0.
         // Decode batches are simulated so the observed 2447-input/2048-output failure

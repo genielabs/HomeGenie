@@ -74,6 +74,10 @@ class NeonDistrict extends ControllerInstance {
   }
 
   onCreate() {
+    Promise.all([
+      import('/widgets/cyberpunk/lighting.module.js'),
+      import('/widgets/cyberpunk/telemetry.module.js')
+    ]).catch(error => console.error('Could not load dashboard widgets', error));
     this.lights = [...new Set(['light1', 'light2', 'light3'].map(key => this.getBoundModule(key)).filter(Boolean))];
     for (const light of this.lights) this.subscribe(light, () => this.renderLights());
 

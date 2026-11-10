@@ -29,6 +29,39 @@ public class PostUpdateCheckTest
         File.WriteAllText(empty,"");PostUpdateCheck.Run(root,null);
         Assert.That(File.Exists(empty),Is.True);Assert.That(File.ReadAllText(Marker),Is.EqualTo(before));
     }
+    [TestCase(false)]
+    [TestCase(true)]
+    public void LegacyWidgetPowerHistoryIsRemovedOnceAfterAppAndThemesAreUpdated(bool preserveOtherFiles)
+    {
+        const string legacyPath = "data/widgets/_shared/power-history.js";
+        const string themePath = "data/widgets/radio-casa/receiver.js";
+        string legacy = Put(legacyPath, "old helper");
+        Put(themePath, "import('/widgets/_shared/power-history.js?v=2')");
+        if (preserveOtherFiles) Put("data/widgets/_shared/custom.js", "keep");
+        Put("data/post-update/completed.json",
+            "{\"empty-compiler-temporaries-v1\":\"2026-01-01T00:00:00+00:00\"}");
+
+        PostUpdateCheck.Run(root, null);
+        Assert.That(File.Exists(legacy), Is.True);
+        string replacement = Put("app/assets/js/widgets/power-history.js", "new helper");
+        PostUpdateCheck.Run(root, null);
+        Assert.That(File.Exists(legacy), Is.True);
+
+        Put(themePath, "import(new URL('assets/js/widgets/power-history.js', document.baseURI).href)");
+        PostUpdateCheck.Run(root, null);
+        Assert.That(File.Exists(legacy), Is.False);
+        Assert.That(File.ReadAllText(replacement), Is.EqualTo("new helper"));
+        Assert.That(Directory.Exists(Path.GetDirectoryName(legacy)), Is.EqualTo(preserveOtherFiles));
+        if (preserveOtherFiles)
+            Assert.That(File.ReadAllText(Path.Combine(root, "data/widgets/_shared/custom.js")), Is.EqualTo("keep"));
+        using var state = JsonDocument.Parse(File.ReadAllText(Marker));
+        Assert.That(state.RootElement.TryGetProperty(PostUpdateCheck.LegacyWidgetPowerHistoryStep, out _), Is.True);
+
+        Put(legacyPath, "new user file");
+        PostUpdateCheck.Run(root, null);
+        Assert.That(File.ReadAllText(legacy), Is.EqualTo("new user file"));
+    }
+
     [Test] public void LlamaBinariesInventoriesAndExistingBackupsAreNotReadValidatedOrChanged() {
         var preserved=new Dictionary<string,string> {
             ["LLamaSharp.KernelMemory.dll"]="legacy-adapter",

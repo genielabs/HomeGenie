@@ -1,5 +1,5 @@
 {
-  "ai_widget_objective": "Vidjet yaratish maqsadi",
+  "ai_goals": "Maqsadlar",
   "ai_task_waiting": "Kutilmoqda",
   "ai_task_cancelled": "Bekor qilindi",
   "ai_task_interrupted": "Uzildi",

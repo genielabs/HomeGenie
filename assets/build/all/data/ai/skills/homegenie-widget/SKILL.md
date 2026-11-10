@@ -111,6 +111,7 @@ class MyWidget extends ControllerInstance {
 **Module selection contract:**
 * Valid module types are `dimmer`, `color`, `doorlock`, `doorwindow`, `generic`, `light`, `mediareceiver`, `mediatransmitter`, `program`, `sensor`, `switch`, `shutter`, `motor`, `thermostat`, and `videoinput`. Matching is case-insensitive.
 * Use comma-separated names without spaces. Types in `typeFilter` are alternatives (OR); fields in `fieldFilter` are also alternatives (OR). When both filters are set, the module must match BOTH groups (AND). Selection includes online modules only.
+* For a power meter role, use `fieldFilter: 'EnergyMonitor.WattLoad,Meter.Watts'` and `includeDomains: 'HomeAutomation.EnergyMonitor'`. Prefer `EnergyMonitor.WattLoad` when present and use the same field for live watts and `Statistics.Field.GetData`. If historical data is missing, show an empty state or actual live samples. Pass `rangeStart` and `rangeEnd` as Unix milliseconds to `module.control('Statistics.Field.GetData', options)`. Its subscription receives the `{x, y}[]` array directly. The `res.response` wrapper is used by `this.apiCall()`. Sort the returned `{x, y}` samples by timestamp from oldest to newest, then merge actual live readings into the same time window.
 * For a general level display, use `fieldFilter: 'Status.Level'` and omit `typeFilter` unless the widget requires specific device types. A lighting widget must include `Color` when it supports color lights.
 * An omitted, empty, or `any` filter imposes no restriction for that group. At least one active filter is required to populate the module selector; leaving both groups unrestricted currently produces an empty list.
 * `moduleSelect` is OPTIONAL. Omit it for standalone widgets such as games, calculators, clocks, or interactive explanations. Such widgets must work without `boundModule`.
@@ -155,6 +156,7 @@ Components MUST be designed to interact seamlessly with their host environment a
 
 ### 2.6 Visual Programming (Directives)
 Directives operate on the context exposed by `this.declare()`.
+*   **`(click)="toggleLight('light1')"`** calls a function exposed by `this.declare({toggleLight: role => this.toggleLight(role)})`. Call the declared name directly in the template. A `context.` prefix will not resolve that function.
 *   **`@hide-if="methodName()"`**: **PREFERRED for VISIBILITY.** Hides element if true.
 *   **`@if="methodName()"`**: Evaluates logic. **MANDATORY:** Must be paired with `@then` or `@else`. It does **NOT** hide elements by itself.
 *   **`@then="..."` / `@else="..."`**: Executed based on `@if`. Inside strings, `$this` is the element wrapper (ZxQuery object), while `$` is the component view (ZxQuery object).
@@ -167,7 +169,7 @@ Directives operate on the context exposed by `this.declare()`.
 *   **Field Values:** These can vary in type. You **must** always use `utils.format.fieldValue(f)` to obtain a formatted string that respects the user's unit settings and display preferences.
 *   **Colors (HSB):** `Status.ColorHsb` format is `H,S,B,[Duration]`.
     *   **H, S, B** are floats `0.0 - 1.0`. Check `parts.length >= 3`.
-    *   **LIGHT STATE (widget JavaScript):** `this.boundModule`, `this.getBoundModule(name)` and `this.getModule(id)` resolve YoT `Module` objects. Read `module?.field('Status.Level')?.decimalValue`: zero is off, a finite positive level is on, and a missing or invalid level is unknown. Render the initial reading and subscribe to `Status.Level` changes.
+    *   **LIGHT STATE (widget JavaScript):** `this.boundModule`, `this.getBoundModule(name)` and `this.getModule(id)` resolve YoT `Module` objects. Read `module?.field('Status.Level')?.decimalValue`: zero is off, a finite positive level is on, and a missing or invalid level is unknown. Render the initial reading and subscribe to `Status.Level` changes. For light brightness, `Status.Level` is a fraction from 0 to 1. Display `Math.round(level * 100)` in a 0–100 slider. Send the slider percentage as a separate argument, for example `module.control('Control.Level', 42)`.
     *   **API boundary:** `IsOn` and `IsOff` are C# automation helpers. In widget JavaScript, use `isOn` or `isOff` only as state derived by your view; the YoT module exposes the field through `module.field(...)`.
 *   **Icons:** Use standard *Google's Material Symbols & Icons* (e.g., `lightbulb`, `light_off`). No `_fill` suffix.
 
@@ -549,7 +551,7 @@ render();
 if (sensor) this.subscribe(sensor, render);
 ```
 
-Role labels should use the user's language; role keys remain stable during revisions. YoT provides one selector per role and persists selections per dashboard/widget instance; editor/preview selections are temporary. A selection change reloads the instance and disposes its managed subscriptions. Do not save bindings with API calls or browser storage, and do not select or command devices automatically during initialization. An unselected role returns `undefined`: show an informational unconfigured state. Configure roles centrally through the container menu; do not repeat association buttons inside child widgets.
+Role labels should use the user's language; role keys remain stable during revisions. Use `module.name` to display the selected device's name. Use the role label (for example, "Light 1") in settings and as a fallback when no device is assigned. YoT provides one selector per role and persists selections per dashboard/widget instance; editor/preview selections are temporary. A selection change reloads the instance and disposes its managed subscriptions. Do not save bindings with API calls or browser storage, and do not select or command devices automatically during initialization. An unselected role returns `undefined`: show an informational unconfigured state. Configure roles centrally through the container menu; do not repeat association buttons inside child widgets.
 
 A container passes a role to a saved child's primary binding with `:module="bm('light')"`; use the child's actual registered tag and import. `bm` is supplied by YoT and returns the Module object directly: do not redefine or declare `bm`, or reconstruct a reference from `.domain`/`.address` (these are not YoT Module properties). When a string ID is required, use the complete `module.id`. The child continues using `this.boundModule`. Children can also call `this.getBoundModule('light')` to inherit named roles. Local explicit selections override ancestors; explicit null/empty/unavailable selections stop inheritance. `:module="null"` disables only the primary binding. Never substitute another device for a missing role.
 

@@ -1,101 +1,4 @@
-# SECTION 2: CUSTOM WIDGET DEVELOPMENT (ZUIX.JS FRONTEND)
-
-Widgets are dynamically **loadable Web Components** running in Shadow DOM. They consist of **HTML (View)**, **CSS (Style)**, and **JavaScript (Controller)**.
-
-### Required CSS dependency check before returning a widget
-
-Inspect the FINAL HTML and CSS before emitting any ordinary, composite or presentation widget. Do not assume the host or another widget imports its styles: each widget is isolated in Shadow DOM.
-
-- If the HTML uses ANY `layout` or `self` attribute, the widget CSS MUST import `assets/styles/flex-layout-attribute.min.css`.
-- If the HTML uses `material-symbols-outlined` or `material-symbols`, the widget CSS MUST import `assets/styles/widget-ui.css`. This file supplies icon/control styling; it DOES NOT supply FLA layout rules. Importing it alone cannot implement `layout="column ..."`.
-- Emit all required `@import` statements once at the very beginning of the CSS string, before selectors or other style rules. Do not put them in HTML, the controller, parent-document styles, or after CSS rules.
-
-For a widget with BOTH layout attributes and Material Symbols, start CSS exactly with:
-
-```css
-@import 'assets/styles/flex-layout-attribute.min.css';
-@import 'assets/styles/widget-ui.css';
-```
-
-Use the documented FLA vocabulary: `layout="row center-left"`, `layout="row center-justify"`, `layout="row center-right"`, `layout="column top-stretch"` or `layout="column center-center"`. Do not invent `center-between`, `center-start` or `center-end`. Put self alignment/sizing in a SEPARATE attribute, e.g. `self="stretch size-x1"`; never put `self-stretch` inside `layout`.
-
-Final internal check: scan the HTML for layout/self attributes and icon classes, then verify their imports exist in the actual CSS output. If you intentionally avoid FLA, omit its attributes and implement all needed display/direction/alignment in explicit CSS instead. Keep fixed-size icons and compact controls from unintentionally inheriting full-row width. Shared `widget-ui.css` hides spans in disabled buttons; when navigation must keep its label/icon, override that behavior within the widget (e.g. `.nav-btn:disabled span { display: inline-block; opacity: 1; }`).
-
-### 2.1 Critical Rules (VIOLATION = BROKEN WIDGET)
-1.  **ASSET MANAGEMENT:**
-    * Prefer local assets for UI and styling: Do NOT use external CDNs for Fonts, Icons, or CSS. Assume these are hosted locally.
-    * Chart.js, Anime.js and Three.js are available as local JavaScript assets; use the entry points below. Other external JavaScript libraries require an explicit user request; do not silently add a CDN dependency.
-2.  **ELEMENT ACCESS & STYLING:**
-    *   **Access:** Use `this.field('my_el')` for elements declared with the `#` directive attribute. Use `this.view().find('valid_query_selector')` to get elements within the view. (Both return a ZxQuery Object).
-    *   **Style:** Use `.css({ 'color': 'red' })`. **NEVER** use `.style` directly on `this.field()`. **DO NOT SET** the background color of a widget if you want it to inherit theme settings.
-    *   **Raw DOM:** Use `this.field('my_el').get()` and `this.view().find('query_selector').get()` if you absolutely need the HTMLElement.
-    *   **IMPORTANT:** Inside the controller `this` is the `ControllerInstance`, `this.$` is the view (ZxQuery). Inside any element of the View (HTML), `this` is the HTMLElement, `$this` is the ZxQuery-wrapped `this`, `context` is the ComponentContext with `context.model()` and other instance members.
-3.  **HTML IDS (Binding):**
-    *   Use **snake_case** (e.g., `#my_value`).
-    *   **NEVER use CamelCase** (e.g., `#myValue` is INVALID).
-4.  **SYNTAX & LOGIC:**
-    *   **Events:** Never use `$event`. Always use `event` or the scoped context.
-    *   **Interpolation:** Never use `{{ variable }}`. **NEVER use Mustache syntax.** Use the framework-specific data-binding via `#` attributes, or via `@` attributes (e.g. `@set="this.innerHTML = model.name"`).
-    *   **Active Refresh (@):** Attributes starting with `@` (e.g., `@set`, `@if`, `@hide-if`) are evaluated **ONLY if the element is visible**. To force evaluation even when the element is not visible (e.g., `display: none` or off-screen), you **MUST** include the `@active` attribute on the same element.
-    *   **Logic:** `@if` is a logic branch, not a display toggle. Manage visibility explicitly via CSS classes or `this.view().show()/hide()`.
-5.  **HOST MENU:** YoT provides the top-right widget menu with Configure and applicable sizing/actions. Do not duplicate it with a header settings button. For a reusable ordinary widget, reserve header space with `padding-right: var(--widget-menu-space, 0px);`: YoT supplies 48px when its menu is visible, 0px when hidden or embedded. Dashboard containers have no overlaid menu and must not reserve a fixed safe zone. Embedded children use their container's configuration: do not generate Associate/Configure buttons, including in unconfigured states. Show a compact informational placeholder when no module is assigned; the user configures all roles through the container's host menu (or Dashboard Preferences). An explicit `this.configure()` action may be useful for a standalone widget, but must not be repeated in embedded children.
-6.  **CONTEXT SEPARATION:**
-    *   **`this.model()`**: Reactive Proxy for text/values.
-    *   **`this.declare()`**: View Context for Methods/Logic.
-7.  **SHADOW DOM:** CSS is scoped. Use `:host { display: block; }`. The generated CSS must be bulletproof to prevent Shadow DOM layout collapse. Define the `:host` and root `.container` layout for the selected preset or free-size mode, following section 2.9.
-
-### 2.2 Controller Configuration (`settings`)
-Defining the `settings` object in the class is **mandatory**. You MUST always include `defaultSize`.
-
-```javascript
-class MyWidget extends ControllerInstance {
-  settings = {
-    moduleSelect: {
-        fieldFilter: 'Status.Level',
-        // CRITICAL LIGHTING DEFINITIONS FOR 'typeFilter':
-        // - 'Light' = Specifically a binary light (0/1 ON/OFF)
-        // - 'Dimmer' = Dimmable light; check the actual field's value range
-        // - 'Color' = Color LED light (RGB/HSB)
-        typeFilter: 'Light,Dimmer,Color'
-    },
-    /**
-     * @type {'' | 'small' | 'medium' | 'big'}
-     * @description The default widget size. Use an empty string '' for an unconstrained,
-     * CSS-driven size. Let the CustomWidget host apply the selected size.
-     */
-    defaultSize: 'medium',
-    // Allowed user presets. If defaultSize is '', consider keeping this empty [] to disable manual resizing.
-    sizeOptions: ['small', 'medium', 'big']
-  };
-}
-```
-
-**Module selection contract:**
-* Valid module types are `dimmer`, `color`, `doorlock`, `doorwindow`, `generic`, `light`, `mediareceiver`, `mediatransmitter`, `program`, `sensor`, `switch`, `shutter`, `motor`, `thermostat`, and `videoinput`. Matching is case-insensitive.
-* Use comma-separated names without spaces. Types in `typeFilter` are alternatives (OR); fields in `fieldFilter` are also alternatives (OR). When both filters are set, the module must match BOTH groups (AND). Selection includes online modules only.
-* For a general level display, use `fieldFilter: 'Status.Level'` and omit `typeFilter` unless the widget requires specific device types. A lighting widget must include `Color` when it supports color lights.
-* An omitted, empty, or `any` filter imposes no restriction for that group. At least one active filter is required to populate the module selector; leaving both groups unrestricted currently produces an empty list.
-* `moduleSelect` is OPTIONAL. Omit it for standalone widgets such as games, calculators, clocks, or interactive explanations. Such widgets must work without `boundModule`.
-* If binding is needed, render a useful unbound state. For embedded children, keep it informational and leave association to the container; only standalone widgets may offer an action calling `this.configure()`. Check that `boundModule` and each required field exist before using them. A field list does not guarantee that every listed field exists.
-* Current CustomWidget CSS declares `small` as 302x168px, `medium` as 302x316px, and `big` as 492x316px, with padding and card constraints applied separately. These are host layout declarations, not guaranteed inner canvas dimensions. Use the actual view size for canvas/chart sizing and adapt on resize.
-* Include `defaultSize` in `sizeOptions` when manual resizing is enabled. Use `sizeOptions: []` to disable manual resizing when a free, CSS-driven layout is appropriate.
-
-### 2.3 Controller Logic & Framework APIs
-*   **`onInit()`**: Pre-load external libs (e.g., `zuix.using`).
-*   **`onCreate()`**: **MAIN ENTRY POINT**.
-    *   **Pattern:** Define a `viewContext` object with Methods and pass it to `this.declare(viewContext)`.
-    *   **Binding Check:** Initialize the view and its methods first. If binding is needed and no module is associated, render the unbound state before returning. Standalone widgets must not depend on a bound module.
-    *   **Subscribe (CRITICAL EXISTENCE CHECK):** You **MUST ALWAYS** verify that a field exists before subscribing to it. Failing to do so causes a FATAL runtime crash.
-        *   *Correct:* `const f = this.boundModule.field('Sensor.Name'); if (f) { this.subscribe(f, callback); }`
-*   **`onDispose()`**: **MANDATORY FOR MEMORY SAFETY**. You MUST always generate this method in the controller class. It is strictly required to clear interval/timeout handles with `clearInterval`/`clearTimeout`, cancel animation frames with `cancelAnimationFrame`, unsubscribe from subscriptions created directly by the widget, and remove event handlers registered outside the managed view to prevent memory leaks. Handlers registered with `this.view().on(...)` are automatically unregistered by the framework. Even if your code doesn't actively use timers yet, generate an empty `onDispose()` method.
-*   **`this.apiCall('domain/address/method', payload)`**: *FRONTEND ONLY (UI/Widgets)*. Sends a request from the widget to a backend service. Returns an Observable.
-    *   **🚨 CRITICAL PAYLOAD PARSING:** The subscription receives an object structured as `{ code: number, response: any }`. **You MUST use `data.response` to access the actual JSON/array returned by the backend API.** Do not assume the raw array/object is returned directly at the root.
-    *   *Correct Usage:* `this.apiCall('Custom/MyApi').subscribe({ next: (data) => { const payload = data.response; /* process payload */ } });`
-*   **`this.configure()`**: *FRONTEND ONLY*. Programmatically opens the custom widget configuration dialog (Bound Module Selection).
-*   **`this.showSettings(moduleId?)`** opens the module settings dialog in YoT. Pass a resolved module ID to open that module's options.
-*   **`this.translate(key)`**: Returns an Observable from `translate.get('WIDGETS.' + key)`. Subscribe to receive the translated string; do not assign the Observable to a text field. Track and unsubscribe any subscription created directly by your controller in `onDispose()`.
-*   **`this.init, this.create, this.dispose, this.update, this.log`**: Are RESERVED methods NEVER OVERWRITE them.
-
+#use-kb homegenie-core/references/widget-authoring.md
 ### 2.4 State Management Strategy (CRITICAL)
 When handling multiple fields, avoid passing values as arguments to a central update function.
 *   **BAD:** `updateUI(level, color)` -> Prone to type mismatch errors.
@@ -115,6 +18,7 @@ Components MUST be designed to interact seamlessly with their host environment a
 
 ### 2.6 Visual Programming (Directives)
 Directives operate on the context exposed by `this.declare()`.
+*   **`(click)="toggleLight('light1')"`** calls a function exposed by `this.declare({toggleLight: role => this.toggleLight(role)})`. Call the declared name directly in the template. A `context.` prefix will not resolve that function.
 *   **`@hide-if="methodName()"`**: **PREFERRED for VISIBILITY.** Hides element if true.
 *   **`@if="methodName()"`**: Evaluates logic. **MANDATORY:** Must be paired with `@then` or `@else`. It does **NOT** hide elements by itself.
 *   **`@then="..."` / `@else="..."`**: Executed based on `@if`. Inside strings, `$this` is the element wrapper (ZxQuery object), while `$` is the component view (ZxQuery object).
@@ -127,33 +31,10 @@ Directives operate on the context exposed by `this.declare()`.
 *   **Field Values:** These can vary in type. You **must** always use `utils.format.fieldValue(f)` to obtain a formatted string that respects the user's unit settings and display preferences.
 *   **Colors (HSB):** `Status.ColorHsb` format is `H,S,B,[Duration]`.
     *   **H, S, B** are floats `0.0 - 1.0`. Check `parts.length >= 3`.
-    *   **LIGHT STATE (widget JavaScript):** `this.boundModule`, `this.getBoundModule(name)` and `this.getModule(id)` resolve YoT `Module` objects. Read `module?.field('Status.Level')?.decimalValue`: zero is off, a finite positive level is on, and a missing or invalid level is unknown. Render the initial reading and subscribe to `Status.Level` changes.
+    *   **LIGHT STATE (widget JavaScript):** `this.boundModule`, `this.getBoundModule(name)` and `this.getModule(id)` resolve YoT `Module` objects. Read `module?.field('Status.Level')?.decimalValue`: zero is off, a finite positive level is on, and a missing or invalid level is unknown. Render the initial reading and subscribe to `Status.Level` changes. For light brightness, `Status.Level` is a fraction from 0 to 1. Display `Math.round(level * 100)` in a 0–100 slider. Send the slider percentage as a separate argument, for example `module.control('Control.Level', 42)`.
     *   **API boundary:** `IsOn` and `IsOff` are C# automation helpers. In widget JavaScript, use `isOn` or `isOff` only as state derived by your view; the YoT module exposes the field through `module.field(...)`.
 *   **Icons:** Use standard *Google's Material Symbols & Icons* (e.g., `lightbulb`, `light_off`). No `_fill` suffix.
 
-
-### Material Symbols in widgets
-
-Material Symbols are available from local YoT assets. Apply these instructions to ordinary widgets, composite widgets and chat widgets with `widget.mode="presentation"`.
-
-When using icons, put this import at the beginning of the widget CSS, before style rules, even when the widget has its own nonempty CSS. Styles outside the widget Shadow DOM are not sufficient:
-
-```css
-@import 'assets/styles/widget-ui.css';
-```
-
-Use the icon name as the text content of a plain HTML span:
-
-```html
-<!-- Outlined -->
-<span class="material-symbols-outlined" aria-hidden="true">lightbulb</span>
-<!-- Filled -->
-<span class="material-symbols" aria-hidden="true">lightbulb</span>
-```
-
-The shared CSS sets `FILL` to 0 for `material-symbols-outlined` and 1 for `material-symbols`. Use standard names such as `lightbulb`, `light_off`, `check_small` or `close_small`; do not invent a `_fill` suffix. Custom widgets use zuix.js rather than Angular, so do not use `<mat-icon>`. Do not load icon fonts or styles from Google Fonts or another external CDN.
-
-For icons alongside text, use an inline-flex container with `align-items: center` and a suitable gap; set the icon's `line-height: 1`. Keep a visible label or accessible name on icon-only controls; `aria-hidden="true"` is appropriate for decorative icons when the control already has its own name.
 
 ### Local graphics and animation libraries
 
@@ -382,7 +263,7 @@ render();
 if (sensor) this.subscribe(sensor, render);
 ```
 
-Role labels should use the user's language; role keys remain stable during revisions. YoT provides one selector per role and persists selections per dashboard/widget instance; editor/preview selections are temporary. A selection change reloads the instance and disposes its managed subscriptions. Do not save bindings with API calls or browser storage, and do not select or command devices automatically during initialization. An unselected role returns `undefined`: show an informational unconfigured state. Configure roles centrally through the container menu; do not repeat association buttons inside child widgets.
+Role labels should use the user's language; role keys remain stable during revisions. Use `module.name` to display the selected device's name. Use the role label (for example, "Light 1") in settings and as a fallback when no device is assigned. YoT provides one selector per role and persists selections per dashboard/widget instance; editor/preview selections are temporary. A selection change reloads the instance and disposes its managed subscriptions. Do not save bindings with API calls or browser storage, and do not select or command devices automatically during initialization. An unselected role returns `undefined`: show an informational unconfigured state. Configure roles centrally through the container menu; do not repeat association buttons inside child widgets.
 
 A container passes a role to a saved child's primary binding with `:module="bm('light')"`; use the child's actual registered tag and import. `bm` is supplied by YoT and returns the Module object directly: do not redefine or declare `bm`, or reconstruct a reference from `.domain`/`.address` (these are not YoT Module properties). When a string ID is required, use the complete `module.id`. The child continues using `this.boundModule`. Children can also call `this.getBoundModule('light')` to inherit named roles. Local explicit selections override ancestors; explicit null/empty/unavailable selections stop inheritance. `:module="null"` disables only the primary binding. Never substitute another device for a missing role.
 
