@@ -1,0 +1,109 @@
+@import 'assets/styles/widget-ui.css';
+
+:host {
+  display: block;
+  height: 100%;
+  min-width: 0;
+  color: var(--text-color, #242527);
+}
+
+.energy-dashboard {
+  --panel: var(--card-color, #fff);
+  --page: var(--background-color, #f5f5f5);
+  --muted: var(--secondary-text-color, #58616b);
+  --divider: color-mix(in srgb, currentColor 13%, transparent);
+  --track: color-mix(in srgb, currentColor 10%, transparent);
+  --energy-accent: #945100;
+  --selected: #ffc266;
+  --selected-text: #291800;
+  box-sizing: border-box;
+  height: 100%;
+  overflow: auto;
+  padding: clamp(14px, 2vw, 28px);
+  background: var(--page);
+  container: energy / inline-size;
+}
+
+.energy-dashboard[data-dark] {
+  --energy-accent: #ffbd5c;
+  --page: color-mix(in srgb, var(--background-color, #303030) 43%, black);
+  --panel: color-mix(in srgb, var(--card-color, #424242) 43%, black);
+}
+.heading { margin: 4px 0 clamp(14px, 2vw, 26px); }
+.heading span { display: block; margin-top: 4px; }
+.heading span:empty { display: none; }
+.heading span, .devices p, .plot p { color: var(--muted); }
+h1, h2, p { margin: 0; }
+h1 { font-size: clamp(1.75rem, 3.4cqw, 2.9rem); line-height: 1.12; }
+h2 { font-size: clamp(1.2rem, 2.4cqw, 1.95rem); line-height: 1.2; }
+.metrics, .detail { display: grid; gap: 14px; }
+.metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 14px; }
+.detail { grid-template-columns: minmax(0, 2.35fr) minmax(0, 1fr); }
+.metrics article, .history, .devices {
+  min-width: 0;
+  padding: clamp(12px, 2cqw, 24px);
+  border: 1px solid var(--divider);
+  border-radius: 16px;
+  background: var(--panel);
+}
+.metrics article {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(10px, 1.7cqw, 24px);
+  background: linear-gradient(125deg, color-mix(in srgb, currentColor 3%, transparent), transparent 72%), var(--panel);
+}
+.metric-icon.material-symbols-outlined {
+  font-size: clamp(24px, 4.5cqw, 62px);
+  color: var(--energy-accent);
+}
+.metric-reading {
+  display: grid;
+  gap: 4px;
+  border-inline-start: 1px solid var(--divider);
+  padding-inline-start: clamp(10px, 1.7cqw, 24px);
+}
+.metric-reading > span { font-size: clamp(.9rem, 1.75cqw, 1.35rem); line-height: 1.2; }
+.metrics strong { font-size: clamp(1.25rem, 4.3cqw, 3.45rem); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.metrics small { font-size: .76em; font-weight: inherit; white-space: nowrap; }
+.history header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+.ranges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--divider);
+  border-radius: 12px;
+  background: var(--track);
+}
+.ranges button {
+  min-height: 36px;
+  padding: 6px clamp(12px, 1.65cqw, 22px);
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.ranges button[aria-pressed="true"] { color: var(--selected-text); background: var(--selected); }
+.ranges button:focus-visible { outline: 2px solid var(--energy-accent); outline-offset: 2px; }
+.plot { height: clamp(250px, 45vh, 540px); position: relative; margin-top: 20px; }
+.plot canvas { position: absolute; inset: 0; }
+.plot p { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; text-align: center; }
+.plot p:empty, .devices p:empty { display: none; }
+.devices p { margin-top: 12px; }
+.devices ol { margin: clamp(18px, 3.2cqw, 42px) 0 0; padding: 0; list-style: none; display: grid; gap: clamp(18px, 2.5cqw, 34px); }
+.devices li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: baseline; font-size: clamp(.95rem, 1.7cqw, 1.28rem); }
+.device-name { overflow-wrap: anywhere; }
+.device-value { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.device-bar { grid-column: 1 / -1; height: clamp(10px, 1.6cqw, 20px); background: var(--track); border-radius: 6px; overflow: hidden; }
+.device-bar span { display: block; height: 100%; background: linear-gradient(90deg, var(--energy-accent), color-mix(in srgb, var(--energy-accent) 82%, #ffd884)); border-radius: inherit; }
+
+@container energy (width < 700px) {
+  .detail { grid-template-columns: 1fr; }
+}
+@container energy (width < 600px) {
+  .metrics { grid-template-columns: 1fr; gap: 8px; }
+  .metric-reading { grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; }
+}

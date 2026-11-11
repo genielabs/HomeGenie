@@ -1,0 +1,133 @@
+@import 'assets/styles/widget-ui.css';
+
+:host { display: block; height: 100%; min-width: 0; min-height: 0; container: security-host / size; color: var(--text-color, #242932); }
+.security {
+  --line: var(--divider-color, #7a83933d);
+  --muted: var(--secondary-text-color, #505866);
+  --action: var(--primary-color, #1b61b9);
+  --page: var(--background-color, #f3f5f7);
+  --security-surface: var(--card-color, #fff);
+  --security-highlight: color-mix(in srgb, currentColor 3%, transparent);
+  --security-shadow: 0 4px 16px #1b263414;
+  --security-body-size: clamp(.95rem, 1.05cqw, 1.22rem);
+  height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+  container: security / inline-size;
+  padding: clamp(12px, 2vw, 26px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(12px, 1.4vw, 22px);
+  align-content: start;
+  font-size: var(--security-body-size);
+  background: var(--page);
+}
+.security[data-dark] {
+  --page: color-mix(in srgb, var(--background-color, #303030) 43%, black);
+  --security-surface: color-mix(in srgb, var(--card-color, #424242) 48%, black);
+  --security-highlight: color-mix(in srgb, currentColor 4%, transparent);
+  --security-shadow: 0 5px 18px #0004;
+  --line: color-mix(in srgb, currentColor 14%, transparent);
+}
+.side-column { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.3fr); align-items: start; gap: inherit; }
+.panel {
+  min-width: 0;
+  padding: clamp(12px, 1.65cqw, 24px);
+  background: linear-gradient(145deg, var(--security-highlight), transparent 66%), var(--security-surface);
+  box-shadow: var(--security-shadow);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+h2 { display: flex; align-items: center; gap: .42em; margin: 0 0 16px; font-size: clamp(1.15rem, 2.1cqw, 2rem); line-height: 1.15; }
+h2 > .heading-icon { flex: 0 0 auto; font-size: 1em; line-height: 1; color: var(--muted); }
+h2 > span:last-child { min-width: 0; overflow-wrap: anywhere; }
+.cameras { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.cameras:has(> [hidden]) { grid-template-columns: minmax(0, 1fr); }
+.alarm { display: flex; flex-direction: column; }
+.alarm-content { flex: 1 0 auto; display: grid; align-content: center; justify-items: center; gap: 12px; text-align: center; }
+.alarm-summary { display: flex; align-items: center; justify-content: center; gap: 12px; }
+.alarm-summary .alarm-symbol { font-size: clamp(28px, 3.1cqw, 48px); line-height: 1; }
+.alarm-summary strong { min-width: 0; font-size: clamp(1.25rem, 2.2cqw, 2.15rem); line-height: 1.15; overflow-wrap: anywhere; }
+.alarm[data-state="home"] .alarm-summary, .alarm[data-state="away"] .alarm-summary { color: var(--action); }
+.alarm[data-state="triggered"] .alarm-summary { color: var(--warn-color, #c52b37); }
+.actions { width: min(100%, 24rem); display: flex; flex-wrap: wrap; gap: 10px; }
+.actions button { flex: 1; min-height: 44px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 9px; color: inherit; background: color-mix(in srgb, currentColor 5%, transparent); font: inherit; font-weight: 650; cursor: pointer; }
+.actions button:not(:disabled):hover { border-color: var(--action); }
+.actions button:disabled { opacity: .55; cursor: default; }
+.actions button:focus-visible { outline: 2px solid var(--action); outline-offset: 2px; }
+.empty { margin: 0; color: var(--muted); }
+.empty:empty { display: none; }
+.command-error { color: var(--warn-color, #c52b37); }
+.rows { list-style: none; padding: 0; margin: 0; }
+.rows li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 10px; min-height: 48px; border-top: 1px solid var(--line); padding: 6px 0; }
+.rows li > span:nth-child(2) { overflow-wrap: anywhere; }
+.event-list li { grid-template-columns: 3.3em auto minmax(0, 1fr); gap: 8px; min-height: 40px; }
+.event-list time, .event-state { color: var(--muted); font-size: .87em; }
+.event-list time { font-variant-numeric: tabular-nums; }
+.event-title { overflow-wrap: anywhere; }
+.event-state:not(:empty)::before { content: ' · '; }
+.sensor-state { max-width: 9em; text-align: center; overflow-wrap: anywhere; padding: 4px 8px; border-radius: 7px; background: #7a839326; font-size: .86em; }
+.sensor-state[data-tone="good"] { background: #2b9a5650; }
+.sensor-state[data-tone="attention"] { background: #c4823155; }
+[hidden] { display: none !important; }
+
+:host([data-dashboard-page]) { height: auto; container-type: inline-size; }
+:host([data-dashboard-page]) .security { height: auto; overflow: visible; }
+
+@media (min-height: 714px) {
+  @container dashboard-page (width >= 940px) {
+    :host([data-dashboard-page]) { height: var(--dashboard-page-height); container-type: size; }
+    :host([data-dashboard-page]) .security { height: var(--dashboard-page-height); overflow: auto; }
+  }
+}
+
+@container security-host (width >= 940px) and (height >= 650px) {
+  .security:has(> .camera-panel:not([hidden])) {
+    grid-template-rows: minmax(0, 3fr) minmax(0, 2fr);
+    align-content: stretch;
+    overflow: hidden;
+  }
+  .camera-panel {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 0;
+    overflow: hidden;
+  }
+  .cameras {
+    container-type: size;
+    --security-camera-height: 100cqh;
+    --security-camera-ratio: auto;
+    grid-template-rows: minmax(0, 1fr);
+    min-height: 0;
+  }
+  .cameras > security-camera-view {
+    height: 100%;
+    min-height: 0;
+  }
+  .side-column {
+    min-height: 0;
+    grid-template-rows: minmax(0, 1fr);
+    align-items: stretch;
+  }
+  .side-column > .panel {
+    min-height: 0;
+    overflow: auto;
+  }
+  .side-column > .recent-events {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .event-list {
+    min-height: 0;
+    overflow: auto;
+  }
+}
+@container security (width < 900px) {
+  .side-column { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .recent-events { grid-column: 1 / -1; }
+}
+@container security (width < 500px) {
+  .side-column { grid-template-columns: minmax(0, 1fr); }
+  .cameras { grid-template-columns: minmax(0, 1fr); }
+}

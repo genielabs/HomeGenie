@@ -1,4 +1,5 @@
 @import 'assets/styles/widget-ui.css';
+@import '/widgets/cyberpunk/hud.css';
 
 :host { display: block; width: 100%; height: 100%; min-height: 0; }
 .district, .district * { box-sizing: border-box; }
@@ -35,31 +36,39 @@
 .district-message p { margin: 4px 0 0; color: #e5faff; white-space: pre-wrap; }
 .motion {
   display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px;
-  padding: 8px 13px; border: 1px solid var(--line); border-radius: 4px;
-  background: #10192a; color: #e5faff; font-size: 12px; cursor: pointer;
+  --hud-edge: #426477; --hud-surface: #10192a;
+  padding: 8px 13px; color: #e5faff; font-size: 12px; cursor: pointer;
 }
-.motion:hover { border-color: var(--cyan); }
 .motion:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
 .motion .material-symbols-outlined { color: var(--cyan); font-size: 19px; }
 .district-layout { flex: 1 0 auto; display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(300px, 1fr); gap: 16px; }
 .city-column { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .city-panel {
   position: relative; isolation: isolate; flex: 1; display: grid; min-width: 0; min-height: clamp(435px, 51vh, 730px);
-  overflow: hidden; border: 1px solid #59627f; background: #14132a;
+  overflow: hidden; border: 1px solid #586784; background: #14132a;
+}
+.city-panel::before {
+  content: ''; position: absolute; inset: 5px; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(90deg, var(--cyan), transparent) top left / 54px 1px,
+    linear-gradient(var(--cyan), transparent) top left / 1px 28px,
+    linear-gradient(270deg, #ffa5d5, transparent) bottom right / 54px 1px,
+    linear-gradient(0deg, #ffa5d5, transparent) bottom right / 1px 28px;
+  background-repeat: no-repeat;
 }
 .city { position: absolute; width: 100%; height: 100%; inset: 0; display: block; z-index: -2; }
 .city-panel::after {
   content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background: linear-gradient(90deg, #0b1020ee 0, #0b102096 32%, transparent 76%), linear-gradient(0deg, #08111ef0 0, transparent 29%);
 }
-.city-content { display: flex; flex-direction: column; justify-content: space-between; gap: 28px; padding: clamp(22px, 4cqw, 64px); }
+.city-content { display: flex; flex-direction: column; justify-content: space-between; gap: 28px; padding: 22px; padding: clamp(22px, 4cqw, 64px); }
 .overline { color: var(--cyan); }
 .city-title { align-self: flex-start; overflow-wrap: anywhere; max-width: min(73%, 720px); text-shadow: 0 3px 20px #080a19; }
-.city-title h1 { margin: 0 0 12px; font-size: clamp(44px, 7.8cqw, 116px); line-height: .88; letter-spacing: -.073em; font-weight: 800; text-wrap: balance; }
-.city-title p { margin: 0; max-width: 29ch; color: #c9d1e4; font-size: clamp(14px, 1.45cqw, 19px); line-height: 1.55; }
+.city-title h1 { margin: 0 0 12px; font-size: clamp(38px, 7vw, 116px); font-size: clamp(38px, 7.8cqw, 116px); line-height: .88; letter-spacing: -.073em; font-weight: 800; text-wrap: balance; }
+.city-title p { margin: 0; max-width: 29ch; color: #c9d1e4; font-size: 14px; font-size: clamp(14px, 1.45cqw, 19px); line-height: 1.55; }
 .city-footer { align-items: flex-end; }
 .time-block { display: grid; gap: 4px; line-height: 1; }
-.time-block time { color: #f5fcff; font-size: clamp(30px, 4.8cqw, 61px); font-variant-numeric: tabular-nums; }
+.time-block time { color: #f5fcff; font-size: clamp(30px, 4.8vw, 61px); font-size: clamp(30px, 4.8cqw, 61px); font-variant-numeric: tabular-nums; }
 .time-block > span { color: #bec9dd; font-size: 11px; line-height: 1.3; }
 .light-chip {
   display: flex; align-items: center; gap: 8px; min-height: 34px; padding: 8px 11px; border: 1px solid #4a5a76;
@@ -96,20 +105,71 @@
 .daylight .sky-low { stop-color: #4b315c; }
 .city-panel:is([data-weather="overcast"], [data-weather="showers"], [data-weather="rain"], [data-weather="thunder"]) :is(.sun, .moon) { opacity: .46; }
 .city-panel.daylight:is([data-weather="overcast"], [data-weather="showers"], [data-weather="rain"], [data-weather="thunder"]) .sky-mid { stop-color: #6e537e; }
-.weather-clouds, .weather-mist, .weather-rain, .weather-snow { display: none; animation-play-state: paused; }
+.weather-clouds, .weather-mist, .weather-rain, .weather-ripples, .weather-snow { display: none; animation-play-state: paused; }
 .city-panel:is([data-weather="few_clouds"], [data-weather="scattered_clouds"], [data-weather="overcast"], [data-weather="showers"], [data-weather="rain"], [data-weather="thunder"], [data-weather="snow"]) .weather-clouds {
   display: inline; animation: cloud-drift 10s ease-in-out infinite alternate paused;
 }
 .city-panel:is([data-weather="overcast"], [data-weather="mist"]) .weather-mist { display: inline; }
 .city-panel:is([data-weather="showers"], [data-weather="rain"], [data-weather="thunder"]) .weather-rain {
-  display: inline; opacity: .63; animation: rain-drift .85s linear infinite paused;
+  display: inline;
+  animation: rain-drift var(--rain-cycle) linear var(--rain-delay, 0s) infinite paused;
 }
-.city-panel[data-weather="snow"] .weather-snow { display: inline; animation: snow-drift 4s linear infinite paused; }
-.city-panel.motion-active :is(.weather-clouds, .weather-rain, .weather-snow) { animation-play-state: running; }
+.rain-far { --rain-cycle: 2.1s; --rain-delay: -.7s; --rain-x: -60px; --rain-y: 120px; opacity: .32; }
+.rain-near { --rain-cycle: 1.25s; --rain-x: -100px; --rain-y: 160px; opacity: .63; }
+.city-panel.motion-active:is([data-weather="showers"], [data-weather="rain"], [data-weather="thunder"]) .weather-ripples {
+  display: inline;
+}
+.rain-ripple {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: rain-ripple var(--ripple-cycle) ease-out var(--ripple-delay) infinite;
+}
+.weather-lightning { display: none; }
+.city-panel.motion-active[data-weather="thunder"] .weather-lightning { display: inline; }
+.lightning-strike {
+  opacity: 0;
+  animation: lightning-strike 30s ease-out var(--strike-delay) infinite;
+}
+.lightning-strike path {
+  fill: none;
+  stroke: #d9e7ff;
+  stroke-width: 1.7;
+}
+@keyframes lightning-strike {
+  0% { opacity: 0; }
+  .2% { opacity: .86; }
+  1.15%, 100% { opacity: 0; }
+}
+.city-panel[data-weather="snow"] .weather-snow { display: inline; }
+.snow-far { --snow-sway: 12px; opacity: .43; }
+.snow-near { --snow-sway: 24px; opacity: .76; }
+.weather-snow circle {
+  --snow-offset: var(--snow-sway);
+  animation: snow-fall var(--snow-cycle) linear var(--snow-delay) infinite paused;
+}
+.weather-snow circle:nth-child(even) { --snow-offset: calc(-1 * var(--snow-sway)); }
+.city-panel.motion-active .weather-snow circle { animation-play-state: running; }
+.city-panel.motion-active :is(.weather-clouds, .weather-rain) { animation-play-state: running; }
 @keyframes cloud-drift { from { transform: translateX(-16px); } to { transform: translateX(16px); } }
-@keyframes rain-drift { from { transform: translate(8px,-12px); } to { transform: translate(-8px,12px); } }
-@keyframes snow-drift { from { transform: translate(0,-10px); } to { transform: translate(11px,18px); } }
-.weather-panel { border: 1px solid var(--line); border-top-color: var(--cyan); background: #101a2a; padding: 12px 15px; }
+/* One period of the skewed SVG pattern, so the last frame joins the first. */
+@keyframes rain-drift { from { transform: translate(0, 0); } to { transform: translate(var(--rain-x), var(--rain-y)); } }
+@keyframes rain-ripple {
+  0% { opacity: 0; transform: scale(.24); }
+  12% { opacity: .6; }
+  45%, 100% { opacity: 0; transform: scale(1.15); }
+}
+/* Each flake resets outside the scene, with delays that spread out the falls. */
+@keyframes snow-fall {
+  from { transform: translate(0, -8px); }
+  50% { transform: translate(var(--snow-offset), 235px); }
+  to { transform: translate(0, 478px); }
+}
+.weather-panel {
+  --hud-accent: var(--cyan);
+  --hud-edge: #3a6377;
+  --hud-surface: radial-gradient(ellipse at 9% 0, #183747, transparent 63%), #101a2a;
+  padding: 16px 15px 14px;
+}
 .weather-heading, .weather-body, .weather-now, .forecast { display: flex; align-items: center; gap: 10px; }
 .weather-heading { justify-content: space-between; min-height: 30px; margin-bottom: 9px; }
 .weather-heading .overline { color: var(--cyan); }
@@ -119,7 +179,7 @@
 .weather-now { flex: 1 1 auto; min-width: 0; }
 .weather-now > img { flex: 0 0 auto; width: 45px; height: 45px; }
 .weather-now > div { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; min-width: 0; }
-.weather-now strong { color: #e6fbff; font-size: clamp(19px, 2cqw, 30px); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.weather-now strong { color: #e6fbff; font-size: 19px; font-size: clamp(19px, 2cqw, 30px); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .weather-now > div > span:first-child { overflow-wrap: anywhere; font-size: 13px; font-weight: 650; }
 .weather-now > div > span:last-child { flex-basis: 100%; color: var(--muted); font-size: 12px; }
 .forecast { justify-content: flex-end; flex-wrap: wrap; list-style: none; gap: 5px; margin: 0; padding: 0; }
@@ -129,7 +189,7 @@
 .weather-panel [hidden], .weather-panel[hidden] { display: none; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .modules { display: grid; grid-template-rows: minmax(270px, 1.16fr) minmax(218px, 1fr); gap: 16px; min-width: 0; }
-.modules > :is(cyberpunk-lighting, cyberpunk-telemetry) { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); min-width: 0; }
+.modules > :is(cyberpunk-lighting, cyberpunk-telemetry) { display: grid; grid-template: minmax(min-content, 1fr) / minmax(0, 1fr); min-width: 0; }
 .district-footer { flex: 0 0 auto; justify-content: flex-start; font-size: 11px; color: var(--muted); line-height: 1.4; }
 .district-footer > span:first-child { flex-shrink: 0; color: var(--cyan); }
 
@@ -149,5 +209,16 @@
 }
 @container district (max-width: 360px) {
   .city-footer { align-items: flex-start; flex-direction: column; }
+}
+/* Keep the phone layout usable when the WebView skips container queries. */
+@media (max-width: 680px) {
+  .district-layout, .modules, .weather-body { grid-template-columns: minmax(0, 1fr); }
+  .modules { grid-template-rows: minmax(240px, auto) minmax(215px, auto); }
+  .mast-label { display: none; }
+  .city-panel { min-height: 340px; }
+  .city-content { padding: 18px; }
+  .city-title { max-width: 100%; }
+  .city-footer { flex-wrap: wrap; }
+  .forecast { justify-content: flex-start; }
 }
 @media (prefers-reduced-motion: reduce) { .building-lights { transition: none; } }

@@ -184,6 +184,18 @@
   .meter-display { bottom: 5%; right: 3%; padding: 2px 4px; }
   .serial { display: none; }
 }
+/* Keep the phone layout usable when the WebView skips container queries. */
+@media (max-width: 680px) {
+  .main-deck { grid-template-columns: minmax(0, 1fr); }
+  .dials { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dial-gauge { width: min(100%, 86px); }
+  .trace-console svg { height: clamp(25px, 7vw, 50px); }
+}
+@media (max-width: 440px) {
+  .preset { grid-template-columns: auto minmax(0, 1fr); }
+  .preset-number, .serial { display: none; }
+  .meter-display { bottom: 5%; right: 3%; padding: 2px 4px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .needle, .dial-needle { transition: none; }
 }

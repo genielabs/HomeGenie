@@ -1,4 +1,14 @@
 {
+  "light_1": "Luce 1",
+  "light_2": "Luce 2",
+  "light_3": "Luce 3",
+  "light_4": "Luce 4",
+  "light_5": "Luce 5",
+  "scene_1": "Scenario 1",
+  "scene_2": "Scenario 2",
+  "scene_3": "Scenario 3",
+  "scene_4": "Scenario 4",
+  "scene_5": "Scenario 5",
   "ai_dashboard_open": "Apri dashboard",
   "ai_dashboard_select_preset": "Seleziona il preset originale e aggiornalo in Preferenze prima di aprire questa dashboard.",
 

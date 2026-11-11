@@ -36,7 +36,7 @@ onCreate() {
 
 ### 2.3 Bind real devices only when needed
 
-Omit `moduleSelect` for standalone widgets. Use filters for widgets that require a module and handle missing modules and fields. Embedded widgets show an unconfigured state and leave configuration to their host. A standalone widget may call `this.configure()`.
+When a widget reads or controls a device, make the device selectable with `settings.moduleSelect` and use `this.boundModule`. Use real values and show missing data as unavailable. Simulate only when requested. Widgets with no device can omit the selector. An embedded widget leaves configuration to its host. An ordinary widget can open its settings with `this.configure()`.
 
 Example from the shipped temperature display, inside `onCreate()`:
 

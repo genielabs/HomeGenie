@@ -10,6 +10,20 @@
       <section class="city-panel" #city_panel>
         <svg class="city" viewBox="0 0 840 470" preserveAspectRatio="xMaxYMax slice" aria-hidden="true">
           <defs>
+            <pattern id="nd-rain-far" width="173" height="120" patternUnits="userSpaceOnUse" patternTransform="matrix(1 0 -.5 1 0 0)">
+              <path d="M16 14v10m46 17v14m75-25v8m-38 39v12m62 16v9" fill="none" stroke="#aff8ff" stroke-width="1" stroke-linecap="round"/>
+            </pattern>
+            <pattern id="nd-rain" width="144" height="160" patternUnits="userSpaceOnUse" patternTransform="matrix(1 0 -.625 1 0 0)">
+              <g fill="none" stroke="#aff8ff" stroke-linecap="round">
+                <path d="M22 11v19m83 42v24" stroke-width="1.7"/>
+                <path d="M61 115v17" stroke-width="1.2" opacity=".55"/>
+              </g>
+            </pattern>
+            <radialGradient id="nd-storm-glow">
+              <stop stop-color="#c5b6ff" stop-opacity=".48"/>
+              <stop offset=".5" stop-color="#a5ceff" stop-opacity=".22"/>
+              <stop offset="1" stop-color="#9cafff" stop-opacity="0"/>
+            </radialGradient>
             <linearGradient id="nd-sky" x2="0" y2="1" gradientUnits="objectBoundingBox">
               <stop class="sky-high" stop-color="#101328"/><stop class="sky-mid" offset=".66" stop-color="#351944"/><stop class="sky-low" offset="1" stop-color="#090c19"/>
             </linearGradient>
@@ -43,6 +57,20 @@
             <path d="M617 106a70 70 0 1 0 47 96 65 65 0 0 1-47-96Z" fill="#ede5ff"/>
             <circle cx="615" cy="204" r="7" fill="#b0a8df" opacity=".38"/>
             <circle cx="577" cy="179" r="10" fill="#b0a8df" opacity=".28"/>
+          </g>
+          <g class="weather-lightning" stroke-linecap="round" stroke-linejoin="round">
+            <g class="lightning-strike" style="--strike-delay: 3s">
+              <ellipse cx="683" cy="113" rx="149" ry="113" fill="url(#nd-storm-glow)"/>
+              <path d="M684 60l-19 40 18 9-28 43 12 11-32 58m48-112 23 17-9 24 15 19m-57-17-21 6-13 25"/>
+            </g>
+            <g class="lightning-strike" style="--strike-delay: 12s">
+              <ellipse cx="467" cy="126" rx="136" ry="103" fill="url(#nd-storm-glow)"/>
+              <path d="M451 77l23 34-13 12 27 27-16 22 21 36m-32-85-28 11-6 21-15 9m60 8-18 13 3 19"/>
+            </g>
+            <g class="lightning-strike" style="--strike-delay: 22s">
+              <ellipse cx="779" cy="153" rx="120" ry="111" fill="url(#nd-storm-glow)"/>
+              <path d="M790 98l-18 32 12 18-22 31 10 11-19 48m31-90 20 9-5 23 11 19m-48-20-16 3-11 18"/>
+            </g>
           </g>
           <path d="M0 293h840M0 312h840M0 331h840" stroke="#ed69bc" stroke-opacity=".24"/>
           <path fill="#251b3a" d="M0 266h28v-43h16v41h14v-9h11v-25h42v22h15v-64h20v37h19v-47h14v46h11v-33h42v-38h14v35h19v53h17v-17h16v-32h18v29h27v-51h14v58h35v-20h13v-45h14v60h29v-24h24v-32h13v34h32v-27h22v31h25v-50h20v65h15v-43h18v22h21v-48h19v51h11v-62h17v64h31v-42h21v34h28v-61h18v41h18v-48h17v30h16v111H0z"/>
@@ -85,11 +113,52 @@
             <path d="M35 246h163m60 4h171m34-14h177m25 14h121M14 278h302m54 12h270m58-3h115" stroke-width="16" opacity=".2"/>
             <path d="M41 311h324m61 6h319" stroke-width="28" opacity=".13"/>
           </g>
-          <g class="weather-rain" fill="none" stroke="#aff8ff" stroke-width="2" stroke-linecap="round">
-            <path d="m118 102-15 24m89 38-15 24m87 29-15 24m89-56-15 24m69-102-15 24m93 7-15 24m66 94-15 24m85-101-15 24m89 56-15 24m88-126-15 24M87 302l-15 24m103 60-15 24m121-90-15 24m88 39-15 24m105-96-15 24m81 66-15 24m90-85-15 24m90 28-15 24m88-69-15 24"/>
+          <rect class="weather-rain rain-far" x="0" y="-120" width="900" height="590" fill="url(#nd-rain-far)"/>
+          <g class="weather-ripples" fill="none" stroke="#8afff5" stroke-width="1.4">
+            <ellipse class="rain-ripple" cx="441" cy="357" rx="6" ry="1.3" style="--ripple-cycle: 3.7s; --ripple-delay: -.5s"/>
+            <ellipse class="rain-ripple" cx="397" cy="371" rx="10" ry="2.2" style="--ripple-cycle: 4.2s; --ripple-delay: -2.1s"/>
+            <ellipse class="rain-ripple" cx="494" cy="392" rx="14" ry="2.8" style="--ripple-cycle: 4.9s; --ripple-delay: -3.4s"/>
+            <ellipse class="rain-ripple" cx="357" cy="412" rx="17" ry="3.4" style="--ripple-cycle: 5.1s; --ripple-delay: -1.3s"/>
+            <ellipse class="rain-ripple" cx="560" cy="435" rx="22" ry="4.4" style="--ripple-cycle: 5.7s; --ripple-delay: -4.8s"/>
+            <ellipse class="rain-ripple" cx="445" cy="450" rx="26" ry="5.2" style="--ripple-cycle: 6.1s; --ripple-delay: -2.8s"/>
           </g>
+          <rect class="weather-rain rain-near" x="0" y="-160" width="940" height="630" fill="url(#nd-rain)"/>
           <g class="weather-snow" fill="#e4fcff">
-            <path d="M113 113h4v4h-4zM190 174h3v3h-3zM247 223h4v4h-4zM330 194h3v3h-3zM386 113h4v4h-4zM465 148h3v3h-3zM513 265h4v4h-4zM586 185h3v3h-3zM651 261h4v4h-4zM731 154h3v3h-3zM78 314h4v4h-4zM160 397h3v3h-3zM263 335h4v4h-4zM335 392h3v3h-3zM414 324h4v4h-4zM479 404h3v3h-3zM558 347h4v4h-4zM633 392h3v3h-3zM708 351h4v4h-4z"/>
+            <g class="snow-far">
+              <circle cx="18" r="1.5" style="--snow-cycle: 19s; --snow-delay: -3s"/>
+              <circle cx="66" r="1.2" style="--snow-cycle: 23s; --snow-delay: -15s"/>
+              <circle cx="109" r="1.8" style="--snow-cycle: 21s; --snow-delay: -10s"/>
+              <circle cx="158" r="1.4" style="--snow-cycle: 25s; --snow-delay: -6s"/>
+              <circle cx="205" r="2" style="--snow-cycle: 19s; --snow-delay: -17s"/>
+              <circle cx="248" r="1.2" style="--snow-cycle: 22s; --snow-delay: -4s"/>
+              <circle cx="292" r="1.6" style="--snow-cycle: 24s; --snow-delay: -20s"/>
+              <circle cx="337" r="1.4" style="--snow-cycle: 18s; --snow-delay: -12s"/>
+              <circle cx="385" r="1.8" style="--snow-cycle: 22s; --snow-delay: -7s"/>
+              <circle cx="430" r="1.2" style="--snow-cycle: 25s; --snow-delay: -19s"/>
+              <circle cx="468" r="1.7" style="--snow-cycle: 21s; --snow-delay: -14s"/>
+              <circle cx="517" r="2" style="--snow-cycle: 18s; --snow-delay: -4s"/>
+              <circle cx="563" r="1.3" style="--snow-cycle: 24s; --snow-delay: -11s"/>
+              <circle cx="607" r="1.7" style="--snow-cycle: 19s; --snow-delay: -16s"/>
+              <circle cx="651" r="1.2" style="--snow-cycle: 25s; --snow-delay: -6s"/>
+              <circle cx="693" r="1.8" style="--snow-cycle: 21s; --snow-delay: -20s"/>
+              <circle cx="734" r="1.4" style="--snow-cycle: 23s; --snow-delay: -13s"/>
+              <circle cx="778" r="1.9" style="--snow-cycle: 20s; --snow-delay: -5s"/>
+              <circle cx="818" r="1.4" style="--snow-cycle: 24s; --snow-delay: -17s"/>
+              <circle cx="857" r="1.8" style="--snow-cycle: 21s; --snow-delay: -9s"/>
+            </g>
+            <g class="snow-near">
+              <circle cx="39" r="3.2" style="--snow-cycle: 12s; --snow-delay: -8s"/>
+              <circle cx="121" r="2.6" style="--snow-cycle: 15s; --snow-delay: -3s"/>
+              <circle cx="211" r="3.5" style="--snow-cycle: 11s; --snow-delay: -5s"/>
+              <circle cx="298" r="2.7" style="--snow-cycle: 14s; --snow-delay: -10s"/>
+              <circle cx="389" r="3.3" style="--snow-cycle: 12s; --snow-delay: -2s"/>
+              <circle cx="476" r="2.8" style="--snow-cycle: 16s; --snow-delay: -11s"/>
+              <circle cx="550" r="3.7" style="--snow-cycle: 11s; --snow-delay: -6s"/>
+              <circle cx="638" r="2.5" style="--snow-cycle: 15s; --snow-delay: -2s"/>
+              <circle cx="710" r="3.2" style="--snow-cycle: 13s; --snow-delay: -9s"/>
+              <circle cx="802" r="3.5" style="--snow-cycle: 11s; --snow-delay: -4s"/>
+              <circle cx="870" r="2.9" style="--snow-cycle: 14s; --snow-delay: -7s"/>
+            </g>
           </g>
         </svg>
 
@@ -108,11 +177,11 @@
         <p #district_message_text></p>
       </section>
 
-      <section class="weather-panel" #weather_panel hidden>
+      <section class="weather-panel hud-frame" #weather_panel hidden>
         <header class="weather-heading">
           <span class="overline" #weather_title></span>
           <span class="weather-updated" #weather_updated></span>
-          <button class="motion weather-settings" type="button" #weather_settings (click)="openWeatherSettings()" hidden>
+          <button class="motion weather-settings hud-button" type="button" #weather_settings (click)="openWeatherSettings()" hidden>
             <span class="material-symbols-outlined" aria-hidden="true">settings</span>
           </button>
         </header>

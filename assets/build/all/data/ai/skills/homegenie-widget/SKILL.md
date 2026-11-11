@@ -532,9 +532,18 @@ settings = {
 
 For a dashboard dedicated to a program created by an objective, save the program first and use `this.getModule('HomeAutomation.HomeGenie.Automation:<PID>')` with the real PID from the host receipt. Keep the same association during revisions. When the resolved program has options, a labelled gear button in the dashboard can call `this.showSettings(program.id)` on user click. Omit or disable the button when the program is unavailable. This opens the program's options, which are shared by every dashboard that uses that program. Use a dashboard-local gear for fixed modules that have no dashboardProgram role.
 
+### Dashboard navigation and scenarios
+
+- For a navigation button, declare a role in `settings.boundDashboards`, for example `room: {label: 'Room dashboard'}`. On click, read `const name = this.getBoundDashboard('room')` and, if set, call `this.openDashboard(name)`. Disable the button if the role is unassigned. YoT shows translated dashboard names and saves the original name. Do not pass a translated label or hardcode a destination in a reusable widget.
+- For a scenario button, declare `scene: {label: 'Scene', typeFilter: 'Scenario'}` in `settings.boundModules`. Read `const scene = this.getBoundModule('scene')`, then call `this.runProgram(scene).subscribe(...)` on click if assigned. Read `scene.field('Program.Status')?.value` initially and use `this.subscribe(scene, ...)` to update the button on `Program.Status` events. Use `Running` to show activity. A successful request only acknowledges the start.
+
 ### Configurable named module bindings
 
-For reusable multi-device widgets or dashboards, declare stable roles instead of hardcoding device IDs:
+For every device or sensor a dashboard or multi-device widget can read or control, add a selectable role in settings.boundModules and use this.getBoundModule(role). Keep the role available when no compatible device is currently assigned. To preselect a device, use a confirmed compatible ID as defaultModule so users can still change it. Hardcode an ID only for an intentionally fixed integration.
+
+Use real readings, names and states from the selected modules. Treat numbers, status indicators and device labels in reference images as visual examples. If a feature has no real data or integration, show it as unavailable or omit it. Disable its controls. Use clearly labeled simulated data only when the user asks for a demo or simulation.
+
+Example:
 
 ```javascript
 settings = {
@@ -550,6 +559,8 @@ const render = () => { this.model().temperature = sensor?.field('Sensor.Temperat
 render();
 if (sensor) this.subscribe(sensor, render);
 ```
+
+For standard numbered roles, use `label: 'light_1'` through `light_5` and `label: 'scene_1'` through `scene_5`. YoT and HomeGenie Panel translate these keys. For other roles, `label` is display text and optional `labelKey` points to the widget's `.i18n.json`. This also applies to `boundDashboards`. Bundled dashboards and their theme widgets must provide a catalog for every supported UI language. User-created widgets may use literal labels without a catalog.
 
 Role labels should use the user's language; role keys remain stable during revisions. Use `module.name` to display the selected device's name. Use the role label (for example, "Light 1") in settings and as a fallback when no device is assigned. YoT provides one selector per role and persists selections per dashboard/widget instance; editor/preview selections are temporary. A selection change reloads the instance and disposes its managed subscriptions. Do not save bindings with API calls or browser storage, and do not select or command devices automatically during initialization. An unselected role returns `undefined`: show an informational unconfigured state. Configure roles centrally through the container menu; do not repeat association buttons inside child widgets.
 

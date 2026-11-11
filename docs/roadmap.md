@@ -21,6 +21,15 @@ This is the active task list. Detailed stage-by-stage decisions, earlier API nam
 
 - [ ] Distribute widgets and their assets directly in packages. Track installed files and ownership so uninstall can remove the package's unused files while preserving shared assets and user changes.
 
+- [ ] **Priority for HomeGenie Panel.** Fix intermittent scroll interruptions in custom dashboards. A swipe can stop mid-gesture and scrolling resumes on the next swipe. Verify that a continuous swipe scrolls smoothly as the collapsible header and WebView hand off scrolling in both directions.
+- [ ] Support opening and editing HomeGenie program options from custom dashboards in HomeGenie Panel. Verify that the weather settings button in Cyberpunk (Neon District) opens the weather program options and saves changes.
+
+## Product dashboards
+
+- [ ] **HomeGenie Robot Car.** Build an FPV dashboard that embeds the existing `specialized/fpv-control` widget as a custom element. Let the user select the motion controller and camera independently through named module bindings. Start with the live JPEG feed and gamepad driving on Vulkan. Show when the feed stops updating, and verify disconnect and tab-switch behavior before testing on the car. Keep arm and gripper controls optional.
+- [ ] **Robot Car 3D view.** Evaluate the original Blender files for GLB export once the FPV dashboard works. Use Three.js for the optional secondary view and animate separate wheels, steering, arm and gripper where available. Distinguish commanded positions from measured positions when the firmware supplies feedback.
+- [ ] **HomeGenie Smart Light.** After Robot Car, build a product dashboard with selectable Smart Light modules, controls for power, brightness, color and effects, and a visual preview for a strip or matrix. Reuse existing LED widgets and device APIs where they fit. Evaluate the auxiliary C2 LED as an optional control when the selected device exposes it. Verify on Vulkan and on a real Smart Light before bundling it.
+
 ## Client preset synchronization (2026-11-06)
 
 - [x] Step 1: capture immutable preset/server/preferences snapshots, serialize local writes and coalesce/serialize server requests per preset. Drain saves before switching/deleting/reloading; suppress application-induced save echoes and report failures.

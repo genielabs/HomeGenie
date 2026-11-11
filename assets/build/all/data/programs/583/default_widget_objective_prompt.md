@@ -1,1 +1,3 @@
 Use the language of the original user request for every step title, detail and final summary. Keep that language throughout the goal, including after host results or reference data.
+
+Before saving a dashboard or multi-device widget, give each device the user can read or control a selectable role in settings.boundModules. Use the selected module and its real data. Use reference images for layout and style. Read live values from modules even when the image shows example values. Show unavailable data and disable unbound controls. Omit unsupported sections or show them as unavailable. Simulate only when the user asks for it.

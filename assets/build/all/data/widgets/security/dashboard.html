@@ -1,0 +1,36 @@
+<section class="security" #layout @set="void 0">
+  <section class="panel camera-panel" #cameras hidden>
+    <h2><span class="material-symbols-outlined heading-icon" aria-hidden="true">speed_camera</span><span #cameras_label>Cameras</span></h2>
+    <div class="cameras">
+      <security-camera-view #camera_one :module="bm('camera1')" hidden></security-camera-view>
+      <security-camera-view #camera_two :module="bm('camera2')" hidden></security-camera-view>
+    </div>
+  </section>
+  <aside class="side-column">
+    <section class="panel alarm" #alarm>
+      <h2><span class="material-symbols-outlined heading-icon" aria-hidden="true">shield_with_house</span><span #alarm_label>Alarm system</span></h2>
+      <div class="alarm-content">
+        <div class="alarm-summary">
+          <span class="material-symbols-outlined alarm-symbol" #alarm_icon aria-hidden="true">shield</span>
+          <strong #alarm_status role="status"></strong>
+        </div>
+        <div class="actions" #alarm_actions hidden>
+          <button type="button" #arm_home (click)="sendAlarm('Control.ArmHome')">Home</button>
+          <button type="button" #arm_away (click)="sendAlarm('Control.ArmAway')">Away</button>
+          <button type="button" #disarm (click)="sendAlarm('Control.Disarm')">Deactivate</button>
+        </div>
+        <p class="empty command-error" #command_error role="status"></p>
+      </div>
+    </section>
+    <section class="panel">
+      <h2><span class="material-symbols-outlined heading-icon" aria-hidden="true">sensors</span><span #sensors_label>Sensors</span></h2>
+      <p class="empty" #sensors_status></p>
+      <ul class="rows" #sensors></ul>
+    </section>
+    <section class="panel recent-events">
+      <h2><span class="material-symbols-outlined heading-icon" aria-hidden="true">list_alt</span><span #events_label>Recent events</span></h2>
+      <p class="empty" #events_status role="status"></p>
+      <ul class="rows event-list" #events></ul>
+    </section>
+  </aside>
+</section>

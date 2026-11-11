@@ -1,20 +1,278 @@
 {
-  "en": { "open": "Open AI Genie" },
-  "it": { "open": "Apri AI Genie" },
-  "ar": { "open": "افتح AI Genie" },
-  "de": { "open": "AI Genie öffnen" },
-  "es": { "open": "Abrir AI Genie" },
-  "fr": { "open": "Ouvrir AI Genie" },
-  "hi": { "open": "AI Genie खोलें" },
-  "ja": { "open": "AI Genie を開く" },
-  "ko": { "open": "AI Genie 열기" },
-  "nl": { "open": "AI Genie openen" },
-  "pa": { "open": "AI Genie ਖੋਲ੍ਹੋ" },
-  "pl": { "open": "Otwórz AI Genie" },
-  "pt": { "open": "Abrir AI Genie" },
-  "ru": { "open": "Открыть AI Genie" },
-  "ta": { "open": "AI Genie ஐத் திறக்கவும்" },
-  "tr": { "open": "AI Genie’yi aç" },
-  "uk": { "open": "Відкрити AI Genie" },
-  "zh": { "open": "打开 AI Genie" }
+  "af": {
+    "open": "Maak AI Genie oop"
+  },
+  "sq": {
+    "open": "Hapni AI Genie"
+  },
+  "am": {
+    "open": "AI Genie ን ይክፈቱ"
+  },
+  "ar": {
+    "open": "افتح AI Genie"
+  },
+  "hy": {
+    "open": "Բացեք AI Genie-ը"
+  },
+  "az": {
+    "open": "AI Genie-ni açın"
+  },
+  "eu": {
+    "open": "Ireki AI Genie"
+  },
+  "be": {
+    "open": "Адкрыйце AI Genie"
+  },
+  "bn": {
+    "open": "এআই জিনি খুলুন"
+  },
+  "bs": {
+    "open": "Otvorite AI Genie"
+  },
+  "bg": {
+    "open": "Отворете AI Genie"
+  },
+  "my": {
+    "open": "AI Genie ကိုဖွင့်ပါ။"
+  },
+  "ca": {
+    "open": "Obre AI Genie"
+  },
+  "ny": {
+    "open": "Tsegulani AI Genie"
+  },
+  "zh-cn": {
+    "open": "打开AI精灵"
+  },
+  "zh-tw": {
+    "open": "開啟AI精靈"
+  },
+  "hr": {
+    "open": "Otvorite AI Genie"
+  },
+  "cs": {
+    "open": "Otevřete AI Genie"
+  },
+  "da": {
+    "open": "Åbn AI Genie"
+  },
+  "nl": {
+    "open": "AI Genie openen"
+  },
+  "en": {
+    "open": "Open AI Genie"
+  },
+  "et": {
+    "open": "Avage AI Genie"
+  },
+  "fi": {
+    "open": "Avaa AI Genie"
+  },
+  "fr": {
+    "open": "Ouvrir AI Genie"
+  },
+  "gl": {
+    "open": "Abre AI Genie"
+  },
+  "ka": {
+    "open": "გახსენით AI Genie"
+  },
+  "de": {
+    "open": "AI Genie öffnen"
+  },
+  "el": {
+    "open": "Ανοίξτε το AI Genie"
+  },
+  "gu": {
+    "open": "AI જીની ખોલો"
+  },
+  "ht": {
+    "open": "Louvri AI Genie"
+  },
+  "ha": {
+    "open": "Bude AI Genie\nSaukewa:"
+  },
+  "he": {
+    "open": "פתח את AI Genie"
+  },
+  "hi": {
+    "open": "AI Genie खोलें"
+  },
+  "hu": {
+    "open": "Nyissa meg az AI Genie-t"
+  },
+  "id": {
+    "open": "Buka AI Genie"
+  },
+  "ga": {
+    "open": "Oscail AI Genie"
+  },
+  "ig": {
+    "open": "Mepee AI Genie"
+  },
+  "is": {
+    "open": "Opnaðu AI Genie"
+  },
+  "it": {
+    "open": "Apri AI Genie"
+  },
+  "ja": {
+    "open": "AI Genie を開く"
+  },
+  "kn": {
+    "open": "AI ಜಿನೀ ತೆರೆಯಿರಿ"
+  },
+  "kk": {
+    "open": "AI Genie ашыңыз"
+  },
+  "km": {
+    "open": "បើក AI Genie"
+  },
+  "ky": {
+    "open": "Ачык AI Genie"
+  },
+  "ko": {
+    "open": "AI Genie 열기"
+  },
+  "ku": {
+    "open": "AI Genie vekin"
+  },
+  "la": {
+    "open": "Open AI Genie"
+  },
+  "lb": {
+    "open": "Open AI Genie"
+  },
+  "lo": {
+    "open": "ເປີດ AI Genie"
+  },
+  "lt": {
+    "open": "Atidarykite AI Genie"
+  },
+  "lv": {
+    "open": "Atveriet AI Genie"
+  },
+  "mk": {
+    "open": "Отворете AI Genie"
+  },
+  "mg": {
+    "open": "Sokafy ny AI Genie\nSary"
+  },
+  "ms": {
+    "open": "Buka AI Genie"
+  },
+  "ml": {
+    "open": "AI Genie തുറക്കുക"
+  },
+  "mt": {
+    "open": "Iftaħ AI Genie"
+  },
+  "mi": {
+    "open": "Tuwhera AI Genie"
+  },
+  "mr": {
+    "open": "एआय जिनी उघडा"
+  },
+  "mn": {
+    "open": "AI Genie-г нээх"
+  },
+  "ne": {
+    "open": "AI Genie खोल्नुहोस्"
+  },
+  "no": {
+    "open": "Åpne AI Genie"
+  },
+  "or": {
+    "open": "AI ଜିନ୍ ଖୋଲନ୍ତୁ |"
+  },
+  "pa": {
+    "open": "AI Genie ਖੋਲ੍ਹੋ"
+  },
+  "fa": {
+    "open": "AI Genie را باز کنید"
+  },
+  "pl": {
+    "open": "Otwórz AI Genie"
+  },
+  "ps": {
+    "open": "AI جینی خلاص کړئ"
+  },
+  "pt": {
+    "open": "Abrir AI Genie"
+  },
+  "ro": {
+    "open": "Deschide AI Genie"
+  },
+  "ru": {
+    "open": "Открыть AI Genie"
+  },
+  "sd": {
+    "open": "AI Genie کوليو"
+  },
+  "sr": {
+    "open": "Отворите АИ Гение"
+  },
+  "si": {
+    "open": "AI Genie විවෘත කරන්න"
+  },
+  "sk": {
+    "open": "Otvorte AI Genie"
+  },
+  "sl": {
+    "open": "Odprite AI Genie"
+  },
+  "so": {
+    "open": "Fur AI Genie"
+  },
+  "es": {
+    "open": "Abrir AI Genie"
+  },
+  "sw": {
+    "open": "Fungua AI Genie"
+  },
+  "sv": {
+    "open": "Öppna AI Genie"
+  },
+  "ta": {
+    "open": "AI Genie ஐத் திறக்கவும்"
+  },
+  "te": {
+    "open": "AI జెనీని తెరవండి"
+  },
+  "tg": {
+    "open": "Genie AI-ро кушоед"
+  },
+  "th": {
+    "open": "เปิด AI Genie"
+  },
+  "tl": {
+    "open": "Buksan ang AI Genie"
+  },
+  "tr": {
+    "open": "AI Genie’yi aç"
+  },
+  "ug": {
+    "open": "AI Genie نى ئېچىڭ"
+  },
+  "uk": {
+    "open": "Відкрити AI Genie"
+  },
+  "ur": {
+    "open": "AI جنی کھولیں۔"
+  },
+  "uz": {
+    "open": "AI Genie-ni oching"
+  },
+  "vi": {
+    "open": "Thần đèn AI mở"
+  },
+  "cy": {
+    "open": "Agor AI Genie"
+  },
+  "yo": {
+    "open": "Ṣii AI Genie"
+  },
+  "zh": {
+    "open": "打开 AI Genie"
+  }
 }

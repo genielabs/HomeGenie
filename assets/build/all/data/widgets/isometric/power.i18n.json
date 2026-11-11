@@ -1,4 +1,164 @@
 {
+  "af": {
+    "energy_heading": "Energie",
+    "no_meter": "Geen meter gekies nie",
+    "power_label": "Oombliklike krag",
+    "trace_label": "Onlangse lesings",
+    "trace_empty": "Wag vir lesings",
+    "bind_power": "Krag"
+  },
+  "sq": {
+    "energy_heading": "Energjisë",
+    "no_meter": "Asnjë matës nuk është zgjedhur",
+    "power_label": "Fuqia e menjëhershme",
+    "trace_label": "Leximet e fundit",
+    "trace_empty": "Në pritje të leximeve",
+    "bind_power": "Fuqia"
+  },
+  "am": {
+    "energy_heading": "ጉልበት",
+    "no_meter": "ምንም ሜትር አልተመረጠም።",
+    "power_label": "ቅጽበታዊ ኃይል",
+    "trace_label": "የቅርብ ጊዜ ንባቦች",
+    "trace_empty": "ንባብ በመጠበቅ ላይ",
+    "bind_power": "ኃይል"
+  },
+  "ar": {
+    "energy_heading": "الطاقة",
+    "no_meter": "لم يتم تحديد أي متر",
+    "power_label": "قوة لحظية",
+    "trace_label": "القراءات الأخيرة",
+    "trace_empty": "في انتظار القراءات",
+    "bind_power": "القوة"
+  },
+  "hy": {
+    "energy_heading": "Էներգիա",
+    "no_meter": "Ընտրված չէ հաշվիչ",
+    "power_label": "Ակնթարթային հզորություն",
+    "trace_label": "Վերջին ընթերցումներ",
+    "trace_empty": "Սպասում ենք ընթերցումների",
+    "bind_power": "Իշխանություն"
+  },
+  "az": {
+    "energy_heading": "Enerji",
+    "no_meter": "Sayğac seçilməyib",
+    "power_label": "Ani güc",
+    "trace_label": "Son oxunuşlar",
+    "trace_empty": "Oxumaları gözləyirik",
+    "bind_power": "Güc"
+  },
+  "eu": {
+    "energy_heading": "Energia",
+    "no_meter": "Ez da neurgailurik hautatu",
+    "power_label": "Berehalako potentzia",
+    "trace_label": "Azken irakurketak",
+    "trace_empty": "Irakurgaien zain",
+    "bind_power": "Boterea"
+  },
+  "be": {
+    "energy_heading": "Энергія",
+    "no_meter": "Лічыльнік не выбраны",
+    "power_label": "Імгненная магутнасць",
+    "trace_label": "Апошнія чытанні",
+    "trace_empty": "Чакаю паказанняў",
+    "bind_power": "Магутнасць"
+  },
+  "bn": {
+    "energy_heading": "শক্তি",
+    "no_meter": "কোনো মিটার নির্বাচন করা হয়নি",
+    "power_label": "তাত্ক্ষণিক শক্তি",
+    "trace_label": "সাম্প্রতিক পড়া",
+    "trace_empty": "পড়ার জন্য অপেক্ষা করছি",
+    "bind_power": "শক্তি"
+  },
+  "bs": {
+    "energy_heading": "Energija",
+    "no_meter": "Nije odabran mjerač",
+    "power_label": "Trenutna snaga",
+    "trace_label": "Nedavna čitanja",
+    "trace_empty": "Čekam čitanje",
+    "bind_power": "Snaga"
+  },
+  "bg": {
+    "energy_heading": "енергия",
+    "no_meter": "Няма избран измервателен уред",
+    "power_label": "Моментна мощност",
+    "trace_label": "Последни четения",
+    "trace_empty": "В очакване на показания",
+    "bind_power": "Мощност"
+  },
+  "my": {
+    "energy_heading": "စွမ်းအင်",
+    "no_meter": "မီတာကို ရွေးထားခြင်းမရှိပါ။",
+    "power_label": "ချက်ခြင်းပါဝါ",
+    "trace_label": "လတ်တလောဖတ်ရှုမှုများ",
+    "trace_empty": "စာဖတ်ခြင်းကို စောင့်မျှော်နေပါသည်။",
+    "bind_power": "ပါဝါ"
+  },
+  "ca": {
+    "energy_heading": "Energia",
+    "no_meter": "No s'ha seleccionat cap mesurador",
+    "power_label": "Potència instantània",
+    "trace_label": "Lectures recents",
+    "trace_empty": "Esperant les lectures",
+    "bind_power": "Poder"
+  },
+  "ny": {
+    "energy_heading": "Mphamvu",
+    "no_meter": "Palibe mita yosankhidwa",
+    "power_label": "Mphamvu yanthawi yomweyo",
+    "trace_label": "Zowerenga zaposachedwa",
+    "trace_empty": "Kudikirira kuwerenga",
+    "bind_power": "Mphamvu"
+  },
+  "zh-cn": {
+    "energy_heading": "能源",
+    "no_meter": "未选择仪表",
+    "power_label": "瞬时功率",
+    "trace_label": "最近读物",
+    "trace_empty": "等待读数",
+    "bind_power": "电源"
+  },
+  "zh-tw": {
+    "energy_heading": "能源",
+    "no_meter": "未選擇儀表",
+    "power_label": "瞬時功率",
+    "trace_label": "最近讀物",
+    "trace_empty": "等待讀數",
+    "bind_power": "電源"
+  },
+  "hr": {
+    "energy_heading": "energija",
+    "no_meter": "Nije odabran mjerač",
+    "power_label": "Trenutna snaga",
+    "trace_label": "Nedavna čitanja",
+    "trace_empty": "Čeka se očitanja",
+    "bind_power": "Snaga"
+  },
+  "cs": {
+    "energy_heading": "Energie",
+    "no_meter": "Není vybrán žádný měřič",
+    "power_label": "Okamžitá síla",
+    "trace_label": "Nedávná čtení",
+    "trace_empty": "Čekání na čtení",
+    "bind_power": "Moc"
+  },
+  "da": {
+    "energy_heading": "Energi",
+    "no_meter": "Ingen måler valgt",
+    "power_label": "Øjeblikkelig kraft",
+    "trace_label": "Seneste aflæsninger",
+    "trace_empty": "Venter på aflæsninger",
+    "bind_power": "Strøm"
+  },
+  "nl": {
+    "energy_heading": "Energie",
+    "no_meter": "Geen meter geselecteerd",
+    "power_label": "Onmiddellijk vermogen",
+    "trace_label": "Recente metingen",
+    "trace_empty": "Wachten op lezingen",
+    "bind_power": "Macht"
+  },
   "en": {
     "energy_heading": "Energy",
     "no_meter": "No meter selected",
@@ -6,6 +166,142 @@
     "trace_label": "Recent readings",
     "trace_empty": "Waiting for readings",
     "bind_power": "Power"
+  },
+  "et": {
+    "energy_heading": "Energia",
+    "no_meter": "Arvestit pole valitud",
+    "power_label": "Hetkeline võimsus",
+    "trace_label": "Viimased lugemised",
+    "trace_empty": "Ootab lugemisi",
+    "bind_power": "Võimsus"
+  },
+  "fi": {
+    "energy_heading": "Energiaa",
+    "no_meter": "Mittaria ei ole valittu",
+    "power_label": "Välitön teho",
+    "trace_label": "Viimeaikaiset lukemat",
+    "trace_empty": "Lukemista odotellessa",
+    "bind_power": "Tehoa"
+  },
+  "fr": {
+    "energy_heading": "Énergie",
+    "no_meter": "Aucun compteur associé",
+    "power_label": "Puissance instantanée",
+    "trace_label": "Relevés récents",
+    "trace_empty": "En attente de relevés",
+    "bind_power": "Puissance"
+  },
+  "gl": {
+    "energy_heading": "Enerxía",
+    "no_meter": "Non se seleccionou ningún contador",
+    "power_label": "Potencia instantánea",
+    "trace_label": "Lecturas recentes",
+    "trace_empty": "Agardando lecturas",
+    "bind_power": "Poder"
+  },
+  "ka": {
+    "energy_heading": "ენერგია",
+    "no_meter": "მეტრი არ არის არჩეული",
+    "power_label": "მყისიერი ძალა",
+    "trace_label": "ბოლო საკითხავი",
+    "trace_empty": "ველოდებით კითხვას",
+    "bind_power": "ძალაუფლება"
+  },
+  "de": {
+    "energy_heading": "Energie",
+    "no_meter": "Kein Messgerät ausgewählt",
+    "power_label": "Momentanleistung",
+    "trace_label": "Aktuelle Lesungen",
+    "trace_empty": "Warten auf Lesungen",
+    "bind_power": "Macht"
+  },
+  "el": {
+    "energy_heading": "Ενέργεια",
+    "no_meter": "Δεν έχει επιλεγεί μετρητής",
+    "power_label": "Στιγμιαία δύναμη",
+    "trace_label": "Πρόσφατες αναγνώσεις",
+    "trace_empty": "Αναμονή για αναγνώσεις",
+    "bind_power": "Δύναμη"
+  },
+  "gu": {
+    "energy_heading": "ઉર્જા",
+    "no_meter": "કોઈ મીટર પસંદ કરેલ નથી",
+    "power_label": "ત્વરિત શક્તિ",
+    "trace_label": "તાજેતરના વાંચન",
+    "trace_empty": "વાંચન માટે રાહ જોઈ રહ્યું છે",
+    "bind_power": "શક્તિ"
+  },
+  "ht": {
+    "energy_heading": "Enèji",
+    "no_meter": "Pa gen mèt chwazi",
+    "power_label": "Pouvwa enstantane",
+    "trace_label": "Lekti ki sot pase yo",
+    "trace_empty": "Ap tann pou lekti",
+    "bind_power": "Pouvwa"
+  },
+  "ha": {
+    "energy_heading": "Makamashi\nSaukewa:",
+    "no_meter": "Babu mita da aka zaɓa\nSaukewa:",
+    "power_label": "Ikon gaggawa\nSaukewa:",
+    "trace_label": "Karatun kwanan nan\nSaukewa:",
+    "trace_empty": "Ana jiran karatu\nSaukewa:",
+    "bind_power": "Ƙarfi\nSaukewa:"
+  },
+  "he": {
+    "energy_heading": "אנרגיה",
+    "no_meter": "לא נבחר מד",
+    "power_label": "כוח מיידי",
+    "trace_label": "קריאות אחרונות",
+    "trace_empty": "מחכה לקריאות",
+    "bind_power": "כוח"
+  },
+  "hi": {
+    "energy_heading": "ऊर्जा",
+    "no_meter": "कोई मीटर चयनित नहीं",
+    "power_label": "तात्कालिक शक्ति",
+    "trace_label": "हालिया पाठन",
+    "trace_empty": "पढ़ने की प्रतीक्षा है",
+    "bind_power": "शक्ति"
+  },
+  "hu": {
+    "energy_heading": "Energia",
+    "no_meter": "Nincs mérő kiválasztva",
+    "power_label": "Azonnali teljesítmény",
+    "trace_label": "Friss olvasmányok",
+    "trace_empty": "Olvasásra várva",
+    "bind_power": "Erő"
+  },
+  "id": {
+    "energy_heading": "Energi",
+    "no_meter": "Tidak ada meteran yang dipilih",
+    "power_label": "Kekuatan seketika",
+    "trace_label": "Bacaan terkini",
+    "trace_empty": "Menunggu bacaan",
+    "bind_power": "Kekuatan"
+  },
+  "ga": {
+    "energy_heading": "Fuinneamh",
+    "no_meter": "Níor roghnaíodh aon mhéadar",
+    "power_label": "Cumhacht mheandarach",
+    "trace_label": "Léamha le déanaí",
+    "trace_empty": "Ag feitheamh le léamha",
+    "bind_power": "Cumhacht"
+  },
+  "ig": {
+    "energy_heading": "Ike",
+    "no_meter": "Ọnweghị mita ahọpụtara",
+    "power_label": "Ike ozugbo",
+    "trace_label": "Ọgụgụ na-adịbeghị anya",
+    "trace_empty": "Na-eche ọgụgụ",
+    "bind_power": "Ike"
+  },
+  "is": {
+    "energy_heading": "Orka",
+    "no_meter": "Enginn mælir valinn",
+    "power_label": "Tafarlaus kraftur",
+    "trace_label": "Nýleg lesning",
+    "trace_empty": "Bíð eftir lestri",
+    "bind_power": "Kraftur"
   },
   "it": {
     "energy_heading": "Energia",
@@ -15,12 +311,420 @@
     "trace_empty": "In attesa di letture",
     "bind_power": "Potenza"
   },
-  "fr": {
-    "energy_heading": "Énergie",
-    "no_meter": "Aucun compteur associé",
-    "power_label": "Puissance instantanée",
-    "trace_label": "Relevés récents",
-    "trace_empty": "En attente de relevés",
-    "bind_power": "Puissance"
+  "ja": {
+    "energy_heading": "エネルギー",
+    "no_meter": "メーターが選択されていません",
+    "power_label": "瞬時電力",
+    "trace_label": "最近の読書",
+    "trace_empty": "測定値を待っています",
+    "bind_power": "パワー"
+  },
+  "kn": {
+    "energy_heading": "ಶಕ್ತಿ",
+    "no_meter": "ಯಾವುದೇ ಮೀಟರ್ ಆಯ್ಕೆ ಮಾಡಲಾಗಿಲ್ಲ",
+    "power_label": "ತತ್ಕ್ಷಣದ ಶಕ್ತಿ",
+    "trace_label": "ಇತ್ತೀಚಿನ ವಾಚನಗೋಷ್ಠಿಗಳು",
+    "trace_empty": "ಓದುವಿಕೆಗಾಗಿ ಕಾಯಲಾಗುತ್ತಿದೆ",
+    "bind_power": "ಶಕ್ತಿ"
+  },
+  "kk": {
+    "energy_heading": "Энергия",
+    "no_meter": "Есептегіш таңдалмаған",
+    "power_label": "Лездік қуат",
+    "trace_label": "Соңғы оқулар",
+    "trace_empty": "Оқуларды күту",
+    "bind_power": "Қуат"
+  },
+  "km": {
+    "energy_heading": "ថាមពល",
+    "no_meter": "មិនបានជ្រើសរើសម៉ែត្រទេ។",
+    "power_label": "ថាមពលភ្លាមៗ",
+    "trace_label": "ការអានថ្មីៗ",
+    "trace_empty": "កំពុងរង់ចាំការអាន",
+    "bind_power": "ថាមពល"
+  },
+  "ky": {
+    "energy_heading": "Энергия",
+    "no_meter": "Эч кандай эсептегич тандалган",
+    "power_label": "Көз ирмемдик күч",
+    "trace_label": "Акыркы окуулар",
+    "trace_empty": "Окууларды күтөбүз",
+    "bind_power": "Күч"
+  },
+  "ko": {
+    "energy_heading": "에너지",
+    "no_meter": "측정기가 선택되지 않았습니다.",
+    "power_label": "순시전력",
+    "trace_label": "최근 독서",
+    "trace_empty": "독서를 기다리는 중",
+    "bind_power": "힘"
+  },
+  "ku": {
+    "energy_heading": "Energy",
+    "no_meter": "Metre nehat hilbijartin",
+    "power_label": "Hêza lezgîn",
+    "trace_label": "Xwendinên dawî",
+    "trace_empty": "Li benda xwendinan in",
+    "bind_power": "Power"
+  },
+  "la": {
+    "energy_heading": "Energy",
+    "no_meter": "Nulla meter electus",
+    "power_label": "Potentia momentanea",
+    "trace_label": "Recentes lectiones",
+    "trace_empty": "Expectans Lectiones",
+    "bind_power": "Potestas"
+  },
+  "lb": {
+    "energy_heading": "Energie",
+    "no_meter": "Kee Meter ausgewielt",
+    "power_label": "Momentaner Kraaft",
+    "trace_label": "Rezent Liesungen",
+    "trace_empty": "Waart op Liesungen",
+    "bind_power": "Muecht"
+  },
+  "lo": {
+    "energy_heading": "ພະລັງງານ",
+    "no_meter": "ບໍ່ໄດ້ເລືອກແມັດ",
+    "power_label": "ພະລັງງານທັນທີ",
+    "trace_label": "ການອ່ານຫຼ້າສຸດ",
+    "trace_empty": "ລໍຖ້າອ່ານ",
+    "bind_power": "ພະລັງງານ"
+  },
+  "lt": {
+    "energy_heading": "Energija",
+    "no_meter": "Nepasirinktas skaitiklis",
+    "power_label": "Momentinė galia",
+    "trace_label": "Naujausi skaitymai",
+    "trace_empty": "Laukiu skaitymų",
+    "bind_power": "Galia"
+  },
+  "lv": {
+    "energy_heading": "Enerģija",
+    "no_meter": "Nav izvēlēts neviens skaitītājs",
+    "power_label": "Momentāna jauda",
+    "trace_label": "Jaunākie lasījumi",
+    "trace_empty": "Gaidām lasījumus",
+    "bind_power": "Jauda"
+  },
+  "mk": {
+    "energy_heading": "Енергија",
+    "no_meter": "Не е избран метар",
+    "power_label": "Моментална моќност",
+    "trace_label": "Неодамнешни читања",
+    "trace_empty": "Чекајќи читања",
+    "bind_power": "Моќ"
+  },
+  "mg": {
+    "energy_heading": "Angovo\nSary",
+    "no_meter": "Tsy misy metatra nofantenana\nSary",
+    "power_label": "Hery avy hatrany\nSary",
+    "trace_label": "Vakiteny farany\nSary",
+    "trace_empty": "Miandry vakiteny\nSary",
+    "bind_power": "Hery\nSary"
+  },
+  "ms": {
+    "energy_heading": "Tenaga",
+    "no_meter": "Tiada meter dipilih",
+    "power_label": "Kuasa serta merta",
+    "trace_label": "Bacaan terkini",
+    "trace_empty": "Menunggu bacaan",
+    "bind_power": "kuasa"
+  },
+  "ml": {
+    "energy_heading": "ഊർജ്ജം",
+    "no_meter": "മീറ്ററൊന്നും തിരഞ്ഞെടുത്തിട്ടില്ല",
+    "power_label": "തൽക്ഷണ ശക്തി",
+    "trace_label": "സമീപകാല വായനകൾ",
+    "trace_empty": "വായനകൾക്കായി കാത്തിരിക്കുന്നു",
+    "bind_power": "ശക്തി"
+  },
+  "mt": {
+    "energy_heading": "Enerġija",
+    "no_meter": "L-ebda metru magħżul",
+    "power_label": "Qawwa istantanja",
+    "trace_label": "Qari reċenti",
+    "trace_empty": "Stennija għall-qari",
+    "bind_power": "Qawwa"
+  },
+  "mi": {
+    "energy_heading": "Pūngao",
+    "no_meter": "Kaore he mita i tohua",
+    "power_label": "Mana tonu",
+    "trace_label": "Ko nga panuitanga tata nei",
+    "trace_empty": "E tatari ana mo nga panui",
+    "bind_power": "Mana"
+  },
+  "mr": {
+    "energy_heading": "ऊर्जा",
+    "no_meter": "कोणतेही मीटर निवडलेले नाही",
+    "power_label": "तात्कालिक शक्ती",
+    "trace_label": "अलीकडील वाचन",
+    "trace_empty": "वाचनाची वाट पाहत आहे",
+    "bind_power": "शक्ती"
+  },
+  "mn": {
+    "energy_heading": "Эрчим хүч",
+    "no_meter": "Ямар ч тоолуур сонгогдоогүй байна",
+    "power_label": "Агшин зуурын хүч",
+    "trace_label": "Сүүлийн үеийн уншилтууд",
+    "trace_empty": "Уншихыг хүлээж байна",
+    "bind_power": "Хүч"
+  },
+  "ne": {
+    "energy_heading": "ऊर्जा",
+    "no_meter": "कुनै मीटर चयन गरिएको छैन",
+    "power_label": "तात्कालिक शक्ति",
+    "trace_label": "भर्खरका पढाइहरू",
+    "trace_empty": "पढाइको लागि प्रतिक्षा गर्दै",
+    "bind_power": "शक्ति"
+  },
+  "no": {
+    "energy_heading": "Energi",
+    "no_meter": "Ingen måler er valgt",
+    "power_label": "Øyeblikkelig kraft",
+    "trace_label": "Nylige avlesninger",
+    "trace_empty": "Venter på lesninger",
+    "bind_power": "Kraft"
+  },
+  "or": {
+    "energy_heading": "ଶକ୍ତି",
+    "no_meter": "କ meter ଣସି ମିଟର ଚୟନ ହୋଇନାହିଁ |",
+    "power_label": "ତତକ୍ଷଣାତ୍ ଶକ୍ତି |",
+    "trace_label": "ସାମ୍ପ୍ରତିକ ପଠନ |",
+    "trace_empty": "ପଠନ ପାଇଁ ଅପେକ୍ଷା |",
+    "bind_power": "ଶକ୍ତି"
+  },
+  "pa": {
+    "energy_heading": "ਊਰਜਾ",
+    "no_meter": "ਕੋਈ ਮੀਟਰ ਨਹੀਂ ਚੁਣਿਆ ਗਿਆ",
+    "power_label": "ਤਤਕਾਲ ਸ਼ਕਤੀ",
+    "trace_label": "ਹਾਲੀਆ ਰੀਡਿੰਗਾਂ",
+    "trace_empty": "ਪੜ੍ਹਨ ਦੀ ਉਡੀਕ ਕਰ ਰਿਹਾ ਹੈ",
+    "bind_power": "ਪਾਵਰ"
+  },
+  "fa": {
+    "energy_heading": "انرژی",
+    "no_meter": "متری انتخاب نشده است",
+    "power_label": "قدرت آنی",
+    "trace_label": "قرائت های اخیر",
+    "trace_empty": "منتظر خواندن",
+    "bind_power": "قدرت"
+  },
+  "pl": {
+    "energy_heading": "Energia",
+    "no_meter": "Nie wybrano miernika",
+    "power_label": "Natychmiastowa moc",
+    "trace_label": "Ostatnie odczyty",
+    "trace_empty": "Czekam na odczyty",
+    "bind_power": "Moc"
+  },
+  "ps": {
+    "energy_heading": "انرژي",
+    "no_meter": "هیڅ میټر نه دی ټاکل شوی",
+    "power_label": "فوري ځواک",
+    "trace_label": "وروستي لوستل",
+    "trace_empty": "د لوستلو په تمه",
+    "bind_power": "ځواک"
+  },
+  "pt": {
+    "energy_heading": "Energia",
+    "no_meter": "Nenhum medidor selecionado",
+    "power_label": "Potência instantânea",
+    "trace_label": "Leituras recentes",
+    "trace_empty": "Aguardando leituras",
+    "bind_power": "Poder"
+  },
+  "ro": {
+    "energy_heading": "Energie",
+    "no_meter": "Niciun contor selectat",
+    "power_label": "Putere instantanee",
+    "trace_label": "Lecturi recente",
+    "trace_empty": "În așteptarea lecturilor",
+    "bind_power": "Putere"
+  },
+  "ru": {
+    "energy_heading": "Энергия",
+    "no_meter": "Счетчик не выбран",
+    "power_label": "Мгновенная мощность",
+    "trace_label": "Последние чтения",
+    "trace_empty": "Жду показаний",
+    "bind_power": "Мощность"
+  },
+  "sd": {
+    "energy_heading": "توانائي",
+    "no_meter": "ڪو به ميٽر نه چونڊيو ويو آهي",
+    "power_label": "فوري طاقت",
+    "trace_label": "تازو پڙهڻ",
+    "trace_empty": "پڙهڻ جي انتظار ۾",
+    "bind_power": "طاقت"
+  },
+  "sr": {
+    "energy_heading": "Енергија",
+    "no_meter": "Није изабран ниједан мерач",
+    "power_label": "Тренутна снага",
+    "trace_label": "Недавна читања",
+    "trace_empty": "Чека се читања",
+    "bind_power": "Повер"
+  },
+  "si": {
+    "energy_heading": "බලශක්තිය",
+    "no_meter": "මීටරයක් තෝරාගෙන නැත",
+    "power_label": "ක්ෂණික බලය",
+    "trace_label": "මෑත කියවීම්",
+    "trace_empty": "කියවීම් සඳහා රැඳී සිටීම",
+    "bind_power": "බලය"
+  },
+  "sk": {
+    "energy_heading": "Energia",
+    "no_meter": "Nie je vybratý žiadny merač",
+    "power_label": "Okamžitá sila",
+    "trace_label": "Nedávne čítania",
+    "trace_empty": "Čaká sa na čítania",
+    "bind_power": "Sila"
+  },
+  "sl": {
+    "energy_heading": "energija",
+    "no_meter": "Izbran ni noben merilnik",
+    "power_label": "Trenutna moč",
+    "trace_label": "Nedavna branja",
+    "trace_empty": "Čakanje na odčitke",
+    "bind_power": "Moč"
+  },
+  "so": {
+    "energy_heading": "Tamarta",
+    "no_meter": "Ma jiro mitir la doortay",
+    "power_label": "Awood degdeg ah",
+    "trace_label": "Akhrisyadii dhawaa",
+    "trace_empty": "Sugaya akhrinta",
+    "bind_power": "Awood"
+  },
+  "es": {
+    "energy_heading": "Energía",
+    "no_meter": "Ningún medidor seleccionado",
+    "power_label": "poder instantáneo",
+    "trace_label": "Lecturas recientes",
+    "trace_empty": "esperando lecturas",
+    "bind_power": "poder"
+  },
+  "sw": {
+    "energy_heading": "Nishati",
+    "no_meter": "Hakuna mita iliyochaguliwa",
+    "power_label": "Nguvu ya papo hapo",
+    "trace_label": "Usomaji wa hivi majuzi",
+    "trace_empty": "Kusubiri kwa usomaji",
+    "bind_power": "Nguvu"
+  },
+  "sv": {
+    "energy_heading": "Energi",
+    "no_meter": "Ingen mätare har valts",
+    "power_label": "Omedelbar kraft",
+    "trace_label": "Senaste läsningar",
+    "trace_empty": "Väntar på läsningar",
+    "bind_power": "Kraft"
+  },
+  "ta": {
+    "energy_heading": "ஆற்றல்",
+    "no_meter": "மீட்டர் எதுவும் தேர்ந்தெடுக்கப்படவில்லை",
+    "power_label": "உடனடி சக்தி",
+    "trace_label": "சமீபத்திய வாசிப்புகள்",
+    "trace_empty": "வாசிப்புகளுக்காக காத்திருக்கிறது",
+    "bind_power": "சக்தி"
+  },
+  "te": {
+    "energy_heading": "శక్తి",
+    "no_meter": "మీటర్ ఏదీ ఎంచుకోబడలేదు",
+    "power_label": "తక్షణ శక్తి",
+    "trace_label": "ఇటీవలి రీడింగులు",
+    "trace_empty": "రీడింగ్‌ల కోసం వేచి ఉంది",
+    "bind_power": "శక్తి"
+  },
+  "tg": {
+    "energy_heading": "Энергетика",
+    "no_meter": "Ҳисобкунак интихоб нашудааст",
+    "power_label": "Қувваи фаврӣ",
+    "trace_label": "Хониши охирин",
+    "trace_empty": "Интизори хондан",
+    "bind_power": "Қувва"
+  },
+  "th": {
+    "energy_heading": "พลังงาน",
+    "no_meter": "ไม่ได้เลือกมิเตอร์",
+    "power_label": "พลังทันที",
+    "trace_label": "การอ่านล่าสุด",
+    "trace_empty": "รออ่านอยู่ครับ",
+    "bind_power": "พลัง"
+  },
+  "tl": {
+    "energy_heading": "Enerhiya",
+    "no_meter": "Walang piniling metro",
+    "power_label": "Agad na kapangyarihan",
+    "trace_label": "Mga kamakailang pagbabasa",
+    "trace_empty": "Naghihintay ng mga pagbabasa",
+    "bind_power": "kapangyarihan"
+  },
+  "tr": {
+    "energy_heading": "Enerji",
+    "no_meter": "Sayaç seçilmedi",
+    "power_label": "Anlık güç",
+    "trace_label": "Son okumalar",
+    "trace_empty": "Okumaları bekliyorum",
+    "bind_power": "Güç"
+  },
+  "ug": {
+    "energy_heading": "ئېنېرگىيە",
+    "no_meter": "مېتىر تاللانمىدى",
+    "power_label": "شۇئان كۈچ",
+    "trace_label": "يېقىنقى ئوقۇشلۇق",
+    "trace_empty": "ئوقۇشنى ساقلاش",
+    "bind_power": "قۇۋۋەت"
+  },
+  "uk": {
+    "energy_heading": "Енергія",
+    "no_meter": "Лічильник не вибрано",
+    "power_label": "Миттєва потужність",
+    "trace_label": "Останні читання",
+    "trace_empty": "Чекаю показань",
+    "bind_power": "потужність"
+  },
+  "ur": {
+    "energy_heading": "توانائی",
+    "no_meter": "کوئی میٹر منتخب نہیں کیا گیا۔",
+    "power_label": "فوری طاقت",
+    "trace_label": "حالیہ ریڈنگز",
+    "trace_empty": "پڑھنے کا انتظار ہے۔",
+    "bind_power": "طاقت"
+  },
+  "uz": {
+    "energy_heading": "Energiya",
+    "no_meter": "Hech qanday hisoblagich tanlanmagan",
+    "power_label": "Bir lahzali quvvat",
+    "trace_label": "So'nggi o'qishlar",
+    "trace_empty": "O'qishlarni kutish",
+    "bind_power": "Quvvat"
+  },
+  "vi": {
+    "energy_heading": "năng lượng",
+    "no_meter": "Không có đồng hồ đo nào được chọn",
+    "power_label": "Sức mạnh tức thời",
+    "trace_label": "Bài đọc gần đây",
+    "trace_empty": "Đang chờ đọc",
+    "bind_power": "quyền lực"
+  },
+  "cy": {
+    "energy_heading": "Egni",
+    "no_meter": "Dim mesurydd wedi'i ddewis",
+    "power_label": "Grym ar unwaith",
+    "trace_label": "Darlleniadau diweddar",
+    "trace_empty": "Aros am ddarlleniadau",
+    "bind_power": "Grym"
+  },
+  "yo": {
+    "energy_heading": "Agbara",
+    "no_meter": "Ko si mita ti a yan",
+    "power_label": "Lẹsẹkẹsẹ agbara",
+    "trace_label": "Awọn kika aipẹ",
+    "trace_empty": "Nduro fun awọn kika",
+    "bind_power": "Agbara"
   }
 }

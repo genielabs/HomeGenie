@@ -1,0 +1,16 @@
+<article class="camera" #card @set="void 0">
+  <div class="frame">
+    <img #image alt="" hidden>
+    <span class="material-symbols-outlined placeholder" #placeholder aria-hidden="true">videocam_off</span>
+  </div>
+  <footer>
+    <div class="caption">
+      <strong #name></strong>
+      <span class="status" #status role="status"></span>
+    </div>
+    <span class="recording" #recording hidden aria-label="Recordings"><span aria-hidden="true"></span>REC</span>
+    <button type="button" #expand (click)="toggleFullscreen()" hidden>
+      <span class="material-symbols-outlined" #expand_icon aria-hidden="true">fullscreen</span>
+    </button>
+  </footer>
+</article>

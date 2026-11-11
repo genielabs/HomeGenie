@@ -362,12 +362,14 @@ interface WidgetBoundModuleDefinition {
 }
 interface WidgetBoundModuleSettings {
   boundModules?: Record<string, WidgetBoundModuleDefinition>;
+  boundDashboards?: Record<string, {label: string; labelKey?: string}>;
 }
 interface CustomWidgetConfiguration {
   componentId: string;
   module?: string;
   size?: string;
   boundModules?: Record<string, string | null>;
+  boundDashboards?: Record<string, string | null>;
 }
 
 /**
@@ -407,6 +409,9 @@ declare class ControllerInstance extends ContextController {
    * The template alias bm(name) is declared automatically unless the widget already declares bm.
    */
   getBoundModule(name: string): Module | undefined;
+  getBoundDashboard(role: string): string | undefined;
+  openDashboard(name: string): Promise<boolean>;
+  runProgram(program: Module): ReturnType<ControllerInstance['apiCall']>;
   /**
    * Resolves a current YoT module by domain:address, without a network request.
    * Uses this widget's adapter unless adapterId is explicitly supplied.

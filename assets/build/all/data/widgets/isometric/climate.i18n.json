@@ -1,10 +1,269 @@
 {
+  "af": {
+    "climate_heading": "Klimaat",
+    "no_sensor": "Geen sensor gekies nie",
+    "temperature_label": "Temperatuur",
+    "humidity_label": "Humiditeit",
+    "bind_climate": "Klimaat"
+  },
+  "sq": {
+    "climate_heading": "Klima",
+    "no_sensor": "Asnjë sensor i zgjedhur",
+    "temperature_label": "Temperatura",
+    "humidity_label": "Lagështia",
+    "bind_climate": "Klima"
+  },
+  "am": {
+    "climate_heading": "የአየር ንብረት",
+    "no_sensor": "ምንም ዳሳሽ አልተመረጠም።",
+    "temperature_label": "የሙቀት መጠን",
+    "humidity_label": "እርጥበት",
+    "bind_climate": "የአየር ንብረት"
+  },
+  "ar": {
+    "climate_heading": "المناخ",
+    "no_sensor": "لم يتم تحديد أي مستشعر",
+    "temperature_label": "درجة الحرارة",
+    "humidity_label": "الرطوبة",
+    "bind_climate": "المناخ"
+  },
+  "hy": {
+    "climate_heading": "Կլիմա",
+    "no_sensor": "Ընտրված չէ սենսոր",
+    "temperature_label": "Ջերմաստիճանը",
+    "humidity_label": "Խոնավություն",
+    "bind_climate": "Կլիմա"
+  },
+  "az": {
+    "climate_heading": "İqlim",
+    "no_sensor": "Sensor seçilməyib",
+    "temperature_label": "Temperatur",
+    "humidity_label": "Rütubət",
+    "bind_climate": "İqlim"
+  },
+  "eu": {
+    "climate_heading": "Klima",
+    "no_sensor": "Ez da sentsorerik hautatu",
+    "temperature_label": "Tenperatura",
+    "humidity_label": "Hezetasuna",
+    "bind_climate": "Klima"
+  },
+  "be": {
+    "climate_heading": "Клімат",
+    "no_sensor": "Датчык не выбраны",
+    "temperature_label": "тэмпература",
+    "humidity_label": "Вільготнасць",
+    "bind_climate": "Клімат"
+  },
+  "bn": {
+    "climate_heading": "জলবায়ু",
+    "no_sensor": "কোন সেন্সর নির্বাচন করা হয়নি",
+    "temperature_label": "তাপমাত্রা",
+    "humidity_label": "আর্দ্রতা",
+    "bind_climate": "জলবায়ু"
+  },
+  "bs": {
+    "climate_heading": "Klima",
+    "no_sensor": "Nije odabran senzor",
+    "temperature_label": "Temperatura",
+    "humidity_label": "Vlažnost",
+    "bind_climate": "Klima"
+  },
+  "bg": {
+    "climate_heading": "Климат",
+    "no_sensor": "Няма избран сензор",
+    "temperature_label": "температура",
+    "humidity_label": "Влажност",
+    "bind_climate": "Климат"
+  },
+  "my": {
+    "climate_heading": "ရာသီဥတု",
+    "no_sensor": "အာရုံခံကိရိယာကို ရွေးချယ်ထားခြင်းမရှိပါ။",
+    "temperature_label": "အပူချိန်",
+    "humidity_label": "စိုထိုင်းဆ",
+    "bind_climate": "ရာသီဥတု"
+  },
+  "ca": {
+    "climate_heading": "Clima",
+    "no_sensor": "No s'ha seleccionat cap sensor",
+    "temperature_label": "Temperatura",
+    "humidity_label": "Humitat",
+    "bind_climate": "Clima"
+  },
+  "ny": {
+    "climate_heading": "Nyengo",
+    "no_sensor": "Palibe sensa yosankhidwa",
+    "temperature_label": "Kutentha",
+    "humidity_label": "Chinyezi",
+    "bind_climate": "Nyengo"
+  },
+  "zh-cn": {
+    "climate_heading": "气候",
+    "no_sensor": "未选择传感器",
+    "temperature_label": "温度",
+    "humidity_label": "湿度",
+    "bind_climate": "气候"
+  },
+  "zh-tw": {
+    "climate_heading": "氣候",
+    "no_sensor": "未選擇感測器",
+    "temperature_label": "溫度",
+    "humidity_label": "濕度",
+    "bind_climate": "氣候"
+  },
+  "hr": {
+    "climate_heading": "Klima",
+    "no_sensor": "Senzor nije odabran",
+    "temperature_label": "Temperatura",
+    "humidity_label": "Vlažnost",
+    "bind_climate": "Klima"
+  },
+  "cs": {
+    "climate_heading": "Podnebí",
+    "no_sensor": "Není vybrán žádný senzor",
+    "temperature_label": "Teplota",
+    "humidity_label": "Vlhkost",
+    "bind_climate": "Podnebí"
+  },
+  "da": {
+    "climate_heading": "Klima",
+    "no_sensor": "Ingen sensor valgt",
+    "temperature_label": "Temperatur",
+    "humidity_label": "Fugtighed",
+    "bind_climate": "Klima"
+  },
+  "nl": {
+    "climate_heading": "Klimaat",
+    "no_sensor": "Geen sensor geselecteerd",
+    "temperature_label": "Temperatuur",
+    "humidity_label": "Vochtigheid",
+    "bind_climate": "Klimaat"
+  },
   "en": {
     "climate_heading": "Climate",
     "no_sensor": "No sensor selected",
     "temperature_label": "Temperature",
     "humidity_label": "Humidity",
     "bind_climate": "Climate"
+  },
+  "et": {
+    "climate_heading": "Kliima",
+    "no_sensor": "Andurit pole valitud",
+    "temperature_label": "Temperatuur",
+    "humidity_label": "Niiskus",
+    "bind_climate": "Kliima"
+  },
+  "fi": {
+    "climate_heading": "Ilmasto",
+    "no_sensor": "Anturia ei ole valittu",
+    "temperature_label": "Lämpötila",
+    "humidity_label": "Kosteus",
+    "bind_climate": "Ilmasto"
+  },
+  "fr": {
+    "climate_heading": "Climat",
+    "no_sensor": "Aucun capteur associé",
+    "temperature_label": "Température",
+    "humidity_label": "Humidité",
+    "bind_climate": "Climat"
+  },
+  "gl": {
+    "climate_heading": "Clima",
+    "no_sensor": "Non se seleccionou ningún sensor",
+    "temperature_label": "Temperatura",
+    "humidity_label": "Humidade",
+    "bind_climate": "Clima"
+  },
+  "ka": {
+    "climate_heading": "კლიმატი",
+    "no_sensor": "სენსორი არ არის არჩეული",
+    "temperature_label": "ტემპერატურა",
+    "humidity_label": "ტენიანობა",
+    "bind_climate": "კლიმატი"
+  },
+  "de": {
+    "climate_heading": "Klima",
+    "no_sensor": "Kein Sensor ausgewählt",
+    "temperature_label": "Temperatur",
+    "humidity_label": "Luftfeuchtigkeit",
+    "bind_climate": "Klima"
+  },
+  "el": {
+    "climate_heading": "Κλίμα",
+    "no_sensor": "Δεν έχει επιλεγεί αισθητήρας",
+    "temperature_label": "Θερμοκρασία",
+    "humidity_label": "Υγρασία",
+    "bind_climate": "Κλίμα"
+  },
+  "gu": {
+    "climate_heading": "આબોહવા",
+    "no_sensor": "કોઈ સેન્સર પસંદ કરેલ નથી",
+    "temperature_label": "તાપમાન",
+    "humidity_label": "ભેજ",
+    "bind_climate": "આબોહવા"
+  },
+  "ht": {
+    "climate_heading": "Klima",
+    "no_sensor": "Pa gen okenn Capteur chwazi",
+    "temperature_label": "Tanperati",
+    "humidity_label": "Imidite",
+    "bind_climate": "Klima"
+  },
+  "ha": {
+    "climate_heading": "Yanayi\nSaukewa:",
+    "no_sensor": "Babu firikwensin da aka zaɓa\nSaukewa:",
+    "temperature_label": "Zazzabi\nSaukewa:",
+    "humidity_label": "Danshi\nSaukewa:",
+    "bind_climate": "Yanayi\nSaukewa:"
+  },
+  "he": {
+    "climate_heading": "אקלים",
+    "no_sensor": "לא נבחר חיישן",
+    "temperature_label": "טמפרטורה",
+    "humidity_label": "לחות",
+    "bind_climate": "אקלים"
+  },
+  "hi": {
+    "climate_heading": "जलवायु",
+    "no_sensor": "कोई सेंसर चयनित नहीं",
+    "temperature_label": "तापमान",
+    "humidity_label": "आर्द्रता",
+    "bind_climate": "जलवायु"
+  },
+  "hu": {
+    "climate_heading": "Klíma",
+    "no_sensor": "Nincs kiválasztva érzékelő",
+    "temperature_label": "Hőmérséklet",
+    "humidity_label": "Páratartalom",
+    "bind_climate": "Klíma"
+  },
+  "id": {
+    "climate_heading": "Iklim",
+    "no_sensor": "Tidak ada sensor yang dipilih",
+    "temperature_label": "Suhu",
+    "humidity_label": "Kelembaban",
+    "bind_climate": "Iklim"
+  },
+  "ga": {
+    "climate_heading": "Aeráid",
+    "no_sensor": "Níor roghnaíodh aon braiteoir",
+    "temperature_label": "Teocht",
+    "humidity_label": "Taiseachas",
+    "bind_climate": "Aeráid"
+  },
+  "ig": {
+    "climate_heading": "Ihu igwe",
+    "no_sensor": "Ọnweghị ihe mmetụta ahọpụtara",
+    "temperature_label": "Okpomọkụ",
+    "humidity_label": "iru mmiri",
+    "bind_climate": "Ihu igwe"
+  },
+  "is": {
+    "climate_heading": "Loftslag",
+    "no_sensor": "Enginn skynjari valinn",
+    "temperature_label": "Hitastig",
+    "humidity_label": "Raki",
+    "bind_climate": "Loftslag"
   },
   "it": {
     "climate_heading": "Clima",
@@ -13,11 +272,368 @@
     "humidity_label": "Umidità",
     "bind_climate": "Clima"
   },
-  "fr": {
-    "climate_heading": "Climat",
-    "no_sensor": "Aucun capteur associé",
-    "temperature_label": "Température",
-    "humidity_label": "Humidité",
-    "bind_climate": "Climat"
+  "ja": {
+    "climate_heading": "気候",
+    "no_sensor": "センサーが選択されていません",
+    "temperature_label": "温度",
+    "humidity_label": "湿度",
+    "bind_climate": "気候"
+  },
+  "kn": {
+    "climate_heading": "ಹವಾಮಾನ",
+    "no_sensor": "ಯಾವುದೇ ಸಂವೇದಕವನ್ನು ಆಯ್ಕೆಮಾಡಲಾಗಿಲ್ಲ",
+    "temperature_label": "ತಾಪಮಾನ",
+    "humidity_label": "ಆರ್ದ್ರತೆ",
+    "bind_climate": "ಹವಾಮಾನ"
+  },
+  "kk": {
+    "climate_heading": "Климат",
+    "no_sensor": "Ешбір сенсор таңдалмаған",
+    "temperature_label": "Температура",
+    "humidity_label": "Ылғалдылық",
+    "bind_climate": "Климат"
+  },
+  "km": {
+    "climate_heading": "អាកាសធាតុ",
+    "no_sensor": "មិនបានជ្រើសរើសឧបករណ៍ចាប់សញ្ញាទេ។",
+    "temperature_label": "សីតុណ្ហភាព",
+    "humidity_label": "សំណើម",
+    "bind_climate": "អាកាសធាតុ"
+  },
+  "ky": {
+    "climate_heading": "Климат",
+    "no_sensor": "Сенсор тандалган жок",
+    "temperature_label": "Температура",
+    "humidity_label": "Нымдуулук",
+    "bind_climate": "Климат"
+  },
+  "ko": {
+    "climate_heading": "기후",
+    "no_sensor": "선택한 센서가 없습니다.",
+    "temperature_label": "온도",
+    "humidity_label": "습도",
+    "bind_climate": "기후"
+  },
+  "ku": {
+    "climate_heading": "Climate",
+    "no_sensor": "Sensor nehat hilbijartin",
+    "temperature_label": "Germahiya",
+    "humidity_label": "Humidity",
+    "bind_climate": "Climate"
+  },
+  "la": {
+    "climate_heading": "Clima",
+    "no_sensor": "Non sensorem electus",
+    "temperature_label": "Temperature",
+    "humidity_label": "Umor",
+    "bind_climate": "Clima"
+  },
+  "lb": {
+    "climate_heading": "Klima",
+    "no_sensor": "Kee Sensor ausgewielt",
+    "temperature_label": "Temperatur",
+    "humidity_label": "Fiichtegkeet",
+    "bind_climate": "Klima"
+  },
+  "lo": {
+    "climate_heading": "ສະພາບອາກາດ",
+    "no_sensor": "ບໍ່ໄດ້ເລືອກເຊັນເຊີ",
+    "temperature_label": "ອຸນຫະພູມ",
+    "humidity_label": "ຄວາມຊຸ່ມຊື່ນ",
+    "bind_climate": "ສະພາບອາກາດ"
+  },
+  "lt": {
+    "climate_heading": "Klimatas",
+    "no_sensor": "Nepasirinktas joks jutiklis",
+    "temperature_label": "Temperatūra",
+    "humidity_label": "Drėgmė",
+    "bind_climate": "Klimatas"
+  },
+  "lv": {
+    "climate_heading": "Klimats",
+    "no_sensor": "Nav atlasīts neviens sensors",
+    "temperature_label": "Temperatūra",
+    "humidity_label": "Mitrums",
+    "bind_climate": "Klimats"
+  },
+  "mk": {
+    "climate_heading": "Клима",
+    "no_sensor": "Не е избран сензор",
+    "temperature_label": "Температура",
+    "humidity_label": "Влажност",
+    "bind_climate": "Клима"
+  },
+  "mg": {
+    "climate_heading": "Toetrandro\nSary",
+    "no_sensor": "Tsy misy sensor voafantina\nSary",
+    "temperature_label": "Temperature\nSary",
+    "humidity_label": "Hamandoana\nSary",
+    "bind_climate": "Toetrandro\nSary"
+  },
+  "ms": {
+    "climate_heading": "iklim",
+    "no_sensor": "Tiada penderia dipilih",
+    "temperature_label": "Suhu",
+    "humidity_label": "Kelembapan",
+    "bind_climate": "iklim"
+  },
+  "ml": {
+    "climate_heading": "കാലാവസ്ഥ",
+    "no_sensor": "സെൻസറൊന്നും തിരഞ്ഞെടുത്തിട്ടില്ല",
+    "temperature_label": "താപനില",
+    "humidity_label": "ഈർപ്പം",
+    "bind_climate": "കാലാവസ്ഥ"
+  },
+  "mt": {
+    "climate_heading": "Klima",
+    "no_sensor": "Ebda sensor magħżul",
+    "temperature_label": "Temperatura",
+    "humidity_label": "Umdità",
+    "bind_climate": "Klima"
+  },
+  "mi": {
+    "climate_heading": "Te rangi",
+    "no_sensor": "Kāore he pūoko i tīpakohia",
+    "temperature_label": "Te pāmahana",
+    "humidity_label": "Te haumākū",
+    "bind_climate": "Te rangi"
+  },
+  "mr": {
+    "climate_heading": "हवामान",
+    "no_sensor": "कोणताही सेन्सर निवडलेला नाही",
+    "temperature_label": "तापमान",
+    "humidity_label": "आर्द्रता",
+    "bind_climate": "हवामान"
+  },
+  "mn": {
+    "climate_heading": "Уур амьсгал",
+    "no_sensor": "Мэдрэгч сонгогдоогүй байна",
+    "temperature_label": "Температур",
+    "humidity_label": "Чийгшил",
+    "bind_climate": "Уур амьсгал"
+  },
+  "ne": {
+    "climate_heading": "जलवायु",
+    "no_sensor": "कुनै सेन्सर चयन गरिएको छैन",
+    "temperature_label": "तापक्रम",
+    "humidity_label": "आर्द्रता",
+    "bind_climate": "जलवायु"
+  },
+  "no": {
+    "climate_heading": "Klima",
+    "no_sensor": "Ingen sensor valgt",
+    "temperature_label": "Temperatur",
+    "humidity_label": "Fuktighet",
+    "bind_climate": "Klima"
+  },
+  "or": {
+    "climate_heading": "ଜଳବାୟୁ",
+    "no_sensor": "କ sens ଣସି ସେନସର ଚୟନ ହୋଇନାହିଁ |",
+    "temperature_label": "ତାପମାତ୍ରା",
+    "humidity_label": "ଆର୍ଦ୍ରତା",
+    "bind_climate": "ଜଳବାୟୁ"
+  },
+  "pa": {
+    "climate_heading": "ਜਲਵਾਯੂ",
+    "no_sensor": "ਕੋਈ ਸੈਂਸਰ ਨਹੀਂ ਚੁਣਿਆ ਗਿਆ",
+    "temperature_label": "ਤਾਪਮਾਨ",
+    "humidity_label": "ਨਮੀ",
+    "bind_climate": "ਜਲਵਾਯੂ"
+  },
+  "fa": {
+    "climate_heading": "آب و هوا",
+    "no_sensor": "هیچ سنسوری انتخاب نشده است",
+    "temperature_label": "دما",
+    "humidity_label": "رطوبت",
+    "bind_climate": "آب و هوا"
+  },
+  "pl": {
+    "climate_heading": "Klimat",
+    "no_sensor": "Nie wybrano czujnika",
+    "temperature_label": "Temperatura",
+    "humidity_label": "Wilgotność",
+    "bind_climate": "Klimat"
+  },
+  "ps": {
+    "climate_heading": "اقلیم",
+    "no_sensor": "هیڅ سینسر نه دی ټاکل شوی",
+    "temperature_label": "د حرارت درجه",
+    "humidity_label": "رطوبت",
+    "bind_climate": "اقلیم"
+  },
+  "pt": {
+    "climate_heading": "Clima",
+    "no_sensor": "Nenhum sensor selecionado",
+    "temperature_label": "Temperatura",
+    "humidity_label": "Umidade",
+    "bind_climate": "Clima"
+  },
+  "ro": {
+    "climate_heading": "Clima",
+    "no_sensor": "Niciun senzor selectat",
+    "temperature_label": "Temperatura",
+    "humidity_label": "Umiditate",
+    "bind_climate": "Clima"
+  },
+  "ru": {
+    "climate_heading": "Климат",
+    "no_sensor": "Датчик не выбран",
+    "temperature_label": "Температура",
+    "humidity_label": "Влажность",
+    "bind_climate": "Климат"
+  },
+  "sd": {
+    "climate_heading": "آبهوا",
+    "no_sensor": "ڪو به سينسر چونڊيو نه آهي",
+    "temperature_label": "گرمي پد",
+    "humidity_label": "نمي",
+    "bind_climate": "آبهوا"
+  },
+  "sr": {
+    "climate_heading": "Клима",
+    "no_sensor": "Није изабран ниједан сензор",
+    "temperature_label": "Температура",
+    "humidity_label": "Влажност",
+    "bind_climate": "Клима"
+  },
+  "si": {
+    "climate_heading": "දේශගුණය",
+    "no_sensor": "සංවේදකයක් තෝරා නැත",
+    "temperature_label": "උෂ්ණත්වය",
+    "humidity_label": "ආර්ද්රතාවය",
+    "bind_climate": "දේශගුණය"
+  },
+  "sk": {
+    "climate_heading": "Klíma",
+    "no_sensor": "Nie je vybratý žiadny snímač",
+    "temperature_label": "Teplota",
+    "humidity_label": "Vlhkosť",
+    "bind_climate": "Klíma"
+  },
+  "sl": {
+    "climate_heading": "Podnebje",
+    "no_sensor": "Izbran ni noben senzor",
+    "temperature_label": "Temperatura",
+    "humidity_label": "Vlažnost",
+    "bind_climate": "Podnebje"
+  },
+  "so": {
+    "climate_heading": "Cimilada",
+    "no_sensor": "Dareemo lama dooran",
+    "temperature_label": "Heerkulka",
+    "humidity_label": "Qoyaanka",
+    "bind_climate": "Cimilada"
+  },
+  "es": {
+    "climate_heading": "Clima",
+    "no_sensor": "Ningún sensor seleccionado",
+    "temperature_label": "Temperatura",
+    "humidity_label": "Humedad",
+    "bind_climate": "Clima"
+  },
+  "sw": {
+    "climate_heading": "Hali ya hewa",
+    "no_sensor": "Hakuna kihisi kilichochaguliwa",
+    "temperature_label": "Halijoto",
+    "humidity_label": "Unyevu",
+    "bind_climate": "Hali ya hewa"
+  },
+  "sv": {
+    "climate_heading": "Klimat",
+    "no_sensor": "Ingen sensor vald",
+    "temperature_label": "Temperatur",
+    "humidity_label": "Fuktighet",
+    "bind_climate": "Klimat"
+  },
+  "ta": {
+    "climate_heading": "காலநிலை",
+    "no_sensor": "சென்சார் தேர்ந்தெடுக்கப்படவில்லை",
+    "temperature_label": "வெப்பநிலை",
+    "humidity_label": "ஈரப்பதம்",
+    "bind_climate": "காலநிலை"
+  },
+  "te": {
+    "climate_heading": "వాతావరణం",
+    "no_sensor": "సెన్సార్ ఎంచుకోబడలేదు",
+    "temperature_label": "ఉష్ణోగ్రత",
+    "humidity_label": "తేమ",
+    "bind_climate": "వాతావరణం"
+  },
+  "tg": {
+    "climate_heading": "Иқлим",
+    "no_sensor": "Ягон сенсор интихоб нашудааст",
+    "temperature_label": "Ҳарорат",
+    "humidity_label": "Намӣ",
+    "bind_climate": "Иқлим"
+  },
+  "th": {
+    "climate_heading": "สภาพภูมิอากาศ",
+    "no_sensor": "ไม่ได้เลือกเซ็นเซอร์",
+    "temperature_label": "อุณหภูมิ",
+    "humidity_label": "ความชื้น",
+    "bind_climate": "สภาพภูมิอากาศ"
+  },
+  "tl": {
+    "climate_heading": "Klima",
+    "no_sensor": "Walang napiling sensor",
+    "temperature_label": "Temperatura",
+    "humidity_label": "Halumigmig",
+    "bind_climate": "Klima"
+  },
+  "tr": {
+    "climate_heading": "İklim",
+    "no_sensor": "Sensör seçilmedi",
+    "temperature_label": "Sıcaklık",
+    "humidity_label": "Nem",
+    "bind_climate": "İklim"
+  },
+  "ug": {
+    "climate_heading": "كىلىمات",
+    "no_sensor": "سېنزور تاللانمىدى",
+    "temperature_label": "تېمپېراتۇرا",
+    "humidity_label": "نەملىك",
+    "bind_climate": "كىلىمات"
+  },
+  "uk": {
+    "climate_heading": "Клімат",
+    "no_sensor": "Датчик не вибрано",
+    "temperature_label": "температура",
+    "humidity_label": "Вологість",
+    "bind_climate": "Клімат"
+  },
+  "ur": {
+    "climate_heading": "آب و ہوا",
+    "no_sensor": "کوئی سینسر منتخب نہیں کیا گیا۔",
+    "temperature_label": "درجہ حرارت",
+    "humidity_label": "نمی",
+    "bind_climate": "آب و ہوا"
+  },
+  "uz": {
+    "climate_heading": "Iqlim",
+    "no_sensor": "Hech qanday sensor tanlanmagan",
+    "temperature_label": "Harorat",
+    "humidity_label": "Namlik",
+    "bind_climate": "Iqlim"
+  },
+  "vi": {
+    "climate_heading": "Khí hậu",
+    "no_sensor": "Không có cảm biến nào được chọn",
+    "temperature_label": "Nhiệt độ",
+    "humidity_label": "Độ ẩm",
+    "bind_climate": "Khí hậu"
+  },
+  "cy": {
+    "climate_heading": "Hinsawdd",
+    "no_sensor": "Dim synhwyrydd wedi'i ddewis",
+    "temperature_label": "Tymheredd",
+    "humidity_label": "Lleithder",
+    "bind_climate": "Hinsawdd"
+  },
+  "yo": {
+    "climate_heading": "Afefe",
+    "no_sensor": "Ko si sensọ ti a yan",
+    "temperature_label": "Iwọn otutu",
+    "humidity_label": "Ọriniinitutu",
+    "bind_climate": "Afefe"
   }
 }

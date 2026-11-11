@@ -246,7 +246,11 @@ For a dashboard dedicated to a program created by an objective, save the program
 
 ### Configurable named module bindings
 
-For reusable multi-device widgets or dashboards, declare stable roles instead of hardcoding device IDs:
+For every device or sensor a dashboard or multi-device widget can read or control, add a selectable role in settings.boundModules and use this.getBoundModule(role). Keep the role available when no compatible device is currently assigned. To preselect a device, use a confirmed compatible ID as defaultModule so users can still change it. Hardcode an ID only for an intentionally fixed integration.
+
+Use real readings, names and states from the selected modules. Treat numbers, status indicators and device labels in reference images as visual examples. If a feature has no real data or integration, show it as unavailable or omit it. Disable its controls. Use clearly labeled simulated data only when the user asks for a demo or simulation.
+
+Example:
 
 ```javascript
 settings = {

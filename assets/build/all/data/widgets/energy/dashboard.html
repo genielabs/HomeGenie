@@ -1,0 +1,49 @@
+<section class="energy-dashboard" @set="void 0">
+  <header class="heading">
+    <h1 #title>Energy</h1>
+    <span #meter_name></span>
+  </header>
+  <div class="metrics">
+    <article>
+      <span class="metric-icon material-symbols-outlined" aria-hidden="true">bolt</span>
+      <div class="metric-reading">
+        <span #current_label>Instantaneous power</span>
+        <strong><span #current>—</span> <small>W</small></strong>
+      </div>
+    </article>
+    <article>
+      <span class="metric-icon material-symbols-outlined" aria-hidden="true">battery_charging_full</span>
+      <div class="metric-reading">
+        <span #today_label>Counter (today)</span>
+        <strong><span #today>—</span> <small>kWh</small></strong>
+      </div>
+    </article>
+    <article>
+      <span class="metric-icon material-symbols-outlined" aria-hidden="true">trending_up</span>
+      <div class="metric-reading">
+        <span #peak_label>Peak today</span>
+        <strong><span #peak>—</span> <small>W</small></strong>
+      </div>
+    </article>
+  </div>
+  <div class="detail">
+    <section class="history">
+      <header>
+        <h2 #history_label>History</h2>
+        <div class="ranges">
+          <button type="button" #hour_label (click)="selectRange('hour')" aria-pressed="true">Last 60 minutes</button>
+          <button type="button" #day_label (click)="selectRange('day')" aria-pressed="false">Since midnight</button>
+        </div>
+      </header>
+      <div class="plot" #plot>
+        <canvas #canvas role="img"></canvas>
+        <p #history_status role="status"></p>
+      </div>
+    </section>
+    <section class="devices">
+      <h2 #devices_label>Devices</h2>
+      <p #devices_status></p>
+      <ol #devices></ol>
+    </section>
+  </div>
+</section>

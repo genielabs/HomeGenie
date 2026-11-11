@@ -8,9 +8,9 @@ class NeonDistrict extends ControllerInstance {
         typeFilter: 'program', fieldFilter: 'Dashboard.Theme.Cyberpunk',
         defaultModule: 'HomeAutomation.HomeGenie.Automation:651'
       },
-      light1: {label: 'Light 1', labelKey: 'bind_light1', typeFilter: 'Light,Dimmer,Color', defaultModule: 'HomeAutomation.PhilipsHue:1', defaultField: 'Simulator.Meter.Watts'},
-      light2: {label: 'Light 2', labelKey: 'bind_light2', typeFilter: 'Light,Dimmer,Color', defaultModule: 'HomeAutomation.PhilipsHue:2', defaultField: 'Simulator.Meter.Watts'},
-      light3: {label: 'Light 3', labelKey: 'bind_light3', typeFilter: 'Light,Dimmer,Color', defaultModule: 'HomeAutomation.PhilipsHue:4', defaultField: 'Simulator.Meter.Watts'},
+      light1: {label: 'light_1', typeFilter: 'Light,Dimmer,Color', defaultModule: 'HomeAutomation.PhilipsHue:1', defaultField: 'Simulator.Meter.Watts'},
+      light2: {label: 'light_2', typeFilter: 'Light,Dimmer,Color', defaultModule: 'HomeAutomation.PhilipsHue:2', defaultField: 'Simulator.Meter.Watts'},
+      light3: {label: 'light_3', typeFilter: 'Light,Dimmer,Color', defaultModule: 'HomeAutomation.PhilipsHue:4', defaultField: 'Simulator.Meter.Watts'},
       climate: {label: 'Climate sensor', labelKey: 'bind_climate', fieldFilter: 'Sensor.Temperature,Sensor.Humidity', defaultModule: 'HomeAutomation.Demo:1'},
       energy: {
         label: 'Power meter', labelKey: 'bind_energy',

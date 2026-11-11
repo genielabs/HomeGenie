@@ -1,0 +1,64 @@
+.hud-frame,
+.hud-button {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid var(--hud-edge, #426e83);
+  background: var(--hud-surface, #102332);
+}
+
+.hud-frame {
+  --hud-cut: 14px;
+  --hud-step: clamp(38px, 23%, 84px);
+  --hud-shape: polygon(
+    0 var(--hud-cut), var(--hud-cut) 0, var(--hud-step) 0,
+    calc(var(--hud-step) + 6px) 6px, calc(100% - var(--hud-cut)) 6px,
+    100% calc(var(--hud-cut) + 6px), 100% calc(100% - var(--hud-cut)),
+    calc(100% - var(--hud-cut)) 100%, calc(100% - var(--hud-step)) 100%,
+    calc(100% - var(--hud-step) - 6px) calc(100% - 5px),
+    0 calc(100% - 5px)
+  );
+}
+
+.hud-button {
+  --hud-shape: polygon(7px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 7px);
+  color: var(--hud-accent, #79f4ed);
+}
+
+.hud-button:not(:disabled):hover { --hud-edge: #daffff; }
+.hud-button:focus-visible { outline: 2px solid #daffff; outline-offset: 2px; }
+
+@supports (clip-path: polygon(0 0, 100% 0, 100% 100%)) {
+  .hud-frame, .hud-button { border-color: transparent; background: transparent; }
+
+  .hud-frame::before, .hud-frame::after,
+  .hud-button::before, .hud-button::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    clip-path: var(--hud-shape);
+  }
+
+  .hud-frame::before, .hud-button::before {
+    inset: -1px;
+    z-index: -2;
+    background: var(--hud-edge, #426e83);
+  }
+
+  .hud-frame::before {
+    background: linear-gradient(128deg, var(--hud-accent) 0, var(--hud-edge) 22% 70%, var(--hud-accent) 100%);
+  }
+
+  .hud-frame::after, .hud-button::after {
+    inset: 0;
+    z-index: -1;
+    background: var(--hud-surface, #102332);
+  }
+
+  .hud-frame::after {
+    background:
+      linear-gradient(90deg, var(--hud-accent), transparent) 15px 4px / 21px 1px no-repeat,
+      repeating-linear-gradient(125deg, transparent 0 3px, var(--hud-accent) 3px 5px) calc(100% - 23px) 10px / 15px 3px no-repeat,
+      linear-gradient(90deg, transparent, var(--hud-accent)) calc(100% - 15px) calc(100% - 4px) / 24px 1px no-repeat,
+      var(--hud-surface);
+  }
+}

@@ -80,6 +80,15 @@ h1, h2, .lamp-status strong { font-family: Georgia, 'Times New Roman', serif; fo
   .masthead { display: grid; gap: 12px; }
   .readings { grid-template-columns: minmax(0, 1fr); }
 }
+/* Keep the phone layout usable when the WebView skips container queries. */
+@media (max-width: 680px) {
+  .spread { grid-template-columns: minmax(0, 1fr); }
+  .masthead { display: grid; gap: 12px; }
+  .readings { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 440px) {
+  .readings { grid-template-columns: minmax(0, 1fr); }
+}
 @media (prefers-reduced-motion: reduce) {
   .daylight { transition: none; }
   .breeze { animation: none; }

@@ -14,15 +14,15 @@ class RadioCasa extends ControllerInstance {
         fieldFilter: 'Sensor.Temperature,Sensor.Humidity', defaultModule: 'HomeAutomation.Demo:1'
       },
       preset1: {
-        label: 'Light 1', labelKey: 'bind_preset_1', typeFilter: 'Light,Dimmer,Color', fieldFilter: 'Status.Level',
+        label: 'light_1', typeFilter: 'Light,Dimmer,Color', fieldFilter: 'Status.Level',
         defaultModule: 'HomeAutomation.PhilipsHue:1', defaultField: 'Simulator.Meter.Watts'
       },
       preset2: {
-        label: 'Light 2', labelKey: 'bind_preset_2', typeFilter: 'Light,Dimmer,Color', fieldFilter: 'Status.Level',
+        label: 'light_2', typeFilter: 'Light,Dimmer,Color', fieldFilter: 'Status.Level',
         defaultModule: 'HomeAutomation.PhilipsHue:2', defaultField: 'Simulator.Meter.Watts'
       },
       preset3: {
-        label: 'Light 3', labelKey: 'bind_preset_3', typeFilter: 'Light,Dimmer,Color', fieldFilter: 'Status.Level',
+        label: 'light_3', typeFilter: 'Light,Dimmer,Color', fieldFilter: 'Status.Level',
         defaultModule: 'HomeAutomation.PhilipsHue:4', defaultField: 'Simulator.Meter.Watts'
       }
     }
