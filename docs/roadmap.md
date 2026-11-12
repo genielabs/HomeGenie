@@ -21,6 +21,8 @@ This is the active task list. Detailed stage-by-stage decisions, earlier API nam
 
 - [ ] Distribute widgets and their assets directly in packages. Track installed files and ownership so uninstall can remove the package's unused files while preserving shared assets and user changes.
 
+- [ ] Export widget folders as ZIP archives from the folder row in YoT. Include nested widgets and shared assets, preserving their paths relative to the widget root. Reuse widget import for folder archives and legacy single-widget ZIPs, and surface conflicts before overwriting existing files.
+
 - [ ] **Priority for HomeGenie Panel.** Fix intermittent scroll interruptions in custom dashboards. A swipe can stop mid-gesture and scrolling resumes on the next swipe. Verify that a continuous swipe scrolls smoothly as the collapsible header and WebView hand off scrolling in both directions.
 - [ ] Support opening and editing HomeGenie program options from custom dashboards in HomeGenie Panel. Verify that the weather settings button in Cyberpunk (Neon District) opens the weather program options and saves changes.
 

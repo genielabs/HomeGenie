@@ -62,3 +62,18 @@
       var(--hud-surface);
   }
 }
+
+/* Preview used by the HUD widget in the editor. */
+.hud-preview {
+  --hud-accent: #79f4ed;
+  --hud-edge: #426e83;
+  --hud-surface: #102332;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px;
+  color: #e6fbff;
+}
+
+.hud-preview .hud-button { min-width: 44px; min-height: 44px; }
