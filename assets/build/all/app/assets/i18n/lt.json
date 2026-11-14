@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Siųsti žinutę",
   "ai_genie_clear_chat_history": "Išvalyti pokalbių istoriją",
   "ai_genie_clear_chat_history_confirm": "Išvalyti pokalbių istoriją?",
+  "ai_genie_replace_chat_confirm": "Pakeisti dabartinį pokalbį?",
   "ai_genie_ask_ai": "Klauskite dirbtinio intelekto džino",
   "widgets_documentation_page_link": "„HomeGenie“ valdiklių dokumentacija",
   "custom_widget_popup_description": "Konfigūruokite valdiklio šaltinį, duomenų susiejimą ir rodymo dydį ataskaitų srityje.",

@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Alefaso hafatra",
   "ai_genie_clear_chat_history": "Fafao ny tantaran'ny chat",
   "ai_genie_clear_chat_history_confirm": "Fafao ny tantaran'ny chat?",
+  "ai_genie_replace_chat_confirm": "Hosoloina ve ny resaka ankehitriny?",
   "ai_genie_ask_ai": "Anontanio AI Genie",
   "widgets_documentation_page_link": "HomeGenie Widgets antontan-taratasy",
   "custom_widget_popup_description": "Ampifanaraho ny loharanon'ny widget, ny famatorana angona ary ny haben'ny fampisehoana ho an'ny dashboard.",

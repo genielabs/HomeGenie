@@ -174,7 +174,7 @@ This continues the original provider conversation and saves only the assistant r
 
 - `utils.speech.say(sentence)` speaks a **plain text string** using the same configured speech engine (browser/local), language and voice settings as AI chat, even when the chat is closed. Do not send widget source, HTML, JSON or the whole AI response to this API.
 - It returns a Promise resolving to `"completed"`, `"cancelled"` (replaced/stopped), or `"empty"`. Handle rejection (engine unavailable/not ready, synthesis failure or browser autoplay restrictions) in the widget UI. The local engine must be enabled and its model ready; there is no silent fallback to another engine.
-- `utils.speech.stop()` cancels the current shared speech channel. A new `say` call replaces prior chat/widget speech; avoid loops and overlapping automatic narration. Prefer an explicit user action such as a Speak button: browsers may require it for playback. The chat automatic-reply speech toggle does not disable an explicit widget call.
+- Speech continues when the user changes page or the widget closes. The user can stop any speech started via this API from the AI chat, including after leaving the widget. Call `utils.speech.stop()` only for an explicit user action (such as pressing Stop). Never call it from `onDispose`, disconnect or hide handlers: it cancels the shared channel, including a chat reply. If a `say` Promise settles after disposal, skip updates to the widget UI. A new `say` call replaces prior chat/widget speech; avoid loops and overlapping automatic narration. Prefer an explicit user action such as a Speak button: browsers may require it for playback. The chat automatic-reply speech toggle does not disable an explicit widget call.
 - Pass only the sentence to narrate. There is no caption/text-overlay API yet. Do not invent voice/engine options or import external TTS libraries.
 
 ```javascript
@@ -247,6 +247,8 @@ For a dashboard dedicated to a program created by an objective, save the program
 ### Configurable named module bindings
 
 For every device or sensor a dashboard or multi-device widget can read or control, add a selectable role in settings.boundModules and use this.getBoundModule(role). Keep the role available when no compatible device is currently assigned. To preselect a device, use a confirmed compatible ID as defaultModule so users can still change it. Hardcode an ID only for an intentionally fixed integration.
+
+When a widget uses a specific companion automation program, give it a named role in `settings.boundModules`. Set the role's `defaultModule` to the confirmed `HomeAutomation.HomeGenie.Automation:<PID>` from the program save or lookup, use `typeFilter: 'program'` and a field exposed by that program, then read it with `this.getBoundModule(role)`. The user can change the selection. Use the same role even if the program is the widget's only binding.
 
 Use real readings, names and states from the selected modules. Treat numbers, status indicators and device labels in reference images as visual examples. If a feature has no real data or integration, show it as unavailable or omit it. Disable its controls. Use clearly labeled simulated data only when the user asks for a demo or simulation.
 

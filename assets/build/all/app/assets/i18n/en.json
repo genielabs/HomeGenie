@@ -364,6 +364,7 @@
   "ai_genie_send_message": "Send message",
   "ai_genie_clear_chat_history": "Clear chat history",
   "ai_genie_clear_chat_history_confirm": "Clear chat history?",
+  "ai_genie_replace_chat_confirm": "Replace the current chat?",
   "ai_genie_ask_ai": "Ask AI Genie",
   "widgets_documentation_page_link": "HomeGenie Widgets documentation",
   "custom_widget_popup_description": "Configure the widget's source, data binding, and display size for the dashboard.",

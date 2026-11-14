@@ -361,6 +361,7 @@
   "ai_genie_send_message": "메시지 보내기",
   "ai_genie_clear_chat_history": "채팅 기록 지우기",
   "ai_genie_clear_chat_history_confirm": "채팅 기록을 지우시겠습니까?",
+  "ai_genie_replace_chat_confirm": "현재 채팅을 바꾸시겠습니까?",
   "ai_genie_ask_ai": "AI Genie에게 물어보세요",
   "widgets_documentation_page_link": "HomeGenie 위젯 설명서",
   "custom_widget_popup_description": "대시보드의 위젯 소스, 데이터 바인딩, 표시 크기를 구성합니다.",

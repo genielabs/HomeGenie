@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Tuma ujumbe",
   "ai_genie_clear_chat_history": "Futa historia ya gumzo",
   "ai_genie_clear_chat_history_confirm": "Ungependa kufuta historia ya gumzo?",
+  "ai_genie_replace_chat_confirm": "Badilisha mazungumzo ya sasa?",
   "ai_genie_ask_ai": "Uliza AI Jini",
   "widgets_documentation_page_link": "Nyaraka za HomeGenie Widgets",
   "custom_widget_popup_description": "Sanidi chanzo cha wijeti, ufungaji data na saizi ya onyesho la dashibodi.",

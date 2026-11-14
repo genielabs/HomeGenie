@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Fariin dir",
   "ai_genie_clear_chat_history": "Nadiifi taariikhda sheekada",
   "ai_genie_clear_chat_history_confirm": "Ma tirtiri taariikhda sheekada?",
+  "ai_genie_replace_chat_confirm": "Ma beddelaysaa wada sheekaysiga hadda?",
   "ai_genie_ask_ai": "Waydii AI Genie",
   "widgets_documentation_page_link": "Dukumeentiga HomeGenie Widgets",
   "custom_widget_popup_description": "Habee isha widget-ka, xidhitaanka xogta, iyo cabbirka bandhigga dashboardka.",

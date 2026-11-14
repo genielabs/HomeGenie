@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Pošalji poruku",
   "ai_genie_clear_chat_history": "Obriši historiju razgovora",
   "ai_genie_clear_chat_history_confirm": "Obrisati historiju razgovora?",
+  "ai_genie_replace_chat_confirm": "Zamijeniti trenutni razgovor?",
   "ai_genie_ask_ai": "Pitajte AI Geniea",
   "widgets_documentation_page_link": "Dokumentacija za HomeGenie Widgete",
   "custom_widget_popup_description": "Konfigurišite izvor widgeta, povezivanje podataka i veličinu prikaza za kontrolnu ploču.",

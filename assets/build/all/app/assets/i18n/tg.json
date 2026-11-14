@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Паём фиристед",
   "ai_genie_clear_chat_history": "Таърихи сӯҳбатро тоза кунед",
   "ai_genie_clear_chat_history_confirm": "Таърихи сӯҳбат тоза карда шавад?",
+  "ai_genie_replace_chat_confirm": "Суҳбати ҷориро иваз мекунед?",
   "ai_genie_ask_ai": "Аз AI Genie пурсед",
   "widgets_documentation_page_link": "Ҳуҷҷатҳои Widgets HomeGenie",
   "custom_widget_popup_description": "Манбаи виджет, ҳатмии маълумот ва андозаи намоишро барои панели идоракунӣ танзим кунед.",

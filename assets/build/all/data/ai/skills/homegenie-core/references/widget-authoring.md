@@ -31,12 +31,14 @@ onCreate() {
 - Use `<span class="material-symbols-outlined" aria-hidden="true">lightbulb</span>` for an outlined icon or `class="material-symbols"` for filled. Use standard icon names without a `_fill` suffix. Give icon-only controls an accessible name. Shared CSS hides spans inside disabled buttons, so override that rule locally if a disabled button must retain its icon.
 - Valid layout examples include `row center-left`, `row center-justify`, `row center-right`, `column top-stretch` and `column center-center`. Set sizing separately with `self="stretch size-x1"`.
 - Define `settings` with `defaultSize` (`small`, `medium`, `big` or `''` for CSS-driven sizing). Include the default in `sizeOptions` when resizing is enabled. Use `sizeOptions: []` to disable resizing. Size charts and canvases to the actual view.
-- Use `:host { display: block; }` and explicit root layout. Let the host supply the card background and configuration menu. Reserve header space on ordinary widgets with `padding-right: var(--widget-menu-space, 0px)`. Dashboard containers need no fixed menu space.
+- Use `:host { display: block; }` and explicit root layout. Let the host supply the card background and configuration menu. On ordinary widgets, apply `padding-right: var(--widget-menu-space, 0px)` only to the top header row (40px high). Keep the body as a sibling that uses the full content width. Never put menu spacing on `:host`, the root wrapper, or the body. Dashboard containers need no menu space.
 - Load CSS, fonts, icons and bundled libraries locally. Chart.js, Anime.js and Three.js are available locally. Load other external JavaScript libraries only when explicitly requested.
 
 ### 2.3 Bind real devices only when needed
 
 When a widget reads or controls a device, make the device selectable with `settings.moduleSelect` and use `this.boundModule`. Use real values and show missing data as unavailable. Simulate only when requested. Widgets with no device can omit the selector. An embedded widget leaves configuration to its host. An ordinary widget can open its settings with `this.configure()`.
+
+When a widget uses a specific companion automation program, give it a named role in `settings.boundModules`. Set the role's `defaultModule` to the confirmed `HomeAutomation.HomeGenie.Automation:<PID>` from the program save or lookup, use `typeFilter: 'program'` and a field exposed by that program, then read it with `this.getBoundModule(role)`. The user can change the selection. Use the same role even if the program is the widget's only binding.
 
 Example from the shipped temperature display, inside `onCreate()`:
 

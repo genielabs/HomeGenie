@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Senda skilaboð",
   "ai_genie_clear_chat_history": "Hreinsa spjallferil",
   "ai_genie_clear_chat_history_confirm": "Hreinsa spjallferil?",
+  "ai_genie_replace_chat_confirm": "Skipta út núverandi spjalli?",
   "ai_genie_ask_ai": "Spyrðu gervigreindaranda",
   "widgets_documentation_page_link": "Skjölun um HomeGenie Widgets",
   "custom_widget_popup_description": "Stilltu uppruna, gagnabindingu og birtingarstærð búnaðarins fyrir mælaborðið.",

@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Anfon neges",
   "ai_genie_clear_chat_history": "Clirio hanes sgwrsio",
   "ai_genie_clear_chat_history_confirm": "Clirio hanes sgwrsio?",
+  "ai_genie_replace_chat_confirm": "Disodli'r sgwrs gyfredol?",
   "ai_genie_ask_ai": "Gofynnwch i'r Genie AI",
   "widgets_documentation_page_link": "Dogfennaeth Widgets HomeGenie",
   "custom_widget_popup_description": "Ffurfweddwch ffynhonnell y teclyn, rhwymiad data, a maint arddangos ar gyfer y dangosfwrdd.",

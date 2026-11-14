@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Seol teachtaireacht",
   "ai_genie_clear_chat_history": "Glan stair an chomhrá",
   "ai_genie_clear_chat_history_confirm": "Scrios stair an chomhrá?",
+  "ai_genie_replace_chat_confirm": "An bhfuil fonn ort an comhrá reatha a athsholáthar?",
   "ai_genie_ask_ai": "Iarr ar Ghéine AI",
   "widgets_documentation_page_link": "Doiciméadú Giuirléidí HomeGenie",
   "custom_widget_popup_description": "Cumraigh foinse, ceangal sonraí, agus méid taispeána an ghiuirléid don phainéal rialaithe.",

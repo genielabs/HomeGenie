@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Билдирүү жөнөтүү",
   "ai_genie_clear_chat_history": "Чат таржымалын тазалоо",
   "ai_genie_clear_chat_history_confirm": "Маектин таржымалы тазалансынбы?",
+  "ai_genie_replace_chat_confirm": "Учурдагы чатты алмаштырасызбы?",
   "ai_genie_ask_ai": "AI Genieден сура",
   "widgets_documentation_page_link": "HomeGenie Widgets документтери",
   "custom_widget_popup_description": "Виджеттин булагын конфигурациялаңыз, маалыматтарды байланыштырыңыз жана башкаруу тактасы үчүн дисплей өлчөмүн түзүңүз.",

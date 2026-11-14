@@ -361,6 +361,7 @@
   "ai_genie_send_message": "Skicka meddelande",
   "ai_genie_clear_chat_history": "Rensa chatthistoriken",
   "ai_genie_clear_chat_history_confirm": "Rensa chatthistoriken?",
+  "ai_genie_replace_chat_confirm": "Ersätta den aktuella chatten?",
   "ai_genie_ask_ai": "Fråga AI-genien",
   "widgets_documentation_page_link": "Dokumentation för HomeGenie Widgets",
   "custom_widget_popup_description": "Konfigurera widgetens källa, databindning och visningsstorlek för instrumentpanelen.",

@@ -361,6 +361,7 @@
   "ai_genie_send_message": "Mesaj gönder",
   "ai_genie_clear_chat_history": "Sohbet geçmişini temizle",
   "ai_genie_clear_chat_history_confirm": "Sohbet geçmişini temizle?",
+  "ai_genie_replace_chat_confirm": "Mevcut sohbet değiştirilsin mi?",
   "ai_genie_ask_ai": "AI Genie'ye Sor",
   "widgets_documentation_page_link": "HomeGenie Widgets belgeleri",
   "custom_widget_popup_description": "Gösterge tablosu için widget'ın kaynağını, veri bağlamasını ve görüntüleme boyutunu yapılandırın.",

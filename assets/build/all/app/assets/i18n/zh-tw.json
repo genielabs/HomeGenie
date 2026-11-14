@@ -361,6 +361,7 @@
   "ai_genie_send_message": "發送訊息",
   "ai_genie_clear_chat_history": "清除聊天記錄",
   "ai_genie_clear_chat_history_confirm": "清除聊天記錄？",
+  "ai_genie_replace_chat_confirm": "要取代目前的聊天嗎？",
   "ai_genie_ask_ai": "詢問AI Genie",
   "widgets_documentation_page_link": "HomeGenie 小工具文檔",
   "custom_widget_popup_description": "配置儀表板的小部件的來源、資料綁定和顯示大小。",

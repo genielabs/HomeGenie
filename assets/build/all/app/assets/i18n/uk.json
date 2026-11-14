@@ -361,6 +361,7 @@
   "ai_genie_send_message": "Надіслати повідомлення",
   "ai_genie_clear_chat_history": "Очистити історію чату",
   "ai_genie_clear_chat_history_confirm": "Очистити історію чату?",
+  "ai_genie_replace_chat_confirm": "Замінити поточний чат?",
   "ai_genie_ask_ai": "Запитайте ШІ Джина",
   "widgets_documentation_page_link": "Документація віджетів HomeGenie",
   "custom_widget_popup_description": "Налаштуйте джерело віджета, прив’язку даних та розмір відображення для інформаційної панелі.",

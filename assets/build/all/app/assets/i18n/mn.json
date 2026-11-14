@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Зурвас илгээх",
   "ai_genie_clear_chat_history": "Чатын түүхийг арилгах",
   "ai_genie_clear_chat_history_confirm": "Чатын түүхийг арилгах уу?",
+  "ai_genie_replace_chat_confirm": "Одоогийн чатыг солих уу?",
   "ai_genie_ask_ai": "AI Genie-ээс асуу",
   "widgets_documentation_page_link": "HomeGenie Widgets баримт бичиг",
   "custom_widget_popup_description": "Хяналтын самбарт зориулсан виджетийн эх сурвалж, өгөгдлийн холболт, дэлгэцийн хэмжээг тохируулна уу.",

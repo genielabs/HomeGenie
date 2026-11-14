@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Ուղարկել հաղորդագրություն",
   "ai_genie_clear_chat_history": "Մաքրել զրույցի պատմությունը",
   "ai_genie_clear_chat_history_confirm": "Մաքրե՞լ զրույցի պատմությունը։",
+  "ai_genie_replace_chat_confirm": "Փոխարինե՞լ ընթացիկ զրույցը։",
   "ai_genie_ask_ai": "Հարցրեք Արհեստական ինտելեկտի ջինին",
   "widgets_documentation_page_link": "HomeGenie Widgets-ի փաստաթղթեր",
   "custom_widget_popup_description": "Կարգավորեք վիջեթի աղբյուրը, տվյալների կապը և վահանակի ցուցադրման չափը։",

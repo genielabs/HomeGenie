@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Hantar mesej",
   "ai_genie_clear_chat_history": "Kosongkan sejarah sembang",
   "ai_genie_clear_chat_history_confirm": "Kosongkan sejarah sembang?",
+  "ai_genie_replace_chat_confirm": "Gantikan perbualan semasa?",
   "ai_genie_ask_ai": "Tanya AI Genie",
   "widgets_documentation_page_link": "Dokumentasi Widget HomeGenie",
   "custom_widget_popup_description": "Konfigurasikan sumber widget, pengikatan data dan saiz paparan untuk papan pemuka.",

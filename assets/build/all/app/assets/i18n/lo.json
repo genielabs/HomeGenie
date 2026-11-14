@@ -359,6 +359,7 @@
   "ai_genie_send_message": "ສົ່ງຂໍ້ຄວາມ",
   "ai_genie_clear_chat_history": "ລຶບປະຫວັດການສົນທະນາ",
   "ai_genie_clear_chat_history_confirm": "ລຶບປະຫວັດການສົນທະນາບໍ?",
+  "ai_genie_replace_chat_confirm": "ແທນທີ່ການສົນທະນາປັດຈຸບັນບໍ?",
   "ai_genie_ask_ai": "ຖາມ AI Genie",
   "widgets_documentation_page_link": "ເອກະສານ HomeGenie Widgets",
   "custom_widget_popup_description": "ຕັ້ງຄ່າແຫຼ່ງຂອງ widget, ການຜູກມັດຂໍ້ມູນ, ແລະຂະຫນາດການສະແດງສໍາລັບ dashboard.",

@@ -361,6 +361,7 @@
   "ai_genie_send_message": "ส่งข้อความ",
   "ai_genie_clear_chat_history": "ล้างประวัติการแชท",
   "ai_genie_clear_chat_history_confirm": "ล้างประวัติการแชท?",
+  "ai_genie_replace_chat_confirm": "แทนที่แชทปัจจุบันหรือไม่",
   "ai_genie_ask_ai": "ถาม AI Genie",
   "widgets_documentation_page_link": "เอกสารประกอบ HomeGenie Widgets",
   "custom_widget_popup_description": "กำหนดค่าแหล่งที่มาของวิดเจ็ต การผูกข้อมูล และขนาดการแสดงผลสำหรับแดชบอร์ด",

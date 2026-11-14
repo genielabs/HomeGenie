@@ -361,6 +361,7 @@
   "ai_genie_send_message": "Kirim pesan",
   "ai_genie_clear_chat_history": "Hapus riwayat obrolan",
   "ai_genie_clear_chat_history_confirm": "Hapus riwayat obrolan?",
+  "ai_genie_replace_chat_confirm": "Ganti percakapan saat ini?",
   "ai_genie_ask_ai": "Tanya AI Genie",
   "widgets_documentation_page_link": "Dokumentasi Widget HomeGenie",
   "custom_widget_popup_description": "Konfigurasikan sumber widget, pengikatan data, dan ukuran tampilan untuk dasbor.",

@@ -359,6 +359,7 @@
   "ai_genie_send_message": "సందేశం పంపండి",
   "ai_genie_clear_chat_history": "చాట్ చరిత్రను క్లియర్ చేయండి",
   "ai_genie_clear_chat_history_confirm": "చాట్ హిస్టరీని క్లియర్ చేయాలా?",
+  "ai_genie_replace_chat_confirm": "ప్రస్తుత చాట్‌ను భర్తీ చేయాలా?",
   "ai_genie_ask_ai": "ఆస్క్ AI జెనీ",
   "widgets_documentation_page_link": "హోమ్‌జెనీ విడ్జెట్‌ల డాక్యుమెంటేషన్",
   "custom_widget_popup_description": "డాష్‌బోర్డ్ కోసం విడ్జెట్ యొక్క మూలం, డేటా బైండింగ్ మరియు ప్రదర్శన పరిమాణాన్ని కాన్ఫిగర్ చేయండి.",

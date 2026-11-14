@@ -359,6 +359,7 @@
   "ai_genie_send_message": "መልእክት ላክ",
   "ai_genie_clear_chat_history": "የውይይት ታሪክ አጽዳ",
   "ai_genie_clear_chat_history_confirm": "የውይይት ታሪክ ይጽዳ?",
+  "ai_genie_replace_chat_confirm": "የአሁኑን ውይይት ልተካ?",
   "ai_genie_ask_ai": "AI Genie ን ይጠይቁ",
   "widgets_documentation_page_link": "የHomeGenie መግብሮች ሰነድ",
   "custom_widget_popup_description": "ለዳሽቦርዱ የመግብሩን ምንጭ፣ የውሂብ ትስስር እና የማሳያ መጠን ያዋቅሩ።",

@@ -359,6 +359,7 @@
   "ai_genie_send_message": "સંદેશ મોકલો",
   "ai_genie_clear_chat_history": "ચેટ ઇતિહાસ સાફ કરો",
   "ai_genie_clear_chat_history_confirm": "ચેટ ઇતિહાસ સાફ કરીએ?",
+  "ai_genie_replace_chat_confirm": "વર્તમાન ચેટ બદલવી છે?",
   "ai_genie_ask_ai": "એઆઈ જીનીને પૂછો",
   "widgets_documentation_page_link": "હોમજીની વિજેટ્સ દસ્તાવેજીકરણ",
   "custom_widget_popup_description": "ડેશબોર્ડ માટે વિજેટના સ્ત્રોત, ડેટા બંધન અને પ્રદર્શન કદને ગોઠવો.",

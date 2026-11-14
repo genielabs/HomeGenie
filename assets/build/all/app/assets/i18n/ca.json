@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Enviar missatge",
   "ai_genie_clear_chat_history": "Esborra l'historial de xat",
   "ai_genie_clear_chat_history_confirm": "Voleu esborrar l'historial de xat?",
+  "ai_genie_replace_chat_confirm": "Vols substituir el xat actual?",
   "ai_genie_ask_ai": "Pregunta al geni de la IA",
   "widgets_documentation_page_link": "Documentació dels widgets de HomeGenie",
   "custom_widget_popup_description": "Configura l'origen del widget, l'enllaç de dades i la mida de visualització per al tauler de control.",

@@ -364,6 +364,7 @@
   "ai_genie_send_message": "Invia messaggio",
   "ai_genie_clear_chat_history": "Elimina cronologia conversazione",
   "ai_genie_clear_chat_history_confirm": "Cancellare la cronologia della chat?",
+  "ai_genie_replace_chat_confirm": "Sostituire la chat corrente?",
   "ai_genie_ask_ai": "Chiedi al Genio IA",
   "widgets_documentation_page_link": "Documentazione Widgets HomeGenie",
   "custom_widget_popup_description": "Configura l'origine del widget, il collegamento ai dati e la dimensione di visualizzazione per la dashboard.",

@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Ibgħat messaġġ",
   "ai_genie_clear_chat_history": "Ħassar l-istorja taċ-chat",
   "ai_genie_clear_chat_history_confirm": "Tħassar l-istorja taċ-chat?",
+  "ai_genie_replace_chat_confirm": "Trid tissostitwixxi ċ-chat attwali?",
   "ai_genie_ask_ai": "Staqsi lill-AI Genie",
   "widgets_documentation_page_link": "Dokumentazzjoni tal-Widgets ta' HomeGenie",
   "custom_widget_popup_description": "Ikkonfigura s-sors tal-widget, ir-rabta tad-dejta, u d-daqs tal-wiri għad-dashboard.",

@@ -361,6 +361,7 @@
   "ai_genie_send_message": "שלח הודעה",
   "ai_genie_clear_chat_history": "נקה את היסטוריית הצ'אט",
   "ai_genie_clear_chat_history_confirm": "לנקות את היסטוריית הצ'אט?",
+  "ai_genie_replace_chat_confirm": "להחליף את השיחה הנוכחית?",
   "ai_genie_ask_ai": "שאל את ג'יני הבינה המלאכותית",
   "widgets_documentation_page_link": "תיעוד של ווידג'טים של HomeGenie",
   "custom_widget_popup_description": "הגדר את מקור הווידג'ט, קישור הנתונים וגודל התצוגה עבור לוח המחוונים.",

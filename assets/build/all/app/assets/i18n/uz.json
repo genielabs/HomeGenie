@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Xabar yuborish",
   "ai_genie_clear_chat_history": "Chat tarixini tozalash",
   "ai_genie_clear_chat_history_confirm": "Chat tarixi tozalansinmi?",
+  "ai_genie_replace_chat_confirm": "Joriy suhbat almashtirilsinmi?",
   "ai_genie_ask_ai": "AI Geniedan so'rang",
   "widgets_documentation_page_link": "HomeGenie vidjetlari hujjatlari",
   "custom_widget_popup_description": "Vidjet manbasini, ma'lumotlarni ulashni va asboblar paneli uchun ekran o'lchamini sozlang.",

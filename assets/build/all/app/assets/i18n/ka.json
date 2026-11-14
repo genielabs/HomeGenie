@@ -359,6 +359,7 @@
   "ai_genie_send_message": "შეტყობინების გაგზავნა",
   "ai_genie_clear_chat_history": "ჩატის ისტორიის გასუფთავება",
   "ai_genie_clear_chat_history_confirm": "ჩატის ისტორიის გასუფთავება?",
+  "ai_genie_replace_chat_confirm": "ჩავანაცვლოთ მიმდინარე ჩატი?",
   "ai_genie_ask_ai": "ჰკითხეთ ხელოვნური ინტელექტის ჯინს",
   "widgets_documentation_page_link": "HomeGenie Widgets-ის დოკუმენტაცია",
   "custom_widget_popup_description": "დაფის ვიჯეტის წყაროს, მონაცემთა შეკავშირებისა და ჩვენების ზომის კონფიგურაცია.",

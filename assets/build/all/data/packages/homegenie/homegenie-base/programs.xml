@@ -4435,6 +4435,7 @@ string baseOutputPath = Path.Combine(Data.GetFolder(), "..", "..", "media", "liv
 
 // Set default feature values
 Modules.InDomain(MediaVideoDomain).Each((m) =&gt; {
+    m.SetParameter("VideoOutput.SnapshotURL", $"/api/{m.Instance.Domain}/{m.Instance.Address}/Camera.GetPicture");
     if (!m.HasFeature(VideoOutputWidth))
     {
         m.SetParameter(VideoOutputWidth, "640");
@@ -5054,9 +5055,9 @@ public static class FfmpegHelper
       <PackageId>homegenie-base</PackageId>
       <PackageVersion>1.0.112</PackageVersion>
       <Id>video-input</Id>
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>EE013ACBF939D795E826A018BB5698D7</Checksum>
+      <Checksum>B00CFD55161C074F6EBEEAD64782B39C</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>200</Address>
@@ -9947,8 +9948,12 @@ public static class AiGenieGoalSource
 
     public static JObject Run(string source, string script, string title, string objective, string previousRequest, CancellationToken cancellationToken,
         string allowedHttpUrls, string allowedLocalFolders, bool fromModule,
-        int sourceLimit, string inlineExtensions)
+        int sourceLimit, string inlineExtensions, Func&lt;string, object, object&gt; call)
     {
+        var isApiPath = IsApiPath(source);
+        if (isApiPath &amp;&amp; !fromModule)
+            throw new InvalidOperationException("Read the exact API path from a shared module property before using it as a source.");
+
         // Match only paths explicitly supplied by the user, including in the preceding request.
         var quoted = System.Text.RegularExpressions.Regex.Escape(source);
         var pattern = @"(?:^|[\s""'`(&lt;])" + quoted + @"(?=$|[\s""'`)&gt;]|[.,;!?](?:\s|$))";
@@ -9966,7 +9971,35 @@ public static class AiGenieGoalSource
         string inputEncoding = "text";
         string display;
         string reference = null;
-        if (isUrl)
+        if (isApiPath)
+        {
+            display = source;
+            token.ThrowIfCancellationRequested();
+            var apiResult = call(source.Substring("/api/".Length), null);
+            token.ThrowIfCancellationRequested();
+            if (apiResult is byte[] bytes &amp;&amp; bytes.Length &gt; 0)
+            {
+                if (bytes.Length &gt; sourceLimit)
+                    throw new InvalidOperationException("The API response exceeds Maximum source file size.");
+                var mime = bytes.AsSpan().StartsWith("%PDF-"u8)
+                    ? "application/pdf"
+                    : SixLabors.ImageSharp.Image.DetectFormat(bytes)?.DefaultMimeType;
+                if (!InlineTypes(inlineExtensions).Contains(mime))
+                    throw new InvalidOperationException("This API response format is disabled or unsupported.");
+                using var stream = new MemoryStream(bytes, writable: false);
+                return ReadInline(stream, display, title, mime, sourceLimit, token);
+            }
+            input = apiResult switch {
+                string value =&gt; value,
+                JToken value =&gt; value.ToString(Formatting.None),
+                _ =&gt; null
+            };
+            if (string.IsNullOrEmpty(input))
+                throw new InvalidOperationException("The API returned no readable content.");
+            if (Encoding.UTF8.GetByteCount(input) &gt; sourceLimit)
+                throw new InvalidOperationException("The API response exceeds Maximum source file size.");
+        }
+        else if (isUrl)
         {
             bool allowedHttp = IsAllowedHttpUrl(uri, allowedHttpUrls);
             if (!allowedHttp &amp;&amp; (uri.Scheme != Uri.UriSchemeHttps || !uri.IsDefaultPort || uri.UserInfo.Length != 0))
@@ -10123,6 +10156,8 @@ public static class AiGenieGoalSource
             &amp;&amp; !(bytes[0] == 203 &amp;&amp; bytes[1] == 0 &amp;&amp; bytes[2] == 113);
     }
 
+    public static bool IsApiPath(string source) =&gt; source.StartsWith("/api/", StringComparison.Ordinal);
+
     public static bool IsInlinePath(string source)
     {
         if (Uri.TryCreate(source, UriKind.Absolute, out var uri) &amp;&amp; !uri.IsFile) return false;
@@ -10266,7 +10301,7 @@ On HOST ERROR, fix the JSON fields and resend the complete action. Wait for the 
 Do not emit api-call/genie-action fences or dispatch separate device commands. Use only the actions enabled below. Repeat a confirmed save only to correct it.
 ";
     const string SourceInstructions=@"
-- run_source_script: for a source-reading request give source as the exact URL or absolute local file path supplied by the user. For a retry or follow-up about the same source, reuse the exact source from the preceding user request. Ask for the path or URL only if you cannot identify the source. Public HTTPS and explicitly allowed HTTP URLs are supported. For a shared module, first request its URL property through read_context with resources.parameterIds, then use that exact HTTP URL. Local files must match the configured folders when a list is set. When asked to inspect an image or PDF, omit script. Try the exact URL even if it has no file extension. The host checks the HTTP response format and passes enabled JPEG, PNG, WebP, or PDF files directly to Gemini. For text or other non-image sources, give script (JavaScript function body). Read each requested source in a separate run_source_script action. When comparing sources, read all of them before answering.
+- run_source_script: for a source-reading request give source as the exact URL or absolute local file path supplied by the user. For a retry or follow-up about the same source, reuse the exact source from the preceding user request. Ask for the path or URL only if you cannot identify the source. Public HTTPS and explicitly allowed HTTP URLs are supported. For a shared module, read the relevant source property through read_context with resources.parameterIds and use its exact value. If it starts with /api/, pass the full path as source. The host removes /api/ before calling Api.Call. Use this for reads only. For other paths and URLs use the usual source rules. Local files must match the configured folders when a list is set. When asked to inspect an image or PDF, omit script. Try the exact URL even if it has no file extension. The host checks the response format and passes enabled JPEG, PNG, WebP, or PDF files directly to Gemini. For text or other non-image sources, give script (JavaScript function body). Read each requested source in a separate run_source_script action. When comparing sources, read all of them before answering.
 - The runner opens the source in read-only mode. Your script receives UTF-8 text, raw HTML, or word/document.xml as input with inputEncoding set to text. Other local files are passed as Base64 with inputEncoding set to base64. Read source code as text without executing it. If the format cannot be interpreted, explain that clearly. Extract the relevant text in JavaScript and return an object with content and label. Use a short, localized activity label such as Read document. Do not put extracted text in the label. Use plain JavaScript string methods and regular expressions; there is no DOM, fetch, CLR or filesystem. For DOCX the text usually occurs inside w:t tags and each w:p contains a paragraph. For HTML ignore script, style and markup. Return the passages the user needs in content. Use the actual host results to answer with complete.
 ";
     const string AutomationInstructions=@"
@@ -10633,7 +10668,7 @@ A dashboard container uses settings={defaultSize:'dashboard',sizeOptions:[]} as 
             messages.Add(AiGenieCoordinator.Message("user",objective));
             string localReceipt=null,localCorrection=null;
             bool sourceRead=false;
-            var moduleHttpUrls=new HashSet&lt;string&gt;(StringComparer.Ordinal);
+            var moduleSources=new HashSet&lt;string&gt;(StringComparer.Ordinal);
             string authoring = File.Exists(authoringPromptFile) ? File.ReadAllText(authoringPromptFile).Trim() : "";
             update("running",null,null);int errors=0;
             for(int step=0;step&lt;maxSteps;step++) {
@@ -10845,9 +10880,9 @@ A dashboard container uses settings={defaultSize:'dashboard',sizeOptions:[]} as 
                                 throw new InvalidOperationException("Source scripts are unavailable for this step.");
                             operation["details"]="";check();RequireCapability("automation",scope,call,provider);
                             var sourceResult=AiGenieGoalSource.Run((string)action["source"],(string)action["script"],(string)action["title"],objective,previousRequest,cancellation.Token,
-                                allowedHttpUrls,allowedLocalFolders,moduleHttpUrls.Contains((string)action["source"]),
+                                allowedHttpUrls,allowedLocalFolders,moduleSources.Contains((string)action["source"]),
                                 AiGenieGoalSource.SourceLimit(maximumSourceSize),
-                                route == ProviderRoutePrefix + "Gemini" || route.StartsWith(ProviderRoutePrefix + "Gemini-", StringComparison.Ordinal) ? inlineExtensions : "");
+                                route == ProviderRoutePrefix + "Gemini" || route.StartsWith(ProviderRoutePrefix + "Gemini-", StringComparison.Ordinal) ? inlineExtensions : "", call);
                             check();RequireCapability("automation",scope,call,provider);
                             sourceRead=true;
                             operation["details"]=AiGenieGoalSource.Describe(sourceResult);
@@ -10864,9 +10899,12 @@ A dashboard container uses settings={defaultSize:'dashboard',sizeOptions:[]} as 
                             scope["resources"]=action["resources"].DeepClone();var lookedUp=AiGenieContext.Prepare(scope,"",widgetsFolder,call);
                             if(lookedUp["moduleParameters"] is JArray parameters) {
                                 foreach(var parameter in parameters.OfType&lt;JObject&gt;()) {
-                                    if(parameter["present"]?.Value&lt;bool&gt;() == true &amp;&amp; parameter["value"]?.Type == JTokenType.String &amp;&amp;
-                                        Uri.TryCreate((string)parameter["value"],UriKind.Absolute,out var moduleUrl) &amp;&amp; moduleUrl.Scheme == Uri.UriSchemeHttp)
-                                        moduleHttpUrls.Add((string)parameter["value"]);
+                                    if(parameter["present"]?.Value&lt;bool&gt;() != true || parameter["value"]?.Type != JTokenType.String)
+                                        continue;
+                                    var value = (string)parameter["value"];
+                                    if(AiGenieGoalSource.IsApiPath(value) ||
+                                        (Uri.TryCreate(value, UriKind.Absolute, out var moduleUrl) &amp;&amp; moduleUrl.Scheme == Uri.UriSchemeHttp))
+                                        moduleSources.Add(value);
                                 }
                             }
                             string data=(string)lookedUp["systemPrompt"];int start=data.IndexOf("ACTUALLY SUPPLIED CONTEXT",StringComparison.Ordinal);
@@ -11202,7 +11240,8 @@ A dashboard container uses settings={defaultSize:'dashboard',sizeOptions:[]} as 
         if(kind=="run_source_script" &amp;&amp; (action["source"]?.Type!=JTokenType.String ||
             string.IsNullOrWhiteSpace((string)action["source"]) || ((string)action["source"]).Length&gt;2048 ||
             ((string)action["source"]).Any(char.IsControl) ||
-            (action["script"] == null ? !AiGenieGoalSource.IsInlinePath((string)action["source"]) &amp;&amp;
+            (action["script"] == null ? !AiGenieGoalSource.IsApiPath((string)action["source"]) &amp;&amp;
+                !AiGenieGoalSource.IsInlinePath((string)action["source"]) &amp;&amp;
                 !(Uri.TryCreate((string)action["source"], UriKind.Absolute, out var sourceUri) &amp;&amp; (sourceUri.Scheme == Uri.UriSchemeHttps || sourceUri.Scheme == Uri.UriSchemeHttp)) :
                 action["script"].Type!=JTokenType.String || string.IsNullOrWhiteSpace((string)action["script"]) ||
                 ((string)action["script"]).Length&gt;12000)))
@@ -11219,9 +11258,9 @@ A dashboard container uses settings={defaultSize:'dashboard',sizeOptions:[]} as 
     <PackageId>homegenie-base</PackageId>
     <PackageVersion>1.0.112</PackageVersion>
     <Id>ai-genie-service</Id>
-    <Version>0.27.42</Version>
+    <Version>0.27.43</Version>
     <Required>true</Required>
-    <Checksum>F5BE52F69CBEA0092DDF49D7B87BDA82</Checksum>
+    <Checksum>DAF3B86B933DC4DD66D0088F9A48D485</Checksum>
   </PackageInfo>
   <Domain>HomeAutomation.HomeGenie.Automation</Domain>
   <Address>583</Address>

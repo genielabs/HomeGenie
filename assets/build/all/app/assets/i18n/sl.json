@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Pošlji sporočilo",
   "ai_genie_clear_chat_history": "Počisti zgodovino klepeta",
   "ai_genie_clear_chat_history_confirm": "Želite izbrisati zgodovino klepeta?",
+  "ai_genie_replace_chat_confirm": "Zamenjati trenutni klepet?",
   "ai_genie_ask_ai": "Vprašajte duha iz umetne inteligence",
   "widgets_documentation_page_link": "Dokumentacija za pripomočke HomeGenie",
   "custom_widget_popup_description": "Konfigurirajte vir gradnika, vezavo podatkov in velikost prikaza za nadzorno ploščo.",

@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Message schécken",
   "ai_genie_clear_chat_history": "Chatverlaf läschen",
   "ai_genie_clear_chat_history_confirm": "Chat-Verlaf läschen?",
+  "ai_genie_replace_chat_confirm": "Den aktuelle Chat ersetzen?",
   "ai_genie_ask_ai": "Frot den AI Genie",
   "widgets_documentation_page_link": "Dokumentatioun vun den HomeGenie Widgets",
   "custom_widget_popup_description": "Konfiguréiert d'Quell vum Widget, d'Datenbindung an d'Uweisgréisst fir den Dashboard.",

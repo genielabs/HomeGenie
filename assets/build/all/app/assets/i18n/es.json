@@ -361,6 +361,7 @@
   "ai_genie_send_message": "Enviar mensaje",
   "ai_genie_clear_chat_history": "Borrar el historial de chat",
   "ai_genie_clear_chat_history_confirm": "¿Borrar el historial de chat?",
+  "ai_genie_replace_chat_confirm": "¿Reemplazar el chat actual?",
   "ai_genie_ask_ai": "Pregúntale a AI Genie",
   "widgets_documentation_page_link": "Documentación de los widgets de HomeGenie",
   "custom_widget_popup_description": "Configure la fuente del widget, el enlace de datos y el tamaño de visualización para el panel.",

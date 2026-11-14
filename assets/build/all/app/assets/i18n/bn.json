@@ -359,6 +359,7 @@
   "ai_genie_send_message": "বার্তা পাঠান",
   "ai_genie_clear_chat_history": "চ্যাট ইতিহাস সাফ করুন",
   "ai_genie_clear_chat_history_confirm": "চ্যাট ইতিহাস সাফ করবেন?",
+  "ai_genie_replace_chat_confirm": "বর্তমান চ্যাটটি প্রতিস্থাপন করবেন?",
   "ai_genie_ask_ai": "Ask AI Genie সম্পর্কে",
   "widgets_documentation_page_link": "হোমজিনি উইজেটস ডকুমেন্টেশন",
   "custom_widget_popup_description": "ড্যাশবোর্ডের জন্য উইজেটের উৎস, ডেটা বাইন্ডিং এবং প্রদর্শনের আকার কনফিগার করুন।",

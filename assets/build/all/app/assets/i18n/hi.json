@@ -361,6 +361,7 @@
   "ai_genie_send_message": "मेसेज भेजें",
   "ai_genie_clear_chat_history": "चैट इतिहास साफ़ करें",
   "ai_genie_clear_chat_history_confirm": "चैट इतिहास साफ़ करें?",
+  "ai_genie_replace_chat_confirm": "मौजूदा चैट बदलें?",
   "ai_genie_ask_ai": "एआई जिन्न से पूछें",
   "widgets_documentation_page_link": "HomeGenie विजेट दस्तावेज़ीकरण",
   "custom_widget_popup_description": "डैशबोर्ड के लिए विजेट के स्रोत, डेटा बाइंडिंग और प्रदर्शन आकार को कॉन्फ़िगर करें.",

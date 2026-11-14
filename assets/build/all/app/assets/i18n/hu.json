@@ -361,6 +361,7 @@
   "ai_genie_send_message": "Üzenet küldése",
   "ai_genie_clear_chat_history": "Csevegési előzmények törlése",
   "ai_genie_clear_chat_history_confirm": "Törli a csevegési előzményeket?",
+  "ai_genie_replace_chat_confirm": "Lecseréli a jelenlegi csevegést?",
   "ai_genie_ask_ai": "Kérdezd meg a mesterséges intelligenciát",
   "widgets_documentation_page_link": "HomeGenie Widgetek dokumentációja",
   "custom_widget_popup_description": "Konfigurálja a widget forrását, adatkötését és megjelenítési méretét az irányítópulton.",

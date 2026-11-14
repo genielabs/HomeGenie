@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Dërgo mesazh",
   "ai_genie_clear_chat_history": "Fshi historikun e bisedës",
   "ai_genie_clear_chat_history_confirm": "Të fshihet historiku i bisedës?",
+  "ai_genie_replace_chat_confirm": "Të zëvendësohet biseda aktuale?",
   "ai_genie_ask_ai": "Pyete AI Genie",
   "widgets_documentation_page_link": "Dokumentacioni i HomeGenie Widgets",
   "custom_widget_popup_description": "Konfiguro burimin e vegël-in, lidhjen e të dhënave dhe madhësinë e shfaqjes për panelin.",

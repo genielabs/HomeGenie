@@ -359,6 +359,7 @@
   "ai_genie_send_message": "မက်ဆေ့ခ်ျပို့ပါ။",
   "ai_genie_clear_chat_history": "ချတ်မှတ်တမ်းကို ရှင်းလင်းပါ။",
   "ai_genie_clear_chat_history_confirm": "ချတ်မှတ်တမ်းကို ရှင်းမလား။",
+  "ai_genie_replace_chat_confirm": "လက်ရှိ စကားဝိုင်းကို အစားထိုးမလား။",
   "ai_genie_ask_ai": "AI Genie ကိုမေးပါ။",
   "widgets_documentation_page_link": "HomeGenie Widgets စာတမ်းပြုစုခြင်း။",
   "custom_widget_popup_description": "ဒက်ရှ်ဘုတ်အတွက် ဝစ်ဂျက်၏ရင်းမြစ်၊ ဒေတာချိတ်ဆက်ခြင်းနှင့် မျက်နှာပြင်အရွယ်အစားကို သတ်မှတ်ပါ။",

@@ -359,6 +359,7 @@
   "ai_genie_send_message": "پیغام واستوئ",
   "ai_genie_clear_chat_history": "د چیٹ تاریخ پاک کړئ",
   "ai_genie_clear_chat_history_confirm": "د چیٹ تاریخ پاک کړئ؟",
+  "ai_genie_replace_chat_confirm": "اوسنۍ خبرې اترې بدلې کړئ؟",
   "ai_genie_ask_ai": "له AI جینی څخه پوښتنه وکړئ",
   "widgets_documentation_page_link": "د هوم جینی ویجټونو اسناد",
   "custom_widget_popup_description": "د ډشبورډ لپاره د ویجیټ سرچینه، د معلوماتو تړل، او د ښودلو اندازه تنظیم کړئ.",

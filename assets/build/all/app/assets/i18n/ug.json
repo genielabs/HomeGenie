@@ -359,6 +359,7 @@
   "ai_genie_send_message": "ئۇچۇر ئەۋەتىڭ",
   "ai_genie_clear_chat_history": "پاراڭلىشىش تارىخىنى تازىلاش",
   "ai_genie_clear_chat_history_confirm": "پاراڭلىشىش تارىخىنى ئېنىقمۇ؟",
+  "ai_genie_replace_chat_confirm": "نۆۋەتتىكى سۆھبەتنى ئالماشتۇرامسىز؟",
   "ai_genie_ask_ai": "سۈنئىي ئەقىل گېنىدىن سوراڭ",
   "widgets_documentation_page_link": "HomeGenie Widgets ھۆججىتى",
   "custom_widget_popup_description": "كىچىك قورالنىڭ مەنبە ، سانلىق مەلۇمات باغلاش ۋە كۆرسىتىش تاختىسىنىڭ چوڭ-كىچىكلىكىنى تەڭشەش.",

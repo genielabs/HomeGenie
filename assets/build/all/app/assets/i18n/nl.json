@@ -361,6 +361,7 @@
   "ai_genie_send_message": "Bericht verzenden",
   "ai_genie_clear_chat_history": "Chatgeschiedenis wissen",
   "ai_genie_clear_chat_history_confirm": "Chatgeschiedenis wissen?",
+  "ai_genie_replace_chat_confirm": "Huidige chat vervangen?",
   "ai_genie_ask_ai": "Vraag AI Genie",
   "widgets_documentation_page_link": "HomeGenie Widgets-documentatie",
   "custom_widget_popup_description": "Configureer de bron van de widget, de gegevensbinding en de weergavegrootte voor het dashboard.",

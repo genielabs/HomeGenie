@@ -359,6 +359,7 @@
   "ai_genie_send_message": "පණිවිඩය යවන්න",
   "ai_genie_clear_chat_history": "කතාබස් ඉතිහාසය හිස් කරන්න",
   "ai_genie_clear_chat_history_confirm": "කතාබස් ඉතිහාසය හිස් කරන්නද?",
+  "ai_genie_replace_chat_confirm": "වත්මන් කතාබහ ප්‍රතිස්ථාපනය කරන්නද?",
   "ai_genie_ask_ai": "AI ජෙනීගෙන් අහන්න",
   "widgets_documentation_page_link": "HomeGenie විජට් ලේඛන",
   "custom_widget_popup_description": "උපකරණ පුවරුව සඳහා විජට් එකේ මූලාශ්‍රය, දත්ත බන්ධනය සහ සංදර්ශක ප්‍රමාණය වින්‍යාස කරන්න.",

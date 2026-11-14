@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Хабарлама жіберу",
   "ai_genie_clear_chat_history": "Сөйлесу тарихын тазалау",
   "ai_genie_clear_chat_history_confirm": "Чат тарихын тазалау керек пе?",
+  "ai_genie_replace_chat_confirm": "Ағымдағы чатты ауыстыру керек пе?",
   "ai_genie_ask_ai": "AI Genie-ден сұраңыз",
   "widgets_documentation_page_link": "HomeGenie виджеттері құжаттамасы",
   "custom_widget_popup_description": "Виджет көзін, деректерді байланыстыруды және бақылау тақтасы үшін көрсету өлшемін теңшеңіз.",

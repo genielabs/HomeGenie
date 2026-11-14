@@ -361,6 +361,7 @@
   "ai_genie_send_message": "Nachricht senden",
   "ai_genie_clear_chat_history": "Chatverlauf löschen",
   "ai_genie_clear_chat_history_confirm": "Chatverlauf löschen?",
+  "ai_genie_replace_chat_confirm": "Aktuellen Chat ersetzen?",
   "ai_genie_ask_ai": "Fragen Sie AI Genie",
   "widgets_documentation_page_link": "HomeGenie Widgets-Dokumentation",
   "custom_widget_popup_description": "Konfigurieren Sie die Quelle, Datenbindung und Anzeigegröße des Widgets für das Dashboard.",

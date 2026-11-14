@@ -359,6 +359,7 @@
   "ai_genie_send_message": "संदेश पाठवा",
   "ai_genie_clear_chat_history": "चॅट इतिहास साफ करा",
   "ai_genie_clear_chat_history_confirm": "चॅट इतिहास साफ करायचा?",
+  "ai_genie_replace_chat_confirm": "सध्याची चॅट बदलायची का?",
   "ai_genie_ask_ai": "एआय जिनीला विचारा",
   "widgets_documentation_page_link": "होमजेनी विजेट्स दस्तऐवजीकरण",
   "custom_widget_popup_description": "डॅशबोर्डसाठी विजेटचा स्रोत, डेटा बाइंडिंग आणि डिस्प्ले आकार कॉन्फिगर करा.",

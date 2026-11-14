@@ -361,6 +361,7 @@
   "ai_genie_send_message": "Wyślij wiadomość",
   "ai_genie_clear_chat_history": "Wyczyść historię czatów",
   "ai_genie_clear_chat_history_confirm": "Wyczyścić historię czatów?",
+  "ai_genie_replace_chat_confirm": "Zastąpić bieżący czat?",
   "ai_genie_ask_ai": "Zapytaj AI Genie",
   "widgets_documentation_page_link": "Dokumentacja HomeGenie Widgets",
   "custom_widget_popup_description": "Skonfiguruj źródło widżetu, powiązanie danych i rozmiar wyświetlania dla pulpitu nawigacyjnego.",

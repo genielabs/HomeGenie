@@ -359,6 +359,7 @@
   "ai_genie_send_message": "发送消息",
   "ai_genie_clear_chat_history": "清除聊天记录",
   "ai_genie_clear_chat_history_confirm": "清除聊天记录？",
+  "ai_genie_replace_chat_confirm": "要替换当前聊天吗？",
   "ai_genie_ask_ai": "询问AI Genie",
   "widgets_documentation_page_link": "HomeGenie 小部件文档",
   "custom_widget_popup_description": "配置仪表板的小部件的来源、数据绑定和显示大小。",

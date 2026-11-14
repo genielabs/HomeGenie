@@ -361,6 +361,7 @@
   "ai_genie_send_message": "Gửi tin nhắn",
   "ai_genie_clear_chat_history": "Xóa lịch sử trò chuyện",
   "ai_genie_clear_chat_history_confirm": "Xóa lịch sử trò chuyện?",
+  "ai_genie_replace_chat_confirm": "Thay thế cuộc trò chuyện hiện tại?",
   "ai_genie_ask_ai": "Hỏi AI Genie",
   "widgets_documentation_page_link": "Tài liệu về Tiện ích HomeGenie",
   "custom_widget_popup_description": "Cấu hình nguồn, ràng buộc dữ liệu và kích thước hiển thị của tiện ích cho bảng điều khiển.",

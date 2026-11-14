@@ -361,6 +361,7 @@
   "ai_genie_send_message": "Enviar mensagem",
   "ai_genie_clear_chat_history": "Limpar histórico de bate-papo",
   "ai_genie_clear_chat_history_confirm": "Limpar histórico de bate-papo?",
+  "ai_genie_replace_chat_confirm": "Substituir a conversa atual?",
   "ai_genie_ask_ai": "Pergunte ao AI Genie",
   "widgets_documentation_page_link": "Documentação dos widgets HomeGenie",
   "custom_widget_popup_description": "Configure a origem do widget, a vinculação de dados e o tamanho de exibição para o painel.",

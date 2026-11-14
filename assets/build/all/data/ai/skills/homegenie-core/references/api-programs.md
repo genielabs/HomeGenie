@@ -50,7 +50,27 @@ ProgramHelper
 - field: Name of this input field
 - defaultValue: Default value for this input field
 - description: Description for this input field
-- type: The type of this option (eg. "text", "password", "cron.text", ...). Each type can have different initialization options that are specified as a list of items separated by a ":" colon.
+- type: Use one of the field types supported by the YoT program options dialog.
+
+| Type | Control |
+| --- | --- |
+| `text` | Text field |
+| `password` | Masked text field |
+| `checkbox` | On/off checkbox |
+| `slider:min:max:step` | Numeric slider |
+| `select:Label=Value,Label=Value` | Dropdown |
+| `editor:file:<path>:<language>` | File editor |
+| `location.text` | Location autocomplete |
+| `module.text` | Module selector |
+| `program.text` | Program/scenario selector |
+| `capture:<field>` | Capture a module field value |
+| `wunderground.city` | Legacy location autocomplete. Use `location.text` for new options. |
+
+For a number, use a slider. This example accepts integers from 1 to 10 and defaults to 3. Read the value with `Program.Option("MaxItemsPerFeed").Value` and validate the range in the program if needed. YoT does not render `input:number` or `number` fields.
+
+```csharp
+Program.AddOption("MaxItemsPerFeed", "3", "Maximum items per feed", "slider:1:10:1");
+```
 
 ```csharp
 ProgramHelper AddVirtualModule(string domain, string address, string type, string widget)

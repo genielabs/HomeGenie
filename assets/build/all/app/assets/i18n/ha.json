@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Aika sako",
   "ai_genie_clear_chat_history": "Share tarihin taɗi",
   "ai_genie_clear_chat_history_confirm": "Share tarihin taɗi?",
+  "ai_genie_replace_chat_confirm": "A maye gurbin hirar da ake yi yanzu?",
   "ai_genie_ask_ai": "Tambayi AI Genie",
   "widgets_documentation_page_link": "Takardun widgets na HomeGenie",
   "custom_widget_popup_description": "Sanya tushen widget din, daurin bayanai, da girman nuni don dashboard.",

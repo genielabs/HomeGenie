@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Пошаљи поруку",
   "ai_genie_clear_chat_history": "Обриши историју ћаскања",
   "ai_genie_clear_chat_history_confirm": "Обрисати историју ћаскања?",
+  "ai_genie_replace_chat_confirm": "Заменити тренутно ћаскање?",
   "ai_genie_ask_ai": "Питајте AI Genie-а",
   "widgets_documentation_page_link": "Документација за HomeGenie виџете",
   "custom_widget_popup_description": "Конфигуришите извор виџета, повезивање података и величину приказа за контролну таблу.",

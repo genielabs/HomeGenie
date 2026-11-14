@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Bidali mezua",
   "ai_genie_clear_chat_history": "Garbitu txataren historia",
   "ai_genie_clear_chat_history_confirm": "Txataren historia garbitu?",
+  "ai_genie_replace_chat_confirm": "Uneko txata ordeztu?",
   "ai_genie_ask_ai": "Galdetu AI Genie-ri",
   "widgets_documentation_page_link": "HomeGenie Widgets dokumentazioa",
   "custom_widget_popup_description": "Konfiguratu widgetaren iturburua, datuen lotura eta bistaratze-tamaina aginte-panelerako.",

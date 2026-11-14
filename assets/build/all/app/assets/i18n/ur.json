@@ -359,6 +359,7 @@
   "ai_genie_send_message": "پیغام بھیجیں۔",
   "ai_genie_clear_chat_history": "چیٹ کی سرگزشت صاف کریں۔",
   "ai_genie_clear_chat_history_confirm": "چیٹ کی سرگزشت صاف کریں؟",
+  "ai_genie_replace_chat_confirm": "موجودہ چیٹ بدل دیں؟",
   "ai_genie_ask_ai": "AI جنی سے پوچھیں۔",
   "widgets_documentation_page_link": "ہوم جینی وجیٹس دستاویزات",
   "custom_widget_popup_description": "ڈیش بورڈ کے لیے ویجیٹ کا ماخذ، ڈیٹا بائنڈنگ، اور ڈسپلے سائز کنفیگر کریں۔",

@@ -361,6 +361,7 @@
   "ai_genie_send_message": "Send melding",
   "ai_genie_clear_chat_history": "Tøm chatteloggen",
   "ai_genie_clear_chat_history_confirm": "Tøm chatteloggen?",
+  "ai_genie_replace_chat_confirm": "Erstatte den nåværende chatten?",
   "ai_genie_ask_ai": "Spør AI-ånden",
   "widgets_documentation_page_link": "Dokumentasjon for HomeGenie Widgets",
   "custom_widget_popup_description": "Konfigurer widgetens kilde, databinding og visningsstørrelse for dashbordet.",

@@ -359,6 +359,7 @@
   "ai_genie_send_message": "ارسال پیام",
   "ai_genie_clear_chat_history": "پاک کردن تاریخچه چت",
   "ai_genie_clear_chat_history_confirm": "تاریخچه چت پاک میشه؟",
+  "ai_genie_replace_chat_confirm": "گفتگوی فعلی جایگزین شود؟",
   "ai_genie_ask_ai": "از هوش مصنوعی جنی بپرسید",
   "widgets_documentation_page_link": "مستندات ویجت‌های HomeGenie",
   "custom_widget_popup_description": "منبع ویجت، اتصال داده و اندازه نمایش آن را برای داشبورد پیکربندی کنید.",

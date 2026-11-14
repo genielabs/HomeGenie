@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Stuur boodskap",
   "ai_genie_clear_chat_history": "Vee kletsgeskiedenis uit",
   "ai_genie_clear_chat_history_confirm": "Vee kletsgeskiedenis uit?",
+  "ai_genie_replace_chat_confirm": "Vervang die huidige klets?",
   "ai_genie_ask_ai": "Vra KI Genie",
   "widgets_documentation_page_link": "HomeGenie Widgets dokumentasie",
   "custom_widget_popup_description": "Konfigureer die widget se bron, databinding en vertoongrootte vir die dashboard.",

@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Tumizani uthenga",
   "ai_genie_clear_chat_history": "Chotsani mbiri yamacheza",
   "ai_genie_clear_chat_history_confirm": "Chotsani mbiri yamacheza?",
+  "ai_genie_replace_chat_confirm": "M'malo mwa macheza apano muike ena?",
   "ai_genie_ask_ai": "Funsani AI Genie",
   "widgets_documentation_page_link": "Zolemba za HomeGenie Widgets",
   "custom_widget_popup_description": "Konzani gwero la widget, kugwirizana kwa data, ndi kukula kwake kwa bolodi.",

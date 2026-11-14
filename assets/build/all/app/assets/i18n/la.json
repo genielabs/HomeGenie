@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Mitte nuntium",
   "ai_genie_clear_chat_history": "Historiam colloquiorum purgare",
   "ai_genie_clear_chat_history_confirm": "Historiam colloquiorum delere vis?",
+  "ai_genie_replace_chat_confirm": "Colloquium praesens substituere?",
   "ai_genie_ask_ai": "Interroga Genium Intelligentiae Artificialis",
   "widgets_documentation_page_link": "Documentatio Instrumentorum HomeGenie",
   "custom_widget_popup_description": "Fontem instrumenti, nexum datorum, et magnitudinem ostentationis pro tabula instrumentorum configura.",

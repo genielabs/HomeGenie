@@ -361,6 +361,7 @@
   "ai_genie_send_message": "إرسال رسالة",
   "ai_genie_clear_chat_history": "مسح سجل الدردشة",
   "ai_genie_clear_chat_history_confirm": "مسح سجل الدردشة؟",
+  "ai_genie_replace_chat_confirm": "هل تريد استبدال المحادثة الحالية؟",
   "ai_genie_ask_ai": "اسأل جني الذكاء الاصطناعي",
   "widgets_documentation_page_link": "توثيق أدوات HomeGenie",
   "custom_widget_popup_description": "قم بتكوين مصدر الأداة وربط البيانات وحجم العرض للوحة المعلومات.",

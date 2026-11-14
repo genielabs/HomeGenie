@@ -361,6 +361,7 @@
   "ai_genie_send_message": "メッセージを送信",
   "ai_genie_clear_chat_history": "チャット履歴を消去",
   "ai_genie_clear_chat_history_confirm": "チャット履歴を消去しますか?",
+  "ai_genie_replace_chat_confirm": "現在のチャットを置き換えますか？",
   "ai_genie_ask_ai": "AI Genieに質問する",
   "widgets_documentation_page_link": "HomeGenie Widgets ドキュメント",
   "custom_widget_popup_description": "ダッシュボードのウィジェットのソース、データ バインディング、表示サイズを構成します。",

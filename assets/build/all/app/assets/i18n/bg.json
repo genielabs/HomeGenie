@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Изпрати съобщение",
   "ai_genie_clear_chat_history": "Изчистване на историята на чата",
   "ai_genie_clear_chat_history_confirm": "Да се изчисти ли историята на чата?",
+  "ai_genie_replace_chat_confirm": "Да се замени ли текущият чат?",
   "ai_genie_ask_ai": "Попитайте Джина с изкуствен интелект",
   "widgets_documentation_page_link": "Документация за HomeGenie Widgets",
   "custom_widget_popup_description": "Конфигурирайте източника на уиджета, обвързването на данни и размера на дисплея за таблото за управление.",

@@ -361,6 +361,7 @@
   "ai_genie_send_message": "Trimite mesaj",
   "ai_genie_clear_chat_history": "Ștergeți istoricul chatului",
   "ai_genie_clear_chat_history_confirm": "Ștergeți istoricul conversațiilor?",
+  "ai_genie_replace_chat_confirm": "Înlocuiești conversația curentă?",
   "ai_genie_ask_ai": "Întreabă-l pe Geniul Inteligenței Artificiale",
   "widgets_documentation_page_link": "Documentația widgeturilor HomeGenie",
   "custom_widget_popup_description": "Configurați sursa widgetului, legătura de date și dimensiunea de afișare pentru tabloul de bord.",

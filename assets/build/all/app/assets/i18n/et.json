@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Saada sõnum",
   "ai_genie_clear_chat_history": "Tühjenda vestlusajalugu",
   "ai_genie_clear_chat_history_confirm": "Kustuta vestluse ajalugu?",
+  "ai_genie_replace_chat_confirm": "Kas asendada praegune vestlus?",
   "ai_genie_ask_ai": "Küsi tehisintellekti džinnilt",
   "widgets_documentation_page_link": "HomeGenie vidinate dokumentatsioon",
   "custom_widget_popup_description": "Konfigureerige vidina allikas, andmete sidumine ja armatuurlaua kuvamissuurus.",

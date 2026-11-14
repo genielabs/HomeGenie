@@ -76,7 +76,7 @@ Final internal check: scan the HTML for layout/self attributes and icon classes,
     *   **Interpolation:** Never use `{{ variable }}`. **NEVER use Mustache syntax.** Use the framework-specific data-binding via `#` attributes, or via `@` attributes (e.g. `@set="this.innerHTML = model.name"`).
     *   **Active Refresh (@):** Attributes starting with `@` (e.g., `@set`, `@if`, `@hide-if`) are evaluated **ONLY if the element is visible**. To force evaluation even when the element is not visible (e.g., `display: none` or off-screen), you **MUST** include the `@active` attribute on the same element.
     *   **Logic:** `@if` is a logic branch, not a display toggle. Manage visibility explicitly via CSS classes or `this.view().show()/hide()`.
-5.  **HOST MENU:** YoT provides the top-right widget menu with Configure and applicable sizing/actions. Do not duplicate it with a header settings button. For a reusable ordinary widget, reserve header space with `padding-right: var(--widget-menu-space, 0px);`: YoT supplies 48px when its menu is visible, 0px when hidden or embedded. Dashboard containers have no overlaid menu and must not reserve a fixed safe zone. Embedded children use their container's configuration: do not generate Associate/Configure buttons, including in unconfigured states. Show a compact informational placeholder when no module is assigned; the user configures all roles through the container's host menu (or Dashboard Preferences). An explicit `this.configure()` action may be useful for a standalone widget, but must not be repeated in embedded children.
+5.  **HOST MENU:** YoT provides the top-right widget menu with Configure and applicable sizing/actions. Do not duplicate it with a header settings button. For an ordinary widget, apply `padding-right: var(--widget-menu-space, 0px);` only to the top header row (40px high). YoT supplies 48px when the menu is visible and 0px when hidden or embedded. Keep tabs, content and footer at full content width below the header. Never apply menu spacing to `:host`, the root wrapper, or the body. Dashboard containers have no overlaid menu and must not reserve a fixed safe zone. Embedded children use their container's configuration: do not generate Associate/Configure buttons, including in unconfigured states. Show a compact informational placeholder when no module is assigned; the user configures all roles through the container's host menu (or Dashboard Preferences). An explicit `this.configure()` action may be useful for a standalone widget, but must not be repeated in embedded children.
 6.  **CONTEXT SEPARATION:**
     *   **`this.model()`**: Reactive Proxy for text/values.
     *   **`this.declare()`**: View Context for Methods/Logic.
@@ -363,7 +363,7 @@ Background automations publish data or listen for events; do not assign the gene
 
 .container { position: absolute; inset: 0; padding: 12px; box-sizing: border-box; overflow: hidden; }
 
-.header { padding-right: var(--widget-menu-space, 0px); margin-bottom: 8px; color: var(--text-color); }
+.header { min-height: 40px; padding-right: var(--widget-menu-space, 0px); margin-bottom: 8px; color: var(--text-color); }
 .status { font-size: 0.9em; color: var(--secondary-text-color); }
 .body { flex: 1; }
 
@@ -460,7 +460,7 @@ Do not emit Markdown code fences around the JSON object. Markdown explanations a
 
 - `utils.speech.say(sentence)` speaks a **plain text string** using the same configured speech engine (browser/local), language and voice settings as AI chat, even when the chat is closed. Do not send widget source, HTML, JSON or the whole AI response to this API.
 - It returns a Promise resolving to `"completed"`, `"cancelled"` (replaced/stopped), or `"empty"`. Handle rejection (engine unavailable/not ready, synthesis failure or browser autoplay restrictions) in the widget UI. The local engine must be enabled and its model ready; there is no silent fallback to another engine.
-- `utils.speech.stop()` cancels the current shared speech channel. A new `say` call replaces prior chat/widget speech; avoid loops and overlapping automatic narration. Prefer an explicit user action such as a Speak button: browsers may require it for playback. The chat automatic-reply speech toggle does not disable an explicit widget call.
+- Speech continues when the user changes page or the widget closes. The user can stop any speech started via this API from the AI chat, including after leaving the widget. Call `utils.speech.stop()` only for an explicit user action (such as pressing Stop). Never call it from `onDispose`, disconnect or hide handlers: it cancels the shared channel, including a chat reply. If a `say` Promise settles after disposal, skip updates to the widget UI. A new `say` call replaces prior chat/widget speech; avoid loops and overlapping automatic narration. Prefer an explicit user action such as a Speak button: browsers may require it for playback. The chat automatic-reply speech toggle does not disable an explicit widget call.
 - Pass only the sentence to narrate. There is no caption/text-overlay API yet. Do not invent voice/engine options or import external TTS libraries.
 
 ```javascript
@@ -540,6 +540,8 @@ For a dashboard dedicated to a program created by an objective, save the program
 ### Configurable named module bindings
 
 For every device or sensor a dashboard or multi-device widget can read or control, add a selectable role in settings.boundModules and use this.getBoundModule(role). Keep the role available when no compatible device is currently assigned. To preselect a device, use a confirmed compatible ID as defaultModule so users can still change it. Hardcode an ID only for an intentionally fixed integration.
+
+When a widget uses a specific companion automation program, give it a named role in `settings.boundModules`. Set the role's `defaultModule` to the confirmed `HomeAutomation.HomeGenie.Automation:<PID>` from the program save or lookup, use `typeFilter: 'program'` and a field exposed by that program, then read it with `this.getBoundModule(role)`. The user can change the selection. Use the same role even if the program is the widget's only binding.
 
 Use real readings, names and states from the selected modules. Treat numbers, status indicators and device labels in reference images as visual examples. If a feature has no real data or integration, show it as unavailable or omit it. Disable its controls. Use clearly labeled simulated data only when the user asks for a demo or simulation.
 

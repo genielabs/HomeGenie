@@ -361,6 +361,7 @@
   "ai_genie_send_message": "Αποστολή μηνύματος",
   "ai_genie_clear_chat_history": "Εκκαθάριση ιστορικού συνομιλίας",
   "ai_genie_clear_chat_history_confirm": "Διαγραφή ιστορικού συνομιλίας;",
+  "ai_genie_replace_chat_confirm": "Να αντικατασταθεί η τρέχουσα συνομιλία;",
   "ai_genie_ask_ai": "Ρωτήστε το Τζίνι της Τεχνητής Νοημοσύνης",
   "widgets_documentation_page_link": "Τεκμηρίωση για τα HomeGenie Widgets",
   "custom_widget_popup_description": "Ρυθμίστε την πηγή, τη σύνδεση δεδομένων και το μέγεθος εμφάνισης του γραφικού στοιχείου για τον πίνακα ελέγχου.",

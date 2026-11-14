@@ -361,6 +361,7 @@
   "ai_genie_send_message": "Send besked",
   "ai_genie_clear_chat_history": "Ryd chathistorik",
   "ai_genie_clear_chat_history_confirm": "Ryd chathistorik?",
+  "ai_genie_replace_chat_confirm": "Erstat den aktuelle chat?",
   "ai_genie_ask_ai": "Spørg AI-ånden",
   "widgets_documentation_page_link": "Dokumentation til HomeGenie Widgets",
   "custom_widget_popup_description": "Konfigurer widgetens kilde, databinding og visningsstørrelse for dashboardet.",

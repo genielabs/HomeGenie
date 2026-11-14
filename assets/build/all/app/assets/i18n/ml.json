@@ -359,6 +359,7 @@
   "ai_genie_send_message": "സന്ദേശം അയയ്ക്കുക",
   "ai_genie_clear_chat_history": "ചാറ്റ് ചരിത്രം മായ്ക്കുക",
   "ai_genie_clear_chat_history_confirm": "ചാറ്റ് ചരിത്രം മായ്ക്കണോ?",
+  "ai_genie_replace_chat_confirm": "നിലവിലെ ചാറ്റ് മാറ്റിസ്ഥാപിക്കണോ?",
   "ai_genie_ask_ai": "ആസ്ക് AI ജെനി",
   "widgets_documentation_page_link": "ഹോംജെനി വിഡ്ജറ്റുകൾ ഡോക്യുമെന്റേഷൻ",
   "custom_widget_popup_description": "ഡാഷ്‌ബോർഡിനായി വിജറ്റിന്റെ ഉറവിടം, ഡാറ്റ ബൈൻഡിംഗ്, ഡിസ്പ്ലേ വലുപ്പം എന്നിവ കോൺഫിഗർ ചെയ്യുക.",

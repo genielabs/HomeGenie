@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Magpadala ng mensahe",
   "ai_genie_clear_chat_history": "I-clear ang kasaysayan ng chat",
   "ai_genie_clear_chat_history_confirm": "I-clear ang history ng chat?",
+  "ai_genie_replace_chat_confirm": "Palitan ang kasalukuyang chat?",
   "ai_genie_ask_ai": "Itanong mo kay AI Genie",
   "widgets_documentation_page_link": "Dokumentasyon ng HomeGenie Widgets",
   "custom_widget_popup_description": "I-configure ang pinagmulan ng widget, data binding, at laki ng display para sa dashboard.",

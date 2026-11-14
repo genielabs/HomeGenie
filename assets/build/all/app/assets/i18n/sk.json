@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Odoslať správu",
   "ai_genie_clear_chat_history": "Vymazať históriu chatu",
   "ai_genie_clear_chat_history_confirm": "Vymazať históriu chatu?",
+  "ai_genie_replace_chat_confirm": "Nahradiť aktuálny chat?",
   "ai_genie_ask_ai": "Opýtajte sa džina s umelou inteligenciou",
   "widgets_documentation_page_link": "Dokumentácia k widgetom HomeGenie",
   "custom_widget_popup_description": "Nakonfigurujte zdroj widgetu, väzbu údajov a veľkosť zobrazenia pre dashboard.",

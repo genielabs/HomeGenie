@@ -361,6 +361,7 @@
   "ai_genie_send_message": "Lähetä viesti",
   "ai_genie_clear_chat_history": "Tyhjennä keskusteluhistoria",
   "ai_genie_clear_chat_history_confirm": "Tyhjennä keskusteluhistoria?",
+  "ai_genie_replace_chat_confirm": "Korvataanko nykyinen keskustelu?",
   "ai_genie_ask_ai": "Kysy tekoälyhengeltä",
   "widgets_documentation_page_link": "HomeGenie Widgets -dokumentaatio",
   "custom_widget_popup_description": "Määritä widgetin lähde, datasidonta ja näyttökoko kojelautaa varten.",

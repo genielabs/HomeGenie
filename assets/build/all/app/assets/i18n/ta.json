@@ -359,6 +359,7 @@
   "ai_genie_send_message": "செய்தி அனுப்பு",
   "ai_genie_clear_chat_history": "அரட்டை வரலாற்றை அழி",
   "ai_genie_clear_chat_history_confirm": "அரட்டை வரலாற்றை அழிக்கவா?",
+  "ai_genie_replace_chat_confirm": "தற்போதைய அரட்டையை மாற்றவா?",
   "ai_genie_ask_ai": "AI ஜெனியிடம் கேளுங்கள்",
   "widgets_documentation_page_link": "HomeGenie விட்ஜெட்கள் ஆவணங்கள்",
   "custom_widget_popup_description": "டாஷ்போர்டுக்கான விட்ஜெட்டின் மூலம், தரவு பிணைப்பு மற்றும் காட்சி அளவை உள்ளமைக்கவும்.",

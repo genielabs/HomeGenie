@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Sūtīt ziņojumu",
   "ai_genie_clear_chat_history": "Notīrīt tērzēšanas vēsturi",
   "ai_genie_clear_chat_history_confirm": "Notīrīt tērzēšanas vēsturi?",
+  "ai_genie_replace_chat_confirm": "Aizstāt pašreizējo sarunu?",
   "ai_genie_ask_ai": "Pajautājiet AI Genie",
   "widgets_documentation_page_link": "HomeGenie logrīku dokumentācija",
   "custom_widget_popup_description": "Konfigurējiet logrīka avotu, datu saistīšanu un attēlošanas izmēru informācijas panelī.",

@@ -359,6 +359,7 @@
   "ai_genie_send_message": "Tuku karere",
   "ai_genie_clear_chat_history": "Ūkui hītori kōrerorero",
   "ai_genie_clear_chat_history_confirm": "Ūkui hītori kōrerorero?",
+  "ai_genie_replace_chat_confirm": "Whakakapia te kōrerorero onāianei?",
   "ai_genie_ask_ai": "Tonoa AI Genie",
   "widgets_documentation_page_link": "Tuhinga o HomeGenie Widgets",
   "custom_widget_popup_description": "Whirihorahia te puna o te widget, te here raraunga, me te rahi whakaatu mo te papatohu.",
