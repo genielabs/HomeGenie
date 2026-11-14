@@ -27,9 +27,9 @@ public class AiGenieRequestExecutionTest {
   var root=new DirectoryInfo(TestContext.CurrentContext.TestDirectory);while(root!=null&&!File.Exists(Path.Combine(root.FullName,"HomeGenie.sln")))root=root.Parent;
   XElement Program(string pkg,string id)=>XDocument.Load(Path.Combine(root.FullName,"assets/build/all/data/packages/homegenie",pkg,"programs.xml")).Root.Elements().Single(n=>(string)n.Element("Address")==id);
   string Class(XElement p,string name)=>CSharpSyntaxTree.ParseText("class Holder{"+(string)p.Element("ScriptContext")+"}").GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text==name).ToFullString();
-  string source="using System;using System.IO;using System.Text;using System.Linq;using System.Threading;using System.Security.Cryptography;using System.Collections.Generic;using Newtonsoft.Json;using Newtonsoft.Json.Linq;"+
+  string source="using System;using System.IO;using System.Net;using System.Text;using System.Linq;using System.Threading;using System.Security.Cryptography;using System.Collections.Generic;using Newtonsoft.Json;using Newtonsoft.Json.Linq;"+
     (string)Program("homegenie-base","583").Element("ScriptContext")+Class(Program("homegenie-base","581"),"GenieResponseContract");
-  var paths=((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")).Split(Path.PathSeparator).Where(p=>Path.GetDirectoryName(p)==Path.GetDirectoryName(typeof(object).Assembly.Location)).Append(typeof(JsonConvert).Assembly.Location);
+  var paths=((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")).Split(Path.PathSeparator).Where(p=>Path.GetDirectoryName(p)==Path.GetDirectoryName(typeof(object).Assembly.Location)).Append(typeof(JsonConvert).Assembly.Location).Append(typeof(SixLabors.ImageSharp.Image).Assembly.Location);
   var compilation=CSharpCompilation.Create("BackgroundExecute"+Guid.NewGuid().ToString("N"),new[]{CSharpSyntaxTree.ParseText(source)},paths.Select(p=>MetadataReference.CreateFromFile(p)),new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
   using var stream=new MemoryStream();var result=compilation.Emit(stream);Assert.That(result.Success,Is.True,string.Join("\n",result.Diagnostics));assembly=Assembly.Load(stream.ToArray());
  }

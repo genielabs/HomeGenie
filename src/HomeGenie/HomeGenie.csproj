@@ -41,7 +41,7 @@
     <PackageReference Include="Esprima" Version="3.0.6" />
     <PackageReference Include="IronPython" Version="3.4.2" />
     <PackageReference Include="IronPython.StdLib" Version="3.4.2" />
-    <PackageReference Include="Jint" Version="4.17.0" />
+    <PackageReference Include="Jint" Version="4.18.0" />
     <PackageReference Include="KNX.net" Version="1.1.10" />
     <PackageReference Include="SerialPortStream" Version="2.4.2" />
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
@@ -80,7 +80,7 @@
   <!-- .NET IoT and other -->
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.9.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.12.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
     <PackageReference Include="System.Device.Gpio" Version="4.2.0" />
     <PackageReference Include="Iot.Device.Bindings" Version="4.2.0" />
