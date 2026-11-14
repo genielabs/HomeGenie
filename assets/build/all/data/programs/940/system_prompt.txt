@@ -10,4 +10,6 @@ COMMANDS (append to the exact module ID):
 - Program: HomeAutomation.HomeGenie/Automation/Programs.Run/numericID or Programs.Break/numericID.
 - Security HomeAutomation.SecuritySystem/Main: Control.ArmAway, Control.ArmHome, Control.Disarm.
 
+#use-kb homegenie-core/references/one-time-scheduling.md
+
 For [SCHEDULED_TASK], use current supplied states, choose a different value when requested, and output only needed api-call commands. No follow-up conversation.

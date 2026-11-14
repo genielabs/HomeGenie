@@ -26,6 +26,14 @@ This is the active task list. Detailed stage-by-stage decisions, earlier API nam
 - [ ] **Priority for HomeGenie Panel.** Fix intermittent scroll interruptions in custom dashboards. A swipe can stop mid-gesture and scrolling resumes on the next swipe. Verify that a continuous swipe scrolls smoothly as the collapsible header and WebView hand off scrolling in both directions.
 - [ ] Support opening and editing HomeGenie program options from custom dashboards in HomeGenie Panel. Verify that the weather settings button in Cyberpunk (Neon District) opens the weather program options and saves changes.
 
+## One-time scheduling
+
+- [x] Run one-time events on the server, including when the chat is closed. Honor the saved local year during execution and occurrence lookup, remove events when their scripts finish, and flag missed events for manual removal.
+- [x] Let AI Genies schedule program runs and group matching On, Off and Toggle commands into one event with bound modules. Save a localized action description and confirm the scheduled time. Manage module associations in the Scheduler and in the module scheduling dialog.
+- [x] Maintainer verified delayed device actions on Vulkan before and after updating the Genie programs.
+- [ ] Add the compatible one-time scheduling API to HomeGenie Mini. Verify device-local execution, cancellation and removal after execution.
+- [ ] Add a quick schedule submenu in HomeGenie Panel for lights and switches. Offer Turn on or Turn off after 5, 10, 15 minutes and other common delays on connections that support one-time scheduling.
+
 ## Product dashboards
 
 - [ ] **HomeGenie Robot Car.** Build an FPV dashboard that embeds the existing `specialized/fpv-control` widget as a custom element. Let the user select the motion controller and camera independently through named module bindings. Start with the live JPEG feed and gamepad driving on Vulkan. Show when the feed stops updating, and verify disconnect and tab-switch behavior before testing on the car. Keep arm and gripper controls optional.
@@ -74,7 +82,12 @@ This is the active task list. Detailed stage-by-stage decisions, earlier API nam
 - [x] Refresh the provider selector from registration and disable/remove events. The maintainer confirmed disable and re-enable on Vulkan. Gemini and the clone emit registration, and Lailama 940 was aligned to the packaged version and verified Ready with the same model and history.
 - [ ] Retest live Stop with objectives running on two Gemini instances, and verify a newly cloned provider appears in the open selector while a draft stays on the selected chat.
 - [ ] Let users keep several named conversations for one provider and switch between them in chat. Evaluate a provider-specific `chats/` subfolder for storing conversations and their attachments, preserving the existing conversation and import/export flow.
-- [ ] Explicit remaining live cases: objective speech after the fix, sleep/reconnect, history clear while an objective is active, and interrupted/imported task recovery. Do not infer these passes from ordinary completion or cross-browser Stop.
+- [x] Let Gemini objectives read multiple URLs or local files in one run. The maintainer verified a two-file comparison on Vulkan.
+- [x] Persist objective and step timestamps, show elapsed time per step and the total at completion, and keep the selected goal types after an accepted submission. Vulkan API checks confirmed timestamp persistence and stable step start times.
+- [x] Narrate live step title changes and offer Try a fix for failed objectives with partial results. The maintainer confirmed that a manual revision completed the seven-widget chain using the four widgets already saved. Focused checks covered the new button and its disappearance on an accepted revision.
+- [ ] Verify objective timing, speech and Try a fix in a live YoT session. Also verify sleep/reconnect, clearing history during an active objective, and recovery of interrupted or imported tasks.
+- [ ] Persist the outcome reported by the source runner in each read step. For URL failures, show the actual HTTP status in step details when the server returns one. Ground Genie summaries of access errors in the recorded outcome.
+- [ ] Enable Automation objectives for Lailama in stages using the shared runner. Start with URL and local text-file reading, then verify a comparison of two sources with a local model. Keep source results available across steps within the model context budget. Validate program creation, compilation and execution separately.
 
 ## AI product direction and local inference checkpoint (2026-10-27)
 

@@ -36,7 +36,7 @@ public class AiGenieHistoryTest {
   new Func<string,object,object>((route,input)=>{Assert.That(route,Is.EqualTo("System.Utility/ChatHistory/GetContext"));var scope=(JObject)input;Assert.That((string)scope["StoreId"],Is.EqualTo("940"));return store.GetMethod("GetContext").Invoke(null,new object[]{messages,(string)scope["ContextProfileKey"]});})});
  JArray Project(JArray messages,string projection="text")=>(JArray)history.GetMethod("Project").Invoke(null,new object[]{new JObject{["version"]=1,["messages"]=messages,["projection"]=projection}});
  JObject Message(string role,string text,string id,string outcome,string profile="profile")=>new(){["role"]=role,["parts"]=new JArray(new JObject{["text"]=text}),["metadata"]=new JObject{["requestId"]=id,["outcome"]=outcome,["contextProfileKey"]=profile}};
- [TestCase("text")] [TestCase("structured")] public void OnlyMatchingCompletedTurnsReachProvider(string projection) {
+ [TestCase("text")] [TestCase("structured")] public void OnlyCompletedTurnsWithCompatibleRepliesReachProvider(string projection) {
   var raw=new JArray(Message("user","ok question","ok","submitted"),Message("model","ok answer","ok","completed"),
    Message("user","failed question","error","submitted"),Message("model","failed answer","error","error"),
    Message("user","cancelled question","cancel","submitted"),Message("model","[STOPPED]","cancel","cancelled"),
@@ -44,6 +44,29 @@ public class AiGenieHistoryTest {
   string before=raw.ToString();var result=Read(raw,projection);Assert.That(result["messages"].Count(),Is.EqualTo(2));
   Assert.That((string)result["messages"][1]["parts"][0]["text"],Is.EqualTo("ok answer"));Assert.That(raw.ToString(),Is.EqualTo(before));
  }
+ [TestCase("context-v1:11100|cap-v1:111", true)]   // Enable Programs.
+ [TestCase("context-v1:10000|cap-v1:111", false)]  // Revoke Widgets.
+ [TestCase("context-v1:10100|cap-v1:111", false)]  // Revoke Widgets while enabling Programs.
+ [TestCase("context-v1:11000|cap-v1:101", false)]  // Revoke Automation capability.
+ [TestCase("context-v1:11001|cap-v1:111", true)]   // Enable technical references.
+ [TestCase("unknown", false)]
+ public void UserRequestsSurviveProfileChangesAndOnlyCompatibleAnswersFollow(string currentProfile, bool includeAnswer) {
+  const string previousProfile="context-v1:11000|cap-v1:111";
+  var raw=new JArray(Message("user","Create a program","create","submitted",previousProfile),
+   Message("model","Created program 1059","create","completed",previousProfile),
+   Message("user","Make it start manually","change","submitted",currentProfile),
+   Message("model","Updated the program","change","completed",currentProfile),
+   Message("user","Current request","pending","submitted",currentProfile));
+  string before=raw.ToString();
+  var result=Read(raw,"structured",currentProfile);
+  var expected=includeAnswer
+   ? new[]{"Create a program","Created program 1059","Make it start manually","Updated the program"}
+   : new[]{"Create a program","Make it start manually","Updated the program"};
+  Assert.That(result["messages"].Select(row=>(string)row["parts"][0]["text"]),Is.EqualTo(expected));
+  Assert.That((string)result["contextProfileKey"],Is.EqualTo(currentProfile));
+  Assert.That(raw.ToString(),Is.EqualTo(before));
+ }
+
  [Test] public void StructuredProjectionPreservesHumanRequestsAndTechnicalContentExactly() {
   var raw=new JArray(Message("user","La funzionalità smart device è attiva sulla luce 1?","read","submitted"),
    Message("model","<think>reasoning</think>\n```genie-action\n{\"version\":1}\n```\nAnswer","read","completed"),
@@ -60,7 +83,7 @@ public class AiGenieHistoryTest {
  [Test] public void LegacyUnprofiledHistoryKeepsItsExistingReadBehavior() {
   var raw=JArray.Parse("[{'role':'user','parts':[{'text':'old question'}]},{'role':'model','parts':[{'text':'old answer'}]}]");
   var unscoped=Read(raw,"structured",null);Assert.That(JToken.DeepEquals(unscoped["messages"],raw),Is.True);
-  Assert.That(Read(raw)["messages"],Is.Empty);
+  Assert.That(Read(raw)["messages"].Select(row=>(string)row["role"]),Is.EqualTo(new[]{"user"}));
  }
  [TestCase("{'version':2,'storeId':'940','projection':'text'}")]
  [TestCase("{'version':1,'storeId':'940','projection':'unknown'}")]

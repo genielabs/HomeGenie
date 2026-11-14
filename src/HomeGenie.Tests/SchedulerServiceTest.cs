@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 using NUnit.Framework;
@@ -83,6 +83,30 @@ namespace HomeGenie.Tests
             var occurrences = _scheduler.GetScheduling(new DateTime(2018, 6, 1), new DateTime(2019, 6, 30), expression);
             //DisplayOccurrences(expression, occurrences);
             Assert.That(occurrences.Count, Is.EqualTo((30+31+15)*1440));
+        }
+
+        [Test]
+        public void OneTimeScheduleSurvivesXmlRoundTrip()
+        {
+            var runAt = new DateTime(2026, 12, 25, 7, 30, 0, DateTimeKind.Local);
+            var item = new SchedulerItem
+            {
+                Name = "Test.Once",
+                CronExpression = "30 7 25 12 *",
+                Data = """{"itemType":4,"from":"2026-12-25","to":"2026-12-25","time":[{"start":"07:30","end":"07:30"}]}""",
+                IsEnabled = true
+            };
+            var serializer = new System.Xml.Serialization.XmlSerializer(typeof(SchedulerItem));
+            using var writer = new System.IO.StringWriter();
+            serializer.Serialize(writer, item);
+            using var reader = new System.IO.StringReader(writer.ToString());
+            var saved = (SchedulerItem)serializer.Deserialize(reader);
+
+            Assert.That(SchedulerService.TryGetOneTime(saved.Data, out var localTime), Is.True);
+            Assert.That(localTime, Is.EqualTo(runAt));
+            Assert.That(saved.CronExpression, Is.EqualTo(item.CronExpression));
+            Assert.That(_scheduler.GetScheduling(runAt.Date.AddDays(-1), runAt.Date.AddDays(2).AddSeconds(-1), saved.CronExpression),
+                Is.EqualTo(new[] { runAt }));
         }
 
         private static List<DateTime> GetOccurrencesForDate(SchedulerService scheduler, DateTime date, string expression)

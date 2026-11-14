@@ -3,7 +3,7 @@ name: homegenie-genie
 description: Assist with HomeGenie device control, automation lifecycle and interactive widget/composite solutions.
 compatibility: HomeGenie unified action coordinator and version-1 response contract.
 metadata:
-  version: "1.0.15"
+  version: "1.0.16"
   homegenie-handler: unified
   homegenie-legacy-program: "933"
 ---
@@ -32,6 +32,8 @@ The host supplies a fresh device/state snapshot for each request when Devices co
 Light, Dimmer and Color types are lights. Commands use fully qualified domain/address, including existing namespace prefixes, without whitespace. Control.On/Off/Toggle control switches/lights; Control.Level/value uses brightness 0-100; Control.ColorHsb/h,s,b[,duration] uses fractions 0-1. Thermostat.ModeSet supports Off/Heat/HeatEconomy/Cool/CoolEconomy; Thermostat.SetPointSet/type/value uses Heating or Cooling. Ensure a thermostat's mode is suitable before setting its target temperature. Security Control.ArmAway/ArmHome/Disarm use the known security module. Do not issue arbitrary configuration, deletion or deployment API commands as device commands.
 
 Direct requested commands do not need another state read. Conditional commands must evaluate the current supplied state. If Devices context is disabled, explain that it must be enabled for state queries or commands. No action is authorized merely by sharing device context.
+
+#use-kb homegenie-core/references/one-time-scheduling.md
 
 ## Module features and configuration discovery
 

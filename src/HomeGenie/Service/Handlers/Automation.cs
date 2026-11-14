@@ -32,6 +32,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using HomeGenie.Service.Constants;
 using HomeGenie.Automation.Scheduler;
 using CronExpressionDescriptor;
@@ -120,12 +121,43 @@ namespace HomeGenie.Service.Handlers
             }
             else if (migCommand.Command.StartsWith("Scheduling."))
             {
+                var scheduler = homegenie.ProgramManager.SchedulerService;
                 switch (migCommand.Command)
                 {
                 case "Scheduling.Add":
                 case "Scheduling.Update":
                     var newSchedule = JsonConvert.DeserializeObject<SchedulerItem>(request.RequestText);
-                    var item = homegenie.ProgramManager.SchedulerService.AddOrUpdate(
+                    if (newSchedule == null || string.IsNullOrWhiteSpace(newSchedule.Name))
+                    {
+                        request.ResponseData = new ResponseStatus(Status.Error, "A schedule name is required.");
+                        break;
+                    }
+                    JObject scheduleData = null;
+                    if (newSchedule.Data?.TrimStart().StartsWith("{") == true)
+                    {
+                        try { scheduleData = JObject.Parse(newSchedule.Data); }
+                        catch (JsonException) { }
+                    }
+                    var once = scheduleData?["itemType"]?.ToString() == "4";
+                    var localTime = default(DateTime);
+                    if (once && (!SchedulerService.TryGetOneTime(scheduleData, out localTime) ||
+                                 localTime <= DateTime.Now || TimeZoneInfo.Local.IsInvalidTime(localTime)))
+                    {
+                        request.ResponseData = new ResponseStatus(Status.Error, "Choose a valid future date and time.");
+                        break;
+                    }
+                    if (once && string.IsNullOrWhiteSpace(newSchedule.CronExpression))
+                    {
+                        request.ResponseData = new ResponseStatus(Status.Error, "A cron expression is required.");
+                        break;
+                    }
+                    var previous = scheduler.Get(newSchedule.Name);
+                    if (!once && previous != null && SchedulerService.TryGetOneTime(previous.Data, out _))
+                    {
+                        request.ResponseData = new ResponseStatus(Status.Error, "A one-time event already uses this name.");
+                        break;
+                    }
+                    var item = scheduler.AddOrUpdate(
                         newSchedule.Name,
                         newSchedule.CronExpression,
                         newSchedule.Data,
@@ -140,7 +172,15 @@ namespace HomeGenie.Service.Handlers
                     {
                         item.BoundModules = newSchedule.BoundModules;
                     }
-                    homegenie.UpdateSchedulerDatabase();
+                    if (!homegenie.UpdateSchedulerDatabase())
+                    {
+                        if (previous == null) scheduler.Remove(item.Name);
+                        request.ResponseData = new ResponseStatus(Status.Error, "The schedule could not be saved.");
+                    }
+                    else if (once)
+                    {
+                        scheduler.NotifyOneTimeChanged(item.Name);
+                    }
                     break;
                 case "Scheduling.ModuleUpdate":
                     var mod = homegenie.Modules.Find((m) =>
@@ -186,8 +226,10 @@ namespace HomeGenie.Service.Handlers
                     homegenie.UpdateSchedulerDatabase();
                     break;
                 case "Scheduling.Delete":
-                    homegenie.ProgramManager.SchedulerService.Remove(migCommand.GetOption(0));
-                    homegenie.UpdateSchedulerDatabase();
+                    if (!scheduler.RemoveAndSave(migCommand.GetOption(0)))
+                    {
+                        request.ResponseData = new ResponseStatus(Status.Error, "The schedule could not be removed.");
+                    }
                     break;
                 case "Scheduling.ListOccurrences":
                     int hours = 24;
@@ -220,9 +262,8 @@ namespace HomeGenie.Service.Handlers
                     }
                     else
                     {
-                        for (int s = 0; s < homegenie.ProgramManager.SchedulerService.Items.Count; s++)
+                        foreach (var ce in scheduler.Items.ToArray())
                         {
-                            var ce = homegenie.ProgramManager.SchedulerService.Items[s];
                             if (!ce.IsEnabled)
                                 continue;
                             var evt = new
@@ -237,9 +278,13 @@ namespace HomeGenie.Service.Handlers
                             var dateEnd = dateStart.AddHours(hours).AddSeconds(-1);
                             var occurs = homegenie.ProgramManager.SchedulerService.GetScheduling(dateStart, dateEnd, ce.CronExpression);
                             occurs.Sort();
+                            var oneTime = SchedulerService.TryGetOneTime(ce.Data, out var time);
                             foreach (var dt in occurs)
                             {
-                                evt.Occurrences.Add(Utility.DateToJavascript(dt.ToUniversalTime()));
+                                var utc = dt.ToUniversalTime();
+                                if (oneTime && utc.ToLocalTime().Year != time.Year) continue;
+
+                                evt.Occurrences.Add(Utility.DateToJavascript(utc));
                             }
                             if (evt.Occurrences.Count > 0)
                             {
@@ -250,9 +295,8 @@ namespace HomeGenie.Service.Handlers
                     request.ResponseData = nextList;
                     break;
                 case "Scheduling.List":
-                    homegenie.ProgramManager.SchedulerService
-                        .Items.Sort((s1, s2) => String.Compare(s1.Name, s2.Name, StringComparison.Ordinal));
-                    request.ResponseData = homegenie.ProgramManager.SchedulerService.Items;
+                    scheduler.Items.Sort((s1, s2) => String.Compare(s1.Name, s2.Name, StringComparison.Ordinal));
+                    request.ResponseData = scheduler.Items;
                     break;
                 case "Scheduling.Describe":
                     var cronDescription = "";

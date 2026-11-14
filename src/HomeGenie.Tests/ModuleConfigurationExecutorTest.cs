@@ -20,7 +20,9 @@ public class ModuleConfigurationExecutorTest
         var node=XDocument.Load(Path.Combine(root.FullName,"assets/build/all/data/packages/homegenie/homegenie-base/programs.xml")).Root.Elements().Single(n=>(string)n.Element("Address")=="581");
         var tree=CSharpSyntaxTree.ParseText("class Holder {"+(string)node.Element("ScriptContext")+"}").GetRoot();
         string Class(string name)=>tree.DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text==name).ToFullString();
-        string method=tree.DescendantNodes().OfType<MethodDeclarationSyntax>().Single(n=>n.Identifier.Text=="ExecuteApiCommands").ToFullString();
+        var executorMethods = new[] { "ExecuteApiCommands", "SaveScheduledAction", "ReadScheduleTarget" };
+        string method = string.Join("\n", tree.DescendantNodes().OfType<MethodDeclarationSyntax>()
+            .Where(node => executorMethods.Contains(node.Identifier.Text)).Select(node => node.ToFullString()));
         string code="using System;using System.IO;using System.Linq;using System.Text;using System.Collections.Generic;using System.Text.RegularExpressions;using Newtonsoft.Json;using Newtonsoft.Json.Linq;"+
             Class("ApiCommandExecution")+Class("ActionLedger")+Class("GenieResponseContract")+Class("ModuleSettingAction")+"public class ExecutorProbe { public FakeData Data=new FakeData();"+method+"}"+"""
 public class FakeData {public string Folder;public string GetFolder()=>Folder;}

@@ -19,6 +19,8 @@ public class AiGenieGoalsTest {
     JObject geminiDiagnostics;
     Dictionary<string,JObject> runners;
     bool goalDeploymentsSettled;
+    int runnerCompilations;
+    string runnerCompilerResponse;
     JObject savedGoalCapabilities;
     string History=>"System.Utility/ChatHistory/";
     [OneTimeSetUp] public void CompileShippedGoals() {
@@ -26,11 +28,12 @@ public class AiGenieGoalsTest {
         while(root!=null&&!File.Exists(Path.Combine(root.FullName,"HomeGenie.sln")))root=root.Parent;
         var xml=XDocument.Load(Path.Combine(root.FullName,"assets/build/all/data/packages/homegenie/homegenie-base/programs.xml")).Root;
         string Context(string id)=>(string)xml.Elements().Single(n=>(string)n.Element("Address")==id).Element("ScriptContext");
-        var goal=CSharpSyntaxTree.ParseText(Context("583")).GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text=="AiGenieGoals").ToFullString();
+        var goal=string.Join("\n", CSharpSyntaxTree.ParseText(Context("583")).GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
+            .Where(n=>n.Identifier.Text is "AiGenieGoals" or "AiGenieGoalSource"));
         var programActions=CSharpSyntaxTree.ParseText(Context("583")).GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text=="AiGenieProgramActions").ToFullString();
         var deploymentState=CSharpSyntaxTree.ParseText(Context("581")).GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
             .Where(n=>n.Identifier.Text is "ApiCommandExecution" or "ActionLedger" or "ProgramDeploymentSession" or "GoalDeploymentStatus");
-        var code="using System;using System.IO;using System.Linq;using System.Text;using System.Threading;using System.Collections.Generic;using Newtonsoft.Json;using Newtonsoft.Json.Linq;"+Context("577")+goal+programActions+string.Join("\n",deploymentState)+@"
+        var code="using System;using System.IO;using System.Linq;using System.Net;using System.Text;using System.Threading;using System.Collections.Generic;using Newtonsoft.Json;using Newtonsoft.Json.Linq;"+Context("577")+goal+programActions+string.Join("\n",deploymentState)+@"
 public static class WidgetContextRequest{public static void Validate(JObject request){}}
 public static class AiGenieContext{public static JObject Prepare(JObject scope,string template,string folder,Func<string,object,object> call){call(""test-template"",template);return new JObject{[""systemPrompt""]=""ACTUALLY SUPPLIED CONTEXT: {}""};}}
 public static class AiGenieCoordinator{public static JObject Message(string role,string text)=>new JObject{[""role""]=role,[""parts""]=new JArray(new JObject{[""text""]=text})};}
@@ -57,6 +60,7 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
         dashboardConflict=false;dashboardApplications=0;creates=runs=generations=saves=0;stopOnGenerate=clearOnGenerate=failSave=false;job=null;replies=new Queue<string>();changeOnGenerate=null;lastMessages=null;failSaveAt=2;
         geminiDiagnostics=null;
         runners=new();goalDeploymentsSettled=true;
+        runnerCompilations=0;runnerCompilerResponse="[]";
         savedGoalCapabilities=null;
         installedPrograms=new();originals=new();deploymentTargets=new();deployments=recoveries=0;unknownDeployment=false;
     }
@@ -82,6 +86,15 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
             runners[pid]["Address"]=int.Parse(pid);
             runners[pid]["IsRunning"]=false;
             return new{ResponseValue=pid};
+        }
+        if(route.EndsWith("Programs.Compile")){
+            runnerCompilations++;
+            var program=(JObject)value;
+            string pid=(string)program["Address"];
+            Assert.That((bool)program["IsEnabled"],Is.False);
+            Assert.That((string)program["ScriptSource"],Is.EqualTo((string)runners[pid]["ScriptSource"]));
+            Assert.That(runs,Is.LessThan(runnerCompilations));
+            return runnerCompilerResponse;
         }
         if(route.EndsWith("Programs.List"))return new JArray(runners.Values.Concat(installedPrograms.Values));
         if(route.Contains("Programs.Get") && installedPrograms.TryGetValue(route.Split('/').Last(),out var installed))return installed.DeepClone();
@@ -200,8 +213,222 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
         if(dashboardTarget)envelope["dashboardTarget"]=new JObject{["preset"]="demo",["expectedRevision"]=7,["clientId"]=new string('a',32)};
         Invoke("AiGenieGoals","Start",input,new Func<string,object,object>(Call));
     }
+    [TestCase("deadline.docx")]
+    [TestCase("image2led.py")]
+    [TestCase("README")]
+    [TestCase("sample.bin")]
+    [TestCase("large.svg")]
+    public void SourceScriptContinuesObjectiveWithoutPersistingExtractedContent(string fileName)
+    {
+        const string marker = "A-PRIVATE-DOCUMENT-MARKER";
+        var path = Path.Combine(folder, fileName);
+        string script;
+        if (fileName.EndsWith(".docx"))
+        {
+            using var zip = System.IO.Compression.ZipFile.Open(path, System.IO.Compression.ZipArchiveMode.Create);
+            using var writer = new StreamWriter(zip.CreateEntry("word/document.xml").Open());
+            writer.Write("<w:p><w:t>" + marker + "</w:t></w:p>");
+            script = "return {content: input.match(/<w:t>(.*?)<\\/w:t>/)[1], label: 'Read document'};";
+        }
+        else if (fileName.EndsWith(".bin"))
+        {
+            File.WriteAllBytes(path, new byte[] {0, 255, 2});
+            script = "return {content: inputEncoding === 'base64' && input === 'AP8C' ? '" + marker +
+                "' : 'Invalid binary data', label: 'Read binary'};";
+        }
+        else
+        {
+            var contents = fileName == "large.svg"
+                ? "<svg><desc>" + new string('x', 32 * 1024) + marker + "</desc></svg>"
+                : "# " + marker + "\n";
+            File.WriteAllText(path, contents);
+            script = "if (inputEncoding !== 'text') throw Error('Expected text'); return {content: input, label: 'Read file'};";
+        }
+
+        var request = StartRequest(false);
+        var input = (JObject)request["input"];
+        input["goalTypes"] = new JArray("automation");
+        input["request"]["message"] = "Read `" + path + "`.";
+        Invoke("AiGenieGoals", "Start", request, new Func<string, object, object>(Call));
+        replies.Enqueue(new JObject {
+            ["version"] = 1, ["action"] = "run_source_script", ["title"] = "Read source", ["message"] = "",
+            ["source"] = path, ["script"] = script
+        }.ToString());
+        replies.Enqueue(Complete);
+        Run();
+
+        var task = TaskRecord();
+        Assert.That((string)task["state"], Is.EqualTo("completed"), task.ToString());
+        Assert.That(lastMessages.ToString(), Does.Contain(marker));
+        Assert.That(task["operations"].ToString(), Does.Contain(fileName));
+        Assert.That(HistoryCall("Conversation.Get", new JObject()).ToString(), Does.Not.Contain(marker));
+        Assert.That(saves + deployments, Is.Zero);
+    }
+
+    [Test]
+    public void LocalPngAboveTextLimitReachesGeminiAsAnImageWithoutPersistingBytes()
+    {
+        var file = Path.Combine(folder, "local screenshot.png");
+        var pixels = new byte[512 * 512 * 4];
+        new Random(123).NextBytes(pixels);
+        using (var image = SixLabors.ImageSharp.Image.LoadPixelData<SixLabors.ImageSharp.PixelFormats.Rgba32>(pixels, 512, 512))
+        using (var stream = File.Create(file))
+            image.Save(stream, new SixLabors.ImageSharp.Formats.Png.PngEncoder());
+        var bytes = File.ReadAllBytes(file);
+        Assert.That(bytes.Length, Is.GreaterThan(512 * 1024));
+
+        var request = StartRequest(false);
+        var input = (JObject)request["input"];
+        input["goalTypes"] = new JArray("automation");
+        input["request"]["message"] = "Describe \"" + file + "\".";
+        Invoke("AiGenieGoals", "Start", request, new Func<string, object, object>(Call));
+        replies.Enqueue(new JObject {
+            ["version"] = 1, ["action"] = "run_source_script", ["title"] = "Read screenshot", ["message"] = "",
+            ["source"] = file
+        }.ToString());
+        replies.Enqueue("{\"version\":1,\"action\":\"complete\",\"title\":\"Done\",\"message\":\"Screenshot analyzed\"}");
+        Run();
+
+        var task = TaskRecord();
+        Assert.That((string)task["state"], Is.EqualTo("completed"), task.ToString());
+        var part = lastMessages.SelectMany(message => message["parts"]).Single(part => part["inlineData"] != null);
+        Assert.That((string)part["inlineData"]["mimeType"], Is.EqualTo("image/png"));
+        var data = (string)part["inlineData"]["data"];
+        Assert.That(data, Is.EqualTo(Convert.ToBase64String(bytes)));
+        Assert.That(task["operations"].ToString(), Does.Contain("local screenshot.png"));
+        Assert.That(HistoryCall("Conversation.Get", new JObject()).ToString(), Does.Not.Contain(data[..80]));
+        Assert.That(saves + deployments, Is.Zero);
+    }
+
+    [Test]
+    public void ExtensionlessHttpsSourceUsesResponseImageType()
+    {
+        const string source = "https://example.com/snapshot";
+        Invoke("AiGenieGoals", "Validate", new JObject {
+            ["version"] = 1, ["action"] = "run_source_script", ["title"] = "Read snapshot",
+            ["message"] = "", ["source"] = source
+        });
+
+        using var image = new SixLabors.ImageSharp.Image<SixLabors.ImageSharp.PixelFormats.Rgb24>(2, 2);
+        using var buffer = new MemoryStream();
+        image.Save(buffer, new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder());
+        var bytes = buffer.ToArray();
+        using var content = new System.Net.Http.ByteArrayContent(bytes);
+        content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpeg");
+        var read = assembly.GetType("AiGenieGoalSource").GetMethod("ReadUrlContent", BindingFlags.Static | BindingFlags.NonPublic);
+        object[] args = {content, "Read snapshot", "example.com/snapshot", CancellationToken.None, 512 * 1024, ".JPG;pdf", null};
+        var result = (JObject)read.Invoke(null, args);
+        Assert.That((string)result["inlineData"]["mimeType"], Is.EqualTo("image/jpeg"));
+        Assert.That((string)result["inlineData"]["data"], Is.EqualTo(Convert.ToBase64String(bytes)));
+        Assert.That(args[6], Is.Null);
+        args[5] = "";
+        var disabled = Assert.Throws<TargetInvocationException>(() => read.Invoke(null, args));
+        Assert.That(disabled.InnerException.Message, Does.Contain("disabled"));
+        args[5] = null;
+
+        using var invalid = new System.Net.Http.StringContent("not a JPEG");
+        invalid.Headers.ContentType = content.Headers.ContentType;
+        args[0] = invalid;
+        Assert.Throws<TargetInvocationException>(() => read.Invoke(null, args));
+
+        using var html = new System.Net.Http.StringContent("<p>Example</p>", System.Text.Encoding.UTF8, "text/html");
+        args[0] = html;
+        Assert.That(read.Invoke(null, args), Is.Null);
+        Assert.That(args[6], Is.EqualTo("<p>Example</p>"));
+    }
+
+    [Test]
+    public void PdfUsesConfiguredLimitAndReachesGeminiWithOriginalBytes()
+    {
+        var file = Path.Combine(folder, "test document.pdf");
+        var bytes = new byte[600 * 1024];
+        System.Text.Encoding.ASCII.GetBytes("%PDF-1.7\n").CopyTo(bytes, 0);
+        File.WriteAllBytes(file, bytes);
+        var request = StartRequest(false);
+        var input = (JObject)request["input"];
+        input["goalTypes"] = new JArray("automation");
+        input["request"]["message"] = "Read \"" + file + "\".";
+        Invoke("AiGenieGoals", "Start", request, new Func<string, object, object>(Call));
+        replies.Enqueue(new JObject {
+            ["version"] = 1, ["action"] = "run_source_script", ["title"] = "Read PDF",
+            ["message"] = "", ["source"] = file
+        }.ToString());
+        replies.Enqueue(Complete);
+        Run("1", " .PDF ");
+
+        Assert.That((string)TaskRecord()["state"], Is.EqualTo("completed"));
+        var part = lastMessages.SelectMany(message => message["parts"]).Single(part => part["inlineData"] != null);
+        Assert.That((string)part["inlineData"]["mimeType"], Is.EqualTo("application/pdf"));
+        Assert.That((string)part["inlineData"]["data"] == Convert.ToBase64String(bytes), Is.True);
+        Assert.That(HistoryCall("Conversation.Get", new JObject()).ToString(), Does.Not.Contain("inlineData"));
+    }
+
+    [TestCase("http://192.168.2.40:8080/frame", "http://192.168.2.40:8080", true)]
+    [TestCase("http://192.168.2.40/frame", " ; http://192.168.2.40/frame ; ", true)]
+    [TestCase("http://192.168.2.40/frame/live", "http://192.168.2.40/frame", false)]
+    [TestCase("http://192.168.2.40/frame?x=1", "http://192.168.2.40/frame", false)]
+    [TestCase("http://192.168.2.40:8080/frame", "http://192.168.2.40", false)]
+    [TestCase("http://camera.example.net/frame", "http://camera.example/frame", false)]
+    [TestCase("http://user:password@camera.example/frame", "http://camera.example", false)]
+    [TestCase("http://camera.example/frame", "", false)]
+    public void HttpRulesMatchExactOriginsAndEndpoints(string url, string rules, bool expected)
+    {
+        var match = assembly.GetType("AiGenieGoalSource").GetMethod("IsAllowedHttpUrl", BindingFlags.Static | BindingFlags.NonPublic);
+        Assert.That(match.Invoke(null, new object[] {new Uri(url), rules}), Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void LocalFolderRulesKeepEmptyListBehaviorAndRejectSiblingPaths()
+    {
+        var allowed = Path.Combine(folder, "images");
+        Directory.CreateDirectory(allowed);
+        var inside = Path.Combine(allowed, "readme.txt");
+        var sibling = Path.Combine(folder, "images-backup.txt");
+        File.WriteAllText(inside, "allowed");
+        File.WriteAllText(sibling, "outside");
+        var getFile = assembly.GetType("AiGenieGoalSource").GetMethod("GetLocalFile", BindingFlags.Static | BindingFlags.NonPublic);
+        Assert.That(((FileInfo)getFile.Invoke(null, new object[] {inside, allowed})).FullName, Is.EqualTo(inside));
+        Assert.That(((FileInfo)getFile.Invoke(null, new object[] {sibling, ""})).FullName, Is.EqualTo(sibling));
+        var error = Assert.Throws<TargetInvocationException>(() => getFile.Invoke(null, new object[] {sibling, allowed}));
+        Assert.That(error.InnerException.Message, Does.Contain("outside Allowed local folders"));
+    }
+
     string MakeParent(){Start();replies.Enqueue(Action("save_widget"));replies.Enqueue(Complete);Run();Assert.That((string)TaskRecord()["state"],Is.EqualTo("completed"));string parent=taskId;taskId=Guid.NewGuid().ToString("N");return parent;}
-    JObject Run()=>JObject.FromObject(Invoke("AiGenieGoals","Run",new Dictionary<string,object>{["job"]=job,["running"]=new Func<bool>(()=>true)},new Func<string,object,object>(Call),folder,Path.Combine(folder,"widget_objective_prompt.md")));
+    [Test]
+    public void RetryReusesPreviousUserPathAndChecksCurrentFolders()
+    {
+        var file = Path.Combine(folder, "retry source.txt");
+        File.WriteAllText(file, "Expected source contents");
+        var otherFolder = Directory.CreateDirectory(Path.Combine(folder, "other"));
+
+        void StartReading(string message)
+        {
+            var request = StartRequest(false);
+            var input = (JObject)request["input"];
+            input["goalTypes"] = new JArray("automation");
+            input["request"]["message"] = message;
+            Invoke("AiGenieGoals", "Start", request, new Func<string, object, object>(Call));
+            replies.Enqueue(new JObject {
+                ["version"] = 1, ["action"] = "run_source_script", ["title"] = "Read file",
+                ["message"] = "", ["source"] = file,
+                ["script"] = "return {content: input, label: 'Read file'};"
+            }.ToString());
+        }
+
+        StartReading("Read \"" + file + "\".");
+        replies.Enqueue("{\"version\":1,\"action\":\"fail\",\"title\":\"Blocked\",\"message\":\"Folder denied\"}");
+        Run(allowedLocalFolders: otherFolder.FullName);
+        Assert.That((string)TaskRecord()["state"], Is.EqualTo("failed"));
+
+        taskId = Guid.NewGuid().ToString("N");
+        StartReading("Riprova");
+        replies.Enqueue(Complete);
+        Run(allowedLocalFolders: folder);
+        Assert.That((string)TaskRecord()["state"], Is.EqualTo("completed"), TaskRecord().ToString());
+        Assert.That(lastMessages.ToString(), Does.Contain("PREVIOUS USER REQUEST").And.Contain("Expected source contents"));
+    }
+
+    JObject Run(string maximumSourceSize=null, string inlineExtensions=null, string allowedLocalFolders="")=>JObject.FromObject(Invoke("AiGenieGoals","Run",new Dictionary<string,object>{["job"]=job,["running"]=new Func<bool>(()=>true)},new Func<string,object,object>(Call),folder,Path.Combine(folder,"widget_objective_prompt.md"),"",allowedLocalFolders,maximumSourceSize,inlineExtensions));
     void CleanRunners(string address=null)=>Invoke("AiGenieGoals","CleanupRunners",new Func<string,object,object>(Call),address,new Action<string>(_=>{}));
     string Action(string action,string name="counter") {
         var value=new JObject{["version"]=1,["action"]=action,["title"]="Counter",["message"]="Counter prepared",
@@ -453,9 +680,34 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
         Assert.That(Invoke("GoalDeploymentStatus","IsSettled",folder,taskId),Is.EqualTo(settled));
     }
 
-    [Test] public void LostStartReceiptNeverCreatesOrRunsASecondProgram(){Start();Start();Assert.That(creates,Is.EqualTo(1));Assert.That(runs,Is.EqualTo(1));Assert.That((int)TaskRecord()["runnerProgramId"],Is.EqualTo(1032));}
+    [TestCase("[{\"Message\":\"Invalid runner\"}]")]
+    [TestCase(null)]
+    public void RunnerStartsOnlyAfterConfirmedCompilation(string compilerResponse) {
+        runnerCompilerResponse=compilerResponse;
+        Assert.Throws<TargetInvocationException>(()=>Start());
+        Assert.That(runnerCompilations,Is.EqualTo(1));
+        Assert.That(runs,Is.Zero);
+        Assert.That((string)TaskRecord()["state"],Is.EqualTo("failed"));
+    }
+
+    [Test] public void LostStartReceiptNeverCreatesOrRunsASecondProgram(){Start();Start();Assert.That(creates,Is.EqualTo(1));Assert.That(runnerCompilations,Is.EqualTo(1));Assert.That(runs,Is.EqualTo(1));Assert.That((int)TaskRecord()["runnerProgramId"],Is.EqualTo(1032));}
     [Test] public void DisabledWidgetCapabilityCreatesNothing(){Assert.Throws<TargetInvocationException>(()=>Invoke("AiGenieGoals","Start",StartRequest(false),new Func<string,object,object>(Call)));Assert.That(creates,Is.Zero);}
     [Test] public void SavedWidgetIsReadBackAndLinkedBeforeCompletion(){Start();replies.Enqueue(Action("save_widget"));replies.Enqueue(Complete);Run();Assert.That((string)TaskRecord()["state"],Is.EqualTo("completed"));Assert.That(((JArray)TaskRecord()["artifacts"]).Count,Is.EqualTo(1));Assert.That(saves,Is.EqualTo(3));}
+    [Test] public void SaveWidgetIgnoresExtraFieldsAndReportsNamesWithoutTheirValues() {
+        Start();
+        var action=JObject.Parse(Action("save_widget"));
+        action["notes"]="unused outer value";
+        action["widget"]["settings"]="unused inner value";
+        replies.Enqueue(action.ToString());
+        replies.Enqueue(Complete);
+        Run();
+        var task=TaskRecord();
+        Assert.That((string)task["state"],Is.EqualTo("completed"));
+        Assert.That(generations,Is.EqualTo(2));
+        Assert.That(saves,Is.EqualTo(3));
+        Assert.That((string)task["operations"][0]["details"],Does.Contain("Ignored extra save_widget fields")
+            .And.Contain("\"notes\"").And.Contain("widget.\"settings\"").And.Not.Contain("unused"));
+    }
     [Test] public void SuccessfulGeminiStepsKeepDiagnosticsBesideTheResult() {
         Start();
         geminiDiagnostics=new JObject {["provider"]="Gemini",["model"]="gemini-test",["elapsedMs"]=120,["finishReason"]="STOP",

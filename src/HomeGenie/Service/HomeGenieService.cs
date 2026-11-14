@@ -63,6 +63,7 @@ namespace HomeGenie.Service
         #region Private Fields declaration
 
         private static readonly Logger _log = LogManager.GetCurrentClassLogger();
+        private readonly object schedulerDatabaseLock = new object();
 
         private MigService migService;
         private WebServiceGateway webGateway;
@@ -623,7 +624,30 @@ namespace HomeGenie.Service
 
         public bool UpdateSchedulerDatabase()
         {
-            return Utility.UpdateXmlDatabase(masterControlProgram.SchedulerService.Items, "scheduler.xml", UpdateDatabaseErrorHandler);
+            lock (schedulerDatabaseLock)
+            {
+                var schedules = masterControlProgram.SchedulerService.Items.ToArray().ToList();
+                var file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scheduler.xml");
+                var temporaryFile = file + ".tmp";
+                try
+                {
+                    if (!Utility.UpdateXmlDatabase(schedules, temporaryFile, UpdateDatabaseErrorHandler))
+                        return false;
+
+                    File.Move(temporaryFile, file, overwrite: true);
+                    return true;
+                }
+                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+                {
+                    return UpdateDatabaseErrorHandler(schedules.GetType(), ex);
+                }
+                finally
+                {
+                    try { File.Delete(temporaryFile); }
+                    catch (IOException) { }
+                    catch (UnauthorizedAccessException) { }
+                }
+            }
         }
 
         /// <summary>

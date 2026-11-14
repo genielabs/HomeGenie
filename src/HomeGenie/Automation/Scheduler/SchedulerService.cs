@@ -1,4 +1,4 @@
-﻿/*
+/*
    Copyright 2012-2025 G-Labs (https://github.com/genielabs)
 
    This program is free software: you can redistribute it and/or modify
@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Text.RegularExpressions;
@@ -29,6 +30,7 @@ using System.Text.RegularExpressions;
 using GLabs.Logging;
 using Innovative.SolarCalculator;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 using HomeGenie.Service.Constants;
 
@@ -62,7 +64,7 @@ namespace HomeGenie.Automation.Scheduler
         public void Start()
         {
             Stop();
-            serviceChecker = new Timer(CheckScheduledEvents); //, null, 1000, 1000);
+            serviceChecker = new Timer(CheckScheduledEvents);
             serviceChecker.Change((60 - DateTime.Now.Second) * 1000, Timeout.Infinite);
         }
 
@@ -71,14 +73,8 @@ namespace HomeGenie.Automation.Scheduler
             if (serviceChecker == null) return;
             serviceChecker.Dispose();
             serviceChecker = null;
-            for (int i = 0; i < events.Count; i++)
-            {
-                var eventItem = events[i];
-                if (eventItem.ScriptEngine != null)
-                {
-                    eventItem.ScriptEngine.StopScript();
-                }
-            }
+            foreach (var item in events.ToArray())
+                item.ScriptEngine?.StopScript();
         }
 
         private void CheckScheduledEvents(object state)
@@ -86,14 +82,17 @@ namespace HomeGenie.Automation.Scheduler
             if (serviceChecker == null) return; // disposed by Stop()
             serviceChecker.Change((60 - DateTime.Now.Second) * 1000, Timeout.Infinite);
             var date = DateTime.Now;
-            for (int e = 0; e < events.Count; e++)
+            // A one-time event can remove itself while this loop is running.
+            foreach (var eventItem in events.ToArray())
             {
-                var eventItem = events[e];
                 if (!eventItem.IsEnabled) continue;
                 // execute items only once instead of repeating for the whole minute
                 string currentOccurrence = date.ToUniversalTime().ToString(FORMAT_DATETIME);
                 if (eventItem.LastOccurrence != currentOccurrence && IsScheduling(date, eventItem.CronExpression))
                 {
+                    var oneTime = TryGetOneTime(eventItem.Data, out var time);
+                    if (oneTime && time.Year != date.Year) continue;
+
                     masterControlProgram.HomeGenie.MigService.RaiseEvent(
                         this,
                         Domains.HomeAutomation_HomeGenie,
@@ -105,6 +104,8 @@ namespace HomeGenie.Automation.Scheduler
                     // update last occurrence value
                     eventItem.LastOccurrence = currentOccurrence;
 
+                    Action onFinished = oneTime ? () => RemoveOneTime(eventItem) : null;
+
                     // execute associated task if any
                     if (!String.IsNullOrWhiteSpace(eventItem.Script))
                     {
@@ -113,16 +114,53 @@ namespace HomeGenie.Automation.Scheduler
                             eventItem.ScriptEngine = new SchedulerScriptingEngine();
                             eventItem.ScriptEngine.SetHost(masterControlProgram.HomeGenie, eventItem);
                         }
-                        eventItem.ScriptEngine.StartScript();
+                        eventItem.ScriptEngine.StartScript(onFinished);
+                    }
+                    else
+                    {
+                        onFinished?.Invoke();
                     }
                 }
             }
         }
 
+        private void RemoveOneTime(SchedulerItem item)
+        {
+            if (ReferenceEquals(Get(item.Name), item))
+                RemoveAndSave(item.Name);
+        }
+
+        internal static bool TryGetOneTime(string data, out DateTime time)
+        {
+            time = default;
+            if (string.IsNullOrWhiteSpace(data)) return false;
+            try
+            {
+                var schedule = JObject.Parse(data);
+                return TryGetOneTime(schedule, out time);
+            }
+            catch (JsonException)
+            {
+                return false;
+            }
+        }
+
+        internal static bool TryGetOneTime(JObject data, out DateTime time)
+        {
+            time = default;
+            if (data?["itemType"]?.ToString() != "4" ||
+                data["time"] is not JArray { Count: 1 } slots || slots[0] is not JObject slot)
+                return false;
+            var date = data["from"]?.ToString();
+            var start = slot["start"]?.ToString();
+            return date == data["to"]?.ToString() && start == slot["end"]?.ToString() &&
+                DateTime.TryParseExact(date + " " + start, FORMAT_DATETIME, CultureInfo.InvariantCulture,
+                    DateTimeStyles.None, out time);
+        }
+
         public SchedulerItem Get(string name)
         {
-            var eventItem = events.Find(e => String.Equals(e.Name, name, StringComparison.CurrentCultureIgnoreCase));
-            return eventItem;
+            return events.Find(e => String.Equals(e.Name, name, StringComparison.CurrentCultureIgnoreCase));
         }
 
         public SchedulerItem AddOrUpdate(string name, string cronExpression, string data = null,
@@ -159,6 +197,12 @@ namespace HomeGenie.Automation.Scheduler
             return eventItem;
         }
 
+        internal void NotifyOneTimeChanged(string name)
+        {
+            masterControlProgram.HomeGenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie,
+                SourceModule.Scheduler, name, Properties.SchedulerOneTimeChanged, name);
+        }
+
         public bool SetScript(string name, string script)
         {
             var eventItem = Get(name);
@@ -193,6 +237,21 @@ namespace HomeGenie.Automation.Scheduler
                 return true;
             }
             return false;
+        }
+
+        internal bool RemoveAndSave(string name)
+        {
+            var item = Get(name);
+            Remove(name);
+            if (!masterControlProgram.HomeGenie.UpdateSchedulerDatabase())
+            {
+                if (item != null) Items.Add(item);
+                return false;
+            }
+
+            if (item != null && TryGetOneTime(item.Data, out _))
+                NotifyOneTimeChanged(name);
+            return true;
         }
 
         public bool Remove(string name)
@@ -436,9 +495,8 @@ namespace HomeGenie.Automation.Scheduler
 
         public void OnModuleUpdate(object eventData)
         {
-            for (int i = 0; i < events.Count; i++)
+            foreach (var item in events.ToArray())
             {
-                var item = events[i];
                 if (item.ScriptEngine != null)
                 {
                     item.ScriptEngine.RouteModuleEvent(eventData);

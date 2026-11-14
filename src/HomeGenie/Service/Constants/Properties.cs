@@ -41,6 +41,8 @@ namespace HomeGenie.Service.Constants
             = "Scheduler.Error";
         public const string SchedulerScriptStatus
             = "Scheduler.ScriptStatus";
+        public const string SchedulerOneTimeChanged
+            = "Scheduler.OneTimeChanged";
         public const string SchedulerTriggeredEvent
             = "Scheduler.TriggeredEvent";
         public const string ProgramEvent

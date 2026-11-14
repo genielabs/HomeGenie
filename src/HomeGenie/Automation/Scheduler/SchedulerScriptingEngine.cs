@@ -121,7 +121,7 @@ namespace HomeGenie.Automation.Scheduler
             get { return isRunning; }
         }
 
-        public void StartScript()
+        public void StartScript(Action onFinished = null)
         {
             if (homegenie == null || eventItem == null || isRunning || String.IsNullOrWhiteSpace(eventItem.Script))
                 return;
@@ -190,6 +190,7 @@ namespace HomeGenie.Automation.Scheduler
                 }
                 homegenie.RaiseEvent(this, Domains.HomeAutomation_HomeGenie, SourceModule.Scheduler, eventItem.Name,
                     Properties.SchedulerScriptStatus, eventItem.Name + ":End");
+                onFinished?.Invoke();
             });
             programThread.IsBackground = true;
             try

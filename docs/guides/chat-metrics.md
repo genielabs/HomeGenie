@@ -17,7 +17,7 @@ The Gemini Intent Handler, Widget Genie, Automan and Local AI attach an optional
 
 Durations use `Stopwatch`, independently of wall-clock changes. Preparation, model generation and action time can overlap across tool rounds; these values should not be added to calculate total duration. Automan generation time is recorded at the last model response before deployment, while action time includes deployment attempts and recovery. Speech synthesis and browser network/playback time are not included.
 
-User messages are persisted before provider generation. Failed, cancelled and pending request pairs remain in history but are omitted from `System.Utility/ChatHistory/GetContext`. This endpoint returns only `role` and `parts`, preventing diagnostic metadata from reaching providers. Nonchat Local AI requests using `noHistory` do not persist telemetry.
+User messages are persisted before provider generation. Failed, cancelled and pending request pairs remain in history but are omitted from `System.Utility/ChatHistory/GetContext`. This endpoint returns only `role` and `parts`, preventing diagnostic metadata from reaching providers. When a profile is supplied, it keeps user messages from completed turns and includes a previous reply only if all context options and capabilities enabled for that reply remain enabled. Unprofiled imported user messages are also kept. These rules apply to the provider view of history and do not modify saved messages. Nonchat Local AI requests using `noHistory` do not persist telemetry.
 
 The frontend retains metadata when loading history without adding visible timestamp labels. Updates should install Chat History Service 1.0.4 before the updated Genie programs. Packages: homegenie-base 1.0.9 and homegenie-ml-ai 1.0.14.
 

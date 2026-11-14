@@ -13,6 +13,7 @@
   "ai_dashboard_select_preset": "Select the original preset and update it in Preferences before opening this dashboard.",
 
   "ai_goals": "Goals",
+  "ai_task_try_to_fix": "Try a fix",
   "ai_task_waiting": "Waiting",
   "ai_task_cancelled": "Cancelled",
   "ai_task_interrupted": "Interrupted",
@@ -87,6 +88,8 @@
   "scheduling_no_occurrences": "No occurrences in the selected day.",
   "scheduling_events": "Scheduled events",
   "scheduling_others": "Other events",
+  "scheduling_one_time": "One time",
+  "scheduling_one_time_missed": "Execution not confirmed",
   "scheduling_disabled": "Disabled",
   "scheduling_add_new_event": "Add new event",
   "not_scheduled_day": "Not scheduled in the selected day.",
