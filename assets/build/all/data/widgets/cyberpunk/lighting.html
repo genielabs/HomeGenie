@@ -11,6 +11,11 @@
       <button class="hud-button" type="button" (click)="toggleLight(0)" disabled aria-pressed="false">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v9M6.3 6.9a8 8 0 1 0 11.4 0"/></svg>
       </button>
+      <div class="level-control" hidden>
+        <input type="range" min="0" max="100" step="1" value="0" disabled
+               (input)="previewLevel(0, event.target.value)" (change)="setLevel(0, event.target.value)">
+        <output aria-hidden="true"></output>
+      </div>
     </li>
     <li class="circuit" #light2>
       <span class="material-symbols-outlined circuit-icon" aria-hidden="true">lightbulb</span>
@@ -18,6 +23,11 @@
       <button class="hud-button" type="button" (click)="toggleLight(1)" disabled aria-pressed="false">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v9M6.3 6.9a8 8 0 1 0 11.4 0"/></svg>
       </button>
+      <div class="level-control" hidden>
+        <input type="range" min="0" max="100" step="1" value="0" disabled
+               (input)="previewLevel(1, event.target.value)" (change)="setLevel(1, event.target.value)">
+        <output aria-hidden="true"></output>
+      </div>
     </li>
     <li class="circuit" #light3>
       <span class="material-symbols-outlined circuit-icon" aria-hidden="true">lightbulb</span>
@@ -25,6 +35,11 @@
       <button class="hud-button" type="button" (click)="toggleLight(2)" disabled aria-pressed="false">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v9M6.3 6.9a8 8 0 1 0 11.4 0"/></svg>
       </button>
+      <div class="level-control" hidden>
+        <input type="range" min="0" max="100" step="1" value="0" disabled
+               (input)="previewLevel(2, event.target.value)" (change)="setLevel(2, event.target.value)">
+        <output aria-hidden="true"></output>
+      </div>
     </li>
   </ul>
 </section>

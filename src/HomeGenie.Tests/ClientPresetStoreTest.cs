@@ -74,7 +74,6 @@ public class ClientPresetStoreTest
             catch (TargetInvocationException error) { ExceptionDispatchInfo.Capture(error.InnerException).Throw(); throw; }
         }
         public JObject Save(string name, JObject payload) => (JObject)Invoke("Save", name, payload);
-        public JObject ApplyDashboard(string name, JObject payload, string[] catalog) => (JObject)Invoke("ApplyDashboard", name, payload, catalog);
         public JObject Get(string name) => (JObject)Invoke("Get", name);
         public JObject Delete(string name, JObject payload) => (JObject)Invoke("Delete", name, payload);
         public string[] List() => (string[])Invoke("List");
@@ -91,52 +90,6 @@ public class ClientPresetStoreTest
         Assert.That(receipt["Status"]!.Value<string>(), Is.EqualTo("Ok"));Assert.That(receipt["revision"]!.Value<long>(), Is.EqualTo(revision));Assert.That(receipt["changed"]!.Value<bool>(), Is.EqualTo(changed));
     }
     private static void Conflict(JObject receipt) {Assert.That(receipt["Code"]!.Value<string>(), Is.EqualTo("PresetConflict"));}
-
-    static JObject DashboardRequest(string mode = "create", string name = "My room", long revision = 1) => new() {
-        ["mode"] = mode, ["dashboardName"] = name, ["widgetId"] = "room/panel", ["expectedRevision"] = revision,
-        ["clientId"] = "ai:origin", ["requestId"] = "goal" };
-    [Test] public void DashboardCreationPreservesOtherSettingsAndStandardWidgets() {
-        var before=Payload();store.Save("room",before);
-        var reply=store.ApplyDashboard("room",DashboardRequest(),new[]{"room/panel"});Ok(reply,2);
-        var after=store.Get("room");
-        Assert.That(JToken.DeepEquals(after["config"]["dashboards"][0],before["config"]["dashboards"][0]),Is.True);
-        Assert.That(JToken.DeepEquals(after["config"]["modules"],before["config"]["modules"]),Is.True);
-        Assert.That(JToken.DeepEquals(after["preferences"],before["preferences"]),Is.True);
-        Assert.That((string)after["config"]["dashboards"][1]["config"]["layout"]["widget"]["configuration"]["componentId"],Is.EqualTo("room/panel"));
-        Assert.That((string)reply["dashboardName"],Is.EqualTo("My room"));
-    }
-    [Test] public void DashboardUpdatePreservesSameContainerBindingsAndIsNoOpWhenUnchanged() {
-        var before=Payload();var dashboard=before["config"]["dashboards"][0];
-        dashboard["config"]=JObject.Parse("{theme:{color:'red'},layout:{mode:'standard',widget:{type:'custom-widget',module:{moduleId:'Demo:1'},configuration:{componentId:'room/panel',size:'dashboard',boundModules:{light:'Demo:2'}}}}}");
-        store.Save("room",before);Ok(store.ApplyDashboard("room",DashboardRequest("update","local"),new[]{"room/panel"}),2);
-        var after=store.Get("room");Assert.That(JToken.DeepEquals(after["config"]["dashboards"][0]["widgets"],dashboard["widgets"]),Is.True);
-        Assert.That(JToken.DeepEquals(after["config"]["dashboards"][0]["config"]["layout"]["widget"],dashboard["config"]["layout"]["widget"]),Is.True);
-        Ok(store.ApplyDashboard("room",DashboardRequest("update","local",2),new[]{"room/panel"}),2,false);
-    }
-    [Test] public void StaleDashboardApplicationDoesNotOverwriteOrRebase() {
-        store.Save("room",Payload());store.Save("room",Payload("other edit",1));
-        Conflict(store.ApplyDashboard("room",DashboardRequest(),new[]{"room/panel"}));
-        Assert.That(((JArray)store.Get("room")["config"]["dashboards"]).Count,Is.EqualTo(1));
-    }
-    [Test] public void DashboardApplicationRequiresCatalogMembershipAndExplicitCreateOrUpdate() {
-        store.Save("room",Payload());
-        Assert.That((string)store.ApplyDashboard("room",DashboardRequest(),Array.Empty<string>())["Code"],Is.EqualTo("InvalidDashboard"));
-        Assert.That((string)store.ApplyDashboard("room",DashboardRequest("create","local"),new[]{"room/panel"})["Code"],Is.EqualTo("DashboardExists"));
-        Assert.That((string)store.ApplyDashboard("room",DashboardRequest("update","absent"),new[]{"room/panel"})["Code"],Is.EqualTo("DashboardNotFound"));
-        Assert.That((long)store.Get("room")["revision"],Is.EqualTo(1));
-    }
-    [Test] public void ConcurrentDashboardCreatesOnlyOneConditionalWinner() {
-        store.Save("room",Payload());var other=NewStore();
-        var results=new JObject[2];Parallel.Invoke(()=>results[0]=store.ApplyDashboard("room",DashboardRequest(name:"One"),new[]{"room/panel"}),
-            ()=>results[1]=other.ApplyDashboard("room",DashboardRequest(name:"Two"),new[]{"room/panel"}));
-        Assert.That(results.Count(r=>(string)r["Status"]=="Ok"),Is.EqualTo(1));
-        Assert.That(((JArray)store.Get("room")["config"]["dashboards"]).Count,Is.EqualTo(2));
-    }
-    [Test] public void FailedDashboardPublicationLeavesPresetUnchanged() {
-        store.Save("room",Payload());string before=File.ReadAllText(Path.Combine(root,"room.json"));
-        Assert.Throws<IOException>(()=>NewStore(true).ApplyDashboard("room",DashboardRequest(),new[]{"room/panel"}));
-        Assert.That(File.ReadAllText(Path.Combine(root,"room.json")),Is.EqualTo(before));
-    }
 
     [Test] public void FirstSaveAfterReloadAllowsLocalDashboardNavigationOnlyInItsBaseProof() {
         var original=Payload();original["preferences"]["ui"]=new JObject{["dashboard"]="Dashboard",["language"]="it"};store.Save("room",original);
@@ -277,29 +230,6 @@ public class ClientPresetStoreTest
         var request=Payload();request["clientId"]=new string('x',129);request["requestId"]=new JObject();announcing.Save("room",request);
         announcing.Save("room",Payload("edited",1));Assert.That(changes.Select(c=>(long)c["revision"]),Is.EqualTo(new long[]{1,2}));
         foreach(var change in changes) {Assert.That((string)change["clientId"],Is.Empty);Assert.That((string)change["requestId"],Is.Empty);}
-    }
-
-    [TestCase("object")][TestCase("bytes")][TestCase("text")][TestCase("dictionary")]
-    public void DashboardApiHandlerAcceptsNativeAndHttpPayloads(string transport) {
-        store.Save("room",Payload());
-        var type=storeType.DeclaringType;var instance=Activator.CreateInstance(type);
-        var data=type.GetField("Data",BindingFlags.NonPublic|BindingFlags.Instance).GetValue(instance);
-        data.GetType().GetField("Root").SetValue(data,root);
-        type.GetMethod("Run",BindingFlags.NonPublic|BindingFlags.Instance).Invoke(instance,null);
-        var api=type.GetField("Api",BindingFlags.NonPublic|BindingFlags.Instance).GetValue(instance);
-        var handlers=(System.Collections.Generic.Dictionary<string,Func<object,object>>)api.GetType().GetField("Handlers").GetValue(api);
-        var command=Activator.CreateInstance(type.Assembly.GetType("PresetCommand"));
-        var payload=DashboardRequest();
-        object body=transport switch {
-            "object"=>payload,
-            "bytes"=>System.Text.Encoding.UTF8.GetBytes(payload.ToString()),
-            "text"=>payload.ToString(),
-            _=>payload.ToObject<System.Collections.Generic.Dictionary<string,object>>()
-        };
-        command.GetType().GetField("Data").SetValue(command,body);
-        var reply=(JObject)handlers["HomeAutomation.HomeGenie/Config/Client.PresetsApplyDashboard/"](command);
-        Ok(reply,2);Assert.That((string)reply["dashboardName"],Is.EqualTo("My room"));
-        Assert.That((string)store.Get("room")["config"]["dashboards"][1]["config"]["layout"]["widget"]["configuration"]["componentId"],Is.EqualTo("room/panel"));
     }
 
     [Test] public void DistributedApiHandlerEmitsTheDeclaredPropertyOnlyForCommittedChanges() {

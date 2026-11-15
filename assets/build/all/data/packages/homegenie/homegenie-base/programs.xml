@@ -683,12 +683,13 @@ public static class ConversationTasks {
                 string id=(string)item["id"];
                 if((string)item["kind"]=="widget")return item.Properties().All(p=&gt;new[]{"kind","id"}.Contains(p.Name)) &amp;&amp;
                     id.StartsWith(prefix,StringComparison.Ordinal) &amp;&amp; System.Text.RegularExpressions.Regex.IsMatch(id.Substring(prefix.Length),@"\A[a-z][a-z0-9-]{0,63}\z");
-                if((string)item["kind"]=="dashboard")return item.Properties().All(p=&gt;new[]{"kind","id","preset","widgetId","revision","clientId","requestId"}.Contains(p.Name)) &amp;&amp;
+                if((string)item["kind"]=="dashboard")return item.Properties().All(p=&gt;new[]{"kind","id","preset","widgetId","mode","revision","clientId","requestId"}.Contains(p.Name)) &amp;&amp;
                     !string.IsNullOrWhiteSpace(id) &amp;&amp; id.Length&lt;=120 &amp;&amp; !id.Any(char.IsControl) &amp;&amp; id.IndexOfAny(new[]{'/','\\'})&lt;0 &amp;&amp;
                     item["preset"]?.Type==JTokenType.String &amp;&amp; !string.IsNullOrWhiteSpace((string)item["preset"]) &amp;&amp; ((string)item["preset"]).Length&lt;=255 &amp;&amp;
                     item["widgetId"]?.Type==JTokenType.String &amp;&amp; ((string)item["widgetId"]).StartsWith(prefix,StringComparison.Ordinal) &amp;&amp;
                     System.Text.RegularExpressions.Regex.IsMatch(((string)item["widgetId"]).Substring(prefix.Length),@"\A[a-z][a-z0-9-]{0,63}\z") &amp;&amp;
-                    item["revision"]?.Type==JTokenType.Integer &amp;&amp; (long)item["revision"]&gt;0 &amp;&amp; (long)item["revision"]&lt;=9007199254740991 &amp;&amp;
+                    (item["mode"]?.Type==JTokenType.String &amp;&amp; ((string)item["mode"]=="create" || (string)item["mode"]=="update") ||
+                     item["mode"]==null &amp;&amp; item["revision"]?.Type==JTokenType.Integer &amp;&amp; (long)item["revision"]&gt;0 &amp;&amp; (long)item["revision"]&lt;=9007199254740991) &amp;&amp;
                     System.Text.RegularExpressions.Regex.IsMatch((string)item["clientId"]??"",@"\A[a-f0-9]{32}\z") &amp;&amp;
                     System.Text.RegularExpressions.Regex.IsMatch((string)item["requestId"]??"",@"\A[a-f0-9]{32}\z");
                 if((string)item["kind"]!="program" || item.Properties().Any(p=&gt;!new[]{"kind","id","key","name"}.Contains(p.Name)))return false;
@@ -735,11 +736,11 @@ public static class ConversationTasks {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>chat-history-service</Id>
-      <Version>1.0.18</Version>
+      <Version>1.0.19</Version>
       <Required>true</Required>
-      <Checksum>3832C257DCDC544B3C1FC6E48872E462</Checksum>
+      <Checksum>9A31F0815503D8B307068933525FE44D</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>577</Address>
@@ -760,7 +761,7 @@ Program.Run();
     <ScriptSource>var presets = new ClientPresetStore(Data.GetFolder(PresetsFolder), change =&gt;
     Program.Emit("Client.PresetsChanged", change.ToString(Formatting.None)));
 
-Api.Handle($"{apiBaseUrl}Protocol", args =&gt; new { version = 2, events = 1, dashboards = 1 });
+Api.Handle($"{apiBaseUrl}Protocol", args =&gt; new { version = 2, events = 1 });
 Api.Handle($"{apiBaseUrl}List", args =&gt; PresetRequest(() =&gt; presets.List()));
 Api.Handle($"{apiBaseUrl}Get/", args =&gt; PresetRequest(() =&gt; {
     var command = Api.Parse(args);
@@ -773,12 +774,6 @@ Api.Handle($"{apiBaseUrl}Add/", args =&gt; PresetRequest(() =&gt; {
 Api.Handle($"{apiBaseUrl}Delete/", args =&gt; PresetRequest(() =&gt; {
     var command = Api.Parse(args);
     return presets.Delete(command.GetOption(0), PresetBody(command.Data));
-}));
-
-Api.Handle($"{apiBaseUrl}ApplyDashboard/", args =&gt; PresetRequest(() =&gt; {
-    var command = Api.Parse(args);
-    var catalog = JArray.FromObject(Api.Call("HomeAutomation.HomeGenie/Config/Widgets.DashboardList"));
-    return presets.ApplyDashboard(command.GetOption(0), PresetBody(command.Data), catalog.Values&lt;string&gt;().ToArray());
 }));
 
 Program.GoBackground();
@@ -873,62 +868,6 @@ public class ClientPresetStore
             Write(name, next);
             Announce(name, Revision(next), "save", request);
             return Receipt(Revision(next), true);
-        }
-    }
-
-    /// &lt;summary&gt;Change only one dashboard layout, under the same preset CAS lock as ordinary saves.&lt;/summary&gt;
-    public JObject ApplyDashboard(string name, JObject request, string[] catalog)
-    {
-        lock (gate)
-        {
-            name = DefaultName(name);
-            string dashboardName = (string)request?["dashboardName"], widgetId = (string)request?["widgetId"];
-            string mode = (string)request?["mode"];
-            if (string.IsNullOrWhiteSpace(dashboardName) || dashboardName.Length &gt; 120 ||
-                dashboardName.Any(char.IsControl) || dashboardName.Contains('/') || dashboardName.Contains('\\') ||
-                !new[] { "create", "update" }.Contains(mode) || string.IsNullOrEmpty(widgetId) ||
-                catalog == null || !catalog.Contains(widgetId, StringComparer.Ordinal) ||
-                request?["expectedRevision"]?.Type != JTokenType.Integer)
-                return Error("InvalidDashboard", "Choose a dashboard name and a saved dashboard container.");
-            var current = Read(name);
-            if (current["config"] is not JObject config || current["preferences"] is not JObject || current["deleted"]?.Value&lt;bool&gt;() == true)
-                return Error("InvalidPreset", "The target preset no longer exists.");
-            if (config["dashboards"] is not JArray dashboards)
-                return Error("InvalidPreset", "The preset has no dashboard collection.");
-            var matches = dashboards.OfType&lt;JObject&gt;().Where(d =&gt; (string)d["name"] == dashboardName).ToArray();
-            if (matches.Length &gt; 1) return Error("InvalidDashboard", "The dashboard name is ambiguous.");
-            var dashboard = matches.SingleOrDefault();
-            if (mode == "create" &amp;&amp; dashboard != null) return Error("DashboardExists", "A dashboard with this name already exists; use update explicitly.");
-            if (mode == "update" &amp;&amp; dashboard == null) return Error("DashboardNotFound", "The dashboard to update no longer exists.");
-            // A stale request must not be rebased onto a newer preset, even if the layout looks identical.
-            if (!Matches(current, request)) return Conflict(current);
-            var next = Content(current);
-            var targetDashboards = (JArray)next["config"]["dashboards"];
-            var target = targetDashboards.OfType&lt;JObject&gt;().SingleOrDefault(d =&gt; (string)d["name"] == dashboardName);
-            if (target == null)
-            {
-                // Reuse the preset's dashboard theme without copying programs or widget instances.
-                var theme = dashboards.OfType&lt;JObject&gt;().FirstOrDefault()?["config"]?["theme"]?.DeepClone() ?? new JObject();
-                target = new JObject { ["name"] = dashboardName, ["description"] = "",
-                    ["config"] = new JObject { ["theme"] = theme }, ["widgets"] = new JArray() };
-                targetDashboards.Add(target);
-            }
-            if (target["config"] is not JObject) target["config"] = new JObject();
-            var settings = (JObject)target["config"];
-            var previous = settings["layout"]?["widget"];
-            // Updating the same container preserves its bound module, role bindings and other options.
-            var widget = (string)previous?["configuration"]?["componentId"] == widgetId ? previous.DeepClone()
-                : new JObject { ["type"] = "custom-widget", ["module"] = null,
-                    ["configuration"] = new JObject { ["componentId"] = widgetId, ["size"] = "dashboard" } };
-            settings["layout"] = new JObject { ["mode"] = "widget", ["widget"] = widget };
-            next["expectedRevision"] = request["expectedRevision"].DeepClone();
-            next["clientId"] = request["clientId"]?.DeepClone();next["requestId"] = request["requestId"]?.DeepClone();
-            var receipt = Save(name, next);
-            if ((string)receipt["Status"] == "Ok")
-            {
-                receipt["dashboardName"] = dashboardName;receipt["widgetId"] = widgetId;receipt["preset"] = name;
-            }
-            return receipt;
         }
     }
 
@@ -1115,11 +1054,11 @@ public class ClientPresetStore
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>client-configs</Id>
-      <Version>1.0.7</Version>
+      <Version>1.0.10</Version>
       <Required>true</Required>
-      <Checksum>C47EBFCEF851C7D9B259C7BA36EE1312</Checksum>
+      <Checksum>B431A7029F602478581D830F0619E704</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>111</Address>
@@ -1486,7 +1425,7 @@ void SaveConfig(string filePath, YamlConfig config)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>daily-energy-report</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -1764,7 +1703,7 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -2410,7 +2349,7 @@ public class DownloadManager : IDisposable
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>download-manager</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -2453,7 +2392,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -2781,7 +2720,7 @@ string GetDbName()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>energy-use-statistics</Id>
       <Version>1.0.9</Version>
       <Required>false</Required>
@@ -2956,7 +2895,7 @@ void InsertData(LiteDatabase db, LoggerEvent data) {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -3111,7 +3050,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>file-manager</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -3330,7 +3269,7 @@ public static class HttpHelper {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>homegenie-panel-notifications</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -3399,7 +3338,7 @@ public string[] GetHourLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>hourly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -3861,7 +3800,7 @@ class MqttCommand: MigInterfaceCommand {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>mqtt-network</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
@@ -4120,7 +4059,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>openweathermap</Id>
       <Version>1.0.6</Version>
       <Required>true</Required>
@@ -4212,7 +4151,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -4304,7 +4243,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -4376,7 +4315,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -5053,7 +4992,7 @@ public static class FfmpegHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>video-input</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -6358,7 +6297,7 @@ public class ThumbnailHelper
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>video-recorder</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -6439,7 +6378,7 @@ public string[] GetDayLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>weekly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -7340,7 +7279,7 @@ public static class ModuleSettingAction
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>ai-action-executor</Id>
       <Version>1.2.20</Version>
       <Required>true</Required>
@@ -7717,7 +7656,7 @@ public static class ProgramUpdateNotification {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.112</PackageVersion>
+      <PackageVersion>1.0.117</PackageVersion>
       <Id>notification-archive</Id>
       <Version>1.2.0</Version>
       <Required>true</Required>
@@ -10330,7 +10269,7 @@ For each save, name is a leaf slug; the host returns the full widget ID. Keep na
 To embed saved widget x/y, import('/widgets/x/y.module.js') in its parent controller and use &lt;x-y&gt;&lt;/x-y&gt; in HTML.
 For example, import /widgets/demo/analog-clock.module.js and use &lt;demo-analog-clock&gt;.
 Use only already saved dependencies. No fake paths or invented presets: current sizes are '',small,medium,big,dashboard.
-A dashboard container uses settings={defaultSize:'dashboard',sizeOptions:[]} as a literal class field. No settings menu overlays a dashboard container: omit the ordinary widget safe zone and its reserved top-right 48px padding/margin. Embedded ordinary widgets keep their own safe zone. Saving alone does not apply a dashboard. To create/apply it use apply_dashboard; claim application only after HOST RESULT confirms it. boundModule is optional for standalone panels.
+A dashboard container uses settings={defaultSize:'dashboard',sizeOptions:[]} as a literal class field. No settings menu overlays a dashboard container: omit the ordinary widget safe zone and its reserved top-right 48px padding/margin. Embedded ordinary widgets keep their own safe zone. Saving alone does not apply a dashboard. To create/apply it use apply_dashboard; only say the dashboard is ready for YoT after HOST RESULT confirms the result. boundModule is optional for standalone panels.
 ";
     static JObject Object(object value)=&gt;value as JObject ?? (value is string text?JObject.Parse(text):JObject.FromObject(value??new{}));
     static JObject Ok(object value) {var result=Object(value);if(!new[]{"ok","0"}.Contains(result["Status"]?.ToString().ToLowerInvariant()))throw new InvalidOperationException((string)result["Message"]??"Operation was not confirmed.");return result;}
@@ -10591,7 +10530,10 @@ A dashboard container uses settings={defaultSize:'dashboard',sizeOptions:[]} as 
         try {
             string route=ResolveProviderRoute(provider,call);
             local=route==LocalProviderRoute;
-            string providerName=local?"Lailama":"Gemini";
+            string providerName=route.Substring(ProviderRoutePrefix.Length);
+            string providerSuffix="-"+provider;
+            if(providerName.EndsWith(providerSuffix,StringComparison.Ordinal))
+                providerName=providerName.Substring(0,providerName.Length-providerSuffix.Length);
             int maxSteps=local?6:12;
             check();var scope=(JObject)job["request"].DeepClone();var task=read();
             string rootId=(string)task["rootTaskId"]??id;
@@ -10706,7 +10648,7 @@ A dashboard container uses settings={defaultSize:'dashboard',sizeOptions:[]} as 
                         (automation &amp;&amp; selectedProgramId==null?"\n"+SourceInstructions:"")+
                         (selectedProgramId==null?"":"\nEdit only the supplied program. Use save_program with name selected-program. Keep its name and language. Do not create a new program or any widgets.")+
                         "\nDASHBOARD APPLICATION: "+(dashboardTarget==null?"unavailable; do not apply dashboards":
-                            "available for the initiating client preset. If the user asks to create a dashboard, save its widgets, call apply_dashboard, and wait for host confirmation before returning complete. If the user asks to save only the container widget, skip apply_dashboard. apply_dashboard requires dashboardName (human name), mode (create or update), and name (owned widget leaf). Use create for a new dashboard, update only for an explicitly requested existing dashboard. Keep the dashboard name/preset/widget from inherited dashboard artifacts on revisions. Apply at most one dashboard per goal, after saving all widgets. This changes only the container layout, preserving Standard widgets and same-container bindings. Do not include preset credentials or configuration in model output."))+
+                            "available for the initiating client preset. If the user asks to create a dashboard, save its widgets and call apply_dashboard before returning complete. This prepares the dashboard for YoT, which applies it through its normal dashboard controls. If the user asks to save only the container widget, skip apply_dashboard. apply_dashboard requires dashboardName (human name), mode (create or update), and name (owned widget leaf). Use create for a new dashboard, update only for an explicitly requested existing dashboard. Keep the dashboard name/preset/widget from inherited dashboard artifacts on revisions. Apply at most one dashboard per goal, after saving all widgets. This changes only the container layout, preserving Standard widgets and same-container bindings. Do not include preset credentials or configuration in model output."))+
                     "\nOWNED WIDGET PREFIX: "+(prefix??"not assigned; propose folder on the first save_widget")+"\nCONFIRMED SAVED WIDGETS: "+PromptArtifacts(artifacts).ToString(Formatting.None)+
                     (sources.Count&gt;0?"\nRevise the supplied sources using the SAME leaf names and exact IDs/tags. Omit folder. Preserve unchanged widgets and their imports. At least one requested change must be saved before completion.":"");
                 string generation=Guid.NewGuid().ToString("N");
@@ -10860,21 +10802,11 @@ A dashboard container uses settings={defaultSize:'dashboard',sizeOptions:[]} as 
                             if(existing==null &amp;&amp; artifacts.Count&gt;=8)throw new InvalidOperationException("At most eight results per objective.");
                             if(existing!=null &amp;&amp; (string)existing["requestId"]==id)throw new InvalidOperationException("The dashboard was already applied in this objective; complete it.");
                             check();RequireCapability("widgets",scope,call,provider);
-                            var request=(JObject)dashboardTarget.DeepClone();string preset=(string)request["preset"];request.Remove("preset");
-                            request["dashboardName"]=dashboardName;request["widgetId"]=widgetId;request["mode"]=existing==null?action["mode"]:"update";
-                            // Announce as an external change even to the originating page until its guarded refresh succeeds.
-                            request["clientId"]="ai:"+(string)dashboardTarget["clientId"];request["requestId"]=id;
-                            JObject applied;
-                            try {applied=Object(call("HomeAutomation.HomeGenie/Config/Client.PresetsApplyDashboard/"+preset,request));}
-                            catch(Exception error) {throw new GoalStorageException("Dashboard application was not confirmed; inspect the preset before retrying: "+error.Message);}
-                            if((string)applied["Status"]!="Ok")throw new GoalStorageException("Dashboard not applied. Saved widgets remain available. "+(string)applied["Message"]);
-                            if((string)applied["dashboardName"]!=dashboardName || (string)applied["widgetId"]!=widgetId || (string)applied["preset"]!=preset || applied["revision"]?.Type!=JTokenType.Integer)
-                                throw new GoalStorageException("Unexpected dashboard application receipt; inspect the preset before retrying.");
-                            var artifact=new JObject{["kind"]="dashboard",["id"]=dashboardName,["preset"]=preset,["widgetId"]=widgetId,
-                                ["revision"]=applied["revision"],["clientId"]=dashboardTarget["clientId"],["requestId"]=id};
+                            var artifact=new JObject{["kind"]="dashboard",["id"]=dashboardName,["preset"]=dashboardTarget["preset"],["widgetId"]=widgetId,
+                                ["mode"]=existing==null?action["mode"]:"update",["clientId"]=dashboardTarget["clientId"],["requestId"]=id};
                             if(existing==null)artifacts.Add(artifact);else artifacts[artifacts.IndexOf(existing)]=artifact;
-                            written.Add("dashboard:"+dashboardName);operation["details"]="Dashboard applied: "+dashboardName+"\n"+action["message"];
-                            messages.Add(AiGenieCoordinator.Message("user","HOST RESULT: dashboard '"+dashboardName+"' applied successfully with container "+widgetId+". Complete the objective; do not apply it again."));
+                            written.Add("dashboard:"+dashboardName);operation["details"]="Dashboard ready: "+dashboardName+"\n"+action["message"];
+                            messages.Add(AiGenieCoordinator.Message("user","HOST RESULT: Dashboard '"+dashboardName+"' is ready. Complete with a short summary in the user's language. Mention the dashboard name and, if useful, the widgets created or reused. YoT handles the dashboard controls. Omit instructions to click Open dashboard and any commentary about opening, saving, or confirmation."));
                         } else if(kind=="run_source_script") {
                             if(!automation || selectedProgramId!=null)
                                 throw new InvalidOperationException("Source scripts are unavailable for this step.");
@@ -11164,9 +11096,8 @@ A dashboard container uses settings={defaultSize:'dashboard',sizeOptions:[]} as 
     static void ValidateDashboardTarget(JObject target) {
         if(target==null || target.Properties().Any(p=&gt;!new[]{"preset","expectedRevision","clientId"}.Contains(p.Name)) ||
             target["preset"]?.Type!=JTokenType.String || string.IsNullOrWhiteSpace((string)target["preset"]) || ((string)target["preset"]).Length&gt;255 ||
-            target["expectedRevision"]?.Type!=JTokenType.Integer || (long)target["expectedRevision"]&lt;1 || (long)target["expectedRevision"]&gt;9007199254740991 ||
             target["clientId"]?.Type!=JTokenType.String || !System.Text.RegularExpressions.Regex.IsMatch((string)target["clientId"],@"\A[a-f0-9]{32}\z"))
-            throw new InvalidOperationException("Invalid dashboard preset target. Refresh the client preset before starting.");
+            throw new InvalidOperationException("Invalid dashboard preset target.");
     }
     static void ValidateStep(JObject action,bool firstSave,Func&lt;string,object,object&gt; call) {
         if(action["action"]?.Type!=JTokenType.String || (string)action["action"]!="save_widget") {
@@ -11256,11 +11187,11 @@ A dashboard container uses settings={defaultSize:'dashboard',sizeOptions:[]} as 
   <PackageInfo>
     <Repository>homegenie</Repository>
     <PackageId>homegenie-base</PackageId>
-    <PackageVersion>1.0.112</PackageVersion>
+    <PackageVersion>1.0.117</PackageVersion>
     <Id>ai-genie-service</Id>
-    <Version>0.27.43</Version>
+    <Version>0.27.46</Version>
     <Required>true</Required>
-    <Checksum>DAF3B86B933DC4DD66D0088F9A48D485</Checksum>
+    <Checksum>641524B3378D2EC555F32576D63C6159</Checksum>
   </PackageInfo>
   <Domain>HomeAutomation.HomeGenie.Automation</Domain>
   <Address>583</Address>

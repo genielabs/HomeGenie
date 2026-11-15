@@ -24,7 +24,13 @@ class NeonLighting extends ControllerInstance {
   };
   disposed = false;
 
-  onInit() { this.declare({toggleLight: index => this.toggleLight(this.slots[index].state)}); }
+  onInit() {
+    this.declare({
+      toggleLight: index => this.toggleLight(this.slots[index].state),
+      previewLevel: (index, value) => this.previewLevel(this.slots[index].state, value),
+      setLevel: (index, value) => this.setLevel(this.slots[index].state, value)
+    });
+  }
 
   onCreate() {
     this.states = new Map();
@@ -34,8 +40,8 @@ class NeonLighting extends ControllerInstance {
       return {node: this.field(key).get(), state: this.states.get(module)};
     });
     for (const state of this.states.values()) this.subscribe(state.module, () => {
-      const on = this.isOn(state.module);
-      if (state.command && on === state.command.desired) this.finish(state);
+      const level = this.readLevel(state.module);
+      if (state.command && level !== null && state.command.matches(level)) this.finish(state);
       else this.render();
     });
     this.render();
@@ -48,10 +54,15 @@ class NeonLighting extends ControllerInstance {
     }
   }
 
-  isOn(module) {
+  readLevel(module) {
     const field = module?.field('Status.Level');
     if (module?.isOnline === false || !field || field.value == null || field.value === '') return null;
-    return Number.isFinite(field.decimalValue) ? field.decimalValue > 0 : null;
+    const level = field.decimalValue;
+    return Number.isFinite(level) && level >= 0 && level <= 1 ? level : null;
+  }
+
+  canDim(state) {
+    return ['dimmer', 'color'].includes(state?.module.type?.toLowerCase());
   }
 
   render() {
@@ -59,7 +70,8 @@ class NeonLighting extends ControllerInstance {
     this.model().title = labels.title;
     this.model().subtitle = labels.subtitle;
     this.slots.forEach(({node, state}, index) => {
-      const on = this.isOn(state?.module);
+      const level = this.readLevel(state?.module);
+      const on = level === null ? null : level > 0;
       const name = state?.module.name || labels.circuit.replace('{number}', index + 1);
       node.classList.toggle('is-on', on === true);
       node.classList.toggle('is-pending', !!state?.command);
@@ -73,6 +85,15 @@ class NeonLighting extends ControllerInstance {
       if (status.textContent !== text) status.textContent = text;
       const button = node.querySelector('button');
       button.disabled = on === null || !!state?.command;
+      const levelControl = node.querySelector('.level-control');
+      const slider = levelControl.querySelector('input');
+      const percent = state?.preview ?? (level === null ? null : Math.round(level * 100));
+      levelControl.hidden = !this.canDim(state);
+      slider.disabled = level === null || !!state?.command;
+      slider.value = String(percent ?? 0);
+      slider.setAttribute('aria-label', name);
+      slider.setAttribute('aria-valuetext', percent === null ? labels.unavailable : percent + '%');
+      levelControl.querySelector('output').textContent = percent === null ? '—' : percent + '%';
       button.setAttribute('aria-pressed', String(on === true));
       button.setAttribute('aria-label', labels.toggle.replace('{name}', name));
     });
@@ -80,15 +101,40 @@ class NeonLighting extends ControllerInstance {
 
   toggleLight(state) {
     if (this.disposed || !state || state.command) return;
-    const on = this.isOn(state.module);
-    if (on === null) return;
-    const command = {desired: !on};
+    const level = this.readLevel(state.module);
+    if (level === null) return;
+    const turnOn = level === 0;
+    this.sendCommand(state, turnOn ? 'Control.On' : 'Control.Off', undefined, value => (value > 0) === turnOn);
+  }
+
+  previewLevel(state, value) {
+    if (!this.canDim(state) || state.command) return;
+    state.preview = Number(value);
+    this.render();
+  }
+
+  setLevel(state, value) {
+    if (!this.canDim(state) || state.command) return;
+    state.preview = undefined;
+    const level = this.readLevel(state.module);
+    const percent = Number(value);
+    if (level === null || !Number.isInteger(percent) || percent < 0 || percent > 100 || Math.round(level * 100) === percent) {
+      this.render();
+      return;
+    }
+    this.sendCommand(state, 'Control.Level', percent, actual => percent === 0 ? actual === 0 : Math.abs(actual * 100 - percent) <= 1 && actual > 0);
+  }
+
+  sendCommand(state, action, value, matches) {
+    if (this.disposed) return;
+    state.preview = undefined;
+    const command = {matches};
     state.command = command;
     state.error = undefined;
     command.timer = setTimeout(() => this.finishIfCurrent(state, command, 'timeout'), 8000);
     this.render();
     try {
-      command.subscription = state.module.control(on ? 'Control.Off' : 'Control.On').subscribe({
+      command.subscription = state.module.control(action, value).subscribe({
         next: receipt => {
           const status = receipt?.response?.Status;
           if (receipt?.code != null && (receipt.code < 200 || receipt.code >= 300)

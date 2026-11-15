@@ -25,10 +25,10 @@
 .panel-code, .circuit-state { font-family: ui-monospace, Consolas, monospace; }
 .panel-code { padding: 6px 7px; color: var(--cyan); background: #22404b; font-size: 12px; }
 .panel-heading > .material-symbols-outlined { margin-inline-start: auto; color: var(--cyan); font-size: 20px; }
-.circuits { list-style: none; flex: 1; display: grid; grid-template-rows: repeat(3, minmax(54px, 1fr)); gap: 6px; margin: 0; padding: 0; }
+.circuits { list-style: none; flex: 1; display: grid; grid-template-rows: repeat(3, minmax(min-content, 1fr)); gap: 6px; margin: 0; padding: 0; }
 .circuit {
   display: grid; grid-template-columns: 24px minmax(0, 1fr) 46px; align-items: center; gap: 9px;
-  padding: 4px 12px 4px 9px; border: 1px solid #30445d; background: linear-gradient(100deg, #142032, #10182a 64%);
+  min-height: 54px; padding: 4px 12px 4px 9px; border: 1px solid #30445d; background: linear-gradient(100deg, #142032, #10182a 64%);
 }
 .circuit-description { display: grid; min-width: 0; }
 .circuit-description > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: clamp(13px, 4cqw, 20px); font-weight: 650; }
@@ -55,3 +55,12 @@
 .circuit button[aria-pressed="true"]:not(:disabled) { filter: drop-shadow(0 0 5px #79f4ed66); }
 .circuit button:disabled { cursor: default; opacity: .45; }
 .circuit button svg { display: block; }
+
+.level-control {
+  grid-column: 2 / -1; display: grid; grid-template-columns: minmax(0, 1fr) 4ch;
+  align-items: center; gap: 8px; margin-top: -5px;
+}
+.level-control[hidden] { display: none; }
+.level-control input { width: 100%; min-width: 0; margin: 0; accent-color: var(--cyan); cursor: pointer; }
+.level-control input:disabled { cursor: default; }
+.level-control output { color: var(--cyan); text-align: end; font: 11px ui-monospace, Consolas, monospace; }

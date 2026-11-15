@@ -56,6 +56,8 @@ HomeGenie follows the official **Microsoft .NET Coding Conventions** and **Namin
 
 We use an `.editorconfig` file in the repository to help enforce these styles automatically. Please ensure your editor is configured to use it.
 
+Program IDs in bundled HomeGenie packages must be below 1000. IDs from 1000 onward are reserved for user programs, including clones of bundled programs.
+
 ## 🚀 Releasing a New Version (for Maintainers)
 
 To create a new release, a new tag must be pushed to the repository using the Semantic Versioning format:

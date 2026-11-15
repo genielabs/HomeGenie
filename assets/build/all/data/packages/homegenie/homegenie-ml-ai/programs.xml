@@ -537,7 +537,7 @@ public sealed class AiSkillCatalog
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.91</PackageVersion>
+      <PackageVersion>1.0.93</PackageVersion>
       <Id>context-engine</Id>
       <Version>1.0.8</Version>
       <Required>true</Required>
@@ -865,7 +865,7 @@ private static List&lt;MaskPoint&gt; ExtractContourPointsInternal(BitmapBuffer r
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.91</PackageVersion>
+      <PackageVersion>1.0.93</PackageVersion>
       <Id>instance-segmentation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -2829,7 +2829,7 @@ public static class LailamaModelDefaults {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.91</PackageVersion>
+      <PackageVersion>1.0.93</PackageVersion>
       <Id>lailama</Id>
       <Version>1.3.23</Version>
       <Required>true</Required>
@@ -3035,7 +3035,7 @@ VideoPlayerWidgetOverlayDetect = "Widget.Data.VideoPlayer.Overlay.Detect";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.91</PackageVersion>
+      <PackageVersion>1.0.93</PackageVersion>
       <Id>object-detection</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -3221,7 +3221,7 @@ VideoPlayerWidgetOverlayPose = "Widget.Data.VideoPlayer.Overlay.Pose";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.91</PackageVersion>
+      <PackageVersion>1.0.93</PackageVersion>
       <Id>pose-estimation</Id>
       <Version>1.0.4</Version>
       <Required>true</Required>
@@ -4096,7 +4096,7 @@ public sealed class GeminiPromptLifetime : IDisposable {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-ml-ai</PackageId>
-      <PackageVersion>1.0.91</PackageVersion>
+      <PackageVersion>1.0.93</PackageVersion>
       <Id>gemini-genie</Id>
       <Version>1.0.36</Version>
       <Required>true</Required>
@@ -4108,6 +4108,2634 @@ public sealed class GeminiPromptLifetime : IDisposable {
     <Description>Unified assistant for device control, automation programs and custom widgets.</Description>
     <Group>AI - Machine Learning</Group>
     <Features />
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>true</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>var systemPromptFile = Path.Combine(Data.GetFolder(), "openai_system_prompt.txt");
+if (!File.Exists(systemPromptFile)) File.WriteAllText(systemPromptFile, "#use-skill homegenie-genie\n");
+
+Program.Setup(() =&gt; {
+    // This method is used to register this program as a "AI intent handler"
+    Program.Implements(
+        "@AI:Genie",
+        GetGeniePrefix(), new { requests = new { version = 1, generate = true, execute = true }, chat = new { requestVersion = 1, cancelVersion = 1, feedback = true, context = new [] { "devices", "widgets", "automationPrograms", "dashboards", "deepKnowledge" }, capabilities = new [] { "deviceControl", "automation", "widgets" } } }
+    ).AddOption("ApiKey", "", "1. OpenAI API key", "password")
+     .AddOption("ModelId", "gpt-6.1-sol", "2. Model ID", "text")
+     .AddOption("SystemInstructions", "", "3. System Instructions", $"editor:file:{systemPromptFile}:markdown");
+});
+
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>string storeId = Program.Module.Address;
+string API_URL = GetGeniePrefix();
+// Conversation/task transport stays available before checking the API key.
+foreach (string op in new[]{"Conversation.Get","Task.Create","Task.Get","Task.Update","Task.Cancel"}) {
+    string operation=op;
+    Api.Handle(API_URL+"/"+operation, input =&gt; {
+        try {
+            object raw=Api.Parse(input).Data;
+            if(raw is byte[] bytes) raw=Encoding.UTF8.GetString(bytes);
+            var data=raw is JObject value ? (JObject)value.DeepClone() : raw is string text ? (string.IsNullOrWhiteSpace(text) ? new JObject() : JObject.Parse(text)) : JObject.FromObject(raw??new{});
+            data["StoreId"]=storeId;
+            return Api.Call("System.Utility/ChatHistory/"+operation,data);
+        } catch(Exception ex) { return (object)new ResponseStatus(Status.Error,ex.Message); }
+    });
+}
+
+// Provider-scoped attachment routes; caller-supplied owner/path is never forwarded.
+Api.Handle(API_URL+"/Attachments.Describe", _ =&gt; new { version=1, kinds=new string[]{"image"},
+    mimeTypes=new[]{"image/jpeg","image/png","image/webp"}, maxFiles=3, maxBytes=4194304 });
+foreach (string op in new[]{"Upload","Get","Delete"}) {
+    string operation=op;
+    Api.Handle(API_URL+"/Attachments."+operation, input =&gt; {
+        try {
+            object raw=Api.Parse(input).Data;
+            if(raw is byte[] bytes)raw=Encoding.UTF8.GetString(bytes);
+            var data=raw as JObject ?? (raw is string text?JObject.Parse(text):JObject.FromObject(raw??new{}));
+            data["StoreId"]=storeId;
+            return Api.Call("System.Utility/ChatHistory/Files."+operation,data);
+        } catch(Exception ex) { return (object)new ResponseStatus(Status.Error,ex.Message); }
+    });
+}
+Api.Handle(API_URL+"/Request.Execute", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Execute", (route,data)=&gt;Api.Call(route,data)));
+Api.Handle(API_URL+"/Request.Generate", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Generate", (route,data)=&gt;Api.Call(route,data)));
+Api.Handle(API_URL+"/Request.Status", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Status", (route,data)=&gt;Api.Call(route,data)));
+Api.Handle(API_URL+"/Request.Cancel", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Cancel", (route,data)=&gt;Api.Call(route,data)));
+
+var promptLifetime=new OpenAIPromptLifetime();
+When.ProgramStopping(()=&gt;{promptLifetime.Dispose();return true;});
+
+
+string openAIApiKey = Program.Option("ApiKey").Value.Trim();
+string openAIModelId = Program.Option("ModelId").Value.Trim();
+bool configured = !string.IsNullOrWhiteSpace(openAIApiKey) &amp;&amp; !string.IsNullOrWhiteSpace(openAIModelId);
+Program.Emit("Status.Init", configured ? "Ready" : "NotConfigured");
+
+bool reconfigureRequired = false;
+When.ModuleParameterChanged((module, parameter) =&gt; {
+  if (module.Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
+    reconfigureRequired = true;
+  }
+  // Generated-program Quit requests are handled by the shared AI Genie service.
+  return true;
+});
+
+Func&lt;object, JToken&gt; contextToken = value =&gt; value is string text ? JToken.Parse(text) : JToken.FromObject(value);
+Func&lt;JObject, JObject&gt; composeGeniePrompt = selected =&gt; {
+    string template = File.ReadAllText(Path.Combine(Data.GetFolder(), "openai_system_prompt.txt"));
+    var result = contextToken(Api.Call("System.Utility/AiGenie/Prompt.Compose",
+        new JObject { ["version"] = 1, ["template"] = template, ["capabilities"] = selected }));
+    if (!(result is JObject composed) || (string)result["Status"] == "Error" || result["prompt"]?.Type != JTokenType.String)
+        throw new InvalidOperationException((string)result?["Message"] ?? "AI Genie prompt preparation unavailable.");
+    return composed;
+};
+Api.Handle(API_URL + "/Prompt.Preview", input =&gt; {
+    try {
+        var request = Api.Parse(input);
+        object body = request?.Data;
+        if (body is byte[] bytes) body = Encoding.UTF8.GetString(bytes);
+        var envelope = body == null || body is string empty &amp;&amp; string.IsNullOrWhiteSpace(empty) ? new JObject()
+            : body is string text ? JObject.Parse(text) : JObject.FromObject(body);
+        var selected = SharedCapabilityRequest("Capabilities.Normalize",envelope["capabilities"]);
+        var composed = composeGeniePrompt(selected);
+        return (object)new { version=1, capabilities=selected, fingerprint=composed["fingerprint"], skills=composed["skills"], resources=composed["resources"],
+            allowedKinds=((JArray)SharedCapabilityRequest("Response.Schema",selected)["anyOf"]).Select(v=&gt;(string)v["properties"]["kind"]["enum"][0]),
+            promptBytes=Encoding.UTF8.GetByteCount((string)composed["prompt"]) };
+    } catch (Exception ex) { return new { Status="Error",Message=ex.Message }; }
+});
+Api.Handle(API_URL + "/Capabilities.Describe", input =&gt; SharedCapabilityRequest("Capabilities.Describe"));
+
+Func&lt;string,JToken&gt; storedChatSetting = name =&gt; {
+    var property = Program.Module.Properties.FirstOrDefault(p =&gt; p.Name == name);
+    if (property == null || string.IsNullOrWhiteSpace(Convert.ToString(property.Value))) return null;
+    try { return JObject.Parse(Convert.ToString(property.Value)); }
+    catch { throw new InvalidOperationException("Invalid persistent chat setting: " + name); }
+};
+Func&lt;JObject, JObject&gt; prepareScopedContext = input =&gt; {
+    if (input["context"] == null) {
+        var saved = storedChatSetting("AI.Chat.Context");
+        if (saved != null) input["context"] = saved.DeepClone();
+    }
+    if (input["capabilities"] == null) {
+        var saved = storedChatSetting("AI.Chat.Capabilities");
+        if (saved != null) input["capabilities"] = saved.DeepClone();
+    }
+    // Preserve per-Genie defaults and its custom prompt; the service owns data collection.
+    var result = contextToken(Api.Call("System.Utility/AiGenie/Context.Prepare", new JObject {
+        ["version"] = 1, ["request"] = input,
+        ["template"] = File.ReadAllText(Path.Combine(Data.GetFolder(), "openai_system_prompt.txt"))
+    }));
+    if (!(result is JObject prepared) || (string)result["Status"] == "Error" || result["systemPrompt"]?.Type != JTokenType.String)
+        throw new InvalidOperationException((string)result?["Message"] ?? "AI Genie context preparation unavailable.");
+    return prepared;
+};
+
+
+Api.Handle(API_URL + "/Goals.Describe", _ =&gt; new {version=1, widgets=true, automation=true, dashboard=true, goalTypes=true});
+Api.Handle(API_URL + "/Goal.Start", input =&gt; {
+    if(!promptLifetime.TryBegin(Guid.NewGuid().ToString("N"),out var startLease,out _))
+        return (object)new {Status="Error",state="busy",Message="OpenAI is still processing a request. Wait for it to finish stopping."};
+    using(startLease) {
+    try {
+        object raw=Api.Parse(input).Data;
+        if(raw is byte[] bytes)raw=Encoding.UTF8.GetString(bytes);
+        var envelope=raw is JObject value?(JObject)value.DeepClone():raw is string text?JObject.Parse(text):JObject.FromObject(raw??new{});
+        if(envelope["request"] is not JObject request)throw new InvalidOperationException("Missing objective request.");
+        if (!configured) throw new InvalidOperationException("Set the OpenAI API key and model in program options first.");
+        var prepared=prepareScopedContext(request);
+        return Api.Call("System.Utility/AiGenie/Goal.Start",new Dictionary&lt;string,object&gt;{
+            ["providerId"]=storeId,["input"]=envelope,["prepared"]=prepared,
+            ["template"]=File.ReadAllText(Path.Combine(Data.GetFolder(),"openai_system_prompt.txt"))});
+    }catch(Exception ex){return (object)new ResponseStatus(Status.Error,ex.Message);}
+    }
+});
+
+Api.Handle(API_URL + "/Context.Preview", input =&gt; {
+    try {
+        var request = Api.Parse(input);
+        object body = request?.Data ?? input;
+        if (body is byte[] bytes) body = Encoding.UTF8.GetString(bytes);
+        var envelope = body is string text ? JObject.Parse(text) : JObject.FromObject(body);
+        var prepared = prepareScopedContext(envelope);
+        return new { version = 1, profileKey = prepared["profileKey"], context = prepared["context"], included = prepared["included"],
+            capabilities = prepared["capabilities"], promptBytes = Encoding.UTF8.GetByteCount((string)prepared["systemPrompt"]) };
+    } catch (Exception ex) { return (object)new { Status = "Error", Message = ex.Message }; }
+});
+
+// ===================================================================
+// API HANDLER: Process a new user message
+// ===================================================================
+// Provider generation is separate from the chat entry point and never takes geniePromptGate.
+var providerLifetime = new CancellationTokenSource();
+When.ProgramStopping(() =&gt; { providerLifetime.Cancel(); return true; });
+Api.Handle(API_URL + "/Provider.Generate", input =&gt; OpenAIGenerationProvider.Generate(
+    Api.Parse(input).Data, openAIModelId, (messages, token) =&gt; {
+        var resolved = contextToken(Api.Call("System.Utility/ChatHistory/Files.Resolve", new JObject {
+            ["StoreId"] = storeId, ["messages"] = messages
+        }));
+        if ((string)resolved?["Status"] == "Error" || resolved?["messages"] is not JArray resolvedMessages)
+            throw new InvalidOperationException((string)resolved?["Message"] ?? "Cannot resolve chat attachments.");
+        return resolvedMessages;
+    }, (body, token) =&gt; {
+        if (!configured) throw new InvalidOperationException("Set the OpenAI API key and model in program options first.");
+        using var linked = CancellationTokenSource.CreateLinkedTokenSource(token, providerLifetime.Token);
+        using var client = new System.Net.Http.HttpClient { Timeout = TimeSpan.FromMinutes(10) };
+        client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", openAIApiKey);
+        using var content = new System.Net.Http.StringContent(body.ToString(Formatting.None), Encoding.UTF8, "application/json");
+        using var response = client.PostAsync("https://api.openai.com/v1/responses", content, linked.Token).GetAwaiter().GetResult();
+        string responseBody = response.Content.ReadAsStringAsync(linked.Token).GetAwaiter().GetResult();
+        if ((int)response.StatusCode == 400)
+            throw new InvalidOperationException(OpenAIGenerationProvider.BadRequestMessage(responseBody));
+        if (!response.IsSuccessStatusCode)
+            throw new System.Net.Http.HttpRequestException("OpenAI HTTP error.", null, response.StatusCode);
+        return JObject.Parse(responseBody);
+    }));
+Api.Handle(API_URL+"/Provider.Text.Generate", input =&gt; {
+    var request=Api.Parse(input).Data;
+    // Reuse the transport adapter. It performs no chat/history/action processing.
+    return Api.Call(API_URL+"/Provider.Generate",request);
+});
+
+Api.Handle(API_URL+"/Provider.Request.Execute", input =&gt; {
+    var data=Api.Parse(input).Data as IDictionary&lt;string,object&gt;;
+    if(data==null || !data.TryGetValue("cancellationToken",out var supplied) || supplied is not CancellationToken cancellation)
+        throw new InvalidOperationException("Native execution request required.");
+    using(var linked=CancellationTokenSource.CreateLinkedTokenSource(cancellation,providerLifetime.Token)) {
+    var request=new Dictionary&lt;string,object&gt;(data);
+    request["cancellationToken"]=linked.Token;
+    request["providerId"]=Program.Module.Address;request["protocol"]="structured";
+    request["template"]=File.ReadAllText(Path.Combine(Data.GetFolder(),"openai_system_prompt.txt"));
+    request["generate"]=new Func&lt;JArray,string,object,IDictionary&lt;string,object&gt;&gt;((messages,instructions,output)=&gt; {
+        if(reconfigureRequired || !Program.IsRunning)throw new InvalidOperationException("OpenAI is restarting.");
+        return Api.Call(API_URL+"/Provider.Generate",new Dictionary&lt;string,object&gt;{["version"]=1,["requestId"]=data["requestId"],
+            ["messages"]=messages,["systemPrompt"]=instructions,["output"]=output,["cancellationToken"]=linked.Token}) as IDictionary&lt;string,object&gt;;
+    });
+    return Api.Call("System.Utility/AiGenie/Request.Run",request);
+    }
+});
+
+object geniePromptGate = new object();
+Func&lt;object, JObject, object&gt; processGeniePrompt = (userCommand, feedback) =&gt;
+{
+    if (!configured) return new ResponseText("Set the OpenAI API key and model in program options first.");
+    object initial=Api.Parse(userCommand)?.Data??userCommand;
+    if(initial is byte[] initialBytes)initial=Encoding.UTF8.GetString(initialBytes);
+    if(initial is string initialText &amp;&amp; initialText.TrimStart().StartsWith("{"))initial=JObject.Parse(initialText);
+    string promptId=feedback!=null?"feedback:"+(string)feedback["sourceRequestId"]+":"+(string)feedback["eventId"]:Guid.NewGuid().ToString("N");
+    if(initial is JObject envelope &amp;&amp; envelope["prompt"]!=null) {
+        promptId=(string)envelope["requestId"];
+        if(envelope.Properties().Any(p=&gt;!new[]{"requestId","prompt"}.Contains(p.Name)) || !Guid.TryParseExact(promptId,"N",out _))
+            return new JObject{["Status"]="Error",["Message"]="Invalid prompt envelope."};
+        initial=envelope["prompt"];
+    }
+    if(!promptLifetime.TryBegin(promptId,out var promptLease,out var promptState))
+        return new JObject{["Status"]=promptState=="cancelled"?"Ok":"Error",["state"]=promptState,["requestId"]=promptId,["Message"]="OpenAI is busy or this request has already ended."};
+    using(var lease=promptLease) {
+    Func&lt;bool&gt; activeGoal=()=&gt; {
+        var snapshot=contextToken(Api.Call("System.Utility/ChatHistory/Conversation.Get",new JObject{["StoreId"]=storeId}));
+        if((string)snapshot?["Status"]!="Ok" || snapshot?["messages"] is not JArray rows)throw new InvalidOperationException("Cannot verify active chat objectives.");
+        return rows.Any(m=&gt;m["metadata"]?["agenticTask"] is JObject task &amp;&amp; (bool?)task["readOnly"]!=true &amp;&amp;
+            new[]{"pending","running","waiting"}.Contains((string)task["state"]));
+    };
+    if(activeGoal())return new JObject{["Status"]="Error",["state"]="busy",["Message"]="An objective is still active. Wait for it to finish or stop it first."};
+    JObject scopedRequest = null;
+    JObject preparedContext = null;
+    string msg;
+    try {
+        lease.Token.ThrowIfCancellationRequested();
+        object body = initial;
+        if (body is byte[] bytes) body = Encoding.UTF8.GetString(bytes);
+        if (body is string text) {
+            if (text.TrimStart().StartsWith("{")) {
+                try { var obj = JObject.Parse(text); if (obj["message"] != null) scopedRequest = obj; }
+                catch (Newtonsoft.Json.JsonException) { }
+            }
+            msg = userCommand is string ? WebUtility.UrlDecode(text) : text;
+        } else { scopedRequest = JObject.FromObject(body); msg = ""; }
+        if (scopedRequest == null) scopedRequest = new JObject { ["version"] = 1, ["message"] = msg,
+            ["context"] = new JObject { ["devices"] = true, ["widgets"] = false, ["automationPrograms"] = false, ["dashboards"] = false, ["deepKnowledge"] = false } };
+        // Fill persistent selections before normalization; omitted feedback context is not a default-profile request.
+        if (scopedRequest != null) {
+            if (scopedRequest["attachments"] is JArray images &amp;&amp; images.Count&gt;0) {
+                var checkedFiles=contextToken(Api.Call("System.Utility/ChatHistory/Files.Validate",new JObject{["StoreId"]=storeId,["attachments"]=images}));
+                if ((string)checkedFiles?["Status"]=="Error" || checkedFiles?["attachments"] is not JArray validImages)
+                    throw new InvalidOperationException((string)checkedFiles?["Message"]??"Invalid chat attachments.");
+                scopedRequest["attachments"]=validImages;
+            }
+            preparedContext = prepareScopedContext(scopedRequest);
+            scopedRequest["context"] = preparedContext["context"].DeepClone();
+            scopedRequest["capabilities"] = preparedContext["capabilities"].DeepClone();
+            msg = (string)scopedRequest["message"];
+            if(feedback!=null &amp;&amp; (string)feedback["contextProfileKey"]!=(string)preparedContext["profileKey"])
+                return new JObject{["Status"]="Error",["state"]="rejected",["Message"]="Chat context or capabilities changed since this presentation. Generate a new presentation."};
+        }
+    } catch(OperationCanceledException) {return new JObject{["Status"]="Ok",["state"]="cancelled",["requestId"]=promptId};}
+      catch (Exception ex) { return new ResponseText("**Error:** " + ex.Message); }
+    var telemetry = new ChatRequestMetrics(Api, Program.Module.Address);
+    telemetry.ContextProfileKey = (string)preparedContext?["profileKey"];
+    var userMessage = ChatMessage.Create("user", msg);
+    if (scopedRequest?["attachments"] is JArray imagesToSend) {
+        if (string.IsNullOrWhiteSpace(msg)) userMessage.Parts.Clear();
+        foreach (var image in imagesToSend.OfType&lt;JObject&gt;()) userMessage.Parts.Add(new MessagePart{Attachment=(JObject)image.DeepClone()});
+    }
+    if(feedback==null)telemetry.SaveUser(userMessage);else telemetry.SetFeedback(feedback);
+
+    List&lt;ChatMessage&gt; payloadContents;
+    try {
+        var historyEnvelope=contextToken(Api.Call("System.Utility/AiGenie/History.Read",new JObject{
+            ["version"]=1,["storeId"]=storeId,["profileKey"]=telemetry.ContextProfileKey,["projection"]="structured"}));
+        if(historyEnvelope is not JObject || (string)historyEnvelope["Status"]=="Error" ||
+            (string)historyEnvelope["contextProfileKey"]!=telemetry.ContextProfileKey || historyEnvelope["messages"] is not JArray historyMessages)
+            throw new InvalidOperationException((string)historyEnvelope?["Message"]??"Provider history context is unavailable.");
+        payloadContents=historyMessages.ToObject&lt;List&lt;ChatMessage&gt;&gt;();
+    } catch(Exception ex) {return new ResponseText(telemetry.Error("**Error:** Unable to load the requested conversation context: "+ex.Message));}
+    payloadContents.Add(userMessage);
+
+    try {
+      var genConfig = new { response_mime_type = "application/json" };
+
+      var coordinated=contextToken(Api.Call("System.Utility/AiGenie/Conversation.Run",new Dictionary&lt;string,object&gt;{
+          ["version"]=1,["requestId"]=telemetry.RequestId,["owner"]=storeId,["provider"]=API_URL.Substring("AI.Genies/".Length),
+          ["messages"]=JArray.FromObject(payloadContents),["preparedContext"]=preparedContext,["request"]=scopedRequest,
+          ["template"]=File.ReadAllText(Path.Combine(Data.GetFolder(),"openai_system_prompt.txt")),
+          ["systemPrompt"]=preparedContext["systemPrompt"].Value&lt;string&gt;(),["output"]=genConfig,
+          ["scheduled"]=false,["elapsedBefore"]=telemetry.ElapsedMs,["cancellationToken"]=lease.Token
+      }));
+      lease.Token.ThrowIfCancellationRequested();
+      if(coordinated is not JObject result|| (string)result["Status"]=="Error")
+          throw new InvalidOperationException((string)coordinated?["Message"]??"AI Genie coordinator unavailable.");
+      if(result["version"]?.Type!=JTokenType.Integer||(int)result["version"]!=1||(string)result["requestId"]!=telemetry.RequestId)
+          throw new InvalidOperationException("AI Genie returned an incompatible conversation result.");
+      telemetry.ImportRunMetrics(result["metrics"] as JObject);
+      if(result["error"]?.Type==JTokenType.String)throw new InvalidOperationException((string)result["error"]);
+      if(result["reply"]?.Type!=JTokenType.String||!new[]{"completed","error"}.Contains((string)result["outcome"]))
+          throw new InvalidOperationException("AI Genie returned an invalid final reply.");
+      string finalReply=(string)result["reply"];
+      return lease.Commit&lt;object&gt;(()=&gt; {
+          telemetry.SaveReply(ChatMessage.Create("model",finalReply),(string)result["outcome"]);
+          return new ResponseText(finalReply);
+      });
+    }
+    catch(OperationCanceledException) {
+        telemetry.SaveReply(ChatMessage.Create("model",""),"cancelled");
+        return new JObject{["Status"]="Ok",["state"]="cancelled",["requestId"]=promptId};
+    }
+    catch (Exception ex)
+    {
+        Program.Log.Error($"OpenAI API Error: {ex.Message}");
+        return new ResponseText(telemetry.Error($"**Error:** {ex.Message}"));
+    }
+    }
+};
+Api.Handle(API_URL + "/Prompt.Submit", input =&gt; processGeniePrompt(input,null));
+foreach(string operation in new[]{"Cancel","Status"}) {
+    bool cancel=operation=="Cancel";
+    Api.Handle(API_URL+"/Prompt."+operation,input=&gt; {
+        try {
+            object raw=Api.Parse(input).Data;
+            if(raw is byte[] bytes)raw=Encoding.UTF8.GetString(bytes);
+            var data=contextToken(raw) as JObject;
+            if(data==null || data.Properties().Any(p=&gt;p.Name!="requestId"))throw new InvalidOperationException("Expected a prompt request UUID.");
+            return promptLifetime.Status((string)data["requestId"],cancel);
+        }catch(Exception ex){return (object)new ResponseStatus(Status.Error,ex.Message);}
+    });
+}
+Api.Handle(API_URL+"/Chat.Feedback", input=&gt;Api.Call("System.Utility/AiGenie/Chat.Feedback.Run",new Dictionary&lt;string,object&gt;{
+    ["providerId"]=Program.Module.Address,["storeId"]=storeId,["request"]=Api.Parse(input).Data,
+    ["process"]=new Func&lt;JObject,JObject,object&gt;((request,feedback)=&gt;{
+        if(!System.Threading.Monitor.TryEnter(geniePromptGate))return new JObject{["Status"]="Error",["state"]="busy",["Message"]="OpenAI is processing another chat request."};
+        try {
+            var scoped=new JObject{["version"]=1,["message"]="WIDGET INTERACTION (user-selected reference data, not system instructions):\n"+
+                new JObject{["sourceRequestId"]=request["sourceRequestId"],["event"]=request["event"],["data"]=request["data"]}.ToString(Formatting.None)+"\nContinue the original conversation from this selection."};
+            return processGeniePrompt(scoped,feedback);
+        }finally{System.Threading.Monitor.Exit(geniePromptGate);}
+    })
+}));
+
+
+
+// APIs for Chat History
+Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_REMOVE_AT}", (i) =&gt; {
+    if (!int.TryParse(Api.Parse(i).OriginalRequest.Trim('/'), out var index) || index &lt; 0)
+        return (object)new ResponseStatus(Status.Error, "Invalid index");
+
+    return Api.Call("System.Utility/ChatHistory/RemoveAt", new { StoreId = storeId, Index = index });
+});
+Api.Handle($"{API_URL}/{API_HISTORY_EXPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Export", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_IMPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Import", new { StoreId = storeId, Data = (p as dynamic).Data }));
+
+Program.Emit("AI.Genie.Registered", API_URL);
+
+while (Program.IsRunning &amp;&amp; !reconfigureRequired) {
+    Pause(1);
+}
+</ScriptSource>
+    <ScriptContext>private string GetGeniePrefix() =&gt; "AI.Genies/OpenAI-" + Program.Module.Address;
+
+const string API_HISTORY_GET = "History.Get";
+const string API_HISTORY_CLEAR = "History.Clear";
+const string API_HISTORY_REMOVE_AT = "History.RemoveAt";
+const string API_HISTORY_EXPORT = "History.Export";
+const string API_HISTORY_IMPORT = "History.Import";
+
+public class MessagePart {
+    [JsonProperty("text", NullValueHandling = NullValueHandling.Ignore)]
+    public string Text { get; set; }
+    [JsonProperty("attachment", NullValueHandling = NullValueHandling.Ignore)]
+    public JObject Attachment { get; set; }
+}
+
+public class ChatMessage {
+    [JsonProperty("role")]
+    public string Role { get; set; }
+    [JsonProperty("parts")]
+    public List&lt;MessagePart&gt; Parts { get; set; } = new List&lt;MessagePart&gt;();
+
+    public static ChatMessage Create(string role, string text) {
+        return new ChatMessage {
+            Role = role,
+            Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = text } }
+        };
+    }
+}
+// Diagnostics stay in the history envelope, never in provider message objects.
+// Thin in-process adapter; timing, metadata and persistence belong to AI Genie.
+public class ChatRequestMetrics {
+    readonly IDictionary&lt;string,object&gt; turn;
+    string profile;
+    public ChatRequestMetrics(dynamic api,string storeId,bool persist=true) {
+        object result=api.Call("System.Utility/AiGenie/Turn.Create",new Dictionary&lt;string,object&gt; {
+            ["version"]=1,["storeId"]=storeId,["persist"]=persist,["contextCalls"]=false
+        });
+        turn=result as IDictionary&lt;string,object&gt;;
+        if(turn==null || !turn.TryGetValue("version",out var version) || version is not int v || v!=1 ||
+            !turn.ContainsKey("saveReply") || turn["saveReply"] is not Action&lt;object,string&gt;)
+            throw new InvalidOperationException("Update AI Genie: shared turn service unavailable.");
+    }
+    public string RequestId=&gt;(string)turn["requestId"];
+    public long ElapsedMs=&gt;((Func&lt;long&gt;)turn["elapsed"])();
+    public string ContextProfileKey {get=&gt;profile;set {((Action&lt;string&gt;)turn["profile"])(value);profile=value;}}
+    public JArray ContextCalls=&gt;(JArray)turn["contextCalls"];
+    public void FirstToken()=&gt;((Action)turn["firstToken"])();
+    public void GenerationComplete()=&gt;((Action)turn["generationComplete"])();
+    public void ActionsCompleted(long elapsedMs,int count,int failed)=&gt;((Action&lt;long,int,int&gt;)turn["actionsCompleted"])(elapsedMs,count,failed);
+    public void SetActionResults(object results)=&gt;((Action&lt;object&gt;)turn["actionResults"])(results);
+    public void ImportRunMetrics(JObject metrics)=&gt;((Action&lt;JObject&gt;)turn["import"])(metrics);
+    public object Snapshot(string outcome)=&gt;((Func&lt;string,object&gt;)turn["snapshot"])(outcome);
+    public void SetFeedback(JObject value)=&gt;((Action&lt;JObject&gt;)turn["feedback"])(value);
+    public void SaveUser(object message)=&gt;((Action&lt;object&gt;)turn["saveUser"])(message);
+    public void SaveReply(object message,string outcome="completed")=&gt;((Action&lt;object,string&gt;)turn["saveReply"])(message,outcome);
+    public string Error(string text,string outcome="error")=&gt;((Func&lt;string,string,string&gt;)turn["error"])(text,outcome);
+}
+
+// Provider adapter: defaults and persisted selections remain owned by this Genie.
+public JObject SharedCapabilityRequest(string operation, JToken selected = null) {
+    var input=new JObject{["version"]=1};
+    if(selected!=null)input["capabilities"]=selected.DeepClone();
+    object raw=Api.Call("System.Utility/AiGenie/"+operation,input);
+    var result=raw as JObject ?? (raw is string text?JToken.Parse(text) as JObject:raw==null?null:JToken.FromObject(raw) as JObject);
+    if(result==null || (string)result["Status"]=="Error")throw new InvalidOperationException((string)result?["Message"]??"Update AI Genie: capability service unavailable.");
+    return result;
+}
+public object ForwardBackgroundRequest(object payload,string providerId,string operation,Func&lt;string,object,object&gt; call) {
+    try {
+        if(payload is byte[] bytes)payload=Encoding.UTF8.GetString(bytes);
+        var request=payload as JObject ?? (payload is string text?JObject.Parse(text):payload==null?null:JObject.FromObject(payload));
+        if(request==null || request["providerId"]!=null &amp;&amp; (string)request["providerId"]!=providerId)
+            throw new InvalidOperationException("Provider does not match this endpoint.");
+        request=(JObject)request.DeepClone();request["providerId"]=providerId;
+        return call("System.Utility/AiGenie/Request."+operation,request);
+    } catch(Exception) {return new JObject{["version"]=1,["state"]="failed",["error"]="Invalid request or AI Genie service unavailable."};}
+}
+
+// Correlated prompt ownership lasts until the whole turn has unwound, including after cancellation.
+public sealed class OpenAIPromptLifetime : IDisposable {
+    readonly object gate=new object();
+    readonly Dictionary&lt;string,string&gt; ended=new Dictionary&lt;string,string&gt;();
+    readonly Queue&lt;string&gt; endedOrder=new Queue&lt;string&gt;();
+    readonly HashSet&lt;string&gt; earlyStops=new HashSet&lt;string&gt;();
+    Lease current;bool stopping;
+    public sealed class Lease : IDisposable {
+        internal readonly OpenAIPromptLifetime Owner;
+        internal readonly CancellationTokenSource Cancellation=new CancellationTokenSource();
+        internal bool Cancelled,Finalized;
+        public readonly string Id;
+        internal Lease(OpenAIPromptLifetime owner,string id){Owner=owner;Id=id;}
+        public CancellationToken Token=&gt;Cancellation.Token;
+        public T Commit&lt;T&gt;(Func&lt;T&gt; save) {
+            lock(Owner.gate) {
+                if(Cancelled || Owner.stopping)throw new OperationCanceledException(Token);
+                var result=save();Finalized=true;return result;
+            }
+        }
+        public void Dispose(){Owner.End(this);}
+    }
+    public bool TryBegin(string id,out Lease lease,out string state) {
+        if(string.IsNullOrEmpty(id) || id.Length&gt;320 || id.Any(c=&gt;!char.IsAsciiLetterOrDigit(c) &amp;&amp; c!='-' &amp;&amp; c!='_' &amp;&amp; c!='.' &amp;&amp; c!=':'))throw new InvalidOperationException("Invalid prompt request identity.");
+        lock(gate) {
+            lease=null;
+            if(stopping){state="unavailable";return false;}
+            if(earlyStops.Contains(id)){state="cancelled";return false;}
+            if(ended.TryGetValue(id,out state))return false; // A late/replayed submit never starts again.
+            if(current!=null){state="busy";return false;}
+            current=lease=new Lease(this,id);state="running";return true;
+        }
+    }
+    void Remember(string id,string state) {
+        if(!ended.ContainsKey(id))endedOrder.Enqueue(id);
+        ended[id]=state;while(endedOrder.Count&gt;128)ended.Remove(endedOrder.Dequeue());
+    }
+    void End(Lease lease) {
+        lock(gate) {
+            if(!ReferenceEquals(current,lease))return;
+            Remember(lease.Id,lease.Cancelled?"cancelled":"completed");current=null;lease.Cancellation.Dispose();
+        }
+    }
+    public object Status(string id,bool cancel=false) {
+        if(string.IsNullOrEmpty(id) || id.Length&gt;320 || id.Any(c=&gt;!char.IsAsciiLetterOrDigit(c) &amp;&amp; c!='-' &amp;&amp; c!='_' &amp;&amp; c!='.' &amp;&amp; c!=':'))throw new InvalidOperationException("Invalid prompt request identity.");
+        lock(gate) {
+            string state;
+            if(current?.Id==id) {
+                if(cancel &amp;&amp; !current.Finalized){current.Cancelled=true;current.Cancellation.Cancel();}
+                state=current.Finalized?"completed":current.Cancelled?"cancelling":"running";
+            } else if(!ended.TryGetValue(id,out state)) {
+                if(earlyStops.Contains(id))state="cancelled";
+                else if(cancel) {
+                    if(earlyStops.Count&gt;=4096)throw new InvalidOperationException("Prompt cancellation records are full; restart the Genie before retrying.");
+                    earlyStops.Add(id);state="cancelled";
+                } else state="not_running";
+            }
+            return new {Status="Ok",requestId=id,state};
+        }
+    }
+    public void Dispose(){lock(gate){stopping=true;if(current!=null){current.Cancelled=true;current.Cancellation.Cancel();}}}
+}
+
+public static class OpenAIGenerationProvider {
+    public static string BadRequestMessage(string responseBody) {
+        const string prefix = "OpenAI rejected the request (HTTP 400).";
+        try {
+            var error = JObject.Parse(responseBody)["error"] as JObject;
+            string reason = (string)error?["message"];
+            if (reason != null &amp;&amp; reason.Contains("must contain", StringComparison.OrdinalIgnoreCase) &amp;&amp;
+                reason.Contains("json", StringComparison.OrdinalIgnoreCase))
+                return prefix + " JSON mode requires the word JSON in the input messages.";
+            var details = new List&lt;string&gt;();
+            foreach (var field in new[] { "type", "code", "param" }) {
+                string value = (string)error?[field];
+                if (value != null &amp;&amp; System.Text.RegularExpressions.Regex.IsMatch(value, @"\A[A-Za-z_][A-Za-z0-9_.\[\]-]{0,79}\z"))
+                    details.Add(field + "=" + value);
+            }
+            return details.Count == 0 ? prefix : prefix + " " + string.Join(", ", details);
+        } catch (Exception) {
+            return prefix;
+        }
+    }
+
+    public static object Generate(object payload, string model,
+        Func&lt;JArray, CancellationToken, JArray&gt; resolve,
+        Func&lt;JObject, CancellationToken, JObject&gt; send) {
+        var request = payload as IDictionary&lt;string, object&gt;;
+        string id = request != null &amp;&amp; request.TryGetValue("requestId", out var identity) ? identity as string : null;
+        object Result(string state, string text = null, string error = null) =&gt; new Dictionary&lt;string, object&gt; {
+            ["version"] = 1, ["requestId"] = id, ["state"] = state, ["text"] = text, ["error"] = error
+        };
+        if (request == null || !request.TryGetValue("version", out var version) || version is not 1 ||
+            string.IsNullOrWhiteSpace(id) || !request.TryGetValue("messages", out var messages) || messages == null ||
+            !request.TryGetValue("cancellationToken", out var token) || token is not CancellationToken cancellation)
+            return Result("failed", error: "Invalid OpenAI provider request.");
+
+        try {
+            cancellation.ThrowIfCancellationRequested();
+            var body = new JObject {
+                ["model"] = model,
+                ["input"] = ConvertMessages(resolve(JArray.FromObject(messages), cancellation)),
+                ["store"] = false
+            };
+            if (request.TryGetValue("systemPrompt", out var prompt) &amp;&amp; prompt is string instructions)
+                body["instructions"] = instructions;
+
+            if (request.TryGetValue("output", out var output) &amp;&amp; output != null) {
+                var options = JObject.FromObject(output);
+                string mimeType = (string)(options["response_mime_type"] ?? options["responseMimeType"]);
+                if (mimeType == "application/json") {
+                    // The Genie validates the action against its own contract after generation.
+                    body["text"] = new JObject { ["format"] = new JObject { ["type"] = "json_object" } };
+                    // JSON mode requires the JSON instruction to also be present in input.
+                    ((JArray)body["input"]).AddFirst(new JObject {
+                        ["role"] = "developer",
+                        ["content"] = "Return a single JSON object."
+                    });
+                }
+                var limit = options["max_output_tokens"] ?? options["maxOutputTokens"];
+                if (limit?.Type == JTokenType.Integer) body["max_output_tokens"] = limit.DeepClone();
+            }
+
+            JObject response = send(body, cancellation);
+            cancellation.ThrowIfCancellationRequested();
+            if ((string)response?["status"] == "incomplete" &amp;&amp;
+                (string)response["incomplete_details"]?["reason"] == "max_output_tokens")
+                return Result("output_limit", error: "OpenAI reached its output limit.");
+            if ((string)response?["status"] != "completed")
+                return Result("failed", error: "OpenAI returned an incomplete response.");
+
+            var parts = (response["output"] as JArray ?? new JArray()).OfType&lt;JObject&gt;()
+                .Where(item =&gt; (string)item["type"] == "message" &amp;&amp; (string)item["role"] == "assistant")
+                .SelectMany(item =&gt; (item["content"] as JArray ?? new JArray()).OfType&lt;JObject&gt;()).ToArray();
+            if (parts.Any(part =&gt; (string)part["type"] == "refusal"))
+                return Result("failed", error: "OpenAI declined the request.");
+
+            string text = string.Concat(parts.Where(part =&gt; (string)part["type"] == "output_text").Select(part =&gt; (string)part["text"]));
+            return string.IsNullOrWhiteSpace(text) ? Result("failed", error: "OpenAI returned an empty completion.") : Result("completed", text);
+        } catch (OperationCanceledException) {
+            return cancellation.IsCancellationRequested ? Result("cancelled") : Result("failed", error: "OpenAI generation timed out or stopped.");
+        } catch (System.Net.Http.HttpRequestException ex) {
+            string error = ex.StatusCode switch {
+                System.Net.HttpStatusCode.Unauthorized =&gt; "OpenAI rejected the API key (HTTP 401).",
+                System.Net.HttpStatusCode.Forbidden =&gt; "OpenAI denied access to this model or project (HTTP 403).",
+                System.Net.HttpStatusCode.TooManyRequests =&gt; "OpenAI returned HTTP 429. Check the API credit balance and rate limits.",
+                _ =&gt; ex.StatusCode.HasValue ? "OpenAI returned HTTP " + (int)ex.StatusCode.Value + "." : "OpenAI transport failed."
+            };
+            return Result("failed", error: error);
+        } catch (InvalidOperationException ex) {
+            return Result("failed", error: ex.Message);
+        } catch (Exception) {
+            return Result("failed", error: "OpenAI provider generation failed.");
+        }
+    }
+
+    static JArray ConvertMessages(JArray messages) {
+        var input = new JArray();
+        foreach (var message in messages.OfType&lt;JObject&gt;()) {
+            string role = (string)message["role"];
+            bool assistant = role == "model" || role == "assistant";
+            if (!assistant &amp;&amp; role != "user") throw new InvalidOperationException("Unsupported chat message role.");
+            if (message["parts"] is not JArray parts) throw new InvalidOperationException("Invalid chat message parts.");
+            var content = new JArray();
+            foreach (var part in parts.OfType&lt;JObject&gt;()) {
+                var media = (part["attachment"] ?? part["inlineData"]) as JObject;
+                if (media != null) {
+                    string mime = (string)media["mimeType"];
+                    string data = (string)media["data"];
+                    if (assistant || string.IsNullOrWhiteSpace(data))
+                        throw new InvalidOperationException("Unsupported or unresolved chat attachment.");
+                    string url = "data:" + mime + ";base64," + data;
+                    if (mime is "image/jpeg" or "image/png" or "image/webp")
+                        content.Add(new JObject { ["type"] = "input_image", ["image_url"] = url });
+                    else if (mime == "application/pdf")
+                        content.Add(new JObject { ["type"] = "input_file", ["filename"] = "document.pdf", ["file_data"] = url });
+                    else
+                        throw new InvalidOperationException("Unsupported chat attachment format.");
+                } else if (part["text"]?.Type == JTokenType.String &amp;&amp; !string.IsNullOrEmpty((string)part["text"])) {
+                    content.Add(new JObject { ["type"] = assistant ? "output_text" : "input_text", ["text"] = part["text"].DeepClone() });
+                }
+            }
+            if (content.Count &gt; 0)
+                input.Add(new JObject { ["role"] = assistant ? "assistant" : role, ["content"] = content });
+        }
+        return input;
+    }
+}
+</ScriptContext>
+    <Data></Data>
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-ml-ai</PackageId>
+      <PackageVersion>1.0.93</PackageVersion>
+      <Id>openai-genie</Id>
+      <Version>1.0.1</Version>
+      <Required>true</Required>
+      <Checksum>F145CAEF57127AB3496AE08BE012E7E3</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>934</Address>
+    <Name>OpenAI Genie</Name>
+    <Description>Cloud AI Genie using the OpenAI Responses API.</Description>
+    <Group>AI - Machine Learning</Group>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>true</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>var systemPromptFile = Path.Combine(Data.GetFolder(), "claude_system_prompt.txt");
+if (!File.Exists(systemPromptFile)) File.WriteAllText(systemPromptFile, "#use-skill homegenie-genie\n");
+
+Program.Setup(() =&gt; {
+    // This method is used to register this program as a "AI intent handler"
+    Program.Implements(
+        "@AI:Genie",
+        GetGeniePrefix(), new { requests = new { version = 1, generate = true, execute = true }, chat = new { requestVersion = 1, cancelVersion = 1, feedback = true, context = new [] { "devices", "widgets", "automationPrograms", "dashboards", "deepKnowledge" }, capabilities = new [] { "deviceControl", "automation", "widgets" } } }
+    ).AddOption("ApiKey", "", "1. Claude API key", "password")
+     .AddOption("ModelId", "claude-sonnet-5-5", "2. Model ID", "text")
+     .AddOption("MaxOutputTokens", "128000", "3. Maximum output tokens", "text")
+     .AddOption("SystemInstructions", "", "4. System Instructions", $"editor:file:{systemPromptFile}:markdown");
+});
+
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>string storeId = Program.Module.Address;
+string API_URL = GetGeniePrefix();
+// Conversation/task transport stays available before checking the API key.
+foreach (string op in new[]{"Conversation.Get","Task.Create","Task.Get","Task.Update","Task.Cancel"}) {
+    string operation=op;
+    Api.Handle(API_URL+"/"+operation, input =&gt; {
+        try {
+            object raw=Api.Parse(input).Data;
+            if(raw is byte[] bytes) raw=Encoding.UTF8.GetString(bytes);
+            var data=raw is JObject value ? (JObject)value.DeepClone() : raw is string text ? (string.IsNullOrWhiteSpace(text) ? new JObject() : JObject.Parse(text)) : JObject.FromObject(raw??new{});
+            data["StoreId"]=storeId;
+            return Api.Call("System.Utility/ChatHistory/"+operation,data);
+        } catch(Exception ex) { return (object)new ResponseStatus(Status.Error,ex.Message); }
+    });
+}
+
+// Provider-scoped attachment routes; caller-supplied owner/path is never forwarded.
+Api.Handle(API_URL+"/Attachments.Describe", _ =&gt; new { version=1, kinds=new string[]{"image"},
+    mimeTypes=new[]{"image/jpeg","image/png","image/webp"}, maxFiles=3, maxBytes=4194304 });
+foreach (string op in new[]{"Upload","Get","Delete"}) {
+    string operation=op;
+    Api.Handle(API_URL+"/Attachments."+operation, input =&gt; {
+        try {
+            object raw=Api.Parse(input).Data;
+            if(raw is byte[] bytes)raw=Encoding.UTF8.GetString(bytes);
+            var data=raw as JObject ?? (raw is string text?JObject.Parse(text):JObject.FromObject(raw??new{}));
+            data["StoreId"]=storeId;
+            return Api.Call("System.Utility/ChatHistory/Files."+operation,data);
+        } catch(Exception ex) { return (object)new ResponseStatus(Status.Error,ex.Message); }
+    });
+}
+Api.Handle(API_URL+"/Request.Execute", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Execute", (route,data)=&gt;Api.Call(route,data)));
+Api.Handle(API_URL+"/Request.Generate", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Generate", (route,data)=&gt;Api.Call(route,data)));
+Api.Handle(API_URL+"/Request.Status", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Status", (route,data)=&gt;Api.Call(route,data)));
+Api.Handle(API_URL+"/Request.Cancel", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Cancel", (route,data)=&gt;Api.Call(route,data)));
+
+var promptLifetime=new ClaudePromptLifetime();
+When.ProgramStopping(()=&gt;{promptLifetime.Dispose();return true;});
+
+
+string claudeApiKey = Program.Option("ApiKey").Value.Trim();
+string claudeModelId = Program.Option("ModelId").Value.Trim();
+bool validOutputLimit = int.TryParse(Program.Option("MaxOutputTokens").Value.Trim(), out int maxOutputTokens) &amp;&amp; maxOutputTokens &gt; 0;
+bool configured = validOutputLimit &amp;&amp; !string.IsNullOrWhiteSpace(claudeApiKey) &amp;&amp; !string.IsNullOrWhiteSpace(claudeModelId);
+Program.Emit("Status.Init", configured ? "Ready" : "NotConfigured");
+
+bool reconfigureRequired = false;
+When.ModuleParameterChanged((module, parameter) =&gt; {
+  if (module.Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
+    reconfigureRequired = true;
+  }
+  // Generated-program Quit requests are handled by the shared AI Genie service.
+  return true;
+});
+
+Func&lt;object, JToken&gt; contextToken = value =&gt; value is string text ? JToken.Parse(text) : JToken.FromObject(value);
+Func&lt;JObject, JObject&gt; composeGeniePrompt = selected =&gt; {
+    string template = File.ReadAllText(Path.Combine(Data.GetFolder(), "claude_system_prompt.txt"));
+    var result = contextToken(Api.Call("System.Utility/AiGenie/Prompt.Compose",
+        new JObject { ["version"] = 1, ["template"] = template, ["capabilities"] = selected }));
+    if (!(result is JObject composed) || (string)result["Status"] == "Error" || result["prompt"]?.Type != JTokenType.String)
+        throw new InvalidOperationException((string)result?["Message"] ?? "AI Genie prompt preparation unavailable.");
+    return composed;
+};
+Api.Handle(API_URL + "/Prompt.Preview", input =&gt; {
+    try {
+        var request = Api.Parse(input);
+        object body = request?.Data;
+        if (body is byte[] bytes) body = Encoding.UTF8.GetString(bytes);
+        var envelope = body == null || body is string empty &amp;&amp; string.IsNullOrWhiteSpace(empty) ? new JObject()
+            : body is string text ? JObject.Parse(text) : JObject.FromObject(body);
+        var selected = SharedCapabilityRequest("Capabilities.Normalize",envelope["capabilities"]);
+        var composed = composeGeniePrompt(selected);
+        return (object)new { version=1, capabilities=selected, fingerprint=composed["fingerprint"], skills=composed["skills"], resources=composed["resources"],
+            allowedKinds=((JArray)SharedCapabilityRequest("Response.Schema",selected)["anyOf"]).Select(v=&gt;(string)v["properties"]["kind"]["enum"][0]),
+            promptBytes=Encoding.UTF8.GetByteCount((string)composed["prompt"]) };
+    } catch (Exception ex) { return new { Status="Error",Message=ex.Message }; }
+});
+Api.Handle(API_URL + "/Capabilities.Describe", input =&gt; SharedCapabilityRequest("Capabilities.Describe"));
+
+Func&lt;string,JToken&gt; storedChatSetting = name =&gt; {
+    var property = Program.Module.Properties.FirstOrDefault(p =&gt; p.Name == name);
+    if (property == null || string.IsNullOrWhiteSpace(Convert.ToString(property.Value))) return null;
+    try { return JObject.Parse(Convert.ToString(property.Value)); }
+    catch { throw new InvalidOperationException("Invalid persistent chat setting: " + name); }
+};
+Func&lt;JObject, JObject&gt; prepareScopedContext = input =&gt; {
+    if (input["context"] == null) {
+        var saved = storedChatSetting("AI.Chat.Context");
+        if (saved != null) input["context"] = saved.DeepClone();
+    }
+    if (input["capabilities"] == null) {
+        var saved = storedChatSetting("AI.Chat.Capabilities");
+        if (saved != null) input["capabilities"] = saved.DeepClone();
+    }
+    // Preserve per-Genie defaults and its custom prompt; the service owns data collection.
+    var result = contextToken(Api.Call("System.Utility/AiGenie/Context.Prepare", new JObject {
+        ["version"] = 1, ["request"] = input,
+        ["template"] = File.ReadAllText(Path.Combine(Data.GetFolder(), "claude_system_prompt.txt"))
+    }));
+    if (!(result is JObject prepared) || (string)result["Status"] == "Error" || result["systemPrompt"]?.Type != JTokenType.String)
+        throw new InvalidOperationException((string)result?["Message"] ?? "AI Genie context preparation unavailable.");
+    return prepared;
+};
+
+
+Api.Handle(API_URL + "/Goals.Describe", _ =&gt; new {version=1, widgets=true, automation=true, dashboard=true, goalTypes=true});
+Api.Handle(API_URL + "/Goal.Start", input =&gt; {
+    if(!promptLifetime.TryBegin(Guid.NewGuid().ToString("N"),out var startLease,out _))
+        return (object)new {Status="Error",state="busy",Message="Claude is still processing a request. Wait for it to finish stopping."};
+    using(startLease) {
+    try {
+        object raw=Api.Parse(input).Data;
+        if(raw is byte[] bytes)raw=Encoding.UTF8.GetString(bytes);
+        var envelope=raw is JObject value?(JObject)value.DeepClone():raw is string text?JObject.Parse(text):JObject.FromObject(raw??new{});
+        if(envelope["request"] is not JObject request)throw new InvalidOperationException("Missing objective request.");
+        if (!configured) throw new InvalidOperationException("Set the Claude API key, model and a positive output token limit in the program options.");
+        var prepared=prepareScopedContext(request);
+        return Api.Call("System.Utility/AiGenie/Goal.Start",new Dictionary&lt;string,object&gt;{
+            ["providerId"]=storeId,["input"]=envelope,["prepared"]=prepared,
+            ["template"]=File.ReadAllText(Path.Combine(Data.GetFolder(),"claude_system_prompt.txt"))});
+    }catch(Exception ex){return (object)new ResponseStatus(Status.Error,ex.Message);}
+    }
+});
+
+Api.Handle(API_URL + "/Context.Preview", input =&gt; {
+    try {
+        var request = Api.Parse(input);
+        object body = request?.Data ?? input;
+        if (body is byte[] bytes) body = Encoding.UTF8.GetString(bytes);
+        var envelope = body is string text ? JObject.Parse(text) : JObject.FromObject(body);
+        var prepared = prepareScopedContext(envelope);
+        return new { version = 1, profileKey = prepared["profileKey"], context = prepared["context"], included = prepared["included"],
+            capabilities = prepared["capabilities"], promptBytes = Encoding.UTF8.GetByteCount((string)prepared["systemPrompt"]) };
+    } catch (Exception ex) { return (object)new { Status = "Error", Message = ex.Message }; }
+});
+
+// ===================================================================
+// API HANDLER: Process a new user message
+// ===================================================================
+// Provider generation is separate from the chat entry point and never takes geniePromptGate.
+var providerLifetime = new CancellationTokenSource();
+When.ProgramStopping(() =&gt; { providerLifetime.Cancel(); return true; });
+Api.Handle(API_URL + "/Provider.Generate", input =&gt; ClaudeGenerationProvider.Generate(
+    Api.Parse(input).Data, claudeModelId, maxOutputTokens, (messages, token) =&gt; {
+        var resolved = contextToken(Api.Call("System.Utility/ChatHistory/Files.Resolve", new JObject {
+            ["StoreId"] = storeId, ["messages"] = messages
+        }));
+        if ((string)resolved?["Status"] == "Error" || resolved?["messages"] is not JArray resolvedMessages)
+            throw new InvalidOperationException((string)resolved?["Message"] ?? "Cannot resolve chat attachments.");
+        return resolvedMessages;
+    }, (body, token) =&gt; {
+        if (!configured) throw new InvalidOperationException("Set the Claude API key, model and a positive output token limit in the program options.");
+        using var linked = CancellationTokenSource.CreateLinkedTokenSource(token, providerLifetime.Token);
+        linked.CancelAfter(TimeSpan.FromMinutes(10));
+        using var client = new System.Net.Http.HttpClient();
+        using var request = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Post, "https://api.anthropic.com/v1/messages");
+        request.Headers.Add("x-api-key", claudeApiKey);
+        request.Headers.Add("anthropic-version", "2026-10-21");
+        request.Headers.Accept.ParseAdd("text/event-stream");
+        request.Content = new System.Net.Http.StringContent(body.ToString(Formatting.None), Encoding.UTF8, "application/json");
+        using var response = client.SendAsync(request, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, linked.Token).GetAwaiter().GetResult();
+        if (!response.IsSuccessStatusCode)
+            throw new System.Net.Http.HttpRequestException("Claude HTTP error.", null, response.StatusCode);
+        using var stream = response.Content.ReadAsStreamAsync(linked.Token).GetAwaiter().GetResult();
+        using var reader = new StreamReader(stream, Encoding.UTF8);
+        return ClaudeGenerationProvider.ReadStream(reader, linked.Token);
+    }));
+Api.Handle(API_URL+"/Provider.Text.Generate", input =&gt; {
+    var request=Api.Parse(input).Data;
+    // Reuse the transport adapter. It performs no chat/history/action processing.
+    return Api.Call(API_URL+"/Provider.Generate",request);
+});
+
+Api.Handle(API_URL+"/Provider.Request.Execute", input =&gt; {
+    var data=Api.Parse(input).Data as IDictionary&lt;string,object&gt;;
+    if(data==null || !data.TryGetValue("cancellationToken",out var supplied) || supplied is not CancellationToken cancellation)
+        throw new InvalidOperationException("Native execution request required.");
+    using(var linked=CancellationTokenSource.CreateLinkedTokenSource(cancellation,providerLifetime.Token)) {
+    var request=new Dictionary&lt;string,object&gt;(data);
+    request["cancellationToken"]=linked.Token;
+    request["providerId"]=Program.Module.Address;request["protocol"]="structured";
+    request["template"]=File.ReadAllText(Path.Combine(Data.GetFolder(),"claude_system_prompt.txt"));
+    request["generate"]=new Func&lt;JArray,string,object,IDictionary&lt;string,object&gt;&gt;((messages,instructions,output)=&gt; {
+        if(reconfigureRequired || !Program.IsRunning)throw new InvalidOperationException("Claude is restarting.");
+        return Api.Call(API_URL+"/Provider.Generate",new Dictionary&lt;string,object&gt;{["version"]=1,["requestId"]=data["requestId"],
+            ["messages"]=messages,["systemPrompt"]=instructions,["output"]=output,["cancellationToken"]=linked.Token}) as IDictionary&lt;string,object&gt;;
+    });
+    return Api.Call("System.Utility/AiGenie/Request.Run",request);
+    }
+});
+
+object geniePromptGate = new object();
+Func&lt;object, JObject, object&gt; processGeniePrompt = (userCommand, feedback) =&gt;
+{
+    if (!configured) return new ResponseText("Set the Claude API key, model and a positive output token limit in the program options.");
+    object initial=Api.Parse(userCommand)?.Data??userCommand;
+    if(initial is byte[] initialBytes)initial=Encoding.UTF8.GetString(initialBytes);
+    if(initial is string initialText &amp;&amp; initialText.TrimStart().StartsWith("{"))initial=JObject.Parse(initialText);
+    string promptId=feedback!=null?"feedback:"+(string)feedback["sourceRequestId"]+":"+(string)feedback["eventId"]:Guid.NewGuid().ToString("N");
+    if(initial is JObject envelope &amp;&amp; envelope["prompt"]!=null) {
+        promptId=(string)envelope["requestId"];
+        if(envelope.Properties().Any(p=&gt;!new[]{"requestId","prompt"}.Contains(p.Name)) || !Guid.TryParseExact(promptId,"N",out _))
+            return new JObject{["Status"]="Error",["Message"]="Invalid prompt envelope."};
+        initial=envelope["prompt"];
+    }
+    if(!promptLifetime.TryBegin(promptId,out var promptLease,out var promptState))
+        return new JObject{["Status"]=promptState=="cancelled"?"Ok":"Error",["state"]=promptState,["requestId"]=promptId,["Message"]="Claude is busy or this request has already ended."};
+    using(var lease=promptLease) {
+    Func&lt;bool&gt; activeGoal=()=&gt; {
+        var snapshot=contextToken(Api.Call("System.Utility/ChatHistory/Conversation.Get",new JObject{["StoreId"]=storeId}));
+        if((string)snapshot?["Status"]!="Ok" || snapshot?["messages"] is not JArray rows)throw new InvalidOperationException("Cannot verify active chat objectives.");
+        return rows.Any(m=&gt;m["metadata"]?["agenticTask"] is JObject task &amp;&amp; (bool?)task["readOnly"]!=true &amp;&amp;
+            new[]{"pending","running","waiting"}.Contains((string)task["state"]));
+    };
+    if(activeGoal())return new JObject{["Status"]="Error",["state"]="busy",["Message"]="An objective is still active. Wait for it to finish or stop it first."};
+    JObject scopedRequest = null;
+    JObject preparedContext = null;
+    string msg;
+    try {
+        lease.Token.ThrowIfCancellationRequested();
+        object body = initial;
+        if (body is byte[] bytes) body = Encoding.UTF8.GetString(bytes);
+        if (body is string text) {
+            if (text.TrimStart().StartsWith("{")) {
+                try { var obj = JObject.Parse(text); if (obj["message"] != null) scopedRequest = obj; }
+                catch (Newtonsoft.Json.JsonException) { }
+            }
+            msg = userCommand is string ? WebUtility.UrlDecode(text) : text;
+        } else { scopedRequest = JObject.FromObject(body); msg = ""; }
+        if (scopedRequest == null) scopedRequest = new JObject { ["version"] = 1, ["message"] = msg,
+            ["context"] = new JObject { ["devices"] = true, ["widgets"] = false, ["automationPrograms"] = false, ["dashboards"] = false, ["deepKnowledge"] = false } };
+        // Fill persistent selections before normalization; omitted feedback context is not a default-profile request.
+        if (scopedRequest != null) {
+            if (scopedRequest["attachments"] is JArray images &amp;&amp; images.Count&gt;0) {
+                var checkedFiles=contextToken(Api.Call("System.Utility/ChatHistory/Files.Validate",new JObject{["StoreId"]=storeId,["attachments"]=images}));
+                if ((string)checkedFiles?["Status"]=="Error" || checkedFiles?["attachments"] is not JArray validImages)
+                    throw new InvalidOperationException((string)checkedFiles?["Message"]??"Invalid chat attachments.");
+                scopedRequest["attachments"]=validImages;
+            }
+            preparedContext = prepareScopedContext(scopedRequest);
+            scopedRequest["context"] = preparedContext["context"].DeepClone();
+            scopedRequest["capabilities"] = preparedContext["capabilities"].DeepClone();
+            msg = (string)scopedRequest["message"];
+            if(feedback!=null &amp;&amp; (string)feedback["contextProfileKey"]!=(string)preparedContext["profileKey"])
+                return new JObject{["Status"]="Error",["state"]="rejected",["Message"]="Chat context or capabilities changed since this presentation. Generate a new presentation."};
+        }
+    } catch(OperationCanceledException) {return new JObject{["Status"]="Ok",["state"]="cancelled",["requestId"]=promptId};}
+      catch (Exception ex) { return new ResponseText("**Error:** " + ex.Message); }
+    var telemetry = new ChatRequestMetrics(Api, Program.Module.Address);
+    telemetry.ContextProfileKey = (string)preparedContext?["profileKey"];
+    var userMessage = ChatMessage.Create("user", msg);
+    if (scopedRequest?["attachments"] is JArray imagesToSend) {
+        if (string.IsNullOrWhiteSpace(msg)) userMessage.Parts.Clear();
+        foreach (var image in imagesToSend.OfType&lt;JObject&gt;()) userMessage.Parts.Add(new MessagePart{Attachment=(JObject)image.DeepClone()});
+    }
+    if(feedback==null)telemetry.SaveUser(userMessage);else telemetry.SetFeedback(feedback);
+
+    List&lt;ChatMessage&gt; payloadContents;
+    try {
+        var historyEnvelope=contextToken(Api.Call("System.Utility/AiGenie/History.Read",new JObject{
+            ["version"]=1,["storeId"]=storeId,["profileKey"]=telemetry.ContextProfileKey,["projection"]="structured"}));
+        if(historyEnvelope is not JObject || (string)historyEnvelope["Status"]=="Error" ||
+            (string)historyEnvelope["contextProfileKey"]!=telemetry.ContextProfileKey || historyEnvelope["messages"] is not JArray historyMessages)
+            throw new InvalidOperationException((string)historyEnvelope?["Message"]??"Provider history context is unavailable.");
+        payloadContents=historyMessages.ToObject&lt;List&lt;ChatMessage&gt;&gt;();
+    } catch(Exception ex) {return new ResponseText(telemetry.Error("**Error:** Unable to load the requested conversation context: "+ex.Message));}
+    payloadContents.Add(userMessage);
+
+    try {
+      var genConfig = new { response_mime_type = "application/json" };
+
+      var coordinated=contextToken(Api.Call("System.Utility/AiGenie/Conversation.Run",new Dictionary&lt;string,object&gt;{
+          ["version"]=1,["requestId"]=telemetry.RequestId,["owner"]=storeId,["provider"]=API_URL.Substring("AI.Genies/".Length),
+          ["messages"]=JArray.FromObject(payloadContents),["preparedContext"]=preparedContext,["request"]=scopedRequest,
+          ["template"]=File.ReadAllText(Path.Combine(Data.GetFolder(),"claude_system_prompt.txt")),
+          ["systemPrompt"]=preparedContext["systemPrompt"].Value&lt;string&gt;(),["output"]=genConfig,
+          ["scheduled"]=false,["elapsedBefore"]=telemetry.ElapsedMs,["cancellationToken"]=lease.Token
+      }));
+      lease.Token.ThrowIfCancellationRequested();
+      if(coordinated is not JObject result|| (string)result["Status"]=="Error")
+          throw new InvalidOperationException((string)coordinated?["Message"]??"AI Genie coordinator unavailable.");
+      if(result["version"]?.Type!=JTokenType.Integer||(int)result["version"]!=1||(string)result["requestId"]!=telemetry.RequestId)
+          throw new InvalidOperationException("AI Genie returned an incompatible conversation result.");
+      telemetry.ImportRunMetrics(result["metrics"] as JObject);
+      if(result["error"]?.Type==JTokenType.String)throw new InvalidOperationException((string)result["error"]);
+      if(result["reply"]?.Type!=JTokenType.String||!new[]{"completed","error"}.Contains((string)result["outcome"]))
+          throw new InvalidOperationException("AI Genie returned an invalid final reply.");
+      string finalReply=(string)result["reply"];
+      return lease.Commit&lt;object&gt;(()=&gt; {
+          telemetry.SaveReply(ChatMessage.Create("model",finalReply),(string)result["outcome"]);
+          return new ResponseText(finalReply);
+      });
+    }
+    catch(OperationCanceledException) {
+        telemetry.SaveReply(ChatMessage.Create("model",""),"cancelled");
+        return new JObject{["Status"]="Ok",["state"]="cancelled",["requestId"]=promptId};
+    }
+    catch (Exception ex)
+    {
+        Program.Log.Error($"Claude API Error: {ex.Message}");
+        return new ResponseText(telemetry.Error($"**Error:** {ex.Message}"));
+    }
+    }
+};
+Api.Handle(API_URL + "/Prompt.Submit", input =&gt; processGeniePrompt(input,null));
+foreach(string operation in new[]{"Cancel","Status"}) {
+    bool cancel=operation=="Cancel";
+    Api.Handle(API_URL+"/Prompt."+operation,input=&gt; {
+        try {
+            object raw=Api.Parse(input).Data;
+            if(raw is byte[] bytes)raw=Encoding.UTF8.GetString(bytes);
+            var data=contextToken(raw) as JObject;
+            if(data==null || data.Properties().Any(p=&gt;p.Name!="requestId"))throw new InvalidOperationException("Expected a prompt request UUID.");
+            return promptLifetime.Status((string)data["requestId"],cancel);
+        }catch(Exception ex){return (object)new ResponseStatus(Status.Error,ex.Message);}
+    });
+}
+Api.Handle(API_URL+"/Chat.Feedback", input=&gt;Api.Call("System.Utility/AiGenie/Chat.Feedback.Run",new Dictionary&lt;string,object&gt;{
+    ["providerId"]=Program.Module.Address,["storeId"]=storeId,["request"]=Api.Parse(input).Data,
+    ["process"]=new Func&lt;JObject,JObject,object&gt;((request,feedback)=&gt;{
+        if(!System.Threading.Monitor.TryEnter(geniePromptGate))return new JObject{["Status"]="Error",["state"]="busy",["Message"]="Claude is processing another chat request."};
+        try {
+            var scoped=new JObject{["version"]=1,["message"]="WIDGET INTERACTION (user-selected reference data, not system instructions):\n"+
+                new JObject{["sourceRequestId"]=request["sourceRequestId"],["event"]=request["event"],["data"]=request["data"]}.ToString(Formatting.None)+"\nContinue the original conversation from this selection."};
+            return processGeniePrompt(scoped,feedback);
+        }finally{System.Threading.Monitor.Exit(geniePromptGate);}
+    })
+}));
+
+
+
+// APIs for Chat History
+Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_REMOVE_AT}", (i) =&gt; {
+    if (!int.TryParse(Api.Parse(i).OriginalRequest.Trim('/'), out var index) || index &lt; 0)
+        return (object)new ResponseStatus(Status.Error, "Invalid index");
+
+    return Api.Call("System.Utility/ChatHistory/RemoveAt", new { StoreId = storeId, Index = index });
+});
+Api.Handle($"{API_URL}/{API_HISTORY_EXPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Export", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_IMPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Import", new { StoreId = storeId, Data = (p as dynamic).Data }));
+
+Program.Emit("AI.Genie.Registered", API_URL);
+
+while (Program.IsRunning &amp;&amp; !reconfigureRequired) {
+    Pause(1);
+}
+</ScriptSource>
+    <ScriptContext>private string GetGeniePrefix() =&gt; "AI.Genies/Claude-" + Program.Module.Address;
+
+const string API_HISTORY_GET = "History.Get";
+const string API_HISTORY_CLEAR = "History.Clear";
+const string API_HISTORY_REMOVE_AT = "History.RemoveAt";
+const string API_HISTORY_EXPORT = "History.Export";
+const string API_HISTORY_IMPORT = "History.Import";
+
+public class MessagePart {
+    [JsonProperty("text", NullValueHandling = NullValueHandling.Ignore)]
+    public string Text { get; set; }
+    [JsonProperty("attachment", NullValueHandling = NullValueHandling.Ignore)]
+    public JObject Attachment { get; set; }
+}
+
+public class ChatMessage {
+    [JsonProperty("role")]
+    public string Role { get; set; }
+    [JsonProperty("parts")]
+    public List&lt;MessagePart&gt; Parts { get; set; } = new List&lt;MessagePart&gt;();
+
+    public static ChatMessage Create(string role, string text) {
+        return new ChatMessage {
+            Role = role,
+            Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = text } }
+        };
+    }
+}
+// Diagnostics stay in the history envelope, never in provider message objects.
+// Thin in-process adapter; timing, metadata and persistence belong to AI Genie.
+public class ChatRequestMetrics {
+    readonly IDictionary&lt;string,object&gt; turn;
+    string profile;
+    public ChatRequestMetrics(dynamic api,string storeId,bool persist=true) {
+        object result=api.Call("System.Utility/AiGenie/Turn.Create",new Dictionary&lt;string,object&gt; {
+            ["version"]=1,["storeId"]=storeId,["persist"]=persist,["contextCalls"]=false
+        });
+        turn=result as IDictionary&lt;string,object&gt;;
+        if(turn==null || !turn.TryGetValue("version",out var version) || version is not int v || v!=1 ||
+            !turn.ContainsKey("saveReply") || turn["saveReply"] is not Action&lt;object,string&gt;)
+            throw new InvalidOperationException("Update AI Genie: shared turn service unavailable.");
+    }
+    public string RequestId=&gt;(string)turn["requestId"];
+    public long ElapsedMs=&gt;((Func&lt;long&gt;)turn["elapsed"])();
+    public string ContextProfileKey {get=&gt;profile;set {((Action&lt;string&gt;)turn["profile"])(value);profile=value;}}
+    public JArray ContextCalls=&gt;(JArray)turn["contextCalls"];
+    public void FirstToken()=&gt;((Action)turn["firstToken"])();
+    public void GenerationComplete()=&gt;((Action)turn["generationComplete"])();
+    public void ActionsCompleted(long elapsedMs,int count,int failed)=&gt;((Action&lt;long,int,int&gt;)turn["actionsCompleted"])(elapsedMs,count,failed);
+    public void SetActionResults(object results)=&gt;((Action&lt;object&gt;)turn["actionResults"])(results);
+    public void ImportRunMetrics(JObject metrics)=&gt;((Action&lt;JObject&gt;)turn["import"])(metrics);
+    public object Snapshot(string outcome)=&gt;((Func&lt;string,object&gt;)turn["snapshot"])(outcome);
+    public void SetFeedback(JObject value)=&gt;((Action&lt;JObject&gt;)turn["feedback"])(value);
+    public void SaveUser(object message)=&gt;((Action&lt;object&gt;)turn["saveUser"])(message);
+    public void SaveReply(object message,string outcome="completed")=&gt;((Action&lt;object,string&gt;)turn["saveReply"])(message,outcome);
+    public string Error(string text,string outcome="error")=&gt;((Func&lt;string,string,string&gt;)turn["error"])(text,outcome);
+}
+
+// Provider adapter: defaults and persisted selections remain owned by this Genie.
+public JObject SharedCapabilityRequest(string operation, JToken selected = null) {
+    var input=new JObject{["version"]=1};
+    if(selected!=null)input["capabilities"]=selected.DeepClone();
+    object raw=Api.Call("System.Utility/AiGenie/"+operation,input);
+    var result=raw as JObject ?? (raw is string text?JToken.Parse(text) as JObject:raw==null?null:JToken.FromObject(raw) as JObject);
+    if(result==null || (string)result["Status"]=="Error")throw new InvalidOperationException((string)result?["Message"]??"Update AI Genie: capability service unavailable.");
+    return result;
+}
+public object ForwardBackgroundRequest(object payload,string providerId,string operation,Func&lt;string,object,object&gt; call) {
+    try {
+        if(payload is byte[] bytes)payload=Encoding.UTF8.GetString(bytes);
+        var request=payload as JObject ?? (payload is string text?JObject.Parse(text):payload==null?null:JObject.FromObject(payload));
+        if(request==null || request["providerId"]!=null &amp;&amp; (string)request["providerId"]!=providerId)
+            throw new InvalidOperationException("Provider does not match this endpoint.");
+        request=(JObject)request.DeepClone();request["providerId"]=providerId;
+        return call("System.Utility/AiGenie/Request."+operation,request);
+    } catch(Exception) {return new JObject{["version"]=1,["state"]="failed",["error"]="Invalid request or AI Genie service unavailable."};}
+}
+
+// Correlated prompt ownership lasts until the whole turn has unwound, including after cancellation.
+public sealed class ClaudePromptLifetime : IDisposable {
+    readonly object gate=new object();
+    readonly Dictionary&lt;string,string&gt; ended=new Dictionary&lt;string,string&gt;();
+    readonly Queue&lt;string&gt; endedOrder=new Queue&lt;string&gt;();
+    readonly HashSet&lt;string&gt; earlyStops=new HashSet&lt;string&gt;();
+    Lease current;bool stopping;
+    public sealed class Lease : IDisposable {
+        internal readonly ClaudePromptLifetime Owner;
+        internal readonly CancellationTokenSource Cancellation=new CancellationTokenSource();
+        internal bool Cancelled,Finalized;
+        public readonly string Id;
+        internal Lease(ClaudePromptLifetime owner,string id){Owner=owner;Id=id;}
+        public CancellationToken Token=&gt;Cancellation.Token;
+        public T Commit&lt;T&gt;(Func&lt;T&gt; save) {
+            lock(Owner.gate) {
+                if(Cancelled || Owner.stopping)throw new OperationCanceledException(Token);
+                var result=save();Finalized=true;return result;
+            }
+        }
+        public void Dispose(){Owner.End(this);}
+    }
+    public bool TryBegin(string id,out Lease lease,out string state) {
+        if(string.IsNullOrEmpty(id) || id.Length&gt;320 || id.Any(c=&gt;!char.IsAsciiLetterOrDigit(c) &amp;&amp; c!='-' &amp;&amp; c!='_' &amp;&amp; c!='.' &amp;&amp; c!=':'))throw new InvalidOperationException("Invalid prompt request identity.");
+        lock(gate) {
+            lease=null;
+            if(stopping){state="unavailable";return false;}
+            if(earlyStops.Contains(id)){state="cancelled";return false;}
+            if(ended.TryGetValue(id,out state))return false; // A late/replayed submit never starts again.
+            if(current!=null){state="busy";return false;}
+            current=lease=new Lease(this,id);state="running";return true;
+        }
+    }
+    void Remember(string id,string state) {
+        if(!ended.ContainsKey(id))endedOrder.Enqueue(id);
+        ended[id]=state;while(endedOrder.Count&gt;128)ended.Remove(endedOrder.Dequeue());
+    }
+    void End(Lease lease) {
+        lock(gate) {
+            if(!ReferenceEquals(current,lease))return;
+            Remember(lease.Id,lease.Cancelled?"cancelled":"completed");current=null;lease.Cancellation.Dispose();
+        }
+    }
+    public object Status(string id,bool cancel=false) {
+        if(string.IsNullOrEmpty(id) || id.Length&gt;320 || id.Any(c=&gt;!char.IsAsciiLetterOrDigit(c) &amp;&amp; c!='-' &amp;&amp; c!='_' &amp;&amp; c!='.' &amp;&amp; c!=':'))throw new InvalidOperationException("Invalid prompt request identity.");
+        lock(gate) {
+            string state;
+            if(current?.Id==id) {
+                if(cancel &amp;&amp; !current.Finalized){current.Cancelled=true;current.Cancellation.Cancel();}
+                state=current.Finalized?"completed":current.Cancelled?"cancelling":"running";
+            } else if(!ended.TryGetValue(id,out state)) {
+                if(earlyStops.Contains(id))state="cancelled";
+                else if(cancel) {
+                    if(earlyStops.Count&gt;=4096)throw new InvalidOperationException("Prompt cancellation records are full; restart the Genie before retrying.");
+                    earlyStops.Add(id);state="cancelled";
+                } else state="not_running";
+            }
+            return new {Status="Ok",requestId=id,state};
+        }
+    }
+    public void Dispose(){lock(gate){stopping=true;if(current!=null){current.Cancelled=true;current.Cancellation.Cancel();}}}
+}
+
+public static class ClaudeGenerationProvider {
+    public static object Generate(object payload, string model, int maxOutputTokens,
+        Func&lt;JArray, CancellationToken, JArray&gt; resolve,
+        Func&lt;JObject, CancellationToken, JObject&gt; send) {
+        var request = payload as IDictionary&lt;string, object&gt;;
+        string id = request != null &amp;&amp; request.TryGetValue("requestId", out var identity) ? identity as string : null;
+        object Result(string state, string text = null, string error = null) =&gt; new Dictionary&lt;string, object&gt; {
+            ["version"] = 1, ["requestId"] = id, ["state"] = state, ["text"] = text, ["error"] = error
+        };
+        if (request == null || !request.TryGetValue("version", out var version) || version is not 1 ||
+            string.IsNullOrWhiteSpace(id) || !request.TryGetValue("messages", out var messages) || messages == null ||
+            !request.TryGetValue("cancellationToken", out var token) || token is not CancellationToken cancellation)
+            return Result("failed", error: "Invalid Claude provider request.");
+        try {
+            cancellation.ThrowIfCancellationRequested();
+            var body = new JObject {
+                ["model"] = model, ["messages"] = ConvertMessages(resolve(JArray.FromObject(messages), cancellation)),
+                ["max_tokens"] = maxOutputTokens, ["stream"] = true
+            };
+            if (request.TryGetValue("systemPrompt", out var prompt) &amp;&amp; prompt is string instructions)
+                body["system"] = instructions;
+            bool json = false;
+            if (request.TryGetValue("output", out var output) &amp;&amp; output != null) {
+                var options = JObject.FromObject(output);
+                json = (string)(options["response_mime_type"] ?? options["responseMimeType"]) == "application/json";
+                if (json)
+                    body["system"] = (string)body["system"] + "\nReturn exactly one JSON object, with no Markdown fences or text outside it.";
+                var limit = options["max_output_tokens"] ?? options["maxOutputTokens"];
+                if (limit?.Type == JTokenType.Integer &amp;&amp; (long)limit &gt; 0)
+                    body["max_tokens"] = Math.Min(maxOutputTokens, (long)limit);
+            }
+            JObject response = send(body, cancellation);
+            cancellation.ThrowIfCancellationRequested();
+            string reason = (string)response?["stop_reason"];
+            if (reason == "max_tokens" || reason == "model_context_window_exceeded")
+                return Result("output_limit", error: reason == "max_tokens" ? "Claude reached its output limit." : "Claude reached its context window limit.");
+            if (reason == "refusal")
+                return Result("failed", error: "Claude declined the request.");
+            if (reason is not ("end_turn" or "stop_sequence"))
+                return Result("failed", error: "Claude returned an incomplete response.");
+            string text = (string)response["text"];
+            if (json &amp;&amp; !string.IsNullOrWhiteSpace(text)) {
+                string trimmed = text.Trim();
+                if (trimmed.StartsWith("```json\n", StringComparison.OrdinalIgnoreCase) &amp;&amp; trimmed.EndsWith("\n```", StringComparison.Ordinal))
+                    text = trimmed.Substring(8, trimmed.Length - 12).Trim();
+            }
+            return string.IsNullOrWhiteSpace(text) ? Result("failed", error: "Claude returned an empty completion.") : Result("completed", text);
+        } catch (OperationCanceledException) {
+            return cancellation.IsCancellationRequested ? Result("cancelled") : Result("failed", error: "Claude generation timed out or stopped.");
+        } catch (System.Net.Http.HttpRequestException ex) {
+            string error = ex.StatusCode switch {
+                System.Net.HttpStatusCode.BadRequest =&gt; "Claude rejected the Messages request (HTTP 400). Check the model ID, output token setting and input.",
+                System.Net.HttpStatusCode.Unauthorized =&gt; "Claude rejected the API key (HTTP 401).",
+                System.Net.HttpStatusCode.Forbidden =&gt; "Claude denied access (HTTP 403). Check the API key and workspace.",
+                System.Net.HttpStatusCode.NotFound =&gt; "Claude could not find the selected model (HTTP 404).",
+                System.Net.HttpStatusCode.TooManyRequests =&gt; "Claude returned HTTP 429. Check the API credit balance and rate limits.",
+                (System.Net.HttpStatusCode)529 =&gt; "Claude is temporarily overloaded (HTTP 529).",
+                _ =&gt; ex.StatusCode.HasValue ? "Claude returned HTTP " + (int)ex.StatusCode.Value + "." : "Claude transport failed."
+            };
+            return Result("failed", error: error);
+        } catch (InvalidOperationException ex) {
+            return Result("failed", error: ex.Message);
+        } catch (Exception) {
+            return Result("failed", error: "Claude provider generation failed.");
+        }
+    }
+
+    static JArray ConvertMessages(JArray messages) {
+        var converted = new JArray();
+        foreach (var message in messages.OfType&lt;JObject&gt;()) {
+            string role = (string)message["role"];
+            bool assistant = role == "model" || role == "assistant";
+            if (!assistant &amp;&amp; role != "user") throw new InvalidOperationException("Unsupported chat message role.");
+            if (message["parts"] is not JArray parts) throw new InvalidOperationException("Invalid chat message parts.");
+            var content = new JArray();
+            foreach (var part in parts.OfType&lt;JObject&gt;()) {
+                var media = (part["attachment"] ?? part["inlineData"]) as JObject;
+                if (media != null) {
+                    string mime = (string)media["mimeType"];
+                    string data = (string)media["data"];
+                    if (assistant || string.IsNullOrWhiteSpace(data))
+                        throw new InvalidOperationException("Unsupported or unresolved chat attachment.");
+                    string type = mime switch {
+                        "image/jpeg" or "image/png" or "image/webp" =&gt; "image",
+                        "application/pdf" =&gt; "document",
+                        _ =&gt; throw new InvalidOperationException("Unsupported chat attachment format.")
+                    };
+                    content.Add(new JObject { ["type"] = type, ["source"] = new JObject {
+                        ["type"] = "base64", ["media_type"] = mime, ["data"] = data
+                    }});
+                } else if (part["text"]?.Type == JTokenType.String &amp;&amp; !string.IsNullOrEmpty((string)part["text"])) {
+                    content.Add(new JObject { ["type"] = "text", ["text"] = part["text"].DeepClone() });
+                }
+            }
+            if (content.Count &gt; 0)
+                converted.Add(new JObject { ["role"] = assistant ? "assistant" : "user", ["content"] = content });
+        }
+        if (converted.Count == 0) throw new InvalidOperationException("The Claude request has no messages.");
+        if ((string)converted.Last["role"] == "assistant")
+            converted.Add(new JObject { ["role"] = "user", ["content"] = "Continue the request." });
+        return converted;
+    }
+
+    public static JObject ReadStream(TextReader reader, CancellationToken cancellation) {
+        var text = new StringBuilder();
+        string reason = null;
+        while (reader.ReadLineAsync(cancellation).AsTask().GetAwaiter().GetResult() is string line) {
+            if (!line.StartsWith("data:", StringComparison.Ordinal)) continue;
+            var data = JObject.Parse(line.Substring(5));
+            switch ((string)data["type"]) {
+                case "content_block_start":
+                    if ((string)data["content_block"]?["type"] == "text") text.Append((string)data["content_block"]["text"]);
+                    break;
+                case "content_block_delta":
+                    if ((string)data["delta"]?["type"] == "text_delta") text.Append((string)data["delta"]["text"]);
+                    break;
+                case "message_delta":
+                    reason = (string)data["delta"]?["stop_reason"] ?? reason;
+                    break;
+                case "error":
+                    if ((string)data["error"]?["type"] == "overloaded_error")
+                        throw new System.Net.Http.HttpRequestException("Claude is overloaded.", null, (System.Net.HttpStatusCode)529);
+                    throw new InvalidOperationException("Claude interrupted the response stream.");
+                case "message_stop":
+                    return new JObject { ["stop_reason"] = reason, ["text"] = text.ToString() };
+            }
+        }
+        throw new InvalidOperationException("Claude's response ended before completion.");
+    }
+}
+
+</ScriptContext>
+    <Data></Data>
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-ml-ai</PackageId>
+      <PackageVersion>1.0.93</PackageVersion>
+      <Id>claude-genie</Id>
+      <Version>1.0.1</Version>
+      <Required>true</Required>
+      <Checksum>A747C0C131A4C4EADB326D28E2015717</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>935</Address>
+    <Name>Claude Genie</Name>
+    <Description>Cloud AI Genie using the Anthropic Messages API.</Description>
+    <Group>AI - Machine Learning</Group>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>true</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>var systemPromptFile = Path.Combine(Data.GetFolder(), "deepseek_system_prompt.txt");
+if (!File.Exists(systemPromptFile)) File.WriteAllText(systemPromptFile, "#use-skill homegenie-genie\n");
+
+Program.Setup(() =&gt; {
+    // This method is used to register this program as a "AI intent handler"
+    Program.Implements(
+        "@AI:Genie",
+        GetGeniePrefix(), new { requests = new { version = 1, generate = true, execute = true }, chat = new { requestVersion = 1, cancelVersion = 1, feedback = true, context = new [] { "devices", "widgets", "automationPrograms", "dashboards", "deepKnowledge" }, capabilities = new [] { "deviceControl", "automation", "widgets" } } }
+    ).AddOption("ApiKey", "", "1. DeepSeek API key", "password")
+     .AddOption("SystemInstructions", "", "2. System Instructions", $"editor:file:{systemPromptFile}:markdown");
+});
+
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>string storeId = Program.Module.Address;
+string API_URL = GetGeniePrefix();
+// Conversation/task transport stays available before checking the API key.
+foreach (string op in new[]{"Conversation.Get","Task.Create","Task.Get","Task.Update","Task.Cancel"}) {
+    string operation=op;
+    Api.Handle(API_URL+"/"+operation, input =&gt; {
+        try {
+            object raw=Api.Parse(input).Data;
+            if(raw is byte[] bytes) raw=Encoding.UTF8.GetString(bytes);
+            var data=raw is JObject value ? (JObject)value.DeepClone() : raw is string text ? (string.IsNullOrWhiteSpace(text) ? new JObject() : JObject.Parse(text)) : JObject.FromObject(raw??new{});
+            data["StoreId"]=storeId;
+            return Api.Call("System.Utility/ChatHistory/"+operation,data);
+        } catch(Exception ex) { return (object)new ResponseStatus(Status.Error,ex.Message); }
+    });
+}
+
+// Provider-scoped attachment routes; caller-supplied owner/path is never forwarded.
+Api.Handle(API_URL+"/Attachments.Describe", _ =&gt; new { version=1, kinds=new string[]{"image"},
+    mimeTypes=new[]{"image/jpeg","image/png","image/webp"}, maxFiles=3, maxBytes=4194304 });
+foreach (string op in new[]{"Upload","Get","Delete"}) {
+    string operation=op;
+    Api.Handle(API_URL+"/Attachments."+operation, input =&gt; {
+        try {
+            object raw=Api.Parse(input).Data;
+            if(raw is byte[] bytes)raw=Encoding.UTF8.GetString(bytes);
+            var data=raw as JObject ?? (raw is string text?JObject.Parse(text):JObject.FromObject(raw??new{}));
+            data["StoreId"]=storeId;
+            return Api.Call("System.Utility/ChatHistory/Files."+operation,data);
+        } catch(Exception ex) { return (object)new ResponseStatus(Status.Error,ex.Message); }
+    });
+}
+Api.Handle(API_URL+"/Request.Execute", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Execute", (route,data)=&gt;Api.Call(route,data)));
+Api.Handle(API_URL+"/Request.Generate", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Generate", (route,data)=&gt;Api.Call(route,data)));
+Api.Handle(API_URL+"/Request.Status", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Status", (route,data)=&gt;Api.Call(route,data)));
+Api.Handle(API_URL+"/Request.Cancel", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Cancel", (route,data)=&gt;Api.Call(route,data)));
+
+var promptLifetime=new DeepSeekPromptLifetime();
+When.ProgramStopping(()=&gt;{promptLifetime.Dispose();return true;});
+
+
+string deepSeekApiKey = Program.Option("ApiKey").Value.Trim();
+const string deepSeekModelId = "deepseek-flash";
+bool configured = !string.IsNullOrWhiteSpace(deepSeekApiKey);
+Program.Emit("Status.Init", configured ? "Ready" : "NotConfigured");
+
+bool reconfigureRequired = false;
+When.ModuleParameterChanged((module, parameter) =&gt; {
+  if (module.Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
+    reconfigureRequired = true;
+  }
+  // Generated-program Quit requests are handled by the shared AI Genie service.
+  return true;
+});
+
+Func&lt;object, JToken&gt; contextToken = value =&gt; value is string text ? JToken.Parse(text) : JToken.FromObject(value);
+Func&lt;JObject, JObject&gt; composeGeniePrompt = selected =&gt; {
+    string template = File.ReadAllText(Path.Combine(Data.GetFolder(), "deepseek_system_prompt.txt"));
+    var result = contextToken(Api.Call("System.Utility/AiGenie/Prompt.Compose",
+        new JObject { ["version"] = 1, ["template"] = template, ["capabilities"] = selected }));
+    if (!(result is JObject composed) || (string)result["Status"] == "Error" || result["prompt"]?.Type != JTokenType.String)
+        throw new InvalidOperationException((string)result?["Message"] ?? "AI Genie prompt preparation unavailable.");
+    return composed;
+};
+Api.Handle(API_URL + "/Prompt.Preview", input =&gt; {
+    try {
+        var request = Api.Parse(input);
+        object body = request?.Data;
+        if (body is byte[] bytes) body = Encoding.UTF8.GetString(bytes);
+        var envelope = body == null || body is string empty &amp;&amp; string.IsNullOrWhiteSpace(empty) ? new JObject()
+            : body is string text ? JObject.Parse(text) : JObject.FromObject(body);
+        var selected = SharedCapabilityRequest("Capabilities.Normalize",envelope["capabilities"]);
+        var composed = composeGeniePrompt(selected);
+        return (object)new { version=1, capabilities=selected, fingerprint=composed["fingerprint"], skills=composed["skills"], resources=composed["resources"],
+            allowedKinds=((JArray)SharedCapabilityRequest("Response.Schema",selected)["anyOf"]).Select(v=&gt;(string)v["properties"]["kind"]["enum"][0]),
+            promptBytes=Encoding.UTF8.GetByteCount((string)composed["prompt"]) };
+    } catch (Exception ex) { return new { Status="Error",Message=ex.Message }; }
+});
+Api.Handle(API_URL + "/Capabilities.Describe", input =&gt; SharedCapabilityRequest("Capabilities.Describe"));
+
+Func&lt;string,JToken&gt; storedChatSetting = name =&gt; {
+    var property = Program.Module.Properties.FirstOrDefault(p =&gt; p.Name == name);
+    if (property == null || string.IsNullOrWhiteSpace(Convert.ToString(property.Value))) return null;
+    try { return JObject.Parse(Convert.ToString(property.Value)); }
+    catch { throw new InvalidOperationException("Invalid persistent chat setting: " + name); }
+};
+Func&lt;JObject, JObject&gt; prepareScopedContext = input =&gt; {
+    if (input["context"] == null) {
+        var saved = storedChatSetting("AI.Chat.Context");
+        if (saved != null) input["context"] = saved.DeepClone();
+    }
+    if (input["capabilities"] == null) {
+        var saved = storedChatSetting("AI.Chat.Capabilities");
+        if (saved != null) input["capabilities"] = saved.DeepClone();
+    }
+    // Preserve per-Genie defaults and its custom prompt; the service owns data collection.
+    var result = contextToken(Api.Call("System.Utility/AiGenie/Context.Prepare", new JObject {
+        ["version"] = 1, ["request"] = input,
+        ["template"] = File.ReadAllText(Path.Combine(Data.GetFolder(), "deepseek_system_prompt.txt"))
+    }));
+    if (!(result is JObject prepared) || (string)result["Status"] == "Error" || result["systemPrompt"]?.Type != JTokenType.String)
+        throw new InvalidOperationException((string)result?["Message"] ?? "AI Genie context preparation unavailable.");
+    return prepared;
+};
+
+
+Api.Handle(API_URL + "/Goals.Describe", _ =&gt; new {version=1, widgets=true, automation=true, dashboard=true, goalTypes=true});
+Api.Handle(API_URL + "/Goal.Start", input =&gt; {
+    if(!promptLifetime.TryBegin(Guid.NewGuid().ToString("N"),out var startLease,out _))
+        return (object)new {Status="Error",state="busy",Message="DeepSeek is still processing a request. Wait for it to finish stopping."};
+    using(startLease) {
+    try {
+        object raw=Api.Parse(input).Data;
+        if(raw is byte[] bytes)raw=Encoding.UTF8.GetString(bytes);
+        var envelope=raw is JObject value?(JObject)value.DeepClone():raw is string text?JObject.Parse(text):JObject.FromObject(raw??new{});
+        if(envelope["request"] is not JObject request)throw new InvalidOperationException("Missing objective request.");
+        if (!configured) throw new InvalidOperationException("Set the DeepSeek API key in program options first.");
+        var prepared=prepareScopedContext(request);
+        return Api.Call("System.Utility/AiGenie/Goal.Start",new Dictionary&lt;string,object&gt;{
+            ["providerId"]=storeId,["input"]=envelope,["prepared"]=prepared,
+            ["template"]=File.ReadAllText(Path.Combine(Data.GetFolder(),"deepseek_system_prompt.txt"))});
+    }catch(Exception ex){return (object)new ResponseStatus(Status.Error,ex.Message);}
+    }
+});
+
+Api.Handle(API_URL + "/Context.Preview", input =&gt; {
+    try {
+        var request = Api.Parse(input);
+        object body = request?.Data ?? input;
+        if (body is byte[] bytes) body = Encoding.UTF8.GetString(bytes);
+        var envelope = body is string text ? JObject.Parse(text) : JObject.FromObject(body);
+        var prepared = prepareScopedContext(envelope);
+        return new { version = 1, profileKey = prepared["profileKey"], context = prepared["context"], included = prepared["included"],
+            capabilities = prepared["capabilities"], promptBytes = Encoding.UTF8.GetByteCount((string)prepared["systemPrompt"]) };
+    } catch (Exception ex) { return (object)new { Status = "Error", Message = ex.Message }; }
+});
+
+// ===================================================================
+// API HANDLER: Process a new user message
+// ===================================================================
+// Provider generation is separate from the chat entry point and never takes geniePromptGate.
+var providerLifetime = new CancellationTokenSource();
+When.ProgramStopping(() =&gt; { providerLifetime.Cancel(); return true; });
+Api.Handle(API_URL + "/Provider.Generate", input =&gt; DeepSeekGenerationProvider.Generate(
+    Api.Parse(input).Data, deepSeekModelId, (messages, token) =&gt; {
+        var resolved = contextToken(Api.Call("System.Utility/ChatHistory/Files.Resolve", new JObject {
+            ["StoreId"] = storeId, ["messages"] = messages
+        }));
+        if ((string)resolved?["Status"] == "Error" || resolved?["messages"] is not JArray resolvedMessages)
+            throw new InvalidOperationException((string)resolved?["Message"] ?? "Cannot resolve chat attachments.");
+        return resolvedMessages;
+    }, (body, token) =&gt; {
+        if (!configured) throw new InvalidOperationException("Set the DeepSeek API key in program options first.");
+        using var linked = CancellationTokenSource.CreateLinkedTokenSource(token, providerLifetime.Token);
+        using var client = new System.Net.Http.HttpClient { Timeout = TimeSpan.FromMinutes(10) };
+        client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", deepSeekApiKey);
+        using var content = new System.Net.Http.StringContent(body.ToString(Formatting.None), Encoding.UTF8, "application/json");
+        using var response = client.PostAsync("https://api.deepseek.com/responses", content, linked.Token).GetAwaiter().GetResult();
+        string responseBody = response.Content.ReadAsStringAsync(linked.Token).GetAwaiter().GetResult();
+        if ((int)response.StatusCode == 400)
+            throw new InvalidOperationException(DeepSeekGenerationProvider.BadRequestMessage(responseBody));
+        if (!response.IsSuccessStatusCode)
+            throw new System.Net.Http.HttpRequestException("DeepSeek HTTP error.", null, response.StatusCode);
+        return JObject.Parse(responseBody);
+    }));
+Api.Handle(API_URL+"/Provider.Text.Generate", input =&gt; {
+    var request=Api.Parse(input).Data;
+    // Reuse the transport adapter. It performs no chat/history/action processing.
+    return Api.Call(API_URL+"/Provider.Generate",request);
+});
+
+Api.Handle(API_URL+"/Provider.Request.Execute", input =&gt; {
+    var data=Api.Parse(input).Data as IDictionary&lt;string,object&gt;;
+    if(data==null || !data.TryGetValue("cancellationToken",out var supplied) || supplied is not CancellationToken cancellation)
+        throw new InvalidOperationException("Native execution request required.");
+    using(var linked=CancellationTokenSource.CreateLinkedTokenSource(cancellation,providerLifetime.Token)) {
+    var request=new Dictionary&lt;string,object&gt;(data);
+    request["cancellationToken"]=linked.Token;
+    request["providerId"]=Program.Module.Address;request["protocol"]="structured";
+    request["template"]=File.ReadAllText(Path.Combine(Data.GetFolder(),"deepseek_system_prompt.txt"));
+    request["generate"]=new Func&lt;JArray,string,object,IDictionary&lt;string,object&gt;&gt;((messages,instructions,output)=&gt; {
+        if(reconfigureRequired || !Program.IsRunning)throw new InvalidOperationException("DeepSeek is restarting.");
+        return Api.Call(API_URL+"/Provider.Generate",new Dictionary&lt;string,object&gt;{["version"]=1,["requestId"]=data["requestId"],
+            ["messages"]=messages,["systemPrompt"]=instructions,["output"]=output,["cancellationToken"]=linked.Token}) as IDictionary&lt;string,object&gt;;
+    });
+    return Api.Call("System.Utility/AiGenie/Request.Run",request);
+    }
+});
+
+object geniePromptGate = new object();
+Func&lt;object, JObject, object&gt; processGeniePrompt = (userCommand, feedback) =&gt;
+{
+    if (!configured) return new ResponseText("Set the DeepSeek API key in program options first.");
+    object initial=Api.Parse(userCommand)?.Data??userCommand;
+    if(initial is byte[] initialBytes)initial=Encoding.UTF8.GetString(initialBytes);
+    if(initial is string initialText &amp;&amp; initialText.TrimStart().StartsWith("{"))initial=JObject.Parse(initialText);
+    string promptId=feedback!=null?"feedback:"+(string)feedback["sourceRequestId"]+":"+(string)feedback["eventId"]:Guid.NewGuid().ToString("N");
+    if(initial is JObject envelope &amp;&amp; envelope["prompt"]!=null) {
+        promptId=(string)envelope["requestId"];
+        if(envelope.Properties().Any(p=&gt;!new[]{"requestId","prompt"}.Contains(p.Name)) || !Guid.TryParseExact(promptId,"N",out _))
+            return new JObject{["Status"]="Error",["Message"]="Invalid prompt envelope."};
+        initial=envelope["prompt"];
+    }
+    if(!promptLifetime.TryBegin(promptId,out var promptLease,out var promptState))
+        return new JObject{["Status"]=promptState=="cancelled"?"Ok":"Error",["state"]=promptState,["requestId"]=promptId,["Message"]="DeepSeek is busy or this request has already ended."};
+    using(var lease=promptLease) {
+    Func&lt;bool&gt; activeGoal=()=&gt; {
+        var snapshot=contextToken(Api.Call("System.Utility/ChatHistory/Conversation.Get",new JObject{["StoreId"]=storeId}));
+        if((string)snapshot?["Status"]!="Ok" || snapshot?["messages"] is not JArray rows)throw new InvalidOperationException("Cannot verify active chat objectives.");
+        return rows.Any(m=&gt;m["metadata"]?["agenticTask"] is JObject task &amp;&amp; (bool?)task["readOnly"]!=true &amp;&amp;
+            new[]{"pending","running","waiting"}.Contains((string)task["state"]));
+    };
+    if(activeGoal())return new JObject{["Status"]="Error",["state"]="busy",["Message"]="An objective is still active. Wait for it to finish or stop it first."};
+    JObject scopedRequest = null;
+    JObject preparedContext = null;
+    string msg;
+    try {
+        lease.Token.ThrowIfCancellationRequested();
+        object body = initial;
+        if (body is byte[] bytes) body = Encoding.UTF8.GetString(bytes);
+        if (body is string text) {
+            if (text.TrimStart().StartsWith("{")) {
+                try { var obj = JObject.Parse(text); if (obj["message"] != null) scopedRequest = obj; }
+                catch (Newtonsoft.Json.JsonException) { }
+            }
+            msg = userCommand is string ? WebUtility.UrlDecode(text) : text;
+        } else { scopedRequest = JObject.FromObject(body); msg = ""; }
+        if (scopedRequest == null) scopedRequest = new JObject { ["version"] = 1, ["message"] = msg,
+            ["context"] = new JObject { ["devices"] = true, ["widgets"] = false, ["automationPrograms"] = false, ["dashboards"] = false, ["deepKnowledge"] = false } };
+        // Fill persistent selections before normalization; omitted feedback context is not a default-profile request.
+        if (scopedRequest != null) {
+            if (scopedRequest["attachments"] is JArray images &amp;&amp; images.Count&gt;0) {
+                var checkedFiles=contextToken(Api.Call("System.Utility/ChatHistory/Files.Validate",new JObject{["StoreId"]=storeId,["attachments"]=images}));
+                if ((string)checkedFiles?["Status"]=="Error" || checkedFiles?["attachments"] is not JArray validImages)
+                    throw new InvalidOperationException((string)checkedFiles?["Message"]??"Invalid chat attachments.");
+                scopedRequest["attachments"]=validImages;
+            }
+            preparedContext = prepareScopedContext(scopedRequest);
+            scopedRequest["context"] = preparedContext["context"].DeepClone();
+            scopedRequest["capabilities"] = preparedContext["capabilities"].DeepClone();
+            msg = (string)scopedRequest["message"];
+            if(feedback!=null &amp;&amp; (string)feedback["contextProfileKey"]!=(string)preparedContext["profileKey"])
+                return new JObject{["Status"]="Error",["state"]="rejected",["Message"]="Chat context or capabilities changed since this presentation. Generate a new presentation."};
+        }
+    } catch(OperationCanceledException) {return new JObject{["Status"]="Ok",["state"]="cancelled",["requestId"]=promptId};}
+      catch (Exception ex) { return new ResponseText("**Error:** " + ex.Message); }
+    var telemetry = new ChatRequestMetrics(Api, Program.Module.Address);
+    telemetry.ContextProfileKey = (string)preparedContext?["profileKey"];
+    var userMessage = ChatMessage.Create("user", msg);
+    if (scopedRequest?["attachments"] is JArray imagesToSend) {
+        if (string.IsNullOrWhiteSpace(msg)) userMessage.Parts.Clear();
+        foreach (var image in imagesToSend.OfType&lt;JObject&gt;()) userMessage.Parts.Add(new MessagePart{Attachment=(JObject)image.DeepClone()});
+    }
+    if(feedback==null)telemetry.SaveUser(userMessage);else telemetry.SetFeedback(feedback);
+
+    List&lt;ChatMessage&gt; payloadContents;
+    try {
+        var historyEnvelope=contextToken(Api.Call("System.Utility/AiGenie/History.Read",new JObject{
+            ["version"]=1,["storeId"]=storeId,["profileKey"]=telemetry.ContextProfileKey,["projection"]="structured"}));
+        if(historyEnvelope is not JObject || (string)historyEnvelope["Status"]=="Error" ||
+            (string)historyEnvelope["contextProfileKey"]!=telemetry.ContextProfileKey || historyEnvelope["messages"] is not JArray historyMessages)
+            throw new InvalidOperationException((string)historyEnvelope?["Message"]??"Provider history context is unavailable.");
+        payloadContents=historyMessages.ToObject&lt;List&lt;ChatMessage&gt;&gt;();
+    } catch(Exception ex) {return new ResponseText(telemetry.Error("**Error:** Unable to load the requested conversation context: "+ex.Message));}
+    payloadContents.Add(userMessage);
+
+    try {
+      var genConfig = new { response_mime_type = "application/json" };
+
+      var coordinated=contextToken(Api.Call("System.Utility/AiGenie/Conversation.Run",new Dictionary&lt;string,object&gt;{
+          ["version"]=1,["requestId"]=telemetry.RequestId,["owner"]=storeId,["provider"]=API_URL.Substring("AI.Genies/".Length),
+          ["messages"]=JArray.FromObject(payloadContents),["preparedContext"]=preparedContext,["request"]=scopedRequest,
+          ["template"]=File.ReadAllText(Path.Combine(Data.GetFolder(),"deepseek_system_prompt.txt")),
+          ["systemPrompt"]=preparedContext["systemPrompt"].Value&lt;string&gt;(),["output"]=genConfig,
+          ["scheduled"]=false,["elapsedBefore"]=telemetry.ElapsedMs,["cancellationToken"]=lease.Token
+      }));
+      lease.Token.ThrowIfCancellationRequested();
+      if(coordinated is not JObject result|| (string)result["Status"]=="Error")
+          throw new InvalidOperationException((string)coordinated?["Message"]??"AI Genie coordinator unavailable.");
+      if(result["version"]?.Type!=JTokenType.Integer||(int)result["version"]!=1||(string)result["requestId"]!=telemetry.RequestId)
+          throw new InvalidOperationException("AI Genie returned an incompatible conversation result.");
+      telemetry.ImportRunMetrics(result["metrics"] as JObject);
+      if(result["error"]?.Type==JTokenType.String)throw new InvalidOperationException((string)result["error"]);
+      if(result["reply"]?.Type!=JTokenType.String||!new[]{"completed","error"}.Contains((string)result["outcome"]))
+          throw new InvalidOperationException("AI Genie returned an invalid final reply.");
+      string finalReply=(string)result["reply"];
+      return lease.Commit&lt;object&gt;(()=&gt; {
+          telemetry.SaveReply(ChatMessage.Create("model",finalReply),(string)result["outcome"]);
+          return new ResponseText(finalReply);
+      });
+    }
+    catch(OperationCanceledException) {
+        telemetry.SaveReply(ChatMessage.Create("model",""),"cancelled");
+        return new JObject{["Status"]="Ok",["state"]="cancelled",["requestId"]=promptId};
+    }
+    catch (Exception ex)
+    {
+        Program.Log.Error($"DeepSeek API Error: {ex.Message}");
+        return new ResponseText(telemetry.Error($"**Error:** {ex.Message}"));
+    }
+    }
+};
+Api.Handle(API_URL + "/Prompt.Submit", input =&gt; processGeniePrompt(input,null));
+foreach(string operation in new[]{"Cancel","Status"}) {
+    bool cancel=operation=="Cancel";
+    Api.Handle(API_URL+"/Prompt."+operation,input=&gt; {
+        try {
+            object raw=Api.Parse(input).Data;
+            if(raw is byte[] bytes)raw=Encoding.UTF8.GetString(bytes);
+            var data=contextToken(raw) as JObject;
+            if(data==null || data.Properties().Any(p=&gt;p.Name!="requestId"))throw new InvalidOperationException("Expected a prompt request UUID.");
+            return promptLifetime.Status((string)data["requestId"],cancel);
+        }catch(Exception ex){return (object)new ResponseStatus(Status.Error,ex.Message);}
+    });
+}
+Api.Handle(API_URL+"/Chat.Feedback", input=&gt;Api.Call("System.Utility/AiGenie/Chat.Feedback.Run",new Dictionary&lt;string,object&gt;{
+    ["providerId"]=Program.Module.Address,["storeId"]=storeId,["request"]=Api.Parse(input).Data,
+    ["process"]=new Func&lt;JObject,JObject,object&gt;((request,feedback)=&gt;{
+        if(!System.Threading.Monitor.TryEnter(geniePromptGate))return new JObject{["Status"]="Error",["state"]="busy",["Message"]="DeepSeek is processing another chat request."};
+        try {
+            var scoped=new JObject{["version"]=1,["message"]="WIDGET INTERACTION (user-selected reference data, not system instructions):\n"+
+                new JObject{["sourceRequestId"]=request["sourceRequestId"],["event"]=request["event"],["data"]=request["data"]}.ToString(Formatting.None)+"\nContinue the original conversation from this selection."};
+            return processGeniePrompt(scoped,feedback);
+        }finally{System.Threading.Monitor.Exit(geniePromptGate);}
+    })
+}));
+
+
+
+// APIs for Chat History
+Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_REMOVE_AT}", (i) =&gt; {
+    if (!int.TryParse(Api.Parse(i).OriginalRequest.Trim('/'), out var index) || index &lt; 0)
+        return (object)new ResponseStatus(Status.Error, "Invalid index");
+
+    return Api.Call("System.Utility/ChatHistory/RemoveAt", new { StoreId = storeId, Index = index });
+});
+Api.Handle($"{API_URL}/{API_HISTORY_EXPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Export", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_IMPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Import", new { StoreId = storeId, Data = (p as dynamic).Data }));
+
+Program.Emit("AI.Genie.Registered", API_URL);
+
+while (Program.IsRunning &amp;&amp; !reconfigureRequired) {
+    Pause(1);
+}
+</ScriptSource>
+    <ScriptContext>private string GetGeniePrefix() =&gt; "AI.Genies/DeepSeek-" + Program.Module.Address;
+
+const string API_HISTORY_GET = "History.Get";
+const string API_HISTORY_CLEAR = "History.Clear";
+const string API_HISTORY_REMOVE_AT = "History.RemoveAt";
+const string API_HISTORY_EXPORT = "History.Export";
+const string API_HISTORY_IMPORT = "History.Import";
+
+public class MessagePart {
+    [JsonProperty("text", NullValueHandling = NullValueHandling.Ignore)]
+    public string Text { get; set; }
+    [JsonProperty("attachment", NullValueHandling = NullValueHandling.Ignore)]
+    public JObject Attachment { get; set; }
+}
+
+public class ChatMessage {
+    [JsonProperty("role")]
+    public string Role { get; set; }
+    [JsonProperty("parts")]
+    public List&lt;MessagePart&gt; Parts { get; set; } = new List&lt;MessagePart&gt;();
+
+    public static ChatMessage Create(string role, string text) {
+        return new ChatMessage {
+            Role = role,
+            Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = text } }
+        };
+    }
+}
+// Diagnostics stay in the history envelope, never in provider message objects.
+// Thin in-process adapter; timing, metadata and persistence belong to AI Genie.
+public class ChatRequestMetrics {
+    readonly IDictionary&lt;string,object&gt; turn;
+    string profile;
+    public ChatRequestMetrics(dynamic api,string storeId,bool persist=true) {
+        object result=api.Call("System.Utility/AiGenie/Turn.Create",new Dictionary&lt;string,object&gt; {
+            ["version"]=1,["storeId"]=storeId,["persist"]=persist,["contextCalls"]=false
+        });
+        turn=result as IDictionary&lt;string,object&gt;;
+        if(turn==null || !turn.TryGetValue("version",out var version) || version is not int v || v!=1 ||
+            !turn.ContainsKey("saveReply") || turn["saveReply"] is not Action&lt;object,string&gt;)
+            throw new InvalidOperationException("Update AI Genie: shared turn service unavailable.");
+    }
+    public string RequestId=&gt;(string)turn["requestId"];
+    public long ElapsedMs=&gt;((Func&lt;long&gt;)turn["elapsed"])();
+    public string ContextProfileKey {get=&gt;profile;set {((Action&lt;string&gt;)turn["profile"])(value);profile=value;}}
+    public JArray ContextCalls=&gt;(JArray)turn["contextCalls"];
+    public void FirstToken()=&gt;((Action)turn["firstToken"])();
+    public void GenerationComplete()=&gt;((Action)turn["generationComplete"])();
+    public void ActionsCompleted(long elapsedMs,int count,int failed)=&gt;((Action&lt;long,int,int&gt;)turn["actionsCompleted"])(elapsedMs,count,failed);
+    public void SetActionResults(object results)=&gt;((Action&lt;object&gt;)turn["actionResults"])(results);
+    public void ImportRunMetrics(JObject metrics)=&gt;((Action&lt;JObject&gt;)turn["import"])(metrics);
+    public object Snapshot(string outcome)=&gt;((Func&lt;string,object&gt;)turn["snapshot"])(outcome);
+    public void SetFeedback(JObject value)=&gt;((Action&lt;JObject&gt;)turn["feedback"])(value);
+    public void SaveUser(object message)=&gt;((Action&lt;object&gt;)turn["saveUser"])(message);
+    public void SaveReply(object message,string outcome="completed")=&gt;((Action&lt;object,string&gt;)turn["saveReply"])(message,outcome);
+    public string Error(string text,string outcome="error")=&gt;((Func&lt;string,string,string&gt;)turn["error"])(text,outcome);
+}
+
+// Provider adapter: defaults and persisted selections remain owned by this Genie.
+public JObject SharedCapabilityRequest(string operation, JToken selected = null) {
+    var input=new JObject{["version"]=1};
+    if(selected!=null)input["capabilities"]=selected.DeepClone();
+    object raw=Api.Call("System.Utility/AiGenie/"+operation,input);
+    var result=raw as JObject ?? (raw is string text?JToken.Parse(text) as JObject:raw==null?null:JToken.FromObject(raw) as JObject);
+    if(result==null || (string)result["Status"]=="Error")throw new InvalidOperationException((string)result?["Message"]??"Update AI Genie: capability service unavailable.");
+    return result;
+}
+public object ForwardBackgroundRequest(object payload,string providerId,string operation,Func&lt;string,object,object&gt; call) {
+    try {
+        if(payload is byte[] bytes)payload=Encoding.UTF8.GetString(bytes);
+        var request=payload as JObject ?? (payload is string text?JObject.Parse(text):payload==null?null:JObject.FromObject(payload));
+        if(request==null || request["providerId"]!=null &amp;&amp; (string)request["providerId"]!=providerId)
+            throw new InvalidOperationException("Provider does not match this endpoint.");
+        request=(JObject)request.DeepClone();request["providerId"]=providerId;
+        return call("System.Utility/AiGenie/Request."+operation,request);
+    } catch(Exception) {return new JObject{["version"]=1,["state"]="failed",["error"]="Invalid request or AI Genie service unavailable."};}
+}
+
+// Correlated prompt ownership lasts until the whole turn has unwound, including after cancellation.
+public sealed class DeepSeekPromptLifetime : IDisposable {
+    readonly object gate=new object();
+    readonly Dictionary&lt;string,string&gt; ended=new Dictionary&lt;string,string&gt;();
+    readonly Queue&lt;string&gt; endedOrder=new Queue&lt;string&gt;();
+    readonly HashSet&lt;string&gt; earlyStops=new HashSet&lt;string&gt;();
+    Lease current;bool stopping;
+    public sealed class Lease : IDisposable {
+        internal readonly DeepSeekPromptLifetime Owner;
+        internal readonly CancellationTokenSource Cancellation=new CancellationTokenSource();
+        internal bool Cancelled,Finalized;
+        public readonly string Id;
+        internal Lease(DeepSeekPromptLifetime owner,string id){Owner=owner;Id=id;}
+        public CancellationToken Token=&gt;Cancellation.Token;
+        public T Commit&lt;T&gt;(Func&lt;T&gt; save) {
+            lock(Owner.gate) {
+                if(Cancelled || Owner.stopping)throw new OperationCanceledException(Token);
+                var result=save();Finalized=true;return result;
+            }
+        }
+        public void Dispose(){Owner.End(this);}
+    }
+    public bool TryBegin(string id,out Lease lease,out string state) {
+        if(string.IsNullOrEmpty(id) || id.Length&gt;320 || id.Any(c=&gt;!char.IsAsciiLetterOrDigit(c) &amp;&amp; c!='-' &amp;&amp; c!='_' &amp;&amp; c!='.' &amp;&amp; c!=':'))throw new InvalidOperationException("Invalid prompt request identity.");
+        lock(gate) {
+            lease=null;
+            if(stopping){state="unavailable";return false;}
+            if(earlyStops.Contains(id)){state="cancelled";return false;}
+            if(ended.TryGetValue(id,out state))return false; // A late/replayed submit never starts again.
+            if(current!=null){state="busy";return false;}
+            current=lease=new Lease(this,id);state="running";return true;
+        }
+    }
+    void Remember(string id,string state) {
+        if(!ended.ContainsKey(id))endedOrder.Enqueue(id);
+        ended[id]=state;while(endedOrder.Count&gt;128)ended.Remove(endedOrder.Dequeue());
+    }
+    void End(Lease lease) {
+        lock(gate) {
+            if(!ReferenceEquals(current,lease))return;
+            Remember(lease.Id,lease.Cancelled?"cancelled":"completed");current=null;lease.Cancellation.Dispose();
+        }
+    }
+    public object Status(string id,bool cancel=false) {
+        if(string.IsNullOrEmpty(id) || id.Length&gt;320 || id.Any(c=&gt;!char.IsAsciiLetterOrDigit(c) &amp;&amp; c!='-' &amp;&amp; c!='_' &amp;&amp; c!='.' &amp;&amp; c!=':'))throw new InvalidOperationException("Invalid prompt request identity.");
+        lock(gate) {
+            string state;
+            if(current?.Id==id) {
+                if(cancel &amp;&amp; !current.Finalized){current.Cancelled=true;current.Cancellation.Cancel();}
+                state=current.Finalized?"completed":current.Cancelled?"cancelling":"running";
+            } else if(!ended.TryGetValue(id,out state)) {
+                if(earlyStops.Contains(id))state="cancelled";
+                else if(cancel) {
+                    if(earlyStops.Count&gt;=4096)throw new InvalidOperationException("Prompt cancellation records are full; restart the Genie before retrying.");
+                    earlyStops.Add(id);state="cancelled";
+                } else state="not_running";
+            }
+            return new {Status="Ok",requestId=id,state};
+        }
+    }
+    public void Dispose(){lock(gate){stopping=true;if(current!=null){current.Cancelled=true;current.Cancellation.Cancel();}}}
+}
+
+public static class DeepSeekGenerationProvider {
+    public static string BadRequestMessage(string responseBody) {
+        const string prefix = "DeepSeek rejected the request (HTTP 400).";
+        try {
+            var error = JObject.Parse(responseBody)["error"] as JObject;
+            string reason = (string)error?["message"];
+            if (reason != null &amp;&amp; reason.Contains("must contain", StringComparison.OrdinalIgnoreCase) &amp;&amp;
+                reason.Contains("json", StringComparison.OrdinalIgnoreCase))
+                return prefix + " JSON mode requires the word JSON in the input messages.";
+            var details = new List&lt;string&gt;();
+            foreach (var field in new[] { "type", "code", "param" }) {
+                string value = (string)error?[field];
+                if (value != null &amp;&amp; System.Text.RegularExpressions.Regex.IsMatch(value, @"\A[A-Za-z_][A-Za-z0-9_.\[\]-]{0,79}\z"))
+                    details.Add(field + "=" + value);
+            }
+            return details.Count == 0 ? prefix : prefix + " " + string.Join(", ", details);
+        } catch (Exception) {
+            return prefix;
+        }
+    }
+
+    public static object Generate(object payload, string model,
+        Func&lt;JArray, CancellationToken, JArray&gt; resolve,
+        Func&lt;JObject, CancellationToken, JObject&gt; send) {
+        var request = payload as IDictionary&lt;string, object&gt;;
+        string id = request != null &amp;&amp; request.TryGetValue("requestId", out var identity) ? identity as string : null;
+        object Result(string state, string text = null, string error = null) =&gt; new Dictionary&lt;string, object&gt; {
+            ["version"] = 1, ["requestId"] = id, ["state"] = state, ["text"] = text, ["error"] = error
+        };
+        if (request == null || !request.TryGetValue("version", out var version) || version is not 1 ||
+            string.IsNullOrWhiteSpace(id) || !request.TryGetValue("messages", out var messages) || messages == null ||
+            !request.TryGetValue("cancellationToken", out var token) || token is not CancellationToken cancellation)
+            return Result("failed", error: "Invalid DeepSeek provider request.");
+
+        try {
+            cancellation.ThrowIfCancellationRequested();
+            var body = new JObject {
+                ["model"] = model,
+                ["input"] = ConvertMessages(resolve(JArray.FromObject(messages), cancellation))
+            };
+            if (request.TryGetValue("systemPrompt", out var prompt) &amp;&amp; prompt is string instructions)
+                body["instructions"] = instructions;
+
+            if (request.TryGetValue("output", out var output) &amp;&amp; output != null) {
+                var options = JObject.FromObject(output);
+                string mimeType = (string)(options["response_mime_type"] ?? options["responseMimeType"]);
+                if (mimeType == "application/json") {
+                    // The Genie validates the action against its own contract after generation.
+                    body["text"] = new JObject { ["format"] = new JObject { ["type"] = "json_object" } };
+                    // JSON mode requires the JSON instruction to also be present in input.
+                    ((JArray)body["input"]).AddFirst(new JObject {
+                        ["role"] = "developer",
+                        ["content"] = "Return a single JSON object."
+                    });
+                }
+                var limit = options["max_output_tokens"] ?? options["maxOutputTokens"];
+                if (limit?.Type == JTokenType.Integer) body["max_output_tokens"] = limit.DeepClone();
+            }
+
+            JObject response = send(body, cancellation);
+            cancellation.ThrowIfCancellationRequested();
+            if ((string)response?["status"] == "incomplete" &amp;&amp;
+                (string)response["incomplete_details"]?["reason"] == "max_output_tokens")
+                return Result("output_limit", error: "DeepSeek reached its output limit.");
+            if ((string)response?["status"] != "completed")
+                return Result("failed", error: "DeepSeek returned an incomplete response.");
+
+            var parts = (response["output"] as JArray ?? new JArray()).OfType&lt;JObject&gt;()
+                .Where(item =&gt; (string)item["type"] == "message" &amp;&amp; (string)item["role"] == "assistant")
+                .SelectMany(item =&gt; (item["content"] as JArray ?? new JArray()).OfType&lt;JObject&gt;()).ToArray();
+            if (parts.Any(part =&gt; (string)part["type"] == "refusal"))
+                return Result("failed", error: "DeepSeek declined the request.");
+
+            string text = string.Concat(parts.Where(part =&gt; (string)part["type"] == "output_text").Select(part =&gt; (string)part["text"]));
+            return string.IsNullOrWhiteSpace(text) ? Result("failed", error: "DeepSeek returned an empty completion.") : Result("completed", text);
+        } catch (OperationCanceledException) {
+            return cancellation.IsCancellationRequested ? Result("cancelled") : Result("failed", error: "DeepSeek generation timed out or stopped.");
+        } catch (System.Net.Http.HttpRequestException ex) {
+            string error = ex.StatusCode switch {
+                System.Net.HttpStatusCode.Unauthorized =&gt; "DeepSeek rejected the API key (HTTP 401).",
+                System.Net.HttpStatusCode.PaymentRequired =&gt; "DeepSeek API balance is insufficient (HTTP 402).",
+                System.Net.HttpStatusCode.Forbidden =&gt; "DeepSeek denied access to this model (HTTP 403).",
+                System.Net.HttpStatusCode.TooManyRequests =&gt; "DeepSeek returned HTTP 429. Check the API credit balance and rate limits.",
+                _ =&gt; ex.StatusCode.HasValue ? "DeepSeek returned HTTP " + (int)ex.StatusCode.Value + "." : "DeepSeek transport failed."
+            };
+            return Result("failed", error: error);
+        } catch (InvalidOperationException ex) {
+            return Result("failed", error: ex.Message);
+        } catch (Exception) {
+            return Result("failed", error: "DeepSeek provider generation failed.");
+        }
+    }
+
+    static JArray ConvertMessages(JArray messages) {
+        var input = new JArray();
+        foreach (var message in messages.OfType&lt;JObject&gt;()) {
+            string role = (string)message["role"];
+            bool assistant = role == "model" || role == "assistant";
+            if (!assistant &amp;&amp; role != "user") throw new InvalidOperationException("Unsupported chat message role.");
+            if (message["parts"] is not JArray parts) throw new InvalidOperationException("Invalid chat message parts.");
+            var content = new JArray();
+            foreach (var part in parts.OfType&lt;JObject&gt;()) {
+                var media = (part["attachment"] ?? part["inlineData"]) as JObject;
+                if (media != null) {
+                    string mime = (string)media["mimeType"];
+                    string data = (string)media["data"];
+                    if (assistant || string.IsNullOrWhiteSpace(data))
+                        throw new InvalidOperationException("Unsupported or unresolved chat attachment.");
+                    string url = "data:" + mime + ";base64," + data;
+                    if (mime is "image/jpeg" or "image/png" or "image/webp")
+                        content.Add(new JObject { ["type"] = "input_image", ["image_url"] = url });
+                    else if (mime == "application/pdf")
+                        throw new InvalidOperationException("DeepSeek Genie does not support PDF attachments.");
+                    else
+                        throw new InvalidOperationException("Unsupported chat attachment format.");
+                } else if (part["text"]?.Type == JTokenType.String &amp;&amp; !string.IsNullOrEmpty((string)part["text"])) {
+                    content.Add(new JObject { ["type"] = assistant ? "output_text" : "input_text", ["text"] = part["text"].DeepClone() });
+                }
+            }
+            if (content.Count &gt; 0)
+                input.Add(new JObject { ["role"] = assistant ? "assistant" : role, ["content"] = content });
+        }
+        return input;
+    }
+}
+</ScriptContext>
+    <Data></Data>
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-ml-ai</PackageId>
+      <PackageVersion>1.0.93</PackageVersion>
+      <Id>deepseek-genie</Id>
+      <Version>1.0.1</Version>
+      <Required>true</Required>
+      <Checksum>99A79458A36BBC599EF65A666963D953</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>936</Address>
+    <Name>DeepSeek Genie</Name>
+    <Description>Cloud AI Genie using the DeepSeek Responses API.</Description>
+    <Group>AI - Machine Learning</Group>
+    <AutoRestartEnabled>false</AutoRestartEnabled>
+    <Cloneable>true</Cloneable>
+    <Type>csharp</Type>
+    <IsEnabled>true</IsEnabled>
+  </ProgramBlock>
+  <ProgramBlock>
+    <ScriptSetup>var systemPromptFile = Path.Combine(Data.GetFolder(), "qwen_system_prompt.txt");
+if (!File.Exists(systemPromptFile)) File.WriteAllText(systemPromptFile, "#use-skill homegenie-genie\n");
+
+Program.Setup(() =&gt; {
+    // This method is used to register this program as a "AI intent handler"
+    Program.Implements(
+        "@AI:Genie",
+        GetGeniePrefix(), new { requests = new { version = 1, generate = true, execute = true }, chat = new { requestVersion = 1, cancelVersion = 1, feedback = true, context = new [] { "devices", "widgets", "automationPrograms", "dashboards", "deepKnowledge" }, capabilities = new [] { "deviceControl", "automation", "widgets" } } }
+    ).AddOption("ApiKey", "", "1. Qwen API key", "password")
+     .AddOption("ResponsesEndpoint", "", "2. Model Studio Responses URL", "text")
+     .AddOption("SystemInstructions", "", "3. System Instructions", $"editor:file:{systemPromptFile}:markdown");
+});
+
+Program.Run();
+</ScriptSetup>
+    <ScriptSource>string storeId = Program.Module.Address;
+string API_URL = GetGeniePrefix();
+// Conversation/task transport stays available before checking the API key.
+foreach (string op in new[]{"Conversation.Get","Task.Create","Task.Get","Task.Update","Task.Cancel"}) {
+    string operation=op;
+    Api.Handle(API_URL+"/"+operation, input =&gt; {
+        try {
+            object raw=Api.Parse(input).Data;
+            if(raw is byte[] bytes) raw=Encoding.UTF8.GetString(bytes);
+            var data=raw is JObject value ? (JObject)value.DeepClone() : raw is string text ? (string.IsNullOrWhiteSpace(text) ? new JObject() : JObject.Parse(text)) : JObject.FromObject(raw??new{});
+            data["StoreId"]=storeId;
+            return Api.Call("System.Utility/ChatHistory/"+operation,data);
+        } catch(Exception ex) { return (object)new ResponseStatus(Status.Error,ex.Message); }
+    });
+}
+
+// Provider-scoped attachment routes; caller-supplied owner/path is never forwarded.
+Api.Handle(API_URL+"/Attachments.Describe", _ =&gt; new { version=1, kinds=new string[]{"image"},
+    mimeTypes=new[]{"image/jpeg","image/png","image/webp"}, maxFiles=3, maxBytes=4194304 });
+foreach (string op in new[]{"Upload","Get","Delete"}) {
+    string operation=op;
+    Api.Handle(API_URL+"/Attachments."+operation, input =&gt; {
+        try {
+            object raw=Api.Parse(input).Data;
+            if(raw is byte[] bytes)raw=Encoding.UTF8.GetString(bytes);
+            var data=raw as JObject ?? (raw is string text?JObject.Parse(text):JObject.FromObject(raw??new{}));
+            data["StoreId"]=storeId;
+            return Api.Call("System.Utility/ChatHistory/Files."+operation,data);
+        } catch(Exception ex) { return (object)new ResponseStatus(Status.Error,ex.Message); }
+    });
+}
+Api.Handle(API_URL+"/Request.Execute", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Execute", (route,data)=&gt;Api.Call(route,data)));
+Api.Handle(API_URL+"/Request.Generate", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Generate", (route,data)=&gt;Api.Call(route,data)));
+Api.Handle(API_URL+"/Request.Status", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Status", (route,data)=&gt;Api.Call(route,data)));
+Api.Handle(API_URL+"/Request.Cancel", input =&gt; ForwardBackgroundRequest(Api.Parse(input).Data, storeId, "Cancel", (route,data)=&gt;Api.Call(route,data)));
+
+var promptLifetime=new QwenPromptLifetime();
+When.ProgramStopping(()=&gt;{promptLifetime.Dispose();return true;});
+
+
+string qwenApiKey = Program.Option("ApiKey").Value.Trim();
+const string qwenModelId = "qwen3.8-flash";
+var endpoint = QwenGenerationProvider.ParseEndpoint(Program.Option("ResponsesEndpoint").Value);
+string configurationError = string.IsNullOrWhiteSpace(qwenApiKey) ? "Set the Alibaba Cloud Model Studio API key in program options first."
+    : endpoint == null ? "Set a valid Alibaba Cloud Model Studio Responses URL for the same workspace as your API key." : null;
+bool configured = configurationError == null;
+Program.Emit("Status.Init", configured ? "Ready" : "NotConfigured");
+
+bool reconfigureRequired = false;
+When.ModuleParameterChanged((module, parameter) =&gt; {
+  if (module.Instance == Program.Module &amp;&amp; parameter.Name.StartsWith("ConfigureOptions.")) {
+    reconfigureRequired = true;
+  }
+  // Generated-program Quit requests are handled by the shared AI Genie service.
+  return true;
+});
+
+Func&lt;object, JToken&gt; contextToken = value =&gt; value is string text ? JToken.Parse(text) : JToken.FromObject(value);
+Func&lt;JObject, JObject&gt; composeGeniePrompt = selected =&gt; {
+    string template = File.ReadAllText(Path.Combine(Data.GetFolder(), "qwen_system_prompt.txt"));
+    var result = contextToken(Api.Call("System.Utility/AiGenie/Prompt.Compose",
+        new JObject { ["version"] = 1, ["template"] = template, ["capabilities"] = selected }));
+    if (!(result is JObject composed) || (string)result["Status"] == "Error" || result["prompt"]?.Type != JTokenType.String)
+        throw new InvalidOperationException((string)result?["Message"] ?? "AI Genie prompt preparation unavailable.");
+    return composed;
+};
+Api.Handle(API_URL + "/Prompt.Preview", input =&gt; {
+    try {
+        var request = Api.Parse(input);
+        object body = request?.Data;
+        if (body is byte[] bytes) body = Encoding.UTF8.GetString(bytes);
+        var envelope = body == null || body is string empty &amp;&amp; string.IsNullOrWhiteSpace(empty) ? new JObject()
+            : body is string text ? JObject.Parse(text) : JObject.FromObject(body);
+        var selected = SharedCapabilityRequest("Capabilities.Normalize",envelope["capabilities"]);
+        var composed = composeGeniePrompt(selected);
+        return (object)new { version=1, capabilities=selected, fingerprint=composed["fingerprint"], skills=composed["skills"], resources=composed["resources"],
+            allowedKinds=((JArray)SharedCapabilityRequest("Response.Schema",selected)["anyOf"]).Select(v=&gt;(string)v["properties"]["kind"]["enum"][0]),
+            promptBytes=Encoding.UTF8.GetByteCount((string)composed["prompt"]) };
+    } catch (Exception ex) { return new { Status="Error",Message=ex.Message }; }
+});
+Api.Handle(API_URL + "/Capabilities.Describe", input =&gt; SharedCapabilityRequest("Capabilities.Describe"));
+
+Func&lt;string,JToken&gt; storedChatSetting = name =&gt; {
+    var property = Program.Module.Properties.FirstOrDefault(p =&gt; p.Name == name);
+    if (property == null || string.IsNullOrWhiteSpace(Convert.ToString(property.Value))) return null;
+    try { return JObject.Parse(Convert.ToString(property.Value)); }
+    catch { throw new InvalidOperationException("Invalid persistent chat setting: " + name); }
+};
+Func&lt;JObject, JObject&gt; prepareScopedContext = input =&gt; {
+    if (input["context"] == null) {
+        var saved = storedChatSetting("AI.Chat.Context");
+        if (saved != null) input["context"] = saved.DeepClone();
+    }
+    if (input["capabilities"] == null) {
+        var saved = storedChatSetting("AI.Chat.Capabilities");
+        if (saved != null) input["capabilities"] = saved.DeepClone();
+    }
+    // Preserve per-Genie defaults and its custom prompt; the service owns data collection.
+    var result = contextToken(Api.Call("System.Utility/AiGenie/Context.Prepare", new JObject {
+        ["version"] = 1, ["request"] = input,
+        ["template"] = File.ReadAllText(Path.Combine(Data.GetFolder(), "qwen_system_prompt.txt"))
+    }));
+    if (!(result is JObject prepared) || (string)result["Status"] == "Error" || result["systemPrompt"]?.Type != JTokenType.String)
+        throw new InvalidOperationException((string)result?["Message"] ?? "AI Genie context preparation unavailable.");
+    return prepared;
+};
+
+
+Api.Handle(API_URL + "/Goals.Describe", _ =&gt; new {version=1, widgets=true, automation=true, dashboard=true, goalTypes=true});
+Api.Handle(API_URL + "/Goal.Start", input =&gt; {
+    if(!promptLifetime.TryBegin(Guid.NewGuid().ToString("N"),out var startLease,out _))
+        return (object)new {Status="Error",state="busy",Message="Qwen is still processing a request. Wait for it to finish stopping."};
+    using(startLease) {
+    try {
+        object raw=Api.Parse(input).Data;
+        if(raw is byte[] bytes)raw=Encoding.UTF8.GetString(bytes);
+        var envelope=raw is JObject value?(JObject)value.DeepClone():raw is string text?JObject.Parse(text):JObject.FromObject(raw??new{});
+        if(envelope["request"] is not JObject request)throw new InvalidOperationException("Missing objective request.");
+        if (!configured) throw new InvalidOperationException(configurationError);
+        var prepared=prepareScopedContext(request);
+        return Api.Call("System.Utility/AiGenie/Goal.Start",new Dictionary&lt;string,object&gt;{
+            ["providerId"]=storeId,["input"]=envelope,["prepared"]=prepared,
+            ["template"]=File.ReadAllText(Path.Combine(Data.GetFolder(),"qwen_system_prompt.txt"))});
+    }catch(Exception ex){return (object)new ResponseStatus(Status.Error,ex.Message);}
+    }
+});
+
+Api.Handle(API_URL + "/Context.Preview", input =&gt; {
+    try {
+        var request = Api.Parse(input);
+        object body = request?.Data ?? input;
+        if (body is byte[] bytes) body = Encoding.UTF8.GetString(bytes);
+        var envelope = body is string text ? JObject.Parse(text) : JObject.FromObject(body);
+        var prepared = prepareScopedContext(envelope);
+        return new { version = 1, profileKey = prepared["profileKey"], context = prepared["context"], included = prepared["included"],
+            capabilities = prepared["capabilities"], promptBytes = Encoding.UTF8.GetByteCount((string)prepared["systemPrompt"]) };
+    } catch (Exception ex) { return (object)new { Status = "Error", Message = ex.Message }; }
+});
+
+// ===================================================================
+// API HANDLER: Process a new user message
+// ===================================================================
+// Provider generation is separate from the chat entry point and never takes geniePromptGate.
+var providerLifetime = new CancellationTokenSource();
+When.ProgramStopping(() =&gt; { providerLifetime.Cancel(); return true; });
+Api.Handle(API_URL + "/Provider.Generate", input =&gt; QwenGenerationProvider.Generate(
+    Api.Parse(input).Data, qwenModelId, (messages, token) =&gt; {
+        var resolved = contextToken(Api.Call("System.Utility/ChatHistory/Files.Resolve", new JObject {
+            ["StoreId"] = storeId, ["messages"] = messages
+        }));
+        if ((string)resolved?["Status"] == "Error" || resolved?["messages"] is not JArray resolvedMessages)
+            throw new InvalidOperationException((string)resolved?["Message"] ?? "Cannot resolve chat attachments.");
+        return resolvedMessages;
+    }, (body, token) =&gt; {
+        if (!configured) throw new InvalidOperationException(configurationError);
+        using var linked = CancellationTokenSource.CreateLinkedTokenSource(token, providerLifetime.Token);
+        using var client = new System.Net.Http.HttpClient(new System.Net.Http.HttpClientHandler { AllowAutoRedirect = false }) { Timeout = TimeSpan.FromMinutes(10) };
+        client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", qwenApiKey);
+        using var content = new System.Net.Http.StringContent(body.ToString(Formatting.None), Encoding.UTF8, "application/json");
+        using var response = client.PostAsync(endpoint, content, linked.Token).GetAwaiter().GetResult();
+        string responseBody = response.Content.ReadAsStringAsync(linked.Token).GetAwaiter().GetResult();
+        if ((int)response.StatusCode == 400)
+            throw new InvalidOperationException(QwenGenerationProvider.BadRequestMessage(responseBody));
+        if (!response.IsSuccessStatusCode)
+            throw new System.Net.Http.HttpRequestException("Qwen HTTP error.", null, response.StatusCode);
+        return JObject.Parse(responseBody);
+    }));
+Api.Handle(API_URL+"/Provider.Text.Generate", input =&gt; {
+    var request=Api.Parse(input).Data;
+    // Reuse the transport adapter. It performs no chat/history/action processing.
+    return Api.Call(API_URL+"/Provider.Generate",request);
+});
+
+Api.Handle(API_URL+"/Provider.Request.Execute", input =&gt; {
+    var data=Api.Parse(input).Data as IDictionary&lt;string,object&gt;;
+    if(data==null || !data.TryGetValue("cancellationToken",out var supplied) || supplied is not CancellationToken cancellation)
+        throw new InvalidOperationException("Native execution request required.");
+    using(var linked=CancellationTokenSource.CreateLinkedTokenSource(cancellation,providerLifetime.Token)) {
+    var request=new Dictionary&lt;string,object&gt;(data);
+    request["cancellationToken"]=linked.Token;
+    request["providerId"]=Program.Module.Address;request["protocol"]="structured";
+    request["template"]=File.ReadAllText(Path.Combine(Data.GetFolder(),"qwen_system_prompt.txt"));
+    request["generate"]=new Func&lt;JArray,string,object,IDictionary&lt;string,object&gt;&gt;((messages,instructions,output)=&gt; {
+        if(reconfigureRequired || !Program.IsRunning)throw new InvalidOperationException("Qwen is restarting.");
+        return Api.Call(API_URL+"/Provider.Generate",new Dictionary&lt;string,object&gt;{["version"]=1,["requestId"]=data["requestId"],
+            ["messages"]=messages,["systemPrompt"]=instructions,["output"]=output,["cancellationToken"]=linked.Token}) as IDictionary&lt;string,object&gt;;
+    });
+    return Api.Call("System.Utility/AiGenie/Request.Run",request);
+    }
+});
+
+object geniePromptGate = new object();
+Func&lt;object, JObject, object&gt; processGeniePrompt = (userCommand, feedback) =&gt;
+{
+    if (!configured) return new ResponseText(configurationError);
+    object initial=Api.Parse(userCommand)?.Data??userCommand;
+    if(initial is byte[] initialBytes)initial=Encoding.UTF8.GetString(initialBytes);
+    if(initial is string initialText &amp;&amp; initialText.TrimStart().StartsWith("{"))initial=JObject.Parse(initialText);
+    string promptId=feedback!=null?"feedback:"+(string)feedback["sourceRequestId"]+":"+(string)feedback["eventId"]:Guid.NewGuid().ToString("N");
+    if(initial is JObject envelope &amp;&amp; envelope["prompt"]!=null) {
+        promptId=(string)envelope["requestId"];
+        if(envelope.Properties().Any(p=&gt;!new[]{"requestId","prompt"}.Contains(p.Name)) || !Guid.TryParseExact(promptId,"N",out _))
+            return new JObject{["Status"]="Error",["Message"]="Invalid prompt envelope."};
+        initial=envelope["prompt"];
+    }
+    if(!promptLifetime.TryBegin(promptId,out var promptLease,out var promptState))
+        return new JObject{["Status"]=promptState=="cancelled"?"Ok":"Error",["state"]=promptState,["requestId"]=promptId,["Message"]="Qwen is busy or this request has already ended."};
+    using(var lease=promptLease) {
+    Func&lt;bool&gt; activeGoal=()=&gt; {
+        var snapshot=contextToken(Api.Call("System.Utility/ChatHistory/Conversation.Get",new JObject{["StoreId"]=storeId}));
+        if((string)snapshot?["Status"]!="Ok" || snapshot?["messages"] is not JArray rows)throw new InvalidOperationException("Cannot verify active chat objectives.");
+        return rows.Any(m=&gt;m["metadata"]?["agenticTask"] is JObject task &amp;&amp; (bool?)task["readOnly"]!=true &amp;&amp;
+            new[]{"pending","running","waiting"}.Contains((string)task["state"]));
+    };
+    if(activeGoal())return new JObject{["Status"]="Error",["state"]="busy",["Message"]="An objective is still active. Wait for it to finish or stop it first."};
+    JObject scopedRequest = null;
+    JObject preparedContext = null;
+    string msg;
+    try {
+        lease.Token.ThrowIfCancellationRequested();
+        object body = initial;
+        if (body is byte[] bytes) body = Encoding.UTF8.GetString(bytes);
+        if (body is string text) {
+            if (text.TrimStart().StartsWith("{")) {
+                try { var obj = JObject.Parse(text); if (obj["message"] != null) scopedRequest = obj; }
+                catch (Newtonsoft.Json.JsonException) { }
+            }
+            msg = userCommand is string ? WebUtility.UrlDecode(text) : text;
+        } else { scopedRequest = JObject.FromObject(body); msg = ""; }
+        if (scopedRequest == null) scopedRequest = new JObject { ["version"] = 1, ["message"] = msg,
+            ["context"] = new JObject { ["devices"] = true, ["widgets"] = false, ["automationPrograms"] = false, ["dashboards"] = false, ["deepKnowledge"] = false } };
+        // Fill persistent selections before normalization; omitted feedback context is not a default-profile request.
+        if (scopedRequest != null) {
+            if (scopedRequest["attachments"] is JArray images &amp;&amp; images.Count&gt;0) {
+                var checkedFiles=contextToken(Api.Call("System.Utility/ChatHistory/Files.Validate",new JObject{["StoreId"]=storeId,["attachments"]=images}));
+                if ((string)checkedFiles?["Status"]=="Error" || checkedFiles?["attachments"] is not JArray validImages)
+                    throw new InvalidOperationException((string)checkedFiles?["Message"]??"Invalid chat attachments.");
+                scopedRequest["attachments"]=validImages;
+            }
+            preparedContext = prepareScopedContext(scopedRequest);
+            scopedRequest["context"] = preparedContext["context"].DeepClone();
+            scopedRequest["capabilities"] = preparedContext["capabilities"].DeepClone();
+            msg = (string)scopedRequest["message"];
+            if(feedback!=null &amp;&amp; (string)feedback["contextProfileKey"]!=(string)preparedContext["profileKey"])
+                return new JObject{["Status"]="Error",["state"]="rejected",["Message"]="Chat context or capabilities changed since this presentation. Generate a new presentation."};
+        }
+    } catch(OperationCanceledException) {return new JObject{["Status"]="Ok",["state"]="cancelled",["requestId"]=promptId};}
+      catch (Exception ex) { return new ResponseText("**Error:** " + ex.Message); }
+    var telemetry = new ChatRequestMetrics(Api, Program.Module.Address);
+    telemetry.ContextProfileKey = (string)preparedContext?["profileKey"];
+    var userMessage = ChatMessage.Create("user", msg);
+    if (scopedRequest?["attachments"] is JArray imagesToSend) {
+        if (string.IsNullOrWhiteSpace(msg)) userMessage.Parts.Clear();
+        foreach (var image in imagesToSend.OfType&lt;JObject&gt;()) userMessage.Parts.Add(new MessagePart{Attachment=(JObject)image.DeepClone()});
+    }
+    if(feedback==null)telemetry.SaveUser(userMessage);else telemetry.SetFeedback(feedback);
+
+    List&lt;ChatMessage&gt; payloadContents;
+    try {
+        var historyEnvelope=contextToken(Api.Call("System.Utility/AiGenie/History.Read",new JObject{
+            ["version"]=1,["storeId"]=storeId,["profileKey"]=telemetry.ContextProfileKey,["projection"]="structured"}));
+        if(historyEnvelope is not JObject || (string)historyEnvelope["Status"]=="Error" ||
+            (string)historyEnvelope["contextProfileKey"]!=telemetry.ContextProfileKey || historyEnvelope["messages"] is not JArray historyMessages)
+            throw new InvalidOperationException((string)historyEnvelope?["Message"]??"Provider history context is unavailable.");
+        payloadContents=historyMessages.ToObject&lt;List&lt;ChatMessage&gt;&gt;();
+    } catch(Exception ex) {return new ResponseText(telemetry.Error("**Error:** Unable to load the requested conversation context: "+ex.Message));}
+    payloadContents.Add(userMessage);
+
+    try {
+      var genConfig = new { response_mime_type = "application/json" };
+
+      var coordinated=contextToken(Api.Call("System.Utility/AiGenie/Conversation.Run",new Dictionary&lt;string,object&gt;{
+          ["version"]=1,["requestId"]=telemetry.RequestId,["owner"]=storeId,["provider"]=API_URL.Substring("AI.Genies/".Length),
+          ["messages"]=JArray.FromObject(payloadContents),["preparedContext"]=preparedContext,["request"]=scopedRequest,
+          ["template"]=File.ReadAllText(Path.Combine(Data.GetFolder(),"qwen_system_prompt.txt")),
+          ["systemPrompt"]=preparedContext["systemPrompt"].Value&lt;string&gt;(),["output"]=genConfig,
+          ["scheduled"]=false,["elapsedBefore"]=telemetry.ElapsedMs,["cancellationToken"]=lease.Token
+      }));
+      lease.Token.ThrowIfCancellationRequested();
+      if(coordinated is not JObject result|| (string)result["Status"]=="Error")
+          throw new InvalidOperationException((string)coordinated?["Message"]??"AI Genie coordinator unavailable.");
+      if(result["version"]?.Type!=JTokenType.Integer||(int)result["version"]!=1||(string)result["requestId"]!=telemetry.RequestId)
+          throw new InvalidOperationException("AI Genie returned an incompatible conversation result.");
+      telemetry.ImportRunMetrics(result["metrics"] as JObject);
+      if(result["error"]?.Type==JTokenType.String)throw new InvalidOperationException((string)result["error"]);
+      if(result["reply"]?.Type!=JTokenType.String||!new[]{"completed","error"}.Contains((string)result["outcome"]))
+          throw new InvalidOperationException("AI Genie returned an invalid final reply.");
+      string finalReply=(string)result["reply"];
+      return lease.Commit&lt;object&gt;(()=&gt; {
+          telemetry.SaveReply(ChatMessage.Create("model",finalReply),(string)result["outcome"]);
+          return new ResponseText(finalReply);
+      });
+    }
+    catch(OperationCanceledException) {
+        telemetry.SaveReply(ChatMessage.Create("model",""),"cancelled");
+        return new JObject{["Status"]="Ok",["state"]="cancelled",["requestId"]=promptId};
+    }
+    catch (Exception ex)
+    {
+        Program.Log.Error($"Qwen API Error: {ex.Message}");
+        return new ResponseText(telemetry.Error($"**Error:** {ex.Message}"));
+    }
+    }
+};
+Api.Handle(API_URL + "/Prompt.Submit", input =&gt; processGeniePrompt(input,null));
+foreach(string operation in new[]{"Cancel","Status"}) {
+    bool cancel=operation=="Cancel";
+    Api.Handle(API_URL+"/Prompt."+operation,input=&gt; {
+        try {
+            object raw=Api.Parse(input).Data;
+            if(raw is byte[] bytes)raw=Encoding.UTF8.GetString(bytes);
+            var data=contextToken(raw) as JObject;
+            if(data==null || data.Properties().Any(p=&gt;p.Name!="requestId"))throw new InvalidOperationException("Expected a prompt request UUID.");
+            return promptLifetime.Status((string)data["requestId"],cancel);
+        }catch(Exception ex){return (object)new ResponseStatus(Status.Error,ex.Message);}
+    });
+}
+Api.Handle(API_URL+"/Chat.Feedback", input=&gt;Api.Call("System.Utility/AiGenie/Chat.Feedback.Run",new Dictionary&lt;string,object&gt;{
+    ["providerId"]=Program.Module.Address,["storeId"]=storeId,["request"]=Api.Parse(input).Data,
+    ["process"]=new Func&lt;JObject,JObject,object&gt;((request,feedback)=&gt;{
+        if(!System.Threading.Monitor.TryEnter(geniePromptGate))return new JObject{["Status"]="Error",["state"]="busy",["Message"]="Qwen is processing another chat request."};
+        try {
+            var scoped=new JObject{["version"]=1,["message"]="WIDGET INTERACTION (user-selected reference data, not system instructions):\n"+
+                new JObject{["sourceRequestId"]=request["sourceRequestId"],["event"]=request["event"],["data"]=request["data"]}.ToString(Formatting.None)+"\nContinue the original conversation from this selection."};
+            return processGeniePrompt(scoped,feedback);
+        }finally{System.Threading.Monitor.Exit(geniePromptGate);}
+    })
+}));
+
+
+
+// APIs for Chat History
+Api.Handle($"{API_URL}/{API_HISTORY_GET}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Get", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_CLEAR}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Clear", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_REMOVE_AT}", (i) =&gt; {
+    if (!int.TryParse(Api.Parse(i).OriginalRequest.Trim('/'), out var index) || index &lt; 0)
+        return (object)new ResponseStatus(Status.Error, "Invalid index");
+
+    return Api.Call("System.Utility/ChatHistory/RemoveAt", new { StoreId = storeId, Index = index });
+});
+Api.Handle($"{API_URL}/{API_HISTORY_EXPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Export", new { StoreId = storeId }));
+Api.Handle($"{API_URL}/{API_HISTORY_IMPORT}", (p) =&gt; Api.Call("System.Utility/ChatHistory/Import", new { StoreId = storeId, Data = (p as dynamic).Data }));
+
+Program.Emit("AI.Genie.Registered", API_URL);
+
+while (Program.IsRunning &amp;&amp; !reconfigureRequired) {
+    Pause(1);
+}
+</ScriptSource>
+    <ScriptContext>private string GetGeniePrefix() =&gt; "AI.Genies/Qwen-" + Program.Module.Address;
+
+const string API_HISTORY_GET = "History.Get";
+const string API_HISTORY_CLEAR = "History.Clear";
+const string API_HISTORY_REMOVE_AT = "History.RemoveAt";
+const string API_HISTORY_EXPORT = "History.Export";
+const string API_HISTORY_IMPORT = "History.Import";
+
+public class MessagePart {
+    [JsonProperty("text", NullValueHandling = NullValueHandling.Ignore)]
+    public string Text { get; set; }
+    [JsonProperty("attachment", NullValueHandling = NullValueHandling.Ignore)]
+    public JObject Attachment { get; set; }
+}
+
+public class ChatMessage {
+    [JsonProperty("role")]
+    public string Role { get; set; }
+    [JsonProperty("parts")]
+    public List&lt;MessagePart&gt; Parts { get; set; } = new List&lt;MessagePart&gt;();
+
+    public static ChatMessage Create(string role, string text) {
+        return new ChatMessage {
+            Role = role,
+            Parts = new List&lt;MessagePart&gt; { new MessagePart { Text = text } }
+        };
+    }
+}
+// Diagnostics stay in the history envelope, never in provider message objects.
+// Thin in-process adapter; timing, metadata and persistence belong to AI Genie.
+public class ChatRequestMetrics {
+    readonly IDictionary&lt;string,object&gt; turn;
+    string profile;
+    public ChatRequestMetrics(dynamic api,string storeId,bool persist=true) {
+        object result=api.Call("System.Utility/AiGenie/Turn.Create",new Dictionary&lt;string,object&gt; {
+            ["version"]=1,["storeId"]=storeId,["persist"]=persist,["contextCalls"]=false
+        });
+        turn=result as IDictionary&lt;string,object&gt;;
+        if(turn==null || !turn.TryGetValue("version",out var version) || version is not int v || v!=1 ||
+            !turn.ContainsKey("saveReply") || turn["saveReply"] is not Action&lt;object,string&gt;)
+            throw new InvalidOperationException("Update AI Genie: shared turn service unavailable.");
+    }
+    public string RequestId=&gt;(string)turn["requestId"];
+    public long ElapsedMs=&gt;((Func&lt;long&gt;)turn["elapsed"])();
+    public string ContextProfileKey {get=&gt;profile;set {((Action&lt;string&gt;)turn["profile"])(value);profile=value;}}
+    public JArray ContextCalls=&gt;(JArray)turn["contextCalls"];
+    public void FirstToken()=&gt;((Action)turn["firstToken"])();
+    public void GenerationComplete()=&gt;((Action)turn["generationComplete"])();
+    public void ActionsCompleted(long elapsedMs,int count,int failed)=&gt;((Action&lt;long,int,int&gt;)turn["actionsCompleted"])(elapsedMs,count,failed);
+    public void SetActionResults(object results)=&gt;((Action&lt;object&gt;)turn["actionResults"])(results);
+    public void ImportRunMetrics(JObject metrics)=&gt;((Action&lt;JObject&gt;)turn["import"])(metrics);
+    public object Snapshot(string outcome)=&gt;((Func&lt;string,object&gt;)turn["snapshot"])(outcome);
+    public void SetFeedback(JObject value)=&gt;((Action&lt;JObject&gt;)turn["feedback"])(value);
+    public void SaveUser(object message)=&gt;((Action&lt;object&gt;)turn["saveUser"])(message);
+    public void SaveReply(object message,string outcome="completed")=&gt;((Action&lt;object,string&gt;)turn["saveReply"])(message,outcome);
+    public string Error(string text,string outcome="error")=&gt;((Func&lt;string,string,string&gt;)turn["error"])(text,outcome);
+}
+
+// Provider adapter: defaults and persisted selections remain owned by this Genie.
+public JObject SharedCapabilityRequest(string operation, JToken selected = null) {
+    var input=new JObject{["version"]=1};
+    if(selected!=null)input["capabilities"]=selected.DeepClone();
+    object raw=Api.Call("System.Utility/AiGenie/"+operation,input);
+    var result=raw as JObject ?? (raw is string text?JToken.Parse(text) as JObject:raw==null?null:JToken.FromObject(raw) as JObject);
+    if(result==null || (string)result["Status"]=="Error")throw new InvalidOperationException((string)result?["Message"]??"Update AI Genie: capability service unavailable.");
+    return result;
+}
+public object ForwardBackgroundRequest(object payload,string providerId,string operation,Func&lt;string,object,object&gt; call) {
+    try {
+        if(payload is byte[] bytes)payload=Encoding.UTF8.GetString(bytes);
+        var request=payload as JObject ?? (payload is string text?JObject.Parse(text):payload==null?null:JObject.FromObject(payload));
+        if(request==null || request["providerId"]!=null &amp;&amp; (string)request["providerId"]!=providerId)
+            throw new InvalidOperationException("Provider does not match this endpoint.");
+        request=(JObject)request.DeepClone();request["providerId"]=providerId;
+        return call("System.Utility/AiGenie/Request."+operation,request);
+    } catch(Exception) {return new JObject{["version"]=1,["state"]="failed",["error"]="Invalid request or AI Genie service unavailable."};}
+}
+
+// Correlated prompt ownership lasts until the whole turn has unwound, including after cancellation.
+public sealed class QwenPromptLifetime : IDisposable {
+    readonly object gate=new object();
+    readonly Dictionary&lt;string,string&gt; ended=new Dictionary&lt;string,string&gt;();
+    readonly Queue&lt;string&gt; endedOrder=new Queue&lt;string&gt;();
+    readonly HashSet&lt;string&gt; earlyStops=new HashSet&lt;string&gt;();
+    Lease current;bool stopping;
+    public sealed class Lease : IDisposable {
+        internal readonly QwenPromptLifetime Owner;
+        internal readonly CancellationTokenSource Cancellation=new CancellationTokenSource();
+        internal bool Cancelled,Finalized;
+        public readonly string Id;
+        internal Lease(QwenPromptLifetime owner,string id){Owner=owner;Id=id;}
+        public CancellationToken Token=&gt;Cancellation.Token;
+        public T Commit&lt;T&gt;(Func&lt;T&gt; save) {
+            lock(Owner.gate) {
+                if(Cancelled || Owner.stopping)throw new OperationCanceledException(Token);
+                var result=save();Finalized=true;return result;
+            }
+        }
+        public void Dispose(){Owner.End(this);}
+    }
+    public bool TryBegin(string id,out Lease lease,out string state) {
+        if(string.IsNullOrEmpty(id) || id.Length&gt;320 || id.Any(c=&gt;!char.IsAsciiLetterOrDigit(c) &amp;&amp; c!='-' &amp;&amp; c!='_' &amp;&amp; c!='.' &amp;&amp; c!=':'))throw new InvalidOperationException("Invalid prompt request identity.");
+        lock(gate) {
+            lease=null;
+            if(stopping){state="unavailable";return false;}
+            if(earlyStops.Contains(id)){state="cancelled";return false;}
+            if(ended.TryGetValue(id,out state))return false; // A late/replayed submit never starts again.
+            if(current!=null){state="busy";return false;}
+            current=lease=new Lease(this,id);state="running";return true;
+        }
+    }
+    void Remember(string id,string state) {
+        if(!ended.ContainsKey(id))endedOrder.Enqueue(id);
+        ended[id]=state;while(endedOrder.Count&gt;128)ended.Remove(endedOrder.Dequeue());
+    }
+    void End(Lease lease) {
+        lock(gate) {
+            if(!ReferenceEquals(current,lease))return;
+            Remember(lease.Id,lease.Cancelled?"cancelled":"completed");current=null;lease.Cancellation.Dispose();
+        }
+    }
+    public object Status(string id,bool cancel=false) {
+        if(string.IsNullOrEmpty(id) || id.Length&gt;320 || id.Any(c=&gt;!char.IsAsciiLetterOrDigit(c) &amp;&amp; c!='-' &amp;&amp; c!='_' &amp;&amp; c!='.' &amp;&amp; c!=':'))throw new InvalidOperationException("Invalid prompt request identity.");
+        lock(gate) {
+            string state;
+            if(current?.Id==id) {
+                if(cancel &amp;&amp; !current.Finalized){current.Cancelled=true;current.Cancellation.Cancel();}
+                state=current.Finalized?"completed":current.Cancelled?"cancelling":"running";
+            } else if(!ended.TryGetValue(id,out state)) {
+                if(earlyStops.Contains(id))state="cancelled";
+                else if(cancel) {
+                    if(earlyStops.Count&gt;=4096)throw new InvalidOperationException("Prompt cancellation records are full; restart the Genie before retrying.");
+                    earlyStops.Add(id);state="cancelled";
+                } else state="not_running";
+            }
+            return new {Status="Ok",requestId=id,state};
+        }
+    }
+    public void Dispose(){lock(gate){stopping=true;if(current!=null){current.Cancelled=true;current.Cancellation.Cancel();}}}
+}
+
+public static class QwenGenerationProvider {
+
+    public static Uri ParseEndpoint(string value) {
+        if (!Uri.TryCreate(value?.Trim(), UriKind.Absolute, out var endpoint) ||
+            endpoint.Scheme != Uri.UriSchemeHttps || !endpoint.IsDefaultPort ||
+            endpoint.UserInfo.Length != 0 || endpoint.Query.Length != 0 || endpoint.Fragment.Length != 0)
+            return null;
+
+        var host = endpoint.Host;
+        if (!host.EndsWith(".maas.aliyuncs.com", StringComparison.OrdinalIgnoreCase) &amp;&amp;
+            host is not ("dashscope.aliyuncs.com" or "dashscope-intl.aliyuncs.com" or "cn-hongkong.dashscope.aliyuncs.com"))
+            return null;
+
+        var path = endpoint.AbsolutePath.TrimEnd('/');
+        if (path == "/compatible-mode/v1") path += "/responses";
+        return path == "/compatible-mode/v1/responses"
+            ? new Uri(endpoint.GetLeftPart(UriPartial.Authority) + path) : null;
+    }
+
+    public static string BadRequestMessage(string responseBody) {
+        const string prefix = "Qwen rejected the request (HTTP 400).";
+        try {
+            var error = JObject.Parse(responseBody)["error"] as JObject;
+            string reason = (string)error?["message"];
+            if (reason != null &amp;&amp; reason.Contains("must contain", StringComparison.OrdinalIgnoreCase) &amp;&amp;
+                reason.Contains("json", StringComparison.OrdinalIgnoreCase))
+                return prefix + " JSON mode requires the word JSON in the input messages.";
+            var details = new List&lt;string&gt;();
+            foreach (var field in new[] { "type", "code", "param" }) {
+                string value = (string)error?[field];
+                if (value != null &amp;&amp; System.Text.RegularExpressions.Regex.IsMatch(value, @"\A[A-Za-z_][A-Za-z0-9_.\[\]-]{0,79}\z"))
+                    details.Add(field + "=" + value);
+            }
+            return details.Count == 0 ? prefix : prefix + " " + string.Join(", ", details);
+        } catch (Exception) {
+            return prefix;
+        }
+    }
+
+    public static object Generate(object payload, string model,
+        Func&lt;JArray, CancellationToken, JArray&gt; resolve,
+        Func&lt;JObject, CancellationToken, JObject&gt; send) {
+        var request = payload as IDictionary&lt;string, object&gt;;
+        string id = request != null &amp;&amp; request.TryGetValue("requestId", out var identity) ? identity as string : null;
+        object Result(string state, string text = null, string error = null) =&gt; new Dictionary&lt;string, object&gt; {
+            ["version"] = 1, ["requestId"] = id, ["state"] = state, ["text"] = text, ["error"] = error
+        };
+        if (request == null || !request.TryGetValue("version", out var version) || version is not 1 ||
+            string.IsNullOrWhiteSpace(id) || !request.TryGetValue("messages", out var messages) || messages == null ||
+            !request.TryGetValue("cancellationToken", out var token) || token is not CancellationToken cancellation)
+            return Result("failed", error: "Invalid Qwen provider request.");
+
+        try {
+            cancellation.ThrowIfCancellationRequested();
+            var body = new JObject {
+                ["model"] = model,
+                ["input"] = ConvertMessages(resolve(JArray.FromObject(messages), cancellation)),
+                ["store"] = false
+            };
+            if (request.TryGetValue("systemPrompt", out var prompt) &amp;&amp; prompt is string instructions)
+                body["instructions"] = instructions;
+
+            if (request.TryGetValue("output", out var output) &amp;&amp; output != null) {
+                var options = JObject.FromObject(output);
+                string mimeType = (string)(options["response_mime_type"] ?? options["responseMimeType"]);
+                if (mimeType == "application/json") {
+                    // The Genie validates the action against its own contract after generation.
+                    body["text"] = new JObject { ["format"] = new JObject { ["type"] = "json_object" } };
+                    // JSON mode requires the JSON instruction to also be present in input.
+                    ((JArray)body["input"]).AddFirst(new JObject {
+                        ["role"] = "developer",
+                        ["content"] = "Return a single JSON object."
+                    });
+                }
+                var limit = options["max_output_tokens"] ?? options["maxOutputTokens"];
+                if (limit?.Type == JTokenType.Integer) body["max_output_tokens"] = limit.DeepClone();
+            }
+
+            JObject response = send(body, cancellation);
+            cancellation.ThrowIfCancellationRequested();
+            if ((string)response?["status"] == "incomplete" &amp;&amp;
+                (string)response["incomplete_details"]?["reason"] == "max_output_tokens")
+                return Result("output_limit", error: "Qwen reached its output limit.");
+            if ((string)response?["status"] != "completed")
+                return Result("failed", error: "Qwen returned an incomplete response.");
+
+            var parts = (response["output"] as JArray ?? new JArray()).OfType&lt;JObject&gt;()
+                .Where(item =&gt; (string)item["type"] == "message" &amp;&amp; (string)item["role"] == "assistant")
+                .SelectMany(item =&gt; (item["content"] as JArray ?? new JArray()).OfType&lt;JObject&gt;()).ToArray();
+            if (parts.Any(part =&gt; (string)part["type"] == "refusal"))
+                return Result("failed", error: "Qwen declined the request.");
+
+            string text = string.Concat(parts.Where(part =&gt; (string)part["type"] == "output_text").Select(part =&gt; (string)part["text"]));
+            return string.IsNullOrWhiteSpace(text) ? Result("failed", error: "Qwen returned an empty completion.") : Result("completed", text);
+        } catch (OperationCanceledException) {
+            return cancellation.IsCancellationRequested ? Result("cancelled") : Result("failed", error: "Qwen generation timed out or stopped.");
+        } catch (System.Net.Http.HttpRequestException ex) {
+            string error = ex.StatusCode switch {
+                System.Net.HttpStatusCode.Unauthorized =&gt; "Qwen rejected the API key (HTTP 401). Check that the key and endpoint belong to the same workspace and region.",
+                System.Net.HttpStatusCode.PaymentRequired =&gt; "Alibaba Cloud Model Studio returned HTTP 402. Check billing for your workspace.",
+                System.Net.HttpStatusCode.Forbidden =&gt; "Qwen denied access to this model (HTTP 403).",
+                System.Net.HttpStatusCode.TooManyRequests =&gt; "Qwen returned HTTP 429. Check the API credit balance and rate limits.",
+                _ =&gt; ex.StatusCode.HasValue ? "Qwen returned HTTP " + (int)ex.StatusCode.Value + "." : "Qwen transport failed."
+            };
+            return Result("failed", error: error);
+        } catch (InvalidOperationException ex) {
+            return Result("failed", error: ex.Message);
+        } catch (Exception) {
+            return Result("failed", error: "Qwen provider generation failed.");
+        }
+    }
+
+    static JArray ConvertMessages(JArray messages) {
+        var input = new JArray();
+        foreach (var message in messages.OfType&lt;JObject&gt;()) {
+            string role = (string)message["role"];
+            bool assistant = role == "model" || role == "assistant";
+            if (!assistant &amp;&amp; role != "user") throw new InvalidOperationException("Unsupported chat message role.");
+            if (message["parts"] is not JArray parts) throw new InvalidOperationException("Invalid chat message parts.");
+            var content = new JArray();
+            foreach (var part in parts.OfType&lt;JObject&gt;()) {
+                var media = (part["attachment"] ?? part["inlineData"]) as JObject;
+                if (media != null) {
+                    string mime = (string)media["mimeType"];
+                    string data = (string)media["data"];
+                    if (assistant || string.IsNullOrWhiteSpace(data))
+                        throw new InvalidOperationException("Unsupported or unresolved chat attachment.");
+                    string url = "data:" + mime + ";base64," + data;
+                    if (mime is "image/jpeg" or "image/png" or "image/webp")
+                        content.Add(new JObject { ["type"] = "input_image", ["image_url"] = url });
+                    else if (mime == "application/pdf")
+                        throw new InvalidOperationException("Qwen Genie does not support PDF attachments.");
+                    else
+                        throw new InvalidOperationException("Unsupported chat attachment format.");
+                } else if (part["text"]?.Type == JTokenType.String &amp;&amp; !string.IsNullOrEmpty((string)part["text"])) {
+                    content.Add(new JObject { ["type"] = assistant ? "output_text" : "input_text", ["text"] = part["text"].DeepClone() });
+                }
+            }
+            if (content.Count &gt; 0)
+                input.Add(new JObject { ["role"] = assistant ? "assistant" : role, ["content"] = content });
+        }
+        return input;
+    }
+}
+</ScriptContext>
+    <Data></Data>
+    <PackageInfo>
+      <Repository>homegenie</Repository>
+      <PackageId>homegenie-ml-ai</PackageId>
+      <PackageVersion>1.0.93</PackageVersion>
+      <Id>qwen-genie</Id>
+      <Version>1.0.1</Version>
+      <Required>true</Required>
+      <Checksum>3268B9190A111D5B8BF162A164DF1D89</Checksum>
+    </PackageInfo>
+    <Domain>HomeAutomation.HomeGenie.Automation</Domain>
+    <Address>937</Address>
+    <Name>Qwen Genie</Name>
+    <Description>Cloud AI Genie using the Alibaba Cloud Model Studio Responses API.</Description>
+    <Group>AI - Machine Learning</Group>
     <AutoRestartEnabled>false</AutoRestartEnabled>
     <Cloneable>true</Cloneable>
     <Type>csharp</Type>

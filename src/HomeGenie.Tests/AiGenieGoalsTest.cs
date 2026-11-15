@@ -57,7 +57,7 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
         folder=Path.Combine(Path.GetTempPath(),"hg-goals-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(folder);
         assembly.GetType("HistoryStore").GetProperty("Stores").SetValue(null,Activator.CreateInstance(assembly.GetType("HistoryStore").GetProperty("Stores").PropertyType));
         goals=Activator.CreateInstance(assembly.GetType("AiGenieGoals"));conversation=(string)HistoryCall("Conversation.Get",new JObject())["conversationId"];taskId=Guid.NewGuid().ToString("N");
-        dashboardConflict=false;dashboardApplications=0;creates=runs=generations=saves=0;stopOnGenerate=clearOnGenerate=failSave=false;job=null;replies=new Queue<string>();changeOnGenerate=null;lastMessages=null;failSaveAt=2;
+        creates=runs=generations=saves=0;stopOnGenerate=clearOnGenerate=failSave=false;job=null;replies=new Queue<string>();changeOnGenerate=null;lastMessages=null;failSaveAt=2;
         geminiDiagnostics=null;
         runners=new();goalDeploymentsSettled=true;
         runnerCompilations=0;runnerCompilerResponse="[]";
@@ -65,16 +65,9 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
         installedPrograms=new();originals=new();deploymentTargets=new();deployments=recoveries=0;unknownDeployment=false;
     }
     [TearDown] public void Cleanup(){((IDisposable)goals).Dispose();Directory.Delete(folder,true);}
-    bool dashboardConflict;int dashboardApplications;
     string ProviderName => provider=="940"?"Lailama":provider=="933"?"Gemini":"Gemini-"+provider;
     object Call(string route,object value){
-        if(route.Contains("Client.PresetsApplyDashboard/")) {
-            dashboardApplications++;var input=(JObject)value;
-            Assert.That((long)input["expectedRevision"],Is.EqualTo(7));
-            Assert.That((string)input["clientId"],Does.StartWith("ai:"));
-            if(dashboardConflict)return new{Status="Error",Code="PresetConflict",Message="Preset changed"};
-            return new JObject{["Status"]="Ok",["revision"]=8,["preset"]="demo",["dashboardName"]=input["dashboardName"],["widgetId"]=input["widgetId"]};
-        }
+        Assert.That(route, Does.Not.Contain("Client.Presets"), "A runner must leave preset changes to YoT.");
         if(route.StartsWith(History))return HistoryCall(route.Substring(History.Length),(JObject)value);
         if(route.EndsWith("Programs.Add")){
             creates++;var program=(JObject)value;
@@ -210,7 +203,7 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
         input["providerId"]=provider;
         var envelope=(JObject)input["input"];
         envelope["goalTypes"]=types;
-        if(dashboardTarget)envelope["dashboardTarget"]=new JObject{["preset"]="demo",["expectedRevision"]=7,["clientId"]=new string('a',32)};
+        if(dashboardTarget)envelope["dashboardTarget"]=new JObject{["preset"]="demo",["clientId"]=new string('a',32)};
         Invoke("AiGenieGoals","Start",input,new Func<string,object,object>(Call));
     }
     [TestCase("deadline.docx")]
@@ -438,22 +431,17 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
     }
     string Complete=>"{\"version\":1,\"action\":\"complete\",\"title\":\"Done\",\"message\":\"Saved the counter\"}";
     void DashboardStart() {
-        var input=StartRequest();((JObject)input["input"])["dashboardTarget"]=new JObject{["preset"]="demo",["expectedRevision"]=7,["clientId"]=new string('a',32)};
+        var input=StartRequest();((JObject)input["input"])["dashboardTarget"]=new JObject{["preset"]="demo",["clientId"]=new string('a',32)};
         Invoke("AiGenieGoals","Start",input,new Func<string,object,object>(Call));
     }
     const string ApplyDashboard="{\"version\":1,\"action\":\"apply_dashboard\",\"title\":\"Apply dashboard\",\"message\":\"Apply saved container\",\"mode\":\"create\",\"dashboardName\":\"Demo room\",\"name\":\"counter\"}";
     [Test] public void DashboardApplicationIsRecordedSeparatelyFromWidgetSave() {
         DashboardStart();replies.Enqueue(Action("save_widget"));replies.Enqueue(ApplyDashboard);replies.Enqueue(Complete);Run();
-        Assert.That((string)TaskRecord()["state"],Is.EqualTo("completed"));Assert.That(dashboardApplications,Is.EqualTo(1));
+        Assert.That((string)TaskRecord()["state"],Is.EqualTo("completed"));
         var applied=TaskRecord()["artifacts"].Single(a=>(string)a["kind"]=="dashboard");
+        Assert.That(applied["revision"],Is.Null);Assert.That((string)applied["mode"],Is.EqualTo("create"));
         Assert.That((string)applied["preset"],Is.EqualTo("demo"));Assert.That((string)applied["requestId"],Is.EqualTo(taskId));
         Assert.That((string)applied["widgetId"],Is.EqualTo(Prefix()+"/counter"));
-    }
-    [Test] public void DashboardConflictStopsWithoutRegeneratingSavedWidgets() {
-        DashboardStart();dashboardConflict=true;replies.Enqueue(Action("save_widget"));replies.Enqueue(ApplyDashboard);Run();
-        Assert.That((string)TaskRecord()["state"],Is.EqualTo("failed"));Assert.That(generations,Is.EqualTo(2));
-        Assert.That(saves,Is.EqualTo(3));Assert.That(dashboardApplications,Is.EqualTo(1));
-        Assert.That(((JArray)TaskRecord()["artifacts"]).Count,Is.EqualTo(1));
     }
     [Test] public void DashboardContractRejectsInvalidShapeBeforeRunning() {
         var action=JObject.Parse(ApplyDashboard);action["dashboardName"]=42;
@@ -461,12 +449,13 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
     }
     [Test] public void UnsavedDashboardCannotBeApplied() {
         DashboardStart();for(int i=0;i<3;i++)replies.Enqueue(ApplyDashboard);Run();
-        Assert.That(dashboardApplications,Is.Zero);Assert.That((string)TaskRecord()["state"],Is.EqualTo("failed"));
+        Assert.That((string)TaskRecord()["state"],Is.EqualTo("failed"));
     }
-    [Test] public void StopBeforeDashboardActionPreventsPresetWrite() {
+    [Test] public void StopBeforeDashboardActionPreventsDashboardArtifact() {
         DashboardStart();changeOnGenerate=()=>{if(generations==2)HistoryCall("Task.Cancel",Identity());};
         replies.Enqueue(Action("save_widget"));replies.Enqueue(ApplyDashboard);Run();
-        Assert.That(dashboardApplications,Is.Zero);Assert.That(saves,Is.EqualTo(3));Assert.That((string)TaskRecord()["state"],Is.EqualTo("cancelled"));
+        Assert.That(saves,Is.EqualTo(3));Assert.That((string)TaskRecord()["state"],Is.EqualTo("cancelled"));
+        Assert.That(TaskRecord()["artifacts"].Any(a=>(string)a["kind"]=="dashboard"),Is.False);
     }
     [Test] public void DashboardRevisionKeepsItsIdentityAndUsesUpdate() {
         DashboardStart();replies.Enqueue(Action("save_widget"));replies.Enqueue(ApplyDashboard);replies.Enqueue(Complete);Run();
@@ -474,16 +463,18 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
         input["parentTaskId"]=parent;input["dashboardTarget"]=job["dashboardTarget"].DeepClone();
         Invoke("AiGenieGoals","Start",request,new Func<string,object,object>(Call));
         replies.Enqueue(Action("save_widget"));replies.Enqueue(ApplyDashboard.Replace("create","update"));replies.Enqueue(Complete);Run();
-        Assert.That((string)TaskRecord()["state"],Is.EqualTo("completed"));Assert.That(dashboardApplications,Is.EqualTo(2));
+        Assert.That((string)TaskRecord()["state"],Is.EqualTo("completed"));
         Assert.That(TaskRecord()["artifacts"].Count(a=>(string)a["kind"]=="dashboard"),Is.EqualTo(1));
-        Assert.That((string)TaskRecord()["artifacts"].Single(a=>(string)a["kind"]=="dashboard")["requestId"],Is.EqualTo(taskId));
+        var artifact=TaskRecord()["artifacts"].Single(a=>(string)a["kind"]=="dashboard");
+        Assert.That((string)artifact["requestId"],Is.EqualTo(taskId));
+        Assert.That((string)artifact["mode"],Is.EqualTo("update"));
     }
     [Test] public void DashboardRevisionRejectsAnotherPresetBeforeInference() {
         DashboardStart();replies.Enqueue(Action("save_widget"));replies.Enqueue(ApplyDashboard);replies.Enqueue(Complete);Run();
         string parent=taskId;taskId=Guid.NewGuid().ToString("N");var request=StartRequest();var input=(JObject)request["input"];
-        input["parentTaskId"]=parent;input["dashboardTarget"]=new JObject{["preset"]="another",["expectedRevision"]=7,["clientId"]=new string('a',32)};
+        input["parentTaskId"]=parent;input["dashboardTarget"]=new JObject{["preset"]="another",["clientId"]=new string('a',32)};
         Invoke("AiGenieGoals","Start",request,new Func<string,object,object>(Call));Run();
-        Assert.That((string)TaskRecord()["state"],Is.EqualTo("failed"));Assert.That(generations,Is.EqualTo(3));Assert.That(dashboardApplications,Is.EqualTo(1));
+        Assert.That((string)TaskRecord()["state"],Is.EqualTo("failed"));Assert.That(generations,Is.EqualTo(3));
     }
     void StartLailama(string parent=null) {
         if(provider!="940") {
@@ -779,7 +770,7 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
         StartSelected(new JArray("widgets"),dashboardTarget:true);
         replies.Enqueue(Action("save_widget"));replies.Enqueue(ProgramAction());replies.Enqueue(ApplyDashboard);replies.Enqueue(Complete);Run();
         Assert.That((string)TaskRecord()["state"],Is.EqualTo("completed"));
-        Assert.That(saves,Is.EqualTo(3));Assert.That(deployments,Is.Zero);Assert.That(dashboardApplications,Is.Zero);
+        Assert.That(saves,Is.EqualTo(3));Assert.That(deployments,Is.Zero);
         Assert.That(lastSystemPrompt,Does.Contain("do not apply dashboards").And.Contain("save_program is forbidden"));
     }
     [Test] public void DashboardSelectionIncludesWidgetsAndCanCombineWithAutomation() {
