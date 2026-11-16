@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "ધીમી",
   "neon_district_road_speed_normal": "સામાન્ય",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "ચેટમાં લક્ષ્યોની નિદાન માહિતી બતાવો"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "ચેટમાં લક્ષ્યોની નિદાન માહિતી બતાવો"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "ચેટમાં લક્ષ્યોની નિદાન માહિતી બતાવો"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "ચેટમાં લક્ષ્યોની નિદાન માહિતી બતાવો"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Neon District ડેશબોર્ડ માટે વૈકલ્પિક સેટિંગ્સ.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "ઊંડા જ્ઞાનને સક્ષમ કરો (પ્રોગ્રામ્સ અને વિજેટ્સ વાંચો)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "ચેટમાં લક્ષ્યોની નિદાન માહિતી બતાવો",
       "Title": "સ્થાનિક AI",
       "Description": "તમારા HomeGenie સર્વર પર સીધા જ અત્યાધુનિક LLM ચલાવો. અન્ય પ્રોગ્રામ્સ અને સ્ક્રિપ્ટ્સમાંથી AI ને નિયંત્રિત કરવા માટે સંપૂર્ણ API શામેલ છે.",
       "ConfigureOptions.MaxTokens": "પ્રતિભાવ લંબાઈ (મહત્તમ ટોકન્સ)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (ડિફૉલ્ટ)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "ચેટમાં લક્ષ્યોની નિદાન માહિતી બતાવો",
       "Title": "Gemini Genie",
       "Description": "HomeGenie માં ઉપકરણોને નિયંત્રિત કરવા, ઓટોમેશન પ્રોગ્રામ્સ બનાવવા અને વિજેટ્સ બનાવવા માટે Google Gemini AI નો ઉપયોગ કરો. ચેટ મેનૂમાંથી શેર કરવા માટેની ક્ષમતાઓ અને સિસ્ટમ સંદર્ભ પસંદ કરો.\nઆ સુવિધાને સક્ષમ કરવા માટે માન્ય API કી દાખલ કરો. https://aistudio.google.com/app/apikey પર API કી મેળવો.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API કી",

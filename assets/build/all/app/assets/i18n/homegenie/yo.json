@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Lọ́ra",
   "neon_district_road_speed_normal": "Bí ó ṣe yẹ",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Fi àlàyé àyẹ̀wò ìṣòro àwọn ibi àfojúsùn hàn nínú ìfọ̀rọ̀wérọ̀"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Fi àlàyé àyẹ̀wò ìṣòro àwọn ibi àfojúsùn hàn nínú ìfọ̀rọ̀wérọ̀"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Fi àlàyé àyẹ̀wò ìṣòro àwọn ibi àfojúsùn hàn nínú ìfọ̀rọ̀wérọ̀"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Fi àlàyé àyẹ̀wò ìṣòro àwọn ibi àfojúsùn hàn nínú ìfọ̀rọ̀wérọ̀"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Àwọn ètò àṣàyàn fún pátákó ìṣàkóso Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Mu Imọ Jinlẹ Ṣiṣẹ (Ka awọn eto ati awọn ẹrọ ailorukọ)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Fi àlàyé àyẹ̀wò ìṣòro àwọn ibi àfojúsùn hàn nínú ìfọ̀rọ̀wérọ̀",
       "Title": "AI agbegbe",
       "Description": "Ṣiṣẹ́ àwọn LLM tuntun taara lórí olupin HomeGenie rẹ. Ó ní API pípé láti ṣàkóso AI láti inú àwọn ètò àti àwọn ìwé àkọsílẹ̀ mìíràn.",
       "ConfigureOptions.MaxTokens": "Gígùn Ìdáhùn (Àwọn àmì tó pọ̀ jùlọ)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Ti a ṣètò tẹ́lẹ̀)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Fi àlàyé àyẹ̀wò ìṣòro àwọn ibi àfojúsùn hàn nínú ìfọ̀rọ̀wérọ̀",
       "Title": "Gemini Genie",
       "Description": "Lo Google Gemini AI láti darí àwọn ẹ̀rọ, ṣẹ̀dá àwọn ètò adaṣe, kí o sì kọ́ àwọn widget ní HomeGenie. Yan àwọn agbára àti àyíká ètò láti pín láti inú àtòjọ ìfọ̀rọ̀wérọ̀.\nTẹ kọ́kọ́rọ́ API tó wúlò láti mú ẹ̀yà yìí ṣiṣẹ́. Gba kọ́kọ́rọ́ API ní https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Kọ́kọ́rọ́ API Google Gemini AI",

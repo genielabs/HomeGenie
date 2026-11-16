@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "ช้า",
   "neon_district_road_speed_normal": "ปกติ",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "แสดงข้อมูลวินิจฉัยเป้าหมายในแชต"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "แสดงข้อมูลวินิจฉัยเป้าหมายในแชต"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "แสดงข้อมูลวินิจฉัยเป้าหมายในแชต"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "แสดงข้อมูลวินิจฉัยเป้าหมายในแชต"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "การตั้งค่าเสริมสำหรับแดชบอร์ด Neon District",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "เปิดใช้งานความรู้เชิงลึก (อ่านโปรแกรมและวิดเจ็ต)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "แสดงข้อมูลวินิจฉัยเป้าหมายในแชต",
       "Title": "AI ท้องถิ่น",
       "Description": "ใช้งานระบบ LLM ล้ำสมัยได้โดยตรงบนเซิร์ฟเวอร์ HomeGenie ของคุณ มาพร้อม API เต็มรูปแบบสำหรับควบคุม AI จากโปรแกรมและสคริปต์อื่นๆ",
       "ConfigureOptions.MaxTokens": "ความยาวการตอบกลับ (จำนวนโทเค็นสูงสุด)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (ค่าเริ่มต้น)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "แสดงข้อมูลวินิจฉัยเป้าหมายในแชต",
       "Title": "Gemini Genie",
       "Description": "ใช้ Google Gemini AI เพื่อควบคุมอุปกรณ์ สร้างโปรแกรมอัตโนมัติ และสร้างวิดเจ็ตใน HomeGenie เลือกความสามารถและบริบทของระบบที่จะแชร์ได้จากเมนูแชท\nป้อนคีย์ API ที่ถูกต้องเพื่อเปิดใช้งานฟีเจอร์นี้ รับคีย์ API ได้ที่ https://aistudio.google.com/app/apikey",
       "ConfigureOptions.ApiKey": "คีย์ API ของ Google Gemini AI",

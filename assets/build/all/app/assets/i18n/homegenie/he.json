@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "איטית",
   "neon_district_road_speed_normal": "רגילה",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "הצגת נתוני אבחון של יעדים בצ׳אט"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "הצגת נתוני אבחון של יעדים בצ׳אט"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "הצגת נתוני אבחון של יעדים בצ׳אט"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "הצגת נתוני אבחון של יעדים בצ׳אט"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "הגדרות אופציונליות ללוח הבקרה ״Neon District״.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "הפעלת ידע מעמיק (קריאת תוכניות ווידג'טים)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "הצגת נתוני אבחון של יעדים בצ׳אט",
       "Title": "בינה מלאכותית מקומית",
       "Description": "הפעלת מערכות LLM חדישות ישירות על שרת HomeGenie שלך. כוללת API מלא לשליטה בבינה המלאכותית מתוכנות וסקריפטים אחרים.",
       "ConfigureOptions.MaxTokens": "אורך תגובה (מקסימום אסימונים)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (ברירת מחדל)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "הצגת נתוני אבחון של יעדים בצ׳אט",
       "Title": "Gemini Genie",
       "Description": "השתמש ב-Google Gemini AI כדי לשלוט במכשירים, ליצור תוכניות אוטומציה ולבנות ווידג'טים ב-HomeGenie. בחר את היכולות ואת הקשר המערכת לשיתוף מתוך תפריט הצ'אט.\nהזן מפתח API חוקי כדי להפעיל תכונה זו. קבל מפתח API בכתובת https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "מפתח API של Google Gemini AI",

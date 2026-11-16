@@ -1,3 +1,3 @@
 {
-  "ffmpeg_required": "Tsarin `{{module_name}}` yana buƙatar **FFmpeg** don aiki. Da fatan za a shigar da shi daga gidan yanar gizon hukuma: - [https://ffmpeg.org](https://ffmpeg.org) Idan ba kwa buƙatar wannan fasalin, kuna iya kashe wannan ɓangaren a cikin sashin Shirye-shiryen Atomatik na **, ko ta danna maɓallin da ke ƙasa."
+  "ffmpeg_required": "Tsarin `{{module_name}}` yana buƙatar **FFmpeg** don aiki. Da fatan za a shigar da shi daga gidan yanar gizon hukuma: - [https://ffmpeg.org](https://ffmpeg.org)\n\nIdan an riga an shigar da FFmpeg, buɗe sabon tashar umarni, gwada `ffmpeg -version`, sannan ka sake kunna HomeGenie daga wannan tashar. Idan ba kwa buƙatar wannan fasalin, kuna iya kashe wannan ɓangaren a cikin sashin Shirye-shiryen Atomatik na **, ko ta danna maɓallin da ke ƙasa."
 }

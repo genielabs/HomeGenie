@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "සෙමින්",
   "neon_district_road_speed_normal": "සාමාන්‍ය",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "කතාබහේදී ඉලක්කවල ගැටලු නිර්ණය පිළිබඳ තොරතුරු පෙන්වන්න"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "කතාබහේදී ඉලක්කවල ගැටලු නිර්ණය පිළිබඳ තොරතුරු පෙන්වන්න"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "කතාබහේදී ඉලක්කවල ගැටලු නිර්ණය පිළිබඳ තොරතුරු පෙන්වන්න"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "කතාබහේදී ඉලක්කවල ගැටලු නිර්ණය පිළිබඳ තොරතුරු පෙන්වන්න"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Neon District උපකරණ පුවරුව සඳහා විකල්ප සැකසුම්.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "ගැඹුරු දැනුම සක්‍රීය කරන්න (වැඩසටහන් සහ විජට් කියවන්න)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "කතාබහේදී ඉලක්කවල ගැටලු නිර්ණය පිළිබඳ තොරතුරු පෙන්වන්න",
       "Title": "දේශීය AI",
       "Description": "ඔබගේ HomeGenie සේවාදායකයේ සෘජුවම අති නවීන LLM ධාවනය කරන්න. අනෙකුත් වැඩසටහන් සහ ස්ක්‍රිප්ට් වලින් AI පාලනය කිරීමට සම්පූර්ණ API එකක් ඇතුළත් වේ.",
       "ConfigureOptions.MaxTokens": "ප්‍රතිචාර දිග (උපරිම ටෝකන)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (පෙරනිමි)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "කතාබහේදී ඉලක්කවල ගැටලු නිර්ණය පිළිබඳ තොරතුරු පෙන්වන්න",
       "Title": "Gemini Genie",
       "Description": "HomeGenie තුළ උපාංග පාලනය කිරීමට, ස්වයංක්‍රීයකරණ වැඩසටහන් සෑදීමට සහ විජට් තැනීමට Google Gemini AI භාවිතා කරන්න. චැට් මෙනුවෙන් බෙදා ගැනීමට ඇති හැකියාවන් සහ පද්ධති සන්දර්භය තෝරන්න.\nමෙම විශේෂාංගය සක්‍රීය කිරීමට වලංගු API යතුරක් ඇතුළත් කරන්න. https://aistudio.google.com/app/apikey වෙතින් API යතුරක් ලබා ගන්න.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API යතුර",

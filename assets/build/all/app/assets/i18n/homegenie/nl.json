@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Langzaam",
   "neon_district_road_speed_normal": "Normaal",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Diagnostische gegevens van doelen in de chat tonen"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Diagnostische gegevens van doelen in de chat tonen"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Diagnostische gegevens van doelen in de chat tonen"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Diagnostische gegevens van doelen in de chat tonen"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Optionele instellingen voor het dashboard ‘Neon District’.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Diepgaande kennis inschakelen (programma's en widgets lezen)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Diagnostische gegevens van doelen in de chat tonen",
       "Title": "Lokale AI",
       "Description": "Voer geavanceerde LLM's rechtstreeks uit op uw HomeGenie-server. Inclusief een volledige API om de AI vanuit andere programma's en scripts te besturen.",
       "ConfigureOptions.MaxTokens": "Reactielengte (maximaal aantal tokens)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Standaard)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Diagnostische gegevens van doelen in de chat tonen",
       "Title": "Gemini Genie",
       "Description": "Gebruik Google Gemini AI om apparaten te bedienen, automatiseringsprogramma's te maken en widgets te bouwen in HomeGenie. Kies de mogelijkheden en de systeemcontext die u wilt delen via het chatmenu.\nVoer een geldige API-sleutel in om deze functie in te schakelen. Vraag een API-sleutel aan via https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-sleutel",

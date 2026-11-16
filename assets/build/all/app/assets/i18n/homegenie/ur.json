@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "سست",
   "neon_district_road_speed_normal": "معمول کی رفتار",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "چیٹ میں مقاصد کی تشخیصی معلومات دکھائیں"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "چیٹ میں مقاصد کی تشخیصی معلومات دکھائیں"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "چیٹ میں مقاصد کی تشخیصی معلومات دکھائیں"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "چیٹ میں مقاصد کی تشخیصی معلومات دکھائیں"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Neon District ڈیش بورڈ کے لیے اختیاری ترتیبات۔",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "گہرے علم کو فعال کریں (پروگرام اور ویجٹ پڑھیں)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "چیٹ میں مقاصد کی تشخیصی معلومات دکھائیں",
       "Title": "مقامی AI",
       "Description": "جدید ترین LLMs کو براہ راست اپنے HomeGenie سرور پر چلائیں۔ دوسرے پروگراموں اور اسکرپٹس سے AI کو کنٹرول کرنے کے لیے ایک مکمل API شامل ہے۔",
       "ConfigureOptions.MaxTokens": "جواب کی لمبائی (زیادہ سے زیادہ ٹوکن)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (طے شدہ)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "چیٹ میں مقاصد کی تشخیصی معلومات دکھائیں",
       "Title": "Gemini Genie",
       "Description": "HomeGenie میں آلات کو کنٹرول کرنے، آٹومیشن پروگرامز بنانے اور وجیٹس تیار کرنے کے لیے Google Gemini AI استعمال کریں۔ چیٹ مینو سے شیئر کرنے کے لیے صلاحیتوں اور سسٹم کے سیاق و سباق کا انتخاب کریں۔\nاس فیچر کو فعال کرنے کے لیے ایک درست API کلید درج کریں۔ https://aistudio.google.com/app/apikey سے API کلید حاصل کریں۔",
       "ConfigureOptions.ApiKey": "Google Gemini AI API کلید",

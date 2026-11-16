@@ -142,8 +142,10 @@
     <PackageReference Include="LLamaSharp.Backend.Vulkan.Windows"
                       Version="0.30.0"
                       Condition="'$(RuntimeIdentifier)' == 'win-x64'" />
-    <PackageReference Include="Microsoft.ML.OnnxRuntime.DirectML"
-                      Version="1.23.0"
+    <!-- YOLO uses the managed API. Sherpa supplies the single native ONNX Runtime. -->
+    <PackageReference Include="Microsoft.ML.OnnxRuntime"
+                      Version="1.23.2"
+                      ExcludeAssets="native;build;buildTransitive"
                       Condition="'$(RuntimeIdentifier)' == 'win-x64'" />
   </ItemGroup>
 

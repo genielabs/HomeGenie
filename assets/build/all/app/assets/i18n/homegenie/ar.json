@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "بطيئة",
   "neon_district_road_speed_normal": "عادية",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "إظهار معلومات تشخيص الأهداف في المحادثة"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "إظهار معلومات تشخيص الأهداف في المحادثة"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "إظهار معلومات تشخيص الأهداف في المحادثة"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "إظهار معلومات تشخيص الأهداف في المحادثة"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "إعدادات اختيارية للوحة معلومات Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "تفعيل المعرفة المتعمقة (قراءة البرامج والأدوات)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "إظهار معلومات تشخيص الأهداف في المحادثة",
       "Title": "الذكاء الاصطناعي المحلي",
       "Description": "قم بتشغيل أحدث أنظمة التعلم الآلي للتعلم الآلي مباشرةً على خادم HomeGenie الخاص بك. يتضمن واجهة برمجة تطبيقات كاملة للتحكم في الذكاء الاصطناعي من برامج ونصوص برمجية أخرى.",
       "ConfigureOptions.MaxTokens": "طول الاستجابة (الحد الأقصى للرموز)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (الافتراضي)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "إظهار معلومات تشخيص الأهداف في المحادثة",
       "Title": "Gemini Genie",
       "Description": "استخدم Google Gemini AI للتحكم في الأجهزة وإنشاء برامج التنفيذ الآلي وإنشاء عناصر واجهة المستخدم في HomeGenie. اختر الإمكانات وسياق النظام للمشاركة من قائمة الدردشة.\nأدخل مفتاح API صالحًا لتفعيل هذه الميزة. احصل على مفتاح API من https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "مفتاح API لـ Google Gemini AI",

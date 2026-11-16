@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "آهستي",
   "neon_district_road_speed_normal": "عام",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "چيٽ ۾ مقصدن جي مسئلن جي تشخيص جا تفصيل ڏيکاريو"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "چيٽ ۾ مقصدن جي مسئلن جي تشخيص جا تفصيل ڏيکاريو"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "چيٽ ۾ مقصدن جي مسئلن جي تشخيص جا تفصيل ڏيکاريو"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "چيٽ ۾ مقصدن جي مسئلن جي تشخيص جا تفصيل ڏيکاريو"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Neon District ڊيش بورڊ لاءِ اختياري سيٽنگون.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "گہرے علم کي فعال ڪريو (پروگرام ۽ ويجيٽس پڙهو)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "چيٽ ۾ مقصدن جي مسئلن جي تشخيص جا تفصيل ڏيکاريو",
       "Title": "مقامي AI",
       "Description": "پنهنجي هوم جيني سرور تي سڌو سنئون جديد LLM هلايو. ٻين پروگرامن ۽ اسڪرپٽس مان AI کي ڪنٽرول ڪرڻ لاءِ هڪ مڪمل API شامل آهي.",
       "ConfigureOptions.MaxTokens": "جواب جي ڊيگهه (وڌ ۾ وڌ ٽوڪن)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (ڊفالٽ)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "چيٽ ۾ مقصدن جي مسئلن جي تشخيص جا تفصيل ڏيکاريو",
       "Title": "Gemini Genie",
       "Description": "HomeGenie ۾ ڊوائيسز کي ڪنٽرول ڪرڻ، آٽوميشن پروگرام ٺاهڻ ۽ وجيٽس تيار ڪرڻ لاءِ Google Gemini AI جو استعمال ڪريو. چيٽ مينيو مان شيئر ڪرڻ لاءِ صلاحيتون ۽ سسٽم سياق چونڊيو.\nهن فيچر کي فعال ڪرڻ لاءِ هڪ صحيح API چاٻي داخل ڪريو. https://aistudio.google.com/app/apikey تان API چاٻي حاصل ڪريو.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API چاٻي",

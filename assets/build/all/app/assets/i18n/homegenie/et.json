@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Aeglane",
   "neon_district_road_speed_normal": "Tavaline",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Kuva eesmärkide diagnostika vestluses"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Kuva eesmärkide diagnostika vestluses"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Kuva eesmärkide diagnostika vestluses"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Kuva eesmärkide diagnostika vestluses"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Töölaua „Neon District“ valikulised seaded.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Süvateadmiste lubamine (programmide ja vidinate lugemine)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Kuva eesmärkide diagnostika vestluses",
       "Title": "Kohalik tehisintellekt",
       "Description": "Käivita tipptasemel õigusteaduse programme (LLM) otse oma HomeGenie serveris. Sisaldab täielikku API-t tehisintellekti juhtimiseks teistest programmidest ja skriptidest.",
       "ConfigureOptions.MaxTokens": "Vastuse pikkus (maksimaalne tokenite arv)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Vaikimisi)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Kuva eesmärkide diagnostika vestluses",
       "Title": "Gemini Genie",
       "Description": "Kasutage rakenduses HomeGenie seadmete juhtimiseks, automaatikaprogrammide loomiseks ja vidinate ehitamiseks Google Gemini AI-d. Valige vestlusmenüüst funktsioonid ja süsteemikontekst, mida jagada.\nSelle funktsiooni lubamiseks sisestage kehtiv API-võti. Hankige API-võti aadressilt https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-võti",

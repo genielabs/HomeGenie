@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Langsam",
   "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Diagnoseinformationen zu Zielen im Chat anzeigen"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Diagnoseinformationen zu Zielen im Chat anzeigen"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Diagnoseinformationen zu Zielen im Chat anzeigen"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Diagnoseinformationen zu Zielen im Chat anzeigen"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Optionale Einstellungen für das Dashboard „Neon District“.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Tiefgreifendes Wissen ermöglichen (Programme und Widgets lesen)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Diagnoseinformationen zu Zielen im Chat anzeigen",
       "Title": "Lokale KI",
       "Description": "Führen Sie hochmoderne LLMs direkt auf Ihrem HomeGenie-Server aus. Beinhaltet eine vollständige API zur Steuerung der KI aus anderen Programmen und Skripten.",
       "ConfigureOptions.MaxTokens": "Antwortlänge (Maximale Anzahl an Tokens)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Standard)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Diagnoseinformationen zu Zielen im Chat anzeigen",
       "Title": "Gemini Genie",
       "Description": "Nutzen Sie Google Gemini AI, um Geräte zu steuern, Automatisierungsprogramme zu erstellen und Widgets in HomeGenie zu bauen. Wählen Sie im Chat-Menü die Funktionen und den Systemkontext aus, die geteilt werden sollen.\nGeben Sie einen gültigen API-Schlüssel ein, um diese Funktion zu aktivieren. Einen API-Schlüssel erhalten Sie unter https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI-API-Schlüssel",

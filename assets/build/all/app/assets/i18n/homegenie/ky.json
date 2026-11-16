@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Жай",
   "neon_district_road_speed_normal": "Кадимки",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Маекте максаттардын диагностикалык маалыматын көрсөтүү"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Маекте максаттардын диагностикалык маалыматын көрсөтүү"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Маекте максаттардын диагностикалык маалыматын көрсөтүү"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Маекте максаттардын диагностикалык маалыматын көрсөтүү"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "«Neon District» башкаруу тактасынын кошумча жөндөөлөрү.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Терең билимди иштетүү (Программаларды жана виджеттерди окуу)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Маекте максаттардын диагностикалык маалыматын көрсөтүү",
       "Title": "Жергиликтүү жасалма интеллект",
       "Description": "HomeGenie сервериңизде түздөн-түз заманбап LLM'дерди иштетиңиз. Башка программалардан жана скрипттерден жасалма интеллектти башкаруу үчүн толук API камтылган.",
       "ConfigureOptions.MaxTokens": "Жооптун узактыгы (максималдуу токендер)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Демейки)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Маекте максаттардын диагностикалык маалыматын көрсөтүү",
       "Title": "Gemini Genie",
       "Description": "HomeGenie'де түзмөктөрдү башкаруу, автоматташтыруу программаларын жана виджеттерди түзүү үчүн Google Gemini AI колдонуңуз. Маек менюсунан бөлүшүлүүчү мүмкүнчүлүктөрдү жана тутумдук контекстти тандаңыз.\nБул функцияны иштетүү үчүн жарактуу API ачкычын киргизиңиз. API ачкычын https://aistudio.google.com/app/apikey сайтынан алыңыз.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API ачкычы",

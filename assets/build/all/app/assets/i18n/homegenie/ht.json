@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Dousman",
   "neon_district_road_speed_normal": "Nòmal",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Montre enfòmasyon dyagnostik objektif yo nan chat la"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Montre enfòmasyon dyagnostik objektif yo nan chat la"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Montre enfòmasyon dyagnostik objektif yo nan chat la"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Montre enfòmasyon dyagnostik objektif yo nan chat la"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Paramèt opsyonèl pou tablodbò Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Aktive Konesans Pwofon (Li pwogram ak widjèt)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Montre enfòmasyon dyagnostik objektif yo nan chat la",
       "Title": "IA lokal",
       "Description": "Kouri LLM dènye kri yo dirèkteman sou sèvè HomeGenie ou a. Gen ladan yon API konplè pou kontwole IA a soti nan lòt pwogram ak script.",
       "ConfigureOptions.MaxTokens": "Longè Repons (Jeton Maksimòm)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Pa defo)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Montre enfòmasyon dyagnostik objektif yo nan chat la",
       "Title": "Gemini Genie",
       "Description": "Sèvi ak Google Gemini AI pou kontwole aparèy yo, kreye pwogram automatisation, epi bati widje nan HomeGenie. Chwazi kapasite ak kontèks sistèm pou pataje nan meni chat la.\nAntre yon kle API ki valab pou pèmèt fonksyon sa a. Jwenn yon kle API nan https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Kle API Google Gemini AI",

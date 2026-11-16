@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Mall",
   "neon_district_road_speed_normal": "Gnáth",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Taispeáin diagnóisic na gcuspóirí sa chomhrá"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Taispeáin diagnóisic na gcuspóirí sa chomhrá"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Taispeáin diagnóisic na gcuspóirí sa chomhrá"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Taispeáin diagnóisic na gcuspóirí sa chomhrá"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Socruithe roghnacha do dheais Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Cumasaigh Eolas Domhain (Léigh cláir & giuirléidí)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Taispeáin diagnóisic na gcuspóirí sa chomhrá",
       "Title": "Intleacht Shaorga Áitiúil",
       "Description": "Rith LLManna den scoth go díreach ar do fhreastalaí HomeGenie. Áirítear API iomlán chun an AI a rialú ó chláir agus scripteanna eile.",
       "ConfigureOptions.MaxTokens": "Fad Freagartha (Uasmhéid Comharthaí)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Réamhshocrú)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Taispeáin diagnóisic na gcuspóirí sa chomhrá",
       "Title": "Gemini Genie",
       "Description": "Úsáid Google Gemini AI chun gléasanna a rialú, cláir uathoibrithe a chruthú, agus giuirléidí a thógáil i HomeGenie. Roghnaigh na cumais agus an comhthéacs córais le roinnt ón roghchlár comhrá.\nIontráil eochair API bhailí chun an ghné seo a chumasú. Faigh eochair API ag https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Eochair API Google Gemini AI",

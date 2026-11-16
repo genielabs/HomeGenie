@@ -305,6 +305,18 @@
     "neon_district_road_speed_slow": "Lenta",
     "neon_district_road_speed_normal": "Normale",
     "$options": {
+      "934": {
+        "ConfigureOptions.GoalDiagnostics": "Mostra la diagnostica degli obiettivi in chat"
+      },
+      "935": {
+        "ConfigureOptions.GoalDiagnostics": "Mostra la diagnostica degli obiettivi in chat"
+      },
+      "936": {
+        "ConfigureOptions.GoalDiagnostics": "Mostra la diagnostica degli obiettivi in chat"
+      },
+      "937": {
+        "ConfigureOptions.GoalDiagnostics": "Mostra la diagnostica degli obiettivi in chat"
+      },
     "651": {
       "Title": "Neon District",
       "Description": "Impostazioni facoltative della dashboard «Neon District».",
@@ -646,6 +658,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie predefinito"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Mostra la diagnostica degli obiettivi in chat",
       "Title": "Gemini Genie",
       "Description": "Usa l’IA Google Gemini per controllare i dispositivi, creare programmi di automazione e realizzare widget in HomeGenie. Dal menu della chat puoi scegliere le capacità e il contesto del sistema da condividere.\nPer abilitare questa funzione, inserisci una chiave API valida. Puoi ottenere una chiave API su https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Chiave API Google Gemini AI",
@@ -670,6 +683,7 @@
     },
 
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Mostra la diagnostica degli obiettivi in chat",
       "Title":
         "IA Locale",
       "Description":

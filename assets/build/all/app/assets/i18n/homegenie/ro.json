@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Lentă",
   "neon_district_road_speed_normal": "Normală",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Afișează informațiile de diagnostic ale obiectivelor în chat"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Afișează informațiile de diagnostic ale obiectivelor în chat"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Afișează informațiile de diagnostic ale obiectivelor în chat"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Afișează informațiile de diagnostic ale obiectivelor în chat"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Setări opționale pentru panoul de control „Neon District”.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Activează cunoștințe aprofundate (citește programe și widget-uri)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Afișează informațiile de diagnostic ale obiectivelor în chat",
       "Title": "IA locală",
       "Description": "Rulați LLM-uri de ultimă generație direct pe serverul dvs. HomeGenie. Include o API completă pentru a controla inteligența artificială din alte programe și scripturi.",
       "ConfigureOptions.MaxTokens": "Lungimea răspunsului (număr maxim de jetoane)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Implicit)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Afișează informațiile de diagnostic ale obiectivelor în chat",
       "Title": "Gemini Genie",
       "Description": "Utilizați Google Gemini AI pentru a controla dispozitive, a crea programe de automatizare și a construi widgeturi în HomeGenie. Alegeți capabilitățile și contextul de sistem de partajat din meniul de chat.\nIntroduceți o cheie API validă pentru a activa această funcție. Obțineți o cheie API la https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Cheie API Google Gemini AI",

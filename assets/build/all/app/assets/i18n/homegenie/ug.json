@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "ئاستا",
   "neon_district_road_speed_normal": "نورمال",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "نىشانلارنىڭ دىئاگنوز ئۇچۇرىنى سۆھبەتتە كۆرسەت"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "نىشانلارنىڭ دىئاگنوز ئۇچۇرىنى سۆھبەتتە كۆرسەت"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "نىشانلارنىڭ دىئاگنوز ئۇچۇرىنى سۆھبەتتە كۆرسەت"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "نىشانلارنىڭ دىئاگنوز ئۇچۇرىنى سۆھبەتتە كۆرسەت"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Neon District باشقۇرۇش تاختىسىنىڭ ئىختىيارىي تەڭشەكلىرى.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "چوڭقۇر بىلىملەرنى قوزغىتىش (پروگراممىلار ۋە كىچىك پروگراممىلارنى ئوقۇش)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "نىشانلارنىڭ دىئاگنوز ئۇچۇرىنى سۆھبەتتە كۆرسەت",
       "Title": "يەرلىك سۈنئىي ئەقىل",
       "Description": "HomeGenie سېرۋېرىڭىزدا ئەڭ ئىلغار LLM لارنى بىۋاسىتە ئىجرا قىلىڭ. باشقا پروگراممىلار ۋە سىكرىپتلاردىن سۈنئىي ئەقىلنى كونترول قىلىش ئۈچۈن تولۇق API نى ئۆز ئىچىگە ئالىدۇ.",
       "ConfigureOptions.MaxTokens": "جاۋاب ئۇزۇنلۇقى (ئەڭ يۇقىرى بەلگىلەر)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (سۈكۈتتىكى)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "نىشانلارنىڭ دىئاگنوز ئۇچۇرىنى سۆھبەتتە كۆرسەت",
       "Title": "Gemini Genie",
       "Description": "HomeGenie دا ئۈسكۈنىلەرنى كونترول قىلىش، ئاپتوماتلاشتۇرۇش پروگراممىلىرىنى قۇرۇش ۋە كىچىك ئەپلەرنى ياساش ئۈچۈن Google Gemini AI نى ئىشلىتىڭ. سۆھبەت تىزىملىكىدىن ھەمبەھىرلىنىدىغان ئىقتىدارلار ۋە سىستېما مەزمۇنىنى تاللاڭ.\nبۇ ئىقتىدارنى قوزغىتىش ئۈچۈن ئىناۋەتلىك API ئاچقۇچى كىرگۈزۈڭ. API ئاچقۇچىنى https://aistudio.google.com/app/apikey دىن ئېلىڭ.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API ئاچقۇچى",

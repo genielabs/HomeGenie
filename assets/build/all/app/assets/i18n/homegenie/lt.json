@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Lėtas",
   "neon_district_road_speed_normal": "Įprastas",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Rodyti tikslų diagnostiką pokalbyje"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Rodyti tikslų diagnostiką pokalbyje"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Rodyti tikslų diagnostiką pokalbyje"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Rodyti tikslų diagnostiką pokalbyje"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Pasirinktiniai valdymo skydelio „Neon District“ nustatymai.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Įgalinti giliąsias žinias (skaityti programas ir valdiklius)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Rodyti tikslų diagnostiką pokalbyje",
       "Title": "Vietinis dirbtinis intelektas",
       "Description": "Paleiskite pažangiausias LLM programas tiesiogiai savo „HomeGenie“ serveryje. Apima visą API sąsają, skirtą dirbtiniam intelektui valdyti iš kitų programų ir scenarijų.",
       "ConfigureOptions.MaxTokens": "Atsakymo ilgis (maks. žetonų)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Numatytasis)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Rodyti tikslų diagnostiką pokalbyje",
       "Title": "Gemini Genie",
       "Description": "Naudokite „Google Gemini AI“, kad valdytumėte įrenginius, kurtumėte automatizavimo programas ir valdiklius sistemoje „HomeGenie“. Pokalbių meniu pasirinkite funkcijas ir sistemos kontekstą, kuriais norite bendrinti.\nĮveskite galiojantį API raktą, kad įjungtumėte šią funkciją. Gaukite API raktą adresu https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "„Google Gemini AI“ API raktas",

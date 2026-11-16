@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Miadana",
   "neon_district_road_speed_normal": "Mahazatra",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Asehoy ao amin’ny resaka ny fampahalalana momba ny fizahana ny olana amin’ny tanjona"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Asehoy ao amin’ny resaka ny fampahalalana momba ny fizahana ny olana amin’ny tanjona"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Asehoy ao amin’ny resaka ny fampahalalana momba ny fizahana ny olana amin’ny tanjona"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Asehoy ao amin’ny resaka ny fampahalalana momba ny fizahana ny olana amin’ny tanjona"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Fikirana azo isafidianana ho an’ny tabilao Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Alefaso ny Fahalalana Lalina (Vakio ireo fandaharana sy widgets)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Asehoy ao amin’ny resaka ny fampahalalana momba ny fizahana ny olana amin’ny tanjona",
       "Title": "AI eo an-toerana",
       "Description": "Ampandehano mivantana amin'ny mpizara HomeGenie anao ireo LLM maoderina. Ahitana API feno hifehezana ny AI avy amin'ny programa sy script hafa.",
       "ConfigureOptions.MaxTokens": "Faharetan'ny valiny (Tokens ambony indrindra)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Mahazatra)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Asehoy ao amin’ny resaka ny fampahalalana momba ny fizahana ny olana amin’ny tanjona",
       "Title": "Gemini Genie",
       "Description": "Mampiasà Google Gemini AI hifehezana fitaovana, hamoronana fandaharana automatique, ary hanamboarana widget ao amin'ny HomeGenie. Safidio avy amin'ny menio resaka ny fahaiza-manao sy ny toe-javatry ny rafitra hozaraina.\nMampidira fanalahidy API manan-kery mba hampiasana ity endri-javatra ity. Mahazoa fanalahidy API ao amin'ny https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Fanalahidy API Google Gemini AI",

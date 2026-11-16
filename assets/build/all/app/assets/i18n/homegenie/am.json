@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "ዝግ",
   "neon_district_road_speed_normal": "መደበኛ",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "የግብ ምርመራ መረጃን በውይይት ውስጥ አሳይ"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "የግብ ምርመራ መረጃን በውይይት ውስጥ አሳይ"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "የግብ ምርመራ መረጃን በውይይት ውስጥ አሳይ"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "የግብ ምርመራ መረጃን በውይይት ውስጥ አሳይ"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "ለNeon District ዳሽቦርድ አማራጭ ቅንብሮች።",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "ጥልቅ እውቀትን አንቃ (ፕሮግራሞችን እና መግብሮችን ያንብቡ)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "የግብ ምርመራ መረጃን በውይይት ውስጥ አሳይ",
       "Title": "አካባቢያዊ የአዕምሮ ህክምና ባለሙያ (AI)",
       "Description": "ዘመናዊ የሆኑ LLMዎችን በቀጥታ በHomeGenie አገልጋይዎ ላይ ያሂዱ። ከሌሎች ፕሮግራሞች እና ስክሪፕቶች AIን ለመቆጣጠር ሙሉ ኤፒአይ ያካትታል።",
       "ConfigureOptions.MaxTokens": "የምላሽ ርዝመት (ከፍተኛ ማስመሰያዎች)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (ነባሪ)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "የግብ ምርመራ መረጃን በውይይት ውስጥ አሳይ",
       "Title": "Gemini Genie",
       "Description": "በHomeGenie ውስጥ መሣሪያዎችን ለመቆጣጠር፣ የአውቶሜሽን ፕሮግራሞችን ለመፍጠር እና መግብሮችን ለመገንባት Google Gemini AIን ይጠቀሙ። ከውይይት ምናሌው ውስጥ የሚያጋሯቸውን ችሎታዎች እና የስርዓት አውድ ይምረጡ።\nይህን ባህሪ ለማንቃት ትክክለኛ የኤፒአይ ቁልፍ ያስገቡ። የኤፒአይ ቁልፍ በ https://aistudio.google.com/app/apikey ያግኙ።",
       "ConfigureOptions.ApiKey": "የGoogle Gemini AI ኤፒአይ ቁልፍ",

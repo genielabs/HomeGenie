@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Chậm",
   "neon_district_road_speed_normal": "Bình thường",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Hiển thị thông tin chẩn đoán mục tiêu trong cuộc trò chuyện"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Hiển thị thông tin chẩn đoán mục tiêu trong cuộc trò chuyện"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Hiển thị thông tin chẩn đoán mục tiêu trong cuộc trò chuyện"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Hiển thị thông tin chẩn đoán mục tiêu trong cuộc trò chuyện"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Cài đặt tùy chọn cho bảng điều khiển Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Kích hoạt kiến thức chuyên sâu (Đọc chương trình và tiện ích)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Hiển thị thông tin chẩn đoán mục tiêu trong cuộc trò chuyện",
       "Title": "Trí tuệ nhân tạo địa phương",
       "Description": "Chạy các hệ thống quản lý ngôn ngữ tự động (LLM) tiên tiến trực tiếp trên máy chủ HomeGenie của bạn. Bao gồm API đầy đủ để điều khiển trí tuệ nhân tạo từ các chương trình và tập lệnh khác.",
       "ConfigureOptions.MaxTokens": "Độ dài phản hồi (Số từ tối đa)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Mặc định)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Hiển thị thông tin chẩn đoán mục tiêu trong cuộc trò chuyện",
       "Title": "Gemini Genie",
       "Description": "Sử dụng Google Gemini AI để điều khiển thiết bị, tạo chương trình tự động hóa và xây dựng tiện ích trong HomeGenie. Chọn các khả năng và ngữ cảnh hệ thống cần chia sẻ từ menu trò chuyện.\nNhập khóa API hợp lệ để bật tính năng này. Lấy khóa API tại https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Khóa API Google Gemini AI",

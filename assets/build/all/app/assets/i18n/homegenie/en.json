@@ -305,6 +305,18 @@
   "neon_district_road_speed_slow": "Slow",
   "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Show objective diagnostics in chat"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Show objective diagnostics in chat"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Show objective diagnostics in chat"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Show objective diagnostics in chat"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Optional settings for the Neon District dashboard.",
@@ -646,6 +658,7 @@
       "ConfigureOptions.DefaultProvider": "Default AI Genie"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Show objective diagnostics in chat",
       "Title": "Gemini Genie",
       "Description": "Use Google Gemini AI to control devices, create automation programs, and build widgets in HomeGenie. Choose the capabilities and system context to share from the chat menu.\nEnter a valid API key to enable this feature. Get an API key at https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API key",
@@ -670,6 +683,7 @@
     },
 
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Show objective diagnostics in chat",
       "Title":
         "Local AI",
       "Description":

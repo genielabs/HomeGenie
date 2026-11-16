@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Yavaş",
   "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Məqsədlərin diaqnostikasını söhbətdə göstər"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Məqsədlərin diaqnostikasını söhbətdə göstər"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Məqsədlərin diaqnostikasını söhbətdə göstər"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Məqsədlərin diaqnostikasını söhbətdə göstər"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Neon District idarəetmə paneli üçün əlavə ayarlar.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Dərin Biliyi Aktivləşdirin (Proqramları və vidjetləri oxuyun)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Məqsədlərin diaqnostikasını söhbətdə göstər",
       "Title": "Yerli süni intellekt",
       "Description": "Ən müasir LLM-ləri birbaşa HomeGenie serverinizdə işlədin. Digər proqramlardan və skriptlərdən süni intellekt idarə etmək üçün tam API daxildir.",
       "ConfigureOptions.MaxTokens": "Cavab Müddəti (Maks Tokenlər)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Standart)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Məqsədlərin diaqnostikasını söhbətdə göstər",
       "Title": "Gemini Genie",
       "Description": "HomeGenie-də cihazları idarə etmək, avtomatlaşdırma proqramları yaratmaq və vidcetlər qurmaq üçün Google Gemini AI-dən istifadə edin. Çat menyusundan paylaşılacaq imkanları və sistem kontekstini seçin.\nBu funksiyanı aktivləşdirmək üçün etibarlı API açarı daxil edin. API açarını https://aistudio.google.com/app/apikey ünvanından əldə edin.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API açarı",

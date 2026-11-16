@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Lenta",
   "neon_district_road_speed_normal": "Usitata",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Indicia diagnostica propositōrum in colloquiō ostende"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Indicia diagnostica propositōrum in colloquiō ostende"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Indicia diagnostica propositōrum in colloquiō ostende"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Indicia diagnostica propositōrum in colloquiō ostende"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Optiones tabulae moderatoriae «Neon District».",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Permitte Cognitionem Profundam (Lege programmata et instrumenta)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Indicia diagnostica propositōrum in colloquiō ostende",
       "Title": "Intellegentia Artificialis Localis",
       "Description": "Curre programmata LLM recentissima directe in servo tuo HomeGenie. API plenam includit ad intellegentiam artificialem ex aliis programmatibus et scriptis moderandam.",
       "ConfigureOptions.MaxTokens": "Longitudo Responsionis (Tesserae Maximae)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Praedefinitum)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Indicia diagnostica propositōrum in colloquiō ostende",
       "Title": "Gemini Genie",
       "Description": "Utere Google Gemini AI ad instrumenta gubernanda, programmata automationis creanda, et vidgetas in HomeGenie aedificandas. Elige facultates et contextum systematis ad communicandum ex indice colloquii.\nInscribe clavem API validam ad hanc functionem excitandam. Clavem API impetra apud https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Clavis API Google Gemini AI",

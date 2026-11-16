@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Långsam",
   "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Visa diagnostik för mål i chatten"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Visa diagnostik för mål i chatten"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Visa diagnostik för mål i chatten"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Visa diagnostik för mål i chatten"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Valfria inställningar för kontrollpanelen ”Neon District”.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Aktivera djupgående kunskap (Läs program och widgetar)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Visa diagnostik för mål i chatten",
       "Title": "Lokal AI",
       "Description": "Kör toppmoderna LLM:er direkt på din HomeGenie-server. Inkluderar ett komplett API för att styra AI:n från andra program och skript.",
       "ConfigureOptions.MaxTokens": "Svarslängd (max antal tokens)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Standard)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Visa diagnostik för mål i chatten",
       "Title": "Gemini Genie",
       "Description": "Använd Google Gemini AI för att styra enheter, skapa automationsprogram och bygga widgetar i HomeGenie. Välj vilka funktioner och systemsammanhang som ska delas från chattmenyn.\nAnge en giltig API-nyckel för att aktivera denna funktion. Hämta en API-nyckel på https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "API-nyckel för Google Gemini AI",

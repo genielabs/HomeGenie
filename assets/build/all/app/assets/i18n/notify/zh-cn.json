@@ -1,3 +1,3 @@
 {
-  "ffmpeg_required": "`{{module_name}}` 模块需要 **FFmpeg** 才能运行。请从官方网站 [https://ffmpeg.org](https://ffmpeg.org) 安装。如果您不需要此功能，可以在“自动化程序”部分禁用此模块，或点击下方按钮。"
+  "ffmpeg_required": "`{{module_name}}` 模块需要 **FFmpeg** 才能运行。请从官方网站 [https://ffmpeg.org](https://ffmpeg.org)\n\n如果已安装 FFmpeg，请打开新的终端，确认 `ffmpeg -version` 可以运行，然后从该终端重新启动 HomeGenie。 安装。如果您不需要此功能，可以在“自动化程序”部分禁用此模块，或点击下方按钮。"
 }

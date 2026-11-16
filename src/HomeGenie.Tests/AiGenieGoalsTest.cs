@@ -16,26 +16,36 @@ namespace HomeGenie.Tests;
 [TestFixture]
 public class AiGenieGoalsTest {
     Assembly assembly;object goals;string folder,conversation,taskId;JObject job;int creates,runs,generations,saves;bool stopOnGenerate,clearOnGenerate,failSave;Queue<string> replies;Action changeOnGenerate;JArray lastMessages;int failSaveAt=2;Dictionary<string,JObject> installedPrograms, originals;Dictionary<string,string> deploymentTargets;int deployments,recoveries;bool unknownDeployment;
-    JObject geminiDiagnostics;
+    JObject stepDiagnostics;
     Dictionary<string,JObject> runners;
     bool goalDeploymentsSettled;
     int runnerCompilations;
     string runnerCompilerResponse;
     JObject savedGoalCapabilities;
+    byte[] sourceImage;
+    List<string> usedTemplates;
     string History=>"System.Utility/ChatHistory/";
     [OneTimeSetUp] public void CompileShippedGoals() {
         var root=new DirectoryInfo(TestContext.CurrentContext.TestDirectory);
         while(root!=null&&!File.Exists(Path.Combine(root.FullName,"HomeGenie.sln")))root=root.Parent;
-        var xml=XDocument.Load(Path.Combine(root.FullName,"assets/build/all/data/packages/homegenie/homegenie-base/programs.xml")).Root;
+        var packages=Path.Combine(root.FullName,"assets/build/all/data/packages/homegenie");
+        var xml=XDocument.Load(Path.Combine(packages,"homegenie-base/programs.xml")).Root;
+        var providers=XDocument.Load(Path.Combine(packages,"homegenie-ml-ai/programs.xml")).Root;
         string Context(string id)=>(string)xml.Elements().Single(n=>(string)n.Element("Address")==id).Element("ScriptContext");
         var goal=string.Join("\n", CSharpSyntaxTree.ParseText(Context("583")).GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
             .Where(n=>n.Identifier.Text is "AiGenieGoals" or "AiGenieGoalSource"));
         var programActions=CSharpSyntaxTree.ParseText(Context("583")).GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text=="AiGenieProgramActions").ToFullString();
         var deploymentState=CSharpSyntaxTree.ParseText(Context("581")).GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
             .Where(n=>n.Identifier.Text is "ApiCommandExecution" or "ActionLedger" or "ProgramDeploymentSession" or "GoalDeploymentStatus");
-        var code="using System;using System.IO;using System.Linq;using System.Net;using System.Text;using System.Threading;using System.Collections.Generic;using Newtonsoft.Json;using Newtonsoft.Json.Linq;"+Context("577")+goal+programActions+string.Join("\n",deploymentState)+@"
+        var cloudAdapters=providers.Elements()
+            .Where(n=>(string)n.Element("Address") is "934" or "935" or "936" or "937")
+            .Select(n=>CSharpSyntaxTree.ParseText((string)n.Element("ScriptContext")).GetRoot()
+                .DescendantNodes().OfType<ClassDeclarationSyntax>().Single(type=>type.Identifier.Text.EndsWith("GenerationProvider",StringComparison.Ordinal)));
+        var code="using System;using System.IO;using System.Linq;using System.Net;using System.Text;using System.Threading;using System.Collections.Generic;using Newtonsoft.Json;using Newtonsoft.Json.Linq;"+Context("577")+goal+programActions+string.Join("\n",deploymentState)+string.Join("\n",cloudAdapters)+@"
 public static class WidgetContextRequest{public static void Validate(JObject request){}}
-public static class AiGenieContext{public static JObject Prepare(JObject scope,string template,string folder,Func<string,object,object> call){call(""test-template"",template);return new JObject{[""systemPrompt""]=""ACTUALLY SUPPLIED CONTEXT: {}""};}}
+public static class AiGenieContext{
+    public static JObject Prepare(JObject scope,string template,string folder,Func<string,object,object> call){call(""test-template"",template);return new JObject{[""systemPrompt""]=""ACTUALLY SUPPLIED CONTEXT: {}""};}
+    public static JObject Lookup(JObject scope,string folder,Func<string,object,object> call)=>(JObject)call(""test-lookup"",scope[""resources""]);}
 public static class AiGenieCoordinator{public static JObject Message(string role,string text)=>new JObject{[""role""]=role,[""parts""]=new JArray(new JObject{[""text""]=text})};}
 public static class AiGeniePreparation{public static JObject Normalize(JObject input,Func<string,object,object> call)=>input;}
 public static class AiGenieHistory{public static JObject Read(JObject input,Func<string,object,object> call){call(""test-profile"",input);return new JObject{[""messages""]=new JArray()};}}
@@ -58,14 +68,19 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
         assembly.GetType("HistoryStore").GetProperty("Stores").SetValue(null,Activator.CreateInstance(assembly.GetType("HistoryStore").GetProperty("Stores").PropertyType));
         goals=Activator.CreateInstance(assembly.GetType("AiGenieGoals"));conversation=(string)HistoryCall("Conversation.Get",new JObject())["conversationId"];taskId=Guid.NewGuid().ToString("N");
         creates=runs=generations=saves=0;stopOnGenerate=clearOnGenerate=failSave=false;job=null;replies=new Queue<string>();changeOnGenerate=null;lastMessages=null;failSaveAt=2;
-        geminiDiagnostics=null;
+        stepDiagnostics=null;
         runners=new();goalDeploymentsSettled=true;
         runnerCompilations=0;runnerCompilerResponse="[]";
         savedGoalCapabilities=null;
+        sourceImage=null;
+        usedTemplates=new();
         installedPrograms=new();originals=new();deploymentTargets=new();deployments=recoveries=0;unknownDeployment=false;
     }
     [TearDown] public void Cleanup(){((IDisposable)goals).Dispose();Directory.Delete(folder,true);}
-    string ProviderName => provider=="940"?"Lailama":provider=="933"?"Gemini":"Gemini-"+provider;
+    string ProviderName => provider switch {
+        "933" => "Gemini", "934" => "OpenAI", "935" => "Claude", "936" => "DeepSeek", "937" => "Qwen",
+        "940" => "Lailama", _ => "Gemini-"+provider
+    };
     object Call(string route,object value){
         Assert.That(route, Does.Not.Contain("Client.Presets"), "A runner must leave preset changes to YoT.");
         if(route.StartsWith(History))return HistoryCall(route.Substring(History.Length),(JObject)value);
@@ -98,9 +113,15 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
         if(route.Contains("Programs.Disable"))return new{Status="OK"};
         if(route=="test-profile"){Assert.That((string)((JObject)value)["profileKey"],Is.EqualTo("profile-one"));return null;}
         if(route=="test-template"){
+            usedTemplates.Add((string)value);
             if(provider=="940")Assert.That(value,Is.EqualTo("#use-kb homegenie-core/references/widget-authoring.md"));
             return null;
         }
+        if(route=="test-lookup") {
+            Assert.That(((JObject)value).ToString(Formatting.None),Is.EqualTo("{\"parameterIds\":[\"Test.Media/4/Image.Current\"]}"));
+            return JObject.Parse("{'moduleParameters':[{'present':true,'value':'/api/Test.Media/4/Read'}]}");
+        }
+        if(route=="Test.Media/4/Read")return sourceImage;
         if(route=="HomeAutomation.HomeGenie/Automation/Programs.Implements/^@AI:/regex")
             return new[]{new{Program=new{Address=int.Parse(provider),IsEnabled=true},ImplementedInterface=new{ApiUrl="AI.Genies/"+ProviderName}}};
         if(route.EndsWith("/Goals.Describe")) {
@@ -142,7 +163,7 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
             generations++;lastMessages=(JArray)((JArray)request["messages"]).DeepClone();changeOnGenerate?.Invoke();
             if(stopOnGenerate)HistoryCall("Task.Cancel",Identity());
             if(clearOnGenerate)Invoke("HistoryStore","Replace",folder,"933",Activator.CreateInstance(typeof(List<>).MakeGenericType(assembly.GetType("ChatMessage"))),false);
-            return new{state="completed",text=replies.Dequeue(),diagnostics=geminiDiagnostics};
+            return new{state="completed",text=replies.Dequeue(),diagnostics=stepDiagnostics};
         }
         if(route.EndsWith("/Cancel"))return new{state="cancelled"};
         if(route.EndsWith("Program.Deploy") || route.EndsWith("Program.GoalUpdate")) {
@@ -258,9 +279,15 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
         Assert.That(saves + deployments, Is.Zero);
     }
 
-    [Test]
-    public void LocalPngAboveTextLimitReachesGeminiAsAnImageWithoutPersistingBytes()
+    [TestCase("933")]
+    [TestCase("934")]
+    [TestCase("935")]
+    [TestCase("936")]
+    [TestCase("937")]
+    public void LocalPngAboveTextLimitReachesSelectedProviderWithoutPersistingBytes(string providerId)
     {
+        provider = providerId;
+        conversation = (string)HistoryCall("Conversation.Get", new JObject())["conversationId"];
         var file = Path.Combine(folder, "local screenshot.png");
         var pixels = new byte[512 * 512 * 4];
         new Random(123).NextBytes(pixels);
@@ -271,6 +298,7 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
         Assert.That(bytes.Length, Is.GreaterThan(512 * 1024));
 
         var request = StartRequest(false);
+        request["providerId"] = provider;
         var input = (JObject)request["input"];
         input["goalTypes"] = new JArray("automation");
         input["request"]["message"] = "Describe \"" + file + "\".";
@@ -291,6 +319,40 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
         Assert.That(task["operations"].ToString(), Does.Contain("local screenshot.png"));
         Assert.That(HistoryCall("Conversation.Get", new JObject()).ToString(), Does.Not.Contain(data[..80]));
         Assert.That(saves + deployments, Is.Zero);
+    }
+
+    [Test]
+    public void ReadOnlyGoalVerifiesGenericApiPropertyWithoutAuthoringGuides()
+    {
+        using var image=new SixLabors.ImageSharp.Image<SixLabors.ImageSharp.PixelFormats.Rgb24>(2,2);
+        using var buffer=new MemoryStream();
+        image.Save(buffer,new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder());
+        sourceImage=buffer.ToArray();
+        var request=StartRequest();
+        request["template"]="#use-skill homegenie-genie\r\nCustom style";
+        Invoke("AiGenieGoals","Start",request,new Func<string,object,object>(Call));
+        replies.Enqueue("""{"version":1,"action":"run_source_script","title":"Read","message":"","source":"/api/Test.Media/4/Read"}""");
+        replies.Enqueue("""{"version":1,"action":"read_context","title":"Look up source","message":"","resources":{"parameterIds":["Test.Media/4/Image.Current"]}}""");
+        replies.Enqueue("""{"version":1,"action":"run_source_script","title":"Read","message":"","source":"/api/Test.Media/4/Read"}""");
+        replies.Enqueue("""{"version":1,"action":"complete","title":"Done","message":"Image read"}""");
+        Run();
+        Assert.That((string)TaskRecord()["state"],Is.EqualTo("completed"),TaskRecord().ToString());
+        Assert.That(generations,Is.EqualTo(4));
+        Assert.That(usedTemplates,Is.All.EqualTo("#use-skill homegenie-core\r\nCustom style"));
+        Assert.That(lastMessages.ToString(),Does.Contain("Read the current value of the shared module property").And.Contain("image/jpeg"));
+    }
+
+    [Test]
+    public void MixedGoalLoadsOnlyTheRequestedAuthoringGuide()
+    {
+        Start();
+        replies.Enqueue("""{"version":1,"action":"read_context","title":"Get guide","message":"","guides":["widgets"]}""");
+        replies.Enqueue(Action("save_widget"));
+        replies.Enqueue(Complete);
+        Run();
+        Assert.That((string)TaskRecord()["state"],Is.EqualTo("completed"),TaskRecord().ToString());
+        Assert.That(usedTemplates[0],Does.Not.Contain("/references/"));
+        Assert.That(usedTemplates[1],Does.Contain("/references/widgets.md").And.Not.Contain("/references/automation.md"));
     }
 
     [Test]
@@ -494,6 +556,8 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
         const string guidance = "Prefer a compact, readable layout.";
         if (local) StartLailama(); else Start();
         File.WriteAllText(Path.Combine(folder,"widget_objective_prompt.md"),guidance);
+        if (!local)
+            replies.Enqueue("""{"version":1,"action":"read_context","title":"Get guide","message":"","guides":["widgets"]}""");
         replies.Enqueue(Action("save_widget"));
         replies.Enqueue(Complete);
         Run();
@@ -701,15 +765,70 @@ public static class AiGenieHistory{public static JObject Read(JObject input,Func
     }
     [Test] public void SuccessfulGeminiStepsKeepDiagnosticsBesideTheResult() {
         Start();
-        geminiDiagnostics=new JObject {["provider"]="Gemini",["model"]="gemini-test",["elapsedMs"]=120,["finishReason"]="STOP",
-            ["promptTokenCount"]=100,["candidatesTokenCount"]=24,["thoughtsTokenCount"]=6};
+        stepDiagnostics=new JObject {["provider"]="Gemini",["model"]="gemini-test",["elapsedMs"]=120,["finishReason"]="STOP",
+            ["promptTokenCount"]=100,["candidatesTokenCount"]=24,["thoughtsTokenCount"]=6,["cachedContentTokenCount"]=64};
         replies.Enqueue(Action("save_widget"));
         replies.Enqueue(Complete);
         Run();
         var task=TaskRecord();
         Assert.That((string)task["state"],Is.EqualTo("completed"));
         Assert.That((string)task["operations"][0]["details"],Does.Contain("Saved:").And.Contain("model default").And.Contain("Thinking: 6 tokens"));
-        Assert.That((string)task["operations"][1]["details"],Does.Contain("Gemini gemini-test, 120 ms").And.Contain("finish STOP"));
+        Assert.That((string)task["operations"][1]["details"],Does.Contain("Gemini gemini-test, 120 ms").And.Contain("finish STOP").And.Contain("Cached input: 64 tokens"));
+    }
+    [TestCase("934", "OpenAI")]
+    [TestCase("935", "Claude")]
+    [TestCase("936", "DeepSeek")]
+    [TestCase("937", "Qwen")]
+    public void CloudAdapterReportsOptInMetricsOnSuccessfulGoalSteps(string providerId, string name)
+    {
+        provider = providerId;
+        conversation = (string)HistoryCall("Conversation.Get", new JObject())["conversationId"];
+        var request = new Dictionary<string, object> {
+            ["version"] = 1, ["requestId"] = "test", ["purpose"] = "widget-goal",
+            ["messages"] = new JArray(new JObject { ["role"] = "user", ["parts"] = new JArray(new JObject { ["text"] = "Test" }) }),
+            ["cancellationToken"] = CancellationToken.None
+        };
+        Func<JArray, CancellationToken, JArray> resolve = (messages, _) => messages;
+        Func<JObject, CancellationToken, JObject> send = (_, token) => {
+            if (name == "Claude")
+            {
+                using var stream = new StringReader(
+                    "data: {\"type\":\"message_start\",\"message\":{\"model\":\"reported-model\",\"usage\":{\"input_tokens\":100,\"output_tokens\":1,\"cache_read_input_tokens\":64,\"cache_creation_input_tokens\":31}}}\n" +
+                    "data: {\"type\":\"content_block_delta\",\"delta\":{\"type\":\"text_delta\",\"text\":\"result\"}}\n" +
+                    "data: {\"type\":\"message_delta\",\"delta\":{\"stop_reason\":\"end_turn\"},\"usage\":{\"output_tokens\":24}}\n" +
+                    "data: {\"type\":\"message_stop\"}\n");
+                return (JObject)Invoke("ClaudeGenerationProvider", "ReadStream", stream, token);
+            }
+            return JObject.Parse("""
+                {"model":"reported-model","status":"completed","usage":{"input_tokens":100,"output_tokens":24,"input_tokens_details":{"cached_tokens":64},"output_tokens_details":{"reasoning_tokens":6}},
+                "output":[{"type":"message","role":"assistant","content":[{"type":"output_text","text":"result"}]}]}
+                """);
+        };
+        JObject Generate(bool enabled) => JObject.FromObject(Invoke(name + "GenerationProvider", "Generate", name == "Claude"
+            ? new object[] { request, "configured-model", 1000, resolve, send, enabled }
+            : new object[] { request, "configured-model", resolve, send, enabled }));
+
+        Assert.That(Generate(false)["diagnostics"], Is.Null);
+        request["purpose"] = "chat";
+        Assert.That(Generate(true)["diagnostics"], Is.Null);
+        request["purpose"] = "widget-goal";
+        var generated = Generate(true);
+        Assert.That((string)generated["state"], Is.EqualTo("completed"));
+        stepDiagnostics = (JObject)generated["diagnostics"];
+        Assert.That((long)stepDiagnostics["elapsedMs"], Is.GreaterThanOrEqualTo(0));
+        Assert.That((string)stepDiagnostics["model"], Is.EqualTo("reported-model"));
+        Assert.That((int)stepDiagnostics["inputTokens"], Is.EqualTo(100));
+        Assert.That((int)stepDiagnostics["outputTokens"], Is.EqualTo(24));
+        StartSelected(new JArray("widgets"));
+        replies.Enqueue(Action("save_widget"));
+        replies.Enqueue(Complete);
+        Run();
+        var task = TaskRecord();
+        Assert.That((string)task["state"], Is.EqualTo("completed"));
+        string details = (string)task["operations"][0]["details"];
+        Assert.That(details, Does.Contain(name + " reported-model").And.Contain("Input: 100 tokens").And.Contain("Output: 24 tokens"));
+        Assert.That(details, name == "Claude" ? Does.Contain("finish end_turn") : Does.Contain("Thinking: 6 tokens"));
+        Assert.That(details,Does.Contain("Cached input: 64 tokens"));
     }
     [Test] public void ValidationFailureCanBeCorrectedWithoutLeavingAFailedOperation(){Start();replies.Enqueue("{}");replies.Enqueue(Action("save_widget"));replies.Enqueue(Complete);Run();Assert.That((string)TaskRecord()["state"],Is.EqualTo("completed"));Assert.That(generations,Is.EqualTo(3));}
     [Test] public void FalseCompletionIsRejectedAndRepairBudgetIsBounded(){Start();foreach(var _ in Enumerable.Range(0,3))replies.Enqueue(Complete);Run();Assert.That((string)TaskRecord()["state"],Is.EqualTo("failed"));Assert.That(generations,Is.EqualTo(3));Assert.That(saves,Is.Zero);}

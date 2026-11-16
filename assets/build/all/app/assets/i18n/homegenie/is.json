@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Hæg",
   "neon_district_road_speed_normal": "Venjuleg",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Sýna greiningarupplýsingar um markmið í spjalli"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Sýna greiningarupplýsingar um markmið í spjalli"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Sýna greiningarupplýsingar um markmið í spjalli"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Sýna greiningarupplýsingar um markmið í spjalli"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Valfrjálsar stillingar fyrir stjórnborðið Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Virkja djúpa þekkingu (Lesa forrit og búnað)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Sýna greiningarupplýsingar um markmið í spjalli",
       "Title": "Staðbundin gervigreind",
       "Description": "Keyrðu nýjustu LLM-kerfin beint á HomeGenie-þjóninum þínum. Inniheldur fullt forritaskil (API) til að stjórna gervigreindinni frá öðrum forritum og forskriftum.",
       "ConfigureOptions.MaxTokens": "Svarlengd (hámarksfjöldi tákna)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Sjálfgefið)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Sýna greiningarupplýsingar um markmið í spjalli",
       "Title": "Gemini Genie",
       "Description": "Notaðu Google Gemini AI til að stjórna tækjum, búa til sjálfvirkniforrit og smíða græjur í HomeGenie. Veldu getu og kerfissamhengi til að deila úr spjallvalmyndinni.\nSláðu inn gildan API-lykil til að virkja þennan eiginleika. Fáðu API-lykil á https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-lykill",

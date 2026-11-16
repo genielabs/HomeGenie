@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Mochedwa",
   "neon_district_road_speed_normal": "Mwachibadwa",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Onetsani zambiri zowunika mavuto a zolinga pa macheza"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Onetsani zambiri zowunika mavuto a zolinga pa macheza"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Onetsani zambiri zowunika mavuto a zolinga pa macheza"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Onetsani zambiri zowunika mavuto a zolinga pa macheza"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Zokonda zosankha za bolodi lowongolera la Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Yambitsani Chidziwitso Chakuya (Werengani mapulogalamu ndi ma widget)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Onetsani zambiri zowunika mavuto a zolinga pa macheza",
       "Title": "AI Yapafupi",
       "Description": "Yendetsani ma LLM apamwamba kwambiri mwachindunji pa seva yanu ya HomeGenie. Muli ndi API yonse yowongolera AI kuchokera ku mapulogalamu ena ndi zolemba.",
       "ConfigureOptions.MaxTokens": "Kutalika kwa Mayankho (Ma Tokeni Ochuluka)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Yokhazikika)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Onetsani zambiri zowunika mavuto a zolinga pa macheza",
       "Title": "Gemini Genie",
       "Description": "Gwiritsani ntchito Google Gemini AI poyang'anira zipangizo, kupanga mapulogalamu a zodziyimira zokha, ndi kupanga ma widget mu HomeGenie. Sankhani luso ndi nkhani ya dongosolo logawana kuchokera pa menyu ya macheza.\nLowetsani kiyi yovomerezeka ya API kuti mutsegule mbaliyi. Pezani kiyi ya API pa https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Kiyi ya API ya Google Gemini AI",

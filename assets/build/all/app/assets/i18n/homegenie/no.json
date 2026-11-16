@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Sakte",
   "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Vis diagnostikk for mål i chatten"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Vis diagnostikk for mål i chatten"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Vis diagnostikk for mål i chatten"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Vis diagnostikk for mål i chatten"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Valgfrie innstillinger for dashbordet «Neon District».",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Aktiver dyp kunnskap (les programmer og widgeter)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Vis diagnostikk for mål i chatten",
       "Title": "Lokal AI",
       "Description": "Kjør toppmoderne LLM-er direkte på HomeGenie-serveren din. Inkluderer et komplett API for å kontrollere AI-en fra andre programmer og skript.",
       "ConfigureOptions.MaxTokens": "Svarlengde (maks. tokener)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Standard)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Vis diagnostikk for mål i chatten",
       "Title": "Gemini Genie",
       "Description": "Bruk Google Gemini AI til å styre enheter, opprette automatiseringsprogrammer og bygge widgeter i HomeGenie. Velg funksjoner og systemkontekst som skal deles fra chat-menyen.\nOppgi en gyldig API-nøkkel for å aktivere denne funksjonen. Få en API-nøkkel på https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-nøkkel",

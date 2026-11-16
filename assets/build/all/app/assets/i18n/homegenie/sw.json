@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Polepole",
   "neon_district_road_speed_normal": "Kawaida",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Onyesha taarifa za uchunguzi wa matatizo ya malengo kwenye gumzo"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Onyesha taarifa za uchunguzi wa matatizo ya malengo kwenye gumzo"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Onyesha taarifa za uchunguzi wa matatizo ya malengo kwenye gumzo"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Onyesha taarifa za uchunguzi wa matatizo ya malengo kwenye gumzo"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Mipangilio ya hiari ya dashibodi ya Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Wezesha Maarifa ya Kina (Soma programu na wijeti)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Onyesha taarifa za uchunguzi wa matatizo ya malengo kwenye gumzo",
       "Title": "AI ya Ndani",
       "Description": "Endesha LLM za kisasa moja kwa moja kwenye seva yako ya HomeGenie. Inajumuisha API kamili ya kudhibiti AI kutoka kwa programu na hati zingine.",
       "ConfigureOptions.MaxTokens": "Urefu wa Majibu (Tokeni za Juu)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Chaguomsingi)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Onyesha taarifa za uchunguzi wa matatizo ya malengo kwenye gumzo",
       "Title": "Gemini Genie",
       "Description": "Tumia Google Gemini AI kudhibiti vifaa, kuunda programu za kiotomatiki, na kuunda wijeti katika HomeGenie. Chagua uwezo na muktadha wa mfumo wa kushiriki kutoka kwenye menyu ya gumzo.\nWeka ufunguo halali wa API ili kuwezesha kipengele hiki. Pata ufunguo wa API kwenye https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Ufunguo wa API wa Google Gemini AI",

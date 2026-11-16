@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Pomalá",
   "neon_district_road_speed_normal": "Normálna",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Zobraziť diagnostiku cieľov v chate"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Zobraziť diagnostiku cieľov v chate"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Zobraziť diagnostiku cieľov v chate"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Zobraziť diagnostiku cieľov v chate"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Voliteľné nastavenia ovládacieho panela „Neon District“.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Povoliť hlboké znalosti (čítať programy a widgety)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Zobraziť diagnostiku cieľov v chate",
       "Title": "Lokálna umelá inteligencia",
       "Description": "Spúšťajte najmodernejšie LLM priamo na vašom serveri HomeGenie. Zahŕňa kompletné API na ovládanie AI z iných programov a skriptov.",
       "ConfigureOptions.MaxTokens": "Dĺžka odpovede (maximálny počet tokenov)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Predvolený)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Zobraziť diagnostiku cieľov v chate",
       "Title": "Gemini Genie",
       "Description": "Použite Google Gemini AI na ovládanie zariadení, vytváranie automatizačných programov a tvorbu widgetov v HomeGenie. Vyberte možnosti a systémový kontext na zdieľanie z ponuky chatu.\nPre aktiváciu tejto funkcie zadajte platný kľúč API. Kľúč API získate na https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Kľúč API pre Google Gemini AI",

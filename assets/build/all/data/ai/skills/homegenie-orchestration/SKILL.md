@@ -1,21 +1,21 @@
 ---
 name: homegenie-orchestration
 description: Create a Director that schedules and runs cooperating automation programs through the unified Genie.
-compatibility: AI.Genies/Gemini orchestration APIs; automation capability required.
+compatibility: System.Utility/AiGenie orchestration APIs; provider automation capability required.
 metadata:
-  version: "1.0.4"
+  version: "1.0.5"
 ---
 # Unattended orchestration
 
 When the user explicitly requests a Director and cooperating agents, deploy the Director as kind=program in this response. One program per response does not require separate interactive user prompts: the Director can generate its helpers through the scheduling API below. Do not replace a requested multi-program design with one combined program or require another confirmation when the request is already clear.
 
-Generated programs use `AI.Genies/Gemini` endpoints, never the disabled legacy `AI.Automan/Gemini` provider.
+Generated programs use `System.Utility/AiGenie` endpoints. Omit `providerId` to use the configured default. Supply a program ID as `providerId` only when the user selects a specific provider.
 
 ## APIs
 
-- `Api.Call("AI.Genies/Gemini/Request.Execute", new { version = 1, prompt = text })` starts an independent action-capable request. It returns requestId and state=queued, or failed/busy with error. The provider's persisted context/capabilities apply; automation must be enabled to create helpers. The common `System.Utility/AiGenie/Request.Execute` route also accepts an optional providerId (otherwise the configured default). If submission returns busy without a requestId, nothing started: Pause(2) and retry within the same deadline. Do not resubmit an accepted request or an unknown outcome.
-- `Api.Call("AI.Genies/Gemini/Request.Status", new { version = 1, requestId })` returns queued/running/cancelling/completed/failed/cancelled/busy/output_limit/context_limit/not_found. Use Pause(2), a deadline and Program.IsRunning checks; cancel on timeout/stop via Request.Cancel with the same version/requestId. Do not automatically repeat an uncertain request. For helper creation, require completed AND a confirmed Program.Deploy receipt in result.actions: endpoint ends in /Program.Deploy, response.Success=true, response.State=completed and response.Response.status=success. Read the helper ID from response.Response.program_id. A completed plain reply without that receipt is not a deployment. Do not assume the former Task.Status programId field exists.
-- `Api.Call("System.Utility/AiGenie/Request.Generate", new { version = 1, prompt = text, providerId = "933" })` starts text-only generation. Omit providerId to use AI Genie's configured default. It returns version, requestId, providerId and state=queued, or failed/busy with error. Poll `Request.Status` on the same service using `{ version = 1, requestId }`. Wait with Pause(2), a deadline and Program.IsRunning checks. Only state=completed supplies final text. On deadline or program stop, call `Request.Cancel` with the same ID and stop this workflow. Requests use the provider's allowed context, never chat history, and never execute generated commands. Direct provider routes such as `AI.Genies/Gemini/Request.Generate` accept the same body without providerId. Do not call the removed Gemini Prompt.Ask endpoint.
+- `Api.Call("System.Utility/AiGenie/Request.Execute", new { version = 1, prompt = text })` starts an independent action-capable request. It returns requestId and state=queued, or failed/busy with error. The provider's persisted context/capabilities apply; automation must be enabled to create helpers. If submission returns busy without a requestId, nothing started: Pause(2) and retry within the same deadline. Do not resubmit an accepted request or an unknown outcome.
+- `Api.Call("System.Utility/AiGenie/Request.Status", new { version = 1, requestId })` returns queued/running/cancelling/completed/failed/cancelled/busy/output_limit/context_limit/not_found. Use Pause(2), a deadline and Program.IsRunning checks; cancel on timeout/stop via `System.Utility/AiGenie/Request.Cancel` with the same version/requestId. Do not automatically repeat an uncertain request. For helper creation, require completed AND a confirmed Program.Deploy receipt in result.actions: endpoint ends in /Program.Deploy, response.Success=true, response.State=completed and response.Response.status=success. Read the helper ID from response.Response.program_id. A completed plain reply without that receipt is not a deployment. Do not assume the former Task.Status programId field exists.
+- `Api.Call("System.Utility/AiGenie/Request.Generate", new { version = 1, prompt = text })` starts text-only generation. It returns version, requestId, providerId and state=queued, or failed/busy with error. Poll `Request.Status` on the same service using `{ version = 1, requestId }`. Wait with Pause(2), a deadline and Program.IsRunning checks. Only state=completed supplies final text. On deadline or program stop, call `Request.Cancel` with the same ID and stop this workflow. Requests use the provider's allowed context, never chat history, and never execute generated commands.
 
 Use `JObject.FromObject(result)` when a backend API returns an object; use `JObject.Parse(text)` only for a JSON string. Do not assume the frontend data.response wrapper exists in backend calls.
 

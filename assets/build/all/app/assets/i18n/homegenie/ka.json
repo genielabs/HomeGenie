@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "ნელი",
   "neon_district_road_speed_normal": "ჩვეულებრივი",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "ჩატში მიზნების დიაგნოსტიკის ჩვენება"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "ჩატში მიზნების დიაგნოსტიკის ჩვენება"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "ჩატში მიზნების დიაგნოსტიკის ჩვენება"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "ჩატში მიზნების დიაგნოსტიკის ჩვენება"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "„Neon District“ მართვის პანელის დამატებითი პარამეტრები.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "ღრმა ცოდნის ჩართვა (პროგრამებისა და ვიჯეტების წაკითხვა)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "ჩატში მიზნების დიაგნოსტიკის ჩვენება",
       "Title": "ადგილობრივი ხელოვნური ინტელექტი",
       "Description": "გაუშვით უახლესი LLM-ები პირდაპირ თქვენს HomeGenie სერვერზე. მოიცავს სრულ API-ს სხვა პროგრამებიდან და სკრიპტებიდან ხელოვნური ინტელექტის სამართავად.",
       "ConfigureOptions.MaxTokens": "პასუხის სიგრძე (მაქსიმალური ჟეტონები)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (ნაგულისხმევი)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "ჩატში მიზნების დიაგნოსტიკის ჩვენება",
       "Title": "Gemini Genie",
       "Description": "გამოიყენეთ Google Gemini AI მოწყობილობების სამართავად, ავტომატიზაციის პროგრამების შესაქმნელად და ვიჯეტების ასაგებად HomeGenie-ში. აირჩიეთ გასაზიარებელი შესაძლებლობები და სისტემური კონტექსტი ჩეთის მენიუდან.\nამ ფუნქციის გასააქტიურებლად შეიყვანეთ მოქმედი API გასაღები. მიიღეთ API გასაღები მისამართზე https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI-ს API გასაღები",

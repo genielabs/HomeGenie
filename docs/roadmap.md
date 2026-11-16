@@ -159,6 +159,8 @@ Use protections scoped to each operation, reusing the package containment guard 
 
 ## Next activities
 
+- [ ] **Guided FFmpeg installation for NVR on Windows and Linux.** Add an optional setup step and an entry point in Video Input settings. Reuse working `ffmpeg` and `ffprobe` when available. Otherwise download a verified portable build for the server architecture into the HomeGenie data directory and share executable resolution between programs 200 and 250. Implement after the current consolidation.
+
 - [x] Retire specialized Genie programs 930, 931 and 932 from shipped homegenie-ml-ai manifests/program bundles, preset modules (including the shipped demo client preset) and dedicated prompt files; package version 1.0.69. No other package depends on them. Current program code, checksums, shared skills and optional legacy-disabling support are preserved. Package install/restore remains additive and installed retired programs/clones, options and histories are not removed or disabled. Added update-planner preservation coverage and clarified technical documentation references.
 
 - [x] Consolidate the active roadmap and preserve historical evidence without treating unverified tests as passed. Prepare separate HomeGenie and YoT commit descriptions; the maintainer performs commits.

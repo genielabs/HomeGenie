@@ -1,3 +1,3 @@
 {
-  "ffmpeg_required": "Modulu `{{module_name}}` chọrọ ka **FFmpeg** rụọ ọrụ. Biko wụnye ya na weebụsaịtị gọọmentị: - [https://ffmpeg.org](https://ffmpeg.org) Ọ bụrụ na ịchọghị atụmatụ a, ị nwere ike gbanyụọ modulu a na ngalaba **Automatic Programs**, ma ọ bụ site na ịpị bọtịnụ dị n'okpuru."
+  "ffmpeg_required": "Modulu `{{module_name}}` chọrọ ka **FFmpeg** rụọ ọrụ. Biko wụnye ya na weebụsaịtị gọọmentị: - [https://ffmpeg.org](https://ffmpeg.org)\n\nỌ bụrụ na etinyela FFmpeg, mepee ọnụ iwu ọhụrụ, nwalee `ffmpeg -version`, malitekwa HomeGenie ọzọ site n’ọnụ iwu ahụ. Ọ bụrụ na ịchọghị atụmatụ a, ị nwere ike gbanyụọ modulu a na ngalaba **Automatic Programs**, ma ọ bụ site na ịpị bọtịnụ dị n'okpuru."
 }

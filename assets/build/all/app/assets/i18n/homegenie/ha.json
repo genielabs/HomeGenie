@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "A hankali",
   "neon_district_road_speed_normal": "Na al’ada",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Nuna bayanan binciken matsalolin manufofi a hira"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Nuna bayanan binciken matsalolin manufofi a hira"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Nuna bayanan binciken matsalolin manufofi a hira"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Nuna bayanan binciken matsalolin manufofi a hira"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Saitunan zaɓi don allon sarrafa Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Kunna Zurfin Ilimi (Karanta shirye-shirye da widgets)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Nuna bayanan binciken matsalolin manufofi a hira",
       "Title": "AI na gida",
       "Description": "Gudanar da LLMs na zamani kai tsaye akan sabar HomeGenie ɗinku. Ya haɗa da cikakken API don sarrafa AI daga wasu shirye-shirye da rubutun.",
       "ConfigureOptions.MaxTokens": "Tsawon Amsa (Matsakaicin Alamomi)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Na asali)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Nuna bayanan binciken matsalolin manufofi a hira",
       "Title": "Gemini Genie",
       "Description": "Yi amfani da Google Gemini AI don sarrafa na'urori, ƙirƙirar shirye-shiryen atomatik, da gina widget a HomeGenie. Zaɓi damammaki da mahallin tsarin da za a raba daga menu na hira.\nShigar da ingantaccen maɓallin API don kunna wannan fasalin. Samu maɓallin API a https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Maɓallin API na Google Gemini AI",

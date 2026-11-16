@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Pōturi",
   "neon_district_road_speed_normal": "Noa",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Whakaatuhia ngā mōhiohio tātari mō ngā whāinga ki te kōrerorero"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Whakaatuhia ngā mōhiohio tātari mō ngā whāinga ki te kōrerorero"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Whakaatuhia ngā mōhiohio tātari mō ngā whāinga ki te kōrerorero"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Whakaatuhia ngā mōhiohio tātari mō ngā whāinga ki te kōrerorero"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Ngā tautuhinga kōwhiringa mō te papatohu Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Whakahohe i te Mātauranga Hōhonu (Pānuihia ngā hōtaka me ngā widget)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Whakaatuhia ngā mōhiohio tātari mō ngā whāinga ki te kōrerorero",
       "Title": "AI ā-Rohe",
       "Description": "Whakahaerehia ngā LLM hou rawa atu i runga i tō tūmau HomeGenie. Kei roto ko te API katoa hei whakahaere i te AI mai i ētahi atu papatono me ngā tuhinga.",
       "ConfigureOptions.MaxTokens": "Te Roa o te Urupare (Ngā Tohu Mōrahi)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Taunoa)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Whakaatuhia ngā mōhiohio tātari mō ngā whāinga ki te kōrerorero",
       "Title": "Gemini Genie",
       "Description": "Whakamahia a Google Gemini AI hei whakahaere pūrere, hei hanga hōtaka aunoatanga, ā, hei waihanga widget hoki ki HomeGenie. Kōwhiria ngā āheinga me te horopaki pūnaha hei tuari mai i te tahua kōrerorero.\nWhakaurua tētahi kī API whaimana hei whakahohe i tēnei āhuatanga. Tikina he kī API i https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Kī API Google Gemini AI",

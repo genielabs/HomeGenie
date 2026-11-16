@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Αργή",
   "neon_district_road_speed_normal": "Κανονική",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Εμφάνιση διαγνωστικών στοιχείων για τους στόχους στη συνομιλία"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Εμφάνιση διαγνωστικών στοιχείων για τους στόχους στη συνομιλία"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Εμφάνιση διαγνωστικών στοιχείων για τους στόχους στη συνομιλία"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Εμφάνιση διαγνωστικών στοιχείων για τους στόχους στη συνομιλία"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Προαιρετικές ρυθμίσεις για τον πίνακα ελέγχου «Neon District».",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Ενεργοποίηση Βαθιάς Γνώσης (Ανάγνωση προγραμμάτων και γραφικών στοιχείων)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Εμφάνιση διαγνωστικών στοιχείων για τους στόχους στη συνομιλία",
       "Title": "Τοπική Τεχνητή Νοημοσύνη",
       "Description": "Εκτελέστε υπερσύγχρονα LLM απευθείας στον διακομιστή HomeGenie. Περιλαμβάνει ένα πλήρες API για τον έλεγχο της τεχνητής νοημοσύνης από άλλα προγράμματα και σενάρια.",
       "ConfigureOptions.MaxTokens": "Μήκος απόκρισης (Μέγιστος αριθμός διακριτικών)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Προεπιλογή)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Εμφάνιση διαγνωστικών στοιχείων για τους στόχους στη συνομιλία",
       "Title": "Gemini Genie",
       "Description": "Χρησιμοποιήστε το Google Gemini AI για να ελέγχετε συσκευές, να δημιουργείτε προγράμματα αυτοματισμού και να φτιάχνετε widgets στο HomeGenie. Επιλέξτε τις δυνατότητες και το περιβάλλον συστήματος για κοινή χρήση από το μενού συνομιλίας.\nΕισαγάγετε ένα έγκυρο κλειδί API για να ενεργοποιήσετε αυτή τη λειτουργία. Αποκτήστε κλειδί API στο https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Κλειδί API Google Gemini AI",

@@ -28,7 +28,8 @@ public class GeminiDiscoveryContractTest
             .DescendantNodes().OfType<ClassDeclarationSyntax>().Single(n=>n.Identifier.Text==name).ToFullString();
         string source=(string)shared.Element("ScriptContext");
         int begin=source.IndexOf("    var moduleIds = resources[",StringComparison.Ordinal);
-        int end=source.IndexOf("    if ((bool)selected[\"automationPrograms\"])",begin,StringComparison.Ordinal);
+        int end=source.IndexOf("    if ((bool)selected[\"automationPrograms\"]",begin,StringComparison.Ordinal);
+        Assert.That(end,Is.GreaterThan(begin),"Module lookup block must end before the program inventory.");
         string block=source.Substring(begin,end-begin);
         var code="using System;using System.IO;using System.Text;using System.Linq;using System.Collections.Generic;using Newtonsoft.Json;using Newtonsoft.Json.Linq;\n"+
             Class(shared,"WidgetContextRequest")+Class(executor,"GenieResponseContract")+

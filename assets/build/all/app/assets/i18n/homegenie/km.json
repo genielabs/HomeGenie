@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "យឺត",
   "neon_district_road_speed_normal": "ធម្មតា",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "បង្ហាញព័ត៌មានវិនិច្ឆ័យបញ្ហានៃគោលដៅក្នុងការជជែក"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "បង្ហាញព័ត៌មានវិនិច្ឆ័យបញ្ហានៃគោលដៅក្នុងការជជែក"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "បង្ហាញព័ត៌មានវិនិច្ឆ័យបញ្ហានៃគោលដៅក្នុងការជជែក"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "បង្ហាញព័ត៌មានវិនិច្ឆ័យបញ្ហានៃគោលដៅក្នុងការជជែក"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "ការកំណត់ស្រេចចិត្តសម្រាប់ផ្ទាំងគ្រប់គ្រង Neon District។",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "បើកដំណើរការចំណេះដឹងស៊ីជម្រៅ (អានកម្មវិធី និងធាតុក្រាហ្វិក)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "បង្ហាញព័ត៌មានវិនិច្ឆ័យបញ្ហានៃគោលដៅក្នុងការជជែក",
       "Title": "បញ្ញាសិប្បនិម្មិតក្នុងស្រុក",
       "Description": "ដំណើរការ LLM ទំនើបៗដោយផ្ទាល់នៅលើម៉ាស៊ីនមេ HomeGenie របស់អ្នក។ រួមបញ្ចូល API ពេញលេញដើម្បីគ្រប់គ្រង AI ពីកម្មវិធី និងស្គ្រីបផ្សេងទៀត។",
       "ConfigureOptions.MaxTokens": "ប្រវែងឆ្លើយតប (ថូខឹនអតិបរមា)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (លំនាំដើម)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "បង្ហាញព័ត៌មានវិនិច្ឆ័យបញ្ហានៃគោលដៅក្នុងការជជែក",
       "Title": "Gemini Genie",
       "Description": "ប្រើ Google Gemini AI ដើម្បីបញ្ជាឧបករណ៍ បង្កើតកម្មវិធីស្វ័យប្រវត្តិកម្ម និងបង្កើតធាតុក្រាហ្វិកនៅក្នុង HomeGenie។ ជ្រើសរើសសមត្ថភាព និងបរិបទប្រព័ន្ធដើម្បីចែករំលែកពីម៉ឺនុយជជែក។\nបញ្ចូលសោ API ត្រឹមត្រូវដើម្បីបើកមុខងារនេះ។ ទទួលបានសោ API នៅ https://aistudio.google.com/app/apikey។",
       "ConfigureOptions.ApiKey": "សោ API របស់ Google Gemini AI",

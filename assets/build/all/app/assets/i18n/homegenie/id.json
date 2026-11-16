@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Lambat",
   "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Tampilkan diagnostik tujuan di obrolan"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Tampilkan diagnostik tujuan di obrolan"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Tampilkan diagnostik tujuan di obrolan"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Tampilkan diagnostik tujuan di obrolan"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Pengaturan opsional untuk dasbor Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Aktifkan Pengetahuan Mendalam (Membaca program & widget)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Tampilkan diagnostik tujuan di obrolan",
       "Title": "AI Lokal",
       "Description": "Jalankan LLM (Learning Learning Model) canggih langsung di server HomeGenie Anda. Termasuk API lengkap untuk mengontrol AI dari program dan skrip lain.",
       "ConfigureOptions.MaxTokens": "Panjang Respons (Token Maksimum)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Bawaan)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Tampilkan diagnostik tujuan di obrolan",
       "Title": "Gemini Genie",
       "Description": "Gunakan Google Gemini AI untuk mengontrol perangkat, membuat program otomatisasi, dan membangun widget di HomeGenie. Pilih kemampuan dan konteks sistem yang ingin dibagikan dari menu obrolan.\nMasukkan kunci API yang valid untuk mengaktifkan fitur ini. Dapatkan kunci API di https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Kunci API Google Gemini AI",

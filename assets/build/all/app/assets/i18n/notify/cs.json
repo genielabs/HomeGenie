@@ -1,3 +1,3 @@
 {
-  "ffmpeg_required": "Modul `{{module_name}}` vyžaduje pro svou funkci **FFmpeg**. Nainstalujte si jej prosím z oficiálních webových stránek: - [https://ffmpeg.org](https://ffmpeg.org) Pokud tuto funkci nepotřebujete, můžete jej deaktivovat v sekci **Automatizační programy** nebo kliknutím na tlačítko níže."
+  "ffmpeg_required": "Modul `{{module_name}}` vyžaduje pro svou funkci **FFmpeg**. Nainstalujte si jej prosím z oficiálních webových stránek: - [https://ffmpeg.org](https://ffmpeg.org)\n\nPokud už je FFmpeg nainstalovaný, otevřete nový terminál, ověřte příkaz `ffmpeg -version` a z tohoto terminálu znovu spusťte HomeGenie. Pokud tuto funkci nepotřebujete, můžete jej deaktivovat v sekci **Automatizační programy** nebo kliknutím na tlačítko níže."
 }

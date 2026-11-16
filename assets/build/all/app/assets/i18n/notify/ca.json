@@ -1,3 +1,3 @@
 {
-  "ffmpeg_required": "El mòdul `{{module_name}}` requereix **FFmpeg** per funcionar. Instal·leu-lo des del lloc web oficial: - [https://ffmpeg.org](https://ffmpeg.org) Si no necessiteu aquesta funció, podeu desactivar aquest mòdul a la secció **Programes d'automatització** o fent clic al botó següent."
+  "ffmpeg_required": "El mòdul `{{module_name}}` requereix **FFmpeg** per funcionar. Instal·leu-lo des del lloc web oficial: - [https://ffmpeg.org](https://ffmpeg.org)\n\nSi FFmpeg ja està instal·lat, obre un terminal nou, comprova que funciona `ffmpeg -version` i reinicia HomeGenie des d’aquell terminal. Si no necessiteu aquesta funció, podeu desactivar aquest mòdul a la secció **Programes d'automatització** o fent clic al botó següent."
 }

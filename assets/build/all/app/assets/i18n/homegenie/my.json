@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "နှေး",
   "neon_district_road_speed_normal": "ပုံမှန်",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "ပန်းတိုင်များ၏ ပြဿနာစစ်ဆေးမှု အချက်အလက်ကို ချတ်တွင် ပြပါ"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "ပန်းတိုင်များ၏ ပြဿနာစစ်ဆေးမှု အချက်အလက်ကို ချတ်တွင် ပြပါ"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "ပန်းတိုင်များ၏ ပြဿနာစစ်ဆေးမှု အချက်အလက်ကို ချတ်တွင် ပြပါ"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "ပန်းတိုင်များ၏ ပြဿနာစစ်ဆေးမှု အချက်အလက်ကို ချတ်တွင် ပြပါ"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Neon District ဒက်ရှ်ဘုတ်အတွက် စိတ်ကြိုက် ဆက်တင်များ။",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Deep Knowledge ကိုဖွင့်ပါ (ပရိုဂရမ်များနှင့် ဝစ်ဂျက်များကိုဖတ်ပါ)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "ပန်းတိုင်များ၏ ပြဿနာစစ်ဆေးမှု အချက်အလက်ကို ချတ်တွင် ပြပါ",
       "Title": "ဒေသတွင်း AI",
       "Description": "သင့်ရဲ့ HomeGenie server မှာ နောက်ဆုံးပေါ် LLM တွေကို တိုက်ရိုက် run လိုက်ပါ။ တခြား program တွေနဲ့ script တွေကနေ AI ကို ထိန်းချုပ်ဖို့ full API ပါဝင်ပါတယ်။",
       "ConfigureOptions.MaxTokens": "တုံ့ပြန်မှုအရှည် (အများဆုံးတိုကင်များ)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (မူရင်း)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "ပန်းတိုင်များ၏ ပြဿနာစစ်ဆေးမှု အချက်အလက်ကို ချတ်တွင် ပြပါ",
       "Title": "Gemini Genie",
       "Description": "HomeGenie တွင် စက်ပစ္စည်းများကို ထိန်းချုပ်ရန်၊ အလိုအလျောက်လုပ်ဆောင်ချက် ပရိုဂရမ်များ ဖန်တီးရန်နှင့် ဝစ်ဂျက်များ ပြုလုပ်ရန် Google Gemini AI ကို အသုံးပြုပါ။ မျှဝေလိုသော လုပ်ဆောင်နိုင်စွမ်းများနှင့် စနစ်အကြောင်းအရာများကို ချတ်မီနူးမှ ရွေးချယ်ပါ။\nဤလုပ်ဆောင်ချက်ကို အသုံးပြုနိုင်ရန် မှန်ကန်သော API key ကို ထည့်သွင်းပါ။ https://aistudio.google.com/app/apikey တွင် API key ရယူပါ။",
       "ConfigureOptions.ApiKey": "Google Gemini AI API key",

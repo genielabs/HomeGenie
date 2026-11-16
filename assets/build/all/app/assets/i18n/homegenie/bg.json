@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Бавно",
   "neon_district_road_speed_normal": "Нормално",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Показване на диагностиката на целите в чата"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Показване на диагностиката на целите в чата"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Показване на диагностиката на целите в чата"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Показване на диагностиката на целите в чата"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Незадължителни настройки за таблото „Neon District“.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Активиране на задълбочени знания (четене на програми и джаджи)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Показване на диагностиката на целите в чата",
       "Title": "Локален изкуствен интелект",
       "Description": "Стартирайте най-съвременни LLM-и директно на вашия HomeGenie сървър. Включва пълен API за управление на AI от други програми и скриптове.",
       "ConfigureOptions.MaxTokens": "Дължина на отговора (максимален брой маркери)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (По подразбиране)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Показване на диагностиката на целите в чата",
       "Title": "Gemini Genie",
       "Description": "Използвайте Google Gemini AI за управление на устройства, създаване на програми за автоматизация и изграждане на уиджети в HomeGenie. Изберете възможностите и системния контекст за споделяне от менюто на чата.\nВъведете валиден API ключ, за да активирате тази функция. Вземете API ключ от https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API ключ",

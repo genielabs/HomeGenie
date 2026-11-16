@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Stadig",
   "neon_district_road_speed_normal": "Normaal",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Wys doelwitdiagnostiek in die klets"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Wys doelwitdiagnostiek in die klets"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Wys doelwitdiagnostiek in die klets"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Wys doelwitdiagnostiek in die klets"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Opsionele instellings vir die Neon District-kontroleskerm.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Aktiveer diepgaande kennis (lees programme en widgets)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Wys doelwitdiagnostiek in die klets",
       "Title": "Plaaslike KI",
       "Description": "Laat die nuutste LLM's direk op jou HomeGenie-bediener loop. Sluit 'n volledige API in om die KI vanaf ander programme en skrifte te beheer.",
       "ConfigureOptions.MaxTokens": "Reaksielengte (Maksimum Tokens)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Verstek)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Wys doelwitdiagnostiek in die klets",
       "Title": "Gemini Genie",
       "Description": "Gebruik Google Gemini AI om toestelle te beheer, outomatiseringsprogramme te skep en legstukke in HomeGenie te bou. Kies die vermoëns en stelselkonteks om te deel vanuit die kletskieslys.\nVoer 'n geldige API-sleutel in om hierdie funksie te aktiveer. Kry 'n API-sleutel by https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI-API-sleutel",

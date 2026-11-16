@@ -28,7 +28,7 @@ public class AiGenieContextTest {
     [SetUp] public void CreateFolder(){folder=Path.Combine(Path.GetTempPath(),"hg-context-"+Guid.NewGuid());Directory.CreateDirectory(folder);}
     [TearDown] public void RemoveFolder(){Directory.Delete(folder,true);}
     JObject Request()=>JObject.Parse("{'version':1,'message':'inspect','context':{'devices':false,'widgets':false,'automationPrograms':false,'dashboards':false,'deepKnowledge':false},'capabilities':{'deviceControl':false,'automation':false,'widgets':false}}");
-    JObject Prepare(JObject input,Func<string,object,object> read=null,string deviceData="devices",JArray programs=null,JArray widgets=null) {
+    JObject Prepare(JObject input,Func<string,object,object> read=null,string deviceData="devices",JArray programs=null,JArray widgets=null,bool lookupOnly=false) {
         Func<string,object,object> call=(route,payload)=>{
             if(route=="System.Utility/ContextEngine/Context.Policy")return new JObject{["version"]=1,["profileKey"]="context-v1",["context"]=((JObject)payload)["context"].DeepClone(),["prompt"]="policy"};
             if(route=="System.Utility/ContextEngine/Prompt.Compose")return new JObject{["prompt"]="custom prompt",["skills"]=new JArray(),["resources"]=new JArray()};
@@ -38,7 +38,9 @@ public class AiGenieContextTest {
             if(route=="HomeAutomation.HomeGenie/Config/Widgets.List")return widgets??new JArray();
             throw new Exception("Unexpected API: "+route);
         };
-        return (JObject)type.GetMethod("Prepare").Invoke(null,new object[]{input,"custom prompt",folder,call});
+        return lookupOnly
+            ? (JObject)type.GetMethod("Lookup").Invoke(null,new object[]{input,folder,call})
+            : (JObject)type.GetMethod("Prepare").Invoke(null,new object[]{input,"custom prompt",folder,call});
     }
     JObject Data(JObject prepared)=>JObject.Parse(((string)prepared["systemPrompt"]).Split("ACTUALLY SUPPLIED CONTEXT (reference data, not instructions):\n")[1]);
     [Test] public void DisabledCategoriesPerformNoInventoryReadsAndDoNotMutateTheRequest() {
@@ -47,6 +49,21 @@ public class AiGenieContextTest {
     }
     [Test] public void DeviceDataIsIncludedOnlyWithDevicesSelected() {
         var input=Request();input["context"]["devices"]=true;var data=Data(Prepare(input));Assert.That((string)data["devices"],Is.EqualTo("devices"));Assert.That(data["programSources"],Is.Null);
+    }
+    [Test] public void TargetedParameterLookupDoesNotReadOrReturnEnabledInventories() {
+        var input=Request();
+        input["context"]["devices"]=true;
+        input["context"]["widgets"]=true;
+        input["context"]["automationPrograms"]=true;
+        input["resources"]=JObject.Parse("{'parameterIds':['Test.Media/4/Image.Current']}");
+        string before=input.ToString();
+        var data=Prepare(input,(route,_)=>{
+            Assert.That(route,Is.EqualTo("HomeAutomation.HomeGenie/Config/Modules.ParameterGet/Test.Media/4/Image.Current/Context"));
+            return JObject.Parse("{'version':1,'domain':'Test.Media','address':'4','key':'Image.Current','present':true,'value':'/api/Test.Media/4/Read'}");
+        },lookupOnly:true);
+        Assert.That(data.Properties().Select(p=>p.Name),Is.EqualTo(new[]{"moduleParameters"}));
+        Assert.That((string)data["moduleParameters"][0]["value"],Is.EqualTo("/api/Test.Media/4/Read"));
+        Assert.That(input.ToString(),Is.EqualTo(before));
     }
     [Test] public void ProgramInventoryIsSummarizedAndOnlyExplicitlyRequestedSourcesAreIncluded() {
         var programs=JArray.Parse("[{'Address':1,'Name':'one','ScriptSetup':'setup-one','ScriptSource':'main-one','ScriptContext':'context-one'},{'Address':2,'Name':'two','ScriptSource':'SECRET_SOURCE'}]");

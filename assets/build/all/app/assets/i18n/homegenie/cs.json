@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Pomalá",
   "neon_district_road_speed_normal": "Normální",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Zobrazit diagnostiku cílů v chatu"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Zobrazit diagnostiku cílů v chatu"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Zobrazit diagnostiku cílů v chatu"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Zobrazit diagnostiku cílů v chatu"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Volitelná nastavení pro řídicí panel „Neon District“.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Povolit hluboké znalosti (číst programy a widgety)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Zobrazit diagnostiku cílů v chatu",
       "Title": "Lokální umělá inteligence",
       "Description": "Spouštějte nejmodernější LLM přímo na svém serveru HomeGenie. Zahrnuje kompletní API pro ovládání umělé inteligence z jiných programů a skriptů.",
       "ConfigureOptions.MaxTokens": "Délka odpovědi (max. tokenů)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Výchozí)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Zobrazit diagnostiku cílů v chatu",
       "Title": "Gemini Genie",
       "Description": "Použijte Google Gemini AI k ovládání zařízení, vytváření automatizačních programů a tvorbě widgetů v HomeGenie. V nabídce chatu vyberte funkce a systémový kontext ke sdílení.\nPro aktivaci této funkce zadejte platný klíč API. Získejte klíč API na adrese https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Klíč API pro Google Gemini AI",

@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Yavaş",
   "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Hedef tanılama bilgilerini sohbette göster"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Hedef tanılama bilgilerini sohbette göster"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Hedef tanılama bilgilerini sohbette göster"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Hedef tanılama bilgilerini sohbette göster"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Neon District panosu için isteğe bağlı ayarlar.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Derinlemesine Bilgi Edinin (Programları ve araçları okuyun)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Hedef tanılama bilgilerini sohbette göster",
       "Title": "Yerel Yapay Zeka",
       "Description": "En gelişmiş LLM'leri doğrudan HomeGenie sunucunuzda çalıştırın. Yapay zekayı diğer programlar ve komut dosyalarından kontrol etmek için eksiksiz bir API içerir.",
       "ConfigureOptions.MaxTokens": "Yanıt Uzunluğu (Maksimum Token Sayısı)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Varsayılan)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Hedef tanılama bilgilerini sohbette göster",
       "Title": "Gemini Genie",
       "Description": "Cihazları kontrol etmek, otomasyon programları oluşturmak ve HomeGenie'de pencere öğeleri oluşturmak için Google Gemini AI'ı kullanın. Sohbet menüsünden paylaşılacak yetenekleri ve sistem bağlamını seçin.\nBu özelliği etkinleştirmek için geçerli bir API anahtarı girin. https://aistudio.google.com/app/apikey adresinden bir API anahtarı alın.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API anahtarı",

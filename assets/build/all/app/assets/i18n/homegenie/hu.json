@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Lassú",
   "neon_district_road_speed_normal": "Normál",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Célok diagnosztikájának megjelenítése a csevegésben"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Célok diagnosztikájának megjelenítése a csevegésben"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Célok diagnosztikájának megjelenítése a csevegésben"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Célok diagnosztikájának megjelenítése a csevegésben"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "A(z) „Neon District” irányítópult választható beállításai.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Mély tudás engedélyezése (programok és widgetek olvasása)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Célok diagnosztikájának megjelenítése a csevegésben",
       "Title": "Helyi mesterséges intelligencia",
       "Description": "Futtasson korszerű LLM-eket közvetlenül a HomeGenie szerverén. Teljes API-t tartalmaz a mesterséges intelligencia más programokból és szkriptekből történő vezérléséhez.",
       "ConfigureOptions.MaxTokens": "Válasz hossza (maximális tokenek)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Alapértelmezett)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Célok diagnosztikájának megjelenítése a csevegésben",
       "Title": "Gemini Genie",
       "Description": "Használja a Google Gemini AI-t eszközök vezérlésére, automatizálási programok létrehozására és widgetek építésére a HomeGenie-ben. Válassza ki a megosztani kívánt funkciókat és rendszerkontextust a csevegés menüjében.\nA funkció engedélyezéséhez adjon meg egy érvényes API-kulcsot. Szerezzen API-kulcsot itt: https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-kulcs",

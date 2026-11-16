@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "느림",
   "neon_district_road_speed_normal": "보통",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "채팅에 목표 진단 정보 표시"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "채팅에 목표 진단 정보 표시"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "채팅에 목표 진단 정보 표시"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "채팅에 목표 진단 정보 표시"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Neon District 대시보드의 선택 설정입니다.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "심층 지식 활성화 (프로그램 및 위젯 읽기)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "채팅에 목표 진단 정보 표시",
       "Title": "로컬 AI",
       "Description": "최첨단 LLM(로컬 라이프사이클 관리)을 HomeGenie 서버에서 직접 실행하세요. 다른 프로그램 및 스크립트에서 AI를 제어할 수 있는 완벽한 API가 포함되어 있습니다.",
       "ConfigureOptions.MaxTokens": "응답 길이(최대 토큰 수)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (기본값)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "채팅에 목표 진단 정보 표시",
       "Title": "Gemini Genie",
       "Description": "Google Gemini AI를 사용하여 HomeGenie에서 기기를 제어하고 자동화 프로그램을 생성하며 위젯을 빌드하세요. 채팅 메뉴에서 공유할 기능과 시스템 컨텍스트를 선택할 수 있습니다.\n이 기능을 활성화하려면 유효한 API 키를 입력하세요. API 키는 https://aistudio.google.com/app/apikey 에서 발급받을 수 있습니다.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API 키",

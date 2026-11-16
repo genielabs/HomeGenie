@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Hidas",
   "neon_district_road_speed_normal": "Normaali",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Näytä tavoitteiden diagnostiikka keskustelussa"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Näytä tavoitteiden diagnostiikka keskustelussa"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Näytä tavoitteiden diagnostiikka keskustelussa"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Näytä tavoitteiden diagnostiikka keskustelussa"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Ohjauspaneelin ”Neon District” valinnaiset asetukset.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Ota käyttöön syvällinen tietämys (lue ohjelmia ja widgetejä)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Näytä tavoitteiden diagnostiikka keskustelussa",
       "Title": "Paikallinen tekoäly",
       "Description": "Suorita huippuluokan LLM-ohjelmia suoraan HomeGenie-palvelimellasi. Sisältää täyden API:n tekoälyn ohjaamiseen muista ohjelmista ja skripteistä.",
       "ConfigureOptions.MaxTokens": "Vastauksen pituus (maksimimäärä tokeneita)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Oletus)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Näytä tavoitteiden diagnostiikka keskustelussa",
       "Title": "Gemini Genie",
       "Description": "Käytä Google Gemini AI -tekoälyä laitteiden ohjaamiseen, automaatio-ohjelmien luomiseen ja pienoisohjelmien rakentamiseen HomeGeniessä. Valitse jaettavat ominaisuudet ja järjestelmäkonteksti chat-valikosta.\nOta tämä ominaisuus käyttöön antamalla kelvollinen API-avain. Hanki API-avain osoitteesta https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI -API-avain",

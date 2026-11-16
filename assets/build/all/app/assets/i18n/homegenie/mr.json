@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "मंद",
   "neon_district_road_speed_normal": "सामान्य",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "चॅटमध्ये उद्दिष्टांची निदान माहिती दाखवा"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "चॅटमध्ये उद्दिष्टांची निदान माहिती दाखवा"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "चॅटमध्ये उद्दिष्टांची निदान माहिती दाखवा"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "चॅटमध्ये उद्दिष्टांची निदान माहिती दाखवा"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Neon District डॅशबोर्डसाठी ऐच्छिक सेटिंग्ज.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "सखोल ज्ञान सक्षम करा (प्रोग्राम आणि विजेट्स वाचा)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "चॅटमध्ये उद्दिष्टांची निदान माहिती दाखवा",
       "Title": "स्थानिक एआय",
       "Description": "तुमच्या HomeGenie सर्व्हरवर थेट अत्याधुनिक LLM चालवा. इतर प्रोग्राम्स आणि स्क्रिप्ट्समधून AI नियंत्रित करण्यासाठी संपूर्ण API समाविष्ट आहे.",
       "ConfigureOptions.MaxTokens": "प्रतिसाद लांबी (कमाल टोकन)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (डीफॉल्ट)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "चॅटमध्ये उद्दिष्टांची निदान माहिती दाखवा",
       "Title": "Gemini Genie",
       "Description": "HomeGenie मध्ये डिव्हाइसेस नियंत्रित करण्यासाठी, ऑटोमेशन प्रोग्राम तयार करण्यासाठी आणि विजेट्स बनवण्यासाठी Google Gemini AI वापरा. चॅट मेनूमधून शेअर करण्यासाठी क्षमता आणि सिस्टम संदर्भ निवडा.\nहे वैशिष्ट्य सक्षम करण्यासाठी वैध API की प्रविष्ट करा. https://aistudio.google.com/app/apikey वर API की मिळवा.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API की",

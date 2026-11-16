@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Դանդաղ",
   "neon_district_road_speed_normal": "Սովորական",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Զրույցում ցուցադրել նպատակների ախտորոշման տվյալները"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Զրույցում ցուցադրել նպատակների ախտորոշման տվյալները"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Զրույցում ցուցադրել նպատակների ախտորոշման տվյալները"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Զրույցում ցուցադրել նպատակների ախտորոշման տվյալները"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "«Neon District» կառավարման վահանակի կամընտիր կարգավորումներ։",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Միացնել խորը գիտելիքները (կարդալ ծրագրեր և վիջեթներ)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Զրույցում ցուցադրել նպատակների ախտորոշման տվյալները",
       "Title": "Տեղական արհեստական բանականություն",
       "Description": "Գործարկեք ժամանակակից LLM ծրագրեր անմիջապես ձեր HomeGenie սերվերի վրա: Ներառում է լիարժեք API՝ այլ ծրագրերից և սկրիպտներից արհեստական բանականությունը կառավարելու համար:",
       "ConfigureOptions.MaxTokens": "Պատասխանի երկարությունը (առավելագույն տոկեններ)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Լռելյայն)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Զրույցում ցուցադրել նպատակների ախտորոշման տվյալները",
       "Title": "Gemini Genie",
       "Description": "Օգտագործեք Google Gemini AI-ը սարքերը կառավարելու, ավտոմատացման ծրագրեր ստեղծելու և HomeGenie-ում վիջեթներ կառուցելու համար: Զրույցի ընտրացանկից ընտրեք համօգտագործվող հնարավորությունները և համակարգի համատեքստը:\nԱյս գործառույթն ակտիվացնելու համար մուտքագրեք վավեր API բանալի: Ստացեք API բանալի https://aistudio.google.com/app/apikey հասցեով:",
       "ConfigureOptions.ApiKey": "Google Gemini AI-ի API բանալի",

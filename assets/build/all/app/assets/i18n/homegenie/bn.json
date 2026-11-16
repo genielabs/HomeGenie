@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "ধীর",
   "neon_district_road_speed_normal": "স্বাভাবিক",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "চ্যাটে লক্ষ্যের ডায়াগনস্টিক তথ্য দেখান"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "চ্যাটে লক্ষ্যের ডায়াগনস্টিক তথ্য দেখান"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "চ্যাটে লক্ষ্যের ডায়াগনস্টিক তথ্য দেখান"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "চ্যাটে লক্ষ্যের ডায়াগনস্টিক তথ্য দেখান"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Neon District ড্যাশবোর্ডের ঐচ্ছিক সেটিংস।",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "গভীর জ্ঞান সক্ষম করুন (প্রোগ্রাম এবং উইজেট পড়ুন)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "চ্যাটে লক্ষ্যের ডায়াগনস্টিক তথ্য দেখান",
       "Title": "স্থানীয় এআই",
       "Description": "আপনার HomeGenie সার্ভারে সরাসরি অত্যাধুনিক LLM চালান। অন্যান্য প্রোগ্রাম এবং স্ক্রিপ্ট থেকে AI নিয়ন্ত্রণ করার জন্য একটি সম্পূর্ণ API অন্তর্ভুক্ত।",
       "ConfigureOptions.MaxTokens": "প্রতিক্রিয়ার দৈর্ঘ্য (সর্বোচ্চ টোকেন)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (ডিফল্ট)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "চ্যাটে লক্ষ্যের ডায়াগনস্টিক তথ্য দেখান",
       "Title": "Gemini Genie",
       "Description": "HomeGenie-তে ডিভাইস নিয়ন্ত্রণ, অটোমেশন প্রোগ্রাম তৈরি এবং উইজেট বানাতে Google Gemini AI ব্যবহার করুন। চ্যাট মেনু থেকে শেয়ার করার ক্ষমতা ও সিস্টেমের প্রসঙ্গ বেছে নিন।\nএই ফিচারটি চালু করতে একটি বৈধ API কী লিখুন। https://aistudio.google.com/app/apikey থেকে একটি API কী পান।",
       "ConfigureOptions.ApiKey": "Google Gemini AI API কী",

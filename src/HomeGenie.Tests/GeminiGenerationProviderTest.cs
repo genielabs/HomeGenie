@@ -62,6 +62,7 @@ public class GeminiGenerationProviderTest {
         var diagnostics=(JObject)result["diagnostics"];
         Assert.That((string)diagnostics["finishReason"],Is.EqualTo("STOP"));
         Assert.That(diagnostics["maxOutputTokens"],Is.Null);
+        Assert.That(diagnostics["cachedContentTokenCount"],Is.Null);
         Assert.That(diagnostics["partialText"],Is.Null);
     }
     [Test] public void IncompleteGoalReportsUsageAndBoundedVisibleOutputThroughTheService() {
@@ -72,7 +73,7 @@ public class GeminiGenerationProviderTest {
         var reply=Completion("MAX_TOKENS");
         reply["modelVersion"]="gemini-test-resolved";
         reply["candidates"][0]["content"]["parts"][2]["text"]=new string('x',1500);
-        reply["usageMetadata"]=new JObject {["promptTokenCount"]=20,["candidatesTokenCount"]=40,["thoughtsTokenCount"]=2};
+        reply["usageMetadata"]=new JObject {["promptTokenCount"]=20,["candidatesTokenCount"]=40,["thoughtsTokenCount"]=2,["cachedContentTokenCount"]=0};
         Func<string,object,object> call=(path,data)=>Generate(data,(b,t)=>reply,"gemini-test");
         var result=(IDictionary<string,object>)serviceType.GetMethod("Generate").Invoke(service,new object[]{request,call});
         Assert.That(result["state"],Is.EqualTo("output_limit"));
@@ -83,6 +84,7 @@ public class GeminiGenerationProviderTest {
         Assert.That((int)diagnostics["elapsedMs"],Is.GreaterThanOrEqualTo(0));
         Assert.That((int)diagnostics["maxOutputTokens"],Is.EqualTo(42));
         Assert.That((int)diagnostics["promptTokenCount"],Is.EqualTo(20));
+        Assert.That((int)diagnostics["cachedContentTokenCount"],Is.Zero);
         Assert.That((int)diagnostics["candidatesTokenCount"],Is.EqualTo(40));
         Assert.That((int)diagnostics["thoughtsTokenCount"],Is.EqualTo(2));
         Assert.That((string)diagnostics["partialText"],Is.EqualTo("visible "+new string('x',1192)));

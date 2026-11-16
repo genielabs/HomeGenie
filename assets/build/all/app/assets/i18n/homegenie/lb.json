@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Lues",
   "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Diagnosinformatiounen iwwer Ziler am Chat weisen"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Diagnosinformatiounen iwwer Ziler am Chat weisen"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Diagnosinformatiounen iwwer Ziler am Chat weisen"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Diagnosinformatiounen iwwer Ziler am Chat weisen"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Optional Astellunge fir den Dashboard „Neon District“.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Déifgräifend Wëssen aktivéieren (Programmer & Widgets liesen)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Diagnosinformatiounen iwwer Ziler am Chat weisen",
       "Title": "Lokal KI",
       "Description": "Laf modern LLMs direkt op Ärem HomeGenie Server aus. Enthält eng komplett API fir d'KI vun anere Programmer a Skripter aus ze kontrolléieren.",
       "ConfigureOptions.MaxTokens": "Äntwertlängt (maximal Tokens)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Standard)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Diagnosinformatiounen iwwer Ziler am Chat weisen",
       "Title": "Gemini Genie",
       "Description": "Benotzt Google Gemini AI fir Apparater ze steieren, Automatiséierungsprogrammer ze kreéieren an Widgets an HomeGenie ze bauen. Wielt d'Fäegkeeten an de Systemkontext fir aus dem Chat-Menü ze deelen.\nGitt e gültegen API-Schlëssel an, fir dës Funktioun z'aktivéieren. Kritt en API-Schlëssel op https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API-Schlëssel",

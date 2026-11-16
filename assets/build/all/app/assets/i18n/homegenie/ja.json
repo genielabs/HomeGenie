@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "遅い",
   "neon_district_road_speed_normal": "標準",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "チャットに目標の診断情報を表示"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "チャットに目標の診断情報を表示"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "チャットに目標の診断情報を表示"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "チャットに目標の診断情報を表示"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "「Neon District」ダッシュボードのオプション設定。",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "ディープナレッジを有効にする（プログラムとウィジェットの読み取り）"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "チャットに目標の診断情報を表示",
       "Title": "ローカルAI",
       "Description": "HomeGenieサーバー上で最先端のLLMを直接実行できます。他のプログラムやスクリプトからAIを制御するための完全なAPIが含まれています。",
       "ConfigureOptions.MaxTokens": "レスポンスの長さ（最大トークン数）",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (デフォルト)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "チャットに目標の診断情報を表示",
       "Title": "Gemini Genie",
       "Description": "Google Gemini AI を使用して、HomeGenie 内のデバイスの制御、自動化プログラムの作成、ウィジェットの構築を行います。チャットメニューから共有する機能とシステムコンテキストを選択してください。\nこの機能を有効にするには、有効な API キーを入力してください。API キーの取得先: https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API キー",

@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Sekin",
   "neon_district_road_speed_normal": "Odatiy",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Chatda maqsadlar diagnostikasini ko‘rsatish"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Chatda maqsadlar diagnostikasini ko‘rsatish"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Chatda maqsadlar diagnostikasini ko‘rsatish"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Chatda maqsadlar diagnostikasini ko‘rsatish"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Neon District boshqaruv paneli uchun ixtiyoriy sozlamalar.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Chuqur bilimlarni yoqish (Dasturlar va vidjetlarni o'qish)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Chatda maqsadlar diagnostikasini ko‘rsatish",
       "Title": "Mahalliy AI",
       "Description": "Eng zamonaviy LLMlarni to'g'ridan-to'g'ri HomeGenie serveringizda ishga tushiring. Boshqa dasturlar va skriptlardan sun'iy intellektni boshqarish uchun to'liq API ni o'z ichiga oladi.",
       "ConfigureOptions.MaxTokens": "Javob uzunligi (Maksimal tokenlar)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Standart)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Chatda maqsadlar diagnostikasini ko‘rsatish",
       "Title": "Gemini Genie",
       "Description": "HomeGenie'da qurilmalarni boshqarish, avtomatlashtirish dasturlarini yaratish va vidjetlar yasash uchun Google Gemini AI'dan foydalaning. Chat menyusidan ulashish uchun imkoniyatlar va tizim kontekstini tanlang.\nUshbu funksiyani yoqish uchun yaroqli API kalitini kiriting. API kalitini https://aistudio.google.com/app/apikey manzilidan oling.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API kaliti",

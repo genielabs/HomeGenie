@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "慢",
   "neon_district_road_speed_normal": "正常",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "在聊天中顯示目標診斷資訊"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "在聊天中顯示目標診斷資訊"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "在聊天中顯示目標診斷資訊"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "在聊天中顯示目標診斷資訊"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "「Neon District」儀表板的選用設定。",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "啟用深度知識（讀取程式和小工具）"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "在聊天中顯示目標診斷資訊",
       "Title": "本地人工智慧",
       "Description": "直接在您的 HomeGenie 伺服器上執行最先進的 LLM（邏輯邏輯模型）。包含完整的 API，可從其他程式和腳本控制 AI。",
       "ConfigureOptions.MaxTokens": "響應長度（最大令牌數）",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (預設)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "在聊天中顯示目標診斷資訊",
       "Title": "Gemini Genie",
       "Description": "使用 Google Gemini AI 在 HomeGenie 中控制裝置、建立自動化程式並建構小工具。從聊天功能表中選取要共用的功能與系統上下文。\n輸入有效的 API 金鑰以啟用此功能。前往 https://aistudio.google.com/app/apikey 取得 API 金鑰。",
       "ConfigureOptions.ApiKey": "Google Gemini AI API 金鑰",

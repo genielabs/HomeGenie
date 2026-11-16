@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Gaabis ah",
   "neon_district_road_speed_normal": "Caadi",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Muuji xogta ogaanshaha ciladaha yoolalka ee wada sheekaysiga"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Muuji xogta ogaanshaha ciladaha yoolalka ee wada sheekaysiga"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Muuji xogta ogaanshaha ciladaha yoolalka ee wada sheekaysiga"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Muuji xogta ogaanshaha ciladaha yoolalka ee wada sheekaysiga"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Dejimaha ikhtiyaariga ah ee guddiga Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Karti Aqoon Qoto Dheer (Akhri barnaamijyada iyo aaladaha)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Muuji xogta ogaanshaha ciladaha yoolalka ee wada sheekaysiga",
       "Title": "AI-ga maxalliga ah",
       "Description": "Ku socodsii LLM-yada casriga ah si toos ah server-kaaga HomeGenie. Waxaa ku jira API buuxa si loo xakameeyo AI-ga barnaamijyada kale iyo qoraallada.",
       "ConfigureOptions.MaxTokens": "Dhererka Jawaabta (Calaamadaha ugu Badan)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Caadiga ah)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Muuji xogta ogaanshaha ciladaha yoolalka ee wada sheekaysiga",
       "Title": "Gemini Genie",
       "Description": "U isticmaal Google Gemini AI si aad u xakameyso qalabka, u sameyso barnaamijyada otomaatiga, una dhistid widgets-ka HomeGenie. Ka dooro awoodaha iyo macnaha guud ee nidaamka si aad ula wadaagto liiska sheekaysiga.\nGeli furaha API ee saxda ah si aad u shaqaysiiso qaabkan. Ka hel furaha API https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Furaha API ee Google Gemini AI",

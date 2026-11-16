@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Mabagal",
   "neon_district_road_speed_normal": "Normal",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Ipakita sa chat ang mga detalye sa pagsusuri ng mga layunin"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Ipakita sa chat ang mga detalye sa pagsusuri ng mga layunin"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Ipakita sa chat ang mga detalye sa pagsusuri ng mga layunin"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Ipakita sa chat ang mga detalye sa pagsusuri ng mga layunin"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Mga opsyonal na setting para sa dashboard na Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Paganahin ang Malalim na Kaalaman (Magbasa ng mga programa at widget)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Ipakita sa chat ang mga detalye sa pagsusuri ng mga layunin",
       "Title": "Lokal na AI",
       "Description": "Magpatakbo ng mga makabagong LLM nang direkta sa iyong HomeGenie server. May kasamang kumpletong API para kontrolin ang AI mula sa iba pang mga programa at script.",
       "ConfigureOptions.MaxTokens": "Haba ng Tugon (Max Tokens)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Default)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Ipakita sa chat ang mga detalye sa pagsusuri ng mga layunin",
       "Title": "Gemini Genie",
       "Description": "Gamitin ang Google Gemini AI upang kontrolin ang mga device, gumawa ng mga automation program, at bumuo ng mga widget sa HomeGenie. Piliin ang mga kakayahan at konteksto ng system na ibabahagi mula sa menu ng chat.\nMaglagay ng valid na API key upang paganahin ang feature na ito. Kumuha ng API key sa https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "API key ng Google Gemini AI",

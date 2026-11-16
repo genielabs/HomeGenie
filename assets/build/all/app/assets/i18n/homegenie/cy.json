@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Araf",
   "neon_district_road_speed_normal": "Arferol",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Dangos gwybodaeth ddiagnostig am amcanion yn y sgwrs"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Dangos gwybodaeth ddiagnostig am amcanion yn y sgwrs"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Dangos gwybodaeth ddiagnostig am amcanion yn y sgwrs"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Dangos gwybodaeth ddiagnostig am amcanion yn y sgwrs"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Gosodiadau dewisol ar gyfer dangosfwrdd Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Galluogi Gwybodaeth Ddwfn (Darllen rhaglenni a widgets)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Dangos gwybodaeth ddiagnostig am amcanion yn y sgwrs",
       "Title": "Deallusrwydd Artiffisial Lleol",
       "Description": "Rhedeg LLMs o'r radd flaenaf yn uniongyrchol ar eich gweinydd HomeGenie. Yn cynnwys API llawn i reoli'r AI o raglenni a sgriptiau eraill.",
       "ConfigureOptions.MaxTokens": "Hyd yr Ymateb (Uchafswm Tocynnau)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Diofyn)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Dangos gwybodaeth ddiagnostig am amcanion yn y sgwrs",
       "Title": "Gemini Genie",
       "Description": "Defnyddiwch Google Gemini AI i reoli dyfeisiau, creu rhaglenni awtomeiddio, ac adeiladu teclynnau yn HomeGenie. Dewiswch y galluoedd a'r cyd-destun system i'w rhannu o'r ddewislen sgwrsio.\nRhowch allwedd API ddilys i alluogi'r nodwedd hon. Mynnwch allwedd API yn https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Allwedd API Google Gemini AI",

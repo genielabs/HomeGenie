@@ -1,3 +1,3 @@
 {
-  "ffmpeg_required": "Modul `{{module_name}}` membutuhkan **FFmpeg** agar berfungsi. Silakan instal dari situs web resminya: - [https://ffmpeg.org](https://ffmpeg.org) Jika Anda tidak memerlukan fitur ini, Anda dapat menonaktifkan modul ini di bagian **Program Otomatisasi**, atau dengan mengklik tombol di bawah ini."
+  "ffmpeg_required": "Modul `{{module_name}}` membutuhkan **FFmpeg** agar berfungsi. Silakan instal dari situs web resminya: - [https://ffmpeg.org](https://ffmpeg.org)\n\nJika FFmpeg sudah terpasang, buka terminal baru, pastikan `ffmpeg -version` berfungsi, lalu mulai ulang HomeGenie dari terminal tersebut. Jika Anda tidak memerlukan fitur ini, Anda dapat menonaktifkan modul ini di bagian **Program Otomatisasi**, atau dengan mengklik tombol di bawah ini."
 }

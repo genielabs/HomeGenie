@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "E ngadaltë",
   "neon_district_road_speed_normal": "Normale",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Shfaq diagnostikën e objektivave në bisedë"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Shfaq diagnostikën e objektivave në bisedë"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Shfaq diagnostikën e objektivave në bisedë"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Shfaq diagnostikën e objektivave në bisedë"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Cilësime opsionale për panelin e kontrollit «Neon District».",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Aktivizo Njohuri të Thella (Lexoni programe dhe widget-e)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Shfaq diagnostikën e objektivave në bisedë",
       "Title": "IA lokale",
       "Description": "Ekzekutoni LLM-të e teknologjisë së fundit direkt në serverin tuaj HomeGenie. Përfshin një API të plotë për të kontrolluar IA-në nga programe dhe skripte të tjera.",
       "ConfigureOptions.MaxTokens": "Gjatësia e Përgjigjes (Tokenët Maksimalë)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Parazgjedhje)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Shfaq diagnostikën e objektivave në bisedë",
       "Title": "Gemini Genie",
       "Description": "Përdorni Google Gemini AI për të kontrolluar pajisjet, për të krijuar programe automatizimi dhe për të ndërtuar miniaplikacione në HomeGenie. Zgjidhni aftësitë dhe kontekstin e sistemit për t'i ndarë nga menyja e bisedës.\nVendosni një çelës të vlefshëm API për të aktivizuar këtë veçori. Merrni një çelës API në https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Çelësi API i Google Gemini AI",

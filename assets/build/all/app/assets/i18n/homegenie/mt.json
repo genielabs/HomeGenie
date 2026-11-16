@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Bil-mod",
   "neon_district_road_speed_normal": "Normali",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Uri d-dijanjostika tal-għanijiet fiċ-chat"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Uri d-dijanjostika tal-għanijiet fiċ-chat"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Uri d-dijanjostika tal-għanijiet fiċ-chat"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Uri d-dijanjostika tal-għanijiet fiċ-chat"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Settings fakultattivi għad-dashboard Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Ippermetti Għarfien Profond (Aqra programmi u widgets)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Uri d-dijanjostika tal-għanijiet fiċ-chat",
       "Title": "AI Lokali",
       "Description": "Mexxi LLMs avvanzati direttament fuq is-server HomeGenie tiegħek. Jinkludi API sħiħa biex tikkontrolla l-AI minn programmi u skripts oħra.",
       "ConfigureOptions.MaxTokens": "Tul tar-Rispons (Tokens Massimi)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Predefinit)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Uri d-dijanjostika tal-għanijiet fiċ-chat",
       "Title": "Gemini Genie",
       "Description": "Uża Google Gemini AI biex tikkontrolla apparati, toħloq programmi ta' awtomazzjoni, u tibni widgets f'HomeGenie. Agħżel il-kapaċitajiet u l-kuntest tas-sistema x'taqsam mill-menu taċ-chat.\nDaħħal ċavetta API valida biex tattiva din il-karatteristika. Ikseb ċavetta API fuq https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Ċavetta API ta' Google Gemini AI",

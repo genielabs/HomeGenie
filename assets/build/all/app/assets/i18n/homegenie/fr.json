@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Lente",
   "neon_district_road_speed_normal": "Normale",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Afficher le diagnostic des objectifs dans la conversation"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Afficher le diagnostic des objectifs dans la conversation"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Afficher le diagnostic des objectifs dans la conversation"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Afficher le diagnostic des objectifs dans la conversation"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Paramètres facultatifs du tableau de bord « Neon District ».",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Activer les connaissances approfondies (Lire les programmes et les widgets)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Afficher le diagnostic des objectifs dans la conversation",
       "Title": "IA locale",
       "Description": "Exécutez des modèles linguistiques de pointe directement sur votre serveur HomeGenie. Inclut une API complète pour contrôler l'IA depuis d'autres programmes et scripts.",
       "ConfigureOptions.MaxTokens": "Longueur de la réponse (nombre maximal de jetons)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Par défaut)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Afficher le diagnostic des objectifs dans la conversation",
       "Title": "Gemini Genie",
       "Description": "Utilisez Google Gemini AI pour contrôler des appareils, créer des programmes d'automatisation et concevoir des widgets dans HomeGenie. Choisissez les fonctionnalités et le contexte système à partager depuis le menu de discussion.\nEntrez une clé API valide pour activer cette fonctionnalité. Obtenez une clé API sur https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Clé API Google Gemini AI",

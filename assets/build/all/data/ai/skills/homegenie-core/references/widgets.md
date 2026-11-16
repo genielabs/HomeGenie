@@ -57,7 +57,11 @@ const { animate } = await import(new URL('assets/js/animejs/anime.esm.min.js', d
 if (this.disposed) return; // Set your own per-instance flag in onDispose().
 ```
 
-Do not use top-level static `import` in a widget controller. Start asynchronous loading after the view exists, catch loading/rendering errors in the widget, and check disposal after each await before allocating resources. Module imports are cached by the browser; do not add per-widget cache-busting URLs. Do not insert scripts or import maps into the shared document. Three.js addons (OrbitControls, GLTFLoader, etc.) are NOT bundled: do not invent local addon paths or mix versions.
+Do not use top-level static `import` in a widget controller. Start asynchronous loading after the view exists, catch loading/rendering errors in the widget, and check disposal after each await before allocating resources. Module imports are cached by the browser; do not add per-widget cache-busting URLs. Do not insert scripts or import maps into the shared document. Load Three.js addons from `assets/js/three/addons/modules/` with the same dynamic import pattern. Each file exposes a named export.
+
+- `OrbitControls.js` for interactive camera controls and `GLTFLoader.js` for local glTF/GLB models.
+- `EffectComposer.js`, `RenderPass.js`, `UnrealBloomPass.js` and `OutputPass.js` for bloom. Add the passes in that order after creating the composer. Resize and dispose the composer and its passes with the widget.
+- For compressed models only, load `DRACOLoader.js` and pass a new instance to `setDRACOLoader()`, use the `MeshoptDecoder` export of `meshopt_decoder.js` with `setMeshoptDecoder()`, or initialize `KTX2Loader.js` with `detectSupport(renderer)` and pass it to `setKTX2Loader()`. Draco and Basis decoder files are local and found automatically.
 
 Prefer HTML/CSS/SVG for simple graphics; Chart.js for ordinary data charts; Anime.js for coordinated HTML/SVG animation; Three.js for useful 3D scenes. Avoid a library when native browser features are sufficient.
 
@@ -194,7 +198,7 @@ In chat, the editor and the widget list, the same widget uses a bounded, scrolla
 
 ### Embedded widgets and YoT context
 
-Import the saved widget's `.module.js` and use its registered custom tag. In YoT the generated loader delegates to `ZxWidget`, providing `apiCall`, `subscribe`, translation and the enclosing widget's context. Outside YoT it loads as an ordinary zUIx Web Component; autonomous widgets remain usable without HomeGenie.
+Import a saved widget from the HomeGenie server root, for example `await import('/widgets/cyberpunk/lighting.module.js')`, and use its registered custom tag `<cyberpunk-lighting>`. Keep the leading slash. The `document.baseURI` pattern in the library examples applies to YoT's `assets/` paths. In YoT the generated loader delegates to `ZxWidget`, providing `apiCall`, `subscribe`, translation and the enclosing widget's context. Outside YoT it loads as an ordinary zUIx Web Component; autonomous widgets remain usable without HomeGenie.
 
 Use native zUIx option attributes (their values are JavaScript expressions evaluated in the parent component):
 

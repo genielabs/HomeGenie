@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Nwayọọ",
   "neon_district_road_speed_normal": "Nkịtị",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Gosi ozi nchọpụta nsogbu nke ebumnuche na nkata"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Gosi ozi nchọpụta nsogbu nke ebumnuche na nkata"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Gosi ozi nchọpụta nsogbu nke ebumnuche na nkata"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Gosi ozi nchọpụta nsogbu nke ebumnuche na nkata"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Ntọala nhọrọ maka ogwe njikwa Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Mee ka ihe ọmụma miri emi rụọ ọrụ (Gụọ mmemme na wijetị)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Gosi ozi nchọpụta nsogbu nke ebumnuche na nkata",
       "Title": "AI mpaghara",
       "Description": "Gbaa LLMs kachasị ọhụrụ ozugbo na sava HomeGenie gị. Gụnyere API zuru oke iji chịkwaa AI site na mmemme na edemede ndị ọzọ.",
       "ConfigureOptions.MaxTokens": "Ogologo Nzaghachi (Mmasị Kachasị)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Nke ndabara)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Gosi ozi nchọpụta nsogbu nke ebumnuche na nkata",
       "Title": "Gemini Genie",
       "Description": "Jiri Google Gemini AI jikwaa ngwaọrụ, mepụta mmemme akpaaka, ma wuo wijetị na HomeGenie. Họrọ ikike na gburugburu sistemụ ị ga-ekere site na menu nkata.\nTinye igodo API dị irè iji mee ka njirimara a rụọ ọrụ. Nweta igodo API na https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Igodo API Google Gemini AI",

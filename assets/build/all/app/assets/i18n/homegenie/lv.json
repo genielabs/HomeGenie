@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Lēns",
   "neon_district_road_speed_normal": "Parasts",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Rādīt mērķu diagnostiku tērzēšanā"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Rādīt mērķu diagnostiku tērzēšanā"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Rādīt mērķu diagnostiku tērzēšanā"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Rādīt mērķu diagnostiku tērzēšanā"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Informācijas paneļa “Neon District” papildu iestatījumi.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Iespējot padziļinātas zināšanas (lasīt programmas un logrīkus)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Rādīt mērķu diagnostiku tērzēšanā",
       "Title": "Vietējais mākslīgais intelekts",
       "Description": "Palaidiet jaunākās paaudzes LLM tieši savā HomeGenie serverī. Iekļauts pilns API, lai kontrolētu mākslīgo intelektu no citām programmām un skriptiem.",
       "ConfigureOptions.MaxTokens": "Atbildes garums (maksimālais žetonu skaits)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Noklusējums)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Rādīt mērķu diagnostiku tērzēšanā",
       "Title": "Gemini Genie",
       "Description": "Izmantojiet Google Gemini AI, lai vadītu ierīces, izveidotu automatizācijas programmas un veidotu logrīkus programmā HomeGenie. Tērzēšanas izvēlnē izvēlieties iespējas un sistēmas kontekstu, ko kopīgot.\nIevadiet derīgu API atslēgu, lai iespējotu šo funkciju. Iegūstiet API atslēgu vietnē https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API atslēga",

@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Počasi",
   "neon_district_road_speed_normal": "Običajno",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Prikaži diagnostiko ciljev v klepetu"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Prikaži diagnostiko ciljev v klepetu"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Prikaži diagnostiko ciljev v klepetu"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Prikaži diagnostiko ciljev v klepetu"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Izbirne nastavitve za nadzorno ploščo »Neon District«.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Omogoči poglobljeno znanje (branje programov in pripomočkov)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Prikaži diagnostiko ciljev v klepetu",
       "Title": "Lokalna umetna inteligenca",
       "Description": "Zaženite najsodobnejše LLM-je neposredno na strežniku HomeGenie. Vključuje celoten API za upravljanje umetne inteligence iz drugih programov in skriptov.",
       "ConfigureOptions.MaxTokens": "Dolžina odgovora (največ žetonov)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Privzeto)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Prikaži diagnostiko ciljev v klepetu",
       "Title": "Gemini Genie",
       "Description": "Uporabite Google Gemini AI za upravljanje naprav, ustvarjanje programov za avtomatizacijo in gradnjo gradnikov v HomeGenie. V meniju klepeta izberite zmožnosti in sistemski kontekst za skupno rabo.\nZa omogočanje te funkcije vnesite veljaven ključ API. Pridobite ključ API na https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Ključ API za Google Gemini AI",

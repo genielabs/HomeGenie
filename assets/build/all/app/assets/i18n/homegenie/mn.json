@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Удаан",
   "neon_district_road_speed_normal": "Хэвийн",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Чатад зорилгын оношилгооны мэдээллийг харуулах"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Чатад зорилгын оношилгооны мэдээллийг харуулах"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Чатад зорилгын оношилгооны мэдээллийг харуулах"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Чатад зорилгын оношилгооны мэдээллийг харуулах"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "«Neon District» хяналтын самбарын нэмэлт тохиргоо.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Гүнзгий мэдлэгийг идэвхжүүлэх (Програм болон виджетүүдийг унших)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Чатад зорилгын оношилгооны мэдээллийг харуулах",
       "Title": "Орон нутгийн хиймэл оюун ухаан",
       "Description": "Хамгийн сүүлийн үеийн LLM-үүдийг HomeGenie сервер дээрээ шууд ажиллуулна. Бусад програм болон скриптээс хиймэл оюун ухааныг удирдах бүрэн API-г багтаасан болно.",
       "ConfigureOptions.MaxTokens": "Хариу өгөх урт (Хамгийн их токен)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Өгөгдмөл)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Чатад зорилгын оношилгооны мэдээллийг харуулах",
       "Title": "Gemini Genie",
       "Description": "HomeGenie дотор төхөөрөмжүүдийг удирдах, автоматжуулалтын хөтөлбөр үүсгэх, виджет бүтээхэд Google Gemini AI-г ашиглана уу. Чат цэснээс хуваалцах боломжууд болон системийн контекстийг сонгоно уу.\nЭнэ функцийг идэвхжүүлэхийн тулд хүчинтэй API түлхүүр оруулна уу. API түлхүүрийг https://aistudio.google.com/app/apikey хаягаас авна уу.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API түлхүүр",

@@ -1,3 +1,3 @@
 {
-  "ffmpeg_required": "Modulen `{{module_name}}` krever **FFmpeg** for å fungere. Installer den fra det offisielle nettstedet: - [https://ffmpeg.org](https://ffmpeg.org) Hvis du ikke trenger denne funksjonen, kan du deaktivere modulen i delen **Automatiseringsprogrammer**, eller ved å klikke på knappen nedenfor."
+  "ffmpeg_required": "Modulen `{{module_name}}` krever **FFmpeg** for å fungere. Installer den fra det offisielle nettstedet: - [https://ffmpeg.org](https://ffmpeg.org)\n\nHvis FFmpeg allerede er installert, åpner du en ny terminal, sjekker at `ffmpeg -version` fungerer og starter HomeGenie på nytt fra den terminalen. Hvis du ikke trenger denne funksjonen, kan du deaktivere modulen i delen **Automatiseringsprogrammer**, eller ved å klikke på knappen nedenfor."
 }

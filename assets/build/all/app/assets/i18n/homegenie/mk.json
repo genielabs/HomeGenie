@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Бавно",
   "neon_district_road_speed_normal": "Нормално",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностика на целите во разговорот"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностика на целите во разговорот"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностика на целите во разговорот"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностика на целите во разговорот"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Изборни поставки за контролната табла „Neon District“.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Овозможи длабинско знаење (Читање програми и виџети)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностика на целите во разговорот",
       "Title": "Локална вештачка интелигенција",
       "Description": "Стартувајте најсовремени LLM директно на вашиот HomeGenie сервер. Вклучува целосен API за контрола на вештачката интелигенција од други програми и скрипти.",
       "ConfigureOptions.MaxTokens": "Должина на одговор (максимум токени)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Стандардно)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностика на целите во разговорот",
       "Title": "Gemini Genie",
       "Description": "Користете Google Gemini AI за контрола на уреди, креирање програми за автоматизација и градење виџети во HomeGenie. Изберете ги можностите и системскиот контекст за споделување од менито за разговор.\nВнесете валиден API клуч за да ја овозможите оваа функција. Земете API клуч на https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API клуч",

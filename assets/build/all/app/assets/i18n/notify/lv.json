@@ -1,3 +1,3 @@
 {
-  "ffmpeg_required": "Moduļa `{{module_name}}` darbībai ir nepieciešams **FFmpeg**. Lūdzu, instalējiet to no oficiālās vietnes: - [https://ffmpeg.org](https://ffmpeg.org). Ja šī funkcija nav nepieciešama, varat atspējot šo moduli sadaļā **Automatizācijas programmas** vai noklikšķinot uz tālāk redzamās pogas."
+  "ffmpeg_required": "Moduļa `{{module_name}}` darbībai ir nepieciešams **FFmpeg**. Lūdzu, instalējiet to no oficiālās vietnes: - [https://ffmpeg.org](https://ffmpeg.org)\n\nJa FFmpeg jau ir instalēts, atveriet jaunu termināli, pārbaudiet komandu `ffmpeg -version` un restartējiet HomeGenie no šī termināļa.. Ja šī funkcija nav nepieciešama, varat atspējot šo moduli sadaļā **Automatizācijas programmas** vai noklikšķinot uz tālāk redzamās pogas."
 }

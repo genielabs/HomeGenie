@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "کند",
   "neon_district_road_speed_normal": "عادی",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "نمایش اطلاعات عیب‌یابی هدف‌ها در گفتگو"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "نمایش اطلاعات عیب‌یابی هدف‌ها در گفتگو"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "نمایش اطلاعات عیب‌یابی هدف‌ها در گفتگو"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "نمایش اطلاعات عیب‌یابی هدف‌ها در گفتگو"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "تنظیمات اختیاری برای داشبورد «Neon District».",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "فعال کردن دانش عمیق (خواندن برنامه‌ها و ابزارک‌ها)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "نمایش اطلاعات عیب‌یابی هدف‌ها در گفتگو",
       "Title": "هوش مصنوعی محلی",
       "Description": "LLM های پیشرفته را مستقیماً روی سرور HomeGenie خود اجرا کنید. شامل یک API کامل برای کنترل هوش مصنوعی از سایر برنامه‌ها و اسکریپت‌ها است.",
       "ConfigureOptions.MaxTokens": "طول پاسخ (حداکثر توکن)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (پیش‌فرض)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "نمایش اطلاعات عیب‌یابی هدف‌ها در گفتگو",
       "Title": "Gemini Genie",
       "Description": "از Google Gemini AI برای کنترل دستگاه‌ها، ایجاد برنامه‌های خودکارسازی و ساخت ویجت‌ها در HomeGenie استفاده کنید. قابلیت‌ها و زمینه سیستمی مورد نظر برای اشتراک‌گذاری را از منوی چت انتخاب کنید.\nبرای فعال کردن این قابلیت، یک کلید API معتبر وارد کنید. کلید API را از https://aistudio.google.com/app/apikey دریافت کنید.",
       "ConfigureOptions.ApiKey": "کلید API مربوط به Google Gemini AI",

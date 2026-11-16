@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "ورو",
   "neon_district_road_speed_normal": "عادي",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "په خبرو اترو کې د موخو د ستونزو د تشخیص معلومات وښایئ"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "په خبرو اترو کې د موخو د ستونزو د تشخیص معلومات وښایئ"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "په خبرو اترو کې د موخو د ستونزو د تشخیص معلومات وښایئ"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "په خبرو اترو کې د موخو د ستونزو د تشخیص معلومات وښایئ"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "د «Neon District» ډشبورډ اختیاري امستنې.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "ژوره پوهه فعاله کړئ (پروګرامونه او ویجټونه ولولئ)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "په خبرو اترو کې د موخو د ستونزو د تشخیص معلومات وښایئ",
       "Title": "سیمه ییز AI",
       "Description": "په مستقیم ډول ستاسو په هوم جیني سرور کې عصري LLM چل کړئ. د نورو برنامو او سکریپټونو څخه د AI کنټرول لپاره بشپړ API پکې شامل دی.",
       "ConfigureOptions.MaxTokens": "د غبرګون اوږدوالی (زیاته ټوکنونه)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (تلواله)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "په خبرو اترو کې د موخو د ستونزو د تشخیص معلومات وښایئ",
       "Title": "Gemini Genie",
       "Description": "په HomeGenie کې د وسیلو کنټرولولو، د اتومات پروګرامونو جوړولو، او ویجټونو جوړولو لپاره د Google Gemini AI څخه کار واخلئ. د چټ مینو څخه د شریکولو لپاره وړتیاوې او د سیسټم شرایط وټاکئ.\nد دې فیچر د فعالولو لپاره یو باوري API کیلي دننه کړئ. له https://aistudio.google.com/app/apikey څخه د API کیلي ترلاسه کړئ.",
       "ConfigureOptions.ApiKey": "د Google Gemini AI API کیلي",

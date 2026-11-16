@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "மெதுவாக",
   "neon_district_road_speed_normal": "இயல்பு",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "அரட்டையில் இலக்குகளின் சிக்கல் கண்டறிதல் தகவலைக் காட்டு"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "அரட்டையில் இலக்குகளின் சிக்கல் கண்டறிதல் தகவலைக் காட்டு"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "அரட்டையில் இலக்குகளின் சிக்கல் கண்டறிதல் தகவலைக் காட்டு"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "அரட்டையில் இலக்குகளின் சிக்கல் கண்டறிதல் தகவலைக் காட்டு"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Neon District கட்டுப்பாட்டுப் பலகைக்கான விருப்ப அமைப்புகள்.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "ஆழ்ந்த அறிவை இயக்கு (நிரல்கள் மற்றும் விட்ஜெட்களைப் படிக்கவும்)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "அரட்டையில் இலக்குகளின் சிக்கல் கண்டறிதல் தகவலைக் காட்டு",
       "Title": "உள்ளூர் AI",
       "Description": "உங்கள் HomeGenie சர்வரில் நேரடியாக அதிநவீன LLMகளை இயக்கவும். பிற நிரல்கள் மற்றும் ஸ்கிரிப்ட்களிலிருந்து AI ஐக் கட்டுப்படுத்த முழு API ஐ உள்ளடக்கியது.",
       "ConfigureOptions.MaxTokens": "மறுமொழி நீளம் (அதிகபட்ச டோக்கன்கள்)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (இயல்புநிலை)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "அரட்டையில் இலக்குகளின் சிக்கல் கண்டறிதல் தகவலைக் காட்டு",
       "Title": "Gemini Genie",
       "Description": "HomeGenie-ல் சாதனங்களைக் கட்டுப்படுத்தவும், தானியங்கு நிரல்களை உருவாக்கவும், விட்ஜெட்களை உருவாக்கவும் Google Gemini AI-ஐப் பயன்படுத்தவும். அரட்டை மெனுவிலிருந்து பகிர வேண்டிய திறன்கள் மற்றும் கணினி சூழலைத் தேர்வுசெய்யவும்.\nஇந்த அம்சத்தை இயக்க சரியான API விசையை உள்ளிடவும். API விசையைப் பெற https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API விசை",

@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Wolna",
   "neon_district_road_speed_normal": "Normalna",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Pokaż diagnostykę celów na czacie"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Pokaż diagnostykę celów na czacie"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Pokaż diagnostykę celów na czacie"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Pokaż diagnostykę celów na czacie"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Opcjonalne ustawienia panelu „Neon District”.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Włącz Deep Knowledge (Odczyt programów i widżetów)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Pokaż diagnostykę celów na czacie",
       "Title": "Lokalna sztuczna inteligencja",
       "Description": "Uruchamiaj najnowocześniejsze programy LLM bezpośrednio na serwerze HomeGenie. Zawiera pełne API do sterowania sztuczną inteligencją z poziomu innych programów i skryptów.",
       "ConfigureOptions.MaxTokens": "Długość odpowiedzi (maksymalna liczba tokenów)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Domyślny)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Pokaż diagnostykę celów na czacie",
       "Title": "Gemini Genie",
       "Description": "Używaj Google Gemini AI do sterowania urządzeniami, tworzenia programów automatyzacji i budowania widżetów w HomeGenie. Wybierz możliwości i kontekst systemu do udostępnienia z menu czatu.\nWprowadź prawidłowy klucz API, aby włączyć tę funkcję. Uzyskaj klucz API pod adresem https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Klucz API Google Gemini AI",

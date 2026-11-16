@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Баяу",
   "neon_district_road_speed_normal": "Қалыпты",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Чатта мақсаттардың диагностикасын көрсету"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Чатта мақсаттардың диагностикасын көрсету"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Чатта мақсаттардың диагностикасын көрсету"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Чатта мақсаттардың диагностикасын көрсету"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "«Neon District» басқару тақтасының қосымша баптаулары.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Терең білімді қосу (бағдарламалар мен виджеттерді оқу)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Чатта мақсаттардың диагностикасын көрсету",
       "Title": "Жергілікті жасанды интеллект",
       "Description": "HomeGenie серверіңізде тікелей заманауи LLM іске қосыңыз. Басқа бағдарламалар мен сценарийлерден жасанды интеллектті басқаруға арналған толық API қамтиды.",
       "ConfigureOptions.MaxTokens": "Жауап ұзындығы (максималды токендер)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Әдепкі)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Чатта мақсаттардың диагностикасын көрсету",
       "Title": "Gemini Genie",
       "Description": "HomeGenie ішінде құрылғыларды басқару, автоматтандыру бағдарламаларын жасау және виджеттер құрастыру үшін Google Gemini AI пайдаланыңыз. Чат мәзірінен бөлісетін мүмкіндіктер мен жүйе мәнмәтінін таңдаңыз.\nБұл мүмкіндікті қосу үшін жарамды API кілтін енгізіңіз. API кілтін https://aistudio.google.com/app/apikey сайтынан алыңыз.",
       "ConfigureOptions.ApiKey": "Google Gemini AI API кілті",

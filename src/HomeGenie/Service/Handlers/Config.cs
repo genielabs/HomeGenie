@@ -1514,7 +1514,7 @@ namespace HomeGenie.Service.Handlers
                     string widgetName = file.Substring(widgetBasePath.Length + 1);
                     if (widgetName.EndsWith(".html") && !widgetName.StartsWith(".template."))
                     {
-                        widgetName = widgetName.Substring(0, widgetName.Length - 5);
+                        widgetName = widgetName.Substring(0, widgetName.Length - 5).Replace(Path.DirectorySeparatorChar, '/');
                         widgetsList.Add(widgetName);
                     }
                 }

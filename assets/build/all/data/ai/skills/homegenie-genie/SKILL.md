@@ -3,7 +3,7 @@ name: homegenie-genie
 description: Assist with HomeGenie device control, automation lifecycle and interactive widget/composite solutions.
 compatibility: HomeGenie unified action coordinator and version-1 response contract.
 metadata:
-  version: "1.0.16"
+  version: "1.0.17"
   homegenie-handler: unified
   homegenie-legacy-program: "933"
 ---
@@ -63,6 +63,8 @@ Emit initial values promptly. The widget consumes its boundModule and subscribes
 
 You cannot install a widget on a dashboard automatically in this version. The user uses Save to choose installation and an optional dashboard. Do not claim it is already installed.
 
+HomeGenie widget modules are imported from `/widgets/` at the server root. Keep the leading slash, for example `await import('/widgets/example/display.module.js')`.
+
 ## Mandatory widget CSS imports
 
 Before emitting any widget/composite/presentation, inspect its FINAL HTML/CSS: layout/self attributes require `@import 'assets/styles/flex-layout-attribute.min.css';`; Material Symbols require `@import 'assets/styles/widget-ui.css';`. When both are used, include BOTH imports once at the very beginning of the CSS string, before rules. widget-ui.css does NOT implement layout attributes; parent styles cannot cross Shadow DOM. Use valid FLA values such as row center-justify, not center-between/start/end; self="stretch" is a separate attribute. Follow the shared widget CSS dependency checklist and complete two-import example. Do not emit the artifact until the required imports are present in its actual CSS.
@@ -73,7 +75,7 @@ Use `widget.mode="presentation"` when the widget IS part of your answer: a chart
 
 For Material Symbols in presentation widgets, import `assets/styles/widget-ui.css` at the beginning of the widget CSS, including when supplying custom styles. Use `<span class="material-symbols-outlined" aria-hidden="true">lightbulb</span>` for outlined icons or `class="material-symbols"` for filled icons. Use local assets and plain HTML, not `<mat-icon>`, external font CDNs or invented `_fill` names. The shared widget reference contains the full icon instructions.
 
-For charts and animation use local lazy-loaded assets: Chart.js 4.5.1 (`assets/js/chartjs/chart.module.js`, default ESM `Chart` export), Anime.js 4.5.0 (`assets/js/animejs/anime.esm.min.js`, v4 named exports), or Three.js 0.186.1 (`assets/js/three/three.module.js`, namespace). Resolve `import(new URL(path, document.baseURI).href)` inside an async controller method, check disposal after awaiting, and handle errors. No CDN, global script injection, import maps or unprovided Three addons. Prefer native HTML/CSS/SVG for simpler work. Follow the shared widget reference for initial field rendering, locale, command observables, throttling and pause/resize/disposal; see the bundled `basic/energy-today` and `isometric/isometric-room` widgets.
+For charts and animation use local lazy-loaded assets: Chart.js 4.5.1 (`assets/js/chartjs/chart.module.js`, default ESM `Chart` export), Anime.js 4.5.0 (`assets/js/animejs/anime.esm.min.js`, v4 named exports), or Three.js 0.186.1 (`assets/js/three/three.module.js`, namespace). Resolve `import(new URL(path, document.baseURI).href)` inside an async controller method, check disposal after awaiting, and handle errors. No CDN, global script injection or import maps. The shared widget reference lists the bundled Three.js addons and their import paths. Prefer native HTML/CSS/SVG for simpler work. Follow the shared widget reference for initial field rendering, locale, command observables, throttling and pause/resize/disposal; see the bundled `basic/energy-today` and `isometric/isometric-room` widgets.
 
 Sources remain complete HTML/CSS/JavaScript strings. There is no new framework, backend language or `kind=presentation`. Use the normal widget lifecycle, local assets and existing `this.apiCall` for known backend APIs. Never invent endpoints. A DOM event such as `this.trigger('quest-action', {scene:'portal', choice:'roots'})` is local feedback; it does not by itself send a request to the AI. Use the presentation feedback route below when a deliberate choice should continue the AI conversation.
 

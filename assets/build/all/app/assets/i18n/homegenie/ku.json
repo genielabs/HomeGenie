@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Hêdî",
   "neon_district_road_speed_normal": "Asayî",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Agahiyên teşxîsa armancan di sohbetê de nîşan bide"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Agahiyên teşxîsa armancan di sohbetê de nîşan bide"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Agahiyên teşxîsa armancan di sohbetê de nîşan bide"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Agahiyên teşxîsa armancan di sohbetê de nîşan bide"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "Mîhengên vebijarkî ji bo panela Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Zanîna Kûr Çalak Bike (Bername û widgetan Bixwîne)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Agahiyên teşxîsa armancan di sohbetê de nîşan bide",
       "Title": "AI-ya herêmî",
       "Description": "LLM-yên herî pêşketî rasterast li ser servera xwe ya HomeGenie bimeşînin. API-yek tevahî vedihewîne da ku AI-ê ji bername û skrîptên din kontrol bike.",
       "ConfigureOptions.MaxTokens": "Dirêjahiya Bersivê (Tokenên Herî Zêde)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Wekî standard)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Agahiyên teşxîsa armancan di sohbetê de nîşan bide",
       "Title": "Gemini Genie",
       "Description": "Ji bo kontrolkirina cîhazan, çêkirina bernameyên otomasyonê û avakirina widgetan di HomeGenie de Google Gemini AI bikar bînin. Ji pêşeka sohbetê şiyan û naveroka pergalê ya ku were parvekirin hilbijêrin.\nJi bo çalakkirina vê taybetmendiyê mifteyeke API-yê ya derbasdar binivîsin. Mifteyek API-yê ji https://aistudio.google.com/app/apikey bistînin.",
       "ConfigureOptions.ApiKey": "Mifteya API-yê ya Google Gemini AI",

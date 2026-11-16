@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "ຊ້າ",
   "neon_district_road_speed_normal": "ປົກກະຕິ",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "ສະແດງຂໍ້ມູນການວິນິດໄສບັນຫາຂອງເປົ້າໝາຍໃນແຊັດ"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "ສະແດງຂໍ້ມູນການວິນິດໄສບັນຫາຂອງເປົ້າໝາຍໃນແຊັດ"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "ສະແດງຂໍ້ມູນການວິນິດໄສບັນຫາຂອງເປົ້າໝາຍໃນແຊັດ"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "ສະແດງຂໍ້ມູນການວິນິດໄສບັນຫາຂອງເປົ້າໝາຍໃນແຊັດ"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "ການຕັ້ງຄ່າເສີມສຳລັບແຜງຄວບຄຸມ Neon District.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "ເປີດໃຊ້ຄວາມຮູ້ເລິກເຊິ່ງ (ອ່ານໂປຣແກຣມ ແລະ ວິດເຈັດ)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "ສະແດງຂໍ້ມູນການວິນິດໄສບັນຫາຂອງເປົ້າໝາຍໃນແຊັດ",
       "Title": "AI ທ້ອງຖິ່ນ",
       "Description": "ໃຊ້ງານ LLM ທີ່ທັນສະໄໝໂດຍກົງໃນເຊີບເວີ HomeGenie ຂອງທ່ານ. ລວມມີ API ເຕັມຮູບແບບເພື່ອຄວບຄຸມ AI ຈາກໂປຣແກຣມ ແລະ ສະຄຣິບອື່ນໆ.",
       "ConfigureOptions.MaxTokens": "ຄວາມຍາວຕອບສະໜອງ (ໂທເຄັນສູງສຸດ)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (ຄ່າເລີ່ມຕົ້ນ)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "ສະແດງຂໍ້ມູນການວິນິດໄສບັນຫາຂອງເປົ້າໝາຍໃນແຊັດ",
       "Title": "Gemini Genie",
       "Description": "ໃຊ້ Google Gemini AI ເພື່ອຄວບຄຸມອຸປະກອນ, ສ້າງໂປຣແກຣມອັດຕະໂນມັດ, ແລະ ສ້າງວິດເຈັດໃນ HomeGenie. ເລືອກຄວາມສາມາດ ແລະ ບໍລິບົດລະບົບທີ່ຈະແບ່ງປັນຈາກເມນູສົນທະນາ.\nປ້ອນລະຫັດ API ທີ່ຖືກຕ້ອງເພື່ອເປີດໃຊ້ຄຸນສົມບັດນີ້. ຮັບລະຫັດ API ໄດ້ທີ່ https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "ລະຫັດ API ຂອງ Google Gemini AI",

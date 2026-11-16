@@ -143,6 +143,18 @@
   "neon_district_road_speed_slow": "Motela",
   "neon_district_road_speed_normal": "Normala",
   "$options": {
+    "934": {
+      "ConfigureOptions.GoalDiagnostics": "Erakutsi helburuen diagnostikoa txatean"
+    },
+    "935": {
+      "ConfigureOptions.GoalDiagnostics": "Erakutsi helburuen diagnostikoa txatean"
+    },
+    "936": {
+      "ConfigureOptions.GoalDiagnostics": "Erakutsi helburuen diagnostikoa txatean"
+    },
+    "937": {
+      "ConfigureOptions.GoalDiagnostics": "Erakutsi helburuen diagnostikoa txatean"
+    },
     "651": {
       "Title": "Neon District",
       "Description": "«Neon District» aginte-panelaren aukerako ezarpenak.",
@@ -357,6 +369,7 @@
       "ConfigureOptions.EnableDeepKnowledge": "Gaitu Ezagutza Sakona (Irakurri programak eta widgetak)"
     },
     "940": {
+      "ConfigureOptions.GoalDiagnostics": "Erakutsi helburuen diagnostikoa txatean",
       "Title": "Tokiko IA",
       "Description": "Exekutatu punta-puntako LLMak zuzenean zure HomeGenie zerbitzarian. API osoa barne hartzen du IA beste programa eta script batzuetatik kontrolatzeko.",
       "ConfigureOptions.MaxTokens": "Erantzunaren luzera (gehienezko tokenak)",
@@ -445,6 +458,7 @@
       "ConfigureOptions.DefaultProvider": "AI Genie (Lehenetsia)"
     },
     "933": {
+      "ConfigureOptions.GoalDiagnostics": "Erakutsi helburuen diagnostikoa txatean",
       "Title": "Gemini Genie",
       "Description": "Erabili Google Gemini AI gailuak kontrolatzeko, automatizazio-programak sortzeko eta widget-ak eraikitzeko HomeGenie-n. Aukeratu txat-menutik partekatzeko gaitasunak eta sistemaren testuingurua.\nSartu baliozko API gako bat funtzio hau gaitzeko. Lortu API gakoa hemen: https://aistudio.google.com/app/apikey.",
       "ConfigureOptions.ApiKey": "Google Gemini AI-ren API gakoa",
