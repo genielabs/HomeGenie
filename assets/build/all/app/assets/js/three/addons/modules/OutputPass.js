@@ -1,9 +1,9 @@
 import {
   FullScreenQuad,
   Pass
-} from "./chunk-DHEQJFFE.js";
+} from "./chunk-JTJIKJED.js";
 
-// ../release-candidate-yot/node_modules/three/examples/jsm/postprocessing/OutputPass.js
+// node_modules/three/examples/jsm/postprocessing/OutputPass.js
 import {
   ColorManagement,
   RawShaderMaterial,
@@ -18,7 +18,7 @@ import {
   SRGBTransfer
 } from "../../three.module.js";
 
-// ../release-candidate-yot/node_modules/three/examples/jsm/shaders/OutputShader.js
+// node_modules/three/examples/jsm/shaders/OutputShader.js
 var OutputShader = {
   name: "OutputShader",
   uniforms: {
@@ -100,7 +100,7 @@ var OutputShader = {
 		}`
 };
 
-// ../release-candidate-yot/node_modules/three/examples/jsm/postprocessing/OutputPass.js
+// node_modules/three/examples/jsm/postprocessing/OutputPass.js
 var OutputPass = class extends Pass {
   constructor() {
     super();

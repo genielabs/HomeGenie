@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Bình thường",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Hiển thị thông tin chẩn đoán mục tiêu trong cuộc trò chuyện"
+      "ConfigureOptions.GoalDiagnostics": "Hiển thị thông tin chẩn đoán mục tiêu trong cuộc trò chuyện",
+      "ConfigureOptions.SystemInstructions": "Hướng dẫn hệ thống",
+      "ConfigureOptions.ApiKey": "Khóa API OpenAI",
+      "ConfigureOptions.ModelId": "ID mô hình"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Hiển thị thông tin chẩn đoán mục tiêu trong cuộc trò chuyện"
+      "ConfigureOptions.GoalDiagnostics": "Hiển thị thông tin chẩn đoán mục tiêu trong cuộc trò chuyện",
+      "ConfigureOptions.SystemInstructions": "Hướng dẫn hệ thống",
+      "ConfigureOptions.ApiKey": "Khóa API Claude",
+      "ConfigureOptions.ModelId": "ID mô hình",
+      "ConfigureOptions.MaxOutputTokens": "Độ dài phản hồi (Số từ tối đa)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Hiển thị thông tin chẩn đoán mục tiêu trong cuộc trò chuyện"
+      "ConfigureOptions.GoalDiagnostics": "Hiển thị thông tin chẩn đoán mục tiêu trong cuộc trò chuyện",
+      "ConfigureOptions.SystemInstructions": "Hướng dẫn hệ thống",
+      "ConfigureOptions.ApiKey": "Khóa API DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Hiển thị thông tin chẩn đoán mục tiêu trong cuộc trò chuyện"
+      "ConfigureOptions.GoalDiagnostics": "Hiển thị thông tin chẩn đoán mục tiêu trong cuộc trò chuyện",
+      "ConfigureOptions.SystemInstructions": "Hướng dẫn hệ thống",
+      "ConfigureOptions.ApiKey": "Khóa API Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL của API Responses trong Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Các dịch vụ dùng chung và lựa chọn nhà cung cấp mặc định cho các yêu cầu chạy nền.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Mặc định)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Mặc định)",
+      "ConfigureOptions.AllowedHttpUrls": "URL HTTP được phép (phân cách bằng dấu chấm phẩy)",
+      "ConfigureOptions.AllowedLocalFolders": "Thư mục cục bộ được phép (phân cách bằng dấu chấm phẩy)",
+      "ConfigureOptions.MaximumSourceSize": "Dung lượng tối đa của tệp nguồn (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Phần mở rộng tệp được đính kèm trực tiếp (phân cách bằng dấu chấm phẩy)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Chỉ dẫn cho mục tiêu tạo tiện ích"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Hiển thị thông tin chẩn đoán mục tiêu trong cuộc trò chuyện",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Dữ liệu đã tải xuống",
   "audio_stop": "Dừng lại",
   "audio_resume": "Tiếp tục",
+  "audio_manage_model": "Quản lý mô hình",
   "audio_download": "Tải xuống",
   "audio_restart_download": "Tải xuống lại",
   "audio_download_downloading": "Đang tải xuống",

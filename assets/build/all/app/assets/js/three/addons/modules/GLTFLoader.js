@@ -1,4 +1,4 @@
-// ../release-candidate-yot/node_modules/three/examples/jsm/loaders/GLTFLoader.js
+// node_modules/three/examples/jsm/loaders/GLTFLoader.js
 import {
   AnimationClip as AnimationClip2,
   Bone,
@@ -67,7 +67,7 @@ import {
   InstancedBufferAttribute as InstancedBufferAttribute2
 } from "../../three.module.js";
 
-// ../release-candidate-yot/node_modules/three/examples/jsm/utils/BufferGeometryUtils.js
+// node_modules/three/examples/jsm/utils/BufferGeometryUtils.js
 import {
   BufferAttribute,
   BufferGeometry,
@@ -134,7 +134,7 @@ function toTrianglesDrawMode(geometry, drawMode) {
   }
 }
 
-// ../release-candidate-yot/node_modules/three/examples/jsm/utils/SkeletonUtils.js
+// node_modules/three/examples/jsm/utils/SkeletonUtils.js
 import {
   AnimationClip,
   AnimationMixer,
@@ -175,7 +175,7 @@ function parallelTraverse(a, b, callback) {
   }
 }
 
-// ../release-candidate-yot/node_modules/three/examples/jsm/loaders/GLTFLoader.js
+// node_modules/three/examples/jsm/loaders/GLTFLoader.js
 var GLTFLoader = class extends Loader {
   constructor(manager) {
     super(manager);

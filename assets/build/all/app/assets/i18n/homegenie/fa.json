@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "عادی",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "نمایش اطلاعات عیب‌یابی هدف‌ها در گفتگو"
+      "ConfigureOptions.GoalDiagnostics": "نمایش اطلاعات عیب‌یابی هدف‌ها در گفتگو",
+      "ConfigureOptions.SystemInstructions": "دستورالعمل‌های سیستم",
+      "ConfigureOptions.ApiKey": "کلید API مربوط به OpenAI",
+      "ConfigureOptions.ModelId": "شناسه مدل"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "نمایش اطلاعات عیب‌یابی هدف‌ها در گفتگو"
+      "ConfigureOptions.GoalDiagnostics": "نمایش اطلاعات عیب‌یابی هدف‌ها در گفتگو",
+      "ConfigureOptions.SystemInstructions": "دستورالعمل‌های سیستم",
+      "ConfigureOptions.ApiKey": "کلید API مربوط به Claude",
+      "ConfigureOptions.ModelId": "شناسه مدل",
+      "ConfigureOptions.MaxOutputTokens": "طول پاسخ (حداکثر توکن)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "نمایش اطلاعات عیب‌یابی هدف‌ها در گفتگو"
+      "ConfigureOptions.GoalDiagnostics": "نمایش اطلاعات عیب‌یابی هدف‌ها در گفتگو",
+      "ConfigureOptions.SystemInstructions": "دستورالعمل‌های سیستم",
+      "ConfigureOptions.ApiKey": "کلید API مربوط به DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "نمایش اطلاعات عیب‌یابی هدف‌ها در گفتگو"
+      "ConfigureOptions.GoalDiagnostics": "نمایش اطلاعات عیب‌یابی هدف‌ها در گفتگو",
+      "ConfigureOptions.SystemInstructions": "دستورالعمل‌های سیستم",
+      "ConfigureOptions.ApiKey": "کلید API مربوط به Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "نشانی API ‏Responses در Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "خدمات مشترک و انتخاب ارائه‌دهنده پیش‌فرض برای درخواست‌های پس‌زمینه.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (پیش‌فرض)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (پیش‌فرض)",
+      "ConfigureOptions.AllowedHttpUrls": "نشانی‌های HTTP مجاز (جداشده با نقطه‌ویرگول)",
+      "ConfigureOptions.AllowedLocalFolders": "پوشه‌های محلی مجاز (جداشده با نقطه‌ویرگول)",
+      "ConfigureOptions.MaximumSourceSize": "حداکثر اندازهٔ فایل منبع (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "پسوندهای فایل برای پیوست مستقیم (جداشده با نقطه‌ویرگول)",
+      "ConfigureOptions.WidgetObjectivePrompt": "دستور اهداف ساخت ابزارک"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "نمایش اطلاعات عیب‌یابی هدف‌ها در گفتگو",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "داده های دانلود شده",
   "audio_stop": "توقف کنید",
   "audio_resume": "رزومه",
+  "audio_manage_model": "مدیریت مدل",
   "audio_download": "دانلود کنید",
   "audio_restart_download": "دوباره دانلود کنید",
   "audio_download_downloading": "در حال دانلود",

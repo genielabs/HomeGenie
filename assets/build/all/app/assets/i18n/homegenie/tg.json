@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Муқаррарӣ",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Маълумоти ташхисии ҳадафҳоро дар чат нишон диҳед"
+      "ConfigureOptions.GoalDiagnostics": "Маълумоти ташхисии ҳадафҳоро дар чат нишон диҳед",
+      "ConfigureOptions.SystemInstructions": "Дастурҳои системавӣ",
+      "ConfigureOptions.ApiKey": "Калиди API-и OpenAI",
+      "ConfigureOptions.ModelId": "ID-и модел"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Маълумоти ташхисии ҳадафҳоро дар чат нишон диҳед"
+      "ConfigureOptions.GoalDiagnostics": "Маълумоти ташхисии ҳадафҳоро дар чат нишон диҳед",
+      "ConfigureOptions.SystemInstructions": "Дастурҳои системавӣ",
+      "ConfigureOptions.ApiKey": "Калиди API-и Claude",
+      "ConfigureOptions.ModelId": "ID-и модел",
+      "ConfigureOptions.MaxOutputTokens": "Давомнокии посух (ҳадди аксар токенҳо)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Маълумоти ташхисии ҳадафҳоро дар чат нишон диҳед"
+      "ConfigureOptions.GoalDiagnostics": "Маълумоти ташхисии ҳадафҳоро дар чат нишон диҳед",
+      "ConfigureOptions.SystemInstructions": "Дастурҳои системавӣ",
+      "ConfigureOptions.ApiKey": "Калиди API-и DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Маълумоти ташхисии ҳадафҳоро дар чат нишон диҳед"
+      "ConfigureOptions.GoalDiagnostics": "Маълумоти ташхисии ҳадафҳоро дар чат нишон диҳед",
+      "ConfigureOptions.SystemInstructions": "Дастурҳои системавӣ",
+      "ConfigureOptions.ApiKey": "Калиди API-и Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "Нишонии Responses API дар Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Хидматҳои муштарак ва интихоби провайдери пешфарз барои дархостҳои пасзамина.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Пешфарз)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Пешфарз)",
+      "ConfigureOptions.AllowedHttpUrls": "Суроғаҳои иҷозашудаи HTTP (бо нуқтавергул ҷудо кунед)",
+      "ConfigureOptions.AllowedLocalFolders": "Ҷузвдонҳои маҳаллии иҷозашуда (бо нуқтавергул ҷудо кунед)",
+      "ConfigureOptions.MaximumSourceSize": "Андозаи ҳадди аксари файли манбаъ (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Пасвандҳои файл барои замимаи мустақим (бо нуқтавергул ҷудо кунед)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Дастур барои ҳадафҳои сохтани виҷет"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Маълумоти ташхисии ҳадафҳоро дар чат нишон диҳед",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Маълумоти зеркашидашуда",
   "audio_stop": "Истед",
   "audio_resume": "Давом додан",
+  "audio_manage_model": "Идора кардани модел",
   "audio_download": "Зеркашӣ кунед",
   "audio_restart_download": "Боз зеркашӣ кунед",
   "audio_download_downloading": "Зеркашӣ кардан",

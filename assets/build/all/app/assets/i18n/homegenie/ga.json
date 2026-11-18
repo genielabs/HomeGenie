@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Gnáth",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Taispeáin diagnóisic na gcuspóirí sa chomhrá"
+      "ConfigureOptions.GoalDiagnostics": "Taispeáin diagnóisic na gcuspóirí sa chomhrá",
+      "ConfigureOptions.SystemInstructions": "Treoracha córais",
+      "ConfigureOptions.ApiKey": "Eochair API OpenAI",
+      "ConfigureOptions.ModelId": "Aitheantas Samhla"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Taispeáin diagnóisic na gcuspóirí sa chomhrá"
+      "ConfigureOptions.GoalDiagnostics": "Taispeáin diagnóisic na gcuspóirí sa chomhrá",
+      "ConfigureOptions.SystemInstructions": "Treoracha córais",
+      "ConfigureOptions.ApiKey": "Eochair API Claude",
+      "ConfigureOptions.ModelId": "Aitheantas Samhla",
+      "ConfigureOptions.MaxOutputTokens": "Fad Freagartha (Uasmhéid Comharthaí)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Taispeáin diagnóisic na gcuspóirí sa chomhrá"
+      "ConfigureOptions.GoalDiagnostics": "Taispeáin diagnóisic na gcuspóirí sa chomhrá",
+      "ConfigureOptions.SystemInstructions": "Treoracha córais",
+      "ConfigureOptions.ApiKey": "Eochair API DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Taispeáin diagnóisic na gcuspóirí sa chomhrá"
+      "ConfigureOptions.GoalDiagnostics": "Taispeáin diagnóisic na gcuspóirí sa chomhrá",
+      "ConfigureOptions.SystemInstructions": "Treoracha córais",
+      "ConfigureOptions.ApiKey": "Eochair API Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL API Responses in Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Seirbhísí comhroinnte agus roghnú an tsoláthraí réamhshocraithe le haghaidh iarrataí cúlra.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Réamhshocrú)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Réamhshocrú)",
+      "ConfigureOptions.AllowedHttpUrls": "URLanna HTTP ceadaithe (scartha le leathstadanna)",
+      "ConfigureOptions.AllowedLocalFolders": "Fillteáin áitiúla cheadaithe (scartha le leathstadanna)",
+      "ConfigureOptions.MaximumSourceSize": "Uasmhéid an chomhaid foinse (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Iarmhíreanna comhaid le ceangal go díreach (scartha le leathstadanna)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Treoir do spriocanna cruthaithe giuirléidí"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Taispeáin diagnóisic na gcuspóirí sa chomhrá",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Sonraí íosluchtaithe",
   "audio_stop": "Stop",
   "audio_resume": "Atosaigh",
+  "audio_manage_model": "Bainistigh an tsamhail",
   "audio_download": "Íosluchtaigh",
   "audio_restart_download": "Íosluchtaigh suas arís mé",
   "audio_download_downloading": "Ag íosluchtú",

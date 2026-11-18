@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Κανονική",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Εμφάνιση διαγνωστικών στοιχείων για τους στόχους στη συνομιλία"
+      "ConfigureOptions.GoalDiagnostics": "Εμφάνιση διαγνωστικών στοιχείων για τους στόχους στη συνομιλία",
+      "ConfigureOptions.SystemInstructions": "Οδηγίες συστήματος",
+      "ConfigureOptions.ApiKey": "Κλειδί API OpenAI",
+      "ConfigureOptions.ModelId": "ID μοντέλου"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Εμφάνιση διαγνωστικών στοιχείων για τους στόχους στη συνομιλία"
+      "ConfigureOptions.GoalDiagnostics": "Εμφάνιση διαγνωστικών στοιχείων για τους στόχους στη συνομιλία",
+      "ConfigureOptions.SystemInstructions": "Οδηγίες συστήματος",
+      "ConfigureOptions.ApiKey": "Κλειδί API Claude",
+      "ConfigureOptions.ModelId": "ID μοντέλου",
+      "ConfigureOptions.MaxOutputTokens": "Μήκος απόκρισης (Μέγιστος αριθμός διακριτικών)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Εμφάνιση διαγνωστικών στοιχείων για τους στόχους στη συνομιλία"
+      "ConfigureOptions.GoalDiagnostics": "Εμφάνιση διαγνωστικών στοιχείων για τους στόχους στη συνομιλία",
+      "ConfigureOptions.SystemInstructions": "Οδηγίες συστήματος",
+      "ConfigureOptions.ApiKey": "Κλειδί API DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Εμφάνιση διαγνωστικών στοιχείων για τους στόχους στη συνομιλία"
+      "ConfigureOptions.GoalDiagnostics": "Εμφάνιση διαγνωστικών στοιχείων για τους στόχους στη συνομιλία",
+      "ConfigureOptions.SystemInstructions": "Οδηγίες συστήματος",
+      "ConfigureOptions.ApiKey": "Κλειδί API Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL του API Responses στο Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Κοινόχρηστες υπηρεσίες και επιλογή προεπιλεγμένου παρόχου για αιτήματα στο παρασκήνιο.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Προεπιλογή)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Προεπιλογή)",
+      "ConfigureOptions.AllowedHttpUrls": "Επιτρεπόμενα URL HTTP (διαχωρισμένα με «;»)",
+      "ConfigureOptions.AllowedLocalFolders": "Επιτρεπόμενοι τοπικοί φάκελοι (διαχωρισμένοι με «;»)",
+      "ConfigureOptions.MaximumSourceSize": "Μέγιστο μέγεθος αρχείου προέλευσης (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Επεκτάσεις αρχείων για απευθείας επισύναψη (διαχωρισμένες με «;»)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Οδηγίες για στόχους δημιουργίας γραφικών στοιχείων"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Εμφάνιση διαγνωστικών στοιχείων για τους στόχους στη συνομιλία",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Λήψη δεδομένων",
   "audio_stop": "Σταμάτα",
   "audio_resume": "Βιογραφικό",
+  "audio_manage_model": "Διαχείριση μοντέλου",
   "audio_download": "Λήψη",
   "audio_restart_download": "Λήψη ξανά",
   "audio_download_downloading": "Λήψη",

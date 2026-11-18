@@ -1,3 +1,8 @@
 # exclude from github language stats
 docs/* linguist-documentation
 assets/* linguist-vendored
+
+# Keep copied web assets stable across checkouts and service worker builds.
+/assets/build/all/app/assets/i18n/blockly/*.json text eol=lf
+/assets/build/all/app/assets/i18n/widgets/*.json text eol=lf
+/assets/build/all/app/assets/images/symbols/*.svg text eol=lf

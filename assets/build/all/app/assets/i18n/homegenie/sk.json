@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normálna",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Zobraziť diagnostiku cieľov v chate"
+      "ConfigureOptions.GoalDiagnostics": "Zobraziť diagnostiku cieľov v chate",
+      "ConfigureOptions.SystemInstructions": "Systémové pokyny",
+      "ConfigureOptions.ApiKey": "Kľúč API pre OpenAI",
+      "ConfigureOptions.ModelId": "ID modelu"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Zobraziť diagnostiku cieľov v chate"
+      "ConfigureOptions.GoalDiagnostics": "Zobraziť diagnostiku cieľov v chate",
+      "ConfigureOptions.SystemInstructions": "Systémové pokyny",
+      "ConfigureOptions.ApiKey": "Kľúč API pre Claude",
+      "ConfigureOptions.ModelId": "ID modelu",
+      "ConfigureOptions.MaxOutputTokens": "Dĺžka odpovede (maximálny počet tokenov)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Zobraziť diagnostiku cieľov v chate"
+      "ConfigureOptions.GoalDiagnostics": "Zobraziť diagnostiku cieľov v chate",
+      "ConfigureOptions.SystemInstructions": "Systémové pokyny",
+      "ConfigureOptions.ApiKey": "Kľúč API pre DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Zobraziť diagnostiku cieľov v chate"
+      "ConfigureOptions.GoalDiagnostics": "Zobraziť diagnostiku cieľov v chate",
+      "ConfigureOptions.SystemInstructions": "Systémové pokyny",
+      "ConfigureOptions.ApiKey": "Kľúč API pre Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL rozhrania Responses v Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Zdieľané služby a výber predvoleného poskytovateľa pre požiadavky na pozadí.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Predvolený)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Predvolený)",
+      "ConfigureOptions.AllowedHttpUrls": "Povolené adresy HTTP (oddelené bodkočiarkou)",
+      "ConfigureOptions.AllowedLocalFolders": "Povolené lokálne priečinky (oddelené bodkočiarkou)",
+      "ConfigureOptions.MaximumSourceSize": "Maximálna veľkosť zdrojového súboru (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Prípony súborov na priame priloženie (oddelené bodkočiarkou)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Pokyn pre ciele tvorby widgetov"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Zobraziť diagnostiku cieľov v chate",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Stiahnuté dáta",
   "audio_stop": "Stop",
   "audio_resume": "Obnoviť",
+  "audio_manage_model": "Spravovať model",
   "audio_download": "Stiahnuť",
   "audio_restart_download": "Stiahnite si znova",
   "audio_download_downloading": "Sťahovanie",

@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "ປົກກະຕິ",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "ສະແດງຂໍ້ມູນການວິນິດໄສບັນຫາຂອງເປົ້າໝາຍໃນແຊັດ"
+      "ConfigureOptions.GoalDiagnostics": "ສະແດງຂໍ້ມູນການວິນິດໄສບັນຫາຂອງເປົ້າໝາຍໃນແຊັດ",
+      "ConfigureOptions.SystemInstructions": "ຄຳແນະນຳລະບົບ",
+      "ConfigureOptions.ApiKey": "ລະຫັດ API ຂອງ OpenAI",
+      "ConfigureOptions.ModelId": "ID ໂມເດວ"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "ສະແດງຂໍ້ມູນການວິນິດໄສບັນຫາຂອງເປົ້າໝາຍໃນແຊັດ"
+      "ConfigureOptions.GoalDiagnostics": "ສະແດງຂໍ້ມູນການວິນິດໄສບັນຫາຂອງເປົ້າໝາຍໃນແຊັດ",
+      "ConfigureOptions.SystemInstructions": "ຄຳແນະນຳລະບົບ",
+      "ConfigureOptions.ApiKey": "ລະຫັດ API ຂອງ Claude",
+      "ConfigureOptions.ModelId": "ID ໂມເດວ",
+      "ConfigureOptions.MaxOutputTokens": "ຄວາມຍາວຕອບສະໜອງ (ໂທເຄັນສູງສຸດ)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "ສະແດງຂໍ້ມູນການວິນິດໄສບັນຫາຂອງເປົ້າໝາຍໃນແຊັດ"
+      "ConfigureOptions.GoalDiagnostics": "ສະແດງຂໍ້ມູນການວິນິດໄສບັນຫາຂອງເປົ້າໝາຍໃນແຊັດ",
+      "ConfigureOptions.SystemInstructions": "ຄຳແນະນຳລະບົບ",
+      "ConfigureOptions.ApiKey": "ລະຫັດ API ຂອງ DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "ສະແດງຂໍ້ມູນການວິນິດໄສບັນຫາຂອງເປົ້າໝາຍໃນແຊັດ"
+      "ConfigureOptions.GoalDiagnostics": "ສະແດງຂໍ້ມູນການວິນິດໄສບັນຫາຂອງເປົ້າໝາຍໃນແຊັດ",
+      "ConfigureOptions.SystemInstructions": "ຄຳແນະນຳລະບົບ",
+      "ConfigureOptions.ApiKey": "ລະຫັດ API ຂອງ Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL ຂອງ Responses API ໃນ Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "ບໍລິການຮ່ວມ ແລະການເລືອກຜູ້ໃຫ້ບໍລິການເລີ່ມຕົ້ນສຳລັບຄຳຮ້ອງຂໍເບື້ອງຫຼັງ.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (ຄ່າເລີ່ມຕົ້ນ)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (ຄ່າເລີ່ມຕົ້ນ)",
+      "ConfigureOptions.AllowedHttpUrls": "URL HTTP ທີ່ອະນຸຍາດ (ແຍກດ້ວຍເຄື່ອງໝາຍ ;)",
+      "ConfigureOptions.AllowedLocalFolders": "ໂຟນເດີທ້ອງຖິ່ນທີ່ອະນຸຍາດ (ແຍກດ້ວຍເຄື່ອງໝາຍ ;)",
+      "ConfigureOptions.MaximumSourceSize": "ຂະໜາດສູງສຸດຂອງໄຟລ໌ຕົ້ນທາງ (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "ນາມສະກຸນໄຟລ໌ສຳລັບແນບໂດຍກົງ (ແຍກດ້ວຍເຄື່ອງໝາຍ ;)",
+      "ConfigureOptions.WidgetObjectivePrompt": "ຄຳແນະນຳສຳລັບເປົ້າໝາຍການສ້າງວິດເຈັດ"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "ສະແດງຂໍ້ມູນການວິນິດໄສບັນຫາຂອງເປົ້າໝາຍໃນແຊັດ",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "ດາວໂຫຼດຂໍ້ມູນ",
   "audio_stop": "ຢຸດ",
   "audio_resume": "ປະຫວັດຫຍໍ້",
+  "audio_manage_model": "ຈັດການໂມເດວ",
   "audio_download": "ດາວໂຫຼດ",
   "audio_restart_download": "ດາວໂຫລດອີກຄັ້ງ",
   "audio_download_downloading": "ກຳລັງດາວໂຫຼດ",

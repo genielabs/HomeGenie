@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normaal",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Wys doelwitdiagnostiek in die klets"
+      "ConfigureOptions.GoalDiagnostics": "Wys doelwitdiagnostiek in die klets",
+      "ConfigureOptions.SystemInstructions": "Stelselinstruksies",
+      "ConfigureOptions.ApiKey": "OpenAI-API-sleutel",
+      "ConfigureOptions.ModelId": "Model-ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Wys doelwitdiagnostiek in die klets"
+      "ConfigureOptions.GoalDiagnostics": "Wys doelwitdiagnostiek in die klets",
+      "ConfigureOptions.SystemInstructions": "Stelselinstruksies",
+      "ConfigureOptions.ApiKey": "Claude-API-sleutel",
+      "ConfigureOptions.ModelId": "Model-ID",
+      "ConfigureOptions.MaxOutputTokens": "Reaksielengte (Maksimum Tokens)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Wys doelwitdiagnostiek in die klets"
+      "ConfigureOptions.GoalDiagnostics": "Wys doelwitdiagnostiek in die klets",
+      "ConfigureOptions.SystemInstructions": "Stelselinstruksies",
+      "ConfigureOptions.ApiKey": "DeepSeek-API-sleutel"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Wys doelwitdiagnostiek in die klets"
+      "ConfigureOptions.GoalDiagnostics": "Wys doelwitdiagnostiek in die klets",
+      "ConfigureOptions.SystemInstructions": "Stelselinstruksies",
+      "ConfigureOptions.ApiKey": "Qwen-API-sleutel",
+      "ConfigureOptions.ResponsesEndpoint": "URL van die Model Studio Responses-API"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Gedeelde dienste en keuse van die verstekverskaffer vir agtergrondversoeke.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Verstek)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Verstek)",
+      "ConfigureOptions.AllowedHttpUrls": "Toegelate HTTP-URL's (met kommapunte geskei)",
+      "ConfigureOptions.AllowedLocalFolders": "Toegelate plaaslike vouers (met kommapunte geskei)",
+      "ConfigureOptions.MaximumSourceSize": "Maksimum brongrootte (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Lêeruitbreidings vir direkte aanhegting (met kommapunte geskei)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Prompt vir legstukdoelwitte"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Wys doelwitdiagnostiek in die klets",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Afgelaaide data",
   "audio_stop": "Stop",
   "audio_resume": "Hervat",
+  "audio_manage_model": "Bestuur model",
   "audio_download": "Laai af",
   "audio_restart_download": "Laai weer af",
   "audio_download_downloading": "Laai tans af",

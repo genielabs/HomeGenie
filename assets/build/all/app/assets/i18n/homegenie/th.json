@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "ปกติ",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "แสดงข้อมูลวินิจฉัยเป้าหมายในแชต"
+      "ConfigureOptions.GoalDiagnostics": "แสดงข้อมูลวินิจฉัยเป้าหมายในแชต",
+      "ConfigureOptions.SystemInstructions": "คำแนะนำสำหรับระบบ",
+      "ConfigureOptions.ApiKey": "คีย์ API ของ OpenAI",
+      "ConfigureOptions.ModelId": "รหัสโมเดล"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "แสดงข้อมูลวินิจฉัยเป้าหมายในแชต"
+      "ConfigureOptions.GoalDiagnostics": "แสดงข้อมูลวินิจฉัยเป้าหมายในแชต",
+      "ConfigureOptions.SystemInstructions": "คำแนะนำสำหรับระบบ",
+      "ConfigureOptions.ApiKey": "คีย์ API ของ Claude",
+      "ConfigureOptions.ModelId": "รหัสโมเดล",
+      "ConfigureOptions.MaxOutputTokens": "ความยาวการตอบกลับ (จำนวนโทเค็นสูงสุด)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "แสดงข้อมูลวินิจฉัยเป้าหมายในแชต"
+      "ConfigureOptions.GoalDiagnostics": "แสดงข้อมูลวินิจฉัยเป้าหมายในแชต",
+      "ConfigureOptions.SystemInstructions": "คำแนะนำสำหรับระบบ",
+      "ConfigureOptions.ApiKey": "คีย์ API ของ DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "แสดงข้อมูลวินิจฉัยเป้าหมายในแชต"
+      "ConfigureOptions.GoalDiagnostics": "แสดงข้อมูลวินิจฉัยเป้าหมายในแชต",
+      "ConfigureOptions.SystemInstructions": "คำแนะนำสำหรับระบบ",
+      "ConfigureOptions.ApiKey": "คีย์ API ของ Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL ของ Responses API ใน Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "บริการที่ใช้ร่วมกันและการเลือกผู้ให้บริการเริ่มต้นสำหรับคำขอเบื้องหลัง",
-      "ConfigureOptions.DefaultProvider": "AI Genie (ค่าเริ่มต้น)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (ค่าเริ่มต้น)",
+      "ConfigureOptions.AllowedHttpUrls": "URL HTTP ที่อนุญาต (คั่นด้วยอัฒภาค)",
+      "ConfigureOptions.AllowedLocalFolders": "โฟลเดอร์ในเครื่องที่อนุญาต (คั่นด้วยอัฒภาค)",
+      "ConfigureOptions.MaximumSourceSize": "ขนาดสูงสุดของไฟล์ต้นทาง (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "นามสกุลไฟล์สำหรับแนบโดยตรง (คั่นด้วยอัฒภาค)",
+      "ConfigureOptions.WidgetObjectivePrompt": "คำสั่งสำหรับเป้าหมายการสร้างวิดเจ็ต"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "แสดงข้อมูลวินิจฉัยเป้าหมายในแชต",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "ข้อมูลที่ดาวน์โหลด",
   "audio_stop": "หยุด",
   "audio_resume": "ดำเนินการต่อ",
+  "audio_manage_model": "จัดการโมเดล",
   "audio_download": "ดาวน์โหลด",
   "audio_restart_download": "ดาวน์โหลดอีกครั้ง",
   "audio_download_downloading": "กำลังดาวน์โหลด",

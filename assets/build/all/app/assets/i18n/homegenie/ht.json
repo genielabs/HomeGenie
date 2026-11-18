@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Nòmal",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Montre enfòmasyon dyagnostik objektif yo nan chat la"
+      "ConfigureOptions.GoalDiagnostics": "Montre enfòmasyon dyagnostik objektif yo nan chat la",
+      "ConfigureOptions.SystemInstructions": "Enstriksyon sistèm",
+      "ConfigureOptions.ApiKey": "Kle API OpenAI",
+      "ConfigureOptions.ModelId": "ID Modèl"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Montre enfòmasyon dyagnostik objektif yo nan chat la"
+      "ConfigureOptions.GoalDiagnostics": "Montre enfòmasyon dyagnostik objektif yo nan chat la",
+      "ConfigureOptions.SystemInstructions": "Enstriksyon sistèm",
+      "ConfigureOptions.ApiKey": "Kle API Claude",
+      "ConfigureOptions.ModelId": "ID Modèl",
+      "ConfigureOptions.MaxOutputTokens": "Longè Repons (Jeton Maksimòm)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Montre enfòmasyon dyagnostik objektif yo nan chat la"
+      "ConfigureOptions.GoalDiagnostics": "Montre enfòmasyon dyagnostik objektif yo nan chat la",
+      "ConfigureOptions.SystemInstructions": "Enstriksyon sistèm",
+      "ConfigureOptions.ApiKey": "Kle API DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Montre enfòmasyon dyagnostik objektif yo nan chat la"
+      "ConfigureOptions.GoalDiagnostics": "Montre enfòmasyon dyagnostik objektif yo nan chat la",
+      "ConfigureOptions.SystemInstructions": "Enstriksyon sistèm",
+      "ConfigureOptions.ApiKey": "Kle API Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL API Responses nan Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Sèvis pataje ak seleksyon founisè pa defo pou demann an aryèplan.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Pa defo)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Pa defo)",
+      "ConfigureOptions.AllowedHttpUrls": "URL HTTP ki otorize (separe ak pwen vigil)",
+      "ConfigureOptions.AllowedLocalFolders": "Dosye lokal ki otorize (separe ak pwen vigil)",
+      "ConfigureOptions.MaximumSourceSize": "Gwosè maksimòm fichye sous la (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Ekstansyon fichye pou tache dirèkteman (separe ak pwen vigil)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Enstriksyon pou objektif kreyasyon widjèt"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Montre enfòmasyon dyagnostik objektif yo nan chat la",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Telechaje done yo",
   "audio_stop": "Sispann",
   "audio_resume": "Rezime",
+  "audio_manage_model": "Jere modèl la",
   "audio_download": "Telechaje",
   "audio_restart_download": "Telechaje ankò",
   "audio_download_downloading": "Telechaje",

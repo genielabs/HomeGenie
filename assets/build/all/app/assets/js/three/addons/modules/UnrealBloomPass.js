@@ -1,12 +1,12 @@
 import {
   CopyShader
-} from "./chunk-VION2OAX.js";
+} from "./chunk-UXYJIP63.js";
 import {
   FullScreenQuad,
   Pass
-} from "./chunk-DHEQJFFE.js";
+} from "./chunk-JTJIKJED.js";
 
-// ../release-candidate-yot/node_modules/three/examples/jsm/postprocessing/UnrealBloomPass.js
+// node_modules/three/examples/jsm/postprocessing/UnrealBloomPass.js
 import {
   AdditiveBlending,
   Color as Color2,
@@ -19,7 +19,7 @@ import {
   WebGLRenderTarget
 } from "../../three.module.js";
 
-// ../release-candidate-yot/node_modules/three/examples/jsm/shaders/LuminosityHighPassShader.js
+// node_modules/three/examples/jsm/shaders/LuminosityHighPassShader.js
 import {
   Color
 } from "../../three.module.js";
@@ -68,7 +68,7 @@ var LuminosityHighPassShader = {
 		}`
 };
 
-// ../release-candidate-yot/node_modules/three/examples/jsm/postprocessing/UnrealBloomPass.js
+// node_modules/three/examples/jsm/postprocessing/UnrealBloomPass.js
 var UnrealBloomPass = class extends Pass {
   constructor(resolution, strength = 1, radius, threshold) {
     super();

@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Venjuleg",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Sýna greiningarupplýsingar um markmið í spjalli"
+      "ConfigureOptions.GoalDiagnostics": "Sýna greiningarupplýsingar um markmið í spjalli",
+      "ConfigureOptions.SystemInstructions": "Kerfisfyrirmæli",
+      "ConfigureOptions.ApiKey": "OpenAI API-lykill",
+      "ConfigureOptions.ModelId": "Auðkenni líkans"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Sýna greiningarupplýsingar um markmið í spjalli"
+      "ConfigureOptions.GoalDiagnostics": "Sýna greiningarupplýsingar um markmið í spjalli",
+      "ConfigureOptions.SystemInstructions": "Kerfisfyrirmæli",
+      "ConfigureOptions.ApiKey": "Claude API-lykill",
+      "ConfigureOptions.ModelId": "Auðkenni líkans",
+      "ConfigureOptions.MaxOutputTokens": "Svarlengd (hámarksfjöldi tákna)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Sýna greiningarupplýsingar um markmið í spjalli"
+      "ConfigureOptions.GoalDiagnostics": "Sýna greiningarupplýsingar um markmið í spjalli",
+      "ConfigureOptions.SystemInstructions": "Kerfisfyrirmæli",
+      "ConfigureOptions.ApiKey": "DeepSeek API-lykill"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Sýna greiningarupplýsingar um markmið í spjalli"
+      "ConfigureOptions.GoalDiagnostics": "Sýna greiningarupplýsingar um markmið í spjalli",
+      "ConfigureOptions.SystemInstructions": "Kerfisfyrirmæli",
+      "ConfigureOptions.ApiKey": "Qwen API-lykill",
+      "ConfigureOptions.ResponsesEndpoint": "Slóð að Responses API í Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Sameiginleg þjónusta og val á sjálfgefnum þjónustuveitanda fyrir bakgrunnsbeiðnir.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Sjálfgefið)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Sjálfgefið)",
+      "ConfigureOptions.AllowedHttpUrls": "Leyfðar HTTP-vefslóðir (aðskildar með semíkommu)",
+      "ConfigureOptions.AllowedLocalFolders": "Leyfðar staðbundnar möppur (aðskildar með semíkommu)",
+      "ConfigureOptions.MaximumSourceSize": "Hámarksstærð frumskrár (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Skráarendingar fyrir bein viðhengi (aðskildar með semíkommu)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Fyrirmæli fyrir markmið um gerð viðmótshluta"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Sýna greiningarupplýsingar um markmið í spjalli",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Sótt gögn",
   "audio_stop": "Hættu",
   "audio_resume": "Halda áfram",
+  "audio_manage_model": "Stjórna líkani",
   "audio_download": "Sækja",
   "audio_restart_download": "Sækja aftur",
   "audio_download_downloading": "Niðurhal",

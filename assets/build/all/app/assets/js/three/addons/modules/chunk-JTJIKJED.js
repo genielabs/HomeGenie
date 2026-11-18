@@ -1,4 +1,4 @@
-// ../release-candidate-yot/node_modules/three/examples/jsm/postprocessing/Pass.js
+// node_modules/three/examples/jsm/postprocessing/Pass.js
 import {
   BufferGeometry,
   Float32BufferAttribute,

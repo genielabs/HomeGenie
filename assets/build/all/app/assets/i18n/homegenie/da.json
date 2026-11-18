@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normal",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Vis diagnostik for mål i chatten"
+      "ConfigureOptions.GoalDiagnostics": "Vis diagnostik for mål i chatten",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktioner",
+      "ConfigureOptions.ApiKey": "OpenAI API-nøgle",
+      "ConfigureOptions.ModelId": "Model-id"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Vis diagnostik for mål i chatten"
+      "ConfigureOptions.GoalDiagnostics": "Vis diagnostik for mål i chatten",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktioner",
+      "ConfigureOptions.ApiKey": "Claude API-nøgle",
+      "ConfigureOptions.ModelId": "Model-id",
+      "ConfigureOptions.MaxOutputTokens": "Svarlængde (maks. antal tokens)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Vis diagnostik for mål i chatten"
+      "ConfigureOptions.GoalDiagnostics": "Vis diagnostik for mål i chatten",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktioner",
+      "ConfigureOptions.ApiKey": "DeepSeek API-nøgle"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Vis diagnostik for mål i chatten"
+      "ConfigureOptions.GoalDiagnostics": "Vis diagnostik for mål i chatten",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktioner",
+      "ConfigureOptions.ApiKey": "Qwen API-nøgle",
+      "ConfigureOptions.ResponsesEndpoint": "URL til Responses-API’et i Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Delte tjenester og valg af standardudbyder til baggrundsanmodninger.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Standard)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Standard)",
+      "ConfigureOptions.AllowedHttpUrls": "Tilladte HTTP-URL’er (adskilt med semikolon)",
+      "ConfigureOptions.AllowedLocalFolders": "Tilladte lokale mapper (adskilt med semikolon)",
+      "ConfigureOptions.MaximumSourceSize": "Maksimal kildefilstørrelse (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Filtypenavne til direkte vedhæftning (adskilt med semikolon)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Prompt til mål for oprettelse af widgets"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Vis diagnostik for mål i chatten",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Downloadede data",
   "audio_stop": "Stop",
   "audio_resume": "Genoptag",
+  "audio_manage_model": "Administrer model",
   "audio_download": "Download",
   "audio_restart_download": "Download igen",
   "audio_download_downloading": "Downloader",

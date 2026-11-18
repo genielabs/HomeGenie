@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Звичайно",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Показувати діагностику цілей у чаті"
+      "ConfigureOptions.GoalDiagnostics": "Показувати діагностику цілей у чаті",
+      "ConfigureOptions.SystemInstructions": "Системні інструкції",
+      "ConfigureOptions.ApiKey": "Ключ API OpenAI",
+      "ConfigureOptions.ModelId": "Ідентифікатор моделі"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Показувати діагностику цілей у чаті"
+      "ConfigureOptions.GoalDiagnostics": "Показувати діагностику цілей у чаті",
+      "ConfigureOptions.SystemInstructions": "Системні інструкції",
+      "ConfigureOptions.ApiKey": "Ключ API Claude",
+      "ConfigureOptions.ModelId": "Ідентифікатор моделі",
+      "ConfigureOptions.MaxOutputTokens": "Довжина відповіді (максимальна кількість токенів)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Показувати діагностику цілей у чаті"
+      "ConfigureOptions.GoalDiagnostics": "Показувати діагностику цілей у чаті",
+      "ConfigureOptions.SystemInstructions": "Системні інструкції",
+      "ConfigureOptions.ApiKey": "Ключ API DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Показувати діагностику цілей у чаті"
+      "ConfigureOptions.GoalDiagnostics": "Показувати діагностику цілей у чаті",
+      "ConfigureOptions.SystemInstructions": "Системні інструкції",
+      "ConfigureOptions.ApiKey": "Ключ API Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL інтерфейсу Responses API в Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Спільні служби та вибір типового постачальника для фонових запитів.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Типовий)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Типовий)",
+      "ConfigureOptions.AllowedHttpUrls": "Дозволені HTTP-адреси (через крапку з комою)",
+      "ConfigureOptions.AllowedLocalFolders": "Дозволені локальні папки (через крапку з комою)",
+      "ConfigureOptions.MaximumSourceSize": "Максимальний розмір вихідного файлу (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Розширення файлів для прямого вкладення (через крапку з комою)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Інструкція для завдань зі створення віджетів"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Показувати діагностику цілей у чаті",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Завантажені дані",
   "audio_stop": "Стоп",
   "audio_resume": "Резюме",
+  "audio_manage_model": "Керувати моделлю",
   "audio_download": "Завантажити",
   "audio_restart_download": "Завантажте знову",
   "audio_download_downloading": "Завантаження",

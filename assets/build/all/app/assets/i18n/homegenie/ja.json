@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "標準",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "チャットに目標の診断情報を表示"
+      "ConfigureOptions.GoalDiagnostics": "チャットに目標の診断情報を表示",
+      "ConfigureOptions.SystemInstructions": "システム指示",
+      "ConfigureOptions.ApiKey": "OpenAI API キー",
+      "ConfigureOptions.ModelId": "モデル ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "チャットに目標の診断情報を表示"
+      "ConfigureOptions.GoalDiagnostics": "チャットに目標の診断情報を表示",
+      "ConfigureOptions.SystemInstructions": "システム指示",
+      "ConfigureOptions.ApiKey": "Claude API キー",
+      "ConfigureOptions.ModelId": "モデル ID",
+      "ConfigureOptions.MaxOutputTokens": "レスポンスの長さ（最大トークン数）"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "チャットに目標の診断情報を表示"
+      "ConfigureOptions.GoalDiagnostics": "チャットに目標の診断情報を表示",
+      "ConfigureOptions.SystemInstructions": "システム指示",
+      "ConfigureOptions.ApiKey": "DeepSeek API キー"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "チャットに目標の診断情報を表示"
+      "ConfigureOptions.GoalDiagnostics": "チャットに目標の診断情報を表示",
+      "ConfigureOptions.SystemInstructions": "システム指示",
+      "ConfigureOptions.ApiKey": "Qwen API キー",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio の Responses API URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "共有サービスと、バックグラウンドリクエストに使用するデフォルトプロバイダーの選択。",
-      "ConfigureOptions.DefaultProvider": "AI Genie (デフォルト)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (デフォルト)",
+      "ConfigureOptions.AllowedHttpUrls": "許可する HTTP URL（セミコロン区切り）",
+      "ConfigureOptions.AllowedLocalFolders": "許可するローカルフォルダー（セミコロン区切り）",
+      "ConfigureOptions.MaximumSourceSize": "ソースファイルの最大サイズ (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "直接添付するファイルの拡張子（セミコロン区切り）",
+      "ConfigureOptions.WidgetObjectivePrompt": "ウィジェット作成目標のプロンプト"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "チャットに目標の診断情報を表示",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "ダウンロードしたデータ",
   "audio_stop": "停止",
   "audio_resume": "再開",
+  "audio_manage_model": "モデルを管理",
   "audio_download": "ダウンロード",
   "audio_restart_download": "再度ダウンロードする",
   "audio_download_downloading": "ダウンロード中",

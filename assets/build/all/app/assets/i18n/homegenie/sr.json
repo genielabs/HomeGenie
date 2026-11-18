@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Нормално",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностику циљева у чету"
+      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностику циљева у чету",
+      "ConfigureOptions.SystemInstructions": "Системска упутства",
+      "ConfigureOptions.ApiKey": "OpenAI API кључ",
+      "ConfigureOptions.ModelId": "ID модела"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностику циљева у чету"
+      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностику циљева у чету",
+      "ConfigureOptions.SystemInstructions": "Системска упутства",
+      "ConfigureOptions.ApiKey": "Claude API кључ",
+      "ConfigureOptions.ModelId": "ID модела",
+      "ConfigureOptions.MaxOutputTokens": "Дужина одговора (максималан број токена)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностику циљева у чету"
+      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностику циљева у чету",
+      "ConfigureOptions.SystemInstructions": "Системска упутства",
+      "ConfigureOptions.ApiKey": "DeepSeek API кључ"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностику циљева у чету"
+      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностику циљева у чету",
+      "ConfigureOptions.SystemInstructions": "Системска упутства",
+      "ConfigureOptions.ApiKey": "Qwen API кључ",
+      "ConfigureOptions.ResponsesEndpoint": "Адреса Responses API-ја у Model Studio-у"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Заједничке услуге и избор подразумеваног добављача за захтеве у позадини.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Подразумевано)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Подразумевано)",
+      "ConfigureOptions.AllowedHttpUrls": "Дозвољене HTTP адресе (одвојене тачком и зарезом)",
+      "ConfigureOptions.AllowedLocalFolders": "Дозвољене локалне фасцикле (одвојене тачком и зарезом)",
+      "ConfigureOptions.MaximumSourceSize": "Највећа величина изворне датотеке (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Наставци датотека за директно прилагање (одвојени тачком и зарезом)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Упутство за циљеве израде виџета"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностику циљева у чету",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Преузети подаци",
   "audio_stop": "Стани",
   "audio_resume": "Настави",
+  "audio_manage_model": "Управљај моделом",
   "audio_download": "Преузми",
   "audio_restart_download": "Преузмите поново",
   "audio_download_downloading": "Преузимање",

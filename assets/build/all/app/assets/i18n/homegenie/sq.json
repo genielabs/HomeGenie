@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normale",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Shfaq diagnostikën e objektivave në bisedë"
+      "ConfigureOptions.GoalDiagnostics": "Shfaq diagnostikën e objektivave në bisedë",
+      "ConfigureOptions.SystemInstructions": "Udhëzimet e sistemit",
+      "ConfigureOptions.ApiKey": "Çelësi API i OpenAI",
+      "ConfigureOptions.ModelId": "ID-ja e modelit"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Shfaq diagnostikën e objektivave në bisedë"
+      "ConfigureOptions.GoalDiagnostics": "Shfaq diagnostikën e objektivave në bisedë",
+      "ConfigureOptions.SystemInstructions": "Udhëzimet e sistemit",
+      "ConfigureOptions.ApiKey": "Çelësi API i Claude",
+      "ConfigureOptions.ModelId": "ID-ja e modelit",
+      "ConfigureOptions.MaxOutputTokens": "Gjatësia e Përgjigjes (Tokenët Maksimalë)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Shfaq diagnostikën e objektivave në bisedë"
+      "ConfigureOptions.GoalDiagnostics": "Shfaq diagnostikën e objektivave në bisedë",
+      "ConfigureOptions.SystemInstructions": "Udhëzimet e sistemit",
+      "ConfigureOptions.ApiKey": "Çelësi API i DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Shfaq diagnostikën e objektivave në bisedë"
+      "ConfigureOptions.GoalDiagnostics": "Shfaq diagnostikën e objektivave në bisedë",
+      "ConfigureOptions.SystemInstructions": "Udhëzimet e sistemit",
+      "ConfigureOptions.ApiKey": "Çelësi API i Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL-ja e Responses API në Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Shërbime të përbashkëta dhe përzgjedhja e ofruesit të parazgjedhur për kërkesat në sfond.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Parazgjedhje)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Parazgjedhje)",
+      "ConfigureOptions.AllowedHttpUrls": "URL-të HTTP të lejuara (të ndara me pikëpresje)",
+      "ConfigureOptions.AllowedLocalFolders": "Dosjet lokale të lejuara (të ndara me pikëpresje)",
+      "ConfigureOptions.MaximumSourceSize": "Madhësia maksimale e skedarit burimor (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Prapashtesat e skedarëve për bashkëngjitje të drejtpërdrejtë (të ndara me pikëpresje)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Udhëzim për objektivat e krijimit të miniaplikacioneve"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Shfaq diagnostikën e objektivave në bisedë",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Të dhënat e shkarkuara",
   "audio_stop": "Ndalo",
   "audio_resume": "Rezyme",
+  "audio_manage_model": "Menaxho modelin",
   "audio_download": "Shkarkoni",
   "audio_restart_download": "Shkarkoni përsëri",
   "audio_download_downloading": "Po shkarkohet",

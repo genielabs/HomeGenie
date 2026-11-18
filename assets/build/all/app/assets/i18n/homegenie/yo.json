@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Bí ó ṣe yẹ",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Fi àlàyé àyẹ̀wò ìṣòro àwọn ibi àfojúsùn hàn nínú ìfọ̀rọ̀wérọ̀"
+      "ConfigureOptions.GoalDiagnostics": "Fi àlàyé àyẹ̀wò ìṣòro àwọn ibi àfojúsùn hàn nínú ìfọ̀rọ̀wérọ̀",
+      "ConfigureOptions.SystemInstructions": "Àwọn ìtọ́ni ètò",
+      "ConfigureOptions.ApiKey": "Kọ́kọ́rọ́ API OpenAI",
+      "ConfigureOptions.ModelId": "ID Àwòṣe"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Fi àlàyé àyẹ̀wò ìṣòro àwọn ibi àfojúsùn hàn nínú ìfọ̀rọ̀wérọ̀"
+      "ConfigureOptions.GoalDiagnostics": "Fi àlàyé àyẹ̀wò ìṣòro àwọn ibi àfojúsùn hàn nínú ìfọ̀rọ̀wérọ̀",
+      "ConfigureOptions.SystemInstructions": "Àwọn ìtọ́ni ètò",
+      "ConfigureOptions.ApiKey": "Kọ́kọ́rọ́ API Claude",
+      "ConfigureOptions.ModelId": "ID Àwòṣe",
+      "ConfigureOptions.MaxOutputTokens": "Gígùn Ìdáhùn (Àwọn àmì tó pọ̀ jùlọ)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Fi àlàyé àyẹ̀wò ìṣòro àwọn ibi àfojúsùn hàn nínú ìfọ̀rọ̀wérọ̀"
+      "ConfigureOptions.GoalDiagnostics": "Fi àlàyé àyẹ̀wò ìṣòro àwọn ibi àfojúsùn hàn nínú ìfọ̀rọ̀wérọ̀",
+      "ConfigureOptions.SystemInstructions": "Àwọn ìtọ́ni ètò",
+      "ConfigureOptions.ApiKey": "Kọ́kọ́rọ́ API DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Fi àlàyé àyẹ̀wò ìṣòro àwọn ibi àfojúsùn hàn nínú ìfọ̀rọ̀wérọ̀"
+      "ConfigureOptions.GoalDiagnostics": "Fi àlàyé àyẹ̀wò ìṣòro àwọn ibi àfojúsùn hàn nínú ìfọ̀rọ̀wérọ̀",
+      "ConfigureOptions.SystemInstructions": "Àwọn ìtọ́ni ètò",
+      "ConfigureOptions.ApiKey": "Kọ́kọ́rọ́ API Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL Responses API nínú Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Àwọn iṣẹ́ àjọpín àti yíyan olùpèsè tí a ṣètò tẹ́lẹ̀ fún àwọn ìbéèrè abẹ́lẹ̀.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Ti a ṣètò tẹ́lẹ̀)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Ti a ṣètò tẹ́lẹ̀)",
+      "ConfigureOptions.AllowedHttpUrls": "Àwọn URL HTTP tí a fàyè gba (fi àmì ; yà wọ́n)",
+      "ConfigureOptions.AllowedLocalFolders": "Àwọn fódà agbègbè tí a fàyè gba (fi àmì ; yà wọ́n)",
+      "ConfigureOptions.MaximumSourceSize": "Ìwọ̀n fáìlì orísun tó pọ̀ jù (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Àfikún orúkọ fáìlì tí a lè so mọ́ ní tààrà (fi àmì ; yà wọ́n)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Ìtọ́nisọ́nà fún àwọn àfojúsùn ṣíṣe widget"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Fi àlàyé àyẹ̀wò ìṣòro àwọn ibi àfojúsùn hàn nínú ìfọ̀rọ̀wérọ̀",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Ti gba lati ayelujara data",
   "audio_stop": "Duro",
   "audio_resume": "Tun bẹrẹ",
+  "audio_manage_model": "Ṣàkóso àwòṣe",
   "audio_download": "Gba lati ayelujara",
   "audio_restart_download": "Ṣe igbasilẹ lẹẹkansi",
   "audio_download_downloading": "Gbigba lati ayelujara",

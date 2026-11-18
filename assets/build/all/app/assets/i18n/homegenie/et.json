@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Tavaline",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Kuva eesmärkide diagnostika vestluses"
+      "ConfigureOptions.GoalDiagnostics": "Kuva eesmärkide diagnostika vestluses",
+      "ConfigureOptions.SystemInstructions": "Süsteemijuhised",
+      "ConfigureOptions.ApiKey": "OpenAI API-võti",
+      "ConfigureOptions.ModelId": "Mudeli ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Kuva eesmärkide diagnostika vestluses"
+      "ConfigureOptions.GoalDiagnostics": "Kuva eesmärkide diagnostika vestluses",
+      "ConfigureOptions.SystemInstructions": "Süsteemijuhised",
+      "ConfigureOptions.ApiKey": "Claude API-võti",
+      "ConfigureOptions.ModelId": "Mudeli ID",
+      "ConfigureOptions.MaxOutputTokens": "Vastuse pikkus (maksimaalne tokenite arv)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Kuva eesmärkide diagnostika vestluses"
+      "ConfigureOptions.GoalDiagnostics": "Kuva eesmärkide diagnostika vestluses",
+      "ConfigureOptions.SystemInstructions": "Süsteemijuhised",
+      "ConfigureOptions.ApiKey": "DeepSeek API-võti"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Kuva eesmärkide diagnostika vestluses"
+      "ConfigureOptions.GoalDiagnostics": "Kuva eesmärkide diagnostika vestluses",
+      "ConfigureOptions.SystemInstructions": "Süsteemijuhised",
+      "ConfigureOptions.ApiKey": "Qwen API-võti",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio Responses API URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Jagatud teenused ja vaikimisi teenusepakkuja valimine taustapäringute jaoks.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Vaikimisi)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Vaikimisi)",
+      "ConfigureOptions.AllowedHttpUrls": "Lubatud HTTP-aadressid (semikooloniga eraldatud)",
+      "ConfigureOptions.AllowedLocalFolders": "Lubatud kohalikud kaustad (semikooloniga eraldatud)",
+      "ConfigureOptions.MaximumSourceSize": "Lähtefaili suurim maht (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Otse manustatavate failide laiendid (semikooloniga eraldatud)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Vidinate loomise eesmärkide juhis"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Kuva eesmärkide diagnostika vestluses",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Allalaaditud andmed",
   "audio_stop": "Peatus",
   "audio_resume": "Jätka",
+  "audio_manage_model": "Halda mudelit",
   "audio_download": "Laadi alla",
   "audio_restart_download": "Laadige uuesti alla",
   "audio_download_downloading": "Allalaadimine",

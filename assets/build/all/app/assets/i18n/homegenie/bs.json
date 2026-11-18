@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normalno",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Prikaži dijagnostiku ciljeva u razgovoru"
+      "ConfigureOptions.GoalDiagnostics": "Prikaži dijagnostiku ciljeva u razgovoru",
+      "ConfigureOptions.SystemInstructions": "Sistemska uputstva",
+      "ConfigureOptions.ApiKey": "OpenAI API ključ",
+      "ConfigureOptions.ModelId": "ID modela"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Prikaži dijagnostiku ciljeva u razgovoru"
+      "ConfigureOptions.GoalDiagnostics": "Prikaži dijagnostiku ciljeva u razgovoru",
+      "ConfigureOptions.SystemInstructions": "Sistemska uputstva",
+      "ConfigureOptions.ApiKey": "Claude API ključ",
+      "ConfigureOptions.ModelId": "ID modela",
+      "ConfigureOptions.MaxOutputTokens": "Dužina odgovora (maksimalni broj tokena)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Prikaži dijagnostiku ciljeva u razgovoru"
+      "ConfigureOptions.GoalDiagnostics": "Prikaži dijagnostiku ciljeva u razgovoru",
+      "ConfigureOptions.SystemInstructions": "Sistemska uputstva",
+      "ConfigureOptions.ApiKey": "DeepSeek API ključ"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Prikaži dijagnostiku ciljeva u razgovoru"
+      "ConfigureOptions.GoalDiagnostics": "Prikaži dijagnostiku ciljeva u razgovoru",
+      "ConfigureOptions.SystemInstructions": "Sistemska uputstva",
+      "ConfigureOptions.ApiKey": "Qwen API ključ",
+      "ConfigureOptions.ResponsesEndpoint": "URL za Responses API u Model Studiju"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Zajedničke usluge i izbor zadanog pružaoca za zahtjeve u pozadini.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Zadano)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Zadano)",
+      "ConfigureOptions.AllowedHttpUrls": "Dozvoljeni HTTP URL-ovi (odvojeni tačkom sa zarezom)",
+      "ConfigureOptions.AllowedLocalFolders": "Dozvoljene lokalne mape (odvojene tačkom sa zarezom)",
+      "ConfigureOptions.MaximumSourceSize": "Najveća veličina izvorne datoteke (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Ekstenzije datoteka za direktno prilaganje (odvojene tačkom sa zarezom)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Uputa za ciljeve izrade vidžeta"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Prikaži dijagnostiku ciljeva u razgovoru",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Preuzeti podaci",
   "audio_stop": "Stani",
   "audio_resume": "Nastavi",
+  "audio_manage_model": "Upravljaj modelom",
   "audio_download": "Preuzmi",
   "audio_restart_download": "Preuzmi ponovo",
   "audio_download_downloading": "Preuzimanje",

@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normální",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Zobrazit diagnostiku cílů v chatu"
+      "ConfigureOptions.GoalDiagnostics": "Zobrazit diagnostiku cílů v chatu",
+      "ConfigureOptions.SystemInstructions": "Systémové pokyny",
+      "ConfigureOptions.ApiKey": "Klíč API pro OpenAI",
+      "ConfigureOptions.ModelId": "ID modelu"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Zobrazit diagnostiku cílů v chatu"
+      "ConfigureOptions.GoalDiagnostics": "Zobrazit diagnostiku cílů v chatu",
+      "ConfigureOptions.SystemInstructions": "Systémové pokyny",
+      "ConfigureOptions.ApiKey": "Klíč API pro Claude",
+      "ConfigureOptions.ModelId": "ID modelu",
+      "ConfigureOptions.MaxOutputTokens": "Délka odpovědi (max. tokenů)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Zobrazit diagnostiku cílů v chatu"
+      "ConfigureOptions.GoalDiagnostics": "Zobrazit diagnostiku cílů v chatu",
+      "ConfigureOptions.SystemInstructions": "Systémové pokyny",
+      "ConfigureOptions.ApiKey": "Klíč API pro DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Zobrazit diagnostiku cílů v chatu"
+      "ConfigureOptions.GoalDiagnostics": "Zobrazit diagnostiku cílů v chatu",
+      "ConfigureOptions.SystemInstructions": "Systémové pokyny",
+      "ConfigureOptions.ApiKey": "Klíč API pro Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL rozhraní Responses v Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Sdílené služby a výběr výchozího poskytovatele pro požadavky na pozadí.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Výchozí)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Výchozí)",
+      "ConfigureOptions.AllowedHttpUrls": "Povolené adresy HTTP (oddělené středníkem)",
+      "ConfigureOptions.AllowedLocalFolders": "Povolené místní složky (oddělené středníkem)",
+      "ConfigureOptions.MaximumSourceSize": "Maximální velikost zdrojového souboru (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Přípony souborů pro přímé přiložení (oddělené středníkem)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Pokyny pro cíle tvorby widgetů"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Zobrazit diagnostiku cílů v chatu",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Stažená data",
   "audio_stop": "Přestaň",
   "audio_resume": "Pokračovat",
+  "audio_manage_model": "Spravovat model",
   "audio_download": "Stáhnout",
   "audio_restart_download": "Stáhnout znovu",
   "audio_download_downloading": "Stahování",

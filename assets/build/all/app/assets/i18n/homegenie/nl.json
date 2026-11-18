@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normaal",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Diagnostische gegevens van doelen in de chat tonen"
+      "ConfigureOptions.GoalDiagnostics": "Diagnostische gegevens van doelen in de chat tonen",
+      "ConfigureOptions.SystemInstructions": "Systeeminstructies",
+      "ConfigureOptions.ApiKey": "OpenAI API-sleutel",
+      "ConfigureOptions.ModelId": "Model-ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Diagnostische gegevens van doelen in de chat tonen"
+      "ConfigureOptions.GoalDiagnostics": "Diagnostische gegevens van doelen in de chat tonen",
+      "ConfigureOptions.SystemInstructions": "Systeeminstructies",
+      "ConfigureOptions.ApiKey": "Claude API-sleutel",
+      "ConfigureOptions.ModelId": "Model-ID",
+      "ConfigureOptions.MaxOutputTokens": "Reactielengte (maximaal aantal tokens)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Diagnostische gegevens van doelen in de chat tonen"
+      "ConfigureOptions.GoalDiagnostics": "Diagnostische gegevens van doelen in de chat tonen",
+      "ConfigureOptions.SystemInstructions": "Systeeminstructies",
+      "ConfigureOptions.ApiKey": "DeepSeek API-sleutel"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Diagnostische gegevens van doelen in de chat tonen"
+      "ConfigureOptions.GoalDiagnostics": "Diagnostische gegevens van doelen in de chat tonen",
+      "ConfigureOptions.SystemInstructions": "Systeeminstructies",
+      "ConfigureOptions.ApiKey": "Qwen API-sleutel",
+      "ConfigureOptions.ResponsesEndpoint": "URL van de Responses-API van Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Gedeelde diensten en selectie van de standaardprovider voor achtergrondverzoeken.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Standaard)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Standaard)",
+      "ConfigureOptions.AllowedHttpUrls": "Toegestane HTTP-URL’s (gescheiden door puntkomma’s)",
+      "ConfigureOptions.AllowedLocalFolders": "Toegestane lokale mappen (gescheiden door puntkomma’s)",
+      "ConfigureOptions.MaximumSourceSize": "Maximale grootte van het bronbestand (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Bestandsextensies voor directe bijlagen (gescheiden door puntkomma’s)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Prompt voor doelen om widgets te maken"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Diagnostische gegevens van doelen in de chat tonen",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Gedownloade gegevens",
   "audio_stop": "Stop",
   "audio_resume": "Hervatten",
+  "audio_manage_model": "Model beheren",
   "audio_download": "Downloaden",
   "audio_restart_download": "Opnieuw downloaden",
   "audio_download_downloading": "Downloaden",

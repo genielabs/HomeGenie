@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Хэвийн",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Чатад зорилгын оношилгооны мэдээллийг харуулах"
+      "ConfigureOptions.GoalDiagnostics": "Чатад зорилгын оношилгооны мэдээллийг харуулах",
+      "ConfigureOptions.SystemInstructions": "Системийн зааварчилгаа",
+      "ConfigureOptions.ApiKey": "OpenAI API түлхүүр",
+      "ConfigureOptions.ModelId": "Загварын ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Чатад зорилгын оношилгооны мэдээллийг харуулах"
+      "ConfigureOptions.GoalDiagnostics": "Чатад зорилгын оношилгооны мэдээллийг харуулах",
+      "ConfigureOptions.SystemInstructions": "Системийн зааварчилгаа",
+      "ConfigureOptions.ApiKey": "Claude API түлхүүр",
+      "ConfigureOptions.ModelId": "Загварын ID",
+      "ConfigureOptions.MaxOutputTokens": "Хариу өгөх урт (Хамгийн их токен)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Чатад зорилгын оношилгооны мэдээллийг харуулах"
+      "ConfigureOptions.GoalDiagnostics": "Чатад зорилгын оношилгооны мэдээллийг харуулах",
+      "ConfigureOptions.SystemInstructions": "Системийн зааварчилгаа",
+      "ConfigureOptions.ApiKey": "DeepSeek API түлхүүр"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Чатад зорилгын оношилгооны мэдээллийг харуулах"
+      "ConfigureOptions.GoalDiagnostics": "Чатад зорилгын оношилгооны мэдээллийг харуулах",
+      "ConfigureOptions.SystemInstructions": "Системийн зааварчилгаа",
+      "ConfigureOptions.ApiKey": "Qwen API түлхүүр",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio дахь Responses API-ийн URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Хуваалцсан үйлчилгээнүүд болон арын хүсэлтүүдийн өгөгдмөл үйлчилгээ үзүүлэгчийг сонгох.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Өгөгдмөл)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Өгөгдмөл)",
+      "ConfigureOptions.AllowedHttpUrls": "Зөвшөөрсөн HTTP хаягууд (цэг таслалаар тусгаарлана)",
+      "ConfigureOptions.AllowedLocalFolders": "Зөвшөөрсөн дотоод хавтаснууд (цэг таслалаар тусгаарлана)",
+      "ConfigureOptions.MaximumSourceSize": "Эх файлын дээд хэмжээ (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Шууд хавсаргах файлын өргөтгөлүүд (цэг таслалаар тусгаарлана)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Вижет үүсгэх зорилгын заавар"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Чатад зорилгын оношилгооны мэдээллийг харуулах",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Татаж авсан өгөгдөл",
   "audio_stop": "Зогс",
   "audio_resume": "Үргэлжлэл",
+  "audio_manage_model": "Загварыг удирдах",
   "audio_download": "Татаж авах",
   "audio_restart_download": "Дахин татаж авах",
   "audio_download_downloading": "Татаж байна",

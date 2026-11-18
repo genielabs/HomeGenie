@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Mahazatra",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Asehoy ao amin’ny resaka ny fampahalalana momba ny fizahana ny olana amin’ny tanjona"
+      "ConfigureOptions.GoalDiagnostics": "Asehoy ao amin’ny resaka ny fampahalalana momba ny fizahana ny olana amin’ny tanjona",
+      "ConfigureOptions.SystemInstructions": "Torolalana amin'ny rafitra",
+      "ConfigureOptions.ApiKey": "Fanalahidy API OpenAI",
+      "ConfigureOptions.ModelId": "ID Modely"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Asehoy ao amin’ny resaka ny fampahalalana momba ny fizahana ny olana amin’ny tanjona"
+      "ConfigureOptions.GoalDiagnostics": "Asehoy ao amin’ny resaka ny fampahalalana momba ny fizahana ny olana amin’ny tanjona",
+      "ConfigureOptions.SystemInstructions": "Torolalana amin'ny rafitra",
+      "ConfigureOptions.ApiKey": "Fanalahidy API Claude",
+      "ConfigureOptions.ModelId": "ID Modely",
+      "ConfigureOptions.MaxOutputTokens": "Faharetan'ny valiny (Tokens ambony indrindra)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Asehoy ao amin’ny resaka ny fampahalalana momba ny fizahana ny olana amin’ny tanjona"
+      "ConfigureOptions.GoalDiagnostics": "Asehoy ao amin’ny resaka ny fampahalalana momba ny fizahana ny olana amin’ny tanjona",
+      "ConfigureOptions.SystemInstructions": "Torolalana amin'ny rafitra",
+      "ConfigureOptions.ApiKey": "Fanalahidy API DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Asehoy ao amin’ny resaka ny fampahalalana momba ny fizahana ny olana amin’ny tanjona"
+      "ConfigureOptions.GoalDiagnostics": "Asehoy ao amin’ny resaka ny fampahalalana momba ny fizahana ny olana amin’ny tanjona",
+      "ConfigureOptions.SystemInstructions": "Torolalana amin'ny rafitra",
+      "ConfigureOptions.ApiKey": "Fanalahidy API Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL an’ny Responses API ao amin’ny Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Tolotra iombonana sy fisafidianana ny mpamatsy mahazatra ho an'ny fangatahana mandeha any ambadika.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Mahazatra)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Mahazatra)",
+      "ConfigureOptions.AllowedHttpUrls": "URL HTTP azo ampiasaina (asaraka amin’ny teboka faingo)",
+      "ConfigureOptions.AllowedLocalFolders": "Lahatahiry eo an-toerana azo ampiasaina (asaraka amin’ny teboka faingo)",
+      "ConfigureOptions.MaximumSourceSize": "Habe ambony indrindra amin’ny rakitra loharano (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Tovana anaran-drakitra ho an’ny fampiarahana mivantana (asaraka amin’ny teboka faingo)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Toromarika ho an’ny tanjona famoronana widget"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Asehoy ao amin’ny resaka ny fampahalalana momba ny fizahana ny olana amin’ny tanjona",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "angona alaina\nSary",
   "audio_stop": "Atsaharo\nSary",
   "audio_resume": "Resume\nSary",
+  "audio_manage_model": "Tantano ny maodely",
   "audio_download": "Download\nSary",
   "audio_restart_download": "Download indray\nSary",
   "audio_download_downloading": "Misintona\nSary",

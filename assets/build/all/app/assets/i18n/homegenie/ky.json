@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Кадимки",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Маекте максаттардын диагностикалык маалыматын көрсөтүү"
+      "ConfigureOptions.GoalDiagnostics": "Маекте максаттардын диагностикалык маалыматын көрсөтүү",
+      "ConfigureOptions.SystemInstructions": "Тутумдук нускамалар",
+      "ConfigureOptions.ApiKey": "OpenAI API ачкычы",
+      "ConfigureOptions.ModelId": "Моделдин IDси"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Маекте максаттардын диагностикалык маалыматын көрсөтүү"
+      "ConfigureOptions.GoalDiagnostics": "Маекте максаттардын диагностикалык маалыматын көрсөтүү",
+      "ConfigureOptions.SystemInstructions": "Тутумдук нускамалар",
+      "ConfigureOptions.ApiKey": "Claude API ачкычы",
+      "ConfigureOptions.ModelId": "Моделдин IDси",
+      "ConfigureOptions.MaxOutputTokens": "Жооптун узактыгы (максималдуу токендер)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Маекте максаттардын диагностикалык маалыматын көрсөтүү"
+      "ConfigureOptions.GoalDiagnostics": "Маекте максаттардын диагностикалык маалыматын көрсөтүү",
+      "ConfigureOptions.SystemInstructions": "Тутумдук нускамалар",
+      "ConfigureOptions.ApiKey": "DeepSeek API ачкычы"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Маекте максаттардын диагностикалык маалыматын көрсөтүү"
+      "ConfigureOptions.GoalDiagnostics": "Маекте максаттардын диагностикалык маалыматын көрсөтүү",
+      "ConfigureOptions.SystemInstructions": "Тутумдук нускамалар",
+      "ConfigureOptions.ApiKey": "Qwen API ачкычы",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio Responses API дареги"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Жалпы кызматтар жана фондо аткарылуучу сурамдар үчүн демейки камсыздоочуну тандоо.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Демейки)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Демейки)",
+      "ConfigureOptions.AllowedHttpUrls": "Уруксат берилген HTTP даректери (үтүрлүү чекит менен бөлүнөт)",
+      "ConfigureOptions.AllowedLocalFolders": "Уруксат берилген жергиликтүү папкалар (үтүрлүү чекит менен бөлүнөт)",
+      "ConfigureOptions.MaximumSourceSize": "Баштапкы файлдын эң чоң өлчөмү (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Түз тиркелүүчү файл кеңейтүүлөрү (үтүрлүү чекит менен бөлүнөт)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Виджет түзүү максаттары үчүн нускама"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Маекте максаттардын диагностикалык маалыматын көрсөтүү",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Жүктөлүп алынган дайындар",
   "audio_stop": "Токто",
   "audio_resume": "Резюме",
+  "audio_manage_model": "Моделди башкаруу",
   "audio_download": "Жүктөп алуу",
   "audio_restart_download": "Кайра жүктөө",
   "audio_download_downloading": "Жүктөлүүдө",

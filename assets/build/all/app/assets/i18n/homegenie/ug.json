@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "نورمال",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "نىشانلارنىڭ دىئاگنوز ئۇچۇرىنى سۆھبەتتە كۆرسەت"
+      "ConfigureOptions.GoalDiagnostics": "نىشانلارنىڭ دىئاگنوز ئۇچۇرىنى سۆھبەتتە كۆرسەت",
+      "ConfigureOptions.SystemInstructions": "سىستېما كۆرسەتمىلىرى",
+      "ConfigureOptions.ApiKey": "OpenAI API ئاچقۇچى",
+      "ConfigureOptions.ModelId": "مودېل كىملىكى (Model ID)"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "نىشانلارنىڭ دىئاگنوز ئۇچۇرىنى سۆھبەتتە كۆرسەت"
+      "ConfigureOptions.GoalDiagnostics": "نىشانلارنىڭ دىئاگنوز ئۇچۇرىنى سۆھبەتتە كۆرسەت",
+      "ConfigureOptions.SystemInstructions": "سىستېما كۆرسەتمىلىرى",
+      "ConfigureOptions.ApiKey": "Claude API ئاچقۇچى",
+      "ConfigureOptions.ModelId": "مودېل كىملىكى (Model ID)",
+      "ConfigureOptions.MaxOutputTokens": "جاۋاب ئۇزۇنلۇقى (ئەڭ يۇقىرى بەلگىلەر)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "نىشانلارنىڭ دىئاگنوز ئۇچۇرىنى سۆھبەتتە كۆرسەت"
+      "ConfigureOptions.GoalDiagnostics": "نىشانلارنىڭ دىئاگنوز ئۇچۇرىنى سۆھبەتتە كۆرسەت",
+      "ConfigureOptions.SystemInstructions": "سىستېما كۆرسەتمىلىرى",
+      "ConfigureOptions.ApiKey": "DeepSeek API ئاچقۇچى"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "نىشانلارنىڭ دىئاگنوز ئۇچۇرىنى سۆھبەتتە كۆرسەت"
+      "ConfigureOptions.GoalDiagnostics": "نىشانلارنىڭ دىئاگنوز ئۇچۇرىنى سۆھبەتتە كۆرسەت",
+      "ConfigureOptions.SystemInstructions": "سىستېما كۆرسەتمىلىرى",
+      "ConfigureOptions.ApiKey": "Qwen API ئاچقۇچى",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio دىكى Responses API ئادرېسى"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "ئورتاق مۇلازىمەتلەر ۋە ئارقا سۇپا تەلەپلىرى ئۈچۈن سۈكۈتتىكى تەمىنلىگۈچىنى تاللاش.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (سۈكۈتتىكى)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (سۈكۈتتىكى)",
+      "ConfigureOptions.AllowedHttpUrls": "رۇخسەت قىلىنغان HTTP ئادرېسلىرى (چېكىتلىك پەش بىلەن ئايرىلىدۇ)",
+      "ConfigureOptions.AllowedLocalFolders": "رۇخسەت قىلىنغان يەرلىك مۇندەرىجىلەر (چېكىتلىك پەش بىلەن ئايرىلىدۇ)",
+      "ConfigureOptions.MaximumSourceSize": "مەنبە ھۆججەتنىڭ ئەڭ چوڭ چوڭلۇقى (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "بىۋاسىتە قوشۇلىدىغان ھۆججەت كېڭەيتمىلىرى (چېكىتلىك پەش بىلەن ئايرىلىدۇ)",
+      "ConfigureOptions.WidgetObjectivePrompt": "ۋىجېت ياساش نىشانلىرى ئۈچۈن كۆرسەتمە"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "نىشانلارنىڭ دىئاگنوز ئۇچۇرىنى سۆھبەتتە كۆرسەت",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "چۈشۈرۈلگەن سانلىق مەلۇمات",
   "audio_stop": "توختاڭ",
   "audio_resume": "ئەسلىگە كەلتۈرۈش",
+  "audio_manage_model": "مودېلنى باشقۇرۇش",
   "audio_download": "چۈشۈرۈش",
   "audio_restart_download": "قايتا چۈشۈرۈڭ",
   "audio_download_downloading": "چۈشۈرۈش",

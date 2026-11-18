@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Սովորական",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Զրույցում ցուցադրել նպատակների ախտորոշման տվյալները"
+      "ConfigureOptions.GoalDiagnostics": "Զրույցում ցուցադրել նպատակների ախտորոշման տվյալները",
+      "ConfigureOptions.SystemInstructions": "Համակարգի հրահանգներ",
+      "ConfigureOptions.ApiKey": "OpenAI-ի API բանալի",
+      "ConfigureOptions.ModelId": "Մոդելի ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Զրույցում ցուցադրել նպատակների ախտորոշման տվյալները"
+      "ConfigureOptions.GoalDiagnostics": "Զրույցում ցուցադրել նպատակների ախտորոշման տվյալները",
+      "ConfigureOptions.SystemInstructions": "Համակարգի հրահանգներ",
+      "ConfigureOptions.ApiKey": "Claude-ի API բանալի",
+      "ConfigureOptions.ModelId": "Մոդելի ID",
+      "ConfigureOptions.MaxOutputTokens": "Պատասխանի երկարությունը (առավելագույն տոկեններ)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Զրույցում ցուցադրել նպատակների ախտորոշման տվյալները"
+      "ConfigureOptions.GoalDiagnostics": "Զրույցում ցուցադրել նպատակների ախտորոշման տվյալները",
+      "ConfigureOptions.SystemInstructions": "Համակարգի հրահանգներ",
+      "ConfigureOptions.ApiKey": "DeepSeek-ի API բանալի"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Զրույցում ցուցադրել նպատակների ախտորոշման տվյալները"
+      "ConfigureOptions.GoalDiagnostics": "Զրույցում ցուցադրել նպատակների ախտորոշման տվյալները",
+      "ConfigureOptions.SystemInstructions": "Համակարգի հրահանգներ",
+      "ConfigureOptions.ApiKey": "Qwen-ի API բանալի",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio-ի Responses API-ի URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Համօգտագործվող ծառայություններ և ֆոնային հարցումների համար լռելյայն մատակարարի ընտրություն։",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Լռելյայն)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Լռելյայն)",
+      "ConfigureOptions.AllowedHttpUrls": "Թույլատրված HTTP հասցեներ (առանձնացված կետ-ստորակետով)",
+      "ConfigureOptions.AllowedLocalFolders": "Թույլատրված տեղական պանակներ (առանձնացված կետ-ստորակետով)",
+      "ConfigureOptions.MaximumSourceSize": "Աղբյուր ֆայլի առավելագույն չափը (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Անմիջապես կցվող ֆայլերի ընդլայնումներ (առանձնացված կետ-ստորակետով)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Վիջեթ ստեղծելու նպատակների հրահանգ"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Զրույցում ցուցադրել նպատակների ախտորոշման տվյալները",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Ներբեռնված տվյալներ",
   "audio_stop": "Դադարեցրեք",
   "audio_resume": "Ռեզյումե",
+  "audio_manage_model": "Կառավարել մոդելը",
   "audio_download": "Բեռնել",
   "audio_restart_download": "Ներբեռնեք նորից",
   "audio_download_downloading": "Ներբեռնում",

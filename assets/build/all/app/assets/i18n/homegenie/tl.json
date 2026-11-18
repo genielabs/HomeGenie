@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normal",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Ipakita sa chat ang mga detalye sa pagsusuri ng mga layunin"
+      "ConfigureOptions.GoalDiagnostics": "Ipakita sa chat ang mga detalye sa pagsusuri ng mga layunin",
+      "ConfigureOptions.SystemInstructions": "Mga tagubilin ng system",
+      "ConfigureOptions.ApiKey": "API key ng OpenAI",
+      "ConfigureOptions.ModelId": "Model ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Ipakita sa chat ang mga detalye sa pagsusuri ng mga layunin"
+      "ConfigureOptions.GoalDiagnostics": "Ipakita sa chat ang mga detalye sa pagsusuri ng mga layunin",
+      "ConfigureOptions.SystemInstructions": "Mga tagubilin ng system",
+      "ConfigureOptions.ApiKey": "API key ng Claude",
+      "ConfigureOptions.ModelId": "Model ID",
+      "ConfigureOptions.MaxOutputTokens": "Haba ng Tugon (Max Tokens)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Ipakita sa chat ang mga detalye sa pagsusuri ng mga layunin"
+      "ConfigureOptions.GoalDiagnostics": "Ipakita sa chat ang mga detalye sa pagsusuri ng mga layunin",
+      "ConfigureOptions.SystemInstructions": "Mga tagubilin ng system",
+      "ConfigureOptions.ApiKey": "API key ng DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Ipakita sa chat ang mga detalye sa pagsusuri ng mga layunin"
+      "ConfigureOptions.GoalDiagnostics": "Ipakita sa chat ang mga detalye sa pagsusuri ng mga layunin",
+      "ConfigureOptions.SystemInstructions": "Mga tagubilin ng system",
+      "ConfigureOptions.ApiKey": "API key ng Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL ng Responses API sa Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Mga nakabahaging serbisyo at pagpili ng default na provider para sa mga kahilingan sa background.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Default)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Default)",
+      "ConfigureOptions.AllowedHttpUrls": "Mga pinapayagang HTTP URL (pinaghihiwalay ng tuldok-kuwit)",
+      "ConfigureOptions.AllowedLocalFolders": "Mga pinapayagang lokal na folder (pinaghihiwalay ng tuldok-kuwit)",
+      "ConfigureOptions.MaximumSourceSize": "Pinakamalaking sukat ng source file (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Mga extension ng file na direktang ikakabit (pinaghihiwalay ng tuldok-kuwit)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Tagubilin para sa mga layunin ng paggawa ng widget"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Ipakita sa chat ang mga detalye sa pagsusuri ng mga layunin",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Na-download na data",
   "audio_stop": "Tumigil ka",
   "audio_resume": "Ipagpatuloy",
+  "audio_manage_model": "Pamahalaan ang modelo",
   "audio_download": "I-download",
   "audio_restart_download": "I-download muli",
   "audio_download_downloading": "Nagda-download",

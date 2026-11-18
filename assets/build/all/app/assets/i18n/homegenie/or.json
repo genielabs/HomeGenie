@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "ସାଧାରଣ",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "ଚାଟ୍‌ରେ ଲକ୍ଷ୍ୟଗୁଡ଼ିକର ନିଦାନ ସୂଚନା ଦେଖାନ୍ତୁ"
+      "ConfigureOptions.GoalDiagnostics": "ଚାଟ୍‌ରେ ଲକ୍ଷ୍ୟଗୁଡ଼ିକର ନିଦାନ ସୂଚନା ଦେଖାନ୍ତୁ",
+      "ConfigureOptions.SystemInstructions": "ସିଷ୍ଟମ୍ ନିର୍ଦ୍ଦେଶାବଳୀ",
+      "ConfigureOptions.ApiKey": "OpenAI API କି",
+      "ConfigureOptions.ModelId": "ମଡେଲ୍ ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "ଚାଟ୍‌ରେ ଲକ୍ଷ୍ୟଗୁଡ଼ିକର ନିଦାନ ସୂଚନା ଦେଖାନ୍ତୁ"
+      "ConfigureOptions.GoalDiagnostics": "ଚାଟ୍‌ରେ ଲକ୍ଷ୍ୟଗୁଡ଼ିକର ନିଦାନ ସୂଚନା ଦେଖାନ୍ତୁ",
+      "ConfigureOptions.SystemInstructions": "ସିଷ୍ଟମ୍ ନିର୍ଦ୍ଦେଶାବଳୀ",
+      "ConfigureOptions.ApiKey": "Claude API କି",
+      "ConfigureOptions.ModelId": "ମଡେଲ୍ ID",
+      "ConfigureOptions.MaxOutputTokens": "ପ୍ରତିକ୍ରିୟା ଦୈର୍ଘ୍ୟ (ସର୍ବାଧିକ ଟୋକନ୍)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "ଚାଟ୍‌ରେ ଲକ୍ଷ୍ୟଗୁଡ଼ିକର ନିଦାନ ସୂଚନା ଦେଖାନ୍ତୁ"
+      "ConfigureOptions.GoalDiagnostics": "ଚାଟ୍‌ରେ ଲକ୍ଷ୍ୟଗୁଡ଼ିକର ନିଦାନ ସୂଚନା ଦେଖାନ୍ତୁ",
+      "ConfigureOptions.SystemInstructions": "ସିଷ୍ଟମ୍ ନିର୍ଦ୍ଦେଶାବଳୀ",
+      "ConfigureOptions.ApiKey": "DeepSeek API କି"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "ଚାଟ୍‌ରେ ଲକ୍ଷ୍ୟଗୁଡ଼ିକର ନିଦାନ ସୂଚନା ଦେଖାନ୍ତୁ"
+      "ConfigureOptions.GoalDiagnostics": "ଚାଟ୍‌ରେ ଲକ୍ଷ୍ୟଗୁଡ଼ିକର ନିଦାନ ସୂଚନା ଦେଖାନ୍ତୁ",
+      "ConfigureOptions.SystemInstructions": "ସିଷ୍ଟମ୍ ନିର୍ଦ୍ଦେଶାବଳୀ",
+      "ConfigureOptions.ApiKey": "Qwen API କି",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio Responses APIର URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "ଅଂଶୀଦାର ସେବା ଏବଂ ପୃଷ୍ଠଭୂମି ଅନୁରୋଧ ପାଇଁ ଡିଫଲ୍ଟ ପ୍ରଦାନକାରୀ ଚୟନ।",
-      "ConfigureOptions.DefaultProvider": "AI Genie (ଡିଫଲ୍ଟ)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (ଡିଫଲ୍ଟ)",
+      "ConfigureOptions.AllowedHttpUrls": "ଅନୁମୋଦିତ HTTP URL (ସେମିକୋଲନ୍‌ରେ ପୃଥକ)",
+      "ConfigureOptions.AllowedLocalFolders": "ଅନୁମୋଦିତ ସ୍ଥାନୀୟ ଫୋଲ୍ଡର (ସେମିକୋଲନ୍‌ରେ ପୃଥକ)",
+      "ConfigureOptions.MaximumSourceSize": "ଉତ୍ସ ଫାଇଲର ସର୍ବାଧିକ ଆକାର (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "ସିଧାସଳଖ ସଂଲଗ୍ନ କରିବା ପାଇଁ ଫାଇଲ ଏକ୍ସଟେନ୍ସନ୍ (ସେମିକୋଲନ୍‌ରେ ପୃଥକ)",
+      "ConfigureOptions.WidgetObjectivePrompt": "ୱିଜେଟ୍ ସୃଷ୍ଟି ଲକ୍ଷ୍ୟ ପାଇଁ ନିର୍ଦ୍ଦେଶ"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "ଚାଟ୍‌ରେ ଲକ୍ଷ୍ୟଗୁଡ଼ିକର ନିଦାନ ସୂଚନା ଦେଖାନ୍ତୁ",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "ଡାଉନଲୋଡ୍ ହୋଇଥିବା ଡାଟା |",
   "audio_stop": "ବନ୍ଦ କର |",
   "audio_resume": "ପୁନ ume କାର୍ଯ୍ୟ ଆରମ୍ଭ କରନ୍ତୁ |",
+  "audio_manage_model": "ମଡେଲ୍ ପରିଚାଳନା କରନ୍ତୁ",
   "audio_download": "ଡାଉନଲୋଡ୍ କରନ୍ତୁ |",
   "audio_restart_download": "|\nପୁନର୍ବାର ଡାଉନଲୋଡ୍ କରନ୍ତୁ |",
   "audio_download_downloading": "ଡାଉନଲୋଡ୍ କରୁଛି |",

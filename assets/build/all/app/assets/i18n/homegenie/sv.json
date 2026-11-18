@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normal",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Visa diagnostik för mål i chatten"
+      "ConfigureOptions.GoalDiagnostics": "Visa diagnostik för mål i chatten",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktioner",
+      "ConfigureOptions.ApiKey": "API-nyckel för OpenAI",
+      "ConfigureOptions.ModelId": "Modell-ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Visa diagnostik för mål i chatten"
+      "ConfigureOptions.GoalDiagnostics": "Visa diagnostik för mål i chatten",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktioner",
+      "ConfigureOptions.ApiKey": "API-nyckel för Claude",
+      "ConfigureOptions.ModelId": "Modell-ID",
+      "ConfigureOptions.MaxOutputTokens": "Svarslängd (max antal tokens)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Visa diagnostik för mål i chatten"
+      "ConfigureOptions.GoalDiagnostics": "Visa diagnostik för mål i chatten",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktioner",
+      "ConfigureOptions.ApiKey": "API-nyckel för DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Visa diagnostik för mål i chatten"
+      "ConfigureOptions.GoalDiagnostics": "Visa diagnostik för mål i chatten",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktioner",
+      "ConfigureOptions.ApiKey": "API-nyckel för Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL till Responses-API:t i Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Delade tjänster och val av standardleverantör för bakgrundsförfrågningar.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Standard)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Standard)",
+      "ConfigureOptions.AllowedHttpUrls": "Tillåtna HTTP-adresser (avgränsade med semikolon)",
+      "ConfigureOptions.AllowedLocalFolders": "Tillåtna lokala mappar (avgränsade med semikolon)",
+      "ConfigureOptions.MaximumSourceSize": "Största storlek för källfilen (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Filändelser för direkta bilagor (avgränsade med semikolon)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Instruktion för mål att skapa widgetar"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Visa diagnostik för mål i chatten",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Nedladdade data",
   "audio_stop": "Sluta",
   "audio_resume": "Återuppta",
+  "audio_manage_model": "Hantera modell",
   "audio_download": "Ladda ner",
   "audio_restart_download": "Ladda ner igen",
   "audio_download_downloading": "Laddar ner",

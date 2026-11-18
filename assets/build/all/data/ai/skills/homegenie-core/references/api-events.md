@@ -41,14 +41,6 @@ Calls the specified handler when HomeGenie service is stopping.
 EventsHelper
 - handler: The handler function to call.
 
-```csharp
-EventsHelper WebServiceCallReceived(string apiCall, Func< object, object > handler)
-```
-
-```csharp
-EventsHelper WebServiceCallReceived(string apiCall, Func< object, string > handler)
-```
-
 ## SchedulerHelper
 
 ```csharp

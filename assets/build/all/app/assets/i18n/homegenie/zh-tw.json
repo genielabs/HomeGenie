@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "正常",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "在聊天中顯示目標診斷資訊"
+      "ConfigureOptions.GoalDiagnostics": "在聊天中顯示目標診斷資訊",
+      "ConfigureOptions.SystemInstructions": "系統指令",
+      "ConfigureOptions.ApiKey": "OpenAI API 金鑰",
+      "ConfigureOptions.ModelId": "模型 ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "在聊天中顯示目標診斷資訊"
+      "ConfigureOptions.GoalDiagnostics": "在聊天中顯示目標診斷資訊",
+      "ConfigureOptions.SystemInstructions": "系統指令",
+      "ConfigureOptions.ApiKey": "Claude API 金鑰",
+      "ConfigureOptions.ModelId": "模型 ID",
+      "ConfigureOptions.MaxOutputTokens": "響應長度（最大令牌數）"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "在聊天中顯示目標診斷資訊"
+      "ConfigureOptions.GoalDiagnostics": "在聊天中顯示目標診斷資訊",
+      "ConfigureOptions.SystemInstructions": "系統指令",
+      "ConfigureOptions.ApiKey": "DeepSeek API 金鑰"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "在聊天中顯示目標診斷資訊"
+      "ConfigureOptions.GoalDiagnostics": "在聊天中顯示目標診斷資訊",
+      "ConfigureOptions.SystemInstructions": "系統指令",
+      "ConfigureOptions.ApiKey": "Qwen API 金鑰",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio 的 Responses API 網址"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "共用服務及背景請求的預設提供者選擇。",
-      "ConfigureOptions.DefaultProvider": "AI Genie (預設)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (預設)",
+      "ConfigureOptions.AllowedHttpUrls": "允許的 HTTP URL（以分號分隔）",
+      "ConfigureOptions.AllowedLocalFolders": "允許的本機資料夾（以分號分隔）",
+      "ConfigureOptions.MaximumSourceSize": "來源檔案大小上限 (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "可直接附加的副檔名（以分號分隔）",
+      "ConfigureOptions.WidgetObjectivePrompt": "小工具建立目標的提示詞"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "在聊天中顯示目標診斷資訊",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "下載的數據",
   "audio_stop": "停止",
   "audio_resume": "履歷",
+  "audio_manage_model": "管理模型",
   "audio_download": "下載",
   "audio_restart_download": "再次下載",
   "audio_download_downloading": "正在下載",

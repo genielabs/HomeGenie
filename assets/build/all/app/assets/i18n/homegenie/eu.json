@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normala",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Erakutsi helburuen diagnostikoa txatean"
+      "ConfigureOptions.GoalDiagnostics": "Erakutsi helburuen diagnostikoa txatean",
+      "ConfigureOptions.SystemInstructions": "Sistemaren argibideak",
+      "ConfigureOptions.ApiKey": "OpenAI-ren API gakoa",
+      "ConfigureOptions.ModelId": "Modeloarearen IDa"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Erakutsi helburuen diagnostikoa txatean"
+      "ConfigureOptions.GoalDiagnostics": "Erakutsi helburuen diagnostikoa txatean",
+      "ConfigureOptions.SystemInstructions": "Sistemaren argibideak",
+      "ConfigureOptions.ApiKey": "Claude-ren API gakoa",
+      "ConfigureOptions.ModelId": "Modeloarearen IDa",
+      "ConfigureOptions.MaxOutputTokens": "Erantzunaren luzera (gehienezko tokenak)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Erakutsi helburuen diagnostikoa txatean"
+      "ConfigureOptions.GoalDiagnostics": "Erakutsi helburuen diagnostikoa txatean",
+      "ConfigureOptions.SystemInstructions": "Sistemaren argibideak",
+      "ConfigureOptions.ApiKey": "DeepSeek-ren API gakoa"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Erakutsi helburuen diagnostikoa txatean"
+      "ConfigureOptions.GoalDiagnostics": "Erakutsi helburuen diagnostikoa txatean",
+      "ConfigureOptions.SystemInstructions": "Sistemaren argibideak",
+      "ConfigureOptions.ApiKey": "Qwen-ren API gakoa",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio-ko Responses APIaren URLa"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Zerbitzu partekatuak eta atzeko planoko eskaeretarako hornitzaile lehenetsia hautatzea.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Lehenetsia)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Lehenetsia)",
+      "ConfigureOptions.AllowedHttpUrls": "Baimendutako HTTP URLak (puntu eta komaz bereizita)",
+      "ConfigureOptions.AllowedLocalFolders": "Baimendutako karpeta lokalak (puntu eta komaz bereizita)",
+      "ConfigureOptions.MaximumSourceSize": "Iturburu-fitxategiaren gehieneko tamaina (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Zuzenean eransteko fitxategi-luzapenak (puntu eta komaz bereizita)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Widgetak sortzeko helburuen jarraibidea"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Erakutsi helburuen diagnostikoa txatean",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Deskargatutako datuak",
   "audio_stop": "Gelditu",
   "audio_resume": "Curriculuma",
+  "audio_manage_model": "Kudeatu modeloa",
   "audio_download": "Deskargatu",
   "audio_restart_download": "Deskargatu berriro",
   "audio_download_downloading": "Deskargatzen",

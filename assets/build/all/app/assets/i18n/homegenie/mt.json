@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normali",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Uri d-dijanjostika tal-għanijiet fiċ-chat"
+      "ConfigureOptions.GoalDiagnostics": "Uri d-dijanjostika tal-għanijiet fiċ-chat",
+      "ConfigureOptions.SystemInstructions": "Struzzjonijiet tas-sistema",
+      "ConfigureOptions.ApiKey": "Ċavetta API ta' OpenAI",
+      "ConfigureOptions.ModelId": "ID tal-Mudell"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Uri d-dijanjostika tal-għanijiet fiċ-chat"
+      "ConfigureOptions.GoalDiagnostics": "Uri d-dijanjostika tal-għanijiet fiċ-chat",
+      "ConfigureOptions.SystemInstructions": "Struzzjonijiet tas-sistema",
+      "ConfigureOptions.ApiKey": "Ċavetta API ta' Claude",
+      "ConfigureOptions.ModelId": "ID tal-Mudell",
+      "ConfigureOptions.MaxOutputTokens": "Tul tar-Rispons (Tokens Massimi)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Uri d-dijanjostika tal-għanijiet fiċ-chat"
+      "ConfigureOptions.GoalDiagnostics": "Uri d-dijanjostika tal-għanijiet fiċ-chat",
+      "ConfigureOptions.SystemInstructions": "Struzzjonijiet tas-sistema",
+      "ConfigureOptions.ApiKey": "Ċavetta API ta' DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Uri d-dijanjostika tal-għanijiet fiċ-chat"
+      "ConfigureOptions.GoalDiagnostics": "Uri d-dijanjostika tal-għanijiet fiċ-chat",
+      "ConfigureOptions.SystemInstructions": "Struzzjonijiet tas-sistema",
+      "ConfigureOptions.ApiKey": "Ċavetta API ta' Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL tal-API Responses f’Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Servizzi kondiviżi u għażla tal-fornitur predefinit għat-talbiet fl-isfond.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Predefinit)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Predefinit)",
+      "ConfigureOptions.AllowedHttpUrls": "URLs HTTP permessi (separati b’punt u virgola)",
+      "ConfigureOptions.AllowedLocalFolders": "Folders lokali permessi (separati b’punt u virgola)",
+      "ConfigureOptions.MaximumSourceSize": "Daqs massimu tal-fajl tas-sors (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Estensjonijiet tal-fajls biex jitwaħħlu direttament (separati b’punt u virgola)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Istruzzjoni għall-għanijiet tal-ħolqien tal-widgets"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Uri d-dijanjostika tal-għanijiet fiċ-chat",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Data mniżżla",
   "audio_stop": "Waqqaf",
   "audio_resume": "Ibda",
+  "audio_manage_model": "Immaniġġja l-mudell",
   "audio_download": "Niżżel",
   "audio_restart_download": "Niżżel mill-ġdid",
   "audio_download_downloading": "Tniżżil",

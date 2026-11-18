@@ -1,0 +1,97 @@
+@import 'assets/styles/widget-ui.css';
+
+.ai-genie-setup {
+  display: grid;
+  gap: 8px;
+  overflow-wrap: anywhere;
+}
+
+.ai-genie-setup :is(h2, h3, p, ul) {
+  margin: 0;
+}
+
+.ai-genie-setup h2 {
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.ai-genie-setup h3 {
+  margin-top: 12px;
+  font-size: 16px;
+  color: var(--primary-color);
+}
+
+.ai-genie-setup ul {
+  padding-inline-start: 24px;
+}
+
+.ai-genie-setup [hidden] {
+  display: none;
+}
+
+.setup-providers {
+  padding: 0;
+  list-style: none;
+}
+
+.setup-provider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  border-bottom: 1px solid var(--divider-color);
+}
+
+.setup-provider:last-child {
+  border-bottom: 0;
+}
+
+.setup-provider-name {
+  flex: 1;
+  min-width: 0;
+}
+
+.setup-provider-status {
+  color: var(--secondary-text-color);
+}
+
+.setup-provider-status.ready {
+  color: var(--primary-color);
+}
+
+.setup-provider-status.error {
+  color: var(--warn-color);
+}
+
+.setup-provider button, .setup-primary {
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 4px;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.setup-provider button {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+.setup-provider button:hover {
+  background: var(--hover-color);
+}
+
+.setup-primary {
+  justify-self: center;
+  margin-block: 16px;
+  padding: 8px 12px;
+  background: var(--primary-color);
+  color: var(--background-color);
+}
+
+.setup-empty {
+  color: var(--secondary-text-color);
+}

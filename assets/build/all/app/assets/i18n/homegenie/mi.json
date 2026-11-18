@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Noa",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Whakaatuhia ngā mōhiohio tātari mō ngā whāinga ki te kōrerorero"
+      "ConfigureOptions.GoalDiagnostics": "Whakaatuhia ngā mōhiohio tātari mō ngā whāinga ki te kōrerorero",
+      "ConfigureOptions.SystemInstructions": "Tohutohu pūnaha",
+      "ConfigureOptions.ApiKey": "Kī API OpenAI",
+      "ConfigureOptions.ModelId": "ID Tauira"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Whakaatuhia ngā mōhiohio tātari mō ngā whāinga ki te kōrerorero"
+      "ConfigureOptions.GoalDiagnostics": "Whakaatuhia ngā mōhiohio tātari mō ngā whāinga ki te kōrerorero",
+      "ConfigureOptions.SystemInstructions": "Tohutohu pūnaha",
+      "ConfigureOptions.ApiKey": "Kī API Claude",
+      "ConfigureOptions.ModelId": "ID Tauira",
+      "ConfigureOptions.MaxOutputTokens": "Te Roa o te Urupare (Ngā Tohu Mōrahi)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Whakaatuhia ngā mōhiohio tātari mō ngā whāinga ki te kōrerorero"
+      "ConfigureOptions.GoalDiagnostics": "Whakaatuhia ngā mōhiohio tātari mō ngā whāinga ki te kōrerorero",
+      "ConfigureOptions.SystemInstructions": "Tohutohu pūnaha",
+      "ConfigureOptions.ApiKey": "Kī API DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Whakaatuhia ngā mōhiohio tātari mō ngā whāinga ki te kōrerorero"
+      "ConfigureOptions.GoalDiagnostics": "Whakaatuhia ngā mōhiohio tātari mō ngā whāinga ki te kōrerorero",
+      "ConfigureOptions.SystemInstructions": "Tohutohu pūnaha",
+      "ConfigureOptions.ApiKey": "Kī API Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL o te Responses API i Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Ngā ratonga tiritahi me te kōwhiri i te kaiwhakarato taunoa mō ngā tono papamuri.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Taunoa)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Taunoa)",
+      "ConfigureOptions.AllowedHttpUrls": "Ngā URL HTTP e whakaaetia ana (wehea ki te tohu ;)",
+      "ConfigureOptions.AllowedLocalFolders": "Ngā kōpaki paetata e whakaaetia ana (wehea ki te tohu ;)",
+      "ConfigureOptions.MaximumSourceSize": "Te rahi mōrahi o te kōnae pūtake (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Ngā toronga kōnae hei āpiti tika (wehea ki te tohu ;)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Tohutohu mō ngā whāinga hanga widget"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Whakaatuhia ngā mōhiohio tātari mō ngā whāinga ki te kōrerorero",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Raraunga kua tikiakehia",
   "audio_stop": "Kati",
   "audio_resume": "Anō",
+  "audio_manage_model": "Whakahaerehia te tauira",
   "audio_download": "Tikiake",
   "audio_restart_download": "Tikiake ano",
   "audio_download_downloading": "Tikiake ana",

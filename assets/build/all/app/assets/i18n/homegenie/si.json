@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "සාමාන්‍ය",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "කතාබහේදී ඉලක්කවල ගැටලු නිර්ණය පිළිබඳ තොරතුරු පෙන්වන්න"
+      "ConfigureOptions.GoalDiagnostics": "කතාබහේදී ඉලක්කවල ගැටලු නිර්ණය පිළිබඳ තොරතුරු පෙන්වන්න",
+      "ConfigureOptions.SystemInstructions": "පද්ධති උපදෙස්",
+      "ConfigureOptions.ApiKey": "OpenAI API යතුර",
+      "ConfigureOptions.ModelId": "Model ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "කතාබහේදී ඉලක්කවල ගැටලු නිර්ණය පිළිබඳ තොරතුරු පෙන්වන්න"
+      "ConfigureOptions.GoalDiagnostics": "කතාබහේදී ඉලක්කවල ගැටලු නිර්ණය පිළිබඳ තොරතුරු පෙන්වන්න",
+      "ConfigureOptions.SystemInstructions": "පද්ධති උපදෙස්",
+      "ConfigureOptions.ApiKey": "Claude API යතුර",
+      "ConfigureOptions.ModelId": "Model ID",
+      "ConfigureOptions.MaxOutputTokens": "ප්‍රතිචාර දිග (උපරිම ටෝකන)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "කතාබහේදී ඉලක්කවල ගැටලු නිර්ණය පිළිබඳ තොරතුරු පෙන්වන්න"
+      "ConfigureOptions.GoalDiagnostics": "කතාබහේදී ඉලක්කවල ගැටලු නිර්ණය පිළිබඳ තොරතුරු පෙන්වන්න",
+      "ConfigureOptions.SystemInstructions": "පද්ධති උපදෙස්",
+      "ConfigureOptions.ApiKey": "DeepSeek API යතුර"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "කතාබහේදී ඉලක්කවල ගැටලු නිර්ණය පිළිබඳ තොරතුරු පෙන්වන්න"
+      "ConfigureOptions.GoalDiagnostics": "කතාබහේදී ඉලක්කවල ගැටලු නිර්ණය පිළිබඳ තොරතුරු පෙන්වන්න",
+      "ConfigureOptions.SystemInstructions": "පද්ධති උපදෙස්",
+      "ConfigureOptions.ApiKey": "Qwen API යතුර",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio හි Responses API URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "හවුල් සේවා සහ පසුබිම් ඉල්ලීම් සඳහා පෙරනිමි සැපයුම්කරු තේරීම.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (පෙරනිමි)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (පෙරනිමි)",
+      "ConfigureOptions.AllowedHttpUrls": "අවසර ලත් HTTP URL (අර්ධ විරාමවලින් වෙන් කරන්න)",
+      "ConfigureOptions.AllowedLocalFolders": "අවසර ලත් දේශීය ෆෝල්ඩර (අර්ධ විරාමවලින් වෙන් කරන්න)",
+      "ConfigureOptions.MaximumSourceSize": "මූලාශ්‍ර ගොනුවේ උපරිම ප්‍රමාණය (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "සෘජුව ඇමිණිය හැකි ගොනු දිගු (අර්ධ විරාමවලින් වෙන් කරන්න)",
+      "ConfigureOptions.WidgetObjectivePrompt": "විජට් නිර්මාණ ඉලක්ක සඳහා උපදෙස්"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "කතාබහේදී ඉලක්කවල ගැටලු නිර්ණය පිළිබඳ තොරතුරු පෙන්වන්න",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "බාගත කළ දත්ත",
   "audio_stop": "නවත්වන්න",
   "audio_resume": "නැවත ආරම්භ කරන්න",
+  "audio_manage_model": "ආකෘතිය කළමනාකරණය කරන්න",
   "audio_download": "බාගන්න",
   "audio_restart_download": "නැවත බාගන්න",
   "audio_download_downloading": "බාගත කිරීම",

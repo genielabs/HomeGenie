@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "ჩვეულებრივი",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "ჩატში მიზნების დიაგნოსტიკის ჩვენება"
+      "ConfigureOptions.GoalDiagnostics": "ჩატში მიზნების დიაგნოსტიკის ჩვენება",
+      "ConfigureOptions.SystemInstructions": "სისტემური ინსტრუქციები",
+      "ConfigureOptions.ApiKey": "OpenAI-ს API გასაღები",
+      "ConfigureOptions.ModelId": "მოდელის ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "ჩატში მიზნების დიაგნოსტიკის ჩვენება"
+      "ConfigureOptions.GoalDiagnostics": "ჩატში მიზნების დიაგნოსტიკის ჩვენება",
+      "ConfigureOptions.SystemInstructions": "სისტემური ინსტრუქციები",
+      "ConfigureOptions.ApiKey": "Claude-ს API გასაღები",
+      "ConfigureOptions.ModelId": "მოდელის ID",
+      "ConfigureOptions.MaxOutputTokens": "პასუხის სიგრძე (მაქსიმალური ჟეტონები)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "ჩატში მიზნების დიაგნოსტიკის ჩვენება"
+      "ConfigureOptions.GoalDiagnostics": "ჩატში მიზნების დიაგნოსტიკის ჩვენება",
+      "ConfigureOptions.SystemInstructions": "სისტემური ინსტრუქციები",
+      "ConfigureOptions.ApiKey": "DeepSeek-ს API გასაღები"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "ჩატში მიზნების დიაგნოსტიკის ჩვენება"
+      "ConfigureOptions.GoalDiagnostics": "ჩატში მიზნების დიაგნოსტიკის ჩვენება",
+      "ConfigureOptions.SystemInstructions": "სისტემური ინსტრუქციები",
+      "ConfigureOptions.ApiKey": "Qwen-ს API გასაღები",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio-ს Responses API-ის URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "საზიარო სერვისები და ფონური მოთხოვნებისთვის ნაგულისხმევი პროვაიდერის შერჩევა.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (ნაგულისხმევი)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (ნაგულისხმევი)",
+      "ConfigureOptions.AllowedHttpUrls": "ნებადართული HTTP URL-ები (გამოყოფილი წერტილ-მძიმით)",
+      "ConfigureOptions.AllowedLocalFolders": "ნებადართული ადგილობრივი საქაღალდეები (გამოყოფილი წერტილ-მძიმით)",
+      "ConfigureOptions.MaximumSourceSize": "წყაროს ფაილის მაქსიმალური ზომა (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "პირდაპირ დასამაგრებელი ფაილების გაფართოებები (გამოყოფილი წერტილ-მძიმით)",
+      "ConfigureOptions.WidgetObjectivePrompt": "ვიჯეტის შექმნის მიზნების ინსტრუქცია"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "ჩატში მიზნების დიაგნოსტიკის ჩვენება",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "გადმოწერილი მონაცემები",
   "audio_stop": "გაჩერდი",
   "audio_resume": "რეზიუმე",
+  "audio_manage_model": "მოდელის მართვა",
   "audio_download": "ჩამოტვირთვა",
   "audio_restart_download": "ხელახლა ჩამოტვირთეთ",
   "audio_download_downloading": "ჩამოტვირთვა",

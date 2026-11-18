@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normál",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Célok diagnosztikájának megjelenítése a csevegésben"
+      "ConfigureOptions.GoalDiagnostics": "Célok diagnosztikájának megjelenítése a csevegésben",
+      "ConfigureOptions.SystemInstructions": "Rendszerutasítások",
+      "ConfigureOptions.ApiKey": "OpenAI API-kulcs",
+      "ConfigureOptions.ModelId": "Modellazonosító"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Célok diagnosztikájának megjelenítése a csevegésben"
+      "ConfigureOptions.GoalDiagnostics": "Célok diagnosztikájának megjelenítése a csevegésben",
+      "ConfigureOptions.SystemInstructions": "Rendszerutasítások",
+      "ConfigureOptions.ApiKey": "Claude API-kulcs",
+      "ConfigureOptions.ModelId": "Modellazonosító",
+      "ConfigureOptions.MaxOutputTokens": "Válasz hossza (maximális tokenek)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Célok diagnosztikájának megjelenítése a csevegésben"
+      "ConfigureOptions.GoalDiagnostics": "Célok diagnosztikájának megjelenítése a csevegésben",
+      "ConfigureOptions.SystemInstructions": "Rendszerutasítások",
+      "ConfigureOptions.ApiKey": "DeepSeek API-kulcs"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Célok diagnosztikájának megjelenítése a csevegésben"
+      "ConfigureOptions.GoalDiagnostics": "Célok diagnosztikájának megjelenítése a csevegésben",
+      "ConfigureOptions.SystemInstructions": "Rendszerutasítások",
+      "ConfigureOptions.ApiKey": "Qwen API-kulcs",
+      "ConfigureOptions.ResponsesEndpoint": "A Model Studio Responses API URL-je"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Megosztott szolgáltatások és az alapértelmezett szolgáltató kiválasztása a háttérben futó kérésekhez.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Alapértelmezett)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Alapértelmezett)",
+      "ConfigureOptions.AllowedHttpUrls": "Engedélyezett HTTP URL-ek (pontosvesszővel elválasztva)",
+      "ConfigureOptions.AllowedLocalFolders": "Engedélyezett helyi mappák (pontosvesszővel elválasztva)",
+      "ConfigureOptions.MaximumSourceSize": "Forrásfájl maximális mérete (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Közvetlenül csatolható fájlok kiterjesztései (pontosvesszővel elválasztva)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Utasítás a widgetkészítési célokhoz"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Célok diagnosztikájának megjelenítése a csevegésben",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Letöltött adatok",
   "audio_stop": "Állj",
   "audio_resume": "Folytatás",
+  "audio_manage_model": "Modell kezelése",
   "audio_download": "Letöltés",
   "audio_restart_download": "Töltse le újra",
   "audio_download_downloading": "Letöltés",

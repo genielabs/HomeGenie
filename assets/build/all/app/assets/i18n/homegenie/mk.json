@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Нормално",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностика на целите во разговорот"
+      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностика на целите во разговорот",
+      "ConfigureOptions.SystemInstructions": "Системски упатства",
+      "ConfigureOptions.ApiKey": "OpenAI API клуч",
+      "ConfigureOptions.ModelId": "ID на модел"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностика на целите во разговорот"
+      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностика на целите во разговорот",
+      "ConfigureOptions.SystemInstructions": "Системски упатства",
+      "ConfigureOptions.ApiKey": "Claude API клуч",
+      "ConfigureOptions.ModelId": "ID на модел",
+      "ConfigureOptions.MaxOutputTokens": "Должина на одговор (максимум токени)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностика на целите во разговорот"
+      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностика на целите во разговорот",
+      "ConfigureOptions.SystemInstructions": "Системски упатства",
+      "ConfigureOptions.ApiKey": "DeepSeek API клуч"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностика на целите во разговорот"
+      "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностика на целите во разговорот",
+      "ConfigureOptions.SystemInstructions": "Системски упатства",
+      "ConfigureOptions.ApiKey": "Qwen API клуч",
+      "ConfigureOptions.ResponsesEndpoint": "URL на Responses API во Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Заеднички услуги и избор на стандарден давател за барања во заднина.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Стандардно)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Стандардно)",
+      "ConfigureOptions.AllowedHttpUrls": "Дозволени HTTP адреси (одделени со точка-запирка)",
+      "ConfigureOptions.AllowedLocalFolders": "Дозволени локални папки (одделени со точка-запирка)",
+      "ConfigureOptions.MaximumSourceSize": "Најголема големина на изворната датотека (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Наставки на датотеки за директно прикачување (одделени со точка-запирка)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Упатство за цели за создавање виџети"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Прикажи дијагностика на целите во разговорот",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Преземени податоци",
   "audio_stop": "Стоп",
   "audio_resume": "Продолжи",
+  "audio_manage_model": "Управувај со моделот",
   "audio_download": "Преземи",
   "audio_restart_download": "Преземете повторно",
   "audio_download_downloading": "Преземање",

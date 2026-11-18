@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normal",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Vis diagnostikk for mål i chatten"
+      "ConfigureOptions.GoalDiagnostics": "Vis diagnostikk for mål i chatten",
+      "ConfigureOptions.SystemInstructions": "Systeminstruksjoner",
+      "ConfigureOptions.ApiKey": "OpenAI API-nøkkel",
+      "ConfigureOptions.ModelId": "Modell-ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Vis diagnostikk for mål i chatten"
+      "ConfigureOptions.GoalDiagnostics": "Vis diagnostikk for mål i chatten",
+      "ConfigureOptions.SystemInstructions": "Systeminstruksjoner",
+      "ConfigureOptions.ApiKey": "Claude API-nøkkel",
+      "ConfigureOptions.ModelId": "Modell-ID",
+      "ConfigureOptions.MaxOutputTokens": "Svarlengde (maks. tokener)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Vis diagnostikk for mål i chatten"
+      "ConfigureOptions.GoalDiagnostics": "Vis diagnostikk for mål i chatten",
+      "ConfigureOptions.SystemInstructions": "Systeminstruksjoner",
+      "ConfigureOptions.ApiKey": "DeepSeek API-nøkkel"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Vis diagnostikk for mål i chatten"
+      "ConfigureOptions.GoalDiagnostics": "Vis diagnostikk for mål i chatten",
+      "ConfigureOptions.SystemInstructions": "Systeminstruksjoner",
+      "ConfigureOptions.ApiKey": "Qwen API-nøkkel",
+      "ConfigureOptions.ResponsesEndpoint": "URL til Responses-API-et i Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Delte tjenester og valg av standardleverandør for bakgrunnsforespørsler.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Standard)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Standard)",
+      "ConfigureOptions.AllowedHttpUrls": "Tillatte HTTP-adresser (skilt med semikolon)",
+      "ConfigureOptions.AllowedLocalFolders": "Tillatte lokale mapper (skilt med semikolon)",
+      "ConfigureOptions.MaximumSourceSize": "Maksimal størrelse på kildefilen (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Filendelser for direkte vedlegg (skilt med semikolon)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Instruks for mål om å lage widgeter"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Vis diagnostikk for mål i chatten",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Nedlastede data",
   "audio_stop": "Stopp",
   "audio_resume": "Fortsett",
+  "audio_manage_model": "Administrer modell",
   "audio_download": "Last ned",
   "audio_restart_download": "Last ned igjen",
   "audio_download_downloading": "Laster ned",

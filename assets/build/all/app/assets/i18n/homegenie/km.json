@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "ធម្មតា",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "បង្ហាញព័ត៌មានវិនិច្ឆ័យបញ្ហានៃគោលដៅក្នុងការជជែក"
+      "ConfigureOptions.GoalDiagnostics": "បង្ហាញព័ត៌មានវិនិច្ឆ័យបញ្ហានៃគោលដៅក្នុងការជជែក",
+      "ConfigureOptions.SystemInstructions": "សេចក្តីណែនាំប្រព័ន្ធ",
+      "ConfigureOptions.ApiKey": "សោ API របស់ OpenAI",
+      "ConfigureOptions.ModelId": "លេខសម្គាល់ម៉ូដែល"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "បង្ហាញព័ត៌មានវិនិច្ឆ័យបញ្ហានៃគោលដៅក្នុងការជជែក"
+      "ConfigureOptions.GoalDiagnostics": "បង្ហាញព័ត៌មានវិនិច្ឆ័យបញ្ហានៃគោលដៅក្នុងការជជែក",
+      "ConfigureOptions.SystemInstructions": "សេចក្តីណែនាំប្រព័ន្ធ",
+      "ConfigureOptions.ApiKey": "សោ API របស់ Claude",
+      "ConfigureOptions.ModelId": "លេខសម្គាល់ម៉ូដែល",
+      "ConfigureOptions.MaxOutputTokens": "ប្រវែងឆ្លើយតប (ថូខឹនអតិបរមា)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "បង្ហាញព័ត៌មានវិនិច្ឆ័យបញ្ហានៃគោលដៅក្នុងការជជែក"
+      "ConfigureOptions.GoalDiagnostics": "បង្ហាញព័ត៌មានវិនិច្ឆ័យបញ្ហានៃគោលដៅក្នុងការជជែក",
+      "ConfigureOptions.SystemInstructions": "សេចក្តីណែនាំប្រព័ន្ធ",
+      "ConfigureOptions.ApiKey": "សោ API របស់ DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "បង្ហាញព័ត៌មានវិនិច្ឆ័យបញ្ហានៃគោលដៅក្នុងការជជែក"
+      "ConfigureOptions.GoalDiagnostics": "បង្ហាញព័ត៌មានវិនិច្ឆ័យបញ្ហានៃគោលដៅក្នុងការជជែក",
+      "ConfigureOptions.SystemInstructions": "សេចក្តីណែនាំប្រព័ន្ធ",
+      "ConfigureOptions.ApiKey": "សោ API របស់ Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL របស់ Responses API ក្នុង Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "សេវាកម្មរួម និងការជ្រើសរើសអ្នកផ្តល់សេវាលំនាំដើមសម្រាប់សំណើនៅផ្ទៃខាងក្រោយ។",
-      "ConfigureOptions.DefaultProvider": "AI Genie (លំនាំដើម)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (លំនាំដើម)",
+      "ConfigureOptions.AllowedHttpUrls": "URL HTTP ដែលអនុញ្ញាត (បំបែកដោយសញ្ញា ;)",
+      "ConfigureOptions.AllowedLocalFolders": "ថតមូលដ្ឋានដែលអនុញ្ញាត (បំបែកដោយសញ្ញា ;)",
+      "ConfigureOptions.MaximumSourceSize": "ទំហំឯកសារប្រភពអតិបរមា (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "កន្ទុយឯកសារសម្រាប់ភ្ជាប់ដោយផ្ទាល់ (បំបែកដោយសញ្ញា ;)",
+      "ConfigureOptions.WidgetObjectivePrompt": "ការណែនាំសម្រាប់គោលដៅបង្កើតធាតុក្រាហ្វិក"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "បង្ហាញព័ត៌មានវិនិច្ឆ័យបញ្ហានៃគោលដៅក្នុងការជជែក",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "ទិន្នន័យដែលបានទាញយក",
   "audio_stop": "ឈប់",
   "audio_resume": "បន្ត",
+  "audio_manage_model": "គ្រប់គ្រងម៉ូឌែល",
   "audio_download": "ទាញយក",
   "audio_restart_download": "ទាញយកម្តងទៀត",
   "audio_download_downloading": "កំពុងទាញយក",

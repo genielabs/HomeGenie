@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Biasa",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Papar diagnostik objektif dalam sembang"
+      "ConfigureOptions.GoalDiagnostics": "Papar diagnostik objektif dalam sembang",
+      "ConfigureOptions.SystemInstructions": "Arahan sistem",
+      "ConfigureOptions.ApiKey": "Kunci API OpenAI",
+      "ConfigureOptions.ModelId": "ID Model"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Papar diagnostik objektif dalam sembang"
+      "ConfigureOptions.GoalDiagnostics": "Papar diagnostik objektif dalam sembang",
+      "ConfigureOptions.SystemInstructions": "Arahan sistem",
+      "ConfigureOptions.ApiKey": "Kunci API Claude",
+      "ConfigureOptions.ModelId": "ID Model",
+      "ConfigureOptions.MaxOutputTokens": "Panjang Respons (Token Maks)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Papar diagnostik objektif dalam sembang"
+      "ConfigureOptions.GoalDiagnostics": "Papar diagnostik objektif dalam sembang",
+      "ConfigureOptions.SystemInstructions": "Arahan sistem",
+      "ConfigureOptions.ApiKey": "Kunci API DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Papar diagnostik objektif dalam sembang"
+      "ConfigureOptions.GoalDiagnostics": "Papar diagnostik objektif dalam sembang",
+      "ConfigureOptions.SystemInstructions": "Arahan sistem",
+      "ConfigureOptions.ApiKey": "Kunci API Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL API Responses dalam Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Perkhidmatan dikongsi dan pemilihan penyedia lalai untuk permintaan latar belakang.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Lalai)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Lalai)",
+      "ConfigureOptions.AllowedHttpUrls": "URL HTTP yang dibenarkan (dipisahkan dengan koma bertitik)",
+      "ConfigureOptions.AllowedLocalFolders": "Folder setempat yang dibenarkan (dipisahkan dengan koma bertitik)",
+      "ConfigureOptions.MaximumSourceSize": "Saiz maksimum fail sumber (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Sambungan fail untuk dilampirkan terus (dipisahkan dengan koma bertitik)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Arahan untuk matlamat penciptaan widget"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Papar diagnostik objektif dalam sembang",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Data yang dimuat turun",
   "audio_stop": "Berhenti",
   "audio_resume": "Sambung semula",
+  "audio_manage_model": "Urus model",
   "audio_download": "Muat turun",
   "audio_restart_download": "Muat turun semula",
   "audio_download_downloading": "Memuat turun",

@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Arferol",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Dangos gwybodaeth ddiagnostig am amcanion yn y sgwrs"
+      "ConfigureOptions.GoalDiagnostics": "Dangos gwybodaeth ddiagnostig am amcanion yn y sgwrs",
+      "ConfigureOptions.SystemInstructions": "Cyfarwyddiadau system",
+      "ConfigureOptions.ApiKey": "Allwedd API OpenAI",
+      "ConfigureOptions.ModelId": "ID Model"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Dangos gwybodaeth ddiagnostig am amcanion yn y sgwrs"
+      "ConfigureOptions.GoalDiagnostics": "Dangos gwybodaeth ddiagnostig am amcanion yn y sgwrs",
+      "ConfigureOptions.SystemInstructions": "Cyfarwyddiadau system",
+      "ConfigureOptions.ApiKey": "Allwedd API Claude",
+      "ConfigureOptions.ModelId": "ID Model",
+      "ConfigureOptions.MaxOutputTokens": "Hyd yr Ymateb (Uchafswm Tocynnau)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Dangos gwybodaeth ddiagnostig am amcanion yn y sgwrs"
+      "ConfigureOptions.GoalDiagnostics": "Dangos gwybodaeth ddiagnostig am amcanion yn y sgwrs",
+      "ConfigureOptions.SystemInstructions": "Cyfarwyddiadau system",
+      "ConfigureOptions.ApiKey": "Allwedd API DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Dangos gwybodaeth ddiagnostig am amcanion yn y sgwrs"
+      "ConfigureOptions.GoalDiagnostics": "Dangos gwybodaeth ddiagnostig am amcanion yn y sgwrs",
+      "ConfigureOptions.SystemInstructions": "Cyfarwyddiadau system",
+      "ConfigureOptions.ApiKey": "Allwedd API Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL API Responses Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Gwasanaethau a rennir a dewis y darparwr diofyn ar gyfer ceisiadau cefndir.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Diofyn)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Diofyn)",
+      "ConfigureOptions.AllowedHttpUrls": "URLau HTTP a ganiateir (wedi’u gwahanu gan hanner colon)",
+      "ConfigureOptions.AllowedLocalFolders": "Ffolderi lleol a ganiateir (wedi’u gwahanu gan hanner colon)",
+      "ConfigureOptions.MaximumSourceSize": "Maint mwyaf y ffeil ffynhonnell (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Estyniadau ffeiliau i’w hatodi’n uniongyrchol (wedi’u gwahanu gan hanner colon)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Anogwr ar gyfer nodau creu teclynnau"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Dangos gwybodaeth ddiagnostig am amcanion yn y sgwrs",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Data wedi'i lawrlwytho",
   "audio_stop": "Stopio",
   "audio_resume": "Ail-ddechrau",
+  "audio_manage_model": "Rheoli’r model",
   "audio_download": "Lawrlwythwch",
   "audio_restart_download": "Lawrlwythwch eto",
   "audio_download_downloading": "Wrthi'n llwytho i lawr",

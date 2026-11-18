@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Usitata",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Indicia diagnostica propositōrum in colloquiō ostende"
+      "ConfigureOptions.GoalDiagnostics": "Indicia diagnostica propositōrum in colloquiō ostende",
+      "ConfigureOptions.SystemInstructions": "Praecepta systematis",
+      "ConfigureOptions.ApiKey": "Clavis API OpenAI",
+      "ConfigureOptions.ModelId": "ID Exemplaris"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Indicia diagnostica propositōrum in colloquiō ostende"
+      "ConfigureOptions.GoalDiagnostics": "Indicia diagnostica propositōrum in colloquiō ostende",
+      "ConfigureOptions.SystemInstructions": "Praecepta systematis",
+      "ConfigureOptions.ApiKey": "Clavis API Claude",
+      "ConfigureOptions.ModelId": "ID Exemplaris",
+      "ConfigureOptions.MaxOutputTokens": "Longitudo Responsionis (Tesserae Maximae)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Indicia diagnostica propositōrum in colloquiō ostende"
+      "ConfigureOptions.GoalDiagnostics": "Indicia diagnostica propositōrum in colloquiō ostende",
+      "ConfigureOptions.SystemInstructions": "Praecepta systematis",
+      "ConfigureOptions.ApiKey": "Clavis API DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Indicia diagnostica propositōrum in colloquiō ostende"
+      "ConfigureOptions.GoalDiagnostics": "Indicia diagnostica propositōrum in colloquiō ostende",
+      "ConfigureOptions.SystemInstructions": "Praecepta systematis",
+      "ConfigureOptions.ApiKey": "Clavis API Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL interfaciei Responses in Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Servitia communia et electio provisoris praedefiniti ad petitiones in recessu tractandas.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Praedefinitum)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Praedefinitum)",
+      "ConfigureOptions.AllowedHttpUrls": "URL HTTP permissa (semicolis distincta)",
+      "ConfigureOptions.AllowedLocalFolders": "Directoria localia permissa (semicolis distincta)",
+      "ConfigureOptions.MaximumSourceSize": "Maxima magnitudo fasciculi fontis (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Extensiones fasciculorum directe adiungendorum (semicolis distinctae)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Praeceptum ad proposita instrumentorum creandorum"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Indicia diagnostica propositōrum in colloquiō ostende",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Downloaded notitia",
   "audio_stop": "Subsisto",
   "audio_resume": "Proin",
+  "audio_manage_model": "Exemplar administra",
   "audio_download": "Download",
   "audio_restart_download": "Download iterum",
   "audio_download_downloading": "Downloading",

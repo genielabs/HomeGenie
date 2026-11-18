@@ -64,8 +64,60 @@ def load_classes(xml_dir):
     return classes
 
 
+def source_line(node):
+    return (" " if node.tag == "sp" else node.text or "") + "".join(
+        source_line(child) + (child.tail or "") for child in node
+    )
+
+
+def load_source_listings(xml_dir):
+    # Doxygen's C# member definitions can omit [Obsolete], even when the
+    # attribute is present in the XML source listing.
+    index = ET.parse(xml_dir / "index.xml").getroot()
+    listings = {}
+    for entry in index.findall("compound[@kind='file']"):
+        if not entry.findtext("name", "").endswith(".cs"):
+            continue
+        compound = ET.parse(xml_dir / (entry.get("refid") + ".xml")).find("compounddef")
+        location = compound.find("location")
+        if location is not None:
+            listings[location.get("file")] = {
+                int(line.get("lineno")): source_line(line).strip()
+                for line in compound.findall("programlisting/codeline")
+            }
+    return listings
+
+
+def is_deprecated(member, listings):
+    if any(text(title).casefold() == "deprecated" for title in member.findall(".//xrefsect/xreftitle")):
+        return True
+    location = member.find("location")
+    if location is None or not location.get("file", "").endswith(".cs"):
+        return False
+    file = location.get("file")
+    lines = listings.get(file)
+    if not lines:
+        raise ValueError("Missing Doxygen XML source listing for " + file + "; enable XML_PROGRAMLISTING")
+    number = int(location.get("line"))
+    # Walk back over the contiguous attribute lists attached to the declaration.
+    while lines.get(number - 1, "").endswith("]"):
+        end = number - 1
+        start = end
+        while start > 0 and not lines.get(start, "").startswith("["):
+            start -= 1
+        if not start:
+            break
+        attributes = " ".join(lines.get(line, "") for line in range(start, end + 1))
+        attributes = re.sub(r'"(?:[^"\\]|\\.)*"', '""', attributes)
+        if re.search(r"(?:\[|,)\s*(?:(?:global::)?System\.)?Obsolete(?:Attribute)?\s*(?=[(,\]])", attributes):
+            return True
+        number = start
+    return False
+
+
 def render(xml_dir):
     classes = load_classes(xml_dir)
+    listings = load_source_listings(xml_dir)
     result = {}
     index = ["# HomeGenie scripting API reference index", "",
              "Generated from Doxygen XML. These are backend automation APIs, not widget JavaScript APIs or a device-command inventory.", "",
@@ -85,7 +137,8 @@ def render(xml_dir):
                 lines += ["Inherits: " + ", ".join(bases) + ". Inherited members are listed under the base class.", ""]
             members = [m for m in compound.findall("sectiondef/memberdef")
                        if m.get("prot") == "public" and m.get("kind") in {"function", "property", "variable", "event"}
-                       and m.findtext("name") not in {name, "~" + name}]
+                       and m.findtext("name") not in {name, "~" + name}
+                       and not is_deprecated(m, listings)]
             for member in sorted(members, key=lambda m: (m.findtext("name"), signature(m))):
                 lines += ["```csharp", signature(member), "```"]
                 # Examples are deliberately excluded: source examples are reviewed separately.

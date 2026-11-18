@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "عام",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "چيٽ ۾ مقصدن جي مسئلن جي تشخيص جا تفصيل ڏيکاريو"
+      "ConfigureOptions.GoalDiagnostics": "چيٽ ۾ مقصدن جي مسئلن جي تشخيص جا تفصيل ڏيکاريو",
+      "ConfigureOptions.SystemInstructions": "سسٽم هدايتون",
+      "ConfigureOptions.ApiKey": "OpenAI API چاٻي",
+      "ConfigureOptions.ModelId": "ماڊل ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "چيٽ ۾ مقصدن جي مسئلن جي تشخيص جا تفصيل ڏيکاريو"
+      "ConfigureOptions.GoalDiagnostics": "چيٽ ۾ مقصدن جي مسئلن جي تشخيص جا تفصيل ڏيکاريو",
+      "ConfigureOptions.SystemInstructions": "سسٽم هدايتون",
+      "ConfigureOptions.ApiKey": "Claude API چاٻي",
+      "ConfigureOptions.ModelId": "ماڊل ID",
+      "ConfigureOptions.MaxOutputTokens": "جواب جي ڊيگهه (وڌ ۾ وڌ ٽوڪن)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "چيٽ ۾ مقصدن جي مسئلن جي تشخيص جا تفصيل ڏيکاريو"
+      "ConfigureOptions.GoalDiagnostics": "چيٽ ۾ مقصدن جي مسئلن جي تشخيص جا تفصيل ڏيکاريو",
+      "ConfigureOptions.SystemInstructions": "سسٽم هدايتون",
+      "ConfigureOptions.ApiKey": "DeepSeek API چاٻي"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "چيٽ ۾ مقصدن جي مسئلن جي تشخيص جا تفصيل ڏيکاريو"
+      "ConfigureOptions.GoalDiagnostics": "چيٽ ۾ مقصدن جي مسئلن جي تشخيص جا تفصيل ڏيکاريو",
+      "ConfigureOptions.SystemInstructions": "سسٽم هدايتون",
+      "ConfigureOptions.ApiKey": "Qwen API چاٻي",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio ۾ Responses API جو URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "گڏيل خدمتون ۽ پسمنظر جي درخواستن لاءِ ڊفالٽ فراهم ڪندڙ جي چونڊ.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (ڊفالٽ)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (ڊفالٽ)",
+      "ConfigureOptions.AllowedHttpUrls": "اجازت ڏنل HTTP URL (سيمي ڪولن سان الڳ ٿيل)",
+      "ConfigureOptions.AllowedLocalFolders": "اجازت ڏنل مقامي فولڊر (سيمي ڪولن سان الڳ ٿيل)",
+      "ConfigureOptions.MaximumSourceSize": "ذريعي واري فائل جي وڌ ۾ وڌ ماپ (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "سڌي ڳنڍڻ لاءِ فائل ايڪسٽينشن (سيمي ڪولن سان الڳ ٿيل)",
+      "ConfigureOptions.WidgetObjectivePrompt": "ويجيٽ ٺاهڻ جي مقصدن لاءِ هدايت"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "چيٽ ۾ مقصدن جي مسئلن جي تشخيص جا تفصيل ڏيکاريو",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "ڊائون لوڊ ٿيل ڊيٽا",
   "audio_stop": "روڪ",
   "audio_resume": "ٻيهر شروع ڪريو",
+  "audio_manage_model": "ماڊل جو انتظام ڪريو",
   "audio_download": "ڊائون لوڊ ڪريو",
   "audio_restart_download": "ٻيهر ڊائونلوڊ ڪريو",
   "audio_download_downloading": "ڊائون لوڊ ڪندي",

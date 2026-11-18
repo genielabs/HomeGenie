@@ -306,16 +306,28 @@
   "neon_district_road_speed_normal": "Normal",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Show objective diagnostics in chat"
+      "ConfigureOptions.GoalDiagnostics": "Show objective diagnostics in chat",
+      "ConfigureOptions.SystemInstructions": "System instructions",
+      "ConfigureOptions.ApiKey": "OpenAI API key",
+      "ConfigureOptions.ModelId": "Model ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Show objective diagnostics in chat"
+      "ConfigureOptions.GoalDiagnostics": "Show objective diagnostics in chat",
+      "ConfigureOptions.SystemInstructions": "System instructions",
+      "ConfigureOptions.ApiKey": "Claude API key",
+      "ConfigureOptions.ModelId": "Model ID",
+      "ConfigureOptions.MaxOutputTokens": "Maximum output tokens"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Show objective diagnostics in chat"
+      "ConfigureOptions.GoalDiagnostics": "Show objective diagnostics in chat",
+      "ConfigureOptions.SystemInstructions": "System instructions",
+      "ConfigureOptions.ApiKey": "DeepSeek API key"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Show objective diagnostics in chat"
+      "ConfigureOptions.GoalDiagnostics": "Show objective diagnostics in chat",
+      "ConfigureOptions.SystemInstructions": "System instructions",
+      "ConfigureOptions.ApiKey": "Qwen API key",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio Responses URL"
     },
     "651": {
       "Title": "Neon District",
@@ -655,7 +667,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Shared services and default provider selection for background requests.",
-      "ConfigureOptions.DefaultProvider": "Default AI Genie"
+      "ConfigureOptions.DefaultProvider": "Default AI Genie",
+      "ConfigureOptions.AllowedHttpUrls": "Allowed HTTP URLs (semicolon separated)",
+      "ConfigureOptions.AllowedLocalFolders": "Allowed local folders (semicolon separated)",
+      "ConfigureOptions.MaximumSourceSize": "Maximum source file size (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Inline file extensions (semicolon separated)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Widget objective prompt"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Show objective diagnostics in chat",
@@ -850,6 +867,7 @@
   "audio_partial_bytes": "Downloaded data",
   "audio_stop": "Stop",
   "audio_resume": "Resume",
+  "audio_manage_model": "Manage model",
   "audio_download": "Download",
   "audio_restart_download": "Download again",
   "audio_download_downloading": "Downloading",

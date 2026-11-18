@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "ਆਮ",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "ਚੈਟ ਵਿੱਚ ਟੀਚਿਆਂ ਦੀ ਜਾਂਚ ਜਾਣਕਾਰੀ ਦਿਖਾਓ"
+      "ConfigureOptions.GoalDiagnostics": "ਚੈਟ ਵਿੱਚ ਟੀਚਿਆਂ ਦੀ ਜਾਂਚ ਜਾਣਕਾਰੀ ਦਿਖਾਓ",
+      "ConfigureOptions.SystemInstructions": "ਸਿਸਟਮ ਨਿਰਦੇਸ਼",
+      "ConfigureOptions.ApiKey": "OpenAI API ਕੁੰਜੀ",
+      "ConfigureOptions.ModelId": "ਮਾਡਲ ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "ਚੈਟ ਵਿੱਚ ਟੀਚਿਆਂ ਦੀ ਜਾਂਚ ਜਾਣਕਾਰੀ ਦਿਖਾਓ"
+      "ConfigureOptions.GoalDiagnostics": "ਚੈਟ ਵਿੱਚ ਟੀਚਿਆਂ ਦੀ ਜਾਂਚ ਜਾਣਕਾਰੀ ਦਿਖਾਓ",
+      "ConfigureOptions.SystemInstructions": "ਸਿਸਟਮ ਨਿਰਦੇਸ਼",
+      "ConfigureOptions.ApiKey": "Claude API ਕੁੰਜੀ",
+      "ConfigureOptions.ModelId": "ਮਾਡਲ ID",
+      "ConfigureOptions.MaxOutputTokens": "ਜਵਾਬ ਦੀ ਲੰਬਾਈ (ਵੱਧ ਤੋਂ ਵੱਧ ਟੋਕਨ)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "ਚੈਟ ਵਿੱਚ ਟੀਚਿਆਂ ਦੀ ਜਾਂਚ ਜਾਣਕਾਰੀ ਦਿਖਾਓ"
+      "ConfigureOptions.GoalDiagnostics": "ਚੈਟ ਵਿੱਚ ਟੀਚਿਆਂ ਦੀ ਜਾਂਚ ਜਾਣਕਾਰੀ ਦਿਖਾਓ",
+      "ConfigureOptions.SystemInstructions": "ਸਿਸਟਮ ਨਿਰਦੇਸ਼",
+      "ConfigureOptions.ApiKey": "DeepSeek API ਕੁੰਜੀ"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "ਚੈਟ ਵਿੱਚ ਟੀਚਿਆਂ ਦੀ ਜਾਂਚ ਜਾਣਕਾਰੀ ਦਿਖਾਓ"
+      "ConfigureOptions.GoalDiagnostics": "ਚੈਟ ਵਿੱਚ ਟੀਚਿਆਂ ਦੀ ਜਾਂਚ ਜਾਣਕਾਰੀ ਦਿਖਾਓ",
+      "ConfigureOptions.SystemInstructions": "ਸਿਸਟਮ ਨਿਰਦੇਸ਼",
+      "ConfigureOptions.ApiKey": "Qwen API ਕੁੰਜੀ",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio Responses API ਦਾ URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "ਸਾਂਝੀਆਂ ਸੇਵਾਵਾਂ ਅਤੇ ਪਿਛੋਕੜ ਬੇਨਤੀਆਂ ਲਈ ਡਿਫੌਲਟ ਪ੍ਰਦਾਤਾ ਦੀ ਚੋਣ।",
-      "ConfigureOptions.DefaultProvider": "AI Genie (ਡਿਫੌਲਟ)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (ਡਿਫੌਲਟ)",
+      "ConfigureOptions.AllowedHttpUrls": "ਮਨਜ਼ੂਰਸ਼ੁਦਾ HTTP URL (ਅਰਧ-ਵਿਰਾਮ ਨਾਲ ਵੱਖ ਕੀਤੇ)",
+      "ConfigureOptions.AllowedLocalFolders": "ਮਨਜ਼ੂਰਸ਼ੁਦਾ ਸਥਾਨਕ ਫੋਲਡਰ (ਅਰਧ-ਵਿਰਾਮ ਨਾਲ ਵੱਖ ਕੀਤੇ)",
+      "ConfigureOptions.MaximumSourceSize": "ਸਰੋਤ ਫਾਈਲ ਦਾ ਵੱਧ ਤੋਂ ਵੱਧ ਆਕਾਰ (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "ਸਿੱਧਾ ਨੱਥੀ ਕਰਨ ਲਈ ਫਾਈਲ ਐਕਸਟੈਂਸ਼ਨ (ਅਰਧ-ਵਿਰਾਮ ਨਾਲ ਵੱਖ ਕੀਤੇ)",
+      "ConfigureOptions.WidgetObjectivePrompt": "ਵਿਜੇਟ ਬਣਾਉਣ ਦੇ ਉਦੇਸ਼ਾਂ ਲਈ ਹਦਾਇਤ"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "ਚੈਟ ਵਿੱਚ ਟੀਚਿਆਂ ਦੀ ਜਾਂਚ ਜਾਣਕਾਰੀ ਦਿਖਾਓ",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "ਡਾਊਨਲੋਡ ਕੀਤਾ ਡਾਟਾ",
   "audio_stop": "ਰੁਕੋ",
   "audio_resume": "ਮੁੜ ਸ਼ੁਰੂ ਕਰੋ",
+  "audio_manage_model": "ਮਾਡਲ ਦਾ ਪ੍ਰਬੰਧ ਕਰੋ",
   "audio_download": "ਡਾਊਨਲੋਡ ਕਰੋ",
   "audio_restart_download": "ਦੁਬਾਰਾ ਡਾਊਨਲੋਡ ਕਰੋ",
   "audio_download_downloading": "ਡਾਊਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ",

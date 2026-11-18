@@ -1,0 +1,46 @@
+.ffmpeg-setup {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  overflow-wrap: anywhere;
+}
+
+.ffmpeg-setup h2,
+.ffmpeg-setup p {
+  margin: 0;
+}
+
+.ffmpeg-setup h2 {
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.ffmpeg-setup progress {
+  width: 100%;
+  accent-color: var(--primary-color);
+}
+
+.details {
+  color: var(--secondary-text-color, inherit);
+}
+
+.ffmpeg-setup button {
+  justify-self: center;
+  margin: 16px;
+  font: inherit;
+  color: var(--background-color);
+  background: var(--primary-color);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.ffmpeg-setup button:hover:not(:disabled) {
+  filter: brightness(.94);
+}
+
+.ffmpeg-setup button:disabled {
+  opacity: .6;
+  cursor: default;
+}

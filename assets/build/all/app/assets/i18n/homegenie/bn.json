@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "স্বাভাবিক",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "চ্যাটে লক্ষ্যের ডায়াগনস্টিক তথ্য দেখান"
+      "ConfigureOptions.GoalDiagnostics": "চ্যাটে লক্ষ্যের ডায়াগনস্টিক তথ্য দেখান",
+      "ConfigureOptions.SystemInstructions": "সিস্টেম নির্দেশাবলী",
+      "ConfigureOptions.ApiKey": "OpenAI API কী",
+      "ConfigureOptions.ModelId": "মডেল আইডি"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "চ্যাটে লক্ষ্যের ডায়াগনস্টিক তথ্য দেখান"
+      "ConfigureOptions.GoalDiagnostics": "চ্যাটে লক্ষ্যের ডায়াগনস্টিক তথ্য দেখান",
+      "ConfigureOptions.SystemInstructions": "সিস্টেম নির্দেশাবলী",
+      "ConfigureOptions.ApiKey": "Claude API কী",
+      "ConfigureOptions.ModelId": "মডেল আইডি",
+      "ConfigureOptions.MaxOutputTokens": "প্রতিক্রিয়ার দৈর্ঘ্য (সর্বোচ্চ টোকেন)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "চ্যাটে লক্ষ্যের ডায়াগনস্টিক তথ্য দেখান"
+      "ConfigureOptions.GoalDiagnostics": "চ্যাটে লক্ষ্যের ডায়াগনস্টিক তথ্য দেখান",
+      "ConfigureOptions.SystemInstructions": "সিস্টেম নির্দেশাবলী",
+      "ConfigureOptions.ApiKey": "DeepSeek API কী"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "চ্যাটে লক্ষ্যের ডায়াগনস্টিক তথ্য দেখান"
+      "ConfigureOptions.GoalDiagnostics": "চ্যাটে লক্ষ্যের ডায়াগনস্টিক তথ্য দেখান",
+      "ConfigureOptions.SystemInstructions": "সিস্টেম নির্দেশাবলী",
+      "ConfigureOptions.ApiKey": "Qwen API কী",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio Responses API-এর URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "শেয়ার করা পরিষেবা এবং পটভূমির অনুরোধগুলির জন্য ডিফল্ট প্রদানকারী নির্বাচন।",
-      "ConfigureOptions.DefaultProvider": "AI Genie (ডিফল্ট)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (ডিফল্ট)",
+      "ConfigureOptions.AllowedHttpUrls": "অনুমোদিত HTTP URL (সেমিকোলন দিয়ে আলাদা)",
+      "ConfigureOptions.AllowedLocalFolders": "অনুমোদিত স্থানীয় ফোল্ডার (সেমিকোলন দিয়ে আলাদা)",
+      "ConfigureOptions.MaximumSourceSize": "উৎস ফাইলের সর্বোচ্চ আকার (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "সরাসরি সংযুক্তির ফাইল এক্সটেনশন (সেমিকোলন দিয়ে আলাদা)",
+      "ConfigureOptions.WidgetObjectivePrompt": "উইজেট তৈরির লক্ষ্যের নির্দেশনা"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "চ্যাটে লক্ষ্যের ডায়াগনস্টিক তথ্য দেখান",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "ডাউনলোড করা ডেটা",
   "audio_stop": "থামো",
   "audio_resume": "পুনরায় শুরু করুন",
+  "audio_manage_model": "মডেল পরিচালনা করুন",
   "audio_download": "ডাউনলোড করুন",
   "audio_restart_download": "আবার ডাউনলোড করুন",
   "audio_download_downloading": "ডাউনলোড হচ্ছে",

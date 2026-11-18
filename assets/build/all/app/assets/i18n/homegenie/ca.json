@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normal",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Mostra el diagnòstic dels objectius al xat"
+      "ConfigureOptions.GoalDiagnostics": "Mostra el diagnòstic dels objectius al xat",
+      "ConfigureOptions.SystemInstructions": "Instruccions del sistema",
+      "ConfigureOptions.ApiKey": "Clau d'API de OpenAI",
+      "ConfigureOptions.ModelId": "ID del model"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Mostra el diagnòstic dels objectius al xat"
+      "ConfigureOptions.GoalDiagnostics": "Mostra el diagnòstic dels objectius al xat",
+      "ConfigureOptions.SystemInstructions": "Instruccions del sistema",
+      "ConfigureOptions.ApiKey": "Clau d'API de Claude",
+      "ConfigureOptions.ModelId": "ID del model",
+      "ConfigureOptions.MaxOutputTokens": "Durada de la resposta (màxim de tokens)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Mostra el diagnòstic dels objectius al xat"
+      "ConfigureOptions.GoalDiagnostics": "Mostra el diagnòstic dels objectius al xat",
+      "ConfigureOptions.SystemInstructions": "Instruccions del sistema",
+      "ConfigureOptions.ApiKey": "Clau d'API de DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Mostra el diagnòstic dels objectius al xat"
+      "ConfigureOptions.GoalDiagnostics": "Mostra el diagnòstic dels objectius al xat",
+      "ConfigureOptions.SystemInstructions": "Instruccions del sistema",
+      "ConfigureOptions.ApiKey": "Clau d'API de Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL de l’API Responses de Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Serveis compartits i selecció del proveïdor per defecte per a les peticions en segon pla.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Per defecte)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Per defecte)",
+      "ConfigureOptions.AllowedHttpUrls": "URL HTTP permesos (separats per punt i coma)",
+      "ConfigureOptions.AllowedLocalFolders": "Carpetes locals permeses (separades per punt i coma)",
+      "ConfigureOptions.MaximumSourceSize": "Mida màxima del fitxer d’origen (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Extensions de fitxer per adjuntar directament (separades per punt i coma)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Instrucció per als objectius de creació de ginys"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Mostra el diagnòstic dels objectius al xat",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Dades baixades",
   "audio_stop": "Atureu-vos",
   "audio_resume": "Currículum",
+  "audio_manage_model": "Gestiona el model",
   "audio_download": "Descarregar",
   "audio_restart_download": "Baixeu-vos de nou",
   "audio_download_downloading": "Descàrrega",

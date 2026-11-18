@@ -1,8 +1,8 @@
 import {
   Pass
-} from "./chunk-DHEQJFFE.js";
+} from "./chunk-JTJIKJED.js";
 
-// ../release-candidate-yot/node_modules/three/examples/jsm/postprocessing/RenderPass.js
+// node_modules/three/examples/jsm/postprocessing/RenderPass.js
 import {
   Color
 } from "../../three.module.js";

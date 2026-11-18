@@ -1,12 +1,12 @@
 import {
   CopyShader
-} from "./chunk-VION2OAX.js";
+} from "./chunk-UXYJIP63.js";
 import {
   FullScreenQuad,
   Pass
-} from "./chunk-DHEQJFFE.js";
+} from "./chunk-JTJIKJED.js";
 
-// ../release-candidate-yot/node_modules/three/examples/jsm/postprocessing/EffectComposer.js
+// node_modules/three/examples/jsm/postprocessing/EffectComposer.js
 import {
   HalfFloatType,
   NoBlending,
@@ -15,7 +15,7 @@ import {
   WebGLRenderTarget
 } from "../../three.module.js";
 
-// ../release-candidate-yot/node_modules/three/examples/jsm/postprocessing/ShaderPass.js
+// node_modules/three/examples/jsm/postprocessing/ShaderPass.js
 import {
   ShaderMaterial,
   UniformsUtils
@@ -62,7 +62,7 @@ var ShaderPass = class extends Pass {
   }
 };
 
-// ../release-candidate-yot/node_modules/three/examples/jsm/postprocessing/MaskPass.js
+// node_modules/three/examples/jsm/postprocessing/MaskPass.js
 var MaskPass = class extends Pass {
   constructor(scene, camera) {
     super();
@@ -121,7 +121,7 @@ var ClearMaskPass = class extends Pass {
   }
 };
 
-// ../release-candidate-yot/node_modules/three/examples/jsm/postprocessing/EffectComposer.js
+// node_modules/three/examples/jsm/postprocessing/EffectComposer.js
 var EffectComposer = class {
   constructor(renderer, renderTarget) {
     this.renderer = renderer;

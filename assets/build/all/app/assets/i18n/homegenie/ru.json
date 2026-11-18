@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Обычно",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Показывать диагностику целей в чате"
+      "ConfigureOptions.GoalDiagnostics": "Показывать диагностику целей в чате",
+      "ConfigureOptions.SystemInstructions": "Системные инструкции",
+      "ConfigureOptions.ApiKey": "Ключ API OpenAI",
+      "ConfigureOptions.ModelId": "Идентификатор модели"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Показывать диагностику целей в чате"
+      "ConfigureOptions.GoalDiagnostics": "Показывать диагностику целей в чате",
+      "ConfigureOptions.SystemInstructions": "Системные инструкции",
+      "ConfigureOptions.ApiKey": "Ключ API Claude",
+      "ConfigureOptions.ModelId": "Идентификатор модели",
+      "ConfigureOptions.MaxOutputTokens": "Длина ответа (максимальное количество токенов)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Показывать диагностику целей в чате"
+      "ConfigureOptions.GoalDiagnostics": "Показывать диагностику целей в чате",
+      "ConfigureOptions.SystemInstructions": "Системные инструкции",
+      "ConfigureOptions.ApiKey": "Ключ API DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Показывать диагностику целей в чате"
+      "ConfigureOptions.GoalDiagnostics": "Показывать диагностику целей в чате",
+      "ConfigureOptions.SystemInstructions": "Системные инструкции",
+      "ConfigureOptions.ApiKey": "Ключ API Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL API Responses в Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Общие службы и выбор поставщика по умолчанию для фоновых запросов.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (По умолчанию)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (По умолчанию)",
+      "ConfigureOptions.AllowedHttpUrls": "Разрешённые HTTP-адреса (через точку с запятой)",
+      "ConfigureOptions.AllowedLocalFolders": "Разрешённые локальные папки (через точку с запятой)",
+      "ConfigureOptions.MaximumSourceSize": "Максимальный размер исходного файла (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Расширения файлов для прямого прикрепления (через точку с запятой)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Инструкция для задач по созданию виджетов"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Показывать диагностику целей в чате",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Загруженные данные",
   "audio_stop": "Стоп",
   "audio_resume": "Резюме",
+  "audio_manage_model": "Управление моделью",
   "audio_download": "Скачать",
   "audio_restart_download": "Загрузите еще раз",
   "audio_download_downloading": "Загрузка",

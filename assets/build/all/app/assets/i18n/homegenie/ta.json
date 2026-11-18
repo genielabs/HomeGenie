@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "இயல்பு",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "அரட்டையில் இலக்குகளின் சிக்கல் கண்டறிதல் தகவலைக் காட்டு"
+      "ConfigureOptions.GoalDiagnostics": "அரட்டையில் இலக்குகளின் சிக்கல் கண்டறிதல் தகவலைக் காட்டு",
+      "ConfigureOptions.SystemInstructions": "கணினி வழிமுறைகள்",
+      "ConfigureOptions.ApiKey": "OpenAI API விசை",
+      "ConfigureOptions.ModelId": "மாடல் ஐடி"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "அரட்டையில் இலக்குகளின் சிக்கல் கண்டறிதல் தகவலைக் காட்டு"
+      "ConfigureOptions.GoalDiagnostics": "அரட்டையில் இலக்குகளின் சிக்கல் கண்டறிதல் தகவலைக் காட்டு",
+      "ConfigureOptions.SystemInstructions": "கணினி வழிமுறைகள்",
+      "ConfigureOptions.ApiKey": "Claude API விசை",
+      "ConfigureOptions.ModelId": "மாடல் ஐடி",
+      "ConfigureOptions.MaxOutputTokens": "மறுமொழி நீளம் (அதிகபட்ச டோக்கன்கள்)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "அரட்டையில் இலக்குகளின் சிக்கல் கண்டறிதல் தகவலைக் காட்டு"
+      "ConfigureOptions.GoalDiagnostics": "அரட்டையில் இலக்குகளின் சிக்கல் கண்டறிதல் தகவலைக் காட்டு",
+      "ConfigureOptions.SystemInstructions": "கணினி வழிமுறைகள்",
+      "ConfigureOptions.ApiKey": "DeepSeek API விசை"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "அரட்டையில் இலக்குகளின் சிக்கல் கண்டறிதல் தகவலைக் காட்டு"
+      "ConfigureOptions.GoalDiagnostics": "அரட்டையில் இலக்குகளின் சிக்கல் கண்டறிதல் தகவலைக் காட்டு",
+      "ConfigureOptions.SystemInstructions": "கணினி வழிமுறைகள்",
+      "ConfigureOptions.ApiKey": "Qwen API விசை",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio Responses API-இன் URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "பகிரப்பட்ட சேவைகள் மற்றும் பின்னணி கோரிக்கைகளுக்கான இயல்புநிலை வழங்குநர் தேர்வு.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (இயல்புநிலை)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (இயல்புநிலை)",
+      "ConfigureOptions.AllowedHttpUrls": "அனுமதிக்கப்பட்ட HTTP URL-கள் (அரைப்புள்ளியால் பிரிக்கப்பட்டவை)",
+      "ConfigureOptions.AllowedLocalFolders": "அனுமதிக்கப்பட்ட உள்ளமை கோப்புறைகள் (அரைப்புள்ளியால் பிரிக்கப்பட்டவை)",
+      "ConfigureOptions.MaximumSourceSize": "மூலக் கோப்பின் அதிகபட்ச அளவு (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "நேரடியாக இணைப்பதற்கான கோப்பு நீட்டிப்புகள் (அரைப்புள்ளியால் பிரிக்கப்பட்டவை)",
+      "ConfigureOptions.WidgetObjectivePrompt": "விட்ஜெட் உருவாக்க இலக்குகளுக்கான வழிமுறை"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "அரட்டையில் இலக்குகளின் சிக்கல் கண்டறிதல் தகவலைக் காட்டு",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "பதிவிறக்கம் செய்யப்பட்ட தரவு",
   "audio_stop": "நிறுத்து",
   "audio_resume": "ரெஸ்யூம்",
+  "audio_manage_model": "மாதிரியை நிர்வகி",
   "audio_download": "பதிவிறக்கவும்",
   "audio_restart_download": "மீண்டும் பதிவிறக்கவும்",
   "audio_download_downloading": "பதிவிறக்குகிறது",

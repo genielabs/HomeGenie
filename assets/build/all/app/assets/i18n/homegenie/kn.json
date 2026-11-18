@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "ಸಾಮಾನ್ಯ",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "ಚಾಟ್‌ನಲ್ಲಿ ಗುರಿಗಳ ದೋಷನಿರ್ಣಯ ಮಾಹಿತಿಯನ್ನು ತೋರಿಸಿ"
+      "ConfigureOptions.GoalDiagnostics": "ಚಾಟ್‌ನಲ್ಲಿ ಗುರಿಗಳ ದೋಷನಿರ್ಣಯ ಮಾಹಿತಿಯನ್ನು ತೋರಿಸಿ",
+      "ConfigureOptions.SystemInstructions": "ಸಿಸ್ಟಮ್ ಸೂಚನೆಗಳು",
+      "ConfigureOptions.ApiKey": "OpenAI API ಕೀ",
+      "ConfigureOptions.ModelId": "ಮಾದರಿ ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "ಚಾಟ್‌ನಲ್ಲಿ ಗುರಿಗಳ ದೋಷನಿರ್ಣಯ ಮಾಹಿತಿಯನ್ನು ತೋರಿಸಿ"
+      "ConfigureOptions.GoalDiagnostics": "ಚಾಟ್‌ನಲ್ಲಿ ಗುರಿಗಳ ದೋಷನಿರ್ಣಯ ಮಾಹಿತಿಯನ್ನು ತೋರಿಸಿ",
+      "ConfigureOptions.SystemInstructions": "ಸಿಸ್ಟಮ್ ಸೂಚನೆಗಳು",
+      "ConfigureOptions.ApiKey": "Claude API ಕೀ",
+      "ConfigureOptions.ModelId": "ಮಾದರಿ ID",
+      "ConfigureOptions.MaxOutputTokens": "ಪ್ರತಿಕ್ರಿಯೆ ಉದ್ದ (ಗರಿಷ್ಠ ಟೋಕನ್‌ಗಳು)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "ಚಾಟ್‌ನಲ್ಲಿ ಗುರಿಗಳ ದೋಷನಿರ್ಣಯ ಮಾಹಿತಿಯನ್ನು ತೋರಿಸಿ"
+      "ConfigureOptions.GoalDiagnostics": "ಚಾಟ್‌ನಲ್ಲಿ ಗುರಿಗಳ ದೋಷನಿರ್ಣಯ ಮಾಹಿತಿಯನ್ನು ತೋರಿಸಿ",
+      "ConfigureOptions.SystemInstructions": "ಸಿಸ್ಟಮ್ ಸೂಚನೆಗಳು",
+      "ConfigureOptions.ApiKey": "DeepSeek API ಕೀ"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "ಚಾಟ್‌ನಲ್ಲಿ ಗುರಿಗಳ ದೋಷನಿರ್ಣಯ ಮಾಹಿತಿಯನ್ನು ತೋರಿಸಿ"
+      "ConfigureOptions.GoalDiagnostics": "ಚಾಟ್‌ನಲ್ಲಿ ಗುರಿಗಳ ದೋಷನಿರ್ಣಯ ಮಾಹಿತಿಯನ್ನು ತೋರಿಸಿ",
+      "ConfigureOptions.SystemInstructions": "ಸಿಸ್ಟಮ್ ಸೂಚನೆಗಳು",
+      "ConfigureOptions.ApiKey": "Qwen API ಕೀ",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio Responses API ಯ URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "ಹಂಚಿದ ಸೇವೆಗಳು ಮತ್ತು ಹಿನ್ನೆಲೆ ವಿನಂತಿಗಳಿಗಾಗಿ ಡೀಫಾಲ್ಟ್ ಪೂರೈಕೆದಾರರ ಆಯ್ಕೆ.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (ಡೀಫಾಲ್ಟ್)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (ಡೀಫಾಲ್ಟ್)",
+      "ConfigureOptions.AllowedHttpUrls": "ಅನುಮತಿಸಲಾದ HTTP URLಗಳು (ಅರ್ಧವಿರಾಮದಿಂದ ಬೇರ್ಪಡಿಸಿ)",
+      "ConfigureOptions.AllowedLocalFolders": "ಅನುಮತಿಸಲಾದ ಸ್ಥಳೀಯ ಫೋಲ್ಡರ್‌ಗಳು (ಅರ್ಧವಿರಾಮದಿಂದ ಬೇರ್ಪಡಿಸಿ)",
+      "ConfigureOptions.MaximumSourceSize": "ಮೂಲ ಫೈಲ್‌ನ ಗರಿಷ್ಠ ಗಾತ್ರ (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "ನೇರವಾಗಿ ಲಗತ್ತಿಸಲು ಫೈಲ್ ವಿಸ್ತರಣೆಗಳು (ಅರ್ಧವಿರಾಮದಿಂದ ಬೇರ್ಪಡಿಸಿ)",
+      "ConfigureOptions.WidgetObjectivePrompt": "ವಿಜೆಟ್ ರಚನೆಯ ಗುರಿಗಳಿಗೆ ಸೂಚನೆ"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "ಚಾಟ್‌ನಲ್ಲಿ ಗುರಿಗಳ ದೋಷನಿರ್ಣಯ ಮಾಹಿತಿಯನ್ನು ತೋರಿಸಿ",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "ಡೌನ್‌ಲೋಡ್ ಮಾಡಿದ ಡೇಟಾ",
   "audio_stop": "ನಿಲ್ಲಿಸು",
   "audio_resume": "ಪುನರಾರಂಭಿಸಿ",
+  "audio_manage_model": "ಮಾದರಿಯನ್ನು ನಿರ್ವಹಿಸಿ",
   "audio_download": "ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ",
   "audio_restart_download": "ಮತ್ತೆ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ",
   "audio_download_downloading": "ಡೌನ್‌ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ",

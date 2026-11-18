@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normal",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Diagnoseinformationen zu Zielen im Chat anzeigen"
+      "ConfigureOptions.GoalDiagnostics": "Diagnoseinformationen zu Zielen im Chat anzeigen",
+      "ConfigureOptions.SystemInstructions": "Systemanweisungen",
+      "ConfigureOptions.ApiKey": "OpenAI-API-Schlüssel",
+      "ConfigureOptions.ModelId": "Modell-ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Diagnoseinformationen zu Zielen im Chat anzeigen"
+      "ConfigureOptions.GoalDiagnostics": "Diagnoseinformationen zu Zielen im Chat anzeigen",
+      "ConfigureOptions.SystemInstructions": "Systemanweisungen",
+      "ConfigureOptions.ApiKey": "Claude-API-Schlüssel",
+      "ConfigureOptions.ModelId": "Modell-ID",
+      "ConfigureOptions.MaxOutputTokens": "Antwortlänge (Maximale Anzahl an Tokens)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Diagnoseinformationen zu Zielen im Chat anzeigen"
+      "ConfigureOptions.GoalDiagnostics": "Diagnoseinformationen zu Zielen im Chat anzeigen",
+      "ConfigureOptions.SystemInstructions": "Systemanweisungen",
+      "ConfigureOptions.ApiKey": "DeepSeek-API-Schlüssel"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Diagnoseinformationen zu Zielen im Chat anzeigen"
+      "ConfigureOptions.GoalDiagnostics": "Diagnoseinformationen zu Zielen im Chat anzeigen",
+      "ConfigureOptions.SystemInstructions": "Systemanweisungen",
+      "ConfigureOptions.ApiKey": "Qwen-API-Schlüssel",
+      "ConfigureOptions.ResponsesEndpoint": "URL der Responses-API von Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Gemeinsame Dienste und Auswahl des Standardanbieters für Hintergrundanfragen.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Standard)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Standard)",
+      "ConfigureOptions.AllowedHttpUrls": "Erlaubte HTTP-URLs (durch Semikolon getrennt)",
+      "ConfigureOptions.AllowedLocalFolders": "Erlaubte lokale Ordner (durch Semikolon getrennt)",
+      "ConfigureOptions.MaximumSourceSize": "Maximale Größe der Quelldatei (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Dateiendungen für direkte Anhänge (durch Semikolon getrennt)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Prompt für Ziele zur Widget-Erstellung"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Diagnoseinformationen zu Zielen im Chat anzeigen",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Heruntergeladene Daten",
   "audio_stop": "Stopp",
   "audio_resume": "Lebenslauf",
+  "audio_manage_model": "Modell verwalten",
   "audio_download": "Herunterladen",
   "audio_restart_download": "Nochmals herunterladen",
   "audio_download_downloading": "Herunterladen",

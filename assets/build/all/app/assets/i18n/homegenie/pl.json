@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normalna",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Pokaż diagnostykę celów na czacie"
+      "ConfigureOptions.GoalDiagnostics": "Pokaż diagnostykę celów na czacie",
+      "ConfigureOptions.SystemInstructions": "Instrukcje systemowe",
+      "ConfigureOptions.ApiKey": "Klucz API OpenAI",
+      "ConfigureOptions.ModelId": "Identyfikator modelu"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Pokaż diagnostykę celów na czacie"
+      "ConfigureOptions.GoalDiagnostics": "Pokaż diagnostykę celów na czacie",
+      "ConfigureOptions.SystemInstructions": "Instrukcje systemowe",
+      "ConfigureOptions.ApiKey": "Klucz API Claude",
+      "ConfigureOptions.ModelId": "Identyfikator modelu",
+      "ConfigureOptions.MaxOutputTokens": "Długość odpowiedzi (maksymalna liczba tokenów)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Pokaż diagnostykę celów na czacie"
+      "ConfigureOptions.GoalDiagnostics": "Pokaż diagnostykę celów na czacie",
+      "ConfigureOptions.SystemInstructions": "Instrukcje systemowe",
+      "ConfigureOptions.ApiKey": "Klucz API DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Pokaż diagnostykę celów na czacie"
+      "ConfigureOptions.GoalDiagnostics": "Pokaż diagnostykę celów na czacie",
+      "ConfigureOptions.SystemInstructions": "Instrukcje systemowe",
+      "ConfigureOptions.ApiKey": "Klucz API Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "Adres URL interfejsu Responses API w Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Wspólne usługi i wybór domyślnego dostawcy dla żądań w tle.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Domyślny)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Domyślny)",
+      "ConfigureOptions.AllowedHttpUrls": "Dozwolone adresy HTTP (oddzielone średnikami)",
+      "ConfigureOptions.AllowedLocalFolders": "Dozwolone foldery lokalne (oddzielone średnikami)",
+      "ConfigureOptions.MaximumSourceSize": "Maksymalny rozmiar pliku źródłowego (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Rozszerzenia plików do bezpośredniego załączania (oddzielone średnikami)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Polecenie dla celów tworzenia widżetów"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Pokaż diagnostykę celów na czacie",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Pobrane dane",
   "audio_stop": "Zatrzymaj się",
   "audio_resume": "Wznów",
+  "audio_manage_model": "Zarządzaj modelem",
   "audio_download": "Pobierz",
   "audio_restart_download": "Pobierz ponownie",
   "audio_download_downloading": "Pobieranie",

@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Odatiy",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Chatda maqsadlar diagnostikasini ko‘rsatish"
+      "ConfigureOptions.GoalDiagnostics": "Chatda maqsadlar diagnostikasini ko‘rsatish",
+      "ConfigureOptions.SystemInstructions": "Tizim ko‘rsatmalari",
+      "ConfigureOptions.ApiKey": "OpenAI API kaliti",
+      "ConfigureOptions.ModelId": "Model ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Chatda maqsadlar diagnostikasini ko‘rsatish"
+      "ConfigureOptions.GoalDiagnostics": "Chatda maqsadlar diagnostikasini ko‘rsatish",
+      "ConfigureOptions.SystemInstructions": "Tizim ko‘rsatmalari",
+      "ConfigureOptions.ApiKey": "Claude API kaliti",
+      "ConfigureOptions.ModelId": "Model ID",
+      "ConfigureOptions.MaxOutputTokens": "Javob uzunligi (Maksimal tokenlar)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Chatda maqsadlar diagnostikasini ko‘rsatish"
+      "ConfigureOptions.GoalDiagnostics": "Chatda maqsadlar diagnostikasini ko‘rsatish",
+      "ConfigureOptions.SystemInstructions": "Tizim ko‘rsatmalari",
+      "ConfigureOptions.ApiKey": "DeepSeek API kaliti"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Chatda maqsadlar diagnostikasini ko‘rsatish"
+      "ConfigureOptions.GoalDiagnostics": "Chatda maqsadlar diagnostikasini ko‘rsatish",
+      "ConfigureOptions.SystemInstructions": "Tizim ko‘rsatmalari",
+      "ConfigureOptions.ApiKey": "Qwen API kaliti",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio Responses API manzili"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Umumiy xizmatlar va fon so‘rovlari uchun standart provayderni tanlash.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Standart)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Standart)",
+      "ConfigureOptions.AllowedHttpUrls": "Ruxsat etilgan HTTP manzillari (nuqtali vergul bilan ajratiladi)",
+      "ConfigureOptions.AllowedLocalFolders": "Ruxsat etilgan mahalliy jildlar (nuqtali vergul bilan ajratiladi)",
+      "ConfigureOptions.MaximumSourceSize": "Manba faylining eng katta hajmi (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Bevosita biriktiriladigan fayl kengaytmalari (nuqtali vergul bilan ajratiladi)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Vidjet yaratish maqsadlari uchun ko‘rsatma"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Chatda maqsadlar diagnostikasini ko‘rsatish",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Yuklab olingan maʼlumotlar",
   "audio_stop": "To'xtang",
   "audio_resume": "Davom etish",
+  "audio_manage_model": "Modelni boshqarish",
   "audio_download": "Yuklab oling",
   "audio_restart_download": "Qayta yuklab oling",
   "audio_download_downloading": "Yuklab olinmoqda",

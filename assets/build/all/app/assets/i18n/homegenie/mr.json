@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "सामान्य",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "चॅटमध्ये उद्दिष्टांची निदान माहिती दाखवा"
+      "ConfigureOptions.GoalDiagnostics": "चॅटमध्ये उद्दिष्टांची निदान माहिती दाखवा",
+      "ConfigureOptions.SystemInstructions": "सिस्टम सूचना",
+      "ConfigureOptions.ApiKey": "OpenAI API की",
+      "ConfigureOptions.ModelId": "मॉडेल आयडी"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "चॅटमध्ये उद्दिष्टांची निदान माहिती दाखवा"
+      "ConfigureOptions.GoalDiagnostics": "चॅटमध्ये उद्दिष्टांची निदान माहिती दाखवा",
+      "ConfigureOptions.SystemInstructions": "सिस्टम सूचना",
+      "ConfigureOptions.ApiKey": "Claude API की",
+      "ConfigureOptions.ModelId": "मॉडेल आयडी",
+      "ConfigureOptions.MaxOutputTokens": "प्रतिसाद लांबी (कमाल टोकन)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "चॅटमध्ये उद्दिष्टांची निदान माहिती दाखवा"
+      "ConfigureOptions.GoalDiagnostics": "चॅटमध्ये उद्दिष्टांची निदान माहिती दाखवा",
+      "ConfigureOptions.SystemInstructions": "सिस्टम सूचना",
+      "ConfigureOptions.ApiKey": "DeepSeek API की"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "चॅटमध्ये उद्दिष्टांची निदान माहिती दाखवा"
+      "ConfigureOptions.GoalDiagnostics": "चॅटमध्ये उद्दिष्टांची निदान माहिती दाखवा",
+      "ConfigureOptions.SystemInstructions": "सिस्टम सूचना",
+      "ConfigureOptions.ApiKey": "Qwen API की",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio Responses API चा URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "सामायिक सेवा आणि पार्श्वभूमीतील विनंत्यांसाठी डीफॉल्ट प्रदात्याची निवड.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (डीफॉल्ट)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (डीफॉल्ट)",
+      "ConfigureOptions.AllowedHttpUrls": "परवानगी असलेले HTTP URL (अर्धविरामाने वेगळे केलेले)",
+      "ConfigureOptions.AllowedLocalFolders": "परवानगी असलेले स्थानिक फोल्डर (अर्धविरामाने वेगळे केलेले)",
+      "ConfigureOptions.MaximumSourceSize": "स्रोत फाइलचा कमाल आकार (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "थेट जोडण्यासाठी फाइल विस्तार (अर्धविरामाने वेगळे केलेले)",
+      "ConfigureOptions.WidgetObjectivePrompt": "विजेट तयार करण्याच्या उद्दिष्टांसाठी सूचना"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "चॅटमध्ये उद्दिष्टांची निदान माहिती दाखवा",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "डाउनलोड केलेला डेटा",
   "audio_stop": "थांबा",
   "audio_resume": "पुन्हा सुरू करा",
+  "audio_manage_model": "मॉडेल व्यवस्थापित करा",
   "audio_download": "डाउनलोड करा",
   "audio_restart_download": "पुन्हा डाउनलोड करा",
   "audio_download_downloading": "डाउनलोड करत आहे",

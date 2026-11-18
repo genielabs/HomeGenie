@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "عادية",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "إظهار معلومات تشخيص الأهداف في المحادثة"
+      "ConfigureOptions.GoalDiagnostics": "إظهار معلومات تشخيص الأهداف في المحادثة",
+      "ConfigureOptions.SystemInstructions": "تعليمات النظام",
+      "ConfigureOptions.ApiKey": "مفتاح API لـ OpenAI",
+      "ConfigureOptions.ModelId": "معرّف الطراز"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "إظهار معلومات تشخيص الأهداف في المحادثة"
+      "ConfigureOptions.GoalDiagnostics": "إظهار معلومات تشخيص الأهداف في المحادثة",
+      "ConfigureOptions.SystemInstructions": "تعليمات النظام",
+      "ConfigureOptions.ApiKey": "مفتاح API لـ Claude",
+      "ConfigureOptions.ModelId": "معرّف الطراز",
+      "ConfigureOptions.MaxOutputTokens": "طول الاستجابة (الحد الأقصى للرموز)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "إظهار معلومات تشخيص الأهداف في المحادثة"
+      "ConfigureOptions.GoalDiagnostics": "إظهار معلومات تشخيص الأهداف في المحادثة",
+      "ConfigureOptions.SystemInstructions": "تعليمات النظام",
+      "ConfigureOptions.ApiKey": "مفتاح API لـ DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "إظهار معلومات تشخيص الأهداف في المحادثة"
+      "ConfigureOptions.GoalDiagnostics": "إظهار معلومات تشخيص الأهداف في المحادثة",
+      "ConfigureOptions.SystemInstructions": "تعليمات النظام",
+      "ConfigureOptions.ApiKey": "مفتاح API لـ Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "عنوان URL لواجهة Responses في Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "خدمات مشتركة واختيار المزوّد الافتراضي للطلبات في الخلفية.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (الافتراضي)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (الافتراضي)",
+      "ConfigureOptions.AllowedHttpUrls": "عناوين HTTP المسموح بها (مفصولة بفواصل منقوطة)",
+      "ConfigureOptions.AllowedLocalFolders": "المجلدات المحلية المسموح بها (مفصولة بفواصل منقوطة)",
+      "ConfigureOptions.MaximumSourceSize": "الحد الأقصى لحجم الملف المصدر (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "امتدادات الملفات المرفقة مباشرةً (مفصولة بفواصل منقوطة)",
+      "ConfigureOptions.WidgetObjectivePrompt": "تعليمات أهداف إنشاء الأدوات"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "إظهار معلومات تشخيص الأهداف في المحادثة",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "البيانات التي تم تنزيلها",
   "audio_stop": "توقف",
   "audio_resume": "استئناف",
+  "audio_manage_model": "إدارة النموذج",
   "audio_download": "تحميل",
   "audio_restart_download": "قم بالتنزيل مرة أخرى",
   "audio_download_downloading": "جارٍ التنزيل",

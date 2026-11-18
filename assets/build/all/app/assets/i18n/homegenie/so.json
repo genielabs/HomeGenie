@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Caadi",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Muuji xogta ogaanshaha ciladaha yoolalka ee wada sheekaysiga"
+      "ConfigureOptions.GoalDiagnostics": "Muuji xogta ogaanshaha ciladaha yoolalka ee wada sheekaysiga",
+      "ConfigureOptions.SystemInstructions": "Tilmaamaha nidaamka",
+      "ConfigureOptions.ApiKey": "Furaha API ee OpenAI",
+      "ConfigureOptions.ModelId": "Aqoonsiga Model-ka"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Muuji xogta ogaanshaha ciladaha yoolalka ee wada sheekaysiga"
+      "ConfigureOptions.GoalDiagnostics": "Muuji xogta ogaanshaha ciladaha yoolalka ee wada sheekaysiga",
+      "ConfigureOptions.SystemInstructions": "Tilmaamaha nidaamka",
+      "ConfigureOptions.ApiKey": "Furaha API ee Claude",
+      "ConfigureOptions.ModelId": "Aqoonsiga Model-ka",
+      "ConfigureOptions.MaxOutputTokens": "Dhererka Jawaabta (Calaamadaha ugu Badan)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Muuji xogta ogaanshaha ciladaha yoolalka ee wada sheekaysiga"
+      "ConfigureOptions.GoalDiagnostics": "Muuji xogta ogaanshaha ciladaha yoolalka ee wada sheekaysiga",
+      "ConfigureOptions.SystemInstructions": "Tilmaamaha nidaamka",
+      "ConfigureOptions.ApiKey": "Furaha API ee DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Muuji xogta ogaanshaha ciladaha yoolalka ee wada sheekaysiga"
+      "ConfigureOptions.GoalDiagnostics": "Muuji xogta ogaanshaha ciladaha yoolalka ee wada sheekaysiga",
+      "ConfigureOptions.SystemInstructions": "Tilmaamaha nidaamka",
+      "ConfigureOptions.ApiKey": "Furaha API ee Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL-ka Responses API ee Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Adeegyo la wadaago iyo doorashada bixiyaha caadiga ah ee codsiyada gadaal ka socda.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Caadiga ah)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Caadiga ah)",
+      "ConfigureOptions.AllowedHttpUrls": "URL-yada HTTP ee la oggol yahay (ku kala saar semikoolan)",
+      "ConfigureOptions.AllowedLocalFolders": "Galka maxalliga ah ee la oggol yahay (ku kala saar semikoolan)",
+      "ConfigureOptions.MaximumSourceSize": "Cabbirka ugu badan ee faylka isha (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Lifaaqyada magaca faylka ee si toos ah loogu dari karo (ku kala saar semikoolan)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Tilmaanta yoolalka samaynta widget-yada"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Muuji xogta ogaanshaha ciladaha yoolalka ee wada sheekaysiga",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Xogta la soo dejiyay",
   "audio_stop": "Jooji",
   "audio_resume": "Dib u bilaw",
+  "audio_manage_model": "Maamul moodeelka",
   "audio_download": "Download",
   "audio_restart_download": "Soo deji mar kale",
   "audio_download_downloading": "Soo dejinta",

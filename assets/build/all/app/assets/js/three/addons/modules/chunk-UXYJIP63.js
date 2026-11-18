@@ -1,4 +1,4 @@
-// ../release-candidate-yot/node_modules/three/examples/jsm/shaders/CopyShader.js
+// node_modules/three/examples/jsm/shaders/CopyShader.js
 var CopyShader = {
   name: "CopyShader",
   uniforms: {

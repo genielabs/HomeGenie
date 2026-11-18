@@ -736,7 +736,7 @@ public static class ConversationTasks {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>chat-history-service</Id>
       <Version>1.0.19</Version>
       <Required>true</Required>
@@ -759,9 +759,13 @@ Data.AddToSystemBackup(dataFolder);
 Program.Run();
 </ScriptSetup>
     <ScriptSource>var presets = new ClientPresetStore(Data.GetFolder(PresetsFolder), change =&gt;
-    Program.Emit("Client.PresetsChanged", change.ToString(Formatting.None)));
+    Program.Emit("Client.PresetsChanged", change.ToString(Formatting.None)), Data.GetFolder("client-preset-setup"));
 
 Api.Handle($"{apiBaseUrl}Protocol", args =&gt; new { version = 2, events = 1 });
+Api.Handle($"{apiBaseUrl}SetupStatus", _ =&gt; PresetRequest(() =&gt; presets.SetupStatus()));
+Api.Handle($"{apiBaseUrl}SetupBegin", args =&gt; PresetRequest(() =&gt; presets.BeginSetup(PresetBody(Api.Parse(args).Data))));
+Api.Handle($"{apiBaseUrl}SetupSkip", args =&gt; PresetRequest(() =&gt; presets.SkipSetup(PresetBody(Api.Parse(args).Data))));
+Api.Handle($"{apiBaseUrl}SetupComplete", args =&gt; PresetRequest(() =&gt; presets.CompleteSetup(PresetBody(Api.Parse(args).Data))));
 Api.Handle($"{apiBaseUrl}List", args =&gt; PresetRequest(() =&gt; presets.List()));
 Api.Handle($"{apiBaseUrl}Get/", args =&gt; PresetRequest(() =&gt; {
     var command = Api.Parse(args);
@@ -822,16 +826,20 @@ public class ClientPresetStore
         }
     }
     private readonly string root;
+    private readonly string setupPath;
     private readonly object gate;
     private readonly Action&lt;JObject&gt; publish;
     private const long MaxRevision = 9007199254740991; // Exact in JavaScript too.
 
     public ClientPresetStore(string folder) : this(folder, null) { }
 
-    public ClientPresetStore(string folder, Action&lt;JObject&gt; publish)
+    public ClientPresetStore(string folder, Action&lt;JObject&gt; publish) : this(folder, publish, folder) { }
+
+    public ClientPresetStore(string folder, Action&lt;JObject&gt; publish, string setupFolder)
     {
         this.publish = publish;
         root = Path.TrimEndingDirectorySeparator(Path.GetFullPath(folder));
+        setupPath = PresetPath.Contained(setupFolder, ".wizard-state");
         gate = GateForFolder(root);
     }
 
@@ -848,7 +856,72 @@ public class ClientPresetStore
         lock (gate) return Read(DefaultName(name));
     }
 
-    public JObject Save(string name, JObject request)
+    private JObject ReadSetup() =&gt; File.Exists(setupPath)
+        ? JObject.Parse(File.ReadAllText(setupPath, Encoding.UTF8)) : null;
+
+    private static bool SetupWasCompleted(JObject preset, JObject session)
+        =&gt; session?["id"] is JValue id &amp;&amp; JToken.DeepEquals(preset["completedSetupId"], id);
+
+    private static JObject SetupReceipt(JObject session) =&gt; new() { ["Status"] = "Ok", ["session"] = session };
+
+    public JObject SetupStatus()
+    {
+        lock (gate)
+        {
+            var session = ReadSetup();
+            return SetupReceipt(session != null &amp;&amp; SetupWasCompleted(Read("default"), session) ? null : session);
+        }
+    }
+
+    public JObject BeginSetup(JObject request)
+    {
+        lock (gate)
+        {
+            var session = ReadSetup();
+            if (session != null)
+                return SetupReceipt(SetupWasCompleted(Read("default"), session) ? null : session);
+            session = new JObject {
+                ["id"] = Guid.NewGuid().ToString("N"), ["skipped"] = new JArray(),
+                ["dashboards"] = new JObject {
+                    ["x10"] = request["x10"]?.Value&lt;bool&gt;() == true,
+                    ["zigbee"] = request["zigbee"]?.Value&lt;bool&gt;() == true,
+                    ["zwave"] = request["zwave"]?.Value&lt;bool&gt;() == true
+                }
+            };
+            WritePath(setupPath, session);
+            return SetupReceipt(session);
+        }
+    }
+
+    public JObject SkipSetup(JObject request)
+    {
+        lock (gate)
+        {
+            var session = ReadSetup();
+            if (!MatchesSetup(session, (string)request["setupId"]))
+                return Error("SetupSessionMismatch", "The setup session is no longer available.");
+            if (SetupWasCompleted(Read("default"), session)) return SetupReceipt(null);
+            if (request["address"]?.Type != JTokenType.Integer || (long)request["address"] &lt;= 0)
+                return Error("InvalidSetupProgram", "A program address is required.");
+            var skipped = (JArray)session["skipped"];
+            var address = (long)request["address"];
+            if (!skipped.Values&lt;long&gt;().Contains(address))
+            {
+                skipped.Add(address);
+                WritePath(setupPath, session);
+            }
+            return SetupReceipt(session);
+        }
+    }
+
+    private static bool MatchesSetup(JObject session, string id)
+        =&gt; id?.Length &gt; 0 &amp;&amp; string.Equals((string)session?["id"], id, StringComparison.Ordinal);
+
+    public JObject Save(string name, JObject request) =&gt; SavePreset(name, request, null);
+
+    public JObject CompleteSetup(JObject request) =&gt; SavePreset("default", request, (string)request["setupId"] ?? "");
+
+    private JObject SavePreset(string name, JObject request, string setupId)
     {
         lock (gate)
         {
@@ -857,12 +930,21 @@ public class ClientPresetStore
                 return Error("InvalidPreset", "A preset requires configuration and preferences.");
             var current = Read(name);
             long revision = Revision(current);
+            if (setupId != null)
+            {
+                var session = ReadSetup();
+                if (name != "default" || !MatchesSetup(session, setupId))
+                    return Error("SetupSessionMismatch", "The setup session is no longer available.");
+                if (SetupWasCompleted(current, session)) return Receipt(revision, false);
+            }
             bool exists = current["config"] is JObject &amp;&amp; current["deleted"]?.Value&lt;bool&gt;() != true;
             if (request["createOnly"]?.Value&lt;bool&gt;() == true &amp;&amp; exists)
                 return Conflict(current);
-            if (exists &amp;&amp; SameContent(current, request)) return Receipt(revision, false);
+            if (setupId == null &amp;&amp; exists &amp;&amp; SameContent(current, request)) return Receipt(revision, false);
             if (!Matches(current, request)) return Conflict(current);
             var next = Content(request);
+            if (setupId != null) next["completedSetupId"] = setupId;
+            else if (current["completedSetupId"] is JValue completed) next["completedSetupId"] = completed.DeepClone();
             next["revision"] = NextRevision(revision);
             next["updatedUtc"] = DateTimeOffset.UtcNow.ToString("O");
             Write(name, next);
@@ -943,11 +1025,13 @@ public class ClientPresetStore
         return preset;
     }
 
-    private void Write(string name, JObject value)
+    private void Write(string name, JObject value) =&gt; WritePath(FilePath(name), value);
+
+    private void WritePath(string path, JObject value)
     {
-        string path = FilePath(name);
-        Directory.CreateDirectory(root);
-        string temporary = Path.Combine(root, ".preset-" + Guid.NewGuid().ToString("N") + ".tmp");
+        var directory = Path.GetDirectoryName(path);
+        Directory.CreateDirectory(directory);
+        string temporary = Path.Combine(directory, ".preset-" + Guid.NewGuid().ToString("N") + ".tmp");
         try
         {
             using (var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
@@ -1054,11 +1138,11 @@ public class ClientPresetStore
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>client-configs</Id>
-      <Version>1.0.10</Version>
+      <Version>1.0.11</Version>
       <Required>true</Required>
-      <Checksum>B431A7029F602478581D830F0619E704</Checksum>
+      <Checksum>DDBA5EC318714DB91CBED5DE1D10B57A</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>111</Address>
@@ -1425,7 +1509,7 @@ void SaveConfig(string filePath, YamlConfig config)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>daily-energy-report</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -1703,7 +1787,7 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -2351,7 +2435,7 @@ public class DownloadManager : IDisposable
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>download-manager</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -2394,7 +2478,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -2722,7 +2806,7 @@ string GetDbName()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>energy-use-statistics</Id>
       <Version>1.0.9</Version>
       <Required>false</Required>
@@ -2897,7 +2981,7 @@ void InsertData(LiteDatabase db, LoggerEvent data) {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -3052,7 +3136,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>file-manager</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -3271,7 +3355,7 @@ public static class HttpHelper {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>homegenie-panel-notifications</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -3340,7 +3424,7 @@ public string[] GetHourLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>hourly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -3802,7 +3886,7 @@ class MqttCommand: MigInterfaceCommand {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>mqtt-network</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
@@ -4061,7 +4145,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>openweathermap</Id>
       <Version>1.0.6</Version>
       <Required>true</Required>
@@ -4153,7 +4237,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -4245,7 +4329,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -4317,7 +4401,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -4338,23 +4422,9 @@ while (Program.IsRunning)
     <ScriptSetup>const string widget = "homegenie/generic/videoinput";
 const string filter = "VideoInput,Sensor:Widget.DisplayModule=" + widget;
 
-// FFMpeg Installation Check
-if (!FfmpegHelper.IsAvailable())
-{
-  Program.Notify(
-      $"The `{Program.Module.Name}` module requires **FFmpeg** to function.\n\n" +
-      $"Please install it from the official website:\n\n" +
-      $"- [https://ffmpeg.org](https://ffmpeg.org)\n\n" +
-      $"If FFmpeg is already installed, open a new terminal, check that `ffmpeg -version` works, then restart HomeGenie from that terminal.\n\n" +
-      $"If you do not need this feature, you can disable this module\n\n" +
-      $"in the **Automation Programs** section or by clicking the button below" +
-      $"[program_disable,translate=NOTIFY.ffmpeg_required]"
-  );
-  Pause(10);
-  return false;
-}
-
 Program.Setup(() =&gt; {
+  Program.Implements("@Setup:Widget", $"/api/{MediaVideoDomain}/Setup/Widgets.Get/ffmpeg",
+      new { translations = true, required = false });
   Program
     .AddModules(MediaVideoDomain, 1, VideoModulesCount, "VideoInput", widget)
     .AddFeature(MediaVideoDomain, filter, VideoInputDisable, "0. Disable this input", "checkbox")
@@ -4374,6 +4444,51 @@ Program.Run();
 var frameCache = new Dictionary&lt;string, VideoInputCacheEntry&gt;();
 object dictionaryLock = new object();
 string baseOutputPath = Path.Combine(Data.GetFolder(), "..", "..", "media", "live");
+var ffmpeg = new FfmpegInstallation(Api, Data.GetFolder("ffmpeg"));
+string setupStatus = null;
+var setupStatusLock = new object();
+void PublishSetupStatus()
+{
+    lock (setupStatusLock)
+    {
+        var status = ffmpeg.SetupStatus;
+        if (status == setupStatus) return;
+        setupStatus = status;
+        Program.Emit("Setup.Status", status);
+    }
+}
+PublishSetupStatus();
+Api.Handle($"{MediaVideoDomain}/service/FFmpeg.Status", _ =&gt; ffmpeg.GetStatus());
+Api.Handle($"{MediaVideoDomain}/service/FFmpeg.Prepare", _ =&gt; {
+    var response = ffmpeg.Prepare();
+    PublishSetupStatus();
+    return response;
+});
+// In-process callers pass a bool. The HTTP gateway passes request bytes.
+Api.Handle($"{MediaVideoDomain}/service/FFmpeg.Executables", args =&gt;
+    Api.Parse(args).Data is true ? ffmpeg.GetExecutables() : null);
+Api.Handle($"{MediaVideoDomain}/Setup/Widgets.Get", args =&gt;
+{
+    var asset = Api.Parse(args).OriginalRequest;
+    if (asset is not ("ffmpeg.html" or "ffmpeg.css" or "ffmpeg.js" or "ffmpeg.i18n.json")) return null;
+    var file = Path.Combine(Data.GetFolder(), "widgets", asset);
+    return File.Exists(file) ? File.ReadAllBytes(file) : null;
+});
+
+
+if (ffmpeg.Executable == null)
+{
+  Program.Notify(
+      $"The `{Program.Module.Name}` module requires **FFmpeg** to function.\n\n" +
+      $"Please install it from the official website:\n\n" +
+      $"- [https://ffmpeg.org](https://ffmpeg.org)\n\n" +
+      $"If FFmpeg is already installed, open a new terminal, check that `ffmpeg -version` works, then restart HomeGenie from that terminal.\n\n" +
+      $"If you do not need this feature, you can disable this module\n\n" +
+      $"in the **Automation Programs** section or by clicking the button below" +
+      $"[program_disable,translate=NOTIFY.ffmpeg_required]"
+  );
+}
+
 
 // Set default feature values
 Modules.InDomain(MediaVideoDomain).Each((m) =&gt; {
@@ -4442,7 +4557,7 @@ var checkStreamer = (string videoFolder, ModuleHelper module) =&gt; {
     // 3. Apply config and start/stop streamer
     if (!inputDisabled &amp;&amp; (hlsEnabled || snapshotEnabled))
     {
-        if (cacheEntry.Streamer == null) cacheEntry.Streamer = new FfmpegStreamer(Net);
+        if (cacheEntry.Streamer == null) cacheEntry.Streamer = new FfmpegStreamer(Net, ffmpeg.Executable);
 
         int hlsTime = 3; int hlsListSize = 4;
         int outputWidth = (int)module.Parameter(VideoOutputWidth).DecimalValue;
@@ -4480,7 +4595,7 @@ var checkStreamer = (string videoFolder, ModuleHelper module) =&gt; {
 
 // Listen for errors reported by the NVR recorder (e.g., live stream died). Force a check/restart.
 When.ModuleParameterChanged((module, parameter) =&gt; {
-    if (module.Instance.Domain == MediaVideoDomain &amp;&amp; parameter.Is("NVR.Status.Error") &amp;&amp; parameter.Value == "encoder_not_ready")
+    if (ffmpeg.Executable != null &amp;&amp; module.Instance.Domain == MediaVideoDomain &amp;&amp; parameter.Is("NVR.Status.Error") &amp;&amp; parameter.Value == "encoder_not_ready")
     {
         string videoFolder = Path.Combine(module.Instance.Domain.Replace(":", "@"), module.Instance.Address);
         checkStreamer(videoFolder, module);
@@ -4494,6 +4609,8 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
 
 // Handle all UI/Frontend requests in "Media.Video" domain
 Api.Handle($"{MediaVideoDomain}/", ( args ) =&gt; {
+  if (ffmpeg.Executable == null) return null;
+
   var request = Api.Parse(args);
   object responseData = new ResponseStatus(Status.Error, "An error occurred processing this request.");
 
@@ -4580,7 +4697,12 @@ When.ProgramStopping(() =&gt;
     return true;
 });
 
-Program.GoBackground();
+while (Program.IsRunning)
+{
+    ffmpeg.Poll();
+    PublishSetupStatus();
+    Pause(1);
+}
 </ScriptSource>
     <ScriptContext>#using System.Diagnostics
 
@@ -4639,9 +4761,12 @@ public class FfmpegStreamer
     // Event to notify parent if the process dies unexpectedly
     public event EventHandler ProcessExited;
 
-    public FfmpegStreamer(NetHelper net)
+    private readonly string executable;
+
+    public FfmpegStreamer(NetHelper net, string executable)
     {
         netHelper = net;
+        this.executable = executable;
     }
 
     public void Configure(FfmpegInputMode mode, string url, string user, string pass, int fps, int width,
@@ -4765,7 +4890,7 @@ public class FfmpegStreamer
         {
             var startInfo = new ProcessStartInfo
             {
-                FileName = "ffmpeg",
+                FileName = executable,
                 Arguments = argsBuilder.ToString(),
                 RedirectStandardInput = (_mode == FfmpegInputMode.Push),
                 RedirectStandardError = true,
@@ -4953,53 +5078,327 @@ public class FfmpegStreamer
     }
 }
 
-public static class FfmpegHelper
+public sealed class FfmpegInstallation
 {
-    private static bool? _isAvailable = null;
+    private const string DownloadApi = "System.Utility/DownloadManager/";
+    private const string Version = "9.0.2";
+    private const string WindowsArchive = "ffmpeg-" + Version + "-essentials_build.zip";
+    private const string LinuxRelease = "https://github.com/FFmpeg-Builds/FFmpeg-Builds/releases/download/autobuild-2026-10-31-12-59/";
+    private const string LinuxBuild = "ffmpeg-n9.0.2-39-g7adfbe40dc-";
+    private readonly ApiHelper api;
+    private readonly string folder;
+    private readonly (string Name, string Url, string Sha256, string Directory) package;
+    private readonly object sync = new object();
+    private volatile InstallationStatus status = new InstallationStatus("Missing");
 
-    public static bool IsAvailable()
+    public FfmpegInstallation(ApiHelper api, string folder)
     {
-        if (_isAvailable.HasValue) return _isAvailable.Value;
+        this.api = api;
+        this.folder = Path.GetFullPath(folder);
+        if (!CheckInstalled())
+        {
+            package = SelectPackage();
+            if (package.Name == null) status = ManualStatus();
+        }
+    }
 
+    public string Executable =&gt; status.Executable;
+    public object GetStatus() =&gt; status;
+    public string SetupStatus =&gt; status.State switch
+    {
+        "Checking" or "Downloading" or "Installing" =&gt; "Busy",
+        "Ready" =&gt; "Complete",
+        _ =&gt; "Pending"
+    };
+    public (string Ffmpeg, string Ffprobe) GetExecutables()
+    {
+        var current = status;
+        return (current.Executable, current.ProbeExecutable);
+    }
+
+    public object Prepare()
+    {
+        lock (sync)
+        {
+            if (!status.Available &amp;&amp; status.State is not ("Checking" or "Downloading" or "Installing"))
+                status = new InstallationStatus("Checking");
+            return status;
+        }
+    }
+
+    public void Poll()
+    {
         try
         {
-            var p = new Process
+            switch (status.State)
             {
-                StartInfo = new ProcessStartInfo
-                {
-                    FileName = "ffmpeg",
-                    Arguments = "-version",
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    CreateNoWindow = true
-                }
-            };
+                case "Checking":
+                    if (CheckInstalled()) break;
+                    if (package.Name == null)
+                    {
+                        status = ManualStatus();
+                        break;
+                    }
+                    QueueDownload();
+                    break;
+                case "Downloading":
+                    ReadDownloadStatus();
+                    break;
+            }
+        }
+        catch (Exception ex)
+        {
+            status = new InstallationStatus("Error", error: ex.Message);
+        }
+    }
 
-            p.Start();
-            p.WaitForExit(2000);
+    private static (string Name, string Url, string Sha256, string Directory) SelectPackage()
+    {
+        var architecture = System.Runtime.InteropServices.RuntimeInformation.OSArchitecture;
+        if (OperatingSystem.IsWindows() &amp;&amp; architecture == System.Runtime.InteropServices.Architecture.X64)
+            return (WindowsArchive, "https://github.com/GyanD/codexffmpeg/releases/download/" + Version + "/" + WindowsArchive,
+                "60f467265b1e312373dbcd92200c2618a74850f98d3d078e94296bb3fa2047ba", "ffmpeg-" + Version + "-essentials_build");
 
-            _isAvailable = (p.ExitCode == 0);
+        if (!OperatingSystem.IsLinux() || Environment.OSVersion.Version &lt; new System.Version(4, 18)) return default;
+        var target = architecture switch {
+            System.Runtime.InteropServices.Architecture.X64 =&gt; "linux64",
+            System.Runtime.InteropServices.Architecture.Arm64 =&gt; "linuxarm64",
+            _ =&gt; null
+        };
+        if (target == null) return default;
+        var libc = ReadProbe("/usr/bin/getconf", "GNU_LIBC_VERSION")?.Trim();
+        if (libc == null || !libc.StartsWith("glibc ", StringComparison.Ordinal) ||
+            !System.Version.TryParse(libc.Substring(6), out var version) || version &lt; new System.Version(2, 28) ||
+            ReadProbe("tar", "--version") == null || ReadProbe("xz", "--version") == null) return default;
+        var directory = LinuxBuild + target + "-gpl-9.0";
+        var name = directory + ".tar.xz";
+        var sha = target == "linux64"
+            ? "73e29a56974ae5a651133a04584c7483b21afe941e17dc91d79814a758b608d3"
+            : "6cad88ae5bcec356cfc5d7979a036cc4007128201928a0cf243df3db483276cc";
+        return (name, LinuxRelease + name, sha, directory);
+    }
+
+    private static InstallationStatus ManualStatus()
+        =&gt; new InstallationStatus("Manual", installCommand: OperatingSystem.IsMacOS() ? "brew install ffmpeg" :
+            OperatingSystem.IsLinux() &amp;&amp; File.Exists("/usr/bin/apt") ? "sudo apt install ffmpeg" : null);
+
+    private string ArchivePath =&gt; Path.Combine(folder, package.Name);
+    private static string FfmpegName =&gt; OperatingSystem.IsWindows() ? "ffmpeg.exe" : "ffmpeg";
+    private static string FfprobeName =&gt; OperatingSystem.IsWindows() ? "ffprobe.exe" : "ffprobe";
+
+    private bool CheckInstalled()
+    {
+        var bin = Path.Combine(folder, "bin");
+        bool UseManaged() =&gt; TryUse(Path.Combine(bin, FfmpegName), Path.Combine(bin, FfprobeName));
+        if (OperatingSystem.IsWindows() &amp;&amp; UseManaged()) return true;
+        if (TryUse(FindOnPath(FfmpegName), FindOnPath(FfprobeName))) return true;
+        if (OperatingSystem.IsLinux() &amp;&amp; UseManaged()) return true;
+        if (OperatingSystem.IsMacOS())
+            return TryUse("/opt/homebrew/bin/ffmpeg", "/opt/homebrew/bin/ffprobe") ||
+                TryUse("/usr/local/bin/ffmpeg", "/usr/local/bin/ffprobe");
+        return false;
+    }
+
+    private bool TryUse(string ffmpeg, string ffprobe)
+    {
+        if (!File.Exists(ffmpeg) || !File.Exists(ffprobe) || !CanUse(ffmpeg, ffprobe)) return false;
+        status = new InstallationStatus("Ready", ffmpeg, ffprobe);
+        return true;
+    }
+
+    private static string FindOnPath(string executable)
+    {
+        foreach (var directory in (Environment.GetEnvironmentVariable("PATH") ?? "").Split(Path.PathSeparator))
+        {
+            var location = directory.Trim().Trim('"');
+            if (!Path.IsPathFullyQualified(location)) continue;
+            var candidate = Path.Combine(location, executable);
+            if (File.Exists(candidate)) return candidate;
+        }
+        return null;
+    }
+
+    private void QueueDownload()
+    {
+        var existing = Download("GetStatus", ArchivePath) as JObject;
+        if (existing != null)
+        {
+            if (existing.Value&lt;string&gt;("Status") is "Paused" or "Error")
+                Download("Resume", JsonConvert.SerializeObject(new { Id = existing.Value&lt;string&gt;("Id") }));
+        }
+        else if (!File.Exists(ArchivePath))
+        {
+            Download("Enqueue", JsonConvert.SerializeObject(new { Name = package.Name, Url = package.Url, Path = folder }));
+        }
+        if (File.Exists(ArchivePath))
+            InstallArchive();
+        else
+            status = new InstallationStatus("Downloading");
+    }
+
+    private void ReadDownloadStatus()
+    {
+        var task = Download("GetStatus", ArchivePath) as JObject
+            ?? throw new IOException("The FFmpeg download is no longer in the queue.");
+        switch (task.Value&lt;string&gt;("Status"))
+        {
+            case "Completed":
+                InstallArchive();
+                break;
+            case "Paused":
+                status = new InstallationStatus("Paused", progress: task.Value&lt;double&gt;("ProgressPercentage"));
+                break;
+            case "Error":
+            case "Cancelled":
+                status = new InstallationStatus("Error", error: task.Value&lt;string&gt;("ErrorMessage") ?? "The FFmpeg download did not finish.");
+                break;
+            default:
+                status = new InstallationStatus("Downloading", progress: task.Value&lt;double&gt;("ProgressPercentage"));
+                break;
+        }
+    }
+
+    private JToken Download(string command, object data)
+    {
+        var response = api.Call(DownloadApi + command, data);
+        var reply = response is string json &amp;&amp; !string.IsNullOrWhiteSpace(json) ? JObject.Parse(json) : response as JObject;
+        if (reply?.Value&lt;bool&gt;("Success") != true)
+            throw new IOException((reply?["Data"] as JObject)?.Value&lt;string&gt;("Error") ?? "The HomeGenie Download Manager is unavailable.");
+        return reply["Data"]?.Type == JTokenType.Null ? null : reply["Data"];
+    }
+
+    private void InstallArchive()
+    {
+        status = new InstallationStatus("Installing", progress: 100);
+        var staging = Path.Combine(folder, "ffmpeg-" + Guid.NewGuid().ToString("N"));
+        var bin = Path.Combine(folder, "bin");
+        var previous = staging + "-previous";
+        try
+        {
+            ExtractArchive(ArchivePath, staging, package.Sha256, package.Directory);
+            if (Directory.Exists(bin)) Directory.Move(bin, previous);
+            Directory.Move(staging, bin);
+        }
+        catch (InvalidDataException)
+        {
+            if (Directory.Exists(staging)) Directory.Delete(staging, true);
+            File.Delete(ArchivePath);
+            throw;
+        }
+        catch
+        {
+            if (Directory.Exists(previous) &amp;&amp; !Directory.Exists(bin)) Directory.Move(previous, bin);
+            if (Directory.Exists(staging)) Directory.Delete(staging, true);
+            throw;
+        }
+        status = new InstallationStatus("Ready", Path.Combine(bin, FfmpegName), Path.Combine(bin, FfprobeName));
+    }
+
+    public static void ExtractArchive(string archivePath, string staging, string checksum, string directory)
+    {
+        using var file = File.OpenRead(archivePath);
+        var hash = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(file));
+        if (!string.Equals(checksum, hash, StringComparison.OrdinalIgnoreCase))
+            throw new InvalidDataException("The downloaded FFmpeg archive failed SHA-256 verification.");
+        file.Position = 0;
+        Directory.CreateDirectory(staging);
+        if (OperatingSystem.IsWindows())
+        {
+            using var archive = new System.IO.Compression.ZipArchive(file);
+            foreach (var name in new[] { FfmpegName, FfprobeName })
+            {
+                var entry = archive.GetEntry(directory + "/bin/" + name)
+                    ?? throw new IOException("Missing executable in the FFmpeg archive: " + name);
+                using var input = entry.Open();
+                using var output = File.Create(Path.Combine(staging, name));
+                input.CopyTo(output);
+            }
+        }
+        else
+        {
+            var start = new ProcessStartInfo("tar") { UseShellExecute = false, RedirectStandardError = true };
+            foreach (var argument in new[] { "--extract", "--xz", "--no-same-owner", "--no-same-permissions",
+                "--strip-components=2", "--file", archivePath, "--directory", staging, "--",
+                directory + "/bin/" + FfmpegName, directory + "/bin/" + FfprobeName })
+                start.ArgumentList.Add(argument);
+            using var tar = Process.Start(start) ?? throw new IOException("Could not start tar.");
+            var error = tar.StandardError.ReadToEndAsync();
+            if (!tar.WaitForExit(90000))
+            {
+                tar.Kill(entireProcessTree: true);
+                throw new IOException("Extracting the FFmpeg archive timed out.");
+            }
+            if (tar.ExitCode != 0) throw new IOException(error.GetAwaiter().GetResult());
+            foreach (var name in new[] { FfmpegName, FfprobeName })
+                File.SetUnixFileMode(Path.Combine(staging, name),
+                    UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute);
+        }
+        if (!CanUse(Path.Combine(staging, FfmpegName), Path.Combine(staging, FfprobeName)))
+            throw new IOException("The extracted FFmpeg build could not be started or does not provide libx264.");
+    }
+
+    private static bool CanUse(string ffmpeg, string ffprobe)
+        =&gt; ReadProbe(ffmpeg, "-hide_banner -encoders")?.Contains(" libx264 ", StringComparison.Ordinal) == true &amp;&amp;
+            ReadProbe(ffprobe, "-version") != null;
+
+    private static string ReadProbe(string file, string arguments)
+    {
+        try
+        {
+            using var process = Process.Start(new ProcessStartInfo(file, arguments) {
+                UseShellExecute = false, CreateNoWindow = true,
+                RedirectStandardOutput = true, RedirectStandardError = true
+            });
+            if (process == null) return null;
+            var output = process.StandardOutput.ReadToEndAsync();
+            var error = process.StandardError.ReadToEndAsync();
+            if (!process.WaitForExit(5000))
+            {
+                process.Kill();
+                return null;
+            }
+            return process.ExitCode == 0 ? output.GetAwaiter().GetResult() : null;
         }
         catch (Exception)
         {
-            _isAvailable = false;
+            return null;
         }
+    }
 
-        return _isAvailable.Value;
+    public sealed class InstallationStatus
+    {
+        internal string Executable { get; }
+        internal string ProbeExecutable { get; }
+        public bool Available =&gt; Executable != null;
+        public string State { get; }
+        public double ProgressPercentage { get; }
+        public string ErrorMessage { get; }
+        public string InstallCommand { get; }
+
+        public InstallationStatus(string state, string executable = null, string probeExecutable = null,
+            double progress = 0, string error = null, string installCommand = null)
+        {
+            State = state;
+            Executable = executable;
+            ProbeExecutable = probeExecutable;
+            ProgressPercentage = progress;
+            ErrorMessage = error;
+            InstallCommand = installCommand;
+        }
     }
 }
+
 </ScriptContext>
     <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>video-input</Id>
-      <Version>1.0.4</Version>
+      <Version>1.0.10</Version>
       <Required>true</Required>
-      <Checksum>76D6F08643E8FB61F063CC82C9623A45</Checksum>
+      <Checksum>30C63A5BBBA8DDDE0C6B73887EC25787</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>200</Address>
@@ -5084,7 +5483,11 @@ public static class FfmpegHelper
 });
 Program.Run();
 </ScriptSetup>
-    <ScriptSource>// Dictionary to track active workers using Module Address as Key
+    <ScriptSource>RecordingFfmpeg.PortableFolder = Path.GetFullPath(Data.GetFolder("ffmpeg"));
+RecordingFfmpeg.GetExecutables = () =&gt;
+    Api.Call("Media.Video/service/FFmpeg.Executables", true) is ValueTuple&lt;string, string&gt; pair ? pair : default;
+
+// Dictionary to track active workers using Module Address as Key
 var activeWorkers = new Dictionary&lt;string, CameraWorker&gt;();
 
 // Define the dynamic collection ONCE outside the loop
@@ -5279,7 +5682,8 @@ while (Program.IsRunning)
 
     // Check for configuration changes every 5 seconds.
     Pause(5);
-}</ScriptSource>
+}
+</ScriptSource>
     <ScriptContext>#using System.Diagnostics
 
 const string RecordOnAlarm = "NVR.RecordOnAlarm";
@@ -5645,7 +6049,7 @@ public class FFmpegRecorder
 
         ProcessStartInfo psi = new ProcessStartInfo
         {
-            FileName = "ffmpeg",
+            FileName = RecordingFfmpeg.Resolve("ffmpeg"),
             Arguments = args,
             RedirectStandardInput = true,
             RedirectStandardOutput = true,
@@ -6163,7 +6567,7 @@ public static class MediaInfoService
     {
         var psi = new ProcessStartInfo
         {
-            FileName = "ffprobe",
+            FileName = RecordingFfmpeg.Resolve("ffprobe"),
             Arguments = $"-v quiet -print_format json -show_format -show_streams \"{filePath}\"",
             RedirectStandardOutput = true,
             UseShellExecute = false,
@@ -6273,7 +6677,7 @@ public class ThumbnailHelper
 
         var psi = new ProcessStartInfo
         {
-            FileName = "ffmpeg",
+            FileName = RecordingFfmpeg.Resolve("ffmpeg"),
             Arguments = args,
             RedirectStandardOutput = true,
             UseShellExecute = false,
@@ -6294,17 +6698,37 @@ public class ThumbnailHelper
         catch { return null; }
     }
 }
+
+public static class RecordingFfmpeg
+{
+    public static string PortableFolder { get; set; }
+    public static Func&lt;(string Ffmpeg, string Ffprobe)&gt; GetExecutables { get; set; }
+
+    public static string Resolve(string executable)
+    {
+        var pair = GetExecutables?.Invoke() ?? default;
+        var selected = executable == "ffprobe" ? pair.Ffprobe : pair.Ffmpeg;
+        if (selected != null &amp;&amp; File.Exists(selected)) return selected;
+        if (OperatingSystem.IsWindows() || OperatingSystem.IsLinux())
+        {
+            var name = OperatingSystem.IsWindows() ? executable + ".exe" : executable;
+            var path = Path.Combine(PortableFolder, "bin", name);
+            if (File.Exists(path)) return path;
+        }
+        return executable;
+    }
+}
 </ScriptContext>
     <ScriptErrors />
     <Data />
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>video-recorder</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.3</Version>
       <Required>true</Required>
-      <Checksum>65B5F0EB261A81B8364054F7891D0F97</Checksum>
+      <Checksum>67F9D355A7504F4FF3363E2657EF67A0</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>250</Address>
@@ -6381,7 +6805,7 @@ public string[] GetDayLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>weekly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -7282,7 +7706,7 @@ public static class ModuleSettingAction
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>ai-action-executor</Id>
       <Version>1.2.20</Version>
       <Required>true</Required>
@@ -7659,7 +8083,7 @@ public static class ProgramUpdateNotification {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.122</PackageVersion>
+      <PackageVersion>1.0.133</PackageVersion>
       <Id>notification-archive</Id>
       <Version>1.2.0</Version>
       <Required>true</Required>
@@ -7684,6 +8108,8 @@ if (!File.Exists(objectivePromptFile) &amp;&amp; File.Exists(defaultObjectivePro
     catch (IOException) when (File.Exists(objectivePromptFile)) { }
 }
 Program.Implements("@Service:AiGenie", "System.Utility/AiGenie", new { version = 1 })
+    .Implements("@Setup:Widget", "/api/System.Utility/AiGenie/Widgets.Get/setup",
+        new { translations = true, required = false, order = 100, actionPath = "/api/System.Utility/AiGenie/Setup.Finalize" })
     .AddOption("DefaultProvider", "940", "Default AI Genie", "select:")
     .AddOption("AllowedHttpUrls", "", "Allowed HTTP URLs (semicolon separated)", "text")
     .AddOption("AllowedLocalFolders", "", "Allowed local folders (semicolon separated)", "text")
@@ -7696,6 +8122,16 @@ Program.Run();
 var requests = new AiGenieRequests();
 var goals = new AiGenieGoals();
 var lifecycle = new AiGenieProgramLifecycle();
+var setup = new AiGenieSetup(Program, Api, Data.GetFolder());
+string setupWidgets = Path.Combine(Data.GetFolder(), "widgets");
+Api.Handle("System.Utility/AiGenie/Widgets.Get", input =&gt; {
+    var asset = Api.Parse(input).OriginalRequest;
+    if (asset is not ("setup.html" or "setup.css" or "setup.js" or "setup.i18n.json")) return null;
+    var path = Path.Combine(setupWidgets, asset);
+    return File.Exists(path) ? File.ReadAllBytes(path) : null;
+});
+Api.Handle("System.Utility/AiGenie/Setup.Providers", _ =&gt; setup.Providers());
+Api.Handle("System.Utility/AiGenie/Setup.Finalize", input =&gt; setup.FinalizeStep(Api.Parse(input).Data));
 void QueueGoalCleanup(string address = null) {
     System.Threading.Tasks.Task.Run(() =&gt; goals.CleanupRunners((route,data) =&gt; Api.Call(route,data), address,
         message =&gt; { try { Program.Log.Warn(message); } catch {} }));
@@ -7711,6 +8147,7 @@ Action refreshProviderOptions=()=&gt; {
             string selected=Program.Option("DefaultProvider").Value;
             string fieldType=AiGenieProviderOptions.Build(providers,selected);
             Program.AddOption("DefaultProvider","940","Default AI Genie",fieldType);
+            setup.RefreshStatus();
         } catch(Exception ex) {try {Program.Log.Warn("Could not refresh AI Genie provider options: "+ex.Message);}catch {}}
     }
 };
@@ -7727,6 +8164,9 @@ When.ModuleParameterChanged((module, parameter) =&gt; {
             try {if(Program.IsRunning)refreshProviderOptions();}
             finally {System.Threading.Interlocked.Exchange(ref providerOptionsPending,0);}
         });
+    if(domain=="HomeAutomation.HomeGenie.Automation" &amp;&amp;
+        field is ("Status.Init" or "ConfigureOptions.ApiKey" or "ConfigureOptions.ModelFile"))
+        System.Threading.Tasks.Task.Run(() =&gt; { if(Program.IsRunning) setup.RefreshStatus(); });
     if(domain=="HomeAutomation.HomeGenie.Automation" &amp;&amp; field=="Program.Status") {
         // The history and deployment services can start after this program.
         if(value=="Background" &amp;&amp; childId is ("577" or "581"))QueueGoalCleanup();
@@ -9365,6 +9805,143 @@ public static JObject Run(string requestId,Func&lt;string,object,object&gt; call
 }
 }
 
+
+public sealed class AiGenieSetup
+{
+    private const string Automation = "HomeAutomation.HomeGenie/Automation/";
+    private readonly ProgramHelper program;
+    private readonly ApiHelper api;
+    private readonly object gate = new object();
+    private string setupStatus;
+    private readonly string completedPath;
+    private static readonly HashSet&lt;string&gt; PackagedCloudProviders = new HashSet&lt;string&gt;(StringComparer.Ordinal)
+        { "gemini-genie", "openai-genie", "claude-genie", "deepseek-genie", "qwen-genie" };
+
+    public AiGenieSetup(ProgramHelper program, ApiHelper api, string folder)
+    {
+        this.program = program;
+        this.api = api;
+        completedPath = Path.Combine(folder, "setup-completed");
+    }
+
+    private static JArray List(object reply) =&gt; reply as JArray ??
+        (reply is string text ? JToken.Parse(text) as JArray : reply == null ? null : JToken.FromObject(reply) as JArray);
+
+    private JArray ReadDeclarations() =&gt; List(api.Call(Automation + "Programs.Implements/^@AI:/regex"))
+        ?? throw new InvalidOperationException("Could not read the installed Genies.");
+
+    private static string PackageId(JObject entry) =&gt; (string)entry["PackageInfo"]?["packageId"] == "homegenie-ml-ai"
+        ? (string)entry["PackageInfo"]?["id"] : null;
+
+    private static IEnumerable&lt;JObject&gt; Registrations(JArray declarations, string identifier) =&gt;
+        declarations.OfType&lt;JObject&gt;()
+            .Where(entry =&gt; string.Equals((string)entry["ImplementedInterface"]?["Identifier"], identifier, StringComparison.OrdinalIgnoreCase))
+            .Select(entry =&gt; entry["Program"]).OfType&lt;JObject&gt;();
+
+    private IEnumerable&lt;(string Name, ProgramHelper Target)&gt; Programs(IEnumerable&lt;JObject&gt; entries, string option, string fieldType = null)
+    {
+        foreach (var entry in entries.GroupBy(row =&gt; (string)row["Address"]).Select(group =&gt; group.First()))
+        {
+            if (!int.TryParse((string)entry["Address"], out var address) || address &lt;= 0) continue;
+            var target = program.WithAddress(address);
+            var parameter = target?.Option(option);
+            if (parameter != null &amp;&amp; (fieldType == null || parameter.FieldType == fieldType))
+                yield return ((string)entry["Name"], target);
+        }
+    }
+
+    private static bool HasOption(ProgramHelper target, string name) =&gt;
+        !string.IsNullOrWhiteSpace(target.Option(name)?.Value);
+
+    private static string ModelState(ProgramHelper target) =&gt; target.Module?.Properties
+        .FirstOrDefault(p =&gt; p.Name == "Status.Init")?.Value;
+
+    private static string ModuleId(ProgramHelper target)
+    {
+        var module = target.Module;
+        return module == null ? null : module.Domain + ":" + module.Address;
+    }
+
+    private void Publish(bool ready)
+    {
+        lock (gate)
+        {
+            var next = File.Exists(completedPath) ? "Complete" : ready ? "Ready" : "Pending";
+            if (setupStatus == next) return;
+            setupStatus = next;
+            program.Emit("Setup.Status", next);
+        }
+    }
+
+    public void RefreshStatus()
+    {
+        if (File.Exists(completedPath)) Publish(false);
+        else Providers();
+    }
+
+    public object FinalizeStep(object data)
+    {
+        string action = null;
+        try
+        {
+            var request = data switch
+            {
+                JObject json =&gt; json,
+                byte[] bytes =&gt; JObject.Parse(System.Text.Encoding.UTF8.GetString(bytes)),
+                string text =&gt; JObject.Parse(text),
+                IDictionary&lt;string, object&gt; fields =&gt; JObject.FromObject(fields),
+                _ =&gt; null
+            };
+            action = (string)request?["action"];
+        }
+        catch (Newtonsoft.Json.JsonException) { }
+        if (action is not ("done" or "skip"))
+            return new { Status = "Error", Code = "InvalidSetupAction" };
+        try
+        {
+            if (action == "done") RefreshStatus();
+            lock (gate)
+            {
+                if (action == "done" &amp;&amp; setupStatus is not ("Ready" or "Complete"))
+                    return new { Status = "Error", Code = "SetupNotReady" };
+                // A repeated confirmation is safe if the wizard was interrupted after the first one.
+                using (File.Open(completedPath, FileMode.OpenOrCreate, FileAccess.Write)) { }
+                Publish(false);
+            }
+            return new { Status = "Ok" };
+        }
+        catch { return new { Status = "Error", Code = "SetupFinalizeFailed" }; }
+    }
+
+    public object Providers()
+    {
+        try
+        {
+            var declarations = ReadDeclarations();
+            // Include packaged instances with existing options even if disabled before interface registration.
+            var installed = (List(api.Call(Automation + "Programs.List")) ?? new JArray()).OfType&lt;JObject&gt;().ToArray();
+            var cloud = Programs(Registrations(declarations, "@AI:Genie")
+                .Concat(installed.Where(entry =&gt; PackagedCloudProviders.Contains(PackageId(entry)))), "ApiKey", "password")
+                .OrderBy(p =&gt; p.Name).ToArray();
+            var local = Programs(Registrations(declarations, "@AI:IntentHandler")
+                .Concat(installed.Where(entry =&gt; PackageId(entry) == "lailama")), "ModelFile")
+                .OrderBy(p =&gt; p.Name).ToArray();
+            Publish(cloud.Any(p =&gt; HasOption(p.Target, "ApiKey")) || local.Any(p =&gt; HasOption(p.Target, "ModelFile")));
+            return new {
+                Status = "Ok", SettingsModuleId = ModuleId(program),
+                Providers = cloud.Select(p =&gt; new {
+                    p.Name, ModuleId = ModuleId(p.Target), Enabled = p.Target.IsEnabled,
+                    HasKey = HasOption(p.Target, "ApiKey")
+                }).ToArray(),
+                LocalProviders = local.Select(p =&gt; new {
+                    p.Name, ModuleId = ModuleId(p.Target), Enabled = p.Target.IsEnabled,
+                    ModelState = ModelState(p.Target), HasModel = HasOption(p.Target, "ModelFile")
+                }).ToArray()
+            };
+        }
+        catch { return new { Status = "Error", Code = "ProviderListUnavailable" }; }
+    }
+}
 
 public static class AiGenieProviderOptions {
     public static string Build(JArray providers,string selected) {
@@ -11236,11 +11813,11 @@ A dashboard container uses settings={defaultSize:'dashboard',sizeOptions:[]} as 
   <PackageInfo>
     <Repository>homegenie</Repository>
     <PackageId>homegenie-base</PackageId>
-    <PackageVersion>1.0.122</PackageVersion>
+    <PackageVersion>1.0.133</PackageVersion>
     <Id>ai-genie-service</Id>
-    <Version>0.27.50</Version>
+    <Version>0.27.54</Version>
     <Required>true</Required>
-    <Checksum>8B038A18A6ADE7BBED38CA86B6D7D7F8</Checksum>
+    <Checksum>E3F8CDB1F1913F2E25E0E886AFB3E582</Checksum>
   </PackageInfo>
   <Domain>HomeAutomation.HomeGenie.Automation</Domain>
   <Address>583</Address>

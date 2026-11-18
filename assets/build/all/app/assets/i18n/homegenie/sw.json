@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Kawaida",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Onyesha taarifa za uchunguzi wa matatizo ya malengo kwenye gumzo"
+      "ConfigureOptions.GoalDiagnostics": "Onyesha taarifa za uchunguzi wa matatizo ya malengo kwenye gumzo",
+      "ConfigureOptions.SystemInstructions": "Maagizo ya mfumo",
+      "ConfigureOptions.ApiKey": "Ufunguo wa API wa OpenAI",
+      "ConfigureOptions.ModelId": "Kitambulisho cha Muundo"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Onyesha taarifa za uchunguzi wa matatizo ya malengo kwenye gumzo"
+      "ConfigureOptions.GoalDiagnostics": "Onyesha taarifa za uchunguzi wa matatizo ya malengo kwenye gumzo",
+      "ConfigureOptions.SystemInstructions": "Maagizo ya mfumo",
+      "ConfigureOptions.ApiKey": "Ufunguo wa API wa Claude",
+      "ConfigureOptions.ModelId": "Kitambulisho cha Muundo",
+      "ConfigureOptions.MaxOutputTokens": "Urefu wa Majibu (Tokeni za Juu)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Onyesha taarifa za uchunguzi wa matatizo ya malengo kwenye gumzo"
+      "ConfigureOptions.GoalDiagnostics": "Onyesha taarifa za uchunguzi wa matatizo ya malengo kwenye gumzo",
+      "ConfigureOptions.SystemInstructions": "Maagizo ya mfumo",
+      "ConfigureOptions.ApiKey": "Ufunguo wa API wa DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Onyesha taarifa za uchunguzi wa matatizo ya malengo kwenye gumzo"
+      "ConfigureOptions.GoalDiagnostics": "Onyesha taarifa za uchunguzi wa matatizo ya malengo kwenye gumzo",
+      "ConfigureOptions.SystemInstructions": "Maagizo ya mfumo",
+      "ConfigureOptions.ApiKey": "Ufunguo wa API wa Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL ya Responses API katika Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Huduma zinazoshirikiwa na uteuzi wa mtoa huduma chaguomsingi kwa maombi ya chinichini.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Chaguomsingi)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Chaguomsingi)",
+      "ConfigureOptions.AllowedHttpUrls": "Anwani za HTTP zinazoruhusiwa (zitenganishwe kwa nukta mkato)",
+      "ConfigureOptions.AllowedLocalFolders": "Folda za ndani zinazoruhusiwa (zitenganishwe kwa nukta mkato)",
+      "ConfigureOptions.MaximumSourceSize": "Ukubwa wa juu wa faili chanzo (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Viendelezi vya faili za kuambatisha moja kwa moja (vitenganishwe kwa nukta mkato)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Maagizo ya malengo ya kuunda wijeti"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Onyesha taarifa za uchunguzi wa matatizo ya malengo kwenye gumzo",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Data iliyopakuliwa",
   "audio_stop": "Acha",
   "audio_resume": "Endelea",
+  "audio_manage_model": "Dhibiti modeli",
   "audio_download": "Pakua",
   "audio_restart_download": "Pakua tena",
   "audio_download_downloading": "Inapakua",

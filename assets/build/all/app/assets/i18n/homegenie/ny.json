@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Mwachibadwa",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Onetsani zambiri zowunika mavuto a zolinga pa macheza"
+      "ConfigureOptions.GoalDiagnostics": "Onetsani zambiri zowunika mavuto a zolinga pa macheza",
+      "ConfigureOptions.SystemInstructions": "Malangizo a dongosolo",
+      "ConfigureOptions.ApiKey": "Kiyi ya API ya OpenAI",
+      "ConfigureOptions.ModelId": "ID ya Model"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Onetsani zambiri zowunika mavuto a zolinga pa macheza"
+      "ConfigureOptions.GoalDiagnostics": "Onetsani zambiri zowunika mavuto a zolinga pa macheza",
+      "ConfigureOptions.SystemInstructions": "Malangizo a dongosolo",
+      "ConfigureOptions.ApiKey": "Kiyi ya API ya Claude",
+      "ConfigureOptions.ModelId": "ID ya Model",
+      "ConfigureOptions.MaxOutputTokens": "Kutalika kwa Mayankho (Ma Tokeni Ochuluka)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Onetsani zambiri zowunika mavuto a zolinga pa macheza"
+      "ConfigureOptions.GoalDiagnostics": "Onetsani zambiri zowunika mavuto a zolinga pa macheza",
+      "ConfigureOptions.SystemInstructions": "Malangizo a dongosolo",
+      "ConfigureOptions.ApiKey": "Kiyi ya API ya DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Onetsani zambiri zowunika mavuto a zolinga pa macheza"
+      "ConfigureOptions.GoalDiagnostics": "Onetsani zambiri zowunika mavuto a zolinga pa macheza",
+      "ConfigureOptions.SystemInstructions": "Malangizo a dongosolo",
+      "ConfigureOptions.ApiKey": "Kiyi ya API ya Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL ya Responses API mu Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Ntchito zogawana ndi kusankha wopereka wokhazikika pa zopempha zakumbuyo.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Yokhazikika)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Yokhazikika)",
+      "ConfigureOptions.AllowedHttpUrls": "Ma URL a HTTP ololedwa (olekanitsidwa ndi semikoloni)",
+      "ConfigureOptions.AllowedLocalFolders": "Mafoda a pa chipangizo ololedwa (olekanitsidwa ndi semikoloni)",
+      "ConfigureOptions.MaximumSourceSize": "Kukula kwakukulu kwa fayilo yoyambira (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Zowonjezera za mafayilo ophatikizidwa mwachindunji (zolekanitsidwa ndi semikoloni)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Malangizo a zolinga zopanga ma widget"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Onetsani zambiri zowunika mavuto a zolinga pa macheza",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Deta yotsitsa\nMtengo wa",
   "audio_stop": "Imani",
   "audio_resume": "Yambitsaninso\nMtengo wa",
+  "audio_manage_model": "Samalirani modēlo",
   "audio_download": "Tsitsani",
   "audio_restart_download": "Koperani kachiwiri\nMtengo wa",
   "audio_download_downloading": "Kutsitsa",

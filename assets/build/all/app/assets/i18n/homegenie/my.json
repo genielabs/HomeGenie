@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "ပုံမှန်",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "ပန်းတိုင်များ၏ ပြဿနာစစ်ဆေးမှု အချက်အလက်ကို ချတ်တွင် ပြပါ"
+      "ConfigureOptions.GoalDiagnostics": "ပန်းတိုင်များ၏ ပြဿနာစစ်ဆေးမှု အချက်အလက်ကို ချတ်တွင် ပြပါ",
+      "ConfigureOptions.SystemInstructions": "စနစ်ဆိုင်ရာ ညွှန်ကြားချက်များ",
+      "ConfigureOptions.ApiKey": "OpenAI API key",
+      "ConfigureOptions.ModelId": "မော်ဒယ် ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "ပန်းတိုင်များ၏ ပြဿနာစစ်ဆေးမှု အချက်အလက်ကို ချတ်တွင် ပြပါ"
+      "ConfigureOptions.GoalDiagnostics": "ပန်းတိုင်များ၏ ပြဿနာစစ်ဆေးမှု အချက်အလက်ကို ချတ်တွင် ပြပါ",
+      "ConfigureOptions.SystemInstructions": "စနစ်ဆိုင်ရာ ညွှန်ကြားချက်များ",
+      "ConfigureOptions.ApiKey": "Claude API key",
+      "ConfigureOptions.ModelId": "မော်ဒယ် ID",
+      "ConfigureOptions.MaxOutputTokens": "တုံ့ပြန်မှုအရှည် (အများဆုံးတိုကင်များ)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "ပန်းတိုင်များ၏ ပြဿနာစစ်ဆေးမှု အချက်အလက်ကို ချတ်တွင် ပြပါ"
+      "ConfigureOptions.GoalDiagnostics": "ပန်းတိုင်များ၏ ပြဿနာစစ်ဆေးမှု အချက်အလက်ကို ချတ်တွင် ပြပါ",
+      "ConfigureOptions.SystemInstructions": "စနစ်ဆိုင်ရာ ညွှန်ကြားချက်များ",
+      "ConfigureOptions.ApiKey": "DeepSeek API key"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "ပန်းတိုင်များ၏ ပြဿနာစစ်ဆေးမှု အချက်အလက်ကို ချတ်တွင် ပြပါ"
+      "ConfigureOptions.GoalDiagnostics": "ပန်းတိုင်များ၏ ပြဿနာစစ်ဆေးမှု အချက်အလက်ကို ချတ်တွင် ပြပါ",
+      "ConfigureOptions.SystemInstructions": "စနစ်ဆိုင်ရာ ညွှန်ကြားချက်များ",
+      "ConfigureOptions.ApiKey": "Qwen API key",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio ရှိ Responses API ၏ URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "မျှဝေသုံးစွဲသော ဝန်ဆောင်မှုများနှင့် နောက်ခံတောင်းဆိုမှုများအတွက် မူရင်းဝန်ဆောင်မှုပေးသူ ရွေးချယ်ခြင်း။",
-      "ConfigureOptions.DefaultProvider": "AI Genie (မူရင်း)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (မူရင်း)",
+      "ConfigureOptions.AllowedHttpUrls": "ခွင့်ပြုထားသော HTTP URL များ (ဆီမီကော်လံဖြင့် ခွဲပါ)",
+      "ConfigureOptions.AllowedLocalFolders": "ခွင့်ပြုထားသော စက်တွင်းဖိုလ်ဒါများ (ဆီမီကော်လံဖြင့် ခွဲပါ)",
+      "ConfigureOptions.MaximumSourceSize": "မူရင်းဖိုင်၏ အများဆုံးအရွယ်အစား (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "တိုက်ရိုက်ပူးတွဲမည့် ဖိုင်နောက်ဆက်တွဲများ (ဆီမီကော်လံဖြင့် ခွဲပါ)",
+      "ConfigureOptions.WidgetObjectivePrompt": "ဝစ်ဂျက်ဖန်တီးရေး ရည်မှန်းချက်များအတွက် ညွှန်ကြားချက်"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "ပန်းတိုင်များ၏ ပြဿနာစစ်ဆေးမှု အချက်အလက်ကို ချတ်တွင် ပြပါ",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "ဒေါင်းလုဒ်လုပ်ထားသောဒေတာ",
   "audio_stop": "ရပ်လိုက်ပါ။",
   "audio_resume": "ကိုယ်ရေးရာဇဝင်",
+  "audio_manage_model": "မော်ဒယ်ကို စီမံရန်",
   "audio_download": "ဒေါင်းလုဒ်လုပ်ပါ။",
   "audio_restart_download": "ထပ်မံဒေါင်းလုဒ်လုပ်ပါ။",
   "audio_download_downloading": "ဒေါင်းလုဒ်လုပ်နေသည်။",

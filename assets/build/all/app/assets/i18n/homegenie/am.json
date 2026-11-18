@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "መደበኛ",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "የግብ ምርመራ መረጃን በውይይት ውስጥ አሳይ"
+      "ConfigureOptions.GoalDiagnostics": "የግብ ምርመራ መረጃን በውይይት ውስጥ አሳይ",
+      "ConfigureOptions.SystemInstructions": "የስርዓት መመሪያዎች",
+      "ConfigureOptions.ApiKey": "የOpenAI ኤፒአይ ቁልፍ",
+      "ConfigureOptions.ModelId": "የሞዴል መታወቂያ"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "የግብ ምርመራ መረጃን በውይይት ውስጥ አሳይ"
+      "ConfigureOptions.GoalDiagnostics": "የግብ ምርመራ መረጃን በውይይት ውስጥ አሳይ",
+      "ConfigureOptions.SystemInstructions": "የስርዓት መመሪያዎች",
+      "ConfigureOptions.ApiKey": "የClaude ኤፒአይ ቁልፍ",
+      "ConfigureOptions.ModelId": "የሞዴል መታወቂያ",
+      "ConfigureOptions.MaxOutputTokens": "የምላሽ ርዝመት (ከፍተኛ ማስመሰያዎች)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "የግብ ምርመራ መረጃን በውይይት ውስጥ አሳይ"
+      "ConfigureOptions.GoalDiagnostics": "የግብ ምርመራ መረጃን በውይይት ውስጥ አሳይ",
+      "ConfigureOptions.SystemInstructions": "የስርዓት መመሪያዎች",
+      "ConfigureOptions.ApiKey": "የDeepSeek ኤፒአይ ቁልፍ"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "የግብ ምርመራ መረጃን በውይይት ውስጥ አሳይ"
+      "ConfigureOptions.GoalDiagnostics": "የግብ ምርመራ መረጃን በውይይት ውስጥ አሳይ",
+      "ConfigureOptions.SystemInstructions": "የስርዓት መመሪያዎች",
+      "ConfigureOptions.ApiKey": "የQwen ኤፒአይ ቁልፍ",
+      "ConfigureOptions.ResponsesEndpoint": "የModel Studio Responses API ዩአርኤል"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "የጋራ አገልግሎቶች እና ለጀርባ ጥያቄዎች ነባሪ አቅራቢ ምርጫ።",
-      "ConfigureOptions.DefaultProvider": "AI Genie (ነባሪ)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (ነባሪ)",
+      "ConfigureOptions.AllowedHttpUrls": "የተፈቀዱ የHTTP ዩአርኤሎች (በሰሚኮሎን የተለዩ)",
+      "ConfigureOptions.AllowedLocalFolders": "የተፈቀዱ የአካባቢ አቃፊዎች (በሰሚኮሎን የተለዩ)",
+      "ConfigureOptions.MaximumSourceSize": "ከፍተኛው የምንጭ ፋይል መጠን (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "በቀጥታ የሚያያዙ የፋይል ቅጥያዎች (በሰሚኮሎን የተለዩ)",
+      "ConfigureOptions.WidgetObjectivePrompt": "የመግብር ግብ መመሪያ"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "የግብ ምርመራ መረጃን በውይይት ውስጥ አሳይ",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "የወረደ ውሂብ",
   "audio_stop": "አቁም",
   "audio_resume": "ከቆመበት ቀጥል",
+  "audio_manage_model": "ሞዴሉን ያስተዳድሩ",
   "audio_download": "አውርድ",
   "audio_restart_download": "እንደገና ያውርዱ",
   "audio_download_downloading": "በማውረድ ላይ",

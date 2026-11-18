@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normal",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Diagnosinformatiounen iwwer Ziler am Chat weisen"
+      "ConfigureOptions.GoalDiagnostics": "Diagnosinformatiounen iwwer Ziler am Chat weisen",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktiounen",
+      "ConfigureOptions.ApiKey": "OpenAI API-Schlëssel",
+      "ConfigureOptions.ModelId": "Modell-ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Diagnosinformatiounen iwwer Ziler am Chat weisen"
+      "ConfigureOptions.GoalDiagnostics": "Diagnosinformatiounen iwwer Ziler am Chat weisen",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktiounen",
+      "ConfigureOptions.ApiKey": "Claude API-Schlëssel",
+      "ConfigureOptions.ModelId": "Modell-ID",
+      "ConfigureOptions.MaxOutputTokens": "Äntwertlängt (maximal Tokens)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Diagnosinformatiounen iwwer Ziler am Chat weisen"
+      "ConfigureOptions.GoalDiagnostics": "Diagnosinformatiounen iwwer Ziler am Chat weisen",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktiounen",
+      "ConfigureOptions.ApiKey": "DeepSeek API-Schlëssel"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Diagnosinformatiounen iwwer Ziler am Chat weisen"
+      "ConfigureOptions.GoalDiagnostics": "Diagnosinformatiounen iwwer Ziler am Chat weisen",
+      "ConfigureOptions.SystemInstructions": "Systeminstruktiounen",
+      "ConfigureOptions.ApiKey": "Qwen API-Schlëssel",
+      "ConfigureOptions.ResponsesEndpoint": "URL vun der Responses-API am Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Gemeinsam Servicer an Auswiel vum Standardubidder fir Hannergrondufroen.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Standard)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Standard)",
+      "ConfigureOptions.AllowedHttpUrls": "Erlaabt HTTP-URLen (mat Semikolone getrennt)",
+      "ConfigureOptions.AllowedLocalFolders": "Erlaabt lokal Dossieren (mat Semikolone getrennt)",
+      "ConfigureOptions.MaximumSourceSize": "Maximal Gréisst vun der Quelldatei (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Dateiendunge fir direkt Unhäng (mat Semikolone getrennt)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Uweisung fir Ziler zur Widget-Erstellung"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Diagnosinformatiounen iwwer Ziler am Chat weisen",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Eroflueden Donnéeën",
   "audio_stop": "Präis\nStop",
   "audio_resume": "Resumé",
+  "audio_manage_model": "Modell verwalten",
   "audio_download": "Download",
   "audio_restart_download": "Präis\nDownload erëm",
   "audio_download_downloading": "Eroflueden",

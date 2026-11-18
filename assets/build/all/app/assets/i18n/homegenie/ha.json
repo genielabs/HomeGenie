@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Na al’ada",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Nuna bayanan binciken matsalolin manufofi a hira"
+      "ConfigureOptions.GoalDiagnostics": "Nuna bayanan binciken matsalolin manufofi a hira",
+      "ConfigureOptions.SystemInstructions": "Umarnin tsarin",
+      "ConfigureOptions.ApiKey": "Maɓallin API na OpenAI",
+      "ConfigureOptions.ModelId": "ID na Samfuri"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Nuna bayanan binciken matsalolin manufofi a hira"
+      "ConfigureOptions.GoalDiagnostics": "Nuna bayanan binciken matsalolin manufofi a hira",
+      "ConfigureOptions.SystemInstructions": "Umarnin tsarin",
+      "ConfigureOptions.ApiKey": "Maɓallin API na Claude",
+      "ConfigureOptions.ModelId": "ID na Samfuri",
+      "ConfigureOptions.MaxOutputTokens": "Tsawon Amsa (Matsakaicin Alamomi)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Nuna bayanan binciken matsalolin manufofi a hira"
+      "ConfigureOptions.GoalDiagnostics": "Nuna bayanan binciken matsalolin manufofi a hira",
+      "ConfigureOptions.SystemInstructions": "Umarnin tsarin",
+      "ConfigureOptions.ApiKey": "Maɓallin API na DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Nuna bayanan binciken matsalolin manufofi a hira"
+      "ConfigureOptions.GoalDiagnostics": "Nuna bayanan binciken matsalolin manufofi a hira",
+      "ConfigureOptions.SystemInstructions": "Umarnin tsarin",
+      "ConfigureOptions.ApiKey": "Maɓallin API na Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL na Responses API na Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Ayyukan gama gari da zaɓin mai ba da sabis na asali don buƙatun bayan fage.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Na asali)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Na asali)",
+      "ConfigureOptions.AllowedHttpUrls": "URLs na HTTP da aka yarda (a raba da alamar ;)",
+      "ConfigureOptions.AllowedLocalFolders": "Jakunkunan fayiloli na gida da aka yarda (a raba da alamar ;)",
+      "ConfigureOptions.MaximumSourceSize": "Matsakaicin girman fayil ɗin tushe (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Ƙarin sunayen fayil don haɗawa kai tsaye (a raba da alamar ;)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Umarnin burin ƙirƙirar widget"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Nuna bayanan binciken matsalolin manufofi a hira",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Zazzage bayanan\nSaukewa:",
   "audio_stop": "Tsaya\nSaukewa:",
   "audio_resume": "Ci gaba\nSaukewa:",
+  "audio_manage_model": "Sarrafa samfurin",
   "audio_download": "Zazzagewa\nSaukewa:",
   "audio_restart_download": "Sauke sake\nSaukewa:",
   "audio_download_downloading": "Ana saukewa\nSaukewa:",

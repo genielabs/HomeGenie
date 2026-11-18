@@ -146,7 +146,7 @@ The API command response.
 ApiHelper Handle(string apiCall, Func< object, object > handler)
 ```
 Defines a handler function that will be called when a web service call starting with apiCall is received. Use this to add user-defined web service API methods.
-ApiHelper API methods should respect the following format: For instance, a program that control Philips Hue lights will implement API methods like this: So an API call to set a Philips Hue light with address 3 to 50% can be done via HTTP GET or from a csharp program When this call is received by the handler, the object args passed to it must be parsed using Program.ParseApiCall method, which will return an object containing the following fields This object also provide a method request.GetOption(<index>) to get eventual options passed with this call. Example
+ApiHelper API methods should respect the following format: For instance, a program that control Philips Hue lights will implement API methods like this: So an API call to set a Philips Hue light with address 3 to 50% can be done via HTTP GET or from a csharp program When this call is received by the handler, the object args passed to it must be parsed using Api.Parse method, which will return an object containing the following fields This object also provide a method request.GetOption(<index>) to get eventual options passed with this call. Example
 - apiCall: API call.
 - handler: Handler.
 

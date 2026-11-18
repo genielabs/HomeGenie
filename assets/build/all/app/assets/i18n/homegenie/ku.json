@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Asayî",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Agahiyên teşxîsa armancan di sohbetê de nîşan bide"
+      "ConfigureOptions.GoalDiagnostics": "Agahiyên teşxîsa armancan di sohbetê de nîşan bide",
+      "ConfigureOptions.SystemInstructions": "Talîmatên pergalê",
+      "ConfigureOptions.ApiKey": "Mifteya API-yê ya OpenAI",
+      "ConfigureOptions.ModelId": "Nasnameya Modelê"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Agahiyên teşxîsa armancan di sohbetê de nîşan bide"
+      "ConfigureOptions.GoalDiagnostics": "Agahiyên teşxîsa armancan di sohbetê de nîşan bide",
+      "ConfigureOptions.SystemInstructions": "Talîmatên pergalê",
+      "ConfigureOptions.ApiKey": "Mifteya API-yê ya Claude",
+      "ConfigureOptions.ModelId": "Nasnameya Modelê",
+      "ConfigureOptions.MaxOutputTokens": "Dirêjahiya Bersivê (Tokenên Herî Zêde)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Agahiyên teşxîsa armancan di sohbetê de nîşan bide"
+      "ConfigureOptions.GoalDiagnostics": "Agahiyên teşxîsa armancan di sohbetê de nîşan bide",
+      "ConfigureOptions.SystemInstructions": "Talîmatên pergalê",
+      "ConfigureOptions.ApiKey": "Mifteya API-yê ya DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Agahiyên teşxîsa armancan di sohbetê de nîşan bide"
+      "ConfigureOptions.GoalDiagnostics": "Agahiyên teşxîsa armancan di sohbetê de nîşan bide",
+      "ConfigureOptions.SystemInstructions": "Talîmatên pergalê",
+      "ConfigureOptions.ApiKey": "Mifteya API-yê ya Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL ya Responses API li Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Xizmetên hevpar û hilbijartina dabînkerê standard ji bo daxwazên paşxaneyê.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Wekî standard)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Wekî standard)",
+      "ConfigureOptions.AllowedHttpUrls": "URLên HTTP yên destûrdayî (bi semîkolonê veqetandî)",
+      "ConfigureOptions.AllowedLocalFolders": "Peldankên herêmî yên destûrdayî (bi semîkolonê veqetandî)",
+      "ConfigureOptions.MaximumSourceSize": "Mezinahiya herî zêde ya pelê çavkanî (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Paşgirên pelan ji bo pêvekirina rasterast (bi semîkolonê veqetandî)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Rêbername ji bo armancên çêkirina amûrkan"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Agahiyên teşxîsa armancan di sohbetê de nîşan bide",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Daneyên dakêşandî",
   "audio_stop": "Raweste",
   "audio_resume": "Resume",
+  "audio_manage_model": "Modelê bi rê ve bibe",
   "audio_download": "Download",
   "audio_restart_download": "Daxistin dîsa",
   "audio_download_downloading": "Daxistin",

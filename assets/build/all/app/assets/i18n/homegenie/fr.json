@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normale",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Afficher le diagnostic des objectifs dans la conversation"
+      "ConfigureOptions.GoalDiagnostics": "Afficher le diagnostic des objectifs dans la conversation",
+      "ConfigureOptions.SystemInstructions": "Instructions système",
+      "ConfigureOptions.ApiKey": "Clé API OpenAI",
+      "ConfigureOptions.ModelId": "ID du modèle"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Afficher le diagnostic des objectifs dans la conversation"
+      "ConfigureOptions.GoalDiagnostics": "Afficher le diagnostic des objectifs dans la conversation",
+      "ConfigureOptions.SystemInstructions": "Instructions système",
+      "ConfigureOptions.ApiKey": "Clé API Claude",
+      "ConfigureOptions.ModelId": "ID du modèle",
+      "ConfigureOptions.MaxOutputTokens": "Longueur de la réponse (nombre maximal de jetons)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Afficher le diagnostic des objectifs dans la conversation"
+      "ConfigureOptions.GoalDiagnostics": "Afficher le diagnostic des objectifs dans la conversation",
+      "ConfigureOptions.SystemInstructions": "Instructions système",
+      "ConfigureOptions.ApiKey": "Clé API DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Afficher le diagnostic des objectifs dans la conversation"
+      "ConfigureOptions.GoalDiagnostics": "Afficher le diagnostic des objectifs dans la conversation",
+      "ConfigureOptions.SystemInstructions": "Instructions système",
+      "ConfigureOptions.ApiKey": "Clé API Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL de l’API Responses de Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Services partagés et sélection du fournisseur par défaut pour les requêtes en arrière-plan.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Par défaut)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Par défaut)",
+      "ConfigureOptions.AllowedHttpUrls": "URL HTTP autorisées (séparées par des points-virgules)",
+      "ConfigureOptions.AllowedLocalFolders": "Dossiers locaux autorisés (séparés par des points-virgules)",
+      "ConfigureOptions.MaximumSourceSize": "Taille maximale du fichier source (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Extensions des fichiers joints directement (séparées par des points-virgules)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Instruction pour les objectifs de création de widgets"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Afficher le diagnostic des objectifs dans la conversation",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Données téléchargées",
   "audio_stop": "Arrêter",
   "audio_resume": "CV",
+  "audio_manage_model": "Gérer le modèle",
   "audio_download": "Télécharger",
   "audio_restart_download": "Télécharger à nouveau",
   "audio_download_downloading": "Téléchargement",

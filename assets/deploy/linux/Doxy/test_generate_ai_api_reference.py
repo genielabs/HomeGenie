@@ -27,6 +27,31 @@ class ReferenceGenerationTest(unittest.TestCase):
         self.assertIn('Own the resource.', result)
         self.assertNotIn('badExample', result)
 
+    def test_deprecation_in_csharp_source_listing_or_doxygen_metadata(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            (root / 'index.xml').write_text(
+                '<doxygenindex><compound kind="file" refid="helper"><name>Helper.cs</name>'
+                '</compound></doxygenindex>', encoding='utf-8')
+            (root / 'helper.xml').write_text(
+                '<doxygen><compounddef><programlisting>'
+                '<codeline lineno="1"><highlight>[System.Obsolete(</highlight></codeline>'
+                '<codeline lineno="2"><highlight>"Use<sp/>Handle<sp/>instead")]</highlight></codeline>'
+                '<codeline lineno="3"><highlight>[AnotherAttribute]</highlight></codeline>'
+                '<codeline lineno="4"><highlight>public<sp/>void<sp/>Legacy()</highlight></codeline>'
+                '<codeline lineno="5"><highlight>{}</highlight></codeline>'
+                '<codeline lineno="6"><highlight>public<sp/>void<sp/>Handle()</highlight></codeline>'
+                '</programlisting><location file="Helper.cs"/></compounddef></doxygen>', encoding='utf-8')
+            listings = generator.load_source_listings(root)
+            legacy = ET.fromstring('<memberdef><location file="Helper.cs" line="4"/></memberdef>')
+            handle = ET.fromstring('<memberdef><location file="Helper.cs" line="6"/></memberdef>')
+            deprecated_doc = ET.fromstring(
+                '<memberdef><detaileddescription><xrefsect><xreftitle>Deprecated</xreftitle>'
+                '</xrefsect></detaileddescription></memberdef>')
+            self.assertTrue(generator.is_deprecated(legacy, listings))
+            self.assertTrue(generator.is_deprecated(deprecated_doc, listings))
+            self.assertFalse(generator.is_deprecated(handle, listings))
+
     def test_generation_filters_internals_and_preserves_inheritance(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)

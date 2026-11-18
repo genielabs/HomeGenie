@@ -53,6 +53,26 @@ For a live widget, update and emit real values periodically or on events. Fixed 
 
 Expose configurable preferences and secrets with `Program.AddOption` inside `Program.Setup`. Resolve program files with `Path.Combine(Data.GetFolder(), "file.ext")`, including paths in `editor:file:<path>:markdown` options. The path belongs inside the FieldType, for example `Program.AddOption("ReportFile", "", "Report", $"editor:file:{reportPath}:markdown")`; `editor:file:text/markdown` is not a valid substitute. `Data.GetFolder()` is isolated per program; use a named shared folder only when communication between programs is required and explicitly agreed in the solution.
 
+| Type | Control |
+| --- | --- |
+| `text` | Text field |
+| `password` | Masked text field |
+| `checkbox` | On/off checkbox |
+| `slider:min:max:step` | Numeric slider |
+| `select:Label=Value,Label=Value` | Dropdown |
+| `editor:file:<path>:<language>` | File editor |
+| `location.text` | Location autocomplete |
+| `module.text` | Module selector |
+| `program.text` | Program/scenario selector |
+| `capture:<field>` | Capture a module field value |
+| `wunderground.city` | Legacy location autocomplete. Use `location.text` for new options. |
+
+For a number, use a slider. This example accepts integers from 1 to 10 and defaults to 3. Read the value with `Program.Option("MaxItemsPerFeed").Value` and validate the range in the program if needed. YoT does not render `input:number` or `number` fields.
+
+```csharp
+Program.AddOption("MaxItemsPerFeed", "3", "Maximum items per feed", "slider:1:10:1");
+```
+
 Backend code calls `Api.Call`; widgets call `this.apiCall` and unwrap `data.response`. Do not confuse these APIs. To publish live values on the program module, use `Program.Emit(propertyName, value)`. Keep property names, addresses, types and units consistent with dependent widgets and emit initial values promptly.
 
 For `Net.WebService(url)`, use `.Call()` for raw XML/RSS/text and `.GetData()` for parsed JSON/XML data. `WebService(url)` selects GET by default; there is no `.Get()` method on `NetHelper`. JSON data is dynamic: check for null before accessing nested fields and do not pass that object to `JObject.Parse`.

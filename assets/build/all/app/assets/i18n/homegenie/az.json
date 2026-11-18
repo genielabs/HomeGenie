@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normal",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Məqsədlərin diaqnostikasını söhbətdə göstər"
+      "ConfigureOptions.GoalDiagnostics": "Məqsədlərin diaqnostikasını söhbətdə göstər",
+      "ConfigureOptions.SystemInstructions": "Sistem təlimatları",
+      "ConfigureOptions.ApiKey": "OpenAI API açarı",
+      "ConfigureOptions.ModelId": "Model ID-si"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Məqsədlərin diaqnostikasını söhbətdə göstər"
+      "ConfigureOptions.GoalDiagnostics": "Məqsədlərin diaqnostikasını söhbətdə göstər",
+      "ConfigureOptions.SystemInstructions": "Sistem təlimatları",
+      "ConfigureOptions.ApiKey": "Claude API açarı",
+      "ConfigureOptions.ModelId": "Model ID-si",
+      "ConfigureOptions.MaxOutputTokens": "Cavab Müddəti (Maks Tokenlər)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Məqsədlərin diaqnostikasını söhbətdə göstər"
+      "ConfigureOptions.GoalDiagnostics": "Məqsədlərin diaqnostikasını söhbətdə göstər",
+      "ConfigureOptions.SystemInstructions": "Sistem təlimatları",
+      "ConfigureOptions.ApiKey": "DeepSeek API açarı"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Məqsədlərin diaqnostikasını söhbətdə göstər"
+      "ConfigureOptions.GoalDiagnostics": "Məqsədlərin diaqnostikasını söhbətdə göstər",
+      "ConfigureOptions.SystemInstructions": "Sistem təlimatları",
+      "ConfigureOptions.ApiKey": "Qwen API açarı",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio Responses API-nin URL-i"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Paylaşılan xidmətlər və arxa plan sorğuları üçün standart provayderin seçilməsi.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Standart)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Standart)",
+      "ConfigureOptions.AllowedHttpUrls": "İcazə verilən HTTP URL-ləri (nöqtəli vergüllə ayrılır)",
+      "ConfigureOptions.AllowedLocalFolders": "İcazə verilən yerli qovluqlar (nöqtəli vergüllə ayrılır)",
+      "ConfigureOptions.MaximumSourceSize": "Mənbə faylının maksimum ölçüsü (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Birbaşa əlavə olunan fayl uzantıları (nöqtəli vergüllə ayrılır)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Vidcet məqsədləri üçün təlimat"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Məqsədlərin diaqnostikasını söhbətdə göstər",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Endirilmiş data",
   "audio_stop": "Dayan",
   "audio_resume": "CV",
+  "audio_manage_model": "Modeli idarə et",
   "audio_download": "Yüklə",
   "audio_restart_download": "Yenidən yükləyin",
   "audio_download_downloading": "Endirilir",

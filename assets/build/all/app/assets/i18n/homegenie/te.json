@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "సాధారణం",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "చాట్‌లో లక్ష్యాల సమస్య నిర్ధారణ సమాచారాన్ని చూపించండి"
+      "ConfigureOptions.GoalDiagnostics": "చాట్‌లో లక్ష్యాల సమస్య నిర్ధారణ సమాచారాన్ని చూపించండి",
+      "ConfigureOptions.SystemInstructions": "సిస్టమ్ సూచనలు",
+      "ConfigureOptions.ApiKey": "OpenAI API కీ",
+      "ConfigureOptions.ModelId": "మోడల్ ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "చాట్‌లో లక్ష్యాల సమస్య నిర్ధారణ సమాచారాన్ని చూపించండి"
+      "ConfigureOptions.GoalDiagnostics": "చాట్‌లో లక్ష్యాల సమస్య నిర్ధారణ సమాచారాన్ని చూపించండి",
+      "ConfigureOptions.SystemInstructions": "సిస్టమ్ సూచనలు",
+      "ConfigureOptions.ApiKey": "Claude API కీ",
+      "ConfigureOptions.ModelId": "మోడల్ ID",
+      "ConfigureOptions.MaxOutputTokens": "ప్రతిస్పందన పొడవు (గరిష్ట టోకెన్‌లు)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "చాట్‌లో లక్ష్యాల సమస్య నిర్ధారణ సమాచారాన్ని చూపించండి"
+      "ConfigureOptions.GoalDiagnostics": "చాట్‌లో లక్ష్యాల సమస్య నిర్ధారణ సమాచారాన్ని చూపించండి",
+      "ConfigureOptions.SystemInstructions": "సిస్టమ్ సూచనలు",
+      "ConfigureOptions.ApiKey": "DeepSeek API కీ"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "చాట్‌లో లక్ష్యాల సమస్య నిర్ధారణ సమాచారాన్ని చూపించండి"
+      "ConfigureOptions.GoalDiagnostics": "చాట్‌లో లక్ష్యాల సమస్య నిర్ధారణ సమాచారాన్ని చూపించండి",
+      "ConfigureOptions.SystemInstructions": "సిస్టమ్ సూచనలు",
+      "ConfigureOptions.ApiKey": "Qwen API కీ",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio Responses API URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "భాగస్వామ్య సేవలు మరియు నేపథ్య అభ్యర్థనల కోసం డిఫాల్ట్ ప్రొవైడర్ ఎంపిక.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (డిఫాల్ట్)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (డిఫాల్ట్)",
+      "ConfigureOptions.AllowedHttpUrls": "అనుమతించిన HTTP URLలు (సెమీకోలన్‌తో వేరు చేయండి)",
+      "ConfigureOptions.AllowedLocalFolders": "అనుమతించిన స్థానిక ఫోల్డర్లు (సెమీకోలన్‌తో వేరు చేయండి)",
+      "ConfigureOptions.MaximumSourceSize": "మూల ఫైల్ గరిష్ఠ పరిమాణం (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "నేరుగా జోడించగల ఫైల్ పొడిగింపులు (సెమీకోలన్‌తో వేరు చేయండి)",
+      "ConfigureOptions.WidgetObjectivePrompt": "విడ్జెట్ సృష్టి లక్ష్యాలకు సూచన"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "చాట్‌లో లక్ష్యాల సమస్య నిర్ధారణ సమాచారాన్ని చూపించండి",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "డౌన్‌లోడ్ చేయబడిన డేటా",
   "audio_stop": "ఆపు",
   "audio_resume": "పునఃప్రారంభించండి",
+  "audio_manage_model": "మోడల్‌ను నిర్వహించండి",
   "audio_download": "డౌన్‌లోడ్ చేయండి",
   "audio_restart_download": "మళ్లీ డౌన్‌లోడ్ చేయండి",
   "audio_download_downloading": "డౌన్‌లోడ్ చేస్తోంది",

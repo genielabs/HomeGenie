@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "सामान्य",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "चैट में लक्ष्यों की निदान जानकारी दिखाएँ"
+      "ConfigureOptions.GoalDiagnostics": "चैट में लक्ष्यों की निदान जानकारी दिखाएँ",
+      "ConfigureOptions.SystemInstructions": "सिस्टम निर्देश",
+      "ConfigureOptions.ApiKey": "OpenAI API कुंजी",
+      "ConfigureOptions.ModelId": "मॉडल ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "चैट में लक्ष्यों की निदान जानकारी दिखाएँ"
+      "ConfigureOptions.GoalDiagnostics": "चैट में लक्ष्यों की निदान जानकारी दिखाएँ",
+      "ConfigureOptions.SystemInstructions": "सिस्टम निर्देश",
+      "ConfigureOptions.ApiKey": "Claude API कुंजी",
+      "ConfigureOptions.ModelId": "मॉडल ID",
+      "ConfigureOptions.MaxOutputTokens": "प्रतिक्रिया की लंबाई (अधिकतम टोकन)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "चैट में लक्ष्यों की निदान जानकारी दिखाएँ"
+      "ConfigureOptions.GoalDiagnostics": "चैट में लक्ष्यों की निदान जानकारी दिखाएँ",
+      "ConfigureOptions.SystemInstructions": "सिस्टम निर्देश",
+      "ConfigureOptions.ApiKey": "DeepSeek API कुंजी"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "चैट में लक्ष्यों की निदान जानकारी दिखाएँ"
+      "ConfigureOptions.GoalDiagnostics": "चैट में लक्ष्यों की निदान जानकारी दिखाएँ",
+      "ConfigureOptions.SystemInstructions": "सिस्टम निर्देश",
+      "ConfigureOptions.ApiKey": "Qwen API कुंजी",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio Responses API का URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "साझा सेवाएँ और पृष्ठभूमि अनुरोधों के लिए डिफ़ॉल्ट प्रदाता का चयन।",
-      "ConfigureOptions.DefaultProvider": "AI Genie (डिफ़ॉल्ट)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (डिफ़ॉल्ट)",
+      "ConfigureOptions.AllowedHttpUrls": "अनुमत HTTP URL (अर्धविराम से अलग)",
+      "ConfigureOptions.AllowedLocalFolders": "अनुमत स्थानीय फ़ोल्डर (अर्धविराम से अलग)",
+      "ConfigureOptions.MaximumSourceSize": "स्रोत फ़ाइल का अधिकतम आकार (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "सीधे संलग्न करने के लिए फ़ाइल एक्सटेंशन (अर्धविराम से अलग)",
+      "ConfigureOptions.WidgetObjectivePrompt": "विजेट बनाने के लक्ष्यों के लिए निर्देश"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "चैट में लक्ष्यों की निदान जानकारी दिखाएँ",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "डाउनलोड किया गया डेटा",
   "audio_stop": "रुकें",
   "audio_resume": "बायोडाटा",
+  "audio_manage_model": "मॉडल प्रबंधित करें",
   "audio_download": "डाउनलोड करें",
   "audio_restart_download": "पुनः डाउनलोड करें",
   "audio_download_downloading": "डाउनलोड हो रहा है",

@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "عادي",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "په خبرو اترو کې د موخو د ستونزو د تشخیص معلومات وښایئ"
+      "ConfigureOptions.GoalDiagnostics": "په خبرو اترو کې د موخو د ستونزو د تشخیص معلومات وښایئ",
+      "ConfigureOptions.SystemInstructions": "د سیسټم لارښوونې",
+      "ConfigureOptions.ApiKey": "د OpenAI API کیلي",
+      "ConfigureOptions.ModelId": "د ماډل ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "په خبرو اترو کې د موخو د ستونزو د تشخیص معلومات وښایئ"
+      "ConfigureOptions.GoalDiagnostics": "په خبرو اترو کې د موخو د ستونزو د تشخیص معلومات وښایئ",
+      "ConfigureOptions.SystemInstructions": "د سیسټم لارښوونې",
+      "ConfigureOptions.ApiKey": "د Claude API کیلي",
+      "ConfigureOptions.ModelId": "د ماډل ID",
+      "ConfigureOptions.MaxOutputTokens": "د غبرګون اوږدوالی (زیاته ټوکنونه)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "په خبرو اترو کې د موخو د ستونزو د تشخیص معلومات وښایئ"
+      "ConfigureOptions.GoalDiagnostics": "په خبرو اترو کې د موخو د ستونزو د تشخیص معلومات وښایئ",
+      "ConfigureOptions.SystemInstructions": "د سیسټم لارښوونې",
+      "ConfigureOptions.ApiKey": "د DeepSeek API کیلي"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "په خبرو اترو کې د موخو د ستونزو د تشخیص معلومات وښایئ"
+      "ConfigureOptions.GoalDiagnostics": "په خبرو اترو کې د موخو د ستونزو د تشخیص معلومات وښایئ",
+      "ConfigureOptions.SystemInstructions": "د سیسټم لارښوونې",
+      "ConfigureOptions.ApiKey": "د Qwen API کیلي",
+      "ConfigureOptions.ResponsesEndpoint": "په Model Studio کې د Responses API پته"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "ګډ خدمتونه او د شالید غوښتنو لپاره د تلواله چمتو کوونکي ټاکنه.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (تلواله)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (تلواله)",
+      "ConfigureOptions.AllowedHttpUrls": "اجازه لرونکي HTTP ادرسونه (په سیمیکولن جلا شوي)",
+      "ConfigureOptions.AllowedLocalFolders": "اجازه لرونکي ځايي فولډرونه (په سیمیکولن جلا شوي)",
+      "ConfigureOptions.MaximumSourceSize": "د سرچینې فایل تر ټولو لویه اندازه (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "د مستقیم نښلولو لپاره د فایل پسوندونه (په سیمیکولن جلا شوي)",
+      "ConfigureOptions.WidgetObjectivePrompt": "د ویجټ جوړولو موخو لپاره لارښوونه"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "په خبرو اترو کې د موخو د ستونزو د تشخیص معلومات وښایئ",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "ډاونلوډ شوي ډاټا",
   "audio_stop": "ودریږئ",
   "audio_resume": "بیا پیل کړئ",
+  "audio_manage_model": "ماډل اداره کړئ",
   "audio_download": "ډاونلوډ کړئ",
   "audio_restart_download": "بیا ډاونلوډ کړئ",
   "audio_download_downloading": "کښته کول",

@@ -39,14 +39,6 @@ ModulesManager
 - callback: Callback function to call for each iteration.
 
 ```csharp
-ModulesManager Execute()
-```
-
-```csharp
-ModulesManager Execute(string options)
-```
-
-```csharp
 ModuleHelper FromInstance(Module module)
 ```
 
@@ -167,14 +159,6 @@ TsList< Module > SelectedModules { get; }
 ```
 Return the list of selected modules.
 List<Module>
-
-```csharp
-ModulesManager Set()
-```
-
-```csharp
-ModulesManager Set(string options)
-```
 
 ```csharp
 ModulesManager Submit()
@@ -316,10 +300,6 @@ Gets the specified module parameter.
 - parameter: Parameter.
 
 ```csharp
-ModuleHelper RaiseEvent(string parameter, object value, string description)
-```
-
-```csharp
 override TsList< Module > SelectedModules { get; }
 ```
 
@@ -415,8 +395,8 @@ The data object as type T.
 ```csharp
 double IdleTime { get; }
 ```
-Gets the idle time (time elapsed since last update).
-The idle time.
+Gets the idle time in seconds (time elapsed since last update).
+The idle time (seconds).
 
 ```csharp
 bool Is(string name)

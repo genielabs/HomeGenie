@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Nkịtị",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Gosi ozi nchọpụta nsogbu nke ebumnuche na nkata"
+      "ConfigureOptions.GoalDiagnostics": "Gosi ozi nchọpụta nsogbu nke ebumnuche na nkata",
+      "ConfigureOptions.SystemInstructions": "Ntuziaka sistemụ",
+      "ConfigureOptions.ApiKey": "Igodo API OpenAI",
+      "ConfigureOptions.ModelId": "ID Ụdị"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Gosi ozi nchọpụta nsogbu nke ebumnuche na nkata"
+      "ConfigureOptions.GoalDiagnostics": "Gosi ozi nchọpụta nsogbu nke ebumnuche na nkata",
+      "ConfigureOptions.SystemInstructions": "Ntuziaka sistemụ",
+      "ConfigureOptions.ApiKey": "Igodo API Claude",
+      "ConfigureOptions.ModelId": "ID Ụdị",
+      "ConfigureOptions.MaxOutputTokens": "Ogologo Nzaghachi (Mmasị Kachasị)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Gosi ozi nchọpụta nsogbu nke ebumnuche na nkata"
+      "ConfigureOptions.GoalDiagnostics": "Gosi ozi nchọpụta nsogbu nke ebumnuche na nkata",
+      "ConfigureOptions.SystemInstructions": "Ntuziaka sistemụ",
+      "ConfigureOptions.ApiKey": "Igodo API DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Gosi ozi nchọpụta nsogbu nke ebumnuche na nkata"
+      "ConfigureOptions.GoalDiagnostics": "Gosi ozi nchọpụta nsogbu nke ebumnuche na nkata",
+      "ConfigureOptions.SystemInstructions": "Ntuziaka sistemụ",
+      "ConfigureOptions.ApiKey": "Igodo API Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL nke Responses API na Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Ọrụ ndị a na-ekekọrịta na nhọrọ onye na-eweta ndabara maka arịrịọ na-agba n'azụ.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Nke ndabara)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Nke ndabara)",
+      "ConfigureOptions.AllowedHttpUrls": "URL HTTP enyere ikike (jiri akara ; kewaa ha)",
+      "ConfigureOptions.AllowedLocalFolders": "Folda mpaghara enyere ikike (jiri akara ; kewaa ha)",
+      "ConfigureOptions.MaximumSourceSize": "Oke nha faịlụ isi mmalite (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Mgbatị faịlụ maka itinye ozugbo (jiri akara ; kewaa ha)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Ntuziaka maka ebumnuche imepụta wijetị"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Gosi ozi nchọpụta nsogbu nke ebumnuche na nkata",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Ebudatala data",
   "audio_stop": "Kwụsị",
   "audio_resume": "maliteghachi",
+  "audio_manage_model": "Jikwaa ụdị ahụ",
   "audio_download": "Budata",
   "audio_restart_download": "Budata ọzọ",
   "audio_download_downloading": "Nbudata",

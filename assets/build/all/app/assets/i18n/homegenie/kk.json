@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Қалыпты",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Чатта мақсаттардың диагностикасын көрсету"
+      "ConfigureOptions.GoalDiagnostics": "Чатта мақсаттардың диагностикасын көрсету",
+      "ConfigureOptions.SystemInstructions": "Жүйелік нұсқаулар",
+      "ConfigureOptions.ApiKey": "OpenAI API кілті",
+      "ConfigureOptions.ModelId": "Үлгі идентификаторы"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Чатта мақсаттардың диагностикасын көрсету"
+      "ConfigureOptions.GoalDiagnostics": "Чатта мақсаттардың диагностикасын көрсету",
+      "ConfigureOptions.SystemInstructions": "Жүйелік нұсқаулар",
+      "ConfigureOptions.ApiKey": "Claude API кілті",
+      "ConfigureOptions.ModelId": "Үлгі идентификаторы",
+      "ConfigureOptions.MaxOutputTokens": "Жауап ұзындығы (максималды токендер)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Чатта мақсаттардың диагностикасын көрсету"
+      "ConfigureOptions.GoalDiagnostics": "Чатта мақсаттардың диагностикасын көрсету",
+      "ConfigureOptions.SystemInstructions": "Жүйелік нұсқаулар",
+      "ConfigureOptions.ApiKey": "DeepSeek API кілті"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Чатта мақсаттардың диагностикасын көрсету"
+      "ConfigureOptions.GoalDiagnostics": "Чатта мақсаттардың диагностикасын көрсету",
+      "ConfigureOptions.SystemInstructions": "Жүйелік нұсқаулар",
+      "ConfigureOptions.ApiKey": "Qwen API кілті",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio Responses API мекенжайы"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Ортақ қызметтер және фондық сұраулар үшін әдепкі провайдерді таңдау.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Әдепкі)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Әдепкі)",
+      "ConfigureOptions.AllowedHttpUrls": "Рұқсат етілген HTTP мекенжайлары (нүктелі үтірмен бөлінген)",
+      "ConfigureOptions.AllowedLocalFolders": "Рұқсат етілген жергілікті қалталар (нүктелі үтірмен бөлінген)",
+      "ConfigureOptions.MaximumSourceSize": "Бастапқы файлдың ең үлкен өлшемі (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Тікелей тіркелетін файл кеңейтімдері (нүктелі үтірмен бөлінген)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Виджет жасау мақсаттарына арналған нұсқау"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Чатта мақсаттардың диагностикасын көрсету",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Жүктелген деректер",
   "audio_stop": "Тоқта",
   "audio_resume": "Резюме",
+  "audio_manage_model": "Модельді басқару",
   "audio_download": "Жүктеп алу",
   "audio_restart_download": "Қайта жүктеп алыңыз",
   "audio_download_downloading": "Жүктеп алынуда",

@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normal",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Hedef tanılama bilgilerini sohbette göster"
+      "ConfigureOptions.GoalDiagnostics": "Hedef tanılama bilgilerini sohbette göster",
+      "ConfigureOptions.SystemInstructions": "Sistem talimatları",
+      "ConfigureOptions.ApiKey": "OpenAI API anahtarı",
+      "ConfigureOptions.ModelId": "Model Kimliği"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Hedef tanılama bilgilerini sohbette göster"
+      "ConfigureOptions.GoalDiagnostics": "Hedef tanılama bilgilerini sohbette göster",
+      "ConfigureOptions.SystemInstructions": "Sistem talimatları",
+      "ConfigureOptions.ApiKey": "Claude API anahtarı",
+      "ConfigureOptions.ModelId": "Model Kimliği",
+      "ConfigureOptions.MaxOutputTokens": "Yanıt Uzunluğu (Maksimum Token Sayısı)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Hedef tanılama bilgilerini sohbette göster"
+      "ConfigureOptions.GoalDiagnostics": "Hedef tanılama bilgilerini sohbette göster",
+      "ConfigureOptions.SystemInstructions": "Sistem talimatları",
+      "ConfigureOptions.ApiKey": "DeepSeek API anahtarı"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Hedef tanılama bilgilerini sohbette göster"
+      "ConfigureOptions.GoalDiagnostics": "Hedef tanılama bilgilerini sohbette göster",
+      "ConfigureOptions.SystemInstructions": "Sistem talimatları",
+      "ConfigureOptions.ApiKey": "Qwen API anahtarı",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio Responses API adresi"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Paylaşılan hizmetler ve arka plan istekleri için varsayılan sağlayıcı seçimi.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Varsayılan)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Varsayılan)",
+      "ConfigureOptions.AllowedHttpUrls": "İzin verilen HTTP adresleri (noktalı virgülle ayrılır)",
+      "ConfigureOptions.AllowedLocalFolders": "İzin verilen yerel klasörler (noktalı virgülle ayrılır)",
+      "ConfigureOptions.MaximumSourceSize": "Kaynak dosyanın en büyük boyutu (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Doğrudan eklenecek dosya uzantıları (noktalı virgülle ayrılır)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Widget oluşturma hedefleri için talimat"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Hedef tanılama bilgilerini sohbette göster",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "İndirilen veriler",
   "audio_stop": "Durdur",
   "audio_resume": "Devam et",
+  "audio_manage_model": "Modeli yönet",
   "audio_download": "İndir",
   "audio_restart_download": "Tekrar indir",
   "audio_download_downloading": "İndiriliyor",

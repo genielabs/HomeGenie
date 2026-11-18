@@ -52,9 +52,9 @@ namespace HomeGenie.Automation.Scripting
         /// <code>
         /// var responseObject = Api.Call("HomeAutomation.PhilipsHue/3/Control.Level/50");
         /// </code>
-        /// When this call is received by the handler, the object `args` passed to it must be parsed using `Program.ParseApiCall` method, which will return an object containing the following fields
+        /// When this call is received by the handler, the object `args` passed to it must be parsed using `Api.Parse` method, which will return an object containing the following fields
         /// <code>
-        /// var request = Program.ParseApiCall(args);
+        /// var request = Api.Parse(args);
         /// //  request -> {
         /// //      Domain,         // (string)
         /// //      Address,        // (string)

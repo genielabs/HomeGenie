@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Parasts",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Rādīt mērķu diagnostiku tērzēšanā"
+      "ConfigureOptions.GoalDiagnostics": "Rādīt mērķu diagnostiku tērzēšanā",
+      "ConfigureOptions.SystemInstructions": "Sistēmas norādījumi",
+      "ConfigureOptions.ApiKey": "OpenAI API atslēga",
+      "ConfigureOptions.ModelId": "Modeļa ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Rādīt mērķu diagnostiku tērzēšanā"
+      "ConfigureOptions.GoalDiagnostics": "Rādīt mērķu diagnostiku tērzēšanā",
+      "ConfigureOptions.SystemInstructions": "Sistēmas norādījumi",
+      "ConfigureOptions.ApiKey": "Claude API atslēga",
+      "ConfigureOptions.ModelId": "Modeļa ID",
+      "ConfigureOptions.MaxOutputTokens": "Atbildes garums (maksimālais žetonu skaits)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Rādīt mērķu diagnostiku tērzēšanā"
+      "ConfigureOptions.GoalDiagnostics": "Rādīt mērķu diagnostiku tērzēšanā",
+      "ConfigureOptions.SystemInstructions": "Sistēmas norādījumi",
+      "ConfigureOptions.ApiKey": "DeepSeek API atslēga"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Rādīt mērķu diagnostiku tērzēšanā"
+      "ConfigureOptions.GoalDiagnostics": "Rādīt mērķu diagnostiku tērzēšanā",
+      "ConfigureOptions.SystemInstructions": "Sistēmas norādījumi",
+      "ConfigureOptions.ApiKey": "Qwen API atslēga",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio Responses API URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Koplietojami pakalpojumi un noklusējuma nodrošinātāja izvēle fona pieprasījumiem.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Noklusējums)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Noklusējums)",
+      "ConfigureOptions.AllowedHttpUrls": "Atļautie HTTP URL (atdalīti ar semikolu)",
+      "ConfigureOptions.AllowedLocalFolders": "Atļautās lokālās mapes (atdalītas ar semikolu)",
+      "ConfigureOptions.MaximumSourceSize": "Avota faila maksimālais lielums (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Tieši pievienojamo failu paplašinājumi (atdalīti ar semikolu)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Norāde logrīku izveides mērķiem"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Rādīt mērķu diagnostiku tērzēšanā",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Lejupielādētie dati",
   "audio_stop": "Stop",
   "audio_resume": "Atsākt",
+  "audio_manage_model": "Pārvaldīt modeli",
   "audio_download": "Lejupielādēt",
   "audio_restart_download": "Lejupielādējiet vēlreiz",
   "audio_download_downloading": "Notiek lejupielāde",

@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Įprastas",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Rodyti tikslų diagnostiką pokalbyje"
+      "ConfigureOptions.GoalDiagnostics": "Rodyti tikslų diagnostiką pokalbyje",
+      "ConfigureOptions.SystemInstructions": "Sistemos instrukcijos",
+      "ConfigureOptions.ApiKey": "„OpenAI“ API raktas",
+      "ConfigureOptions.ModelId": "Modelio ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Rodyti tikslų diagnostiką pokalbyje"
+      "ConfigureOptions.GoalDiagnostics": "Rodyti tikslų diagnostiką pokalbyje",
+      "ConfigureOptions.SystemInstructions": "Sistemos instrukcijos",
+      "ConfigureOptions.ApiKey": "„Claude“ API raktas",
+      "ConfigureOptions.ModelId": "Modelio ID",
+      "ConfigureOptions.MaxOutputTokens": "Atsakymo ilgis (maks. žetonų)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Rodyti tikslų diagnostiką pokalbyje"
+      "ConfigureOptions.GoalDiagnostics": "Rodyti tikslų diagnostiką pokalbyje",
+      "ConfigureOptions.SystemInstructions": "Sistemos instrukcijos",
+      "ConfigureOptions.ApiKey": "„DeepSeek“ API raktas"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Rodyti tikslų diagnostiką pokalbyje"
+      "ConfigureOptions.GoalDiagnostics": "Rodyti tikslų diagnostiką pokalbyje",
+      "ConfigureOptions.SystemInstructions": "Sistemos instrukcijos",
+      "ConfigureOptions.ApiKey": "„Qwen“ API raktas",
+      "ConfigureOptions.ResponsesEndpoint": "„Model Studio“ Responses API URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Bendros paslaugos ir numatytojo teikėjo pasirinkimas foninėms užklausoms.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Numatytasis)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Numatytasis)",
+      "ConfigureOptions.AllowedHttpUrls": "Leidžiami HTTP URL (atskirti kabliataškiais)",
+      "ConfigureOptions.AllowedLocalFolders": "Leidžiami vietiniai aplankai (atskirti kabliataškiais)",
+      "ConfigureOptions.MaximumSourceSize": "Didžiausias šaltinio failo dydis (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Tiesiogiai pridedamų failų plėtiniai (atskirti kabliataškiais)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Valdiklių kūrimo tikslų instrukcija"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Rodyti tikslų diagnostiką pokalbyje",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Atsisiunčiami duomenys",
   "audio_stop": "Sustok",
   "audio_resume": "Tęsti",
+  "audio_manage_model": "Tvarkyti modelį",
   "audio_download": "Atsisiųsti",
   "audio_restart_download": "Atsisiųskite dar kartą",
   "audio_download_downloading": "Atsisiunčiama",

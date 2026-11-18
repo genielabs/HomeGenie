@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "സാധാരണം",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "ലക്ഷ്യങ്ങളുടെ പ്രശ്നനിർണയ വിവരങ്ങൾ ചാറ്റിൽ കാണിക്കുക"
+      "ConfigureOptions.GoalDiagnostics": "ലക്ഷ്യങ്ങളുടെ പ്രശ്നനിർണയ വിവരങ്ങൾ ചാറ്റിൽ കാണിക്കുക",
+      "ConfigureOptions.SystemInstructions": "സിസ്റ്റം നിർദ്ദേശങ്ങൾ",
+      "ConfigureOptions.ApiKey": "OpenAI API കീ",
+      "ConfigureOptions.ModelId": "മോഡൽ ഐഡി"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "ലക്ഷ്യങ്ങളുടെ പ്രശ്നനിർണയ വിവരങ്ങൾ ചാറ്റിൽ കാണിക്കുക"
+      "ConfigureOptions.GoalDiagnostics": "ലക്ഷ്യങ്ങളുടെ പ്രശ്നനിർണയ വിവരങ്ങൾ ചാറ്റിൽ കാണിക്കുക",
+      "ConfigureOptions.SystemInstructions": "സിസ്റ്റം നിർദ്ദേശങ്ങൾ",
+      "ConfigureOptions.ApiKey": "Claude API കീ",
+      "ConfigureOptions.ModelId": "മോഡൽ ഐഡി",
+      "ConfigureOptions.MaxOutputTokens": "പ്രതികരണ ദൈർഘ്യം (പരമാവധി ടോക്കണുകൾ)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "ലക്ഷ്യങ്ങളുടെ പ്രശ്നനിർണയ വിവരങ്ങൾ ചാറ്റിൽ കാണിക്കുക"
+      "ConfigureOptions.GoalDiagnostics": "ലക്ഷ്യങ്ങളുടെ പ്രശ്നനിർണയ വിവരങ്ങൾ ചാറ്റിൽ കാണിക്കുക",
+      "ConfigureOptions.SystemInstructions": "സിസ്റ്റം നിർദ്ദേശങ്ങൾ",
+      "ConfigureOptions.ApiKey": "DeepSeek API കീ"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "ലക്ഷ്യങ്ങളുടെ പ്രശ്നനിർണയ വിവരങ്ങൾ ചാറ്റിൽ കാണിക്കുക"
+      "ConfigureOptions.GoalDiagnostics": "ലക്ഷ്യങ്ങളുടെ പ്രശ്നനിർണയ വിവരങ്ങൾ ചാറ്റിൽ കാണിക്കുക",
+      "ConfigureOptions.SystemInstructions": "സിസ്റ്റം നിർദ്ദേശങ്ങൾ",
+      "ConfigureOptions.ApiKey": "Qwen API കീ",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio-യിലെ Responses API-യുടെ URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "പങ്കിട്ട സേവനങ്ങളും പശ്ചാത്തല അഭ്യർത്ഥനകൾക്കായുള്ള സ്ഥിരസ്ഥിതി ദാതാവിന്റെ തിരഞ്ഞെടുപ്പും.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (സ്ഥിരസ്ഥിതി)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (സ്ഥിരസ്ഥിതി)",
+      "ConfigureOptions.AllowedHttpUrls": "അനുവദിച്ച HTTP URL-കൾ (അർധവിരാമം ഉപയോഗിച്ച് വേർതിരിക്കുക)",
+      "ConfigureOptions.AllowedLocalFolders": "അനുവദിച്ച പ്രാദേശിക ഫോൾഡറുകൾ (അർധവിരാമം ഉപയോഗിച്ച് വേർതിരിക്കുക)",
+      "ConfigureOptions.MaximumSourceSize": "ഉറവിട ഫയലിന്റെ പരമാവധി വലുപ്പം (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "നേരിട്ട് ചേർക്കാനുള്ള ഫയൽ എക്സ്റ്റൻഷനുകൾ (അർധവിരാമം ഉപയോഗിച്ച് വേർതിരിക്കുക)",
+      "ConfigureOptions.WidgetObjectivePrompt": "വിജറ്റ് സൃഷ്ടിക്കൽ ലക്ഷ്യങ്ങൾക്കുള്ള നിർദേശം"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "ലക്ഷ്യങ്ങളുടെ പ്രശ്നനിർണയ വിവരങ്ങൾ ചാറ്റിൽ കാണിക്കുക",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "ഡൗൺലോഡ് ചെയ്ത ഡാറ്റ",
   "audio_stop": "നിർത്തുക",
   "audio_resume": "പുനരാരംഭിക്കുക",
+  "audio_manage_model": "മോഡൽ നിയന്ത്രിക്കുക",
   "audio_download": "ഡൗൺലോഡ് ചെയ്യുക",
   "audio_restart_download": "വീണ്ടും ഡൗൺലോഡ് ചെയ്യുക",
   "audio_download_downloading": "ഡൗൺലോഡ് ചെയ്യുന്നു",

@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "معمول کی رفتار",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "چیٹ میں مقاصد کی تشخیصی معلومات دکھائیں"
+      "ConfigureOptions.GoalDiagnostics": "چیٹ میں مقاصد کی تشخیصی معلومات دکھائیں",
+      "ConfigureOptions.SystemInstructions": "سسٹم کی ہدایات",
+      "ConfigureOptions.ApiKey": "OpenAI API کلید",
+      "ConfigureOptions.ModelId": "ماڈل ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "چیٹ میں مقاصد کی تشخیصی معلومات دکھائیں"
+      "ConfigureOptions.GoalDiagnostics": "چیٹ میں مقاصد کی تشخیصی معلومات دکھائیں",
+      "ConfigureOptions.SystemInstructions": "سسٹم کی ہدایات",
+      "ConfigureOptions.ApiKey": "Claude API کلید",
+      "ConfigureOptions.ModelId": "ماڈل ID",
+      "ConfigureOptions.MaxOutputTokens": "جواب کی لمبائی (زیادہ سے زیادہ ٹوکن)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "چیٹ میں مقاصد کی تشخیصی معلومات دکھائیں"
+      "ConfigureOptions.GoalDiagnostics": "چیٹ میں مقاصد کی تشخیصی معلومات دکھائیں",
+      "ConfigureOptions.SystemInstructions": "سسٹم کی ہدایات",
+      "ConfigureOptions.ApiKey": "DeepSeek API کلید"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "چیٹ میں مقاصد کی تشخیصی معلومات دکھائیں"
+      "ConfigureOptions.GoalDiagnostics": "چیٹ میں مقاصد کی تشخیصی معلومات دکھائیں",
+      "ConfigureOptions.SystemInstructions": "سسٹم کی ہدایات",
+      "ConfigureOptions.ApiKey": "Qwen API کلید",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio میں Responses API کا URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "مشترکہ خدمات اور پس منظر کی درخواستوں کے لیے طے شدہ فراہم کنندہ کا انتخاب۔",
-      "ConfigureOptions.DefaultProvider": "AI Genie (طے شدہ)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (طے شدہ)",
+      "ConfigureOptions.AllowedHttpUrls": "اجازت یافتہ HTTP پتے (سیمی کولن سے الگ کریں)",
+      "ConfigureOptions.AllowedLocalFolders": "اجازت یافتہ مقامی فولڈر (سیمی کولن سے الگ کریں)",
+      "ConfigureOptions.MaximumSourceSize": "سورس فائل کا زیادہ سے زیادہ سائز (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "براہ راست منسلک کرنے کے لیے فائل ایکسٹینشنز (سیمی کولن سے الگ کریں)",
+      "ConfigureOptions.WidgetObjectivePrompt": "ویجٹ بنانے کے اہداف کے لیے ہدایت"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "چیٹ میں مقاصد کی تشخیصی معلومات دکھائیں",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "ڈاؤن لوڈ کردہ ڈیٹا",
   "audio_stop": "رک جاؤ",
   "audio_resume": "دوبارہ شروع کریں۔",
+  "audio_manage_model": "ماڈل کا نظم کریں",
   "audio_download": "ڈاؤن لوڈ کریں۔",
   "audio_restart_download": "دوبارہ ڈاؤن لوڈ کریں۔",
   "audio_download_downloading": "ڈاؤن لوڈ ہو رہا ہے۔",

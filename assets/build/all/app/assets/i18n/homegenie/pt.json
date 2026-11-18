@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "Normal",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "Mostrar o diagnóstico dos objetivos no chat"
+      "ConfigureOptions.GoalDiagnostics": "Mostrar o diagnóstico dos objetivos no chat",
+      "ConfigureOptions.SystemInstructions": "Instruções do sistema",
+      "ConfigureOptions.ApiKey": "Chave de API do OpenAI",
+      "ConfigureOptions.ModelId": "ID do modelo"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "Mostrar o diagnóstico dos objetivos no chat"
+      "ConfigureOptions.GoalDiagnostics": "Mostrar o diagnóstico dos objetivos no chat",
+      "ConfigureOptions.SystemInstructions": "Instruções do sistema",
+      "ConfigureOptions.ApiKey": "Chave de API do Claude",
+      "ConfigureOptions.ModelId": "ID do modelo",
+      "ConfigureOptions.MaxOutputTokens": "Comprimento da resposta (tokens máximos)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "Mostrar o diagnóstico dos objetivos no chat"
+      "ConfigureOptions.GoalDiagnostics": "Mostrar o diagnóstico dos objetivos no chat",
+      "ConfigureOptions.SystemInstructions": "Instruções do sistema",
+      "ConfigureOptions.ApiKey": "Chave de API do DeepSeek"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "Mostrar o diagnóstico dos objetivos no chat"
+      "ConfigureOptions.GoalDiagnostics": "Mostrar o diagnóstico dos objetivos no chat",
+      "ConfigureOptions.SystemInstructions": "Instruções do sistema",
+      "ConfigureOptions.ApiKey": "Chave de API do Qwen",
+      "ConfigureOptions.ResponsesEndpoint": "URL da API Responses do Model Studio"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "Serviços partilhados e seleção do fornecedor predefinido para pedidos em segundo plano.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (Predefinido)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (Predefinido)",
+      "ConfigureOptions.AllowedHttpUrls": "URLs HTTP permitidos (separados por ponto e vírgula)",
+      "ConfigureOptions.AllowedLocalFolders": "Pastas locais permitidas (separadas por ponto e vírgula)",
+      "ConfigureOptions.MaximumSourceSize": "Tamanho máximo do ficheiro de origem (MiB)",
+      "ConfigureOptions.InlineFileExtensions": "Extensões de ficheiros para anexar diretamente (separadas por ponto e vírgula)",
+      "ConfigureOptions.WidgetObjectivePrompt": "Instrução para objetivos de criação de widgets"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "Mostrar o diagnóstico dos objetivos no chat",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "Dados baixados",
   "audio_stop": "Pare",
   "audio_resume": "Currículo",
+  "audio_manage_model": "Gerenciar modelo",
   "audio_download": "Baixar",
   "audio_restart_download": "Baixe novamente",
   "audio_download_downloading": "Baixando",

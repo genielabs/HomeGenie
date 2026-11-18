@@ -144,16 +144,28 @@
   "neon_district_road_speed_normal": "보통",
   "$options": {
     "934": {
-      "ConfigureOptions.GoalDiagnostics": "채팅에 목표 진단 정보 표시"
+      "ConfigureOptions.GoalDiagnostics": "채팅에 목표 진단 정보 표시",
+      "ConfigureOptions.SystemInstructions": "시스템 지침",
+      "ConfigureOptions.ApiKey": "OpenAI API 키",
+      "ConfigureOptions.ModelId": "모델 ID"
     },
     "935": {
-      "ConfigureOptions.GoalDiagnostics": "채팅에 목표 진단 정보 표시"
+      "ConfigureOptions.GoalDiagnostics": "채팅에 목표 진단 정보 표시",
+      "ConfigureOptions.SystemInstructions": "시스템 지침",
+      "ConfigureOptions.ApiKey": "Claude API 키",
+      "ConfigureOptions.ModelId": "모델 ID",
+      "ConfigureOptions.MaxOutputTokens": "응답 길이(최대 토큰 수)"
     },
     "936": {
-      "ConfigureOptions.GoalDiagnostics": "채팅에 목표 진단 정보 표시"
+      "ConfigureOptions.GoalDiagnostics": "채팅에 목표 진단 정보 표시",
+      "ConfigureOptions.SystemInstructions": "시스템 지침",
+      "ConfigureOptions.ApiKey": "DeepSeek API 키"
     },
     "937": {
-      "ConfigureOptions.GoalDiagnostics": "채팅에 목표 진단 정보 표시"
+      "ConfigureOptions.GoalDiagnostics": "채팅에 목표 진단 정보 표시",
+      "ConfigureOptions.SystemInstructions": "시스템 지침",
+      "ConfigureOptions.ApiKey": "Qwen API 키",
+      "ConfigureOptions.ResponsesEndpoint": "Model Studio의 Responses API URL"
     },
     "651": {
       "Title": "Neon District",
@@ -455,7 +467,12 @@
     "583": {
       "Title": "AI Genie",
       "Description": "공유 서비스 및 백그라운드 요청을 위한 기본 공급자 선택.",
-      "ConfigureOptions.DefaultProvider": "AI Genie (기본값)"
+      "ConfigureOptions.DefaultProvider": "AI Genie (기본값)",
+      "ConfigureOptions.AllowedHttpUrls": "허용된 HTTP URL(세미콜론으로 구분)",
+      "ConfigureOptions.AllowedLocalFolders": "허용된 로컬 폴더(세미콜론으로 구분)",
+      "ConfigureOptions.MaximumSourceSize": "원본 파일의 최대 크기(MiB)",
+      "ConfigureOptions.InlineFileExtensions": "직접 첨부할 파일 확장자(세미콜론으로 구분)",
+      "ConfigureOptions.WidgetObjectivePrompt": "위젯 생성 목표용 프롬프트"
     },
     "933": {
       "ConfigureOptions.GoalDiagnostics": "채팅에 목표 진단 정보 표시",
@@ -522,6 +539,7 @@
   "audio_partial_bytes": "다운로드된 데이터",
   "audio_stop": "중지",
   "audio_resume": "이력서",
+  "audio_manage_model": "모델 관리",
   "audio_download": "다운로드",
   "audio_restart_download": "다시 다운로드",
   "audio_download_downloading": "다운로드 중",

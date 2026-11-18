@@ -1,4 +1,4 @@
-// ../release-candidate-yot/node_modules/three/examples/jsm/controls/OrbitControls.js
+// node_modules/three/examples/jsm/controls/OrbitControls.js
 import {
   Controls,
   MOUSE,
