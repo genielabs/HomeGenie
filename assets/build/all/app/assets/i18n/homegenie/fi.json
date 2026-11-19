@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Suorita ohjelma",
   "scheduler_preset_action_config_program": "Ohjelmoida",
   "scheduler_preset_action_config_options": "Asetukset",
+  "scheduler_preset_action_program_notify_panel": "Lähetä ilmoitus Panel-sovellukseen",
   "scheduler_preset_action_program_say": "Sanoa",
   "scheduler_preset_action_net_http_call": "Soita verkkopalveluun",
   "scheduler_preset_action_config_url": "Osoite (URL)",

@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "ਪ੍ਰੋਗਰਾਮ ਚਲਾਓ",
   "scheduler_preset_action_config_program": "ਪ੍ਰੋਗਰਾਮ",
   "scheduler_preset_action_config_options": "ਵਿਕਲਪ",
+  "scheduler_preset_action_program_notify_panel": "Panel ਨੂੰ ਸੂਚਨਾ ਭੇਜੋ",
   "scheduler_preset_action_program_say": "ਕਹੋ",
   "scheduler_preset_action_net_http_call": "ਵੈੱਬ ਸੇਵਾ ਨੂੰ ਕਾਲ ਕਰੋ",
   "scheduler_preset_action_config_url": "ਪਤਾ (URL)",

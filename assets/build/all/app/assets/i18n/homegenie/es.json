@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Ejecutar programa",
   "scheduler_preset_action_config_program": "Programa",
   "scheduler_preset_action_config_options": "Opciones",
+  "scheduler_preset_action_program_notify_panel": "Enviar notificación a Panel",
   "scheduler_preset_action_program_say": "Decir",
   "scheduler_preset_action_net_http_call": "Llamar a un servicio web",
   "scheduler_preset_action_config_url": "Dirección (URL)",

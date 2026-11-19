@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Gbaa mmemme",
   "scheduler_preset_action_config_program": "Mmemme",
   "scheduler_preset_action_config_options": "Nhọrọ",
+  "scheduler_preset_action_program_notify_panel": "Zipụ ọkwa na Panel",
   "scheduler_preset_action_program_say": "Kwuo",
   "scheduler_preset_action_net_http_call": "Kpọọ ọrụ Weebụ",
   "scheduler_preset_action_config_url": "Adreesị (URL)",

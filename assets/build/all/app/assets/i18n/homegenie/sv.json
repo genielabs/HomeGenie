@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Kör program",
   "scheduler_preset_action_config_program": "Programmera",
   "scheduler_preset_action_config_options": "Alternativ",
+  "scheduler_preset_action_program_notify_panel": "Skicka avisering till Panel",
   "scheduler_preset_action_program_say": "Säga",
   "scheduler_preset_action_net_http_call": "Ring en webbtjänst",
   "scheduler_preset_action_config_url": "Adress (URL)",

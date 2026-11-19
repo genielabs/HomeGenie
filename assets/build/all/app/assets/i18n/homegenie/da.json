@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Kør program",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Valgmuligheder",
+  "scheduler_preset_action_program_notify_panel": "Send notifikation til Panel",
   "scheduler_preset_action_program_say": "Sige",
   "scheduler_preset_action_net_http_call": "Ring til en webtjeneste",
   "scheduler_preset_action_config_url": "Adresse (URL)",

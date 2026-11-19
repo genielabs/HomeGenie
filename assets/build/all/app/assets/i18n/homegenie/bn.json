@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "প্রোগ্রাম চালান",
   "scheduler_preset_action_config_program": "কার্যক্রম",
   "scheduler_preset_action_config_options": "বিকল্পগুলি",
+  "scheduler_preset_action_program_notify_panel": "Panel-এ বিজ্ঞপ্তি পাঠান",
   "scheduler_preset_action_program_say": "বলুন",
   "scheduler_preset_action_net_http_call": "একটি ওয়েব পরিষেবাতে কল করুন",
   "scheduler_preset_action_config_url": "ঠিকানা (URL)",

@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Rith Clár",
   "scheduler_preset_action_config_program": "Clár",
   "scheduler_preset_action_config_options": "Roghanna",
+  "scheduler_preset_action_program_notify_panel": "Seol fógra chuig Panel",
   "scheduler_preset_action_program_say": "Abair",
   "scheduler_preset_action_net_http_call": "Glaoigh ar Sheirbhís Gréasáin",
   "scheduler_preset_action_config_url": "Seoladh (URL)",

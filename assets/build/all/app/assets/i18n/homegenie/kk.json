@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Бағдарламаны іске қосу",
   "scheduler_preset_action_config_program": "Бағдарлама",
   "scheduler_preset_action_config_options": "Параметрлер",
+  "scheduler_preset_action_program_notify_panel": "Panel қолданбасына хабарландыру жіберу",
   "scheduler_preset_action_program_say": "Айт",
   "scheduler_preset_action_net_http_call": "Веб-қызметке қоңырау шалыңыз",
   "scheduler_preset_action_config_url": "Мекенжай (URL)",

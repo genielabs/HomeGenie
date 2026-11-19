@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "پروگراممىنى ئىجرا قىلىڭ",
   "scheduler_preset_action_config_program": "پروگرامما",
   "scheduler_preset_action_config_options": "تاللانما",
+  "scheduler_preset_action_program_notify_panel": "Panel غا ئۇقتۇرۇش ئەۋەتىش",
   "scheduler_preset_action_program_say": "ئېيتقىن",
   "scheduler_preset_action_net_http_call": "تور مۇلازىمىتىگە تېلېفون قىلىڭ",
   "scheduler_preset_action_config_url": "ئادرېس (URL)",

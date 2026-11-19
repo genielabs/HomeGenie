@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Dasturni ishga tushirish",
   "scheduler_preset_action_config_program": "Dastur",
   "scheduler_preset_action_config_options": "Variantlar",
+  "scheduler_preset_action_program_notify_panel": "Panel ilovasiga bildirishnoma yuborish",
   "scheduler_preset_action_program_say": "Ayting",
   "scheduler_preset_action_net_http_call": "Veb-xizmatga qo'ng'iroq qiling",
   "scheduler_preset_action_config_url": "Manzil (URL)",

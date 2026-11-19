@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "ដំណើរការកម្មវិធី",
   "scheduler_preset_action_config_program": "កម្មវិធី",
   "scheduler_preset_action_config_options": "ជម្រើស",
+  "scheduler_preset_action_program_notify_panel": "ផ្ញើការជូនដំណឹងទៅ Panel",
   "scheduler_preset_action_program_say": "និយាយ",
   "scheduler_preset_action_net_http_call": "ហៅទូរស័ព្ទទៅសេវាគេហទំព័រ",
   "scheduler_preset_action_config_url": "អាសយដ្ឋាន (URL)",

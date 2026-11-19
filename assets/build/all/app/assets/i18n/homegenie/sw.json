@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Endesha Programu",
   "scheduler_preset_action_config_program": "Mpango",
   "scheduler_preset_action_config_options": "Chaguo",
+  "scheduler_preset_action_program_notify_panel": "Tuma arifa kwa Panel",
   "scheduler_preset_action_program_say": "Sema",
   "scheduler_preset_action_net_http_call": "Piga Huduma ya Wavuti",
   "scheduler_preset_action_config_url": "Anwani (URL)",

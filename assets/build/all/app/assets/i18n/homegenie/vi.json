@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Chạy chương trình",
   "scheduler_preset_action_config_program": "Chương trình",
   "scheduler_preset_action_config_options": "Tùy chọn",
+  "scheduler_preset_action_program_notify_panel": "Gửi thông báo đến Panel",
   "scheduler_preset_action_program_say": "Nói",
   "scheduler_preset_action_net_http_call": "Gọi dịch vụ web",
   "scheduler_preset_action_config_url": "Địa chỉ (URL)",

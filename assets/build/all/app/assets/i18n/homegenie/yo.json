@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Ṣiṣe Eto",
   "scheduler_preset_action_config_program": "Eto",
   "scheduler_preset_action_config_options": "Awọn aṣayan",
+  "scheduler_preset_action_program_notify_panel": "Fi ìfitónilétí ránṣẹ́ sí Panel",
   "scheduler_preset_action_program_say": "Sọ",
   "scheduler_preset_action_net_http_call": "Pe Iṣẹ Ayelujara kan",
   "scheduler_preset_action_config_url": "Adirẹsi (URL)",

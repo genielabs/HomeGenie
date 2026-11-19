@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "ప్రోగ్రామ్‌ను అమలు చేయండి",
   "scheduler_preset_action_config_program": "కార్యక్రమం",
   "scheduler_preset_action_config_options": "ఎంపికలు",
+  "scheduler_preset_action_program_notify_panel": "Panelకు నోటిఫికేషన్ పంపండి",
   "scheduler_preset_action_program_say": "చెప్పండి",
   "scheduler_preset_action_net_http_call": "వెబ్ సర్వీస్‌కు కాల్ చేయండి",
   "scheduler_preset_action_config_url": "చిరునామా (URL)",

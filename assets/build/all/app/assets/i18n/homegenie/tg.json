@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Барномаро иҷро кунед",
   "scheduler_preset_action_config_program": "Барнома",
   "scheduler_preset_action_config_options": "Имконот",
+  "scheduler_preset_action_program_notify_panel": "Ба Panel огоҳинома фиристед",
   "scheduler_preset_action_program_say": "Бигӯ",
   "scheduler_preset_action_net_http_call": "Ба хидмати веб занг занед",
   "scheduler_preset_action_config_url": "Суроға (URL)",

@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Ekzekuto Programin",
   "scheduler_preset_action_config_program": "Programi",
   "scheduler_preset_action_config_options": "Opsionet",
+  "scheduler_preset_action_program_notify_panel": "Dërgo njoftim te Panel",
   "scheduler_preset_action_program_say": "Thuaj",
   "scheduler_preset_action_net_http_call": "Telefononi një Shërbim Uebi",
   "scheduler_preset_action_config_url": "Adresa (URL)",

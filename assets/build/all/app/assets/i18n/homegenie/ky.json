@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Программаны иштетүү",
   "scheduler_preset_action_config_program": "Программа",
   "scheduler_preset_action_config_options": "Параметрлер",
+  "scheduler_preset_action_program_notify_panel": "Panel колдонмосуна билдирүү жөнөтүү",
   "scheduler_preset_action_program_say": "Айт",
   "scheduler_preset_action_net_http_call": "Веб кызматына чалыңыз",
   "scheduler_preset_action_config_url": "Дарек (URL)",

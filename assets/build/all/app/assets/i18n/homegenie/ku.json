@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Bernameyê Bixebitîne",
   "scheduler_preset_action_config_program": "Bername",
   "scheduler_preset_action_config_options": "Vebijêrk",
+  "scheduler_preset_action_program_notify_panel": "Agahdariyê bişîne Panel",
   "scheduler_preset_action_program_say": "Gotin",
   "scheduler_preset_action_net_http_call": "Gazî Xizmeteke Webê Bike",
   "scheduler_preset_action_config_url": "Navnîşan (URL)",

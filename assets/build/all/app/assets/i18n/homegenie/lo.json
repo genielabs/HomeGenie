@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "ດໍາເນີນໂຄງການ",
   "scheduler_preset_action_config_program": "ໂຄງການ",
   "scheduler_preset_action_config_options": "ທາງເລືອກ",
+  "scheduler_preset_action_program_notify_panel": "ສົ່ງການແຈ້ງເຕືອນໄປຫາ Panel",
   "scheduler_preset_action_program_say": "ເວົ້າ",
   "scheduler_preset_action_net_http_call": "ໂທຫາບໍລິການເວັບ",
   "scheduler_preset_action_config_url": "ທີ່ຢູ່ (URL)",

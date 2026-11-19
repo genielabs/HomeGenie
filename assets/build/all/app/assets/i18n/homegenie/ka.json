@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "პროგრამის გაშვება",
   "scheduler_preset_action_config_program": "პროგრამა",
   "scheduler_preset_action_config_options": "პარამეტრები",
+  "scheduler_preset_action_program_notify_panel": "შეტყობინების გაგზავნა Panel-ში",
   "scheduler_preset_action_program_say": "თქვი",
   "scheduler_preset_action_net_http_call": "ვებ სერვისთან დარეკვა",
   "scheduler_preset_action_config_url": "მისამართი (URL)",

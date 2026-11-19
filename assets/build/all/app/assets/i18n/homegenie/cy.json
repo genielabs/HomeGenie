@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Rhedeg Rhaglen",
   "scheduler_preset_action_config_program": "Rhaglen",
   "scheduler_preset_action_config_options": "Dewisiadau",
+  "scheduler_preset_action_program_notify_panel": "Anfon hysbysiad i Panel",
   "scheduler_preset_action_program_say": "Dywedwch",
   "scheduler_preset_action_net_http_call": "Ffoniwch Wasanaeth Gwe",
   "scheduler_preset_action_config_url": "Cyfeiriad (URL)",

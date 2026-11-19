@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Run Program",
   "scheduler_preset_action_config_program": "FANDAHARAM-POTOANA",
   "scheduler_preset_action_config_options": "FANDIKANA",
+  "scheduler_preset_action_program_notify_panel": "Handefa fampandrenesana any amin’ny Panel",
   "scheduler_preset_action_program_say": "LAZAIN'NY",
   "scheduler_preset_action_net_http_call": "Miantso serivisy an-tranonkala",
   "scheduler_preset_action_config_url": "Adiresy (URL)",

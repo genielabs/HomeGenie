@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Begin Program",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Opsies",
+  "scheduler_preset_action_program_notify_panel": "Stuur kennisgewing na Panel",
   "scheduler_preset_action_program_say": "Sê",
   "scheduler_preset_action_net_http_call": "Bel 'n webdiens",
   "scheduler_preset_action_config_url": "Adres (URL)",

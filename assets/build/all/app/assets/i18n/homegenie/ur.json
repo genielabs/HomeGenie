@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "پروگرام چلائیں۔",
   "scheduler_preset_action_config_program": "پروگرام",
   "scheduler_preset_action_config_options": "اختیارات",
+  "scheduler_preset_action_program_notify_panel": "Panel کو اطلاع بھیجیں",
   "scheduler_preset_action_program_say": "کہو",
   "scheduler_preset_action_net_http_call": "ویب سروس کو کال کریں۔",
   "scheduler_preset_action_config_url": "پتہ (URL)",

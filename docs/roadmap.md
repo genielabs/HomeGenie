@@ -1,6 +1,6 @@
 # Roadmap
 
-Consolidated status: 2026-11-09. HomeGenie 2.0.36 includes the dashboard, widget, and preset work described below. The maintainer verified a clean Vulkan installation, an update on Vulkan, and the update on the production Raspberry Pi. See the [changelog](../CHANGELOG.md).
+Consolidated status: 2026-11-18. HomeGenie v2.0.41 includes resumable feature setup, guided FFmpeg installation for VisionCore NVR, and AI Genie configuration in the wizard. The dashboard, widget, and preset work shipped in 2.0.36 was verified on a clean Vulkan installation, a Vulkan update, and the production Raspberry Pi. See the [changelog](../CHANGELOG.md).
 
 This is the active task list. Detailed stage-by-stage decisions, earlier API names, test counts and acceptance evidence are preserved in [implementation history](roadmap-history.md); they do not override this status. Completed work is not reopened merely because an earlier checkpoint still says pending.
 
@@ -157,9 +157,14 @@ Use protections scoped to each operation, reusing the package containment guard 
 - [ ] Revisit dashboard free-size sizing separately, with an agreed design before implementation. Do not reapply the reverted broad sizing change as part of consolidation.
 - [ ] Review the personal Lailama prompt separately: basic language/device guidance is still useful, but legacy SYSTEM REPORT / SCHEDULED_TASK assumptions and success-before-result examples need review. Keep widget guidance in the shared capability instructions rather than duplicating it in the personal prompt.
 
-## Next activities
+## Feature setup (v2.0.41)
 
-- [ ] **Guided FFmpeg installation for NVR on Windows and Linux.** Add an optional setup step and an entry point in Video Input settings. Reuse working `ffmpeg` and `ffprobe` when available. Otherwise download a verified portable build for the server architecture into the HomeGenie data directory and share executable resolution between programs 200 and 250. Implement after the current consolidation.
+- [x] Add resumable feature setup after package installation. VisionCore NVR uses an existing FFmpeg installation when available, offers guided installation on Windows x64 and supported Linux systems, and provides manual instructions on macOS. Video Input and Video Recorder share the detected executables. A skipped NVR step can be opened later from Programs.
+- [x] Add the optional AI Genie setup step for cloud providers and Lailama. Both Done and Skip close the AI Genie setup step. Localize both setup widgets in the 91 YoT languages.
+- [x] Maintainer confirmed the v2.0.41 wizard on a clean installation and a successful update on Raspberry Pi.
+- [ ] **Weather Forecast.** Add an optional setup widget for the existing OpenWeatherMap program (34) before **VisionCore NVR**. Prefill the editable `Location` and `Language` options from choices made in earlier wizard steps and let the user enter the API key (APPID) in the existing password field. Under the **Weather Forecast** title, explain that HomeGenie uses OpenWeatherMap to show current conditions and forecasts for the selected location. Explain that users can obtain a key from their OpenWeather account and link to the [official setup guide](https://openweathermap.org/appid). Localize the widget like the existing feature setup widgets.
+
+## Next activities
 
 - [x] Retire specialized Genie programs 930, 931 and 932 from shipped homegenie-ml-ai manifests/program bundles, preset modules (including the shipped demo client preset) and dedicated prompt files; package version 1.0.69. No other package depends on them. Current program code, checksums, shared skills and optional legacy-disabling support are preserved. Package install/restore remains additive and installed retired programs/clones, options and histories are not removed or disabled. Added update-planner preservation coverage and clarified technical documentation references.
 
@@ -167,7 +172,7 @@ Use protections scoped to each operation, reusing the package containment guard 
 - [x] Complete AI Genie default-provider settings and scheduler provider labels in all 91 supported languages. Added the six missing keys in the other 89 locales, preserving unrelated values. Structural audit of 728 files across eight catalogs found no missing keys, empty translations, value-type mismatches or interpolation-token mismatches against English. Existing decorative separator duplicates in English/Italian were retained. Distributed and Vulkan HomeGenie catalogs match the source; service-worker translation hashes were refreshed. This is structural completeness validation, not native-speaker review of every existing translation.
 - [ ] Review current documentation, website guidance and examples against the public Request APIs. Keep historical Automan examples identified with their actual legacy program; do not silently rewrite their original workflow. Review the longer shared-engine guide's intermediate-stage descriptions as well.
 - [x] Local release-readiness assessment (2026-10-18): all 31 owned programs in homegenie-base/homegenie-ml-ai have matching script/XML/manifest checksums and versions; cross-package program versions/checksums agree. Bundled main contains the new scheduler UI/rendering logic, its preset matches YoT, and all referenced application resources/cache hashes pass. The pre-existing missing favicon.svg was fixed in YoT build/test assets, SVG MIME declaration and service-worker configuration, then staged in both bundles with officially regenerated Angular manifests; live /app/favicon.svg returned HTTP 200 and image/svg+xml. Final bundled base-href is /app/ and all 14 dedicated tests passed. Together with 493 backend regressions, translation audit and live provider/scheduler acceptance, no new functional release blocker was identified. Final CI/release artifacts still depend on the actual release build; no tag or publication was performed. Release notes must explain removed APIs and regenerating saved Genie scripts. No intensive local coding test is required.
-- [ ] After consolidation and release review, discuss the next provider adapter. OpenAI is a candidate; start with conversation, reads and device control, reusing the common engine and keeping credentials on the backend. No new provider implementation is authorized by this roadmap item alone.
+- [x] Ship OpenAI, Claude, DeepSeek and Qwen alongside Gemini. The four cloud adapters landed in v2.0.40 and appear in the v2.0.41 AI Genie setup widget when installed.
 
 ## Completed: shared Genie engine and providers
 

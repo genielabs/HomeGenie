@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Jalankan Program",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Pilihan",
+  "scheduler_preset_action_program_notify_panel": "Kirim notifikasi ke Panel",
   "scheduler_preset_action_program_say": "Mengatakan",
   "scheduler_preset_action_net_http_call": "Hubungi Layanan Web",
   "scheduler_preset_action_config_url": "Alamat (URL)",

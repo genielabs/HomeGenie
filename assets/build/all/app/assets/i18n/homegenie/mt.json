@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Mexxi l-Programm",
   "scheduler_preset_action_config_program": "Programm",
   "scheduler_preset_action_config_options": "Għażliet",
+  "scheduler_preset_action_program_notify_panel": "Ibgħat notifika lil Panel",
   "scheduler_preset_action_program_say": "Għid",
   "scheduler_preset_action_net_http_call": "Ċempel Servizz tal-Web",
   "scheduler_preset_action_config_url": "Indirizz (URL)",

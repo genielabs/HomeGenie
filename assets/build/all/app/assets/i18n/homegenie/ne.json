@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "कार्यक्रम चलाउनुहोस्",
   "scheduler_preset_action_config_program": "कार्यक्रम",
   "scheduler_preset_action_config_options": "विकल्पहरू",
+  "scheduler_preset_action_program_notify_panel": "Panel मा सूचना पठाउनुहोस्",
   "scheduler_preset_action_program_say": "भन्नुहोस्",
   "scheduler_preset_action_net_http_call": "वेब सेवामा कल गर्नुहोस्",
   "scheduler_preset_action_config_url": "ठेगाना (URL)",

@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Zaženi program",
   "scheduler_preset_action_config_program": "Program",
   "scheduler_preset_action_config_options": "Možnosti",
+  "scheduler_preset_action_program_notify_panel": "Pošlji obvestilo v Panel",
   "scheduler_preset_action_program_say": "Reci",
   "scheduler_preset_action_net_http_call": "Pokličite spletno storitev",
   "scheduler_preset_action_config_url": "Naslov (URL)",

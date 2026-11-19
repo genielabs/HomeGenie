@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Run Shirin",
   "scheduler_preset_action_config_program": "Shirin",
   "scheduler_preset_action_config_options": "Zabuka",
+  "scheduler_preset_action_program_notify_panel": "Aika sanarwa zuwa Panel",
   "scheduler_preset_action_program_say": "Ka ce",
   "scheduler_preset_action_net_http_call": "Kira Sabis na Yanar Gizo",
   "scheduler_preset_action_config_url": "Adireshi (URL)",

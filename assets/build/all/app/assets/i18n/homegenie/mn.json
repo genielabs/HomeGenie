@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Програмыг ажиллуулах",
   "scheduler_preset_action_config_program": "Програм",
   "scheduler_preset_action_config_options": "Сонголтууд",
+  "scheduler_preset_action_program_notify_panel": "Panel руу мэдэгдэл илгээх",
   "scheduler_preset_action_program_say": "Хэлэх",
   "scheduler_preset_action_net_http_call": "Вэб үйлчилгээ рүү залгаарай",
   "scheduler_preset_action_config_url": "Хаяг (URL)",

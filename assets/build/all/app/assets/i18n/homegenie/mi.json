@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Whakahaere Papatono",
   "scheduler_preset_action_config_program": "Papatono",
   "scheduler_preset_action_config_options": "Kōwhiringa",
+  "scheduler_preset_action_program_notify_panel": "Tukuna he whakamōhiotanga ki Panel",
   "scheduler_preset_action_program_say": "Mea atu",
   "scheduler_preset_action_net_http_call": "Waea he Ratonga Tukutuku",
   "scheduler_preset_action_config_url": "Wāhitau (URL)",

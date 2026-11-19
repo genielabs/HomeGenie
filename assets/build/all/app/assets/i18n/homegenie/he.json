@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "הפעלת תוכנית",
   "scheduler_preset_action_config_program": "תָכְנִית",
   "scheduler_preset_action_config_options": "אפשרויות",
+  "scheduler_preset_action_program_notify_panel": "שליחת התראה אל Panel",
   "scheduler_preset_action_program_say": "לוֹמַר",
   "scheduler_preset_action_net_http_call": "התקשרו לשירות אינטרנט",
   "scheduler_preset_action_config_url": "כתובת (URL)",

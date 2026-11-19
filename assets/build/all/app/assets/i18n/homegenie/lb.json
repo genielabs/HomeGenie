@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Programm ausféieren",
   "scheduler_preset_action_config_program": "Programm",
   "scheduler_preset_action_config_options": "Optiounen",
+  "scheduler_preset_action_program_notify_panel": "Notifikatioun u Panel schécken",
   "scheduler_preset_action_program_say": "Soen",
   "scheduler_preset_action_net_http_call": "Rufft e Webservice un",
   "scheduler_preset_action_config_url": "Adress (URL)",

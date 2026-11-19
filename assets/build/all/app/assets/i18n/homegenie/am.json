@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "ፕሮግራሙን አሂድ",
   "scheduler_preset_action_config_program": "ፕሮግራም",
   "scheduler_preset_action_config_options": "አማራጮች",
+  "scheduler_preset_action_program_notify_panel": "ወደ Panel ማሳወቂያ ላክ",
   "scheduler_preset_action_program_say": "በላቸው",
   "scheduler_preset_action_net_http_call": "ለድር አገልግሎት ይደውሉ",
   "scheduler_preset_action_config_url": "አድራሻ (ዩአርኤል)",

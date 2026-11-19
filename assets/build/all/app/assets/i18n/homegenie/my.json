@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "ပရိုဂရမ်ကို Run လိုက်ပါ။",
   "scheduler_preset_action_config_program": "အစီအစဉ်",
   "scheduler_preset_action_config_options": "ရွေးချယ်မှုများ",
+  "scheduler_preset_action_program_notify_panel": "Panel သို့ အသိပေးချက်ပို့ရန်",
   "scheduler_preset_action_program_say": "ဆိုပါတော့",
   "scheduler_preset_action_net_http_call": "ဝဘ်ဝန်ဆောင်မှုကို ခေါ်ပါ။",
   "scheduler_preset_action_config_url": "လိပ်စာ (URL)",

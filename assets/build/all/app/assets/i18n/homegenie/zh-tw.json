@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "運行程式",
   "scheduler_preset_action_config_program": "程式",
   "scheduler_preset_action_config_options": "選項",
+  "scheduler_preset_action_program_notify_panel": "傳送通知至 Panel",
   "scheduler_preset_action_program_say": "說",
   "scheduler_preset_action_net_http_call": "呼叫 Web 服務",
   "scheduler_preset_action_config_url": "地址（URL）",

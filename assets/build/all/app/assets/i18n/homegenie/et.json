@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Käivita programm",
   "scheduler_preset_action_config_program": "Programm",
   "scheduler_preset_action_config_options": "Valikud",
+  "scheduler_preset_action_program_notify_panel": "Saada teavitus rakendusse Panel",
   "scheduler_preset_action_program_say": "Ütle",
   "scheduler_preset_action_net_http_call": "Helista veebiteenusele",
   "scheduler_preset_action_config_url": "Aadress (URL)",

@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "프로그램 실행",
   "scheduler_preset_action_config_program": "프로그램",
   "scheduler_preset_action_config_options": "옵션",
+  "scheduler_preset_action_program_notify_panel": "Panel에 알림 보내기",
   "scheduler_preset_action_program_say": "말하다",
   "scheduler_preset_action_net_http_call": "웹 서비스 호출",
   "scheduler_preset_action_config_url": "주소(URL)",

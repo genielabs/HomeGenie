@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Programma uitvoeren",
   "scheduler_preset_action_config_program": "Programma",
   "scheduler_preset_action_config_options": "Opties",
+  "scheduler_preset_action_program_notify_panel": "Melding naar Panel sturen",
   "scheduler_preset_action_program_say": "Inspraak",
   "scheduler_preset_action_net_http_call": "Een webservice aanroepen",
   "scheduler_preset_action_config_url": "Adres (URL)",

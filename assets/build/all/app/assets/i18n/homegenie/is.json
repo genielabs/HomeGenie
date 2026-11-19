@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Keyra forrit",
   "scheduler_preset_action_config_program": "Dagskrá",
   "scheduler_preset_action_config_options": "Valkostir",
+  "scheduler_preset_action_program_notify_panel": "Senda tilkynningu í Panel",
   "scheduler_preset_action_program_say": "Segðu",
   "scheduler_preset_action_net_http_call": "Hringdu í vefþjónustu",
   "scheduler_preset_action_config_url": "Heimilisfang (URL)",

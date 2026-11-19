@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "වැඩසටහන ක්‍රියාත්මක කරන්න",
   "scheduler_preset_action_config_program": "වැඩසටහන",
   "scheduler_preset_action_config_options": "විකල්ප",
+  "scheduler_preset_action_program_notify_panel": "Panel වෙත දැනුම්දීමක් යවන්න",
   "scheduler_preset_action_program_say": "කියන්න",
   "scheduler_preset_action_net_http_call": "වෙබ් සේවාවක් අමතන්න",
   "scheduler_preset_action_config_url": "ලිපිනය (URL)",

@@ -37,6 +37,16 @@ namespace HomeGenie
             }
         }
 
+        /// <summary>Sends a message to the registered HomeGenie Panel devices.</summary>
+        public ProgramHelperBase NotifyPanel(string message)
+        {
+            if (!String.IsNullOrWhiteSpace(message))
+            {
+                homegenie.InterfaceControl(new MigInterfaceCommand("HomeAutomation.HomeGenie/Config/Notifications.Send", message));
+            }
+            return this;
+        }
+
         /// <summary>
         /// Playbacks a synthesized voice message from speaker.
         /// </summary>

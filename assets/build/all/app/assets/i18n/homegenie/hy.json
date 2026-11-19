@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Գործարկել ծրագիրը",
   "scheduler_preset_action_config_program": "Ծրագիր",
   "scheduler_preset_action_config_options": "Ընտրանքներ",
+  "scheduler_preset_action_program_notify_panel": "Ծանուցում ուղարկել Panel հավելվածին",
   "scheduler_preset_action_program_say": "Ասա",
   "scheduler_preset_action_net_http_call": "Զանգահարեք վեբ ծառայությանը",
   "scheduler_preset_action_config_url": "Հասցե (URL)",

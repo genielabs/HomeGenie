@@ -104,6 +104,19 @@
     }
   },
   {
+    "id": "program_notify_panel",
+    "script": "$$.program.notifyPanel('$message$');\n",
+    "config": {
+      "message": {
+        "options": {
+          "maxLength": 200
+        },
+        "type": "text",
+        "value": ""
+      }
+    }
+  },
+  {
     "id": "program_say",
     "script": "$$.program.say('$message$');\n",
     "config": {

@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Patakbuhin ang Programa",
   "scheduler_preset_action_config_program": "Programa",
   "scheduler_preset_action_config_options": "Mga pagpipilian",
+  "scheduler_preset_action_program_notify_panel": "Magpadala ng abiso sa Panel",
   "scheduler_preset_action_program_say": "Sabihin",
   "scheduler_preset_action_net_http_call": "Tumawag sa isang Web Service",
   "scheduler_preset_action_config_url": "Address (URL)",

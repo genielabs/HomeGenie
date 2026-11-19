@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Запусціць праграму",
   "scheduler_preset_action_config_program": "Праграма",
   "scheduler_preset_action_config_options": "Варыянты",
+  "scheduler_preset_action_program_notify_panel": "Адправіць апавяшчэнне ў Panel",
   "scheduler_preset_action_program_say": "Скажыце",
   "scheduler_preset_action_net_http_call": "Выклік вэб-службы",
   "scheduler_preset_action_config_url": "Адрас (URL)",

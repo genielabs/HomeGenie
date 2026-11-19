@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "ಪ್ರೋಗ್ರಾಂ ಅನ್ನು ಚಲಾಯಿಸಿ",
   "scheduler_preset_action_config_program": "ಕಾರ್ಯಕ್ರಮ",
   "scheduler_preset_action_config_options": "ಆಯ್ಕೆಗಳು",
+  "scheduler_preset_action_program_notify_panel": "Panel ಗೆ ಅಧಿಸೂಚನೆ ಕಳುಹಿಸಿ",
   "scheduler_preset_action_program_say": "ಹೇಳು",
   "scheduler_preset_action_net_http_call": "ವೆಬ್ ಸೇವೆಗೆ ಕರೆ ಮಾಡಿ",
   "scheduler_preset_action_config_url": "ವಿಳಾಸ (URL)",

@@ -206,6 +206,7 @@
         "Programma",
     "scheduler_preset_action_config_options":
         "Opzioni",
+    "scheduler_preset_action_program_notify_panel": "Invia notifica a Panel",
     "scheduler_preset_action_program_say":
         "Parla",
   "scheduler_preset_action_genie_command":

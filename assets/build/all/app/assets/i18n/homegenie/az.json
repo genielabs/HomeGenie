@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Proqramı işə salın",
   "scheduler_preset_action_config_program": "Proqram",
   "scheduler_preset_action_config_options": "Seçimlər",
+  "scheduler_preset_action_program_notify_panel": "Panel tətbiqinə bildiriş göndər",
   "scheduler_preset_action_program_say": "deyin",
   "scheduler_preset_action_net_http_call": "Veb xidmətinə zəng edin",
   "scheduler_preset_action_config_url": "Ünvan (URL)",

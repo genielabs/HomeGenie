@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "പ്രോഗ്രാം പ്രവർത്തിപ്പിക്കുക",
   "scheduler_preset_action_config_program": "പ്രോഗ്രാം",
   "scheduler_preset_action_config_options": "ഓപ്ഷനുകൾ",
+  "scheduler_preset_action_program_notify_panel": "Panel-ലേക്ക് അറിയിപ്പ് അയയ്ക്കുക",
   "scheduler_preset_action_program_say": "പറയുക",
   "scheduler_preset_action_net_http_call": "ഒരു വെബ് സേവനത്തിലേക്ക് വിളിക്കുക",
   "scheduler_preset_action_config_url": "വിലാസം (URL)",

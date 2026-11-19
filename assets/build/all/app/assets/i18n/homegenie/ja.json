@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "プログラムを実行",
   "scheduler_preset_action_config_program": "プログラム",
   "scheduler_preset_action_config_options": "オプション",
+  "scheduler_preset_action_program_notify_panel": "Panel に通知を送信",
   "scheduler_preset_action_program_say": "言う",
   "scheduler_preset_action_net_http_call": "Webサービスを呼び出す",
   "scheduler_preset_action_config_url": "住所（URL）",

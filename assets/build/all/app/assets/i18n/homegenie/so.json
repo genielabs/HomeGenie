@@ -100,6 +100,7 @@
   "scheduler_preset_action_program_run": "Orod barnaamijka",
   "scheduler_preset_action_config_program": "Barnaamijka",
   "scheduler_preset_action_config_options": "Ikhtiyaarada",
+  "scheduler_preset_action_program_notify_panel": "Ogeysiis u dir Panel",
   "scheduler_preset_action_program_say": "dheh",
   "scheduler_preset_action_net_http_call": "Wac Adeegga Shabakadda",
   "scheduler_preset_action_config_url": "Cinwaanka (URL)",

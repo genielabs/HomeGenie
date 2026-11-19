@@ -736,7 +736,7 @@ public static class ConversationTasks {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>chat-history-service</Id>
       <Version>1.0.19</Version>
       <Required>true</Required>
@@ -1138,7 +1138,7 @@ public class ClientPresetStore
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>client-configs</Id>
       <Version>1.0.11</Version>
       <Required>true</Required>
@@ -1509,7 +1509,7 @@ void SaveConfig(string filePath, YamlConfig config)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>daily-energy-report</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -1787,7 +1787,7 @@ List&lt;StatValue&gt; ApplyFilter(string storageDomain, NWaves.Filters.Base.IFil
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>stats-data-monitor</Id>
       <Version>1.0.5</Version>
       <Required>true</Required>
@@ -2435,7 +2435,7 @@ public class DownloadManager : IDisposable
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>download-manager</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -2478,7 +2478,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>e-mail-account</Id>
       <Version>1.0.1</Version>
       <Required>true</Required>
@@ -2806,7 +2806,7 @@ string GetDbName()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>energy-use-statistics</Id>
       <Version>1.0.9</Version>
       <Required>false</Required>
@@ -2981,7 +2981,7 @@ void InsertData(LiteDatabase db, LoggerEvent data) {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>events-logging</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -3136,7 +3136,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>file-manager</Id>
       <Version>1.0.0</Version>
       <Required>true</Required>
@@ -3172,6 +3172,66 @@ Program.Run();
 
 string devicesPath = Path.Combine(Data.GetFolder(), "panel_devices.json");
 
+string relayKeyPath = Path.Combine(Data.GetFolder(), "panel_relay.key");
+Action&lt;string&gt; notifyPanel = message =&gt;
+{
+    var devices = DeviceRegistry.Load(devicesPath);
+
+    foreach (var device in devices)
+    {
+        var targetDevice = device; // local capture
+
+        Program.RunAsyncTask(async () =&gt;
+        {
+            try
+            {
+                var payload = new
+                {
+                    token = targetDevice.Token,
+                    title = "HomeGenie Update",
+                    body = message
+                };
+
+                string jsonPayload = Newtonsoft.Json.JsonConvert.SerializeObject(payload);
+
+                // Use static client instance instead of creating a new one for each request
+                var request = new HttpRequestMessage(HttpMethod.Post, "https://push.homegenie.workers.dev");
+                request.Headers.Add("x-hg-key", PanelRelaySettings.ForSend(relayKeyPath, "PYKqr2hUhdASrkWJGWuKpM+C7rbXaQTFcvFYz4d8IJBLK1bz4R6kw1"));
+                request.Content = new StringContent(jsonPayload, System.Text.Encoding.UTF8, "application/json");
+
+                var response = await HttpHelper.Client.SendAsync(request);
+
+                if (!response.IsSuccessStatusCode) {
+                    Program.Log.Error($"Proxy Error[{response.StatusCode}]");
+                } else {
+                    Program.Log.Info($"Notification sent to {targetDevice.Model}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Program.Log.Error($"Failed to send to proxy: {ex.GetType().Name}");
+            }
+        });
+    }
+};
+
+Api.Handle("HomeAutomation.HomeGenie/Config/Notifications.Send", args =&gt;
+{
+    string message = Api.Parse(args).Data as string;
+    if (String.IsNullOrWhiteSpace(message)) return new ResponseStatus(Status.Error, "Message missing");
+    notifyPanel(message);
+    return new ResponseStatus(Status.Ok, "Queued");
+});
+
+Api.Handle("HomeAutomation.HomeGenie/Config/Notifications.RelayKey", args =&gt;
+{
+    var request = Api.Parse(args);
+    if (!String.IsNullOrEmpty(request.OriginalRequest))
+        return new ResponseStatus(Status.Error, "Invalid relay key request");
+    return PanelRelaySettings.Update(relayKeyPath, request.Data);
+});
+
+
 // --- 1. API HANDLER
 // HomeAutomation.HomeGenie/Config/Notifications.Register/&lt;token&gt;/&lt;model&gt;
 Api.Handle("HomeAutomation.HomeGenie/Config/Notifications.Register", (args) =&gt; 
@@ -3192,7 +3252,7 @@ Api.Handle("HomeAutomation.HomeGenie/Config/Notifications.Register", (args) =&gt
             Model = model, 
             RegisteredAt = DateTime.Now 
         });
-        Program.Log.Info($"New Panel registered: {model} ({token})");
+        Program.Log.Info($"New Panel registered: {model}");
     }
     else 
     {
@@ -3270,48 +3330,7 @@ When.ModuleParameterChanged((module, parameter) =&gt;
                 break;
         }
 
-        if (shouldNotify) 
-        {
-            var devices = DeviceRegistry.Load(devicesPath);
-
-            foreach (var device in devices) 
-            {
-                var targetDevice = device; // local capture
-
-                Program.RunAsyncTask(async () =&gt; 
-                {
-                    try 
-                    {
-                        var payload = new 
-                        { 
-                            token = targetDevice.Token, 
-                            title = "HomeGenie Update", 
-                            body = message
-                        };
-                        
-                        string jsonPayload = Newtonsoft.Json.JsonConvert.SerializeObject(payload);
-
-                        // Use static client instance instead of creating a new one for each request
-                        var request = new HttpRequestMessage(HttpMethod.Post, "https://push.homegenie.workers.dev");
-                        request.Headers.Add("x-hg-key", "PYKqr2hUhdASrkWJGWuKpM+C7rbXaQTFcvFYz4d8IJBLK1bz4R6kw1");
-                        request.Content = new StringContent(jsonPayload, System.Text.Encoding.UTF8, "application/json");                            
-                        
-                        var response = await HttpHelper.Client.SendAsync(request);
-                        
-                        if (!response.IsSuccessStatusCode) {
-                            string err = await response.Content.ReadAsStringAsync();
-                            Program.Log.Error($"Proxy Error[{response.StatusCode}]: {err}");
-                        } else {
-                            Program.Log.Info($"Notification sent to {targetDevice.Model}");
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Program.Log.Error($"Failed to send to proxy: {ex.Message}");
-                    }
-                });
-            }
-        }
+        if (shouldNotify) notifyPanel(message);
     }
     return true;
 });
@@ -3346,6 +3365,70 @@ public static class DeviceRegistry {
     }
 }
 
+public static class PanelRelaySettings
+{
+    static readonly object Sync = new object();
+
+    public static object Update(string path, object body)
+    {
+        string key = null;
+        try
+        {
+            string json = body is byte[] bytes ? new UTF8Encoding(false, true).GetString(bytes)
+                : body is string text ? text : Newtonsoft.Json.JsonConvert.SerializeObject(body);
+            using (var doc = System.Text.Json.JsonDocument.Parse(json))
+            {
+                if (doc.RootElement.ValueKind == System.Text.Json.JsonValueKind.Object)
+                {
+                    foreach (var field in doc.RootElement.EnumerateObject())
+                    {
+                        if (key != null || field.Name != "key" || field.Value.ValueKind != System.Text.Json.JsonValueKind.String)
+                            return Invalid();
+                        key = field.Value.GetString();
+                    }
+                }
+            }
+        }
+        catch (System.Text.Json.JsonException) { return Invalid(); }
+        catch (DecoderFallbackException) { return Invalid(); }
+        catch (InvalidOperationException) { return Invalid(); }
+        if (key == null || key.Length &gt; 512 || key.StartsWith(" ") || key.EndsWith(" ") ||
+            key.Any(c =&gt; c &lt; 32 || c &gt; 126)) return Invalid();
+        try
+        {
+            lock (Sync)
+            {
+                if (key.Length == 0) File.Delete(path);
+                else
+                {
+                    string temp = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
+                    try
+                    {
+                        File.WriteAllText(temp, key);
+                        File.Move(temp, path, true);
+                    }
+                    finally { File.Delete(temp); }
+                }
+            }
+            return new ResponseStatus(Status.Ok, "Relay key updated");
+        }
+        catch (IOException) { return SaveError(); }
+        catch (UnauthorizedAccessException) { return SaveError(); }
+    }
+
+    public static string ForSend(string path, string defaultKey)
+    {
+        lock (Sync)
+        {
+            try { return File.ReadAllText(path); }
+            catch (FileNotFoundException) { return defaultKey; }
+        }
+    }
+
+    static object Invalid() =&gt; new ResponseStatus(Status.Error, "Invalid relay key request");
+    static object SaveError() =&gt; new ResponseStatus(Status.Error, "Cannot save relay key");
+}
+
 public static class HttpHelper {
     public static readonly HttpClient Client = new HttpClient();
 }
@@ -3355,11 +3438,11 @@ public static class HttpHelper {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>homegenie-panel-notifications</Id>
-      <Version>1.0.1</Version>
+      <Version>1.0.4</Version>
       <Required>true</Required>
-      <Checksum>A351D86B04B09401569549524F0CD796</Checksum>
+      <Checksum>0064E395764C445D59307F10D8CD3F77</Checksum>
     </PackageInfo>
     <Domain>HomeAutomation.HomeGenie.Automation</Domain>
     <Address>580</Address>
@@ -3424,7 +3507,7 @@ public string[] GetHourLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>hourly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -3886,7 +3969,7 @@ class MqttCommand: MigInterfaceCommand {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>mqtt-network</Id>
       <Version>1.0.9</Version>
       <Required>true</Required>
@@ -4145,7 +4228,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>openweathermap</Id>
       <Version>1.0.6</Version>
       <Required>true</Required>
@@ -4237,7 +4320,7 @@ const string dataApiUrl = "DataProcessing.Statistics/MyStat";
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>pie-chart-stats-example</Id>
       <Version>1.0.2</Version>
       <Required>false</Required>
@@ -4329,7 +4412,7 @@ Program.GoBackground();
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>remote-control</Id>
       <Version>1.0.2</Version>
       <Required>true</Required>
@@ -4401,7 +4484,7 @@ while (Program.IsRunning)
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>sine-wave-signal</Id>
       <Version>1.0.3</Version>
       <Required>false</Required>
@@ -5394,7 +5477,7 @@ public sealed class FfmpegInstallation
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>video-input</Id>
       <Version>1.0.10</Version>
       <Required>true</Required>
@@ -6724,7 +6807,7 @@ public static class RecordingFfmpeg
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>video-recorder</Id>
       <Version>1.0.3</Version>
       <Required>true</Required>
@@ -6805,7 +6888,7 @@ public string[] GetDayLabels()
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>weekly-energy-use-chart</Id>
       <Version>1.0.0</Version>
       <Required>false</Required>
@@ -7706,7 +7789,7 @@ public static class ModuleSettingAction
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>ai-action-executor</Id>
       <Version>1.2.20</Version>
       <Required>true</Required>
@@ -8083,7 +8166,7 @@ public static class ProgramUpdateNotification {
     <PackageInfo>
       <Repository>homegenie</Repository>
       <PackageId>homegenie-base</PackageId>
-      <PackageVersion>1.0.133</PackageVersion>
+      <PackageVersion>1.0.136</PackageVersion>
       <Id>notification-archive</Id>
       <Version>1.2.0</Version>
       <Required>true</Required>
@@ -11813,7 +11896,7 @@ A dashboard container uses settings={defaultSize:'dashboard',sizeOptions:[]} as 
   <PackageInfo>
     <Repository>homegenie</Repository>
     <PackageId>homegenie-base</PackageId>
-    <PackageVersion>1.0.133</PackageVersion>
+    <PackageVersion>1.0.136</PackageVersion>
     <Id>ai-genie-service</Id>
     <Version>0.27.54</Version>
     <Required>true</Required>
