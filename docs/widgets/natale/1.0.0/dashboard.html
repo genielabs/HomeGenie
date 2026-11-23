@@ -1,0 +1,49 @@
+<main class="christmas" #scene @set="void 0">
+  <div class="snow" #snow aria-hidden="true"></div>
+  <header><span class="eyebrow" data-label-text="homegenie_party_edition">HOMEGENIE · PARTY EDITION</span><h1 data-label-text="the_magic_of_christmas">The magic of Christmas</h1><p data-label-text="a_small_wait_a_great_desire">A small wait, a great desire.</p></header>
+  <section class="stage" aria-label="Bright Christmas tree" data-label-aria="bright_christmas_tree">
+    <div class="halo"></div>
+    <svg class="tree" viewBox="0 0 400 390" role="img" aria-label="Christmas tree with star and bright decorations" data-label-aria="christmas_tree_with_star_and_bright_decorations">
+      <defs><linearGradient id="pine" x2="1" y2="1"><stop stop-color="#22695b"/><stop offset="1" stop-color="#092e2b"/></linearGradient></defs>
+      <ellipse cx="200" cy="366" rx="148" ry="14" fill="#a1eedb" opacity=".1"/>
+      <path d="M187 315h26v49h-26z" fill="#9e6742"/>
+      <path d="M200 53L128 166h36L91 259h48L55 339h290l-84-80h48l-73-93h36z" fill="url(#pine)" stroke="#509f88" stroke-width="2"/>
+      <path d="M159 149q42 30 82 0M127 231q73 42 146 0M96 307q104 48 208 0" fill="none" stroke="#efcd83" stroke-width="3" opacity=".85"/>
+      <g class="bulbs" fill="#ffe6a7"><circle cx="172" cy="158" r="5"/><circle cx="222" cy="157" r="5"/><circle cx="147" cy="241" r="5"/><circle cx="200" cy="251" r="5"/><circle cx="255" cy="241" r="5"/><circle cx="117" cy="316" r="5"/><circle cx="174" cy="331" r="5"/><circle cx="232" cy="330" r="5"/><circle cx="286" cy="316" r="5"/></g>
+      <g fill="#de6878"><circle cx="190" cy="195" r="8"/><circle cx="238" cy="283" r="9"/><circle cx="153" cy="285" r="7"/></g>
+      <path class="star" d="M200 18l9 20 22 3-16 16 4 23-19-11-20 11 4-23-16-16 23-3z" fill="#ffe4a0"/>
+      <rect x="68" y="337" width="49" height="31" rx="4" fill="#bc4a60"/><path d="M92 337v31" stroke="#f9d898" stroke-width="6"/>
+      <rect x="280" y="329" width="46" height="39" rx="4" fill="#ddb667"/><path d="M303 329v39" stroke="#fff0c4" stroke-width="6"/>
+    </svg>
+  </section>
+  <section class="countdown" aria-label="Countdown to Christmas" data-label-aria="countdown_to_christmas">
+    <p class="eyebrow" #target_label></p>
+    <div class="digits"><div><strong #days>—</strong><span data-label-text="days">DAYS</span></div><b>:</b><div><strong #hours>—</strong><span data-label-text="hours">HOURS</span></div><b>:</b><div><strong #minutes>—</strong><span data-label-text="minutes">MINUTES</span></div><b>:</b><div><strong #seconds>—</strong><span data-label-text="seconds">SECONDS</span></div></div>
+    <p class="wish" #message aria-live="polite"></p>
+  </section>
+  <section class="lighting" aria-label="Control of two lights" data-label-aria="control_of_two_lights">
+    <h2 data-label-text="holiday_lights">Holiday lights</h2>
+    <p class="binding-hint" data-label-text="choose_the_two_lights_from_associated_modules">Choose the two lights from Associated Modules in the dashboard bar.</p>
+    <div class="light-grid">
+      <article class="light-card" #light_one_card>
+        <h3 #light_one_name data-label-text="light_1">Light 1</h3><p class="light-state" #light_one_state data-label-text="not_available">Not available</p>
+        <div class="switches"><button type="button" #light_one_on (click)="switchLight('lightOne', true)" data-label-text="turn_on">Turn on</button><button type="button" #light_one_off (click)="switchLight('lightOne', false)" data-label-text="turn_off">Turn off</button></div>
+        <label data-label-text="brightness">Brightness <strong #light_one_level>—</strong><input #light_one_slider type="range" min="0" max="100" step="1" aria-label="Light brightness 1" data-label-aria="light_brightness_1" (change)="setLightLevel('lightOne', event)" /></label>
+        <p class="command-message" #light_one_feedback role="status"></p>
+      </article>
+      <article class="light-card" #light_two_card>
+        <h3 #light_two_name data-label-text="light_2">Light 2</h3><p class="light-state" #light_two_state data-label-text="not_available">Not available</p>
+        <div class="switches"><button type="button" #light_two_on (click)="switchLight('lightTwo', true)" data-label-text="turn_on">Turn on</button><button type="button" #light_two_off (click)="switchLight('lightTwo', false)" data-label-text="turn_off">Turn off</button></div>
+        <label data-label-text="brightness">Brightness <strong #light_two_level>—</strong><input #light_two_slider type="range" min="0" max="100" step="1" aria-label="Light brightness 2" data-label-aria="light_brightness_2" (change)="setLightLevel('lightTwo', event)" /></label>
+        <p class="command-message" #light_two_feedback role="status"></p>
+      </article>
+    </div>
+  </section>
+  <footer>
+    <button type="button" (click)="simulateFireworks()" aria-describedby="simulation_hint" data-label-text="simulate_midnight_fires">Simulate midnight fires</button>
+    <button type="button" (click)="toggleMotion()" #motion_button data-label-text="pause_animations">Pause animations</button>
+    <span data-label-text="december_25_midnight_local_time">December 25 · Midnight · Local time</span>
+    <span id="simulation_hint" data-label-text="the_simulation_lasts_15_seconds_and_activates">The simulation lasts 15 seconds and activates animations. The countdown does not change.</span>
+  </footer>
+  <div class="fireworks" #fireworks aria-hidden="true"></div>
+</main>

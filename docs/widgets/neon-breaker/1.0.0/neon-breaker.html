@@ -1,0 +1,38 @@
+<div class="arcade-container" layout="column center-stretch">
+  <div class="arcade-header" layout="row center-justify">
+    <div class="arcade-title" layout="row center-left">
+      <span class="material-symbols-outlined neon-icon" aria-hidden="true">sports_esports</span>
+      <span>NEON BREAKER</span>
+    </div>
+    <div class="arcade-stats" layout="row center-right">
+      <div class="stat-box"><span class="stat-label" data-label-text="points">POINTS</span> <span class="stat-val" #score_text>0</span></div>
+      <div class="stat-box"><span class="stat-label" data-label-text="high_score">HIGH SCORE</span> <span class="stat-val" #high_text>0</span></div>
+      <div class="stat-box lives-box" layout="row center-center">
+        <span class="material-symbols-outlined heart-icon" aria-hidden="true">favorite</span>
+        <span class="stat-val" #lives_text>3</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="canvas-wrapper" #canvas_wrap>
+    <canvas #game_canvas width="480" height="380"></canvas>
+    <div class="overlay" #game_overlay layout="column center-center">
+      <h2 #overlay_title data-label-text="coffee_break">COFFEE BREAK!</h2>
+      <p #overlay_subtitle data-label-text="smash_all_the_neon_bricks_to_relax">Smash all the neon bricks to relax</p>
+      <button type="button" class="play-btn" (click)="togglePlay()" layout="row center-center">
+        <span class="material-symbols-outlined" aria-hidden="true">play_arrow</span>
+        <span #btn_label data-label-text="play">PLAY</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="arcade-controls" layout="row center-justify">
+    <button type="button" class="touch-btn" #btn_left aria-label="Move left" data-label-aria="move_left">
+      <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+    </button>
+    <div class="hint-text" data-label-text="drag_use_arrows_or_buttons">Drag, use arrows or buttons</div>
+    <button type="button" class="touch-btn" #btn_right aria-label="Move right" data-label-aria="move_right">
+      <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+    </button>
+  </div>
+</div>

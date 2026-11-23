@@ -41,6 +41,50 @@
         "maze.module.js",
         "levels.json"
       ]
+    },
+    {
+      "id": "natale",
+      "version": "1.0.0",
+      "name": "Natale",
+      "description": {
+        "en": "A Christmas countdown with two controllable holiday lights.",
+        "it": "Un conto alla rovescia fino a Natale con due luci controllabili."
+      },
+      "category": "seasonal",
+      "dashboard": true,
+      "base": "natale/1.0.0/",
+      "path": "dashboard",
+      "preview": "preview.jpg",
+      "files": [
+        "dashboard.html",
+        "dashboard.css",
+        "dashboard.js",
+        "dashboard.module.js",
+        "dashboard.i18n.json",
+        "localize.js"
+      ]
+    },
+    {
+      "id": "neon-breaker",
+      "version": "1.0.0",
+      "name": "Neon Breaker",
+      "description": {
+        "en": "Break neon bricks using touch or arrow keys.",
+        "it": "Rompi i mattoni al neon con il touch o i tasti freccia."
+      },
+      "category": "games",
+      "dashboard": false,
+      "base": "neon-breaker/1.0.0/",
+      "path": "neon-breaker",
+      "preview": "preview.jpg",
+      "files": [
+        "neon-breaker.html",
+        "neon-breaker.css",
+        "neon-breaker.js",
+        "neon-breaker.module.js",
+        "neon-breaker.i18n.json",
+        "localize.js"
+      ]
     }
   ]
 }

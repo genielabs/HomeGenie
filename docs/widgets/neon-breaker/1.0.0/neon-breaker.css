@@ -1,0 +1,199 @@
+@import 'assets/styles/flex-layout-attribute.min.css';
+@import 'assets/styles/widget-ui.css';
+
+:host {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.arcade-container {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(145deg, #0d111c, #161c2d);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 16px;
+  box-sizing: border-box;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100%;
+  min-height: 0;
+  padding: 8px;
+  padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right))
+           max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 240, 255, 0.12);
+  color: #f0f4f8;
+  font-family: system-ui, -apple-system, sans-serif;
+  user-select: none;
+}
+
+.arcade-header {
+  flex: none;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+  gap: 12px;
+}
+
+.arcade-title {
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 1.5px;
+  color: #00f0ff;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+  gap: 6px;
+}
+
+.neon-icon {
+  font-size: 24px;
+  color: #00f0ff;
+}
+
+.arcade-stats {
+  gap: 10px;
+}
+
+.stat-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+}
+
+.stat-label {
+  color: #8b9bb4;
+  font-size: 0.68rem;
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.stat-val {
+  color: #ffffff;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.heart-icon {
+  color: #ff3366;
+  font-size: 16px;
+  margin-right: 4px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+
+.canvas-wrapper {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  flex: 1 1 0;
+  min-height: 0;
+  background: #080a10;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 240, 255, 0.18);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+}
+
+canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 10, 16, 0.82);
+  backdrop-filter: blur(4px);
+  display: flex;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: opacity 0.25s ease;
+}
+
+.overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay h2 {
+  margin: 0 0 6px 0;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #ffffff;
+  text-shadow: 0 0 12px rgba(255, 0, 128, 0.8);
+}
+
+.overlay p {
+  margin: 0 0 18px 0;
+  color: #9cb1ce;
+  font-size: 0.9rem;
+}
+
+.play-btn {
+  background: linear-gradient(135deg, #00f0ff, #7000ff);
+  color: #ffffff;
+  border: none;
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-radius: 28px;
+  cursor: pointer;
+  gap: 6px;
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.5);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.play-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 24px rgba(0, 240, 255, 0.8);
+}
+
+.play-btn:active {
+  transform: translateY(1px);
+}
+
+.arcade-controls {
+  flex: none;
+  margin-top: 8px;
+  gap: 12px;
+}
+
+.touch-btn {
+  flex: 1;
+  max-width: 110px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  color: #00f0ff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background 0.1s ease;
+}
+
+.touch-btn:active {
+  background: rgba(0, 240, 255, 0.28);
+}
+
+.hint-text {
+  font-size: 0.72rem;
+  color: #65758f;
+  text-align: center;
+}
