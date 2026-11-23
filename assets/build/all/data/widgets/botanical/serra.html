@@ -117,11 +117,23 @@
           </span>
           <div><p class="source" #light_name></p><strong #light_state aria-live="polite"></strong></div>
         </div>
-        <button class="light-toggle" type="button" #light_toggle (click)="toggleLight()" disabled>
-          <span #light_action></span>
-          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 3v8m4.8-5a7.5 7.5 0 1 1-9.6 0"/></svg>
-        </button>
-        <p class="feedback" #feedback role="status"></p>
+        <div class="power-actions">
+          <button type="button" #light_on (click)="setPower('light', true)" disabled></button>
+          <button type="button" #light_off (click)="setPower('light', false)" disabled></button>
+        </div>
+        <p class="feedback" #light_feedback role="status"></p>
+      </section>
+      <section class="observation ventilation">
+        <header><span class="section-index" aria-hidden="true">03 /</span><h2 #fan_heading></h2></header>
+        <div class="lamp-status">
+          <span class="lamp-icon" aria-hidden="true">✣</span>
+          <div><p class="source" #fan_name></p><strong #fan_state aria-live="polite"></strong></div>
+        </div>
+        <div class="power-actions">
+          <button type="button" #fan_on (click)="setPower('fan', true)" disabled></button>
+          <button type="button" #fan_off (click)="setPower('fan', false)" disabled></button>
+        </div>
+        <p class="feedback" #fan_feedback role="status"></p>
       </section>
     </aside>
   </div>

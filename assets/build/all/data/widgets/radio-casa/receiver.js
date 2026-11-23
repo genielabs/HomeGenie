@@ -15,15 +15,15 @@ class RadioCasa extends ControllerInstance {
       },
       preset1: {
         label: 'light_1', typeFilter: 'Light,Dimmer,Color', fieldFilter: 'Status.Level',
-        defaultModule: 'HomeAutomation.PhilipsHue:1', defaultField: 'Simulator.Meter.Watts'
+        defaultModule: 'HomeAutomation.PhilipsHue:1', defaultField: 'Meter.Watts'
       },
       preset2: {
         label: 'light_2', typeFilter: 'Light,Dimmer,Color', fieldFilter: 'Status.Level',
-        defaultModule: 'HomeAutomation.PhilipsHue:2', defaultField: 'Simulator.Meter.Watts'
+        defaultModule: 'HomeAutomation.PhilipsHue:2', defaultField: 'Meter.Watts'
       },
       preset3: {
         label: 'light_3', typeFilter: 'Light,Dimmer,Color', fieldFilter: 'Status.Level',
-        defaultModule: 'HomeAutomation.PhilipsHue:4', defaultField: 'Simulator.Meter.Watts'
+        defaultModule: 'HomeAutomation.PhilipsHue:4', defaultField: 'Meter.Watts'
       }
     }
   };
@@ -183,17 +183,28 @@ class RadioCasa extends ControllerInstance {
   renderPresets() {
     this.presets.forEach((module, index) => {
       const state = this.state(module), command = this.commands.get(module);
-      if (command && state === command.on) this.finishCommand(module, command);
+      if (command && state === command.on && this.finishCommand(module, command)) {
+        this.showFeedback(module, state ? 'light_on' : 'light_off');
+      }
       const pending = this.commands.has(module), button = this.field('preset_' + index).get();
       button.disabled = pending || state === null;
       button.dataset.state = state === null ? 'unknown' : state ? 'on' : 'off';
       button.setAttribute('aria-pressed', String(state === true));
       button.setAttribute('aria-busy', String(pending));
       this.write('name_' + index, module?.name || this.labels.no_light);
-      this.write('state_' + index, this.labels[pending ? 'waiting' : state === null ? 'unavailable' : state ? 'light_on' : 'light_off']);
+      this.write('state_' + index, this.labels[state === null ? 'unavailable' : state ? 'light_on' : 'light_off']);
     });
-    const feedback = this.feedback;
-    this.write('feedback', feedback ? (feedback.module.name ? feedback.module.name + ' · ' : '') + this.labels[feedback.key] : '');
+  }
+
+  showFeedback(module, key) {
+    clearTimeout(this.feedbackTimer);
+    const toast = this.view().find('.command-feedback').get();
+    toast.textContent = (module.name ? module.name + ' · ' : '') + this.labels[key];
+    toast.showPopover?.();
+    this.feedbackTimer = setTimeout(() => {
+      toast.hidePopover?.();
+      toast.textContent = '';
+    }, 3500);
   }
 
   togglePreset(index) {
@@ -201,11 +212,11 @@ class RadioCasa extends ControllerInstance {
     if (this.disposed || state === null || this.commands.has(module)) return;
     const command = {on: !state};
     this.commands.set(module, command);
-    this.feedback = undefined;
+    this.showFeedback(module, 'waiting');
     this.renderPresets();
     const fail = key => {
       if (this.disposed || !this.finishCommand(module, command)) return;
-      this.feedback = {module, key};
+      this.showFeedback(module, key);
       this.renderPresets();
     };
     command.timer = setTimeout(() => fail('command_timeout'), 8000);
@@ -243,6 +254,7 @@ class RadioCasa extends ControllerInstance {
 
   onDispose() {
     this.disposed = true;
+    clearTimeout(this.feedbackTimer);
     document.removeEventListener('visibilitychange', this.visibility);
     clearTimeout(this.backlightTimer);
     this.history?.dispose();

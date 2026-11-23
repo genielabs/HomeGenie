@@ -10,7 +10,7 @@ class IsometricRoom extends ControllerInstance {
       },
       light: {
         label: 'Light', labelKey: 'bind_light', typeFilter: 'Light,Dimmer,Color',
-        defaultModule: 'HomeAutomation.PhilipsHue:1', defaultField: 'Simulator.Meter.Watts'
+        defaultModule: 'HomeAutomation.PhilipsHue:1', defaultField: 'Meter.Watts'
       },
       rgbLight: {label: 'RGB light', labelKey: 'bind_rgb', typeFilter: 'Color', fieldFilter: 'Status.ColorHsb'},
       climate: {label: 'Climate', labelKey: 'bind_climate', fieldFilter: 'Sensor.Temperature,Sensor.Humidity', defaultModule: 'HomeAutomation.Demo:1'},

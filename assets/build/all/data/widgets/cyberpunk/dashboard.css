@@ -21,11 +21,11 @@
   background: radial-gradient(ellipse at 68% 0, #1a1530, transparent 56%), var(--ink);
   font-family: system-ui, sans-serif;
 }
-.mast, .district-footer, .city-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.mast, .city-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .mast { flex: 0 0 auto; border-bottom: 1px solid var(--line); padding-bottom: 13px; }
 .brand { display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 800; line-height: 1.15; letter-spacing: .16em; }
 .brand-mark { display: grid; place-items: center; width: 37px; height: 37px; background: var(--cyan); color: #081621; font-size: 22px; font-style: italic; clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%); }
-.mast-label, .overline, .district-footer, .time-block, .light-chip, .motion { font-family: ui-monospace, Consolas, monospace; }
+.mast-label, .overline, .time-block, .light-chip, .motion { font-family: ui-monospace, Consolas, monospace; }
 .mast-label, .overline { font-size: 11px; letter-spacing: .13em; text-transform: uppercase; }
 .mast-label { color: var(--muted); }
 .district-message[hidden] { display: none; }
@@ -190,8 +190,6 @@
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .modules { display: grid; grid-template-rows: minmax(320px, 1.16fr) minmax(218px, 1fr); gap: 16px; min-width: 0; }
 .modules > :is(cyberpunk-lighting, cyberpunk-telemetry) { display: grid; grid-template: minmax(min-content, 1fr) / minmax(0, 1fr); min-width: 0; }
-.district-footer { flex: 0 0 auto; justify-content: flex-start; font-size: 11px; color: var(--muted); line-height: 1.4; }
-.district-footer > span:first-child { flex-shrink: 0; color: var(--cyan); }
 
 @container district (max-width: 850px) {
   .district-layout { grid-template-columns: minmax(0, 1fr); }

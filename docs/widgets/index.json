@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "widgets": [
+    {
+      "id": "focus-timer",
+      "version": "1.0.0",
+      "name": "Focus Timer",
+      "description": {
+        "en": "A focus timer with short breaks.",
+        "it": "Un timer per concentrazione e pause brevi."
+      },
+      "category": "tools",
+      "dashboard": false,
+      "base": "focus-timer/1.0.0/",
+      "path": "timer",
+      "preview": "preview.png",
+      "files": [
+        "timer.html",
+        "timer.css",
+        "timer.js",
+        "timer.module.js"
+      ]
+    },
+    {
+      "id": "tilt-maze",
+      "version": "1.0.0",
+      "name": "Tilt Maze",
+      "description": {
+        "en": "Guide a marble through two mazes using tilt or touch.",
+        "it": "Guida una biglia in due labirinti inclinando il telefono o usando i pulsanti."
+      },
+      "category": "games",
+      "dashboard": true,
+      "base": "tilt-maze/1.0.0/",
+      "path": "maze",
+      "preview": "preview.png",
+      "files": [
+        "maze.html",
+        "maze.css",
+        "maze.js",
+        "maze.module.js",
+        "levels.json"
+      ]
+    }
+  ]
+}

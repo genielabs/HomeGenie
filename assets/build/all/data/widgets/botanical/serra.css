@@ -39,7 +39,7 @@ h1, h2, .lamp-status strong { font-family: Georgia, 'Times New Roman', serif; fo
 }
 .breeze[href="#serra-fern"] { animation-duration: 11s; animation-delay: -4s; }
 .breeze[href="#serra-leaves"] { animation-delay: -2s; }
-[data-breeze='running'] .breeze { animation-play-state: running; }
+[data-breeze='running'][data-fan='on'] .breeze { animation-play-state: running; }
 @keyframes serra-breeze {
   from { transform: rotate(-2deg); }
   to { transform: rotate(2.5deg); }
@@ -67,11 +67,14 @@ h1, h2, .lamp-status strong { font-family: Georgia, 'Times New Roman', serif; fo
 .lamp-icon { display: grid; place-items: center; flex: 0 0 40px; height: 40px; border-radius: 50%; background: #d5dfc7; color: #3b5547; }
 .lamp-icon svg { width: 26px; height: 26px; }
 .lighting[data-lamp='on'] .lamp-icon { background: #efd19a; color: #714526; }
-.light-toggle { display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; min-height: 44px; padding: 9px 13px; border: 1px solid transparent; background: #284a37; color: #fff8e8; font: 650 clamp(12px, 1.5cqw, 15px) system-ui, sans-serif; text-align: start; cursor: pointer; }
-.light-toggle:not(:disabled):hover { background: #375d46; }
-.light-toggle:focus-visible { outline: 2px solid #8c553b; outline-offset: 3px; }
-.light-toggle:disabled { color: #43594a; background: #d5decb; cursor: default; }
-.feedback { min-height: 2.7em; margin: 5px 0 0; color: #70462e; font-size: 11px; line-height: 1.35; }
+.power-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.power-actions button { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 44px; padding: 9px 13px; border: 1px solid transparent; background: #284a37; color: #fff8e8; font: 650 clamp(12px, 1.5cqw, 15px) system-ui, sans-serif; text-align: start; cursor: pointer; }
+.power-actions button:not(:disabled):hover { background: #375d46; }
+.power-actions button:focus-visible { outline: 2px solid #8c553b; outline-offset: 3px; }
+.power-actions button:disabled { color: #43594a; background: #d5decb; cursor: default; }
+.power-actions button[aria-pressed='true'] { border-color: #527057; background: #dde8d5; color: #233e2d; }
+.feedback:empty { display: none; }
+.feedback { margin: 5px 0 0; color: #70462e; font-size: 11px; line-height: 1.35; }
 @container serra (max-width: 720px) {
   .spread { grid-template-columns: minmax(0, 1fr); }
   .readings { grid-template-columns: repeat(2, minmax(0, 1fr)); }

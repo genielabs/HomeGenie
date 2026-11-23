@@ -66,8 +66,8 @@ class NeonTelemetry extends ControllerInstance {
     model.humidity = humidity ? utils.format.fieldValue(humidity) : '—';
     model.watts = power ? utils.format.fieldValue({key: 'Meter.Watts', value: power.value}) : '—';
     const units = utils.preferences?.units;
-    const temperatureUnit = units?.temperature || 'C';
-    model.temperature_unit = ['C', 'F'].includes(temperatureUnit) ? '°' + temperatureUnit : temperatureUnit;
+    const unit = units?.temperature || 'C';
+    model.temperature_unit = unit === 'C' ? '℃' : unit === 'F' ? '℉' : unit;
     model.power_unit = units?.power || 'W';
 
     this.history?.update(this.energy, this.energy?.field(powerKey) ? powerKey : undefined, power);

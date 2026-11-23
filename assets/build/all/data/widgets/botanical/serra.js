@@ -11,8 +11,9 @@ class SerraDashboard extends ControllerInstance {
       light: {
         label: 'Light', labelKey: 'bind_light', typeFilter: 'Light,Dimmer,Color',
         fieldFilter: 'Status.Level', defaultModule: 'HomeAutomation.PhilipsHue:1',
-        defaultField: 'Simulator.Meter.Watts'
-      }
+        defaultField: 'Meter.Watts'
+      },
+      fan: {label: 'Fan', labelKey: 'fan_heading', typeFilter: 'Fan,Switch', fieldFilter: 'Status.Level'}
     }
   };
 
@@ -21,6 +22,7 @@ class SerraDashboard extends ControllerInstance {
     intro: 'The light, warmth and air of your room, drawn as a living greenhouse.',
     caption: 'The sky follows the light sensor. The lamp reflects the device state.',
     climate_heading: 'Room climate',
+    fan_heading: 'Fan',
     light_heading: 'Greenhouse light',
     temperature_label: 'Temperature',
     humidity_label: 'Humidity',
@@ -42,19 +44,20 @@ class SerraDashboard extends ControllerInstance {
   active = true;
   disposed = false;
   lightState = null;
-  feedback = '';
+  commands = {};
+  feedback = {};
 
   onInit() {
-    this.declare({toggleLight: () => this.toggleLight()});
+    this.declare({setPower: (slot, desired) => this.setPower(slot, desired)});
   }
 
   onCreate() {
     this.sensor = this.getBoundModule('climate');
     this.light = this.getBoundModule('light');
+    this.fan = this.getBoundModule('fan');
     this.scene = this.field('scene').get();
     this.glow = this.field('lamp_glow').get();
     this.lighting = this.field('lighting').get();
-    this.button = this.field('light_toggle').get();
     this.reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
     this.onMotionVisibility = () => {
       const moving = this.canAnimate();
@@ -72,9 +75,11 @@ class SerraDashboard extends ControllerInstance {
     if (this.sensor) this.subscribe(this.sensor, ({key}) => {
       if (key === 'Sensor.Temperature' || key === 'Sensor.Humidity' || key === 'Sensor.Luminance') this.renderClimate();
     });
-    if (this.light) this.subscribe(this.light, ({key}) => {
-      if (key === 'Status.Level') this.renderLight();
-    });
+    for (const slot of ['light', 'fan']) {
+      if (this[slot]) this.subscribe(this[slot], ({key}) => {
+        if (key === 'Status.Level') this.renderDevice(slot);
+      });
+    }
 
     for (const [key, fallback] of Object.entries(this.labels)) {
       this.translate?.(key, {scope: 'widget', fallback})?.subscribe(value => {
@@ -97,7 +102,7 @@ class SerraDashboard extends ControllerInstance {
 
   renderLabels() {
     const model = this.model();
-    for (const key of ['edition', 'intro', 'caption', 'climate_heading', 'light_heading',
+    for (const key of ['edition', 'intro', 'caption', 'climate_heading', 'light_heading', 'fan_heading',
       'temperature_label', 'humidity_label', 'luminance_label']) model[key] = this.labels[key];
     const unit = utils.preferences?.units?.temperature || 'C';
     model.temperature_unit = ['C', 'F'].includes(unit) ? '°' + unit : unit;
@@ -107,7 +112,8 @@ class SerraDashboard extends ControllerInstance {
   renderData() {
     if (this.disposed) return;
     this.renderClimate();
-    this.renderLight();
+    this.renderDevice('light');
+    this.renderDevice('fan');
   }
 
   read(module, key) {
@@ -130,17 +136,25 @@ class SerraDashboard extends ControllerInstance {
     this.scene.style.setProperty('--daylight', String(.15 + .85 * sunlight));
   }
 
-  renderLight() {
-    const level = this.read(this.light, 'Status.Level')?.decimalValue;
+  renderDevice(slot) {
+    const level = this.read(this[slot], 'Status.Level')?.decimalValue;
     const state = level == null || level < 0 ? null : level > 0;
-    if (state !== this.lightState) this.updateLamp(state);
-    this.lightState = state;
+    if (slot === 'light' && state !== this.lightState) this.updateLamp(state);
+    if (slot === 'light') this.lightState = state;
+    else this.scene.dataset.fan = state ? 'on' : 'off';
 
     const model = this.model();
-    model.light_name = this.light?.name || this.labels.no_light;
-    model.light_state = this.labels[state === null ? 'unavailable' : state ? 'light_on' : 'light_off'];
-    if (this.command && state === this.command.desired) this.finishCommand(this.command);
-    this.renderControl();
+    model[slot + '_name'] = this[slot]?.name || (slot === 'light' ? this.labels.no_light : '');
+    model[slot + '_state'] = this.labels[state === null ? 'unavailable' : state ? 'light_on' : 'light_off'];
+    const pending = this.commands[slot];
+    if (pending && pending.desired === state) this.finishCommand(slot, pending);
+    for (const [suffix, desired] of [['on', true], ['off', false]]) {
+      const button = this.field(slot + '_' + suffix).get();
+      button.textContent = this.labels[desired ? 'turn_on' : 'turn_off'];
+      button.disabled = state === null || !!this.commands[slot] || state === desired;
+      button.setAttribute('aria-pressed', String(state === desired));
+    }
+    model[slot + '_feedback'] = this.commands[slot] ? '…' : this.labels[this.feedback[slot]] || '';
   }
 
   canAnimate() {
@@ -173,56 +187,49 @@ class SerraDashboard extends ControllerInstance {
     this.glow.style.removeProperty('opacity');
   }
 
-  renderControl() {
-    const pending = !!this.command;
-    const model = this.model();
-    model.light_action = this.labels[pending ? 'waiting' : this.lightState ? 'turn_off' : 'turn_on'];
-    model.feedback = this.feedback ? this.labels[this.feedback] : '';
-    this.button.disabled = this.lightState === null || pending;
-    this.button.setAttribute('aria-pressed', String(this.lightState === true));
-    this.button.setAttribute('aria-busy', String(pending));
-  }
-
-  toggleLight() {
-    if (this.disposed || this.command || this.lightState === null) return;
-    const command = {desired: !this.lightState};
-    this.command = command;
-    this.feedback = '';
-    this.renderControl();
-    command.timer = setTimeout(() => this.finishCommand(command, 'command_timeout'), 8000);
+  setPower(slot, desired) {
+    if (this.disposed || this.commands[slot] || !['light', 'fan'].includes(slot)) return;
+    const level = this.read(this[slot], 'Status.Level')?.decimalValue;
+    if (level == null || level < 0 || (level > 0) === desired) return;
+    const command = {desired};
+    this.commands[slot] = command;
+    this.feedback[slot] = '';
+    this.renderDevice(slot);
+    command.timer = setTimeout(() => this.finishCommand(slot, command,
+      slot === 'light' ? 'command_timeout' : 'command_failed'), 8000);
     try {
-      const request = this.light.control(command.desired ? 'Control.On' : 'Control.Off');
+      const request = this[slot].control(command.desired ? 'Control.On' : 'Control.Off');
       if (!request?.subscribe) throw new Error('Command unavailable');
       command.subscription = request.subscribe({
         next: receipt => {
           const status = receipt?.response?.Status;
           if (receipt?.code != null && (receipt.code < 200 || receipt.code >= 300)
             || status != null && status !== 0 && status !== '0' && status !== 'Ok') {
-            this.finishCommand(command, 'command_failed');
+            this.finishCommand(slot, command, 'command_failed');
           }
         },
-        error: () => this.finishCommand(command, 'command_failed')
+        error: () => this.finishCommand(slot, command, 'command_failed')
       });
-      if (this.command !== command) command.subscription?.unsubscribe();
+      if (this.commands[slot] !== command) command.subscription?.unsubscribe();
     } catch {
-      this.finishCommand(command, 'command_failed');
+      this.finishCommand(slot, command, 'command_failed');
     }
   }
 
-  finishCommand(command, feedback = '') {
-    if (this.command !== command) return;
-    this.command = undefined;
+  finishCommand(slot, command, feedback = '') {
+    if (this.commands[slot] !== command) return;
+    delete this.commands[slot];
     clearTimeout(command.timer);
     command.subscription?.unsubscribe();
-    this.feedback = feedback;
-    if (!this.disposed) this.renderControl();
+    this.feedback[slot] = feedback;
+    if (!this.disposed) this.renderDevice(slot);
   }
 
   onDispose() {
     this.disposed = true;
     this.scene.dataset.breeze = 'paused';
     this.stopMotion();
-    if (this.command) this.finishCommand(this.command);
+    for (const [slot, command] of Object.entries(this.commands)) this.finishCommand(slot, command);
     document.removeEventListener('visibilitychange', this.onMotionVisibility);
     this.reducedMotion?.removeEventListener('change', this.onMotionVisibility);
   }

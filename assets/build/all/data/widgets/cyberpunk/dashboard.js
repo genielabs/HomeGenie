@@ -3,14 +3,19 @@ class NeonDistrict extends ControllerInstance {
     defaultSize: 'dashboard',
     sizeOptions: [],
     boundModules: {
+      weather: {
+        label: 'Outside conditions', labelKey: 'weather_title',
+        fieldFilter: 'Conditions.IconType,Conditions.DisplayLocation,Conditions.City',
+        defaultModule: 'HomeAutomation.HomeGenie.Automation:34'
+      },
       dashboardProgram: {
         label: 'Dashboard program', labelKey: 'bind_dashboard_program',
         typeFilter: 'program', fieldFilter: 'Dashboard.Theme.Cyberpunk',
         defaultModule: 'HomeAutomation.HomeGenie.Automation:651'
       },
-      light1: {label: 'light_1', typeFilter: 'Light,Dimmer,Color', defaultModule: 'HomeAutomation.PhilipsHue:1', defaultField: 'Simulator.Meter.Watts'},
-      light2: {label: 'light_2', typeFilter: 'Light,Dimmer,Color', defaultModule: 'HomeAutomation.PhilipsHue:2', defaultField: 'Simulator.Meter.Watts'},
-      light3: {label: 'light_3', typeFilter: 'Light,Dimmer,Color', defaultModule: 'HomeAutomation.PhilipsHue:4', defaultField: 'Simulator.Meter.Watts'},
+      light1: {label: 'light_1', typeFilter: 'Light,Dimmer,Color', defaultModule: 'HomeAutomation.PhilipsHue:1', defaultField: 'Meter.Watts'},
+      light2: {label: 'light_2', typeFilter: 'Light,Dimmer,Color', defaultModule: 'HomeAutomation.PhilipsHue:2', defaultField: 'Meter.Watts'},
+      light3: {label: 'light_3', typeFilter: 'Light,Dimmer,Color', defaultModule: 'HomeAutomation.PhilipsHue:4', defaultField: 'Meter.Watts'},
       climate: {label: 'Climate sensor', labelKey: 'bind_climate', fieldFilter: 'Sensor.Temperature,Sensor.Humidity', defaultModule: 'HomeAutomation.Demo:1'},
       energy: {
         label: 'Power meter', labelKey: 'bind_energy',
@@ -27,7 +32,6 @@ class NeonDistrict extends ControllerInstance {
     headline: 'The city after dark.',
     headline_day: 'The city in daylight.',
     subtitle: 'Your lights, climate and power on one console.',
-    footer_hint: 'Connect your devices in dashboard settings.',
     no_lights: 'No lights linked',
     unknown: 'Light status unavailable',
     all_off: 'All lights off',
@@ -57,7 +61,6 @@ class NeonDistrict extends ControllerInstance {
     sunrise: 'Sunrise',
     sunset: 'Sunset'
   };
-  weatherId = 'HomeAutomation.HomeGenie.Automation:34';
   weatherTypes = {
     '01': 'clear', '02': 'few_clouds', '03': 'scattered_clouds', '04': 'overcast',
     '09': 'showers', '10': 'rain', '11': 'thunder', '13': 'snow', '50': 'mist'
@@ -69,7 +72,7 @@ class NeonDistrict extends ControllerInstance {
   onInit() {
     this.declare({
 
-      openWeatherSettings: () => this.showSettings?.(this.weatherId)
+      openWeatherSettings: () => { if (this.weather) this.showSettings?.(this.weather.id); }
     });
   }
 
@@ -125,7 +128,7 @@ class NeonDistrict extends ControllerInstance {
 
   renderLabels() {
     const model = this.model();
-    for (const key of ['console_label', 'scene_label', 'footer_hint', 'weather_title'])
+    for (const key of ['console_label', 'scene_label', 'weather_title'])
       model[key] = this.labels[key];
     this.renderWeather();
     this.renderLights();
@@ -178,7 +181,7 @@ class NeonDistrict extends ControllerInstance {
   }
 
   bindWeather() {
-    const weather = this.getModule?.(this.weatherId);
+    const weather = this.getBoundModule('weather');
     if (weather !== this.weather) {
       this.weatherSubscription?.unsubscribe();
       this.weather = weather;
@@ -217,7 +220,7 @@ class NeonDistrict extends ControllerInstance {
     const value = this.weatherNumeric(key);
     if (value === null) return '';
     const unit = utils.preferences?.units?.temperature || 'C';
-    return utils.format.fieldValue({key: 'Sensor.Temperature', value}) + (unit === 'K' ? ' K' : ' °' + unit);
+    return utils.format.fieldValue({key: 'Sensor.Temperature', value}) + ' ' + (unit === 'C' ? '℃' : unit === 'F' ? '℉' : unit);
   }
 
   renderWeather() {
@@ -236,7 +239,7 @@ class NeonDistrict extends ControllerInstance {
     this.field('weather_panel').get().hidden = !this.weather;
     if (!this.weather) return;
     const settings = this.field('weather_settings').get();
-    settings.hidden = typeof this.showSettings !== 'function';
+    settings.hidden = typeof this.showSettings !== 'function' || this.canShowSettings?.(this.weather.id) === false;
     settings.setAttribute('aria-label', labels.weather_settings);
     settings.title = labels.weather_settings;
     this.setWeatherIcon(this.field('weather_icon').get(), code);

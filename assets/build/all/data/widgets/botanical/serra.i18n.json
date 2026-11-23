@@ -19,7 +19,8 @@
     "command_failed": "Die opdrag het misluk. Probeer weer.",
     "command_timeout": "Die lig het nie die verandering bevestig nie.",
     "bind_climate": "Klimaat sensor",
-    "bind_light": "Lig"
+    "bind_light": "Lig",
+    "fan_heading": "Waaier"
   },
   "sq": {
     "edition": "Observatori Botanik",
@@ -41,7 +42,8 @@
     "command_failed": "Komanda dështoi. Provo sërish.",
     "command_timeout": "Drita nuk e konfirmoi ndryshimin.",
     "bind_climate": "Sensori i klimës",
-    "bind_light": "Drita"
+    "bind_light": "Drita",
+    "fan_heading": "Ventilator"
   },
   "am": {
     "edition": "የእጽዋት ክትትል",
@@ -63,7 +65,8 @@
     "command_failed": "ትዕዛዙ አልተሳካም። እንደገና ይሞክሩ።",
     "command_timeout": "ብርሃኑ ለውጡን አላረጋገጠም.",
     "bind_climate": "የአየር ንብረት ዳሳሽ",
-    "bind_light": "ብርሃን"
+    "bind_light": "ብርሃን",
+    "fan_heading": "ማራገቢያ"
   },
   "ar": {
     "edition": "المرصد النباتي",
@@ -85,7 +88,8 @@
     "command_failed": "فشل الأمر. حاول ثانية.",
     "command_timeout": "لم يؤكد الضوء التغيير.",
     "bind_climate": "مستشعر المناخ",
-    "bind_light": "ضوء"
+    "bind_light": "ضوء",
+    "fan_heading": "مروحة"
   },
   "hy": {
     "edition": "Բուսաբանական աստղադիտարան",
@@ -107,7 +111,8 @@
     "command_failed": "Հրամանը ձախողվեց: Նորից փորձեք:",
     "command_timeout": "Լույսը չի հաստատել փոփոխությունը։",
     "bind_climate": "Կլիմայի սենսոր",
-    "bind_light": "Լույս"
+    "bind_light": "Լույս",
+    "fan_heading": "Օդափոխիչ"
   },
   "az": {
     "edition": "Botanika rəsədxanası",
@@ -129,7 +134,8 @@
     "command_failed": "Komanda uğursuz oldu. Yenidən cəhd edin.",
     "command_timeout": "İşıq dəyişikliyi təsdiqləmədi.",
     "bind_climate": "İqlim sensoru",
-    "bind_light": "İşıq"
+    "bind_light": "İşıq",
+    "fan_heading": "Ventilyator"
   },
   "eu": {
     "edition": "Behatoki botanikoa",
@@ -151,7 +157,8 @@
     "command_failed": "Aginduak huts egin du. Saiatu berriro.",
     "command_timeout": "Argiak ez zuen aldaketa baieztatu.",
     "bind_climate": "Klima-sentsorea",
-    "bind_light": "Argia"
+    "bind_light": "Argia",
+    "fan_heading": "Haizagailua"
   },
   "be": {
     "edition": "Батанічная абсерваторыя",
@@ -173,7 +180,8 @@
     "command_failed": "Каманда не атрымалася. Паспрабуйце яшчэ раз.",
     "command_timeout": "Святло не пацвердзіла змены.",
     "bind_climate": "Датчык клімату",
-    "bind_light": "Святло"
+    "bind_light": "Святло",
+    "fan_heading": "Вентылятар"
   },
   "bn": {
     "edition": "বোটানিক্যাল অবজারভেটরি",
@@ -195,7 +203,8 @@
     "command_failed": "কমান্ড ব্যর্থ হয়েছে. আবার চেষ্টা করুন",
     "command_timeout": "আলো পরিবর্তন নিশ্চিত করেনি।",
     "bind_climate": "জলবায়ু সেন্সর",
-    "bind_light": "আলো"
+    "bind_light": "আলো",
+    "fan_heading": "পাখা"
   },
   "bs": {
     "edition": "Botanička opservatorija",
@@ -217,7 +226,8 @@
     "command_failed": "Komanda nije uspjela. Pokušajte ponovo.",
     "command_timeout": "Svjetlo nije potvrdilo promjenu.",
     "bind_climate": "Senzor klime",
-    "bind_light": "Light"
+    "bind_light": "Light",
+    "fan_heading": "Ventilator"
   },
   "bg": {
     "edition": "Ботаническа обсерватория",
@@ -239,7 +249,8 @@
     "command_failed": "Командата не успя. Опитайте отново.",
     "command_timeout": "Светлината не потвърди промяната.",
     "bind_climate": "Климатичен сензор",
-    "bind_light": "светлина"
+    "bind_light": "светлина",
+    "fan_heading": "Вентилатор"
   },
   "my": {
     "edition": "ရုက္ခဗေဒ နက္ခတ်",
@@ -261,7 +272,8 @@
     "command_failed": "အမိန့်မအောင်မြင်ပါ။ ထပ်ကြိုးစားပါ။",
     "command_timeout": "အလင်းသည် ပြောင်းလဲမှုကို အတည်မပြုပေ။",
     "bind_climate": "ရာသီဥတုအာရုံခံကိရိယာ",
-    "bind_light": "အလင်း"
+    "bind_light": "အလင်း",
+    "fan_heading": "ပန်ကာ"
   },
   "ca": {
     "edition": "Observatori botànic",
@@ -283,7 +295,8 @@
     "command_failed": "L'ordre ha fallat. Torna-ho a provar.",
     "command_timeout": "La llum no va confirmar el canvi.",
     "bind_climate": "Sensor de clima",
-    "bind_light": "Llum"
+    "bind_light": "Llum",
+    "fan_heading": "Ventilador"
   },
   "ny": {
     "edition": "Botanical observatory",
@@ -305,7 +318,8 @@
     "command_failed": "Lamuloli linalephera. Yesaninso.",
     "command_timeout": "Kuwala sikunatsimikizire kusintha.",
     "bind_climate": "Sensa yanyengo",
-    "bind_light": "Kuwala"
+    "bind_light": "Kuwala",
+    "fan_heading": "Fani"
   },
   "zh-cn": {
     "edition": "植物观测站",
@@ -327,7 +341,8 @@
     "command_failed": "命令失败。再试一次。",
     "command_timeout": "灯光并没有确认这一变化。",
     "bind_climate": "气候传感器",
-    "bind_light": "光"
+    "bind_light": "光",
+    "fan_heading": "风扇"
   },
   "zh-tw": {
     "edition": "植物觀測站",
@@ -349,7 +364,8 @@
     "command_failed": "命令失敗。再試一次。",
     "command_timeout": "燈光並沒有確認這項變化。",
     "bind_climate": "氣候感測器",
-    "bind_light": "光"
+    "bind_light": "光",
+    "fan_heading": "風扇"
   },
   "hr": {
     "edition": "Botanička zvjezdarnica",
@@ -371,7 +387,8 @@
     "command_failed": "Naredba nije uspjela. Pokušajte ponovno.",
     "command_timeout": "Svjetlo nije potvrdilo promjenu.",
     "bind_climate": "Klimatski senzor",
-    "bind_light": "svjetlo"
+    "bind_light": "svjetlo",
+    "fan_heading": "Ventilator"
   },
   "cs": {
     "edition": "Botanická observatoř",
@@ -393,7 +410,8 @@
     "command_failed": "Příkaz selhal. Zkuste to znovu.",
     "command_timeout": "Kontrolka změnu nepotvrdila.",
     "bind_climate": "Klimatické čidlo",
-    "bind_light": "Světlo"
+    "bind_light": "Světlo",
+    "fan_heading": "Ventilátor"
   },
   "da": {
     "edition": "Botanisk observatorium",
@@ -415,7 +433,8 @@
     "command_failed": "Kommandoen mislykkedes. Prøv igen.",
     "command_timeout": "Lyset bekræftede ikke ændringen.",
     "bind_climate": "Klima sensor",
-    "bind_light": "Lys"
+    "bind_light": "Lys",
+    "fan_heading": "Ventilator"
   },
   "nl": {
     "edition": "Botanisch observatorium",
@@ -437,7 +456,8 @@
     "command_failed": "De opdracht is mislukt. Probeer het opnieuw.",
     "command_timeout": "Het licht bevestigde de verandering niet.",
     "bind_climate": "Klimaatsensor",
-    "bind_light": "Licht"
+    "bind_light": "Licht",
+    "fan_heading": "Ventilator"
   },
   "en": {
     "edition": "Botanical observatory",
@@ -459,7 +479,8 @@
     "command_failed": "The command failed. Try again.",
     "command_timeout": "The light did not confirm the change.",
     "bind_climate": "Climate sensor",
-    "bind_light": "Light"
+    "bind_light": "Light",
+    "fan_heading": "Fan"
   },
   "et": {
     "edition": "Botaanikaobservatoorium",
@@ -481,7 +502,8 @@
     "command_failed": "Käsk ebaõnnestus. Proovi uuesti.",
     "command_timeout": "Tuli muutust ei kinnitanud.",
     "bind_climate": "Kliimaandur",
-    "bind_light": "Valgus"
+    "bind_light": "Valgus",
+    "fan_heading": "Ventilaator"
   },
   "fi": {
     "edition": "Kasvitieteellinen observatorio",
@@ -503,7 +525,8 @@
     "command_failed": "Komento epäonnistui. Yritä uudelleen.",
     "command_timeout": "Valo ei vahvistanut muutosta.",
     "bind_climate": "Ilmasto-anturi",
-    "bind_light": "Kevyt"
+    "bind_light": "Kevyt",
+    "fan_heading": "Tuuletin"
   },
   "fr": {
     "edition": "Observatoire botanique",
@@ -525,7 +548,8 @@
     "command_failed": "La commande a échoué. Réessayez.",
     "command_timeout": "L’éclairage n’a pas confirmé le changement.",
     "bind_climate": "Capteur de climat",
-    "bind_light": "Éclairage"
+    "bind_light": "Éclairage",
+    "fan_heading": "Ventilateur"
   },
   "gl": {
     "edition": "Observatorio botánico",
@@ -547,7 +571,8 @@
     "command_failed": "O comando fallou. Téntao de novo.",
     "command_timeout": "A luz non confirmou o cambio.",
     "bind_climate": "Sensor de clima",
-    "bind_light": "Luz"
+    "bind_light": "Luz",
+    "fan_heading": "Ventilador"
   },
   "ka": {
     "edition": "ბოტანიკური ობსერვატორია",
@@ -569,7 +594,8 @@
     "command_failed": "ბრძანება ვერ მოხერხდა. სცადეთ ხელახლა.",
     "command_timeout": "შუქი არ ადასტურებდა ცვლილებას.",
     "bind_climate": "კლიმატის სენსორი",
-    "bind_light": "სინათლე"
+    "bind_light": "სინათლე",
+    "fan_heading": "ვენტილატორი"
   },
   "de": {
     "edition": "Botanisches Observatorium",
@@ -591,7 +617,8 @@
     "command_failed": "Der Befehl ist fehlgeschlagen. Versuchen Sie es erneut.",
     "command_timeout": "Das Licht bestätigte die Änderung nicht.",
     "bind_climate": "Klimasensor",
-    "bind_light": "Licht"
+    "bind_light": "Licht",
+    "fan_heading": "Ventilator"
   },
   "el": {
     "edition": "Βοτανικό Παρατηρητήριο",
@@ -613,7 +640,8 @@
     "command_failed": "Η εντολή απέτυχε. Προσπαθήστε ξανά.",
     "command_timeout": "Το φως δεν επιβεβαίωσε την αλλαγή.",
     "bind_climate": "Αισθητήρας κλίματος",
-    "bind_light": "Φως"
+    "bind_light": "Φως",
+    "fan_heading": "Ανεμιστήρας"
   },
   "gu": {
     "edition": "બોટનિકલ વેધશાળા",
@@ -635,7 +663,8 @@
     "command_failed": "આદેશ નિષ્ફળ ગયો. ફરી પ્રયાસ કરો.",
     "command_timeout": "પ્રકાશે ફેરફારની પુષ્ટિ કરી નથી.",
     "bind_climate": "આબોહવા સેન્સર",
-    "bind_light": "પ્રકાશ"
+    "bind_light": "પ્રકાશ",
+    "fan_heading": "પંખો"
   },
   "ht": {
     "edition": "Obsèvatwa botanik",
@@ -657,7 +686,8 @@
     "command_failed": "Kòmandman an echwe. Eseye ankò.",
     "command_timeout": "Limyè a pa konfime chanjman an.",
     "bind_climate": "Capteur klima",
-    "bind_light": "Limyè"
+    "bind_light": "Limyè",
+    "fan_heading": "Vantilatè"
   },
   "ha": {
     "edition": "Botanical Observatory\nSaukewa:",
@@ -679,7 +709,8 @@
     "command_failed": "Umurnin ya kasa. Gwada kuma.\nSaukewa:",
     "command_timeout": "Hasken bai tabbatar da canjin ba.\nSaukewa:",
     "bind_climate": "Yanayin yanayi\nSaukewa:",
-    "bind_light": "Haske\nSaukewa:"
+    "bind_light": "Haske\nSaukewa:",
+    "fan_heading": "Fanka"
   },
   "he": {
     "edition": "מצפה כוכבים בוטני",
@@ -701,7 +732,8 @@
     "command_failed": "הפקודה נכשלה. נסה שוב.",
     "command_timeout": "האור לא אישר את השינוי.",
     "bind_climate": "חיישן אקלים",
-    "bind_light": "אור"
+    "bind_light": "אור",
+    "fan_heading": "מאוורר"
   },
   "hi": {
     "edition": "वानस्पतिक वेधशाला",
@@ -723,7 +755,8 @@
     "command_failed": "आदेश विफल रहा. पुनः प्रयास करें।",
     "command_timeout": "प्रकाश ने परिवर्तन की पुष्टि नहीं की.",
     "bind_climate": "जलवायु सेंसर",
-    "bind_light": "रोशनी"
+    "bind_light": "रोशनी",
+    "fan_heading": "पंखा"
   },
   "hu": {
     "edition": "Botanikai Obszervatórium",
@@ -745,7 +778,8 @@
     "command_failed": "A parancs nem sikerült. Próbáld újra.",
     "command_timeout": "A lámpa nem erősítette meg a változást.",
     "bind_climate": "Klímaérzékelő",
-    "bind_light": "Fény"
+    "bind_light": "Fény",
+    "fan_heading": "Ventilátor"
   },
   "id": {
     "edition": "Observatorium Botani",
@@ -767,7 +801,8 @@
     "command_failed": "Perintah itu gagal. Coba lagi.",
     "command_timeout": "Lampu tidak mengkonfirmasi perubahan tersebut.",
     "bind_climate": "Sensor iklim",
-    "bind_light": "Ringan"
+    "bind_light": "Ringan",
+    "fan_heading": "Kipas angin"
   },
   "ga": {
     "edition": "Réadlann luibheolaíoch",
@@ -789,7 +824,8 @@
     "command_failed": "Theip ar an ordú. Bain triail eile as.",
     "command_timeout": "Níor dheimhnigh an solas an t-athrú.",
     "bind_climate": "Braiteoir aeráide",
-    "bind_light": "Solas"
+    "bind_light": "Solas",
+    "fan_heading": "Gaothrán"
   },
   "ig": {
     "edition": "Botanical Observatory",
@@ -811,7 +847,8 @@
     "command_failed": "Iwu a dara. Nwaa ọzọ.",
     "command_timeout": "Ìhè ahụ akwadoghị mgbanwe ahụ.",
     "bind_climate": "Ihe mmetụta ihu igwe",
-    "bind_light": "Ìhè"
+    "bind_light": "Ìhè",
+    "fan_heading": "Igwe ikuku"
   },
   "is": {
     "edition": "Botanical Observatory",
@@ -833,7 +870,8 @@
     "command_failed": "Skipunin mistókst. Reyndu aftur.",
     "command_timeout": "Ljósið staðfesti ekki breytinguna.",
     "bind_climate": "Loftslagsskynjari",
-    "bind_light": "Ljós"
+    "bind_light": "Ljós",
+    "fan_heading": "Vifta"
   },
   "it": {
     "edition": "Osservatorio botanico",
@@ -855,7 +893,8 @@
     "command_failed": "Comando non riuscito. Riprova.",
     "command_timeout": "La luce non ha confermato il cambio di stato.",
     "bind_climate": "Sensore clima",
-    "bind_light": "Luce"
+    "bind_light": "Luce",
+    "fan_heading": "Ventilatore"
   },
   "ja": {
     "edition": "植物天文台",
@@ -877,7 +916,8 @@
     "command_failed": "コマンドが失敗しました。もう一度やり直してください。",
     "command_timeout": "ライトでは変化は確認されませんでした。",
     "bind_climate": "気候センサー",
-    "bind_light": "ライト"
+    "bind_light": "ライト",
+    "fan_heading": "換気扇"
   },
   "kn": {
     "edition": "ಸಸ್ಯಶಾಸ್ತ್ರೀಯ ವೀಕ್ಷಣಾಲಯ",
@@ -899,7 +939,8 @@
     "command_failed": "ಆಜ್ಞೆಯು ವಿಫಲವಾಗಿದೆ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
     "command_timeout": "ಬೆಳಕು ಬದಲಾವಣೆಯನ್ನು ದೃಢೀಕರಿಸಲಿಲ್ಲ.",
     "bind_climate": "ಹವಾಮಾನ ಸಂವೇದಕ",
-    "bind_light": "ಬೆಳಕು"
+    "bind_light": "ಬೆಳಕು",
+    "fan_heading": "ಫ್ಯಾನ್"
   },
   "kk": {
     "edition": "Ботаникалық обсерватория",
@@ -921,7 +962,8 @@
     "command_failed": "Пәрмен орындалмады. Қайтадан байқап көріңіз.",
     "command_timeout": "Жарық өзгерісті растамады.",
     "bind_climate": "Климат сенсоры",
-    "bind_light": "Жарық"
+    "bind_light": "Жарық",
+    "fan_heading": "Желдеткіш"
   },
   "km": {
     "edition": "កន្លែងសង្កេតរុក្ខសាស្ត្រ",
@@ -943,7 +985,8 @@
     "command_failed": "ពាក្យ​បញ្ជា​បាន​បរាជ័យ។ ព្យាយាមម្តងទៀត។",
     "command_timeout": "ពន្លឺមិនបានបញ្ជាក់ពីការផ្លាស់ប្តូរទេ។",
     "bind_climate": "ឧបករណ៍ចាប់សញ្ញាអាកាសធាតុ",
-    "bind_light": "ពន្លឺ"
+    "bind_light": "ពន្លឺ",
+    "fan_heading": "កង្ហារ"
   },
   "ky": {
     "edition": "Ботаникалык обсерватория",
@@ -965,7 +1008,8 @@
     "command_failed": "Буйрук ишке ашкан жок. Кайра аракет кыл.",
     "command_timeout": "Жарык өзгөртүүнү тастыктаган жок.",
     "bind_climate": "Климат сенсору",
-    "bind_light": "Жарык"
+    "bind_light": "Жарык",
+    "fan_heading": "Желдеткич"
   },
   "ko": {
     "edition": "식물관측소",
@@ -987,7 +1031,8 @@
     "command_failed": "명령이 실패했습니다. 다시 시도해 보세요.",
     "command_timeout": "표시등이 변경 사항을 확인하지 못했습니다.",
     "bind_climate": "기후 센서",
-    "bind_light": "빛"
+    "bind_light": "빛",
+    "fan_heading": "환풍기"
   },
   "ku": {
     "edition": "Çavdêrxaneya Botanîkî",
@@ -1009,7 +1054,8 @@
     "command_failed": "Ferman têk çû. Dubare bixebitin.",
     "command_timeout": "Ronahî guhertin piştrast nekir.",
     "bind_climate": "Sensorê avhewayê",
-    "bind_light": "Light"
+    "bind_light": "Light",
+    "fan_heading": "Pervane"
   },
   "la": {
     "edition": "Botanical observation",
@@ -1031,7 +1077,8 @@
     "command_failed": "Praeceptum defuit. Iterum tenta.",
     "command_timeout": "Lux non confirmavit mutationem.",
     "bind_climate": "Clima sensorem",
-    "bind_light": "lux"
+    "bind_light": "lux",
+    "fan_heading": "Ventilabrum"
   },
   "lb": {
     "edition": "Botaneschen Observatoire",
@@ -1053,7 +1100,8 @@
     "command_failed": "De Kommando ass gescheitert. Probéiert nach eng Kéier.",
     "command_timeout": "D'Luucht huet d'Ännerung net confirméiert.",
     "bind_climate": "Klimasensor",
-    "bind_light": "Liicht"
+    "bind_light": "Liicht",
+    "fan_heading": "Ventilator"
   },
   "lo": {
     "edition": "ຫໍສັງເກດການທາງພືດສາດ",
@@ -1075,7 +1123,8 @@
     "command_failed": "ຄໍາສັ່ງລົ້ມເຫລວ. ລອງອີກຄັ້ງ.",
     "command_timeout": "ແສງສະຫວ່າງບໍ່ໄດ້ຢືນຢັນການປ່ຽນແປງ.",
     "bind_climate": "ເຊັນເຊີສະພາບອາກາດ",
-    "bind_light": "ແສງສະຫວ່າງ"
+    "bind_light": "ແສງສະຫວ່າງ",
+    "fan_heading": "ພັດລົມ"
   },
   "lt": {
     "edition": "Botanikos observatorija",
@@ -1097,7 +1146,8 @@
     "command_failed": "Komanda nepavyko. Bandykite dar kartą.",
     "command_timeout": "Šviesa nepatvirtino pakeitimo.",
     "bind_climate": "Klimato jutiklis",
-    "bind_light": "Šviesa"
+    "bind_light": "Šviesa",
+    "fan_heading": "Ventiliatorius"
   },
   "lv": {
     "edition": "Botāniskā observatorija",
@@ -1119,7 +1169,8 @@
     "command_failed": "Komanda neizdevās. Mēģiniet vēlreiz.",
     "command_timeout": "Gaisma neapstiprināja izmaiņas.",
     "bind_climate": "Klimata sensors",
-    "bind_light": "Gaisma"
+    "bind_light": "Gaisma",
+    "fan_heading": "Ventilators"
   },
   "mk": {
     "edition": "Ботаничка опсерваторија",
@@ -1141,7 +1192,8 @@
     "command_failed": "Командата не успеа. Обидете се повторно.",
     "command_timeout": "Светлото не ја потврди промената.",
     "bind_climate": "Сензор за клима",
-    "bind_light": "Светлина"
+    "bind_light": "Светлина",
+    "fan_heading": "Вентилатор"
   },
   "mg": {
     "edition": "Botanical observatory\nSary",
@@ -1163,7 +1215,8 @@
     "command_failed": "Tsy nahomby ny baiko. Andramo indray mandeha.\nSary",
     "command_timeout": "Tsy nanamafy ny fiovana ny hazavana.\nSary",
     "bind_climate": "Climate sensor\nSary",
-    "bind_light": "Fahazavana\nSary"
+    "bind_light": "Fahazavana\nSary",
+    "fan_heading": "Ventilatera"
   },
   "ms": {
     "edition": "Balai cerap botani",
@@ -1185,7 +1238,8 @@
     "command_failed": "Perintah itu gagal. Cuba lagi.",
     "command_timeout": "Cahaya tidak mengesahkan perubahan itu.",
     "bind_climate": "Penderia iklim",
-    "bind_light": "Cahaya"
+    "bind_light": "Cahaya",
+    "fan_heading": "Kipas"
   },
   "ml": {
     "edition": "ബൊട്ടാണിക്കൽ ഒബ്സർവേറ്ററി",
@@ -1207,7 +1261,8 @@
     "command_failed": "കമാൻഡ് പരാജയപ്പെട്ടു. വീണ്ടും ശ്രമിക്കുക.",
     "command_timeout": "വെളിച്ചം മാറ്റം സ്ഥിരീകരിച്ചില്ല.",
     "bind_climate": "കാലാവസ്ഥ സെൻസർ",
-    "bind_light": "വെളിച്ചം"
+    "bind_light": "വെളിച്ചം",
+    "fan_heading": "ഫാൻ"
   },
   "mt": {
     "edition": "Osservatorju botaniku",
@@ -1229,7 +1284,8 @@
     "command_failed": "Il-kmand falla. Erġa' pprova.",
     "command_timeout": "Id-dawl ma kkonfermax il-bidla.",
     "bind_climate": "Sensor tal-klima",
-    "bind_light": "Dawl"
+    "bind_light": "Dawl",
+    "fan_heading": "Fann"
   },
   "mi": {
     "edition": "Te tirotiro huaota",
@@ -1251,7 +1307,8 @@
     "command_failed": "I rahua te whakahau. Ngana ano.",
     "command_timeout": "Kaore te marama i whakapumau i te huringa.",
     "bind_climate": "Pūoko rangi",
-    "bind_light": "Maama"
+    "bind_light": "Maama",
+    "fan_heading": "Pūrere hau"
   },
   "mr": {
     "edition": "बोटॅनिकल वेधशाळा",
@@ -1273,7 +1330,8 @@
     "command_failed": "आदेश अयशस्वी. पुन्हा प्रयत्न करा.",
     "command_timeout": "प्रकाशाने बदलाची पुष्टी केली नाही.",
     "bind_climate": "हवामान सेन्सर",
-    "bind_light": "प्रकाश"
+    "bind_light": "प्रकाश",
+    "fan_heading": "पंखा"
   },
   "mn": {
     "edition": "Ботаникийн ажиглалтын газар",
@@ -1295,7 +1353,8 @@
     "command_failed": "Тушаал амжилтгүй боллоо. Дахин оролдоно уу.",
     "command_timeout": "Гэрэл нь өөрчлөлтийг баталгаажуулаагүй.",
     "bind_climate": "Цаг уурын мэдрэгч",
-    "bind_light": "Гэрэл"
+    "bind_light": "Гэрэл",
+    "fan_heading": "Сэнс"
   },
   "ne": {
     "edition": "वनस्पति वेधशाला",
@@ -1317,7 +1376,8 @@
     "command_failed": "आदेश असफल भयो। पुन: प्रयास गर्नुहोस्।",
     "command_timeout": "प्रकाशले परिवर्तन पुष्टि गरेन।",
     "bind_climate": "जलवायु सेन्सर",
-    "bind_light": "उज्यालो"
+    "bind_light": "उज्यालो",
+    "fan_heading": "पङ्खा"
   },
   "no": {
     "edition": "Botanisk observatorium",
@@ -1339,7 +1399,8 @@
     "command_failed": "Kommandoen mislyktes. Prøv igjen.",
     "command_timeout": "Lyset bekreftet ikke endringen.",
     "bind_climate": "Klimasensor",
-    "bind_light": "Lys"
+    "bind_light": "Lys",
+    "fan_heading": "Vifte"
   },
   "or": {
     "edition": "ବଟାନିକାଲ୍ ଅବଜରଭେଟୋରୀ |",
@@ -1361,7 +1422,8 @@
     "command_failed": "ନିର୍ଦ୍ଦେଶ ବିଫଳ ହେଲା | ପୁନର୍ବାର ଚେଷ୍ଟା କରନ୍ତୁ |",
     "command_timeout": "ଆଲୋକ ପରିବର୍ତ୍ତନକୁ ନିଶ୍ଚିତ କରିନଥିଲା |",
     "bind_climate": "ଜଳବାୟୁ ସେନସର |",
-    "bind_light": "ଆଲୋକ"
+    "bind_light": "ଆଲୋକ",
+    "fan_heading": "ପଙ୍ଖା"
   },
   "pa": {
     "edition": "ਬੋਟੈਨੀਕਲ ਆਬਜ਼ਰਵੇਟਰੀ",
@@ -1383,7 +1445,8 @@
     "command_failed": "ਹੁਕਮ ਅਸਫਲ ਰਿਹਾ। ਫਿਰ ਕੋਸ਼ਿਸ਼ ਕਰੋ.",
     "command_timeout": "ਰੋਸ਼ਨੀ ਨੇ ਤਬਦੀਲੀ ਦੀ ਪੁਸ਼ਟੀ ਨਹੀਂ ਕੀਤੀ.",
     "bind_climate": "ਜਲਵਾਯੂ ਸੂਚਕ",
-    "bind_light": "ਚਾਨਣ"
+    "bind_light": "ਚਾਨਣ",
+    "fan_heading": "ਪੱਖਾ"
   },
   "fa": {
     "edition": "رصدخانه گیاه شناسی",
@@ -1405,7 +1468,8 @@
     "command_failed": "فرمان شکست خورد. دوباره امتحان کنید.",
     "command_timeout": "چراغ تغییر را تایید نکرد.",
     "bind_climate": "سنسور آب و هوا",
-    "bind_light": "نور"
+    "bind_light": "نور",
+    "fan_heading": "پنکه"
   },
   "pl": {
     "edition": "Obserwatorium Botaniczne",
@@ -1427,7 +1491,8 @@
     "command_failed": "Polecenie nie powiodło się. Spróbuj ponownie.",
     "command_timeout": "Światło nie potwierdziło zmiany.",
     "bind_climate": "Czujnik klimatyczny",
-    "bind_light": "Światło"
+    "bind_light": "Światło",
+    "fan_heading": "Wentylator"
   },
   "ps": {
     "edition": "د نباتاتو څارګر",
@@ -1449,7 +1514,8 @@
     "command_failed": "امر ناکام شو. بیا هڅه وکړئ.",
     "command_timeout": "رڼا دا بدلون تایید نه کړ.",
     "bind_climate": "د اقلیم سینسر",
-    "bind_light": "رڼا"
+    "bind_light": "رڼا",
+    "fan_heading": "پکه"
   },
   "pt": {
     "edition": "Observatório botânico",
@@ -1471,7 +1537,8 @@
     "command_failed": "O comando falhou. Tente novamente.",
     "command_timeout": "A luz não confirmou a mudança.",
     "bind_climate": "Sensor climático",
-    "bind_light": "Luz"
+    "bind_light": "Luz",
+    "fan_heading": "Ventilador"
   },
   "ro": {
     "edition": "Observator botanic",
@@ -1493,7 +1560,8 @@
     "command_failed": "Comanda a eșuat. Încearcă din nou.",
     "command_timeout": "Lumina nu a confirmat schimbarea.",
     "bind_climate": "Senzor de climă",
-    "bind_light": "Lumină"
+    "bind_light": "Lumină",
+    "fan_heading": "Ventilator"
   },
   "ru": {
     "edition": "Ботаническая обсерватория",
@@ -1515,7 +1583,8 @@
     "command_failed": "Команда не удалась. Попробуйте еще раз.",
     "command_timeout": "Свет не подтвердил изменения.",
     "bind_climate": "Датчик климата",
-    "bind_light": "Свет"
+    "bind_light": "Свет",
+    "fan_heading": "Вентилятор"
   },
   "sd": {
     "edition": "نباتاتي مشاهدو",
@@ -1537,7 +1606,8 @@
     "command_failed": "حڪم ناڪام ٿيو. ٻيهر ڪوشش ڪريو.",
     "command_timeout": "روشني تبديلي جي تصديق نه ڪئي.",
     "bind_climate": "آبهوا سينسر",
-    "bind_light": "روشني"
+    "bind_light": "روشني",
+    "fan_heading": "پکو"
   },
   "sr": {
     "edition": "Ботаничка опсерваторија",
@@ -1559,7 +1629,8 @@
     "command_failed": "Команда није успела. Покушајте поново.",
     "command_timeout": "Светло није потврдило промену.",
     "bind_climate": "Сензор климе",
-    "bind_light": "Светлост"
+    "bind_light": "Светлост",
+    "fan_heading": "Вентилатор"
   },
   "si": {
     "edition": "උද්භිද නිරීක්ෂණාගාරය",
@@ -1581,7 +1652,8 @@
     "command_failed": "විධානය අසාර්ථක විය. නැවත උත්සාහ කරන්න.",
     "command_timeout": "ආලෝකය වෙනස් කිරීම තහවුරු කළේ නැත.",
     "bind_climate": "දේශගුණ සංවේදකය",
-    "bind_light": "ආලෝකය"
+    "bind_light": "ආලෝකය",
+    "fan_heading": "විදුලි පංකාව"
   },
   "sk": {
     "edition": "Botanické observatórium",
@@ -1603,7 +1675,8 @@
     "command_failed": "Príkaz zlyhal. Skúste to znova.",
     "command_timeout": "Svetlo zmenu nepotvrdilo.",
     "bind_climate": "Klimatický senzor",
-    "bind_light": "Svetlo"
+    "bind_light": "Svetlo",
+    "fan_heading": "Ventilátor"
   },
   "sl": {
     "edition": "Botanični observatorij",
@@ -1625,7 +1698,8 @@
     "command_failed": "Ukaz ni uspel. poskusi ponovno",
     "command_timeout": "Svetloba ni potrdila spremembe.",
     "bind_climate": "Senzor klime",
-    "bind_light": "Svetloba"
+    "bind_light": "Svetloba",
+    "fan_heading": "Ventilator"
   },
   "so": {
     "edition": "Kormeerka dhirta",
@@ -1647,7 +1721,8 @@
     "command_failed": "Taliskii wuu fashilmay. Isku day mar kale",
     "command_timeout": "Iftiinku ma xaqiijin isbeddelka.",
     "bind_climate": "Dareemaha cimilada",
-    "bind_light": "Iftiin"
+    "bind_light": "Iftiin",
+    "fan_heading": "Marawaxad"
   },
   "es": {
     "edition": "Observatorio botánico",
@@ -1669,7 +1744,8 @@
     "command_failed": "El comando falló. Intentar otra vez.",
     "command_timeout": "La luz no confirmó el cambio.",
     "bind_climate": "Sensor climático",
-    "bind_light": "Luz"
+    "bind_light": "Luz",
+    "fan_heading": "Ventilador"
   },
   "sw": {
     "edition": "Uchunguzi wa Botanical",
@@ -1691,7 +1767,8 @@
     "command_failed": "Amri imeshindwa. Jaribu tena.",
     "command_timeout": "Nuru haikuthibitisha mabadiliko.",
     "bind_climate": "Sensor ya hali ya hewa",
-    "bind_light": "Mwanga"
+    "bind_light": "Mwanga",
+    "fan_heading": "Feni"
   },
   "sv": {
     "edition": "Botaniskt observatorium",
@@ -1713,7 +1790,8 @@
     "command_failed": "Kommandot misslyckades. Försök igen.",
     "command_timeout": "Ljuset bekräftade inte förändringen.",
     "bind_climate": "Klimatsensor",
-    "bind_light": "Ljus"
+    "bind_light": "Ljus",
+    "fan_heading": "Fläkt"
   },
   "ta": {
     "edition": "தாவரவியல் ஆய்வகம்",
@@ -1735,7 +1813,8 @@
     "command_failed": "கட்டளை தோல்வியடைந்தது. மீண்டும் முயற்சிக்கவும்.",
     "command_timeout": "ஒளி மாற்றத்தை உறுதிப்படுத்தவில்லை.",
     "bind_climate": "காலநிலை சென்சார்",
-    "bind_light": "ஒளி"
+    "bind_light": "ஒளி",
+    "fan_heading": "மின்விசிறி"
   },
   "te": {
     "edition": "బొటానికల్ అబ్జర్వేటరీ",
@@ -1757,7 +1836,8 @@
     "command_failed": "ఆదేశం విఫలమైంది. మళ్లీ ప్రయత్నించండి.",
     "command_timeout": "కాంతి మార్పును నిర్ధారించలేదు.",
     "bind_climate": "క్లైమేట్ సెన్సార్",
-    "bind_light": "కాంతి"
+    "bind_light": "కాంతి",
+    "fan_heading": "ఫ్యాన్"
   },
   "tg": {
     "edition": "Расадхонаи ботаники",
@@ -1779,7 +1859,8 @@
     "command_failed": "Фармон ноком шуд. Як бори дигар санҷед.",
     "command_timeout": "Чароғ тағиротро тасдиқ накард.",
     "bind_climate": "Сенсори иқлим",
-    "bind_light": "Нур"
+    "bind_light": "Нур",
+    "fan_heading": "Бодбезак"
   },
   "th": {
     "edition": "หอดูดาวพฤกษศาสตร์",
@@ -1801,7 +1882,8 @@
     "command_failed": "คำสั่งล้มเหลว ลองอีกครั้ง",
     "command_timeout": "แสงไม่ได้ยืนยันการเปลี่ยนแปลง",
     "bind_climate": "เซ็นเซอร์สภาพอากาศ",
-    "bind_light": "เบา"
+    "bind_light": "เบา",
+    "fan_heading": "พัดลม"
   },
   "tl": {
     "edition": "Botanical observatory",
@@ -1823,7 +1905,8 @@
     "command_failed": "Nabigo ang utos. Subukan muli.",
     "command_timeout": "Hindi kinumpirma ng liwanag ang pagbabago.",
     "bind_climate": "Sensor ng klima",
-    "bind_light": "Liwanag"
+    "bind_light": "Liwanag",
+    "fan_heading": "Bentilador"
   },
   "tr": {
     "edition": "Botanik gözlemevi",
@@ -1845,7 +1928,8 @@
     "command_failed": "Komut başarısız oldu. Tekrar deneyin.",
     "command_timeout": "Işık değişikliği onaylamadı.",
     "bind_climate": "İklim sensörü",
-    "bind_light": "Işık"
+    "bind_light": "Işık",
+    "fan_heading": "Vantilatör"
   },
   "ug": {
     "edition": "بوتانىكا رەسەتخانىسى",
@@ -1867,7 +1951,8 @@
     "command_failed": "بۇيرۇق مەغلۇپ بولدى. قايتا سىناڭ.",
     "command_timeout": "نۇر بۇ ئۆزگىرىشنى ئىسپاتلىمىدى.",
     "bind_climate": "كېلىمات سېنزورى",
-    "bind_light": "نۇر"
+    "bind_light": "نۇر",
+    "fan_heading": "شامالدۇرغۇچ"
   },
   "uk": {
     "edition": "Ботанічна обсерваторія",
@@ -1889,7 +1974,8 @@
     "command_failed": "Команда не виконана. Спробуйте знову.",
     "command_timeout": "Світло не підтвердило зміни.",
     "bind_climate": "Датчик клімату",
-    "bind_light": "світло"
+    "bind_light": "світло",
+    "fan_heading": "Вентилятор"
   },
   "ur": {
     "edition": "نباتاتی رصدگاہ",
@@ -1911,7 +1997,8 @@
     "command_failed": "کمانڈ ناکام ہوگئی۔ دوبارہ کوشش کریں۔",
     "command_timeout": "روشنی نے تبدیلی کی تصدیق نہیں کی۔",
     "bind_climate": "آب و ہوا کا سینسر",
-    "bind_light": "روشنی"
+    "bind_light": "روشنی",
+    "fan_heading": "پنکھا"
   },
   "uz": {
     "edition": "Botanika rasadxonasi",
@@ -1933,7 +2020,8 @@
     "command_failed": "Buyruq bajarilmadi. Qayta urinib ko'ring.",
     "command_timeout": "Chiroq o'zgarishni tasdiqlamadi.",
     "bind_climate": "Iqlim sensori",
-    "bind_light": "Nur"
+    "bind_light": "Nur",
+    "fan_heading": "Ventilyator"
   },
   "vi": {
     "edition": "đài quan sát thực vật",
@@ -1955,7 +2043,8 @@
     "command_failed": "Lệnh không thành công. Hãy thử lại.",
     "command_timeout": "Ánh sáng không xác nhận sự thay đổi.",
     "bind_climate": "Cảm biến khí hậu",
-    "bind_light": "Ánh sáng"
+    "bind_light": "Ánh sáng",
+    "fan_heading": "Quạt"
   },
   "cy": {
     "edition": "Arsyllfa botanegol",
@@ -1977,7 +2066,8 @@
     "command_failed": "Methodd y gorchymyn. Ceisiwch eto.",
     "command_timeout": "Ni chadarnhaodd y golau y newid.",
     "bind_climate": "Synhwyrydd hinsawdd",
-    "bind_light": "Ysgafn"
+    "bind_light": "Ysgafn",
+    "fan_heading": "Gwyntyll"
   },
   "yo": {
     "edition": "Botanical observatory",
@@ -1999,6 +2089,7 @@
     "command_failed": "Aṣẹ kuna. Gbiyanju lẹẹkansi.",
     "command_timeout": "Imọlẹ naa ko jẹrisi iyipada naa.",
     "bind_climate": "Sensọ afefe",
-    "bind_light": "Imọlẹ"
+    "bind_light": "Imọlẹ",
+    "fan_heading": "Ẹ̀rọ afẹ́fẹ́"
   }
 }

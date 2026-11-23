@@ -8,6 +8,10 @@ This is the active task list. Detailed stage-by-stage decisions, earlier API nam
 
 - [x] Sensor Simulator 410 1.0.6 uses a ScriptContext date/time/type helper for bounded seasonal/daytime temperature, humidity and luminance, with stable per-module variation and no cumulative drift. Keep feature/frequency configuration and level-based power with regular off samples. Seven isolated distributed-script scenarios passed; Vulkan updated only 410 through the backed-up program-update flow, with compilation, running state and plausible live night readings confirmed. See [sensor profile](guides/sensor-simulator.md).
 
+## Standard dashboard layout (YoT)
+
+- [ ] Fix vertical jitter when a scrolled dashboard reflows. The standard layout measures available height from the container's viewport-relative top, rewrites its height, and schedules another layout after 100 ms if the height changed. Trace this near the overflow threshold, including scrollbar width changes and the 200 ms widget transform transition. Verify that tall dashboards retain the visible scroll anchor and short dashboards settle immediately at the vertical center in both window and docked scrolling layouts.
+
 ## Isometric Room dashboard
 
 - [x] Add `isometric/isometric-room`: procedural isometric room, live light/climate/power cards and named bindings, with optional demo defaults and editable device bindings. Reuse the standard dashboard settings and existing local Three.js distribution.
@@ -23,6 +27,9 @@ This is the active task list. Detailed stage-by-stage decisions, earlier API nam
 
 - [ ] Export widget folders as ZIP archives from the folder row in YoT. Include nested widgets and shared assets, preserving their paths relative to the widget root. Reuse widget import for folder archives and legacy single-widget ZIPs, and surface conflicts before overwriting existing files.
 
+- [ ] Fix the Security widget preview in the HomeGenie Panel Widgets Library before the Panel 2.0.0 release.
+- [ ] At the end of the Panel 2.0.0 update, review the codebase and remove obsolete screens, navigation paths, resources and other unused code. Verify that existing installations can still upgrade and access their saved data.
+- [ ] In HomeGenie Panel, add **Remote Access** (working title) after **Preferences** in the Home screen's **Manage** section. Rework the existing **MQTT Network** screen so users can find and manage access to their home devices over the internet.
 - [ ] **Priority for HomeGenie Panel.** Fix intermittent scroll interruptions in custom dashboards. A swipe can stop mid-gesture and scrolling resumes on the next swipe. Verify that a continuous swipe scrolls smoothly as the collapsible header and WebView hand off scrolling in both directions.
 - [ ] Support opening and editing HomeGenie program options from custom dashboards in HomeGenie Panel. Verify that the weather settings button in Cyberpunk (Neon District) opens the weather program options and saves changes.
 

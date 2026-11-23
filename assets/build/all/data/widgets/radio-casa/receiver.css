@@ -169,7 +169,15 @@
 .preset-text { display: grid; min-width: 0; gap: 2px; overflow-wrap: anywhere; }
 .preset-text strong { font-size: clamp(11px, 1.5cqw, 16px); font-weight: 650; }
 .preset-text small { color: #dbc7a7; font-size: clamp(10px, 1.2cqw, 12px); }
-.command-feedback { min-height: 1.2em; margin: 5px 0 0; color: #ffcfab; font-size: 11px; overflow-wrap: anywhere; }
+.command-feedback {
+  position: fixed; z-index: 2; inset: auto auto 16px 50%;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
+  width: max-content; max-width: calc(100% - 32px); box-sizing: border-box;
+  margin: 0; padding: 10px 16px; border: 0; border-radius: 4px;
+  background: #302820; color: #fff4e5; box-shadow: 0 2px 8px #0008;
+  font-size: 14px; overflow-wrap: anywhere; pointer-events: none;
+}
+.command-feedback:empty { display: none; }
 .footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 5px 12px; padding-top: 10px; font-size: clamp(9px, 1.2cqw, 12px); }
 .serial { color: #e6cca6; letter-spacing: .09em; }
 @container receiver (max-width: 670px) {
