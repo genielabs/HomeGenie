@@ -1,0 +1,127 @@
+/* AI-generated with HomeGenie Widget Genie (https://homegenie.it) */
+:host {
+  display: block;
+  place-content: center;
+  height: 100%;
+  font-family: sans-serif;
+}
+
+.container {
+  background:black;
+  padding: 12px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.header {
+  width: 100%;
+  margin-bottom: 16px;
+  color: white;
+}
+
+.score-box {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+.game-board {
+  color: white;
+  position: relative;
+  width: 235px;
+  height: 235px;
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.pad {
+  width: 100px;
+  height: 100px;
+  margin: 4px;
+  cursor: pointer;
+  transition: opacity 0.1s, filter 0.1s;
+  opacity: 0.5;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.green {
+  background: #2ecc71;
+  border-radius: 100% 0 0 0;
+}
+
+.red {
+  background: #e74c3c;
+  border-radius: 0 100% 0 0;
+}
+
+.yellow {
+  background: #f1c40f;
+  border-radius: 0 0 0 100%;
+}
+
+.blue {
+  background: #3498db;
+  border-radius: 0 0 100% 0;
+}
+
+.pad.active {
+  opacity: 1;
+  filter: brightness(1.4) drop-shadow(0 0 12px white);
+}
+
+.center-control {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px!important;
+  height: 64px!important;
+  background: #111;
+  border-radius: 50%;
+  border: 4px solid #333;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button span {
+  font-size: 36px;
+}
+
+.status-message {
+  height: 32px;
+  margin-top: 16px;
+  font-size: 0.95em;
+  color: white;
+  opacity: 0.8;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+[layout]{display:flex}[layout^=column]{flex-direction:column}[layout*="center-center"]{align-items:center;justify-content:center}[layout*="center-justify"],[layout*="center-spread"]{align-items:center;justify-content:space-between}[layout*="top-center"]{justify-content:center}[layout*="top-left"]{align-items:flex-start}
+:host{display:block;width:100%;max-width:none;height:100%;min-height:0;aspect-ratio:auto;border-radius:0}
+.container{height:100vh;height:100dvh;background:radial-gradient(circle at center,#233037,#11191e 70%);color:#f2f3ee}
+.game-board {
+  width: min(75vw, 58vh); aspect-ratio: 1; height: auto; flex: none;
+  box-sizing: border-box; display: grid; grid-template-rows: repeat(2, minmax(0,1fr));
+  padding: 8px; gap: 6px; background: #131a1d;
+}
+.game-board > [layout^="row"] { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 6px; }
+.game-board .pad { margin: 0; width: 100%; height: 100%; }
+.center-control button { width: 100%; height: 100%; padding: 0; }
+.center-control svg { display: block; color: #c9ff8e; }
+.header{max-width:420px}.score-box{color:#fbd86c}.center-control button{cursor:pointer}

@@ -1,0 +1,20 @@
+<!-- View (HTML) -->
+<div class="container" #container>
+  <div class="ui-layer">
+    <div class="hud">
+      <div class="score">SCORE: <span #score_val>0</span></div>
+      <div class="lives">LIVES: <span #lives_val>3</span></div>
+    </div>
+  </div>
+  
+  <div class="overlay" #overlay (click)="startGame()">
+    <h1 #overlay_title class="neon-text">3D INVADERS</h1>
+    <p #overlay_sub class="blink">Tap to start · With tilt, hold to fire</p>
+  </div>
+
+  <div #canvas_container 
+       class="canvas-container" 
+       (pointermove)="movePlayer(event)">
+  </div>
+<button class="tilt-button" #tilt_button aria-pressed="false" aria-label="Tilt steering">◎ Tilt</button>
+</div>

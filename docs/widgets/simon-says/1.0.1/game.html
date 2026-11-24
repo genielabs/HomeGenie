@@ -1,0 +1,28 @@
+<!-- AI-generated with HomeGenie Widget Genie (https://homegenie.it) -->
+<div class="container animate__animated animate__fadeIn animate__faster" layout="column center-center">
+  <div class="header" layout="row center-justify">
+    <strong #title>Simon Says</strong>
+    <span class="score-box">Score: <span #score_text>0</span></span>
+  </div>
+
+  <div class="game-board">
+    <div layout="row center-center">
+      <div #pad_0 class="pad green" (pointerdown)="handlePadClick(0)"></div>
+      <div #pad_1 class="pad red" (pointerdown)="handlePadClick(1)"></div>
+    </div>
+    <div layout="row center-center">
+      <div #pad_2 class="pad yellow" (pointerdown)="handlePadClick(2)"></div>
+      <div #pad_3 class="pad blue" (pointerdown)="handlePadClick(3)"></div>
+    </div>
+    <div class="center-control" layout="column center-center">
+      <button aria-label="Play" @active #start_btn (click)="startGame()" @if="isPlaying()" @then="$this.css({display: 'none'})" @else="$this.css({display: ''})">
+        <svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3L22 12 6 21Z"/></svg>
+      </button>
+      <div @active @if="!isPlaying()" @then="$this.css({display: 'none'})" @else="$this.css({display: ''})">
+        <span style="opacity: 0.4" class="material-symbols-outlined notranslate animate__animated animate__pulse animate__infinite">♫</span>
+      </div>
+    </div>
+  </div>
+
+  <div #message class="status-message">Press Play to Start</div>
+</div>

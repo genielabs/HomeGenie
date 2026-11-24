@@ -110,7 +110,7 @@
     },
     {
       "id": "simon-says",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "name": "Simon Says",
       "description": {
         "en": "Listen, watch and repeat the sequence of four colored pads.",
@@ -118,7 +118,7 @@
       },
       "category": "games",
       "dashboard": true,
-      "base": "simon-says/1.0.0/",
+      "base": "simon-says/1.0.1/",
       "path": "game",
       "preview": "preview.png",
       "files": [
@@ -130,7 +130,7 @@
     },
     {
       "id": "weather-station",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "name": "Weather Station",
       "description": {
         "en": "A weather console for a bound weather module.",
@@ -138,7 +138,7 @@
       },
       "category": "tools",
       "dashboard": false,
-      "base": "weather-station/1.0.0/",
+      "base": "weather-station/1.0.2/",
       "path": "station",
       "preview": "preview.png",
       "files": [
@@ -150,7 +150,7 @@
     },
     {
       "id": "moon-lander",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "name": "Moon Lander",
       "description": {
         "en": "Control rotation and thrust to land the lunar module.",
@@ -158,7 +158,7 @@
       },
       "category": "games",
       "dashboard": true,
-      "base": "moon-lander/1.0.0/",
+      "base": "moon-lander/1.0.2/",
       "path": "game",
       "preview": "preview.png",
       "files": [
@@ -170,7 +170,7 @@
     },
     {
       "id": "star-catcher",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "name": "Star Catcher",
       "description": {
         "en": "Catch falling stars and dodge black holes by touch or tilt.",
@@ -178,7 +178,7 @@
       },
       "category": "games",
       "dashboard": true,
-      "base": "star-catcher/1.0.0/",
+      "base": "star-catcher/1.0.1/",
       "path": "game",
       "preview": "preview.png",
       "files": [
@@ -190,7 +190,7 @@
     },
     {
       "id": "space-invaders-3d",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "name": "Space Invaders 3D",
       "description": {
         "en": "Defend the grid in a 3D arcade shooter with touch and tilt.",
@@ -198,7 +198,7 @@
       },
       "category": "games",
       "dashboard": true,
-      "base": "space-invaders-3d/1.0.0/",
+      "base": "space-invaders-3d/1.0.2/",
       "path": "game",
       "preview": "preview.png",
       "files": [
@@ -232,7 +232,7 @@
     },
     {
       "id": "toggle-widget",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "name": "Toggle Switch",
       "description": {
         "en": "A switch for a bound light or outlet, with a local demo.",
@@ -240,7 +240,7 @@
       },
       "category": "tools",
       "dashboard": false,
-      "base": "toggle-widget/1.0.0/",
+      "base": "toggle-widget/1.0.1/",
       "path": "toggle",
       "preview": "preview.png",
       "files": [

@@ -1,0 +1,57 @@
+<div class="container" layout="column top-stretch">
+  <div class="header" layout="row center-justify">
+    <div layout="column top-left">
+      <strong #game_title>MOON LANDER</strong>
+      <span class="status" #status_text>READY FOR DESCENT</span>
+    </div>
+    <div class="stats-panel" layout="row center-center">
+      <div class="stat-item">
+        <span class="label">FUEL</span>
+        <div class="bar-container">
+          <div class="bar" #fuel_bar></div>
+        </div>
+      </div>
+      <div class="stat-item">
+        <span class="label">SCORE</span>
+        <span class="value" #score_val>0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="canvas-wrapper" #canvas_container (click)="startGame()">
+    <canvas #game_canvas width="400" height="300"></canvas>
+    <div class="overlay" #overlay>
+      <h1 #overlay_title>LUNAR MODULE</h1>
+      <p #overlay_sub class="blink">CLICK TO INITIATE LANDING</p>
+    </div>
+  </div>
+
+  <button class="tilt-button" #tilt_button aria-pressed="false" aria-label="Tilt steering">◎ Tilt</button>
+  <div class="controls" layout="row center-center">
+    <button class="ctrl-btn" aria-label="Rotate left" (pointerdown)="setRotate('left')" (pointerup)="setRotate(null)">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.5 18a7 7 0 0 0-5.8-10.8H6.4l3.2-3.1L8.1 2.6 2.4 8.3l5.7 5.7 1.5-1.5-3.2-3.2h6.3a5 5 0 0 1 4.2 7.7z"/></svg>
+    </button>
+    <button class="ctrl-btn thrust" (pointerdown)="setThrust(true)" (pointerup)="setThrust(false)">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 5l9 15H3z"/></svg>
+      <span class="btn-label">THRUST</span>
+    </button>
+    <button class="ctrl-btn" aria-label="Rotate right" (pointerdown)="setRotate('right')" (pointerup)="setRotate(null)">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><g transform="translate(24 0) scale(-1 1)"><path d="M18.5 18a7 7 0 0 0-5.8-10.8H6.4l3.2-3.1L8.1 2.6 2.4 8.3l5.7 5.7 1.5-1.5-3.2-3.2h6.3a5 5 0 0 1 4.2 7.7z"/></g></svg>
+    </button>
+  </div>
+
+  <div class="telemetry" layout="row center-justify">
+    <div layout="row center-center" style="gap:10px">
+      <span class="label">V-SPD:</span>
+      <span #v_speed class="value">0.0</span>
+    </div>
+    <div layout="row center-center" style="gap:10px">
+      <span class="label">H-SPD:</span>
+      <span #h_speed class="value">0.0</span>
+    </div>
+    <div layout="row center-center" style="gap:10px">
+      <span class="label">ALT:</span>
+      <span #altitude class="value">0</span>
+    </div>
+  </div>
+</div>
