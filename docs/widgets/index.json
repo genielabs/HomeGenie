@@ -3,43 +3,43 @@
   "widgets": [
     {
       "id": "focus-timer",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "name": "Focus Timer",
       "description": {
-        "en": "A focus timer with short breaks.",
-        "it": "Un timer per concentrazione e pause brevi."
+        "en": "Focus sessions, short and long breaks, with an optional focus light.",
+        "it": "Sessioni di concentrazione e pause brevi o lunghe, con luce opzionale."
       },
       "category": "tools",
       "dashboard": false,
-      "base": "focus-timer/1.0.0/",
+      "base": "focus-timer/1.1.0/",
       "path": "timer",
       "preview": "preview.png",
       "files": [
         "timer.html",
-        "timer.css",
         "timer.js",
+        "timer.css",
         "timer.module.js"
       ]
     },
     {
       "id": "tilt-maze",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "name": "Tilt Maze",
       "description": {
-        "en": "Guide a marble through two mazes using tilt or touch.",
-        "it": "Guida una biglia in due labirinti inclinando il telefono o usando i pulsanti."
+        "en": "Roll a brass marble through two sculpted mazes using tilt or touch.",
+        "it": "Guida una biglia di ottone in due labirinti a rilievo, con inclinazione o touch."
       },
       "category": "games",
       "dashboard": true,
-      "base": "tilt-maze/1.0.0/",
+      "base": "tilt-maze/1.1.0/",
       "path": "maze",
       "preview": "preview.png",
       "files": [
+        "levels.json",
         "maze.html",
-        "maze.css",
         "maze.js",
-        "maze.module.js",
-        "levels.json"
+        "maze.css",
+        "maze.module.js"
       ]
     },
     {
@@ -84,6 +84,170 @@
         "neon-breaker.module.js",
         "neon-breaker.i18n.json",
         "localize.js"
+      ]
+    },
+    {
+      "id": "break-out",
+      "version": "1.0.0",
+      "name": "Breakout",
+      "description": {
+        "en": "A 3D brick breaker with touch and tilt steering.",
+        "it": "Un rompimattoni 3D con comandi touch e a inclinazione."
+      },
+      "category": "games",
+      "dashboard": true,
+      "base": "break-out/1.0.0/",
+      "path": "game",
+      "preview": "preview.png",
+      "files": [
+        "three.module.js",
+        "three-license.txt",
+        "game.html",
+        "game.js",
+        "game.css",
+        "game.module.js"
+      ]
+    },
+    {
+      "id": "simon-says",
+      "version": "1.0.0",
+      "name": "Simon Says",
+      "description": {
+        "en": "Listen, watch and repeat the sequence of four colored pads.",
+        "it": "Ascolta, osserva e ripeti la sequenza dei quattro colori."
+      },
+      "category": "games",
+      "dashboard": true,
+      "base": "simon-says/1.0.0/",
+      "path": "game",
+      "preview": "preview.png",
+      "files": [
+        "game.html",
+        "game.js",
+        "game.css",
+        "game.module.js"
+      ]
+    },
+    {
+      "id": "weather-station",
+      "version": "1.0.0",
+      "name": "Weather Station",
+      "description": {
+        "en": "A weather console for a bound weather module.",
+        "it": "Una console meteo per il modulo associato."
+      },
+      "category": "tools",
+      "dashboard": false,
+      "base": "weather-station/1.0.0/",
+      "path": "station",
+      "preview": "preview.png",
+      "files": [
+        "station.html",
+        "station.js",
+        "station.css",
+        "station.module.js"
+      ]
+    },
+    {
+      "id": "moon-lander",
+      "version": "1.0.0",
+      "name": "Moon Lander",
+      "description": {
+        "en": "Control rotation and thrust to land the lunar module.",
+        "it": "Controlla rotazione e spinta per far atterrare il modulo lunare."
+      },
+      "category": "games",
+      "dashboard": true,
+      "base": "moon-lander/1.0.0/",
+      "path": "game",
+      "preview": "preview.png",
+      "files": [
+        "game.html",
+        "game.js",
+        "game.css",
+        "game.module.js"
+      ]
+    },
+    {
+      "id": "star-catcher",
+      "version": "1.0.0",
+      "name": "Star Catcher",
+      "description": {
+        "en": "Catch falling stars and dodge black holes by touch or tilt.",
+        "it": "Cattura le stelle ed evita i buchi neri con il touch o inclinando il dispositivo."
+      },
+      "category": "games",
+      "dashboard": true,
+      "base": "star-catcher/1.0.0/",
+      "path": "game",
+      "preview": "preview.png",
+      "files": [
+        "game.html",
+        "game.js",
+        "game.css",
+        "game.module.js"
+      ]
+    },
+    {
+      "id": "space-invaders-3d",
+      "version": "1.0.0",
+      "name": "Space Invaders 3D",
+      "description": {
+        "en": "Defend the grid in a 3D arcade shooter with touch and tilt.",
+        "it": "Difendi la griglia in uno sparatutto arcade 3D con touch e inclinazione."
+      },
+      "category": "games",
+      "dashboard": true,
+      "base": "space-invaders-3d/1.0.0/",
+      "path": "game",
+      "preview": "preview.png",
+      "files": [
+        "three.module.js",
+        "three-license.txt",
+        "game.html",
+        "game.js",
+        "game.css",
+        "game.module.js"
+      ]
+    },
+    {
+      "id": "three-cards-game",
+      "version": "1.0.0",
+      "name": "Three Cards Game",
+      "description": {
+        "en": "Follow the ace of hearts as the cards change places.",
+        "it": "Segui l’asso di cuori mentre le carte si scambiano di posto."
+      },
+      "category": "games",
+      "dashboard": true,
+      "base": "three-cards-game/1.0.0/",
+      "path": "game",
+      "preview": "preview.png",
+      "files": [
+        "game.html",
+        "game.js",
+        "game.css",
+        "game.module.js"
+      ]
+    },
+    {
+      "id": "toggle-widget",
+      "version": "1.0.0",
+      "name": "Toggle Switch",
+      "description": {
+        "en": "A switch for a bound light or outlet, with a local demo.",
+        "it": "Un interruttore per una luce o presa associata, con demo locale."
+      },
+      "category": "tools",
+      "dashboard": false,
+      "base": "toggle-widget/1.0.0/",
+      "path": "toggle",
+      "preview": "preview.png",
+      "files": [
+        "toggle.html",
+        "toggle.js",
+        "toggle.css",
+        "toggle.module.js"
       ]
     }
   ]

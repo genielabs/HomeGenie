@@ -1,0 +1,57 @@
+<div class="container" layout="column top-stretch">
+  <div class="header" layout="row center-justify">
+    <div layout="column top-left">
+      <strong #game_title>MOON LANDER</strong>
+      <span class="status" #status_text>READY FOR DESCENT</span>
+    </div>
+    <div class="stats-panel" layout="row center-center">
+      <div class="stat-item">
+        <span class="label">FUEL</span>
+        <div class="bar-container">
+          <div class="bar" #fuel_bar></div>
+        </div>
+      </div>
+      <div class="stat-item">
+        <span class="label">SCORE</span>
+        <span class="value" #score_val>0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="canvas-wrapper" #canvas_container (click)="startGame()">
+    <canvas #game_canvas width="400" height="300"></canvas>
+    <div class="overlay" #overlay>
+      <h1 #overlay_title>LUNAR MODULE</h1>
+      <p #overlay_sub class="blink">CLICK TO INITIATE LANDING</p>
+    </div>
+  </div>
+
+  <button class="tilt-button" #tilt_button aria-pressed="false" aria-label="Tilt steering">◎ Tilt</button>
+  <div class="controls" layout="row center-center">
+    <button class="ctrl-btn" (pointerdown)="setRotate('left')" (pointerup)="setRotate(null)">
+      <span class="material-symbols-outlined">↶</span>
+    </button>
+    <button class="ctrl-btn thrust" (pointerdown)="setThrust(true)" (pointerup)="setThrust(false)">
+      <span class="material-symbols-outlined">▲</span>
+      <span class="btn-label">THRUST</span>
+    </button>
+    <button class="ctrl-btn" (pointerdown)="setRotate('right')" (pointerup)="setRotate(null)">
+      <span class="material-symbols-outlined">↷</span>
+    </button>
+  </div>
+
+  <div class="telemetry" layout="row center-justify">
+    <div layout="row center-center" style="gap:10px">
+      <span class="label">V-SPD:</span>
+      <span #v_speed class="value">0.0</span>
+    </div>
+    <div layout="row center-center" style="gap:10px">
+      <span class="label">H-SPD:</span>
+      <span #h_speed class="value">0.0</span>
+    </div>
+    <div layout="row center-center" style="gap:10px">
+      <span class="label">ALT:</span>
+      <span #altitude class="value">0</span>
+    </div>
+  </div>
+</div>

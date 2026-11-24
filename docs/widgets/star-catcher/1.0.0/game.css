@@ -1,0 +1,134 @@
+:host {
+    display: block;
+    width: 100%;
+    height: 360px;
+    max-width: 500px;
+    aspect-ratio: 3/4;
+    margin: 0 auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+    overflow: hidden;
+    background: #1a1a2e;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.game-container {
+    position: relative;
+    width: 100%;
+    height: 360px;
+    background: linear-gradient(to bottom, #16213e, #0f3460);
+    cursor: none;
+}
+
+.hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    z-index: 5;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    pointer-events: none;
+}
+
+.stat-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 15px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.play-field {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.player {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    background: #4cc9f0;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 20px #4cc9f0;
+    transition: transform 0.1s ease-out;
+}
+
+.player .glow {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: white;
+    opacity: 0.4;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.3); opacity: 0; }
+    100% { transform: scale(1); opacity: 0.4; }
+}
+
+/* Elementi cadenti */
+.star, .void {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    z-index: 2;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 52, 96, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
+
+.overlay h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: #4cc9f0;
+    text-shadow: 0 0 10px #4cc9f0;
+}
+
+.overlay p {
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0.3; }
+}
+
+.high-score {
+    margin-top: 20px;
+    padding: 10px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+}
+[layout]{display:flex}[layout^=column]{flex-direction:column}[layout*="center-center"]{align-items:center;justify-content:center}[layout*="center-justify"],[layout*="center-spread"]{align-items:center;justify-content:space-between}[layout*="top-center"]{justify-content:center}[layout*="top-left"]{align-items:flex-start}
+:host{display:block;width:100%;max-width:none;height:100%;min-height:0;aspect-ratio:auto;border-radius:0}
+.tilt-button{position:absolute;right:12px;bottom:12px;z-index:12;border:1px solid #92d5e0;border-radius:20px;padding:7px 12px;background:#13232ddd;color:#e0fffb;font:600 13px system-ui}.tilt-button[aria-pressed=true]{background:#13717c}
+.game-container{height:100vh;height:100dvh;touch-action:none}

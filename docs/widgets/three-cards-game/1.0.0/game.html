@@ -1,0 +1,47 @@
+<div class="game-container" layout="column center-center">
+    <div class="header">
+        <h2 #game_message>Find the Ace!</h2>
+        <div class="score-board">Score: <span #score_val>0</span></div>
+    </div>
+
+    <div class="table" #card_table>
+        <!-- Card 0 -->
+        <div class="card-wrapper" #card_0 (click)="pickCard(0)">
+            <div class="card-inner"
+                 @if="isRevealed()"
+                 @then="$this.addClass('flipped')"
+                 @else="$this.removeClass('flipped')">
+                <div class="card-front"></div>
+                <div class="card-back" #content_0></div>
+            </div>
+        </div>
+
+        <!-- Card 1 -->
+        <div class="card-wrapper" #card_1 (click)="pickCard(1)">
+            <div class="card-inner"
+                 @if="isRevealed()"
+                 @then="$this.addClass('flipped')"
+                 @else="$this.removeClass('flipped')">
+                <div class="card-front"></div>
+                <div class="card-back" #content_1></div>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card-wrapper" #card_2 (click)="pickCard(2)">
+            <div class="card-inner"
+                 @if="isRevealed()"
+                 @then="$this.addClass('flipped')"
+                 @else="$this.removeClass('flipped')">
+                <div class="card-front"></div>
+                <div class="card-back" #content_2></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button #btn_start (click)="startShuffle()" class="action-btn">
+            SHUFFLE CARDS
+        </button>
+    </div>
+</div>

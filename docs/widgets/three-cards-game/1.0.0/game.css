@@ -1,0 +1,105 @@
+:host {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+.game-container {
+    background: #1a472a; /* Poker table green */
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    border: 4px solid #5d4037;
+}
+
+.header { text-align: center; margin-bottom: 2rem; }
+.score-board { font-size: 1.5rem; font-weight: bold; color: #ffeb3b; }
+
+.table {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    perspective: 1000px;
+    height: 180px;
+    width: 100%;
+    position: relative;
+}
+
+.card-wrapper {
+    width: 120px;
+    height: 170px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.4s ease-in-out;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card-inner.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.card-front {
+    background: #c62828;
+    border: 5px solid white;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.1) 10px, rgba(255,255,255,.1) 20px);
+}
+
+.card-back {
+    background: white;
+    color: black;
+    transform: rotateY(180deg);
+    border: 1px solid #ccc;
+}
+
+.ace { color: #d32f2f; }
+.joker { color: #424242; }
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.action-btn {
+    margin-top: 1.2rem;
+    margin-bottom: 1rem;
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    background: #ffeb3b;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.action-btn:hover { background: #fdd835; transform: scale(1.05); }
+.action-btn:disabled { background: #9e9e9e; cursor: not-allowed; }
+[layout]{display:flex}[layout^=column]{flex-direction:column}[layout*="center-center"]{align-items:center;justify-content:center}[layout*="center-justify"],[layout*="center-spread"]{align-items:center;justify-content:space-between}[layout*="top-center"]{justify-content:center}[layout*="top-left"]{align-items:flex-start}
+:host{display:block;width:100%;max-width:none;height:100%;min-height:0;aspect-ratio:auto;border-radius:0}
+.game-container{height:100vh;height:100dvh;box-sizing:border-box;background:radial-gradient(ellipse,#245939,#0d3328);border:0;border-radius:0}.table{gap:3%;height:min(40vh,185px)}.card-wrapper{width:min(26%,120px);height:100%}.card-front,.card-back{box-sizing:border-box}.header{margin:0 0 1rem}

@@ -1,0 +1,55 @@
+<!-- AI-generated with HomeGenie Widget Genie (https://homegenie.it) -->
+<div class="container animate__animated animate__fadeIn animate__faster" layout="column top-stretch">
+  <!-- HUD HEADER -->
+  <div class="header" layout="row center-justify">
+    <div layout="column top-left">
+      <span class="system-label">WEATHER STATION</span>
+      <strong #city_name class="glow-text">Weather Station</strong>
+    </div>
+    <div class="status-indicator" layout="row center-center">
+      <span class="blink">●</span>
+      <span #status_code>—</span>
+    </div>
+  </div>
+
+  <!-- MAIN DISPLAY -->
+  <div class="main-display" layout="row center-center">
+    <div class="temp-container" layout="column center-center">
+      <div layout="row top-center">
+        <span #temp_val class="temp-big glow-text">24</span>
+        <span class="unit-big" #unit>°C</span>
+      </div>
+      <div #condition_text class="condition">SCATTERED_CLOUDS</div>
+    </div>
+    <div class="weather-icon-hud">
+      <span class="material-symbols-outlined notranslate icon-glow" #weather_icon>cloud</span>
+    </div>
+  </div>
+
+  <!-- SENSOR GRID -->
+  <div class="sensor-grid">
+    <div class="sensor-item" layout="column center-center">
+      <span class="material-symbols-outlined notranslate mini-icon">◒</span>
+      <span class="mini-label">HUMIDITY</span>
+      <span #humidity_val class="mini-value">65%</span>
+    </div>
+    <div class="sensor-item" layout="column center-center">
+      <span class="material-symbols-outlined notranslate mini-icon">≋</span>
+      <span class="mini-label">WIND_SPD</span>
+      <span #wind_val class="mini-value">12.4 km/h</span>
+    </div>
+    <div class="sensor-item" layout="column center-center">
+      <span class="material-symbols-outlined notranslate mini-icon">↕</span>
+      <span class="mini-label">PRESSURE</span>
+      <span #pressure_val class="mini-value">1012 hPa</span>
+    </div>
+    <div class="sensor-item" layout="column center-center">
+      <span class="material-symbols-outlined notranslate mini-icon">☀</span>
+      <span class="mini-label">RAIN</span>
+      <span #rain_val class="mini-value">—</span>
+    </div>
+  </div>
+
+  <!-- SCANLINE OVERLAY -->
+  <div class="scanlines"></div>
+</div>
