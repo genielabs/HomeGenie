@@ -4,5 +4,9 @@
   "operation_timed_out": "Eragiketaren denbora-muga gainditu da.",
   "node_added": "Nodoa behar bezala gehitu da",
   "turn_on_device_to_add": "Piztu gailua eta sakatu parekatzeko botoia 5 segundoz behar izanez gero.",
-  "soft_reset_button": "Berrezarpen leuna"
+  "soft_reset_button": "Berrezarpen leuna",
+  "status_updates": "Egoera-eguneratzeak",
+  "brightness": "Distira",
+  "linked_coordinator": "Koordinatzaileari lotuta",
+  "device_reporting": "Gailuaren txostenak"
 }

@@ -4,5 +4,9 @@
   "operation_timed_out": "Tapitra ny fotoana fiasana.",
   "node_added": "Nampiana node nahomby",
   "turn_on_device_to_add": "Ampidiro ny fitaovana ary tsindrio ny bokotra fampiarahana mandritra ny 5 segondra raha ilaina",
-  "soft_reset_button": "Famerenana malefaka"
+  "soft_reset_button": "Famerenana malefaka",
+  "status_updates": "Fanavaozana ny sata",
+  "brightness": "Hamafin’ny hazavana",
+  "linked_coordinator": "Mifandray amin’ny mpandrindra",
+  "device_reporting": "Tatitra avy amin’ny fitaovana"
 }

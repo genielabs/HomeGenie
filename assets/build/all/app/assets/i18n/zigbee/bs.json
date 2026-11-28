@@ -4,5 +4,9 @@
   "operation_timed_out": "Vremensko ograničenje operacije je isteklo.",
   "node_added": "Čvor uspješno dodan",
   "turn_on_device_to_add": "Uključite uređaj i po potrebi pritisnite dugme za uparivanje 5 sekundi",
-  "soft_reset_button": "Meko resetovanje"
+  "soft_reset_button": "Meko resetovanje",
+  "status_updates": "Ažuriranja stanja",
+  "brightness": "Svjetlina",
+  "linked_coordinator": "Povezano s koordinatorom",
+  "device_reporting": "Izvještavanje uređaja"
 }

@@ -4,5 +4,9 @@
   "operation_timed_out": "Operasie het 'n tydsverloop gehad.",
   "node_added": "Node suksesvol bygevoeg",
   "turn_on_device_to_add": "Skakel die toestel aan en druk die paringsknoppie vir 5 sekondes indien nodig",
-  "soft_reset_button": "Sagte herstel"
+  "soft_reset_button": "Sagte herstel",
+  "status_updates": "Statusopdaterings",
+  "brightness": "Helderheid",
+  "linked_coordinator": "Aan die koördineerder gekoppel",
+  "device_reporting": "Toestelverslaggewing"
 }

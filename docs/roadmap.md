@@ -4,6 +4,12 @@ Consolidated status: 2026-11-18. HomeGenie v2.0.41 includes resumable feature se
 
 This is the active task list. Detailed stage-by-stage decisions, earlier API names, test counts and acceptance evidence are preserved in [implementation history](roadmap-history.md); they do not override this status. Completed work is not reopened merely because an earlier checkpoint still says pending.
 
+## ZigBee remote controls
+
+- [ ] Revisit ZigBee remote control in a future release. Use an automation program with `Program.AddOption` and/or `Program.AddFeature` to associate the source remote with target modules. Decide whether to extend program 505 or create a separate program after reviewing the configuration workflow. Preserve existing IR/RF associations.
+- [ ] Introduce a `Remote` module type for remote controls. Add it to `MIG.HomeAutomation.Commons.ModuleTypes` without renumbering existing types, classify supported remotes in the ZigBee driver, and check the type mapping through MIG, HomeGenie and YoT.
+- [ ] Verify the chosen program with the Philips Hue Dimmer on the Raspberry Pi using `Receiver.Action` for `On`, `Off`, repeated `BrightnessUp` / `BrightnessDown` and `BrightnessStop`.
+
 ## Demo sensor profile (2026-11-07)
 
 - [x] Sensor Simulator 410 1.0.6 uses a ScriptContext date/time/type helper for bounded seasonal/daytime temperature, humidity and luminance, with stable per-module variation and no cumulative drift. Keep feature/frequency configuration and level-based power with regular off samples. Seven isolated distributed-script scenarios passed; Vulkan updated only 410 through the backed-up program-update flow, with compilation, running state and plausible live night readings confirmed. See [sensor profile](guides/sensor-simulator.md).

@@ -4,5 +4,9 @@
   "operation_timed_out": "זמן הפעולה הסתיים.",
   "node_added": "צומת נוסף בהצלחה",
   "turn_on_device_to_add": "הפעל את המכשיר ולחץ על כפתור הצימוד למשך 5 שניות במידת הצורך",
-  "soft_reset_button": "איפוס רך"
+  "soft_reset_button": "איפוס רך",
+  "status_updates": "עדכוני מצב",
+  "brightness": "בהירות",
+  "linked_coordinator": "מקושר לרכז",
+  "device_reporting": "דיווח מהמכשיר"
 }

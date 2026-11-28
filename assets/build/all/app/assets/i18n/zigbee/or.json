@@ -4,5 +4,9 @@
   "operation_timed_out": "କାର୍ଯ୍ୟର ସମୟ ସମାପ୍ତ ହୋଇଛି।",
   "node_added": "ନୋଡ୍ ସଫଳତାର ସହ ଯୋଗ କରାଯାଇଛି",
   "turn_on_device_to_add": "ଡିଭାଇସକୁ ଚାଲୁ କରନ୍ତୁ ଏବଂ ଆବଶ୍ୟକ ହେଲେ ପେୟାରିଂ ବଟନ୍ 5 ସେକେଣ୍ଡ ପାଇଁ ଦବାନ୍ତୁ।",
-  "soft_reset_button": "ସଫ୍ଟ ରିସେଟ୍"
+  "soft_reset_button": "ସଫ୍ଟ ରିସେଟ୍",
+  "status_updates": "ସ୍ଥିତି ଅଦ୍ୟତନ",
+  "brightness": "ଉଜ୍ଜ୍ୱଳତା",
+  "linked_coordinator": "ସମନ୍ୱୟକ ସହିତ ସଂଯୁକ୍ତ",
+  "device_reporting": "ଉପକରଣର ରିପୋର୍ଟ"
 }

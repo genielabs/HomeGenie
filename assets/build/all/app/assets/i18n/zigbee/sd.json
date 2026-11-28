@@ -4,5 +4,9 @@
   "operation_timed_out": "آپريشن جو وقت ختم ٿي ويو.",
   "node_added": "نوڊ ڪاميابي سان شامل ڪيو ويو",
   "turn_on_device_to_add": "جيڪڏهن ضرورت هجي ته ڊوائيس آن ڪريو ۽ پيئرنگ بٽڻ کي 5 سيڪنڊن لاءِ دٻايو.",
-  "soft_reset_button": "نرم ري سيٽ"
+  "soft_reset_button": "نرم ري سيٽ",
+  "status_updates": "حالت جون تازه ڪاريون",
+  "brightness": "روشني",
+  "linked_coordinator": "ڪوآرڊينيٽر سان ڳنڍيل",
+  "device_reporting": "ڊوائيس جون رپورٽون"
 }

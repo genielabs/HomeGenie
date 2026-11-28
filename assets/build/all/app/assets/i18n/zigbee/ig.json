@@ -4,5 +4,9 @@
   "operation_timed_out": "Oge ọrụ agwụla.",
   "node_added": "agbakwunyere ọnụ nke ọma",
   "turn_on_device_to_add": "Gbanwee na ngwaọrụ wee pịa bọtịnụ njikọta maka sekọnd 5 ma ọ bụrụ na achọrọ ya",
-  "soft_reset_button": "Ntọgharị dị nro"
+  "soft_reset_button": "Ntọgharị dị nro",
+  "status_updates": "Mmelite ọnọdụ",
+  "brightness": "Nchapụta",
+  "linked_coordinator": "Ejikọrọ na onye nhazi",
+  "device_reporting": "Akụkọ ngwaọrụ"
 }

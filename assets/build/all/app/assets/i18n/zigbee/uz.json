@@ -4,5 +4,9 @@
   "operation_timed_out": "Operatsiya vaqti tugadi.",
   "node_added": "Muvaffaqiyatli tugun qo‘shildi",
   "turn_on_device_to_add": "Qurilmani yoqing va agar kerak bo'lsa, ulanish tugmasini 5 soniya bosib turing",
-  "soft_reset_button": "Yumshoq tiklash"
+  "soft_reset_button": "Yumshoq tiklash",
+  "status_updates": "Holat yangilanishlari",
+  "brightness": "Yorqinlik",
+  "linked_coordinator": "Koordinatorga bog‘langan",
+  "device_reporting": "Qurilma hisobotlari"
 }

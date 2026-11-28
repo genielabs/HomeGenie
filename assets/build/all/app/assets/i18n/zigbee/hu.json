@@ -4,5 +4,9 @@
   "operation_timed_out": "A művelet időtúllépést okozott.",
   "node_added": "Csomópont sikeresen hozzáadva",
   "turn_on_device_to_add": "Kapcsolja be az eszközt, és szükség esetén tartsa lenyomva a párosítás gombot 5 másodpercig.",
-  "soft_reset_button": "Lágy alaphelyzetbe állítás"
+  "soft_reset_button": "Lágy alaphelyzetbe állítás",
+  "status_updates": "Állapotfrissítések",
+  "brightness": "Fényerő",
+  "linked_coordinator": "A koordinátorhoz társítva",
+  "device_reporting": "Eszközjelentések"
 }

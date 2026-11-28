@@ -4,5 +4,9 @@
   "operation_timed_out": "പ്രവർത്തനം സമയം കഴിഞ്ഞു.",
   "node_added": "നോഡ് വിജയകരമായി ചേർത്തു",
   "turn_on_device_to_add": "ആവശ്യമെങ്കിൽ ഉപകരണം ഓണാക്കി ജോടിയാക്കൽ ബട്ടൺ 5 സെക്കൻഡ് അമർത്തുക.",
-  "soft_reset_button": "സോഫ്റ്റ് റീസെറ്റ്"
+  "soft_reset_button": "സോഫ്റ്റ് റീസെറ്റ്",
+  "status_updates": "നില അറിയിപ്പുകൾ",
+  "brightness": "തെളിച്ചം",
+  "linked_coordinator": "കോർഡിനേറ്ററുമായി ബന്ധിപ്പിച്ചു",
+  "device_reporting": "ഉപകരണ റിപ്പോർട്ടുകൾ"
 }

@@ -4,5 +4,9 @@
   "operation_timed_out": "آپریشن کا وقت ختم ہو گیا۔",
   "node_added": "نوڈ کامیابی کے ساتھ شامل کیا گیا۔",
   "turn_on_device_to_add": "ڈیوائس کو آن کریں اور اگر ضرورت ہو تو 5 سیکنڈ کے لیے پیئرنگ بٹن دبائیں۔",
-  "soft_reset_button": "نرم ری سیٹ"
+  "soft_reset_button": "نرم ری سیٹ",
+  "status_updates": "حالت کی تازہ کاریاں",
+  "brightness": "چمک",
+  "linked_coordinator": "کوآرڈینیٹر سے منسلک",
+  "device_reporting": "آلے کی رپورٹنگ"
 }

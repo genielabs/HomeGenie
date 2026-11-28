@@ -4,5 +4,9 @@
   "operation_timed_out": "Operasjonen ble tidsavbrutt.",
   "node_added": "Noden er lagt til",
   "turn_on_device_to_add": "Slå på enheten og trykk på paringsknappen i 5 sekunder om nødvendig",
-  "soft_reset_button": "Myk tilbakestilling"
+  "soft_reset_button": "Myk tilbakestilling",
+  "status_updates": "Statusoppdateringer",
+  "brightness": "Lysstyrke",
+  "linked_coordinator": "Koblet til koordinatoren",
+  "device_reporting": "Enhetsrapportering"
 }

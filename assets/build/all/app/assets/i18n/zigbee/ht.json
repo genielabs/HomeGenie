@@ -4,5 +4,9 @@
   "operation_timed_out": "Operasyon an te ekspire.",
   "node_added": "Nœd ajoute avèk siksè",
   "turn_on_device_to_add": "Limen aparèy la epi peze bouton koneksyon an pandan 5 segonn si sa nesesè.",
-  "soft_reset_button": "Reyajisteman mou"
+  "soft_reset_button": "Reyajisteman mou",
+  "status_updates": "Mizajou sou eta aparèy la",
+  "brightness": "Klate",
+  "linked_coordinator": "Lye ak kowòdonatè a",
+  "device_reporting": "Rapò aparèy la"
 }

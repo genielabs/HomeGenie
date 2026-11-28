@@ -4,5 +4,9 @@
   "operation_timed_out": "Časovna omejitev operacije je potekla.",
   "node_added": "Vozlišče uspešno dodano",
   "turn_on_device_to_add": "Vklopite napravo in po potrebi pritisnite gumb za seznanjanje za 5 sekund",
-  "soft_reset_button": "Mehka ponastavitev"
+  "soft_reset_button": "Mehka ponastavitev",
+  "status_updates": "Posodobitve stanja",
+  "brightness": "Svetlost",
+  "linked_coordinator": "Povezano s koordinatorjem",
+  "device_reporting": "Poročanje naprave"
 }

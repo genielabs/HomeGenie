@@ -4,5 +4,9 @@
   "operation_timed_out": "Operațiunea a expirat.",
   "node_added": "Nod adăugat cu succes",
   "turn_on_device_to_add": "Porniți dispozitivul și apăsați butonul de asociere timp de 5 secunde, dacă este necesar.",
-  "soft_reset_button": "Resetare soft"
+  "soft_reset_button": "Resetare soft",
+  "status_updates": "Actualizări de stare",
+  "brightness": "Luminozitate",
+  "linked_coordinator": "Asociat cu coordonatorul",
+  "device_reporting": "Raportarea dispozitivului"
 }

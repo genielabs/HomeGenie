@@ -4,5 +4,9 @@
   "operation_timed_out": "Đã hết thời gian thao tác.",
   "node_added": "Đã thêm nút thành công",
   "turn_on_device_to_add": "Bật thiết bị và nhấn nút ghép nối trong 5 giây nếu cần",
-  "soft_reset_button": "Thiết lập lại mềm"
+  "soft_reset_button": "Thiết lập lại mềm",
+  "status_updates": "Cập nhật trạng thái",
+  "brightness": "Độ sáng",
+  "linked_coordinator": "Đã liên kết với bộ điều phối",
+  "device_reporting": "Báo cáo của thiết bị"
 }

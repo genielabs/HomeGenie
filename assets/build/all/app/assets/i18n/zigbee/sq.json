@@ -4,5 +4,9 @@
   "operation_timed_out": "Koha e funksionimit skadoi.",
   "node_added": "Nyja u shtua me sukses",
   "turn_on_device_to_add": "Ndizni pajisjen dhe shtypni butonin e çiftëzimit për 5 sekonda nëse është e nevojshme",
-  "soft_reset_button": "Rivendosje e butë"
+  "soft_reset_button": "Rivendosje e butë",
+  "status_updates": "Përditësime të gjendjes",
+  "brightness": "Ndriçimi",
+  "linked_coordinator": "Lidhur me koordinatorin",
+  "device_reporting": "Raportimi i pajisjes"
 }

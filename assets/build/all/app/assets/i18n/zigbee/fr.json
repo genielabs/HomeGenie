@@ -4,5 +4,9 @@
   "operation_timed_out": "L'opération a expiré.",
   "node_added": "Nœud ajouté avec succès",
   "turn_on_device_to_add": "Allumez l'appareil et appuyez sur le bouton d'appairage pendant 5 secondes si nécessaire",
-  "soft_reset_button": "Réinitialisation logicielle"
+  "soft_reset_button": "Réinitialisation logicielle",
+  "status_updates": "Mises à jour de l’état",
+  "brightness": "Luminosité",
+  "linked_coordinator": "Associé au coordinateur",
+  "device_reporting": "Rapports de l’appareil"
 }

@@ -4,5 +4,9 @@
   "operation_timed_out": "सञ्चालनको समय सकियो।",
   "node_added": "नोड सफलतापूर्वक थपियो",
   "turn_on_device_to_add": "आवश्यक परेमा उपकरण खोल्नुहोस् र ५ सेकेन्डसम्म जोडा बनाउने बटन थिच्नुहोस्।",
-  "soft_reset_button": "सफ्ट रिसेट"
+  "soft_reset_button": "सफ्ट रिसेट",
+  "status_updates": "स्थितिका अद्यावधिकहरू",
+  "brightness": "चमक",
+  "linked_coordinator": "संयोजकसँग जोडिएको छ",
+  "device_reporting": "उपकरणका प्रतिवेदनहरू"
 }

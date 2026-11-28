@@ -4,5 +4,9 @@
   "operation_timed_out": "Operasi tamat masa.",
   "node_added": "Berjaya menambahkan nod",
   "turn_on_device_to_add": "Hidupkan peranti dan tekan butang berpasangan selama 5 saat jika perlu",
-  "soft_reset_button": "Tetapan semula lembut"
+  "soft_reset_button": "Tetapan semula lembut",
+  "status_updates": "Kemas kini status",
+  "brightness": "Kecerahan",
+  "linked_coordinator": "Dipautkan kepada penyelaras",
+  "device_reporting": "Pelaporan peranti"
 }

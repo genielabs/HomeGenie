@@ -4,5 +4,9 @@
   "operation_timed_out": "Toiminto aikakatkaistiin.",
   "node_added": "Solmu lisätty onnistuneesti",
   "turn_on_device_to_add": "Käynnistä laite ja paina tarvittaessa pariliitospainiketta 5 sekunnin ajan.",
-  "soft_reset_button": "Pehmeä nollaus"
+  "soft_reset_button": "Pehmeä nollaus",
+  "status_updates": "Tilapäivitykset",
+  "brightness": "Kirkkaus",
+  "linked_coordinator": "Yhdistetty koordinaattoriin",
+  "device_reporting": "Laitteen raportointi"
 }

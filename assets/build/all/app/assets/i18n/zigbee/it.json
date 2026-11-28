@@ -10,5 +10,9 @@
   "turn_on_device_to_add":
     "Accendi il dispositivo da aggiungere e premi per 5 secondi il pulsante di associazione se richiesto",
   "soft_reset_button":
-    "Soft reset"
+    "Soft reset",
+  "status_updates": "Aggiornamenti di stato",
+  "brightness": "Luminosità",
+  "linked_coordinator": "Collegato al coordinatore",
+  "device_reporting": "Reporting del dispositivo"
 }

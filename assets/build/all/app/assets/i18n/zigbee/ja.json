@@ -4,5 +4,9 @@
   "operation_timed_out": "操作がタイムアウトしました。",
   "node_added": "ノードが正常に追加されました",
   "turn_on_device_to_add": "デバイスの電源を入れ、必要に応じてペアリングボタンを5秒間押します。",
-  "soft_reset_button": "ソフトリセット"
+  "soft_reset_button": "ソフトリセット",
+  "status_updates": "状態の更新",
+  "brightness": "明るさ",
+  "linked_coordinator": "コーディネーターに接続済み",
+  "device_reporting": "デバイスからのレポート"
 }

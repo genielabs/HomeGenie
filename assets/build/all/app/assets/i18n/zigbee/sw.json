@@ -4,5 +4,9 @@
   "operation_timed_out": "Muda wa operesheni umekwisha.",
   "node_added": "Imefaulu kuongeza nodi",
   "turn_on_device_to_add": "Washa kifaa na ubonyeze kitufe cha kuoanisha kwa sekunde 5 ikiwa inahitajika",
-  "soft_reset_button": "Weka upya laini"
+  "soft_reset_button": "Weka upya laini",
+  "status_updates": "Masasisho ya hali",
+  "brightness": "Mwangaza",
+  "linked_coordinator": "Imeunganishwa na kiratibu",
+  "device_reporting": "Ripoti za kifaa"
 }

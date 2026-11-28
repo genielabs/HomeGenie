@@ -4,5 +4,9 @@
   "operation_timed_out": "د عملیاتو وخت پای ته ورسېد.",
   "node_added": "نوډ په بریالیتوب سره اضافه شو",
   "turn_on_device_to_add": "وسیله چالان کړئ او د اړتیا په صورت کې د جوړه کولو تڼۍ د 5 ثانیو لپاره فشار ورکړئ",
-  "soft_reset_button": "نرم ری سیٹ"
+  "soft_reset_button": "نرم ری سیٹ",
+  "status_updates": "د حالت تازه معلومات",
+  "brightness": "روښانتیا",
+  "linked_coordinator": "له همغږي کوونکي سره تړلی",
+  "device_reporting": "د وسیلې راپورونه"
 }

@@ -4,5 +4,9 @@
   "operation_timed_out": "操作超時。",
   "node_added": "成功新增節點",
   "turn_on_device_to_add": "開啟裝置並按下配對按鈕 5 秒鐘（如果需要）",
-  "soft_reset_button": "軟復位"
+  "soft_reset_button": "軟復位",
+  "status_updates": "狀態更新",
+  "brightness": "亮度",
+  "linked_coordinator": "已繫結至協調器",
+  "device_reporting": "裝置回報"
 }

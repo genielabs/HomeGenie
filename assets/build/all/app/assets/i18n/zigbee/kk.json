@@ -4,5 +4,9 @@
   "operation_timed_out": "Операция уақыты аяқталды.",
   "node_added": "Түйін сәтті қосылды",
   "turn_on_device_to_add": "Құрылғыны қосыңыз және қажет болса, жұптастыру түймесін 5 секунд басыңыз",
-  "soft_reset_button": "Жұмсақ қалпына келтіру"
+  "soft_reset_button": "Жұмсақ қалпына келтіру",
+  "status_updates": "Күй жаңартулары",
+  "brightness": "Жарықтық",
+  "linked_coordinator": "Үйлестірушіге байланыстырылған",
+  "device_reporting": "Құрылғы есептері"
 }

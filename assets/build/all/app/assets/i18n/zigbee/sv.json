@@ -4,5 +4,9 @@
   "operation_timed_out": "Åtgärden har nått tidsgränsen.",
   "node_added": "Noden har lagts till",
   "turn_on_device_to_add": "Slå på enheten och tryck på parkopplingsknappen i 5 sekunder om det behövs.",
-  "soft_reset_button": "Mjuk återställning"
+  "soft_reset_button": "Mjuk återställning",
+  "status_updates": "Statusuppdateringar",
+  "brightness": "Ljusstyrka",
+  "linked_coordinator": "Kopplad till koordinatorn",
+  "device_reporting": "Enhetsrapportering"
 }

@@ -4,5 +4,9 @@
   "operation_timed_out": "Demê operasyonê qediya.",
   "node_added": "Girêk bi serkeftî hate zêdekirin",
   "turn_on_device_to_add": "Amûrê vekin û heke pêwîst be bişkoja cotkirinê 5 saniyeyan bikirtînin",
-  "soft_reset_button": "Vesazkirina nerm"
+  "soft_reset_button": "Vesazkirina nerm",
+  "status_updates": "Nûvekirinên rewşê",
+  "brightness": "Ronahî",
+  "linked_coordinator": "Bi koordînatorê ve girêdayî ye",
+  "device_reporting": "Raporên amûrê"
 }

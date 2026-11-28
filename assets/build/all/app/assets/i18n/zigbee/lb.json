@@ -4,5 +4,9 @@
   "operation_timed_out": "D'Operatioun ass ofgelaf.",
   "node_added": "Node erfollegräich bäigefüügt",
   "turn_on_device_to_add": "Schalt den Apparat un a dréckt de Pairing-Knäppchen fir 5 Sekonnen, wann néideg.",
-  "soft_reset_button": "Soft Reset"
+  "soft_reset_button": "Soft Reset",
+  "status_updates": "Statusaktualiséierungen",
+  "brightness": "Hellegkeet",
+  "linked_coordinator": "Mam Koordinator verbonnen",
+  "device_reporting": "Rapporte vum Apparat"
 }

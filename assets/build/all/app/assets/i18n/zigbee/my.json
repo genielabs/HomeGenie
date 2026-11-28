@@ -4,5 +4,9 @@
   "operation_timed_out": "လည်ပတ်မှု အချိန်ကုန်သွားသည်။",
   "node_added": "node ကို အောင်မြင်စွာ ထည့်သွင်းခဲ့သည်။",
   "turn_on_device_to_add": "လိုအပ်ပါက စက်ကိုဖွင့်ပြီး တွဲချိတ်ခြင်းခလုတ်ကို 5 စက္ကန့်ကြာ နှိပ်ပါ။",
-  "soft_reset_button": "Soft reset ပါ။"
+  "soft_reset_button": "Soft reset ပါ။",
+  "status_updates": "အခြေအနေ အပ်ဒိတ်များ",
+  "brightness": "တောက်ပမှု",
+  "linked_coordinator": "ညှိနှိုင်းကိရိယာနှင့် ချိတ်ဆက်ထားသည်",
+  "device_reporting": "စက်၏ အစီရင်ခံမှု"
 }

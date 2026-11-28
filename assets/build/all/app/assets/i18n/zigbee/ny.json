@@ -4,5 +4,9 @@
   "operation_timed_out": "Ntchito yatha.",
   "node_added": "Kuwonjeza bwino mfundo",
   "turn_on_device_to_add": "Yatsani chipangizocho ndikusindikiza batani loyanjanitsa kwa masekondi 5 ngati pakufunika",
-  "soft_reset_button": "Kukhazikitsanso kofewa"
+  "soft_reset_button": "Kukhazikitsanso kofewa",
+  "status_updates": "Zosintha za mmene chipangizo chilili",
+  "brightness": "Kuwala",
+  "linked_coordinator": "Cholumikizidwa ndi wogwirizanitsa",
+  "device_reporting": "Malipoti a chipangizo"
 }

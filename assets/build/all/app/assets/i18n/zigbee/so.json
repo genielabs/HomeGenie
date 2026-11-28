@@ -4,5 +4,9 @@
   "operation_timed_out": "Hawlgalku wuu dhammaaday.",
   "node_added": "Si guul leh loogu daray noodhka",
   "turn_on_device_to_add": "Daar qalabka oo taabo badhanka lammaanaynta 5 ilbiriqsi haddii loo baahdo",
-  "soft_reset_button": "Dib u dejin jilicsan"
+  "soft_reset_button": "Dib u dejin jilicsan",
+  "status_updates": "Cusboonaysiinta xaaladda",
+  "brightness": "Iftiinka",
+  "linked_coordinator": "Ku xiran isku-duwaha",
+  "device_reporting": "Warbixinnada qalabka"
 }

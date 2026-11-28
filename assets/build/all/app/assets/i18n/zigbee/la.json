@@ -4,5 +4,9 @@
   "operation_timed_out": "Operatio tempore exacto exspiravit.",
   "node_added": "Nodus feliciter additus est.",
   "turn_on_device_to_add": "Instrumentum accende et, si opus est, clavem coniunctionis per quinque secunda preme.",
-  "soft_reset_button": "Restitutio mollis"
+  "soft_reset_button": "Restitutio mollis",
+  "status_updates": "Renuntiationes status",
+  "brightness": "Claritas",
+  "linked_coordinator": "Cum coordinatore coniunctum",
+  "device_reporting": "Relationes instrumenti"
 }

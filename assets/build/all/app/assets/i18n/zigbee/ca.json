@@ -4,5 +4,9 @@
   "operation_timed_out": "S'ha esgotat el temps d'espera de l'operació.",
   "node_added": "Node afegit correctament",
   "turn_on_device_to_add": "Engegueu el dispositiu i premeu el botó d'emparellament durant 5 segons si cal.",
-  "soft_reset_button": "Restabliment suau"
+  "soft_reset_button": "Restabliment suau",
+  "status_updates": "Actualitzacions d’estat",
+  "brightness": "Lluminositat",
+  "linked_coordinator": "Vinculat al coordinador",
+  "device_reporting": "Informes del dispositiu"
 }

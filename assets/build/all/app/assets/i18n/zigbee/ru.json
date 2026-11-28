@@ -4,5 +4,9 @@
   "operation_timed_out": "Время ожидания операции истекло.",
   "node_added": "Узел успешно добавлен",
   "turn_on_device_to_add": "Включите устройство и при необходимости нажмите кнопку сопряжения на 5 секунд.",
-  "soft_reset_button": "Мягкий сброс"
+  "soft_reset_button": "Мягкий сброс",
+  "status_updates": "Обновления состояния",
+  "brightness": "Яркость",
+  "linked_coordinator": "Связано с координатором",
+  "device_reporting": "Отчёты устройства"
 }

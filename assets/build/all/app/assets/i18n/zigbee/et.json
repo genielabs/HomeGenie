@@ -4,5 +4,9 @@
   "operation_timed_out": "Toiming aegus.",
   "node_added": "Sõlm on edukalt lisatud",
   "turn_on_device_to_add": "Lülitage seade sisse ja vajutage vajadusel sidumisnuppu 5 sekundit.",
-  "soft_reset_button": "Pehme lähtestamine"
+  "soft_reset_button": "Pehme lähtestamine",
+  "status_updates": "Olekuvärskendused",
+  "brightness": "Heledus",
+  "linked_coordinator": "Koordinaatoriga seotud",
+  "device_reporting": "Seadme aruandlus"
 }

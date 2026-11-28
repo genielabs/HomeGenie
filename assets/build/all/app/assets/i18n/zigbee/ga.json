@@ -4,5 +4,9 @@
   "operation_timed_out": "Chuaigh an t-am isteach ar an oibríocht.",
   "node_added": "Cuireadh nód leis go rathúil",
   "turn_on_device_to_add": "Cas air an gléas agus brúigh an cnaipe péireála ar feadh 5 soicind más gá.",
-  "soft_reset_button": "Athshocrú bog"
+  "soft_reset_button": "Athshocrú bog",
+  "status_updates": "Nuashonruithe stádais",
+  "brightness": "Gile",
+  "linked_coordinator": "Nasctha leis an gcomhordaitheoir",
+  "device_reporting": "Tuairisciú an ghléis"
 }

@@ -4,5 +4,9 @@
   "operation_timed_out": "ऑपरेशन का समय समाप्त हो गया.",
   "node_added": "नोड सफलतापूर्वक जोड़ा गया",
   "turn_on_device_to_add": "यदि आवश्यक हो तो डिवाइस को चालू करें और पेयरिंग बटन को 5 सेकंड तक दबाएँ",
-  "soft_reset_button": "सॉफ्ट रीसेट"
+  "soft_reset_button": "सॉफ्ट रीसेट",
+  "status_updates": "स्थिति अपडेट",
+  "brightness": "चमक",
+  "linked_coordinator": "समन्वयक से जुड़ा है",
+  "device_reporting": "डिवाइस की रिपोर्टिंग"
 }

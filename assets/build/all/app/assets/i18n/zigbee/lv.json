@@ -4,5 +4,9 @@
   "operation_timed_out": "Darbība ir beigusies.",
   "node_added": "Mezgls veiksmīgi pievienots",
   "turn_on_device_to_add": "Ieslēdziet ierīci un, ja nepieciešams, 5 sekundes nospiediet savienošanas pārī pogu.",
-  "soft_reset_button": "Mīkstā atiestatīšana"
+  "soft_reset_button": "Mīkstā atiestatīšana",
+  "status_updates": "Stāvokļa atjauninājumi",
+  "brightness": "Spilgtums",
+  "linked_coordinator": "Saistīts ar koordinatoru",
+  "device_reporting": "Ierīces ziņojumi"
 }

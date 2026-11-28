@@ -4,5 +4,9 @@
   "operation_timed_out": "Časový limit operace vypršel.",
   "node_added": "Uzel byl úspěšně přidán",
   "turn_on_device_to_add": "Zapněte zařízení a v případě potřeby stiskněte tlačítko párování po dobu 5 sekund.",
-  "soft_reset_button": "Měkký reset"
+  "soft_reset_button": "Měkký reset",
+  "status_updates": "Aktualizace stavu",
+  "brightness": "Jas",
+  "linked_coordinator": "Připojeno ke koordinátoru",
+  "device_reporting": "Hlášení zařízení"
 }

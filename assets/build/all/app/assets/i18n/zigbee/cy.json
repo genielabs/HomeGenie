@@ -4,5 +4,9 @@
   "operation_timed_out": "Daeth amser y llawdriniaeth i ben.",
   "node_added": "Nod wedi'i ychwanegu'n llwyddiannus",
   "turn_on_device_to_add": "Trowch y ddyfais ymlaen a gwasgwch y botwm paru am 5 eiliad os oes angen",
-  "soft_reset_button": "Ailosodiad meddal"
+  "soft_reset_button": "Ailosodiad meddal",
+  "status_updates": "Diweddariadau statws",
+  "brightness": "Disgleirdeb",
+  "linked_coordinator": "Wedi cysylltu â’r cydlynydd",
+  "device_reporting": "Adroddiadau’r ddyfais"
 }

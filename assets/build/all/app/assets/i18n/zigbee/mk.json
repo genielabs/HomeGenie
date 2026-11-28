@@ -4,5 +4,9 @@
   "operation_timed_out": "Операцијата истече.",
   "node_added": "Успешно додаден јазол",
   "turn_on_device_to_add": "Вклучете го уредот и доколку е потребно, притиснете го копчето за спарување 5 секунди",
-  "soft_reset_button": "Меко ресетирање"
+  "soft_reset_button": "Меко ресетирање",
+  "status_updates": "Ажурирања на состојбата",
+  "brightness": "Осветленост",
+  "linked_coordinator": "Поврзано со координаторот",
+  "device_reporting": "Извештаи од уредот"
 }

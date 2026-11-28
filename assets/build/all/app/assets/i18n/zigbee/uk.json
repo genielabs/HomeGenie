@@ -4,5 +4,9 @@
   "operation_timed_out": "Час очікування операції вичерпано.",
   "node_added": "Вузол успішно додано",
   "turn_on_device_to_add": "Увімкніть пристрій і за потреби натисніть кнопку сполучення протягом 5 секунд",
-  "soft_reset_button": "М'яке скидання"
+  "soft_reset_button": "М'яке скидання",
+  "status_updates": "Оновлення стану",
+  "brightness": "Яскравість",
+  "linked_coordinator": "Зв’язано з координатором",
+  "device_reporting": "Звіти пристрою"
 }

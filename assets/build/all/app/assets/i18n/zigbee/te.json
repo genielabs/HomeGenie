@@ -4,5 +4,9 @@
   "operation_timed_out": "ఆపరేషన్ సమయం ముగిసింది.",
   "node_added": "నోడ్ విజయవంతంగా జోడించబడింది",
   "turn_on_device_to_add": "అవసరమైతే పరికరాన్ని ఆన్ చేసి, జత చేసే బటన్‌ను 5 సెకన్ల పాటు నొక్కండి.",
-  "soft_reset_button": "సాఫ్ట్ రీసెట్"
+  "soft_reset_button": "సాఫ్ట్ రీసెట్",
+  "status_updates": "స్థితి నవీకరణలు",
+  "brightness": "ప్రకాశం",
+  "linked_coordinator": "సమన్వయకర్తకు అనుసంధానమైంది",
+  "device_reporting": "పరికర నివేదికలు"
 }

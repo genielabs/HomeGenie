@@ -4,5 +4,9 @@
   "operation_timed_out": "Час дзеяння аперацыі скончыўся.",
   "node_added": "Вузел паспяхова дададзены",
   "turn_on_device_to_add": "Уключыце прыладу і пры неабходнасці націсніце кнопку спалучэння на працягу 5 секунд",
-  "soft_reset_button": "Мяккі скід"
+  "soft_reset_button": "Мяккі скід",
+  "status_updates": "Абнаўленні стану",
+  "brightness": "Яркасць",
+  "linked_coordinator": "Звязана з каардынатарам",
+  "device_reporting": "Справаздачы прылады"
 }

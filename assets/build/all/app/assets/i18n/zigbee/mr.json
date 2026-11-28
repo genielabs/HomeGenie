@@ -4,5 +4,9 @@
   "operation_timed_out": "ऑपरेशनची वेळ संपली.",
   "node_added": "नोड यशस्वीरित्या जोडला गेला",
   "turn_on_device_to_add": "आवश्यक असल्यास डिव्हाइस चालू करा आणि पेअरिंग बटण ५ सेकंद दाबा.",
-  "soft_reset_button": "सॉफ्ट रीसेट"
+  "soft_reset_button": "सॉफ्ट रीसेट",
+  "status_updates": "स्थिती अद्यतने",
+  "brightness": "उजेड",
+  "linked_coordinator": "समन्वयकाशी जोडले आहे",
+  "device_reporting": "उपकरणाचे अहवाल"
 }

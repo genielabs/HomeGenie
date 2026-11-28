@@ -4,5 +4,9 @@
   "operation_timed_out": "Handlingen er udløbet.",
   "node_added": "Node tilføjet",
   "turn_on_device_to_add": "Tænd enheden, og tryk på parringsknappen i 5 sekunder, hvis det er nødvendigt.",
-  "soft_reset_button": "Blød nulstilling"
+  "soft_reset_button": "Blød nulstilling",
+  "status_updates": "Statusopdateringer",
+  "brightness": "Lysstyrke",
+  "linked_coordinator": "Forbundet med koordinatoren",
+  "device_reporting": "Rapportering fra enheden"
 }

@@ -4,5 +4,9 @@
   "operation_timed_out": "การดำเนินการหมดเวลาแล้ว",
   "node_added": "เพิ่มโหนดสำเร็จแล้ว",
   "turn_on_device_to_add": "เปิดอุปกรณ์และกดปุ่มจับคู่เป็นเวลา 5 วินาทีหากจำเป็น",
-  "soft_reset_button": "รีเซ็ตแบบซอฟต์"
+  "soft_reset_button": "รีเซ็ตแบบซอฟต์",
+  "status_updates": "การอัปเดตสถานะ",
+  "brightness": "ความสว่าง",
+  "linked_coordinator": "เชื่อมโยงกับตัวประสานงานแล้ว",
+  "device_reporting": "การรายงานของอุปกรณ์"
 }

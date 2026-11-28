@@ -4,5 +4,9 @@
   "operation_timed_out": "De bewerking is verlopen.",
   "node_added": "Knooppunt succesvol toegevoegd",
   "turn_on_device_to_add": "Schakel het apparaat in en druk indien nodig 5 seconden op de koppelingsknop",
-  "soft_reset_button": "Zachte reset"
+  "soft_reset_button": "Zachte reset",
+  "status_updates": "Statusupdates",
+  "brightness": "Helderheid",
+  "linked_coordinator": "Gekoppeld aan de coördinator",
+  "device_reporting": "Apparaatrapportage"
 }

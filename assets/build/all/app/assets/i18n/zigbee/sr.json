@@ -4,5 +4,9 @@
   "operation_timed_out": "Временско ограничење операције је истекло.",
   "node_added": "Чвор је успешно додат",
   "turn_on_device_to_add": "Укључите уређај и притисните дугме за упаривање 5 секунди ако је потребно",
-  "soft_reset_button": "Софт ресетовање"
+  "soft_reset_button": "Софт ресетовање",
+  "status_updates": "Ажурирања стања",
+  "brightness": "Осветљеност",
+  "linked_coordinator": "Повезано са координатором",
+  "device_reporting": "Извештавање уређаја"
 }
